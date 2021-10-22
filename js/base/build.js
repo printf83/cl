@@ -1,3 +1,5 @@
+"use strict";
+
 Array.prototype.removeEmpty = function () {
 	return this.filter(Boolean);
 };
@@ -16,10 +18,10 @@ const core = {
 	extend: function (out) {
 		out = out || {};
 
-		for (var i = 1; i < arguments.length; i++) {
+		for (let i = 1; i < arguments.length; i++) {
 			if (!arguments[i]) continue;
 
-			for (var key in arguments[i]) {
+			for (let key in arguments[i]) {
 				if (arguments[i].hasOwnProperty(key)) out[key] = arguments[i][key];
 			}
 		}
@@ -247,7 +249,18 @@ class tag {
 }
 
 class label extends tag {
-	constructor(d) {
+	constructor(...arg) {
+		let d = {};
+
+		if (arg && arg.length === 1 && typeof arg[0] === "string") {
+			d.label = arg[0];
+		} else if (arg && arg.length === 2) {
+			d.icon = arg[0];
+			d.label = arg[1];
+		} else {
+			d = arg[0];
+		}
+
 		d = core.extend(
 			{},
 			{
@@ -271,7 +284,18 @@ class label extends tag {
 }
 
 class button extends tag {
-	constructor(d) {
+	constructor(...arg) {
+		let d = {};
+
+		if (arg && arg.length === 1 && typeof arg[0] === "string") {
+			d.label = arg[0];
+		} else if (arg && arg.length === 2) {
+			d.label = arg[0];
+			d.color = arg[1];
+		} else {
+			d = arg[0];
+		}
+
 		d = core.extend(
 			{},
 			{
@@ -308,7 +332,21 @@ class button extends tag {
 }
 
 class icon extends tag {
-	constructor(d) {
+	constructor(...arg) {
+		let d = {};
+		if (arg && arg.length === 1 && typeof arg[0] === "string") {
+			d = {
+				icon: arg[0],
+			};
+		} else if (arg && arg.length === 2) {
+			d = {
+				style: arg[0],
+				icon: arg[1],
+			};
+		} else {
+			d = arg[0];
+		}
+
 		d = core.extend(
 			{},
 			{
