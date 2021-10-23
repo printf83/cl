@@ -28,6 +28,82 @@ const core = {
 
 		return out;
 	},
+	merge: {
+		class: function (a, b) {
+			if (a && b) {
+				let aT = typeof a;
+				let bT = typeof a;
+				let aR = Array.isArray(a);
+				let bR = Array.isArray(b);
+
+				if (!aR && !bR && aT === "string" && bT === "string") {
+					return [a, b];
+				} else if (!aR && bR && aT === "string") {
+					b.push(a);
+					return b;
+				} else if (aR && !bR && bT === "string") {
+					a.push(b);
+					return a;
+				} else if (aR && bR) {
+					return [...a, ...b];
+				} else {
+					console.error("Unhandle #r class rules");
+				}
+			} else if (a && !b) {
+				return a;
+			} else if (!a && b) {
+				return b;
+			} else {
+				return null;
+			}
+		},
+		style: function (a, b) {
+			if (a && b) {
+				let c = {};
+				Object.keys(a).forEach((i) => {
+					if (b.hasOwnProperty(i)) {
+						console.warn(`Same property ${i} provided in 'a' and 'b'. Using style from 'a' insted.`);
+						c[i] = a[i]; //used a insted
+					} else {
+						c[i] = a[i];
+					}
+				});
+
+				Object.keys(b).forEach((i) => {
+					if (!a.hasOwnProperty(i)) {
+						c[i] = b[i];
+					}
+				});
+
+				return c;
+			} else if (a && !b) {
+				return a;
+			} else if (!a && b) {
+				return b;
+			} else {
+				return null;
+			}
+		},
+	},
+	UUID: function () {
+		return "el-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
+			var r = (Math.random() * 16) | 0,
+				v = c === "x" ? r : (r & 0x3) | 0x8;
+			return v.toString(16);
+		});
+	},
+	multiClass: function (val, format) {
+		//core.multiClass(["lg-12","xl-3","md-2","2"],"col-$1")
+		return val
+			? Array.isArray(val)
+				? val
+						.map(function (i) {
+							return format.replace("$1", i);
+						})
+						.join(" ")
+				: format.replace("$1", val)
+			: null;
+	},
 };
 
 class attr {
@@ -37,7 +113,6 @@ class attr {
 			{
 				class: null,
 				style: null,
-				data: null,
 			},
 			d
 		);
@@ -45,114 +120,10 @@ class attr {
 		this.d = d;
 	}
 
-	static #r = {
-		class: function (a, b) {
-			let aT = typeof a;
-			let bT = typeof a;
-			let aR = Array.isArray(a);
-			let bR = Array.isArray(b);
-
-			if (!aR && !bR && aT === "string" && bT === "string") {
-				return [a, b];
-			} else if (!aR && bR && aT === "string") {
-				b.push(a);
-				return b;
-			} else if (aR && !bR && bT === "string") {
-				a.push(b);
-				return a;
-			} else if (aR && bR) {
-				return [...a, ...b];
-			} else {
-				console.error("Unhandle #r class rules");
-			}
-		},
-		style: function (a, b) {
-			let c = {};
-			Object.keys(a).forEach((i) => {
-				if (b.hasOwnProperty(i)) {
-					console.warn(`Same property ${i} provided in 'a' and 'b'. Using style from 'a' insted.`);
-					c[i] = a[i]; //used a insted
-				} else {
-					c[i] = a[i];
-				}
-			});
-
-			Object.keys(b).forEach((i) => {
-				if (!a.hasOwnProperty(i)) {
-					c[i] = b[i];
-				}
-			});
-
-			return c;
-		},
-		data: function (a, b) {
-			let c = {};
-			Object.keys(a).forEach((i) => {
-				if (b.hasOwnProperty(i)) {
-					console.warn(`Same property ${i} provided in 'a' and 'b'. Using data from 'a' insted.`);
-					c[i] = a[i]; //used a insted
-				} else {
-					c[i] = a[i];
-				}
-			});
-
-			Object.keys(b).forEach((i) => {
-				if (!a.hasOwnProperty(i)) {
-					c[i] = b[i];
-				}
-			});
-
-			return c;
-		},
-	};
-
-	//rules for unsupported property
-	static merge = function (a, b, rules) {
-		if ((a || b) && !(a && b)) {
-			return a || b;
-		} else if (a && b) {
-			//manual copy needed
-			let c = {};
-			Object.keys(a).forEach((i) => {
-				if (b.hasOwnProperty(i)) {
-					//need to merge a and b into c
-					switch (i) {
-						case "class":
-						case "style":
-						case "data":
-							c[i] = this.#r[i](a[i], b[i]);
-							break;
-						default:
-							if (rules && rules.hasOwnProperty(i)) {
-								c[i] = rules[i](a[i], b[i]);
-							} else {
-								console.warn(
-									`Fail to merge attr:${i}. No rules provided for merging this attribute. Using attr from 'a' insted.`
-								);
-								c[i] = a[i]; //used a insted
-							}
-					}
-				} else {
-					c[i] = a[i];
-				}
-			});
-
-			Object.keys(b).forEach((i) => {
-				if (!a.hasOwnProperty(i)) {
-					c[i] = b[i];
-				}
-			});
-
-			return c;
-		} else {
-			return null;
-		}
-	};
-
 	attach = function (elems) {
 		if (elems) {
 			Object.keys(this.d).forEach((i) => {
-				if ((this.d[i] || this.d[i] === "") && this.d[i] !== null) {
+				if (i !== "tag" && i !== "elem" && (this.d[i] || this.d[i] === "") && this.d[i] !== null) {
 					if (i === "class") {
 						if (Array.isArray(this.d[i])) {
 							let k = this.d[i].combine(" ");
@@ -166,10 +137,38 @@ class attr {
 								elems.style[j] = this.d[i][j];
 							}
 						});
-					} else if (i === "data") {
-						Object.keys(this.d[i]).forEach((j) => {
-							if (this.d[i][j]) elems.setAttribute(`data-${j}`, this.d[i][j]);
-						});
+					} else if (
+						[
+							"allowfullscreen",
+							"allowpaymentrequest",
+							"async",
+							"autofocus",
+							"autoplay",
+							"checked",
+							"controls",
+							"default",
+							"defer",
+							"disabled",
+							"formnovalidate",
+							"hidden",
+							"ismap",
+							"itemscope",
+							"loop",
+							"multiple",
+							"muted",
+							"nomodule",
+							"novalidate",
+							"open",
+							"playsinline",
+							"readonly",
+							"required",
+							"reversed",
+							"selected",
+							"truespeed",
+						].includes(i) &&
+						this.d[i]
+					) {
+						elems[i] = true;
 					} else {
 						if (this.d[i] instanceof Function) {
 							if (i.startsWith("on")) {
@@ -197,7 +196,6 @@ class tag {
 			{},
 			{
 				tag: null,
-				attr: null,
 				elem: null,
 			},
 			d
@@ -210,9 +208,7 @@ class tag {
 		container = container || document.createElement("div");
 
 		let element = this.d.tag ? document.createElement(this.d.tag) : container;
-		if (this.d.attr) {
-			element = new attr(this.d.attr).attach(element);
-		}
+		element = new attr(this.d).attach(element);
 
 		if (this.d.elem) {
 			if (typeof this.d.elem === "string") {
@@ -250,121 +246,129 @@ class tag {
 
 class label extends tag {
 	constructor(...arg) {
-		let d = {};
+		let t = {};
 
 		if (arg && arg.length === 1 && typeof arg[0] === "string") {
-			d.label = arg[0];
+			t.label = arg[0];
 		} else if (arg && arg.length === 2) {
-			d.icon = arg[0];
-			d.label = arg[1];
+			t.icon = arg[0];
+			t.label = arg[1];
 		} else {
-			d = arg[0];
+			t = arg[0];
 		}
 
-		d = core.extend(
+		let d = core.extend(
 			{},
 			{
-				attr: null,
+				id: null,
+				class: null,
+				style: null,
 
 				icon: null,
 				label: null,
 			},
-			d
+			t
 		);
 
-		let e = {
-			attr: d.attr,
-			elem: d.icon
-				? [new icon(d.icon), new tag({ tag: "label", attr: { class: "ms-2" }, elem: d.label })]
-				: new tag({ tag: "label", elem: d.label }),
-		};
+		super({
+			id: d.id,
+			class: d.class,
+			style: d.style,
 
-		super(e);
+			elem: d.icon
+				? [new icon(d.icon), new tag({ tag: "label", class: "ms-2", elem: d.label })]
+				: new tag({ tag: "label", elem: d.label }),
+		});
 	}
 }
 
 class button extends tag {
 	constructor(...arg) {
-		let d = {};
+		let t = {};
 
 		if (arg && arg.length === 1 && typeof arg[0] === "string") {
-			d.label = arg[0];
+			t.label = arg[0];
 		} else if (arg && arg.length === 2) {
-			d.label = arg[0];
-			d.color = arg[1];
+			t.label = arg[0];
+			t.color = arg[1];
 		} else {
-			d = arg[0];
+			t = arg[0];
 		}
 
-		d = core.extend(
+		let d = core.extend(
 			{},
 			{
-				attr: null,
+				id: null,
+				class: null,
+				style: null,
 
 				type: "button",
 				label: "Button",
+				hidelabel: false,
 				icon: null,
 				color: null,
 				textcolor: null,
+				disabled: false,
 				outline: false,
 				onclick: null,
 			},
-			d
+			t
 		);
 
-		let e = {
+		super({
+			id: d.id,
+			style: d.style,
 			tag: "button",
-			attr: attr.merge(d.attr, {
-				role: "button",
-				type: d.type,
-				onclick: d.onclick,
-				class: [
-					"btn",
-					d.color ? (d.outline ? `btn-outline-${d.color}` : `btn-${d.color}`) : null,
-					d.textcolor ? `text-${d.textcolor}` : null,
-				],
-			}),
-			elem: new label({ icon: d.icon, label: d.label }),
-		};
-
-		super(e);
+			role: "button",
+			type: d.type,
+			disabled: d.disabled,
+			onclick: d.onclick,
+			"aria-label": d.hidelabel && d.label ? d.label : null,
+			class: core.merge.class(d.class, [
+				"btn",
+				d.color ? (d.outline ? `btn-outline-${d.color}` : `btn-${d.color}`) : null,
+				d.textcolor ? `text-${d.textcolor}` : null,
+			]),
+			elem: d.hidelabel ? (d.icon ? new icon(d.icon) : null) : new label(d.icon, d.label),
+		});
 	}
 }
 
 class icon extends tag {
 	constructor(...arg) {
-		let d = {};
-		if (arg && arg.length === 1 && typeof arg[0] === "string") {
-			d = {
-				icon: arg[0],
-			};
-		} else if (arg && arg.length === 2) {
-			d = {
-				style: arg[0],
-				icon: arg[1],
-			};
-		} else {
-			d = arg[0];
+		let t = {};
+		if (arg && arg.length === 1) {
+			if (typeof arg[0] === "string") {
+				t = {
+					icon: `fas fa-${arg[0]}`,
+				};
+			} else if (typeof arg[0] === "object" && Array.isArray(arg[0]) && arg[0].length === 2) {
+				t = {
+					icon: `${arg[0][0]} fa-${arg[0][1]}`,
+				};
+			} else {
+				t = arg[0];
+			}
 		}
 
-		d = core.extend(
+		let d = core.extend(
 			{},
 			{
-				attr: null,
+				id: null,
+				class: null,
+				style: null,
 
-				style: "fas",
 				icon: null,
+				fixwidth: true,
 			},
-			d
+			t
 		);
 
-		let e = {
+		super({
+			id: d.id,
+			style: d.style,
 			tag: "i",
-			attr: attr.merge(d.attr, {
-				class: [d.style, `fa-${d.icon}`],
-			}),
-		};
-
-		super(e);
+			class: core.merge.class(d.class, [d.icon, d.fixwidth ? "fa-fw" : null]),
+		});
 	}
 }

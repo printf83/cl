@@ -4,16 +4,26 @@ $(document).ready(() => {
 		tag: "div",
 		elem: [
 			"Hello World",
-			new button({ label: "Primary", color: "primary" }),
+			new button({ id: core.UUID(), label: "Primary", color: "primary" }),
 			new button({
 				label: "Danger",
 				color: "danger",
+				style: { width: "150px" },
 				type: "submit",
-				icon: { icon: "facebook", style: "fab" },
+				icon: ["fab", "facebook"],
+			}),
+			new button({
+				label: "Yay",
+				class: ["makkauhijau", null, null, null, "makkaubiru"],
+				disabled: true,
+				hidelabel: true,
+				color: "success",
+				type: "reset",
+				icon: "fire",
 			}),
 			new button("hello", "warning"),
 		],
-		attr: { class: "display-1" },
+		class: "display-1",
 	});
 	b.build(root);
 });
