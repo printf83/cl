@@ -1,6 +1,7 @@
 "use strict";
 import * as core from "./core.js";
 import tag from "./tag.js";
+import attr from "./attr.js";
 import icon from "./icon.js";
 import label from "./label.js";
 
@@ -20,9 +21,7 @@ export default class button extends tag {
 		let d = core.extend(
 			{},
 			{
-				id: null,
-				class: null,
-				style: null,
+				attr: null,
 
 				type: "button",
 				label: "Button",
@@ -38,19 +37,19 @@ export default class button extends tag {
 		);
 
 		super({
-			id: d.id,
-			style: d.style,
 			tag: "button",
-			role: "button",
-			type: d.type,
-			disabled: d.disabled,
-			onclick: d.onclick,
-			"aria-label": d.hidelabel && d.label ? d.label : null,
-			class: core.merge.class(d.class, [
-				"btn",
-				d.color ? (d.outline ? `btn-outline-${d.color}` : `btn-${d.color}`) : null,
-				d.textcolor ? `text-${d.textcolor}` : null,
-			]),
+			attr: attr.merge(d.attr, {
+				role: "button",
+				type: d.type,
+				disabled: d.disabled,
+				onclick: d.onclick,
+				"aria-label": d.hidelabel && d.label ? d.label : null,
+				class: [
+					"btn",
+					d.color ? (d.outline ? `btn-outline-${d.color}` : `btn-${d.color}`) : null,
+					d.textcolor ? `text-${d.textcolor}` : null,
+				],
+			}),
 			elem: d.hidelabel ? (d.icon ? new icon(d.icon) : null) : new label(d.icon, d.label),
 		});
 	}

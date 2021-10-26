@@ -8,6 +8,7 @@ export default class tag {
 			{},
 			{
 				tag: null,
+				attr: null,
 				elem: null,
 			},
 			d
@@ -20,7 +21,7 @@ export default class tag {
 		container = container || document.createElement("div");
 
 		let element = this.d.tag ? document.createElement(this.d.tag) : container;
-		element = new attr(this.d).attach(element);
+		element = new attr(this.d.attr).attach(element);
 
 		if (this.d.elem) {
 			if (typeof this.d.elem === "string") {

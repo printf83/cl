@@ -19,10 +19,7 @@ export default class label extends tag {
 		let d = core.extend(
 			{},
 			{
-				id: null,
-				class: null,
-				style: null,
-
+				attr: null,
 				icon: null,
 				label: null,
 			},
@@ -30,12 +27,9 @@ export default class label extends tag {
 		);
 
 		super({
-			id: d.id,
-			class: d.class,
-			style: d.style,
-
+			attr: d.attr,
 			elem: d.icon
-				? [new icon(d.icon), new tag({ tag: "label", class: "ms-2", elem: d.label })]
+				? [new icon(d.icon), new tag({ tag: "label", attr: { class: "ms-2" }, elem: d.label })]
 				: new tag({ tag: "label", elem: d.label }),
 		});
 	}

@@ -81,8 +81,8 @@ export const merge = {
 		}
 	},
 };
-export function UUID() {
-	return "el-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
+export function UUID(format) {
+	return (format || "el-xxxxxxxxxxxx").replace(/[xy]/g, function (c) {
 		var r = (Math.random() * 16) | 0,
 			v = c === "x" ? r : (r & 0x3) | 0x8;
 		return v.toString(16);
@@ -99,4 +99,18 @@ export function multiClass(val, format) {
 					.join(" ")
 			: format.replace("$1", val)
 		: null;
+}
+export function documentReady(callback) {
+	if (document.readyState != "loading") {
+		// in case the document is already rendered
+		callback();
+	} else if (document.addEventListener) {
+		// modern browsers
+		document.addEventListener("DOMContentLoaded", callback);
+	} else {
+		// IE <= 8
+		document.attachEvent("onreadystatechange", function () {
+			if (document.readyState == "complete") callback();
+		});
+	}
 }

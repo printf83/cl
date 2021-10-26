@@ -1,4 +1,5 @@
 "use strict";
+import attr from "./attr.js";
 import * as core from "./core.js";
 import tag from "./tag.js";
 
@@ -22,11 +23,7 @@ export default class icon extends tag {
 		let d = core.extend(
 			{},
 			{
-				id: null,
-				class: null,
-				style: null,
 				attr: null,
-
 				icon: null,
 				fixwidth: true,
 			},
@@ -34,12 +31,10 @@ export default class icon extends tag {
 		);
 
 		super({
-			id: d.id,
-			style: d.style,
-			attr: d.attr,
-
 			tag: "i",
-			class: core.merge.class(d.class, [d.icon, d.fixwidth ? "fa-fw" : null]),
+			attr: attr.merge(d.attr, {
+				class: [d.icon, d.fixwidth ? "fa-fw" : null],
+			}),
 		});
 	}
 }
