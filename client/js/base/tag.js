@@ -29,10 +29,12 @@ export default class tag {
 			} else {
 				if (Array.isArray(this.d.elem)) {
 					this.d.elem.forEach(function (i) {
-						if (typeof i === "string") {
-							element.appendChild(document.createTextNode(i));
-						} else {
-							element = i.build(element);
+						if (i) {
+							if (typeof i === "string") {
+								element.appendChild(document.createTextNode(i));
+							} else {
+								element = i.build(element);
+							}
 						}
 					});
 				} else {
