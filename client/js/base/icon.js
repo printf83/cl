@@ -24,8 +24,10 @@ export default class icon extends tag {
 			{},
 			{
 				attr: null,
+				style: "fas",
 				icon: null,
 				fixwidth: true,
+				spin: false,
 			},
 			t
 		);
@@ -33,7 +35,7 @@ export default class icon extends tag {
 		super({
 			tag: "i",
 			attr: attr.merge(d.attr, {
-				class: [d.icon, d.fixwidth ? "fa-fw" : null],
+				class: [d.style, d.icon, d.fixwidth ? "fa-fw" : null, d.spin ? "fa-spin" : null],
 			}),
 		});
 	}

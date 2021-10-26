@@ -15,7 +15,7 @@ core.documentReady(() => {
 				label: "Danger",
 				color: "danger",
 				type: "submit",
-				icon: ["fab", "facebook"],
+				icon: { style: "fab", icon: "facebook", spin: true },
 				attr: { style: { width: "150px" } },
 			}),
 			new button({
