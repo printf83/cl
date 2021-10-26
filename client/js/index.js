@@ -34,7 +34,7 @@ core.documentReady(() => {
 		new div([
 			new inputgroup.container([
 				new button("Hello", "primary"),
-				new inputgroup.text("@"),
+				new inputgroup.text({ elem: "@", attr: { class: "text-danger" } }),
 				new button("World", "info"),
 			]),
 		]),
