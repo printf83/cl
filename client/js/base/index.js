@@ -1,3 +1,8 @@
+"use strict";
+import { core } from "./core.js";
+import tag from "./tag.js";
+import button from "./button.js";
+
 $(document).ready(() => {
 	var root = document.getElementById("root");
 	var b = new tag({
