@@ -1,6 +1,35 @@
 "use strict";
 import * as core from "./core.js";
 
+const booleanAttr = [
+	"allowfullscreen",
+	"allowpaymentrequest",
+	"async",
+	"autofocus",
+	"autoplay",
+	"checked",
+	"controls",
+	"default",
+	"defer",
+	"disabled",
+	"formnovalidate",
+	"hidden",
+	"ismap",
+	"itemscope",
+	"loop",
+	"multiple",
+	"muted",
+	"nomodule",
+	"novalidate",
+	"open",
+	"playsinline",
+	"readonly",
+	"required",
+	"reversed",
+	"selected",
+	"truespeed",
+];
+
 export default class attr {
 	constructor(d) {
 		d = core.extend(
@@ -76,37 +105,7 @@ export default class attr {
 								elems.style[j] = this.d[i][j];
 							}
 						});
-					} else if (
-						[
-							"allowfullscreen",
-							"allowpaymentrequest",
-							"async",
-							"autofocus",
-							"autoplay",
-							"checked",
-							"controls",
-							"default",
-							"defer",
-							"disabled",
-							"formnovalidate",
-							"hidden",
-							"ismap",
-							"itemscope",
-							"loop",
-							"multiple",
-							"muted",
-							"nomodule",
-							"novalidate",
-							"open",
-							"playsinline",
-							"readonly",
-							"required",
-							"reversed",
-							"selected",
-							"truespeed",
-						].includes(i) &&
-						this.d[i]
-					) {
+					} else if (booleanAttr.includes(i) && this.d[i]) {
 						elems[i] = true;
 					} else {
 						if (this.d[i] instanceof Function) {
