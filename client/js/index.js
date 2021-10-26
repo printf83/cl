@@ -31,7 +31,7 @@ core.documentReady(() => {
 		}),
 		new button("hello", "warning"),
 		new h(3, "text-primary", "This is h3 Title"),
-		new div([
+		new div("kelabu", [
 			new inputgroup.container([
 				new button("Hello", "primary"),
 				new inputgroup.text({ elem: "@", attr: { class: "text-danger" } }),
