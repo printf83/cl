@@ -35,7 +35,12 @@ export default class icon extends tag {
 		super({
 			tag: "i",
 			attr: attr.merge(d.attr, {
-				class: [d.style, d.icon, d.fixwidth ? "fa-fw" : null, d.spin ? "fa-spin" : null],
+				class: [
+					d.style,
+					d.icon ? `fa-${d.icon}` : null,
+					d.fixwidth ? "fa-fw" : null,
+					d.spin ? "fa-spin" : null,
+				],
 			}),
 		});
 	}
