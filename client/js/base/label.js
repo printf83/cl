@@ -1,5 +1,5 @@
 "use strict";
-import { core } from "./core.js";
+import * as core from "./core.js";
 import tag from "./tag.js";
 import icon from "./icon.js";
 
