@@ -5,6 +5,11 @@ import attr from "./attr.js";
 import icon from "./icon.js";
 import label from "./label.js";
 
+/**
+ * label
+ * label,color
+ * option
+ */
 export default class button extends tag {
 	constructor(...arg) {
 		let t = {};

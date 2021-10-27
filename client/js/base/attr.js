@@ -30,6 +30,9 @@ const booleanAttr = [
 	"truespeed",
 ];
 
+/**
+ * option {class,style,...}
+ */
 export default class attr {
 	constructor(d) {
 		d = core.extend(

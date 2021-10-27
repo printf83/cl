@@ -2,6 +2,9 @@
 import * as core from "./core.js";
 import attr from "./attr.js";
 
+/**
+ * option
+ */
 export default class tag {
 	constructor(d) {
 		d = core.extend(
