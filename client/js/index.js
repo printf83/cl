@@ -9,7 +9,19 @@ import icon from "./base/icon.js";
 
 core.documentReady(() => {
 	var root = document.getElementById("root");
-	// let b = new div("display-1", "Hello world");
+	//let b = new tag({ tag: "div", elem: "Hello" });
+
+	//let b = new div("mb-5", ["Hello World"]);
+
+	// let b = new inputgroup.container([
+	// 	new inputgroup.text([new icon("fire")]),
+	// 	new button("Hello", "primary"),
+	// 	new inputgroup.text([new icon("fire")]),
+	// 	new inputgroup.text({ elem: new icon("fire"), attr: { class: "text-danger" } }),
+	// 	new button("World", "info"),
+	// 	new inputgroup.text([new icon("fire"), new icon("fire"), new icon("fire")]),
+	// ]);
+
 	let b = new div("mb-5", [
 		new p("display-1", "Hello World"),
 		new button({ label: "Primary", color: "primary", attr: { id: core.UUID("btn-xxxxxxx") } }),

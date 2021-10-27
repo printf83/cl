@@ -12,41 +12,39 @@ import attr from "./attr.js";
 export default class cont extends tag {
 	constructor(tag, ...arg) {
 		super();
+
+		let t = {
+			class: null,
+			style: null,
+			elem: null,
+		};
+
+		if (arg && arg.length === 3) {
+			t.class = arg[0];
+			t.style = arg[1];
+			t.elem = arg[2];
+		} else if (arg && arg.length === 2) {
+			t.class = arg[0];
+			t.elem = arg[1];
+		} else if ((arg && arg.length === 1 && typeof arg[0] === "string") || Array.isArray(arg[0])) {
+			t.elem = arg[0];
+		} else {
+			t = arg[0];
+		}
+
 		this.data = {
 			tag: tag,
-			arg: arg,
+			arg: t,
 		};
 	}
 
 	get data() {
 		return this._d;
 	}
-	set data(param) {
-		this._d = param;
+	set data(value) {
+		this._d = value;
 
-		if (param && param.tag && param.arg) {
-			let tag = param.tag;
-			let arg = param.arg;
-
-			let t = {
-				class: null,
-				style: null,
-				elem: null,
-			};
-
-			if (arg && arg.length === 3) {
-				t.class = arg[0];
-				t.style = arg[1];
-				t.elem = arg[2];
-			} else if (arg && arg.length === 2) {
-				t.class = arg[0];
-				t.elem = arg[1];
-			} else if ((arg && arg.length === 1 && typeof arg[0] === "string") || Array.isArray(arg[0])) {
-				t.elem = arg[0];
-			} else {
-				t = arg[0];
-			}
-
+		if (value && value.tag && value.arg) {
 			let d = core.extend(
 				{},
 				{
@@ -55,11 +53,11 @@ export default class cont extends tag {
 					style: null,
 					elem: null,
 				},
-				t
+				value.arg
 			);
 
 			super.data = {
-				tag: tag,
+				tag: value.tag,
 				attr: attr.merge(d.attr, {
 					class: d.class,
 					style: d.style,

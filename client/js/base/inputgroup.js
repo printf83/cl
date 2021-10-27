@@ -13,34 +13,35 @@ import div from "./div.js";
 export class container extends tag {
 	constructor(...arg) {
 		super();
-		this.data = arg;
+
+		let t = {
+			for: null,
+			label: null,
+			elem: null,
+		};
+
+		if (arg && arg.length === 3) {
+			t.for = arg[0];
+			t.label = arg[1];
+			t.elem = arg[2];
+		} else if (arg && arg.length === 2) {
+			t.label = arg[0];
+			t.elem = arg[1];
+		} else if (arg && arg.length === 1 && Array.isArray(arg[0])) {
+			t.elem = arg[0];
+		} else {
+			t = arg[0];
+		}
+
+		this.data = t;
 	}
 
 	get data() {
 		return this._d;
 	}
-	set data(arg) {
-		this._d = arg;
-		if (arg) {
-			let t = {
-				for: null,
-				label: null,
-				elem: null,
-			};
-
-			if (arg && arg.length === 3) {
-				t.for = arg[0];
-				t.label = arg[1];
-				t.elem = arg[2];
-			} else if (arg && arg.length === 2) {
-				t.label = arg[0];
-				t.elem = arg[1];
-			} else if (arg && arg.length === 1 && Array.isArray(arg[0])) {
-				t.elem = arg[0];
-			} else {
-				t = arg[0];
-			}
-
+	set data(value) {
+		this._d = value;
+		if (value) {
 			let d = core.extend(
 				{},
 				{
@@ -50,7 +51,7 @@ export class container extends tag {
 					elem: null,
 					nowarp: false,
 				},
-				t
+				value
 			);
 
 			super.data = {
@@ -74,38 +75,43 @@ export class container extends tag {
 export class text extends div {
 	constructor(...arg) {
 		super();
-		this.data = arg;
+
+		let t = {
+			elem: null,
+		};
+
+		if (arg && arg.length === 1 && (typeof arg[0] === "string" || Array.isArray(arg[0]))) {
+			t.elem = arg[0];
+		} else {
+			t = arg[0];
+		}
+
+		this.data = t;
 	}
 
 	get data() {
 		return this._d;
 	}
-	set data(arg) {
-		this._d = arg;
-		if (arg) {
-			let t = {
-				elem: null,
-			};
+	set data(value) {
+		this._d = value;
 
-			if (arg && arg.length === 1 && (typeof arg[0] === "string" || Array.isArray(arg[0]))) {
-				t.elem = arg[0];
-			} else {
-				t = arg[0];
-			}
-
+		if (value) {
 			let d = core.extend(
 				{},
 				{
 					attr: null,
 					elem: null,
 				},
-				t
+				value
 			);
 
 			super.data = {
-				attr: d.attr,
-				class: ["input-group-text"],
-				elem: d.elem,
+				tag: "div",
+				arg: {
+					attr: d.attr,
+					class: ["input-group-text"],
+					elem: d.elem,
+				},
 			};
 		}
 	}

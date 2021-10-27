@@ -12,40 +12,43 @@ import tag from "./tag.js";
 export default class icon extends tag {
 	constructor(...arg) {
 		super();
-		if (arg) {
-			this.data = arg;
+
+		let t = {
+			style: null,
+			icon: null,
+		};
+
+		if (arg && arg.length === 1) {
+			if (typeof arg[0] === "string") {
+				t = {
+					style: "fas",
+					icon: arg[0],
+				};
+			} else if (Array.isArray(arg[0]) && arg[0].length === 2) {
+				t = {
+					style: arg[0][0],
+					icon: arg[0][1],
+				};
+			} else {
+				t = arg[0];
+			}
+		} else if (arg.length === 2) {
+			t = {
+				style: arg[0],
+				icon: arg[1],
+			};
 		}
+
+		this.data = t;
 	}
 
 	get data() {
 		return this._d;
 	}
-	set data(arg) {
-		this._d = arg;
+	set data(value) {
+		this._d = value;
 
-		if (arg) {
-			let t = {};
-			if (arg && arg.length === 1) {
-				if (typeof arg[0] === "string") {
-					t = {
-						style: "fas",
-						icon: arg[0],
-					};
-				} else if (Array.isArray(arg[0]) && arg[0].length === 2) {
-					t = {
-						style: arg[0][0],
-						icon: arg[0][1],
-					};
-				} else {
-					t = arg[0];
-				}
-			} else if (arg.length === 2) {
-				t = {
-					style: arg[0],
-					icon: arg[1],
-				};
-			}
-
+		if (value) {
 			let d = core.extend(
 				{},
 				{
@@ -61,7 +64,7 @@ export default class icon extends tag {
 					elem: null,
 					stack: 0,
 				},
-				t
+				value
 			);
 
 			let rotate = null;

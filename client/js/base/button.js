@@ -15,37 +15,38 @@ import label from "./label.js";
 export default class button extends tag {
 	constructor(...arg) {
 		super();
-		this.data = arg;
+
+		let t = {
+			label: null,
+			color: null,
+			onclick: null,
+		};
+		if (arg && arg.length === 3) {
+			t.label = arg[0];
+			t.color = arg[1];
+			t.onclick = arg[2];
+		} else if (arg && arg.length === 2 && arg[1] instanceof Function) {
+			t.label = arg[0];
+			t.onclick = arg[1];
+		} else if (arg && arg.length === 2 && typeof arg[1] === "string") {
+			t.label = arg[0];
+			t.color = arg[1];
+		} else if (arg && arg.length === 1 && typeof arg[0] === "string") {
+			t.label = arg[0];
+		} else {
+			t = arg[0];
+		}
+
+		this.data = t;
 	}
 
 	get data() {
 		return this._d;
 	}
-	set data(arg) {
-		this._d = arg;
+	set data(value) {
+		this._d = value;
 
-		if (arg) {
-			let t = {
-				label: null,
-				color: null,
-				onclick: null,
-			};
-			if (arg && arg.length === 3) {
-				t.label = arg[0];
-				t.color = arg[1];
-				t.onclick = arg[2];
-			} else if (arg && arg.length === 2 && arg[1] instanceof Function) {
-				t.label = arg[0];
-				t.onclick = arg[1];
-			} else if (arg && arg.length === 2 && typeof arg[1] === "string") {
-				t.label = arg[0];
-				t.color = arg[1];
-			} else if (arg && arg.length === 1 && typeof arg[0] === "string") {
-				t.label = arg[0];
-			} else {
-				t = arg[0];
-			}
-
+		if (value) {
 			let d = core.extend(
 				{},
 				{
@@ -71,7 +72,7 @@ export default class button extends tag {
 					onclick: null,
 					href: null,
 				},
-				t
+				value
 			);
 
 			super.data = {
