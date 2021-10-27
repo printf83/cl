@@ -7,7 +7,7 @@ import cont from "./cont.js";
  * [elem]
  * option
  */
-export default class div extends cont {
+export default class p extends cont {
 	constructor(...arg) {
 		super("p", ...arg);
 	}

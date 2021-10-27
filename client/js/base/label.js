@@ -13,38 +13,49 @@ import attr from "./attr.js";
  */
 export default class label extends tag {
 	constructor(...arg) {
-		let t = {};
+		super();
+		this.data = arg;
+	}
 
-		if (arg && arg.length === 3) {
-			t.for = arg[0];
-			t.icon = arg[1];
-			t.label = arg[2];
-		} else if (arg && arg.length === 2) {
-			t.icon = arg[0];
-			t.label = arg[1];
-		} else if (arg && arg.length === 1 && typeof arg[0] === "string") {
-			t.label = arg[0];
-		} else {
-			t = arg[0];
+	get data() {
+		return this._d;
+	}
+	set data(arg) {
+		this._d = arg;
+		if (arg) {
+			let t = {};
+
+			if (arg && arg.length === 3) {
+				t.for = arg[0];
+				t.icon = arg[1];
+				t.label = arg[2];
+			} else if (arg && arg.length === 2) {
+				t.icon = arg[0];
+				t.label = arg[1];
+			} else if (arg && arg.length === 1 && typeof arg[0] === "string") {
+				t.label = arg[0];
+			} else {
+				t = arg[0];
+			}
+
+			let d = core.extend(
+				{},
+				{
+					attr: null,
+					for: null,
+					icon: null,
+					label: null,
+				},
+				t
+			);
+
+			super.data = {
+				tag: "label",
+				attr: attr.merge(d.attr, {
+					for: d.for,
+				}),
+				elem: [d.icon ? new span("me-2", new icon(d.icon)) : null, d.label],
+			};
 		}
-
-		let d = core.extend(
-			{},
-			{
-				attr: null,
-				for: null,
-				icon: null,
-				label: null,
-			},
-			t
-		);
-
-		super({
-			tag: "label",
-			attr: attr.merge(d.attr, {
-				for: d.for,
-			}),
-			elem: [d.icon ? new span("me-2", new icon(d.icon)) : null, d.label],
-		});
 	}
 }

@@ -34,20 +34,30 @@ const booleanAttr = [
  * option {class,style,...}
  */
 export default class attr {
-	constructor(d) {
-		d = core.extend(
+	constructor(arg) {
+		this.data = core.extend(
 			{},
 			{
 				class: null,
 				style: null,
 			},
-			d
+			arg
 		);
-
-		this.d = d;
 	}
 
-	//rules for unsupported property
+	get data() {
+		return this._d;
+	}
+	set data(arg) {
+		this._d = arg;
+	}
+
+	/**
+	 *
+	 * rules : unsupported property merge process
+	 * example :
+	 * merge({},{},{id:function(a,b){return b}})
+	 */
 	static merge = function (a, b, rules) {
 		if ((a || b) && !(a && b)) {
 			return a || b;
@@ -92,35 +102,35 @@ export default class attr {
 	};
 
 	attach = function (elems) {
-		if (elems) {
-			Object.keys(this.d).forEach((i) => {
-				if (i !== "tag" && i !== "elem" && (this.d[i] || this.d[i] === "") && this.d[i] !== null) {
+		if (elems && this._d) {
+			Object.keys(this._d).forEach((i) => {
+				if (i !== "tag" && i !== "elem" && (this._d[i] || this._d[i] === "") && this._d[i] !== null) {
 					if (i === "class") {
-						if (Array.isArray(this.d[i])) {
-							let k = Array.from(new Set(this.d[i])).combine(" ");
+						if (Array.isArray(this._d[i])) {
+							let k = Array.from(new Set(this._d[i])).combine(" ");
 							if (k) elems.classList = k;
 						} else {
-							elems.classList = this.d[i];
+							elems.classList = this._d[i];
 						}
 					} else if (i === "style") {
-						Object.keys(this.d[i]).forEach((j) => {
-							if (this.d[i][j] && this.d[i][j] !== null) {
-								elems.style[j] = this.d[i][j];
+						Object.keys(this._d[i]).forEach((j) => {
+							if (this._d[i][j] && this._d[i][j] !== null) {
+								elems.style[j] = this._d[i][j];
 							}
 						});
-					} else if (booleanAttr.includes(i) && this.d[i]) {
+					} else if (booleanAttr.includes(i) && this._d[i]) {
 						elems[i] = true;
 					} else {
-						if (this.d[i] instanceof Function) {
+						if (this._d[i] instanceof Function) {
 							if (i.startsWith("on")) {
 								elems.addEventListener(i.startsWith("on") ? i.substr(2) : i, function (event) {
-									this.d[i](event.currentTarget, event);
+									this._d[i](event.currentTarget, event);
 								});
 							} else {
-								elems.setAttribute(i, this.d[i]);
+								elems.setAttribute(i, this._d[i]);
 							}
 						} else {
-							elems.setAttribute(i, this.d[i]);
+							elems.setAttribute(i, this._d[i]);
 						}
 					}
 				}

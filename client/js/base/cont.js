@@ -11,39 +11,61 @@ import attr from "./attr.js";
  */
 export default class cont extends tag {
 	constructor(tag, ...arg) {
-		let t = {};
+		super();
+		this.data = {
+			tag: tag,
+			arg: arg,
+		};
+	}
 
-		if (arg && arg.length === 3) {
-			t.class = arg[0];
-			t.style = arg[1];
-			t.elem = arg[2];
-		} else if (arg && arg.length === 2) {
-			t.class = arg[0];
-			t.elem = arg[1];
-		} else if ((arg && arg.length === 1 && typeof arg[0] === "string") || Array.isArray(arg[0])) {
-			t.elem = arg[0];
-		} else {
-			t = arg[0];
-		}
+	get data() {
+		return this._d;
+	}
+	set data(param) {
+		this._d = param;
 
-		let d = core.extend(
-			{},
-			{
-				attr: null,
+		if (param && param.tag && param.arg) {
+			let tag = param.tag;
+			let arg = param.arg;
+
+			let t = {
 				class: null,
 				style: null,
 				elem: null,
-			},
-			t
-		);
+			};
 
-		super({
-			tag: tag,
-			attr: attr.merge(d.attr, {
-				class: d.class,
-				style: d.style,
-			}),
-			elem: d.elem,
-		});
+			if (arg && arg.length === 3) {
+				t.class = arg[0];
+				t.style = arg[1];
+				t.elem = arg[2];
+			} else if (arg && arg.length === 2) {
+				t.class = arg[0];
+				t.elem = arg[1];
+			} else if ((arg && arg.length === 1 && typeof arg[0] === "string") || Array.isArray(arg[0])) {
+				t.elem = arg[0];
+			} else {
+				t = arg[0];
+			}
+
+			let d = core.extend(
+				{},
+				{
+					attr: null,
+					class: null,
+					style: null,
+					elem: null,
+				},
+				t
+			);
+
+			super.data = {
+				tag: tag,
+				attr: attr.merge(d.attr, {
+					class: d.class,
+					style: d.style,
+				}),
+				elem: d.elem,
+			};
+		}
 	}
 }

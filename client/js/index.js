@@ -17,6 +17,7 @@ core.documentReady(() => {
 			label: "Danger",
 			color: "danger",
 			type: "submit",
+			outline: true,
 			icon: { style: "fab", icon: "facebook", spin: true },
 			attr: { style: { width: "150px" } },
 		}),
