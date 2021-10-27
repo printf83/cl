@@ -9,7 +9,8 @@ import icon from "./base/icon.js";
 
 core.documentReady(() => {
 	var root = document.getElementById("root");
-	var b = new div("mb-5", [
+	// let b = new div("display-1", "Hello world");
+	let b = new div("mb-5", [
 		new p("display-1", "Hello World"),
 		new button({ label: "Primary", color: "primary", attr: { id: core.UUID("btn-xxxxxxx") } }),
 		new button({
