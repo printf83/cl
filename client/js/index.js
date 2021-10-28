@@ -79,7 +79,7 @@ core.documentReady(() => {
 		new div("mb-5", [
 			new icon("fab", "bootstrap"),
 			new icon("home"),
-			new icon({ icon: "home", color: "danger" }),
+			new icon({ icon: "home", color: "success" }),
 			new icon({ icon: "home", color: "danger", rotate: 90 }),
 			new icon({ icon: "home", color: "warning", rotate: "both" }),
 		]),
