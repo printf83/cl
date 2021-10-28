@@ -6,6 +6,7 @@ import h from "./base/h.js";
 import button from "./base/button.js";
 import * as inputgroup from "./base/inputgroup.js";
 import icon from "./base/icon.js";
+import tooltip from "./base/tooltip.js";
 
 core.documentReady(() => {
 	var root = document.getElementById("root");
@@ -23,17 +24,27 @@ core.documentReady(() => {
 	// ]);
 
 	console.time("b");
+	// let b = new tooltip(new button("Hello"), "World");
+
 	let b = new div("mb-5", [
 		new p("display-1", "Hello World"),
 		new button({ label: "Primary", color: "primary", id: core.UUID("btn-xxxxxxx") }),
-		new button({
-			label: "Danger",
-			color: "danger",
-			type: "submit",
-			outline: true,
-			icon: { style: "fab", icon: "facebook", spin: true },
-			attr: { style: { width: "150px" } },
-		}),
+		new tooltip(
+			new button({
+				label: "Danger",
+				color: "danger",
+				type: "submit",
+				outline: true,
+				icon: { style: "fab", icon: "facebook", spin: true },
+				attr: { style: { width: "150px" } },
+			}),
+			{
+				title: "Title",
+				msg: "Message",
+				type: "popover",
+				postition: "end",
+			}
+		),
 		new button({
 			label: "Yay",
 			disabled: true,

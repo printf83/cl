@@ -30,33 +30,34 @@ export default class label extends tag {
 			t = arg[0];
 		}
 
-		this.data = t;
+		this.data = core.extend(
+			{},
+			{
+				attr: null,
+				for: null,
+				icon: null,
+				label: null,
+			},
+			t
+		);
 	}
 
 	get data() {
 		return this._d;
 	}
-	set data(value) {
-		this._d = value;
-		if (value) {
-			let d = core.extend(
-				{},
-				{
-					attr: null,
-					for: null,
-					icon: null,
-					label: null,
-				},
-				value
-			);
-
-			super.data = {
+	set data(d) {
+		if (d) {
+			this._d = {
 				tag: "label",
 				attr: attr.merge(d.attr, {
 					for: d.for,
 				}),
 				elem: [d.icon ? new span("me-2", new icon(d.icon)) : null, d.label],
 			};
+		} else {
+			this._d = null;
 		}
+
+		super.data = this._d;
 	}
 }

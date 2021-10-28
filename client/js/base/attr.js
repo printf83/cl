@@ -66,23 +66,27 @@ export default class attr {
 			let c = {};
 			Object.keys(a).forEach((i) => {
 				if (b.hasOwnProperty(i)) {
-					//need to merge a and b into c
-					switch (i) {
-						case "class":
-							c[i] = core.merge.class(a[i], b[i]);
-							break;
-						case "style":
-							c[i] = core.merge.style(a[i], b[i]);
-							break;
-						default:
-							if (rules && rules.hasOwnProperty(i)) {
-								c[i] = rules[i](a[i], b[i]);
-							} else {
-								console.warn(
-									`Fail to merge attr:${i}. No rules provided for merging this attribute. Using attr from 'a' insted.`
-								);
-								c[i] = a[i]; //used a insted
-							}
+					if ((a[i] || b[i]) && !(a[i] && b[i])) {
+						c[i] = a[i] || b[i];
+					} else if (a[i] && b[i]) {
+						//need to merge a and b into c
+						switch (i) {
+							case "class":
+								c[i] = core.merge.class(a[i], b[i]);
+								break;
+							case "style":
+								c[i] = core.merge.style(a[i], b[i]);
+								break;
+							default:
+								if (rules && rules.hasOwnProperty(i)) {
+									c[i] = rules[i](a[i], b[i]);
+								} else {
+									console.warn(
+										`Fail to merge attr:${i}. No rules provided for merging this attribute. Using attr from 'a' insted.`
+									);
+									c[i] = a[i]; //used a insted
+								}
+						}
 					}
 				} else {
 					c[i] = a[i];
@@ -91,7 +95,9 @@ export default class attr {
 
 			Object.keys(b).forEach((i) => {
 				if (!a.hasOwnProperty(i)) {
-					c[i] = b[i];
+					if (b[i]) {
+						c[i] = b[i];
+					}
 				}
 			});
 

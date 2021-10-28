@@ -33,28 +33,25 @@ export class container extends tag {
 			t = arg[0];
 		}
 
-		this.data = t;
+		this.data = core.extend(
+			{},
+			{
+				for: null,
+				label: null,
+				attr: null,
+				elem: null,
+				nowarp: false,
+			},
+			t
+		);
 	}
 
 	get data() {
 		return this._d;
 	}
-	set data(value) {
-		this._d = value;
-		if (value) {
-			let d = core.extend(
-				{},
-				{
-					for: null,
-					label: null,
-					attr: null,
-					elem: null,
-					nowarp: false,
-				},
-				value
-			);
-
-			super.data = {
+	set data(d) {
+		if (d) {
+			this._d = {
 				elem: [
 					d.label ? new label(d.for, "form-label", d.label) : null,
 					new div({
@@ -64,7 +61,11 @@ export class container extends tag {
 					}),
 				],
 			};
+		} else {
+			this._d = null;
 		}
+
+		super.data = this._d;
 	}
 }
 
@@ -86,33 +87,33 @@ export class text extends div {
 			t = arg[0];
 		}
 
-		this.data = t;
+		this.data = core.extend(
+			{},
+			{
+				attr: null,
+				elem: null,
+			},
+			t
+		);
 	}
 
 	get data() {
 		return this._d;
 	}
-	set data(value) {
-		this._d = value;
-
-		if (value) {
-			let d = core.extend(
-				{},
-				{
-					attr: null,
-					elem: null,
-				},
-				value
-			);
-
-			super.data = {
-				tag: "div",
-				arg: {
+	set data(d) {
+		if (d) {
+			this._d = {
+				t: "div",
+				d: {
 					attr: d.attr,
 					class: ["input-group-text"],
 					elem: d.elem,
 				},
 			};
+		} else {
+			this._d = null;
 		}
+
+		super.data = this._d;
 	}
 }

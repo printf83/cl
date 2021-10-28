@@ -39,34 +39,30 @@ export default class icon extends tag {
 			};
 		}
 
-		this.data = t;
+		this.data = core.extend(
+			{},
+			{
+				attr: null,
+				style: null,
+				icon: null,
+				weight: null,
+				fixwidth: true,
+				spin: false,
+				rotate: null,
+				color: null,
+				inverse: false,
+				elem: null,
+				stack: 0,
+			},
+			t
+		);
 	}
 
 	get data() {
 		return this._d;
 	}
-	set data(value) {
-		this._d = value;
-
-		if (value) {
-			let d = core.extend(
-				{},
-				{
-					attr: null,
-					style: null,
-					icon: null,
-					weight: null,
-					fixwidth: true,
-					spin: false,
-					rotate: null,
-					color: null,
-					inverse: false,
-					elem: null,
-					stack: 0,
-				},
-				value
-			);
-
+	set data(d) {
+		if (d) {
 			let rotate = null;
 			switch (d.rotate) {
 				case 90:
@@ -81,7 +77,7 @@ export default class icon extends tag {
 					break;
 			}
 
-			super.data = {
+			this._d = {
 				tag: d.icon ? "i" : "span",
 				attr: attr.merge(d.attr, {
 					class: [
@@ -99,6 +95,10 @@ export default class icon extends tag {
 				}),
 				elem: d.elem,
 			};
+		} else {
+			this._d = null;
 		}
+
+		super.data = this._d;
 	}
 }

@@ -37,45 +37,41 @@ export default class button extends tag {
 			t = arg[0];
 		}
 
-		this.data = t;
+		this.data = core.extend(
+			{},
+			{
+				attr: null,
+
+				id: null,
+				name: null,
+
+				type: "button",
+				label: null,
+				icon: null,
+				value: null,
+				checked: false,
+
+				color: null,
+				textcolor: null,
+				weight: null,
+				disabled: false,
+				outline: false,
+				hidelabel: false,
+				nowarp: false,
+
+				onclick: null,
+				href: null,
+			},
+			t
+		);
 	}
 
 	get data() {
 		return this._d;
 	}
-	set data(value) {
-		this._d = value;
-
-		if (value) {
-			let d = core.extend(
-				{},
-				{
-					attr: null,
-
-					id: null,
-					name: null,
-
-					type: "button",
-					label: null,
-					icon: null,
-					value: null,
-					checked: false,
-
-					color: null,
-					textcolor: null,
-					weight: null,
-					disabled: false,
-					outline: false,
-					hidelabel: false,
-					nowarp: false,
-
-					onclick: null,
-					href: null,
-				},
-				value
-			);
-
-			super.data = {
+	set data(d) {
+		if (d) {
+			this._d = {
 				tag: d.href ? "a" : "button",
 				attr: attr.merge(d.attr, {
 					id: d.id,
@@ -100,6 +96,10 @@ export default class button extends tag {
 				}),
 				elem: d.hidelabel ? (d.icon ? new icon(d.icon) : null) : new label(d.icon, d.label),
 			};
+		} else {
+			this._d = null;
 		}
+
+		super.data = this._d;
 	}
 }

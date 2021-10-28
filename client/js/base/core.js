@@ -88,6 +88,11 @@ export function UUID(format) {
 		return v.toString(16);
 	});
 }
+export function isHTML(str) {
+	if (typeof str === "string") {
+		return /<\/?[a-z][\s\S]*>/i.test(str);
+	}
+}
 export function multiClass(val, format) {
 	//core.multiClass(["lg-12","xl-3","md-2","2"],"col-$1")
 	return val

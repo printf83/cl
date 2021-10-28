@@ -33,19 +33,8 @@ export default class cont extends tag {
 		}
 
 		this.data = {
-			tag: tag,
-			arg: t,
-		};
-	}
-
-	get data() {
-		return this._d;
-	}
-	set data(value) {
-		this._d = value;
-
-		if (value && value.tag && value.arg) {
-			let d = core.extend(
+			t: tag,
+			d: core.extend(
 				{},
 				{
 					attr: null,
@@ -53,17 +42,28 @@ export default class cont extends tag {
 					style: null,
 					elem: null,
 				},
-				value.arg
-			);
+				t
+			),
+		};
+	}
 
-			super.data = {
-				tag: value.tag,
-				attr: attr.merge(d.attr, {
-					class: d.class,
-					style: d.style,
+	get data() {
+		return this._d;
+	}
+	set data(arg) {
+		if (arg && arg.t && arg.d) {
+			this._d = {
+				tag: arg.t,
+				attr: attr.merge(arg.d.attr, {
+					class: arg.d.class,
+					style: arg.d.style,
 				}),
-				elem: d.elem,
+				elem: arg.d.elem,
 			};
+		} else {
+			this._d = null;
 		}
+
+		super.data = this._d;
 	}
 }
