@@ -67,7 +67,9 @@ core.documentReady(() => {
 				new button("Hello", "primary"),
 				new inputgroup.text([new icon("fire")]),
 				new inputgroup.text({ elem: new icon("fire"), attr: { class: "text-danger" } }),
-				new button("World", "info"),
+				new button("World", "info", function () {
+					alert("Clicked");
+				}),
 				new inputgroup.text([new icon("fire"), new icon("fire"), new icon("fire")]),
 			]),
 		]),
