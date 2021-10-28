@@ -57,7 +57,10 @@ core.documentReady(() => {
 			},
 		}),
 		new button("hello", "warning"),
-		new h(3, "text-primary mb-5", "This is h3 Title"),
+		new tooltip(new h(3, "text-primary mb-5", "This is h3 Title"), {
+			type: "tooltip",
+			msg: "Yeessss!!!",
+		}),
 		new div("mb-5", [
 			new inputgroup.container([
 				new inputgroup.text([new icon("fire")]),
