@@ -22,9 +22,10 @@ core.documentReady(() => {
 	// 	new inputgroup.text([new icon("fire"), new icon("fire"), new icon("fire")]),
 	// ]);
 
+	console.time("b");
 	let b = new div("mb-5", [
 		new p("display-1", "Hello World"),
-		new button({ label: "Primary", color: "primary", attr: { id: core.UUID("btn-xxxxxxx") } }),
+		new button({ label: "Primary", color: "primary", id: core.UUID("btn-xxxxxxx") }),
 		new button({
 			label: "Danger",
 			color: "danger",
@@ -79,4 +80,5 @@ core.documentReady(() => {
 		]),
 	]);
 	b.build(root);
+	console.timeEnd("b");
 });
