@@ -32,38 +32,43 @@ export default class cont extends tag {
 			t = arg[0];
 		}
 
-		this.data = {
-			t: tag,
-			d: core.extend(
-				{},
-				{
-					attr: null,
-					class: null,
-					style: null,
-					elem: null,
-				},
-				t
-			),
-		};
+		this.tag = tag;
+		this.data = core.extend(
+			{},
+			{
+				attr: null,
+				class: null,
+				style: null,
+				elem: null,
+			},
+			t
+		);
+	}
+
+	get tag() {
+		return this._t;
+	}
+	set tag(d) {
+		this._t = d;
 	}
 
 	get data() {
 		return this._d;
 	}
-	set data(arg) {
-		if (arg && arg.t && arg.d) {
-			this._d = {
-				tag: arg.t,
-				attr: attr.merge(arg.d.attr, {
-					class: arg.d.class,
-					style: arg.d.style,
+	set data(d) {
+		if (d) {
+			this._d = d;
+			super.data = {
+				tag: this._t,
+				attr: attr.merge(d.attr, {
+					class: d.class,
+					style: d.style,
 				}),
-				elem: arg.d.elem,
+				elem: d.elem,
 			};
 		} else {
 			this._d = null;
+			super.data = null;
 		}
-
-		super.data = this._d;
 	}
 }

@@ -5,6 +5,7 @@ import p from "./base/p.js";
 import h from "./base/h.js";
 import button from "./base/button.js";
 import * as inputgroup from "./base/inputgroup.js";
+import btngroup from "./base/btngroup.js";
 import icon from "./base/icon.js";
 import tooltip from "./base/tooltip.js";
 
@@ -26,37 +27,39 @@ core.documentReady(() => {
 	console.time("b");
 	// let b = new tooltip(new button("Hello"), "World");
 
-	let b = new div("mb-5", [
+	let b = new div("my-5 container", [
 		new p("display-1", "Hello World"),
-		new button({ label: "Primary", color: "primary", id: core.UUID("btn-xxxxxxx") }),
-		new tooltip(
+		new btngroup([
+			new button({ label: "Primary", color: "primary", id: core.UUID("btn-xxxxxxx") }),
+			new tooltip(
+				new button({
+					label: "Danger",
+					color: "danger",
+					type: "submit",
+					outline: true,
+					icon: { style: "fab", icon: "facebook", spin: true },
+					attr: { style: { width: "150px" } },
+				}),
+				{
+					title: "Title",
+					msg: "Message",
+					type: "popover",
+					postition: "end",
+				}
+			),
 			new button({
-				label: "Danger",
-				color: "danger",
-				type: "submit",
-				outline: true,
-				icon: { style: "fab", icon: "facebook", spin: true },
-				attr: { style: { width: "150px" } },
+				label: "Yay",
+				disabled: true,
+				hidelabel: true,
+				color: "success",
+				type: "reset",
+				icon: "fire",
+				attr: {
+					class: ["makkauhijau", "btn", "btn", null, null, null, "makkaubiru", "makkaubiru", "makkaubiru"],
+				},
 			}),
-			{
-				title: "Title",
-				msg: "Message",
-				type: "popover",
-				postition: "end",
-			}
-		),
-		new button({
-			label: "Yay",
-			disabled: true,
-			hidelabel: true,
-			color: "success",
-			type: "reset",
-			icon: "fire",
-			attr: {
-				class: ["makkauhijau", "btn", "btn", null, null, null, "makkaubiru", "makkaubiru", "makkaubiru"],
-			},
-		}),
-		new button("hello", "warning"),
+			new button("hello", "warning"),
+		]),
 		new tooltip(new h(3, "text-primary mb-5", "This is h3 Title"), {
 			type: "tooltip",
 			msg: "Yeessss!!!",

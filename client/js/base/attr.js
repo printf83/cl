@@ -129,9 +129,6 @@ export default class attr {
 					} else {
 						if (this._d[i] instanceof Function) {
 							if (i.startsWith("on")) {
-								// elems.addEventListener(i.startsWith("on") ? i.substr(2) : i, function (event) {
-								// 	this._d[i](event.currentTarget, event);
-								// });
 								elems.addEventListener(i.startsWith("on") ? i.substr(2) : i, this._d[i]);
 							} else {
 								elems.setAttribute(i, this._d[i]);

@@ -11,4 +11,11 @@ export default class p extends cont {
 	constructor(...arg) {
 		super("p", ...arg);
 	}
+
+	get data() {
+		return super.data;
+	}
+	set data(arg) {
+		super.data = arg;
+	}
 }

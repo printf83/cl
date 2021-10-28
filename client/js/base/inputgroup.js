@@ -103,12 +103,9 @@ export class text extends div {
 	set data(d) {
 		if (d) {
 			this._d = {
-				t: "div",
-				d: {
-					attr: d.attr,
-					class: ["input-group-text"],
-					elem: d.elem,
-				},
+				attr: d.attr,
+				class: ["input-group-text"],
+				elem: d.elem,
 			};
 		} else {
 			this._d = null;

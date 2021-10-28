@@ -11,4 +11,11 @@ export default class div extends cont {
 	constructor(...arg) {
 		super("div", ...arg);
 	}
+
+	get data() {
+		return super.data;
+	}
+	set data(arg) {
+		super.data = arg;
+	}
 }
