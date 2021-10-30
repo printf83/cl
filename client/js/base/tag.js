@@ -76,7 +76,7 @@ export default class tag {
 
 	html = function () {
 		let container = document.createElement("div");
-		container = build(container);
+		container = this.build(container);
 		return container.innerHTML;
 	};
 }

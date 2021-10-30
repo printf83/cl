@@ -2,8 +2,8 @@
 import * as core from "./core.js";
 import tag from "./tag.js";
 import attr from "./attr.js";
-import icon from "./icon.js";
 import label from "./label.js";
+import badge from "./badge.js";
 
 /**
  * label
@@ -48,6 +48,7 @@ export default class button extends tag {
 				type: "button",
 				label: null,
 				icon: null,
+				badge: null,
 				value: null,
 				checked: false,
 
@@ -92,9 +93,13 @@ export default class button extends tag {
 						d.weight ? `btn-${d.weight}` : null,
 						d.color ? (d.outline ? `btn-outline-${d.color}` : `btn-${d.color}`) : null,
 						d.textcolor ? `text-${d.textcolor}` : null,
+						d.badge && typeof d.badge === "object" && d.badge.notification ? "position-relative" : null,
 					],
 				}),
-				elem: d.hidelabel ? (d.icon ? new icon(d.icon) : null) : new label(d.icon, d.label),
+				elem: [
+					d.label || d.icon ? new label({ icon: d.icon, label: !d.hidelabel ? d.label : null }) : null,
+					d.badge ? new badge(d.badge) : null,
+				],
 			};
 		} else {
 			this._d = null;

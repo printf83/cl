@@ -52,7 +52,7 @@ export default class label extends tag {
 				attr: attr.merge(d.attr, {
 					for: d.for,
 				}),
-				elem: [d.icon ? new span("me-2", new icon(d.icon)) : null, d.label],
+				elem: [d.icon ? new span(d.label ? "me-2" : null, new icon(d.icon)) : null, d.label],
 			};
 		} else {
 			this._d = null;

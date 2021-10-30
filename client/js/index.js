@@ -8,6 +8,7 @@ import * as inputgroup from "./base/inputgroup.js";
 import btngroup from "./base/btngroup.js";
 import icon from "./base/icon.js";
 import tooltip from "./base/tooltip.js";
+import badge from "./base/badge.js";
 
 core.documentReady(() => {
 	var root = document.getElementById("root");
@@ -30,7 +31,18 @@ core.documentReady(() => {
 	let b = new div("my-5 container", [
 		new p("display-1", "Hello World"),
 		new btngroup([
-			new button({ label: "Primary", color: "primary", id: core.UUID("btn-xxxxxxx") }),
+			new button({
+				label: "Primary",
+				color: "primary",
+				id: core.UUID("btn-xxxxxxx"),
+				badge: {
+					// label: "45",
+					color: "danger",
+					bordercolor: "white",
+					notification: true,
+					// attr: { class: "ms-2" },
+				},
+			}),
 			new tooltip(
 				new button({
 					label: "Danger",
@@ -58,12 +70,34 @@ core.documentReady(() => {
 					class: ["makkauhijau", "btn", "btn", null, null, null, "makkaubiru", "makkaubiru", "makkaubiru"],
 				},
 			}),
-			new button("hello", "warning"),
+			new button({
+				label: "hello",
+				color: "primary",
+				badge: {
+					label: "45",
+					color: "danger",
+					bordercolor: "white",
+					notification: true,
+					pill: true,
+				},
+			}),
 		]),
-		new tooltip(new h(3, "text-primary mb-5", "This is h3 Title"), {
-			type: "tooltip",
-			msg: "Yeessss!!!",
-		}),
+		new tooltip(
+			new h(3, "text-primary my-5", [
+				"This is h3 Title",
+				new badge({
+					label: "+99",
+					icon: "fire",
+					color: "danger",
+					pill: true,
+				}),
+			]),
+			{
+				type: "tooltip",
+				msg: "Yeessss!!!",
+				placement: "left",
+			}
+		),
 		new div("mb-5", [
 			new inputgroup.container([
 				new inputgroup.text([new icon("fire")]),
@@ -96,6 +130,14 @@ core.documentReady(() => {
 					new icon({ stack: 1, style: "fab", icon: "twitter", inverse: true }),
 				],
 			}),
+		]),
+		new div("mb-5", [
+			new badge("primary", "primary"),
+			new badge("success", "success"),
+			new badge("danger", "danger"),
+			new badge("warning", "warning", true),
+			new badge("info", "info", true),
+			new badge("secondary", "secondary", true),
 		]),
 	]);
 	b.build(root);
