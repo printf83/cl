@@ -79,7 +79,6 @@ export default class button extends tag {
 					name: d.name,
 					value: d.value,
 					checked: d.checked,
-
 					role: "button",
 					type: d.type !== "button" ? d.type : null,
 					disabled: d.disabled,
