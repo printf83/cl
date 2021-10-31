@@ -5,6 +5,8 @@ import attr from "./attr.js";
 import label from "./label.js";
 import button from "./button.js";
 import * as inputgroup from "./inputgroup.js";
+import div from "./div.js";
+import option from "./option.js";
 
 /**
  * label
@@ -13,7 +15,7 @@ import * as inputgroup from "./inputgroup.js";
  * label, color, onclick
  * option
  */
-export default class button extends tag {
+export default class input extends tag {
 	constructor(...arg) {
 		super();
 
@@ -51,6 +53,7 @@ export default class button extends tag {
 				hidelabel: false,
 				floatlabel: false,
 
+				inline: false,
 				labelsize: null,
 				ctlsize: null,
 				size: null,
@@ -100,6 +103,12 @@ export default class button extends tag {
 	}
 	set data(d) {
 		if (d) {
+			//floating label required label
+			//disable floatlabel if no label
+			if (d.floatlabel && !d.label && !d.hidelabel) {
+				d.floatlabel = false;
+			}
+
 			//floating label not works with some input
 			if (d.floatlabel) {
 				if (["checkbox", "radio", "switch", "file"].includes(d.type) || d.readonly) {
@@ -121,29 +130,36 @@ export default class button extends tag {
 				? typeof d.before === "string"
 					? new inputgroup.text(d.before)
 					: d.before
-				: d.type === "number"
+				: d.type === "number" && d.numctl
 				? new button({
 						icon: "minus",
 						color: "primary",
 						onclick: function (event) {
-							console.log("todo");
+							console.log("todo numctl minus");
 						},
 				  })
 				: null;
 
-			//label
-			let label = null;
-			if (d.label && !d.hidelabel) {
-				label = new label({
-					for: d.id,
-					label: d.label,
-					attr: {
-						class: ["checkbox", "radio", "switch", "file"].includes(d.type)
-							? "form-check-label"
-							: "form-label",
-					},
-				});
-			}
+			//after control
+			let afterctl = d.after
+				? typeof d.after === "string"
+					? new inputgroup.text(d.after)
+					: d.after
+				: d.type === "number" && d.numctl
+				? new button({
+						icon: "plus",
+						color: "primary",
+						onclick: function (event) {
+							console.log("todo: numctl add");
+						},
+				  })
+				: null;
+
+			//valid msg
+			let validmsg = d.valid ? new div("valid-feedback", d.valid) : null;
+
+			//invalid msg
+			let invalidmsg = d.invalid ? new div("invalid-feedback", d.invalid) : null;
 
 			//datalist
 			let datalistctl = null;
@@ -186,7 +202,7 @@ export default class button extends tag {
 				case "textarea":
 					mainctl = new tag({
 						tag: "textarea",
-						attr: {
+						attr: attr.merge(d.attr, {
 							id: d.id,
 							name: d.name,
 							class: [
@@ -220,14 +236,14 @@ export default class button extends tag {
 							onclick: d.onclick,
 							onfocus: d.onfocus,
 							onblur: d.onblur,
-						},
+						}),
 						elem: d.value,
 					});
 					break;
 				case "select":
 					mainctl = {
 						tag: "select",
-						attr: {
+						attr: attr.merge(d.attr, {
 							id: d.id,
 							name: d.name,
 							class: [
@@ -263,21 +279,21 @@ export default class button extends tag {
 							onclick: d.onclick,
 							onfocus: d.onfocus,
 							onblur: d.onblur,
-						},
+						}),
 						elem: new option(d.option, d.value),
 					};
 					break;
 				case "datalist":
 					mainctl = new tag({
 						tag: "datalist",
-						attr: { id: d.id },
+						attr: attr.merge(d.attr, { id: d.id }),
 						elem: new option(d.option, d.value),
 					});
 					break;
 				default:
 					mainctl = new tag({
 						tag: "input",
-						attr: {
+						attr: attr.merge(d.attr, {
 							id: d.id,
 							name: d.name,
 							type: d.type,
@@ -331,40 +347,119 @@ export default class button extends tag {
 							onclick: d.onclick,
 							onfocus: d.onfocus,
 							onblur: d.onblur,
-						},
+						}),
 					});
 					break;
 			}
 
-			this._d = {
-				tag: d.href ? "a" : "button",
-				attr: attr.merge(d.attr, {
-					id: d.id,
-					name: d.name,
-					value: d.value,
-					checked: d.checked,
+			//label
+			let labelctl = null;
+			if (d.label && !d.hidelabel) {
+				labelctl = new label({
+					for: d.id,
+					label: d.label,
+					attr: {
+						class: ["checkbox", "radio", "switch", "file"].includes(d.type)
+							? "form-check-label"
+							: d.labelsize
+							? `col-form-label col-${d.labelsize}`
+							: "form-label",
+					},
+				});
+			}
 
-					role: "button",
-					type: d.type !== "button" ? d.type : null,
-					disabled: d.disabled,
-					onclick: d.onclick,
-					href: d.href,
-					"aria-label": d.hidelabel && d.label ? d.label : null,
-					"aria-disabled": d.href && d.disabled ? "true" : null,
-					class: [
-						"btn",
-						d.nowarp ? "text-nowarp" : null,
-						d.weight ? `btn-${d.weight}` : null,
-						d.color ? (d.outline ? `btn-outline-${d.color}` : `btn-${d.color}`) : null,
-						d.textcolor ? `text-${d.textcolor}` : null,
-						d.badge && typeof d.badge === "object" && d.badge.notification ? "position-relative" : null,
-					],
-				}),
-				elem: [
-					d.label || d.icon ? new label({ icon: d.icon, label: !d.hidelabel ? d.label : null }) : null,
-					d.badge ? new badge(d.badge) : null,
-				],
-			};
+			//combine all
+			let ctl = [];
+
+			if (beforectl) ctl.push(beforectl);
+
+			if (labelctl && d.floatlabel) {
+				ctl.push(new div("form-floating flex-grow-1", [mainctl, labelctl]));
+			} else {
+				ctl.push(mainctl);
+			}
+
+			if (afterctl) ctl.push(afterctl);
+			if (validmsg) ctl.push(validmsg);
+			if (invalidmsg) ctl.push(invalidmsg);
+			if (datalistctl) ctl.push(datalistctl);
+
+			if (d.type === "hidden") {
+				this._d = {
+					elem: new div("d-none", ctl),
+				};
+			} else {
+				if (d.size) {
+					if (d.flex) {
+						this._d = { elem: new div("d-flex", new div(d.size, ctl)) };
+					} else {
+						if (["checkbox", "radio", "switch"].includes(d.type)) {
+							this._d = {
+								elem: new div(
+									d.size,
+									new div(
+										[
+											"form-check",
+											d.label && d.inline ? "form-check-inline" : null,
+											d.type === "switch" ? "form-switch" : null,
+											d.valid || d.invalid ? "has-validation" : null,
+										],
+										[ctl, labelctl]
+									)
+								),
+							};
+						} else {
+							this._d = {
+								elem: new div(d.size, [
+									labelctl,
+									new div(
+										[
+											"input-group",
+											d.nowarp ? "flex-nowarp" : null,
+											d.weight ? `input-group-${d.weight}` : null,
+											d.valid || d.invalid ? "has-validation" : null,
+										],
+										ctl
+									),
+								]),
+							};
+						}
+					}
+				} else {
+					if (d.flex) {
+						this._d = { elem: new div("d-flex", ctl) };
+					} else {
+						if (["checkbox", "radio", "switch"].includes(d.type)) {
+							this._d = {
+								elem: new div(
+									[
+										"form-check",
+										d.label && d.inline ? "form-check-inline" : null,
+										d.type === "switch" ? "form-switch" : null,
+										d.valid || d.invalid ? "has-validation" : null,
+									],
+									[ctl, labelctl]
+								),
+							};
+						} else {
+							this._d = {
+								elem: [
+									labelctl,
+									new div(
+										[
+											"input-group",
+											d.nowarp ? "flex-nowarp" : null,
+											d.weight ? `input-group-${d.weight}` : null,
+											d.valid || d.invalid ? "has-validation" : null,
+										],
+										ctl
+									),
+								],
+							};
+						}
+					}
+				}
+			}
 		} else {
 			this._d = null;
 		}
