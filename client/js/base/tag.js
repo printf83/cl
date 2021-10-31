@@ -41,14 +41,28 @@ export default class tag {
 						this._d.elem.forEach(function (i) {
 							if (i) {
 								if (typeof i === "string") {
+									//console.info("i is text", i);
 									element.appendChild(document.createTextNode(i));
+								} else if (Array.isArray(i)) {
+									console.warn(
+										"i is array. This happen when you set elem: [[tag],tag]. It should be elem:[tag,tag]",
+										i
+									);
+									i.forEach(function (j) {
+										element = j.build(element);
+									});
 								} else {
+									//console.info("i is object", i);
 									element = i.build(element);
 								}
 							}
 						});
 					} else {
-						element = this._d.elem.build(element);
+						try {
+							element = this._d.elem.build(element);
+						} catch (ex) {
+							console.error(ex.message, this._d.elem);
+						}
 					}
 				}
 			}

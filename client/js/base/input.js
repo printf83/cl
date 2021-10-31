@@ -77,7 +77,9 @@ export default class input extends tag {
 				valid: null,
 				invalid: null,
 
+				beforetype: "text",
 				before: null,
+				aftertype: "text",
 				after: null,
 
 				plaintext: false,
@@ -125,33 +127,83 @@ export default class input extends tag {
 				d.id = core.UUID();
 			}
 
+			//auto mark beforetype and aftertype if numctl
+			if (d.type === "number" && d.numctl) {
+				d.beforetype = "button";
+				d.aftertype = "button";
+			}
+
+			//automark aftertype if addctl provided
+			if (d.addctl) {
+				d.after = null;
+				d.aftertype = "button";
+			}
+
+			//automark aftertype and beforetype if numctl provided
+			if (d.numctl && d.type === "number") {
+				d.before = null;
+				d.beforetype = "button";
+				d.after = null;
+				d.aftertype = "button";
+			}
+
 			//before control
 			let beforectl = d.before
-				? typeof d.before === "string"
+				? d.beforetype === "text"
 					? new inputgroup.text(d.before)
-					: d.before
+					: new tag({
+							elem: d.before,
+					  })
 				: d.type === "number" && d.numctl
 				? new button({
 						icon: "minus",
 						color: "primary",
-						onclick: function (event) {
-							console.log("todo numctl minus");
+						onclick: function (e) {
+							let sender = e.currentTarget;
+							let parent = sender.parentElement;
+							let input = parent.getElementsByTagName("input")[0];
+							let val = parseInt(input.value);
+							let min = parseInt(input.min);
+							let step = parseInt(input.step);
+
+							val = val || min;
+							step = step || 1;
+							input.value = val - step;
+							if (val - step < min) input.value = min;
 						},
 				  })
 				: null;
 
 			//after control
 			let afterctl = d.after
-				? typeof d.after === "string"
+				? d.aftertype === "text"
 					? new inputgroup.text(d.after)
-					: d.after
+					: new tag({
+							elem: d.after,
+					  })
 				: d.type === "number" && d.numctl
 				? new button({
 						icon: "plus",
 						color: "primary",
-						onclick: function (event) {
-							console.log("todo: numctl add");
+						onclick: function (e) {
+							let sender = e.currentTarget;
+							let parent = sender.parentElement;
+							let input = parent.getElementsByTagName("input")[0];
+							let val = parseInt(input.value);
+							let max = parseInt(input.max);
+							let step = parseInt(input.step);
+
+							val = val || max;
+							step = step || 1;
+							input.value = val + step;
+							if (val + step > max) input.value = max;
 						},
+				  })
+				: d.addctl
+				? new button({
+						icon: "plus",
+						color: "primary",
+						onclick: d.addctl,
 				  })
 				: null;
 
@@ -171,6 +223,22 @@ export default class input extends tag {
 				});
 			}
 
+			//label
+			let labelctl = null;
+			if (d.label && !d.hidelabel) {
+				labelctl = new label({
+					for: d.id,
+					label: d.label,
+					attr: {
+						class: ["checkbox", "radio", "switch", "file"].includes(d.type)
+							? "form-check-label"
+							: d.labelsize
+							? `col-form-label col-${d.labelsize}`
+							: "form-label",
+					},
+				});
+			}
+
 			//main control
 			let mainctl = null;
 			switch (d.type) {
@@ -182,7 +250,7 @@ export default class input extends tag {
 						attr: attr.merge(d.attr, {
 							id: d.id,
 							name: d.name,
-							type: d.type,
+							type: d.type === "switch" ? "checkbox" : d.type,
 							class: "form-check-input",
 							readonly: d.readonly,
 							disabled: d.disabled,
@@ -241,7 +309,7 @@ export default class input extends tag {
 					});
 					break;
 				case "select":
-					mainctl = {
+					mainctl = new tag({
 						tag: "select",
 						attr: attr.merge(d.attr, {
 							id: d.id,
@@ -281,7 +349,7 @@ export default class input extends tag {
 							onblur: d.onblur,
 						}),
 						elem: new option(d.option, d.value),
-					};
+					});
 					break;
 				case "datalist":
 					mainctl = new tag({
@@ -352,22 +420,6 @@ export default class input extends tag {
 					break;
 			}
 
-			//label
-			let labelctl = null;
-			if (d.label && !d.hidelabel) {
-				labelctl = new label({
-					for: d.id,
-					label: d.label,
-					attr: {
-						class: ["checkbox", "radio", "switch", "file"].includes(d.type)
-							? "form-check-label"
-							: d.labelsize
-							? `col-form-label col-${d.labelsize}`
-							: "form-label",
-					},
-				});
-			}
-
 			//combine all
 			let ctl = [];
 
@@ -375,6 +427,7 @@ export default class input extends tag {
 
 			if (labelctl && d.floatlabel) {
 				ctl.push(new div("form-floating flex-grow-1", [mainctl, labelctl]));
+				labelctl = null;
 			} else {
 				ctl.push(mainctl);
 			}
@@ -382,7 +435,6 @@ export default class input extends tag {
 			if (afterctl) ctl.push(afterctl);
 			if (validmsg) ctl.push(validmsg);
 			if (invalidmsg) ctl.push(invalidmsg);
-			if (datalistctl) ctl.push(datalistctl);
 
 			if (d.type === "hidden") {
 				this._d = {
@@ -394,6 +446,7 @@ export default class input extends tag {
 						this._d = { elem: new div("d-flex", new div(d.size, ctl)) };
 					} else {
 						if (["checkbox", "radio", "switch"].includes(d.type)) {
+							ctl.push(labelctl);
 							this._d = {
 								elem: new div(
 									d.size,
@@ -404,7 +457,7 @@ export default class input extends tag {
 											d.type === "switch" ? "form-switch" : null,
 											d.valid || d.invalid ? "has-validation" : null,
 										],
-										[ctl, labelctl]
+										ctl
 									)
 								),
 							};
@@ -421,6 +474,7 @@ export default class input extends tag {
 										],
 										ctl
 									),
+									datalistctl,
 								]),
 							};
 						}
@@ -430,6 +484,7 @@ export default class input extends tag {
 						this._d = { elem: new div("d-flex", ctl) };
 					} else {
 						if (["checkbox", "radio", "switch"].includes(d.type)) {
+							ctl.push(labelctl);
 							this._d = {
 								elem: new div(
 									[
@@ -438,7 +493,7 @@ export default class input extends tag {
 										d.type === "switch" ? "form-switch" : null,
 										d.valid || d.invalid ? "has-validation" : null,
 									],
-									[ctl, labelctl]
+									ctl
 								),
 							};
 						} else {
@@ -454,6 +509,7 @@ export default class input extends tag {
 										],
 										ctl
 									),
+									datalistctl,
 								],
 							};
 						}

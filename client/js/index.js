@@ -10,6 +10,7 @@ import icon from "./base/icon.js";
 import tooltip from "./base/tooltip.js";
 import badge from "./base/badge.js";
 import input from "./base/input.js";
+import label from "./base/label.js";
 
 core.documentReady(() => {
 	var root = document.getElementById("root");
@@ -27,6 +28,49 @@ core.documentReady(() => {
 	// ]);
 
 	console.time("b");
+	// let b = new div(
+	// 	"container p-0",
+	// 	new div("row row-cols-1 g-2", [
+	// 		new input({
+	// 			label: "Name",
+	// 			required: true,
+	// 			invalid: "Please provide name",
+	// 			name: "name",
+	// 			type: "text",
+	// 			size: "col-12",
+	// 		}),
+	// 		new input({
+	// 			label: "Age",
+	// 			required: true,
+	// 			invalid: "Please provide age",
+	// 			name: "age",
+	// 			type: "number",
+	// 			min: 13,
+	// 			max: 100,
+	// 			numctl: true,
+	// 			size: "col-12",
+	// 		}),
+	// 		new input({
+	// 			type: "radio",
+	// 			label: "Secret",
+	// 			name: "sex",
+	// 			value: "s",
+	// 			checked: true,
+	// 		}),
+	// 		new input({
+	// 			type: "radio",
+	// 			label: "Male",
+	// 			name: "sex",
+	// 			value: "m",
+	// 		}),
+	// 		new input({
+	// 			type: "radio",
+	// 			label: "Female",
+	// 			name: "sex",
+	// 			value: "f",
+	// 		}),
+	// 	])
+	// );
 	// let b = new tooltip(new button("Hello"), "World");
 
 	let b = new div(
@@ -35,14 +79,15 @@ core.documentReady(() => {
 			new input({
 				label: "Hello",
 				type: "text",
-				disabled: true,
 				size: "col-6",
+				option: ["Aase qwe", "Bas tes", "Cde kil", "Def ghi"],
 				before: "A",
 			}),
 			new input({
 				label: "Hello",
 				type: "text",
 				plaintext: true,
+				value: "Hello",
 				size: "col-6",
 				before: "A",
 			}),
@@ -61,9 +106,11 @@ core.documentReady(() => {
 				after: "B",
 			}),
 			new input({
-				label: "Hello2",
+				label: "Hello2 required",
 				type: "text",
 				required: true,
+				valid: "ok",
+				invalid: "emmmm",
 				size: "col-6",
 				before: "A",
 				after: "C",
@@ -72,8 +119,97 @@ core.documentReady(() => {
 				label: "Hello2",
 				type: "text",
 				size: "col-6",
-				before: new inputgroup.text({ elem: new icon("fire") }),
-				after: new button({ label: "Hello", color: "primary" }),
+				before: [new icon("fire")],
+				aftertype: "button",
+				after: [new button({ label: "Hello", color: "primary" })],
+			}),
+
+			new input({
+				label: "Hello2",
+				type: "select",
+				size: "col-6",
+				value: "2",
+				option: [
+					{ value: "1", label: "One" },
+					{ value: "2", label: "Two" },
+					{ value: "3", label: "Three" },
+				],
+				before: [new icon("fire")],
+				addctl: function (event) {
+					alert("Add ctl");
+				},
+			}),
+
+			new input({
+				label: "Name",
+				required: true,
+				invalid: "Please provide name",
+				name: "name",
+				type: "text",
+				size: "col-12",
+			}),
+			new input({
+				label: "Age",
+				required: true,
+				invalid: "Please provide age",
+				name: "age",
+				type: "number",
+				min: 13,
+				max: 90,
+				step: 5,
+				numctl: true,
+				size: "col-12",
+			}),
+			new label("Sex"),
+			new input({
+				type: "radio",
+				label: "Secret",
+				name: "sex",
+				value: "s",
+				checked: true,
+			}),
+			new input({
+				type: "radio",
+				label: "Male",
+				name: "sex",
+				value: "m",
+			}),
+			new input({
+				type: "radio",
+				label: "Female",
+				name: "sex",
+				value: "f",
+			}),
+			new label("Interest"),
+			new input({
+				type: "switch",
+				label: "Internet",
+				name: "interest",
+				value: "internet",
+			}),
+			new input({
+				type: "switch",
+				label: "Shopping",
+				name: "interest",
+				value: "shopping",
+			}),
+			new input({
+				type: "switch",
+				label: "Sport",
+				name: "interest",
+				value: "Sport",
+			}),
+
+			new input({
+				label: "State",
+				type: "select",
+				size: "col-6",
+				value: "my",
+				option: [
+					{ value: "my", label: "Malaysia" },
+					{ value: "us", label: "United State" },
+					{ value: "sg", label: "Singapore" },
+				],
 			}),
 		])
 	);
