@@ -37,7 +37,7 @@ core.documentReady(() => {
 	// 			invalid: "Please provide name",
 	// 			name: "name",
 	// 			type: "text",
-	// 			size: "col-12",
+	// 			////size: "col-12",
 	// 		}),
 	// 		new input({
 	// 			label: "Age",
@@ -48,7 +48,7 @@ core.documentReady(() => {
 	// 			min: 13,
 	// 			max: 100,
 	// 			numctl: true,
-	// 			size: "col-12",
+	// 			//size: "col-12",
 	// 		}),
 	// 		new input({
 	// 			type: "radio",
@@ -79,7 +79,7 @@ core.documentReady(() => {
 			new input({
 				label: "Hello",
 				type: "text",
-				size: "col-6",
+				//size: "col-12",
 				option: ["Aase qwe", "Bas tes", "Cde kil", "Def ghi"],
 				before: "A",
 			}),
@@ -88,21 +88,21 @@ core.documentReady(() => {
 				type: "text",
 				plaintext: true,
 				value: "Hello",
-				size: "col-6",
+				//size: "col-12",
 				before: "A",
 			}),
 			new input({
 				label: "Hello",
 				hidelabel: true,
 				type: "text",
-				size: "col-6",
+				//size: "col-12",
 				before: "A",
 			}),
 			new input({
 				label: "Hello1",
 				type: "text",
 				floatlabel: true,
-				size: "col-6",
+				//size: "col-12",
 				after: "B",
 			}),
 			new input({
@@ -111,14 +111,14 @@ core.documentReady(() => {
 				required: true,
 				valid: "ok",
 				invalid: "emmmm",
-				size: "col-6",
+				//size: "col-12",
 				before: "A",
 				after: "C",
 			}),
 			new input({
 				label: "Hello2",
 				type: "text",
-				size: "col-6",
+				//size: "col-12",
 				before: [new icon("fire")],
 				aftertype: "button",
 				after: [new button({ label: "Hello", color: "primary" })],
@@ -127,7 +127,7 @@ core.documentReady(() => {
 			new input({
 				label: "Hello2",
 				type: "select",
-				size: "col-6",
+				//size: "col-12",
 				value: "2",
 				option: [
 					{ value: "1", label: "One" },
@@ -146,7 +146,8 @@ core.documentReady(() => {
 				invalid: "Please provide name",
 				name: "name",
 				type: "text",
-				size: "col-12",
+				labelsize: "col-3",
+				size: "col",
 			}),
 			new input({
 				label: "Age",
@@ -158,7 +159,8 @@ core.documentReady(() => {
 				max: 90,
 				step: 5,
 				numctl: true,
-				size: "col-12",
+				labelsize: "col-3",
+				size: "col",
 			}),
 			new label("Sex"),
 			new input({
@@ -203,13 +205,22 @@ core.documentReady(() => {
 			new input({
 				label: "State",
 				type: "select",
-				size: "col-6",
+				weight: "lg",
 				value: "my",
 				option: [
 					{ value: "my", label: "Malaysia" },
 					{ value: "us", label: "United State" },
 					{ value: "sg", label: "Singapore" },
 				],
+			}),
+
+			new input({
+				type: "textarea",
+				label: "Karangan",
+				floatlabel: true,
+				name: "karangan",
+				attr: { style: { height: "150px" } },
+				before: [new icon("fire")],
 			}),
 		])
 	);
