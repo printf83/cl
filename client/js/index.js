@@ -222,6 +222,15 @@ core.documentReady(() => {
 				attr: { style: { height: "150px" } },
 				before: [new icon("fire")],
 			}),
+
+			new input({
+				label: "Example Range",
+				type: "range",
+				value: 2.5,
+				min: 0,
+				max: 5,
+				step: 0.5,
+			}),
 		])
 	);
 
