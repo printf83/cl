@@ -12,33 +12,37 @@ export default class btngroup extends div {
 	constructor(...arg) {
 		super();
 
-		let t = {
-			for: null,
-			label: null,
-			elem: null,
-		};
-
-		if (arg && arg.length === 2) {
-			t.label = arg[0];
-			t.elem = arg[1];
-		} else if (arg && arg.length === 1 && Array.isArray(arg[0])) {
-			t.elem = arg[0];
-		} else {
-			t = arg[0];
-		}
-
-		this.data = core.extend(
-			{},
-			{
-				attr: null,
-
+		if (arg && arg.length > 0) {
+			let t = {
+				for: null,
 				label: null,
 				elem: null,
-				weight: null,
-				vertical: false,
-			},
-			t
-		);
+			};
+
+			if (arg && arg.length === 2) {
+				t.label = arg[0];
+				t.elem = arg[1];
+			} else if (arg && arg.length === 1 && Array.isArray(arg[0])) {
+				t.elem = arg[0];
+			} else {
+				t = arg[0];
+			}
+
+			this.data = core.extend(
+				{},
+				{
+					attr: null,
+
+					label: null,
+					elem: null,
+					weight: null,
+					vertical: false,
+				},
+				t
+			);
+		} else {
+			this.data = null;
+		}
 	}
 
 	get data() {

@@ -12,50 +12,53 @@ import tag from "./tag.js";
 export default class icon extends tag {
 	constructor(...arg) {
 		super();
-
-		let t = {
-			style: null,
-			icon: null,
-		};
-
-		if (arg && arg.length === 1) {
-			if (typeof arg[0] === "string") {
-				t = {
-					style: "fas",
-					icon: arg[0],
-				};
-			} else if (Array.isArray(arg[0]) && arg[0].length === 2) {
-				t = {
-					style: arg[0][0],
-					icon: arg[0][1],
-				};
-			} else {
-				t = arg[0];
-			}
-		} else if (arg.length === 2) {
-			t = {
-				style: arg[0],
-				icon: arg[1],
-			};
-		}
-
-		this.data = core.extend(
-			{},
-			{
-				attr: null,
+		if (arg && arg.length > 0) {
+			let t = {
 				style: null,
 				icon: null,
-				weight: null,
-				fixwidth: true,
-				spin: false,
-				rotate: null,
-				color: null,
-				inverse: false,
-				elem: null,
-				stack: 0,
-			},
-			t
-		);
+			};
+
+			if (arg && arg.length === 1) {
+				if (typeof arg[0] === "string") {
+					t = {
+						style: "fas",
+						icon: arg[0],
+					};
+				} else if (Array.isArray(arg[0]) && arg[0].length === 2) {
+					t = {
+						style: arg[0][0],
+						icon: arg[0][1],
+					};
+				} else {
+					t = arg[0];
+				}
+			} else if (arg.length === 2) {
+				t = {
+					style: arg[0],
+					icon: arg[1],
+				};
+			}
+
+			this.data = core.extend(
+				{},
+				{
+					attr: null,
+					style: null,
+					icon: null,
+					weight: null,
+					fixwidth: true,
+					spin: false,
+					rotate: null,
+					color: null,
+					inverse: false,
+					elem: null,
+					stack: 0,
+				},
+				t
+			);
+		} else {
+			this.data = null;
+		}
 	}
 
 	get data() {

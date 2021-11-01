@@ -11,30 +11,33 @@ import label from "./label.js";
 export default class option extends tag {
 	constructor(...arg) {
 		super();
-
-		let t = {
-			item: null,
-			selected: null,
-		};
-
-		if (arg && arg.length === 2) {
-			t.item = arg[0];
-			t.selected = arg[1];
-		} else if (arg && arg.length === 1 && Array.isArray(arg[0])) {
-			t.item = arg[0];
-		} else {
-			t = arg[0];
-		}
-
-		this.data = core.extend(
-			{},
-			{
-				type: "option",
+		if (arg && arg.length > 0) {
+			let t = {
 				item: null,
 				selected: null,
-			},
-			t
-		);
+			};
+
+			if (arg && arg.length === 2) {
+				t.item = arg[0];
+				t.selected = arg[1];
+			} else if (arg && arg.length === 1 && Array.isArray(arg[0])) {
+				t.item = arg[0];
+			} else {
+				t = arg[0];
+			}
+
+			this.data = core.extend(
+				{},
+				{
+					type: "option",
+					item: null,
+					selected: null,
+				},
+				t
+			);
+		} else {
+			this.data = null;
+		}
 	}
 
 	#gen_option = function (item, selected) {

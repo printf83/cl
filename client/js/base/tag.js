@@ -7,15 +7,19 @@ import attr from "./attr.js";
  */
 export default class tag {
 	constructor(arg) {
-		this.data = core.extend(
-			{},
-			{
-				tag: null,
-				attr: null,
-				elem: null,
-			},
-			arg
-		);
+		if (arg && arg.length > 0) {
+			this.data = core.extend(
+				{},
+				{
+					tag: null,
+					attr: null,
+					elem: null,
+				},
+				arg
+			);
+		} else {
+			this.data = null;
+		}
 	}
 
 	get data() {

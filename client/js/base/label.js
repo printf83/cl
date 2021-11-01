@@ -14,32 +14,39 @@ import attr from "./attr.js";
 export default class label extends tag {
 	constructor(...arg) {
 		super();
-
-		let t = {};
-
-		if (arg && arg.length === 3) {
-			t.for = arg[0];
-			t.icon = arg[1];
-			t.label = arg[2];
-		} else if (arg && arg.length === 2) {
-			t.icon = arg[0];
-			t.label = arg[1];
-		} else if (arg && arg.length === 1 && typeof arg[0] === "string") {
-			t.label = arg[0];
-		} else {
-			t = arg[0];
-		}
-
-		this.data = core.extend(
-			{},
-			{
-				attr: null,
+		if (arg && arg.length > 0) {
+			let t = {
 				for: null,
 				icon: null,
 				label: null,
-			},
-			t
-		);
+			};
+
+			if (arg && arg.length === 3) {
+				t.for = arg[0];
+				t.icon = arg[1];
+				t.label = arg[2];
+			} else if (arg && arg.length === 2) {
+				t.icon = arg[0];
+				t.label = arg[1];
+			} else if (arg && arg.length === 1 && typeof arg[0] === "string") {
+				t.label = arg[0];
+			} else {
+				t = arg[0];
+			}
+
+			this.data = core.extend(
+				{},
+				{
+					attr: null,
+					for: null,
+					icon: null,
+					label: null,
+				},
+				t
+			);
+		} else {
+			this.data = null;
+		}
 	}
 
 	get data() {

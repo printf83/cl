@@ -51,6 +51,9 @@ export default class badge extends span {
 				t
 			);
 		}
+		else {
+			this.data = null;
+		}
 	}
 
 	get data() {

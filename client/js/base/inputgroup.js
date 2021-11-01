@@ -76,25 +76,28 @@ export class container extends tag {
 export class text extends div {
 	constructor(...arg) {
 		super();
-
-		let t = {
-			elem: null,
-		};
-
-		if (arg && arg.length === 1 && (typeof arg[0] === "string" || Array.isArray(arg[0]))) {
-			t.elem = arg[0];
-		} else {
-			t = arg[0];
-		}
-
-		this.data = core.extend(
-			{},
-			{
-				attr: null,
+		if (arg && arg.length > 0) {
+			let t = {
 				elem: null,
-			},
-			t
-		);
+			};
+
+			if (arg && arg.length === 1 && (typeof arg[0] === "string" || Array.isArray(arg[0]))) {
+				t.elem = arg[0];
+			} else {
+				t = arg[0];
+			}
+
+			this.data = core.extend(
+				{},
+				{
+					attr: null,
+					elem: null,
+				},
+				t
+			);
+		} else {
+			this.data = null;
+		}
 	}
 
 	get data() {

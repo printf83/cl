@@ -15,56 +15,59 @@ import badge from "./badge.js";
 export default class button extends tag {
 	constructor(...arg) {
 		super();
-
-		let t = {
-			label: null,
-			color: null,
-			onclick: null,
-		};
-		if (arg && arg.length === 3) {
-			t.label = arg[0];
-			t.color = arg[1];
-			t.onclick = arg[2];
-		} else if (arg && arg.length === 2 && arg[1] instanceof Function) {
-			t.label = arg[0];
-			t.onclick = arg[1];
-		} else if (arg && arg.length === 2 && typeof arg[1] === "string") {
-			t.label = arg[0];
-			t.color = arg[1];
-		} else if (arg && arg.length === 1 && typeof arg[0] === "string") {
-			t.label = arg[0];
-		} else {
-			t = arg[0];
-		}
-
-		this.data = core.extend(
-			{},
-			{
-				attr: null,
-
-				id: null,
-				name: null,
-
-				type: "button",
+		if (arg && arg.length > 0) {
+			let t = {
 				label: null,
-				icon: null,
-				badge: null,
-				value: null,
-				checked: false,
-
 				color: null,
-				textcolor: null,
-				weight: null,
-				disabled: false,
-				outline: false,
-				hidelabel: false,
-				nowarp: false,
-
 				onclick: null,
-				href: null,
-			},
-			t
-		);
+			};
+			if (arg && arg.length === 3) {
+				t.label = arg[0];
+				t.color = arg[1];
+				t.onclick = arg[2];
+			} else if (arg && arg.length === 2 && arg[1] instanceof Function) {
+				t.label = arg[0];
+				t.onclick = arg[1];
+			} else if (arg && arg.length === 2 && typeof arg[1] === "string") {
+				t.label = arg[0];
+				t.color = arg[1];
+			} else if (arg && arg.length === 1 && typeof arg[0] === "string") {
+				t.label = arg[0];
+			} else {
+				t = arg[0];
+			}
+
+			this.data = core.extend(
+				{},
+				{
+					attr: null,
+
+					id: null,
+					name: null,
+
+					type: "button",
+					label: null,
+					icon: null,
+					badge: null,
+					value: null,
+					checked: false,
+
+					color: null,
+					textcolor: null,
+					weight: null,
+					disabled: false,
+					outline: false,
+					hidelabel: false,
+					nowarp: false,
+
+					onclick: null,
+					href: null,
+				},
+				t
+			);
+		} else {
+			this.data = null;
+		}
 	}
 
 	get data() {

@@ -5,31 +5,34 @@ import tag from "./tag.js";
 export default class tooltip extends tag {
 	constructor(elem, ...arg) {
 		super();
-
 		if (elem && arg && arg.length > 0) {
-			let t = {};
-			if (arg.length === 1 && typeof arg[0] === "string") {
-				t = {
-					msg: arg[0],
-				};
-			} else {
-				t = arg[0];
-			}
+			if (elem && arg && arg.length > 0) {
+				let t = {};
+				if (arg.length === 1 && typeof arg[0] === "string") {
+					t = {
+						msg: arg[0],
+					};
+				} else {
+					t = arg[0];
+				}
 
-			this.data = {
-				e: elem,
-				d: core.extend(
-					{},
-					{
-						attr: null,
-						msg: null,
-						type: null,
-						placement: "top",
-						trigger: "focus",
-					},
-					t
-				),
-			};
+				this.data = {
+					e: elem,
+					d: core.extend(
+						{},
+						{
+							attr: null,
+							msg: null,
+							type: null,
+							placement: "top",
+							trigger: "focus",
+						},
+						t
+					),
+				};
+			}
+		} else {
+			this.data = null;
 		}
 	}
 
