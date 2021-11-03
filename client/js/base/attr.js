@@ -112,33 +112,33 @@ export default class attr {
 	};
 
 	attach = function (elems) {
-		if (elems && this._d) {
-			Object.keys(this._d).forEach((i) => {
-				if (i !== "tag" && i !== "elem" && (this._d[i] || this._d[i] === "") && this._d[i] !== null) {
+		if (elems && this.data) {
+			Object.keys(this.data).forEach((i) => {
+				if (i !== "tag" && i !== "elem" && (this.data[i] || this.data[i] === "") && this.data[i] !== null) {
 					if (i === "class") {
-						if (Array.isArray(this._d[i])) {
-							let k = Array.from(new Set(this._d[i])).combine(" ");
+						if (Array.isArray(this.data[i])) {
+							let k = Array.from(new Set(this.data[i])).combine(" ");
 							if (k) elems.classList = k;
 						} else {
-							elems.classList = this._d[i];
+							elems.classList = this.data[i];
 						}
 					} else if (i === "style") {
-						Object.keys(this._d[i]).forEach((j) => {
-							if (this._d[i][j] && this._d[i][j] !== null) {
-								elems.style[j] = this._d[i][j];
+						Object.keys(this.data[i]).forEach((j) => {
+							if (this.data[i][j] && this.data[i][j] !== null) {
+								elems.style[j] = this.data[i][j];
 							}
 						});
-					} else if (booleanAttr.includes(i) && this._d[i]) {
+					} else if (booleanAttr.includes(i) && this.data[i]) {
 						elems[i] = true;
 					} else {
-						if (this._d[i] instanceof Function) {
+						if (this.data[i] instanceof Function) {
 							if (i.startsWith("on")) {
-								elems.addEventListener(i.startsWith("on") ? i.substr(2) : i, this._d[i]);
+								elems.addEventListener(i.startsWith("on") ? i.substr(2) : i, this.data[i]);
 							} else {
-								elems.setAttribute(i, this._d[i]);
+								elems.setAttribute(i, this.data[i]);
 							}
 						} else {
-							elems.setAttribute(i, this._d[i]);
+							elems.setAttribute(i, this.data[i]);
 						}
 					}
 				}

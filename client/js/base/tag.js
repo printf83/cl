@@ -25,24 +25,24 @@ export default class tag {
 	get data() {
 		return this._d;
 	}
-	set data(arg) {
-		this._d = arg;
+	set data(d) {
+		this._d = d;
 	}
 
 	build = function (container) {
-		if (this._d) {
+		if (this.data) {
 			let hasContainer = container ? true : false;
 			container = container || document.createElement("div");
 
-			let element = this._d.tag ? document.createElement(this._d.tag) : container;
-			element = new attr(this._d.attr).attach(element);
+			let element = this.data.tag ? document.createElement(this.data.tag) : container;
+			element = new attr(this.data.attr).attach(element);
 
-			if (this._d.elem) {
-				if (typeof this._d.elem === "string") {
-					element.appendChild(document.createTextNode(this._d.elem));
+			if (this.data.elem) {
+				if (typeof this.data.elem === "string") {
+					element.appendChild(document.createTextNode(this.data.elem));
 				} else {
-					if (Array.isArray(this._d.elem)) {
-						this._d.elem.forEach(function (i) {
+					if (Array.isArray(this.data.elem)) {
+						this.data.elem.forEach(function (i) {
 							if (i) {
 								if (typeof i === "string") {
 									//console.info("i is text", i);
@@ -69,16 +69,16 @@ export default class tag {
 						});
 					} else {
 						try {
-							let t = this._d.elem.build(element);
+							let t = this.data.elem.build(element);
 							element = t ? t : element;
 						} catch (ex) {
-							console.error(ex.message, this._d.elem, element);
+							console.error(ex.message, this.data.elem, element);
 						}
 					}
 				}
 			}
 
-			if (this._d.tag) container.appendChild(element);
+			if (this.data.tag) container.appendChild(element);
 
 			if (hasContainer) {
 				let popoverTriggerList = [].slice.call(container.querySelectorAll('[data-bs-toggle="popover"]'));

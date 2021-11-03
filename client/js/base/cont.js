@@ -68,7 +68,7 @@ export default class cont extends tag {
 		if (d) {
 			this._d = d;
 			super.data = {
-				tag: this._t,
+				tag: this.tag,
 				attr: attr.merge(d.attr, {
 					class: d.class,
 					style: d.style,
