@@ -13,41 +13,45 @@ export default class cont extends tag {
 	constructor(tag, ...arg) {
 		super();
 
-		// if (tag && arg && arg.length > 0) {
-		let t = {
-			class: null,
-			style: null,
-			elem: null,
-		};
-
-		if (arg && arg.length === 3) {
-			t.class = arg[0];
-			t.style = arg[1];
-			t.elem = arg[2];
-		} else if (arg && arg.length === 2) {
-			t.class = arg[0];
-			t.elem = arg[1];
-		} else if ((arg && arg.length === 1 && typeof arg[0] === "string") || Array.isArray(arg[0])) {
-			t.elem = arg[0];
+		if (tag) {
+			this.tag = tag;
 		} else {
-			t = arg[0];
+			this.tag = null;
 		}
 
-		this.tag = tag;
-		this.data = core.extend(
-			{},
-			{
-				attr: null,
+		if (arg && arg.length > 0) {
+			let t = {
 				class: null,
 				style: null,
 				elem: null,
-			},
-			t
-		);
-		// } else {
-		// 	this.tag = null;
-		// 	this.data = null;
-		// }
+			};
+
+			if (arg && arg.length === 3) {
+				t.class = arg[0];
+				t.style = arg[1];
+				t.elem = arg[2];
+			} else if (arg && arg.length === 2) {
+				t.class = arg[0];
+				t.elem = arg[1];
+			} else if ((arg && arg.length === 1 && typeof arg[0] === "string") || Array.isArray(arg[0])) {
+				t.elem = arg[0];
+			} else {
+				t = arg[0];
+			}
+
+			this.data = core.extend(
+				{},
+				{
+					attr: null,
+					class: null,
+					style: null,
+					elem: null,
+				},
+				t
+			);
+		} else {
+			this.data = null;
+		}
 	}
 
 	get tag() {

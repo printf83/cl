@@ -11,67 +11,12 @@ import tooltip from "./base/tooltip.js";
 import badge from "./base/badge.js";
 import input from "./base/input.js";
 import label from "./base/label.js";
+import tag from "./base/tag.js";
 
 core.documentReady(() => {
 	var root = document.getElementById("root");
-	//let b = new tag({ tag: "div", elem: "Hello" });
-
-	//let b = new div("mb-5", ["Hello World"]);
-
-	// let b = new inputgroup.container([
-	// 	new inputgroup.text([new icon("fire")]),
-	// 	new button("Hello", "primary"),
-	// 	new inputgroup.text([new icon("fire")]),
-	// 	new inputgroup.text({ elem: new icon("fire"), attr: { class: "text-danger" } }),
-	// 	new button("World", "info"),
-	// 	new inputgroup.text([new icon("fire"), new icon("fire"), new icon("fire")]),
-	// ]);
 
 	console.time("b");
-	// let b = new div(
-	// 	"container p-0",
-	// 	new div("row row-cols-1 g-2", [
-	// 		new input({
-	// 			label: "Name",
-	// 			required: true,
-	// 			invalid: "Please provide name",
-	// 			name: "name",
-	// 			type: "text",
-	// 			////size: "col-12",
-	// 		}),
-	// 		new input({
-	// 			label: "Age",
-	// 			required: true,
-	// 			invalid: "Please provide age",
-	// 			name: "age",
-	// 			type: "number",
-	// 			min: 13,
-	// 			max: 100,
-	// 			numctl: true,
-	// 			//size: "col-12",
-	// 		}),
-	// 		new input({
-	// 			type: "radio",
-	// 			label: "Secret",
-	// 			name: "sex",
-	// 			value: "s",
-	// 			checked: true,
-	// 		}),
-	// 		new input({
-	// 			type: "radio",
-	// 			label: "Male",
-	// 			name: "sex",
-	// 			value: "m",
-	// 		}),
-	// 		new input({
-	// 			type: "radio",
-	// 			label: "Female",
-	// 			name: "sex",
-	// 			value: "f",
-	// 		}),
-	// 	])
-	// );
-	// let b = new tooltip(new button("Hello"), "World");
 
 	let b = new div("my-5 container", [
 		new p("display-1", "Hello World"),
@@ -348,6 +293,7 @@ core.documentReady(() => {
 			])
 		),
 	]);
+
 	b.build(root);
 	console.timeEnd("b");
 });

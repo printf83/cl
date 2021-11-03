@@ -5,44 +5,52 @@ import tag from "./tag.js";
 export default class tooltip extends tag {
 	constructor(elem, ...arg) {
 		super();
-		if (elem && arg && arg.length > 0) {
-			if (elem && arg && arg.length > 0) {
-				let t = {};
-				if (arg.length === 1 && typeof arg[0] === "string") {
-					t = {
-						msg: arg[0],
-					};
-				} else {
-					t = arg[0];
-				}
 
-				this.data = {
-					e: elem,
-					d: core.extend(
-						{},
-						{
-							attr: null,
-							msg: null,
-							type: null,
-							placement: "top",
-							trigger: "focus",
-						},
-						t
-					),
+		if (elem) {
+			this.elem = elem;
+		} else {
+			this.elem = null;
+		}
+
+		if (arg && arg.length > 0) {
+			let t = {};
+			if (arg.length === 1 && typeof arg[0] === "string") {
+				t = {
+					msg: arg[0],
 				};
+			} else {
+				t = arg[0];
 			}
+
+			this.data = core.extend(
+				{},
+				{
+					attr: null,
+					msg: null,
+					type: null,
+					placement: "top",
+					trigger: "focus",
+				},
+				t
+			);
 		} else {
 			this.data = null;
 		}
 	}
 
+	get elem() {
+		return this._e;
+	}
+	set elem(d) {
+		this._e = d;
+	}
+
 	get data() {
 		return this._d;
 	}
-	set data(arg) {
-		if (arg && arg.e && arg.d) {
-			let d = arg.d;
-			this._d = arg.e.data;
+	set data(d) {
+		if (d && this._e) {
+			this._d = this._e.data;
 
 			this._d.attr = attr.merge(this._d.attr, {
 				title: d.type === "popover" ? d.title : d.msg,
