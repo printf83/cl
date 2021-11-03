@@ -50,8 +50,7 @@ export default class badge extends span {
 				},
 				t
 			);
-		}
-		else {
+		} else {
 			this.data = null;
 		}
 	}

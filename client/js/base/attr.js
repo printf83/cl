@@ -35,18 +35,18 @@ const booleanAttr = [
  */
 export default class attr {
 	constructor(arg) {
-		if (arg && arg.length > 0) {
-			this.data = core.extend(
-				{},
-				{
-					class: null,
-					style: null,
-				},
-				arg
-			);
-		} else {
-			this.data = null;
-		}
+		// if (arg && arg.length > 0) {
+		this.data = core.extend(
+			{},
+			{
+				class: null,
+				style: null,
+			},
+			arg
+		);
+		// } else {
+		// 	this.data = null;
+		// }
 	}
 
 	get data() {

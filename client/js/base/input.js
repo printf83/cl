@@ -501,6 +501,8 @@ export default class input extends tag {
 					elem: ctl,
 				};
 			}
+
+			console.log(this._d);
 		} else {
 			this._d = null;
 		}

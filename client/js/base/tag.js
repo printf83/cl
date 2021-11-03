@@ -7,19 +7,19 @@ import attr from "./attr.js";
  */
 export default class tag {
 	constructor(arg) {
-		if (arg && arg.length > 0) {
-			this.data = core.extend(
-				{},
-				{
-					tag: null,
-					attr: null,
-					elem: null,
-				},
-				arg
-			);
-		} else {
-			this.data = null;
-		}
+		// if (arg && arg.length > 0) {
+		this.data = core.extend(
+			{},
+			{
+				tag: null,
+				attr: null,
+				elem: null,
+			},
+			arg
+		);
+		// } else {
+		// 	this.data = null;
+		// }
 	}
 
 	get data() {
@@ -53,19 +53,26 @@ export default class tag {
 										i
 									);
 									i.forEach(function (j) {
-										element = j.build(element);
+										let t = j.build(element);
+										element = t ? t : element;
 									});
 								} else {
 									//console.info("i is object", i);
-									element = i.build(element);
+									try {
+										let t = i.build(element);
+										element = t ? t : element;
+									} catch (ex) {
+										console.error(ex.message, i, element);
+									}
 								}
 							}
 						});
 					} else {
 						try {
-							element = this._d.elem.build(element);
+							let t = this._d.elem.build(element);
+							element = t ? t : element;
 						} catch (ex) {
-							console.error(ex.message, this._d.elem);
+							console.error(ex.message, this._d.elem, element);
 						}
 					}
 				}
