@@ -119,3 +119,13 @@ export function documentReady(callback) {
 		});
 	}
 }
+export function countElement(node) {
+	let child = node.childNodes;
+	let cnt = child.length;
+
+	child.forEach(function (i) {
+		cnt += countElement(i);
+	});
+
+	return cnt;
+}

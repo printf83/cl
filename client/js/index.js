@@ -371,4 +371,5 @@ core.documentReady(() => {
 
 	b.replaceChild(root);
 	console.timeEnd("b");
+	console.log(`${core.countElement(root)} element`);
 });
