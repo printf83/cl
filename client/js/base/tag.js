@@ -99,6 +99,58 @@ export default class tag {
 		return null;
 	};
 
+	appendChild = function (container) {
+		let n = this.node();
+		if (Node.prototype.isPrototypeOf(n)) {
+			container.appendChild(n);
+		} else if (NodeList.prototype.isPrototypeOf(n)) {
+			n.forEach(function (i) {
+				container.appendChild(i);
+			});
+		}
+	};
+
+	prependChild = function (container) {
+		let n = this.node();
+		if (Node.prototype.isPrototypeOf(n)) {
+			container.insertBefore(n, container.firstChild);
+		} else if (NodeList.prototype.isPrototypeOf(n)) {
+			n.forEach(function (i) {
+				container.insertBefore(i, container.firstChild);
+			});
+		}
+	};
+
+	replaceWith = function (elem) {
+		while (elem.firstChild) {
+			elem.firstChild.remove();
+		}
+
+		let n = this.node();
+		let parent = elem.parentNode;
+		if (Node.prototype.isPrototypeOf(n)) {
+			parent.insertBefore(n, elem);
+		} else if (NodeList.prototype.isPrototypeOf(n)) {
+			n.forEach(function (i) {
+				parent.insertBefore(i, elem);
+			});
+		}
+
+		elem.remove();
+	};
+
+	replaceChild = function (container) {
+		while (container.firstChild) {
+			container.firstChild.remove();
+		}
+
+		this.build(container);
+	};
+
+	node = function () {
+		return this.build();
+	};
+
 	html = function () {
 		let container = document.createElement("div");
 		container = this.build(container);

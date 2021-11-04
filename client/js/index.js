@@ -346,6 +346,6 @@ core.documentReady(() => {
 		),
 	]);
 
-	b.build(root);
+	b.replaceChild(root);
 	console.timeEnd("b");
 });
