@@ -17,7 +17,10 @@ export default class tooltip extends tag {
 		}
 
 		if (arg && arg.length > 0) {
-			let t = {};
+			let t = {
+				msg: null,
+			};
+
 			if (arg.length === 1 && typeof arg[0] === "string") {
 				t = {
 					msg: arg[0],
