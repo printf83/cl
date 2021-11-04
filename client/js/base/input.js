@@ -13,7 +13,7 @@ import option from "./option.js";
  * label, color
  * label, onclick
  * label, color, onclick
- * option
+ * opt : {attr,id,name,type,label,hidelabel,floatlabel,inline,labelsize,ctlsize,size,weight,value,checked,placeholder,option,numctl,addctl,min,max,step,row,multiple,required,valid,invalid,beforetype,before,aftertype,after,plaintext,readonly,disabled,container,flex,nowarp,onclick,onchange,onclick,onfocus,onblur}
  */
 export default class input extends tag {
 	constructor(...arg) {

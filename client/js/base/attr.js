@@ -31,7 +31,7 @@ const booleanAttr = [
 ];
 
 /**
- * option {class,style,...}
+ * opt {class,style,...}
  */
 export default class attr {
 	constructor(arg) {

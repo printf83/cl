@@ -6,7 +6,7 @@ import div from "./div.js";
 /**
  * label,elem
  * [elem],
- * option
+ * opt : {attr,label,elem,weight,vertical}
  */
 export default class btngroup extends div {
 	constructor(...arg) {

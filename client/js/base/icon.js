@@ -7,7 +7,7 @@ import tag from "./tag.js";
  * icon
  * [style,icon]
  * style,icon
- * option
+ * opt : {attr,style,icon,weight,fixwidth,spin,rotate,color,inverse,elem,stack}
  */
 export default class icon extends tag {
 	constructor(...arg) {

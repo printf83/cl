@@ -6,7 +6,9 @@ import label from "./label.js";
 /**
  * item, selected
  * item
- * option
+ * opt : {type,item,selected}
+ * option item : [string]|[{value,label,selected}]
+ * dropdown item : [string]|[{attr,elem,value,label,icon,active,disabled,interactive,onclick,href}]
  */
 export default class option extends tag {
 	constructor(...arg) {
@@ -74,16 +76,20 @@ export default class option extends tag {
 		});
 	};
 
-	#gen_ddoption = function (item, selected) {
+	#gen_dropdown = function (item, selected) {
 		return item.map(function (i) {
 			if (typeof i === "string") {
 				return new tag({
 					tag: "li",
-					attr: {
-						value: i,
-						selected: selected.includes(i),
-					},
-					elem: i,
+					elem: new tag({
+						tag: "span",
+						attr: {
+							class: ["dropdown-item", selected.includes(i) ? "active" : null],
+						},
+						elem: new label({
+							label: i,
+						}),
+					}),
 				});
 			} else {
 				i = core.extend(
@@ -179,7 +185,7 @@ export default class option extends tag {
 				};
 			} else {
 				this._d = {
-					elem: this.#gen_ddoption(
+					elem: this.#gen_dropdown(
 						d.item,
 						d.selected ? (Array.isArray(d.selected) ? d.selected : [d.selected]) : []
 					),

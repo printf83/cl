@@ -11,12 +11,37 @@ import tooltip from "./base/tooltip.js";
 import badge from "./base/badge.js";
 import input from "./base/input.js";
 import label from "./base/label.js";
-import tag from "./base/tag.js";
+import dropdown from "./base/dropdown.js";
 
 core.documentReady(() => {
 	var root = document.getElementById("root");
 
 	console.time("b");
+
+	// let b = new div(
+	// 	"container p-2",
+	// 	new div(
+	// 		"row",
+	// 		new div("col", [
+	// new dropdown({
+	// 	label: "Hello world",
+	// 	color: "primary",
+	// 	weight: "sm",
+	// 	splittoggle: true,
+	// 	offset: "20,30",
+	// 	// arrow: "end",
+	// 	dark: true,
+	// 	option: [
+	// 		{ href: "javascript:void(0);", label: "Action" },
+	// 		{ href: "javascript:void(0);", label: "Another action" },
+	// 		{ href: "javascript:void(0);", label: "Something else here" },
+	// 		{ value: "-" },
+	// 		{ href: "javascript:void(0);", label: "Separated link" },
+	// 	],
+	// }),
+	// 		])
+	// 	)
+	// );
 
 	let b = new div("my-5 container", [
 		new p("display-1", "Hello World"),
@@ -130,8 +155,6 @@ core.documentReady(() => {
 			new badge("secondary", "secondary", true),
 		]),
 
-		new div("mb-5", [new input()]),
-
 		new div(
 			"container",
 			new div("row g-2", [
@@ -164,6 +187,20 @@ core.documentReady(() => {
 					//size: "col-12",
 					after: "B",
 				}),
+				new dropdown({
+					label: "Hello world",
+					color: "primary",
+					splittoggle: false,
+					arrow: "start",
+					dark: true,
+					option: [
+						{ href: "javascript:void(0);", label: "Action" },
+						{ href: "javascript:void(0);", label: "Another action" },
+						{ href: "javascript:void(0);", label: "Something else here" },
+						{ value: "-" },
+						{ href: "javascript:void(0);", label: "Separated link" },
+					],
+				}),
 				new input({
 					label: "Hello2 required",
 					type: "text",
@@ -172,7 +209,22 @@ core.documentReady(() => {
 					invalid: "emmmm",
 					//size: "col-12",
 					before: "A",
-					after: "C",
+					aftertype: "dropdown",
+					after: new dropdown({
+						label: "Hello world",
+						color: "primary",
+						// splittoggle: true,
+						// offset: "20,30",
+						arrow: "start",
+						dark: true,
+						option: [
+							{ href: "javascript:void(0);", label: "Action" },
+							{ href: "javascript:void(0);", label: "Another action" },
+							{ href: "javascript:void(0);", label: "Something else here" },
+							{ value: "-" },
+							{ href: "javascript:void(0);", label: "Separated link" },
+						],
+					}),
 				}),
 				new input({
 					label: "Hello2",

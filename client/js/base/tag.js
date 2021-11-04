@@ -3,7 +3,7 @@ import * as core from "./core.js";
 import attr from "./attr.js";
 
 /**
- * option
+ * opt : {tag,attr,elem}
  */
 export default class tag {
 	constructor(arg) {

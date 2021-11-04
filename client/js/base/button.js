@@ -10,7 +10,7 @@ import badge from "./badge.js";
  * label, color
  * label, onclick
  * label, color, onclick
- * option
+ * option : {attr,id,name,type,label,icon,badge,value,checked,color,textcolor,weight,disabled,outline,hidelabel,nowarp,onclick,href}
  */
 export default class button extends tag {
 	constructor(...arg) {

@@ -5,7 +5,7 @@ import cont from "./cont.js";
  * class,style,elem
  * class,elem
  * [elem]
- * option
+ * opt : {attr,class,style,elem}
  */
 export default class span extends cont {
 	constructor(...arg) {

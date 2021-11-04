@@ -9,7 +9,7 @@ import attr from "./attr.js";
  * for,icon,label
  * icon,label
  * label
- * option
+ * opt : {attr,for,icon,label}
  */
 export default class label extends tag {
 	constructor(...arg) {

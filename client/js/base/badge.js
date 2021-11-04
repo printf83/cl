@@ -6,7 +6,7 @@ import span from "./span.js";
  * label,color,pill
  * label,color
  * label
- * option
+ * opt : {attr,label,asst,icon,notification,pill,color,textcolor,bordercolor}
  */
 export default class badge extends span {
 	constructor(...arg) {

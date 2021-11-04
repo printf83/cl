@@ -7,7 +7,7 @@ import attr from "./attr.js";
  * tag,class,style,elem
  * tag,class,elem
  * tag,[elem]
- * tag,option
+ * tag,opt : {attr,class,style,elem}
  */
 export default class cont extends tag {
 	constructor(tag, ...arg) {

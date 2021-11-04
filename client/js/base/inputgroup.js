@@ -8,7 +8,7 @@ import div from "./div.js";
  * for,label,elem
  * label,elem
  * [elem],
- * option
+ * opt : {attr,for,label,elem,nowarp}
  */
 export class container extends tag {
 	constructor(...arg) {
@@ -71,7 +71,7 @@ export class container extends tag {
 
 /**
  * [elem]
- * option
+ * opt : {attr,elem}
  */
 export class text extends div {
 	constructor(...arg) {

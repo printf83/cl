@@ -2,6 +2,10 @@ import * as core from "./core.js";
 import attr from "./attr.js";
 import tag from "./tag.js";
 
+/**
+ * elem, msg
+ * elem, opt : {attr,title,msg,type,placement,trigger}
+ */
 export default class tooltip extends tag {
 	constructor(elem, ...arg) {
 		super();
@@ -26,6 +30,7 @@ export default class tooltip extends tag {
 				{},
 				{
 					attr: null,
+					title: null,
 					msg: null,
 					type: null,
 					placement: "top",
