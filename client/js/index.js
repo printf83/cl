@@ -193,6 +193,7 @@ core.documentReady(() => {
 					splittoggle: false,
 					arrow: "start",
 					dark: true,
+					container: "col",
 					option: [
 						{ href: "javascript:void(0);", label: "Action" },
 						{ href: "javascript:void(0);", label: "Another action" },
@@ -215,6 +216,7 @@ core.documentReady(() => {
 						color: "primary",
 						// splittoggle: true,
 						// offset: "20,30",
+						container: null,
 						arrow: "start",
 						dark: true,
 						option: [

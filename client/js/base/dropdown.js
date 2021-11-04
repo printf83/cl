@@ -72,7 +72,8 @@ export default class dropdown extends tag {
 					href: null,
 
 					option: null,
-					container: null,
+					// container: null,
+					container: "btn-group",
 					arrow: "down",
 					splittoggle: false,
 					aligment: null,
@@ -175,18 +176,18 @@ export default class dropdown extends tag {
 				  })
 				: null;
 
-			if (d.splittoggle && d.container === null) {
-				d.container = "btn-group";
-			}
+			// if (d.splittoggle && d.container === null) {
+			// 	d.container = "btn-group";
+			// }
 
 			if (d.splittoggle && d.arrow === "start") {
 				this._d = {
 					tag: d.container ? "div" : null,
-					attr: d.container ? { class: ["btn-group", d.container] } : null,
+					attr: d.container ? { class: ["btn-group", d.container, d.arrow ? `drop${d.arrow}` : null] } : null,
 					elem: [
 						new tag({
 							tag: "div",
-							attr: { class: ["btn-group", d.arrow ? `drop${d.arrow}` : null], role: "group" },
+							attr: { class: ["btn-group"], role: "group" },
 							elem: [splitctl, menuctl],
 						}),
 						btnctl,
@@ -195,11 +196,11 @@ export default class dropdown extends tag {
 			} else {
 				this._d = {
 					tag: d.container ? "div" : null,
-					attr: d.container ? { class: [d.container] } : null,
+					attr: d.container ? { class: [d.container, d.arrow ? `drop${d.arrow}` : null] } : null,
 					elem: d.splittoggle
 						? new tag({
 								tag: "div",
-								attr: { class: ["btn-group", d.arrow ? `drop${d.arrow}` : null], role: "group" },
+								attr: { class: ["btn-group"], role: "group" },
 								elem: [btnctl, splitctl, menuctl],
 						  })
 						: [btnctl, menuctl],
