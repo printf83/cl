@@ -21,31 +21,6 @@ core.documentReady(() => {
 	let tid1 = core.UUID();
 	let tid2 = core.UUID();
 
-	// let b = new div(
-	// 	"container p-2",
-	// 	new div(
-	// 		"row",
-	// 		new div("col", [
-	// 			new dropdown({
-	// 				label: "Hello world",
-	// 				color: "primary",
-	// 				weight: "sm",
-	// 				splittoggle: true,
-	// 				offset: "20,30",
-	// 				// arrow: "end",
-	// 				dark: true,
-	// 				option: [
-	// 					{ href: "javascript:void(0);", label: "Action" },
-	// 					{ href: "javascript:void(0);", label: "Another action" },
-	// 					{ href: "javascript:void(0);", label: "Something else here" },
-	// 					{ value: "-" },
-	// 					{ href: "javascript:void(0);", label: "Separated link" },
-	// 				],
-	// 			}),
-	// 		])
-	// 	)
-	// );
-
 	let b = new div("my-5 container", [
 		new p("display-1", "Hello World"),
 		new btngroup([
