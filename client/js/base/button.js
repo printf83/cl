@@ -99,7 +99,7 @@ export default class button extends tag {
 					],
 				}),
 				elem: [
-					d.label || d.icon ? new label({ icon: d.icon, label: !d.hidelabel ? d.label : null }) : null,
+					d.label || d.icon ? new label({ icon: d.icon, label: d.label, hidelabel: d.hidelabel }) : null,
 					d.badge ? new badge(d.badge) : null,
 				],
 			};

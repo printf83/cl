@@ -41,6 +41,7 @@ export default class label extends tag {
 					for: null,
 					icon: null,
 					label: null,
+					hidelabel: false,
 				},
 				t
 			);
@@ -53,14 +54,29 @@ export default class label extends tag {
 		return this._d;
 	}
 	set data(d) {
-		if (d) {
-			this._d = {
-				tag: "label",
-				attr: attr.merge(d.attr, {
-					for: d.for,
-				}),
-				elem: [d.icon ? new span(d.label ? "me-2" : null, new icon(d.icon)) : null, d.label],
-			};
+		if (d && (d.icon || d.label)) {
+			if (d.hidelabel) {
+				if (d.icon) {
+					this._d = {
+						elem: [new icon(d.icon), d.label ? new span("visually-hidden", d.label) : null],
+					};
+				} else {
+					this._d = {
+						elem: new span("visually-hidden", d.label),
+					};
+				}
+			} else {
+				this._d = {
+					tag: "label",
+					attr: attr.merge(d.attr, {
+						for: d.for,
+					}),
+					elem: [
+						d.icon ? new span(d.label && !d.hidelabel ? "me-2" : null, new icon(d.icon)) : null,
+						d.label,
+					],
+				};
+			}
 		} else {
 			this._d = null;
 		}
