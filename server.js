@@ -12,5 +12,5 @@ var server = app.listen(envPORT, function () {
 	var host = server.address().address;
 	var port = server.address().port;
 
-	console.info(`✅ App listening at http://${host}:${port}`);
+	console.info(`App listening at http://${host}:${port}`);
 });
