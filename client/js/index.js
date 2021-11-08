@@ -355,15 +355,18 @@ core.documentReady(() => {
 				new collapse.toggle(new button("Yay", "secondary"), `.anak-ayam`),
 			]),
 
-			new collapse.container(new div("card", new div("card-body", "Body anak ayam 1")), {
+			new collapse.container(new card.container(new card.body("Body anak ayam 1")), {
 				id: tid1,
 				class: "anak-ayam m-2",
 			}),
 
-			new collapse.container(new div("card", new div("card-body", "Body anak ayam 2")), {
-				id: tid2,
-				class: "anak-ayam m-2",
-			}),
+			new collapse.container(
+				new card.container([new card.header("Header 2"), new card.body("Body anak ayam 2")]),
+				{
+					id: tid2,
+					class: "anak-ayam m-2",
+				}
+			),
 		]),
 	]);
 
