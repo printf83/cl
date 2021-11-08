@@ -108,7 +108,7 @@ export default class tab extends tag {
 					i = core.extend({}, defOption, i);
 
 					//create id for tab elem
-					i.id = i.id ? i.id : i.elem && i.elem.length > 0 ? core.UUID() : null;
+					i.id = i.id ? i.id : i.elem ? core.UUID() : null;
 
 					//make header
 					headerItem.push(

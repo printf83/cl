@@ -14,6 +14,7 @@ import label from "./base/label.js";
 import dropdown from "./base/dropdown.js";
 import tab from "./base/tab.js";
 import * as collapse from "./base/collapse.js";
+import * as card from "./base/card.js";
 
 core.documentReady(() => {
 	var root = document.getElementById("root");
@@ -37,7 +38,7 @@ core.documentReady(() => {
 						{ href: "javascript:void(0);", label: "Something else here" },
 					],
 				},
-				{ label: "Third", elem: "This is third tab. " },
+				{ label: "Third", elem: new card.container([new card.body(["This is third tab. "])]) },
 				{
 					label: "Form",
 					elem: [
