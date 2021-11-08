@@ -38,7 +38,7 @@ core.documentReady(() => {
 						{ href: "javascript:void(0);", label: "Something else here" },
 					],
 				},
-				{ label: "Third", elem: new card.container([new card.body(["This is third tab. "])]) },
+				{ label: "Third", elem: new card.container(new card.body("This is third tab. ")) },
 				{
 					label: "Form",
 					elem: [
@@ -119,9 +119,9 @@ core.documentReady(() => {
 									label: "Hello2",
 									type: "text",
 									//size: "col-12",
-									before: [new icon("fire")],
+									before: new icon("fire"),
 									aftertype: "button",
-									after: [new button({ label: "Hello", color: "primary" })],
+									after: new button({ label: "Hello", color: "primary" }),
 								}),
 
 								new input({
@@ -134,7 +134,7 @@ core.documentReady(() => {
 										{ value: "2", label: "Two" },
 										{ value: "3", label: "Three" },
 									],
-									before: [new icon("fire")],
+									before: new icon("fire"),
 									addctl: function (event) {
 										alert("Add ctl");
 									},
@@ -220,7 +220,7 @@ core.documentReady(() => {
 									floatlabel: true,
 									name: "karangan",
 									attr: { style: { height: "150px" } },
-									before: [new icon("fire")],
+									before: new icon("fire"),
 								}),
 
 								new input({
@@ -308,9 +308,9 @@ core.documentReady(() => {
 		),
 		new div("mb-5", [
 			new inputgroup.container([
-				new inputgroup.text([new icon("fire")]),
+				new inputgroup.text(new icon("fire")),
 				new button("Hello", "primary"),
-				new inputgroup.text([new icon("fire")]),
+				new inputgroup.text(new icon("fire")),
 				new inputgroup.text({ elem: new icon("fire"), attr: { class: "text-danger" } }),
 				new button("World", "info", function () {
 					alert("Clicked");

@@ -13,7 +13,7 @@ import option from "./option.js";
  * label, color
  * label, onclick
  * label, color, onclick
- * opt : {attr,id,name,type,label,hidelabel,floatlabel,inline,labelsize,ctlsize,size,weight,value,checked,placeholder,option,numctl,addctl,min,max,step,row,multiple,required,valid,invalid,beforetype,before,aftertype,after,plaintext,readonly,disabled,container,flex,nowarp,onclick,onchange,onclick,onfocus,onblur}
+ * opt : {attr,id,name,type,label,hidelabel,floatlabel,inline,labelsize,ctlsize,size,weight,value,checked,placeholder,option,numctl,addctl,min,max,step,row,multiple,required,valid,invalid,before,after,plaintext,readonly,disabled,container,flex,nowarp,onclick,onchange,onclick,onfocus,onblur}
  */
 export default class input extends tag {
 	constructor(...arg) {
@@ -77,9 +77,9 @@ export default class input extends tag {
 					valid: null,
 					invalid: null,
 
-					beforetype: "text",
+					// beforetype: "text",
 					before: null,
-					aftertype: "text",
+					// aftertype: "text",
 					after: null,
 
 					plaintext: false,
@@ -136,28 +136,28 @@ export default class input extends tag {
 			}
 
 			//auto mark beforetype and aftertype if numctl
-			if (d.type === "number" && d.numctl) {
-				d.beforetype = "button";
-				d.aftertype = "button";
-			}
+			// if (d.type === "number" && d.numctl) {
+			// 	d.beforetype = "button";
+			// 	d.aftertype = "button";
+			// }
 
 			//automark aftertype if addctl provided
 			if (d.addctl) {
 				d.after = null;
-				d.aftertype = "button";
+				// d.aftertype = "button";
 			}
 
 			//automark aftertype and beforetype if numctl provided
 			if (d.numctl && d.type === "number") {
 				d.before = null;
-				d.beforetype = "button";
+				// d.beforetype = "button";
 				d.after = null;
-				d.aftertype = "button";
+				// d.aftertype = "button";
 			}
 
 			//before control
 			let beforectl = d.before
-				? d.beforetype === "text"
+				? typeof d.before === "string" || d.before.hasOwnProperty("clicon") //d.beforetype === "text"
 					? new inputgroup.text(d.before)
 					: new tag({
 							elem: d.before,
@@ -184,7 +184,7 @@ export default class input extends tag {
 
 			//after control
 			let afterctl = d.after
-				? d.aftertype === "text"
+				? typeof d.after === "string" || d.after.hasOwnProperty("clicon") //d.aftertype === "text"
 					? new inputgroup.text(d.after)
 					: new tag({
 							elem: d.after,

@@ -27,7 +27,7 @@ export class container extends tag {
 		} else if (arg && arg.length === 2) {
 			t.label = arg[0];
 			t.elem = arg[1];
-		} else if (arg && arg.length === 1 && Array.isArray(arg[0])) {
+		} else if (arg && arg.length === 1 && (Array.isArray(arg[0]) || arg[0].hasOwnProperty("cl"))) {
 			t.elem = arg[0];
 		} else {
 			t = arg[0];
@@ -81,7 +81,11 @@ export class text extends div {
 				elem: null,
 			};
 
-			if (arg && arg.length === 1 && (typeof arg[0] === "string" || Array.isArray(arg[0]))) {
+			if (
+				arg &&
+				arg.length === 1 &&
+				(typeof arg[0] === "string" || Array.isArray(arg[0]) || arg[0].hasOwnProperty("cl"))
+			) {
 				t.elem = arg[0];
 			} else {
 				t = arg[0];

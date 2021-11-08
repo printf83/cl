@@ -2,24 +2,24 @@
 import * as core from "./core.js";
 import tag from "./tag.js";
 import attr from "./attr.js";
-import div from "./div.js";
+import a from "./a.js";
 
-/**
- * string
- * [elem]
- * opt : {attr,id,class,style,align,color,textcolor,bordercolor,border,elem}
- */
-class main extends div {
-	constructor(main, ...arg) {
+class main extends tag {
+	constructor(tag, className, ...arg) {
 		super();
 		if (arg && arg.length > 0) {
-			this.main = main;
+			this.tag = tag;
+			this.className = className;
 
 			let t = {
 				elem: null,
 			};
 
-			if (arg && arg.length === 1 && (typeof arg[0] === "string" || Array.isArray(arg[0]))) {
+			if (
+				arg &&
+				arg.length === 1 &&
+				(typeof arg[0] === "string" || Array.isArray(arg[0]) || arg[0].hasOwnProperty("cl"))
+			) {
 				t.elem = arg[0];
 			} else {
 				t = arg[0];
@@ -45,38 +45,49 @@ class main extends div {
 				t
 			);
 		} else {
-			this.main = null;
+			this.tag = null;
+			this.className = null;
 			this.data = null;
 		}
 	}
 
-	get main() {
-		return this._m;
+	get tag() {
+		return this._t;
 	}
-	set main(d) {
-		this._m = d;
+	set tag(d) {
+		this._t = d;
 	}
 
+	get className() {
+		return this._c;
+	}
+	set className(d) {
+		this._c = d;
+	}
 	get data() {
 		return this._d;
 	}
 	set data(d) {
-		if (d && this.main) {
+		if (d && this.tag) {
 			this._d = {
-				attr: d.attr,
-				class: [
-					this.main,
-					d.class,
-					d.align ? `text-${d.align}` : null,
-					d.color ? `bg-${d.color}` : null,
-					d.textcolor ? `text-${d.textcolor}` : null,
-					d.bordercolor ? `border-${d.bordercolor}` : null,
-					!d.border ? "border-0" : null,
-				],
-				style: d.style,
+				tag: this.tag,
+				attr: attr.merge(d.attr, {
+					class: [
+						this.className,
+						d.class,
+						d.align ? `text-${d.align}` : null,
+						d.color ? `bg-${d.color}` : null,
+						d.textcolor ? `text-${d.textcolor}` : null,
+						d.bordercolor ? `border-${d.bordercolor}` : null,
+						!d.border ? "border-0" : null,
+					],
+					style: d.style,
+				}),
 				elem: d.elem,
 			};
 		} else {
+			this.tag = null;
+			this.className = null;
 			this._d = null;
 		}
 
@@ -86,7 +97,7 @@ class main extends div {
 
 export class container extends main {
 	constructor(...arg) {
-		super("card", ...arg);
+		super("div", "card", ...arg);
 	}
 
 	get data() {
@@ -103,7 +114,7 @@ export class container extends main {
  */
 export class header extends main {
 	constructor(...arg) {
-		super("card-header", ...arg);
+		super("div", "card-header", ...arg);
 	}
 
 	get data() {
@@ -121,7 +132,7 @@ export class header extends main {
  */
 export class body extends main {
 	constructor(...arg) {
-		super("card-body", ...arg);
+		super("div", "card-body", ...arg);
 	}
 
 	get data() {
@@ -139,7 +150,7 @@ export class body extends main {
  */
 export class footer extends main {
 	constructor(...arg) {
-		super("card-footer", ...arg);
+		super("div", "card-footer", ...arg);
 	}
 
 	get data() {
@@ -157,7 +168,143 @@ export class footer extends main {
  */
 export class group extends main {
 	constructor(...arg) {
-		super("card-group", ...arg);
+		super("div", "card-group", ...arg);
+	}
+
+	get data() {
+		return super.data;
+	}
+	set data(arg) {
+		super.data = arg;
+	}
+}
+
+/**
+ * string
+ * [elem]
+ * opt : {attr,id,class,style,align,color,textcolor,bordercolor,border,elem}
+ */
+export class title extends main {
+	constructor(...arg) {
+		super("h5", "card-title", ...arg);
+	}
+
+	get data() {
+		return super.data;
+	}
+	set data(arg) {
+		super.data = arg;
+	}
+}
+
+/**
+ * string
+ * [elem]
+ * opt : {attr,id,class,style,align,color,textcolor,bordercolor,border,elem}
+ */
+export class subtitle extends main {
+	constructor(...arg) {
+		super("h6", "card-subtitle mb-2", ...arg);
+	}
+
+	get data() {
+		return super.data;
+	}
+	set data(arg) {
+		super.data = arg;
+	}
+}
+
+/**
+ * string
+ * [elem]
+ * opt : {attr,id,class,style,align,color,textcolor,bordercolor,border,elem}
+ */
+export class text extends main {
+	constructor(...arg) {
+		super("p", "card-text", ...arg);
+	}
+
+	get data() {
+		return super.data;
+	}
+	set data(arg) {
+		super.data = arg;
+	}
+}
+
+/**
+ * label, href
+ * label, onclick
+ * class, label, href
+ * class, label, onclick
+ * option : {attr,id,name,type,label,icon,badge,value,checked,color,textcolor,weight,disabled,outline,hidelabel,nowarp,onclick,href}
+ */
+export default class link extends a {
+	constructor(...arg) {
+		super();
+		if (arg && arg.length > 0) {
+			let t = {
+				label: null,
+				class: null,
+				href: null,
+				onclick: null,
+			};
+			if (arg && arg.length === 3) {
+				if (arg[2] instanceof Function) {
+					t.class = arg[0];
+					t.label = arg[1];
+					t.onclick = arg[2];
+				} else {
+					t.class = arg[0];
+					t.label = arg[1];
+					t.href = arg[2];
+				}
+			} else if (arg && arg.length === 2) {
+				if (arg[1] instanceof Function) {
+					t.label = arg[0];
+					t.onclick = arg[1];
+				} else {
+					t.label = arg[0];
+					t.href = arg[1];
+				}
+			} else {
+				t = arg[0];
+			}
+
+			this.data = core.extend(
+				{},
+				{
+					attr: null,
+
+					id: null,
+					name: null,
+					class: "card-link",
+					style: null,
+
+					type: "button",
+					label: null,
+					icon: null,
+					badge: null,
+					value: null,
+					checked: false,
+
+					color: null,
+					textcolor: null,
+					weight: null,
+					disabled: false,
+					outline: false,
+					hidelabel: false,
+					nowarp: false,
+
+					onclick: null,
+					href: null,
+				},
+				t
+			);
+		} else {
+			this.data = null;
+		}
 	}
 
 	get data() {

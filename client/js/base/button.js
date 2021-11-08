@@ -10,7 +10,7 @@ import badge from "./badge.js";
  * label, color
  * label, onclick
  * label, color, onclick
- * option : {attr,id,name,type,label,icon,badge,value,checked,color,textcolor,weight,disabled,outline,hidelabel,nowarp,onclick,href}
+ * option : {attr,id,name,class,style,type,label,icon,badge,value,checked,color,textcolor,weight,disabled,outline,hidelabel,nowarp,onclick,href}
  */
 export default class button extends tag {
 	constructor(...arg) {
@@ -44,6 +44,8 @@ export default class button extends tag {
 
 					id: null,
 					name: null,
+					class: null,
+					style: null,
 
 					type: "button",
 					label: null,
@@ -90,13 +92,15 @@ export default class button extends tag {
 					"aria-label": d.hidelabel && d.label ? d.label : null,
 					"aria-disabled": d.href && d.disabled ? "true" : null,
 					class: [
-						"btn",
+						d.class,
+						d.type === "a" ? null : "btn",
 						d.nowarp ? "text-nowarp" : null,
 						d.weight ? `btn-${d.weight}` : null,
 						d.color ? (d.outline ? `btn-outline-${d.color}` : `btn-${d.color}`) : null,
 						d.textcolor ? `text-${d.textcolor}` : null,
 						d.badge && typeof d.badge === "object" && d.badge.notification ? "position-relative" : null,
 					],
+					style: d.style,
 				}),
 				elem: [
 					d.label || d.icon ? new label({ icon: d.icon, label: d.label, hidelabel: d.hidelabel }) : null,

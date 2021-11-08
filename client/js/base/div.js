@@ -5,7 +5,7 @@ import cont from "./cont.js";
  * class,style,elem
  * class,elem
  * [elem]
- * opt : {attr,class,style,elem}
+ * opt : {attr,class,style,id,name,onclick,elem}
  */
 export default class div extends cont {
 	constructor(...arg) {

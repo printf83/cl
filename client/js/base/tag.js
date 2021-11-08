@@ -22,6 +22,9 @@ export default class tag {
 		}
 	}
 
+	//name tag "cl" so we can check hasOwnProperty("cl")
+	cl = 1;
+
 	get data() {
 		return this._d;
 	}
@@ -56,14 +59,11 @@ export default class tag {
 										let t = j.build(element);
 										element = t ? t : element;
 									});
+								} else if (i.hasOwnProperty("cl")) {
+									let t = i.build(element);
+									element = t ? t : element;
 								} else {
-									//console.info("i is object", i);
-									try {
-										let t = i.build(element);
-										element = t ? t : element;
-									} catch (ex) {
-										console.error(ex.message, i, element);
-									}
+									console.info("i is not elem or [elem] or string", i);
 								}
 							}
 						});

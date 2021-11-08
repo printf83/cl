@@ -6,8 +6,9 @@ import attr from "./attr.js";
 /**
  * tag,class,style,elem
  * tag,class,elem
+ * tag,elem
  * tag,[elem]
- * tag,opt : {attr,class,style,elem}
+ * tag,opt : {attr,class,style,id,name,href(if tag a),onclick,elem}
  */
 export default class cont extends tag {
 	constructor(tag, ...arg) {
@@ -33,7 +34,11 @@ export default class cont extends tag {
 			} else if (arg && arg.length === 2) {
 				t.class = arg[0];
 				t.elem = arg[1];
-			} else if ((arg && arg.length === 1 && typeof arg[0] === "string") || Array.isArray(arg[0])) {
+			} else if (
+				arg &&
+				arg.length === 1 &&
+				(typeof arg[0] === "string" || Array.isArray(arg[0]) || arg[0].hasOwnProperty("cl"))
+			) {
 				t.elem = arg[0];
 			} else {
 				t = arg[0];
@@ -42,6 +47,11 @@ export default class cont extends tag {
 			this.data = core.extend(
 				{},
 				{
+					id: null,
+					name: null,
+					onclick: null,
+					href: null,
+
 					attr: null,
 					class: null,
 					style: null,
@@ -72,6 +82,11 @@ export default class cont extends tag {
 				attr: attr.merge(d.attr, {
 					class: d.class,
 					style: d.style,
+
+					id: d.id,
+					name: d.name,
+					href: this.tag === "a" ? (d.href ? d.href : "javascript.void(0)") : null,
+					onclick: d.onclick,
 				}),
 				elem: d.elem,
 			};

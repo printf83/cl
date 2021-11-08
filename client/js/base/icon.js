@@ -61,6 +61,8 @@ export default class icon extends tag {
 		}
 	}
 
+	clicon = 1;
+
 	get data() {
 		return this._d;
 	}

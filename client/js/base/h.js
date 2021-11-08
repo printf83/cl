@@ -5,7 +5,7 @@ import cont from "./cont.js";
  * level,class,style,elem
  * level,class,elem
  * level,[elem]
- * level,opt : {attr,class,style,elem}
+ * level,opt : {attr,class,style,id,name,onclick,elem}
  */
 export default class h extends cont {
 	constructor(level, ...arg) {
