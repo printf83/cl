@@ -86,7 +86,8 @@ export default class attr {
 									c[i] = rules[i](a[i], b[i]);
 								} else {
 									console.warn(
-										`Fail to merge attr:${i}. No rules provided for merging this attribute. Using attr from 'a' insted.`
+										`Fail to merge attr:${i}. No rules provided for merging this attribute. Using attr from 'a' insted.`,
+										[a[i], b[i]]
 									);
 									c[i] = a[i]; //used a insted
 								}

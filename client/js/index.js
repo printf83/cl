@@ -370,6 +370,7 @@ core.documentReady(() => {
 		]),
 	]);
 
+	// let b = new div([new h(1, "AAA"), new btngroup([new button("B")])]);
 	b.replaceChild(root);
 	console.timeEnd("b");
 	console.log(`${core.countElement(root)} element`);

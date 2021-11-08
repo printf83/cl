@@ -76,8 +76,7 @@ export default class cont extends tag {
 	}
 	set data(d) {
 		if (d) {
-			this._d = d;
-			super.data = {
+			this._d = {
 				tag: this.tag,
 				attr: attr.merge(d.attr, {
 					class: d.class,
@@ -85,14 +84,15 @@ export default class cont extends tag {
 
 					id: d.id,
 					name: d.name,
-					href: this.tag === "a" ? (d.href ? d.href : "javascript.void(0)") : null,
+					href: d.href,
 					onclick: d.onclick,
 				}),
 				elem: d.elem,
 			};
 		} else {
 			this._d = null;
-			super.data = null;
 		}
+
+		super.data = this._d;
 	}
 }
