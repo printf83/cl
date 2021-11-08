@@ -1,10 +1,10 @@
 "use strict";
 import * as core from "./core.js";
 import tag from "./tag.js";
-import attr from "./attr.js";
 import button from "./button.js";
 import option from "./option.js";
 import div from "./div.js";
+import ul from "./ul.js";
 
 /**
  * label, option
@@ -96,8 +96,7 @@ export default class dropdown extends tag {
 		if (d) {
 			d.id = d.id || core.UUID();
 
-			let menuctl = new tag({
-				tag: "ul",
+			let menuctl = new ul({
 				attr: { "aria-labelledby": d.id, class: ["dropdown-menu", d.dark ? "dropdown-menu-dark" : null] },
 				elem: new option({ type: "dropdown", item: d.option, selected: d.value }),
 			});
@@ -185,8 +184,7 @@ export default class dropdown extends tag {
 					tag: d.container ? "div" : null,
 					attr: d.container ? { class: ["btn-group", d.container, d.arrow ? `drop${d.arrow}` : null] } : null,
 					elem: [
-						new tag({
-							tag: "div",
+						new div({
 							attr: { class: ["btn-group"], role: "group" },
 							elem: [splitctl, menuctl],
 						}),
@@ -198,8 +196,7 @@ export default class dropdown extends tag {
 					tag: d.container ? "div" : null,
 					attr: d.container ? { class: [d.container, d.arrow ? `drop${d.arrow}` : null] } : null,
 					elem: d.splittoggle
-						? new tag({
-								tag: "div",
+						? new div({
 								attr: { class: ["btn-group"], role: "group" },
 								elem: [btnctl, splitctl, menuctl],
 						  })

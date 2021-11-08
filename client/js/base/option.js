@@ -2,6 +2,8 @@
 import * as core from "./core.js";
 import tag from "./tag.js";
 import label from "./label.js";
+import li from "./li.js";
+import span from "./span.js";
 
 /**
  * item, selected
@@ -79,10 +81,8 @@ export default class option extends tag {
 	#gen_dropdown = function (item, selected) {
 		return item.map(function (i) {
 			if (typeof i === "string") {
-				return new tag({
-					tag: "li",
-					elem: new tag({
-						tag: "span",
+				return new li({
+					elem: new span({
 						attr: {
 							class: ["dropdown-item", selected.includes(i) ? "active" : null],
 						},
@@ -114,8 +114,7 @@ export default class option extends tag {
 
 				if (i.value === "-") {
 					if (i.label) {
-						return new tag({
-							tag: "li",
+						return new li({
 							attr: i.attr,
 							elem: new tag({
 								tag: "h6",
@@ -127,8 +126,7 @@ export default class option extends tag {
 							}),
 						});
 					} else {
-						return new tag({
-							tag: "li",
+						return new li({
 							attr: i.attr,
 							elem: new tag({
 								tag: "hr",
@@ -138,14 +136,12 @@ export default class option extends tag {
 					}
 				} else {
 					if (item.elem) {
-						return new tag({
-							tag: "li",
+						return new li({
 							attr: i.attr,
 							elem: i.elem,
 						});
 					} else {
-						return new tag({
-							tag: "li",
+						return new li({
 							attr: i.attr,
 							elem: new tag({
 								tag: i.href ? "a" : i.interactive ? "button" : "span",

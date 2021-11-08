@@ -3,6 +3,9 @@ import * as core from "./core.js";
 import tag from "./tag.js";
 import option from "./option.js";
 import div from "./div.js";
+import ul from "./ul.js";
+import li from "./li.js";
+import a from "./a.js";
 import label from "./label.js";
 
 /**
@@ -109,15 +112,13 @@ export default class tab extends tag {
 
 					//make header
 					headerItem.push(
-						new tag({
-							tag: "li",
+						new li({
 							attr: {
 								class: ["nav-item", i.option ? "dropdown" : null],
 								role: "presentation",
 							},
 							elem: [
-								new tag({
-									tag: "a",
+								new a({
 									attr: {
 										class: [
 											"nav-link",
@@ -143,16 +144,13 @@ export default class tab extends tag {
 									}),
 								}),
 								i.option
-									? new tag({
-											tag: "ul",
-											attr: {
-												class: "dropdown-menu",
-											},
-											elem: new option({
+									? new ul(
+											"dropdown-menu",
+											new option({
 												type: "dropdown",
 												item: i.option,
-											}),
-									  })
+											})
+									  )
 									: null,
 							],
 						})
@@ -161,8 +159,7 @@ export default class tab extends tag {
 					//make body
 					if (i.elem) {
 						bodyItem.push(
-							new tag({
-								tag: "div",
+							new div({
 								attr: {
 									class: ["tab-pane", d.animate ? "fade" : null, i.active ? "active show" : null],
 									id: `${i.id}-body`,
@@ -175,8 +172,7 @@ export default class tab extends tag {
 				});
 
 				//wrap headerItem in ul.nav
-				let headerCtl = new tag({
-					tag: "ul",
+				let headerCtl = new ul({
 					attr: {
 						class: [
 							"nav",
@@ -209,8 +205,7 @@ export default class tab extends tag {
 
 				let bodyCtl =
 					bodyItem && bodyItem.length > 0
-						? new tag({
-								tag: "div",
+						? new div({
 								attr: {
 									class: "tab-content",
 									id: d.id ? `${d.id}-body` : null,

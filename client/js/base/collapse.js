@@ -1,6 +1,7 @@
 import * as core from "./core.js";
 import attr from "./attr.js";
 import tag from "./tag.js";
+import div from "./div.js";
 
 /**
  * elem, target
@@ -129,12 +130,13 @@ export class container extends tag {
 	set data(d) {
 		if (d && this._e) {
 			this._d = {
-				tag: "div",
-				attr: attr.merge(d.attr, {
-					id: d.id,
-					class: ["collapse", d.show ? "show" : null, d.class],
+				elem: new div({
+					attr: attr.merge(d.attr, {
+						id: d.id,
+						class: ["collapse", d.show ? "show" : null, d.class],
+					}),
+					elem: this._e,
 				}),
-				elem: this._e,
 			};
 		} else {
 			this._d = null;
