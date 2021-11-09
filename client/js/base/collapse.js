@@ -27,8 +27,10 @@ export class toggle extends tag {
 				t = {
 					target: arg[0],
 				};
-			} else {
+			} else if (arg.length === 1) {
 				t = arg[0];
+			} else {
+				console.error("Unsupported argument", arg);
 			}
 
 			this.data = core.extend(
@@ -98,8 +100,10 @@ export class container extends tag {
 				t = {
 					id: arg[0],
 				};
-			} else {
+			} else if (arg.length === 1) {
 				t = arg[0];
+			} else {
+				console.error("Unsupported argument", arg);
 			}
 
 			this.data = core.extend(

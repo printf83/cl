@@ -21,20 +21,22 @@ export default class button extends tag {
 				color: null,
 				onclick: null,
 			};
-			if (arg && arg.length === 3) {
+			if (arg.length === 3) {
 				t.label = arg[0];
 				t.color = arg[1];
 				t.onclick = arg[2];
-			} else if (arg && arg.length === 2 && arg[1] instanceof Function) {
+			} else if (arg.length === 2 && arg[1] instanceof Function) {
 				t.label = arg[0];
 				t.onclick = arg[1];
-			} else if (arg && arg.length === 2 && typeof arg[1] === "string") {
+			} else if (arg.length === 2 && typeof arg[1] === "string") {
 				t.label = arg[0];
 				t.color = arg[1];
-			} else if (arg && arg.length === 1 && typeof arg[0] === "string") {
+			} else if (arg.length === 1 && typeof arg[0] === "string") {
 				t.label = arg[0];
-			} else {
+			} else if (arg.length === 1) {
 				t = arg[0];
+			} else {
+				console.error("Unsupported argument", arg);
 			}
 
 			this.data = core.extend(

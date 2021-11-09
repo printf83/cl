@@ -29,7 +29,7 @@ export default class a extends tag {
 				elem: null,
 			};
 
-			if (arg && arg.length === 4) {
+			if (arg.length === 4) {
 				t.class = arg[0];
 				t.style = arg[1];
 				t.elem = arg[2];
@@ -39,7 +39,7 @@ export default class a extends tag {
 				} else {
 					t.href = arg[3];
 				}
-			} else if (arg && arg.length === 3) {
+			} else if (arg.length === 3) {
 				t.class = arg[0];
 				t.elem = arg[1];
 
@@ -48,22 +48,24 @@ export default class a extends tag {
 				} else {
 					t.href = arg[2];
 				}
-			} else if (arg && arg.length === 2) {
+			} else if (arg.length === 2) {
 				t.elem = arg[0];
 
 				if (arg[1] instanceof Function) {
-					t.onclick = arg[2];
+					t.onclick = arg[1];
 				} else {
-					t.href = arg[2];
+					t.href = arg[1];
 				}
 			} else if (
-				arg &&
 				arg.length === 1 &&
 				(typeof arg[0] === "string" || Array.isArray(arg[0]) || arg[0].hasOwnProperty("cl"))
 			) {
 				t.elem = arg[0];
-			} else {
+			} else if (arg.length === 1) {
 				t = arg[0];
+			}
+			else {
+				console.error("Unsupported argument", arg);
 			}
 
 			this.data = core.extend(
@@ -94,7 +96,7 @@ export default class a extends tag {
 			this._d = {
 				tag: "a",
 				attr: attr.merge(d.attr, {
-					class: d.class,
+					class: ["ns-link", d.class],
 					style: d.style,
 
 					id: d.id,
@@ -111,25 +113,3 @@ export default class a extends tag {
 		super.data = this._d;
 	}
 }
-
-// "use strict";
-// import cont from "./cont.js";
-
-// /**
-//  * class,style,elem
-//  * class,elem
-//  * [elem]
-//  * opt : {attr,class,style,id,name,onclick,elem}
-//  */
-// export default class a extends cont {
-// 	constructor(...arg) {
-// 		super("a", ...arg);
-// 	}
-
-// 	get data() {
-// 		return super.data;
-// 	}
-// 	set data(arg) {
-// 		super.data = arg;
-// 	}
-// }

@@ -3,6 +3,8 @@ import * as core from "./core.js";
 import tag from "./tag.js";
 import attr from "./attr.js";
 import a from "./a.js";
+import div from "./div.js";
+import imgtag from "./img.js";
 
 class main extends tag {
 	constructor(tag, className, ...arg) {
@@ -16,13 +18,14 @@ class main extends tag {
 			};
 
 			if (
-				arg &&
 				arg.length === 1 &&
 				(typeof arg[0] === "string" || Array.isArray(arg[0]) || arg[0].hasOwnProperty("cl"))
 			) {
 				t.elem = arg[0];
-			} else {
+			} else if (arg.length === 1) {
 				t = arg[0];
+			} else {
+				console.error("Unsupported argument", arg);
 			}
 
 			this.data = core.extend(
@@ -233,84 +236,166 @@ export class text extends main {
 	}
 }
 
-// /**
-//  * label, href
-//  * label, onclick
-//  * class, label, href
-//  * class, label, onclick
-//  * option : {attr,id,name,type,label,icon,badge,value,checked,color,textcolor,weight,disabled,outline,hidelabel,nowarp,onclick,href}
-//  */
-// export default class link extends a {
-// 	constructor(...arg) {
-// 		super();
-// 		if (arg && arg.length > 0) {
-// 			let t = {
-// 				label: null,
-// 				class: null,
-// 				href: null,
-// 				onclick: null,
-// 			};
-// 			if (arg && arg.length === 3) {
-// 				if (arg[2] instanceof Function) {
-// 					t.class = arg[0];
-// 					t.label = arg[1];
-// 					t.onclick = arg[2];
-// 				} else {
-// 					t.class = arg[0];
-// 					t.label = arg[1];
-// 					t.href = arg[2];
-// 				}
-// 			} else if (arg && arg.length === 2) {
-// 				if (arg[1] instanceof Function) {
-// 					t.label = arg[0];
-// 					t.onclick = arg[1];
-// 				} else {
-// 					t.label = arg[0];
-// 					t.href = arg[1];
-// 				}
-// 			} else {
-// 				t = arg[0];
-// 			}
+/**
+ * string
+ * [elem]
+ * opt : {attr,id,class,style,align,color,textcolor,bordercolor,border,elem}
+ */
+export class imgoverlay extends main {
+	constructor(...arg) {
+		super("div", "card-img-overlay", ...arg);
+	}
 
-// 			this.data = core.extend(
-// 				{},
-// 				{
-// 					attr: null,
+	get data() {
+		return super.data;
+	}
+	set data(arg) {
+		super.data = arg;
+	}
+}
 
-// 					id: null,
-// 					name: null,
-// 					class: "card-link",
-// 					style: null,
+/**
+ * size,leftelement(string|elem|[elem]),rightelement(string|elem|[elem])
+ * leftelement(string|elem|[elem]),rightelement(string|elem|[elem])
+ * opt : {attr,id,class,style,align,color,textcolor,bordercolor,border,left,right,size,gap}
+ */
+export class horizontal extends tag {
+	constructor(...arg) {
+		super();
+		if (arg && arg.length > 0) {
+			let t = {
+				left: null,
+				right: null,
+				size: "col-md-4",
+			};
 
-// 					type: "button",
-// 					label: null,
-// 					icon: null,
-// 					badge: null,
-// 					value: null,
-// 					checked: false,
+			if (arg.length === 3) {
+				t = {
+					size: arg[0],
+					left: arg[1],
+					right: arg[2],
+				};
+			} else if (arg.length === 2) {
+				t = {
+					left: arg[0],
+					right: arg[1],
+				};
+			} else if (arg.length === 1) {
+				t = arg[0];
+			} else {
+				console.error("Unsupported argument", arg);
+			}
 
-// 					color: null,
-// 					textcolor: null,
-// 					weight: null,
-// 					disabled: false,
-// 					outline: false,
-// 					hidelabel: false,
-// 					nowarp: false,
+			this.data = core.extend(
+				{},
+				{
+					attr: null,
 
-// 					onclick: null,
-// 					href: null,
-// 				},
-// 				t
-// 			);
-// 		} else {
-// 			this.data = null;
-// 		}
-// 	}
+					id: null,
+					class: null,
+					style: null,
 
-// 	get data() {
-// 		return super.data;
-// 	}
-// 	set data(arg) {
-// 		super.data = arg;
-// 	}
-// }
+					align: null, //left,right,center
+					color: null,
+					textcolor: null,
+					bordercolor: null,
+					border: true,
+
+					left: null,
+					right: null,
+					size: "col-md-4",
+					gap: 0,
+				},
+				t
+			);
+		} else {
+			this.data = null;
+		}
+	}
+
+	get data() {
+		return this._d;
+	}
+	set data(d) {
+		if (d) {
+			this._d = {
+				tag: "div",
+				attr: attr.merge(d.attr, {
+					class: [
+						"row",
+						d.class,
+						d.align ? `text-${d.align}` : null,
+						d.color ? `bg-${d.color}` : null,
+						d.textcolor ? `text-${d.textcolor}` : null,
+						d.bordercolor ? `border-${d.bordercolor}` : null,
+						!d.border ? "border-0" : null,
+						d.gap !== null ? `g-${d.gap}` : null,
+					],
+					style: d.style,
+				}),
+				elem: [new div(d.size, d.left), new div("col", d.right)],
+			};
+		} else {
+			this._d = null;
+		}
+
+		super.data = this._d;
+	}
+}
+
+/**
+ * class,style,elem,href
+ * class,style,elem,onclick
+ * class,elem,href
+ * class,elem,onclick
+ * elem,href
+ * elem,onclick
+ * [elem],href
+ * [elem],onclick
+ * elem
+ * [elem]
+ * opt : {attr,class,style,id,name,href,onclick,elem}
+ */
+export class link extends a {
+	constructor(...arg) {
+		super(...arg);
+	}
+
+	get data() {
+		return super.data;
+	}
+	set data(d) {
+		super.data = d;
+
+		if (super.data) {
+			super.data.attr = attr.merge(super.data.attr, { class: "card-link" });
+		}
+	}
+}
+
+export class img extends imgtag {
+	constructor(...arg) {
+		super(...arg);
+	}
+
+	get data() {
+		return super.data;
+	}
+	set data(d) {
+		super.data = d;
+
+		if (super.data) {
+			d = core.extend({}, { placement: "top" }, d);
+
+			super.data.attr = attr.merge(super.data.attr, {
+				class: [
+					d.placement === "full" ? "card-img" : null,
+					d.placement === "top" ? "card-img-top" : null,
+					d.placement === "bottom" ? "card-img-bottom" : null,
+					d.placement === "left" ? "img-fluid rounded-start" : null,
+					d.placement === "right" ? "img-fluid rounded-end" : null,
+				],
+			});
+		}
+	}
+}

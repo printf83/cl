@@ -15,6 +15,7 @@ import dropdown from "./base/dropdown.js";
 import tab from "./base/tab.js";
 import * as collapse from "./base/collapse.js";
 import * as card from "./base/card.js";
+import small from "./base/small.js";
 
 core.documentReady(() => {
 	var root = document.getElementById("root");
@@ -361,7 +362,30 @@ core.documentReady(() => {
 			}),
 
 			new collapse.container(
-				new card.container([new card.header("Header 2"), new card.body("Body anak ayam 2")]),
+				new card.container([
+					new card.horizontal(
+						new card.img({
+							placement: "top",
+							src: "https://picsum.photos/seed/103/800/400.webp",
+						}),
+						[
+							new card.header("Card header"),
+							new card.body([
+								new card.title("Card title"),
+								new card.subtitle("Card subtitle"),
+								new card.text(
+									"Some quick example text to build on the card title and make up the bulk of the card's content."
+								),
+								new card.text({
+									textcolor: "muted",
+									elem: new small("bg-primary", "Small muted text"),
+								}),
+								new card.link("Hello world", "http://www.google.com"),
+							]),
+							new card.footer("Footer"),
+						]
+					),
+				]),
 				{
 					id: tid2,
 					class: "anak-ayam m-2",

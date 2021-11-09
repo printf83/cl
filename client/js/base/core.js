@@ -28,7 +28,7 @@ export const merge = {
 	class: function (a, b) {
 		if (a && b) {
 			let aT = typeof a;
-			let bT = typeof a;
+			let bT = typeof b;
 			let aR = Array.isArray(a);
 			let bR = Array.isArray(b);
 
@@ -43,7 +43,7 @@ export const merge = {
 			} else if (aR && bR) {
 				return [...a, ...b];
 			} else {
-				console.error("Unhandle #r class rules");
+				console.error("Unhandle class rules", [aT, bT, aR, bR]);
 			}
 		} else if (a && !b) {
 			return a;

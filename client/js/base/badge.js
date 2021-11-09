@@ -29,8 +29,10 @@ export default class badge extends span {
 				t = {
 					label: arg[0],
 				};
-			} else {
+			} else if (arg.length === 1) {
 				t = arg[0];
+			} else {
+				console.error("Unsupported argument", arg);
 			}
 
 			this.data = core.extend(

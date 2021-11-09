@@ -18,7 +18,7 @@ export default class icon extends tag {
 				icon: null,
 			};
 
-			if (arg && arg.length === 1) {
+			if (arg.length === 1) {
 				if (typeof arg[0] === "string") {
 					t = {
 						style: "fas",
@@ -37,6 +37,8 @@ export default class icon extends tag {
 					style: arg[0],
 					icon: arg[1],
 				};
+			} else {
+				console.error("Unsupported argument", arg);
 			}
 
 			this.data = core.extend(

@@ -19,13 +19,15 @@ export default class btngroup extends div {
 				elem: null,
 			};
 
-			if (arg && arg.length === 2) {
+			if (arg.length === 2) {
 				t.label = arg[0];
 				t.elem = arg[1];
-			} else if (arg && arg.length === 1 && Array.isArray(arg[0])) {
+			} else if (arg.length === 1 && Array.isArray(arg[0])) {
 				t.elem = arg[0];
-			} else {
+			} else if (arg.length === 1) {
 				t = arg[0];
+			} else {
+				console.error("Unsupported argument", arg);
 			}
 
 			this.data = core.extend(

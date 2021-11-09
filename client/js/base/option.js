@@ -21,13 +21,15 @@ export default class option extends tag {
 				selected: null,
 			};
 
-			if (arg && arg.length === 2) {
+			if (arg.length === 2) {
 				t.item = arg[0];
 				t.selected = arg[1];
-			} else if (arg && arg.length === 1 && Array.isArray(arg[0])) {
+			} else if (arg.length === 1 && Array.isArray(arg[0])) {
 				t.item = arg[0];
-			} else {
+			} else if (arg.length === 1) {
 				t = arg[0];
+			} else {
+				console.error("Unsupported argument", arg);
 			}
 
 			this.data = core.extend(

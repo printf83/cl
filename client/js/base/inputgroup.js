@@ -14,36 +14,42 @@ export class container extends tag {
 	constructor(...arg) {
 		super();
 
-		let t = {
-			for: null,
-			label: null,
-			elem: null,
-		};
-
-		if (arg && arg.length === 3) {
-			t.for = arg[0];
-			t.label = arg[1];
-			t.elem = arg[2];
-		} else if (arg && arg.length === 2) {
-			t.label = arg[0];
-			t.elem = arg[1];
-		} else if (arg && arg.length === 1 && (Array.isArray(arg[0]) || arg[0].hasOwnProperty("cl"))) {
-			t.elem = arg[0];
-		} else {
-			t = arg[0];
-		}
-
-		this.data = core.extend(
-			{},
-			{
+		if (arg && arg.length > 0) {
+			let t = {
 				for: null,
 				label: null,
-				attr: null,
 				elem: null,
-				nowarp: false,
-			},
-			t
-		);
+			};
+
+			if (arg.length === 3) {
+				t.for = arg[0];
+				t.label = arg[1];
+				t.elem = arg[2];
+			} else if (arg.length === 2) {
+				t.label = arg[0];
+				t.elem = arg[1];
+			} else if (arg.length === 1 && (Array.isArray(arg[0]) || arg[0].hasOwnProperty("cl"))) {
+				t.elem = arg[0];
+			} else if (arg.length === 1) {
+				t = arg[0];
+			} else {
+				console.error("Unsupported argument", arg);
+			}
+
+			this.data = core.extend(
+				{},
+				{
+					for: null,
+					label: null,
+					attr: null,
+					elem: null,
+					nowarp: false,
+				},
+				t
+			);
+		} else {
+			this.data = null;
+		}
 	}
 
 	get data() {
@@ -82,13 +88,14 @@ export class text extends div {
 			};
 
 			if (
-				arg &&
 				arg.length === 1 &&
 				(typeof arg[0] === "string" || Array.isArray(arg[0]) || arg[0].hasOwnProperty("cl"))
 			) {
 				t.elem = arg[0];
-			} else {
+			} else if (arg.length === 1) {
 				t = arg[0];
+			} else {
+				console.error("Unsupported argument", arg);
 			}
 
 			this.data = core.extend(

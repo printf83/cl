@@ -25,10 +25,12 @@ export default class tab extends tag {
 				item: null,
 			};
 
-			if (arg && arg.length === 1 && Array.isArray(arg[0])) {
+			if (arg.length === 1 && Array.isArray(arg[0])) {
 				t.item = arg[0];
-			} else {
+			} else if (arg.length === 1) {
 				t = arg[0];
+			} else {
+				console.error("Unsupported argument", arg);
 			}
 
 			this.data = core.extend(

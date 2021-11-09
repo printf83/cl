@@ -21,17 +21,19 @@ export default class label extends tag {
 				label: null,
 			};
 
-			if (arg && arg.length === 3) {
+			if (arg.length === 3) {
 				t.for = arg[0];
 				t.icon = arg[1];
 				t.label = arg[2];
-			} else if (arg && arg.length === 2) {
+			} else if (arg.length === 2) {
 				t.icon = arg[0];
 				t.label = arg[1];
-			} else if (arg && arg.length === 1 && typeof arg[0] === "string") {
+			} else if (arg.length === 1 && typeof arg[0] === "string") {
 				t.label = arg[0];
-			} else {
+			} else if (arg.length === 1) {
 				t = arg[0];
+			} else {
+				console.error("Unsupported argument", arg);
 			}
 
 			this.data = core.extend(
