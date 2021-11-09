@@ -20,7 +20,7 @@ import small from "./base/small.js";
 core.documentReady(() => {
 	var root = document.getElementById("root");
 
-	console.time("b");
+	console.time("Proccesing Time");
 	let tid1 = core.UUID();
 	let tid2 = core.UUID();
 
@@ -396,6 +396,6 @@ core.documentReady(() => {
 
 	// let b = new div([new h(1, "AAA"), new btngroup([new button("B")])]);
 	b.replaceChild(root);
-	console.timeEnd("b");
-	console.log(`${core.countElement(root)} element`);
+	console.timeEnd("Proccesing Time");
+	console.log(`Element Count: ${core.countElement(root)}`);
 });

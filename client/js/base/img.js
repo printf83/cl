@@ -45,7 +45,7 @@ export default class img extends tag {
 					class: null,
 					style: null,
 					src: null,
-					alt: null,
+					alt: "Image",
 				},
 				t
 			);
