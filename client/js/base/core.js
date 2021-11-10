@@ -93,16 +93,21 @@ export function isHTML(str) {
 		return /<\/?[a-z][\s\S]*>/i.test(str);
 	}
 }
-export function multiClass(val, format) {
+export function multiClass(val, format, supported) {
 	//core.multiClass(["lg-12","xl-3","md-2","2"],"col-$1")
+
 	return val
 		? Array.isArray(val)
 			? val
 					.map(function (i) {
-						return format.replace("$1", i);
+						return !supported || (Array.isArray(supported) ? supported.include(i) : supported === i)
+							? format.replace("$1", i)
+							: i;
 					})
 					.join(" ")
-			: format.replace("$1", val)
+			: !supported || (Array.isArray(supported) ? supported.include(val) : supported === val)
+			? format.replace("$1", val)
+			: val
 		: null;
 }
 export function documentReady(callback) {
