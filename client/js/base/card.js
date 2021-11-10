@@ -266,7 +266,7 @@ export class horizontal extends tag {
 			let t = {
 				left: null,
 				right: null,
-				size: "col-md-4",
+				size: "md-4",
 			};
 
 			if (arg.length === 3) {
@@ -303,7 +303,7 @@ export class horizontal extends tag {
 
 					left: null,
 					right: null,
-					size: "col-md-4",
+					size: "md-4",
 					gap: 0,
 				},
 				t
@@ -333,7 +333,7 @@ export class horizontal extends tag {
 					],
 					style: d.style,
 				}),
-				elem: [new div(d.size, d.left), new div("col", d.right)],
+				elem: [new div(core.multiClass(d.size, "col-$1", null, "col"), d.left), new div("col", d.right)],
 			};
 		} else {
 			this._d = null;

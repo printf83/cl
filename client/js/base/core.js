@@ -93,19 +93,37 @@ export function isHTML(str) {
 		return /<\/?[a-z][\s\S]*>/i.test(str);
 	}
 }
-export function multiClass(val, format, supported) {
-	//core.multiClass(["lg-12","xl-3","md-2","2"],"col-$1")
 
+function isListed(val, listed) {
+	if (listed) {
+		if (Array.isArray(listed) && listed.includes(val)) {
+			return true;
+		} else {
+			return listed === val;
+		}
+	} else {
+		return true;
+	}
+}
+
+function isSupported(val, supported, unsupported) {
+	if (isListed(val, unsupported)) {
+		return false;
+	} else {
+		return isListed(val, supported);
+	}
+}
+
+export function multiClass(val, format, supported, unsupported) {
+	//core.multiClass(["lg-12","xl-3","md-2","2"],"col-$1")
 	return val
 		? Array.isArray(val)
 			? val
 					.map(function (i) {
-						return !supported || (Array.isArray(supported) ? supported.include(i) : supported === i)
-							? format.replace("$1", i)
-							: i;
+						return isSupported(i, supported, unsupported) ? format.replace("$1", i) : i;
 					})
 					.join(" ")
-			: !supported || (Array.isArray(supported) ? supported.include(val) : supported === val)
+			: isSupported(val, supported, unsupported)
 			? format.replace("$1", val)
 			: val
 		: null;

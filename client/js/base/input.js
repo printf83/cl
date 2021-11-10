@@ -243,7 +243,7 @@ export default class input extends tag {
 						class: ["checkbox", "radio", "switch", "file"].includes(d.type)
 							? "form-check-label"
 							: d.labelsize
-							? ["col-form-label", d.labelsize]
+							? ["col-form-label"].concat(core.multiClass(d.labelsize, "col-$1", null, "col"))
 							: "form-label",
 					},
 				});
@@ -486,7 +486,12 @@ export default class input extends tag {
 
 						//put ctl in div.col-auto if labelsize is set
 						if (d.labelsize || d.ctlsize) {
-							ctl = [new div(d.ctlsize ? d.ctlsize : "col-auto", ctl)];
+							ctl = [
+								new div(
+									d.ctlsize ? core.multiClass(d.ctlsize, "col-$1", null, "col") : "col-auto",
+									ctl
+								),
+							];
 						}
 
 						ctl.unshift(labelctl);
@@ -496,7 +501,7 @@ export default class input extends tag {
 
 			if (d.size) {
 				this._d = {
-					elem: new div(d.size, ctl),
+					elem: new div(core.multiClass(d.size, "col-$1", null, "col"), ctl),
 				};
 			} else {
 				this._d = {

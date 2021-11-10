@@ -49,7 +49,6 @@ core.documentReady(() => {
 								new input({
 									label: "Hello",
 									type: "text",
-									//size: "col-12",
 									option: ["Aase qwe", "Bas tes", "Cde kil", "Def ghi"],
 									before: "A",
 								}),
@@ -58,21 +57,20 @@ core.documentReady(() => {
 									type: "text",
 									plaintext: true,
 									value: "Hello",
-									//size: "col-12",
 									before: "A",
+									size: 5,
 								}),
 								new input({
 									label: "Hello",
 									hidelabel: true,
 									type: "text",
-									//size: "col-12",
 									before: "A",
+									size: 7,
 								}),
 								new input({
 									label: "Hello1",
 									type: "text",
 									floatlabel: true,
-									//size: "col-12",
 									after: "B",
 								}),
 								new dropdown({
@@ -96,7 +94,6 @@ core.documentReady(() => {
 									required: true,
 									valid: "ok",
 									invalid: "emmmm",
-									//size: "col-12",
 									before: "A",
 									aftertype: "dropdown",
 									after: new dropdown({
@@ -119,7 +116,6 @@ core.documentReady(() => {
 								new input({
 									label: "Hello2",
 									type: "text",
-									//size: "col-12",
 									before: new icon("fire"),
 									aftertype: "button",
 									after: new button({ label: "Hello", color: "primary" }),
@@ -128,7 +124,6 @@ core.documentReady(() => {
 								new input({
 									label: "Hello2",
 									type: "select",
-									//size: "col-12",
 									value: "2",
 									option: [
 										{ value: "1", label: "One" },
@@ -141,28 +136,38 @@ core.documentReady(() => {
 									},
 								}),
 
-								new input({
-									label: "Name",
-									required: true,
-									invalid: "Please provide name",
-									name: "name",
-									type: "text",
-									labelsize: "col-3",
-									size: "col",
-								}),
-								new input({
-									label: "Age",
-									required: true,
-									invalid: "Please provide age",
-									name: "age",
-									type: "number",
-									min: 13,
-									max: 90,
-									step: 5,
-									numctl: true,
-									labelsize: "col-3",
-									size: "col",
-								}),
+								new div("container", [
+									new div(
+										"row py-2",
+										new input({
+											label: "Name",
+											required: true,
+											invalid: "Please provide name",
+											name: "name",
+											type: "text",
+											labelsize: ["lg-3", "md-6", "sm-12"],
+											ctlsize: ["lg-9", "md-6", "sm-12"],
+										})
+									),
+
+									new div(
+										"row py-2",
+										new input({
+											label: "Age",
+											required: true,
+											invalid: "Please provide age",
+											name: "age",
+											type: "number",
+											min: 13,
+											max: 90,
+											step: 5,
+											numctl: true,
+											labelsize: ["lg-3", "md-6", "sm-12"],
+											ctlsize: ["lg-9", "md-6", "sm-12"],
+										})
+									),
+								]),
+
 								new label("Sex"),
 								new input({
 									type: "radio",
@@ -394,7 +399,37 @@ core.documentReady(() => {
 		]),
 	]);
 
-	// let b = new div([new h(1, "AAA"), new btngroup([new button("B")])]);
+	// let b = new div([
+	// 	new div(
+	// 		"row py-2",
+	// 		new input({
+	// 			label: "Name",
+	// 			required: true,
+	// 			invalid: "Please provide name",
+	// 			name: "name",
+	// 			type: "text",
+	// 			labelsize: 3,
+	// 			ctlsize: 9,
+	// 		})
+	// 	),
+
+	// 	new div(
+	// 		"row py-2",
+	// 		new input({
+	// 			label: "Age",
+	// 			required: true,
+	// 			invalid: "Please provide age",
+	// 			name: "age",
+	// 			type: "number",
+	// 			min: 13,
+	// 			max: 90,
+	// 			step: 5,
+	// 			numctl: true,
+	// 			labelsize: 3,
+	// 			ctlsize: 9,
+	// 		})
+	// 	),
+	// ]);
 	b.replaceChild(root);
 	console.timeEnd("Proccesing Time");
 	console.log(`Element Count: ${core.countElement(root)}`);
