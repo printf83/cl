@@ -107,7 +107,7 @@ export default class modal extends tag {
 										class: "ms-3 btn-modal",
 										onclick: i.onclick,
 
-										color: i.color ? i.color : ix === 0 ? "primary" : "text-secondary",
+										color: i.color,
 										label: i.label,
 										icon: i.icon,
 									},
@@ -119,7 +119,7 @@ export default class modal extends tag {
 									label: i.label,
 									icon: i.icon,
 									class: i.class,
-									color: i.color,
+									color: i.color ? i.color : ix === 0 ? "primary" : "text-secondary",
 								});
 							}
 						})

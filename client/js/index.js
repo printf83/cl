@@ -434,7 +434,17 @@ core.documentReady(() => {
 
 	let b = new modal({
 		title: "Title",
-		elem: "Hello World",
+		icon: "fire",
+		elem: new tab({
+			border: false,
+			item: [
+				{ label: "First", icon: "fire", elem: "This is first tab. " },
+				{ label: "Second", icon: "fire", elem: "This is second tab. " },
+				{ label: "Third", icon: "fire", elem: "This is third tab. " },
+				{ label: "Fourth", icon: "fire", elem: "This is fourth tab. " },
+			],
+		}),
+		hastab: true,
 		button: "Okay",
 		show: true,
 	});
