@@ -445,7 +445,8 @@ core.documentReady(() => {
 			],
 		}),
 		hastab: true,
-		button: "Okay",
+		button: ["Okay", "Cancel"],
+		footer: new input({ type: "switch", name: "showagain", label: "Show again" }),
 		show: true,
 	});
 	b.replaceChild(root);

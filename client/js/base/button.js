@@ -93,15 +93,14 @@ export default class button extends tag {
 					href: d.href,
 					"aria-label": d.hidelabel && d.label ? d.label : null,
 					"aria-disabled": d.href && d.disabled ? "true" : null,
-					class: [
-						d.class,
+					class: core.merge.class(d.class, [
 						d.type === "a" ? null : "btn",
 						d.nowarp ? "text-nowarp" : null,
 						d.weight ? `btn-${d.weight}` : null,
 						d.color ? (d.outline ? `btn-outline-${d.color}` : `btn-${d.color}`) : null,
 						d.textcolor ? `text-${d.textcolor}` : null,
 						d.badge && typeof d.badge === "object" && d.badge.notification ? "position-relative" : null,
-					],
+					]),
 					style: d.style,
 				}),
 				elem: [

@@ -56,13 +56,10 @@ export default class modal extends tag {
 			d.id = d.id || core.UUID();
 
 			//generate header
-			let ctlHeader = new div(
-				"modal-header",
-				new h(5, "modal-title", [
-					new label(d.icon, d.title),
-					new button({ class: "btn-close", attr: { "data-bs-dismiss": "modal" } }),
-				])
-			);
+			let ctlHeader = new div("modal-header", [
+				new h(5, "modal-title", new label(d.icon, d.title)),
+				new button({ class: "btn-close", attr: { "data-bs-dismiss": "modal" } }),
+			]);
 
 			//generate body
 			let ctlBody = new div(["modal-body", d.hastab ? "p-0" : null], d.elem);
@@ -104,7 +101,7 @@ export default class modal extends tag {
 									{},
 									{
 										id: i.id ? i.id : `${d.id}-btn-${ix}`,
-										class: "ms-3 btn-modal",
+										class: i.class,
 										onclick: i.onclick,
 
 										color: i.color,
@@ -118,7 +115,7 @@ export default class modal extends tag {
 									id: i.id,
 									label: i.label,
 									icon: i.icon,
-									class: i.class,
+									class: ["ms-2", "btn-modal", i.class],
 									color: i.color ? i.color : ix === 0 ? "primary" : "text-secondary",
 								});
 							}
