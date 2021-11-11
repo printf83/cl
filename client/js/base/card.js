@@ -75,15 +75,16 @@ class main extends tag {
 			this._d = {
 				tag: this.tag,
 				attr: attr.merge(d.attr, {
-					class: [
+					class: core.merge.class(
 						this.className,
-						d.class,
-						d.align ? `text-${d.align}` : null,
-						d.color ? `bg-${d.color}` : null,
-						d.textcolor ? `text-${d.textcolor}` : null,
-						d.bordercolor ? `border-${d.bordercolor}` : null,
-						!d.border ? "border-0" : null,
-					],
+						core.merge.class(d.class, [
+							d.align ? `text-${d.align}` : null,
+							d.color ? `bg-${d.color}` : null,
+							d.textcolor ? `text-${d.textcolor}` : null,
+							d.bordercolor ? `border-${d.bordercolor}` : null,
+							!d.border ? "border-0" : null,
+						])
+					),
 					style: d.style,
 				}),
 				elem: d.elem,

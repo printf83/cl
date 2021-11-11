@@ -108,6 +108,8 @@ export default class tag {
 				container.appendChild(i);
 			});
 		}
+
+		return container.lastChild;
 	};
 
 	prependChild = function (container) {
@@ -119,6 +121,8 @@ export default class tag {
 				container.insertBefore(i, container.firstChild);
 			});
 		}
+
+		return container.firstChild;
 	};
 
 	replaceWith = function (elem) {
@@ -126,17 +130,20 @@ export default class tag {
 			elem.firstChild.remove();
 		}
 
+		let r = null;
 		let n = this.node();
 		let parent = elem.parentNode;
 		if (Node.prototype.isPrototypeOf(n)) {
-			parent.insertBefore(n, elem);
+			r = parent.insertBefore(n, elem);
 		} else if (NodeList.prototype.isPrototypeOf(n)) {
 			n.forEach(function (i) {
-				parent.insertBefore(i, elem);
+				r = parent.insertBefore(i, elem);
 			});
 		}
 
 		elem.remove();
+
+		return r;
 	};
 
 	replaceChild = function (container) {
@@ -145,6 +152,7 @@ export default class tag {
 		}
 
 		this.build(container);
+		return container.childNodes;
 	};
 
 	node = function () {

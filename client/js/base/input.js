@@ -324,7 +324,7 @@ export default class input extends tag {
 						attr: attr.merge(d.attr, {
 							id: d.id,
 							name: d.name,
-							class: [
+							class: core.merge.class(d.class, [
 								d.plaintext && d.readonly ? "form-select-plaintext" : "form-select",
 								d.weight &&
 								!(
@@ -342,8 +342,7 @@ export default class input extends tag {
 											d.after ? "rounded-start" : null,
 									  ].combine(" ")
 									: null,
-								d.class,
-							],
+							]),
 
 							"aria-label": d.hidelabel && d.label ? d.label : null,
 
@@ -375,7 +374,7 @@ export default class input extends tag {
 							id: d.id,
 							name: d.name,
 							type: d.type,
-							class: [
+							class: core.merge.class(d.class, [
 								d.type !== "range"
 									? [
 											d.plaintext && d.readonly ? "form-control-plaintext" : "form-control",
@@ -403,8 +402,7 @@ export default class input extends tag {
 									: d.label && d.numctl
 									? "rounded-0"
 									: null,
-								d.class,
-							],
+							]),
 							"aria-label": d.hidelabel && d.label ? d.label : null,
 
 							placeholder: d.placeholder,

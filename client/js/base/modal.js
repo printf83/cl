@@ -115,8 +115,15 @@ export default class modal extends tag {
 									id: i.id,
 									label: i.label,
 									icon: i.icon,
-									class: ["ms-2", "btn-modal", i.class],
+									class: core.merge.class(i.class, ["ms-2", "btn-modal"]),
 									color: i.color ? i.color : ix === 0 ? "primary" : "text-secondary",
+									onclick:
+										i.onclick instanceof Function
+											? function (event) {
+													i.onclick(event.currentTarget);
+											  }
+											: null,
+									attr: { "data-bs-dismiss": i.onclick instanceof Function ? null : "modal" },
 								});
 							}
 						})
@@ -137,12 +144,13 @@ export default class modal extends tag {
 			this._d = {
 				elem: new div({
 					attr: {
-						class: ["modal", d.animate && !d.show ? "fade" : null, d.show ? "d-block" : null],
+						class: ["modal", d.animate && !d.show && "fade", d.show ? "show" : null],
 						id: d.id,
 						tabindex: -1,
 						"data-bs-backdrop": d.static ? "static" : null,
 						"data-bs-keyboard": d.static ? "false" : "true",
 						"data-bs-focus": d.focus ? "true" : null,
+						"aria-hidden": d.show ? "false" : "true",
 					},
 					elem: new div(
 						[
@@ -166,4 +174,39 @@ export default class modal extends tag {
 
 		super.data = this._d;
 	}
+
+	get dom() {
+		return this._n;
+	}
+	set dom(d) {
+		this._n = d;
+	}
+
+	get mdl() {
+		return this._m;
+	}
+	set mdl(d) {
+		this._m = d;
+	}
+
+	show = function (...arg) {
+		//add into document
+		this.dom = this.appendChild(document.body);
+		this.mdl = new bootstrap.Modal(this.dom);
+		this.mdl.show();
+	};
+	hide = function (...arg) {
+		if (this.mdl) {
+			this.mdl.hide();
+		}
+	};
+	destroy = function (...arg) {
+		if (this.mdl) {
+			this.mdl.dispose();
+			this.dom.remove();
+
+			this.mdl = null;
+			this.dom = null;
+		}
+	};
 }

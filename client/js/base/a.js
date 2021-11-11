@@ -63,8 +63,7 @@ export default class a extends tag {
 				t.elem = arg[0];
 			} else if (arg.length === 1) {
 				t = arg[0];
-			}
-			else {
+			} else {
 				console.error("Unsupported argument", arg);
 			}
 
@@ -96,7 +95,7 @@ export default class a extends tag {
 			this._d = {
 				tag: "a",
 				attr: attr.merge(d.attr, {
-					class: ["ns-link", d.class],
+					class: core.merge.class(d.class, "ns-link"),
 					style: d.style,
 
 					id: d.id,

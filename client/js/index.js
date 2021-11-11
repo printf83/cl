@@ -432,24 +432,42 @@ core.documentReady(() => {
 	// 	),
 	// ]);
 
-	let b = new modal({
-		title: "Title",
-		icon: "fire",
-		elem: new tab({
-			border: false,
-			item: [
-				{ label: "First", icon: "fire", elem: "This is first tab. " },
-				{ label: "Second", icon: "fire", elem: "This is second tab. " },
-				{ label: "Third", icon: "fire", elem: "This is third tab. " },
-				{ label: "Fourth", icon: "fire", elem: "This is fourth tab. " },
+	let b = new button("Test", function () {
+		let m = new modal({
+			title: "Title",
+			icon: "fire",
+			elem: new tab({
+				border: false,
+				item: [
+					{ label: "First", icon: "fire", elem: "This is first tab. " },
+					{ label: "Second", icon: "fire", elem: "This is second tab. " },
+					{ label: "Third", icon: "fire", elem: "This is third tab. " },
+					{ label: "Fourth", icon: "fire", elem: "This is fourth tab. " },
+				],
+			}),
+			hastab: true,
+			button: [
+				{
+					label: "Okay",
+					onclick: function (sender) {
+						console.log(sender);
+
+						new modal({
+							title: "Hei",
+							elem: "MMMMMMM",
+							button: "Okay",
+						}).show();
+					},
+				},
+				"Cancel",
 			],
-		}),
-		hastab: true,
-		button: ["Okay", "Cancel"],
-		footer: new input({ type: "switch", name: "showagain", label: "Show again" }),
-		show: true,
+			footer: new input({ type: "switch", name: "showagain", label: "Show again" }),
+		});
+		m.show();
 	});
+
 	b.replaceChild(root);
+
 	console.timeEnd("Proccesing Time");
 	console.log(`Element Count: ${core.countElement(root)}`);
 });
