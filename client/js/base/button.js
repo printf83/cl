@@ -1,7 +1,8 @@
 "use strict";
 import * as core from "./core.js";
+import { mergeAttr } from "./cl.js";
 import tag from "./tag.js";
-import attr from "./attr.js";
+// import attr from "./attr.js";
 import label from "./label.js";
 import badge from "./badge.js";
 
@@ -81,7 +82,7 @@ export default class button extends tag {
 		if (d) {
 			this._d = {
 				tag: d.href ? "a" : "button",
-				attr: attr.merge(d.attr, {
+				attr: mergeAttr(d.attr, {
 					id: d.id,
 					name: d.name,
 					value: d.value,

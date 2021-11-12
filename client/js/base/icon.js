@@ -1,6 +1,7 @@
 "use strict";
-import attr from "./attr.js";
+// import attr from "./attr.js";
 import * as core from "./core.js";
+import { mergeAttr } from "./cl.js";
 import tag from "./tag.js";
 
 /**
@@ -86,7 +87,7 @@ export default class icon extends tag {
 
 			this._d = {
 				tag: d.icon ? "i" : "span",
-				attr: attr.merge(d.attr, {
+				attr: mergeAttr(d.attr, {
 					class: [
 						d.style ? d.style : d.icon ? "fas" : null,
 						d.icon ? `fa-${d.icon}` : null,

@@ -1,9 +1,10 @@
 "use strict";
 import * as core from "./core.js";
+import { mergeAttr } from "./cl.js";
 import tag from "./tag.js";
 import span from "./span.js";
 import icon from "./icon.js";
-import attr from "./attr.js";
+// import attr from "./attr.js";
 
 /**
  * for,icon,label
@@ -70,7 +71,7 @@ export default class label extends tag {
 			} else {
 				this._d = {
 					tag: "label",
-					attr: attr.merge(d.attr, {
+					attr: mergeAttr(d.attr, {
 						for: d.for,
 					}),
 					elem: [

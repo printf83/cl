@@ -1,6 +1,7 @@
 "use strict";
 import * as core from "./core.js";
-import attr from "./attr.js";
+import { mergeAttr } from "./cl.js";
+// import attr from "./attr.js";
 import div from "./div.js";
 
 /**
@@ -53,7 +54,7 @@ export default class btngroup extends div {
 	set data(d) {
 		if (d) {
 			this._d = {
-				attr: attr.merge(d.attr, {
+				attr: mergeAttr(d.attr, {
 					role: "group",
 					"aria-label": d.label,
 				}),

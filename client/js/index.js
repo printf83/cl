@@ -1,5 +1,6 @@
 "use strict";
 import * as core from "./base/core.js";
+import * as cl from "./base/cl.js";
 import div from "./base/div.js";
 import p from "./base/p.js";
 import h from "./base/h.js";
@@ -466,7 +467,7 @@ core.documentReady(() => {
 		m.show();
 	});
 
-	b.replaceChild(root);
+	cl.replaceChild(root, b);
 
 	console.timeEnd("Proccesing Time");
 	console.log(`Element Count: ${core.countElement(root)}`);

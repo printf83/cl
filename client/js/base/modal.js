@@ -1,5 +1,6 @@
 "use strict";
 import * as core from "./core.js";
+import * as cl from "./cl.js";
 import tag from "./tag.js";
 import h from "./h.js";
 import label from "./label.js";
@@ -118,7 +119,6 @@ export default class modal extends tag {
 									class: core.merge.class(i.class, ["ms-2", "btn-modal"]),
 									color: i.color ? i.color : ix === 0 ? "primary" : "text-secondary",
 									onclick: function (event) {
-										//todo: //this code is in problem coz i is outside
 										let result =
 											i.onclick instanceof Function ? i.onclick(event.currentTarget) : true;
 										if (result !== false) {
@@ -132,7 +132,7 @@ export default class modal extends tag {
 													mdl.dispose();
 													dom.remove();
 												},
-												3000,
+												1000,
 												dom,
 												mdl
 											);
@@ -206,8 +206,15 @@ export default class modal extends tag {
 
 	show = function (...arg) {
 		//add into document
-		this.dom = this.appendChild(document.body);
+		this.dom = cl.appendChild(document.body, this);
 		this.mdl = new bootstrap.Modal(this.dom);
+
+		//hide previous modal
+
+		//set destroy after hide
+		//need to check if hide auto
+		//todo
+
 		this.mdl.show();
 	};
 	hide = function (...arg) {

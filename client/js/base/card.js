@@ -74,7 +74,7 @@ class main extends tag {
 		if (d && this.tag) {
 			this._d = {
 				tag: this.tag,
-				attr: attr.merge(d.attr, {
+				attr: mergeAttr(d.attr, {
 					class: core.merge.class(
 						this.className,
 						core.merge.class(d.class, [
@@ -321,7 +321,7 @@ export class horizontal extends tag {
 		if (d) {
 			this._d = {
 				tag: "div",
-				attr: attr.merge(d.attr, {
+				attr: mergeAttr(d.attr, {
 					class: [
 						"row",
 						d.class,
@@ -369,7 +369,7 @@ export class link extends a {
 		super.data = d;
 
 		if (super.data) {
-			super.data.attr = attr.merge(super.data.attr, { class: "card-link" });
+			super.data.attr = mergeAttr(super.data.attr, { class: "card-link" });
 		}
 	}
 }
@@ -388,7 +388,7 @@ export class img extends imgtag {
 		if (super.data) {
 			d = core.extend({}, { placement: "top" }, d);
 
-			super.data.attr = attr.merge(super.data.attr, {
+			super.data.attr = mergeAttr(super.data.attr, {
 				class: [
 					d.placement === "full" ? "card-img" : null,
 					d.placement === "top" ? "card-img-top" : null,
