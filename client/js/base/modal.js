@@ -117,12 +117,27 @@ export default class modal extends tag {
 									icon: i.icon,
 									class: core.merge.class(i.class, ["ms-2", "btn-modal"]),
 									color: i.color ? i.color : ix === 0 ? "primary" : "text-secondary",
-									onclick:
-										i.onclick instanceof Function
-											? function (event) {
-													i.onclick(event.currentTarget);
-											  }
-											: null,
+									onclick: function (event) {
+										//todo: //this code is in problem coz i is outside
+										let result =
+											i.onclick instanceof Function ? i.onclick(event.currentTarget) : true;
+										if (result !== false) {
+											//find parent and close
+											let dom = event.currentTarget.closest(".modal");
+											let mdl = bootstrap.Modal.getInstance(dom);
+											mdl.hide();
+
+											setTimeout(
+												function (dom, mdl) {
+													mdl.dispose();
+													dom.remove();
+												},
+												3000,
+												dom,
+												mdl
+											);
+										}
+									},
 									attr: { "data-bs-dismiss": i.onclick instanceof Function ? null : "modal" },
 								});
 							}
