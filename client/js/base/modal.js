@@ -128,16 +128,6 @@ export default class modal extends tag {
 											let dom = event.currentTarget.closest(".modal");
 											let mdl = bootstrap.Modal.getInstance(dom);
 											mdl.hide();
-
-											setTimeout(
-												function (dom, mdl) {
-													mdl.dispose();
-													dom.remove();
-												},
-												1000,
-												dom,
-												mdl
-											);
 										}
 									},
 									attr: { "data-bs-dismiss": i.onclick instanceof Function ? null : "modal" },
@@ -211,26 +201,58 @@ export default class modal extends tag {
 		this.dom = cl.appendChild(document.body, this);
 		this.mdl = new bootstrap.Modal(this.dom);
 
-		//hide previous modal
+		// hide previous modal
+		let tmdl = document.getElementsByClassName("modal");
+		if (tmdl && tmdl.length > 0) {
+			//todo: error
+			//remove d-block modal
+			let amdl = [];
+			tmdl.forEach(function (i) {
+				if (i.classList.include("d-block")) amdl.push(i);
+			});
+
+			if (amdl && amdl.length > 1) {
+				amdl[amdl.length - 2].classList.remove("show");
+				if (amdl[amdl.length - 2].dataset["bsBackdrop"] === "static") {
+					amdl[amdl.length - 2].nextSibling.classList.remove("show");
+				}
+			}
+		}
 
 		//set destroy after hide
-		//need to check if hide auto
-		//todo
+		this.dom.addEventListener("hidden.bs.modal", function (event) {
+			//show back previous modal
+			let tmdl = document.getElementsByClassName("modal");
+			if (tmdl && tmdl.length > 0) {
+				//todo: error
+				//remove d-block modal
+				let amdl = [];
+				tmdl.forEach(function (i) {
+					if (i.classList.include("d-block")) amdl.push(i);
+				});
+
+				if (amdl && amdl.length > 1) {
+					amdl[amdl.length - 2].classList.add("show");
+					if (amdl[amdl.length - 2].dataset["bsBackdrop"] === "static") {
+						amdl[amdl.length - 2].nextSibling.classList.add("show");
+					}
+				}
+			}
+
+			let dom = event.currentTarget;
+			let mdl = bootstrap.Modal.getInstance(dom);
+
+			setTimeout(
+				function (dom, mdl) {
+					mdl.dispose();
+					dom.remove();
+				},
+				300,
+				dom,
+				mdl
+			);
+		});
 
 		this.mdl.show();
-	};
-	hide = function (...arg) {
-		if (this.mdl) {
-			this.mdl.hide();
-		}
-	};
-	destroy = function (...arg) {
-		if (this.mdl) {
-			this.mdl.dispose();
-			this.dom.remove();
-
-			this.mdl = null;
-			this.dom = null;
-		}
 	};
 }

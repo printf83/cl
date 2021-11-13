@@ -71,6 +71,8 @@ core.documentReady(() => {
 													elem: "MMMMMMM",
 													button: "Okay",
 												}).show();
+
+												return false; //prevent auto destroy
 											},
 										},
 										"Cancel",
