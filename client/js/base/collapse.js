@@ -142,7 +142,7 @@ export class container extends tag {
 				elem: new div({
 					attr: mergeAttr(d.attr, {
 						id: d.id,
-						class: core.merge.class(d.class, [("collapse", d.show ? "show" : null)]),
+						class: core.merge.class(d.class, ["collapse", d.show ? "show" : null]),
 					}),
 					elem: this._e,
 				}),
