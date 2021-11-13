@@ -2,7 +2,6 @@
 import * as core from "./core.js";
 import { mergeAttr } from "./cl.js";
 import tag from "./tag.js";
-// import attr from "./attr.js";
 import label from "./label.js";
 import badge from "./badge.js";
 
@@ -14,6 +13,8 @@ import badge from "./badge.js";
  * option : {attr,id,name,class,style,type,label,icon,badge,value,checked,color,textcolor,weight,disabled,outline,hidelabel,nowarp,onclick,href}
  */
 export default class button extends tag {
+	_d = null;
+
 	constructor(...arg) {
 		super();
 		if (arg && arg.length > 0) {

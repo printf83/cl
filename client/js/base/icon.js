@@ -1,5 +1,4 @@
 "use strict";
-// import attr from "./attr.js";
 import * as core from "./core.js";
 import { mergeAttr } from "./cl.js";
 import tag from "./tag.js";
@@ -11,6 +10,8 @@ import tag from "./tag.js";
  * opt : {attr,style,icon,weight,fixwidth,spin,rotate,color,inverse,elem,stack}
  */
 export default class icon extends tag {
+	_d = null;
+
 	constructor(...arg) {
 		super();
 		if (arg && arg.length > 0) {

@@ -9,6 +9,8 @@ import span from "./span.js";
  * opt : {attr,label,asst,icon,notification,pill,color,textcolor,bordercolor}
  */
 export default class badge extends span {
+	_d = null;
+
 	constructor(...arg) {
 		super();
 

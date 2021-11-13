@@ -2,7 +2,6 @@
 import * as core from "./core.js";
 import { mergeAttr } from "./cl.js";
 import tag from "./tag.js";
-// import attr from "./attr.js";
 
 /**
  * tag,class,style,elem
@@ -12,6 +11,9 @@ import tag from "./tag.js";
  * tag,opt : {attr,class,style,id,name,href(if tag a),onclick,elem}
  */
 export default class cont extends tag {
+	_t = null;
+	_d = null;
+
 	constructor(tag, ...arg) {
 		super();
 

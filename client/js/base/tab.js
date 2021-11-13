@@ -17,6 +17,8 @@ import label from "./label.js";
  */
 
 export default class tab extends tag {
+	_d = null;
+
 	constructor(...arg) {
 		super();
 

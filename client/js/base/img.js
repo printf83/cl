@@ -2,7 +2,6 @@
 import * as core from "./core.js";
 import { mergeAttr } from "./cl.js";
 import tag from "./tag.js";
-// import attr from "./attr.js";
 
 /**
  * class,src,alt
@@ -11,6 +10,8 @@ import tag from "./tag.js";
  * opt : {attr,class,style,id,onclick,src,alt}
  */
 export default class img extends tag {
+	_d = null;
+
 	constructor(...arg) {
 		super();
 

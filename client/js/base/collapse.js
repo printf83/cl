@@ -1,6 +1,5 @@
 import * as core from "./core.js";
 import { mergeAttr } from "./cl.js";
-// import attr from "./attr.js";
 import tag from "./tag.js";
 import div from "./div.js";
 
@@ -10,6 +9,9 @@ import div from "./div.js";
  * target example : "#id", ".class"
  */
 export class toggle extends tag {
+	_d = null;
+	_e = null;
+
 	constructor(elem, ...arg) {
 		super();
 
@@ -83,6 +85,8 @@ export class toggle extends tag {
  * target example : "#id", ".class"
  */
 export class container extends tag {
+	_d = null;
+
 	constructor(elem, ...arg) {
 		super();
 

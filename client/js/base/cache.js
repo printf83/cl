@@ -1,6 +1,8 @@
 "use strict";
 
 export default class cache {
+	_d = null;
+
 	constructor(init) {
 		this._d = new Map(init);
 	}

@@ -15,6 +15,8 @@ import ul from "./ul.js";
  */
 
 export default class dropdown extends tag {
+	_d = null;
+
 	constructor(...arg) {
 		super();
 

@@ -1,12 +1,16 @@
 "use strict";
 import * as core from "./core.js";
+import { mergeAttr } from "./cl.js";
 import tag from "./tag.js";
-import attr from "./attr.js";
 import a from "./a.js";
 import div from "./div.js";
 import imgtag from "./img.js";
 
 class main extends tag {
+	_t = null;
+	_c = null;
+	_d = null;
+
 	constructor(tag, className, ...arg) {
 		super();
 		if (arg && arg.length > 0) {
@@ -261,6 +265,8 @@ export class imgoverlay extends main {
  * opt : {attr,id,class,style,align,color,textcolor,bordercolor,border,left,right,size,gap}
  */
 export class horizontal extends tag {
+	_d = null;
+
 	constructor(...arg) {
 		super();
 		if (arg && arg.length > 0) {

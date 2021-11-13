@@ -4,7 +4,6 @@ import { mergeAttr } from "./cl.js";
 import tag from "./tag.js";
 import span from "./span.js";
 import icon from "./icon.js";
-// import attr from "./attr.js";
 
 /**
  * for,icon,label
@@ -13,6 +12,8 @@ import icon from "./icon.js";
  * opt : {attr,for,icon,label}
  */
 export default class label extends tag {
+	_d = null;
+
 	constructor(...arg) {
 		super();
 		if (arg && arg.length > 0) {

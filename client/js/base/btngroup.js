@@ -1,7 +1,6 @@
 "use strict";
 import * as core from "./core.js";
 import { mergeAttr } from "./cl.js";
-// import attr from "./attr.js";
 import div from "./div.js";
 
 /**
@@ -10,6 +9,8 @@ import div from "./div.js";
  * opt : {attr,label,elem,weight,vertical}
  */
 export default class btngroup extends div {
+	_d = null;
+
 	constructor(...arg) {
 		super();
 

@@ -13,6 +13,8 @@ import span from "./span.js";
  * dropdown item : [string]|[{attr,elem,value,label,icon,active,disabled,interactive,onclick,href}]
  */
 export default class option extends tag {
+	_d = null;
+
 	constructor(...arg) {
 		super();
 		if (arg && arg.length > 0) {

@@ -8,6 +8,8 @@ import button from "./button.js";
 import div from "./div.js";
 
 export default class modal extends tag {
+	_d = null;
+
 	constructor(...arg) {
 		super();
 

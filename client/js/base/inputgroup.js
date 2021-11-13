@@ -11,6 +11,8 @@ import div from "./div.js";
  * opt : {attr,for,label,elem,nowarp}
  */
 export class container extends tag {
+	_d = null;
+
 	constructor(...arg) {
 		super();
 
@@ -80,6 +82,8 @@ export class container extends tag {
  * opt : {attr,elem}
  */
 export class text extends div {
+	_d = null;
+
 	constructor(...arg) {
 		super();
 		if (arg && arg.length > 0) {

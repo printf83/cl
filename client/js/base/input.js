@@ -2,7 +2,6 @@
 import * as core from "./core.js";
 import { mergeAttr } from "./cl.js";
 import tag from "./tag.js";
-// import attr from "./attr.js";
 import label from "./label.js";
 import button from "./button.js";
 import * as inputgroup from "./inputgroup.js";
@@ -17,6 +16,8 @@ import option from "./option.js";
  * opt : {attr,id,name,type,label,hidelabel,floatlabel,inline,labelsize,ctlsize,size,weight,value,checked,placeholder,option,numctl,addctl,min,max,step,row,multiple,required,valid,invalid,before,after,plaintext,readonly,disabled,container,flex,nowarp,onclick,onchange,onclick,onfocus,onblur}
  */
 export default class input extends tag {
+	_d = null;
+
 	constructor(...arg) {
 		super();
 		if (arg && arg.length > 0) {

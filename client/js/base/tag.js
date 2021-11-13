@@ -1,11 +1,12 @@
 "use strict";
 import * as core from "./core.js";
-import attr from "./attr.js";
 
 /**
  * opt : {tag,attr,elem}
  */
 export default class tag {
+	_d = null;
+
 	constructor(arg) {
 		if (arg) {
 			this.data = core.extend(

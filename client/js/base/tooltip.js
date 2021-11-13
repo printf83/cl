@@ -1,6 +1,5 @@
 import * as core from "./core.js";
 import { mergeAttr } from "./cl.js";
-// import attr from "./attr.js";
 import tag from "./tag.js";
 
 /**
@@ -8,6 +7,8 @@ import tag from "./tag.js";
  * elem, opt : {attr,title,msg,type,placement,trigger}
  */
 export default class tooltip extends tag {
+	_d = null;
+
 	constructor(elem, ...arg) {
 		super();
 
