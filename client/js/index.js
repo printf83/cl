@@ -18,6 +18,7 @@ import * as collapse from "./base/collapse.js";
 import * as card from "./base/card.js";
 import small from "./base/small.js";
 import modal from "./base/modal.js";
+import toast from "./base/toast.js";
 
 core.documentReady(() => {
 	var root = document.getElementById("root");
@@ -35,10 +36,11 @@ core.documentReady(() => {
 					label: "Second",
 					elem: "This is second tab. ",
 					option: [
-						{ href: "javascript:void(0);", label: "Action" },
-						{ href: "javascript:void(0);", label: "Another action" },
-						{ value: "-", label: "" },
-						{ href: "javascript:void(0);", label: "Something else here" },
+						{ onclick: function () {}, label: "Action" },
+						{ onclick: function () {}, label: "Another action" },
+						{ onclick: function () {}, label: "Something else here" },
+						{ value: "-" },
+						{ onclick: function () {}, label: "Separated link" },
 					],
 				},
 				{
@@ -46,7 +48,7 @@ core.documentReady(() => {
 					elem: new card.container(
 						new card.body([
 							"This is third tab. ",
-							new button("Test", function () {
+							new button("Test Modal", "primary me-2", function () {
 								let m = new modal({
 									title: "Title",
 									icon: "fire",
@@ -59,7 +61,6 @@ core.documentReady(() => {
 											{ label: "Fourth", icon: "fire", elem: "This is fourth tab. " },
 										],
 									}),
-									hastab: true,
 									button: [
 										{
 											label: "Okay",
@@ -80,6 +81,13 @@ core.documentReady(() => {
 									footer: new input({ type: "switch", name: "showagain", label: "Show again" }),
 								});
 								m.show();
+							}),
+							new button("Test Toast", "secondary me-2", function () {
+								new toast({
+									title: "Title",
+									icon: "fire",
+									elem: "Hello World",
+								}).show();
 							}),
 						])
 					),
@@ -125,11 +133,11 @@ core.documentReady(() => {
 									dark: true,
 									container: "col",
 									option: [
-										{ href: "javascript:void(0);", label: "Action" },
-										{ href: "javascript:void(0);", label: "Another action" },
-										{ href: "javascript:void(0);", label: "Something else here" },
+										{ onclick: function () {}, label: "Action" },
+										{ onclick: function () {}, label: "Another action" },
+										{ onclick: function () {}, label: "Something else here" },
 										{ value: "-" },
-										{ href: "javascript:void(0);", label: "Separated link" },
+										{ onclick: function () {}, label: "Separated link" },
 									],
 								}),
 								new input({
@@ -149,11 +157,11 @@ core.documentReady(() => {
 										arrow: "start",
 										dark: true,
 										option: [
-											{ href: "javascript:void(0);", label: "Action" },
-											{ href: "javascript:void(0);", label: "Another action" },
-											{ href: "javascript:void(0);", label: "Something else here" },
+											{ onclick: function () {}, label: "Action" },
+											{ onclick: function () {}, label: "Another action" },
+											{ onclick: function () {}, label: "Something else here" },
 											{ value: "-" },
-											{ href: "javascript:void(0);", label: "Separated link" },
+											{ onclick: function () {}, label: "Separated link" },
 										],
 									}),
 								}),

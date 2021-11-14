@@ -9,6 +9,8 @@ import div from "./div.js";
 
 export default class modal extends tag {
 	_d = null;
+	_n = null;
+	_m = null;
 
 	constructor(...arg) {
 		super();
@@ -35,7 +37,6 @@ export default class modal extends tag {
 						center: true,
 						size: null,
 						fullscreen: false,
-						hastab: false,
 						focus: true,
 
 						elem: null,
@@ -61,11 +62,18 @@ export default class modal extends tag {
 			//generate header
 			let ctlHeader = new div("modal-header", [
 				new h(5, "modal-title", new label(d.icon, d.title)),
-				new button({ class: "btn-close", attr: { "data-bs-dismiss": "modal" } }),
+				new button({ class: "btn-close", attr: { "data-bs-dismiss": "modal", "aria-label": "Close" } }),
 			]);
 
+			//check if first elem is tab
+			let hastab = d.elem
+				? Array.isArray(d.elem)
+					? d.elem[0].hasOwnProperty("cltab")
+					: d.elem.hasOwnProperty("cltab")
+				: false;
+
 			//generate body
-			let ctlBody = new div(["modal-body", d.hastab ? "p-0" : null], d.elem);
+			let ctlBody = new div(["modal-body", hastab ? "p-0" : null], d.elem);
 
 			//generate control
 			let ctlControl = new div(["footer-ctl", "float-start"], d.footer);
@@ -125,9 +133,10 @@ export default class modal extends tag {
 											i.onclick instanceof Function ? i.onclick(event.currentTarget) : true;
 										if (result !== false) {
 											//find parent and close
-											let dom = event.currentTarget.closest(".modal");
-											let mdl = bootstrap.Modal.getInstance(dom);
-											mdl.hide();
+											modal.hide(event.currentTarget.closest(".modal"));
+											// let dom = event.currentTarget.closest(".modal");
+											// let mdl = bootstrap.Modal.getInstance(dom);
+											// mdl.hide();
 										}
 									},
 									attr: { "data-bs-dismiss": i.onclick instanceof Function ? null : "modal" },
@@ -179,7 +188,15 @@ export default class modal extends tag {
 			this._d = null;
 		}
 
+		this.setting = d;
 		super.data = this._d;
+	}
+
+	get setting() {
+		return this._s;
+	}
+	set setting(d) {
+		this._s = d;
 	}
 
 	get dom() {
@@ -202,17 +219,19 @@ export default class modal extends tag {
 		this.mdl = new bootstrap.Modal(this.dom);
 
 		// hide previous modal
-		let tmdl = document.getElementsByClassName("modal");
+		let tmdl = [...document.getElementsByClassName("modal")];
 		if (tmdl && tmdl.length > 0) {
-			//todo: error
 			//remove d-block modal
 			let amdl = [];
 			tmdl.forEach(function (i) {
-				if (i.classList.include("d-block")) amdl.push(i);
+				if (!i.classList.contains("d-block")) amdl.push(i);
 			});
 
+			//remove show class
 			if (amdl && amdl.length > 1) {
 				amdl[amdl.length - 2].classList.remove("show");
+
+				//remove show from backdrop
 				if (amdl[amdl.length - 2].dataset["bsBackdrop"] === "static") {
 					amdl[amdl.length - 2].nextSibling.classList.remove("show");
 				}
@@ -222,17 +241,19 @@ export default class modal extends tag {
 		//set destroy after hide
 		this.dom.addEventListener("hidden.bs.modal", function (event) {
 			//show back previous modal
-			let tmdl = document.getElementsByClassName("modal");
+			let tmdl = [...document.getElementsByClassName("modal")];
 			if (tmdl && tmdl.length > 0) {
-				//todo: error
 				//remove d-block modal
 				let amdl = [];
 				tmdl.forEach(function (i) {
-					if (i.classList.include("d-block")) amdl.push(i);
+					if (!i.classList.contains("d-block")) amdl.push(i);
 				});
 
+				//add show class
 				if (amdl && amdl.length > 1) {
 					amdl[amdl.length - 2].classList.add("show");
+
+					//add show backdrop
 					if (amdl[amdl.length - 2].dataset["bsBackdrop"] === "static") {
 						amdl[amdl.length - 2].nextSibling.classList.add("show");
 					}
@@ -255,4 +276,9 @@ export default class modal extends tag {
 
 		this.mdl.show();
 	};
+
+	static hide(element) {
+		let mdl = new bootstrap.Modal(element);
+		mdl.hide();
+	}
 }

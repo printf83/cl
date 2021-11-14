@@ -61,8 +61,8 @@ export default class tooltip extends tag {
 		return this._d;
 	}
 	set data(d) {
-		if (d && this._e) {
-			this._d = this._e.data;
+		if (d && this.elem) {
+			this._d = this.elem.data;
 
 			this._d.attr = mergeAttr(this._d.attr, {
 				title: d.type === "popover" ? d.title : d.msg,
@@ -76,6 +76,14 @@ export default class tooltip extends tag {
 			this._d = null;
 		}
 
+		this.setting = d;
 		super.data = this._d;
+	}
+
+	get setting() {
+		return this._s;
+	}
+	set setting(d) {
+		this._s = d;
 	}
 }

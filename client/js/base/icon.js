@@ -11,6 +11,7 @@ import tag from "./tag.js";
  */
 export default class icon extends tag {
 	_d = null;
+	clicon = 1;
 
 	constructor(...arg) {
 		super();
@@ -65,8 +66,6 @@ export default class icon extends tag {
 		}
 	}
 
-	clicon = 1;
-
 	get data() {
 		return this._d;
 	}
@@ -108,6 +107,14 @@ export default class icon extends tag {
 			this._d = null;
 		}
 
+		this.setting = d;
 		super.data = this._d;
+	}
+
+	get setting() {
+		return this._s;
+	}
+	set setting(d) {
+		this._s = d;
 	}
 }

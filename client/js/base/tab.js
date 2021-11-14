@@ -18,6 +18,7 @@ import label from "./label.js";
 
 export default class tab extends tag {
 	_d = null;
+	cltab = 1;
 
 	constructor(...arg) {
 		super();
@@ -119,7 +120,7 @@ export default class tab extends tag {
 						new li({
 							attr: {
 								class: ["nav-item", i.option ? "dropdown" : null],
-								role: "presentation",
+								role: "tab",
 							},
 							elem: [
 								new a({
@@ -139,6 +140,8 @@ export default class tab extends tag {
 											: d.style === "pill"
 											? "pill"
 											: "tab",
+										"aria-controls": `${i.id}-body`,
+										// "aria-selected": i.active ? "true" : "false",
 										role: i.option ? "button" : null,
 									},
 									elem: new label({
@@ -168,6 +171,7 @@ export default class tab extends tag {
 									class: ["tab-pane", d.animate ? "fade" : null, i.active ? "active show" : null],
 									id: `${i.id}-body`,
 									role: "tabpanel",
+									"aria-labelledby": `${i.id}-head`,
 								},
 								elem: i.elem,
 							})
@@ -253,6 +257,7 @@ export default class tab extends tag {
 			this._d = null;
 		}
 
+		this.setting = d;
 		super.data = this._d;
 	}
 }
