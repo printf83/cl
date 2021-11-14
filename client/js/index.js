@@ -19,9 +19,12 @@ import * as card from "./base/card.js";
 import small from "./base/small.js";
 import modal from "./base/modal.js";
 import toast from "./base/toast.js";
+import msg from "./base/msg.js";
 
 core.documentReady(() => {
-	var root = document.getElementById("root");
+	let loream =
+		"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce hendrerit tincidunt nibh ut condimentum. Nulla vitae vulputate elit. Sed accumsan varius mauris, vel bibendum magna consequat eget. Vivamus felis dolor, laoreet et blandit ut, iaculis eu arcu. Proin dapibus, metus vitae iaculis venenatis, lacus purus commodo tellus, aliquam commodo ex metus vulputate mi. Nam eu lorem vel nisi scelerisque hendrerit et id justo. Nunc vestibulum eget est sed ullamcorper. Etiam pulvinar, dui eget vehicula molestie, sapien sapien lobortis nulla, nec cursus urna sapien imperdiet tortor. Nam vitae lacus sem. Praesent id arcu vitae sem ultrices rutrum ut ac mi.";
+	let root = document.getElementById("root");
 
 	console.time("Proccesing Time");
 	let tid1 = core.UUID();
@@ -63,13 +66,42 @@ core.documentReady(() => {
 									}),
 									button: [
 										{
-											label: "Okay",
+											label: "Long",
 											onclick: function (sender) {
-												console.log(sender);
-
 												new modal({
 													title: "Hei",
-													elem: "MMMMMMM",
+													elem: new msg("md", "fire", loream),
+													button: "Okay",
+												}).show();
+
+												return false; //prevent auto destroy
+											},
+										},
+										{
+											label: "Short",
+											onclick: function (sender) {
+												new modal({
+													title: "Hei",
+													elem: new msg("md", "fire", "loream"),
+													button: "Okay",
+												}).show();
+
+												return false; //prevent auto destroy
+											},
+										},
+										,
+										{
+											label: "Large",
+											onclick: function (sender) {
+												new modal({
+													elem: new msg(
+														"lg",
+														{
+															icon: "fire",
+															weight: "3x",
+														},
+														new div([new h(3, "Loream"), loream])
+													),
 													button: "Okay",
 												}).show();
 
@@ -82,11 +114,24 @@ core.documentReady(() => {
 								});
 								m.show();
 							}),
-							new button("Test Toast", "secondary me-2", function () {
+							new button("Test Long Toast", "secondary me-2", function () {
 								new toast({
-									title: "Title",
-									icon: "fire",
-									elem: "Hello World",
+									// title: "Title",
+									// icon: "fire",
+									elem: new msg("sm", "fire", loream),
+									color: "primary",
+									textcolor: "light",
+									// autohide: false,
+								}).show();
+							}),
+							new button("Test Short Toast", "info me-2", function () {
+								new toast({
+									// title: "Title",
+									// icon: "fire",
+									elem: new msg("sm", "fire", "loream"),
+									color: "primary",
+									textcolor: "light",
+									// autohide: false,
 								}).show();
 							}),
 						])

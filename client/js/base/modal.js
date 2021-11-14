@@ -60,10 +60,16 @@ export default class modal extends tag {
 			d.id = d.id || core.UUID();
 
 			//generate header
-			let ctlHeader = new div("modal-header", [
-				new h(5, "modal-title", new label(d.icon, d.title)),
-				new button({ class: "btn-close", attr: { "data-bs-dismiss": "modal", "aria-label": "Close" } }),
-			]);
+			let ctlHeader =
+				d.icon || d.title
+					? new div("modal-header", [
+							new h(5, "modal-title", new label(d.icon, d.title)),
+							new button({
+								class: "btn-close",
+								attr: { "data-bs-dismiss": "modal", "aria-label": "Close" },
+							}),
+					  ])
+					: null;
 
 			//check if first elem is tab
 			let hastab = d.elem
@@ -186,11 +192,10 @@ export default class modal extends tag {
 			};
 		} else {
 			this._d = null;
-				}
+		}
 
 		super.data = this._d;
 	}
-
 
 	get dom() {
 		return this._n;

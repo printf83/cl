@@ -66,28 +66,52 @@ export default class toast extends tag {
 			let tc = toast.timercounter(new Date(d.date));
 
 			//generate header
-			let ctlHeader = new div("toast-header", [
-				new strong("me-auto", d.icon || d.title ? new label(d.icon, d.title) : " "),
-				!d.autohide
-					? new small({
-							class: ["text-muted", "timer"],
-							attr: {
-								"data-cl-time": d.date,
-								id: `${d.id}-timer`,
-							},
-							elem: tc ? tc.msg : "Just now", //need to add timer here
-					  })
-					: null,
-				d.close
-					? new button({
-							class: "btn-close",
-							attr: { "data-bs-dismiss": "modal", "aria-label": "Close" },
-					  })
-					: null,
-			]);
+			let ctlHeader =
+				d.icon || d.title
+					? new div("toast-header", [
+							new strong("me-auto", new label(d.icon, d.title)),
+							!d.autohide
+								? new small({
+										class: ["text-muted", "timer"],
+										attr: {
+											"data-cl-time": d.date,
+											id: `${d.id}-timer`,
+										},
+										elem: tc ? tc.msg : "Just now", //need to add timer here
+								  })
+								: null,
+							d.close
+								? new button({
+										class: [
+											"btn-close",
+											(d.textcolor && d.textcolor === "light") || d.textcolor === "white"
+												? "btn-close-white"
+												: null,
+										],
+										attr: { "data-bs-dismiss": "toast", "aria-label": "Close" },
+								  })
+								: null,
+					  ])
+					: null;
 
 			//generate body
-			let ctlBody = new div("toast-body", d.elem);
+			let ctlBody = new div(
+				"toast-body",
+				new div("d-flex align-items-stretch", [
+					new div("me-auto", d.elem),
+					!(d.icon || d.title) && d.close
+						? new button({
+								class: [
+									"btn-close",
+									(d.textcolor && d.textcolor === "light") || d.textcolor === "white"
+										? "btn-close-white"
+										: null,
+								],
+								attr: { "data-bs-dismiss": "toast", "aria-label": "Close" },
+						  })
+						: null,
+				])
+			);
 
 			//combine header,body to div.toast
 			this._d = {
@@ -104,7 +128,7 @@ export default class toast extends tag {
 						"data-bs-animation": d.animate ? "true" : null,
 						"data-bs-autohide": d.autohide ? "true" : "false",
 						"data-bs-delay": d.delay,
-						"data-cl-position": d.position
+						"data-cl-position": d.position,
 					},
 					elem: [ctlHeader, ctlBody],
 				}),
@@ -132,7 +156,8 @@ export default class toast extends tag {
 
 	show = function () {
 		//generate container
-		let containerQuery = ["toast-container", this.data.dataset.clPosition].combine(" ");
+		let position = this.data.elem.data.attr["data-cl-position"];
+		let containerQuery = ["toast-container", position].combine(" ");
 		let container = document.body.getElementsByClassName(containerQuery)[0];
 		if (!container || container.length === 0) {
 			//build container
@@ -145,7 +170,7 @@ export default class toast extends tag {
 						"aria-atomic": "true",
 						zIndex: 1031,
 					},
-					elem: new div(["toast-container", "position-fixed", "p-3", this.data.dataset.clPosition], null),
+					elem: new div(["toast-container", "position-fixed", "p-3", position], null),
 				})
 			);
 
