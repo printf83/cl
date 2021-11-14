@@ -76,12 +76,6 @@ export class container extends tag {
 		super.data = this._d;
 	}
 
-	get setting() {
-		return this._s;
-	}
-	set setting(d) {
-		this._s = d;
-	}
 }
 
 /**
@@ -134,16 +128,9 @@ export class text extends div {
 			};
 		} else {
 			this._d = null;
-		}
+				}
 
-		this.setting = d;
 		super.data = this._d;
 	}
 
-	get setting() {
-		return this._s;
-	}
-	set setting(d) {
-		this._s = d;
-	}
 }

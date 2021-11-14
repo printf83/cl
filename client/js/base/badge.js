@@ -93,14 +93,7 @@ export default class badge extends span {
 			this._d = null;
 		}
 
-		this.setting = d;
 		super.data = this._d;
 	}
 
-	get setting() {
-		return this._s;
-	}
-	set setting(d) {
-		this._s = d;
-	}
 }

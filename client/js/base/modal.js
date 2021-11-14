@@ -186,18 +186,11 @@ export default class modal extends tag {
 			};
 		} else {
 			this._d = null;
-		}
+				}
 
-		this.setting = d;
 		super.data = this._d;
 	}
 
-	get setting() {
-		return this._s;
-	}
-	set setting(d) {
-		this._s = d;
-	}
 
 	get dom() {
 		return this._n;
@@ -232,7 +225,7 @@ export default class modal extends tag {
 				amdl[amdl.length - 2].classList.remove("show");
 
 				//remove show from backdrop
-				if (amdl[amdl.length - 2].dataset["bsBackdrop"] === "static") {
+				if (amdl[amdl.length - 2].dataset.bsBackdrop === "static") {
 					amdl[amdl.length - 2].nextSibling.classList.remove("show");
 				}
 			}
@@ -254,7 +247,7 @@ export default class modal extends tag {
 					amdl[amdl.length - 2].classList.add("show");
 
 					//add show backdrop
-					if (amdl[amdl.length - 2].dataset["bsBackdrop"] === "static") {
+					if (amdl[amdl.length - 2].dataset.bsBackdrop === "static") {
 						amdl[amdl.length - 2].nextSibling.classList.add("show");
 					}
 				}

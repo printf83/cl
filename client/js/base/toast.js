@@ -103,7 +103,8 @@ export default class toast extends tag {
 						tabindex: -1,
 						"data-bs-animation": d.animate ? "true" : null,
 						"data-bs-autohide": d.autohide ? "true" : "false",
-						"data-bs-delay": d.delay ? d.delay : null,
+						"data-bs-delay": d.delay,
+						"data-cl-position": d.position
 					},
 					elem: [ctlHeader, ctlBody],
 				}),
@@ -112,15 +113,7 @@ export default class toast extends tag {
 			this._d = null;
 		}
 
-		this.setting = d;
 		super.data = this._d;
-	}
-
-	get setting() {
-		return this._s;
-	}
-	set setting(d) {
-		this._s = d;
 	}
 
 	get dom() {
@@ -139,7 +132,7 @@ export default class toast extends tag {
 
 	show = function () {
 		//generate container
-		let containerQuery = ["toast-container", this.setting.position].combine(" ");
+		let containerQuery = ["toast-container", this.data.dataset.clPosition].combine(" ");
 		let container = document.body.getElementsByClassName(containerQuery)[0];
 		if (!container || container.length === 0) {
 			//build container
@@ -152,7 +145,7 @@ export default class toast extends tag {
 						"aria-atomic": "true",
 						zIndex: 1031,
 					},
-					elem: new div(["toast-container", "position-fixed", "p-3", this.setting.position], null),
+					elem: new div(["toast-container", "position-fixed", "p-3", this.data.dataset.clPosition], null),
 				})
 			);
 

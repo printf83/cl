@@ -28,14 +28,6 @@ export default class tag {
 		return this._d;
 	}
 	set data(d) {
-		this.setting = d;
 		this._d = d;
-	}
-
-	get setting() {
-		return this._s;
-	}
-	set setting(d) {
-		this._s = d;
 	}
 }

@@ -105,16 +105,9 @@ export default class icon extends tag {
 			};
 		} else {
 			this._d = null;
-		}
+			}
 
-		this.setting = d;
 		super.data = this._d;
 	}
 
-	get setting() {
-		return this._s;
-	}
-	set setting(d) {
-		this._s = d;
-	}
 }
