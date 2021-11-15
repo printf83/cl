@@ -95,17 +95,19 @@ core.documentReady(() => {
 											onclick: function (sender) {
 												new modal({
 													divider: false,
-													color: "primary",
-													textcolor: "light",
+													centerbutton: true,
+													// color: "primary",
+													// textcolor: "light",
 													elem: new msg(
 														"lg",
 														{
 															icon: "fire",
 															weight: "3x",
+															color: "danger",
 														},
-														new div([new h(3, "Loream"), loream])
+														new div([new h(4, "Loream"), loream])
 													),
-													button: "Okay",
+													button: ["Okay", "Cancel"],
 												}).show();
 
 												return false; //prevent auto destroy

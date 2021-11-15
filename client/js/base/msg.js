@@ -86,7 +86,7 @@ export default class msg extends tag {
 						tag: "div",
 						attr: d.attr,
 						elem: [
-							d.icon ? new h(1, "display-1 text-center mb-5", new icon(d.icon)) : null,
+							d.icon ? new h(1, "display-1 text-center mx-3", new icon(d.icon)) : null,
 							new div("text-center", d.elem),
 						],
 					};

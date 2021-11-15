@@ -83,16 +83,7 @@ export default class toast extends tag {
 								  })
 								: null,
 							d.close
-								? // new button({
-								  // 		class: [
-								  // 			"btn-close",
-								  // 			(d.textcolor && d.textcolor === "light") || d.textcolor === "white"
-								  // 				? "btn-close-white"
-								  // 				: null,
-								  // 		],
-								  // 		attr: { "data-bs-dismiss": "toast", "aria-label": "Close" },
-								  //   })
-								  new btnclose(
+								? new btnclose(
 										"toast",
 										d.textcolor ? !(d.textcolor === "light" || d.textcolor === "white") : true
 								  )
@@ -106,15 +97,10 @@ export default class toast extends tag {
 				new div("d-flex align-items-stretch", [
 					new div("me-auto", d.elem),
 					!(d.icon || d.title) && d.close
-						? new button({
-								class: [
-									"btn-close",
-									(d.textcolor && d.textcolor === "light") || d.textcolor === "white"
-										? "btn-close-white"
-										: null,
-								],
-								attr: { "data-bs-dismiss": "toast", "aria-label": "Close" },
-						  })
+						? new btnclose(
+								"toast",
+								d.textcolor ? !(d.textcolor === "light" || d.textcolor === "white") : true
+						  )
 						: null,
 				])
 			);

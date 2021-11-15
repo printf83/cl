@@ -76,10 +76,6 @@ export default class modal extends tag {
 							["modal-header", !d.divider ? "border-bottom-0" : null],
 							[
 								new h(5, "modal-title", new label(d.icon, d.title)),
-								// new button({
-								// 	class: "btn-close",
-								// 	attr: { "data-bs-dismiss": "modal", "aria-label": "Close" },
-								// }),
 								new btnclose(
 									"modal",
 									d.textcolor ? !(d.textcolor === "light" || d.textcolor === "white") : true
@@ -108,73 +104,95 @@ export default class modal extends tag {
 					d.button = [d.button];
 				}
 
-				ctlButton = new div(
-					"justify-content-end",
-					d.button
-						.map(function (j, ix) {
-							if (j.hasOwnProperty("cl")) {
-								return j;
-							} else {
-								let i = {
-									id: null,
-									label: null,
-									icon: null,
-									color: null,
-									class: null,
-									onclick: null,
-								};
+				//standby button
+				let btn = d.button.map(function (j, ix) {
+					if (j.hasOwnProperty("cl")) {
+						return j;
+					} else {
+						let i = {
+							id: null,
+							label: null,
+							icon: null,
+							color: null,
+							class: null,
+							onclick: null,
+						};
 
-								//support string and object
-								if (typeof j === "string") {
-									i.label = j;
-								} else {
-									i = j;
+						//support string and object
+						if (typeof j === "string") {
+							i.label = j;
+						} else {
+							i = j;
+						}
+
+						i = core.extend(
+							{},
+							{
+								id: i.id ? i.id : `${d.id}-btn-${ix}`,
+								class: i.class,
+								onclick: i.onclick,
+
+								color: i.color,
+								label: i.label,
+								icon: i.icon,
+							},
+							i
+						);
+
+						return new button({
+							id: i.id,
+							label: i.label,
+							icon: i.icon,
+							class: core.merge.class(i.class, [d.centerbutton ? "ms-2" : null, "btn-modal"]),
+							color: i.color ? i.color : ix === 0 ? "primary" : "text-secondary",
+							onclick: function (event) {
+								let result = i.onclick instanceof Function ? i.onclick(event.currentTarget) : true;
+								if (result !== false) {
+									//find parent and close
+									modal.hide(event.currentTarget.closest(".modal"));
 								}
+							},
+							attr: { "data-bs-dismiss": i.onclick instanceof Function ? null : "modal" },
+						});
+					}
+				});
 
-								i = core.extend(
-									{},
-									{
-										id: i.id ? i.id : `${d.id}-btn-${ix}`,
-										class: i.class,
-										onclick: i.onclick,
+				//reverse button in not centerbutton
+				if (btn && !d.centerbutton) {
+					btn = btn.reverse();
+				}
 
-										color: i.color,
-										label: i.label,
-										icon: i.icon,
-									},
-									i
-								);
-
-								return new button({
-									id: i.id,
-									label: i.label,
-									icon: i.icon,
-									class: core.merge.class(i.class, ["ms-2", "btn-modal"]),
-									color: i.color ? i.color : ix === 0 ? "primary" : "text-secondary",
-									onclick: function (event) {
-										let result =
-											i.onclick instanceof Function ? i.onclick(event.currentTarget) : true;
-										if (result !== false) {
-											//find parent and close
-											modal.hide(event.currentTarget.closest(".modal"));
-										}
-									},
-									attr: { "data-bs-dismiss": i.onclick instanceof Function ? null : "modal" },
-								});
-							}
-						})
-						?.reverse()
+				//container for button
+				ctlButton = new div(
+					d.centerbutton ? ["d-grid", "gap-2", "col-12", "col-md-6", "mx-auto"] : "justify-content-end",
+					btn
 				);
 			}
 
 			//mix footer and button
-			let ctlFooter = new div(
-				["modal-footer", !d.divider ? "border-top-0" : null],
-				new div(
-					"container-fluid g-0 p-0",
-					new div("row align-items-center", [new div("col", ctlControl), new div("col-auto", ctlButton)])
-				)
-			);
+			let ctlFooter = null;
+			if (ctlButton || ctlControl) {
+				if (d.centerbutton) {
+					ctlFooter = new div(
+						["modal-footer", !d.divider ? "border-top-0" : null],
+						new div("container-fluid g-0 p-0", [
+							new div("row", new div("col", ctlButton)),
+							new div("row", new div("col", ctlControl)),
+						])
+					);
+				} else {
+					ctlFooter = new div(
+						["modal-footer", !d.divider ? "border-top-0" : null],
+						new div(
+							"container-fluid g-0 p-0",
+							new div("row align-items-center", [
+								new div("col", ctlControl),
+								new div("col-auto", ctlButton),
+							])
+						)
+					);
+				}
+			}
 
 			//combine header,body,footer to div.modal > div.modal-dialog > div.content
 			this._d = {
