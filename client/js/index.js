@@ -26,7 +26,7 @@ core.documentReady(() => {
 		"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce hendrerit tincidunt nibh ut condimentum. Nulla vitae vulputate elit. Sed accumsan varius mauris, vel bibendum magna consequat eget. Vivamus felis dolor, laoreet et blandit ut, iaculis eu arcu. Proin dapibus, metus vitae iaculis venenatis, lacus purus commodo tellus, aliquam commodo ex metus vulputate mi. Nam eu lorem vel nisi scelerisque hendrerit et id justo. Nunc vestibulum eget est sed ullamcorper. Etiam pulvinar, dui eget vehicula molestie, sapien sapien lobortis nulla, nec cursus urna sapien imperdiet tortor. Nam vitae lacus sem. Praesent id arcu vitae sem ultrices rutrum ut ac mi.";
 	let root = document.getElementById("root");
 
-	console.time("Proccesing Time");
+	// console.time("Proccesing Time");
 	let tid1 = core.UUID();
 	let tid2 = core.UUID();
 
@@ -498,6 +498,6 @@ core.documentReady(() => {
 
 	cl.replaceChild(root, b);
 
-	console.timeEnd("Proccesing Time");
-	console.log(`Element Count: ${core.countElement(root)}`);
+	// console.timeEnd("Proccesing Time");
+	// console.log(`Element Count: ${core.countElement(root)}`);
 });

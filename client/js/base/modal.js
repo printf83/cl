@@ -140,9 +140,6 @@ export default class modal extends tag {
 										if (result !== false) {
 											//find parent and close
 											modal.hide(event.currentTarget.closest(".modal"));
-											// let dom = event.currentTarget.closest(".modal");
-											// let mdl = bootstrap.Modal.getInstance(dom);
-											// mdl.hide();
 										}
 									},
 									attr: { "data-bs-dismiss": i.onclick instanceof Function ? null : "modal" },

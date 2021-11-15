@@ -191,6 +191,7 @@ export function mergeAttr(a, b, rules) {
 }
 
 export function appendChild(container, data) {
+	console.time("appendChild");
 	let n = node(data);
 	if (Node.prototype.isPrototypeOf(n)) {
 		container.appendChild(n);
@@ -199,11 +200,13 @@ export function appendChild(container, data) {
 			container.appendChild(i);
 		});
 	}
+	console.timeEnd("appendChild");
 
 	return container.lastChild;
 }
 
 export function prependChild(container, data) {
+	console.time("prependChild");
 	let n = node(data);
 	if (Node.prototype.isPrototypeOf(n)) {
 		container.insertBefore(n, container.firstChild);
@@ -212,11 +215,12 @@ export function prependChild(container, data) {
 			container.insertBefore(i, container.firstChild);
 		});
 	}
-
+	console.timeEnd("prependChild");
 	return container.firstChild;
 }
 
 export function replaceWith(elem, data) {
+	console.time("replaceWith");
 	while (elem.firstChild) {
 		elem.firstChild.remove();
 	}
@@ -234,15 +238,19 @@ export function replaceWith(elem, data) {
 
 	elem.remove();
 
+	console.timeEnd("replaceWith");
 	return r;
 }
 
 export function replaceChild(container, data) {
+	console.time("replaceChild");
 	while (container.firstChild) {
 		container.firstChild.remove();
 	}
 
 	build(container, data);
+
+	console.timeEnd("replaceChild");
 	return container.childNodes;
 }
 
