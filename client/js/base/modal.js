@@ -6,6 +6,7 @@ import h from "./h.js";
 import label from "./label.js";
 import button from "./button.js";
 import div from "./div.js";
+import btnclose from "./btnclose.js";
 
 export default class modal extends tag {
 	_d = null;
@@ -39,6 +40,15 @@ export default class modal extends tag {
 						fullscreen: false,
 						focus: true,
 
+						align: null, //left,right,center
+						color: null,
+						textcolor: null,
+						bordercolor: null,
+						border: true,
+
+						divider: true,
+						centerbutton: false,
+
 						elem: null,
 					},
 					t
@@ -62,13 +72,20 @@ export default class modal extends tag {
 			//generate header
 			let ctlHeader =
 				d.icon || d.title
-					? new div("modal-header", [
-							new h(5, "modal-title", new label(d.icon, d.title)),
-							new button({
-								class: "btn-close",
-								attr: { "data-bs-dismiss": "modal", "aria-label": "Close" },
-							}),
-					  ])
+					? new div(
+							["modal-header", !d.divider ? "border-bottom-0" : null],
+							[
+								new h(5, "modal-title", new label(d.icon, d.title)),
+								// new button({
+								// 	class: "btn-close",
+								// 	attr: { "data-bs-dismiss": "modal", "aria-label": "Close" },
+								// }),
+								new btnclose(
+									"modal",
+									d.textcolor ? !(d.textcolor === "light" || d.textcolor === "white") : true
+								),
+							]
+					  )
 					: null;
 
 			//check if first elem is tab
@@ -152,7 +169,7 @@ export default class modal extends tag {
 
 			//mix footer and button
 			let ctlFooter = new div(
-				"modal-footer",
+				["modal-footer", !d.divider ? "border-top-0" : null],
 				new div(
 					"container-fluid g-0 p-0",
 					new div("row align-items-center", [new div("col", ctlControl), new div("col-auto", ctlButton)])
@@ -183,7 +200,17 @@ export default class modal extends tag {
 									: "modal-fullscreen"
 								: null,
 						],
-						new div("modal-content", [ctlHeader, ctlBody, ctlFooter])
+						new div(
+							[
+								"modal-content",
+								d.align ? `text-${d.align}` : null,
+								d.color ? `bg-${d.color}` : null,
+								d.textcolor ? `text-${d.textcolor}` : null,
+								d.bordercolor ? `border-${d.bordercolor}` : null,
+								!d.border ? "border-0" : null,
+							],
+							[ctlHeader, ctlBody, ctlFooter]
+						)
 					),
 				}),
 			};

@@ -2,12 +2,12 @@
 import * as core from "./core.js";
 import * as cl from "./cl.js";
 import tag from "./tag.js";
-import h from "./h.js";
 import label from "./label.js";
 import button from "./button.js";
 import div from "./div.js";
 import strong from "./strong.js";
 import small from "./small.js";
+import btnclose from "./btnclose.js";
 
 export default class toast extends tag {
 	_d = null;
@@ -38,6 +38,8 @@ export default class toast extends tag {
 						delay: 5000,
 						color: null,
 						textcolor: null,
+						bordercolor: null,
+						border: false,
 						date: new Date(),
 						timer: true,
 						position: "top-0 end-0",
@@ -81,15 +83,19 @@ export default class toast extends tag {
 								  })
 								: null,
 							d.close
-								? new button({
-										class: [
-											"btn-close",
-											(d.textcolor && d.textcolor === "light") || d.textcolor === "white"
-												? "btn-close-white"
-												: null,
-										],
-										attr: { "data-bs-dismiss": "toast", "aria-label": "Close" },
-								  })
+								? // new button({
+								  // 		class: [
+								  // 			"btn-close",
+								  // 			(d.textcolor && d.textcolor === "light") || d.textcolor === "white"
+								  // 				? "btn-close-white"
+								  // 				: null,
+								  // 		],
+								  // 		attr: { "data-bs-dismiss": "toast", "aria-label": "Close" },
+								  //   })
+								  new btnclose(
+										"toast",
+										d.textcolor ? !(d.textcolor === "light" || d.textcolor === "white") : true
+								  )
 								: null,
 					  ])
 					: null;
@@ -122,6 +128,8 @@ export default class toast extends tag {
 							!d.show ? "show" : null, //for preview perpose only
 							d.color ? `bg-${d.color}` : null,
 							d.textcolor ? `text-${d.textcolor}` : null,
+							d.bordercolor ? `border-${d.bordercolor}` : null,
+							!d.border ? "border-0" : null,
 						],
 						id: d.id,
 						tabindex: -1,

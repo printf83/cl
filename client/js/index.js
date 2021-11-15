@@ -94,6 +94,9 @@ core.documentReady(() => {
 											label: "Large",
 											onclick: function (sender) {
 												new modal({
+													divider: false,
+													color: "primary",
+													textcolor: "light",
 													elem: new msg(
 														"lg",
 														{
