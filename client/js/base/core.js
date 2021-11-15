@@ -152,3 +152,30 @@ export function countElement(node) {
 
 	return cnt;
 }
+
+export function getValue(container) {
+	let elem = container.querySelectorAll("[name]");
+	if (elem && elem.length > 0) {
+		let rtn = {};
+
+		elem.forEach(function (i) {
+			rtn[i.getAttribute("name")] = i.value ? i.value : null;
+		});
+
+		return rtn;
+	}
+
+	return null;
+}
+
+export function setValue(container, value) {
+	let elem = container.querySelectorAll("[name]");
+	if (elem && elem.length > 0 && value) {
+		elem.forEach(function (i) {
+			let val = value[i.getAttribute("name")];
+			if (val) {
+				i.value = val;
+			}
+		});
+	}
+}

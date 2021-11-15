@@ -318,7 +318,7 @@ export default class modal extends tag {
 	};
 
 	static hide(element) {
-		let mdl = new bootstrap.Modal(element);
+		let mdl = bootstrap.Modal.getInstance(element);
 		mdl.hide();
 	}
 }

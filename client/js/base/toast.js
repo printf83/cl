@@ -13,7 +13,6 @@ export default class toast extends tag {
 	_d = null;
 	_n = null;
 	_m = null;
-	_s = null;
 
 	constructor(...arg) {
 		super();
@@ -255,5 +254,10 @@ export default class toast extends tag {
 				}
 			}
 		}
+	}
+
+	static hide(element) {
+		let tst = bootstrap.Toast.getInstance(element);
+		tst.hide();
 	}
 }

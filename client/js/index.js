@@ -20,6 +20,7 @@ import small from "./base/small.js";
 import modal from "./base/modal.js";
 import toast from "./base/toast.js";
 import msg from "./base/msg.js";
+import a from "./base/a.js";
 
 core.documentReady(() => {
 	let loream =
@@ -146,7 +147,7 @@ core.documentReady(() => {
 					label: "Form",
 					elem: [
 						new div(
-							"container",
+							"container form-try-get-data",
 							new div("row g-2", [
 								new input({
 									label: "Hello",
@@ -311,6 +312,7 @@ core.documentReady(() => {
 								}),
 
 								new input({
+									name: "state",
 									label: "State",
 									type: "select",
 									weight: "lg",
@@ -332,12 +334,34 @@ core.documentReady(() => {
 								}),
 
 								new input({
+									name: "rng",
 									label: "Example Range",
 									type: "range",
 									value: 2.5,
 									min: 0,
 									max: 5,
 									step: 0.5,
+								}),
+
+								new button({
+									label: "Test Read Data",
+									onclick: function () {
+										let c = document.getElementsByClassName("form-try-get-data")[0];
+										new toast({
+											title: "Result",
+											icon: "fire",
+											elem: JSON.stringify(core.getValue(c)),
+											color: "primary",
+											textcolor: "light",
+										}).show();
+									},
+								}),
+								new button({
+									label: "Test Write Data",
+									onclick: function () {
+										let c = document.getElementsByClassName("form-try-get-data")[0];
+										core.setValue(c, { name: "Abu Bakar Ella", rng: 1 });
+									},
 								}),
 							])
 						),
@@ -502,7 +526,4 @@ core.documentReady(() => {
 	]);
 
 	cl.replaceChild(root, b);
-
-	// console.timeEnd("Proccesing Time");
-	// console.log(`Element Count: ${core.countElement(root)}`);
 });

@@ -510,9 +510,22 @@ export default class input extends tag {
 			}
 		} else {
 			this._d = null;
-			}
+		}
 
 		super.data = this._d;
 	}
 
+	static val(elem, value) {
+		if (value) {
+			if (elem && elem.value) {
+				elem.value = value;
+			}
+		} else {
+			if (elem && elem.value) {
+				return elem.value;
+			}
+
+			return null;
+		}
+	}
 }
