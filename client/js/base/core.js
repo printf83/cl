@@ -159,7 +159,27 @@ export function getValue(container) {
 		let rtn = {};
 
 		elem.forEach(function (i) {
-			rtn[i.getAttribute("name")] = i.value ? i.value : null;
+			let type = i.getAttribute("type");
+			switch (type) {
+				case "radio":
+					if (i.checked) {
+						rtn[i.getAttribute("name")] = i.value;
+					}
+
+					break;
+				case "checkbox":
+					if (!rtn.hasOwnProperty(i.getAttribute("name"))) {
+						rtn[i.getAttribute("name")] = [];
+					}
+
+					if (i.checked) {
+						rtn[i.getAttribute("name")].push(i.value);
+					}
+
+					break;
+				default:
+					rtn[i.getAttribute("name")] = i.value ? i.value : null;
+			}
 		});
 
 		return rtn;
@@ -174,7 +194,23 @@ export function setValue(container, value) {
 		elem.forEach(function (i) {
 			let val = value[i.getAttribute("name")];
 			if (val) {
-				i.value = val;
+				let type = i.getAttribute("type");
+				switch (type) {
+					case "radio":
+						i.checked = i.value === val;
+
+						break;
+					case "checkbox":
+						if (Array.isArray(val)) {
+							i.checked = val.includes(i.value);
+						} else {
+							i.checked = val === i.value;
+						}
+
+						break;
+					default:
+						i.value = val;
+				}
 			}
 		});
 	}

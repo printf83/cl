@@ -110,6 +110,7 @@ export default class toast extends tag {
 					attr: {
 						class: [
 							"toast",
+							// "position-absolute",
 							!d.show ? "show" : null, //for preview perpose only
 							d.color ? `bg-${d.color}` : null,
 							d.textcolor ? `text-${d.textcolor}` : null,
@@ -122,6 +123,8 @@ export default class toast extends tag {
 						"data-bs-autohide": d.autohide ? "true" : "false",
 						"data-bs-delay": d.delay,
 						"data-cl-position": d.position,
+						zIndex: 1,
+						// style: { top: "0", left: "0" },
 					},
 					elem: [ctlHeader, ctlBody],
 				}),
@@ -157,11 +160,11 @@ export default class toast extends tag {
 			cl.appendChild(
 				document.body,
 				new div({
-					class: "position-relative",
+					class: "position-absolute",
 					attr: {
 						"aria-live": "polite",
 						"aria-atomic": "true",
-						zIndex: 1031,
+						zIndex: 3,
 					},
 					elem: new div(["toast-container", "position-fixed", "p-3", position], null),
 				})

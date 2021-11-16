@@ -360,7 +360,12 @@ core.documentReady(() => {
 									label: "Test Write Data",
 									onclick: function () {
 										let c = document.getElementsByClassName("form-try-get-data")[0];
-										core.setValue(c, { name: "Abu Bakar Ella", rng: 1 });
+										core.setValue(c, {
+											name: "Abu Bakar Ella",
+											rng: 1,
+											interest: "shopping",
+											sex: "f",
+										});
 									},
 								}),
 							])
