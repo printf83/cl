@@ -66,6 +66,20 @@ export default class modal extends tag {
 	}
 	set data(d) {
 		if (d) {
+			let bI = core.getBaseIcon(d.icon);
+			let defButtonColor = "primary";
+			let defButtonTextColor = null;
+			if (bI) {
+				d.icon = {
+					icon: bI.icon,
+					style: bI.style,
+					color: bI.color,
+				};
+
+				defButtonColor = bI.color;
+				defButtonTextColor = bI.textcolor ? bI.textcolor : null;
+			}
+
 			//generate id
 			d.id = d.id || core.UUID();
 
@@ -143,13 +157,18 @@ export default class modal extends tag {
 							id: i.id,
 							label: i.label,
 							icon: i.icon,
-							class: core.merge.class(i.class, [d.centerbutton ? "ms-2" : null, "btn-modal"]),
-							color: i.color ? i.color : ix === 0 ? "primary" : "text-secondary",
+							class: core.merge.class(i.class, [!d.centerbutton ? "ms-2" : null, "btn-modal"]),
+							color:
+								ix === 0 ? (i.color ? i.color : defButtonColor) : i.color ? i.color : "text-secondary", //i.color ? i.color : ix === 0 ? defButtonColor : "text-secondary",
+							textColor: defButtonTextColor,
 							onclick: function (event) {
-								let result = i.onclick instanceof Function ? i.onclick(event.currentTarget) : true;
+								let mdl = event.currentTarget.closest(".modal");
+								let formdata = core.getValue(mdl);
+								let result =
+									i.onclick instanceof Function ? i.onclick(event.currentTarget, formdata) : true;
 								if (result !== false) {
 									//find parent and close
-									modal.hide(event.currentTarget.closest(".modal"));
+									modal.hide(mdl);
 								}
 							},
 							attr: { "data-bs-dismiss": i.onclick instanceof Function ? null : "modal" },

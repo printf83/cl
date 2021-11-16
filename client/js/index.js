@@ -20,7 +20,7 @@ import small from "./base/small.js";
 import modal from "./base/modal.js";
 import toast from "./base/toast.js";
 import msg from "./base/msg.js";
-// import a from "./base/a.js";
+import * as dlg from "./base/dlg.js";
 
 core.documentReady(() => {
 	let loream =
@@ -121,10 +121,15 @@ core.documentReady(() => {
 								m.show();
 							}),
 							new button("Test Long Toast", "secondary me-2", function () {
-								new toast("primary", "light", "fire", loream).show();
+								new toast("x", loream).show();
 							}),
 							new button("Test Short Toast", "info me-2", function () {
-								new toast("primary", "light", "fire", "loream").show();
+								new toast("!", "loream").show();
+							}),
+							new button("Test Msgbox", "success me-2", function () {
+								new dlg.msgbox("!!", "This is info msg", function () {
+									new toast("-", "Hello world").show();
+								}).show();
 							}),
 						])
 					),

@@ -43,12 +43,27 @@ export default class toast extends tag {
 				t.color = arg[0];
 				t.elem = new msg("sm", arg[1], arg[2]);
 			} else if (arg.length === 2) {
-				t.color = arg[0];
+				let bI = core.getBaseIcon(arg[0]);
+				if (bI) {
+					t.color = bI.color;
+					t.textcolor = bI.textcolor;
 
-				if (typeof arg[1] === "string") {
-					t.elem = new msg("sm", null, arg[1]);
+					t.elem = new msg(
+						"sm",
+						{
+							icon: bI.icon,
+							style: bI.style,
+						},
+						arg[1]
+					);
 				} else {
-					t.elem = arg[1];
+					t.color = arg[0];
+
+					if (typeof arg[1] === "string") {
+						t.elem = new msg("sm", null, arg[1]);
+					} else {
+						t.elem = arg[1];
+					}
 				}
 			} else if (arg.length === 1) {
 				if (typeof arg[0] === "string") {
@@ -98,6 +113,13 @@ export default class toast extends tag {
 	}
 	set data(d) {
 		if (d) {
+			let bI = core.getBaseIcon(d.icon);
+			if (bI) {
+				d.icon = bI.icon;
+				d.color = d.color || bI.color;
+				d.textcolor = d.textcolor || bI.textcolor;
+			}
+
 			//generate id
 			d.id = d.id || core.UUID();
 

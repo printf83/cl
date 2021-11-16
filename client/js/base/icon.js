@@ -8,6 +8,7 @@ import tag from "./tag.js";
  * style,icon
  * opt : {attr,class,style,icon,weight,fixwidth,spin,rotate,color,inverse,elem,stack}
  */
+
 export default class icon extends tag {
 	_d = null;
 	clicon = 1;
@@ -71,6 +72,14 @@ export default class icon extends tag {
 	}
 	set data(d) {
 		if (d) {
+			//baseicon
+			let bI = core.getBaseIcon(d.icon);
+			if (bI) {
+				d.icon = bI.icon;
+				d.color = d.color || bI.color;
+				d.style = bI.style ? bI.style : d.style;
+			}
+
 			let rotate = null;
 			switch (d.rotate) {
 				case 90:

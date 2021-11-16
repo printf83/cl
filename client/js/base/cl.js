@@ -1,5 +1,4 @@
 "use strict";
-import * as core from "./core.js";
 
 const booleanAttr = [
 	"allowfullscreen",

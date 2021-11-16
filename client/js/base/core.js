@@ -11,6 +11,25 @@ String.prototype.capitalize = function () {
 	return this.charAt(0).toUpperCase() + this.slice(1);
 };
 
+export const baseIcon = {
+	i: { icon: "info-circle", style: "fas", color: "primary", textcolor: "light" },
+	"!": { icon: "exclamation-triangle", style: "fas", color: "warning", textcolor: "dark" },
+	"!!": { icon: "exclamation-triangle", style: "fas", color: "danger", textcolor: "light" },
+	"?": { icon: "question-circle", style: "fas", color: "success", textcolor: "light" },
+	"/": { icon: "check-circle", style: "fas", color: "success", textcolor: "light" },
+	x: { icon: "times-circle", style: "fas", color: "danger", textcolor: "light" },
+	"-": { icon: "minus-circle", style: "fas", color: "danger", textcolor: "light" },
+};
+
+export function getBaseIcon(icon) {
+	if (icon && typeof icon === "string") {
+		if (baseIcon.hasOwnProperty(icon)) {
+			return baseIcon[icon];
+		}
+	}
+	return null;
+}
+
 export function extend(out) {
 	out = out || {};
 
