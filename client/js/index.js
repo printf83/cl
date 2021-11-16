@@ -127,7 +127,7 @@ core.documentReady(() => {
 								new toast("!", "loream").show();
 							}),
 							new button("Test Msgbox", "success me-2", function () {
-								new dlg.msgbox("!!", "This is info msg", function () {
+								new dlg.msgbox("?", "This is info msg", function () {
 									new toast("-", "Hello world").show();
 								}).show();
 							}),
