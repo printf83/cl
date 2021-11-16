@@ -73,7 +73,7 @@ export default class msg extends tag {
 							d.icon
 								? new div(
 										"d-flex align-item-start",
-										new div(d.weight === "sm" ? "fs-6" : "fs-1", new icon(d.icon))
+										new div(d.weight === "sm" ? "fs-4" : "display-4", new icon(d.icon))
 								  )
 								: null,
 							new div("d-flex align-items-center", new div(d.elem)),

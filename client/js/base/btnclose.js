@@ -51,11 +51,11 @@ export default class btnclose extends button {
 		if (d) {
 			this._d = {
 				type: "button",
-				attr: {
-					class: ["btn-close", !d.dark ? "btn-close-white" : null],
+				attr: core.merge.attr(d.attr, {
+					class: core.merge.class(d.class, ["btn-close", !d.dark ? "btn-close-white" : null]),
 					"data-bs-dismiss": d.dismiss,
 					"aria-label": d.label,
-				},
+				}),
 			};
 		} else {
 			this._d = null;
