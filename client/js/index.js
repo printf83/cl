@@ -122,22 +122,16 @@ core.documentReady(() => {
 							}),
 							new button("Test Long Toast", "secondary me-2", function () {
 								new toast({
-									// title: "Title",
-									// icon: "fire",
 									elem: new msg("sm", "fire", loream),
 									color: "primary",
 									textcolor: "light",
-									// autohide: false,
 								}).show();
 							}),
 							new button("Test Short Toast", "info me-2", function () {
 								new toast({
-									// title: "Title",
-									// icon: "fire",
 									elem: new msg("sm", "fire", "loream"),
 									color: "primary",
 									textcolor: "light",
-									// autohide: false,
 								}).show();
 							}),
 						])

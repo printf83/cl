@@ -1,6 +1,5 @@
 "use strict";
 import * as core from "./core.js";
-import { mergeAttr } from "./cl.js";
 import tag from "./tag.js";
 import label from "./label.js";
 import button from "./button.js";
@@ -259,7 +258,7 @@ export default class input extends tag {
 				case "radio":
 					mainctl = new tag({
 						tag: "input",
-						attr: mergeAttr(d.attr, {
+						attr: core.merge.attr(d.attr, {
 							id: d.id,
 							name: d.name,
 							type: d.type === "switch" ? "checkbox" : d.type,
@@ -282,7 +281,7 @@ export default class input extends tag {
 				case "textarea":
 					mainctl = new tag({
 						tag: "textarea",
-						attr: mergeAttr(d.attr, {
+						attr: core.merge.attr(d.attr, {
 							id: d.id,
 							name: d.name,
 							class: [
@@ -323,7 +322,7 @@ export default class input extends tag {
 				case "select":
 					mainctl = new tag({
 						tag: "select",
-						attr: mergeAttr(d.attr, {
+						attr: core.merge.attr(d.attr, {
 							id: d.id,
 							name: d.name,
 							class: core.merge.class(d.class, [
@@ -365,14 +364,14 @@ export default class input extends tag {
 				case "datalist":
 					mainctl = new tag({
 						tag: "datalist",
-						attr: mergeAttr(d.attr, { id: d.id }),
+						attr: core.merge.attr(d.attr, { id: d.id }),
 						elem: new option(d.option, d.value),
 					});
 					break;
 				default:
 					mainctl = new tag({
 						tag: "input",
-						attr: mergeAttr(d.attr, {
+						attr: core.merge.attr(d.attr, {
 							id: d.id,
 							name: d.name,
 							type: d.type,

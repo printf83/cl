@@ -1,6 +1,5 @@
 "use strict";
 import * as core from "./core.js";
-import { mergeAttr } from "./cl.js";
 import div from "./div.js";
 
 /**
@@ -55,7 +54,7 @@ export default class btngroup extends div {
 	set data(d) {
 		if (d) {
 			this._d = {
-				attr: mergeAttr(d.attr, {
+				attr: core.merge.attr(d.attr, {
 					role: "group",
 					"aria-label": d.label,
 				}),
@@ -64,9 +63,8 @@ export default class btngroup extends div {
 			};
 		} else {
 			this._d = null;
-			}
+		}
 
 		super.data = this._d;
 	}
-
 }

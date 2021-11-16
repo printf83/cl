@@ -1,5 +1,4 @@
 import * as core from "./core.js";
-import { mergeAttr } from "./cl.js";
 import tag from "./tag.js";
 import div from "./div.js";
 
@@ -64,7 +63,7 @@ export class toggle extends tag {
 		if (d && this._e) {
 			this._d = this._e.data;
 
-			this._d.attr = mergeAttr(this._d.attr, {
+			this._d.attr = core.merge.attr(this._d.attr, {
 				"aria-controls": d.target,
 				"aria-expanded": d.show ? "true" : "false",
 				"data-bs-target": d.target,
@@ -140,7 +139,7 @@ export class container extends tag {
 		if (d && this._e) {
 			this._d = {
 				elem: new div({
-					attr: mergeAttr(d.attr, {
+					attr: core.merge.attr(d.attr, {
 						id: d.id,
 						class: core.merge.class(d.class, ["collapse", d.show ? "show" : null]),
 					}),
@@ -149,9 +148,8 @@ export class container extends tag {
 			};
 		} else {
 			this._d = null;
-				}
+		}
 
 		super.data = this._d;
 	}
-
 }

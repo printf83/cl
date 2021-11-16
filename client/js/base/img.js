@@ -1,6 +1,5 @@
 "use strict";
 import * as core from "./core.js";
-import { mergeAttr } from "./cl.js";
 import tag from "./tag.js";
 
 /**
@@ -63,7 +62,7 @@ export default class img extends tag {
 		if (d) {
 			this._d = {
 				tag: "img",
-				attr: mergeAttr(d.attr, {
+				attr: core.merge.attr(d.attr, {
 					class: d.class,
 					style: d.style,
 
@@ -75,9 +74,8 @@ export default class img extends tag {
 			};
 		} else {
 			this._d = null;
-				}
+		}
 
 		super.data = this._d;
 	}
-
 }

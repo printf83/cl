@@ -1,13 +1,12 @@
 "use strict";
 import * as core from "./core.js";
-import { mergeAttr } from "./cl.js";
 import tag from "./tag.js";
 
 /**
  * icon
  * [style,icon]
  * style,icon
- * opt : {attr,style,icon,weight,fixwidth,spin,rotate,color,inverse,elem,stack}
+ * opt : {attr,class,style,icon,weight,fixwidth,spin,rotate,color,inverse,elem,stack}
  */
 export default class icon extends tag {
 	_d = null;
@@ -48,6 +47,7 @@ export default class icon extends tag {
 				{},
 				{
 					attr: null,
+					class: null,
 					style: null,
 					icon: null,
 					weight: null,
@@ -87,8 +87,8 @@ export default class icon extends tag {
 
 			this._d = {
 				tag: d.icon ? "i" : "span",
-				attr: mergeAttr(d.attr, {
-					class: [
+				attr: core.merge.attr(d.attr, {
+					class: core.merge.class(d.class, [
 						d.style ? d.style : d.icon ? "fas" : null,
 						d.icon ? `fa-${d.icon}` : null,
 						d.weight ? `fa-${d.weight}` : null,
@@ -99,15 +99,14 @@ export default class icon extends tag {
 						d.inverse ? "fa-inverse" : null,
 						d.color ? `text-${d.color}` : null,
 						rotate,
-					],
+					]),
 				}),
 				elem: d.elem,
 			};
 		} else {
 			this._d = null;
-			}
+		}
 
 		super.data = this._d;
 	}
-
 }

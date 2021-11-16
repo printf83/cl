@@ -9,6 +9,33 @@ import strong from "./strong.js";
 import small from "./small.js";
 import btnclose from "./btnclose.js";
 
+/**
+ * color,icon,elem
+ * icon,elem
+ * elem|[elem]|string
+ * opt : {attr,id,class,elem}
+ */
+
+// attr: null,
+
+// 					id: null,
+// 					class: null,
+// 					animate: true,
+// 					title: null,
+// 					icon: null,
+// 					elem: null,
+// 					close: true,
+// 					autohide: true,
+// 					delay: 5000,
+// 					color: null,
+// 					textcolor: null,
+// 					bordercolor: null,
+// 					border: false,
+// 					date: new Date(),
+// 					timer: true,
+// 					position: "top-0 end-0",
+
+// 					show: true, //preview only
 export default class toast extends tag {
 	_d = null;
 	_n = null;
@@ -18,38 +45,55 @@ export default class toast extends tag {
 		super();
 
 		if (arg && arg.length > 0) {
-			if (arg.length === 1) {
-				let t = arg[0];
-
-				this.data = core.extend(
-					{},
-					{
-						attr: null, //combine to container
-
-						id: null,
-						class: null,
-						animate: true,
-						title: null,
-						icon: null,
-						elem: null,
-						close: true,
-						autohide: true,
-						delay: 5000,
-						color: null,
-						textcolor: null,
-						bordercolor: null,
-						border: false,
-						date: new Date(),
-						timer: true,
-						position: "top-0 end-0",
-
-						show: true, //preview only
-					},
-					t
-				);
+			let t = {
+				color: null,
+				icon: null,
+				elem: null,
+			};
+			if (arg.length === 3) {
+				t.color = arg[0];
+				t.icon = arg[1];
+				t.elem = arg[2];
+			} else if (arg.length === 2) {
+				t.color = arg[0];
+				t.elem = arg[1];
+			} else if (
+				arg.length === 1 &&
+				(typeof arg[0] === "string" || Array.isArray(arg[0]) || arg[0].hasOwnProperty("cl"))
+			) {
+				t.elem = arg[0];
+			} else if (arg.length === 1) {
+				t = arg[0];
 			} else {
 				console.error("Unsupported argument", arg);
 			}
+
+			this.data = core.extend(
+				{},
+				{
+					attr: null,
+
+					id: null,
+					class: null,
+					animate: true,
+					title: null,
+					icon: null,
+					elem: null,
+					close: true,
+					autohide: true,
+					delay: 5000,
+					color: null,
+					textcolor: null,
+					bordercolor: null,
+					border: false,
+					date: new Date(),
+					timer: true,
+					position: "top-0 end-0",
+
+					show: true, //preview only
+				},
+				t
+			);
 		} else {
 			this.data = null;
 		}
@@ -81,12 +125,7 @@ export default class toast extends tag {
 										elem: tc ? tc.msg : "Just now", //need to add timer here
 								  })
 								: null,
-							d.close
-								? new btnclose(
-										"toast",
-										d.textcolor ? !(d.textcolor === "light" || d.textcolor === "white") : true
-								  )
-								: null,
+							d.close ? new btnclose("toast") : null,
 					  ])
 					: null;
 
@@ -107,16 +146,15 @@ export default class toast extends tag {
 			//combine header,body to div.toast
 			this._d = {
 				elem: new div({
-					attr: {
-						class: [
+					attr: core.merge.attr(d.attr, {
+						class: core.merge.class(d.class, [
 							"toast",
-							// "position-absolute",
 							!d.show ? "show" : null, //for preview perpose only
 							d.color ? `bg-${d.color}` : null,
 							d.textcolor ? `text-${d.textcolor}` : null,
 							d.bordercolor ? `border-${d.bordercolor}` : null,
 							!d.border ? "border-0" : null,
-						],
+						]),
 						id: d.id,
 						tabindex: -1,
 						"data-bs-animation": d.animate ? "true" : null,
@@ -124,8 +162,7 @@ export default class toast extends tag {
 						"data-bs-delay": d.delay,
 						"data-cl-position": d.position,
 						zIndex: 1,
-						// style: { top: "0", left: "0" },
-					},
+					}),
 					elem: [ctlHeader, ctlBody],
 				}),
 			};

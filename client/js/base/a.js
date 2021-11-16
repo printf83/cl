@@ -1,6 +1,5 @@
 "use strict";
 import * as core from "./core.js";
-import { mergeAttr } from "./cl.js";
 import tag from "./tag.js";
 
 /**
@@ -96,7 +95,7 @@ export default class a extends tag {
 		if (d) {
 			this._d = {
 				tag: "a",
-				attr: mergeAttr(d.attr, {
+				attr: core.merge.attr(d.attr, {
 					class: core.merge.class(d.class, "ns-link"),
 					style: d.style,
 
@@ -113,5 +112,4 @@ export default class a extends tag {
 
 		super.data = this._d;
 	}
-
 }

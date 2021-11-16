@@ -1,6 +1,5 @@
 "use strict";
 import * as core from "./core.js";
-import { mergeAttr } from "./cl.js";
 import tag from "./tag.js";
 import icon from "./icon.js";
 import div from "./div.js";
@@ -10,7 +9,7 @@ import h from "./h.js";
  * weight,icon,label
  * icon,label
  * label
- * opt : {attr,icon,weight,elem}
+ * opt : {attr,class,icon,weight,elem}
  */
 export default class msg extends tag {
 	_d = null;
@@ -45,6 +44,7 @@ export default class msg extends tag {
 				{},
 				{
 					attr: null,
+					class: null,
 					icon: null,
 					weight: null, //font size fs-1 to fs-6 or display-1 to display-6 (any class for i)
 					elem: null,
@@ -66,8 +66,8 @@ export default class msg extends tag {
 				case "md":
 					this._d = {
 						tag: "div",
-						attr: mergeAttr(d.attr, {
-							class: ["d-flex", "align-items-stretch", "gap-2"],
+						attr: core.merge.attr(d.attr, {
+							class: core.merge.class(d.class, ["d-flex", "align-items-stretch", "gap-2"]),
 						}),
 						elem: [
 							d.icon
@@ -84,7 +84,9 @@ export default class msg extends tag {
 				case "lg":
 					this._d = {
 						tag: "div",
-						attr: d.attr,
+						attr: core.merge.attr(d.attr, {
+							class: d.class,
+						}),
 						elem: [
 							d.icon ? new h(1, "display-1 text-center mx-3", new icon(d.icon)) : null,
 							new div("text-center", d.elem),

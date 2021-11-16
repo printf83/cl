@@ -1,6 +1,5 @@
 "use strict";
 import * as core from "./core.js";
-import { mergeAttr } from "./cl.js";
 import tag from "./tag.js";
 import a from "./a.js";
 import div from "./div.js";
@@ -78,7 +77,7 @@ class main extends tag {
 		if (d && this.tag) {
 			this._d = {
 				tag: this.tag,
-				attr: mergeAttr(d.attr, {
+				attr: core.merge.attr(d.attr, {
 					class: core.merge.class(
 						this.className,
 						core.merge.class(d.class, [
@@ -97,11 +96,10 @@ class main extends tag {
 			this.tag = null;
 			this.className = null;
 			this._d = null;
-				}
+		}
 
 		super.data = this._d;
 	}
-
 }
 
 export class container extends main {
@@ -328,7 +326,7 @@ export class horizontal extends tag {
 		if (d) {
 			this._d = {
 				tag: "div",
-				attr: mergeAttr(d.attr, {
+				attr: core.merge.attr(d.attr, {
 					class: [
 						"row",
 						d.class,
@@ -345,11 +343,10 @@ export class horizontal extends tag {
 			};
 		} else {
 			this._d = null;
-				}
+		}
 
 		super.data = this._d;
 	}
-
 }
 
 /**
@@ -377,7 +374,7 @@ export class link extends a {
 		super.data = d;
 
 		if (super.data) {
-			super.data.attr = mergeAttr(super.data.attr, { class: "card-link" });
+			super.data.attr = core.merge.attr(super.data.attr, { class: "card-link" });
 		}
 	}
 }
@@ -396,7 +393,7 @@ export class img extends imgtag {
 		if (super.data) {
 			d = core.extend({}, { placement: "top" }, d);
 
-			super.data.attr = mergeAttr(super.data.attr, {
+			super.data.attr = core.merge.attr(super.data.attr, {
 				class: [
 					d.placement === "full" ? "card-img" : null,
 					d.placement === "top" ? "card-img-top" : null,

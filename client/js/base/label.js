@@ -1,6 +1,5 @@
 "use strict";
 import * as core from "./core.js";
-import { mergeAttr } from "./cl.js";
 import tag from "./tag.js";
 import span from "./span.js";
 import icon from "./icon.js";
@@ -72,7 +71,7 @@ export default class label extends tag {
 			} else {
 				this._d = {
 					tag: "label",
-					attr: mergeAttr(d.attr, {
+					attr: core.merge.attr(d.attr, {
 						for: d.for,
 					}),
 					elem: [
@@ -83,9 +82,8 @@ export default class label extends tag {
 			}
 		} else {
 			this._d = null;
-				}
+		}
 
 		super.data = this._d;
 	}
-
 }

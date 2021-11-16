@@ -1,5 +1,4 @@
 import * as core from "./core.js";
-import { mergeAttr } from "./cl.js";
 import tag from "./tag.js";
 
 /**
@@ -64,7 +63,7 @@ export default class tooltip extends tag {
 		if (d && this.elem) {
 			this._d = this.elem.data;
 
-			this._d.attr = mergeAttr(this._d.attr, {
+			this._d.attr = core.merge.attr(this._d.attr, {
 				title: d.type === "popover" ? d.title : d.msg,
 				"data-bs-toggle": d.type,
 				"data-bs-content": d.type === "popover" ? d.msg : null,
@@ -78,5 +77,4 @@ export default class tooltip extends tag {
 
 		super.data = this._d;
 	}
-
 }
