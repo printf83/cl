@@ -3,39 +3,24 @@ import * as core from "./core.js";
 import * as cl from "./cl.js";
 import tag from "./tag.js";
 import label from "./label.js";
-import button from "./button.js";
+import msg from "./msg.js";
 import div from "./div.js";
 import strong from "./strong.js";
 import small from "./small.js";
 import btnclose from "./btnclose.js";
 
 /**
- * color,icon,elem
- * icon,elem
- * elem|[elem]|string
- * opt : {attr,id,class,elem}
+ * color,textcolor,icon,msg
+ * color,icon,msg
+ * color,msg
+ * color,[elem]
+ * color,elem
+ * elem
+ * [elem]
+ * msg
+ * opt : {attr,id,class,animate,title,icon,elem,close,autohide,delay,color,textcolor,bordercolor,border,date,timer,position,show}
  */
 
-// attr: null,
-
-// 					id: null,
-// 					class: null,
-// 					animate: true,
-// 					title: null,
-// 					icon: null,
-// 					elem: null,
-// 					close: true,
-// 					autohide: true,
-// 					delay: 5000,
-// 					color: null,
-// 					textcolor: null,
-// 					bordercolor: null,
-// 					border: false,
-// 					date: new Date(),
-// 					timer: true,
-// 					position: "top-0 end-0",
-
-// 					show: true, //preview only
 export default class toast extends tag {
 	_d = null;
 	_n = null;
@@ -46,24 +31,33 @@ export default class toast extends tag {
 
 		if (arg && arg.length > 0) {
 			let t = {
+				textcolor: null,
 				color: null,
-				icon: null,
 				elem: null,
 			};
-			if (arg.length === 3) {
+			if (arg.length === 4) {
 				t.color = arg[0];
-				t.icon = arg[1];
-				t.elem = arg[2];
+				t.textcolor = arg[1];
+				t.elem = new msg("sm", arg[2], arg[3]);
+			} else if (arg.length === 3) {
+				t.color = arg[0];
+				t.elem = new msg("sm", arg[1], arg[2]);
 			} else if (arg.length === 2) {
 				t.color = arg[0];
-				t.elem = arg[1];
-			} else if (
-				arg.length === 1 &&
-				(typeof arg[0] === "string" || Array.isArray(arg[0]) || arg[0].hasOwnProperty("cl"))
-			) {
-				t.elem = arg[0];
+
+				if (typeof arg[1] === "string") {
+					t.elem = new msg("sm", null, arg[1]);
+				} else {
+					t.elem = arg[1];
+				}
 			} else if (arg.length === 1) {
-				t = arg[0];
+				if (typeof arg[0] === "string") {
+					t.elem = new msg("sm", null, arg[0]);
+				} else if (Array.isArray(arg[0]) || arg[0].hasOwnProperty("cl")) {
+					t.elem = arg[0];
+				} else {
+					t = arg[0];
+				}
 			} else {
 				console.error("Unsupported argument", arg);
 			}
