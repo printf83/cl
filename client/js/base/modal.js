@@ -8,6 +8,9 @@ import button from "./button.js";
 import div from "./div.js";
 import btnclose from "./btnclose.js";
 
+/**
+ * option : {attr,id,class,static,title,icon,footer,button,animated,show,scrollable,center,size,fullscreen,focus,align,color,textcolor,bordercolor,border,divider,centerbutton,elem}
+ */
 export default class modal extends tag {
 	_d = null;
 	_n = null;

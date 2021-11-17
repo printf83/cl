@@ -76,7 +76,7 @@ export default class msg extends tag {
 										new div(d.weight === "sm" ? "fs-4" : "display-4", new icon(d.icon))
 								  )
 								: null,
-							new div("d-flex align-items-center", new div(d.elem)),
+							new div("d-flex align-items-center", new div("text-break", d.elem)),
 						],
 					};
 
@@ -89,7 +89,7 @@ export default class msg extends tag {
 						}),
 						elem: [
 							d.icon ? new h(1, "display-1 text-center mx-3", new icon(d.icon)) : null,
-							new div("text-center", d.elem),
+							new div("text-center", new div("text-break", d.elem)),
 						],
 					};
 

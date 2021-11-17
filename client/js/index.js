@@ -128,7 +128,22 @@ core.documentReady(() => {
 							}),
 							new button("Test Msgbox", "success me-2", function () {
 								new dlg.msgbox("?", "This is info msg", function () {
-									new toast("-", "Hello world").show();
+									new toast("?", "Hello world").show();
+								}).show();
+							}),
+							new button("Test Confirmbox", "warning me-2", function () {
+								new dlg.confirmbox("/", "This is confirmbox", function () {
+									new dlg.confirmbox("/", "This is confirmbox", [
+										{
+											label: "Yesss",
+											color: "success",
+											onclick: function () {
+												new toast("x", "Hello world").show();
+											},
+										},
+										"No",
+										"Cancel",
+									]).show();
 								}).show();
 							}),
 						])

@@ -151,11 +151,14 @@ export default class toast extends tag {
 				new div("d-flex align-items-stretch", [
 					new div("me-auto", d.elem),
 					!(d.icon || d.title) && d.close
-						? new btnclose({
-								dissmiss: "toast",
-								dark: d.textcolor ? !(d.textcolor === "light" || d.textcolor === "white") : true,
-								class: "my-1",
-						  })
+						? new div(
+								"ms-2",
+								new btnclose({
+									dissmiss: "toast",
+									dark: d.textcolor ? !(d.textcolor === "light" || d.textcolor === "white") : true,
+									class: "my-1",
+								})
+						  )
 						: null,
 				])
 			);
