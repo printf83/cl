@@ -482,7 +482,7 @@ core.documentReady(() => {
 			new btngroup([
 				new collapse.toggle(new button("Hello", "primary"), `#${tid1}`),
 				new collapse.toggle(new button("World", "secondary"), `#${tid2}`),
-				new collapse.toggle(new button("Yay", "secondary"), `.anak-ayam`),
+				new collapse.toggle(new button("Yay", "success"), `.anak-ayam`),
 			]),
 
 			new collapse.container(new card.container(new card.body("Body anak ayam 1")), {

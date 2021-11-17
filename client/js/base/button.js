@@ -80,6 +80,17 @@ export default class button extends tag {
 	}
 	set data(d) {
 		if (d) {
+			let bI = core.getBaseIcon(d.icon);
+			if (bI) {
+				d.icon = {
+					icon: bI.icon,
+					style: bI.style,
+				};
+
+				d.color = d.color || bI.color;
+				d.textcolor = d.textcolor || bI.textcolor;
+			}
+
 			this._d = {
 				tag: d.href ? "a" : "button",
 				attr: core.merge.attr(d.attr, {

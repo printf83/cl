@@ -11,20 +11,50 @@ String.prototype.capitalize = function () {
 	return this.charAt(0).toUpperCase() + this.slice(1);
 };
 
-export const baseIcon = {
-	i: { icon: "info-circle", style: "fas", color: "primary", textcolor: "light" },
-	"!": { icon: "exclamation-triangle", style: "fas", color: "warning", textcolor: "dark" },
-	"!!": { icon: "exclamation-triangle", style: "fas", color: "danger", textcolor: "light" },
-	"?": { icon: "question-circle", style: "fas", color: "success", textcolor: "light" },
-	"/": { icon: "check-circle", style: "fas", color: "success", textcolor: "light" },
-	x: { icon: "times-circle", style: "fas", color: "danger", textcolor: "light" },
-	"-": { icon: "minus-circle", style: "fas", color: "danger", textcolor: "light" },
+const _baseIcon = {
+	i: { icon: "info-circle", style: "fas", color: "primary" },
+	"!": { icon: "exclamation-triangle", style: "fas", color: "warning" },
+	"!!": { icon: "exclamation-triangle", style: "fas", color: "danger" },
+	"?": { icon: "question-circle", style: "fas", color: "success" },
+	"/": { icon: "check-circle", style: "fas", color: "success" },
+	x: { icon: "times-circle", style: "fas", color: "danger" },
+	"-": { icon: "minus-circle", style: "fas", color: "danger" },
 };
 
-export function getBaseIcon(icon) {
+export function getBaseIcon(icon, baseIcon, baseColor) {
+	baseIcon = baseIcon || _baseIcon;
+	baseColor = baseColor || _baseColor;
 	if (icon && typeof icon === "string") {
 		if (baseIcon.hasOwnProperty(icon)) {
-			return baseIcon[icon];
+			let bI = baseIcon[icon];
+			let bC = baseColor.hasOwnProperty(bI.color) ? baseColor[bI.color] : null;
+
+			return {
+				icon: bI.icon,
+				style: bI.style,
+				color: bI.color,
+				textcolor: bC?.textcolor,
+			};
+		}
+	}
+	return null;
+}
+
+const _baseColor = {
+	primary: { textcolor: "light" },
+	warning: { textcolor: "dark" },
+	success: { textcolor: "light" },
+	danger: { textcolor: "light" },
+	info: { textcolor: "dark" },
+	dark: { textcolor: "light" },
+	light: { textcolor: "dark" },
+};
+
+export function getBaseColor(color, baseColor) {
+	baseColor = baseColor || _baseColor;
+	if (color && typeof color === "string") {
+		if (baseColor.hasOwnProperty(color)) {
+			return baseColor[color];
 		}
 	}
 	return null;
