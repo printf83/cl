@@ -72,7 +72,7 @@ core.documentReady(() => {
 											onclick: function (sender) {
 												new modal({
 													title: "Hei",
-													elem: new msg("md", "fire", loream),
+													elem: new msg("md", "i", loream),
 													button: "Okay",
 												}).show();
 
@@ -100,15 +100,7 @@ core.documentReady(() => {
 													centerbutton: true,
 													// color: "primary",
 													// textcolor: "light",
-													elem: new msg(
-														"lg",
-														{
-															icon: "fire",
-															weight: "3x",
-															color: "danger",
-														},
-														new div([new h(4, "Loream"), loream])
-													),
+													elem: new msg("lg", "i", new div([new h(4, "Loream"), loream])),
 													button: ["Okay", "Cancel"],
 												}).show();
 
