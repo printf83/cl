@@ -49,6 +49,7 @@ export default class modal extends tag {
 						bordercolor: null,
 						border: true,
 
+						defautlbtncolor: "primary",
 						divider: true,
 						centerbutton: false,
 
@@ -70,7 +71,7 @@ export default class modal extends tag {
 	set data(d) {
 		if (d) {
 			let bI = core.getBaseIcon(d.icon);
-			let defButtonColor = "primary";
+			let defButtonColor = d.defautlbtncolor;
 			let defButtonTextColor = null;
 			if (bI) {
 				d.icon = {
@@ -163,7 +164,7 @@ export default class modal extends tag {
 							class: core.merge.class(i.class, [!d.centerbutton ? "ms-2" : null, "btn-modal"]),
 							color:
 								ix === 0 ? (i.color ? i.color : defButtonColor) : i.color ? i.color : "text-secondary", //i.color ? i.color : ix === 0 ? defButtonColor : "text-secondary",
-							textColor: defButtonTextColor,
+							// textColor: defButtonTextColor,
 							onclick: function (event) {
 								let mdl = event.currentTarget.closest(".modal");
 								let formdata = core.getValue(mdl);

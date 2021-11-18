@@ -132,11 +132,10 @@ core.documentReady(() => {
 								}).show();
 							}),
 							new button("Test Confirmbox", "warning me-2", function () {
-								new dlg.confirmbox("/", "This is confirmbox", function () {
-									new dlg.confirmbox("/", "This is confirmbox", [
+								new dlg.confirmbox("!", "This is confirmbox", function () {
+									new dlg.confirmbox("!", "This is confirmbox", [
 										{
 											label: "Yesss",
-											color: "success",
 											onclick: function () {
 												new toast("x", "Hello world").show();
 											},
@@ -145,6 +144,19 @@ core.documentReady(() => {
 										"Cancel",
 									]).show();
 								}).show();
+							}),
+
+							new button("Test2 Confirmbox", "warning me-2", function () {
+								new dlg.confirmbox("x", "This is confirmbox2", [
+									{
+										label: "Yesss",
+										onclick: function () {
+											new toast("x", "Hello world").show();
+										},
+									},
+									"No",
+									"Cancel",
+								]).show();
 							}),
 						])
 					),

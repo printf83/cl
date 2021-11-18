@@ -27,6 +27,7 @@ export class msgbox extends modal {
 							: arg[0],
 						arg[1]
 					),
+					defautlbtncolor: bI ? bI.color : null,
 					button:
 						arg[2] instanceof Function
 							? {
@@ -89,6 +90,7 @@ export class confirmbox extends modal {
 							: arg[0],
 						arg[1]
 					),
+					defautlbtncolor: bI ? bI.color : null,
 					button: argBtn.map(function (i, ix) {
 						return i instanceof Function
 							? {
