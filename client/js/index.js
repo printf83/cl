@@ -21,6 +21,7 @@ import modal from "./base/modal.js";
 import toast from "./base/toast.js";
 import msg from "./base/msg.js";
 import * as dlg from "./base/dlg.js";
+import * as container from "./base/container.js";
 
 //test upload from laptop
 core.documentReady(() => {
@@ -36,7 +37,50 @@ core.documentReady(() => {
 		new tab({
 			style: "tab",
 			item: [
-				{ label: "First", icon: "fire", elem: "This is first tab. " },
+				{
+					label: "First",
+					icon: "fire",
+					elem: [
+						new toast({
+							title: "Title",
+							icon: "fire",
+							elem: new msg("sm", "!", "Testing Toast"),
+							debug: true,
+						}),
+						new modal({
+							title: "Title",
+							icon: "fire",
+							elem: new msg("md", "!!", "Testing Modal"),
+							button: "Okay",
+							debug: true,
+						}),
+						new button("primary", "Hello World", function () {
+							new dlg.inputbox(
+								[
+									new input({
+										type: "text",
+										value: "aaa",
+										required: true,
+										label: "hehehe",
+										name: "vx",
+									}),
+									new input({
+										type: "number",
+										value: 123,
+										min: 10,
+										max: 300,
+										required: true,
+										label: "hehehe2",
+										name: "vy",
+									}),
+								],
+								function (_sender, data) {
+									new toast("i", JSON.stringify(data)).show();
+								}
+							).show();
+						}),
+					],
+				},
 				{
 					label: "Second",
 					elem: "This is second tab. ",
@@ -53,80 +97,99 @@ core.documentReady(() => {
 					elem: new card.container(
 						new card.body([
 							"This is third tab. ",
-							new button("Test Modal", "primary me-2", function () {
-								let m = new modal({
-									title: "Title",
-									icon: "fire",
-									elem: new tab({
-										border: false,
-										item: [
-											{ label: "First", icon: "fire", elem: "This is first tab. " },
-											{ label: "Second", icon: "fire", elem: "This is second tab. " },
-											{ label: "Third", icon: "fire", elem: "This is third tab. " },
-											{ label: "Fourth", icon: "fire", elem: "This is fourth tab. " },
+							new container.stack([
+								new button("primary", "Test Modal", function () {
+									let m = new modal({
+										title: "Title",
+										icon: "fire",
+										elem: new tab({
+											border: false,
+											item: [
+												{ label: "First", icon: "fire", elem: "This is first tab. " },
+												{ label: "Second", icon: "fire", elem: "This is second tab. " },
+												{ label: "Third", icon: "fire", elem: "This is third tab. " },
+												{ label: "Fourth", icon: "fire", elem: "This is fourth tab. " },
+											],
+										}),
+										button: [
+											{
+												label: "Long",
+												onclick: function (sender) {
+													new modal({
+														title: "Hei",
+														elem: new msg("md", "i", loream),
+														button: "Okay",
+													}).show();
+
+													return false; //prevent auto destroy
+												},
+											},
+											{
+												label: "Short",
+												onclick: function (sender) {
+													new modal({
+														title: "Hei",
+														elem: new msg("md", "fire", "loream"),
+														button: "Okay",
+													}).show();
+
+													return false; //prevent auto destroy
+												},
+											},
+											,
+											{
+												label: "Large",
+												onclick: function (sender) {
+													new modal({
+														divider: false,
+														centerbutton: true,
+														// color: "primary",
+														// textcolor: "light",
+														elem: new msg("lg", "i", new div([new h(4, "Loream"), loream])),
+														button: ["Okay", "Cancel"],
+													}).show();
+
+													return false; //prevent auto destroy
+												},
+											},
+											"Cancel",
 										],
-									}),
-									button: [
-										{
-											label: "Long",
-											onclick: function (sender) {
-												new modal({
-													title: "Hei",
-													elem: new msg("md", "i", loream),
-													button: "Okay",
-												}).show();
-
-												return false; //prevent auto destroy
+										footer: new input({
+											type: "switch",
+											name: "showagain",
+											label: "Show again",
+										}),
+									});
+									m.show();
+								}),
+								new button("success", "Test Long Toast", function () {
+									new toast("x", loream).show();
+								}),
+								new button("info", "Test Short Toast", function () {
+									new toast("!", "loream").show();
+								}),
+								new button("secondary", "Test Msgbox", function () {
+									new dlg.msgbox("?", "This is info msg", function () {
+										new toast("?", "Hello world").show();
+									}).show();
+								}),
+								new button("warning", "Test Confirmbox", function () {
+									new dlg.confirmbox("!", "This is confirmbox", function () {
+										new dlg.confirmbox("!", "This is confirmbox", [
+											{
+												label: "Yesss",
+												onclick: function () {
+													new toast("x", "Hello world").show();
+												},
 											},
-										},
-										{
-											label: "Short",
-											onclick: function (sender) {
-												new modal({
-													title: "Hei",
-													elem: new msg("md", "fire", "loream"),
-													button: "Okay",
-												}).show();
+											"No",
+											"Cancel",
+										]).show();
+									}).show();
+								}),
 
-												return false; //prevent auto destroy
-											},
-										},
-										,
-										{
-											label: "Large",
-											onclick: function (sender) {
-												new modal({
-													divider: false,
-													centerbutton: true,
-													// color: "primary",
-													// textcolor: "light",
-													elem: new msg("lg", "i", new div([new h(4, "Loream"), loream])),
-													button: ["Okay", "Cancel"],
-												}).show();
-
-												return false; //prevent auto destroy
-											},
-										},
-										"Cancel",
-									],
-									footer: new input({ type: "switch", name: "showagain", label: "Show again" }),
-								});
-								m.show();
-							}),
-							new button("Test Long Toast", "secondary me-2", function () {
-								new toast("x", loream).show();
-							}),
-							new button("Test Short Toast", "info me-2", function () {
-								new toast("!", "loream").show();
-							}),
-							new button("Test Msgbox", "success me-2", function () {
-								new dlg.msgbox("?", "This is info msg", function () {
-									new toast("?", "Hello world").show();
-								}).show();
-							}),
-							new button("Test Confirmbox", "warning me-2", function () {
-								new dlg.confirmbox("!", "This is confirmbox", function () {
-									new dlg.confirmbox("!", "This is confirmbox", [
+								new button("danger", "Test2 Confirmbox", function () {
+									new dlg.confirmbox("x", "This is confirmbox2", [
 										{
 											label: "Yesss",
 											onclick: function () {
@@ -136,21 +199,8 @@ core.documentReady(() => {
 										"No",
 										"Cancel",
 									]).show();
-								}).show();
-							}),
-
-							new button("Test2 Confirmbox", "warning me-2", function () {
-								new dlg.confirmbox("x", "This is confirmbox2", [
-									{
-										label: "Yesss",
-										onclick: function () {
-											new toast("x", "Hello world").show();
-										},
-									},
-									"No",
-									"Cancel",
-								]).show();
-							}),
+								}),
+							]),
 						])
 					),
 				},
@@ -459,10 +509,10 @@ core.documentReady(() => {
 		new div("mb-5", [
 			new inputgroup.container([
 				new inputgroup.text(new icon("fire")),
-				new button("Hello", "primary"),
+				new button("primary", "Hello"),
 				new inputgroup.text(new icon("fire")),
 				new inputgroup.text({ elem: new icon("fire"), attr: { class: "text-danger" } }),
-				new button("World", "info", function () {
+				new button("info", "World", function () {
 					alert("Clicked");
 				}),
 				new inputgroup.text([new icon("fire"), new icon("fire"), new icon("fire")]),
@@ -500,9 +550,9 @@ core.documentReady(() => {
 
 		new div("mt-5", [
 			new btngroup([
-				new collapse.toggle(new button("Hello", "primary"), `#${tid1}`),
-				new collapse.toggle(new button("World", "secondary"), `#${tid2}`),
-				new collapse.toggle(new button("Yay", "success"), `.anak-ayam`),
+				new collapse.toggle(new button("danger", "Hello"), `#${tid1}`),
+				new collapse.toggle(new button("warning", "World"), `#${tid2}`),
+				new collapse.toggle(new button("success", "Yay"), `.anak-ayam`),
 			]),
 
 			new collapse.container(new card.container(new card.body("Body anak ayam 1")), {

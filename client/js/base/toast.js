@@ -18,7 +18,7 @@ import btnclose from "./btnclose.js";
  * elem
  * [elem]
  * msg
- * opt : {attr,id,class,animate,title,icon,elem,close,autohide,delay,color,textcolor,bordercolor,border,date,timer,position,show}
+ * opt : {attr,id,class,animate,title,icon,elem,close,autohide,delay,color,textcolor,bordercolor,border,date,timer,position,debug}
  */
 
 export default class toast extends tag {
@@ -99,7 +99,7 @@ export default class toast extends tag {
 					timer: true,
 					position: "top-0 end-0",
 
-					show: true, //preview only
+					debug: false,
 				},
 				t
 			);
@@ -169,7 +169,7 @@ export default class toast extends tag {
 					attr: core.merge.attr(d.attr, {
 						class: core.merge.class(d.class, [
 							"toast",
-							!d.show ? "show" : null, //for preview perpose only
+							d.debug ? "show" : null,
 							d.color ? `bg-${d.color}` : null,
 							d.textcolor ? `text-${d.textcolor}` : null,
 							d.bordercolor ? `border-${d.bordercolor}` : null,

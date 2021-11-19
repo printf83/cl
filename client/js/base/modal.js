@@ -9,7 +9,7 @@ import div from "./div.js";
 import btnclose from "./btnclose.js";
 
 /**
- * option : {attr,id,class,static,title,icon,footer,button,animated,show,scrollable,center,size,fullscreen,focus,align,color,textcolor,bordercolor,border,divider,centerbutton,elem}
+ * option : {attr,id,class,static,title,icon,footer,button,animated,debug,scrollable,center,size,fullscreen,focus,align,color,textcolor,bordercolor,border,divider,centerbutton,elem}
  */
 export default class modal extends tag {
 	_d = null;
@@ -36,7 +36,6 @@ export default class modal extends tag {
 						footer: null,
 						button: null,
 						animate: true,
-						show: false,
 						scrollable: true,
 						center: true,
 						size: null,
@@ -54,6 +53,8 @@ export default class modal extends tag {
 						centerbutton: false,
 
 						elem: null,
+
+						debug: false,
 					},
 					t
 				);
@@ -221,13 +222,14 @@ export default class modal extends tag {
 			this._d = {
 				elem: new div({
 					attr: {
-						class: ["modal", d.animate && !d.show && "fade", d.show ? "show" : null],
+						class: ["modal", d.animate && !d.debug && "fade", !d.debug ? "show" : "cl-debug"],
 						id: d.id,
 						tabindex: -1,
 						"data-bs-backdrop": d.static ? "static" : null,
 						"data-bs-keyboard": d.static ? "false" : "true",
 						"data-bs-focus": d.focus ? "true" : null,
-						"aria-hidden": d.show ? "false" : "true",
+						"aria-hidden": d.debug ? "false" : "true",
+						style: d.debug ? { display: "block", position: "static" } : null,
 					},
 					elem: new div(
 						[
@@ -287,7 +289,7 @@ export default class modal extends tag {
 			//remove d-block modal
 			let amdl = [];
 			tmdl.forEach(function (i) {
-				if (!i.classList.contains("d-block")) amdl.push(i);
+				if (!i.classList.contains("cl-debug")) amdl.push(i);
 			});
 
 			//remove show class
@@ -309,7 +311,7 @@ export default class modal extends tag {
 				//remove d-block modal
 				let amdl = [];
 				tmdl.forEach(function (i) {
-					if (!i.classList.contains("d-block")) amdl.push(i);
+					if (!i.classList.contains("cl-block")) amdl.push(i);
 				});
 
 				//add show class

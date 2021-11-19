@@ -6,9 +6,9 @@ import badge from "./badge.js";
 
 /**
  * label
- * label, color
  * label, onclick
- * label, color, onclick
+ * color, label
+ * color, label, onclick
  * option : {attr,id,name,class,style,type,label,icon,badge,value,checked,color,textcolor,weight,disabled,outline,hidelabel,nowarp,onclick,href}
  */
 export default class button extends tag {
@@ -23,15 +23,15 @@ export default class button extends tag {
 				onclick: null,
 			};
 			if (arg.length === 3) {
-				t.label = arg[0];
-				t.color = arg[1];
+				t.color = arg[0];
+				t.label = arg[1];
 				t.onclick = arg[2];
 			} else if (arg.length === 2 && arg[1] instanceof Function) {
 				t.label = arg[0];
 				t.onclick = arg[1];
 			} else if (arg.length === 2 && typeof arg[1] === "string") {
-				t.label = arg[0];
-				t.color = arg[1];
+				t.color = arg[0];
+				t.label = arg[1];
 			} else if (arg.length === 1 && typeof arg[0] === "string") {
 				t.label = arg[0];
 			} else if (arg.length === 1) {
