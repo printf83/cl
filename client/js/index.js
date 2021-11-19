@@ -518,13 +518,16 @@ core.documentReady(() => {
 				new inputgroup.text([new icon("fire"), new icon("fire"), new icon("fire")]),
 			]),
 		]),
-		new div("mb-5", [
-			new icon("fab", "bootstrap"),
-			new icon("home"),
-			new icon({ icon: "home", color: "success" }),
-			new icon({ icon: "home", color: "danger", rotate: 90 }),
-			new icon({ icon: "home", color: "warning", rotate: "both" }),
-		]),
+		new div(
+			"mb-5",
+			new container.stack([
+				new icon("fab", "bootstrap"),
+				new icon("home"),
+				new icon({ icon: "home", color: "success" }),
+				new icon({ icon: "home", color: "danger", rotate: 90 }),
+				new icon({ icon: "home", color: "warning", rotate: "both" }),
+			])
+		),
 
 		new div("mb-5", [
 			new icon({ icon: "home", color: "danger", weight: "5x" }),
@@ -539,14 +542,17 @@ core.documentReady(() => {
 				],
 			}),
 		]),
-		new div("mb-5", [
-			new badge("primary", "primary"),
-			new badge("success", "success"),
-			new badge("danger", "danger"),
-			new badge("warning", "warning", true),
-			new badge("info", "info", true),
-			new badge("secondary", "secondary", true),
-		]),
+		new div(
+			"mb-5",
+			new container.stack([
+				new badge("primary", "primary"),
+				new badge("success", "success"),
+				new badge("danger", "danger"),
+				new badge("warning", "warning", true),
+				new badge("info", "info", true),
+				new badge("secondary", "secondary", true),
+			])
+		),
 
 		new div("mt-5", [
 			new btngroup([

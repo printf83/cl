@@ -10,7 +10,7 @@ import div from "./div.js";
  * opt : {modal option}
  */
 export class form extends tag {
-	constructor(elem, gap = 3, col = 1) {
+	constructor(elem, gap = 2, col = 1) {
 		if (elem) {
 			super({
 				elem: new div(
@@ -32,7 +32,7 @@ export class form extends tag {
 }
 
 export class stack extends tag {
-	constructor(elem, gap = 3, col = "auto") {
+	constructor(elem, gap = 2, col = "auto") {
 		if (elem) {
 			super({
 				elem: new div(

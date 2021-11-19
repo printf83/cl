@@ -154,7 +154,7 @@ export default class toast extends tag {
 						? new div(
 								"ms-2",
 								new btnclose({
-									dissmiss: "toast",
+									dismiss: "toast",
 									dark: d.textcolor ? !(d.textcolor === "light" || d.textcolor === "white") : true,
 									class: "my-1",
 								})

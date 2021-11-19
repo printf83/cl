@@ -7,6 +7,7 @@ import label from "./label.js";
 import button from "./button.js";
 import div from "./div.js";
 import btnclose from "./btnclose.js";
+import * as container from "./container.js";
 
 /**
  * option : {attr,id,class,static,title,icon,footer,button,animated,debug,scrollable,center,size,fullscreen,focus,align,color,textcolor,bordercolor,border,divider,centerbutton,elem}
@@ -162,7 +163,7 @@ export default class modal extends tag {
 							id: i.id,
 							label: i.label,
 							icon: i.icon,
-							class: core.merge.class(i.class, [!d.centerbutton ? "ms-2" : null, "btn-modal"]),
+							class: core.merge.class(i.class, "btn-modal"),
 							color:
 								ix === 0 ? (i.color ? i.color : defButtonColor) : i.color ? i.color : "text-secondary", //i.color ? i.color : ix === 0 ? defButtonColor : "text-secondary",
 							// textColor: defButtonTextColor,
@@ -187,10 +188,9 @@ export default class modal extends tag {
 				}
 
 				//container for button
-				ctlButton = new div(
-					d.centerbutton ? ["d-grid", "gap-2", "col-12", "col-md-6", "mx-auto"] : "justify-content-end",
-					btn
-				);
+				ctlButton = d.centerbutton
+					? new div(["d-grid", "gap-2", "col-12", "col-md-6", "mx-auto"], btn)
+					: new div("justify-content-end", new container.stack(btn));
 			}
 
 			//mix footer and button
