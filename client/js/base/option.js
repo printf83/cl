@@ -4,6 +4,8 @@ import tag from "./tag.js";
 import label from "./label.js";
 import li from "./li.js";
 import span from "./span.js";
+import hr from "./hr.js";
+import h from "./h.js";
 
 /**
  * item, selected
@@ -120,22 +122,23 @@ export default class option extends tag {
 					if (i.label) {
 						return new li({
 							attr: i.attr,
-							elem: new tag({
-								tag: "h6",
-								attr: { class: "dropdown-header" },
-								elem: new label({
-									icon: i.icon,
-									label: i.label,
-								}),
+							elem: new h(6, {
+								class: "dropdown-header",
+								elem: new label({ icon: i.icon, label: i.label }),
 							}),
+							// elem: new tag({
+							// 	tag: "h6",
+							// 	attr: { class: "dropdown-header" },
+							// 	elem: new label({
+							// 		icon: i.icon,
+							// 		label: i.label,
+							// 	}),
+							// }),
 						});
 					} else {
 						return new li({
 							attr: i.attr,
-							elem: new tag({
-								tag: "hr",
-								attr: { class: "dropdown-divider" },
-							}),
+							elem: new hr("dropdown-divider"),
 						});
 					}
 				} else {
@@ -193,9 +196,8 @@ export default class option extends tag {
 			}
 		} else {
 			this._d = null;
-				}
+		}
 
 		super.data = this._d;
 	}
-
 }
