@@ -23,6 +23,9 @@ import msg from "./base/msg.js";
 import * as dlg from "./base/dlg.js";
 import * as container from "./base/container.js";
 
+import * as alert from "./base/alert.js";
+import hr from "./base/hr.js";
+
 //test upload from laptop
 core.documentReady(() => {
 	let loream =
@@ -41,6 +44,25 @@ core.documentReady(() => {
 					label: "First",
 					icon: "fire",
 					elem: [
+						new alert.container("i", "Info alert"),
+						new alert.container({ icon: "/", elem: "Success", close: true }),
+						new alert.container({
+							color: "primary",
+							elem: [
+								new alert.heading("Well done!"),
+								new p(
+									"Aww yeah, you successfully read this important alert message. This example text is going to run a bit longer so that you can see how spacing within an alert works with this kind of content."
+								),
+								new hr(),
+								new p("mb-0", [
+									"Whenever you need to, be sure to use margin utilities to ",
+									new alert.link("keep things", "#"),
+									" nice and tidy.",
+								]),
+								new alert.link("Goto Google", "https://www.google.com"),
+							],
+						}),
+
 						new toast({
 							title: "Title",
 							icon: "fire",

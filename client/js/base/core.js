@@ -12,13 +12,13 @@ String.prototype.capitalize = function () {
 };
 
 const _baseIcon = {
-	i: { icon: "info-circle", style: "fas", color: "primary" },
+	i: { icon: "info-circle", style: "fas", color: "info" },
 	"!": { icon: "exclamation-triangle", style: "fas", color: "warning" },
 	"!!": { icon: "exclamation-triangle", style: "fas", color: "danger" },
-	"?": { icon: "question-circle", style: "fas", color: "success" },
-	"/": { icon: "check-circle", style: "fas", color: "success" },
-	x: { icon: "times-circle", style: "fas", color: "danger" },
-	"-": { icon: "minus-circle", style: "fas", color: "danger" },
+	"?": { icon: "question-circle", style: "far", color: "success" },
+	"/": { icon: "check-circle", style: "far", color: "success" },
+	x: { icon: "times-circle", style: "far", color: "danger" },
+	"-": { icon: "minus-circle", style: "far", color: "danger" },
 };
 
 export function getBaseIcon(icon, baseIcon, baseColor) {

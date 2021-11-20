@@ -2,43 +2,41 @@
 import * as core from "./core.js";
 import tag from "./tag.js";
 import a from "./a.js";
+import h from "./h.js";
+import msg from "./msg.js";
 import div from "./div.js";
-import imgtag from "./img.js";
+import btnclose from "./btnclose.js";
 
 /**
- * color,textcolor,icon,msg
- * color,icon,msg
- * color,msg
- * color,[elem]
+ * color,icon,elem
+ * color,icon,[elem]
  * color,elem
+ * color,[elem]
  * elem
  * [elem]
- * msg
  * opt : {attr,id,class,animate,title,icon,elem,close,autohide,delay,color,textcolor,bordercolor,border,date,timer,position,debug}
  */
-class container extends tag {
+export class container extends tag {
 	_d = null;
 
 	constructor(...arg) {
+		super();
+
 		if (arg && arg.length > 0) {
 			let t = {
 				icon: null,
 				color: null,
 				elem: null,
 			};
-			if (arg.length === 4) {
+
+			if (arg.length === 3) {
 				t.color = arg[0];
-				t.textcolor = arg[1];
-				t.elem = new msg("sm", arg[2], arg[3]);
-			} else if (arg.length === 3) {
-				t.color = arg[0];
-				t.elem = new msg("sm", arg[1], arg[2]);
+				t.icon = arg[1];
+				t.elem = arg[2];
 			} else if (arg.length === 2) {
 				let bI = core.getBaseIcon(arg[0]);
 				if (bI) {
 					t.color = bI.color;
-					t.textcolor = bI.textcolor;
-
 					t.elem = new msg(
 						"sm",
 						{
@@ -49,16 +47,11 @@ class container extends tag {
 					);
 				} else {
 					t.color = arg[0];
-
-					if (typeof arg[1] === "string") {
-						t.elem = new msg("sm", null, arg[1]);
-					} else {
-						t.elem = arg[1];
-					}
+					t.elem = arg[1];
 				}
 			} else if (arg.length === 1) {
 				if (typeof arg[0] === "string") {
-					t.elem = new msg("sm", null, arg[0]);
+					t.elem = arg[0];
 				} else if (Array.isArray(arg[0]) || arg[0].hasOwnProperty("cl")) {
 					t.elem = arg[0];
 				} else {
@@ -75,22 +68,11 @@ class container extends tag {
 
 					id: null,
 					class: null,
-					animate: true,
-					title: null,
+					style: null,
 					icon: null,
 					elem: null,
-					close: true,
-					autohide: true,
-					delay: 5000,
+					close: false,
 					color: null,
-					textcolor: null,
-					bordercolor: null,
-					border: false,
-					date: new Date(),
-					timer: true,
-					position: "top-0 end-0",
-
-					debug: false,
 				},
 				t
 			);
@@ -99,47 +81,80 @@ class container extends tag {
 		}
 	}
 
-	get tag() {
-		return this._t;
-	}
-	set tag(d) {
-		this._t = d;
-	}
-
-	get className() {
-		return this._c;
-	}
-	set className(d) {
-		this._c = d;
-	}
 	get data() {
 		return this._d;
 	}
 	set data(d) {
-		if (d && this.tag) {
+		if (d) {
+			let bI = core.getBaseIcon(d.icon);
+			if (bI) {
+				d.color = d.color || bI.color;
+				d.elem = new msg(
+					"sm",
+					{
+						icon: bI.icon,
+						style: bI.style,
+					},
+					d.elem
+				);
+			}
+
 			this._d = {
-				tag: this.tag,
+				tag: "div",
 				attr: core.merge.attr(d.attr, {
-					class: core.merge.class(
-						this.className,
-						core.merge.class(d.class, [
-							d.align ? `text-${d.align}` : null,
-							d.color ? `bg-${d.color}` : null,
-							d.textcolor ? `text-${d.textcolor}` : null,
-							d.bordercolor ? `border-${d.bordercolor}` : null,
-							!d.border ? "border-0" : null,
-						])
-					),
+					id: d.id,
+					class: core.merge.class(d.class, ["alert", d.color ? `alert-${d.color}` : null]),
 					style: d.style,
+					role: "alert",
 				}),
-				elem: d.elem,
+				elem: new div("d-flex align-items-stretch", [
+					new div("me-auto", d.elem),
+					d.close
+						? new btnclose({
+								dismiss: "alert",
+								class: "my-1",
+						  })
+						: null,
+				]),
 			};
 		} else {
-			this.tag = null;
-			this.className = null;
 			this._d = null;
 		}
 
 		super.data = this._d;
+	}
+}
+
+export class link extends a {
+	constructor(...arg) {
+		super(...arg);
+	}
+
+	get data() {
+		return super.data;
+	}
+	set data(d) {
+		super.data = d;
+
+		if (super.data) {
+			super.data.attr = core.merge.attr(super.data.attr, { class: "alert-link" });
+		}
+	}
+}
+
+export class heading extends h {
+	constructor(...arg) {
+		super(4, ...arg);
+	}
+
+	get data() {
+		return super.data;
+	}
+	set data(d) {
+		super.data = d;
+
+		if (super.data) {
+			super.data.attr = core.merge.attr(super.data.attr, { class: "heading" });
+		}
 	}
 }

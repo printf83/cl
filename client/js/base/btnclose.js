@@ -25,7 +25,11 @@ export default class btnclose extends button {
 				t.dismiss = arg[0];
 				t.dark = arg[1];
 			} else if (arg.length === 1) {
-				t = arg[0];
+				if (typeof arg[0] === "string") {
+					t.dismiss = arg[0];
+				} else {
+					t = arg[0];
+				}
 			} else {
 				console.error("Unsupported argument", arg);
 			}
