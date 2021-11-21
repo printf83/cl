@@ -101,7 +101,11 @@ export class container extends div {
 			this._d = {
 				attr: core.merge.attr(d.attr, {
 					id: d.id,
-					class: core.merge.class(d.class, ["alert", d.color ? `alert-${d.color}` : null]),
+					class: core.merge.class(d.class, [
+						"alert",
+						d.color ? `alert-${d.color}` : null,
+						d.close ? "fade show" : null,
+					]),
 					style: d.style,
 					role: "alert",
 				}),

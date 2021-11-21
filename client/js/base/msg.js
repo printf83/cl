@@ -88,7 +88,15 @@ export default class msg extends tag {
 							class: d.class,
 						}),
 						elem: [
-							d.icon ? new h(1, "display-1 text-center mx-3", new icon(d.icon)) : null,
+							d.icon
+								? new h(
+										1,
+										"display-1 text-center mx-3",
+										typeof d.icon === "string"
+											? new icon({ icon: d.icon, weight: "2x" })
+											: new icon(d.icon)
+								  )
+								: null,
 							new div("text-center", new div("text-break", d.elem)),
 						],
 					};
