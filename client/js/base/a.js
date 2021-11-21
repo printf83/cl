@@ -96,7 +96,7 @@ export default class a extends tag {
 			this._d = {
 				tag: "a",
 				attr: core.merge.attr(d.attr, {
-					class: core.merge.class(d.class, "ns-link"),
+					class: d.class,
 					style: d.style,
 
 					id: d.id,

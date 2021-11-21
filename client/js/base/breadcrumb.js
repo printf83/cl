@@ -1,14 +1,17 @@
 "use strict";
 import * as core from "./core.js";
-import h from "./h.js";
-import div from "./div.js";
+import tag from "./tag.js";
 import button from "./button.js";
+import ol from "./ol.js";
+import li from "./li.js";
+import label from "./label.js";
+import a from "./a.js";
 
 /**
- * [item:{title,icon,active,elem}]
- * opt : {attr,id,class,style,item,flush,autoclose}
+ * [item:{title,icon,divider,label,href,onclick}]
+ * opt : {attr,id,class,style,item,divider}
  */
-export default class accordion extends div {
+export default class breadcrumb extends tag {
 	_d = null;
 
 	constructor(...arg) {
@@ -39,8 +42,8 @@ export default class accordion extends div {
 					style: null,
 					item: null,
 
-					flush: false,
-					autoclose: true,
+					label: "Breadcrumb",
+					divider: `url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;);;"`,
 				},
 				t
 			);
@@ -57,81 +60,57 @@ export default class accordion extends div {
 			//check if item isnot array
 			d.item = d.item ? (Array.isArray(d.item) ? d.item : [d.item]) : null;
 
-			//id require if autoclose
-			d.id = d.id || d.autoclose ? core.UUID() : null;
-
-			//check if any item active
-			let activeitem = d.item.find((i) => {
-				return i.active === true;
+			//check if any item current
+			let currentitem = d.item.find((i) => {
+				return i.current === true;
 			});
 
-			if (!activeitem) {
-				d.item[0].active = true;
+			if (!currentitem) {
+				d.item[d.item.length - 1].current = true;
 			}
 
 			this._d = {
+				tag: "nav",
 				attr: core.merge.attr(d.attr, {
 					id: d.id,
-					class: core.merge.class(d.class, ["accordion", d.flush ? "accordion-flush" : null]),
-					style: d.style,
+					"aria-label": d.label,
+					class: d.class,
+					style: core.merge.style(d.style, {
+						"--bs-breadcrumb-divider": d.divider,
+					}),
 				}),
-				elem:
+				elem: new ol(
+					"breadcrumb",
 					d.item && d.item.length > 0
 						? d.item.map(function (i) {
 								i = core.extend(
 									{},
 									{
-										id: null,
-										title: null,
+										label: null,
 										icon: null,
-										active: false,
-										elem: null,
+										current: false,
+										href: null,
+										onclick: null,
 									},
 									i
 								);
 
-								let id = i.id || core.UUID();
-								return new div("accordion-item", [
-									new h(2, {
-										id: `${id}-head`,
-										class: "accordion-header",
-										elem: new button({
-											label: i.title,
-											icon: i.icon,
-											class: ["accordion-button", !i.active ? "collapsed" : null],
-											attr: {
-												"data-bs-toggle": "collapse",
-												"data-bs-target": `#${id}-body`,
-												"aria-control": `${id}-body`,
-												"aria-expanded": i.active ? "true" : "false",
-											},
-										}),
-										//create button from tag to prevent btn class on accordion-button
-										// elem: new tag({
-										// 	tag: "button",
-										// 	attr: {
-										// 		type: "button",
-										// 		class: ["accordion-button", !i.active ? "collapsed" : null],
-										// 		"data-bs-toggle": "collapse",
-										// 		"data-bs-target": `#${id}-body`,
-										// 		"aria-control": `${id}-body`,
-										// 		"aria-expanded": i.active ? "true" : "false",
-										// 	},
-										// 	elem: new label(i.icon, i.title),
-										// }),
-									}),
-									new div({
-										id: `${id}-body`,
-										class: ["accordion-collapse", "collapse", i.active ? "show" : null],
-										attr: {
-											"aria-labelledby": `${id}-head`,
-											"data-bs-parent": d.autoclose ? `#${d.id}` : null,
-										},
-										elem: new div("accordion-body", i.elem),
-									}),
-								]);
+								return new li({
+									class: ["breadcrumb-item", i.current ? "active" : null],
+									attr: { "aria-current": i.current ? "page" : null },
+									elem: [
+										i.current
+											? new label(i.icon, i.label)
+											: i.href
+											? new a(new label(i.icon, i.label), i.href)
+											: i.onclick
+											? new button({ label: i.label, icon: i.icon, onclick: i.onclick })
+											: new label(i.icon, i.label),
+									],
+								});
 						  })
-						: null,
+						: null
+				),
 			};
 		} else {
 			this._d = null;
