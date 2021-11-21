@@ -43,7 +43,9 @@ export default class breadcrumb extends tag {
 					item: null,
 
 					label: "Breadcrumb",
-					divider: `url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;);;"`,
+					divider:
+						"url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;)",
+					//";",
 				},
 				t
 			);
@@ -76,7 +78,9 @@ export default class breadcrumb extends tag {
 					"aria-label": d.label,
 					class: d.class,
 					style: core.merge.style(d.style, {
-						"--bs-breadcrumb-divider": d.divider,
+						"--bs-breadcrumb-divider": d.divider ? d.divider : null, //`${d.divider};`
+						height: "150px",
+						width: "100%",
 					}),
 				}),
 				elem: new ol(
