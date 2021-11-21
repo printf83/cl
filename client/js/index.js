@@ -22,9 +22,9 @@ import toast from "./base/toast.js";
 import msg from "./base/msg.js";
 import * as dlg from "./base/dlg.js";
 import * as container from "./base/container.js";
-
 import * as alert from "./base/alert.js";
 import hr from "./base/hr.js";
+import accordion from "./base/accordion.js";
 
 //test upload from laptop
 core.documentReady(() => {
@@ -40,6 +40,19 @@ core.documentReady(() => {
 		new tab({
 			style: "tab",
 			item: [
+				{
+					label: "1",
+					elem: [
+						new accordion({
+							item: [
+								{ title: "Hello", elem: "World" },
+								{ title: "Hello1", icon: "fire", elem: "World1" },
+								{ title: "Hello2", elem: "World2" },
+								{ title: "Hello3", elem: "World3" },
+							],
+						}),
+					],
+				},
 				{
 					label: "First",
 					icon: "fire",

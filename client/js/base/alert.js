@@ -1,6 +1,5 @@
 "use strict";
 import * as core from "./core.js";
-import tag from "./tag.js";
 import a from "./a.js";
 import h from "./h.js";
 import msg from "./msg.js";
@@ -16,7 +15,7 @@ import btnclose from "./btnclose.js";
  * [elem]
  * opt : {attr,id,class,animate,title,icon,elem,close,autohide,delay,color,textcolor,bordercolor,border,date,timer,position,debug}
  */
-export class container extends tag {
+export class container extends div {
 	_d = null;
 
 	constructor(...arg) {
@@ -100,7 +99,6 @@ export class container extends tag {
 			}
 
 			this._d = {
-				tag: "div",
 				attr: core.merge.attr(d.attr, {
 					id: d.id,
 					class: core.merge.class(d.class, ["alert", d.color ? `alert-${d.color}` : null]),
