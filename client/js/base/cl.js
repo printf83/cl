@@ -43,7 +43,7 @@ function attachAttr(elems, arg) {
 				} else if (i === "style") {
 					Object.keys(arg[i]).forEach((j) => {
 						if (arg[i][j] && arg[i][j] !== null) {
-							elems.style[j] = arg[i][j];
+							elems.style.setProperty(j, arg[i][j]);
 						}
 					});
 				} else if (booleanAttr.includes(i) && arg[i]) {

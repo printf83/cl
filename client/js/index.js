@@ -53,7 +53,6 @@ core.documentReady(() => {
 								{
 									title: "Hello",
 									elem: new breadcrumb({
-										divider: "xxxx",
 										item: [
 											{ label: "Google", href: "https://www.google.com" },
 											{ label: "Facebook", href: "https://www.facebook.com" },
