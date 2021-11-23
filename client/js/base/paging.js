@@ -1,17 +1,22 @@
 "use strict";
 import * as core from "./core.js";
+import * as cl from "./cl.js";
 import tag from "./tag.js";
 import li from "./li.js";
 import a from "./a.js";
 import ul from "./ul.js";
 import icon from "./icon.js";
+
 /**
  * [item:{title,icon,divider,label,href,onclick}]
  * opt : {attr,id,class,style,item,divider}
  */
 
-function pagingonchange(sender, page) {
-	console.log(page);
+function pagingonchange(sender, data) {
+	console.log("Data", data);
+	let parent = sender.closest(".cl-paging");
+	console.log("Parent", parent);
+	cl.replaceWith(parent, new paging(data));
 }
 
 export default class paging extends tag {
@@ -78,7 +83,8 @@ export default class paging extends tag {
 									"aria-disabled": curpage > 1 ? null : true,
 									"aria-label": "First Page",
 									onclick: function (sender) {
-										pagingonchange(sender.currentTarget, 0);
+										d.skip = 0;
+										pagingonchange(sender.currentTarget, d);
 									},
 								},
 								elem: d.labelfirst ? d.labelfirst : new icon("angle-double-left"),
@@ -99,7 +105,8 @@ export default class paging extends tag {
 									"aria-disabled": curpage > 1 ? null : true,
 									"aria-label": "Previous Page",
 									onclick: function (sender) {
-										pagingonchange(sender.currentTarget, (curpage - 2) * d.limit);
+										d.skip = (curpage - 2) * d.limit;
+										pagingonchange(sender.currentTarget, d);
 									},
 								},
 								elem: d.labelprev ? d.labelprev : new icon("angle-left"),
@@ -171,7 +178,8 @@ export default class paging extends tag {
 									"aria-label": `Page ${x.toString()}`,
 									onclick: function (sender) {
 										let xnum = parseInt(sender.currentTarget.innerText, 10);
-										pagingonchange(sender.currentTarget, (xnum - 1) * d.limit);
+										d.skip = (xnum - 1) * d.limit;
+										pagingonchange(sender.currentTarget, d);
 									},
 								},
 								elem: x.toString(),
@@ -192,7 +200,8 @@ export default class paging extends tag {
 									"aria-disabled": curpage > 1 ? null : true,
 									"aria-label": "Next Page",
 									onclick: function (sender) {
-										pagingonchange(sender.currentTarget, curpage * d.limit);
+										d.skip = curpage * d.limit;
+										pagingonchange(sender.currentTarget, d);
 									},
 								},
 								elem: d.labelnext ? d.labelnext : new icon("angle-right"),
@@ -213,7 +222,8 @@ export default class paging extends tag {
 									"aria-disabled": curpage > 1 ? null : true,
 									"aria-label": "Last Page",
 									onclick: function (sender) {
-										pagingonchange(sender.currentTarget, (btncount - 1) * d.limit);
+										d.skip = (btncount - 1) * d.limit;
+										pagingonchange(sender.currentTarget, d);
 									},
 								},
 								elem: d.labellast ? d.labellast : new icon("angle-double-right"),
@@ -231,7 +241,7 @@ export default class paging extends tag {
 						class: [
 							"d-flex",
 							"p-1",
-							"ns-list-page",
+							"cl-paging",
 							d.align ? "justify-content-" + d.align : null,
 							d.overflow ? "overflow-auto" : null,
 						],
