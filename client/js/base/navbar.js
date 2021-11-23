@@ -2,320 +2,39 @@
 import * as core from "./core.js";
 import tag from "./tag.js";
 import a from "./a.js";
+import span from "./span.js";
 import div from "./div.js";
-import imgtag from "./img.js";
 
-class main extends tag {
-	_t = null;
-	_c = null;
+export class container extends tag {
 	_d = null;
 
-	constructor(tag, className, ...arg) {
+	constructor(...arg) {
 		super();
+
 		if (arg && arg.length > 0) {
-			this.tag = tag;
-			this.className = className;
-
-			let t = {
-				elem: null,
-			};
-
-			if (
-				arg.length === 1 &&
-				(typeof arg[0] === "string" || Array.isArray(arg[0]) || arg[0].hasOwnProperty("cl"))
-			) {
-				t.elem = arg[0];
-			} else if (arg.length === 1) {
-				t = arg[0];
-			} else {
-				console.error("Unsupported argument", arg);
-			}
+			let t = {};
 
 			this.data = core.extend(
 				{},
 				{
-					attr: null,
-
 					id: null,
+					attr: null,
 					class: null,
 					style: null,
 
-					align: null, //left,right,center
-					color: null,
-					textcolor: null,
-					bordercolor: null,
-					border: true,
+					containerfluid: true,
+					containerclass: null,
+					containerattr: null,
+					containerstyle: null,
 
+					expand: null, //sm|md|lg|xl|xxl|null|''
+					dark: false, //light|dark
+					color: null, //danger|primary|dark|warning|...
+					position: null, //fixed-top|fixed-bottom|sticky-top|null
 					elem: null,
 				},
 				t
 			);
-		} else {
-			this.tag = null;
-			this.className = null;
-			this.data = null;
-		}
-	}
-
-	get tag() {
-		return this._t;
-	}
-	set tag(d) {
-		this._t = d;
-	}
-
-	get className() {
-		return this._c;
-	}
-	set className(d) {
-		this._c = d;
-	}
-	get data() {
-		return this._d;
-	}
-	set data(d) {
-		if (d && this.tag) {
-			this._d = {
-				tag: this.tag,
-				attr: core.merge.attr(d.attr, {
-					class: core.merge.class(
-						this.className,
-						core.merge.class(d.class, [
-							d.align ? `text-${d.align}` : null,
-							d.color ? `bg-${d.color}` : null,
-							d.textcolor ? `text-${d.textcolor}` : null,
-							d.bordercolor ? `border-${d.bordercolor}` : null,
-							!d.border ? "border-0" : null,
-						])
-					),
-					style: d.style,
-				}),
-				elem: d.elem,
-			};
-		} else {
-			this.tag = null;
-			this.className = null;
-			this._d = null;
-		}
-
-		super.data = this._d;
-	}
-}
-
-export class container extends main {
-	constructor(...arg) {
-		super("div", "card", ...arg);
-	}
-
-	get data() {
-		return super.data;
-	}
-	set data(arg) {
-		super.data = arg;
-	}
-}
-/**
- * string
- * [elem]
- * opt : {attr,id,class,style,align,color,textcolor,bordercolor,border,elem}
- */
-export class header extends main {
-	constructor(...arg) {
-		super("div", "card-header", ...arg);
-	}
-
-	get data() {
-		return super.data;
-	}
-	set data(arg) {
-		super.data = arg;
-	}
-}
-
-/**
- * string
- * [elem]
- * opt : {attr,id,class,style,align,color,textcolor,bordercolor,border,elem}
- */
-export class body extends main {
-	constructor(...arg) {
-		super("div", "card-body", ...arg);
-	}
-
-	get data() {
-		return super.data;
-	}
-	set data(arg) {
-		super.data = arg;
-	}
-}
-
-/**
- * string
- * [elem]
- * opt : {attr,id,class,style,align,color,textcolor,bordercolor,border,elem}
- */
-export class footer extends main {
-	constructor(...arg) {
-		super("div", "card-footer", ...arg);
-	}
-
-	get data() {
-		return super.data;
-	}
-	set data(arg) {
-		super.data = arg;
-	}
-}
-
-/**
- * string
- * [elem]
- * opt : {attr,id,class,style,align,color,textcolor,bordercolor,border,elem}
- */
-export class group extends main {
-	constructor(...arg) {
-		super("div", "card-group", ...arg);
-	}
-
-	get data() {
-		return super.data;
-	}
-	set data(arg) {
-		super.data = arg;
-	}
-}
-
-/**
- * string
- * [elem]
- * opt : {attr,id,class,style,align,color,textcolor,bordercolor,border,elem}
- */
-export class title extends main {
-	constructor(...arg) {
-		super("h5", "card-title", ...arg);
-	}
-
-	get data() {
-		return super.data;
-	}
-	set data(arg) {
-		super.data = arg;
-	}
-}
-
-/**
- * string
- * [elem]
- * opt : {attr,id,class,style,align,color,textcolor,bordercolor,border,elem}
- */
-export class subtitle extends main {
-	constructor(...arg) {
-		super("h6", "card-subtitle mb-2", ...arg);
-	}
-
-	get data() {
-		return super.data;
-	}
-	set data(arg) {
-		super.data = arg;
-	}
-}
-
-/**
- * string
- * [elem]
- * opt : {attr,id,class,style,align,color,textcolor,bordercolor,border,elem}
- */
-export class text extends main {
-	constructor(...arg) {
-		super("p", "card-text", ...arg);
-	}
-
-	get data() {
-		return super.data;
-	}
-	set data(arg) {
-		super.data = arg;
-	}
-}
-
-/**
- * string
- * [elem]
- * opt : {attr,id,class,style,align,color,textcolor,bordercolor,border,elem}
- */
-export class imgoverlay extends main {
-	constructor(...arg) {
-		super("div", "card-img-overlay", ...arg);
-	}
-
-	get data() {
-		return super.data;
-	}
-	set data(arg) {
-		super.data = arg;
-	}
-}
-
-/**
- * size,leftelement(string|elem|[elem]),rightelement(string|elem|[elem])
- * leftelement(string|elem|[elem]),rightelement(string|elem|[elem])
- * opt : {attr,id,class,style,align,color,textcolor,bordercolor,border,left,right,size,gap}
- */
-export class horizontal extends tag {
-	_d = null;
-
-	constructor(...arg) {
-		super();
-		if (arg && arg.length > 0) {
-			let t = {
-				left: null,
-				right: null,
-				size: "md-4",
-			};
-
-			if (arg.length === 3) {
-				t = {
-					size: arg[0],
-					left: arg[1],
-					right: arg[2],
-				};
-			} else if (arg.length === 2) {
-				t = {
-					left: arg[0],
-					right: arg[1],
-				};
-			} else if (arg.length === 1) {
-				t = arg[0];
-			} else {
-				console.error("Unsupported argument", arg);
-			}
-
-			this.data = core.extend(
-				{},
-				{
-					attr: null,
-
-					id: null,
-					class: null,
-					style: null,
-
-					align: null, //left,right,center
-					color: null,
-					textcolor: null,
-					bordercolor: null,
-					border: true,
-
-					left: null,
-					right: null,
-					size: "md-4",
-					gap: 0,
-				},
-				t
-			);
-		} else {
-			this.data = null;
 		}
 	}
 
@@ -325,21 +44,35 @@ export class horizontal extends tag {
 	set data(d) {
 		if (d) {
 			this._d = {
-				tag: "div",
+				tag: "nav",
 				attr: core.merge.attr(d.attr, {
-					class: [
-						"row",
-						d.class,
-						d.align ? `text-${d.align}` : null,
+					class: core.merge.class(d.class, [
+						"navbar",
+						d.expand || d.expand === ""
+							? d.expand === ""
+								? "navbar-expand"
+								: `navbar-expand-${d.expand}`
+							: null,
+						d.dark ? `navbar-${d.dark ? "dark" : "light"}` : null,
 						d.color ? `bg-${d.color}` : null,
-						d.textcolor ? `text-${d.textcolor}` : null,
-						d.bordercolor ? `border-${d.bordercolor}` : null,
-						!d.border ? "border-0" : null,
-						d.gap !== null ? `g-${d.gap}` : null,
-					],
+						d.position ? d.position : null,
+					]),
 					style: d.style,
+					id: d.id,
 				}),
-				elem: [new div(core.multiClass(d.size, "col-$1", null, "col"), d.left), new div("col", d.right)],
+				elem: new div({
+					attr: core.merge.attr(d.attr, {
+						class: core.merge.class(d.containerclass, [
+							d.containerfluid === true
+								? "container-fluid"
+								: d.containerfluid === false
+								? "container"
+								: core.multiClass(d.containerfluid, "container-$1"),
+						]),
+						style: d.containerstyle,
+					}),
+					elem: d.elem,
+				}),
 			};
 		} else {
 			this._d = null;
@@ -349,59 +82,59 @@ export class horizontal extends tag {
 	}
 }
 
-/**
- * class,style,elem,href
- * class,style,elem,onclick
- * class,elem,href
- * class,elem,onclick
- * elem,href
- * elem,onclick
- * [elem],href
- * [elem],onclick
- * elem
- * [elem]
- * opt : {attr,class,style,id,name,href,onclick,elem}
- */
-export class link extends a {
+export class brand extends tag {
+	_d = null;
+
 	constructor(...arg) {
-		super(...arg);
+		super();
+
+		if (arg && arg.length > 0) {
+			let t = {};
+
+			this.data = core.extend(
+				{},
+				{
+					id: null,
+					attr: null,
+					class: null,
+					style: null,
+
+					href: null,
+					onclick: null,
+					label: null,
+					icon: null,
+					img: null,
+					elem: null,
+				},
+				t
+			);
+		}
 	}
 
 	get data() {
-		return super.data;
+		return this._d;
 	}
 	set data(d) {
-		super.data = d;
-
-		if (super.data) {
-			super.data.attr = core.merge.attr(super.data.attr, { class: "card-link" });
+		if (d) {
+			this._d = {
+				tag: d.href ? "a" : "h1",
+				attr: {
+					class: core.merge.class(d.class, ["navbar-brand", !d.href ? "mb-0" : null]),
+					id: d.id,
+					href: d.href,
+					onclick: d.onclick,
+				},
+				elem: d.elem
+					? d.elem
+					: new label({
+							icon: d.icon,
+							label: d.label,
+					  }),
+			};
+		} else {
+			this._d = null;
 		}
-	}
-}
 
-export class img extends imgtag {
-	constructor(...arg) {
-		super(...arg);
-	}
-
-	get data() {
-		return super.data;
-	}
-	set data(d) {
-		super.data = d;
-
-		if (super.data) {
-			d = core.extend({}, { placement: "top" }, d);
-
-			super.data.attr = core.merge.attr(super.data.attr, {
-				class: [
-					d.placement === "full" ? "card-img" : null,
-					d.placement === "top" ? "card-img-top" : null,
-					d.placement === "bottom" ? "card-img-bottom" : null,
-					d.placement === "left" ? "img-fluid rounded-start" : null,
-					d.placement === "right" ? "img-fluid rounded-end" : null,
-				],
-			});
-		}
+		super.data = this._d;
 	}
 }
