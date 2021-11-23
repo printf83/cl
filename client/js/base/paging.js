@@ -13,10 +13,20 @@ import icon from "./icon.js";
  */
 
 function pagingonchange(sender, data) {
-	console.log("Data", data);
-	let parent = sender.closest(".cl-paging");
-	console.log("Parent", parent);
-	cl.replaceWith(parent, new paging(data));
+	let container = sender.closest(".cl-paging");
+	var event = new CustomEvent("change", {
+		currentTarget: sender,
+		detail: {
+			total: data.total,
+			skip: data.skip,
+			limit: data.limit,
+			max: data.max,
+		},
+	});
+
+	container.dispatchEvent(event);
+
+	cl.replaceWith(container, new paging(data));
 }
 
 export default class paging extends tag {
@@ -245,6 +255,7 @@ export default class paging extends tag {
 							d.align ? "justify-content-" + d.align : null,
 							d.overflow ? "overflow-auto" : null,
 						],
+						onchange: d.onchange,
 					},
 					elem: new ul(
 						["pagination", d.weight ? `pagination-${d.weight}` : null, d.overflow ? "mx-5" : null],
