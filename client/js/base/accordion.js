@@ -102,7 +102,7 @@ export default class accordion extends div {
 											attr: {
 												"data-bs-toggle": "collapse",
 												"data-bs-target": `#${id}-body`,
-												"aria-control": `${id}-body`,
+												"aria-controls": `${id}-body`,
 												"aria-expanded": i.active ? "true" : "false",
 											},
 										}),
@@ -114,7 +114,7 @@ export default class accordion extends div {
 										// 		class: ["accordion-button", !i.active ? "collapsed" : null],
 										// 		"data-bs-toggle": "collapse",
 										// 		"data-bs-target": `#${id}-body`,
-										// 		"aria-control": `${id}-body`,
+										// 		"aria-controls": `${id}-body`,
 										// 		"aria-expanded": i.active ? "true" : "false",
 										// 	},
 										// 	elem: new label(i.icon, i.title),

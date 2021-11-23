@@ -92,6 +92,7 @@ export default class paging extends tag {
 									tabindex: curpage > 1 ? null : "-1",
 									"aria-disabled": curpage > 1 ? null : true,
 									"aria-label": "First Page",
+									href: "javascript:void(0)",
 									onclick: function (sender) {
 										d.skip = 0;
 										pagingonchange(sender.currentTarget, d);
@@ -114,6 +115,7 @@ export default class paging extends tag {
 									tabindex: curpage > 1 ? null : "-1",
 									"aria-disabled": curpage > 1 ? null : true,
 									"aria-label": "Previous Page",
+									href: "javascript:void(0)",
 									onclick: function (sender) {
 										d.skip = (curpage - 2) * d.limit;
 										pagingonchange(sender.currentTarget, d);
@@ -186,6 +188,7 @@ export default class paging extends tag {
 								class: "page-link",
 								attr: {
 									"aria-label": `Page ${x.toString()}`,
+									href: "javascript:void(0)",
 									onclick: function (sender) {
 										let xnum = parseInt(sender.currentTarget.innerText, 10);
 										d.skip = (xnum - 1) * d.limit;
@@ -209,6 +212,7 @@ export default class paging extends tag {
 									tabindex: curpage < btncount ? null : "-1",
 									"aria-disabled": curpage > 1 ? null : true,
 									"aria-label": "Next Page",
+									href: "javascript:void(0)",
 									onclick: function (sender) {
 										d.skip = curpage * d.limit;
 										pagingonchange(sender.currentTarget, d);
@@ -231,6 +235,7 @@ export default class paging extends tag {
 									tabindex: curpage < btncount ? null : "-1",
 									"aria-disabled": curpage > 1 ? null : true,
 									"aria-label": "Last Page",
+									href: "javascript:void(0)",
 									onclick: function (sender) {
 										d.skip = (btncount - 1) * d.limit;
 										pagingonchange(sender.currentTarget, d);
