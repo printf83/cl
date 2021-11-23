@@ -251,17 +251,18 @@ export default class paging extends tag {
 				//ns.data.set(d.id, d);
 				this._d = {
 					tag: "div",
-					attr: {
+					attr: core.merge(d.attr, {
 						id: d.id,
-						class: [
+						class: core.merge.class(d.class, [
 							"d-flex",
 							"p-1",
 							"cl-paging",
 							d.align ? "justify-content-" + d.align : null,
 							d.overflow ? "overflow-auto" : null,
-						],
+						]),
+						style: d.style,
 						onchange: d.onchange,
-					},
+					}),
 					elem: new ul(
 						["pagination", d.weight ? `pagination-${d.weight}` : null, d.overflow ? "mx-5" : null],
 						item
