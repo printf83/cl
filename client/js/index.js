@@ -26,6 +26,7 @@ import * as alert from "./base/alert.js";
 import hr from "./base/hr.js";
 import accordion from "./base/accordion.js";
 import breadcrumb from "./base/breadcrumb.js";
+import paging from "./base/paging.js";
 
 let imgurlindex = 0;
 function imgurl(width, height) {
@@ -60,7 +61,16 @@ core.documentReady(() => {
 										],
 									}),
 								},
-								{ title: "Hello1", icon: "fire", elem: "World1" },
+								{
+									title: "Hello1",
+									icon: "fire",
+									elem: new paging({
+										total: 1260,
+										skip: 0,
+										limit: 10,
+										max: 5,
+									}),
+								},
 								{ title: "Hello2", elem: "World2" },
 								{ title: "Hello3", elem: "World3" },
 							],
