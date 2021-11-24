@@ -32,10 +32,18 @@ let imgurlindex = 0;
 function imgurl(width, height) {
 	return `https://picsum.photos/seed/${++imgurlindex}/${width ? width : 800}/${height ? height : 400}.webp`;
 }
-//test upload from laptop
-core.documentReady(() => {
-	let loream =
-		"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce hendrerit tincidunt nibh ut condimentum. Nulla vitae vulputate elit. Sed accumsan varius mauris, vel bibendum magna consequat eget. Vivamus felis dolor, laoreet et blandit ut, iaculis eu arcu. Proin dapibus, metus vitae iaculis venenatis, lacus purus commodo tellus, aliquam commodo ex metus vulputate mi. Nam eu lorem vel nisi scelerisque hendrerit et id justo. Nunc vestibulum eget est sed ullamcorper. Etiam pulvinar, dui eget vehicula molestie, sapien sapien lobortis nulla, nec cursus urna sapien imperdiet tortor. Nam vitae lacus sem. Praesent id arcu vitae sem ultrices rutrum ut ac mi.";
+let loream =
+	"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce hendrerit tincidunt nibh ut condimentum. Nulla vitae vulputate elit. Sed accumsan varius mauris, vel bibendum magna consequat eget. Vivamus felis dolor, laoreet et blandit ut, iaculis eu arcu. Proin dapibus, metus vitae iaculis venenatis, lacus purus commodo tellus, aliquam commodo ex metus vulputate mi. Nam eu lorem vel nisi scelerisque hendrerit et id justo. Nunc vestibulum eget est sed ullamcorper. Etiam pulvinar, dui eget vehicula molestie, sapien sapien lobortis nulla, nec cursus urna sapien imperdiet tortor. Nam vitae lacus sem. Praesent id arcu vitae sem ultrices rutrum ut ac mi.";
+
+function repeatdoform(timestorepeat) {
+	if (timestorepeat > 0) {
+		doForm();
+		setTimeout(repeatdoform(timestorepeat - 1), 10);
+	} else {
+		console.log("End repeat");
+	}
+}
+function doForm() {
 	let root = document.getElementById("root");
 
 	// console.time("Proccesing Time");
@@ -45,6 +53,9 @@ core.documentReady(() => {
 	cl.replaceChild(
 		root,
 		new div("my-5 container", [
+			new button("danger mb-2", "Generate Root", function () {
+				repeatdoform(500);
+			}),
 			new tab({
 				style: "tab",
 				item: [
@@ -685,4 +696,8 @@ core.documentReady(() => {
 			]),
 		])
 	);
+}
+//test upload from laptop
+core.documentReady(() => {
+	doForm();
 });

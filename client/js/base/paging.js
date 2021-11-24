@@ -251,7 +251,7 @@ export default class paging extends tag {
 				//ns.data.set(d.id, d);
 				this._d = {
 					tag: "div",
-					attr: core.merge(d.attr, {
+					attr: core.merge.attr(d.attr, {
 						id: d.id,
 						class: core.merge.class(d.class, [
 							"d-flex",
