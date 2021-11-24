@@ -133,6 +133,15 @@ function build(container, arg) {
 	return null;
 }
 
+function removeEvent(elem) {
+	// for (let eventType in getEventListeners(elem)) {
+	// 	getEventListeners(elem)[eventType].forEach(function (o) {
+	// 		o.remove();
+	// 	});
+	// }
+	elem.parentNode.replaceChild(elem.cloneNode(true), elem);
+}
+
 export function appendChild(container, data) {
 	console.time("appendChild");
 	let n = node(data);
@@ -144,7 +153,6 @@ export function appendChild(container, data) {
 		});
 	}
 	console.timeEnd("appendChild");
-
 	return container.lastChild;
 }
 
@@ -165,6 +173,7 @@ export function prependChild(container, data) {
 export function replaceWith(elem, data) {
 	console.time("replaceWith");
 	while (elem.firstChild) {
+		removeEvent(elem);
 		elem.firstChild.remove();
 	}
 
@@ -188,6 +197,7 @@ export function replaceWith(elem, data) {
 export function replaceChild(container, data) {
 	console.time("replaceChild");
 	while (container.firstChild) {
+		removeEvent(container.firstChild);
 		container.firstChild.remove();
 	}
 

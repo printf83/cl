@@ -54,7 +54,7 @@ function doForm() {
 		root,
 		new div("my-5 container", [
 			new button("danger mb-2", "Generate Root", function () {
-				repeatdoform(500);
+				repeatdoform(5000);
 			}),
 			new tab({
 				style: "tab",
