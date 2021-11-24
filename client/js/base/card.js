@@ -10,10 +10,10 @@ class main extends tag {
 	_c = null;
 	_d = null;
 
-	constructor(tag, className, ...arg) {
+	constructor(tagName, className, ...arg) {
 		super();
 		if (arg && arg.length > 0) {
-			this.tag = tag;
+			this.tagName = tagName;
 			this.className = className;
 
 			let t = {
@@ -51,16 +51,16 @@ class main extends tag {
 				t
 			);
 		} else {
-			this.tag = null;
+			this.tagName = null;
 			this.className = null;
 			this.data = null;
 		}
 	}
 
-	get tag() {
+	get tagName() {
 		return this._t;
 	}
-	set tag(d) {
+	set tagName(d) {
 		this._t = d;
 	}
 
@@ -74,9 +74,9 @@ class main extends tag {
 		return this._d;
 	}
 	set data(d) {
-		if (d && this.tag) {
+		if (d && this.tagName) {
 			this._d = {
-				tag: this.tag,
+				tag: this.tagName,
 				attr: core.merge.attr(d.attr, {
 					class: core.merge.class(
 						this.className,
@@ -93,7 +93,7 @@ class main extends tag {
 				elem: d.elem,
 			};
 		} else {
-			this.tag = null;
+			this.tagName = null;
 			this.className = null;
 			this._d = null;
 		}
