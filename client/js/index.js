@@ -38,7 +38,7 @@ let loream =
 function repeatdoform(timestorepeat) {
 	if (timestorepeat > 0) {
 		doForm();
-		setTimeout(repeatdoform(timestorepeat - 1), 10);
+		repeatdoform(timestorepeat - 1);
 	} else {
 		console.log("End repeat");
 	}
@@ -54,7 +54,7 @@ function doForm() {
 		root,
 		new div("my-5 container", [
 			new button("danger mb-2", "Generate Root", function () {
-				repeatdoform(5000);
+				repeatdoform(1000);
 			}),
 			new tab({
 				style: "tab",
@@ -699,5 +699,5 @@ function doForm() {
 }
 //test upload from laptop
 core.documentReady(() => {
-	doForm();
+	repeatdoform(1000);
 });
