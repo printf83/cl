@@ -331,6 +331,7 @@ export default class modal extends tag {
 			setTimeout(
 				function (dom, mdl) {
 					mdl.dispose();
+					cl.removeChildElement(dom);
 					dom.remove();
 				},
 				300,

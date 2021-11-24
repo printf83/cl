@@ -134,12 +134,14 @@ function build(container, arg) {
 }
 
 function removeEvent(elem) {
-	// for (let eventType in getEventListeners(elem)) {
-	// 	getEventListeners(elem)[eventType].forEach(function (o) {
-	// 		o.remove();
-	// 	});
-	// }
 	elem.parentNode.replaceChild(elem.cloneNode(true), elem);
+}
+
+export function removeChildElement(elem) {
+	while (elem.firstChild) {
+		removeEvent(elem.firstChild);
+		elem.firstChild.remove();
+	}
 }
 
 export function appendChild(container, data) {
@@ -172,10 +174,7 @@ export function prependChild(container, data) {
 
 export function replaceWith(elem, data) {
 	console.time("replaceWith");
-	while (elem.firstChild) {
-		removeEvent(elem);
-		elem.firstChild.remove();
-	}
+	removeChildElement(elem);
 
 	let r = null;
 	let n = node(data);
@@ -196,10 +195,7 @@ export function replaceWith(elem, data) {
 
 export function replaceChild(container, data) {
 	console.time("replaceChild");
-	while (container.firstChild) {
-		removeEvent(container.firstChild);
-		container.firstChild.remove();
-	}
+	removeChildElement(container);
 
 	build(container, data);
 
