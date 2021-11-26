@@ -12,8 +12,6 @@ import h from "./h.js";
  * opt : {attr,class,icon,weight,elem}
  */
 export default class msg extends tag {
-	_d = null;
-
 	constructor(...arg) {
 		super();
 		if (arg && arg.length > 0) {
@@ -57,14 +55,14 @@ export default class msg extends tag {
 	}
 
 	get data() {
-		return this._d;
+		return super.data;
 	}
 	set data(d) {
 		if (d && (d.icon || d.elem)) {
 			switch (d.weight) {
 				case "sm":
 				case "md":
-					this._d = {
+					super.data = {
 						tag: "div",
 						attr: core.merge.attr(d.attr, {
 							class: core.merge.class(d.class, ["d-flex", "align-items-stretch", "gap-2"]),
@@ -82,7 +80,7 @@ export default class msg extends tag {
 
 					break;
 				case "lg":
-					this._d = {
+					super.data = {
 						tag: "div",
 						attr: core.merge.attr(d.attr, {
 							class: d.class,
@@ -106,9 +104,7 @@ export default class msg extends tag {
 					console.error("Unsupported weight", d.weight);
 			}
 		} else {
-			this._d = null;
+			super.data = null;
 		}
-
-		super.data = this._d;
 	}
 }

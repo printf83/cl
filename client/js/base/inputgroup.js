@@ -11,8 +11,6 @@ import div from "./div.js";
  * opt : {attr,for,label,elem,nowarp}
  */
 export class container extends tag {
-	_d = null;
-
 	constructor(...arg) {
 		super();
 
@@ -55,11 +53,11 @@ export class container extends tag {
 	}
 
 	get data() {
-		return this._d;
+		return super.data;
 	}
 	set data(d) {
 		if (d) {
-			this._d = {
+			super.data = {
 				elem: [
 					d.label ? new label(d.for, "form-label", d.label) : null,
 					new div({
@@ -70,12 +68,9 @@ export class container extends tag {
 				],
 			};
 		} else {
-			this._d = null;
+			super.data = null;
 		}
-
-		super.data = this._d;
 	}
-
 }
 
 /**
@@ -83,8 +78,6 @@ export class container extends tag {
  * opt : {attr,elem}
  */
 export class text extends div {
-	_d = null;
-
 	constructor(...arg) {
 		super();
 		if (arg && arg.length > 0) {
@@ -117,20 +110,17 @@ export class text extends div {
 	}
 
 	get data() {
-		return this._d;
+		return super.data;
 	}
 	set data(d) {
 		if (d) {
-			this._d = {
+			super.data = {
 				attr: d.attr,
 				class: ["input-group-text"],
 				elem: d.elem,
 			};
 		} else {
-			this._d = null;
-				}
-
-		super.data = this._d;
+			super.data = null;
+		}
 	}
-
 }

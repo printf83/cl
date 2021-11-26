@@ -15,8 +15,6 @@ import h from "./h.js";
  * dropdown item : [string]|[{attr,elem,value,label,icon,active,disabled,interactive,onclick,href}]
  */
 export default class option extends tag {
-	_d = null;
-
 	constructor(...arg) {
 		super();
 		if (arg && arg.length > 0) {
@@ -175,19 +173,19 @@ export default class option extends tag {
 	};
 
 	get data() {
-		return this._d;
+		return super.data;
 	}
 	set data(d) {
 		if (d && d.item && d.item.length > 0) {
 			if (d.type === "option") {
-				this._d = {
+				super.data = {
 					elem: this.#gen_option(
 						d.item,
 						d.selected ? (Array.isArray(d.selected) ? d.selected : [d.selected]) : []
 					),
 				};
 			} else {
-				this._d = {
+				super.data = {
 					elem: this.#gen_dropdown(
 						d.item,
 						d.selected ? (Array.isArray(d.selected) ? d.selected : [d.selected]) : []
@@ -195,9 +193,7 @@ export default class option extends tag {
 				};
 			}
 		} else {
-			this._d = null;
+			super.data = null;
 		}
-
-		super.data = this._d;
 	}
 }

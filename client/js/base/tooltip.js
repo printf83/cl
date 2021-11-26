@@ -6,18 +6,10 @@ import tag from "./tag.js";
  * elem, opt : {attr,title,msg,type,placement,trigger}
  */
 export default class tooltip extends tag {
-	_d = null;
-
 	constructor(elem, ...arg) {
 		super();
 
-		if (elem) {
-			this.elem = elem;
-		} else {
-			this.elem = null;
-		}
-
-		if (arg && arg.length > 0) {
+		if (elem && arg && arg.length > 0) {
 			let t = {
 				msg: null,
 			};
@@ -35,6 +27,8 @@ export default class tooltip extends tag {
 			this.data = core.extend(
 				{},
 				{
+					_target: elem,
+
 					attr: null,
 					title: null,
 					msg: null,
@@ -45,25 +39,17 @@ export default class tooltip extends tag {
 				t
 			);
 		} else {
-			this.data = null;
+			this.data = { _target: elem };
 		}
 	}
 
-	get elem() {
-		return this._e;
-	}
-	set elem(d) {
-		this._e = d;
-	}
-
 	get data() {
-		return this._d;
+		return super.data;
 	}
 	set data(d) {
-		if (d && this.elem) {
-			this._d = this.elem.data;
-
-			this._d.attr = core.merge.attr(this._d.attr, {
+		if (d && d._target) {
+			super.data = d._target.data;
+			super.data.attr = core.merge.attr(super.data.attr, {
 				title: d.type === "popover" ? d.title : d.msg,
 				"data-bs-toggle": d.type,
 				"data-bs-content": d.type === "popover" ? d.msg : null,
@@ -72,9 +58,7 @@ export default class tooltip extends tag {
 				"data-bs-html": d.type && core.isHTML(d.msg) ? "true" : null,
 			});
 		} else {
-			this._d = null;
+			super.data = null;
 		}
-
-		super.data = this._d;
 	}
 }

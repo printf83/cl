@@ -9,8 +9,6 @@ import button from "./button.js";
  * opt : {attr,id,class,style,item,flush,autoclose}
  */
 export default class accordion extends div {
-	_d = null;
-
 	constructor(...arg) {
 		super();
 
@@ -50,7 +48,7 @@ export default class accordion extends div {
 	}
 
 	get data() {
-		return this._d;
+		return super.data;
 	}
 	set data(d) {
 		if (d) {
@@ -61,15 +59,15 @@ export default class accordion extends div {
 			d.id = d.id || d.autoclose ? core.UUID() : null;
 
 			//check if any item active
-			let activeitem = d.item.find((i) => {
+			let activeitem = d.item?.find((i) => {
 				return i.active === true;
 			});
 
-			if (!activeitem) {
+			if (d.item && !activeitem) {
 				d.item[0].active = true;
 			}
 
-			this._d = {
+			super.data = {
 				attr: core.merge.attr(d.attr, {
 					id: d.id,
 					class: core.merge.class(d.class, ["accordion", d.flush ? "accordion-flush" : null]),
@@ -134,9 +132,7 @@ export default class accordion extends div {
 						: null,
 			};
 		} else {
-			this._d = null;
+			super.data = null;
 		}
-
-		super.data = this._d;
 	}
 }

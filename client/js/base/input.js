@@ -15,8 +15,6 @@ import option from "./option.js";
  * opt : {attr,id,name,type,label,hidelabel,floatlabel,inline,labelsize,ctlsize,size,weight,value,checked,placeholder,option,numctl,addctl,min,max,step,row,multiple,required,valid,invalid,before,after,plaintext,readonly,disabled,container,flex,nowarp,onclick,onchange,onclick,onfocus,onblur}
  */
 export default class input extends tag {
-	_d = null;
-
 	constructor(...arg) {
 		super();
 		if (arg && arg.length > 0) {
@@ -107,7 +105,7 @@ export default class input extends tag {
 	}
 
 	get data() {
-		return this._d;
+		return super.data;
 	}
 	set data(d) {
 		if (d) {
@@ -499,32 +497,30 @@ export default class input extends tag {
 			}
 
 			if (d.size) {
-				this._d = {
+				super.data = {
 					elem: new div(core.multiClass(d.size, "col-$1", null, "col"), ctl),
 				};
 			} else {
-				this._d = {
+				super.data = {
 					elem: ctl,
 				};
 			}
 		} else {
-			this._d = null;
-		}
-
-		super.data = this._d;
-	}
-
-	static val(elem, value) {
-		if (value) {
-			if (elem && elem.value) {
-				elem.value = value;
-			}
-		} else {
-			if (elem && elem.value) {
-				return elem.value;
-			}
-
-			return null;
+			super.data = null;
 		}
 	}
+
+	// static val(elem, value) {
+	// 	if (value) {
+	// 		if (elem && elem.value) {
+	// 			elem.value = value;
+	// 		}
+	// 	} else {
+	// 		if (elem && elem.value) {
+	// 			return elem.value;
+	// 		}
+
+	// 		return null;
+	// 	}
+	// }
 }

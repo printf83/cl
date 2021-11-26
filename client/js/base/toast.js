@@ -22,7 +22,6 @@ import btnclose from "./btnclose.js";
  */
 
 export default class toast extends tag {
-	_d = null;
 	_n = null;
 	_m = null;
 
@@ -109,7 +108,7 @@ export default class toast extends tag {
 	}
 
 	get data() {
-		return this._d;
+		return super.data;
 	}
 	set data(d) {
 		if (d) {
@@ -164,7 +163,7 @@ export default class toast extends tag {
 			);
 
 			//combine header,body to div.toast
-			this._d = {
+			super.data = {
 				elem: new div({
 					attr: core.merge.attr(d.attr, {
 						class: core.merge.class(d.class, [
@@ -187,10 +186,8 @@ export default class toast extends tag {
 				}),
 			};
 		} else {
-			this._d = null;
+			super.data = null;
 		}
-
-		super.data = this._d;
 	}
 
 	get dom() {
@@ -247,6 +244,9 @@ export default class toast extends tag {
 					//tst.destroy();
 					cl.removeChildElement(dom);
 					dom.remove();
+
+					this.tst = null;
+					this.dom = null;
 				},
 				300,
 				dom,

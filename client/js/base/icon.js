@@ -10,7 +10,6 @@ import tag from "./tag.js";
  */
 
 export default class icon extends tag {
-	_d = null;
 	clicon = 1;
 
 	constructor(...arg) {
@@ -68,7 +67,7 @@ export default class icon extends tag {
 	}
 
 	get data() {
-		return this._d;
+		return super.data;
 	}
 	set data(d) {
 		if (d) {
@@ -94,7 +93,7 @@ export default class icon extends tag {
 					break;
 			}
 
-			this._d = {
+			super.data = {
 				tag: d.icon ? "i" : "span",
 				attr: core.merge.attr(d.attr, {
 					class: core.merge.class(d.class, [
@@ -113,9 +112,7 @@ export default class icon extends tag {
 				elem: d.elem,
 			};
 		} else {
-			this._d = null;
+			super.data = null;
 		}
-
-		super.data = this._d;
 	}
 }

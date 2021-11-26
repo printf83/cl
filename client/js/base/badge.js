@@ -9,8 +9,6 @@ import span from "./span.js";
  * opt : {attr,label,asst,icon,notification,pill,color,textcolor,bordercolor}
  */
 export default class badge extends span {
-	_d = null;
-
 	constructor(...arg) {
 		super();
 
@@ -60,11 +58,11 @@ export default class badge extends span {
 	}
 
 	get data() {
-		return this._d;
+		return super.data;
 	}
 	set data(d) {
 		if (d) {
-			this._d = {
+			super.data = {
 				attr: d.attr,
 				class: [
 					"badge",
@@ -90,10 +88,7 @@ export default class badge extends span {
 				],
 			};
 		} else {
-			this._d = null;
+			super.data = null;
 		}
-
-		super.data = this._d;
 	}
-
 }

@@ -1,4 +1,5 @@
 "use strict";
+import * as core from "./core.js";
 import cont from "./cont.js";
 
 /**
@@ -16,6 +17,6 @@ export default class li extends cont {
 		return super.data;
 	}
 	set data(arg) {
-		super.data = arg;
+		super.data = core.extend({}, { tag: "li" }, arg);
 	}
 }

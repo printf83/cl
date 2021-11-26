@@ -30,8 +30,6 @@ function pagingonchange(sender, data) {
 }
 
 export default class paging extends tag {
-	_d = null;
-
 	constructor(...arg) {
 		super();
 
@@ -68,7 +66,7 @@ export default class paging extends tag {
 	}
 
 	get data() {
-		return this._d;
+		return super.data;
 	}
 	set data(d) {
 		if (d) {
@@ -249,7 +247,7 @@ export default class paging extends tag {
 
 				//save in memory
 				//ns.data.set(d.id, d);
-				this._d = {
+				super.data = {
 					tag: "div",
 					attr: core.merge.attr(d.attr, {
 						id: d.id,
@@ -270,9 +268,7 @@ export default class paging extends tag {
 				};
 			}
 		} else {
-			this._d = null;
+			super.data = null;
 		}
-
-		super.data = this._d;
 	}
 }

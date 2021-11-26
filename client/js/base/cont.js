@@ -10,19 +10,10 @@ import tag from "./tag.js";
  * tag,opt : {attr,class,style,id,name,href(if tag a),onclick,elem}
  */
 export default class cont extends tag {
-	_t = null;
-	_d = null;
-
-	constructor(tag, ...arg) {
+	constructor(tagName, ...arg) {
 		super();
 
-		if (tag) {
-			this.tag = tag;
-		} else {
-			this.tag = null;
-		}
-
-		if (arg && arg.length > 0) {
+		if (tagName && arg && arg.length > 0) {
 			let t = {
 				class: null,
 				style: null,
@@ -51,6 +42,7 @@ export default class cont extends tag {
 			this.data = core.extend(
 				{},
 				{
+					tag: tagName,
 					id: null,
 					name: null,
 					onclick: null,
@@ -65,24 +57,17 @@ export default class cont extends tag {
 				t
 			);
 		} else {
-			this.data = null;
+			this.data = { tag: tagName };
 		}
 	}
 
-	get tag() {
-		return this._t;
-	}
-	set tag(d) {
-		this._t = d;
-	}
-
 	get data() {
-		return this._d;
+		return super.data;
 	}
 	set data(d) {
 		if (d) {
-			this._d = {
-				tag: this.tag,
+			super.data = {
+				tag: d.tag,
 				attr: core.merge.attr(d.attr, {
 					class: d.class,
 					style: d.style,
@@ -95,9 +80,7 @@ export default class cont extends tag {
 				elem: d.elem,
 			};
 		} else {
-			this._d = null;
+			super.data = null;
 		}
-
-		super.data = this._d;
 	}
 }

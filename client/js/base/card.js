@@ -13,9 +13,6 @@ class main extends tag {
 	constructor(tagName, className, ...arg) {
 		super();
 		if (arg && arg.length > 0) {
-			this.tagName = tagName;
-			this.className = className;
-
 			let t = {
 				elem: null,
 			};
@@ -34,6 +31,9 @@ class main extends tag {
 			this.data = core.extend(
 				{},
 				{
+					tag: tagName,
+					cn: className,
+
 					attr: null,
 
 					id: null,
@@ -51,35 +51,19 @@ class main extends tag {
 				t
 			);
 		} else {
-			this.tagName = null;
-			this.className = null;
 			this.data = null;
 		}
 	}
-
-	get tagName() {
-		return this._t;
-	}
-	set tagName(d) {
-		this._t = d;
-	}
-
-	get className() {
-		return this._c;
-	}
-	set className(d) {
-		this._c = d;
-	}
 	get data() {
-		return this._d;
+		return super.data;
 	}
 	set data(d) {
-		if (d && this.tagName) {
-			this._d = {
-				tag: this.tagName,
+		if (d) {
+			super.data = {
+				tag: d.tag,
 				attr: core.merge.attr(d.attr, {
 					class: core.merge.class(
-						this.className,
+						d.cn,
 						core.merge.class(d.class, [
 							d.align ? `text-${d.align}` : null,
 							d.color ? `bg-${d.color}` : null,
@@ -93,12 +77,8 @@ class main extends tag {
 				elem: d.elem,
 			};
 		} else {
-			this.tagName = null;
-			this.className = null;
-			this._d = null;
+			super.data = null;
 		}
-
-		super.data = this._d;
 	}
 }
 
@@ -111,7 +91,7 @@ export class container extends main {
 		return super.data;
 	}
 	set data(arg) {
-		super.data = arg;
+		super.data = core.extend({}, { tag: "div", cn: "card" }, arg);
 	}
 }
 /**
@@ -128,7 +108,7 @@ export class header extends main {
 		return super.data;
 	}
 	set data(arg) {
-		super.data = arg;
+		super.data = core.extend({}, { tag: "div", cn: "card-header" }, arg);
 	}
 }
 
@@ -146,7 +126,7 @@ export class body extends main {
 		return super.data;
 	}
 	set data(arg) {
-		super.data = arg;
+		super.data = core.extend({}, { tag: "div", cn: "card-body" }, arg);
 	}
 }
 
@@ -164,7 +144,7 @@ export class footer extends main {
 		return super.data;
 	}
 	set data(arg) {
-		super.data = arg;
+		super.data = core.extend({}, { tag: "div", cn: "card-footer" }, arg);
 	}
 }
 
@@ -182,7 +162,7 @@ export class group extends main {
 		return super.data;
 	}
 	set data(arg) {
-		super.data = arg;
+		super.data = core.extend({}, { tag: "div", cn: "card-group" }, arg);
 	}
 }
 
@@ -200,7 +180,7 @@ export class title extends main {
 		return super.data;
 	}
 	set data(arg) {
-		super.data = arg;
+		super.data = core.extend({}, { tag: "h5", cn: "card-title" }, arg);
 	}
 }
 
@@ -218,7 +198,7 @@ export class subtitle extends main {
 		return super.data;
 	}
 	set data(arg) {
-		super.data = arg;
+		super.data = core.extend({}, { tag: "h6", cn: "card-subtitle mb-2" }, arg);
 	}
 }
 
@@ -236,7 +216,7 @@ export class text extends main {
 		return super.data;
 	}
 	set data(arg) {
-		super.data = arg;
+		super.data = core.extend({}, { tag: "p", cn: "card-text" }, arg);
 	}
 }
 
@@ -254,7 +234,7 @@ export class imgoverlay extends main {
 		return super.data;
 	}
 	set data(arg) {
-		super.data = arg;
+		super.data = core.extend({}, { tag: "div", cn: "card-img-overlay" }, arg);
 	}
 }
 
@@ -264,8 +244,6 @@ export class imgoverlay extends main {
  * opt : {attr,id,class,style,align,color,textcolor,bordercolor,border,left,right,size,gap}
  */
 export class horizontal extends tag {
-	_d = null;
-
 	constructor(...arg) {
 		super();
 		if (arg && arg.length > 0) {
@@ -320,11 +298,11 @@ export class horizontal extends tag {
 	}
 
 	get data() {
-		return this._d;
+		return super.data;
 	}
 	set data(d) {
 		if (d) {
-			this._d = {
+			super.data = {
 				tag: "div",
 				attr: core.merge.attr(d.attr, {
 					class: [
@@ -342,10 +320,8 @@ export class horizontal extends tag {
 				elem: [new div(core.multiClass(d.size, "col-$1", null, "col"), d.left), new div("col", d.right)],
 			};
 		} else {
-			this._d = null;
+			super.data = null;
 		}
-
-		super.data = this._d;
 	}
 }
 

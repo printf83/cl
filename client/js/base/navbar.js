@@ -6,8 +6,6 @@ import span from "./span.js";
 import div from "./div.js";
 
 export class container extends tag {
-	_d = null;
-
 	constructor(...arg) {
 		super();
 
@@ -39,11 +37,11 @@ export class container extends tag {
 	}
 
 	get data() {
-		return this._d;
+		return super.data;
 	}
 	set data(d) {
 		if (d) {
-			this._d = {
+			super.data = {
 				tag: "nav",
 				attr: core.merge.attr(d.attr, {
 					class: core.merge.class(d.class, [
@@ -75,16 +73,12 @@ export class container extends tag {
 				}),
 			};
 		} else {
-			this._d = null;
+			super.data = null;
 		}
-
-		super.data = this._d;
 	}
 }
 
 export class brand extends tag {
-	_d = null;
-
 	constructor(...arg) {
 		super();
 
@@ -112,11 +106,11 @@ export class brand extends tag {
 	}
 
 	get data() {
-		return this._d;
+		return super.data;
 	}
 	set data(d) {
 		if (d) {
-			this._d = {
+			super.data = {
 				tag: d.href ? "a" : "h1",
 				attr: {
 					class: core.merge.class(d.class, ["navbar-brand", !d.href ? "mb-0" : null]),
@@ -132,9 +126,7 @@ export class brand extends tag {
 					  }),
 			};
 		} else {
-			this._d = null;
+			super.data = null;
 		}
-
-		super.data = this._d;
 	}
 }

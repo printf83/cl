@@ -1,4 +1,5 @@
 "use strict";
+import * as core from "./core.js";
 import tag from "./tag.js";
 
 /**
@@ -28,6 +29,6 @@ export default class hr extends tag {
 		return super.data;
 	}
 	set data(arg) {
-		super.data = arg;
+		super.data = core.extend({}, { tag: "hr" }, arg);
 	}
 }

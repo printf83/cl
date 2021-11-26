@@ -17,7 +17,6 @@ import label from "./label.js";
  */
 
 export default class tab extends tag {
-	_d = null;
 	cltab = 1;
 
 	constructor(...arg) {
@@ -60,7 +59,7 @@ export default class tab extends tag {
 	}
 
 	get data() {
-		return this._d;
+		return super.data;
 	}
 	set data(d) {
 		if (d) {
@@ -223,7 +222,7 @@ export default class tab extends tag {
 						: null;
 
 				if (bodyCtl) {
-					this._d = {
+					super.data = {
 						elem: new div(
 							[
 								"card p-0", //need p-0 to make sure no one change this padding
@@ -248,16 +247,13 @@ export default class tab extends tag {
 						),
 					};
 				} else {
-					this._d = {
+					super.data = {
 						elem: headerCtl,
 					};
 				}
 			}
 		} else {
-			this._d = null;
+			super.data = null;
 		}
-
-		this.setting = d;
-		super.data = this._d;
 	}
 }

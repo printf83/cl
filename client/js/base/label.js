@@ -11,8 +11,6 @@ import icon from "./icon.js";
  * opt : {attr,for,icon,label}
  */
 export default class label extends tag {
-	_d = null;
-
 	constructor(...arg) {
 		super();
 		if (arg && arg.length > 0) {
@@ -54,22 +52,22 @@ export default class label extends tag {
 	}
 
 	get data() {
-		return this._d;
+		return super.data;
 	}
 	set data(d) {
 		if (d && (d.icon || d.label)) {
 			if (d.hidelabel) {
 				if (d.icon) {
-					this._d = {
+					super.data = {
 						elem: [new icon(d.icon), d.label ? new span("visually-hidden", d.label) : null],
 					};
 				} else {
-					this._d = {
+					super.data = {
 						elem: new span("visually-hidden", d.label),
 					};
 				}
 			} else {
-				this._d = {
+				super.data = {
 					tag: "label",
 					attr: core.merge.attr(d.attr, {
 						for: d.for,
@@ -81,9 +79,7 @@ export default class label extends tag {
 				};
 			}
 		} else {
-			this._d = null;
+			super.data = null;
 		}
-
-		super.data = this._d;
 	}
 }

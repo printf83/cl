@@ -1,4 +1,5 @@
 "use strict";
+import * as core from "./core.js";
 import cont from "./cont.js";
 
 /**
@@ -21,6 +22,6 @@ export default class h extends cont {
 		return super.data;
 	}
 	set data(arg) {
-		super.data = arg;
+		super.data = core.extend({}, { tag: "h1" }, arg);
 	}
 }

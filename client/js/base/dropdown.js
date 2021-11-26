@@ -15,8 +15,6 @@ import ul from "./ul.js";
  */
 
 export default class dropdown extends tag {
-	_d = null;
-
 	constructor(...arg) {
 		super();
 
@@ -94,7 +92,7 @@ export default class dropdown extends tag {
 	}
 
 	get data() {
-		return this._d;
+		return super.data;
 	}
 	set data(d) {
 		if (d) {
@@ -184,7 +182,7 @@ export default class dropdown extends tag {
 			// }
 
 			if (d.splittoggle && d.arrow === "start") {
-				this._d = {
+				super.data = {
 					tag: d.container ? "div" : null,
 					attr: d.container ? { class: ["btn-group", d.container, d.arrow ? `drop${d.arrow}` : null] } : null,
 					elem: [
@@ -196,7 +194,7 @@ export default class dropdown extends tag {
 					],
 				};
 			} else {
-				this._d = {
+				super.data = {
 					tag: d.container ? "div" : null,
 					attr: d.container ? { class: [d.container, d.arrow ? `drop${d.arrow}` : null] } : null,
 					elem: d.splittoggle
@@ -208,10 +206,7 @@ export default class dropdown extends tag {
 				};
 			}
 		} else {
-			this._d = null;
-			}
-
-		super.data = this._d;
+			super.data = null;
+		}
 	}
-
 }

@@ -9,8 +9,6 @@ import tag from "./tag.js";
  * opt : {attr,class,style,id,onclick,src,alt}
  */
 export default class img extends tag {
-	_d = null;
-
 	constructor(...arg) {
 		super();
 
@@ -56,11 +54,11 @@ export default class img extends tag {
 	}
 
 	get data() {
-		return this._d;
+		return super.data;
 	}
 	set data(d) {
 		if (d) {
-			this._d = {
+			super.data = {
 				tag: "img",
 				attr: core.merge.attr(d.attr, {
 					class: d.class,
@@ -73,9 +71,7 @@ export default class img extends tag {
 				}),
 			};
 		} else {
-			this._d = null;
+			super.data = null;
 		}
-
-		super.data = this._d;
 	}
 }

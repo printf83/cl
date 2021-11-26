@@ -12,8 +12,6 @@ import a from "./a.js";
  * opt : {attr,id,class,style,item,divider}
  */
 export default class breadcrumb extends tag {
-	_d = null;
-
 	constructor(...arg) {
 		super();
 
@@ -53,7 +51,7 @@ export default class breadcrumb extends tag {
 	}
 
 	get data() {
-		return this._d;
+		return super.data;
 	}
 	set data(d) {
 		if (d) {
@@ -69,7 +67,7 @@ export default class breadcrumb extends tag {
 				d.item[d.item.length - 1].current = true;
 			}
 
-			this._d = {
+			super.data = {
 				tag: "nav",
 				attr: core.merge.attr(d.attr, {
 					id: d.id,
@@ -113,9 +111,7 @@ export default class breadcrumb extends tag {
 				),
 			};
 		} else {
-			this._d = null;
+			super.data = null;
 		}
-
-		super.data = this._d;
 	}
 }

@@ -16,8 +16,6 @@ import btnclose from "./btnclose.js";
  * opt : {attr,id,class,animate,title,icon,elem,close,autohide,delay,color,textcolor,bordercolor,border,date,timer,position,debug}
  */
 export class container extends div {
-	_d = null;
-
 	constructor(...arg) {
 		super();
 
@@ -81,7 +79,7 @@ export class container extends div {
 	}
 
 	get data() {
-		return this._d;
+		return super.data;
 	}
 	set data(d) {
 		if (d) {
@@ -98,7 +96,7 @@ export class container extends div {
 				);
 			}
 
-			this._d = {
+			super.data = {
 				attr: core.merge.attr(d.attr, {
 					id: d.id,
 					class: core.merge.class(d.class, [
@@ -120,10 +118,8 @@ export class container extends div {
 				]),
 			};
 		} else {
-			this._d = null;
+			super.data = null;
 		}
-
-		super.data = this._d;
 	}
 }
 

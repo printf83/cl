@@ -53,7 +53,7 @@ export default class btnclose extends button {
 	}
 	set data(d) {
 		if (d) {
-			this._d = {
+			super.data = {
 				type: "button",
 				attr: core.merge.attr(d.attr, {
 					class: core.merge.class(d.class, ["btn-close", !d.dark ? "btn-close-white" : null]),
@@ -62,8 +62,7 @@ export default class btnclose extends button {
 				}),
 			};
 		} else {
-			this._d = null;
+			super.data = null;
 		}
-		super.data = this._d;
 	}
 }

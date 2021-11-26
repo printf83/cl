@@ -50,7 +50,7 @@ function attachAttr(elems, arg) {
 					elems[i] = true;
 				} else {
 					if (arg[i] instanceof Function) {
-						console.warn(`Element has ${i} function`, elems);
+						// console.warn(`Element has ${i} function`, elems);
 						if (i.startsWith("on")) {
 							elems.addEventListener(i.startsWith("on") ? i.substr(2) : i, arg[i]);
 						} else {
@@ -146,7 +146,7 @@ export function removeChildElement(elem) {
 }
 
 export function appendChild(container, data) {
-	console.time("appendChild");
+	// console.time("appendChild");
 	let n = node(data);
 	if (Node.prototype.isPrototypeOf(n)) {
 		container.appendChild(n);
@@ -155,12 +155,12 @@ export function appendChild(container, data) {
 			container.appendChild(i);
 		});
 	}
-	console.timeEnd("appendChild");
+	// console.timeEnd("appendChild");
 	return container.lastChild;
 }
 
 export function prependChild(container, data) {
-	console.time("prependChild");
+	// console.time("prependChild");
 	let n = node(data);
 	if (Node.prototype.isPrototypeOf(n)) {
 		container.insertBefore(n, container.firstChild);
@@ -169,12 +169,12 @@ export function prependChild(container, data) {
 			container.insertBefore(i, container.firstChild);
 		});
 	}
-	console.timeEnd("prependChild");
+	// console.timeEnd("prependChild");
 	return container.firstChild;
 }
 
 export function replaceWith(elem, data) {
-	console.time("replaceWith");
+	//console.time("replaceWith");
 	removeChildElement(elem);
 
 	let r = null;
@@ -190,17 +190,17 @@ export function replaceWith(elem, data) {
 
 	elem.remove();
 
-	console.timeEnd("replaceWith");
+	//console.timeEnd("replaceWith");
 	return r;
 }
 
 export function replaceChild(container, data) {
-	console.time("replaceChild");
+	//console.time("replaceChild");
 	removeChildElement(container);
 
 	build(container, data);
-
-	console.timeEnd("replaceChild");
+	data = null;
+	//console.timeEnd("replaceChild");
 	return container.childNodes;
 }
 

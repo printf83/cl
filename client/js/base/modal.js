@@ -13,7 +13,6 @@ import * as container from "./container.js";
  * option : {attr,id,class,static,title,icon,footer,button,animated,debug,scrollable,center,size,fullscreen,focus,align,color,textcolor,bordercolor,border,divider,centerbutton,elem}
  */
 export default class modal extends tag {
-	_d = null;
 	_n = null;
 	_m = null;
 
@@ -68,7 +67,7 @@ export default class modal extends tag {
 	}
 
 	get data() {
-		return this._d;
+		return super.data;
 	}
 	set data(d) {
 		if (d) {
@@ -219,7 +218,7 @@ export default class modal extends tag {
 			}
 
 			//combine header,body,footer to div.modal > div.modal-dialog > div.content
-			this._d = {
+			super.data = {
 				elem: new div({
 					attr: {
 						class: ["modal", d.animate && !d.debug && "fade", !d.debug ? "show" : "cl-debug"],
@@ -258,10 +257,8 @@ export default class modal extends tag {
 				}),
 			};
 		} else {
-			this._d = null;
+			super.data = null;
 		}
-
-		super.data = this._d;
 	}
 
 	get dom() {
@@ -333,6 +330,9 @@ export default class modal extends tag {
 					mdl.dispose();
 					cl.removeChildElement(dom);
 					dom.remove();
+
+					this.mdl = null;
+					this.dom = null;
 				},
 				300,
 				dom,

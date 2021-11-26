@@ -12,8 +12,6 @@ import badge from "./badge.js";
  * option : {attr,id,name,class,style,type,label,icon,badge,value,checked,color,textcolor,weight,disabled,outline,hidelabel,nowarp,onclick,href}
  */
 export default class button extends tag {
-	_d = null;
-
 	constructor(...arg) {
 		super();
 		if (arg && arg.length > 0) {
@@ -76,7 +74,7 @@ export default class button extends tag {
 	}
 
 	get data() {
-		return this._d;
+		return super.data;
 	}
 	set data(d) {
 		if (d) {
@@ -91,7 +89,7 @@ export default class button extends tag {
 				d.textcolor = d.textcolor || bI.textcolor;
 			}
 
-			this._d = {
+			super.data = {
 				tag: d.href ? "a" : "button",
 				attr: core.merge.attr(d.attr, {
 					id: d.id,
@@ -121,9 +119,7 @@ export default class button extends tag {
 				],
 			};
 		} else {
-			this._d = null;
+			super.data = null;
 		}
-
-		super.data = this._d;
 	}
 }

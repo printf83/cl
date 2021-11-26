@@ -8,17 +8,8 @@ import div from "./div.js";
  * target example : "#id", ".class"
  */
 export class toggle extends tag {
-	_d = null;
-	_e = null;
-
 	constructor(elem, ...arg) {
 		super();
-
-		if (elem) {
-			this.elem = elem;
-		} else {
-			this.elem = null;
-		}
 
 		if (arg && arg.length > 0) {
 			let t = {
@@ -38,6 +29,8 @@ export class toggle extends tag {
 			this.data = core.extend(
 				{},
 				{
+					_target: elem,
+
 					attr: null,
 					target: null,
 					show: false,
@@ -45,35 +38,26 @@ export class toggle extends tag {
 				t
 			);
 		} else {
-			this.data = null;
+			this.data = { _target: elem };
 		}
 	}
 
-	get elem() {
-		return this._e;
-	}
-	set elem(d) {
-		this._e = d;
-	}
-
 	get data() {
-		return this._d;
+		return super.data;
 	}
 	set data(d) {
-		if (d && this._e) {
-			this._d = this._e.data;
+		if (d && d._target) {
+			super.data = d._target.data;
 
-			this._d.attr = core.merge.attr(this._d.attr, {
+			super.data.attr = core.merge.attr(super.data.attr, {
 				"aria-controls": d.target,
 				"aria-expanded": d.show ? "true" : "false",
 				"data-bs-target": d.target,
 				"data-bs-toggle": "collapse",
 			});
 		} else {
-			this._d = null;
+			super.data = null;
 		}
-
-		super.data = this._d;
 	}
 }
 
@@ -84,16 +68,8 @@ export class toggle extends tag {
  * target example : "#id", ".class"
  */
 export class container extends tag {
-	_d = null;
-
 	constructor(elem, ...arg) {
 		super();
-
-		if (elem) {
-			this.elem = elem;
-		} else {
-			this.elem = null;
-		}
 
 		if (arg && arg.length > 0) {
 			let t = {
@@ -113,6 +89,8 @@ export class container extends tag {
 			this.data = core.extend(
 				{},
 				{
+					_target: elem,
+
 					attr: null,
 					id: null,
 					class: null,
@@ -125,31 +103,22 @@ export class container extends tag {
 		}
 	}
 
-	get elem() {
-		return this._e;
-	}
-	set elem(d) {
-		this._e = d;
-	}
-
 	get data() {
-		return this._d;
+		return super.data;
 	}
 	set data(d) {
-		if (d && this._e) {
-			this._d = {
+		if (d && d._target) {
+			super.data = {
 				elem: new div({
 					attr: core.merge.attr(d.attr, {
 						id: d.id,
 						class: core.merge.class(d.class, ["collapse", d.show ? "show" : null]),
 					}),
-					elem: this._e,
+					elem: d._target,
 				}),
 			};
 		} else {
-			this._d = null;
+			super.data = null;
 		}
-
-		super.data = this._d;
 	}
 }

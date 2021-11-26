@@ -8,8 +8,6 @@ import div from "./div.js";
  * opt : {attr,label,elem,weight,vertical}
  */
 export default class btngroup extends div {
-	_d = null;
-
 	constructor(...arg) {
 		super();
 
@@ -49,11 +47,11 @@ export default class btngroup extends div {
 	}
 
 	get data() {
-		return this._d;
+		return super.data;
 	}
 	set data(d) {
 		if (d) {
-			this._d = {
+			super.data = {
 				attr: core.merge.attr(d.attr, {
 					role: "group",
 					"aria-label": d.label,
@@ -62,9 +60,7 @@ export default class btngroup extends div {
 				elem: d.elem,
 			};
 		} else {
-			this._d = null;
+			super.data = null;
 		}
-
-		super.data = this._d;
 	}
 }
