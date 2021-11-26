@@ -6,10 +6,6 @@ import div from "./div.js";
 import imgtag from "./img.js";
 
 class main extends tag {
-	_t = null;
-	_c = null;
-	_d = null;
-
 	constructor(tagName, className, ...arg) {
 		super();
 		if (arg && arg.length > 0) {
@@ -31,7 +27,7 @@ class main extends tag {
 			this.data = core.extend(
 				{},
 				{
-					tag: tagName,
+					tn: tagName,
 					cn: className,
 
 					attr: null,
@@ -60,7 +56,7 @@ class main extends tag {
 	set data(d) {
 		if (d) {
 			super.data = {
-				tag: d.tag,
+				tag: d.tn,
 				attr: core.merge.attr(d.attr, {
 					class: core.merge.class(
 						d.cn,
