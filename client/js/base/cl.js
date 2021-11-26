@@ -50,6 +50,7 @@ function attachAttr(elems, arg) {
 					elems[i] = true;
 				} else {
 					if (arg[i] instanceof Function) {
+						console.warn(`Element has ${i} function`, elems);
 						if (i.startsWith("on")) {
 							elems.addEventListener(i.startsWith("on") ? i.substr(2) : i, arg[i]);
 						} else {
