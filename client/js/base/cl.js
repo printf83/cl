@@ -116,15 +116,15 @@ function build(container, arg) {
 		if (arg.data.tag) container.appendChild(element);
 
 		if (hasContainer) {
-			let popoverTriggerList = [].slice.call(container.querySelectorAll('[data-bs-toggle="popover"]'));
-			popoverTriggerList.map(function (popoverTriggerEl) {
-				return new bootstrap.Popover(popoverTriggerEl);
-			});
+			// let popoverTriggerList = [].slice.call(container.querySelectorAll('[data-bs-toggle="popover"]'));
+			// popoverTriggerList.map(function (popoverTriggerEl) {
+			// 	return new bootstrap.Popover(popoverTriggerEl);
+			// });
 
-			let tooltipTriggerList = [].slice.call(container.querySelectorAll('[data-bs-toggle="tooltip"]'));
-			tooltipTriggerList.map(function (tooltipTriggerEl) {
-				return new bootstrap.Tooltip(tooltipTriggerEl);
-			});
+			// let tooltipTriggerList = [].slice.call(container.querySelectorAll('[data-bs-toggle="tooltip"]'));
+			// tooltipTriggerList.map(function (tooltipTriggerEl) {
+			// 	return new bootstrap.Tooltip(tooltipTriggerEl);
+			// });
 
 			return container;
 		} else {
@@ -199,7 +199,6 @@ export function replaceChild(container, data) {
 	removeChildElement(container);
 
 	build(container, data);
-	data = null;
 	//console.timeEnd("replaceChild");
 	return container.childNodes;
 }
@@ -212,4 +211,15 @@ export function html(data) {
 	let container = document.createElement("div");
 	container = build(container, data);
 	return container.innerHTML;
+}
+
+export function init(container) {
+	let popoverTriggerList = [].slice.call(container.querySelectorAll('[data-bs-toggle="popover"]'));
+	popoverTriggerList.map(function (popoverTriggerEl) {
+		return new bootstrap.Popover(popoverTriggerEl);
+	});
+	let tooltipTriggerList = [].slice.call(container.querySelectorAll('[data-bs-toggle="tooltip"]'));
+	tooltipTriggerList.map(function (tooltipTriggerEl) {
+		return new bootstrap.Tooltip(tooltipTriggerEl);
+	});
 }

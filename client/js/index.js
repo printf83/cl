@@ -35,12 +35,13 @@ function imgurl(width, height) {
 let loream =
 	"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce hendrerit tincidunt nibh ut condimentum. Nulla vitae vulputate elit. Sed accumsan varius mauris, vel bibendum magna consequat eget. Vivamus felis dolor, laoreet et blandit ut, iaculis eu arcu. Proin dapibus, metus vitae iaculis venenatis, lacus purus commodo tellus, aliquam commodo ex metus vulputate mi. Nam eu lorem vel nisi scelerisque hendrerit et id justo. Nunc vestibulum eget est sed ullamcorper. Etiam pulvinar, dui eget vehicula molestie, sapien sapien lobortis nulla, nec cursus urna sapien imperdiet tortor. Nam vitae lacus sem. Praesent id arcu vitae sem ultrices rutrum ut ac mi.";
 
-function repeatdoform(timestorepeat) {
+function repeatdoform(timestorepeat, callback) {
 	if (timestorepeat > 0) {
 		doForm();
-		repeatdoform(timestorepeat - 1);
+		repeatdoform(timestorepeat - 1, callback);
 	} else {
 		console.log("End repeat");
+		callback();
 	}
 }
 function doForm() {
@@ -55,7 +56,9 @@ function doForm() {
 		new div("my-5 container", [
 			"Test DIV",
 			new button("danger mb-2", "Generate Root", function () {
-				repeatdoform(1);
+				repeatdoform(1000, function () {
+					cl.init(root);
+				});
 			}),
 			new tab({
 				style: "tab",
@@ -697,8 +700,10 @@ function doForm() {
 			]),
 		])
 	);
+
+	cl.init(root);
 }
 //test upload from laptop
 core.documentReady(() => {
-	repeatdoform(1);
+	repeatdoform(1, function () {});
 });
