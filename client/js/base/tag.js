@@ -5,10 +5,12 @@ import * as core from "./core.js";
  * opt : {tag,attr,elem}
  */
 export default class tag {
-	_d = null;
+	//_d = null;
 	cl = 1; //name tag "cl" so we can check hasOwnProperty("cl")
 
 	constructor(arg) {
+		this._d = null;
+
 		if (arg) {
 			this.data = core.extend(
 				{},

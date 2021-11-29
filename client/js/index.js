@@ -56,21 +56,6 @@ function doForm() {
 	cl.replaceChild(
 		root,
 		new div("my-5 container", [
-			new ul([new li({ elem: "AAA", onclick: "testonclick()" })]),
-			new button("danger mb-2", "Generate Root", function () {
-				repeatdoform(1000, function () {
-					cl.init(root);
-				});
-			}),
-			new paging({
-				total: 1260,
-				skip: 0,
-				limit: 10,
-				max: 5,
-				onchange: function (event) {
-					console.log("Current skip:", event.detail.skip);
-				},
-			}),
 			new button("danger mb-2", "Generate Root", function () {
 				repeatdoform(1000, function () {
 					cl.init(root);
@@ -714,10 +699,11 @@ function doForm() {
 			]),
 		])
 	);
-
-	cl.init(root);
 }
 //test upload from laptop
 core.documentReady(() => {
-	repeatdoform(1, function () {});
+	repeatdoform(1, function () {
+		let root = document.getElementById("root");
+		cl.init(root);
+	});
 });
