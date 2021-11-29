@@ -61,7 +61,7 @@ export default class tag {
 						d.align ? `text-${d.align}` : null,
 						d.color ? `bg-${d.color}` : null,
 						d.textcolor ? `text-${d.textcolor}` : null,
-						d.bordercolor ? `border-${d.bordercolor}` : null,
+						d.bordercolor ? `border border-${d.bordercolor}` : null,
 						d.border === false ? "border-0" : null,
 					]),
 					style: d.style,

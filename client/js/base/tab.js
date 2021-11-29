@@ -140,7 +140,6 @@ export default class tab extends tag {
 											? "pill"
 											: "tab",
 										"aria-controls": `${i.id}-body`,
-										// "aria-selected": i.active ? "true" : "false",
 										role: i.option ? "button" : null,
 									},
 									elem: new label({

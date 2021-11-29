@@ -58,18 +58,16 @@ export default class img extends tag {
 	}
 	set data(d) {
 		if (d) {
-			super.data = {
-				tag: "img",
-				attr: core.merge.attr(d.attr, {
-					class: d.class,
-					style: d.style,
+			d.tag = "img";
+			d.attr = core.merge.attr(d.attr, {
+				src: d.src,
+				alt: d.alt,
+			});
 
-					id: d.id,
-					src: d.src,
-					alt: d.alt,
-					onclick: d.onclick,
-				}),
-			};
+			delete d.src;
+			delete d.alt;
+
+			super.data = d;
 		} else {
 			super.data = null;
 		}

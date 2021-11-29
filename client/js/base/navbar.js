@@ -43,21 +43,33 @@ export class container extends tag {
 		if (d) {
 			super.data = {
 				tag: "nav",
-				attr: core.merge.attr(d.attr, {
-					class: core.merge.class(d.class, [
-						"navbar",
-						d.expand || d.expand === ""
-							? d.expand === ""
-								? "navbar-expand"
-								: `navbar-expand-${d.expand}`
-							: null,
-						d.dark ? `navbar-${d.dark ? "dark" : "light"}` : null,
-						d.color ? `bg-${d.color}` : null,
-						d.position ? d.position : null,
-					]),
-					style: d.style,
-					id: d.id,
-				}),
+
+				id: d.id,
+				name: d.name,
+				attr: d.attr,
+				style: d.style,
+
+				align: d.align,
+				color: d.color,
+				textcolor: d.textcolor,
+				bordercolor: d.bordercolor,
+				border: d.border,
+
+				onchange: d.onchange,
+				onclick: d.onclick,
+				onfocus: d.onfocus,
+				onblur: d.onblur,
+
+				class: core.merge.class(d.class, [
+					"navbar",
+					d.expand || d.expand === ""
+						? d.expand === ""
+							? "navbar-expand"
+							: `navbar-expand-${d.expand}`
+						: null,
+					d.dark ? `navbar-${d.dark ? "dark" : "light"}` : null,
+					d.position ? d.position : null,
+				]),
 				elem: new div({
 					attr: core.merge.attr(d.attr, {
 						class: core.merge.class(d.containerclass, [
@@ -112,12 +124,27 @@ export class brand extends tag {
 		if (d) {
 			super.data = {
 				tag: d.href ? "a" : "h1",
-				attr: {
-					class: core.merge.class(d.class, ["navbar-brand", !d.href ? "mb-0" : null]),
-					id: d.id,
-					href: d.href,
-					onclick: d.onclick,
-				},
+
+				id: d.id,
+				name: d.name,
+				attr: d.attr,
+				style: d.style,
+
+				align: d.align,
+				color: d.color,
+				textcolor: d.textcolor,
+				bordercolor: d.bordercolor,
+				border: d.border,
+
+				onchange: d.onchange,
+				onclick: d.onclick,
+				onfocus: d.onfocus,
+				onblur: d.onblur,
+
+				href: d.href,
+
+				class: core.merge.class(d.class, ["navbar-brand", !d.href ? "mb-0" : null]),
+
 				elem: d.elem
 					? d.elem
 					: new label({

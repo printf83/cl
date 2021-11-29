@@ -69,13 +69,28 @@ export default class breadcrumb extends tag {
 
 			super.data = {
 				tag: "nav",
+
+				id: d.id,
+				name: d.name,
+				attr: d.attr,
+				class: d.class,
+
+				align: d.align,
+				color: d.color,
+				textcolor: d.textcolor,
+				bordercolor: d.bordercolor,
+				border: d.border,
+
+				onclick: d.onclick,
+				onchange: d.onchange,
+				onfocus: d.onfocus,
+				onblur: d.onblur,
+
+				style: core.merge.style(d.style, {
+					"--bs-breadcrumb-divider": d.divider ? d.divider : null, //`${d.divider};`
+				}),
 				attr: core.merge.attr(d.attr, {
-					id: d.id,
 					"aria-label": d.label,
-					class: d.class,
-					style: core.merge.style(d.style, {
-						"--bs-breadcrumb-divider": d.divider ? d.divider : null, //`${d.divider};`
-					}),
 				}),
 				elem: new ol(
 					"breadcrumb",

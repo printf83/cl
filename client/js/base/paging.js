@@ -73,9 +73,6 @@ export default class paging extends tag {
 			let curpage = d.skip / d.limit + 1;
 			let btncount = parseInt(d.total / d.limit, 10) + (d.total % d.limit > 0 ? 1 : 0);
 
-			//generate id
-			// d.id = d.id ? d.id : ns.core.UUID();
-
 			if (d.total > d.limit) {
 				let item = [];
 
@@ -249,10 +246,23 @@ export default class paging extends tag {
 				//ns.data.set(d.id, d);
 				super.data = {
 					tag: "div",
-					attr: core.merge.attr(d.attr, {
-						onchange: d.onchange,
-					}),
+
 					id: d.id,
+					name: d.name,
+					attr: d.attr,
+					style: d.style,
+
+					align: d.align,
+					color: d.color,
+					textcolor: d.textcolor,
+					bordercolor: d.bordercolor,
+					border: d.border,
+
+					onchange: d.onchange,
+					onclick: d.onclick,
+					onfocus: d.onfocus,
+					onblur: d.onblur,
+
 					class: core.merge.class(d.class, [
 						"d-flex",
 						"p-1",
@@ -260,7 +270,6 @@ export default class paging extends tag {
 						d.align ? "justify-content-" + d.align : null,
 						d.overflow ? "overflow-auto" : null,
 					]),
-					style: d.style,
 					elem: new ul(
 						["pagination", d.weight ? `pagination-${d.weight}` : null, d.overflow ? "mx-5" : null],
 						item

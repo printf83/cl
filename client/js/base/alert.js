@@ -97,14 +97,26 @@ export class container extends div {
 			}
 
 			super.data = {
+				id: d.id,
+				name: d.name,
+				style: d.style,
+
+				align: d.align,
+				textcolor: d.textcolor,
+				bordercolor: d.bordercolor,
+				border: d.border,
+
+				onclick: d.onclick,
+				onchange: d.onchange,
+				onfocus: d.onfocus,
+				onblur: d.onblur,
+
+				class: core.merge.class(d.class, [
+					"alert",
+					d.color ? `alert-${d.color}` : null,
+					d.close ? "fade show" : null,
+				]),
 				attr: core.merge.attr(d.attr, {
-					id: d.id,
-					class: core.merge.class(d.class, [
-						"alert",
-						d.color ? `alert-${d.color}` : null,
-						d.close ? "fade show" : null,
-					]),
-					style: d.style,
 					role: "alert",
 				}),
 				elem: new div("d-flex align-items-stretch", [
@@ -135,7 +147,7 @@ export class link extends a {
 		super.data = d;
 
 		if (super.data) {
-			super.data.attr = core.merge.attr(super.data.attr, { class: "alert-link" });
+			super.data.class = core.merge.class(super.data.class, "alert-link");
 		}
 	}
 }
@@ -152,7 +164,7 @@ export class heading extends h {
 		super.data = d;
 
 		if (super.data) {
-			super.data.attr = core.merge.attr(super.data.attr, { class: "heading" });
+			super.data.class = core.merge.class("heading");
 		}
 	}
 }

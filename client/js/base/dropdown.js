@@ -74,7 +74,6 @@ export default class dropdown extends tag {
 					href: null,
 
 					option: null,
-					// container: null,
 					container: "btn-group",
 					arrow: "down",
 					splittoggle: false,
@@ -99,7 +98,8 @@ export default class dropdown extends tag {
 			d.id = d.id || core.UUID();
 
 			let menuctl = new ul({
-				attr: { "aria-labelledby": d.id, class: ["dropdown-menu", d.dark ? "dropdown-menu-dark" : null] },
+				class: ["dropdown-menu", d.dark ? "dropdown-menu-dark" : null],
+				attr: { "aria-labelledby": d.id },
 				elem: new option({ type: "dropdown", item: d.option, selected: d.value }),
 			});
 
@@ -123,8 +123,8 @@ export default class dropdown extends tag {
 						href: d.href,
 				  })
 				: new button({
+						class: "dropdown-toggle",
 						attr: {
-							class: "dropdown-toggle",
 							"aria-expanded": "false",
 							"data-bs-auto-close": d.autoclose,
 							"data-bs-reference": d.reference,
@@ -155,8 +155,8 @@ export default class dropdown extends tag {
 
 			let splitctl = d.splittoggle
 				? new button({
+						class: ["dropdown-toggle", "dropdown-toggle-split"],
 						attr: {
-							class: ["dropdown-toggle", "dropdown-toggle-split"],
 							"aria-expanded": "false",
 							"data-bs-auto-close": d.autoclose,
 							"data-bs-reference": d.reference,
@@ -177,17 +177,14 @@ export default class dropdown extends tag {
 				  })
 				: null;
 
-			// if (d.splittoggle && d.container === null) {
-			// 	d.container = "btn-group";
-			// }
-
 			if (d.splittoggle && d.arrow === "start") {
 				super.data = {
 					tag: d.container ? "div" : null,
-					attr: d.container ? { class: ["btn-group", d.container, d.arrow ? `drop${d.arrow}` : null] } : null,
+					class: d.container ? ["btn-group", d.container, d.arrow ? `drop${d.arrow}` : null] : null,
 					elem: [
 						new div({
-							attr: { class: ["btn-group"], role: "group" },
+							class: ["btn-group"],
+							attr: { role: "group" },
 							elem: [splitctl, menuctl],
 						}),
 						btnctl,
@@ -196,10 +193,11 @@ export default class dropdown extends tag {
 			} else {
 				super.data = {
 					tag: d.container ? "div" : null,
-					attr: d.container ? { class: [d.container, d.arrow ? `drop${d.arrow}` : null] } : null,
+					class: d.container ? [d.container, d.arrow ? `drop${d.arrow}` : null] : null,
 					elem: d.splittoggle
 						? new div({
-								attr: { class: ["btn-group"], role: "group" },
+								class: ["btn-group"],
+								attr: { role: "group" },
 								elem: [btnctl, splitctl, menuctl],
 						  })
 						: [btnctl, menuctl],

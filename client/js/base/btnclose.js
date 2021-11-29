@@ -54,9 +54,24 @@ export default class btnclose extends button {
 	set data(d) {
 		if (d) {
 			super.data = {
+				id: d.id,
+				name: d.name,
+				style: d.style,
+
+				align: d.align,
+				color: d.color,
+				textcolor: d.textcolor,
+				bordercolor: d.bordercolor,
+				border: d.border,
+
+				onclick: d.onclick,
+				onchange: d.onchange,
+				onfocus: d.onfocus,
+				onblur: d.onblur,
+
 				type: "button",
+				class: core.merge.class(d.class, ["btn-close", !d.dark ? "btn-close-white" : null]),
 				attr: core.merge.attr(d.attr, {
-					class: core.merge.class(d.class, ["btn-close", !d.dark ? "btn-close-white" : null]),
 					"data-bs-dismiss": d.dismiss,
 					"aria-label": d.label,
 				}),

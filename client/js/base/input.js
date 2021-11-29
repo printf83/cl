@@ -78,9 +78,7 @@ export default class input extends tag {
 					valid: null,
 					invalid: null,
 
-					// beforetype: "text",
 					before: null,
-					// aftertype: "text",
 					after: null,
 
 					plaintext: false,
@@ -136,24 +134,15 @@ export default class input extends tag {
 				d.id = core.UUID();
 			}
 
-			//auto mark beforetype and aftertype if numctl
-			// if (d.type === "number" && d.numctl) {
-			// 	d.beforetype = "button";
-			// 	d.aftertype = "button";
-			// }
-
 			//automark aftertype if addctl provided
 			if (d.addctl) {
 				d.after = null;
-				// d.aftertype = "button";
 			}
 
 			//automark aftertype and beforetype if numctl provided
 			if (d.numctl && d.type === "number") {
 				d.before = null;
-				// d.beforetype = "button";
 				d.after = null;
-				// d.aftertype = "button";
 			}
 
 			//before control
@@ -254,13 +243,23 @@ export default class input extends tag {
 				case "radio":
 					mainctl = new tag({
 						tag: "input",
+
 						id: d.id,
 						name: d.name,
-						class: "form-check-input",
+						style: d.style,
+
+						align: d.align,
+						color: d.color,
+						textcolor: d.textcolor,
+						bordercolor: d.bordercolor,
+						border: d.border,
+
 						onchange: d.onchange,
 						onclick: d.onclick,
 						onfocus: d.onfocus,
 						onblur: d.onblur,
+
+						class: "form-check-input",
 						attr: core.merge.attr(d.attr, {
 							type: d.type === "switch" ? "checkbox" : d.type,
 
@@ -277,8 +276,22 @@ export default class input extends tag {
 				case "textarea":
 					mainctl = new tag({
 						tag: "textarea",
+
 						id: d.id,
 						name: d.name,
+						style: d.style,
+
+						align: d.align,
+						color: d.color,
+						textcolor: d.textcolor,
+						bordercolor: d.bordercolor,
+						border: d.border,
+
+						onchange: d.onchange,
+						onclick: d.onclick,
+						onfocus: d.onfocus,
+						onblur: d.onblur,
+
 						class: [
 							d.plaintext && d.readonly ? "form-control-plaintext" : "form-control",
 							d.weight &&
@@ -293,10 +306,6 @@ export default class input extends tag {
 								  ].combine(" ")
 								: null,
 						],
-						onchange: d.onchange,
-						onclick: d.onclick,
-						onfocus: d.onfocus,
-						onblur: d.onblur,
 						attr: core.merge.attr(d.attr, {
 							placeholder: d.placeholder,
 							readonly: d.readonly,
@@ -312,8 +321,22 @@ export default class input extends tag {
 				case "select":
 					mainctl = new tag({
 						tag: "select",
+
 						id: d.id,
 						name: d.name,
+						style: d.style,
+
+						align: d.align,
+						color: d.color,
+						textcolor: d.textcolor,
+						bordercolor: d.bordercolor,
+						border: d.border,
+
+						onchange: d.onchange,
+						onclick: d.onclick,
+						onfocus: d.onfocus,
+						onblur: d.onblur,
+
 						class: core.merge.class(d.class, [
 							d.plaintext && d.readonly ? "form-select-plaintext" : "form-select",
 							d.weight &&
@@ -328,10 +351,6 @@ export default class input extends tag {
 								  ].combine(" ")
 								: null,
 						]),
-						onchange: d.onchange,
-						onclick: d.onclick,
-						onfocus: d.onfocus,
-						onblur: d.onblur,
 						attr: core.merge.attr(d.attr, {
 							"aria-label": d.hidelabel && d.label ? d.label : null,
 
@@ -347,16 +366,45 @@ export default class input extends tag {
 				case "datalist":
 					mainctl = new tag({
 						tag: "datalist",
+
 						id: d.id,
+						name: d.name,
+						style: d.style,
 						attr: d.attr,
+
+						align: d.align,
+						color: d.color,
+						textcolor: d.textcolor,
+						bordercolor: d.bordercolor,
+						border: d.border,
+
+						onclick: d.onclick,
+						onchange: d.onchange,
+						onfocus: d.onfocus,
+						onblur: d.onblur,
+
 						elem: new option(d.option, d.value),
 					});
 					break;
 				default:
 					mainctl = new tag({
 						tag: "input",
+
 						id: d.id,
 						name: d.name,
+						style: d.style,
+
+						align: d.align,
+						color: d.color,
+						textcolor: d.textcolor,
+						bordercolor: d.bordercolor,
+						border: d.border,
+
+						onchange: d.onchange,
+						onclick: d.onclick,
+						onfocus: d.onfocus,
+						onblur: d.onblur,
+
 						class: core.merge.class(d.class, [
 							d.type !== "range"
 								? [
@@ -386,10 +434,6 @@ export default class input extends tag {
 								? "rounded-0"
 								: null,
 						]),
-						onchange: d.onchange,
-						onclick: d.onclick,
-						onfocus: d.onfocus,
-						onblur: d.onblur,
 						attr: core.merge.attr(d.attr, {
 							type: d.type,
 							"aria-label": d.hidelabel && d.label ? d.label : null,
@@ -493,18 +537,4 @@ export default class input extends tag {
 			super.data = null;
 		}
 	}
-
-	// static val(elem, value) {
-	// 	if (value) {
-	// 		if (elem && elem.value) {
-	// 			elem.value = value;
-	// 		}
-	// 	} else {
-	// 		if (elem && elem.value) {
-	// 			return elem.value;
-	// 		}
-
-	// 		return null;
-	// 	}
-	// }
 }

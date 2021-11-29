@@ -58,6 +58,16 @@ export class container extends tag {
 	set data(d) {
 		if (d) {
 			super.data = {
+				id: d.id,
+				name: d.name,
+				style: d.style,
+				class: d.class,
+
+				onchange: d.onchange,
+				onclick: d.onclick,
+				onfocus: d.onfocus,
+				onblur: d.onblur,
+
 				elem: [
 					d.label ? new label(d.for, "form-label", d.label) : null,
 					new div({
@@ -115,7 +125,16 @@ export class text extends div {
 	set data(d) {
 		if (d) {
 			super.data = {
+				id: d.id,
+				name: d.name,
+				style: d.style,
 				attr: d.attr,
+
+				onchange: d.onchange,
+				onclick: d.onclick,
+				onfocus: d.onfocus,
+				onblur: d.onblur,
+
 				class: ["input-group-text"],
 				elem: d.elem,
 			};

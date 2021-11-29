@@ -124,14 +124,6 @@ export default class option extends tag {
 								class: "dropdown-header",
 								elem: new label({ icon: i.icon, label: i.label }),
 							}),
-							// elem: new tag({
-							// 	tag: "h6",
-							// 	attr: { class: "dropdown-header" },
-							// 	elem: new label({
-							// 		icon: i.icon,
-							// 		label: i.label,
-							// 	}),
-							// }),
 						});
 					} else {
 						return new li({

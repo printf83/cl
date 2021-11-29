@@ -27,22 +27,8 @@ class main extends tag {
 			this.data = core.extend(
 				{},
 				{
-					tn: tagName,
+					tg: tagName,
 					cn: className,
-
-					// attr: null,
-
-					// id: null,
-					// class: null,
-					// style: null,
-
-					// align: null, //left,right,center
-					// color: null,
-					// textcolor: null,
-					// bordercolor: null,
-					// border: true,
-
-					// elem: null,
 				},
 				t
 			);
@@ -56,23 +42,10 @@ class main extends tag {
 	set data(d) {
 		if (d) {
 			super.data = d;
-			// super.data = {
-			// 	tag: d.tn,
-			// 	attr: core.merge.attr(d.attr, {
-			// 		class: core.merge.class(
-			// 			d.cn,
-			// 			core.merge.class(d.class, [
-			// 				d.align ? `text-${d.align}` : null,
-			// 				d.color ? `bg-${d.color}` : null,
-			// 				d.textcolor ? `text-${d.textcolor}` : null,
-			// 				d.bordercolor ? `border-${d.bordercolor}` : null,
-			// 				!d.border ? "border-0" : null,
-			// 			])
-			// 		),
-			// 		style: d.style,
-			// 	}),
-			// 	elem: d.elem,
-			// };
+			super.data.tag = d.tg;
+			super.data.class = core.merge.class(super.data.class, d.cn);
+			delete super.data.tg;
+			delete super.data.cn;
 		} else {
 			super.data = null;
 		}
@@ -123,7 +96,7 @@ export class body extends main {
 		return super.data;
 	}
 	set data(arg) {
-		super.data = core.extend({}, { tag: "div", cn: "card-body" }, arg);
+		super.data = core.extend({}, { tg: "div", cn: "card-body" }, arg);
 	}
 }
 
@@ -141,7 +114,7 @@ export class footer extends main {
 		return super.data;
 	}
 	set data(arg) {
-		super.data = core.extend({}, { tag: "div", cn: "card-footer" }, arg);
+		super.data = core.extend({}, { tg: "div", cn: "card-footer" }, arg);
 	}
 }
 
@@ -159,7 +132,7 @@ export class group extends main {
 		return super.data;
 	}
 	set data(arg) {
-		super.data = core.extend({}, { tag: "div", cn: "card-group" }, arg);
+		super.data = core.extend({}, { tg: "div", cn: "card-group" }, arg);
 	}
 }
 
@@ -177,7 +150,7 @@ export class title extends main {
 		return super.data;
 	}
 	set data(arg) {
-		super.data = core.extend({}, { tag: "h5", cn: "card-title" }, arg);
+		super.data = core.extend({}, { tg: "h5", cn: "card-title" }, arg);
 	}
 }
 
@@ -195,7 +168,7 @@ export class subtitle extends main {
 		return super.data;
 	}
 	set data(arg) {
-		super.data = core.extend({}, { tag: "h6", cn: "card-subtitle mb-2" }, arg);
+		super.data = core.extend({}, { tg: "h6", cn: "card-subtitle mb-2" }, arg);
 	}
 }
 
@@ -213,7 +186,7 @@ export class text extends main {
 		return super.data;
 	}
 	set data(arg) {
-		super.data = core.extend({}, { tag: "p", cn: "card-text" }, arg);
+		super.data = core.extend({}, { tg: "p", cn: "card-text" }, arg);
 	}
 }
 
@@ -231,7 +204,7 @@ export class imgoverlay extends main {
 		return super.data;
 	}
 	set data(arg) {
-		super.data = core.extend({}, { tag: "div", cn: "card-img-overlay" }, arg);
+		super.data = core.extend({}, { tg: "div", cn: "card-img-overlay" }, arg);
 	}
 }
 
@@ -301,19 +274,25 @@ export class horizontal extends tag {
 		if (d) {
 			super.data = {
 				tag: "div",
-				attr: core.merge.attr(d.attr, {
-					class: [
-						"row",
-						d.class,
-						d.align ? `text-${d.align}` : null,
-						d.color ? `bg-${d.color}` : null,
-						d.textcolor ? `text-${d.textcolor}` : null,
-						d.bordercolor ? `border-${d.bordercolor}` : null,
-						!d.border ? "border-0" : null,
-						d.gap !== null ? `g-${d.gap}` : null,
-					],
-					style: d.style,
-				}),
+
+				id: d.id,
+				name: d.name,
+				style: d.style,
+				attr: d.attr,
+
+				align: d.align,
+				color: d.color,
+				textcolor: d.textcolor,
+				bordercolor: d.bordercolor,
+				border: d.border,
+
+				onclick: d.onclick,
+				onchange: d.onchange,
+				onfocus: d.onfocus,
+				onblur: d.onblur,
+
+				class: core.merge.class(d.class, ["row", d.gap !== null ? `g-${d.gap}` : null]),
+
 				elem: [new div(core.multiClass(d.size, "col-$1", null, "col"), d.left), new div("col", d.right)],
 			};
 		} else {
@@ -347,7 +326,7 @@ export class link extends a {
 		super.data = d;
 
 		if (super.data) {
-			super.data.attr = core.merge.attr(super.data.attr, { class: "card-link" });
+			super.data.class = core.merge.class(super.data.class, "card-link");
 		}
 	}
 }
@@ -366,15 +345,13 @@ export class img extends imgtag {
 		if (super.data) {
 			d = core.extend({}, { placement: "top" }, d);
 
-			super.data.attr = core.merge.attr(super.data.attr, {
-				class: [
-					d.placement === "full" ? "card-img" : null,
-					d.placement === "top" ? "card-img-top" : null,
-					d.placement === "bottom" ? "card-img-bottom" : null,
-					d.placement === "left" ? "img-fluid rounded-start" : null,
-					d.placement === "right" ? "img-fluid rounded-end" : null,
-				],
-			});
+			super.data.class = core.merge.class(super.data.class, [
+				d.placement === "full" ? "card-img" : null,
+				d.placement === "top" ? "card-img-top" : null,
+				d.placement === "bottom" ? "card-img-bottom" : null,
+				d.placement === "left" ? "img-fluid rounded-start" : null,
+				d.placement === "right" ? "img-fluid rounded-end" : null,
+			]);
 		}
 	}
 }

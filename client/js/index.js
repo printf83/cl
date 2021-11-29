@@ -238,8 +238,6 @@ function doForm() {
 														new modal({
 															divider: false,
 															centerbutton: true,
-															// color: "primary",
-															// textcolor: "light",
 															elem: new msg(
 																"lg",
 																"i",

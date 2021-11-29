@@ -132,10 +132,10 @@ export default class toast extends tag {
 							new strong("me-auto", new label(d.icon, d.title)),
 							!d.autohide
 								? new small({
+										id: `${d.id}-timer`,
 										class: ["text-muted", "timer"],
 										attr: {
 											"data-cl-time": d.date,
-											id: `${d.id}-timer`,
 										},
 										elem: tc ? tc.msg : "Just now", //need to add timer here
 								  })
@@ -165,16 +165,24 @@ export default class toast extends tag {
 			//combine header,body to div.toast
 			super.data = {
 				elem: new div({
+					id: d.id,
+					name: d.name,
+					style: d.style,
+
+					align: d.align,
+					color: d.color,
+					textcolor: d.textcolor,
+					bordercolor: d.bordercolor,
+					border: d.border,
+
+					onchange: d.onchange,
+					onclick: d.onclick,
+					onfocus: d.onfocus,
+					onblur: d.onblur,
+
+					class: core.merge.class(d.class, ["toast", d.debug ? "show" : null]),
+
 					attr: core.merge.attr(d.attr, {
-						class: core.merge.class(d.class, [
-							"toast",
-							d.debug ? "show" : null,
-							d.color ? `bg-${d.color}` : null,
-							d.textcolor ? `text-${d.textcolor}` : null,
-							d.bordercolor ? `border-${d.bordercolor}` : null,
-							!d.border ? "border-0" : null,
-						]),
-						id: d.id,
 						tabindex: -1,
 						"data-bs-animation": d.animate ? "true" : null,
 						"data-bs-autohide": d.autohide ? "true" : "false",

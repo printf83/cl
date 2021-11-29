@@ -63,15 +63,27 @@ export default class badge extends span {
 	set data(d) {
 		if (d) {
 			super.data = {
+				id: d.id,
+				name: d.name,
 				attr: d.attr,
+				style: d.style,
+
+				align: d.align,
+				color: d.color,
+				textcolor: d.textcolor,
+				bordercolor: d.bordercolor,
+				border: d.border,
+
+				onclick: d.onclick,
+				onchange: d.onchange,
+				onfocus: d.onfocus,
+				onblur: d.onblur,
+
 				class: [
 					"badge",
-					d.color ? `bg-${d.color}` : null,
-					d.textcolor ? `text-${d.textcolor}` : null,
 					d.pill ? "rounded-pill" : null,
 					d.notification ? "position-absolute top-0 start-100 translate-middle" : null,
 					!d.label && !d.icon ? "rounded-circle p-2" : null,
-					d.bordercolor ? `border border-${d.bordercolor}` : null,
 				],
 				elem: [
 					d.label || d.icon

@@ -59,16 +59,67 @@ export default class label extends tag {
 			if (d.hidelabel) {
 				if (d.icon) {
 					super.data = {
+						id: d.id,
+						name: d.name,
+						style: d.style,
+						class: d.class,
+						attr: d.attr,
+
+						align: d.align,
+						color: d.color,
+						textcolor: d.textcolor,
+						bordercolor: d.bordercolor,
+						border: d.border,
+
+						onchange: d.onchange,
+						onclick: d.onclick,
+						onfocus: d.onfocus,
+						onblur: d.onblur,
+
 						elem: [new icon(d.icon), d.label ? new span("visually-hidden", d.label) : null],
 					};
 				} else {
 					super.data = {
+						id: d.id,
+						name: d.name,
+						style: d.style,
+						class: d.class,
+						attr: d.attr,
+
+						align: d.align,
+						color: d.color,
+						textcolor: d.textcolor,
+						bordercolor: d.bordercolor,
+						border: d.border,
+
+						onchange: d.onchange,
+						onclick: d.onclick,
+						onfocus: d.onfocus,
+						onblur: d.onblur,
+
 						elem: new span("visually-hidden", d.label),
 					};
 				}
 			} else {
 				super.data = {
 					tag: "label",
+
+					id: d.id,
+					name: d.name,
+					style: d.style,
+					class: d.class,
+
+					align: d.align,
+					color: d.color,
+					textcolor: d.textcolor,
+					bordercolor: d.bordercolor,
+					border: d.border,
+
+					onchange: d.onchange,
+					onclick: d.onclick,
+					onfocus: d.onfocus,
+					onblur: d.onblur,
+
 					attr: core.merge.attr(d.attr, {
 						for: d.for,
 					}),

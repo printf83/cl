@@ -68,11 +68,23 @@ export default class accordion extends div {
 			}
 
 			super.data = {
-				attr: core.merge.attr(d.attr, {
-					id: d.id,
-					class: core.merge.class(d.class, ["accordion", d.flush ? "accordion-flush" : null]),
-					style: d.style,
-				}),
+				id: d.id,
+				name: d.name,
+				attr: d.attr,
+				style: d.style,
+
+				align: d.align,
+				color: d.color,
+				textcolor: d.textcolor,
+				bordercolor: d.bordercolor,
+				border: d.border,
+
+				onclick: d.onclick,
+				onchange: d.onchange,
+				onfocus: d.onfocus,
+				onblur: d.onblur,
+
+				class: core.merge.class(d.class, ["accordion", d.flush ? "accordion-flush" : null]),
 				elem:
 					d.item && d.item.length > 0
 						? d.item.map(function (i) {

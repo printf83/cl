@@ -110,10 +110,23 @@ export class container extends tag {
 		if (d && d._target) {
 			super.data = {
 				elem: new div({
-					attr: core.merge.attr(d.attr, {
-						id: d.id,
-						class: core.merge.class(d.class, ["collapse", d.show ? "show" : null]),
-					}),
+					id: d.id,
+					name: d.name,
+					style: d.style,
+					attr: d.attr,
+
+					align: d.align,
+					color: d.color,
+					textcolor: d.textcolor,
+					bordercolor: d.bordercolor,
+					border: d.border,
+
+					onclick: d.onclick,
+					onchange: d.onchange,
+					onfocus: d.onfocus,
+					onblur: d.onblur,
+
+					class: core.merge.class(d.class, ["collapse", d.show ? "show" : null]),
 					elem: d._target,
 				}),
 			};

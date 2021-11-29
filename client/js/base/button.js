@@ -91,27 +91,35 @@ export default class button extends tag {
 
 			super.data = {
 				tag: d.href ? "a" : "button",
+
+				id: d.id,
+				name: d.name,
+				style: d.style,
+
+				onclick: d.onclick,
+				onchange: d.onchange,
+				onfocus: d.onfocus,
+				onblur: d.onblur,
+
+				href: d.href,
+
+				class: core.merge.class(d.class, [
+					d.type === "a" ? null : "btn",
+					d.nowarp ? "text-nowarp" : null,
+					d.weight ? `btn-${d.weight}` : null,
+					d.color ? (d.outline ? `btn-outline-${d.color}` : `btn-${d.color}`) : null,
+					d.textcolor ? `text-${d.textcolor}` : null,
+					d.badge && typeof d.badge === "object" && d.badge.notification ? "position-relative" : null,
+				]),
+
 				attr: core.merge.attr(d.attr, {
-					id: d.id,
-					name: d.name,
 					value: d.value,
 					checked: d.checked,
 					role: "button",
 					type: d.type !== "button" ? d.type : null,
 					disabled: d.disabled,
-					onclick: d.onclick,
-					href: d.href,
 					"aria-label": d.hidelabel && d.label ? d.label : null,
 					"aria-disabled": d.href && d.disabled ? "true" : null,
-					class: core.merge.class(d.class, [
-						d.type === "a" ? null : "btn",
-						d.nowarp ? "text-nowarp" : null,
-						d.weight ? `btn-${d.weight}` : null,
-						d.color ? (d.outline ? `btn-outline-${d.color}` : `btn-${d.color}`) : null,
-						d.textcolor ? `text-${d.textcolor}` : null,
-						d.badge && typeof d.badge === "object" && d.badge.notification ? "position-relative" : null,
-					]),
-					style: d.style,
 				}),
 				elem: [
 					d.label || d.icon ? new label({ icon: d.icon, label: d.label, hidelabel: d.hidelabel }) : null,

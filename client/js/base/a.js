@@ -69,8 +69,6 @@ export default class a extends tag {
 			this.data = core.extend(
 				{},
 				{
-					id: null,
-					name: null,
 					onclick: null,
 					href: null,
 
@@ -93,25 +91,6 @@ export default class a extends tag {
 		if (d) {
 			d.tag = "a";
 			super.data = d;
-			// super.data = {
-			// 	tag: "a",
-			// 	id: d.id,
-			// 	name: d.name,
-			// 	href: d.href,
-			// 	onclick: d.onclick,
-			// 	class: d.class,
-			// 	style: d.style,
-			// 	// attr: core.merge.attr(d.attr, {
-			// 	// 	class: d.class,
-			// 	// 	style: d.style,
-
-			// 	// 	id: d.id,
-			// 	// 	name: d.name,
-			// 	// 	href: d.href,
-			// 	// 	onclick: d.onclick,
-			// 	// }),
-			// 	elem: d.elem,
-			// };
 		} else {
 			super.data = null;
 		}

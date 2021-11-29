@@ -165,7 +165,6 @@ export default class modal extends tag {
 							class: core.merge.class(i.class, "btn-modal"),
 							color:
 								ix === 0 ? (i.color ? i.color : defButtonColor) : i.color ? i.color : "text-secondary", //i.color ? i.color : ix === 0 ? defButtonColor : "text-secondary",
-							// textColor: defButtonTextColor,
 							onclick: function (event) {
 								let mdl = event.currentTarget.closest(".modal");
 								let formdata = core.getValue(mdl);
@@ -220,16 +219,33 @@ export default class modal extends tag {
 			//combine header,body,footer to div.modal > div.modal-dialog > div.content
 			super.data = {
 				elem: new div({
-					attr: {
-						class: ["modal", d.animate && !d.debug && "fade", !d.debug ? "show" : "cl-debug"],
-						id: d.id,
+					id: d.id,
+					name: d.name,
+
+					align: d.align,
+					color: d.color,
+					textcolor: d.textcolor,
+					bordercolor: d.bordercolor,
+					border: d.border,
+
+					onchange: d.onchange,
+					onclick: d.onclick,
+					onfocus: d.onfocus,
+					onblur: d.onblur,
+
+					class: core.merge.class(d.class, [
+						"modal",
+						d.animate && !d.debug && "fade",
+						!d.debug ? "show" : "cl-debug",
+					]),
+					style: core.merge.style(d.style, d.debug ? { display: "block", position: "static" } : null),
+					attr: core.merge.attr(d.attr, {
 						tabindex: -1,
 						"data-bs-backdrop": d.static ? "static" : null,
 						"data-bs-keyboard": d.static ? "false" : "true",
 						"data-bs-focus": d.focus ? "true" : null,
 						"aria-hidden": d.debug ? "false" : "true",
-						style: d.debug ? { display: "block", position: "static" } : null,
-					},
+					}),
 					elem: new div(
 						[
 							"modal-dialog",
@@ -299,6 +315,11 @@ export default class modal extends tag {
 				}
 			}
 		}
+
+		//set init
+		this.dom.addEventListener("shown.bs.modal", function (event) {
+			cl.init(event.currentTarget);
+		});
 
 		//set destroy after hide
 		this.dom.addEventListener("hidden.bs.modal", function (event) {

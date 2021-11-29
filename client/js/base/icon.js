@@ -95,20 +95,29 @@ export default class icon extends tag {
 
 			super.data = {
 				tag: d.icon ? "i" : "span",
-				attr: core.merge.attr(d.attr, {
-					class: core.merge.class(d.class, [
-						d.style ? d.style : d.icon ? "fas" : null,
-						d.icon ? `fa-${d.icon}` : null,
-						d.weight ? `fa-${d.weight}` : null,
-						d.fixwidth ? "fa-fw" : null,
-						d.spin ? "fa-spin" : null,
-						d.elem ? "fa-stack" : null,
-						d.stack > 0 ? `fa-stack-${d.stack}x` : null,
-						d.inverse ? "fa-inverse" : null,
-						d.color ? `text-${d.color}` : null,
-						rotate,
-					]),
-				}),
+
+				id: d.id,
+				name: d.name,
+				//style: d.style, conflict
+				attr: d.attr,
+
+				onclick: d.onclick,
+				onchange: d.onchange,
+				onfocus: d.onfocus,
+				onblur: d.onblur,
+
+				class: core.merge.class(d.class, [
+					d.style ? d.style : d.icon ? "fas" : null,
+					d.icon ? `fa-${d.icon}` : null,
+					d.weight ? `fa-${d.weight}` : null,
+					d.fixwidth ? "fa-fw" : null,
+					d.spin ? "fa-spin" : null,
+					d.elem ? "fa-stack" : null,
+					d.stack > 0 ? `fa-stack-${d.stack}x` : null,
+					d.inverse ? "fa-inverse" : null,
+					d.color ? `text-${d.color}` : null,
+					rotate,
+				]),
 				elem: d.elem,
 			};
 		} else {

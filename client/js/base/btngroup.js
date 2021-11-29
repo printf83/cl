@@ -52,6 +52,15 @@ export default class btngroup extends div {
 	set data(d) {
 		if (d) {
 			super.data = {
+				id: d.id,
+				name: d.name,
+				style: d.style,
+
+				onclick: d.onclick,
+				onchange: d.onchange,
+				onfocus: d.onfocus,
+				onblur: d.onblur,
+
 				attr: core.merge.attr(d.attr, {
 					role: "group",
 					"aria-label": d.label,

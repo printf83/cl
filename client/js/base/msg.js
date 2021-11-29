@@ -64,9 +64,25 @@ export default class msg extends tag {
 				case "md":
 					super.data = {
 						tag: "div",
-						attr: core.merge.attr(d.attr, {
-							class: core.merge.class(d.class, ["d-flex", "align-items-stretch", "gap-2"]),
-						}),
+
+						id: d.id,
+						name: d.name,
+						attr: d.attr,
+						style: d.style,
+
+						align: d.align,
+						color: d.color,
+						textcolor: d.textcolor,
+						bordercolor: d.bordercolor,
+						border: d.border,
+
+						onchange: d.onchange,
+						onclick: d.onclick,
+						onfocus: d.onfocus,
+						onblur: d.onblur,
+
+						class: core.merge.class(d.class, ["d-flex", "align-items-stretch", "gap-2"]),
+
 						elem: [
 							d.icon
 								? new div(
@@ -82,9 +98,24 @@ export default class msg extends tag {
 				case "lg":
 					super.data = {
 						tag: "div",
-						attr: core.merge.attr(d.attr, {
-							class: d.class,
-						}),
+
+						id: d.id,
+						name: d.name,
+						attr: d.attr,
+						class: d.class,
+						style: d.style,
+
+						align: d.align,
+						color: d.color,
+						textcolor: d.textcolor,
+						bordercolor: d.bordercolor,
+						border: d.border,
+
+						onchange: d.onchange,
+						onclick: d.onclick,
+						onfocus: d.onfocus,
+						onblur: d.onblur,
+
 						elem: [
 							d.icon
 								? new h(
