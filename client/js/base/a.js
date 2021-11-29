@@ -91,19 +91,27 @@ export default class a extends tag {
 	}
 	set data(d) {
 		if (d) {
-			super.data = {
-				tag: "a",
-				attr: core.merge.attr(d.attr, {
-					class: d.class,
-					style: d.style,
+			d.tag = "a";
+			super.data = d;
+			// super.data = {
+			// 	tag: "a",
+			// 	id: d.id,
+			// 	name: d.name,
+			// 	href: d.href,
+			// 	onclick: d.onclick,
+			// 	class: d.class,
+			// 	style: d.style,
+			// 	// attr: core.merge.attr(d.attr, {
+			// 	// 	class: d.class,
+			// 	// 	style: d.style,
 
-					id: d.id,
-					name: d.name,
-					href: d.href,
-					onclick: d.onclick,
-				}),
-				elem: d.elem,
-			};
+			// 	// 	id: d.id,
+			// 	// 	name: d.name,
+			// 	// 	href: d.href,
+			// 	// 	onclick: d.onclick,
+			// 	// }),
+			// 	elem: d.elem,
+			// };
 		} else {
 			super.data = null;
 		}

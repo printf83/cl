@@ -43,16 +43,16 @@ export default class cont extends tag {
 				{},
 				{
 					tag: tagName,
-					id: null,
-					name: null,
-					onclick: null,
-					href: null,
+					// id: null,
+					// name: null,
+					// onclick: null,
+					// href: null,
 
-					attr: null,
-					class: null,
-					style: null,
+					// attr: null,
+					// class: null,
+					// style: null,
 
-					elem: null,
+					// elem: null,
 				},
 				t
 			);
@@ -66,19 +66,20 @@ export default class cont extends tag {
 	}
 	set data(d) {
 		if (d) {
-			super.data = {
-				tag: d.tag,
-				attr: core.merge.attr(d.attr, {
-					class: d.class,
-					style: d.style,
+			super.data = d;
+			// super.data = {
+			// 	tag: d.tag,
+			// 	attr: core.merge.attr(d.attr, {
+			// 		class: d.class,
+			// 		style: d.style,
 
-					id: d.id,
-					name: d.name,
-					href: d.href,
-					onclick: d.onclick,
-				}),
-				elem: d.elem,
-			};
+			// 		id: d.id,
+			// 		name: d.name,
+			// 		href: d.href,
+			// 		onclick: d.onclick,
+			// 	}),
+			// 	elem: d.elem,
+			// };
 		} else {
 			super.data = null;
 		}

@@ -227,7 +227,7 @@ export default class input extends tag {
 			if (d.option && d.type !== "select") {
 				datalistctl = new tag({
 					tag: "datalist",
-					attr: { id: `${d.id}-dl` },
+					id: `${d.id}-dl`,
 					elem: new option(d.option, d.value),
 				});
 			}
@@ -238,13 +238,11 @@ export default class input extends tag {
 				labelctl = new label({
 					for: d.id,
 					label: d.label,
-					attr: {
-						class: ["checkbox", "radio", "switch", "file"].includes(d.type)
-							? "form-check-label"
-							: d.labelsize
-							? ["col-form-label"].concat(core.multiClass(d.labelsize, "col-$1", null, "col"))
-							: "form-label",
-					},
+					class: ["checkbox", "radio", "switch", "file"].includes(d.type)
+						? "form-check-label"
+						: d.labelsize
+						? ["col-form-label"].concat(core.multiClass(d.labelsize, "col-$1", null, "col"))
+						: "form-label",
 				});
 			}
 
@@ -256,22 +254,22 @@ export default class input extends tag {
 				case "radio":
 					mainctl = new tag({
 						tag: "input",
+						id: d.id,
+						name: d.name,
+						class: "form-check-input",
+						onchange: d.onchange,
+						onclick: d.onclick,
+						onfocus: d.onfocus,
+						onblur: d.onblur,
 						attr: core.merge.attr(d.attr, {
-							id: d.id,
-							name: d.name,
 							type: d.type === "switch" ? "checkbox" : d.type,
-							class: "form-check-input",
+
 							readonly: d.readonly,
 							disabled: d.disabled,
 							required: d.required,
 							value: d.value,
 							checked: d.checked,
 							"aria-label": d.hidelabel && d.label ? d.label : null,
-
-							onchange: d.onchange,
-							onclick: d.onclick,
-							onfocus: d.onfocus,
-							onblur: d.onblur,
 						}),
 					});
 
@@ -279,28 +277,27 @@ export default class input extends tag {
 				case "textarea":
 					mainctl = new tag({
 						tag: "textarea",
+						id: d.id,
+						name: d.name,
+						class: [
+							d.plaintext && d.readonly ? "form-control-plaintext" : "form-control",
+							d.weight &&
+							!(d.before || d.after || d.addctl !== null || (d.type === "number" && d.numctl === true))
+								? `form-control-${d.weight}`
+								: null,
+							d.label && d.floatlabel
+								? [
+										d.before || d.after ? "rounded-0" : null,
+										d.before ? "rounded-end" : null,
+										d.after ? "rounded-start" : null,
+								  ].combine(" ")
+								: null,
+						],
+						onchange: d.onchange,
+						onclick: d.onclick,
+						onfocus: d.onfocus,
+						onblur: d.onblur,
 						attr: core.merge.attr(d.attr, {
-							id: d.id,
-							name: d.name,
-							class: [
-								d.plaintext && d.readonly ? "form-control-plaintext" : "form-control",
-								d.weight &&
-								!(
-									d.before ||
-									d.after ||
-									d.addctl !== null ||
-									(d.type === "number" && d.numctl === true)
-								)
-									? `form-control-${d.weight}`
-									: null,
-								d.label && d.floatlabel
-									? [
-											d.before || d.after ? "rounded-0" : null,
-											d.before ? "rounded-end" : null,
-											d.after ? "rounded-start" : null,
-									  ].combine(" ")
-									: null,
-							],
 							placeholder: d.placeholder,
 							readonly: d.readonly,
 							disabled: d.disabled,
@@ -308,11 +305,6 @@ export default class input extends tag {
 							rows: d.row,
 
 							"aria-label": d.hidelabel && d.label ? d.label : null,
-
-							onchange: d.onchange,
-							onclick: d.onclick,
-							onfocus: d.onfocus,
-							onblur: d.onblur,
 						}),
 						elem: d.value,
 					});
@@ -320,29 +312,27 @@ export default class input extends tag {
 				case "select":
 					mainctl = new tag({
 						tag: "select",
+						id: d.id,
+						name: d.name,
+						class: core.merge.class(d.class, [
+							d.plaintext && d.readonly ? "form-select-plaintext" : "form-select",
+							d.weight &&
+							!(d.before || d.after || d.addctl !== null || (d.type === "number" && d.numctl === true))
+								? `form-select-${d.weight}`
+								: null,
+							d.label && d.floatlabel
+								? [
+										d.before || d.after ? "rounded-0" : null,
+										d.before ? "rounded-end" : null,
+										d.after ? "rounded-start" : null,
+								  ].combine(" ")
+								: null,
+						]),
+						onchange: d.onchange,
+						onclick: d.onclick,
+						onfocus: d.onfocus,
+						onblur: d.onblur,
 						attr: core.merge.attr(d.attr, {
-							id: d.id,
-							name: d.name,
-							class: core.merge.class(d.class, [
-								d.plaintext && d.readonly ? "form-select-plaintext" : "form-select",
-								d.weight &&
-								!(
-									d.before ||
-									d.after ||
-									d.addctl !== null ||
-									(d.type === "number" && d.numctl === true)
-								)
-									? `form-select-${d.weight}`
-									: null,
-								d.label && d.floatlabel
-									? [
-											d.before || d.after ? "rounded-0" : null,
-											d.before ? "rounded-end" : null,
-											d.after ? "rounded-start" : null,
-									  ].combine(" ")
-									: null,
-							]),
-
 							"aria-label": d.hidelabel && d.label ? d.label : null,
 
 							readonly: d.readonly,
@@ -350,11 +340,6 @@ export default class input extends tag {
 							required: d.required,
 							rows: d.row,
 							multiple: d.multiple,
-
-							onchange: d.onchange,
-							onclick: d.onclick,
-							onfocus: d.onfocus,
-							onblur: d.onblur,
 						}),
 						elem: new option(d.option, d.value),
 					});
@@ -362,48 +347,52 @@ export default class input extends tag {
 				case "datalist":
 					mainctl = new tag({
 						tag: "datalist",
-						attr: core.merge.attr(d.attr, { id: d.id }),
+						id: d.id,
+						attr: d.attr,
 						elem: new option(d.option, d.value),
 					});
 					break;
 				default:
 					mainctl = new tag({
 						tag: "input",
+						id: d.id,
+						name: d.name,
+						class: core.merge.class(d.class, [
+							d.type !== "range"
+								? [
+										d.plaintext && d.readonly ? "form-control-plaintext" : "form-control",
+										,
+										d.weight &&
+										!(
+											d.before ||
+											d.after ||
+											d.addctl !== null ||
+											(d.type === "number" && d.numctl === true)
+										)
+											? `form-control-${d.weight}`
+											: null,
+								  ].combine(" ")
+								: "form-range",
+							d.type === "color"
+								? ["form-control-color", d.floatlabel ? "w-100" : null].combine(" ")
+								: null,
+							d.label && d.floatlabel
+								? [
+										d.before || d.after || d.numctl ? "rounded-0" : null,
+										d.before ? "rounded-end" : null,
+										d.after ? "rounded-start" : null,
+								  ].combine(" ")
+								: d.label && d.numctl
+								? "rounded-0"
+								: null,
+						]),
+						onchange: d.onchange,
+						onclick: d.onclick,
+						onfocus: d.onfocus,
+						onblur: d.onblur,
 						attr: core.merge.attr(d.attr, {
-							id: d.id,
-							name: d.name,
 							type: d.type,
-							class: core.merge.class(d.class, [
-								d.type !== "range"
-									? [
-											d.plaintext && d.readonly ? "form-control-plaintext" : "form-control",
-											,
-											d.weight &&
-											!(
-												d.before ||
-												d.after ||
-												d.addctl !== null ||
-												(d.type === "number" && d.numctl === true)
-											)
-												? `form-control-${d.weight}`
-												: null,
-									  ].combine(" ")
-									: "form-range",
-								d.type === "color"
-									? ["form-control-color", d.floatlabel ? "w-100" : null].combine(" ")
-									: null,
-								d.label && d.floatlabel
-									? [
-											d.before || d.after || d.numctl ? "rounded-0" : null,
-											d.before ? "rounded-end" : null,
-											d.after ? "rounded-start" : null,
-									  ].combine(" ")
-									: d.label && d.numctl
-									? "rounded-0"
-									: null,
-							]),
 							"aria-label": d.hidelabel && d.label ? d.label : null,
-
 							placeholder: d.placeholder,
 							min: d.min,
 							max: d.max,
@@ -417,11 +406,6 @@ export default class input extends tag {
 									: d.value,
 
 							list: d.option ? `${d.id}-dl` : null,
-
-							onchange: d.onchange,
-							onclick: d.onclick,
-							onfocus: d.onfocus,
-							onblur: d.onblur,
 						}),
 					});
 					break;

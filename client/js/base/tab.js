@@ -12,7 +12,7 @@ import label from "./label.js";
  * label, option
  * label, color, option
  * label, onclick, option
- * label, color, onclick, option
+ * label, color, onclick, option6cadf580e11d
  * opt {...buttonopt,option,container,arrow,splittoggle,aligment,offset,autoclose}
  */
 
@@ -123,15 +123,15 @@ export default class tab extends tag {
 							},
 							elem: [
 								new a({
+									class: [
+										"nav-link",
+										i.option ? "dropdown-toggle" : null,
+										i.active ? "active" : null,
+										i.disabled ? "disabled" : null,
+									],
+									href: `#${i.id}-body`,
+									id: `${i.id}-head`,
 									attr: {
-										class: [
-											"nav-link",
-											i.option ? "dropdown-toggle" : null,
-											i.active ? "active" : null,
-											i.disabled ? "disabled" : null,
-										],
-										href: `#${i.id}-body`,
-										id: `${i.id}-head`,
 										"data-bs-toggle": i.option
 											? "dropdown"
 											: d.style === "tab"
@@ -166,9 +166,9 @@ export default class tab extends tag {
 					if (i.elem) {
 						bodyItem.push(
 							new div({
+								class: ["tab-pane", d.animate ? "fade" : null, i.active ? "active show" : null],
+								id: `${i.id}-body`,
 								attr: {
-									class: ["tab-pane", d.animate ? "fade" : null, i.active ? "active show" : null],
-									id: `${i.id}-body`,
 									role: "tabpanel",
 									"aria-labelledby": `${i.id}-head`,
 								},
@@ -180,31 +180,31 @@ export default class tab extends tag {
 
 				//wrap headerItem in ul.nav
 				let headerCtl = new ul({
+					class: [
+						"nav",
+						//card-header-tabs if has body (will wrap in card)
+						bodyItem && bodyItem.length > 0
+							? d.style === "tab"
+								? "card-" + (d.align === "vertical-right" ? "footer" : "header") + "-tabs"
+								: d.style === "pill"
+								? "card-" + (d.align === "vertical-right" ? "footer" : "header") + "-pills"
+								: "card-" + (d.align === "vertical-right" ? "footer" : "header") + "-tabs"
+							: null,
+						d.column ? "flex-column mb-auto" : null,
+						d.flush ? "nav-flush" : null,
+						d.style === "tab" ? "nav-tabs" : d.style === "pill" ? "nav-pills" : null,
+						d.align === "right"
+							? "justify-content-end"
+							: d.align === "center"
+							? "justify-content-center"
+							: d.align === "vertical" || d.align === "vertical-right"
+							? "flex-column mb-auto"
+							: d.align === "fill"
+							? "nav-fill"
+							: null,
+					],
+					id: d.id ? `${d.id}-head` : null,
 					attr: {
-						class: [
-							"nav",
-							//card-header-tabs if has body (will wrap in card)
-							bodyItem && bodyItem.length > 0
-								? d.style === "tab"
-									? "card-" + (d.align === "vertical-right" ? "footer" : "header") + "-tabs"
-									: d.style === "pill"
-									? "card-" + (d.align === "vertical-right" ? "footer" : "header") + "-pills"
-									: "card-" + (d.align === "vertical-right" ? "footer" : "header") + "-tabs"
-								: null,
-							d.column ? "flex-column mb-auto" : null,
-							d.flush ? "nav-flush" : null,
-							d.style === "tab" ? "nav-tabs" : d.style === "pill" ? "nav-pills" : null,
-							d.align === "right"
-								? "justify-content-end"
-								: d.align === "center"
-								? "justify-content-center"
-								: d.align === "vertical" || d.align === "vertical-right"
-								? "flex-column mb-auto"
-								: d.align === "fill"
-								? "nav-fill"
-								: null,
-						],
-						id: d.id ? `${d.id}-head` : null,
 						role: "tablist",
 					},
 					elem: headerItem,
@@ -213,10 +213,8 @@ export default class tab extends tag {
 				let bodyCtl =
 					bodyItem && bodyItem.length > 0
 						? new div({
-								attr: {
-									class: "tab-content",
-									id: d.id ? `${d.id}-body` : null,
-								},
+								class: "tab-content",
+								id: d.id ? `${d.id}-body` : null,
 								elem: bodyItem,
 						  })
 						: null;

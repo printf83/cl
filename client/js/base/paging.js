@@ -90,11 +90,11 @@ export default class paging extends tag {
 									tabindex: curpage > 1 ? null : "-1",
 									"aria-disabled": curpage > 1 ? null : true,
 									"aria-label": "First Page",
-									href: "javascript:void(0)",
-									onclick: function (sender) {
-										d.skip = 0;
-										pagingonchange(sender.currentTarget, d);
-									},
+								},
+								href: "javascript:void(0)",
+								onclick: function (sender) {
+									d.skip = 0;
+									pagingonchange(sender.currentTarget, d);
 								},
 								elem: d.labelfirst ? d.labelfirst : new icon("angle-double-left"),
 							}),
@@ -113,11 +113,11 @@ export default class paging extends tag {
 									tabindex: curpage > 1 ? null : "-1",
 									"aria-disabled": curpage > 1 ? null : true,
 									"aria-label": "Previous Page",
-									href: "javascript:void(0)",
-									onclick: function (sender) {
-										d.skip = (curpage - 2) * d.limit;
-										pagingonchange(sender.currentTarget, d);
-									},
+								},
+								href: "javascript:void(0)",
+								onclick: function (sender) {
+									d.skip = (curpage - 2) * d.limit;
+									pagingonchange(sender.currentTarget, d);
 								},
 								elem: d.labelprev ? d.labelprev : new icon("angle-left"),
 							}),
@@ -186,12 +186,12 @@ export default class paging extends tag {
 								class: "page-link",
 								attr: {
 									"aria-label": `Page ${x.toString()}`,
-									href: "javascript:void(0)",
-									onclick: function (sender) {
-										let xnum = parseInt(sender.currentTarget.innerText, 10);
-										d.skip = (xnum - 1) * d.limit;
-										pagingonchange(sender.currentTarget, d);
-									},
+								},
+								href: "javascript:void(0)",
+								onclick: function (sender) {
+									let xnum = parseInt(sender.currentTarget.innerText, 10);
+									d.skip = (xnum - 1) * d.limit;
+									pagingonchange(sender.currentTarget, d);
 								},
 								elem: x.toString(),
 							}),
@@ -210,11 +210,11 @@ export default class paging extends tag {
 									tabindex: curpage < btncount ? null : "-1",
 									"aria-disabled": curpage > 1 ? null : true,
 									"aria-label": "Next Page",
-									href: "javascript:void(0)",
-									onclick: function (sender) {
-										d.skip = curpage * d.limit;
-										pagingonchange(sender.currentTarget, d);
-									},
+								},
+								href: "javascript:void(0)",
+								onclick: function (sender) {
+									d.skip = curpage * d.limit;
+									pagingonchange(sender.currentTarget, d);
 								},
 								elem: d.labelnext ? d.labelnext : new icon("angle-right"),
 							}),
@@ -233,11 +233,11 @@ export default class paging extends tag {
 									tabindex: curpage < btncount ? null : "-1",
 									"aria-disabled": curpage > 1 ? null : true,
 									"aria-label": "Last Page",
-									href: "javascript:void(0)",
-									onclick: function (sender) {
-										d.skip = (btncount - 1) * d.limit;
-										pagingonchange(sender.currentTarget, d);
-									},
+								},
+								href: "javascript:void(0)",
+								onclick: function (sender) {
+									d.skip = (btncount - 1) * d.limit;
+									pagingonchange(sender.currentTarget, d);
 								},
 								elem: d.labellast ? d.labellast : new icon("angle-double-right"),
 							}),
@@ -250,17 +250,17 @@ export default class paging extends tag {
 				super.data = {
 					tag: "div",
 					attr: core.merge.attr(d.attr, {
-						id: d.id,
-						class: core.merge.class(d.class, [
-							"d-flex",
-							"p-1",
-							"cl-paging",
-							d.align ? "justify-content-" + d.align : null,
-							d.overflow ? "overflow-auto" : null,
-						]),
-						style: d.style,
 						onchange: d.onchange,
 					}),
+					id: d.id,
+					class: core.merge.class(d.class, [
+						"d-flex",
+						"p-1",
+						"cl-paging",
+						d.align ? "justify-content-" + d.align : null,
+						d.overflow ? "overflow-auto" : null,
+					]),
+					style: d.style,
 					elem: new ul(
 						["pagination", d.weight ? `pagination-${d.weight}` : null, d.overflow ? "mx-5" : null],
 						item

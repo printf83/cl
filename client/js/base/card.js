@@ -30,19 +30,19 @@ class main extends tag {
 					tn: tagName,
 					cn: className,
 
-					attr: null,
+					// attr: null,
 
-					id: null,
-					class: null,
-					style: null,
+					// id: null,
+					// class: null,
+					// style: null,
 
-					align: null, //left,right,center
-					color: null,
-					textcolor: null,
-					bordercolor: null,
-					border: true,
+					// align: null, //left,right,center
+					// color: null,
+					// textcolor: null,
+					// bordercolor: null,
+					// border: true,
 
-					elem: null,
+					// elem: null,
 				},
 				t
 			);
@@ -55,23 +55,24 @@ class main extends tag {
 	}
 	set data(d) {
 		if (d) {
-			super.data = {
-				tag: d.tn,
-				attr: core.merge.attr(d.attr, {
-					class: core.merge.class(
-						d.cn,
-						core.merge.class(d.class, [
-							d.align ? `text-${d.align}` : null,
-							d.color ? `bg-${d.color}` : null,
-							d.textcolor ? `text-${d.textcolor}` : null,
-							d.bordercolor ? `border-${d.bordercolor}` : null,
-							!d.border ? "border-0" : null,
-						])
-					),
-					style: d.style,
-				}),
-				elem: d.elem,
-			};
+			super.data = d;
+			// super.data = {
+			// 	tag: d.tn,
+			// 	attr: core.merge.attr(d.attr, {
+			// 		class: core.merge.class(
+			// 			d.cn,
+			// 			core.merge.class(d.class, [
+			// 				d.align ? `text-${d.align}` : null,
+			// 				d.color ? `bg-${d.color}` : null,
+			// 				d.textcolor ? `text-${d.textcolor}` : null,
+			// 				d.bordercolor ? `border-${d.bordercolor}` : null,
+			// 				!d.border ? "border-0" : null,
+			// 			])
+			// 		),
+			// 		style: d.style,
+			// 	}),
+			// 	elem: d.elem,
+			// };
 		} else {
 			super.data = null;
 		}

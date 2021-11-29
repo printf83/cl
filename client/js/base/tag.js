@@ -15,6 +15,24 @@ export default class tag {
 				{
 					tag: null,
 					attr: null,
+
+					id: null,
+					name: null,
+					class: null,
+					style: null,
+
+					href: null,
+					onclick: null,
+					onchange: null,
+					onfocus: null,
+					onblur: null,
+
+					align: null,
+					color: null,
+					textcolor: null,
+					bordercolor: null,
+					border: null,
+
 					elem: null,
 				},
 				arg
@@ -28,6 +46,30 @@ export default class tag {
 		return this._d;
 	}
 	set data(d) {
-		this._d = d;
+		if (d) {
+			this._d = {
+				tag: d.tag,
+				attr: core.merge.attr(d.attr, {
+					id: d.id,
+					name: d.name,
+					href: d.tag === "a" ? (d.href ? d.href : "javascript:void(0)") : null,
+					onclick: d.onclick,
+					onchange: d.onchange,
+					onfocus: d.onfocus,
+					onblur: d.onblur,
+					class: core.merge.class(d.class, [
+						d.align ? `text-${d.align}` : null,
+						d.color ? `bg-${d.color}` : null,
+						d.textcolor ? `text-${d.textcolor}` : null,
+						d.bordercolor ? `border-${d.bordercolor}` : null,
+						d.border === false ? "border-0" : null,
+					]),
+					style: d.style,
+				}),
+				elem: d.elem,
+			};
+		} else {
+			this._d = null;
+		}
 	}
 }
