@@ -1,12 +1,16 @@
 "use strict";
 import * as core from "./core.js";
 
-const DEBUG = true;
+const DEBUG = false;
 
 function elemInfo(elem) {
-	return `${elem.localName}${elem.id ? "#" + elem.id : ""}${
-		elem.classList && elem.classList.length > 0 ? "." + [].slice.apply(elem.classList).join(".") : ""
-	}${elem.name ? `[name='${elem.name}']` : ""}${elem.innerText ? ` [${elem.innerText}]` : ""}`;
+	let a1 = elem.localName;
+	let a2 = elem.id ? `#${elem.id}` : "";
+	let a3 = elem.classList && elem.classList.length > 0 ? "." + [].slice.apply(elem.classList).join(".") : "";
+	let a4 = elem.name ? `[name='${elem.name}']` : "";
+	let a5 = elem.innerText ? ` [${elem.innerText}]` : "";
+
+	return `${a1}${a2}${a3}${a4}${a5}`;
 }
 
 const booleanAttr = [
@@ -141,7 +145,9 @@ function build(container, arg) {
 
 			return container;
 		} else {
-			return container.childNodes;
+			let result = container.childNodes;
+			container = null;
+			return result;
 		}
 	}
 	return null;
@@ -240,7 +246,9 @@ export function node(data) {
 export function html(data) {
 	let container = document.createElement("div");
 	container = build(container, data);
-	return container.innerHTML;
+	let html = container.innerHTML;
+	container = null;
+	return html;
 }
 
 export function init(container) {

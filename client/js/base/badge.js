@@ -1,3 +1,4 @@
+"use strict";
 import * as core from "./core.js";
 import label from "./label.js";
 import span from "./span.js";

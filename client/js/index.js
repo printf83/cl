@@ -44,7 +44,7 @@ function repeatdoform(max, cur, callback) {
 			function (m, t, c) {
 				repeatdoform(m, t, c);
 			},
-			10,
+			1,
 			max,
 			cur - 1,
 			callback
@@ -67,7 +67,7 @@ function doForm(max, cur) {
 				"danger mb-2",
 				`Regenerate root ${Math.round((((max - cur) / max) * 100 + Number.EPSILON) * 100) / 100}% complete`,
 				function () {
-					repeatdoform(100, 100, function () {
+					repeatdoform(5000, 4999, function () {
 						cl.init(root);
 						console.log("Complete regenerate");
 					});
@@ -733,7 +733,7 @@ function doForm(max, cur) {
 }
 //test upload from laptop
 core.documentReady(() => {
-	repeatdoform(1, 1, function () {
+	repeatdoform(1, 0, function () {
 		let root = document.getElementById("root");
 		cl.init(root);
 		console.log("Complete generate");
