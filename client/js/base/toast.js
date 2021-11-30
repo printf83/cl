@@ -215,7 +215,7 @@ export default class toast extends tag {
 	show = function () {
 		//generate container
 		let position = this.data.elem.data.attr["data-cl-position"];
-		let containerQuery = ["toast-container", position].combine(" ");
+		let containerQuery = core.combineArray(["toast-container", position], " ");
 		let container = document.body.getElementsByClassName(containerQuery)[0];
 		if (!container || container.length === 0) {
 			//build container

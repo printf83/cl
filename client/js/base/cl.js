@@ -1,4 +1,6 @@
 "use strict";
+import * as core from "./core.js";
+
 const DEBUG = true;
 
 function elemInfo(elem) {
@@ -42,7 +44,7 @@ function attachAttr(elems, arg) {
 			if (i !== "tag" && i !== "elem" && (arg[i] || arg[i] === "") && arg[i] !== null) {
 				if (i === "class") {
 					if (Array.isArray(arg[i])) {
-						let k = Array.from(new Set(arg[i])).combine(" ");
+						let k = core.combineArray(Array.from(new Set(arg[i])), " ");
 						if (k) elems.classList = k;
 					} else {
 						elems.classList = arg[i];

@@ -299,11 +299,14 @@ export default class input extends tag {
 								? `form-control-${d.weight}`
 								: null,
 							d.label && d.floatlabel
-								? [
-										d.before || d.after ? "rounded-0" : null,
-										d.before ? "rounded-end" : null,
-										d.after ? "rounded-start" : null,
-								  ].combine(" ")
+								? core.combineArray(
+										[
+											d.before || d.after ? "rounded-0" : null,
+											d.before ? "rounded-end" : null,
+											d.after ? "rounded-start" : null,
+										],
+										" "
+								  )
 								: null,
 						],
 						attr: core.merge.attr(d.attr, {
@@ -344,11 +347,14 @@ export default class input extends tag {
 								? `form-select-${d.weight}`
 								: null,
 							d.label && d.floatlabel
-								? [
-										d.before || d.after ? "rounded-0" : null,
-										d.before ? "rounded-end" : null,
-										d.after ? "rounded-start" : null,
-								  ].combine(" ")
+								? core.combineArray(
+										[
+											d.before || d.after ? "rounded-0" : null,
+											d.before ? "rounded-end" : null,
+											d.after ? "rounded-start" : null,
+										],
+										" "
+								  )
 								: null,
 						]),
 						attr: core.merge.attr(d.attr, {
@@ -407,29 +413,35 @@ export default class input extends tag {
 
 						class: core.merge.class(d.class, [
 							d.type !== "range"
-								? [
-										d.plaintext && d.readonly ? "form-control-plaintext" : "form-control",
-										,
-										d.weight &&
-										!(
-											d.before ||
-											d.after ||
-											d.addctl !== null ||
-											(d.type === "number" && d.numctl === true)
-										)
-											? `form-control-${d.weight}`
-											: null,
-								  ].combine(" ")
+								? core.combineArray(
+										[
+											d.plaintext && d.readonly ? "form-control-plaintext" : "form-control",
+											,
+											d.weight &&
+											!(
+												d.before ||
+												d.after ||
+												d.addctl !== null ||
+												(d.type === "number" && d.numctl === true)
+											)
+												? `form-control-${d.weight}`
+												: null,
+										],
+										" "
+								  )
 								: "form-range",
 							d.type === "color"
-								? ["form-control-color", d.floatlabel ? "w-100" : null].combine(" ")
+								? core.combineArray(["form-control-color", d.floatlabel ? "w-100" : null], " ")
 								: null,
 							d.label && d.floatlabel
-								? [
-										d.before || d.after || d.numctl ? "rounded-0" : null,
-										d.before ? "rounded-end" : null,
-										d.after ? "rounded-start" : null,
-								  ].combine(" ")
+								? core.combineArray(
+										[
+											d.before || d.after || d.numctl ? "rounded-0" : null,
+											d.before ? "rounded-end" : null,
+											d.after ? "rounded-start" : null,
+										],
+										" "
+								  )
 								: d.label && d.numctl
 								? "rounded-0"
 								: null,

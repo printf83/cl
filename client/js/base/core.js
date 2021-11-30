@@ -1,15 +1,23 @@
 "use strict";
-Array.prototype.removeEmpty = function () {
-	return this.filter(Boolean);
-};
+// Array.prototype.removeEmpty = function () {
+// 	return this.filter(Boolean);
+// };
 
-Array.prototype.combine = function (delimeter) {
-	return this.removeEmpty().join(delimeter);
-};
+// Array.prototype.combine = function (delimeter) {
+// 	return this.removeEmpty().join(delimeter);
+// };
 
-String.prototype.capitalize = function () {
-	return this.charAt(0).toUpperCase() + this.slice(1);
-};
+// String.prototype.capitalize = function () {
+// 	return this.charAt(0).toUpperCase() + this.slice(1);
+// };
+
+export function combineArray(arr, delimeter) {
+	return removeEmptyArray(arr)?.join(delimeter);
+}
+
+export function removeEmptyArray(arr) {
+	return arr.filter(Boolean);
+}
 
 const _baseIcon = {
 	i: { icon: "info-circle", style: "fas", color: "info" },
