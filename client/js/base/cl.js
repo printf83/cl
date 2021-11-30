@@ -51,11 +51,13 @@ function attachAttr(elems, arg) {
 				} else {
 					if (arg[i] instanceof Function) {
 						//console.warn(`Element has ${i} function`, elems);
-						if (i.startsWith("on")) {
-							elems.addEventListener(i.startsWith("on") ? i.substr(2) : i, arg[i]);
-						} else {
-							elems.setAttribute(i, arg[i]);
-						}
+						elems.addEventListener(i.startsWith("on") ? i.substr(2) : i, arg[i]);
+						elems.clRemove = function (sender) {
+							sender.removeEventListener(i.startsWith("on") ? i.substr(2) : i, arg[i]);
+							sender.remove();
+							sender.clRemove = null;
+							delete sender.clRemove;
+						};
 					} else {
 						elems.setAttribute(i, arg[i]);
 					}
@@ -134,14 +136,28 @@ function build(container, arg) {
 	return null;
 }
 
-function removeEvent(elem) {
-	elem.parentNode.replaceChild(elem.cloneNode(true), elem);
-}
+// function removeEvent(elem) {
+// 	// elem.parentNode.replaceChild(elem.cloneNode(true), elem);
+// 	if (elem.clRemove instanceof Function) {
+// 		elem.clRemove(elem);
+// 	}
+// }
 
 export function removeChildElement(elem) {
 	while (elem.firstChild) {
-		removeEvent(elem.firstChild);
-		elem.firstChild.remove();
+		if (elem.firstChild.clRemove instanceof Function) {
+			elem.firstChild.clRemove(elem.firstChild);
+		} else {
+			elem.firstChild.remove();
+		}
+	}
+}
+
+export function removeElement(elem) {
+	if (elem.clRemove instanceof Function) {
+		elem.clRemove(elem);
+	} else {
+		elem.remove();
 	}
 }
 
@@ -188,7 +204,7 @@ export function replaceWith(elem, data) {
 		});
 	}
 
-	elem.remove();
+	removeElement(elem);
 
 	console.timeEnd("replaceWith");
 	return r;
