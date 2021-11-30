@@ -27,8 +27,8 @@ import hr from "./base/hr.js";
 import accordion from "./base/accordion.js";
 import breadcrumb from "./base/breadcrumb.js";
 import paging from "./base/paging.js";
-import ul from "./base/ul.js";
-import li from "./base/li.js";
+// import ul from "./base/ul.js";
+// import li from "./base/li.js";
 
 let imgurlindex = 0;
 function imgurl(width, height) {
@@ -56,7 +56,7 @@ function doForm() {
 	cl.replaceChild(
 		root,
 		new div("my-5 container", [
-			new button("danger mb-2", "Generate Root", function () {
+			new button("danger mb-2", "Regenerate Root 1000 times", function () {
 				repeatdoform(1000, function () {
 					cl.init(root);
 				});

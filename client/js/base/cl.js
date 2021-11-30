@@ -1,4 +1,5 @@
 "use strict";
+const DEBUG = false;
 
 const booleanAttr = [
 	"allowfullscreen",
@@ -52,12 +53,11 @@ function attachAttr(elems, arg) {
 					if (arg[i] instanceof Function) {
 						//console.warn(`Element has ${i} function`, elems);
 						elems.addEventListener(i.startsWith("on") ? i.substr(2) : i, arg[i]);
-						elems.clRemove = function (sender) {
+						elems.detachEventListener = function (sender) {
+							// console.log(`Remove ${i} from ${sender}`);
 							sender.removeEventListener(i.startsWith("on") ? i.substr(2) : i, arg[i]);
-
-							sender.clRemove = null;
-							delete sender.clRemove;
-							sender.remove();
+							sender.detachEventListener = null;
+							delete sender.detachEventListener;
 						};
 					} else {
 						elems.setAttribute(i, arg[i]);
@@ -137,26 +137,36 @@ function build(container, arg) {
 	return null;
 }
 
+export function detachEventListener(elem) {
+	let c = elem.childNodes;
+	if (c?.length > 0) {
+		c.forEach(function (item) {
+			detachEventListener(item);
+			if (item.detachEventListener instanceof Function) {
+				item.detachEventListener(item);
+			}
+		});
+	}
+
+	if (elem.detachEventListener instanceof Function) {
+		elem.detachEventListener(elem);
+	}
+}
+
 export function removeChildElement(elem) {
 	while (elem.firstChild) {
-		if (elem.firstChild.clRemove instanceof Function) {
-			elem.firstChild.clRemove(elem.firstChild);
-		} else {
-			elem.firstChild.remove();
-		}
+		detachEventListener(elem.firstChild);
+		elem.firstChild.remove();
 	}
 }
 
 export function removeElement(elem) {
-	if (elem.clRemove instanceof Function) {
-		elem.clRemove(elem);
-	} else {
-		elem.remove();
-	}
+	detachEventListener(elem);
+	elem.remove();
 }
 
 export function appendChild(container, data) {
-	console.time("appendChild");
+	if (DEBUG) console.time("appendChild");
 	let n = node(data);
 	if (Node.prototype.isPrototypeOf(n)) {
 		container.appendChild(n);
@@ -165,12 +175,12 @@ export function appendChild(container, data) {
 			container.appendChild(i);
 		});
 	}
-	console.timeEnd("appendChild");
+	if (DEBUG) console.timeEnd("appendChild");
 	return container.lastChild;
 }
 
 export function prependChild(container, data) {
-	console.time("prependChild");
+	if (DEBUG) console.time("prependChild");
 	let n = node(data);
 	if (Node.prototype.isPrototypeOf(n)) {
 		container.insertBefore(n, container.firstChild);
@@ -179,12 +189,12 @@ export function prependChild(container, data) {
 			container.insertBefore(i, container.firstChild);
 		});
 	}
-	console.timeEnd("prependChild");
+	if (DEBUG) console.timeEnd("prependChild");
 	return container.firstChild;
 }
 
 export function replaceWith(elem, data) {
-	console.time("replaceWith");
+	if (DEBUG) console.time("replaceWith");
 	removeChildElement(elem);
 
 	let r = null;
@@ -200,16 +210,16 @@ export function replaceWith(elem, data) {
 
 	removeElement(elem);
 
-	console.timeEnd("replaceWith");
+	if (DEBUG) console.timeEnd("replaceWith");
 	return r;
 }
 
 export function replaceChild(container, data) {
-	console.time("replaceChild");
+	if (DEBUG) console.time("replaceChild");
 	removeChildElement(container);
 
 	build(container, data);
-	console.timeEnd("replaceChild");
+	if (DEBUG) console.timeEnd("replaceChild");
 	return container.childNodes;
 }
 
