@@ -54,9 +54,10 @@ function attachAttr(elems, arg) {
 						elems.addEventListener(i.startsWith("on") ? i.substr(2) : i, arg[i]);
 						elems.clRemove = function (sender) {
 							sender.removeEventListener(i.startsWith("on") ? i.substr(2) : i, arg[i]);
-							sender.remove();
+
 							sender.clRemove = null;
 							delete sender.clRemove;
+							sender.remove();
 						};
 					} else {
 						elems.setAttribute(i, arg[i]);
@@ -135,13 +136,6 @@ function build(container, arg) {
 	}
 	return null;
 }
-
-// function removeEvent(elem) {
-// 	// elem.parentNode.replaceChild(elem.cloneNode(true), elem);
-// 	if (elem.clRemove instanceof Function) {
-// 		elem.clRemove(elem);
-// 	}
-// }
 
 export function removeChildElement(elem) {
 	while (elem.firstChild) {
