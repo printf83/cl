@@ -54,7 +54,7 @@ export default class tag {
 				attr: core.merge.attr(d.attr, {
 					id: d.id,
 					name: d.name,
-					href: d.tag === "a" ? (d.href ? d.href : "javascript:void(0)") : null,
+					href: d.href, //d.tag === "a" ? (d.href ? d.href : "javascript:void(0)") : null,
 					onclick: d.onclick,
 					onchange: d.onchange,
 					onfocus: d.onfocus,

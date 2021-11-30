@@ -48,8 +48,8 @@ export default class tooltip extends tag {
 	}
 	set data(d) {
 		if (d && d._target) {
-			super.data = d._target.data;
-			super.data.attr = core.merge.attr(super.data.attr, {
+			let tmp = d._target.data;
+			tmp.attr = core.merge.attr(tmp.attr, {
 				title: d.type === "popover" ? d.title : d.msg,
 				"data-bs-toggle": d.type,
 				"data-bs-content": d.type === "popover" ? d.msg : null,
@@ -57,6 +57,7 @@ export default class tooltip extends tag {
 				"data-bs-placement": d.type ? d.placement : null,
 				"data-bs-html": d.type && core.isHTML(d.msg) ? "true" : null,
 			});
+			super.data = tmp;
 		} else {
 			super.data = null;
 		}

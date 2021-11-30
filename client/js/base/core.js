@@ -75,7 +75,7 @@ export function extend(out) {
 }
 export const merge = {
 	class: function (a, b) {
-		if (a && b) {
+		if (a && b && a !== undefined && b !== undefined) {
 			let aT = typeof a;
 			let bT = typeof b;
 			let aR = Array.isArray(a);
@@ -94,16 +94,16 @@ export const merge = {
 			} else {
 				console.error("Unhandle class rules", [aT, bT, aR, bR]);
 			}
-		} else if (a && !b) {
+		} else if (a && !b && a !== undefined) {
 			return a;
-		} else if (!a && b) {
+		} else if (!a && b && b !== undefined) {
 			return b;
 		} else {
 			return null;
 		}
 	},
 	style: function (a, b) {
-		if (a && b) {
+		if (a && b && a !== undefined && b !== undefined) {
 			let c = {};
 			Object.keys(a).forEach((i) => {
 				if (b.hasOwnProperty(i)) {
@@ -121,9 +121,9 @@ export const merge = {
 			});
 
 			return c;
-		} else if (a && !b) {
+		} else if (a && !b && a !== undefined) {
 			return a;
-		} else if (!a && b) {
+		} else if (!a && b && b !== undefined) {
 			return b;
 		} else {
 			return null;

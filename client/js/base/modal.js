@@ -147,7 +147,7 @@ export default class modal extends tag {
 						i = core.extend(
 							{},
 							{
-								id: i.id ? i.id : `${d.id}-btn-${ix}`,
+								id: i.id,
 								class: i.class,
 								onclick: i.onclick,
 
@@ -159,7 +159,7 @@ export default class modal extends tag {
 						);
 
 						return new button({
-							id: i.id,
+							id: i.id ? i.id : `${d.id}-btn-${ix}`,
 							label: i.label,
 							icon: i.icon,
 							class: core.merge.class(i.class, "btn-modal"),

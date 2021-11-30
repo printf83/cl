@@ -41,11 +41,36 @@ class main extends tag {
 	}
 	set data(d) {
 		if (d) {
-			super.data = d;
-			super.data.tag = d.tg;
-			super.data.class = core.merge.class(super.data.class, d.cn);
-			delete super.data.tg;
-			delete super.data.cn;
+			// super.data = {
+			// 	tag: d.tg,
+			// 	class: core.merge.class(d.class, d.cn),
+
+			// 	id: d.id,
+			// 	name: d.name,
+			// 	style: d.style,
+
+			// 	onclick: d.onclick,
+			// 	onchange: d.onchange,
+			// 	onfocus: d.onfocus,
+			// 	onblur: d.onblur,
+
+			// 	elem: d.elem,
+			// };
+
+			let tmp = d;
+			tmp.tag = d.tg;
+			tmp.class = core.merge.class(tmp.class, d.cn);
+
+			delete tmp.tg;
+			delete tmp.cn;
+
+			super.data = tmp;
+
+			// super.data = d;
+			// super.data.tag = d.tg;
+			// super.data.class = core.merge.class(super.data.class, d.cn);
+			// delete super.data.tg;
+			// delete super.data.cn;
 		} else {
 			super.data = null;
 		}
@@ -61,7 +86,7 @@ export class container extends main {
 		return super.data;
 	}
 	set data(arg) {
-		super.data = core.extend({}, { tag: "div", cn: "card" }, arg);
+		super.data = core.extend({}, { tg: "div", cn: "card" }, arg);
 	}
 }
 /**
@@ -78,7 +103,7 @@ export class header extends main {
 		return super.data;
 	}
 	set data(arg) {
-		super.data = core.extend({}, { tag: "div", cn: "card-header" }, arg);
+		super.data = core.extend({}, { tg: "div", cn: "card-header" }, arg);
 	}
 }
 
@@ -326,7 +351,9 @@ export class link extends a {
 		super.data = d;
 
 		if (super.data) {
-			super.data.class = core.merge.class(super.data.class, "card-link");
+			let tmp = super.data;
+			tmp.class = core.merge.class(tmp.class, "card-link");
+			super.data = tmp;
 		}
 	}
 }
@@ -344,14 +371,17 @@ export class img extends imgtag {
 
 		if (super.data) {
 			d = core.extend({}, { placement: "top" }, d);
+			let tmp = super.data;
 
-			super.data.class = core.merge.class(super.data.class, [
+			tmp.class = core.merge.class(tmp.class, [
 				d.placement === "full" ? "card-img" : null,
 				d.placement === "top" ? "card-img-top" : null,
 				d.placement === "bottom" ? "card-img-bottom" : null,
 				d.placement === "left" ? "img-fluid rounded-start" : null,
 				d.placement === "right" ? "img-fluid rounded-end" : null,
 			]);
+
+			super.data = tmp;
 		}
 	}
 }

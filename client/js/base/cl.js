@@ -1,5 +1,11 @@
 "use strict";
-const DEBUG = false;
+const DEBUG = true;
+
+function elemInfo(elem) {
+	return `${elem.localName}${elem.id ? "#" + elem.id : ""}${
+		elem.classList && elem.classList.length > 0 ? "." + [].slice.apply(elem.classList).join(".") : ""
+	}${elem.name ? `[name='${elem.name}']` : ""}${elem.innerText ? ` [${elem.innerText}]` : ""}`;
+}
 
 const booleanAttr = [
 	"allowfullscreen",
@@ -43,23 +49,25 @@ function attachAttr(elems, arg) {
 					}
 				} else if (i === "style") {
 					Object.keys(arg[i]).forEach((j) => {
-						if (arg[i][j] && arg[i][j] !== null) {
+						if (arg[i][j] && arg[i][j] !== null && arg[i][j] !== undefined) {
 							elems.style.setProperty(j, arg[i][j]);
 						}
 					});
-				} else if (booleanAttr.includes(i) && arg[i]) {
+				} else if (booleanAttr.includes(i) && arg[i] && arg[i] !== undefined) {
 					elems[i] = true;
 				} else {
-					if (arg[i] instanceof Function) {
-						//console.warn(`Element has ${i} function`, elems);
-						elems.addEventListener(i.startsWith("on") ? i.substr(2) : i, arg[i]);
+					if (arg[i] instanceof Function && arg[i] !== undefined) {
+						//console.warn(`Element ${elemInfo(elems)} has ${i} function`);
+						elems.addEventListener(i.startsWith("on") ? i.substr(2) : i, arg[i], false);
+
+						//create function to remove EventListener
 						elems.detachEventListener = function (sender) {
-							// console.log(`Remove ${i} from ${sender}`);
-							sender.removeEventListener(i.startsWith("on") ? i.substr(2) : i, arg[i]);
+							if (DEBUG) console.log(`Remove ${i} from ${elemInfo(sender)}`);
+							sender.removeEventListener(i.startsWith("on") ? i.substr(2) : i, arg[i], false);
 							sender.detachEventListener = null;
 							delete sender.detachEventListener;
 						};
-					} else {
+					} else if (arg[i] !== undefined) {
 						elems.setAttribute(i, arg[i]);
 					}
 				}

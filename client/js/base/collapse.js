@@ -47,14 +47,14 @@ export class toggle extends tag {
 	}
 	set data(d) {
 		if (d && d._target) {
-			super.data = d._target.data;
-
-			super.data.attr = core.merge.attr(super.data.attr, {
+			let tmp = d._target.data;
+			tmp.attr = core.merge.attr(tmp.attr, {
 				"aria-controls": d.target,
 				"aria-expanded": d.show ? "true" : "false",
 				"data-bs-target": d.target,
 				"data-bs-toggle": "collapse",
 			});
+			super.data = tmp;
 		} else {
 			super.data = null;
 		}

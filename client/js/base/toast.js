@@ -250,8 +250,9 @@ export default class toast extends tag {
 			setTimeout(
 				function (dom, tst) {
 					//tst.destroy();
-					cl.removeChildElement(dom);
-					dom.remove();
+					// cl.removeChildElement(dom);
+					// dom.remove();
+					cl.removeElement(dom);
 
 					this.tst = null;
 					this.dom = null;

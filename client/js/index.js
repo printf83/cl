@@ -32,21 +32,28 @@ import paging from "./base/paging.js";
 
 let imgurlindex = 0;
 function imgurl(width, height) {
-	return `https://picsum.photos/seed/${++imgurlindex}/${width ? width : 800}/${height ? height : 400}.webp`;
+	return `https://picsum.photos/seed/11/${width ? width : 800}/${height ? height : 400}.webp`;
 }
 let loream =
 	"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce hendrerit tincidunt nibh ut condimentum. Nulla vitae vulputate elit. Sed accumsan varius mauris, vel bibendum magna consequat eget. Vivamus felis dolor, laoreet et blandit ut, iaculis eu arcu. Proin dapibus, metus vitae iaculis venenatis, lacus purus commodo tellus, aliquam commodo ex metus vulputate mi. Nam eu lorem vel nisi scelerisque hendrerit et id justo. Nunc vestibulum eget est sed ullamcorper. Etiam pulvinar, dui eget vehicula molestie, sapien sapien lobortis nulla, nec cursus urna sapien imperdiet tortor. Nam vitae lacus sem. Praesent id arcu vitae sem ultrices rutrum ut ac mi.";
 
-function repeatdoform(timestorepeat, callback) {
-	if (timestorepeat > 0) {
-		doForm();
-		repeatdoform(timestorepeat - 1, callback);
+function repeatdoform(max, cur, callback) {
+	if (cur > 0) {
+		doForm(max, cur);
+		setTimeout(
+			function (m, t, c) {
+				repeatdoform(m, t, c);
+			},
+			1000,
+			max,
+			cur - 1,
+			callback
+		);
 	} else {
-		console.log("End repeat");
 		callback();
 	}
 }
-function doForm() {
+function doForm(max, cur) {
 	let root = document.getElementById("root");
 
 	// console.time("Proccesing Time");
@@ -56,11 +63,16 @@ function doForm() {
 	cl.replaceChild(
 		root,
 		new div("my-5 container", [
-			new button("danger mb-2", "Regenerate Root 1000 times", function () {
-				repeatdoform(1000, function () {
-					cl.init(root);
-				});
-			}),
+			new button(
+				"danger mb-2",
+				`Regenerate root ${Math.round((((max - cur) / max) * 100 + Number.EPSILON) * 100) / 100}% complete`,
+				function () {
+					repeatdoform(1000, 1000, function () {
+						cl.init(root);
+						console.log("Complete regenerate");
+					});
+				}
+			),
 			new tab({
 				style: "tab",
 				item: [
@@ -73,8 +85,8 @@ function doForm() {
 										title: "Hello",
 										elem: new breadcrumb({
 											item: [
-												{ label: "Google", href: "https://www.google.com" },
-												{ label: "Facebook", href: "https://www.facebook.com" },
+												{ label: "Live", href: "https://www.live.com" },
+												{ label: "Github", href: "https://www.github.com" },
 												{ label: "Bing", href: "https://www.bing.com" },
 											],
 										}),
@@ -185,7 +197,26 @@ function doForm() {
 											elem: new tab({
 												border: false,
 												item: [
-													{ label: "First", icon: "fire", elem: "This is first tab. " },
+													{
+														label: "First",
+														icon: "fire",
+														elem: new tooltip(
+															new button({
+																label: "Danger",
+																color: "danger",
+																type: "submit",
+																outline: true,
+																icon: { style: "fab", icon: "facebook", spin: true },
+																attr: { style: { width: "150px" } },
+															}),
+															{
+																title: "Title",
+																msg: "Message",
+																type: "popover",
+																postition: "end",
+															}
+														),
+													},
 													{ label: "Second", icon: "fire", elem: "This is second tab. " },
 													{ label: "Third", icon: "fire", elem: "This is third tab. " },
 													{ label: "Fourth", icon: "fire", elem: "This is fourth tab. " },
@@ -670,8 +701,8 @@ function doForm() {
 					new card.container([
 						new card.horizontal(
 							new card.img({
-								placement: "top",
-								src: imgurl(400, 300),
+								placement: "left",
+								src: imgurl(450, 300),
 							}),
 							[
 								new card.header("Card header"),
@@ -702,8 +733,9 @@ function doForm() {
 }
 //test upload from laptop
 core.documentReady(() => {
-	repeatdoform(1, function () {
+	repeatdoform(1, 1, function () {
 		let root = document.getElementById("root");
 		cl.init(root);
+		console.log("Complete generate");
 	});
 });

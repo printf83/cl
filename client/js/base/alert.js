@@ -147,7 +147,9 @@ export class link extends a {
 		super.data = d;
 
 		if (super.data) {
-			super.data.class = core.merge.class(super.data.class, "alert-link");
+			let tmp = super.data;
+			tmp.class = core.merge.class(tmp.class, "alert-link");
+			super.data = tmp;
 		}
 	}
 }
@@ -164,7 +166,9 @@ export class heading extends h {
 		super.data = d;
 
 		if (super.data) {
-			super.data.class = core.merge.class("heading");
+			let tmp = super.data;
+			tmp.class = core.merge.class(tmp.class, "heading");
+			super.data = tmp;
 		}
 	}
 }
