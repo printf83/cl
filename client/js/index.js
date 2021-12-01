@@ -29,6 +29,7 @@ import breadcrumb from "./base/breadcrumb.js";
 import paging from "./base/paging.js";
 // import ul from "./base/ul.js";
 // import li from "./base/li.js";
+import * as navbar from "./base/navbar.js";
 
 let imgurlindex = 0;
 function imgurl(width, height) {
@@ -59,6 +60,7 @@ function doForm(max, cur) {
 	// console.time("Proccesing Time");
 	let tid1 = core.UUID();
 	let tid2 = core.UUID();
+	let tid3 = core.UUID();
 
 	cl.replaceChild(
 		root,
@@ -104,7 +106,65 @@ function doForm(max, cur) {
 											},
 										}),
 									},
-									{ title: "Hello2", elem: "World2" },
+									{
+										title: "Hello2",
+										elem: new navbar.container({
+											expand: "lg",
+											color: "light",
+											elem: [
+												new navbar.toggle({
+													target: `#${tid3}`, //this id must same with ns.navbar.collapsecontainer id
+													toggle: "collapse",
+												}),
+												new navbar.brand({
+													label: "Navbar",
+													icon: "fire",
+													href: "javascript:void(0);",
+												}),
+												new navbar.collapsecontainer({
+													id: tid3,
+													elem: new navbar.itemcontainer({
+														parenttype: "collapse",
+														elem: [
+															new navbar.item({
+																label: "Home",
+																href: "#",
+																active: "true",
+															}),
+															new navbar.item({
+																label: "Features",
+																href: "javascript:void(0);",
+															}),
+															new navbar.item({
+																label: "Pricing",
+																option: [
+																	{ href: "javascript:void(0);", label: "Action" },
+																	{
+																		href: "javascript:void(0);",
+																		label: "Another action",
+																	},
+																	{
+																		href: "javascript:void(0);",
+																		label: "Something else here",
+																	},
+																	{ value: "-" },
+																	{
+																		href: "javascript:void(0);",
+																		label: "Separated link",
+																	},
+																],
+															}),
+															new navbar.item({
+																label: "Disabled",
+																href: "javascript:void(0);",
+																disabled: true,
+															}),
+														],
+													}),
+												}),
+											],
+										}),
+									},
 									{ title: "Hello3", elem: "World3" },
 								],
 							}),

@@ -90,7 +90,6 @@ export default class a extends tag {
 	set data(d) {
 		if (d) {
 			d.tag = "a";
-
 			super.data = d;
 		} else {
 			super.data = null;

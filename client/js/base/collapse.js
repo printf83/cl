@@ -35,6 +35,8 @@ export class toggle extends tag {
 					attr: null,
 					target: null,
 					show: false,
+
+					toggle: "collapse", //collapse | offcanvas
 				},
 				t
 			);
@@ -53,7 +55,7 @@ export class toggle extends tag {
 				"aria-controls": d.target,
 				"aria-expanded": d.show ? "true" : "false",
 				"data-bs-target": d.target,
-				"data-bs-toggle": "collapse",
+				"data-bs-toggle": d.toggle,
 			});
 			super.data = tmp;
 		} else {
