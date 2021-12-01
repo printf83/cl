@@ -27,8 +27,6 @@ import hr from "./base/hr.js";
 import accordion from "./base/accordion.js";
 import breadcrumb from "./base/breadcrumb.js";
 import paging from "./base/paging.js";
-// import ul from "./base/ul.js";
-// import li from "./base/li.js";
 import * as navbar from "./base/navbar.js";
 
 let imgurlindex = 0;

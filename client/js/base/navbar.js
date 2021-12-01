@@ -532,7 +532,7 @@ export class item extends div {
 					}),
 					d.option
 						? new ul({
-								class: ["drowdown-menu", "w-100", "w-md-auto"],
+								class: ["dropdown-menu", "w-sm-100"],
 								attr: { "aria-labelledby": d.id ? d.id : null },
 								elem: new option({ type: "dropdown", item: d.option }),
 						  })
