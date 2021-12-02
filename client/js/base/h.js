@@ -14,7 +14,7 @@ export default class h extends tag {
 	get data() {
 		return super.data;
 	}
-	set data(arg) {
-		super.data = arg;
+	set data(opt) {
+		super.data = opt;
 	}
 }

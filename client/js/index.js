@@ -6,7 +6,6 @@ import div from "./base/div.js";
 import a from "./base/a.js";
 import button from "./base/button.js";
 // import * as inputgroup from "./base/inputgroup.js";
-// import btngroup from "./base/btngroup.js";
 // import icon from "./base/icon.js";
 // import tooltip from "./base/tooltip.js";
 // import badge from "./base/badge.js";
@@ -21,9 +20,11 @@ import button from "./base/button.js";
 // import toast from "./base/toast.js";
 // import msg from "./base/msg.js";
 // import * as dlg from "./base/dlg.js";
-// import * as container from "./base/container.js";
+import * as container from "./base/container.js";
 import * as alert from "./base/alert.js";
-// import hr from "./base/hr.js";
+import h from "./base/h.js";
+import hr from "./base/hr.js";
+import btngroup from "./base/btngroup.js";
 // import accordion from "./base/accordion.js";
 // import breadcrumb from "./base/breadcrumb.js";
 // import paging from "./base/paging.js";
@@ -62,26 +63,38 @@ function doForm(max, cur) {
 
 	cl.replaceChild(
 		root,
-		new div({
-			elem: [
-				new button({
-					color: "primary",
-					label: "hello world",
-					onclick: function () {
-						//alert("Hello World");
-						console.log("Hello");
-					},
-				}),
-				new a({
-					label: "Link to google",
-					href: "https://www.google.com",
-				}),
-				new alert.container({
-					color: "primary",
-					elem: ["Hello ", new alert.link({ label: "Google", href: "http://google.com" })],
-				}),
-			],
-		})
+		new container.form([
+			new button({
+				color: "primary",
+				label: "hello world",
+				onclick: function () {
+					//alert("Hello World");
+					console.log("Hello");
+				},
+			}),
+			new a({
+				label: "Link to google",
+				href: "https://www.google.com",
+			}),
+			new alert.container({
+				color: "primary",
+				close: true,
+				elem: [
+					new alert.heading({ elem: "Head" }),
+					new hr(),
+					"Hello ",
+					new alert.link({ label: "Google", href: "http://google.com" }),
+				],
+			}),
+			new h(3, { elem: "Hello World H3" }),
+			new btngroup({
+				elem: [
+					new button({ label: "A", color: "danger" }),
+					new button({ label: "B", color: "warning" }),
+					new button({ label: "C", color: "success" }),
+				],
+			}),
+		])
 		// new navbar.container({
 		// 	expand: "lg",
 		// 	color: "light",

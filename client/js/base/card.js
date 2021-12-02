@@ -1,6 +1,5 @@
 "use strict";
 import * as core from "./core.js";
-import tag from "./tag.js";
 import a from "./a.js";
 import div from "./div.js";
 import imgtag from "./img.js";
@@ -118,7 +117,7 @@ export class title extends h {
 	}
 	set data(opt) {
 		if (opt) {
-			opt.tag = "h5";
+			opt.tag = super.data.tag;
 			opt.class = core.merge.class(opt.class, "card-title");
 			super.data = opt;
 		} else {
@@ -139,7 +138,7 @@ export class subtitle extends h {
 	}
 	set data(opt) {
 		if (opt) {
-			opt.tag = "h6";
+			opt.tag = super.data.tag;
 			opt.class = core.merge.class(opt.class, "card-subtitle mb-2");
 			super.data = opt;
 		} else {
@@ -190,17 +189,10 @@ export class imgoverlay extends div {
 /**
  * opt:{tagoption,left,right,size,gap}
  */
-export class horizontal extends tag {
+export class horizontal extends div {
 	constructor(opt) {
-		super(opt);
-	}
-
-	get data() {
-		return super.data;
-	}
-	set data(opt) {
-		if (opt) {
-			opt = core.extend(
+		super(
+			core.extend(
 				{},
 				{
 					left: null,
@@ -209,8 +201,15 @@ export class horizontal extends tag {
 					gap: 0,
 				},
 				opt
-			);
+			)
+		);
+	}
 
+	get data() {
+		return super.data;
+	}
+	set data(opt) {
+		if (opt) {
 			opt.class = core.merge.class(opt.class, ["row", opt.gap !== null ? `g-${opt.gap}` : null]);
 			opt.elem = [
 				new div({

@@ -8,15 +8,8 @@ import span from "./span.js";
  */
 export default class badge extends span {
 	constructor(opt) {
-		super(opt);
-	}
-
-	get data() {
-		return super.data;
-	}
-	set data(opt) {
-		if (opt) {
-			opt = core.extend(
+		super(
+			core.extend(
 				{},
 				{
 					icon: null,
@@ -30,8 +23,15 @@ export default class badge extends span {
 					color: "secondary",
 				},
 				opt
-			);
+			)
+		);
+	}
 
+	get data() {
+		return super.data;
+	}
+	set data(opt) {
+		if (opt) {
 			opt.class = core.merge.class(opt.class, [
 				"badge",
 				opt.pill ? "rounded-pill" : null,

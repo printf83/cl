@@ -7,13 +7,13 @@ import tag from "./tag.js";
  */
 export default class form extends tag {
 	constructor(opt) {
-		super(opt);
+		super(core.extend({}, { tag: "form" }, opt));
 	}
 
 	get data() {
 		return super.data;
 	}
 	set data(opt) {
-		super.data = core.extend({}, { tag: "form" }, opt);
+		super.data = opt;
 	}
 }

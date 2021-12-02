@@ -15,39 +15,9 @@ import ul from "./ul.js";
  */
 
 export default class dropdown extends tag {
-	constructor(...arg) {
-		super();
-
-		if (arg && arg.length > 0) {
-			let t = {
-				label: null,
-				color: null,
-				onclick: null,
-				option: null,
-			};
-			if (arg.length === 4) {
-				t.label = arg[0];
-				t.color = arg[1];
-				t.onclick = arg[2];
-				t.option = arg[3];
-			} else if (arg.length === 3 && arg[1] instanceof Function) {
-				t.label = arg[0];
-				t.onclick = arg[1];
-				t.option = arg[2];
-			} else if (arg.length === 3 && typeof arg[1] === "string") {
-				t.label = arg[0];
-				t.color = arg[1];
-				t.option = arg[2];
-			} else if (arg.length === 2 && typeof arg[0] === "string") {
-				t.label = arg[0];
-				t.option = arg[1];
-			} else if (arg.length === 1) {
-				t = arg[0];
-			} else {
-				console.error("Unsupported argument", arg);
-			}
-
-			this.data = core.extend(
+	constructor(opt) {
+		super(
+			core.extend(
 				{},
 				{
 					attr: null, //combine to container
@@ -83,104 +53,102 @@ export default class dropdown extends tag {
 					autoclose: true,
 					dark: false,
 				},
-				t
-			);
-		} else {
-			this.data = null;
-		}
+				opt
+			)
+		);
 	}
 
 	get data() {
 		return super.data;
 	}
-	set data(d) {
-		if (d) {
-			d.id = d.id || core.UUID();
+	set data(opt) {
+		if (opt) {
+			opt.id = opt.id || core.UUID();
 
 			let menuctl = new ul({
-				class: ["dropdown-menu", d.dark ? "dropdown-menu-dark" : null],
-				attr: { "aria-labelledby": d.id },
-				elem: new option({ type: "dropdown", item: d.option, selected: d.value }),
+				class: ["dropdown-menu", opt.dark ? "dropdown-menu-dark" : null],
+				attr: { "aria-labelledby": opt.id },
+				elem: new option({ type: "dropdown", item: opt.option, selected: opt.value }),
 			});
 
-			let btnctl = d.splittoggle
+			let btnctl = opt.splittoggle
 				? new button({
-						type: d.type,
-						label: d.label,
-						icon: d.icon,
-						value: d.value,
-						checked: d.checked,
+						type: opt.type,
+						label: opt.label,
+						icon: opt.icon,
+						value: opt.value,
+						checked: opt.checked,
 
-						color: d.color,
-						textcolor: d.textcolor,
-						weight: d.weight,
-						disabled: d.disabled,
-						outline: d.outline,
-						hidelabel: d.hidelabel,
-						nowarp: d.nowarp,
+						color: opt.color,
+						textcolor: opt.textcolor,
+						weight: opt.weight,
+						disabled: opt.disabled,
+						outline: opt.outline,
+						hidelabel: opt.hidelabel,
+						nowarp: opt.nowarp,
 
-						onclick: d.onclick,
-						href: d.href,
+						onclick: opt.onclick,
+						href: opt.href,
 				  })
 				: new button({
 						class: "dropdown-toggle",
 						attr: {
 							"aria-expanded": "false",
-							"data-bs-auto-close": d.autoclose,
-							"data-bs-reference": d.reference,
-							"data-bs-offset": d.offset,
+							"data-bs-auto-close": opt.autoclose,
+							"data-bs-reference": opt.reference,
+							"data-bs-offset": opt.offset,
 							"data-bs-toggle": "dropdown",
 						},
-						id: d.id,
-						name: d.name,
+						id: opt.id,
+						name: opt.name,
 
-						type: d.type,
-						label: d.label,
-						icon: d.icon,
-						badge: d.badge,
-						value: d.value,
-						checked: d.checked,
+						type: opt.type,
+						label: opt.label,
+						icon: opt.icon,
+						badge: opt.badge,
+						value: opt.value,
+						checked: opt.checked,
 
-						color: d.color,
-						textcolor: d.textcolor,
-						weight: d.weight,
-						disabled: d.disabled,
-						outline: d.outline,
-						hidelabel: d.hidelabel,
-						nowarp: d.nowarp,
+						color: opt.color,
+						textcolor: opt.textcolor,
+						weight: opt.weight,
+						disabled: opt.disabled,
+						outline: opt.outline,
+						hidelabel: opt.hidelabel,
+						nowarp: opt.nowarp,
 
-						onclick: d.onclick,
-						href: d.href,
+						onclick: opt.onclick,
+						href: opt.href,
 				  });
 
-			let splitctl = d.splittoggle
+			let splitctl = opt.splittoggle
 				? new button({
 						class: ["dropdown-toggle", "dropdown-toggle-split"],
 						attr: {
 							"aria-expanded": "false",
-							"data-bs-auto-close": d.autoclose,
-							"data-bs-reference": d.reference,
-							"data-bs-offset": d.offset,
+							"data-bs-auto-close": opt.autoclose,
+							"data-bs-reference": opt.reference,
+							"data-bs-offset": opt.offset,
 							"data-bs-toggle": "dropdown",
 						},
-						id: d.id,
+						id: opt.id,
 						label: "Toggle Dropdown",
-						badge: d.badge,
+						badge: opt.badge,
 
-						color: d.color,
-						textcolor: d.textcolor,
-						weight: d.weight,
-						disabled: d.disabled,
-						outline: d.outline,
+						color: opt.color,
+						textcolor: opt.textcolor,
+						weight: opt.weight,
+						disabled: opt.disabled,
+						outline: opt.outline,
 						hidelabel: true,
-						nowarp: d.nowarp,
+						nowarp: opt.nowarp,
 				  })
 				: null;
 
-			if (d.splittoggle && d.arrow === "start") {
+			if (opt.splittoggle && opt.arrow === "start") {
 				super.data = {
-					tag: d.container ? "div" : null,
-					class: d.container ? ["btn-group", d.container, d.arrow ? `drop${d.arrow}` : null] : null,
+					tag: opt.container ? "div" : null,
+					class: opt.container ? ["btn-group", opt.container, opt.arrow ? `drop${opt.arrow}` : null] : null,
 					elem: [
 						new div({
 							class: ["btn-group"],
@@ -192,9 +160,9 @@ export default class dropdown extends tag {
 				};
 			} else {
 				super.data = {
-					tag: d.container ? "div" : null,
-					class: d.container ? [d.container, d.arrow ? `drop${d.arrow}` : null] : null,
-					elem: d.splittoggle
+					tag: opt.container ? "div" : null,
+					class: opt.container ? [opt.container, opt.arrow ? `drop${opt.arrow}` : null] : null,
+					elem: opt.splittoggle
 						? new div({
 								class: ["btn-group"],
 								attr: { role: "group" },

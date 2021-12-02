@@ -14,6 +14,6 @@ export default class div extends tag {
 		return super.data;
 	}
 	set data(opt) {
-		super.data = core.extend({}, { tag: "div" }, opt);
+		super.data = opt;
 	}
 }

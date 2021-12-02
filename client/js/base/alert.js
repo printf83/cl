@@ -45,11 +45,10 @@ export class container extends div {
 			opt.elem = new div({
 				class: "d-flex align-items-stretch",
 				elem: [
-					new div({ class: "me-auto", elem: opt.elem || opt.msg }),
+					new div({ class: "w-100", elem: opt.elem || opt.msg }),
 					opt.close
 						? new btnclose({
 								dismiss: "alert",
-								class: "my-1",
 						  })
 						: null,
 				],

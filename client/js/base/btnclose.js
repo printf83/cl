@@ -7,15 +7,8 @@ import button from "./button.js";
  */
 export default class btnclose extends button {
 	constructor(opt) {
-		super(opt);
-	}
-
-	get data() {
-		return super.data;
-	}
-	set data(opt) {
-		if (opt) {
-			opt = core.extend(
+		super(
+			core.extend(
 				{},
 				{
 					label: "Close",
@@ -23,8 +16,15 @@ export default class btnclose extends button {
 					dark: true,
 				},
 				opt
-			);
+			)
+		);
+	}
 
+	get data() {
+		return super.data;
+	}
+	set data(opt) {
+		if (opt) {
 			opt.type = "button";
 			opt.class = core.merge.class(opt.class, ["btn-close", !opt.dark ? "btn-close-white" : null]);
 			opt.attr = core.merge.attr(opt.attr, {
@@ -36,7 +36,7 @@ export default class btnclose extends button {
 			delete opt.label;
 			delete opt.dark;
 
-			super.data = d;
+			super.data = opt;
 		} else {
 			super.data = null;
 		}

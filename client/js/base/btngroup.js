@@ -7,15 +7,8 @@ import div from "./div.js";
  */
 export default class btngroup extends div {
 	constructor(opt) {
-		super(opt);
-	}
-
-	get data() {
-		return super.data;
-	}
-	set data(opt) {
-		if (opt) {
-			opt = core.extend(
+		super(
+			core.extend(
 				{},
 				{
 					label: null,
@@ -24,8 +17,15 @@ export default class btngroup extends div {
 					elem: null,
 				},
 				opt
-			);
+			)
+		);
+	}
 
+	get data() {
+		return super.data;
+	}
+	set data(opt) {
+		if (opt) {
 			opt.attr = core.merge.attr(opt.attr, {
 				role: "group",
 				"aria-label": opt.label,

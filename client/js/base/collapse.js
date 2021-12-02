@@ -10,15 +10,8 @@ import button from "./button.js";
  */
 export class toggle extends tag {
 	constructor(opt) {
-		super(opt);
-	}
-
-	get data() {
-		return super.data;
-	}
-	set data(opt) {
-		if (opt) {
-			opt = core.extend(
+		super(
+			core.extend(
 				{},
 				{
 					elem: null,
@@ -29,8 +22,15 @@ export class toggle extends tag {
 					toggle: "collapse", //collapse | offcanvas
 				},
 				opt
-			);
+			)
+		);
+	}
 
+	get data() {
+		return super.data;
+	}
+	set data(opt) {
+		if (opt) {
 			if (!opt.elem) {
 				opt.elem = new button({
 					icon: "bars",
@@ -56,15 +56,8 @@ export class toggle extends tag {
  */
 export class container extends div {
 	constructor(opt) {
-		super(opt);
-	}
-
-	get data() {
-		return super.data;
-	}
-	set data(opt) {
-		if (opt) {
-			opt = core.extend(
+		super(
+			core.extend(
 				{},
 				{
 					elem: null,
@@ -72,8 +65,15 @@ export class container extends div {
 					show: false,
 				},
 				opt
-			);
+			)
+		);
+	}
 
+	get data() {
+		return super.data;
+	}
+	set data(opt) {
+		if (opt) {
 			if (!opt.elem) {
 				opt.elem = new div({ elem: "" });
 			}

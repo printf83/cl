@@ -12,15 +12,8 @@ import a from "./a.js";
  */
 export default class breadcrumb extends nav {
 	constructor(opt) {
-		super(opt);
-	}
-
-	get data() {
-		return super.data;
-	}
-	set data(opt) {
-		if (opt) {
-			opt = core.extend(
+		super(
+			core.extend(
 				{},
 				{
 					label: "Breadcrumb",
@@ -28,8 +21,15 @@ export default class breadcrumb extends nav {
 					elem: null,
 				},
 				opt
-			);
+			)
+		);
+	}
 
+	get data() {
+		return super.data;
+	}
+	set data(opt) {
+		if (opt) {
 			//check if elem isnot array
 			opt.elem = opt.elem ? (Array.isArray(opt.elem) ? opt.elem : [opt.elem]) : null;
 
