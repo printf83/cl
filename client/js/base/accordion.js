@@ -9,7 +9,18 @@ import button from "./button.js";
  */
 export default class accordion extends div {
 	constructor(opt) {
-		super(opt);
+		super(
+			core.extend(
+				{},
+				{
+					id: null,
+					flush: false,
+					autoclose: true,
+					elem: null,
+				},
+				opt
+			)
+		);
 	}
 
 	get data() {
@@ -17,16 +28,6 @@ export default class accordion extends div {
 	}
 	set data(opt) {
 		if (opt) {
-			opt = core.extend(
-				{},
-				{
-					id: null,
-					flush: false,
-					autoclose: true,
-				},
-				opt
-			);
-
 			//check if elem isnot array
 			opt.elem = opt.elem ? (Array.isArray(opt.elem) ? opt.elem : [opt.elem]) : null;
 

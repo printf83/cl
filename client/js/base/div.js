@@ -7,7 +7,7 @@ import tag from "./tag.js";
  */
 export default class div extends tag {
 	constructor(opt) {
-		super(opt);
+		super(core.extend({}, { tag: "div" }, opt));
 	}
 
 	get data() {

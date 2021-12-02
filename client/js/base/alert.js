@@ -7,11 +7,11 @@ import div from "./div.js";
 import btnclose from "./btnclose.js";
 
 /**
- * opt : {tagoption,icon,color,close}
+ * opt : {tagoption,icon,color,message,close}
  */
 export class container extends div {
 	constructor(opt) {
-		super(opt);
+		super(core.extend({}, { icon: null, color: null, message: null, close: false }, opt));
 	}
 
 	get data() {
@@ -19,8 +19,6 @@ export class container extends div {
 	}
 	set data(opt) {
 		if (opt) {
-			opt = core.extend({}, { icon: null, close: false }, opt);
-
 			let bI = core.getBaseIcon(opt.icon);
 			if (bI) {
 				opt.color = opt.color || bI.color;
@@ -47,7 +45,7 @@ export class container extends div {
 			opt.elem = new div({
 				class: "d-flex align-items-stretch",
 				elem: [
-					new div({ class: "me-auto", elem: opt.elem }),
+					new div({ class: "me-auto", elem: opt.elem || opt.msg }),
 					opt.close
 						? new btnclose({
 								dismiss: "alert",
@@ -60,8 +58,9 @@ export class container extends div {
 			delete opt.icon;
 			delete opt.color;
 			delete opt.close;
+			delete opt.msg;
 
-			super.data = d;
+			super.data = opt;
 		} else {
 			super.data = null;
 		}

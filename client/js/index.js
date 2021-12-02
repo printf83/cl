@@ -2,32 +2,32 @@
 import * as core from "./base/core.js";
 import * as cl from "./base/cl.js";
 import div from "./base/div.js";
-import p from "./base/p.js";
-import h from "./base/h.js";
+// import p from "./base/p.js";
+import a from "./base/a.js";
 import button from "./base/button.js";
-import * as inputgroup from "./base/inputgroup.js";
-import btngroup from "./base/btngroup.js";
-import icon from "./base/icon.js";
-import tooltip from "./base/tooltip.js";
-import badge from "./base/badge.js";
-import input from "./base/input.js";
-import label from "./base/label.js";
-import dropdown from "./base/dropdown.js";
-import tab from "./base/tab.js";
-import * as collapse from "./base/collapse.js";
-import * as card from "./base/card.js";
-import small from "./base/small.js";
-import modal from "./base/modal.js";
-import toast from "./base/toast.js";
-import msg from "./base/msg.js";
-import * as dlg from "./base/dlg.js";
-import * as container from "./base/container.js";
+// import * as inputgroup from "./base/inputgroup.js";
+// import btngroup from "./base/btngroup.js";
+// import icon from "./base/icon.js";
+// import tooltip from "./base/tooltip.js";
+// import badge from "./base/badge.js";
+// import input from "./base/input.js";
+// import label from "./base/label.js";
+// import dropdown from "./base/dropdown.js";
+// import tab from "./base/tab.js";
+// import * as collapse from "./base/collapse.js";
+// import * as card from "./base/card.js";
+// import small from "./base/small.js";
+// import modal from "./base/modal.js";
+// import toast from "./base/toast.js";
+// import msg from "./base/msg.js";
+// import * as dlg from "./base/dlg.js";
+// import * as container from "./base/container.js";
 import * as alert from "./base/alert.js";
-import hr from "./base/hr.js";
-import accordion from "./base/accordion.js";
-import breadcrumb from "./base/breadcrumb.js";
-import paging from "./base/paging.js";
-import * as navbar from "./base/navbar.js";
+// import hr from "./base/hr.js";
+// import accordion from "./base/accordion.js";
+// import breadcrumb from "./base/breadcrumb.js";
+// import paging from "./base/paging.js";
+// import * as navbar from "./base/navbar.js";
 
 let imgurlindex = 0;
 function imgurl(width, height) {
@@ -62,26 +62,46 @@ function doForm(max, cur) {
 
 	cl.replaceChild(
 		root,
-		new navbar.container({
-			expand: "lg",
-			color: "light",
+		new div({
 			elem: [
-				// new navbar.brand({
-				// 	label: "Navbar",
-				// }),
-
-				new input({ type: "text", before: "@", placeholder: "Username", size: "col" }),
-				// new navbar.formcontainer([
-				// 	new input({
-				// 		type: "search",
-				// 		placeholder: "Search",
-				// 		hiddenlabel: "Search",
-				// 		class: "me-2",
-				// 	}),
-				// 	new button({ label: "Search", color: "success", outline: true }),
-				// ]),
+				new button({
+					color: "primary",
+					label: "hello world",
+					onclick: function () {
+						//alert("Hello World");
+						console.log("Hello");
+					},
+				}),
+				new a({
+					label: "Link to google",
+					href: "https://www.google.com",
+				}),
+				new alert.container({
+					color: "primary",
+					elem: ["Hello ", new alert.link({ label: "Google", href: "http://google.com" })],
+				}),
 			],
 		})
+		// new navbar.container({
+		// 	expand: "lg",
+		// 	color: "light",
+		// 	elem: [
+		// 		// new navbar.brand({
+		// 		// 	label: "Navbar",
+		// 		// }),
+
+		// 		new input({ type: "text", before: "@", placeholder: "Username", size: "col" }),
+		// 		// new navbar.formcontainer([
+		// 		// 	new input({
+		// 		// 		type: "search",
+		// 		// 		placeholder: "Search",
+		// 		// 		hiddenlabel: "Search",
+		// 		// 		class: "me-2",
+		// 		// 	}),
+		// 		// 	new button({ label: "Search", color: "success", outline: true }),
+		// 		// ]),
+		// 	],
+		// })
 	);
 	// cl.replaceChild(
 	// 	root,

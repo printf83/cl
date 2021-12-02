@@ -9,17 +9,12 @@ import badge from "./badge.js";
  */
 export default class button extends tag {
 	constructor(opt) {
-		super("button", opt);
-	}
-
-	get data() {
-		return super.data;
-	}
-	set data(opt) {
-		if (opt) {
-			opt = core.extend(
+		super(
+			core.extend(
 				{},
 				{
+					tag: "button",
+
 					type: "button",
 					label: null,
 					icon: null,
@@ -37,8 +32,15 @@ export default class button extends tag {
 					elem: null,
 				},
 				opt
-			);
+			)
+		);
+	}
 
+	get data() {
+		return super.data;
+	}
+	set data(opt) {
+		if (opt) {
 			let bI = core.getBaseIcon(opt.icon);
 			if (bI) {
 				opt.icon = {
