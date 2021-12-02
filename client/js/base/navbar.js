@@ -131,7 +131,6 @@ export class brand extends tag {
 	set data(d) {
 		if (d) {
 			d.tag = d.href ? "a" : "h1";
-			g;
 			d.class = core.merge.class(d.class, ["navbar-brand", !d.href ? "mb-0" : null]);
 			d.elem = d.elem
 				? d.elem
