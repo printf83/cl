@@ -1,22 +1,19 @@
 "use strict";
 import * as core from "./core.js";
-import cont from "./cont.js";
+import tag from "./tag.js";
 
 /**
- * class,style,elem
- * class,elem
- * [elem]
- * opt : {attr,class,style,id,name,onclick,elem}
+ * opt : {tagoption}
  */
-export default class span extends cont {
-	constructor(...arg) {
-		super("span", ...arg);
+export default class span extends tag {
+	constructor(opt) {
+		super(opt);
 	}
 
 	get data() {
 		return super.data;
 	}
-	set data(arg) {
-		super.data = core.extend({}, { tag: "span" }, arg);
+	set data(opt) {
+		super.data = core.extend({}, { tag: "span" }, opt);
 	}
 }

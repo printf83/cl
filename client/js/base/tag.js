@@ -2,7 +2,7 @@
 import * as core from "./core.js";
 
 /**
- * opt : {tag,attr,elem}
+ * opt : {tag,id,name,class,style,attr,href,onclick,onchange,onfocus,onblur,align,color,textcolor,bordercolor,border,elem}
  */
 export default class tag {
 	//_d = null;
@@ -16,12 +16,13 @@ export default class tag {
 				{},
 				{
 					tag: null,
-					attr: null,
 
 					id: null,
 					name: null,
+
 					class: null,
 					style: null,
+					attr: null,
 
 					href: null,
 					onclick: null,

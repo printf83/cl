@@ -1,27 +1,20 @@
 "use strict";
 import * as core from "./core.js";
-import cont from "./cont.js";
+import tag from "./tag.js";
 
 /**
- * level,class,style,elem
- * level,class,elem
- * level,[elem]
- * level,opt : {attr,class,style,id,name,onclick,elem}
+ * level, opt : {tagoption}
  */
-export default class h extends cont {
-	constructor(level, ...arg) {
-		if (level && typeof level === "number" && level >= 1 && level <= 6) {
-			super(`h${level}`, ...arg);
-		} else {
-			console.warn("H tag level should be a number 1 to 6.", level);
-			super(`h1`, ...arg);
-		}
+export default class h extends tag {
+	constructor(level = 1, opt) {
+		opt = core.extend({}, { tag: `h${level}` }, opt);
+		super(opt);
 	}
 
 	get data() {
 		return super.data;
 	}
 	set data(arg) {
-		super.data = core.extend({}, { tag: "h1" }, arg);
+		super.data = arg;
 	}
 }

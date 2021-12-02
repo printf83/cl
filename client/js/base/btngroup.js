@@ -3,71 +3,44 @@ import * as core from "./core.js";
 import div from "./div.js";
 
 /**
- * label,elem
- * [elem],
- * opt : {attr,label,elem,weight,vertical}
+ * opt : {tagoption,label,weight,vertical,elem}
  */
 export default class btngroup extends div {
-	constructor(...arg) {
-		super();
-
-		if (arg && arg.length > 0) {
-			let t = {
-				for: null,
-				label: null,
-				elem: null,
-			};
-
-			if (arg.length === 2) {
-				t.label = arg[0];
-				t.elem = arg[1];
-			} else if (arg.length === 1 && Array.isArray(arg[0])) {
-				t.elem = arg[0];
-			} else if (arg.length === 1) {
-				t = arg[0];
-			} else {
-				console.error("Unsupported argument", arg);
-			}
-
-			this.data = core.extend(
-				{},
-				{
-					attr: null,
-
-					label: null,
-					elem: null,
-					weight: null,
-					vertical: false,
-				},
-				t
-			);
-		} else {
-			this.data = null;
-		}
+	constructor(opt) {
+		super(opt);
 	}
 
 	get data() {
 		return super.data;
 	}
-	set data(d) {
-		if (d) {
-			super.data = {
-				id: d.id,
-				name: d.name,
-				style: d.style,
+	set data(opt) {
+		if (opt) {
+			opt = core.extend(
+				{},
+				{
+					label: null,
+					weight: null,
+					vertical: false,
+					elem: null,
+				},
+				opt
+			);
 
-				onclick: d.onclick,
-				onchange: d.onchange,
-				onfocus: d.onfocus,
-				onblur: d.onblur,
+			opt.attr = core.merge.attr(opt.attr, {
+				role: "group",
+				"aria-label": opt.label,
+			});
 
-				attr: core.merge.attr(d.attr, {
-					role: "group",
-					"aria-label": d.label,
-				}),
-				class: [d.vertical ? "btn-group-vertical" : "btn-group", d.weight ? `btn-group-${d.weight}` : null],
-				elem: d.elem,
-			};
+			opt.class = core.merge.class(opt.class, [
+				opt.vertical ? "btn-group-vertical" : "btn-group",
+				opt.weight ? `btn-group-${opt.weight}` : null,
+			]);
+
+			delete opt.label;
+			delete opt.weight;
+			delete opt.vertical;
+
+			super.data = opt;
 		} else {
 			super.data = null;
 		}

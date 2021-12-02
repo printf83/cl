@@ -5,321 +5,230 @@ import a from "./a.js";
 import div from "./div.js";
 import imgtag from "./img.js";
 
-class main extends tag {
-	constructor(tagName, className, ...arg) {
-		super();
-		if (arg && arg.length > 0) {
-			let t = {
-				elem: null,
-			};
-
-			if (
-				arg.length === 1 &&
-				(typeof arg[0] === "string" || Array.isArray(arg[0]) || arg[0].hasOwnProperty("cl"))
-			) {
-				t.elem = arg[0];
-			} else if (arg.length === 1) {
-				t = arg[0];
-			} else {
-				console.error("Unsupported argument", arg);
-			}
-
-			this.data = core.extend(
-				{},
-				{
-					tg: tagName,
-					cn: className,
-				},
-				t
-			);
-		} else {
-			this.data = null;
-		}
+/**
+ * opt:{tagoption}
+ */
+export class container extends div {
+	constructor(opt) {
+		super(opt);
 	}
+
 	get data() {
 		return super.data;
 	}
-	set data(d) {
-		if (d) {
-			// super.data = {
-			// 	tag: d.tg,
-			// 	class: core.merge.class(d.class, d.cn),
-
-			// 	id: d.id,
-			// 	name: d.name,
-			// 	style: d.style,
-
-			// 	onclick: d.onclick,
-			// 	onchange: d.onchange,
-			// 	onfocus: d.onfocus,
-			// 	onblur: d.onblur,
-
-			// 	elem: d.elem,
-			// };
-
-			let tmp = d;
-			tmp.tag = d.tg;
-			tmp.class = core.merge.class(tmp.class, d.cn);
-
-			delete tmp.tg;
-			delete tmp.cn;
-
-			super.data = tmp;
-
-			// super.data = d;
-			// super.data.tag = d.tg;
-			// super.data.class = core.merge.class(super.data.class, d.cn);
-			// delete super.data.tg;
-			// delete super.data.cn;
+	set data(opt) {
+		if (opt) {
+			opt.class = core.merge.class(opt.class, "card");
+			super.data = opt;
 		} else {
 			super.data = null;
 		}
 	}
 }
-
-export class container extends main {
-	constructor(...arg) {
-		super("div", "card", ...arg);
-	}
-
-	get data() {
-		return super.data;
-	}
-	set data(arg) {
-		super.data = core.extend({}, { tg: "div", cn: "card" }, arg);
-	}
-}
 /**
- * string
- * [elem]
- * opt : {attr,id,class,style,align,color,textcolor,bordercolor,border,elem}
+ * opt:{tagoption}
  */
-export class header extends main {
-	constructor(...arg) {
-		super("div", "card-header", ...arg);
+export class header extends div {
+	constructor(opt) {
+		super(opt);
 	}
 
 	get data() {
 		return super.data;
 	}
-	set data(arg) {
-		super.data = core.extend({}, { tg: "div", cn: "card-header" }, arg);
+	set data(opt) {
+		if (opt) {
+			opt.class = core.merge.class(opt.class, "card-header");
+			super.data = opt;
+		} else {
+			super.data = null;
+		}
 	}
 }
-
 /**
- * string
- * [elem]
- * opt : {attr,id,class,style,align,color,textcolor,bordercolor,border,elem}
+ * opt:{tagoption}
  */
-export class body extends main {
-	constructor(...arg) {
-		super("div", "card-body", ...arg);
+export class body extends div {
+	constructor(opt) {
+		super(opt);
 	}
 
 	get data() {
 		return super.data;
 	}
-	set data(arg) {
-		super.data = core.extend({}, { tg: "div", cn: "card-body" }, arg);
+	set data(opt) {
+		if (opt) {
+			opt.class = core.merge.class(opt.class, "card-body");
+			super.data = opt;
+		} else {
+			super.data = null;
+		}
 	}
 }
-
 /**
- * string
- * [elem]
- * opt : {attr,id,class,style,align,color,textcolor,bordercolor,border,elem}
+ * opt:{tagoption}
  */
-export class footer extends main {
-	constructor(...arg) {
-		super("div", "card-footer", ...arg);
+export class footer extends div {
+	constructor(opt) {
+		super(opt);
 	}
 
 	get data() {
 		return super.data;
 	}
-	set data(arg) {
-		super.data = core.extend({}, { tg: "div", cn: "card-footer" }, arg);
+	set data(opt) {
+		if (opt) {
+			opt.class = core.merge.class(opt.class, "card-footer");
+			super.data = opt;
+		} else {
+			super.data = null;
+		}
 	}
 }
-
 /**
- * string
- * [elem]
- * opt : {attr,id,class,style,align,color,textcolor,bordercolor,border,elem}
+ * opt:{tagoption}
  */
-export class group extends main {
-	constructor(...arg) {
-		super("div", "card-group", ...arg);
+export class group extends div {
+	constructor(opt) {
+		super(opt);
 	}
 
 	get data() {
 		return super.data;
 	}
-	set data(arg) {
-		super.data = core.extend({}, { tg: "div", cn: "card-group" }, arg);
+	set data(opt) {
+		if (opt) {
+			opt.class = core.merge.class(opt.class, "card-group");
+			super.data = opt;
+		} else {
+			super.data = null;
+		}
 	}
 }
-
 /**
- * string
- * [elem]
- * opt : {attr,id,class,style,align,color,textcolor,bordercolor,border,elem}
+ * opt:{tagoption}
  */
-export class title extends main {
-	constructor(...arg) {
-		super("h5", "card-title", ...arg);
+export class title extends h {
+	constructor(opt) {
+		super(5, opt);
 	}
 
 	get data() {
 		return super.data;
 	}
-	set data(arg) {
-		super.data = core.extend({}, { tg: "h5", cn: "card-title" }, arg);
+	set data(opt) {
+		if (opt) {
+			opt.tag = "h5";
+			opt.class = core.merge.class(opt.class, "card-title");
+			super.data = opt;
+		} else {
+			super.data = null;
+		}
 	}
 }
-
 /**
- * string
- * [elem]
- * opt : {attr,id,class,style,align,color,textcolor,bordercolor,border,elem}
+ * opt:{tagoption}
  */
-export class subtitle extends main {
-	constructor(...arg) {
-		super("h6", "card-subtitle mb-2", ...arg);
+export class subtitle extends h {
+	constructor(opt) {
+		super(6, opt);
 	}
 
 	get data() {
 		return super.data;
 	}
-	set data(arg) {
-		super.data = core.extend({}, { tg: "h6", cn: "card-subtitle mb-2" }, arg);
+	set data(opt) {
+		if (opt) {
+			opt.tag = "h6";
+			opt.class = core.merge.class(opt.class, "card-subtitle mb-2");
+			super.data = opt;
+		} else {
+			super.data = null;
+		}
 	}
 }
-
 /**
- * string
- * [elem]
- * opt : {attr,id,class,style,align,color,textcolor,bordercolor,border,elem}
+ * opt:{tagoption}
  */
-export class text extends main {
-	constructor(...arg) {
-		super("p", "card-text", ...arg);
+export class text extends p {
+	constructor(opt) {
+		super(opt);
 	}
 
 	get data() {
 		return super.data;
 	}
-	set data(arg) {
-		super.data = core.extend({}, { tg: "p", cn: "card-text" }, arg);
+	set data(opt) {
+		if (opt) {
+			opt.class = core.merge.class(opt.class, "card-text");
+			super.data = opt;
+		} else {
+			super.data = null;
+		}
 	}
 }
-
 /**
- * string
- * [elem]
- * opt : {attr,id,class,style,align,color,textcolor,bordercolor,border,elem}
+ * opt:{tagoption}
  */
-export class imgoverlay extends main {
-	constructor(...arg) {
-		super("div", "card-img-overlay", ...arg);
+export class imgoverlay extends div {
+	constructor(opt) {
+		super(opt);
 	}
 
 	get data() {
 		return super.data;
 	}
-	set data(arg) {
-		super.data = core.extend({}, { tg: "div", cn: "card-img-overlay" }, arg);
+	set data(opt) {
+		if (opt) {
+			opt.class = core.merge.class(opt.class, "card-img-overlay");
+			super.data = opt;
+		} else {
+			super.data = null;
+		}
 	}
 }
-
 /**
- * size,leftelement(string|elem|[elem]),rightelement(string|elem|[elem])
- * leftelement(string|elem|[elem]),rightelement(string|elem|[elem])
- * opt : {attr,id,class,style,align,color,textcolor,bordercolor,border,left,right,size,gap}
+ * opt:{tagoption,left,right,size,gap}
  */
 export class horizontal extends tag {
-	constructor(...arg) {
-		super();
-		if (arg && arg.length > 0) {
-			let t = {
-				left: null,
-				right: null,
-				size: "md-4",
-			};
+	constructor(opt) {
+		super(opt);
+	}
 
-			if (arg.length === 3) {
-				t = {
-					size: arg[0],
-					left: arg[1],
-					right: arg[2],
-				};
-			} else if (arg.length === 2) {
-				t = {
-					left: arg[0],
-					right: arg[1],
-				};
-			} else if (arg.length === 1) {
-				t = arg[0];
-			} else {
-				console.error("Unsupported argument", arg);
-			}
-
-			this.data = core.extend(
+	get data() {
+		return super.data;
+	}
+	set data(opt) {
+		if (opt) {
+			opt = core.extend(
 				{},
 				{
-					attr: null,
-
-					id: null,
-					class: null,
-					style: null,
-
-					align: null, //left,right,center
-					color: null,
-					textcolor: null,
-					bordercolor: null,
-					border: true,
-
 					left: null,
 					right: null,
 					size: "md-4",
 					gap: 0,
 				},
-				t
+				opt
 			);
-		} else {
-			this.data = null;
-		}
-	}
 
-	get data() {
-		return super.data;
-	}
-	set data(d) {
-		if (d) {
-			super.data = {
-				tag: "div",
+			opt.class = core.merge.class(opt.class, ["row", opt.gap !== null ? `g-${opt.gap}` : null]);
+			opt.elem = [
+				new div({
+					class: core.multiClass(opt.size, "col-$1", null, "col"),
+					elem: opt.left,
+				}),
+				new div({
+					class: "col",
+					elem: opt.right,
+				}),
+			];
 
-				id: d.id,
-				name: d.name,
-				style: d.style,
-				attr: d.attr,
+			delete opt.left;
+			delete opt.right;
+			delete opt.size;
+			delete opt.gap;
 
-				align: d.align,
-				color: d.color,
-				textcolor: d.textcolor,
-				bordercolor: d.bordercolor,
-				border: d.border,
-
-				onclick: d.onclick,
-				onchange: d.onchange,
-				onfocus: d.onfocus,
-				onblur: d.onblur,
-
-				class: core.merge.class(d.class, ["row", d.gap !== null ? `g-${d.gap}` : null]),
-
-				elem: [new div(core.multiClass(d.size, "col-$1", null, "col"), d.left), new div("col", d.right)],
-			};
+			super.data = opt;
 		} else {
 			super.data = null;
 		}
@@ -327,61 +236,60 @@ export class horizontal extends tag {
 }
 
 /**
- * class,style,elem,href
- * class,style,elem,onclick
- * class,elem,href
- * class,elem,onclick
- * elem,href
- * elem,onclick
- * [elem],href
- * [elem],onclick
- * elem
- * [elem]
- * opt : {attr,class,style,id,name,href,onclick,elem}
+ * opt:{tagoption}
  */
 export class link extends a {
-	constructor(...arg) {
-		super(...arg);
+	constructor(opt) {
+		super(opt);
 	}
 
 	get data() {
 		return super.data;
 	}
-	set data(d) {
-		super.data = d;
-
-		if (super.data) {
-			let tmp = super.data;
-			tmp.class = core.merge.class(tmp.class, "card-link");
-			super.data = tmp;
+	set data(opt) {
+		if (opt) {
+			opt.class = core.merge.class(opt.class, "card-link");
+			super.data = opt;
+		} else {
+			super.data = null;
 		}
 	}
 }
 
+/**
+ * opt:{tagoption,imgoption,placement}
+ */
 export class img extends imgtag {
-	constructor(...arg) {
-		super(...arg);
+	constructor(opt) {
+		super(opt);
 	}
 
 	get data() {
 		return super.data;
 	}
-	set data(d) {
-		super.data = d;
+	set data(opt) {
+		if (opt) {
+			opt = core.extend(
+				{},
+				{
+					placement: "top",
+				},
+				opt
+			);
 
-		if (super.data) {
-			d = core.extend({}, { placement: "top" }, d);
-			let tmp = super.data;
-
-			tmp.class = core.merge.class(tmp.class, [
-				d.placement === "full" ? "card-img" : null,
-				d.placement === "top" ? "card-img-top" : null,
-				d.placement === "bottom" ? "card-img-bottom" : null,
-				d.placement === "left" ? "img-fluid rounded-start" : null,
-				d.placement === "right" ? "img-fluid rounded-end" : null,
+			opt.class = core.merge.class(opt.class, [
+				opt.placement === "full" ? "card-img" : null,
+				opt.placement === "top" ? "card-img-top" : null,
+				opt.placement === "bottom" ? "card-img-bottom" : null,
+				opt.placement === "left" ? "img-fluid rounded-start" : null,
+				opt.placement === "right" ? "img-fluid rounded-end" : null,
 			]);
 
-			super.data = tmp;
+			delete opt.placement;
+
+			super.data = opt;
+		} else {
+			super.data = null;
 		}
 	}
 }

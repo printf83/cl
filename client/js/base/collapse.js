@@ -2,137 +2,88 @@
 import * as core from "./core.js";
 import tag from "./tag.js";
 import div from "./div.js";
+import e from "express";
+import button from "./button.js";
 
 /**
- * elem, target
- * elem, opt : {attr,target,show}
- * target example : "#id", ".class"
+ * opt: {tagoption,elem,target,show,toggle}
  */
 export class toggle extends tag {
-	constructor(elem, ...arg) {
-		super();
+	constructor(opt) {
+		super(opt);
+	}
 
-		if (arg && arg.length > 0) {
-			let t = {
-				target: null,
-			};
-
-			if (arg.length === 1 && typeof arg[0] === "string") {
-				t = {
-					target: arg[0],
-				};
-			} else if (arg.length === 1) {
-				t = arg[0];
-			} else {
-				console.error("Unsupported argument", arg);
-			}
-
-			this.data = core.extend(
+	get data() {
+		return super.data;
+	}
+	set data(opt) {
+		if (opt) {
+			opt = core.extend(
 				{},
 				{
-					_target: elem,
+					elem: null,
 
-					attr: null,
 					target: null,
 					show: false,
 
 					toggle: "collapse", //collapse | offcanvas
 				},
-				t
+				opt
 			);
-		} else {
-			this.data = { _target: elem };
-		}
-	}
 
-	get data() {
-		return super.data;
-	}
-	set data(d) {
-		if (d && d._target) {
-			let tmp = d._target.data;
-			tmp.attr = core.merge.attr(tmp.attr, {
-				"aria-controls": d.target,
-				"aria-expanded": d.show ? "true" : "false",
-				"data-bs-target": d.target,
-				"data-bs-toggle": d.toggle,
+			if (!opt.elem) {
+				opt.elem = new button({
+					icon: "bars",
+				});
+			}
+
+			let t = opt.elem.data;
+			t.attr = core.merge.attr(t.attr, {
+				"aria-controls": opt.target,
+				"aria-expanded": opt.show ? "true" : "false",
+				"data-bs-target": opt.target,
+				"data-bs-toggle": opt.toggle,
 			});
-			super.data = tmp;
+
+			super.data = t;
 		} else {
 			super.data = null;
 		}
 	}
 }
-
 /**
- * elem, id
- * elem, opt : {attr,id,show}
- *
- * target example : "#id", ".class"
+ * opt: {tagoption,elem,id,show}
  */
-export class container extends tag {
-	constructor(elem, ...arg) {
-		super();
-
-		if (arg && arg.length > 0) {
-			let t = {
-				id: null,
-			};
-
-			if (arg.length === 1 && typeof arg[0] === "string") {
-				t = {
-					id: arg[0],
-				};
-			} else if (arg.length === 1) {
-				t = arg[0];
-			} else {
-				console.error("Unsupported argument", arg);
-			}
-
-			this.data = core.extend(
-				{},
-				{
-					_target: elem,
-
-					attr: null,
-					id: null,
-					class: null,
-					show: false,
-				},
-				t
-			);
-		} else {
-			this.data = null;
-		}
+export class container extends div {
+	constructor(opt) {
+		super(opt);
 	}
 
 	get data() {
 		return super.data;
 	}
-	set data(d) {
-		if (d && d._target) {
-			super.data = {
-				elem: new div({
-					id: d.id,
-					name: d.name,
-					style: d.style,
-					attr: d.attr,
+	set data(opt) {
+		if (opt) {
+			opt = core.extend(
+				{},
+				{
+					elem: null,
+					id: null,
+					show: false,
+				},
+				opt
+			);
 
-					align: d.align,
-					color: d.color,
-					textcolor: d.textcolor,
-					bordercolor: d.bordercolor,
-					border: d.border,
+			if (!opt.elem) {
+				opt.elem = new div({ elem: "" });
+			}
 
-					onclick: d.onclick,
-					onchange: d.onchange,
-					onfocus: d.onfocus,
-					onblur: d.onblur,
+			let t = opt.elem.data;
 
-					class: core.merge.class(d.class, ["collapse", d.show ? "show" : null]),
-					elem: d._target,
-				}),
-			};
+			t.class = core.merge.class(t.class, ["collapse", opt.show ? "show" : null]);
+			t.id = t.id || opt.id;
+
+			super.data = t;
 		} else {
 			super.data = null;
 		}

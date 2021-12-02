@@ -5,49 +5,21 @@ import label from "./label.js";
 import badge from "./badge.js";
 
 /**
- * label
- * label, onclick
- * color, label
- * color, label, onclick
- * option : {attr,id,name,class,style,type,label,icon,badge,value,checked,color,textcolor,weight,disabled,outline,hidelabel,nowarp,onclick,href}
+ * option : {tagoption,type,label,icon,badge,value,checked,color,weight,disabled,outline,hidelabel,nowarp,elem}
  */
 export default class button extends tag {
-	constructor(...arg) {
-		super();
-		if (arg && arg.length > 0) {
-			let t = {
-				label: null,
-				color: null,
-				onclick: null,
-			};
-			if (arg.length === 3) {
-				t.color = arg[0];
-				t.label = arg[1];
-				t.onclick = arg[2];
-			} else if (arg.length === 2 && arg[1] instanceof Function) {
-				t.label = arg[0];
-				t.onclick = arg[1];
-			} else if (arg.length === 2 && typeof arg[1] === "string") {
-				t.color = arg[0];
-				t.label = arg[1];
-			} else if (arg.length === 1 && typeof arg[0] === "string") {
-				t.label = arg[0];
-			} else if (arg.length === 1) {
-				t = arg[0];
-			} else {
-				console.error("Unsupported argument", arg);
-			}
+	constructor(opt) {
+		super("button", opt);
+	}
 
-			this.data = core.extend(
+	get data() {
+		return super.data;
+	}
+	set data(opt) {
+		if (opt) {
+			opt = core.extend(
 				{},
 				{
-					attr: null,
-
-					id: null,
-					name: null,
-					class: null,
-					style: null,
-
 					type: "button",
 					label: null,
 					icon: null,
@@ -56,76 +28,71 @@ export default class button extends tag {
 					checked: false,
 
 					color: null,
-					textcolor: null,
 					weight: null,
 					disabled: false,
 					outline: false,
 					hidelabel: false,
 					nowarp: false,
 
-					onclick: null,
-					href: null,
+					elem: null,
 				},
-				t
+				opt
 			);
-		} else {
-			this.data = null;
-		}
-	}
 
-	get data() {
-		return super.data;
-	}
-	set data(d) {
-		if (d) {
-			let bI = core.getBaseIcon(d.icon);
+			let bI = core.getBaseIcon(opt.icon);
 			if (bI) {
-				d.icon = {
+				opt.icon = {
 					icon: bI.icon,
 					style: bI.style,
 				};
 
-				d.color = d.color || bI.color;
-				d.textcolor = d.textcolor || bI.textcolor;
+				opt.color = opt.color || bI.color;
+				opt.textcolor = opt.textcolor || bI.textcolor;
 			}
 
-			super.data = {
-				tag: d.href ? "a" : "button",
+			opt.tag = opt.href ? "a" : "button";
+			opt.class = core.merge.class(opt.class, [
+				opt.type === "a" ? null : "btn",
+				opt.nowarp ? "text-nowarp" : null,
+				opt.weight ? `btn-${opt.weight}` : null,
+				opt.color ? (opt.outline ? `btn-outline-${opt.color}` : `btn-${opt.color}`) : null,
+				opt.badge && typeof opt.badge === "object" && opt.badge.notification ? "position-relative" : null,
+			]);
 
-				id: d.id,
-				name: d.name,
-				style: d.style,
+			opt.attr = core.merge.attr(opt.attr, {
+				value: opt.value,
+				checked: opt.checked,
+				role: "button",
+				disabled: opt.disabled,
+				type: opt.href ? null : opt.type,
+				"aria-label": opt.hidelabel && opt.label ? opt.label : null,
+				"aria-disabled": opt.href && opt.disabled ? "true" : null,
+			});
 
-				onclick: d.onclick,
-				onchange: d.onchange,
-				onfocus: d.onfocus,
-				onblur: d.onblur,
+			opt.elem = opt.elem
+				? opt.elem
+				: [
+						opt.label || opt.icon
+							? new label({ icon: opt.icon, label: opt.label, hidelabel: opt.hidelabel })
+							: null,
+						opt.badge ? new badge(opt.badge) : null,
+				  ];
 
-				href: d.href,
+			delete opt.type;
+			delete opt.label;
+			delete opt.icon;
+			delete opt.badge;
+			delete opt.value;
+			delete opt.checked;
 
-				class: core.merge.class(d.class, [
-					d.type === "a" ? null : "btn",
-					d.nowarp ? "text-nowarp" : null,
-					d.weight ? `btn-${d.weight}` : null,
-					d.color ? (d.outline ? `btn-outline-${d.color}` : `btn-${d.color}`) : null,
-					d.textcolor ? `text-${d.textcolor}` : null,
-					d.badge && typeof d.badge === "object" && d.badge.notification ? "position-relative" : null,
-				]),
+			delete opt.color;
+			delete opt.weight;
+			delete opt.disabled;
+			delete opt.outline;
+			delete opt.hidelabel;
+			delete opt.nowarp;
 
-				attr: core.merge.attr(d.attr, {
-					value: d.value,
-					checked: d.checked,
-					role: "button",
-					type: d.type !== "button" ? d.type : null,
-					disabled: d.disabled,
-					"aria-label": d.hidelabel && d.label ? d.label : null,
-					"aria-disabled": d.href && d.disabled ? "true" : null,
-				}),
-				elem: [
-					d.label || d.icon ? new label({ icon: d.icon, label: d.label, hidelabel: d.hidelabel }) : null,
-					d.badge ? new badge(d.badge) : null,
-				],
-			};
+			super.data = opt;
 		} else {
 			super.data = null;
 		}

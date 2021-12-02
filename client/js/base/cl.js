@@ -133,16 +133,6 @@ function build(container, arg) {
 		if (arg.data.tag) container.appendChild(element);
 
 		if (hasContainer) {
-			// let popoverTriggerList = [].slice.call(container.querySelectorAll('[data-bs-toggle="popover"]'));
-			// popoverTriggerList.map(function (popoverTriggerEl) {
-			// 	return new bootstrap.Popover(popoverTriggerEl);
-			// });
-
-			// let tooltipTriggerList = [].slice.call(container.querySelectorAll('[data-bs-toggle="tooltip"]'));
-			// tooltipTriggerList.map(function (tooltipTriggerEl) {
-			// 	return new bootstrap.Tooltip(tooltipTriggerEl);
-			// });
-
 			return container;
 		} else {
 			let result = container.childNodes;

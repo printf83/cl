@@ -500,7 +500,7 @@ export class item extends div {
 		if (d) {
 			d.id = d.id || core.UUID();
 			super.data = {
-				tag: "div",
+				// tag: "div",
 				attr: d.attr,
 				style: d.style,
 				onclick: d.onclick,

@@ -1,6 +1,6 @@
 "use strict";
 import * as core from "./core.js";
-import tag from "./tag.js";
+import nav from "./nav.js";
 import button from "./button.js";
 import ol from "./ol.js";
 import li from "./li.js";
@@ -8,123 +8,101 @@ import label from "./label.js";
 import a from "./a.js";
 
 /**
- * [item:{title,icon,divider,label,href,onclick}]
- * opt : {attr,id,class,style,item,divider}
+ * opt : {tagoption,label,divider,elem:{label,icon,current,href,onclick,elem}}
  */
-export default class breadcrumb extends tag {
-	constructor(...arg) {
-		super();
-
-		if (arg && arg.length > 0) {
-			let t = {
-				item: null,
-			};
-
-			if (arg.length === 1) {
-				if (Array.isArray(arg[0])) {
-					t.item = arg[0];
-				} else {
-					t = arg[0];
-				}
-			} else {
-				console.error("Unsupported argument", arg);
-			}
-
-			this.data = core.extend(
-				{},
-				{
-					attr: null,
-
-					id: null,
-					class: null,
-					style: null,
-					item: null,
-
-					label: "Breadcrumb",
-					divider: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E")`,
-				},
-				t
-			);
-		} else {
-			this.data = null;
-		}
+export default class breadcrumb extends nav {
+	constructor(opt) {
+		super(opt);
 	}
 
 	get data() {
 		return super.data;
 	}
-	set data(d) {
-		if (d) {
-			//check if item isnot array
-			d.item = d.item ? (Array.isArray(d.item) ? d.item : [d.item]) : null;
+	set data(opt) {
+		if (opt) {
+			opt = core.extend(
+				{},
+				{
+					label: "Breadcrumb",
+					divider: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E")`,
+					elem: null,
+				},
+				opt
+			);
 
-			//check if any item current
-			let currentitem = d.item.find((i) => {
+			//check if elem isnot array
+			opt.elem = opt.elem ? (Array.isArray(opt.elem) ? opt.elem : [opt.elem]) : null;
+
+			//check if any elem current
+			let currentelem = opt.elem.find((i) => {
 				return i.current === true;
 			});
 
-			if (!currentitem) {
-				d.item[d.item.length - 1].current = true;
+			if (!currentelem) {
+				opt.elem[opt.elem.length - 1].current = true;
 			}
 
-			super.data = {
-				tag: "nav",
+			opt.style = core.merge.style(opt.style, {
+				"--bs-breadcrumb-divider": opt.divider ? opt.divider : null,
+			});
 
-				id: d.id,
-				name: d.name,
-				attr: d.attr,
-				class: d.class,
+			opt.attr = core.merge.attr(opt.attr, {
+				"aria-label": opt.label,
+			});
 
-				align: d.align,
-				color: d.color,
-				textcolor: d.textcolor,
-				bordercolor: d.bordercolor,
-				border: d.border,
+			opt.elem = opt.elem
+				? new ol({
+						class: "breadcrumb",
+						elem: opt.elem.map(function (i) {
+							i = core.extend(
+								{},
+								{
+									label: null,
+									icon: null,
+									current: false,
+									href: null,
+									onclick: null,
+									elem: null,
+								},
+								i
+							);
 
-				onclick: d.onclick,
-				onchange: d.onchange,
-				onfocus: d.onfocus,
-				onblur: d.onblur,
+							return new li({
+								class: ["breadcrumb-item", i.current ? "active" : null],
+								attr: { "aria-current": i.current ? "page" : null },
+								elem: i.elem
+									? i.elem
+									: [
+											i.current
+												? new label({
+														icon: i.icon,
+														label: i.label,
+												  })
+												: i.href
+												? new a({
+														href: i.href,
+														elem: new label({
+															icon: i.icon,
+															label: i.label,
+														}),
+												  })
+												: i.onclick
+												? new button({ label: i.label, icon: i.icon, onclick: i.onclick })
+												: new label({
+														icon: i.icon,
+														label: i.label,
+												  }),
+									  ],
+							});
+						}),
+				  })
+				: null;
 
-				style: core.merge.style(d.style, {
-					"--bs-breadcrumb-divider": d.divider ? d.divider : null, //`${d.divider};`
-				}),
-				attr: core.merge.attr(d.attr, {
-					"aria-label": d.label,
-				}),
-				elem: new ol(
-					"breadcrumb",
-					d.item && d.item.length > 0
-						? d.item.map(function (i) {
-								i = core.extend(
-									{},
-									{
-										label: null,
-										icon: null,
-										current: false,
-										href: null,
-										onclick: null,
-									},
-									i
-								);
+			delete opt.label;
+			delete opt.icon;
+			delete opt.divider;
 
-								return new li({
-									class: ["breadcrumb-item", i.current ? "active" : null],
-									attr: { "aria-current": i.current ? "page" : null },
-									elem: [
-										i.current
-											? new label(i.icon, i.label)
-											: i.href
-											? new a(new label(i.icon, i.label), i.href)
-											: i.onclick
-											? new button({ label: i.label, icon: i.icon, onclick: i.onclick })
-											: new label(i.icon, i.label),
-									],
-								});
-						  })
-						: null
-				),
-			};
+			super.data = opt;
 		} else {
 			super.data = null;
 		}
