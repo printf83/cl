@@ -62,26 +62,103 @@ function doForm(max, cur) {
 
 	cl.replaceChild(
 		root,
-		new navbar.container({
-			expand: "lg",
-			color: "light",
-			elem: [
-				// new navbar.brand({
-				// 	label: "Navbar",
-				// }),
+		new div([
+			new navbar.container({
+				expand: "lg",
+				color: "light",
+				elem: [
+					new navbar.toggle({
+						target: `#${tid3}`,
+						toggle: "collapse",
+					}),
 
-				new input({ type: "text", before: "@", placeholder: "Username", size: "col" }),
-				// new navbar.formcontainer([
-				// 	new input({
-				// 		type: "search",
-				// 		placeholder: "Search",
-				// 		hiddenlabel: "Search",
-				// 		class: "me-2",
-				// 	}),
-				// 	new button({ label: "Search", color: "success", outline: true }),
-				// ]),
-			],
-		})
+					new navbar.brand({
+						label: "Navbar",
+					}),
+
+					new navbar.collapsecontainer({
+						id: tid3,
+						elem: [
+							new navbar.itemcontainer({
+								parenttype: "collapse",
+								elem: [
+									new navbar.item({ label: "Home", active: true }),
+									new navbar.item({ label: "Link" }),
+									new navbar.item({
+										label: "Dropdown",
+										option: [
+											{ href: "javascript:void(0);", label: "Action" },
+											{
+												href: "javascript:void(0);",
+												label: "Another action",
+											},
+											{
+												href: "javascript:void(0);",
+												label: "Something else here",
+											},
+											{ value: "-" },
+											{
+												href: "javascript:void(0);",
+												label: "Separated link",
+											},
+										],
+									}),
+									new navbar.item({ label: "Disabled", disabled: true }),
+								],
+							}),
+							new navbar.formcontainer([
+								new input({
+									type: "search",
+									placeholder: "Search",
+									label: "Search",
+									hidelabel: true,
+								}),
+								new button({ label: "Search", color: "success", outline: true }),
+							]),
+						],
+					}),
+				],
+			}),
+			new navbar.container({
+				expand: "lg",
+				color: "light",
+				containerclass: "justify-content-start gap-2",
+				elem: [
+					new button({
+						label: "Main button",
+						color: "success",
+						outline: true,
+						weight: "lg",
+					}),
+					new button({
+						label: "Small button",
+						color: "secondary",
+						outline: true,
+						weight: "sm",
+					}),
+				],
+			}),
+		])
+
+		// new navbar.container({
+		// 	expand: "lg",
+		// 	color: "light",
+		// 	containerclass: "justify-content-start gap-2",
+		// 	elem: [
+		// 		new button({
+		// 			label: "Main button",
+		// 			color: "success",
+		// 			outline: true,
+		// 			weight: "lg",
+		// 		}),
+		// 		new button({
+		// 			label: "Small button",
+		// 			color: "secondary",
+		// 			outline: true,
+		// 			weight: "sm",
+		// 		}),
+		// 	],
+		// }),
 	);
 	// cl.replaceChild(
 	// 	root,

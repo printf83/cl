@@ -130,36 +130,47 @@ export class brand extends tag {
 	}
 	set data(d) {
 		if (d) {
-			super.data = {
-				tag: d.href ? "a" : "h1",
+			d.tag = d.href ? "a" : "h1";
+			g;
+			d.class = core.merge.class(d.class, ["navbar-brand", !d.href ? "mb-0" : null]);
+			d.elem = d.elem
+				? d.elem
+				: new label({
+						icon: d.icon,
+						label: d.label,
+				  });
 
-				id: d.id,
-				name: d.name,
-				attr: d.attr,
-				style: d.style,
+			super.data = d;
+			// super.data = {
+			// 	tag: d.href ? "a" : "h1",
 
-				align: d.align,
-				color: d.color,
-				textcolor: d.textcolor,
-				bordercolor: d.bordercolor,
-				border: d.border,
+			// 	id: d.id,
+			// 	name: d.name,
+			// 	attr: d.attr,
+			// 	style: d.style,
 
-				onchange: d.onchange,
-				onclick: d.onclick,
-				onfocus: d.onfocus,
-				onblur: d.onblur,
+			// 	align: d.align,
+			// 	color: d.color,
+			// 	textcolor: d.textcolor,
+			// 	bordercolor: d.bordercolor,
+			// 	border: d.border,
 
-				href: d.href,
+			// 	onchange: d.onchange,
+			// 	onclick: d.onclick,
+			// 	onfocus: d.onfocus,
+			// 	onblur: d.onblur,
 
-				class: core.merge.class(d.class, ["navbar-brand", !d.href ? "mb-0" : null]),
+			// 	href: d.href,
 
-				elem: d.elem
-					? d.elem
-					: new label({
-							icon: d.icon,
-							label: d.label,
-					  }),
-			};
+			// 	class: core.merge.class(d.class, ["navbar-brand", !d.href ? "mb-0" : null]),
+
+			// 	elem: d.elem
+			// 		? d.elem
+			// 		: new label({
+			// 				icon: d.icon,
+			// 				label: d.label,
+			// 		  }),
+			// };
 		} else {
 			super.data = null;
 		}
@@ -203,20 +214,32 @@ export class toggle extends tag {
 	}
 	set data(d) {
 		if (d) {
-			super.data = {
-				elem: new collapse.toggle(
-					new button({
-						icon: "bars",
-						label: "Toggle navigation",
-						hidelabel: true,
-						class: "navbar-toggler",
-					}),
-					{
-						target: d.target,
-						toggle: d.toggle,
-					}
-				),
-			};
+			super.data = new collapse.toggle(
+				new button({
+					icon: "bars",
+					label: "Toggle navigation",
+					hidelabel: true,
+					class: "navbar-toggler",
+				}),
+				{
+					target: d.target,
+					toggle: d.toggle,
+				}
+			).data;
+			// super.data = {
+			// 	elem: new collapse.toggle(
+			// 		new button({
+			// 			icon: "bars",
+			// 			label: "Toggle navigation",
+			// 			hidelabel: true,
+			// 			class: "navbar-toggler",
+			// 		}),
+			// 		{
+			// 			target: d.target,
+			// 			toggle: d.toggle,
+			// 		}
+			// 	),
+			// };
 		} else {
 			super.data = null;
 		}
@@ -263,13 +286,15 @@ export class formcontainer extends form {
 	}
 	set data(d) {
 		if (d) {
-			super.data = {
-				id: d.id,
-				style: d.style,
-				attr: d.attr,
-				class: core.merge.class(d.class, "d-flex"),
-				elem: d.elem,
-			};
+			d.class = core.merge.class(d.class, ["d-flex", "gap-2"]);
+			super.data = d;
+			// super.data = {
+			// 	id: d.id,
+			// 	style: d.style,
+			// 	attr: d.attr,
+			// 	class: core.merge.class(d.class, ["d-flex", "gap-2"]),
+			// 	elem: d.elem,
+			// };
 		} else {
 			super.data = null;
 		}
@@ -316,13 +341,15 @@ export class collapsecontainer extends div {
 	}
 	set data(d) {
 		if (d) {
-			super.data = {
-				id: d.id,
-				style: d.style,
-				attr: d.attr,
-				class: core.merge.class(d.class, ["collapse", "navbar-collapse"]),
-				elem: d.elem,
-			};
+			d.class = core.merge.class(d.class, ["collapse", "navbar-collapse"]);
+			super.data = d;
+			// super.data = {
+			// 	id: d.id,
+			// 	style: d.style,
+			// 	attr: d.attr,
+			// 	class: core.merge.class(d.class, ["collapse", "navbar-collapse"]),
+			// 	elem: d.elem,
+			// };
 		} else {
 			super.data = null;
 		}
@@ -380,23 +407,36 @@ export class offcanvascontainer extends div {
 	set data(d) {
 		if (d) {
 			d.id = d.id || core.UUID();
+			d.class = core.merge.class(d.class, ["offcanvas", "offcanvas-end"]);
+			d.attr = core.merge.attr(d.attr, {
+				tabindex: "-1",
+				"aria-labelledby": d.id ? `${d.id}-label` : null,
+			});
+			d.elem = [
+				new div("offcanvas-header", [
+					new h(5, { class: "offcanvas-title", id: `${d.id}-label`, elem: new label(d.icon, d.title) }),
+					new btnclose({ class: "text-reset", dismiss: "offcanvas", label: "Close" }),
+				]),
+				new div("offcanvas-body", d.elem),
+			];
 
-			super.data = {
-				id: d.id,
-				style: d.style,
-				attr: core.merge.attr(d.attr, {
-					tabindex: "-1",
-					"aria-labelledby": d.id ? `${d.id}-label` : null,
-				}),
-				class: core.merge.class(d.class, ["offcanvas", "offcanvas-end"]),
-				elem: [
-					new div("offcanvas-header", [
-						new h(5, { class: "offcanvas-title", id: `${d.id}-label`, elem: new label(d.icon, d.title) }),
-						new btnclose({ class: "text-reset", dismiss: "offcanvas", label: "Close" }),
-					]),
-					new div("offcanvas-body", d.elem),
-				],
-			};
+			super.data = d;
+			// super.data = {
+			// 	id: d.id,
+			// 	style: d.style,
+			// 	attr: core.merge.attr(d.attr, {
+			// 		tabindex: "-1",
+			// 		"aria-labelledby": d.id ? `${d.id}-label` : null,
+			// 	}),
+			// 	class: core.merge.class(d.class, ["offcanvas", "offcanvas-end"]),
+			// 	elem: [
+			// 		new div("offcanvas-header", [
+			// 			new h(5, { class: "offcanvas-title", id: `${d.id}-label`, elem: new label(d.icon, d.title) }),
+			// 			new btnclose({ class: "text-reset", dismiss: "offcanvas", label: "Close" }),
+			// 		]),
+			// 		new div("offcanvas-body", d.elem),
+			// 	],
+			// };
 		} else {
 			super.data = null;
 		}
@@ -447,19 +487,29 @@ export class itemcontainer extends div {
 	}
 	set data(d) {
 		if (d) {
-			super.data = {
-				id: d.id,
-				style: core.merge.style(d.style, { "--bs-scroll-height": d.scroll }),
-				attr: d.attr,
-				class: core.merge.class(d.class, [
-					"navbar-nav",
-					d.mxauto ? "me-auto" : null,
-					d.scroll ? "navbar-nav-scroll" : null,
-					d.parenttype === "collapse" ? "mb-2 mb-lg-0" : null,
-					d.parenttype === "offcanvas" ? "justify-content-end flex-grow-1 pe-3" : null,
-				]),
-				elem: d.elem,
-			};
+			d.style = core.merge.style(d.style, { "--bs-scroll-height": d.scroll });
+			d.class = core.merge.class(d.class, [
+				"navbar-nav",
+				d.mxauto ? "me-auto" : null,
+				d.scroll ? "navbar-nav-scroll" : null,
+				d.parenttype === "collapse" ? "mb-2 mb-lg-0" : null,
+				d.parenttype === "offcanvas" ? "justify-content-end flex-grow-1 pe-3" : null,
+			]);
+
+			super.data = d;
+			// super.data = {
+			// 	id: d.id,
+			// 	style: core.merge.style(d.style, { "--bs-scroll-height": d.scroll }),
+			// 	attr: d.attr,
+			// 	class: core.merge.class(d.class, [
+			// 		"navbar-nav",
+			// 		d.mxauto ? "me-auto" : null,
+			// 		d.scroll ? "navbar-nav-scroll" : null,
+			// 		d.parenttype === "collapse" ? "mb-2 mb-lg-0" : null,
+			// 		d.parenttype === "offcanvas" ? "justify-content-end flex-grow-1 pe-3" : null,
+			// 	]),
+			// 	elem: d.elem,
+			// };
 		} else {
 			super.data = null;
 		}
@@ -499,46 +549,81 @@ export class item extends div {
 	set data(d) {
 		if (d) {
 			d.id = d.id || core.UUID();
-			super.data = {
-				tag: "div",
-				attr: d.attr,
-				style: d.style,
-				onclick: d.onclick,
-				class: core.merge.class(d.class, [
-					"nav-item",
-					"d-flex",
-					"align-content-center",
-					"flex-wrap",
-					d.option ? "dropdown" : null,
-				]),
-				elem: [
-					new a({
-						id: d.id,
-						href: d.href,
-						class: [
-							"nav-link",
-							"text-md-center",
-							d.active ? "active" : null,
-							d.disabled ? "disabled" : null,
-							d.option ? "dropdown-toggle" : null,
-						],
-						attr: {
-							"aria-current": d.active ? "page" : null,
-							role: "button",
-							"data-bs-toggle": d.option ? "dropdown" : null,
-							"aria-expanded": d.option ? "false" : null,
-						},
-						elem: new label(d.icon, d.label),
-					}),
-					d.option
-						? new ul({
-								class: ["dropdown-menu", "w-sm-100"],
-								attr: { "aria-labelledby": d.id ? d.id : null },
-								elem: new option({ type: "dropdown", item: d.option }),
-						  })
-						: null,
-				],
-			};
+			d.class = core.merge.class(d.class, [
+				"nav-item",
+				"d-flex",
+				"align-content-center",
+				"flex-wrap",
+				d.option ? "dropdown" : null,
+			]);
+			d.elem = [
+				new a({
+					id: d.id,
+					href: d.href,
+					class: [
+						"nav-link",
+						"text-md-center",
+						d.active ? "active" : null,
+						d.disabled ? "disabled" : null,
+						d.option ? "dropdown-toggle" : null,
+					],
+					attr: {
+						"aria-current": d.active ? "page" : null,
+						role: "button",
+						"data-bs-toggle": d.option ? "dropdown" : null,
+						"aria-expanded": d.option ? "false" : null,
+					},
+					elem: new label(d.icon, d.label),
+				}),
+				d.option
+					? new ul({
+							class: ["dropdown-menu", "w-sm-100"],
+							attr: { "aria-labelledby": d.id ? d.id : null },
+							elem: new option({ type: "dropdown", item: d.option }),
+					  })
+					: null,
+			];
+			super.data = d;
+
+			// super.data = {
+			// 	attr: d.attr,
+			// 	style: d.style,
+			// 	onclick: d.onclick,
+			// 	class: core.merge.class(d.class, [
+			// 		"nav-item",
+			// 		"d-flex",
+			// 		"align-content-center",
+			// 		"flex-wrap",
+			// 		d.option ? "dropdown" : null,
+			// 	]),
+			// 	elem: [
+			// 		new a({
+			// 			id: d.id,
+			// 			href: d.href,
+			// 			class: [
+			// 				"nav-link",
+			// 				"text-md-center",
+			// 				d.active ? "active" : null,
+			// 				d.disabled ? "disabled" : null,
+			// 				d.option ? "dropdown-toggle" : null,
+			// 			],
+			// 			attr: {
+			// 				"aria-current": d.active ? "page" : null,
+			// 				role: "button",
+			// 				"data-bs-toggle": d.option ? "dropdown" : null,
+			// 				"aria-expanded": d.option ? "false" : null,
+			// 			},
+			// 			elem: new label(d.icon, d.label),
+			// 		}),
+			// 		d.option
+			// 			? new ul({
+			// 					class: ["dropdown-menu", "w-sm-100"],
+			// 					attr: { "aria-labelledby": d.id ? d.id : null },
+			// 					elem: new option({ type: "dropdown", item: d.option }),
+			// 			  })
+			// 			: null,
+			// 	],
+			// };
 		} else {
 			super.data = null;
 		}
