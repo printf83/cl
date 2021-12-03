@@ -2,7 +2,6 @@
 import * as core from "./core.js";
 import tag from "./tag.js";
 import div from "./div.js";
-import e from "express";
 import button from "./button.js";
 
 /**
