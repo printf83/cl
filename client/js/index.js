@@ -19,12 +19,14 @@ import * as card from "./base/card.js";
 // import modal from "./base/modal.js";
 // import toast from "./base/toast.js";
 // import msg from "./base/msg.js";
-// import * as dlg from "./base/dlg.js";
+import * as dlg from "./base/dlg.js";
 import * as container from "./base/container.js";
 import * as alert from "./base/alert.js";
 import h from "./base/h.js";
 import hr from "./base/hr.js";
 import btngroup from "./base/btngroup.js";
+import input from "./base/input.js";
+import icon from "./base/icon.js";
 // import accordion from "./base/accordion.js";
 // import breadcrumb from "./base/breadcrumb.js";
 // import paging from "./base/paging.js";
@@ -68,7 +70,9 @@ function doForm(max, cur) {
 				color: "primary",
 				label: "hello world",
 				onclick: function () {
-					console.log("Hello");
+					new dlg.msgbox("?", "This is info msg", function () {
+						new toast("?", "Hello world").show();
+					}).show();
 				},
 			}),
 			new a({
@@ -116,6 +120,7 @@ function doForm(max, cur) {
 				class: tid3,
 				elem: new card.container({ color: "warning", elem: new card.body({ elem: "Test 2" }) }),
 			}),
+			new input({ type: "text", label: "Input Text", before: new icon({ icon: "fire" }) }),
 		])
 		// new navbar.container({
 		// 	expand: "lg",

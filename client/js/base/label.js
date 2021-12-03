@@ -5,7 +5,7 @@ import span from "./span.js";
 import icon from "./icon.js";
 
 /**
- * opt : {tagoption,for,icon,label,hidelabel}
+ * opt : {tagoption,for,elem,icon,label,hidelabel}
  */
 export default class label extends tag {
 	constructor(opt) {
@@ -15,6 +15,7 @@ export default class label extends tag {
 				{
 					for: null,
 					icon: null,
+					elem: null,
 					label: null,
 					hidelabel: false,
 				},
@@ -32,7 +33,7 @@ export default class label extends tag {
 			opt.attr = core.merge.attr(opt.attr, {
 				for: opt.for,
 			});
-			opt.elem = [
+			opt.elem = opt.elem || [
 				opt.icon
 					? new span({ class: opt.label && !opt.hidelabel ? "me-2" : null, elem: new icon(opt.icon) })
 					: null,

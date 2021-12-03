@@ -15,10 +15,10 @@ export default class msg extends tag {
 				{},
 				{
 					icon: null,
-					weight: null, //font size fs-1 to fs-6 or display-1 to display-6 (any class for i)
+					weight: "md", //font size fs-1 to fs-6 or display-1 to display-6 (any class for i)
 					elem: null,
 				},
-				t
+				opt
 			)
 		);
 	}
