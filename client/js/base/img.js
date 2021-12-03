@@ -3,71 +3,37 @@ import * as core from "./core.js";
 import tag from "./tag.js";
 
 /**
- * class,src,alt
- * class,src
- * src
- * opt : {attr,class,style,id,onclick,src,alt}
+ * opt : {tagoption,src,alt}
  */
 export default class img extends tag {
-	constructor(...arg) {
-		super();
-
-		if (arg && arg.length > 0) {
-			let t = {
-				class: null,
-				src: null,
-				alt: null,
-			};
-
-			if (arg.length === 3) {
-				t.class = arg[0];
-				t.src = arg[1];
-				t.alt = arg[2];
-			} else if (arg.length === 2) {
-				t.class = arg[0];
-				t.src = arg[1];
-			} else if (arg.length === 1 && typeof arg[0] === "string") {
-				t.src = arg[0];
-			} else if (arg.length === 1) {
-				t = arg[0];
-			} else {
-				console.error("Unsupported argument", arg);
-			}
-
-			this.data = core.extend(
+	constructor(opt) {
+		super(
+			core.extend(
 				{},
 				{
-					id: null,
-					onclick: null,
-
-					attr: null,
-					class: null,
-					style: null,
+					tag: "img",
 					src: null,
 					alt: "Image",
 				},
-				t
-			);
-		} else {
-			this.data = null;
-		}
+				opt
+			)
+		);
 	}
 
 	get data() {
 		return super.data;
 	}
-	set data(d) {
-		if (d) {
-			d.tag = "img";
-			d.attr = core.merge.attr(d.attr, {
-				src: d.src,
-				alt: d.alt,
+	set data(opt) {
+		if (opt) {
+			opt.attr = core.merge.attr(opt.attr, {
+				src: opt.src,
+				alt: opt.alt,
 			});
 
-			delete d.src;
-			delete d.alt;
+			delete opt.src;
+			delete opt.alt;
 
-			super.data = d;
+			super.data = opt;
 		} else {
 			super.data = null;
 		}

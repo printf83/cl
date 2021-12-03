@@ -61,6 +61,7 @@ export class container extends div {
 				{
 					elem: null,
 					id: null,
+					class: null,
 					show: false,
 				},
 				opt
@@ -79,7 +80,7 @@ export class container extends div {
 
 			let t = opt.elem.data;
 
-			t.class = core.merge.class(t.class, ["collapse", opt.show ? "show" : null]);
+			t.class = core.merge.class(opt.class, core.merge.class(t.class, ["collapse", opt.show ? "show" : null]));
 			t.id = t.id || opt.id;
 
 			super.data = t;

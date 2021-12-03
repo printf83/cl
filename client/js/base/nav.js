@@ -1,19 +1,19 @@
 "use strict";
 import * as core from "./core.js";
-import cont from "./cont.js";
+import tag from "./tag.js";
 
 /**
- * opt : {tag option}
+ * opt : {tagoption}
  */
-export default class nav extends cont {
+export default class nav extends tag {
 	constructor(opt) {
-		super("nav", opt);
+		super(core.extend({}, { tag: "nav" }, opt));
 	}
 
 	get data() {
 		return super.data;
 	}
 	set data(opt) {
-		super.data = core.extend({}, { tag: "nav" }, opt);
+		super.data = opt;
 	}
 }

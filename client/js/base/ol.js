@@ -7,13 +7,13 @@ import tag from "./tag.js";
  */
 export default class ol extends tag {
 	constructor(opt) {
-		super(opt);
+		super(core.extend({}, { tag: "ol" }, opt));
 	}
 
 	get data() {
 		return super.data;
 	}
 	set data(opt) {
-		super.data = core.extend({}, { tag: "ol" }, opt);
+		super.data = opt;
 	}
 }

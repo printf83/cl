@@ -1,6 +1,8 @@
 "use strict";
 import * as core from "./core.js";
 import a from "./a.js";
+import h from "./h.js";
+import p from "./p.js";
 import div from "./div.js";
 import imgtag from "./img.js";
 

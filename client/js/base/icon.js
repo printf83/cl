@@ -3,52 +3,19 @@ import * as core from "./core.js";
 import tag from "./tag.js";
 
 /**
- * icon
- * [style,icon]
- * style,icon
- * opt : {attr,class,style,icon,weight,fixwidth,spin,rotate,color,inverse,elem,stack}
+ * opt : {tagoption,type,icon,weight,fixwidth,spin,rotate,color,inverse,elem,stack}
  */
 
 export default class icon extends tag {
 	clicon = 1;
 
-	constructor(...arg) {
-		super();
-		if (arg && arg.length > 0) {
-			let t = {
-				style: null,
-				icon: null,
-			};
-
-			if (arg.length === 1) {
-				if (typeof arg[0] === "string") {
-					t = {
-						style: "fas",
-						icon: arg[0],
-					};
-				} else if (Array.isArray(arg[0]) && arg[0].length === 2) {
-					t = {
-						style: arg[0][0],
-						icon: arg[0][1],
-					};
-				} else {
-					t = arg[0];
-				}
-			} else if (arg.length === 2) {
-				t = {
-					style: arg[0],
-					icon: arg[1],
-				};
-			} else {
-				console.error("Unsupported argument", arg);
-			}
-
-			this.data = core.extend(
+	constructor(opt) {
+		super(
+			core.extend(
 				{},
 				{
-					attr: null,
-					class: null,
-					style: null,
+					tag: "i",
+					type: "fas",
 					icon: null,
 					weight: null,
 					fixwidth: true,
@@ -59,67 +26,62 @@ export default class icon extends tag {
 					elem: null,
 					stack: 0,
 				},
-				t
-			);
-		} else {
-			this.data = null;
-		}
+				opt
+			)
+		);
 	}
 
 	get data() {
 		return super.data;
 	}
-	set data(d) {
-		if (d) {
+	set data(opt) {
+		if (opt) {
 			//baseicon
-			let bI = core.getBaseIcon(d.icon);
+			let bI = core.getBaseIcon(opt.icon);
 			if (bI) {
-				d.icon = bI.icon;
-				d.color = d.color || bI.color;
-				d.style = bI.style ? bI.style : d.style;
+				opt.icon = bI.icon;
+				opt.color = opt.color || bI.color;
+				opt.type = bI.type ? bI.type : opt.type;
 			}
 
 			let rotate = null;
-			switch (d.rotate) {
+			switch (opt.rotate) {
 				case 90:
 				case 180:
 				case 270:
-					rotate = `fa-rotate-${d.rotate}`;
+					rotate = `fa-rotate-${opt.rotate}`;
 					break;
 				case "horizontal":
 				case "vertical":
 				case "both":
-					rotate = `fa-flip-${d.rotate}`;
+					rotate = `fa-flip-${opt.rotate}`;
 					break;
 			}
 
-			super.data = {
-				tag: d.icon ? "i" : "span",
+			opt.textcolor = opt.color;
+			opt.class = core.merge.class(opt.class, [
+				opt.type ? opt.type : null,
+				opt.icon ? `fa-${opt.icon}` : null,
+				opt.weight ? `fa-${opt.weight}` : null,
+				opt.fixwidth ? "fa-fw" : null,
+				opt.spin ? "fa-spin" : null,
+				opt.elem ? "fa-stack" : null,
+				opt.stack > 0 ? `fa-stack-${opt.stack}x` : null,
+				opt.inverse ? "fa-inverse" : null,
+				rotate,
+			]);
 
-				id: d.id,
-				name: d.name,
-				//style: d.style, conflict
-				attr: d.attr,
+			delete opt.type;
+			delete opt.icon;
+			delete opt.weight;
+			delete opt.fixwidth;
+			delete opt.spin;
+			delete opt.rotate;
+			delete opt.color;
+			delete opt.inverse;
+			delete opt.stack;
 
-				onclick: d.onclick,
-				onchange: d.onchange,
-				onfocus: d.onfocus,
-				onblur: d.onblur,
-
-				class: core.merge.class(d.class, [
-					d.style ? d.style : d.icon ? "fas" : null,
-					d.icon ? `fa-${d.icon}` : null,
-					d.weight ? `fa-${d.weight}` : null,
-					d.fixwidth ? "fa-fw" : null,
-					d.spin ? "fa-spin" : null,
-					d.elem ? "fa-stack" : null,
-					d.stack > 0 ? `fa-stack-${d.stack}x` : null,
-					d.inverse ? "fa-inverse" : null,
-					d.color ? `text-${d.color}` : null,
-					rotate,
-				]),
-				elem: d.elem,
-			};
+			super.data = opt;
 		} else {
 			super.data = null;
 		}

@@ -20,13 +20,13 @@ export function removeEmptyArray(arr) {
 }
 
 const _baseIcon = {
-	i: { icon: "info-circle", style: "fas", color: "info" },
-	"!": { icon: "exclamation-triangle", style: "fas", color: "warning" },
-	"!!": { icon: "exclamation-triangle", style: "fas", color: "danger" },
-	"?": { icon: "question-circle", style: "fas", color: "success" },
-	"/": { icon: "check-circle", style: "fas", color: "success" },
-	x: { icon: "times-circle", style: "fas", color: "danger" },
-	"-": { icon: "minus-circle", style: "fas", color: "danger" },
+	i: { icon: "info-circle", type: "fas", color: "info" },
+	"!": { icon: "exclamation-triangle", type: "fas", color: "warning" },
+	"!!": { icon: "exclamation-triangle", type: "fas", color: "danger" },
+	"?": { icon: "question-circle", type: "fas", color: "success" },
+	"/": { icon: "check-circle", type: "fas", color: "success" },
+	x: { icon: "times-circle", type: "fas", color: "danger" },
+	"-": { icon: "minus-circle", type: "fas", color: "danger" },
 };
 
 export function getBaseIcon(icon, baseIcon, baseColor) {
@@ -39,7 +39,7 @@ export function getBaseIcon(icon, baseIcon, baseColor) {
 
 			return {
 				icon: bI.icon,
-				style: bI.style,
+				type: bI.type,
 				color: bI.color,
 				textcolor: bC?.textcolor,
 			};

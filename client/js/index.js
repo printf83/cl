@@ -13,8 +13,8 @@ import button from "./base/button.js";
 // import label from "./base/label.js";
 // import dropdown from "./base/dropdown.js";
 // import tab from "./base/tab.js";
-// import * as collapse from "./base/collapse.js";
-// import * as card from "./base/card.js";
+import * as collapse from "./base/collapse.js";
+import * as card from "./base/card.js";
 // import small from "./base/small.js";
 // import modal from "./base/modal.js";
 // import toast from "./base/toast.js";
@@ -68,7 +68,6 @@ function doForm(max, cur) {
 				color: "primary",
 				label: "hello world",
 				onclick: function () {
-					//alert("Hello World");
 					console.log("Hello");
 				},
 			}),
@@ -89,10 +88,33 @@ function doForm(max, cur) {
 			new h(3, { elem: "Hello World H3" }),
 			new btngroup({
 				elem: [
-					new button({ label: "A", color: "danger" }),
-					new button({ label: "B", color: "warning" }),
-					new button({ label: "C", color: "success" }),
+					new collapse.toggle({
+						target: `#${tid1}`,
+						elem: new button({ label: "Test 1", color: "danger" }),
+					}),
+					new collapse.toggle({
+						target: `#${tid2}`,
+						elem: new button({ label: "Test 2", color: "warning" }),
+					}),
+					new collapse.toggle({
+						target: `.${tid3}`,
+						elem: new button({ label: "Both", color: "success" }),
+					}),
 				],
+			}),
+			new collapse.container({
+				id: tid1,
+				class: tid3,
+				elem: new card.container({
+					color: "danger",
+					textcolor: "light",
+					elem: new card.body({ elem: "Test 1" }),
+				}),
+			}),
+			new collapse.container({
+				id: tid2,
+				class: tid3,
+				elem: new card.container({ color: "warning", elem: new card.body({ elem: "Test 2" }) }),
 			}),
 		])
 		// new navbar.container({

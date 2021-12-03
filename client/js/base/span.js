@@ -7,13 +7,13 @@ import tag from "./tag.js";
  */
 export default class span extends tag {
 	constructor(opt) {
-		super(opt);
+		super(core.extend({}, { tag: "span" }, opt));
 	}
 
 	get data() {
 		return super.data;
 	}
 	set data(opt) {
-		super.data = core.extend({}, { tag: "span" }, opt);
+		super.data = opt;
 	}
 }
