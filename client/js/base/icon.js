@@ -9,9 +9,48 @@ import tag from "./tag.js";
 export default class icon extends tag {
 	clicon = 1;
 
-	constructor(opt) {
-		super(
-			core.extend(
+	constructor(...arg) {
+		super();
+		if (arg && arg.length > 0) {
+			let t = {
+				type: null,
+				icon: null,
+			};
+			if (arg.length === 1) {
+				if (typeof arg[0] === "string") {
+					t = {
+						type: "fas",
+						icon: arg[0],
+					};
+				} else if (Array.isArray(arg[0]) && arg[0].length === 2) {
+					t = {
+						type: arg[0][0],
+						icon: arg[0][1],
+					};
+				} else {
+					t = arg[0];
+				}
+			} else if (arg.length === 2) {
+				t = {
+					type: arg[0],
+					icon: arg[1],
+				};
+			} else {
+				console.error("Unsupported argument", arg);
+			}
+
+			this.data = t;
+		} else {
+			this.data = null;
+		}
+	}
+
+	get data() {
+		return super.data;
+	}
+	set data(opt) {
+		if (opt) {
+			opt = core.extend(
 				{},
 				{
 					tag: "i",
@@ -27,15 +66,8 @@ export default class icon extends tag {
 					stack: 0,
 				},
 				opt
-			)
-		);
-	}
+			);
 
-	get data() {
-		return super.data;
-	}
-	set data(opt) {
-		if (opt) {
 			//baseicon
 			let bI = core.getBaseIcon(opt.icon);
 			if (bI) {

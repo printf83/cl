@@ -95,7 +95,7 @@ function doForm(max, cur) {
 				elem: [
 					new collapse.toggle({
 						target: `#${tid1}`,
-						elem: new button({ icon: { icon: "fire" }, label: "Test 1", color: "danger" }),
+						elem: new button({ icon: "fire", label: "Test 1", color: "danger" }),
 					}),
 					new collapse.toggle({
 						target: `#${tid2}`,
@@ -121,7 +121,7 @@ function doForm(max, cur) {
 				class: tid3,
 				elem: new card.container({ color: "warning", elem: new card.body({ elem: "Test 2" }) }),
 			}),
-			new input({ type: "text", label: "Input Text", before: new icon({ icon: "fire" }) }),
+			new input({ type: "text", label: "Input Text", before: new icon("fire") }),
 		])
 		// new navbar.container({
 		// 	expand: "lg",
