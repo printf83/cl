@@ -15,7 +15,7 @@ import button from "./base/button.js";
 // import tab from "./base/tab.js";
 import * as collapse from "./base/collapse.js";
 import * as card from "./base/card.js";
-// import small from "./base/small.js";
+import small from "./base/small.js";
 // import modal from "./base/modal.js";
 import toast from "./base/toast.js";
 // import msg from "./base/msg.js";
@@ -143,13 +143,62 @@ function doForm(max, cur) {
 				elem: new card.container({
 					color: "danger",
 					textcolor: "light",
-					elem: new card.body({ elem: "Test 1" }),
+					elem: new card.horizontal({
+						left: new card.img({
+							placement: "left",
+							src: imgurl(450, 300),
+						}),
+						right: [
+							new card.header({ elem: "Card 1" }),
+							new card.body({
+								elem: [
+									new card.title({ elem: "Card title" }),
+									new card.subtitle({ elem: "Card subtitle" }),
+									new card.text({
+										elem: "Some quick example text to build on the card title and make up the bulk of the card's content.",
+									}),
+									new card.text({
+										elem: new small({ elem: "Small muted text" }),
+									}),
+									new card.link({ elem: "Hello world", href: "http://www.google.com" }),
+								],
+							}),
+							new card.footer({ elem: "Footer 1" }),
+						],
+					}),
 				}),
 			}),
 			new collapse.container({
 				id: tid2,
 				class: tid3,
-				elem: new card.container({ color: "warning", elem: new card.body({ elem: "Test 2" }) }),
+				elem: new card.container({
+					color: "success",
+					textcolor: "light",
+					elem: new card.horizontal({
+						size: "md-8",
+						left: [
+							new card.header({ elem: "Card 2" }),
+							new card.body({
+								elem: [
+									new card.title({ elem: "Card title" }),
+									new card.subtitle({ elem: "Card subtitle" }),
+									new card.text({
+										elem: "Some quick example text to build on the card title and make up the bulk of the card's content.",
+									}),
+									new card.text({
+										elem: new small({ elem: "Small muted text" }),
+									}),
+									new card.link({ elem: "Hello world", href: "http://www.google.com" }),
+								],
+							}),
+							new card.footer({ elem: "Footer 2" }),
+						],
+						right: new card.img({
+							placement: "left",
+							src: imgurl(450, 300),
+						}),
+					}),
+				}),
 			}),
 			new input({ type: "text", label: "Input Text", before: new icon("fire") }),
 			new input({

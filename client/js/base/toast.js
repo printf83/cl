@@ -21,13 +21,11 @@ import btnclose from "./btnclose.js";
  * opt : {attr,id,class,animate,title,icon,elem,close,autohide,delay,color,textcolor,bordercolor,border,date,timer,position,debug}
  */
 
-export default class toast extends tag {
+export default class toast extends div {
 	_n = null;
 	_m = null;
 
 	constructor(...arg) {
-		super();
-
 		if (arg && arg.length > 0) {
 			let t = {
 				textcolor: null,
@@ -74,28 +72,51 @@ export default class toast extends tag {
 				console.error("Unsupported argument", arg);
 			}
 
-			this.data = core.extend(
-				{},
-				{
-					animate: true,
-					title: null,
-					icon: null,
+			super.data(
+				core.extend(
+					{},
+					{
+						animate: true,
+						title: null,
+						icon: null,
 
-					close: true,
-					autohide: true,
-					delay: 5000,
-					date: new Date(),
-					timer: true,
-					position: "top-0 end-0",
+						close: true,
+						autohide: true,
+						delay: 5000,
+						date: new Date(),
+						timer: true,
+						position: "top-0 end-0",
 
-					elem: null,
+						elem: null,
 
-					debug: false,
-				},
-				t
+						debug: false,
+					},
+					t
+				)
 			);
+			// this.data = core.extend(
+			// 	{},
+			// 	{
+			// 		animate: true,
+			// 		title: null,
+			// 		icon: null,
+
+			// 		close: true,
+			// 		autohide: true,
+			// 		delay: 5000,
+			// 		date: new Date(),
+			// 		timer: true,
+			// 		position: "top-0 end-0",
+
+			// 		elem: null,
+
+			// 		debug: false,
+			// 	},
+			// 	t
+			// );
 		} else {
-			this.data = null;
+			super();
+			// this.data = null;
 		}
 	}
 
@@ -162,7 +183,7 @@ export default class toast extends tag {
 				}),
 			});
 
-			opt.tag = "div";
+			// opt.tag = "div";
 			opt.class = core.merge.class(opt.class, ["toast", opt.debug ? "show" : null]);
 			opt.attr = core.merge.attr(opt.attr, {
 				tabindex: -1,

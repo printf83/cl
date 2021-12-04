@@ -119,7 +119,6 @@ export class title extends h {
 	}
 	set data(opt) {
 		if (opt) {
-			opt.tag = super.data.tag;
 			opt.class = core.merge.class(opt.class, "card-title");
 			super.data = opt;
 		} else {
@@ -140,7 +139,6 @@ export class subtitle extends h {
 	}
 	set data(opt) {
 		if (opt) {
-			opt.tag = super.data.tag;
 			opt.class = core.merge.class(opt.class, "card-subtitle mb-2");
 			super.data = opt;
 		} else {
