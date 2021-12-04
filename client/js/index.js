@@ -69,6 +69,18 @@ function doForm(max, cur) {
 	cl.replaceChild(
 		root,
 		new container.form([
+			new button({
+				color: "danger",
+				label: `Regenerate root ${
+					Math.round((((max - cur) / max) * 100 + Number.EPSILON) * 100) / 100
+				}% complete`,
+				onclick: function () {
+					repeatdoform(5000, 4999, function () {
+						cl.init(root);
+						console.log("Complete regenerate");
+					});
+				},
+			}),
 			new btngroup({
 				elem: [
 					new button({
