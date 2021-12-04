@@ -5,7 +5,7 @@ import label from "./label.js";
 import button from "./button.js";
 import * as inputgroup from "./inputgroup.js";
 import div from "./div.js";
-import option from "./option.js";
+import * as option from "./option.js";
 
 /**
  * opt : {attr,id,name,type,label,hidelabel,floatlabel,inline,labelsize,ctlsize,size,weight,value,checked,placeholder,option,numctl,addctl,min,max,step,row,multiple,required,valid,invalid,before,after,plaintext,readonly,disabled,container,flex,nowarp,onclick,onchange,onclick,onfocus,onblur}
@@ -186,7 +186,7 @@ export default class input extends tag {
 				datalistctl = new tag({
 					tag: "datalist",
 					id: `${opt.id}-dl`,
-					elem: new option({ item: opt.option, selected: opt.value }),
+					elem: new option.select({ elem: opt.option, selected: opt.value }),
 				});
 			}
 
@@ -345,7 +345,7 @@ export default class input extends tag {
 							rows: opt.row,
 							multiple: opt.multiple,
 						}),
-						elem: new option({ item: opt.option, selected: opt.value }),
+						elem: new option.select({ elem: opt.option, selected: opt.value }),
 					});
 					break;
 				case "datalist":
@@ -368,7 +368,7 @@ export default class input extends tag {
 						onfocus: opt.onfocus,
 						onblur: opt.onblur,
 
-						elem: new option({ item: opt.option, selected: opt.value }),
+						elem: new option.select({ elem: opt.option, selected: opt.value }),
 					});
 					break;
 				default:

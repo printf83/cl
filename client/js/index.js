@@ -28,10 +28,12 @@ import btngroup from "./base/btngroup.js";
 import input from "./base/input.js";
 import icon from "./base/icon.js";
 import msg from "./base/msg.js";
+import dropdown from "./base/dropdown.js";
 // import accordion from "./base/accordion.js";
 // import breadcrumb from "./base/breadcrumb.js";
 // import paging from "./base/paging.js";
 // import * as navbar from "./base/navbar.js";
+import * as option from "./base/option.js";
 
 let imgurlindex = 0;
 function imgurl(width, height) {
@@ -67,14 +69,42 @@ function doForm(max, cur) {
 	cl.replaceChild(
 		root,
 		new container.form([
-			new button({
-				color: "primary",
-				label: "hello world",
-				onclick: function () {
-					new dlg.msgbox("i", "This is info msgbox", function () {
-						new toast("i", "This is info toast").show();
-					}).show();
-				},
+			new btngroup({
+				elem: [
+					new button({
+						color: "primary",
+						label: "Msgbox",
+						onclick: function () {
+							new dlg.msgbox("/", "This is success msgbox", function () {
+								new toast("/", "This is success toast").show();
+							}).show();
+						},
+					}),
+					new button({
+						color: "secondary",
+						label: "Confirmbox",
+						onclick: function () {
+							new dlg.confirmbox("x", "This is confirmbox", [
+								function () {
+									new toast("!", "First button callback").show();
+								},
+								function () {
+									new toast("!", "Second button callback").show();
+								},
+							]).show();
+						},
+					}),
+					new button({
+						icon: "fire",
+						color: "info",
+						label: "Inputbox",
+						onclick: function () {
+							new dlg.inputbox("text", "Textbox Input", function (_sender, data) {
+								new toast("!!", JSON.stringify(data)).show();
+							}).show();
+						},
+					}),
+				],
 			}),
 			new a({
 				label: "Link to google",
@@ -122,6 +152,33 @@ function doForm(max, cur) {
 				elem: new card.container({ color: "warning", elem: new card.body({ elem: "Test 2" }) }),
 			}),
 			new input({ type: "text", label: "Input Text", before: new icon("fire") }),
+			new input({
+				type: "select",
+				label: "Select Box",
+				before: new icon("fire"),
+				option: ["A", "B", "C"],
+			}),
+			new dropdown({
+				label: "Drowpdown",
+				color: "primary",
+				outline: true,
+				splittoggle: true,
+				option: [
+					{ href: "javascript:void(0);", label: "Action" },
+					{
+						href: "javascript:void(0);",
+						label: "Another action",
+					},
+					{
+						label: "Something else here",
+					},
+					{ value: "-" },
+					{
+						href: "javascript:void(0);",
+						label: "Separated link",
+					},
+				],
+			}),
 		])
 		// new navbar.container({
 		// 	expand: "lg",

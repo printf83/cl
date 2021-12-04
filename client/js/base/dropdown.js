@@ -2,7 +2,7 @@
 import * as core from "./core.js";
 import tag from "./tag.js";
 import button from "./button.js";
-import option from "./option.js";
+import * as option from "./option.js";
 import div from "./div.js";
 import ul from "./ul.js";
 
@@ -68,7 +68,7 @@ export default class dropdown extends tag {
 			let menuctl = new ul({
 				class: ["dropdown-menu", opt.dark ? "dropdown-menu-dark" : null],
 				attr: { "aria-labelledby": opt.id },
-				elem: new option({ type: "dropdown", item: opt.option, selected: opt.value }),
+				elem: new option.dropdown({ elem: opt.option, selected: opt.value }),
 			});
 
 			let btnctl = opt.splittoggle
