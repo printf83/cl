@@ -24,7 +24,6 @@ import btnclose from "./btnclose.js";
 export default class toast extends tag {
 	_n = null;
 	_m = null;
-	_p = null;
 
 	constructor(...arg) {
 		super();
