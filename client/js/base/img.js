@@ -25,17 +25,6 @@ export default class img extends tag {
 	}
 	set data(opt) {
 		if (opt) {
-
-			opt = core.extend(
-				{},
-				{
-					tag: "img",
-					src: null,
-					alt: "Image",
-				},
-				opt
-			);
-			
 			opt.attr = core.merge.attr(opt.attr, {
 				src: opt.src,
 				alt: opt.alt,

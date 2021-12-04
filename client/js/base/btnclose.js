@@ -25,7 +25,7 @@ export default class btnclose extends button {
 	}
 	set data(opt) {
 		if (opt) {
-			opt.type = "button";
+			// opt.type = "button";
 			opt.class = core.merge.class(opt.class, ["btn-close", !opt.dark ? "btn-close-white" : null]);
 			opt.attr = core.merge.attr(opt.attr, {
 				"data-bs-dismiss": opt.dismiss,

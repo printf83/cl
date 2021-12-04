@@ -30,7 +30,6 @@ export default class label extends tag {
 	}
 	set data(opt) {
 		if (opt) {
-			// opt.tag = "label";
 			opt.attr = core.merge.attr(opt.attr, {
 				for: opt.for,
 			});

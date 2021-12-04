@@ -39,18 +39,7 @@ export default class icon extends tag {
 				console.error("Unsupported argument", arg);
 			}
 
-			this.data = t;
-		} else {
-			this.data = null;
-		}
-	}
-
-	get data() {
-		return super.data;
-	}
-	set data(opt) {
-		if (opt) {
-			opt = core.extend(
+			this.data = core.extend(
 				{},
 				{
 					tag: "i",
@@ -65,9 +54,18 @@ export default class icon extends tag {
 					elem: null,
 					stack: 0,
 				},
-				opt
+				t
 			);
+		} else {
+			this.data = null;
+		}
+	}
 
+	get data() {
+		return super.data;
+	}
+	set data(opt) {
+		if (opt) {
 			//baseicon
 			let bI = core.getBaseIcon(opt.icon);
 			if (bI) {

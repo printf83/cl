@@ -5,74 +5,64 @@ import * as core from "./core.js";
  * opt : {tag,id,name,class,style,attr,href,onclick,onchange,onfocus,onblur,align,color,textcolor,bordercolor,border,elem}
  */
 export default class tag {
-	//_d = null;
+	_d = null;
 	cl = 1; //name tag "cl" so we can check hasOwnProperty("cl")
 
-	constructor(arg) {
-		this._d = null;
+	constructor(opt) {
+		this.data = core.extend(
+			{},
+			{
+				tag: null,
 
-		if (arg) {
-			this.data = core.extend(
-				{},
-				{
-					tag: null,
+				id: null,
+				name: null,
 
-					id: null,
-					name: null,
+				class: null,
+				style: null,
+				attr: null,
 
-					class: null,
-					style: null,
-					attr: null,
+				href: null,
+				onclick: null,
+				onchange: null,
+				onfocus: null,
+				onblur: null,
 
-					href: null,
-					onclick: null,
-					onchange: null,
-					onfocus: null,
-					onblur: null,
+				align: null,
+				color: null,
+				textcolor: null,
+				bordercolor: null,
+				border: null,
 
-					align: null,
-					color: null,
-					textcolor: null,
-					bordercolor: null,
-					border: null,
-
-					elem: null,
-				},
-				arg
-			);
-		} else {
-			this.data = null;
-		}
+				elem: null,
+			},
+			opt
+		);
 	}
 
 	get data() {
 		return this._d;
 	}
-	set data(d) {
-		if (d) {
-			this._d = {
-				tag: d.tag,
-				attr: core.merge.attr(d.attr, {
-					id: d.id,
-					name: d.name,
-					href: d.href, //d.tag === "a" ? (d.href ? d.href : "javascript:void(0)") : null,
-					onclick: d.onclick,
-					onchange: d.onchange,
-					onfocus: d.onfocus,
-					onblur: d.onblur,
-					class: core.merge.class(d.class, [
-						d.align ? `text-${d.align}` : null,
-						d.color ? `bg-${d.color}` : null,
-						d.textcolor ? `text-${d.textcolor}` : null,
-						d.bordercolor ? `border border-${d.bordercolor}` : null,
-						d.border === false ? "border-0" : null,
-					]),
-					style: d.style,
-				}),
-				elem: d.elem,
-			};
-		} else {
-			this._d = null;
-		}
+	set data(opt) {
+		this._d = {
+			tag: opt.tag,
+			attr: core.merge.attr(opt.attr, {
+				id: opt.id,
+				name: opt.name,
+				href: opt.href, //d.tag === "a" ? (d.href ? d.href : "javascript:void(0)") : null,
+				onclick: opt.onclick,
+				onchange: opt.onchange,
+				onfocus: opt.onfocus,
+				onblur: opt.onblur,
+				class: core.merge.class(opt.class, [
+					opt.align ? `text-${opt.align}` : null,
+					opt.color ? `bg-${opt.color}` : null,
+					opt.textcolor ? `text-${opt.textcolor}` : null,
+					opt.bordercolor ? `border border-${opt.bordercolor}` : null,
+					opt.border === false ? "border-0" : null,
+				]),
+				style: opt.style,
+			}),
+			elem: opt.elem,
+		};
 	}
 }

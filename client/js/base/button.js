@@ -41,6 +41,8 @@ export default class button extends tag {
 	}
 	set data(opt) {
 		if (opt) {
+			opt = core.extend({}, super.data, opt);
+
 			let bI = core.getBaseIcon(opt.icon);
 			if (bI) {
 				opt.icon = {

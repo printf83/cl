@@ -27,6 +27,8 @@ export class container extends tag {
 	}
 	set data(opt) {
 		if (opt) {
+			super.data = core.extend({}, super.data, opt);
+
 			let ctllabel = opt.label ? new label({ for: opt.for, class: "form-label", label: opt.label }) : null;
 
 			delete opt.label;

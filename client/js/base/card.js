@@ -260,7 +260,15 @@ export class link extends a {
  */
 export class img extends imgtag {
 	constructor(opt) {
-		super(opt);
+		super(
+			core.extend(
+				{},
+				{
+					placement: "top",
+				},
+				opt
+			)
+		);
 	}
 
 	get data() {
@@ -268,21 +276,15 @@ export class img extends imgtag {
 	}
 	set data(opt) {
 		if (opt) {
-			opt = core.extend(
-				{},
-				{
-					placement: "top",
-				},
-				opt
-			);
-
-			opt.class = core.merge.class(opt.class, [
-				opt.placement === "full" ? "card-img" : null,
-				opt.placement === "top" ? "card-img-top" : null,
-				opt.placement === "bottom" ? "card-img-bottom" : null,
-				opt.placement === "left" ? "img-fluid rounded-start" : null,
-				opt.placement === "right" ? "img-fluid rounded-end" : null,
-			]);
+			opt.class = opt.placement
+				? core.merge.class(opt.class, [
+						opt.placement === "full" ? "card-img" : null,
+						opt.placement === "top" ? "card-img-top" : null,
+						opt.placement === "bottom" ? "card-img-bottom" : null,
+						opt.placement === "left" ? "img-fluid rounded-start" : null,
+						opt.placement === "right" ? "img-fluid rounded-end" : null,
+				  ])
+				: opt.class;
 
 			delete opt.placement;
 

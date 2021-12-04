@@ -76,6 +76,7 @@ export class link extends a {
 	}
 	set data(opt) {
 		if (opt) {
+			opt = core.extend({}, super.data, opt);
 			opt.class = core.merge.class(opt.class, "alert-link");
 		}
 
@@ -93,6 +94,7 @@ export class heading extends h {
 	}
 	set data(opt) {
 		if (opt) {
+			opt = core.extend({}, super.data, opt);
 			opt.class = core.merge.class(opt.class, "heading");
 		}
 

@@ -26,6 +26,8 @@ export default class toast extends div {
 	_m = null;
 
 	constructor(...arg) {
+		super();
+
 		if (arg && arg.length > 0) {
 			let t = {
 				textcolor: null,
@@ -72,51 +74,28 @@ export default class toast extends div {
 				console.error("Unsupported argument", arg);
 			}
 
-			super.data(
-				core.extend(
-					{},
-					{
-						animate: true,
-						title: null,
-						icon: null,
+			this.data = core.extend(
+				{},
+				{
+					animate: true,
+					title: null,
+					icon: null,
 
-						close: true,
-						autohide: true,
-						delay: 5000,
-						date: new Date(),
-						timer: true,
-						position: "top-0 end-0",
+					close: true,
+					autohide: true,
+					delay: 5000,
+					date: new Date(),
+					timer: true,
+					position: "top-0 end-0",
 
-						elem: null,
+					elem: null,
 
-						debug: false,
-					},
-					t
-				)
+					debug: false,
+				},
+				t
 			);
-			// this.data = core.extend(
-			// 	{},
-			// 	{
-			// 		animate: true,
-			// 		title: null,
-			// 		icon: null,
-
-			// 		close: true,
-			// 		autohide: true,
-			// 		delay: 5000,
-			// 		date: new Date(),
-			// 		timer: true,
-			// 		position: "top-0 end-0",
-
-			// 		elem: null,
-
-			// 		debug: false,
-			// 	},
-			// 	t
-			// );
 		} else {
-			super();
-			// this.data = null;
+			this.data = null;
 		}
 	}
 
@@ -183,7 +162,7 @@ export default class toast extends div {
 				}),
 			});
 
-			// opt.tag = "div";
+			//opt.tag = "div"; //how to remove this?
 			opt.class = core.merge.class(opt.class, ["toast", opt.debug ? "show" : null]);
 			opt.attr = core.merge.attr(opt.attr, {
 				tabindex: -1,
