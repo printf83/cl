@@ -221,17 +221,6 @@ export default class modal extends tag {
 					id: opt.id,
 					name: opt.name,
 
-					align: opt.align,
-					color: opt.color,
-					textcolor: opt.textcolor,
-					bordercolor: opt.bordercolor,
-					border: opt.border,
-
-					onchange: opt.onchange,
-					onclick: opt.onclick,
-					onfocus: opt.onfocus,
-					onblur: opt.onblur,
-
 					class: core.merge.class(opt.class, [
 						"modal",
 						opt.animate && !opt.debug && "fade",
@@ -245,8 +234,8 @@ export default class modal extends tag {
 						"data-bs-focus": opt.focus ? "true" : null,
 						"aria-hidden": opt.debug ? "false" : "true",
 					}),
-					elem: new div(
-						[
+					elem: new div({
+						class: [
 							"modal-dialog",
 							opt.scrollable ? "modal-dialog-scrollable" : null,
 							opt.center ? "modal-dialog-centered" : null,
@@ -257,18 +246,16 @@ export default class modal extends tag {
 									: "modal-fullscreen"
 								: null,
 						],
-						new div(
-							[
-								"modal-content",
-								opt.align ? `text-${opt.align}` : null,
-								opt.color ? `bg-${opt.color}` : null,
-								opt.textcolor ? `text-${opt.textcolor}` : null,
-								opt.bordercolor ? `border-${opt.bordercolor}` : null,
-								!opt.border ? "border-0" : null,
-							],
-							[ctlHeader, ctlBody, ctlFooter]
-						)
-					),
+						elem: new div({
+							align: opt.align,
+							color: opt.color,
+							textcolor: opt.textcolor,
+							bordercolor: opt.bordercolor,
+							border: opt.border,
+							class: ["modal-content"],
+							elem: [ctlHeader, ctlBody, ctlFooter],
+						}),
+					}),
 				}),
 			};
 		} else {

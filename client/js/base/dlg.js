@@ -36,22 +36,22 @@ export class msgbox extends modal {
 				let bI = core.getBaseIcon(arg[0]);
 
 				super({
-					elem: new msg(
-						"md",
-						bI
+					elem: new msg({
+						weight: "md",
+						icon: bI
 							? {
 									icon: bI.icon,
 									color: bI.color,
 							  }
 							: arg[0],
-						arg[1]
-					),
+						elem: arg[1],
+					}),
 					defautlbtncolor: bI ? bI.color : null,
 					button: btnBuilder(arg[2], ["Okay"], bI?.color, false),
 				});
 			} else if (arg.length === 2) {
 				super({
-					elem: new msg("md", null, arg[0]),
+					elem: new msg({ weight: "md", elem: arg[0] }),
 					button: btnBuilder(arg[2], ["Okay"], null, false),
 				});
 			} else if (arg.length === 1) {
@@ -83,22 +83,22 @@ export class confirmbox extends modal {
 				let bI = core.getBaseIcon(arg[0]);
 
 				super({
-					elem: new msg(
-						"md",
-						bI
+					elem: new msg({
+						weight: "md",
+						icon: bI
 							? {
 									icon: bI.icon,
 									color: bI.color,
 							  }
 							: arg[0],
-						arg[1]
-					),
+						elem: arg[1],
+					}),
 					defautlbtncolor: bI ? bI.color : null,
 					button: btnBuilder(arg[2], ["Okay", "Cancel", "Retry"], bI?.color, true),
 				});
 			} else if (arg.length === 2) {
 				super({
-					elem: new msg("md", null, arg[0]),
+					elem: new msg({ weight: "md", elem: arg[0] }),
 					button: btnBuilder(arg[1], ["Okay", "Cancel", "Retry"], null, true),
 				});
 			} else if (arg.length === 1) {
@@ -142,7 +142,7 @@ export class inputbox extends modal {
 		if (arg && arg.length > 0) {
 			if (arg.length === 3) {
 				super({
-					elem: [new p(arg[1]), elemBuilder(arg[0])],
+					elem: [new p({ elem: arg[1] }), elemBuilder(arg[0])],
 					button: btnBuilder(arg[2], ["Okay", "Cancel", "Retry"], null, true),
 				});
 			} else if (arg.length === 2) {

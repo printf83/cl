@@ -24,6 +24,7 @@ import btnclose from "./btnclose.js";
 export default class toast extends tag {
 	_n = null;
 	_m = null;
+	_p = null;
 
 	constructor(...arg) {
 		super();
@@ -37,36 +38,34 @@ export default class toast extends tag {
 			if (arg.length === 4) {
 				t.color = arg[0];
 				t.textcolor = arg[1];
-				t.elem = new msg("sm", arg[2], arg[3]);
+				t.elem = new msg({ weight: "sm", icon: arg[2], elem: arg[3] });
 			} else if (arg.length === 3) {
 				t.color = arg[0];
-				t.elem = new msg("sm", arg[1], arg[2]);
+				t.elem = new msg({ weight: "sm", icon: arg[1], elem: arg[2] });
 			} else if (arg.length === 2) {
 				let bI = core.getBaseIcon(arg[0]);
 				if (bI) {
 					t.color = bI.color;
 					t.textcolor = bI.textcolor;
-
-					t.elem = new msg(
-						"sm",
-						{
+					t.elem = new msg({
+						weight: "sm",
+						icon: {
 							icon: bI.icon,
-							style: bI.style,
+							type: bI.type,
 						},
-						arg[1]
-					);
+						elem: arg[1],
+					});
 				} else {
 					t.color = arg[0];
-
 					if (typeof arg[1] === "string") {
-						t.elem = new msg("sm", null, arg[1]);
+						t.elem = new msg({ weight: "sm", elem: arg[1] });
 					} else {
 						t.elem = arg[1];
 					}
 				}
 			} else if (arg.length === 1) {
 				if (typeof arg[0] === "string") {
-					t.elem = new msg("sm", null, arg[0]);
+					t.elem = new msg({ weight: "sm", elem: arg[0] });
 				} else if (Array.isArray(arg[0]) || arg[0].hasOwnProperty("cl")) {
 					t.elem = arg[0];
 				} else {
@@ -79,24 +78,18 @@ export default class toast extends tag {
 			this.data = core.extend(
 				{},
 				{
-					attr: null,
-
-					id: null,
-					class: null,
 					animate: true,
 					title: null,
 					icon: null,
-					elem: null,
+
 					close: true,
 					autohide: true,
 					delay: 5000,
-					color: null,
-					textcolor: null,
-					bordercolor: null,
-					border: false,
 					date: new Date(),
 					timer: true,
 					position: "top-0 end-0",
+
+					elem: null,
 
 					debug: false,
 				},
@@ -110,89 +103,90 @@ export default class toast extends tag {
 	get data() {
 		return super.data;
 	}
-	set data(d) {
-		if (d) {
-			let bI = core.getBaseIcon(d.icon);
+	set data(opt) {
+		if (opt) {
+			let bI = core.getBaseIcon(opt.icon);
 			if (bI) {
-				d.icon = bI.icon;
-				d.color = d.color || bI.color;
-				d.textcolor = d.textcolor || bI.textcolor;
+				opt.icon = bI.icon;
+				opt.color = opt.color || bI.color;
+				opt.textcolor = opt.textcolor || bI.textcolor;
 			}
 
 			//generate id
-			d.id = d.id || core.UUID();
+			opt.id = opt.id || core.UUID();
 
 			//gen timer
-			let tc = toast.timercounter(new Date(d.date));
+			let tc = toast.timercounter(new Date(opt.date));
 
 			//generate header
 			let ctlHeader =
-				d.icon || d.title
-					? new div("toast-header", [
-							new strong("me-auto", new label(d.icon, d.title)),
-							!d.autohide
-								? new small({
-										id: `${d.id}-timer`,
-										class: ["text-muted", "timer"],
-										attr: {
-											"data-cl-time": d.date,
-										},
-										elem: tc ? tc.msg : "Just now", //need to add timer here
-								  })
-								: null,
-							d.close ? new btnclose("toast") : null,
-					  ])
+				opt.icon || opt.title
+					? new div({
+							class: "toast-header",
+							elem: [
+								new strong({ class: "me-auto", elem: new label({ icon: opt.icon, label: opt.title }) }),
+								!opt.autohide
+									? new small({
+											id: `${opt.id}-timer`,
+											class: ["text-muted", "timer"],
+											attr: {
+												"data-cl-time": opt.date,
+											},
+											elem: tc ? tc.msg : "Just now", //need to add timer here
+									  })
+									: null,
+								opt.close ? new btnclose({ dismiss: "toast" }) : null,
+							],
+					  })
 					: null;
 
 			//generate body
-			let ctlBody = new div(
-				"toast-body",
-				new div("d-flex align-items-stretch", [
-					new div("me-auto", d.elem),
-					!(d.icon || d.title) && d.close
-						? new div(
-								"ms-2",
-								new btnclose({
-									dismiss: "toast",
-									dark: d.textcolor ? !(d.textcolor === "light" || d.textcolor === "white") : true,
-									class: "my-1",
-								})
-						  )
-						: null,
-				])
-			);
-
-			//combine header,body to div.toast
-			super.data = {
+			let ctlBody = new div({
+				class: "toast-body",
 				elem: new div({
-					id: d.id,
-					name: d.name,
-					style: d.style,
-
-					align: d.align,
-					color: d.color,
-					textcolor: d.textcolor,
-					bordercolor: d.bordercolor,
-					border: d.border,
-
-					onchange: d.onchange,
-					onclick: d.onclick,
-					onfocus: d.onfocus,
-					onblur: d.onblur,
-
-					class: core.merge.class(d.class, ["toast", d.debug ? "show" : null]),
-
-					attr: core.merge.attr(d.attr, {
-						tabindex: -1,
-						"data-bs-animation": d.animate ? "true" : null,
-						"data-bs-autohide": d.autohide ? "true" : "false",
-						"data-bs-delay": d.delay,
-						"data-cl-position": d.position,
-						zIndex: 1,
-					}),
-					elem: [ctlHeader, ctlBody],
+					class: "d-flex align-items-stretch",
+					elem: [
+						new div({ class: "me-auto", elem: opt.elem }),
+						!(opt.icon || opt.title) && opt.close
+							? new div({
+									class: "ms-2",
+									elem: new btnclose({
+										dismiss: "toast",
+										dark: opt.textcolor
+											? !(opt.textcolor === "light" || opt.textcolor === "white")
+											: true,
+										class: "my-1",
+									}),
+							  })
+							: null,
+					],
 				}),
-			};
+			});
+
+			opt.tag = "div";
+			opt.class = core.merge.class(opt.class, ["toast", opt.debug ? "show" : null]);
+			opt.attr = core.merge.attr(opt.attr, {
+				tabindex: -1,
+				"data-bs-animation": opt.animate ? "true" : null,
+				"data-bs-autohide": opt.autohide ? "true" : "false",
+				"data-bs-delay": opt.delay,
+				"data-cl-position": opt.position,
+				zIndex: 1,
+			});
+			opt.elem = [ctlHeader, ctlBody];
+
+			delete opt.animate;
+			delete opt.title;
+			delete opt.icon;
+			delete opt.close;
+			delete opt.autohide;
+			delete opt.delay;
+			delete opt.date;
+			delete opt.timer;
+			delete opt.position;
+			delete opt.debug;
+
+			super.data = opt;
 		} else {
 			super.data = null;
 		}
@@ -214,7 +208,7 @@ export default class toast extends tag {
 
 	show = function () {
 		//generate container
-		let position = this.data.elem.data.attr["data-cl-position"];
+		let position = this.data.attr["data-cl-position"];
 		let containerQuery = core.combineArray(["toast-container", position], " ");
 		let container = document.body.getElementsByClassName(containerQuery)[0];
 		if (!container || container.length === 0) {
@@ -228,7 +222,7 @@ export default class toast extends tag {
 						"aria-atomic": "true",
 						zIndex: 3,
 					},
-					elem: new div(["toast-container", "position-fixed", "p-3", position], null),
+					elem: new div({ class: ["toast-container", "position-fixed", "p-3", position] }),
 				})
 			);
 
@@ -250,8 +244,6 @@ export default class toast extends tag {
 			setTimeout(
 				function (dom, tst) {
 					//tst.destroy();
-					// cl.removeChildElement(dom);
-					// dom.remove();
 					cl.removeElement(dom);
 
 					this.tst = null;

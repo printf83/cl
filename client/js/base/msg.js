@@ -1,6 +1,5 @@
 "use strict";
 import * as core from "./core.js";
-import tag from "./tag.js";
 import icon from "./icon.js";
 import div from "./div.js";
 import h from "./h.js";
@@ -8,14 +7,14 @@ import h from "./h.js";
 /**
  * opt : {tagoption,icon,weight,elem}
  */
-export default class msg extends tag {
+export default class msg extends div {
 	constructor(opt) {
 		super(
 			core.extend(
 				{},
 				{
 					icon: null,
-					weight: "md", //font size fs-1 to fs-6 or display-1 to display-6 (any class for i)
+					weight: "md",
 					elem: null,
 				},
 				opt

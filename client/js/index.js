@@ -17,7 +17,7 @@ import * as collapse from "./base/collapse.js";
 import * as card from "./base/card.js";
 // import small from "./base/small.js";
 // import modal from "./base/modal.js";
-// import toast from "./base/toast.js";
+import toast from "./base/toast.js";
 // import msg from "./base/msg.js";
 import * as dlg from "./base/dlg.js";
 import * as container from "./base/container.js";
@@ -27,6 +27,7 @@ import hr from "./base/hr.js";
 import btngroup from "./base/btngroup.js";
 import input from "./base/input.js";
 import icon from "./base/icon.js";
+import msg from "./base/msg.js";
 // import accordion from "./base/accordion.js";
 // import breadcrumb from "./base/breadcrumb.js";
 // import paging from "./base/paging.js";
@@ -70,8 +71,8 @@ function doForm(max, cur) {
 				color: "primary",
 				label: "hello world",
 				onclick: function () {
-					new dlg.msgbox("?", "This is info msg", function () {
-						new toast("?", "Hello world").show();
+					new dlg.msgbox("i", "This is info msgbox", function () {
+						new toast("i", "This is info toast").show();
 					}).show();
 				},
 			}),
@@ -94,7 +95,7 @@ function doForm(max, cur) {
 				elem: [
 					new collapse.toggle({
 						target: `#${tid1}`,
-						elem: new button({ label: "Test 1", color: "danger" }),
+						elem: new button({ icon: { icon: "fire" }, label: "Test 1", color: "danger" }),
 					}),
 					new collapse.toggle({
 						target: `#${tid2}`,
