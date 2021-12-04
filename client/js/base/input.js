@@ -186,7 +186,7 @@ export default class input extends tag {
 				datalistctl = new tag({
 					tag: "datalist",
 					id: `${opt.id}-dl`,
-					elem: new option.select({ elem: opt.option, selected: opt.value }),
+					elem: new option.select({ item: opt.option, selected: opt.value }),
 				});
 			}
 
@@ -345,7 +345,7 @@ export default class input extends tag {
 							rows: opt.row,
 							multiple: opt.multiple,
 						}),
-						elem: new option.select({ elem: opt.option, selected: opt.value }),
+						elem: new option.select({ item: opt.option, selected: opt.value }),
 					});
 					break;
 				case "datalist":
@@ -368,7 +368,7 @@ export default class input extends tag {
 						onfocus: opt.onfocus,
 						onblur: opt.onblur,
 
-						elem: new option.select({ elem: opt.option, selected: opt.value }),
+						elem: new option.select({ item: opt.option, selected: opt.value }),
 					});
 					break;
 				default:

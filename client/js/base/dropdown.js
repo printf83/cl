@@ -68,7 +68,7 @@ export default class dropdown extends tag {
 			let menuctl = new ul({
 				class: ["dropdown-menu", opt.dark ? "dropdown-menu-dark" : null],
 				attr: { "aria-labelledby": opt.id },
-				elem: new option.dropdown({ elem: opt.option, selected: opt.value }),
+				elem: new option.dropdown({ item: opt.option, selected: opt.value }),
 			});
 
 			let btnctl = opt.splittoggle

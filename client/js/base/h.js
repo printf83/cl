@@ -7,8 +7,7 @@ import tag from "./tag.js";
  */
 export default class h extends tag {
 	constructor(level = 1, opt) {
-		opt = core.extend({}, { tag: `h${level}` }, opt);
-		super(opt);
+		super(core.extend({}, { tag: `h${level}` }, opt));
 	}
 
 	get data() {

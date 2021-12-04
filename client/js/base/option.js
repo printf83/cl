@@ -8,7 +8,7 @@ import hr from "./hr.js";
 import h from "./h.js";
 
 /**
- * opt : {tagoption,elem : selectitem,selected}
+ * opt : {tagoption,item : {selectitem},selected}
  * selectitem : [string]|[{tagoption,elem,value,label,icon,active,disabled,interactive}]
  */
 export class select extends tag {
@@ -17,7 +17,7 @@ export class select extends tag {
 			core.extend(
 				{},
 				{
-					elem: null,
+					item: null,
 					selected: null,
 				},
 				opt
@@ -31,8 +31,8 @@ export class select extends tag {
 	set data(opt) {
 		if (opt) {
 			opt.selected = Array.isArray(opt.selected) ? opt.selected : [opt.selected];
-			opt.elem = Array.isArray(opt.elem) ? opt.elem : [opt.elem];
-			opt.elem = opt.elem.map(function (i) {
+			opt.item = Array.isArray(opt.item) ? opt.item : [opt.item];
+			opt.elem = opt.item.map(function (i) {
 				if (typeof i === "string") {
 					return new tag({
 						tag: "option",
@@ -68,6 +68,7 @@ export class select extends tag {
 				}
 			});
 
+			delete opt.item;
 			delete opt.selected;
 
 			super.data = opt;
@@ -78,7 +79,7 @@ export class select extends tag {
 }
 
 /**
- * opt : {tagoption,elem : dropdownitem,selected}
+ * opt : {tagoption,item : dropdownitem,selected}
  * dropdownitem : [string]|[{tagoption,elem,value,label,icon,active,disabled,interactive}]
  */
 export class dropdown extends tag {
@@ -87,7 +88,7 @@ export class dropdown extends tag {
 			core.extend(
 				{},
 				{
-					elem: null,
+					item: null,
 					selected: null,
 				},
 				opt
@@ -101,8 +102,8 @@ export class dropdown extends tag {
 	set data(opt) {
 		if (opt) {
 			opt.selected = Array.isArray(opt.selected) ? opt.selected : [opt.selected];
-			opt.elem = Array.isArray(opt.elem) ? opt.elem : [opt.elem];
-			opt.elem = opt.elem.map(function (i) {
+			opt.item = Array.isArray(opt.item) ? opt.item : [opt.item];
+			opt.elem = opt.item.map(function (i) {
 				if (typeof i === "string") {
 					return new li({
 						elem: new span({

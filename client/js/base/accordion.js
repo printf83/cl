@@ -5,7 +5,7 @@ import div from "./div.js";
 import button from "./button.js";
 
 /**
- * opt : {tagoption,flush,autoclose,elem:[{id,title,icon,active,elem}]}
+ * opt : {tagoption,flush,autoclose,item:[{id,title,icon,active,elem}]}
  */
 export default class accordion extends div {
 	constructor(opt) {
@@ -16,7 +16,7 @@ export default class accordion extends div {
 					id: null,
 					flush: false,
 					autoclose: true,
-					elem: null,
+					item: null,
 				},
 				opt
 			)
@@ -28,25 +28,25 @@ export default class accordion extends div {
 	}
 	set data(opt) {
 		if (opt) {
-			//check if elem isnot array
-			opt.elem = opt.elem ? (Array.isArray(opt.elem) ? opt.elem : [opt.elem]) : null;
+			//check if item isnot array
+			opt.item = opt.item ? (Array.isArray(opt.item) ? opt.item : [opt.item]) : null;
 
 			//id require if autoclose
 			opt.id = opt.id || opt.autoclose ? core.UUID() : null;
 
-			//check if any elem active
-			let activeelem = opt.elem?.find((i) => {
+			//check if any item active
+			let activeitem = opt.item?.find((i) => {
 				return i.active === true;
 			});
 
-			if (opt.elem && !activeelem) {
-				opt.elem[0].active = true;
+			if (opt.item && !activeitem) {
+				opt.item[0].active = true;
 			}
 
 			opt.class = core.merge.class(opt.class, ["accordion", opt.flush ? "accordion-flush" : null]);
 			opt.elem =
-				opt.elem && opt.elem.length > 0
-					? opt.elem.map(function (i) {
+				opt.item && opt.item.length > 0
+					? opt.item.map(function (i) {
 							i = core.extend(
 								{},
 								{
@@ -86,7 +86,7 @@ export default class accordion extends div {
 											"aria-labelledby": `${i.id}-head`,
 											"data-bs-parent": opt.autoclose ? `#${opt.id}` : null,
 										},
-										elem: new div({ class: "accordion-body", elem: i.elem }),
+										elem: new div({ class: "accordion-body", elem: i.item }),
 									}),
 								],
 							});
