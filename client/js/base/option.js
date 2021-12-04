@@ -72,8 +72,6 @@ export class select extends tag {
 			delete opt.selected;
 
 			super.data = opt;
-		} else {
-			super.data = null;
 		}
 	}
 }
@@ -175,8 +173,6 @@ export class dropdown extends tag {
 			delete opt.selected;
 
 			super.data = opt;
-		} else {
-			super.data = null;
 		}
 	}
 }

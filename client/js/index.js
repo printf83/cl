@@ -12,11 +12,11 @@ import button from "./base/button.js";
 // import input from "./base/input.js";
 // import label from "./base/label.js";
 // import dropdown from "./base/dropdown.js";
-// import tab from "./base/tab.js";
+import tab from "./base/tab.js";
 import * as collapse from "./base/collapse.js";
 import * as card from "./base/card.js";
 import small from "./base/small.js";
-// import modal from "./base/modal.js";
+import modal from "./base/modal.js";
 import toast from "./base/toast.js";
 // import msg from "./base/msg.js";
 import * as dlg from "./base/dlg.js";
@@ -73,6 +73,40 @@ function doForm(max, cur) {
 				elem: [
 					new button({
 						color: "primary",
+						outline: true,
+						label: "Modal With Tab",
+						onclick: function () {
+							new modal({
+								elem: new tab({
+									border: false,
+									rounded: false,
+									item: [
+										{ label: "1", elem: "1" },
+										{ label: "2", elem: "2" },
+										{ label: "3", elem: "3" },
+									],
+								}),
+								button: [
+									{
+										label: "AAA",
+										onclick: function (_sender, data) {
+											new toast("i", JSON.stringify(data)).show();
+											return true;
+										},
+									},
+									{
+										label: "BBB",
+										onclick: function () {
+											return true;
+										},
+									},
+								],
+								footer: new input({ type: "switch", name: "showagain", label: "Show again" }),
+							}).show();
+						},
+					}),
+					new button({
+						color: "primary",
 						label: "Msgbox",
 						onclick: function () {
 							new dlg.msgbox("/", "This is success msgbox", function () {
@@ -122,6 +156,7 @@ function doForm(max, cur) {
 			}),
 			new h(3, { elem: "Hello World H3" }),
 			new btngroup({
+				shadow: true,
 				elem: [
 					new collapse.toggle({
 						target: `#${tid1}`,
@@ -141,8 +176,11 @@ function doForm(max, cur) {
 				id: tid1,
 				class: tid3,
 				elem: new card.container({
-					color: "danger",
-					textcolor: "light",
+					color: "primary",
+					coloropacity: 25,
+					textcolor: "primary",
+					shadow: true,
+					borderweight: 3,
 					elem: new card.horizontal({
 						left: new card.img({
 							placement: "left",
@@ -158,7 +196,7 @@ function doForm(max, cur) {
 										elem: "Some quick example text to build on the card title and make up the bulk of the card's content.",
 									}),
 									new card.text({
-										elem: new small({ elem: "Small muted text" }),
+										elem: new small({ textcolor: "muted", elem: "Small muted text" }),
 									}),
 									new card.link({ elem: "Hello world", href: "http://www.google.com" }),
 								],
@@ -172,8 +210,6 @@ function doForm(max, cur) {
 				id: tid2,
 				class: tid3,
 				elem: new card.container({
-					color: "success",
-					textcolor: "light",
 					elem: new card.horizontal({
 						size: "md-8",
 						left: [
@@ -186,7 +222,7 @@ function doForm(max, cur) {
 										elem: "Some quick example text to build on the card title and make up the bulk of the card's content.",
 									}),
 									new card.text({
-										elem: new small({ elem: "Small muted text" }),
+										elem: new small({ textcolor: "muted", elem: "Small muted text" }),
 									}),
 									new card.link({ elem: "Hello world", href: "http://www.google.com" }),
 								],
@@ -194,7 +230,7 @@ function doForm(max, cur) {
 							new card.footer({ elem: "Footer 2" }),
 						],
 						right: new card.img({
-							placement: "left",
+							placement: "right",
 							src: imgurl(450, 300),
 						}),
 					}),
@@ -226,6 +262,26 @@ function doForm(max, cur) {
 						href: "javascript:void(0);",
 						label: "Separated link",
 					},
+				],
+			}),
+			new tab({
+				type: "pill",
+				align: "center",
+				item: [
+					{ label: "1", icon: "fire", elem: "1" },
+					{ label: "2", elem: "2" },
+					{ label: "3", elem: "3" },
+					{ label: "4", elem: "4" },
+				],
+			}),
+			new tab({
+				type: "pill",
+				headalign: "vertical-right",
+				item: [
+					{ label: "1", icon: "fire", elem: "1" },
+					{ label: "2", elem: "2" },
+					{ label: "3", elem: "3" },
+					{ label: "4", elem: "4" },
 				],
 			}),
 		])

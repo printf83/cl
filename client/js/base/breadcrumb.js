@@ -38,7 +38,7 @@ export default class breadcrumb extends nav {
 				return i.current === true;
 			});
 
-			if (!currentitem) {
+			if (!currentitem && typeof opt.item[opt.item.length - 1] === "object") {
 				opt.item[opt.item.length - 1].current = true;
 			}
 
@@ -103,8 +103,6 @@ export default class breadcrumb extends nav {
 			delete opt.divider;
 
 			super.data = opt;
-		} else {
-			super.data = null;
 		}
 	}
 }

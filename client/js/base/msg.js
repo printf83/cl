@@ -71,8 +71,6 @@ export default class msg extends div {
 			delete opt.icon;
 
 			super.data = opt;
-		} else {
-			super.data = null;
 		}
 	}
 }

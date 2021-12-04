@@ -44,8 +44,6 @@ export class container extends tag {
 			super.data = {
 				elem: [ctllabel, ctlmain],
 			};
-		} else {
-			super.data = null;
 		}
 	}
 }
@@ -65,8 +63,6 @@ export class text extends div {
 		if (opt) {
 			opt.class = core.merge.class(opt.class, "input-group-text");
 			super.data = opt;
-		} else {
-			super.data = null;
 		}
 	}
 }

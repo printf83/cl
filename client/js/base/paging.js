@@ -276,8 +276,6 @@ export default class paging extends tag {
 					),
 				};
 			}
-		} else {
-			super.data = null;
 		}
 	}
 }

@@ -60,8 +60,6 @@ export class container extends div {
 			delete opt.msg;
 
 			super.data = opt;
-		} else {
-			super.data = null;
 		}
 	}
 }

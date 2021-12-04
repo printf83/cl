@@ -258,8 +258,6 @@ export default class modal extends tag {
 					}),
 				}),
 			};
-		} else {
-			super.data = null;
 		}
 	}
 

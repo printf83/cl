@@ -94,8 +94,6 @@ export default class accordion extends div {
 					: null;
 
 			super.data = d;
-		} else {
-			super.data = null;
 		}
 	}
 }

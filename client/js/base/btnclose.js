@@ -37,8 +37,6 @@ export default class btnclose extends button {
 			delete opt.dark;
 
 			super.data = opt;
-		} else {
-			super.data = null;
 		}
 	}
 }

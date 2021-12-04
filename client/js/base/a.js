@@ -22,8 +22,6 @@ export default class a extends tag {
 			delete opt.label;
 
 			super.data = opt;
-		} else {
-			super.data = null;
 		}
 	}
 }

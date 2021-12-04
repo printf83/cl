@@ -21,8 +21,6 @@ export class container extends div {
 		if (opt) {
 			opt.class = core.merge.class(opt.class, "card");
 			super.data = opt;
-		} else {
-			super.data = null;
 		}
 	}
 }
@@ -41,8 +39,6 @@ export class header extends div {
 		if (opt) {
 			opt.class = core.merge.class(opt.class, "card-header");
 			super.data = opt;
-		} else {
-			super.data = null;
 		}
 	}
 }
@@ -61,8 +57,6 @@ export class body extends div {
 		if (opt) {
 			opt.class = core.merge.class(opt.class, "card-body");
 			super.data = opt;
-		} else {
-			super.data = null;
 		}
 	}
 }
@@ -81,8 +75,6 @@ export class footer extends div {
 		if (opt) {
 			opt.class = core.merge.class(opt.class, "card-footer");
 			super.data = opt;
-		} else {
-			super.data = null;
 		}
 	}
 }
@@ -101,8 +93,6 @@ export class group extends div {
 		if (opt) {
 			opt.class = core.merge.class(opt.class, "card-group");
 			super.data = opt;
-		} else {
-			super.data = null;
 		}
 	}
 }
@@ -121,8 +111,6 @@ export class title extends h {
 		if (opt) {
 			opt.class = core.merge.class(opt.class, "card-title");
 			super.data = opt;
-		} else {
-			super.data = null;
 		}
 	}
 }
@@ -141,8 +129,6 @@ export class subtitle extends h {
 		if (opt) {
 			opt.class = core.merge.class(opt.class, "card-subtitle mb-2");
 			super.data = opt;
-		} else {
-			super.data = null;
 		}
 	}
 }
@@ -161,8 +147,6 @@ export class text extends p {
 		if (opt) {
 			opt.class = core.merge.class(opt.class, "card-text");
 			super.data = opt;
-		} else {
-			super.data = null;
 		}
 	}
 }
@@ -181,8 +165,6 @@ export class imgoverlay extends div {
 		if (opt) {
 			opt.class = core.merge.class(opt.class, "card-img-overlay");
 			super.data = opt;
-		} else {
-			super.data = null;
 		}
 	}
 }
@@ -228,8 +210,6 @@ export class horizontal extends div {
 			delete opt.gap;
 
 			super.data = opt;
-		} else {
-			super.data = null;
 		}
 	}
 }
@@ -249,8 +229,6 @@ export class link extends a {
 		if (opt) {
 			opt.class = core.merge.class(opt.class, "card-link");
 			super.data = opt;
-		} else {
-			super.data = null;
 		}
 	}
 }
@@ -289,8 +267,6 @@ export class img extends imgtag {
 			delete opt.placement;
 
 			super.data = opt;
-		} else {
-			super.data = null;
 		}
 	}
 }

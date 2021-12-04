@@ -32,11 +32,13 @@ export default class badge extends span {
 	}
 	set data(opt) {
 		if (opt) {
+			opt.rounded = opt.pill ? "pill" : null;
+			opt.rounded = !opt.label && !opt.icon ? "circle" : opt.rounded;
+
 			opt.class = core.merge.class(opt.class, [
 				"badge",
-				opt.pill ? "rounded-pill" : null,
 				opt.notification ? "position-absolute top-0 start-100 translate-middle" : null,
-				!opt.label && !opt.icon ? "rounded-circle p-2" : null,
+				!opt.label && !opt.icon ? "p-2" : null,
 			]);
 
 			opt.elem = [
@@ -59,8 +61,6 @@ export default class badge extends span {
 			delete opt.pill;
 
 			super.data = opt;
-		} else {
-			super.data = null;
 		}
 	}
 }

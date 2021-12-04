@@ -92,8 +92,6 @@ export class container extends tag {
 					elem: d.elem,
 				}),
 			};
-		} else {
-			super.data = null;
 		}
 	}
 }
@@ -160,8 +158,6 @@ export class brand extends tag {
 							label: d.label,
 					  }),
 			};
-		} else {
-			super.data = null;
 		}
 	}
 }
@@ -217,8 +213,6 @@ export class toggle extends tag {
 					}
 				),
 			};
-		} else {
-			super.data = null;
 		}
 	}
 }
@@ -270,8 +264,6 @@ export class formcontainer extends form {
 				class: core.merge.class(d.class, "d-flex"),
 				elem: d.elem,
 			};
-		} else {
-			super.data = null;
 		}
 	}
 }
@@ -323,8 +315,6 @@ export class collapsecontainer extends div {
 				class: core.merge.class(d.class, ["collapse", "navbar-collapse"]),
 				elem: d.elem,
 			};
-		} else {
-			super.data = null;
 		}
 	}
 }
@@ -397,8 +387,6 @@ export class offcanvascontainer extends div {
 					new div("offcanvas-body", d.elem),
 				],
 			};
-		} else {
-			super.data = null;
 		}
 	}
 }
@@ -460,8 +448,6 @@ export class itemcontainer extends div {
 				]),
 				elem: d.elem,
 			};
-		} else {
-			super.data = null;
 		}
 	}
 }
@@ -539,8 +525,6 @@ export class item extends div {
 						: null,
 				],
 			};
-		} else {
-			super.data = null;
 		}
 	}
 }

@@ -58,8 +58,6 @@ export default class tooltip extends tag {
 				"data-bs-html": d.type && core.isHTML(d.msg) ? "true" : null,
 			});
 			super.data = tmp;
-		} else {
-			super.data = null;
 		}
 	}
 }

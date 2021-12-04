@@ -1,7 +1,6 @@
 "use strict";
 import * as core from "./core.js";
-import tag from "./tag.js";
-import option from "./option.js";
+import * as option from "./option.js";
 import div from "./div.js";
 import ul from "./ul.js";
 import li from "./li.js";
@@ -9,248 +8,234 @@ import a from "./a.js";
 import label from "./label.js";
 
 /**
- * label, option
- * label, color, option
- * label, onclick, option
- * label, color, onclick, option6cadf580e11d
- * opt {...buttonopt,option,container,arrow,splittoggle,aligment,offset,autoclose}
+ * opt:{tagoption,type,headalign,size,animated,flush,item:{tabitem}}
+ * tabitem : {id,label,icon,hidelabel,disable,active,option,elem}
  */
 
-export default class tab extends tag {
+export default class tab extends div {
 	cltab = 1;
 
-	constructor(...arg) {
-		super();
-
-		if (arg && arg.length > 0) {
-			let t = {
-				item: null,
-			};
-
-			if (arg.length === 1 && Array.isArray(arg[0])) {
-				t.item = arg[0];
-			} else if (arg.length === 1) {
-				t = arg[0];
-			} else {
-				console.error("Unsupported argument", arg);
-			}
-
-			this.data = core.extend(
+	constructor(opt) {
+		super(
+			core.extend(
 				{},
 				{
-					attr: null, //combine to container
-
-					id: null,
-					style: "tab", //null|tab|pill
-					align: null,
+					type: "tab", //null|tab|pill
+					headalign: null, //tab align
 					size: null, //need to set for vertical. only used if has body
-					animate: true,
-					border: true,
-					rounded: true,
+					animated: true,
 					flush: false,
 
 					item: [],
 				},
-				t
-			);
-		} else {
-			this.data = null;
-		}
+				opt
+			)
+		);
 	}
 
 	get data() {
 		return super.data;
 	}
-	set data(d) {
-		if (d) {
-			if (!Array.isArray(d.item)) {
-				console.error("Tab elem must be an Array");
-			} else {
-				//make sure one elem is active, if no active, set first as active
-				let activeIndex = -1;
-				d.item.forEach((i, x) => {
-					if (activeIndex === -1) {
-						if (i.active) {
-							activeIndex = x;
-						}
-					}
-				});
+	set data(opt) {
+		if (opt) {
+			//check if item isnot array
+			opt.item = opt.item ? (Array.isArray(opt.item) ? opt.item : [opt.item]) : null;
 
-				if (activeIndex === -1 && typeof d.item[0] === "object") {
-					d.item[0].active = true;
+			//check if any item active
+			let activeitem = opt.item.find((i) => {
+				return i.active === true;
+			});
+
+			if (!activeitem && typeof opt.item[0] === "object") {
+				opt.item[0].active = true;
+			}
+
+			//auto size if vertical headalign
+			if (!opt.size && (opt.headalign === "vertical" || opt.headalign === "vertical-right")) {
+				opt.size = "col-sm-12 col-md-6 col-lg-4";
+			}
+
+			//start make item
+			var headerItem = [];
+			var bodyItem = [];
+
+			opt.item.forEach((i, x) => {
+				if (typeof i === "string") {
+					if (x === 0) {
+						i = { label: i, active: true };
+					} else {
+						i = { label: i };
+					}
 				}
 
-				//auto size if vertical align
-				if (!d.size && (d.align === "vertical" || d.align === "vertical-right")) {
-					d.size = "col-sm-12 col-md-6 col-lg-4";
-				}
+				i = core.extend(
+					{},
+					{
+						id: null,
+						label: null,
+						icon: null,
+						hidelabel: false,
+						disable: false,
+						active: false,
+						option: null,
+						elem: null,
+					},
+					i
+				);
 
-				//start make item
-				var headerItem = [];
-				var bodyItem = [];
+				//create id for tab elem
+				i.id = i.id ? i.id : i.elem ? core.UUID() : null;
 
-				var defOption = {
-					id: null,
-					label: null,
-					icon: null,
-					hidelabel: false,
-					disable: false,
-					active: false,
-					option: null,
-					item: null,
-				};
-
-				d.item.forEach((i, x) => {
-					if (typeof i === "string") {
-						if (x === 0) {
-							i = { label: i, active: true };
-						} else {
-							i = { label: i };
-						}
-					}
-
-					i = core.extend({}, defOption, i);
-
-					//create id for tab elem
-					i.id = i.id ? i.id : i.elem ? core.UUID() : null;
-
-					//make header
-					headerItem.push(
-						new li({
-							attr: {
-								class: ["nav-item", i.option ? "dropdown" : null],
-								role: "tab",
-							},
-							elem: [
-								new a({
-									class: [
-										"nav-link",
-										i.option ? "dropdown-toggle" : null,
-										i.active ? "active" : null,
-										i.disabled ? "disabled" : null,
-									],
-									href: `#${i.id}-body`,
-									id: `${i.id}-head`,
-									attr: {
-										"data-bs-toggle": i.option
-											? "dropdown"
-											: d.style === "tab"
-											? "tab"
-											: d.style === "pill"
-											? "pill"
-											: "tab",
-										"aria-controls": `${i.id}-body`,
-										role: i.option ? "button" : null,
-									},
-									elem: new label({
-										label: i.label,
-										icon: i.icon,
-										hidelabel: i.hidelabel,
-									}),
+				//make header
+				headerItem.push(
+					new li({
+						class: ["nav-item", i.option ? "dropdown" : null],
+						attr: {
+							role: "tab",
+						},
+						elem: [
+							new a({
+								class: [
+									"nav-link",
+									i.option ? "dropdown-toggle" : null,
+									i.active ? "active" : null,
+									i.disabled ? "disabled" : null,
+								],
+								href: `#${i.id}-body`,
+								id: `${i.id}-head`,
+								attr: {
+									"data-bs-toggle": i.option
+										? "dropdown"
+										: opt.type === "tab"
+										? "tab"
+										: opt.type === "pill"
+										? "pill"
+										: "tab",
+									"aria-controls": `${i.id}-body`,
+									role: i.option ? "button" : null,
+								},
+								elem: new label({
+									label: i.label,
+									icon: i.icon,
+									hidelabel: i.hidelabel,
 								}),
-								i.option
-									? new ul(
-											"dropdown-menu",
-											new option({
-												type: "dropdown",
-												item: i.option,
-											})
-									  )
-									: null,
-							],
+							}),
+							i.option
+								? new ul({
+										class: "dropdown-menu",
+										elem: new option.dropdown({
+											item: i.option,
+										}),
+								  })
+								: null,
+						],
+					})
+				);
+
+				//make body
+				if (i.elem) {
+					bodyItem.push(
+						new div({
+							class: ["tab-pane", opt.animated ? "fade" : null, i.active ? "active show" : null],
+							id: `${i.id}-body`,
+							attr: {
+								role: "tabpanel",
+								"aria-labelledby": `${i.id}-head`,
+							},
+							elem: i.elem,
 						})
 					);
-
-					//make body
-					if (i.elem) {
-						bodyItem.push(
-							new div({
-								class: ["tab-pane", d.animate ? "fade" : null, i.active ? "active show" : null],
-								id: `${i.id}-body`,
-								attr: {
-									role: "tabpanel",
-									"aria-labelledby": `${i.id}-head`,
-								},
-								elem: i.elem,
-							})
-						);
-					}
-				});
-
-				//wrap headerItem in ul.nav
-				let headerCtl = new ul({
-					class: [
-						"nav",
-						//card-header-tabs if has body (will wrap in card)
-						bodyItem && bodyItem.length > 0
-							? d.style === "tab"
-								? "card-" + (d.align === "vertical-right" ? "footer" : "header") + "-tabs"
-								: d.style === "pill"
-								? "card-" + (d.align === "vertical-right" ? "footer" : "header") + "-pills"
-								: "card-" + (d.align === "vertical-right" ? "footer" : "header") + "-tabs"
-							: null,
-						d.column ? "flex-column mb-auto" : null,
-						d.flush ? "nav-flush" : null,
-						d.style === "tab" ? "nav-tabs" : d.style === "pill" ? "nav-pills" : null,
-						d.align === "right"
-							? "justify-content-end"
-							: d.align === "center"
-							? "justify-content-center"
-							: d.align === "vertical" || d.align === "vertical-right"
-							? "flex-column mb-auto"
-							: d.align === "fill"
-							? "nav-fill"
-							: null,
-					],
-					id: d.id ? `${d.id}-head` : null,
-					attr: {
-						role: "tablist",
-					},
-					elem: headerItem,
-				});
-
-				let bodyCtl =
-					bodyItem && bodyItem.length > 0
-						? new div({
-								class: "tab-content",
-								id: d.id ? `${d.id}-body` : null,
-								elem: bodyItem,
-						  })
-						: null;
-
-				if (bodyCtl) {
-					super.data = {
-						elem: new div(
-							[
-								"card p-0", //need p-0 to make sure no one change this padding
-								d.rounded ? null : "rounded-0",
-								d.border ? null : "border-0",
-							],
-							d.size
-								? d.align === "vertical-right"
-									? [
-											new div("row g-0", [
-												new div("col", new div("card-body", bodyCtl)),
-												new div([d.size, "card-footer border-0 p-2"], headerCtl),
-											]),
-									  ]
-									: [
-											new div("row g-0", [
-												new div([d.size, "card-header border-0"], headerCtl),
-												new div("col", new div("card-body", bodyCtl)),
-											]),
-									  ]
-								: [new div("card-header", headerCtl), new div("card-body", bodyCtl)]
-						),
-					};
-				} else {
-					super.data = {
-						elem: headerCtl,
-					};
 				}
+			});
+
+			//wrap headerItem in ul.nav
+			let headerCtl = new ul({
+				class: [
+					"nav",
+					//card-header-tabs if has body (will wrap in card)
+					bodyItem && bodyItem.length > 0
+						? opt.type === "tab"
+							? "card-" + (opt.headalign === "vertical-right" ? "footer" : "header") + "-tabs"
+							: opt.type === "pill"
+							? "card-" + (opt.headalign === "vertical-right" ? "footer" : "header") + "-pills"
+							: "card-" + (opt.headalign === "vertical-right" ? "footer" : "header") + "-tabs"
+						: null,
+					opt.column ? "flex-column mb-auto" : null,
+					opt.flush ? "nav-flush" : null,
+					opt.type === "tab" ? "nav-tabs" : opt.type === "pill" ? "nav-pills" : null,
+					opt.headalign === "right"
+						? "justify-content-end"
+						: opt.headalign === "center"
+						? "justify-content-center"
+						: opt.headalign === "vertical" || opt.headalign === "vertical-right"
+						? "flex-column mb-auto"
+						: opt.headalign === "fill"
+						? "nav-fill"
+						: null,
+				],
+				id: opt.id ? `${opt.id}-head` : null,
+				attr: {
+					role: "tablist",
+				},
+				elem: headerItem,
+			});
+
+			let bodyCtl =
+				bodyItem && bodyItem.length > 0
+					? new div({
+							class: "tab-content",
+							id: opt.id ? `${opt.id}-body` : null,
+							elem: bodyItem,
+					  })
+					: null;
+
+			if (bodyCtl) {
+				opt.class = core.merge.class(opt.class, "card p-0");
+				opt.elem = opt.size
+					? opt.headalign === "vertical-right"
+						? [
+								new div({
+									class: "row g-0",
+									elem: [
+										new div({
+											class: "col",
+											elem: new div({ class: "card-body", elem: bodyCtl }),
+										}),
+										new div({
+											class: [opt.size, "card-footer border-0 p-2"],
+											elem: headerCtl,
+										}),
+									],
+								}),
+						  ]
+						: [
+								new div({
+									class: "row g-0",
+									elem: [
+										new div({ class: [opt.size, "card-header border-0"], elem: headerCtl }),
+										new div({
+											class: "col",
+											elem: new div({ class: "card-body", elem: bodyCtl }),
+										}),
+									],
+								}),
+						  ]
+					: [
+							new div({ class: "card-header", elem: headerCtl }),
+							new div({ class: "card-body", elem: bodyCtl }),
+					  ];
+			} else {
+				opt.elem = headerCtl.data;
 			}
-		} else {
-			super.data = null;
+
+			delete opt.item;
+			delete opt.type;
+			delete opt.headalign;
+			delete opt.size;
+			delete opt.animated;
+			delete opt.flush;
+
+			super.data = opt;
 		}
 	}
 }

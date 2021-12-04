@@ -186,8 +186,6 @@ export default class toast extends div {
 			delete opt.debug;
 
 			super.data = opt;
-		} else {
-			super.data = null;
 		}
 	}
 

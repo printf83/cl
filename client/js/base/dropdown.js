@@ -171,8 +171,6 @@ export default class dropdown extends tag {
 						: [btnctl, menuctl],
 				};
 			}
-		} else {
-			super.data = null;
 		}
 	}
 }

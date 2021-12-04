@@ -34,8 +34,6 @@ export default class img extends tag {
 			delete opt.alt;
 
 			super.data = opt;
-		} else {
-			super.data = null;
 		}
 	}
 }

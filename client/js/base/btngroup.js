@@ -41,8 +41,6 @@ export default class btngroup extends div {
 			delete opt.vertical;
 
 			super.data = opt;
-		} else {
-			super.data = null;
 		}
 	}
 }

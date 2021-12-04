@@ -112,8 +112,6 @@ export default class icon extends tag {
 			delete opt.stack;
 
 			super.data = opt;
-		} else {
-			super.data = null;
 		}
 	}
 }

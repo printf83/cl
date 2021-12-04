@@ -526,8 +526,6 @@ export default class input extends tag {
 					elem: ctl,
 				};
 			}
-		} else {
-			super.data = null;
 		}
 	}
 }

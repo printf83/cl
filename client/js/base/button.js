@@ -97,8 +97,6 @@ export default class button extends tag {
 			delete opt.nowarp;
 
 			super.data = opt;
-		} else {
-			super.data = null;
 		}
 	}
 }

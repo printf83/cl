@@ -45,8 +45,6 @@ export class toggle extends tag {
 			});
 
 			super.data = t;
-		} else {
-			super.data = null;
 		}
 	}
 }
@@ -84,8 +82,6 @@ export class container extends div {
 			t.id = t.id || opt.id;
 
 			super.data = t;
-		} else {
-			super.data = null;
 		}
 	}
 }
