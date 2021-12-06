@@ -20,7 +20,7 @@ export default class badge extends span {
 
 					notification: false,
 					pill: false,
-					color: "secondary",
+					color: "danger",
 				},
 				opt
 			)
@@ -32,13 +32,15 @@ export default class badge extends span {
 	}
 	set data(opt) {
 		if (opt) {
-			opt.rounded = opt.pill ? "pill" : null;
+			opt.rounded = opt.rounded || (opt.pill ? "pill" : null);
 			opt.rounded = !opt.label && !opt.icon ? "circle" : opt.rounded;
+			opt.padding = !opt.label && !opt.icon ? 2 : null;
+			opt.borderweight = opt.borderweight || opt.notification ? 2 : null;
+			opt.bordercolor = opt.bordercolor || opt.notification ? "white" : null;
 
 			opt.class = core.merge.class(opt.class, [
 				"badge",
 				opt.notification ? "position-absolute top-0 start-100 translate-middle" : null,
-				!opt.label && !opt.icon ? "p-2" : null,
 			]);
 
 			opt.elem = [

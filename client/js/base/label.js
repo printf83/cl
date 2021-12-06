@@ -33,9 +33,10 @@ export default class label extends tag {
 			opt.attr = core.merge.attr(opt.attr, {
 				for: opt.for,
 			});
+
 			opt.elem = opt.elem || [
 				opt.icon
-					? new span({ class: opt.label && !opt.hidelabel ? "me-2" : null, elem: new icon(opt.icon) })
+					? new span({ marginEnd: opt.label && !opt.hidelabel ? 2 : null, elem: new icon(opt.icon) })
 					: null,
 				opt.label
 					? opt.hidelabel

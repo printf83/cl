@@ -30,11 +30,14 @@ export default class msg extends div {
 			switch (opt.weight) {
 				case "sm":
 				case "md":
-					opt.class = core.merge.class(opt.class, ["d-flex", "align-items-stretch", "gap-2"]);
+					opt.display = "flex";
+					opt.alignItem = "stretch";
+					opt.gap = 2;
 					opt.elem = [
 						opt.icon
 							? new div({
-									class: "d-flex align-item-start",
+									display: "flex",
+									alignItem: "start",
 									elem: new div({
 										class: opt.weight === "sm" ? "fs-5" : "display-4",
 										elem: new icon(opt.icon),
@@ -42,7 +45,8 @@ export default class msg extends div {
 							  })
 							: null,
 						new div({
-							class: "d-flex align-items-center",
+							display: "flex",
+							alignItem: "center",
 							elem: new div({ class: "text-break", elem: opt.elem }),
 						}),
 					];
@@ -56,10 +60,16 @@ export default class msg extends div {
 					opt.elem = [
 						opt.icon
 							? new h(1, {
-									class: "display-1 text-center mx-3",
+									class: "display-1",
+									align: "center",
+									marginX: 3,
 									elem: new icon(opt.icon),
 							  })
 							: null,
+						new div({
+							align: "center",
+							elem: new div({ class: "text-break", elem: opt.elem }),
+						}),
 					];
 
 					break;

@@ -14,12 +14,14 @@ export class form extends div {
 		super({
 			class: "container p-0",
 			elem: new div({
-				class: `row row-cols-${col} g-${gap}`,
+				gap: gap,
+				row: true,
+				class: `row-cols-${col}`,
 				elem: Array.isArray(elem)
 					? elem.map(function (i) {
-							return new div({ class: "col", elem: i });
+							return new div({ col: true, elem: i });
 					  })
-					: new div({ class: "col", elem: elem }),
+					: new div({ col: true, elem: elem }),
 			}),
 		});
 	}
@@ -28,14 +30,17 @@ export class form extends div {
 export class stack extends tag {
 	constructor(elem, gap = 2, col = "auto") {
 		super({
-			class: "container p-0",
+			padding: 0,
+			class: "container",
 			elem: new div({
-				class: `row row-cols-${col} g-${gap}`,
+				row: true,
+				gap: gap,
+				class: `row-cols-${col}`,
 				elem: Array.isArray(elem)
 					? elem.map(function (i) {
-							return new div({ class: "col", elem: i });
+							return new div({ col: true, elem: i });
 					  })
-					: new div({ class: "col", elem: elem }),
+					: new div({ col: true, elem: elem }),
 			}),
 		});
 	}

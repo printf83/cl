@@ -231,8 +231,8 @@ function isSupported(val, supported, unsupported) {
 }
 
 export function multiClass(val, format, supported, unsupported) {
-	if (val) {
-		return val
+	if (val || val === 0) {
+		return val || val === 0
 			? Array.isArray(val)
 				? val
 						.map(function (i) {

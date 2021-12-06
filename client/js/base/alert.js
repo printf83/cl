@@ -26,7 +26,7 @@ export class container extends div {
 					"sm",
 					{
 						icon: bI.icon,
-						style: bI.style,
+						type: bI.type,
 					},
 					opt.elem
 				);

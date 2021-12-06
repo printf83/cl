@@ -112,7 +112,8 @@ export class brand extends tag {
 	set data(opt) {
 		if (opt) {
 			opt.tag = opt.href ? "a" : "h1";
-			opt.class = core.merge.class(opt.class, ["navbar-brand", !opt.href ? "mb-0" : null]);
+			opt.marginBottom = !opt.href ? 0 : null;
+			opt.class = core.merge.class(opt.class, "navbar-brand");
 			opt.elem =
 				opt.elem ||
 				new label({
@@ -162,14 +163,14 @@ export class toggle extends collapse.toggle {
 
 export class formcontainer extends form {
 	constructor(opt) {
-		super(core.extend({}, { class: "d-flex", opt }));
+		super(core.extend({}, { display: "flex", opt }));
 	}
 
 	get data() {
 		return super.data;
 	}
 	set data(opt) {
-		opt.class = core.merge.class(opt.class, "d-flex");
+		opt.display = "flex";
 		super.data = opt;
 	}
 }
@@ -247,12 +248,19 @@ export class itemcontainer extends div {
 	}
 	set data(opt) {
 		opt.style = core.merge.style(opt.style, { "--bs-scroll-height": opt.scroll });
+		opt.marginEnd = opt.mxauto ? "auto" : null;
+
+		if (opt.parenttype === "collapse") {
+			opt.marginBottom = opt.parenttype === "collapse" ? [(2, "lg-0")] : null;
+		} else if (opt.parenttype === "offcanvas") {
+			opt.justifyContent = "end";
+			opt.paddingEnd = 3;
+		}
 		opt.class = core.merge.class(opt.class, [
 			"navbar-nav",
 			opt.mxauto ? "me-auto" : null,
 			opt.scroll ? "navbar-nav-scroll" : null,
-			opt.parenttype === "collapse" ? "mb-2 mb-lg-0" : null,
-			opt.parenttype === "offcanvas" ? "justify-content-end flex-grow-1 pe-3" : null,
+			opt.parenttype === "offcanvas" ? "flex-grow-1" : null,
 		]);
 
 		delete opt.mxauto;
@@ -293,7 +301,6 @@ export class item extends div {
 					href: opt.href,
 					class: [
 						"nav-link",
-						"text-md-center",
 						opt.active ? "active" : null,
 						opt.disabled ? "disabled" : null,
 						opt.option ? "dropdown-toggle" : null,

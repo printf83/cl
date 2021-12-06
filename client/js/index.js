@@ -7,8 +7,7 @@ import a from "./base/a.js";
 import button from "./base/button.js";
 // import * as inputgroup from "./base/inputgroup.js";
 // import icon from "./base/icon.js";
-// import tooltip from "./base/tooltip.js";
-// import badge from "./base/badge.js";
+import badge from "./base/badge.js";
 // import input from "./base/input.js";
 // import label from "./base/label.js";
 // import dropdown from "./base/dropdown.js";
@@ -33,6 +32,9 @@ import accordion from "./base/accordion.js";
 import breadcrumb from "./base/breadcrumb.js";
 import paging from "./base/paging.js";
 import * as navbar from "./base/navbar.js";
+import p from "./base/p.js";
+import tooltip from "./base/tooltip.js";
+import msg from "./base/msg.js";
 // import * as option from "./base/option.js";
 
 let imgurlindex = 0;
@@ -151,6 +153,38 @@ function doForm(max, cur) {
 							}).show();
 						},
 					}),
+					new button({
+						icon: "fire",
+						color: "warning",
+						label: "Large Modal",
+						onclick: function () {
+							new modal({
+								divider: false,
+								centerbutton: true,
+								elem: new msg({
+									weight: "lg",
+									icon: "i",
+									elem: "Hello world",
+								}),
+								button: [
+									{
+										label: "Okay",
+										color: "primary",
+										onclick: function (_sender, data) {
+											return true;
+										},
+									},
+									{
+										label: "Cancel",
+										onclick: function () {
+											return true;
+										},
+									},
+								],
+								footer: new input({ type: "switch", name: "showagain", label: "Show again" }),
+							}).show();
+						},
+					}),
 				],
 			}),
 			new a({
@@ -167,7 +201,42 @@ function doForm(max, cur) {
 					new alert.link({ label: "Google", href: "http://google.com" }),
 				],
 			}),
-			new h(3, { elem: "Hello World H3" }),
+			new h(3, { elem: ["Hello World H3", new badge({ label: "Test Badge", marginStart: 2, pill: true })] }),
+			new p({ elem: "Test p" }),
+
+			new div({
+				elem: new container.stack([
+					new button({
+						label: "Badge in button",
+						color: "primary",
+						badge: {
+							color: "danger",
+							notification: true,
+						},
+					}),
+					new button({
+						label: "Badge in button",
+						color: "primary",
+						badge: {
+							label: "45",
+							color: "danger",
+							marginStart: 2,
+						},
+					}),
+				]),
+			}),
+
+			new tooltip({
+				type: "popover",
+				msg: "This is popover",
+				title: "Title",
+				elem: new button({ color: "primary", label: "Test popover" }),
+			}),
+			new tooltip({
+				type: "tooltip",
+				msg: "This is tooltip",
+				elem: new button({ color: "primary", label: "Test tooltip" }),
+			}),
 			new btngroup({
 				shadow: true,
 				elem: [
@@ -192,7 +261,6 @@ function doForm(max, cur) {
 					color: "primary",
 					coloropacity: 25,
 					textcolor: "primary",
-					shadow: true,
 					borderweight: 3,
 					elem: new card.horizontal({
 						left: new card.img({

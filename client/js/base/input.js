@@ -469,10 +469,10 @@ export default class input extends tag {
 			ctl.push(invalidmsg);
 
 			if (opt.type === "hidden") {
-				ctl = [new div({ class: "d-none", elem: ctl })];
+				ctl = [new div({ display: "none", elem: ctl })];
 			} else {
 				if (opt.flex) {
-					ctl = [new div({ class: "d-flex", elem: ctl })];
+					ctl = [new div({ display: "flex", elem: ctl })];
 				} else {
 					if (["checkbox", "radio", "switch"].includes(opt.type)) {
 						ctl.push(labelctl);

@@ -190,19 +190,23 @@ export default class tab extends div {
 					: null;
 
 			if (bodyCtl) {
-				opt.class = core.merge.class(opt.class, "card p-0");
+				opt.class = core.merge.class(opt.class, "card");
+				opt.padding = 0;
 				opt.elem = opt.size
 					? opt.headalign === "vertical-right"
 						? [
 								new div({
-									class: "row g-0",
+									row: true,
+									gap: 0,
 									elem: [
 										new div({
-											class: "col",
+											col: true,
 											elem: new div({ class: "card-body", elem: bodyCtl }),
 										}),
 										new div({
-											class: [opt.size, "card-footer border-0 p-2"],
+											class: [opt.size, "card-footer"],
+											border: false,
+											padding: 2,
 											elem: headerCtl,
 										}),
 									],
@@ -212,9 +216,9 @@ export default class tab extends div {
 								new div({
 									class: "row g-0",
 									elem: [
-										new div({ class: [opt.size, "card-header border-0"], elem: headerCtl }),
+										new div({ class: [opt.size, "card-header"], border: false, elem: headerCtl }),
 										new div({
-											class: "col",
+											col: true,
 											elem: new div({ class: "card-body", elem: bodyCtl }),
 										}),
 									],

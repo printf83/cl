@@ -6,58 +6,41 @@ import tag from "./tag.js";
  * elem, opt : {attr,title,msg,type,placement,trigger}
  */
 export default class tooltip extends tag {
-	constructor(elem, ...arg) {
-		super();
-
-		if (elem && arg && arg.length > 0) {
-			let t = {
-				msg: null,
-			};
-
-			if (arg.length === 1 && typeof arg[0] === "string") {
-				t = {
-					msg: arg[0],
-				};
-			} else if (arg.length === 1) {
-				t = arg[0];
-			} else {
-				console.error("Unsupported argument", arg);
-			}
-
-			this.data = core.extend(
+	constructor(opt) {
+		super(
+			core.extend(
 				{},
 				{
-					_target: elem,
-
-					attr: null,
+					elem: null,
 					title: null,
 					msg: null,
 					type: null,
 					placement: "top",
 					trigger: "focus",
 				},
-				t
-			);
-		} else {
-			this.data = { _target: elem };
-		}
+				opt
+			)
+		);
 	}
 
 	get data() {
 		return super.data;
 	}
-	set data(d) {
-		if (d && d._target) {
-			let tmp = d._target.data;
+	set data(opt) {
+		if (opt && opt.elem) {
+			let tmp = opt.elem.data;
 			tmp.attr = core.merge.attr(tmp.attr, {
-				title: d.type === "popover" ? d.title : d.msg,
-				"data-bs-toggle": d.type,
-				"data-bs-content": d.type === "popover" ? d.msg : null,
-				"data-bs-trigger": d.type === "popover" ? d.trigger : null,
-				"data-bs-placement": d.type ? d.placement : null,
-				"data-bs-html": d.type && core.isHTML(d.msg) ? "true" : null,
+				title: opt.type === "popover" ? opt.title : opt.msg,
+				"data-bs-toggle": opt.type,
+				"data-bs-content": opt.type === "popover" ? opt.msg : null,
+				"data-bs-trigger": opt.type === "popover" ? opt.trigger : null,
+				"data-bs-placement": opt.type ? opt.placement : null,
+				"data-bs-html": opt.type && core.isHTML(opt.msg) ? "true" : null,
 			});
+
 			super.data = tmp;
+		} else {
+			super.data = null;
 		}
 	}
 }

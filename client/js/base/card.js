@@ -127,7 +127,8 @@ export class subtitle extends h {
 	}
 	set data(opt) {
 		if (opt) {
-			opt.class = core.merge.class(opt.class, "card-subtitle mb-2");
+			opt.marginBottom = 2;
+			opt.class = core.merge.class(opt.class, "card-subtitle");
 			super.data = opt;
 		}
 	}
@@ -192,13 +193,14 @@ export class horizontal extends div {
 	}
 	set data(opt) {
 		if (opt) {
-			opt.class = core.merge.class(opt.class, ["row", opt.gap !== null ? `g-${opt.gap}` : null]);
+			opt.gap = opt.class = core.merge.class(opt.class, ["row", opt.gap !== null ? `g-${opt.gap}` : null]);
 			opt.elem = [
 				new div({
-					class: core.multiClass(opt.size, "col-$1", null, "col"),
+					col: opt.size === "col" ? true : opt.size,
 					elem: opt.left,
 				}),
 				new div({
+					col: true,
 					class: "col",
 					elem: opt.right,
 				}),
@@ -207,7 +209,6 @@ export class horizontal extends div {
 			delete opt.left;
 			delete opt.right;
 			delete opt.size;
-			delete opt.gap;
 
 			super.data = opt;
 		}

@@ -250,13 +250,10 @@ export default class paging extends div {
 				delete opt.labelprev;
 
 				super.data = {
-					class: [
-						"d-flex",
-						"cl-paging",
-						"p-3",
-						opt.align ? "justify-content-" + opt.align : null,
-						opt.overflow ? "overflow-auto" : null,
-					],
+					display: "flex",
+					padding: 3,
+					justifyContent: opt.align ? opt.align : null,
+					class: ["cl-paging", opt.overflow ? "overflow-auto" : null],
 					elem: new ul(opt),
 				};
 

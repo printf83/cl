@@ -80,7 +80,8 @@ export default class modal extends tag {
 			let ctlHeader =
 				opt.icon || opt.title
 					? new div({
-							class: ["modal-header", !opt.divider ? "border-bottom-0" : null],
+							border: !opt.divider ? "bottom-0" : null,
+							class: ["modal-header"],
 							elem: [
 								new h(5, {
 									class: "modal-title",
@@ -104,10 +105,10 @@ export default class modal extends tag {
 				: false;
 
 			//generate body
-			let ctlBody = new div({ class: ["modal-body", hastab ? "p-0" : null], elem: opt.elem });
+			let ctlBody = new div({ class: ["modal-body"], padding: hastab ? 0 : null, elem: opt.elem });
 
 			//generate control
-			let ctlControl = new div({ class: ["footer-ctl", "float-start"], elem: opt.footer });
+			let ctlControl = new div({ float: "start", class: ["footer-ctl"], elem: opt.footer });
 
 			//generate button
 			let ctlButton = null;
@@ -180,8 +181,8 @@ export default class modal extends tag {
 
 				//container for button
 				ctlButton = opt.centerbutton
-					? new div({ class: ["d-grid", "gap-2", "col-12", "col-md-6", "mx-auto"], elem: btn })
-					: new div({ class: "justify-content-end", elem: new container.stack(btn) });
+					? new div({ display: "grid", gap: 2, col: [12, "md-6"], marginX: "auto", elem: btn })
+					: new div({ justifyContent: "end", elem: new container.stack(btn) });
 			}
 
 			//mix footer and button
@@ -189,25 +190,32 @@ export default class modal extends tag {
 			if (ctlButton || ctlControl) {
 				if (opt.centerbutton) {
 					ctlFooter = new div({
-						class: ["modal-footer", !opt.divider ? "border-top-0" : null],
+						border: !opt.divider ? "top-0" : null,
+						class: ["modal-footer"],
 						elem: new div({
-							class: "container-fluid g-0 p-0",
+							gap: 2,
+							padding: 0,
+							class: "container-fluid",
 							elem: [
-								new div({ class: "row", elem: new div({ class: "col", elem: ctlButton }) }),
-								new div({ class: "row", elem: new div({ class: "col", elem: ctlControl }) }),
+								new div({ row: true, elem: new div({ col: true, elem: ctlButton }) }),
+								new div({ row: true, elem: new div({ col: true, elem: ctlControl }) }),
 							],
 						}),
 					});
 				} else {
 					ctlFooter = new div({
-						class: ["modal-footer", !opt.divider ? "border-top-0" : null],
+						border: !opt.divider ? "top-0" : null,
+						class: ["modal-footer"],
 						elem: new div({
-							class: "container-fluid g-0 p-0",
+							gap: 0,
+							padding: 0,
+							class: "container-fluid",
 							elem: new div({
-								class: "row align-items-center",
+								row: true,
+								alignItem: "center",
 								elem: [
-									new div({ class: "col", elem: ctlControl }),
-									new div({ class: "col-auto", elem: ctlButton }),
+									new div({ col: true, elem: ctlControl }),
+									new div({ col: "auto", elem: ctlButton }),
 								],
 							}),
 						}),

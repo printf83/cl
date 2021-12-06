@@ -143,18 +143,19 @@ export default class toast extends div {
 			let ctlBody = new div({
 				class: "toast-body",
 				elem: new div({
-					class: "d-flex align-items-stretch",
+					display: "flex",
+					alignItem: "stretch",
 					elem: [
-						new div({ class: "me-auto", elem: opt.elem }),
+						new div({ marginEnd: "auto", elem: opt.elem }),
 						!(opt.icon || opt.title) && opt.close
 							? new div({
-									class: "ms-2",
+									marginStart: 2,
 									elem: new btnclose({
 										dismiss: "toast",
 										dark: opt.textcolor
 											? !(opt.textcolor === "light" || opt.textcolor === "white")
 											: true,
-										class: "my-1",
+										marginY: 1,
 									}),
 							  })
 							: null,

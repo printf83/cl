@@ -1,6 +1,26 @@
 "use strict";
 import * as core from "./core.js";
 
+function c1(val, iftrue, iffalse, other) {
+	if (val !== undefined && val !== null) {
+		if (val === true) {
+			return iftrue;
+		} else if (val === false) {
+			return iffalse;
+		} else {
+			return other;
+		}
+	}
+	return null;
+}
+
+function c2(val, format) {
+	if (val !== undefined && val !== null) {
+		return core.multiClass(val, format);
+	}
+	return null;
+}
+
 /**
  * opt : {tag,id,name,class,style,attr,href,onclick,onchange,onfocus,onblur,align,color,textcolor,bordercolor,border,elem}
  */
@@ -104,54 +124,44 @@ export default class tag {
 						opt.textcolor ? `text-${opt.textcolor}` : null,
 						opt.textopacity ? `text-opacity-${opt.textopacity}` : null,
 
-						opt.shadow === false
-							? "shadow-none"
-							: opt.shadow === true
-							? "shadow"
-							: opt.shadow
-							? `shadow-${opt.shadow}`
+						c1(opt.shadow, "shadow", "shadow-none", `shadow-${opt.shadow}`),
+						c1(opt.border, "border", "border-0", `border-${opt.border}`),
+						c1(opt.borderweight, null, null, `border border-${opt.borderweight}`),
+						c1(opt.bordercolor, null, null, `border border-${opt.bordercolor}`),
+						c1(opt.rounded, "rounded", "rounded-0", `rounded-${opt.rounded}`),
+						c1(opt.roundedtype, null, null, `rounded-${opt.roundedtype}`),
+
+						c2(opt.padding, "p-$1"),
+						c2(opt.paddingX, "px-$1"),
+						c2(opt.paddingY, "py-$1"),
+						c2(opt.paddingTop, "pt-$1"),
+						c2(opt.paddingBottom, "pb-$1"),
+						c2(opt.paddingStart, "ps-$1"),
+						c2(opt.paddingEnd, "pe-$1"),
+
+						c2(opt.margin, "m-$1"),
+						c2(opt.marginX, "mx-$1"),
+						c2(opt.marginY, "my-$1"),
+						c2(opt.marginTop, "mt-$1"),
+						c2(opt.marginBottom, "mb-$1"),
+						c2(opt.marginStart, "ms-$1"),
+						c2(opt.marginEnd, "me-$1"),
+
+						c2(opt.display, "d-$1"),
+						c2(opt.gap, "g-$1"),
+						c2(opt.gap, "gap-$1"),
+
+						opt.row ? "row" : null,
+
+						opt.col && opt.col !== undefined
+							? opt.col === true
+								? "col"
+								: core.multiClass(opt.col, "col-$1")
 							: null,
-						opt.border === false
-							? "border-0"
-							: opt.border === true || opt.borderweight || opt.bordercolor
-							? opt.border === true
-								? "border"
-								: opt.border
-								? `border-${opt.border}`
-								: null
-							: null,
-						opt.borderweight ? `border-${opt.borderweight}` : null,
-						opt.bordercolor ? `border-${opt.bordercolor}` : null,
 
-						opt.rounded === false
-							? "rounded-0"
-							: opt.rounded === true
-							? `rounded`
-							: opt.rounded
-							? `rounded-${opt.rounded}`
-							: null,
-
-						opt.roundedtype && opt.rounded !== false && opt.rounded !== true
-							? `rounded-${opt.roundedtype}`
-							: null,
-
-						opt.padding ? core.multiClass(opt.padding, "p-$1") : null,
-						opt.paddingX ? core.multiClass(opt.paddingX, "py-$1") : null,
-						opt.paddingY ? core.multiClass(opt.paddingY, "px-$1") : null,
-						opt.paddingTop ? core.multiClass(opt.paddingTop, "pt-$1") : null,
-						opt.paddingBottom ? core.multiClass(opt.paddingBottom, "pb-$1") : null,
-						opt.paddingStart ? core.multiClass(opt.paddingStart, "ps-$1") : null,
-						opt.paddingEnd ? core.multiClass(opt.paddingEnd, "pe-$1") : null,
-
-						opt.margin ? core.multiClass(opt.margin, "m-$1") : null,
-						opt.marginX ? core.multiClass(opt.marginX, "my-$1") : null,
-						opt.marginY ? core.multiClass(opt.marginY, "mx-$1") : null,
-						opt.marginTop ? core.multiClass(opt.marginTop, "mt-$1") : null,
-						opt.marginBottom ? core.multiClass(opt.marginBottom, "mb-$1") : null,
-						opt.marginStart ? core.multiClass(opt.marginStart, "ms-$1") : null,
-						opt.marginEnd ? core.multiClass(opt.marginEnd, "me-$1") : null,
-
-						opt.display ? core.multiClass(opt.display, "d-$1") : null,
+						opt.float ? core.multiClass(opt.float, "float-$1") : null,
+						opt.alignItem ? core.multiClass(opt.alignItem, "align-items-$1") : null,
+						opt.justifyContent ? core.multiClass(opt.justifyContent, "justify-content-$1") : null,
 					]),
 					style: opt.style,
 				}),
