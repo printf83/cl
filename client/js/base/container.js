@@ -12,7 +12,8 @@ import div from "./div.js";
 export class form extends div {
 	constructor(elem, gap = 2, col = 1) {
 		super({
-			class: "container p-0",
+			padding: 0,
+			class: "container",
 			elem: new div({
 				gap: gap,
 				row: true,

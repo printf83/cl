@@ -2,7 +2,7 @@
 import * as core from "./core.js";
 
 function c1(val, iftrue, iffalse, other) {
-	if (val !== undefined && val !== null) {
+	if (val !== null && val !== undefined) {
 		if (val === true) {
 			return iftrue;
 		} else if (val === false) {
@@ -15,7 +15,7 @@ function c1(val, iftrue, iffalse, other) {
 }
 
 function c2(val, format) {
-	if (val !== undefined && val !== null) {
+	if (val !== null && val !== undefined) {
 		return core.multiClass(val, format);
 	}
 	return null;
