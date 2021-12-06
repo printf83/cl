@@ -286,13 +286,7 @@ export class item extends div {
 	set data(opt) {
 		if (opt) {
 			opt.id = opt.id || core.UUID();
-			opt.class = core.merge.class(opt.class, [
-				"nav-item",
-				"d-flex",
-				"align-content-center",
-				"flex-wrap",
-				opt.option ? "dropdown" : null,
-			]);
+			opt.class = core.merge.class(opt.class, ["nav-item", opt.option ? "dropdown" : null]);
 
 			opt.elem = [
 				new a({
@@ -314,7 +308,7 @@ export class item extends div {
 				}),
 				opt.option
 					? new ul({
-							class: ["dropdown-menu", "w-100"],
+							class: ["dropdown-menu"],
 							attr: { "aria-labelledby": opt.id ? opt.id : null },
 							elem: new option.dropdown({ item: opt.option }),
 					  })
