@@ -31,7 +31,7 @@ import msg from "./base/msg.js";
 import dropdown from "./base/dropdown.js";
 // import accordion from "./base/accordion.js";
 // import breadcrumb from "./base/breadcrumb.js";
-// import paging from "./base/paging.js";
+import paging from "./base/paging.js";
 // import * as navbar from "./base/navbar.js";
 import * as option from "./base/option.js";
 
@@ -254,6 +254,9 @@ function doForm(max, cur) {
 				label: "Select Box",
 				before: new icon("fire"),
 				option: ["A", "B", "C"],
+				addctl: function () {
+					new toast("i", "Addctl function").show();
+				},
 			}),
 			new dropdown({
 				label: "Drowpdown",
@@ -288,12 +291,54 @@ function doForm(max, cur) {
 			}),
 			new tab({
 				type: "pill",
-				headalign: "vertical-right",
+				headalign: "right",
 				item: [
 					{ label: "1", icon: "fire", elem: "1" },
 					{ label: "2", elem: "2" },
 					{ label: "3", elem: "3" },
 					{ label: "4", elem: "4" },
+				],
+			}),
+			new paging({
+				total: 1260,
+				skip: 0,
+				limit: 10,
+				max: 5,
+				shadow: true,
+				onchange: function (event) {
+					console.log("Current skip:", event.detail.skip);
+				},
+			}),
+			new input({ type: "number", min: 1, max: 20, value: 5, label: "Number", numctl: true }),
+			new input({ type: "range", min: 1, max: 20, value: 5, label: "Range" }),
+
+			new div({
+				class: "col",
+				elem: [
+					new input({ name: "ctlgroup", value: "a", type: "switch", label: "A", inline: true }),
+					new input({ name: "ctlgroup", value: "b", type: "switch", label: "B", inline: true }),
+					new input({ name: "ctlgroup", value: "c", type: "switch", label: "C", inline: true }),
+					new input({ name: "ctlgroup", value: "d", type: "switch", label: "D", inline: true }),
+				],
+			}),
+
+			new div({
+				class: "col",
+				elem: [
+					new input({ name: "ctlgroup2", value: "e", type: "checkbox", label: "E", inline: true }),
+					new input({ name: "ctlgroup2", value: "f", type: "checkbox", label: "F", inline: true }),
+					new input({ name: "ctlgroup2", value: "g", type: "checkbox", label: "G", inline: true }),
+					new input({ name: "ctlgroup2", value: "h", type: "checkbox", label: "H", inline: true }),
+				],
+			}),
+
+			new div({
+				class: "col",
+				elem: [
+					new input({ name: "ctlgroup3", value: "i", type: "radio", label: "I", inline: true }),
+					new input({ name: "ctlgroup3", value: "j", type: "radio", label: "J", inline: true }),
+					new input({ name: "ctlgroup3", value: "k", type: "radio", label: "K", inline: true }),
+					new input({ name: "ctlgroup3", value: "l", type: "radio", label: "L", inline: true }),
 				],
 			}),
 		])
