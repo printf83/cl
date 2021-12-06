@@ -52,7 +52,7 @@ export default class breadcrumb extends nav {
 
 			opt.elem = opt.item
 				? new ol({
-						class: "breadcrumb",
+						class: ["breadcrumb", "m-0"],
 						elem: opt.item.map(function (i) {
 							i = core.extend(
 								{},

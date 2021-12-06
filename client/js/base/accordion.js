@@ -5,7 +5,7 @@ import div from "./div.js";
 import button from "./button.js";
 
 /**
- * opt : {tagoption,flush,autoclose,item:[{id,title,icon,active,elem}]}
+ * opt : {tagoption,flush,autoclose,item:[{id,label,icon,active,elem}]}
  */
 export default class accordion extends div {
 	constructor(opt) {
@@ -51,7 +51,7 @@ export default class accordion extends div {
 								{},
 								{
 									id: null,
-									title: null,
+									label: null,
 									icon: null,
 									active: false,
 									elem: null,
@@ -68,7 +68,7 @@ export default class accordion extends div {
 										id: `${i.id}-head`,
 										class: "accordion-header",
 										elem: new button({
-											label: i.title,
+											label: i.label,
 											icon: i.icon,
 											class: ["accordion-button", !i.active ? "collapsed" : null],
 											attr: {
@@ -86,14 +86,14 @@ export default class accordion extends div {
 											"aria-labelledby": `${i.id}-head`,
 											"data-bs-parent": opt.autoclose ? `#${opt.id}` : null,
 										},
-										elem: new div({ class: "accordion-body", elem: i.item }),
+										elem: new div({ class: "accordion-body", elem: i.elem }),
 									}),
 								],
 							});
 					  })
 					: null;
 
-			super.data = d;
+			super.data = opt;
 		}
 	}
 }

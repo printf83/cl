@@ -27,13 +27,13 @@ import hr from "./base/hr.js";
 import btngroup from "./base/btngroup.js";
 import input from "./base/input.js";
 import icon from "./base/icon.js";
-import msg from "./base/msg.js";
+// import msg from "./base/msg.js";
 import dropdown from "./base/dropdown.js";
-// import accordion from "./base/accordion.js";
-// import breadcrumb from "./base/breadcrumb.js";
+import accordion from "./base/accordion.js";
+import breadcrumb from "./base/breadcrumb.js";
 import paging from "./base/paging.js";
 import * as navbar from "./base/navbar.js";
-import * as option from "./base/option.js";
+// import * as option from "./base/option.js";
 
 let imgurlindex = 0;
 function imgurl(width, height) {
@@ -414,27 +414,28 @@ function doForm(max, cur) {
 					}),
 				],
 			}),
-		])
-		// new navbar.container({
-		// 	expand: "lg",
-		// 	color: "light",
-		// 	elem: [
-		// 		// new navbar.brand({
-		// 		// 	label: "Navbar",
-		// 		// }),
 
-		// 		new input({ type: "text", before: "@", placeholder: "Username", size: "col" }),
-		// 		// new navbar.formcontainer([
-		// 		// 	new input({
-		// 		// 		type: "search",
-		// 		// 		placeholder: "Search",
-		// 		// 		hiddenlabel: "Search",
-		// 		// 		class: "me-2",
-		// 		// 	}),
-		// 		// 	new button({ label: "Search", color: "success", outline: true }),
-		// 		// ]),
-		// 	],
-		// })
+			new breadcrumb({
+				color: "light",
+				class: "p-3",
+				rounded: true,
+				shadow: true,
+				item: [
+					{ label: "Live", href: "https://www.live.com" },
+					{ label: "Github", href: "https://www.github.com" },
+					{ label: "Bing", href: "https://www.bing.com" },
+				],
+			}),
+
+			new accordion({
+				item: [
+					{ label: "A1", elem: "A1 Item" },
+					{ label: "A2", elem: "A2 Item" },
+					{ label: "A3", elem: "A3 Item" },
+					{ label: "A4", elem: "A4 Item" },
+				],
+			}),
+		])
 	);
 	// cl.replaceChild(
 	// 	root,
