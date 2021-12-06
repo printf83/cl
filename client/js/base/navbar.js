@@ -1,6 +1,7 @@
 "use strict";
 import * as core from "./core.js";
 import tag from "./tag.js";
+import nav from "./nav.js";
 import * as collapse from "./collapse.js";
 import button from "./button.js";
 import div from "./div.js";
@@ -11,27 +12,17 @@ import btnclose from "./btnclose.js";
 import ul from "./ul.js";
 import span from "./span.js";
 import a from "./a.js";
-import option from "./option.js";
+import * as option from "./option.js";
 
-export class container extends tag {
-	constructor(...arg) {
-		super();
-
-		if (arg && arg.length > 0) {
-			let t = arg[0];
-
-			this.data = core.extend(
+export class container extends nav {
+	constructor(opt) {
+		super(
+			core.extend(
 				{},
 				{
-					id: null,
-					attr: null,
-					class: null,
-					style: null,
-
-					containerfluid: true,
-					containerclass: null,
-					containerattr: null,
-					containerstyle: null,
+					body: {
+						fluid: true,
+					},
 
 					expand: null, //sm|md|lg|xl|xxl|null|''
 					dark: false, //light|dark
@@ -39,71 +30,63 @@ export class container extends tag {
 					position: null, //fixed-top|fixed-bottom|sticky-top|null
 					elem: null,
 				},
-				t
-			);
-		}
+				opt
+			)
+		);
 	}
 
 	get data() {
 		return super.data;
 	}
-	set data(d) {
-		if (d) {
-			super.data = {
-				tag: "nav",
+	set data(opt) {
+		if (opt) {
+			opt.class = core.merge.class(opt.class, [
+				"navbar",
+				opt.expand || opt.expand === ""
+					? opt.expand === ""
+						? "navbar-expand"
+						: `navbar-expand-${opt.expand}`
+					: null,
+				opt.dark ? `navbar-${opt.dark ? "dark" : "light"}` : null,
+				opt.position ? opt.position : null,
+			]);
 
-				id: d.id,
-				name: d.name,
-				attr: d.attr,
-				style: d.style,
+			opt.body = core.extend(
+				{},
+				{
+					fluid: true,
+				},
+				opt.body
+			);
 
-				align: d.align,
-				color: d.color,
-				textcolor: d.textcolor,
-				bordercolor: d.bordercolor,
-				border: d.border,
+			opt.body.class = core.merge.attr(opt.body.class, [
+				opt.body.fluid === true
+					? "container-fluid"
+					: opt.body.fluid === false
+					? "container"
+					: core.multiClass(opt.body.fluid, "container-$1"),
+			]);
 
-				onchange: d.onchange,
-				onclick: d.onclick,
-				onfocus: d.onfocus,
-				onblur: d.onblur,
+			opt.body.elem = opt.body.elem || opt.elem;
 
-				class: core.merge.class(d.class, [
-					"navbar",
-					d.expand || d.expand === ""
-						? d.expand === ""
-							? "navbar-expand"
-							: `navbar-expand-${d.expand}`
-						: null,
-					d.dark ? `navbar-${d.dark ? "dark" : "light"}` : null,
-					d.position ? d.position : null,
-				]),
-				elem: new div({
-					attr: core.merge.attr(d.attr, {
-						class: core.merge.class(d.containerclass, [
-							d.containerfluid === true
-								? "container-fluid"
-								: d.containerfluid === false
-								? "container"
-								: core.multiClass(d.containerfluid, "container-$1"),
-						]),
-						style: d.containerstyle,
-					}),
-					elem: d.elem,
-				}),
-			};
+			delete opt.body.fluid;
+
+			opt.elem = new div(opt.body);
+
+			delete opt.body;
+			delete opt.expand;
+			delete opt.dark;
+			delete opt.position;
+
+			super.data = opt;
 		}
 	}
 }
 
 export class brand extends tag {
-	constructor(...arg) {
-		super();
-
-		if (arg && arg.length > 0) {
-			let t = arg[0];
-
-			this.data = core.extend(
+	constructor(opt) {
+		super(
+			core.extend(
 				{},
 				{
 					id: null,
@@ -118,428 +101,248 @@ export class brand extends tag {
 					img: null,
 					elem: null,
 				},
-				t
-			);
-		}
+				opt
+			)
+		);
 	}
 
 	get data() {
 		return super.data;
 	}
-	set data(d) {
-		if (d) {
-			super.data = {
-				tag: d.href ? "a" : "h1",
+	set data(opt) {
+		if (opt) {
+			opt.tag = opt.href ? "a" : "h1";
+			opt.class = core.merge.class(opt.class, ["navbar-brand", !opt.href ? "mb-0" : null]);
+			opt.elem =
+				opt.elem ||
+				new label({
+					icon: opt.icon,
+					label: opt.label,
+				});
 
-				id: d.id,
-				name: d.name,
-				attr: d.attr,
-				style: d.style,
+			delete opt.icon;
+			delete opt.label;
 
-				align: d.align,
-				color: d.color,
-				textcolor: d.textcolor,
-				bordercolor: d.bordercolor,
-				border: d.border,
-
-				onchange: d.onchange,
-				onclick: d.onclick,
-				onfocus: d.onfocus,
-				onblur: d.onblur,
-
-				href: d.href,
-
-				class: core.merge.class(d.class, ["navbar-brand", !d.href ? "mb-0" : null]),
-
-				elem: d.elem
-					? d.elem
-					: new label({
-							icon: d.icon,
-							label: d.label,
-					  }),
-			};
+			super.data = opt;
 		}
 	}
 }
 
-export class toggle extends tag {
-	constructor(...arg) {
-		super();
-
-		if (arg && arg.length > 0) {
-			let t = {
-				target: null,
-			};
-
-			if (arg.length === 1) {
-				if (typeof arg[0] === "string") {
-					t.target = arg[0];
-				} else {
-					t = arg[0];
-				}
-			} else {
-				console.error("Unsupported argument", arg);
-			}
-
-			this.data = core.extend(
+export class toggle extends collapse.toggle {
+	constructor(opt) {
+		super(
+			core.extend(
 				{},
 				{
 					target: null,
 					toggle: "collapse", //collapse | offcanvas
 				},
-				t
-			);
-		} else {
-			this.data = null;
-		}
+				opt
+			)
+		);
 	}
 
 	get data() {
 		return super.data;
 	}
-	set data(d) {
-		if (d) {
-			super.data = {
-				elem: new collapse.toggle(
-					new button({
-						icon: "bars",
-						label: "Toggle navigation",
-						hidelabel: true,
-						class: "navbar-toggler",
-					}),
-					{
-						target: d.target,
-						toggle: d.toggle,
-					}
-				),
-			};
+	set data(opt) {
+		if (opt) {
+			opt.elem =
+				opt.elem ||
+				new button({
+					icon: "bars",
+					label: "Toggle navigation",
+					hidelabel: true,
+					class: "navbar-toggler",
+				});
+			super.data = opt;
 		}
 	}
 }
 
 export class formcontainer extends form {
-	constructor(...arg) {
-		super();
-
-		if (arg && arg.length > 0) {
-			let t = {
-				elem: null,
-			};
-
-			if (arg.length === 1) {
-				if (Array.isArray(arg[0]) || arg[0].hasOwnProperty("cl")) {
-					t.elem = arg[0];
-				} else {
-					t = arg[0];
-				}
-			} else {
-				console.error("Unsupported argument", arg);
-			}
-
-			this.data = core.extend(
-				{},
-				{
-					id: null,
-					class: null,
-					style: null,
-					attr: null,
-					elem: null,
-				},
-				t
-			);
-		} else {
-			this.data = null;
-		}
+	constructor(opt) {
+		super(core.extend({}, { class: "d-flex", opt }));
 	}
 
 	get data() {
 		return super.data;
 	}
-	set data(d) {
-		if (d) {
-			super.data = {
-				id: d.id,
-				style: d.style,
-				attr: d.attr,
-				class: core.merge.class(d.class, "d-flex"),
-				elem: d.elem,
-			};
-		}
+	set data(opt) {
+		opt.class = core.merge.class(opt.class, "d-flex");
+		super.data = opt;
 	}
 }
 
 export class collapsecontainer extends div {
-	constructor(...arg) {
-		super();
-
-		if (arg && arg.length > 0) {
-			let t = {
-				elem: null,
-			};
-
-			if (arg.length === 1) {
-				if (Array.isArray(arg[0]) || arg[0].hasOwnProperty("cl")) {
-					t.elem = arg[0];
-				} else {
-					t = arg[0];
-				}
-			} else {
-				console.error("Unsupported argument", arg);
-			}
-
-			this.data = core.extend(
-				{},
-				{
-					id: null,
-					class: null,
-					style: null,
-					attr: null,
-					elem: null,
-				},
-				t
-			);
-		} else {
-			this.data = null;
-		}
+	constructor(opt) {
+		super(core.extend({}, { class: ["collapse", "navbar-collapse"] }, opt));
 	}
 
 	get data() {
 		return super.data;
 	}
-	set data(d) {
-		if (d) {
-			super.data = {
-				id: d.id,
-				style: d.style,
-				attr: d.attr,
-				class: core.merge.class(d.class, ["collapse", "navbar-collapse"]),
-				elem: d.elem,
-			};
-		}
+	set data(opt) {
+		opt.class = core.merge.class(opt.class, ["collapse", "navbar-collapse"]);
+		super.data = opt;
 	}
 }
 
 export class offcanvascontainer extends div {
-	constructor(...arg) {
-		super();
-
-		if (arg && arg.length > 0) {
-			let t = {
-				icon: null,
-				title: null,
-				elem: null,
-			};
-
-			if (arg.length === 3) {
-				t.icon = arg[0];
-				t.title = arg[1];
-				t.elem = arg[2];
-			} else if (arg.length === 2) {
-				t.title = arg[0];
-				t.elem = arg[1];
-			} else if (arg.length === 1) {
-				if (Array.isArray(arg[0]) || arg[0].hasOwnProperty("cl")) {
-					t.elem = arg[0];
-				} else {
-					t = arg[0];
-				}
-			} else {
-				console.error("Unsupported argument", arg);
-			}
-
-			this.data = core.extend(
-				{},
-				{
-					id: null,
-					title: null,
-					class: null,
-					style: null,
-					attr: null,
-					elem: null,
-				},
-				t
-			);
-		} else {
-			this.data = null;
-		}
+	constructor(opt) {
+		super(core.extend({}, { icon: null, title: null }, opt));
 	}
 
 	get data() {
 		return super.data;
 	}
-	set data(d) {
-		if (d) {
-			d.id = d.id || core.UUID();
+	set data(opt) {
+		opt.id = opt.id || core.UUID();
+		opt.attr = core.merge.attr(opt.attr, {
+			tabindex: "-1",
+			"aria-labelledby": opt.id ? `${opt.id}-label` : null,
+		});
 
-			super.data = {
-				id: d.id,
-				style: d.style,
-				attr: core.merge.attr(d.attr, {
-					tabindex: "-1",
-					"aria-labelledby": d.id ? `${d.id}-label` : null,
-				}),
-				class: core.merge.class(d.class, ["offcanvas", "offcanvas-end"]),
+		opt.class = core.merge.class(opt.class, ["offcanvas", "offcanvas-end"]);
+
+		opt.elem = [
+			new div({
+				class: "offcanvas-header",
 				elem: [
-					new div("offcanvas-header", [
-						new h(5, { class: "offcanvas-title", id: `${d.id}-label`, elem: new label(d.icon, d.title) }),
-						new btnclose({ class: "text-reset", dismiss: "offcanvas", label: "Close" }),
-					]),
-					new div("offcanvas-body", d.elem),
+					new h(5, {
+						class: "offcanvas-title",
+						id: `${opt.id}-label`,
+						elem: new label({ icon: opt.icon, title: opt.title }),
+					}),
+					new btnclose({ class: "text-reset", dismiss: "offcanvas", label: "Close" }),
 				],
-			};
-		}
+			}),
+			new div({ class: "offcanvas-body", elem: opt.elem }),
+		];
+
+		delete opt.icon;
+		delete opt.title;
+
+		super.data = opt;
 	}
 }
 
 export class itemcontainer extends div {
-	constructor(...arg) {
-		super();
-
-		if (arg && arg.length > 0) {
-			let t = {
-				elem: null,
-			};
-
-			if (arg.length === 1) {
-				if (Array.isArray(arg[0]) || arg[0].hasOwnProperty("cl")) {
-					t.elem = arg[0];
-				} else {
-					t = arg[0];
-				}
-			} else {
-				console.error("Unsupported argument", arg);
-			}
-
-			this.data = core.extend(
+	constructor(opt) {
+		super(
+			core.extend(
 				{},
 				{
-					id: null,
-					class: null,
-					style: null,
-					attr: null,
-					elem: null,
-
 					scroll: null,
 					mxauto: true,
-					parenttype: null, //collapse|offcanvas|null
+					parenttype: "collapse", //collapse|offcanvas|null
 				},
-				t
-			);
-		} else {
-			this.data = null;
-		}
+				opt
+			)
+		);
 	}
 
 	get data() {
 		return super.data;
 	}
-	set data(d) {
-		if (d) {
-			super.data = {
-				id: d.id,
-				style: core.merge.style(d.style, { "--bs-scroll-height": d.scroll }),
-				attr: d.attr,
-				class: core.merge.class(d.class, [
-					"navbar-nav",
-					d.mxauto ? "me-auto" : null,
-					d.scroll ? "navbar-nav-scroll" : null,
-					d.parenttype === "collapse" ? "mb-2 mb-lg-0" : null,
-					d.parenttype === "offcanvas" ? "justify-content-end flex-grow-1 pe-3" : null,
-				]),
-				elem: d.elem,
-			};
-		}
+	set data(opt) {
+		opt.style = core.merge.style(opt.style, { "--bs-scroll-height": opt.scroll });
+		opt.class = core.merge.class(opt.class, [
+			"navbar-nav",
+			opt.mxauto ? "me-auto" : null,
+			opt.scroll ? "navbar-nav-scroll" : null,
+			opt.parenttype === "collapse" ? "mb-2 mb-lg-0" : null,
+			opt.parenttype === "offcanvas" ? "justify-content-end flex-grow-1 pe-3" : null,
+		]);
+
+		delete opt.mxauto;
+		delete opt.scroll;
+		delete opt.parenttype;
+
+		super.data = opt;
 	}
 }
 
 export class item extends div {
-	constructor(...arg) {
-		super();
-
-		if (arg && arg.length > 0) {
-			let t = arg[0];
-
-			this.data = core.extend(
+	constructor(opt) {
+		super(
+			core.extend(
 				{},
 				{
-					id: null,
-					class: null,
 					option: null,
-					href: "javascript:void(0)",
-					onclick: null,
 					icon: null,
 					label: null,
 					active: false,
 					disabled: false,
 				},
-				t
-			);
-		} else {
-			this.data = null;
-		}
+				opt
+			)
+		);
 	}
 
 	get data() {
 		return super.data;
 	}
-	set data(d) {
-		if (d) {
-			d.id = d.id || core.UUID();
-			super.data = {
-				// tag: "div",
-				attr: d.attr,
-				style: d.style,
-				onclick: d.onclick,
-				class: core.merge.class(d.class, [
-					"nav-item",
-					"d-flex",
-					"align-content-center",
-					"flex-wrap",
-					d.option ? "dropdown" : null,
-				]),
-				elem: [
-					new a({
-						id: d.id,
-						href: d.href,
-						class: [
-							"nav-link",
-							"text-md-center",
-							d.active ? "active" : null,
-							d.disabled ? "disabled" : null,
-							d.option ? "dropdown-toggle" : null,
-						],
-						attr: {
-							"aria-current": d.active ? "page" : null,
-							role: "button",
-							"data-bs-toggle": d.option ? "dropdown" : null,
-							"aria-expanded": d.option ? "false" : null,
-						},
-						elem: new label(d.icon, d.label),
-					}),
-					d.option
-						? new ul({
-								class: ["dropdown-menu", "w-sm-100"],
-								attr: { "aria-labelledby": d.id ? d.id : null },
-								elem: new option({ type: "dropdown", item: d.option }),
-						  })
-						: null,
-				],
-			};
+	set data(opt) {
+		if (opt) {
+			opt.id = opt.id || core.UUID();
+			opt.class = core.merge.class(opt.class, [
+				"nav-item",
+				"d-flex",
+				"align-content-center",
+				"flex-wrap",
+				opt.option ? "dropdown" : null,
+			]);
+
+			opt.elem = [
+				new a({
+					href: opt.href,
+					class: [
+						"nav-link",
+						"text-md-center",
+						opt.active ? "active" : null,
+						opt.disabled ? "disabled" : null,
+						opt.option ? "dropdown-toggle" : null,
+					],
+					attr: {
+						"aria-current": opt.active ? "page" : null,
+						role: "button",
+						"data-bs-toggle": opt.option ? "dropdown" : null,
+						"aria-expanded": opt.option ? "false" : null,
+					},
+					elem: new label({ icon: opt.icon, label: opt.label }),
+				}),
+				opt.option
+					? new ul({
+							class: ["dropdown-menu", "w-100"],
+							attr: { "aria-labelledby": opt.id ? opt.id : null },
+							elem: new option.dropdown({ item: opt.option }),
+					  })
+					: null,
+			];
+
+			delete opt.href;
+			delete opt.active;
+			delete opt.disabled;
+			delete opt.option;
+			delete opt.icon;
+			delete opt.label;
+
+			super.data = opt;
 		}
 	}
 }
 
 export default class text extends span {
-	constructor(...arg) {
-		super(...arg);
+	constructor(opt) {
+		super(core.extend({}, { class: "navbar-text" }, opt));
 	}
 
 	get data() {
 		return super.data;
 	}
-	set data(arg) {
-		let tmp = super.data;
-		tmp.class = core.merge.class(tmp.class, "navbar-text");
-		super.data = tmp;
+	set data(opt) {
+		opt.class = core.merge.class(opt.class, "navbar-text");
+		super.data = opt;
 	}
 }

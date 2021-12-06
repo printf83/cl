@@ -32,7 +32,7 @@ import dropdown from "./base/dropdown.js";
 // import accordion from "./base/accordion.js";
 // import breadcrumb from "./base/breadcrumb.js";
 import paging from "./base/paging.js";
-// import * as navbar from "./base/navbar.js";
+import * as navbar from "./base/navbar.js";
 import * as option from "./base/option.js";
 
 let imgurlindex = 0;
@@ -65,6 +65,7 @@ function doForm(max, cur) {
 	let tid1 = core.UUID();
 	let tid2 = core.UUID();
 	let tid3 = core.UUID();
+	let tid4 = core.UUID();
 
 	cl.replaceChild(
 		root,
@@ -339,6 +340,78 @@ function doForm(max, cur) {
 					new input({ name: "ctlgroup3", value: "j", type: "radio", label: "J", inline: true }),
 					new input({ name: "ctlgroup3", value: "k", type: "radio", label: "K", inline: true }),
 					new input({ name: "ctlgroup3", value: "l", type: "radio", label: "L", inline: true }),
+				],
+			}),
+
+			new navbar.container({
+				expand: "lg",
+				color: "light",
+				elem: [
+					new navbar.brand({
+						label: "Navbar",
+					}),
+					new input({ type: "text", before: "@", placeholder: "Username", size: "col" }),
+					new navbar.formcontainer({
+						elem: [
+							new input({
+								type: "search",
+								placeholder: "Search",
+								hiddenlabel: "Search",
+								class: "me-2",
+							}),
+							new button({ label: "Search", color: "success", outline: true }),
+						],
+					}),
+				],
+			}),
+
+			new navbar.container({
+				expand: "lg",
+				color: "light",
+				elem: [
+					new navbar.toggle({
+						target: `#${tid4}`, //this id must same with ns.navbar.collapsecontainer id
+						toggle: "collapse",
+					}),
+					new navbar.brand({
+						label: "Navbar",
+						icon: "fire",
+					}),
+					new navbar.collapsecontainer({
+						id: tid4,
+						elem: new navbar.itemcontainer({
+							parenttype: "collapse",
+							elem: [
+								new navbar.item({
+									label: "Home",
+									active: "true",
+								}),
+								new navbar.item({
+									label: "Features",
+								}),
+								new navbar.item({
+									label: "Pricing",
+									option: [
+										{ label: "Action" },
+										{
+											label: "Another action",
+										},
+										{
+											label: "Something else here",
+										},
+										{ value: "-" },
+										{
+											label: "Separated link",
+										},
+									],
+								}),
+								new navbar.item({
+									label: "Disabled",
+									disabled: true,
+								}),
+							],
+						}),
+					}),
 				],
 			}),
 		])
