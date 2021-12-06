@@ -357,7 +357,7 @@ function doForm(max, cur) {
 								type: "search",
 								placeholder: "Search",
 								hiddenlabel: "Search",
-								class: "me-2",
+								marginEnd: 2,
 							}),
 							new button({ label: "Search", color: "success", outline: true }),
 						],
@@ -417,7 +417,7 @@ function doForm(max, cur) {
 
 			new breadcrumb({
 				color: "light",
-				class: "p-3",
+				padding: 3,
 				rounded: true,
 				shadow: true,
 				item: [
@@ -428,6 +428,7 @@ function doForm(max, cur) {
 			}),
 
 			new accordion({
+				shadow: true,
 				item: [
 					{ label: "A1", elem: "A1 Item" },
 					{ label: "A2", elem: "A2 Item" },

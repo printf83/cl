@@ -219,26 +219,33 @@ function isListed(val, listed) {
 }
 
 function isSupported(val, supported, unsupported) {
-	if (isListed(val, unsupported)) {
+	if (unsupported && isListed(val, unsupported)) {
 		return false;
-	} else {
-		return isListed(val, supported);
 	}
+
+	if (supported && isListed(val, supported)) {
+		return true;
+	}
+
+	return true;
 }
 
 export function multiClass(val, format, supported, unsupported) {
-	//core.multiClass(["lg-12","xl-3","md-2","2"],"col-$1")
-	return val
-		? Array.isArray(val)
-			? val
-					.map(function (i) {
-						return isSupported(i, supported, unsupported) ? format.replace("$1", i) : i;
-					})
-					.join(" ")
-			: isSupported(val, supported, unsupported)
-			? format.replace("$1", val)
-			: val
-		: null;
+	if (val) {
+		return val
+			? Array.isArray(val)
+				? val
+						.map(function (i) {
+							return isSupported(i, supported, unsupported) ? format.replace("$1", i) : i;
+						})
+						.join(" ")
+				: isSupported(val, supported, unsupported)
+				? format.replace("$1", val)
+				: val
+			: null;
+	} else {
+		return val;
+	}
 }
 export function documentReady(callback) {
 	if (document.readyState != "loading") {

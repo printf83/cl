@@ -40,6 +40,24 @@ export default class tag {
 					textcolor: null,
 					textopacity: null,
 
+					padding: null,
+					paddingX: null,
+					paddingY: null,
+					paddingTop: null,
+					paddingBottom: null,
+					paddingStart: null,
+					paddingEnd: null,
+
+					margin: null,
+					marginX: null,
+					marginY: null,
+					marginTop: null,
+					marginBottom: null,
+					marginStart: null,
+					marginEnd: null,
+
+					display: null,
+
 					shadow: null,
 
 					border: null,
@@ -116,6 +134,24 @@ export default class tag {
 						opt.roundedtype && opt.rounded !== false && opt.rounded !== true
 							? `rounded-${opt.roundedtype}`
 							: null,
+
+						opt.padding ? core.multiClass(opt.padding, "p-$1") : null,
+						opt.paddingX ? core.multiClass(opt.paddingX, "py-$1") : null,
+						opt.paddingY ? core.multiClass(opt.paddingY, "px-$1") : null,
+						opt.paddingTop ? core.multiClass(opt.paddingTop, "pt-$1") : null,
+						opt.paddingBottom ? core.multiClass(opt.paddingBottom, "pb-$1") : null,
+						opt.paddingStart ? core.multiClass(opt.paddingStart, "ps-$1") : null,
+						opt.paddingEnd ? core.multiClass(opt.paddingEnd, "pe-$1") : null,
+
+						opt.margin ? core.multiClass(opt.margin, "m-$1") : null,
+						opt.marginX ? core.multiClass(opt.marginX, "my-$1") : null,
+						opt.marginY ? core.multiClass(opt.marginY, "mx-$1") : null,
+						opt.marginTop ? core.multiClass(opt.marginTop, "mt-$1") : null,
+						opt.marginBottom ? core.multiClass(opt.marginBottom, "mb-$1") : null,
+						opt.marginStart ? core.multiClass(opt.marginStart, "ms-$1") : null,
+						opt.marginEnd ? core.multiClass(opt.marginEnd, "me-$1") : null,
+
+						opt.display ? core.multiClass(opt.display, "d-$1") : null,
 					]),
 					style: opt.style,
 				}),
