@@ -170,7 +170,6 @@ export default class toast extends div {
 				"data-bs-autohide": opt.autohide ? "true" : "false",
 				"data-bs-delay": opt.delay,
 				"data-cl-position": opt.position,
-				zIndex: 1,
 			});
 			opt.elem = [ctlHeader, ctlBody];
 
@@ -217,8 +216,8 @@ export default class toast extends div {
 					attr: {
 						"aria-live": "polite",
 						"aria-atomic": "true",
-						zIndex: 3,
 					},
+					style: { "z-index": 2 },
 					elem: new div({ class: ["toast-container", "position-fixed", "p-3", position] }),
 				})
 			);

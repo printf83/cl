@@ -38,6 +38,7 @@ export default class msg extends div {
 							? new div({
 									display: "flex",
 									alignItem: "start",
+									marginEnd: 2,
 									elem: new div({
 										class: opt.weight === "sm" ? "fs-5" : "display-4",
 										elem: new icon(opt.icon),

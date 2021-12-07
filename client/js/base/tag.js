@@ -111,6 +111,8 @@ export default class tag {
 					onfocus: opt.onfocus,
 					onblur: opt.onblur,
 
+					style: opt.style,
+
 					class: core.merge.class(opt.class, [
 						opt.align ? `text-${opt.align}` : null,
 						opt.position ? `position-${opt.position}` : null,
@@ -163,7 +165,6 @@ export default class tag {
 						opt.alignItem ? core.multiClass(opt.alignItem, "align-items-$1") : null,
 						opt.justifyContent ? core.multiClass(opt.justifyContent, "justify-content-$1") : null,
 					]),
-					style: opt.style,
 				}),
 				elem: opt.elem,
 			};
