@@ -1,6 +1,6 @@
 "use strict";
 import * as core from "./core.js";
-import div from "./tag.js";
+import div from "./div.js";
 /**
  * opt : {tagoption,height,item : {baritem}}
  * baritem : {tagoption,label,stripe,animated,min,max,value}
@@ -24,7 +24,6 @@ export class container extends div {
 	}
 	set data(opt) {
 		if (opt) {
-			opt.tag = "div";
 			opt.class = core.merge.class(opt.class, "progress");
 			opt.style = core.merge.style(opt.style, {
 				height: opt.height > 0 ? `${opt.height}px` : null,
@@ -85,7 +84,6 @@ export class bar extends div {
 
 			let percent = opt.max - opt.min > 0 ? parseInt((opt.value / (opt.max - opt.min)) * 100, 10) : 0;
 
-			opt.tag = "div";
 			opt.class = core.merge.class(opt.class, [
 				"progress-bar",
 				opt.stripe ? "progress-bar-striped" : null,

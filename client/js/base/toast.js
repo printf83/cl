@@ -163,7 +163,6 @@ export default class toast extends div {
 				}),
 			});
 
-			//opt.tag = "div"; //how to remove this?
 			opt.class = core.merge.class(opt.class, ["toast", opt.debug ? "show" : null]);
 			opt.attr = core.merge.attr(opt.attr, {
 				tabindex: -1,
