@@ -180,7 +180,7 @@ export class horizontal extends div {
 				{
 					left: null,
 					right: null,
-					size: "md-4",
+					size: "auto",
 					gap: 0,
 				},
 				opt

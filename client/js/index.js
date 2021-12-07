@@ -41,7 +41,7 @@ import offcanvas from "./base/offcanvas.js";
 
 let imgurlindex = 0;
 function imgurl(width, height) {
-	return `https://picsum.photos/seed/11/${width ? width : 800}/${height ? height : 400}.webp`;
+	return `https://picsum.photos/seed/${imgurlindex++}/${width ? width : 800}/${height ? height : 400}.webp`;
 }
 let loream =
 	"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce hendrerit tincidunt nibh ut condimentum. Nulla vitae vulputate elit. Sed accumsan varius mauris, vel bibendum magna consequat eget. Vivamus felis dolor, laoreet et blandit ut, iaculis eu arcu. Proin dapibus, metus vitae iaculis venenatis, lacus purus commodo tellus, aliquam commodo ex metus vulputate mi. Nam eu lorem vel nisi scelerisque hendrerit et id justo. Nunc vestibulum eget est sed ullamcorper. Etiam pulvinar, dui eget vehicula molestie, sapien sapien lobortis nulla, nec cursus urna sapien imperdiet tortor. Nam vitae lacus sem. Praesent id arcu vitae sem ultrices rutrum ut ac mi.";
@@ -74,16 +74,28 @@ function doForm(max, cur) {
 	cl.replaceChild(
 		root,
 		new container.form([
-			new button({
-				color: "danger",
-				label: `Regenerate root`,
-				onclick: function () {
-					repeatdoform(5000, 4999, function () {
-						cl.init(root);
-						console.log("Complete regenerate");
-					});
-				},
-			}),
+			new container.stack([
+				new button({
+					color: "primary",
+					label: `Regenerate root 1 times`,
+					onclick: function () {
+						repeatdoform(1, 0, function () {
+							cl.init(root);
+							console.log("Complete regenerate");
+						});
+					},
+				}),
+				new button({
+					color: "danger",
+					label: `Regenerate root 100 times`,
+					onclick: function () {
+						repeatdoform(100, 99, function () {
+							cl.init(root);
+							console.log("Complete regenerate");
+						});
+					},
+				}),
+			]),
 			new progress.container({
 				item: { min: 0, max: max, value: max - cur, label: true, stripe: true, animate: true, color: "danger" },
 			}),
@@ -255,13 +267,17 @@ function doForm(max, cur) {
 				]),
 			}),
 
-			new carousel({
-				item: [
-					{ src: imgurl(400, 300) },
-					{ src: imgurl(400, 300) },
-					{ src: imgurl(400, 300) },
-					{ src: imgurl(400, 300) },
-				],
+			new div({
+				rounded: true,
+				shadow: true,
+				elem: new carousel({
+					item: [
+						{ src: imgurl(600, 300) },
+						{ src: imgurl(600, 300) },
+						{ src: imgurl(600, 300) },
+						{ src: imgurl(600, 300) },
+					],
+				}),
 			}),
 
 			new btngroup({
@@ -293,7 +309,7 @@ function doForm(max, cur) {
 					elem: new card.horizontal({
 						left: new card.img({
 							placement: "left",
-							src: imgurl(450, 300),
+							src: imgurl(400, 300),
 						}),
 						right: [
 							new card.header({ elem: "Card 1" }),
@@ -340,7 +356,7 @@ function doForm(max, cur) {
 						],
 						right: new card.img({
 							placement: "right",
-							src: imgurl(450, 300),
+							src: imgurl(400, 300),
 						}),
 					}),
 				}),

@@ -16,11 +16,11 @@ export default class carousel extends div {
 			core.extend(
 				{},
 				{
-					control: false,
+					control: true,
 					touch: true,
 					slide: true,
 					fade: false,
-					indicators: false,
+					indicators: true,
 					dark: false,
 					item: null,
 				},
@@ -59,16 +59,16 @@ export default class carousel extends div {
 
 			opt.elem = [
 				opt.indicators
-					? new div(
-							"carousel-indicators",
-							opt.item.map(function (i, ix) {
+					? new div({
+							class: "carousel-indicators",
+							elem: opt.item.map(function (i, ix) {
 								if (typeof i === "string") {
 									i = {
 										src: i,
 									};
 								}
 
-								i = $.extend({}, itemOption, i);
+								i = core.extend({}, itemOption, i);
 
 								return new button({
 									class: ix === 0 ? "active" : null,
@@ -79,8 +79,8 @@ export default class carousel extends div {
 										"data-bs-target": `${opt.id}`,
 									},
 								});
-							})
-					  )
+							}),
+					  })
 					: null,
 				new div({
 					class: "carousel-inner",
