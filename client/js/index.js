@@ -36,7 +36,7 @@ import p from "./base/p.js";
 import tooltip from "./base/tooltip.js";
 import msg from "./base/msg.js";
 // import * as option from "./base/option.js";
-
+import * as progress from "./base/progress.js";
 let imgurlindex = 0;
 function imgurl(width, height) {
 	return `https://picsum.photos/seed/11/${width ? width : 800}/${height ? height : 400}.webp`;
@@ -74,15 +74,16 @@ function doForm(max, cur) {
 		new container.form([
 			new button({
 				color: "danger",
-				label: `Regenerate root ${
-					Math.round((((max - cur) / max) * 100 + Number.EPSILON) * 100) / 100
-				}% complete`,
+				label: `Regenerate root`,
 				onclick: function () {
 					repeatdoform(5000, 4999, function () {
 						cl.init(root);
 						console.log("Complete regenerate");
 					});
 				},
+			}),
+			new progress.container({
+				item: { min: 0, max: max, value: max - cur, label: true, stripe: true, animate: true, color: "danger" },
 			}),
 			new btngroup({
 				elem: [

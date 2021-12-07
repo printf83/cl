@@ -149,7 +149,7 @@ export default class tag {
 
 						c2(opt.display, "d-$1"),
 						c2(opt.gap, "g-$1"),
-						c2(opt.gap, "gap-$1"),
+						// c2(opt.gap, "gap-$1"),
 
 						opt.row ? "row" : null,
 

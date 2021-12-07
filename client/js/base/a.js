@@ -14,14 +14,12 @@ export default class a extends tag {
 		return super.data;
 	}
 	set data(opt) {
-		if (opt) {
-			opt = core.extend({}, super.data, opt);
-			opt.elem = opt.elem || (opt.label || opt.icon ? new label({ icon: opt.icon, label: opt.label }) : opt.href);
+		opt = core.extend({}, super.data, opt);
+		opt.elem = opt.elem || (opt.label || opt.icon ? new label({ icon: opt.icon, label: opt.label }) : opt.href);
 
-			delete opt.icon;
-			delete opt.label;
+		delete opt.icon;
+		delete opt.label;
 
-			super.data = opt;
-		}
+		super.data = opt;
 	}
 }
