@@ -37,6 +37,8 @@ import tooltip from "./base/tooltip.js";
 import msg from "./base/msg.js";
 // import * as option from "./base/option.js";
 import * as progress from "./base/progress.js";
+import offcanvas from "./base/offcanvas.js";
+
 let imgurlindex = 0;
 function imgurl(width, height) {
 	return `https://picsum.photos/seed/11/${width ? width : 800}/${height ? height : 400}.webp`;
@@ -224,20 +226,35 @@ function doForm(max, cur) {
 							marginStart: 2,
 						},
 					}),
+
+					new tooltip({
+						type: "popover",
+						msg: "This is popover",
+						title: "Title",
+						elem: new button({ color: "primary", label: "Test popover" }),
+					}),
+					new tooltip({
+						type: "tooltip",
+						msg: "This is tooltip",
+						elem: new button({ color: "primary", label: "Test tooltip" }),
+					}),
+
+					new button({
+						label: "Offcanvas",
+						color: "primary",
+						onclick: function () {
+							new offcanvas({
+								color: "dark",
+								textcolor: "light",
+								title: "Title",
+								icon: "fire",
+								elem: "Hello",
+							}).show();
+						},
+					}),
 				]),
 			}),
 
-			new tooltip({
-				type: "popover",
-				msg: "This is popover",
-				title: "Title",
-				elem: new button({ color: "primary", label: "Test popover" }),
-			}),
-			new tooltip({
-				type: "tooltip",
-				msg: "This is tooltip",
-				elem: new button({ color: "primary", label: "Test tooltip" }),
-			}),
 			new btngroup({
 				shadow: true,
 				elem: [

@@ -1,7 +1,6 @@
 "use strict";
 import * as core from "./core.js";
 import * as cl from "./cl.js";
-import tag from "./tag.js";
 import h from "./h.js";
 import label from "./label.js";
 import button from "./button.js";
@@ -12,7 +11,7 @@ import * as container from "./container.js";
 /**
  * option : {attr,id,class,static,title,icon,footer,button,animated,debug,scrollable,center,size,fullscreen,focus,align,color,textcolor,bordercolor,border,divider,centerbutton,elem}
  */
-export default class modal extends tag {
+export default class modal extends div {
 	_n = null;
 	_m = null;
 
@@ -225,44 +224,42 @@ export default class modal extends tag {
 
 			//combine header,body,footer to div.modal > div.modal-dialog > div.content
 			super.data = {
-				elem: new div({
-					id: opt.id,
-					name: opt.name,
+				id: opt.id,
+				name: opt.name,
 
-					class: core.merge.class(opt.class, [
-						"modal",
-						opt.animate && !opt.debug && "fade",
-						!opt.debug ? "show" : "cl-debug",
-					]),
-					style: core.merge.style(opt.style, opt.debug ? { display: "block", position: "static" } : null),
-					attr: core.merge.attr(opt.attr, {
-						tabindex: -1,
-						"data-bs-backdrop": opt.static ? "static" : null,
-						"data-bs-keyboard": opt.static ? "false" : "true",
-						"data-bs-focus": opt.focus ? "true" : null,
-						"aria-hidden": opt.debug ? "false" : "true",
-					}),
+				class: core.merge.class(opt.class, [
+					"modal",
+					opt.animate && !opt.debug && "fade",
+					!opt.debug ? "show" : "cl-debug",
+				]),
+				style: core.merge.style(opt.style, opt.debug ? { display: "block", position: "static" } : null),
+				attr: core.merge.attr(opt.attr, {
+					tabindex: -1,
+					"data-bs-backdrop": opt.static ? "static" : null,
+					"data-bs-keyboard": opt.static ? "false" : "true",
+					"data-bs-focus": opt.focus ? "true" : null,
+					"aria-hidden": opt.debug ? "false" : "true",
+				}),
+				elem: new div({
+					class: [
+						"modal-dialog",
+						opt.scrollable ? "modal-dialog-scrollable" : null,
+						opt.center ? "modal-dialog-centered" : null,
+						opt.size ? core.multiClass(opt.size, "modal-$1") : null,
+						opt.fullscreen
+							? typeof opt.fullscreen === "string" || Array.isArray(opt.fullscreen)
+								? core.multiClass(opt.fullscreen, "modal-fullscreen-$1")
+								: "modal-fullscreen"
+							: null,
+					],
 					elem: new div({
-						class: [
-							"modal-dialog",
-							opt.scrollable ? "modal-dialog-scrollable" : null,
-							opt.center ? "modal-dialog-centered" : null,
-							opt.size ? core.multiClass(opt.size, "modal-$1") : null,
-							opt.fullscreen
-								? typeof opt.fullscreen === "string" || Array.isArray(opt.fullscreen)
-									? core.multiClass(opt.fullscreen, "modal-fullscreen-$1")
-									: "modal-fullscreen"
-								: null,
-						],
-						elem: new div({
-							align: opt.align,
-							color: opt.color,
-							textcolor: opt.textcolor,
-							bordercolor: opt.bordercolor,
-							border: opt.border,
-							class: ["modal-content"],
-							elem: [ctlHeader, ctlBody, ctlFooter],
-						}),
+						align: opt.align,
+						color: opt.color,
+						textcolor: opt.textcolor,
+						bordercolor: opt.bordercolor,
+						border: opt.border,
+						class: ["modal-content"],
+						elem: [ctlHeader, ctlBody, ctlFooter],
 					}),
 				}),
 			};
