@@ -10,7 +10,7 @@ import button from "./base/button.js";
 import badge from "./base/badge.js";
 // import input from "./base/input.js";
 // import label from "./base/label.js";
-// import dropdown from "./base/dropdown.js";
+import carousel from "./base/carousel.js";
 import tab from "./base/tab.js";
 import * as collapse from "./base/collapse.js";
 import * as card from "./base/card.js";
@@ -255,6 +255,15 @@ function doForm(max, cur) {
 				]),
 			}),
 
+			new carousel({
+				item: [
+					{ src: imgurl(400, 300) },
+					{ src: imgurl(400, 300) },
+					{ src: imgurl(400, 300) },
+					{ src: imgurl(400, 300) },
+				],
+			}),
+
 			new btngroup({
 				shadow: true,
 				elem: [
@@ -272,6 +281,7 @@ function doForm(max, cur) {
 					}),
 				],
 			}),
+
 			new collapse.container({
 				id: tid1,
 				class: tid3,
