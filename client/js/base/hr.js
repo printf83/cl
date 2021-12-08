@@ -9,7 +9,7 @@ const defaultOption = { tag: "hr" };
  */
 export default class hr extends tag {
 	constructor(opt) {
-		super(opt);
+		super(core.extend({}, defaultOption, opt));
 	}
 
 	get data() {

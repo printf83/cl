@@ -87,7 +87,9 @@ export default class tag {
 	cl = 1; //name tag "cl" so we can check hasOwnProperty("cl")
 
 	constructor(opt) {
-		this.data = opt;
+		if (opt) {
+			this.data = opt;
+		}
 	}
 
 	get data() {
