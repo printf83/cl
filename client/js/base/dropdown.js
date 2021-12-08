@@ -8,29 +8,6 @@ import ul from "./ul.js";
 import btngroup from "./btngroup.js";
 
 const defaultOption = {
-	// attr: null, //combine to container
-
-	// id: null,
-	// name: null,
-
-	// type: "button",
-	// label: null,
-	// icon: null,
-	// badge: null,
-	// value: null,
-	// checked: false,
-
-	// color: null,
-	// textcolor: null,
-	// weight: null,
-	// disabled: false,
-	// outline: false,
-	// hidelabel: false,
-	// nowarp: false,
-
-	// onclick: null,
-	// href: null,
-
 	option: null,
 	container: "btn-group",
 	arrow: "down",
