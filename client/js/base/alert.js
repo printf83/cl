@@ -6,12 +6,13 @@ import msg from "./msg.js";
 import div from "./div.js";
 import btnclose from "./btnclose.js";
 
+const defaultOption = { icon: null, color: null, message: null, close: false };
 /**
  * opt : {tagoption,icon,color,message,close}
  */
 export class container extends div {
 	constructor(opt) {
-		super(core.extend({}, { icon: null, color: null, message: null, close: false }, opt));
+		super(core.extend({}, defaultOption, opt));
 	}
 
 	get data() {
@@ -19,6 +20,8 @@ export class container extends div {
 	}
 	set data(opt) {
 		if (opt) {
+			opt = core.extend({}, defaultOption, opt);
+
 			let bI = core.getBaseIcon(opt.icon);
 			if (bI) {
 				opt.color = opt.color || bI.color;

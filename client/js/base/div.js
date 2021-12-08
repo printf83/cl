@@ -5,15 +5,19 @@ import tag from "./tag.js";
 /**
  * opt : {tagoption}
  */
+const defaultOption = {
+	tag: "div",
+};
+
 export default class div extends tag {
 	constructor(opt) {
-		super(core.extend({}, { tag: "div" }, opt));
+		super(core.extend({}, defaultOption, opt));
 	}
 
 	get data() {
 		return super.data;
 	}
 	set data(opt) {
-		super.data = core.extend({}, { tag: "div" }, opt);
+		super.data = core.extend({}, defaultOption, opt);
 	}
 }

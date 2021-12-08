@@ -2,23 +2,13 @@
 import * as core from "./core.js";
 import div from "./div.js";
 
+const defaultOption = { label: null, weight: null, vertical: false, elem: null };
 /**
  * opt : {tagoption,label,weight,vertical,elem}
  */
 export default class btngroup extends div {
 	constructor(opt) {
-		super(
-			core.extend(
-				{},
-				{
-					label: null,
-					weight: null,
-					vertical: false,
-					elem: null,
-				},
-				opt
-			)
-		);
+		super(core.extend({}, defaultOption, opt));
 	}
 
 	get data() {
@@ -26,6 +16,8 @@ export default class btngroup extends div {
 	}
 	set data(opt) {
 		if (opt) {
+			opt = core.extend({}, defaultOption, opt);
+
 			opt.attr = core.merge.attr(opt.attr, {
 				role: "group",
 				"aria-label": opt.label,

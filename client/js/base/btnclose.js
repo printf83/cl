@@ -2,22 +2,13 @@
 import * as core from "./core.js";
 import button from "./button.js";
 
+const defaultOption = { label: "Close", dismiss: null, dark: true };
 /**
  * opt : {tagoption,label,dismiss,dark}
  */
 export default class btnclose extends button {
 	constructor(opt) {
-		super(
-			core.extend(
-				{},
-				{
-					label: "Close",
-					dismiss: null,
-					dark: true,
-				},
-				opt
-			)
-		);
+		super(core.extend({}, defaultOption, opt));
 	}
 
 	get data() {
@@ -25,7 +16,8 @@ export default class btnclose extends button {
 	}
 	set data(opt) {
 		if (opt) {
-			// opt.type = "button";
+			opt = core.extend({}, defaultOption, opt);
+
 			opt.class = core.merge.class(opt.class, ["btn-close", !opt.dark ? "btn-close-white" : null]);
 			opt.attr = core.merge.attr(opt.attr, {
 				"data-bs-dismiss": opt.dismiss,

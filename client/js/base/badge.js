@@ -3,28 +3,26 @@ import * as core from "./core.js";
 import label from "./label.js";
 import span from "./span.js";
 
+
+
+const defaultOption = {
+	icon: null,
+
+	label: null,
+	elem: null,
+	asst: null,
+
+	notification: false,
+	pill: false,
+	color: "danger",
+};
+
 /**
  * opt : {tagoption,icon,label,elem,asst,notification,pill,color}
  */
 export default class badge extends span {
 	constructor(opt) {
-		super(
-			core.extend(
-				{},
-				{
-					icon: null,
-
-					label: null,
-					elem: null,
-					asst: null,
-
-					notification: false,
-					pill: false,
-					color: "danger",
-				},
-				opt
-			)
-		);
+		super(core.extend({}, defaultOption, opt));
 	}
 
 	get data() {
@@ -32,6 +30,8 @@ export default class badge extends span {
 	}
 	set data(opt) {
 		if (opt) {
+			opt = core.extend({}, defaultOption, opt);
+
 			opt.rounded = opt.rounded || (opt.pill ? "pill" : null);
 			opt.rounded = !opt.label && !opt.icon ? "circle" : opt.rounded;
 			opt.padding = !opt.label && !opt.icon ? 2 : null;

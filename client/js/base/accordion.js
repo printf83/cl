@@ -4,23 +4,21 @@ import h from "./h.js";
 import div from "./div.js";
 import button from "./button.js";
 
+const defaultOption = {
+	id: null,
+	flush: false,
+	autoclose: true,
+	item: null,
+};
+
+const defaultItemOption = { id: null, label: null, icon: null, active: false, elem: null };
+
 /**
  * opt : {tagoption,flush,autoclose,item:[{id,label,icon,active,elem}]}
  */
 export default class accordion extends div {
 	constructor(opt) {
-		super(
-			core.extend(
-				{},
-				{
-					id: null,
-					flush: false,
-					autoclose: true,
-					item: null,
-				},
-				opt
-			)
-		);
+		super(core.extend({}, defaultOption, opt));
 	}
 
 	get data() {
@@ -47,17 +45,7 @@ export default class accordion extends div {
 			opt.elem =
 				opt.item && opt.item.length > 0
 					? opt.item.map(function (i) {
-							i = core.extend(
-								{},
-								{
-									id: null,
-									label: null,
-									icon: null,
-									active: false,
-									elem: null,
-								},
-								i
-							);
+							i = core.extend({}, defaultItemOption, i);
 
 							i.id = i.id || core.UUID();
 

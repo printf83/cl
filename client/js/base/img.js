@@ -5,19 +5,16 @@ import tag from "./tag.js";
 /**
  * opt : {tagoption,src,alt}
  */
+
+const defaultOption = {
+	tag: "img",
+	src: null,
+	alt: "Image",
+};
+
 export default class img extends tag {
 	constructor(opt) {
-		super(
-			core.extend(
-				{},
-				{
-					tag: "img",
-					src: null,
-					alt: "Image",
-				},
-				opt
-			)
-		);
+		super(core.extend({}, defaultOption, opt));
 	}
 
 	get data() {
@@ -25,6 +22,8 @@ export default class img extends tag {
 	}
 	set data(opt) {
 		if (opt) {
+			opt = core.extend({}, defaultOption, opt);
+
 			opt.attr = core.merge.attr(opt.attr, {
 				src: opt.src,
 				alt: opt.alt,

@@ -14,6 +14,6 @@ export default class form extends tag {
 		return super.data;
 	}
 	set data(opt) {
-		super.data = core.extend({}, super.data, opt);
+		super.data = core.extend({}, { tag: "form" }, opt);
 	}
 }

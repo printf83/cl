@@ -4,36 +4,32 @@ import tag from "./tag.js";
 import label from "./label.js";
 import badge from "./badge.js";
 
+const defaultOption = {
+	tag: "button",
+
+	type: "button",
+	label: null,
+	icon: null,
+	badge: null,
+	value: null,
+	checked: false,
+
+	color: null,
+	weight: null,
+	disabled: false,
+	outline: false,
+	hidelabel: false,
+	nowarp: false,
+
+	elem: null,
+};
+
 /**
  * option : {tagoption,type,label,icon,badge,value,checked,color,weight,disabled,outline,hidelabel,nowarp,elem}
  */
 export default class button extends tag {
 	constructor(opt) {
-		super(
-			core.extend(
-				{},
-				{
-					tag: "button",
-
-					type: "button",
-					label: null,
-					icon: null,
-					badge: null,
-					value: null,
-					checked: false,
-
-					color: null,
-					weight: null,
-					disabled: false,
-					outline: false,
-					hidelabel: false,
-					nowarp: false,
-
-					elem: null,
-				},
-				opt
-			)
-		);
+		super(core.extend({}, defaultOption, opt));
 	}
 
 	get data() {
@@ -41,7 +37,7 @@ export default class button extends tag {
 	}
 	set data(opt) {
 		if (opt) {
-			opt = core.extend({}, super.data, opt);
+			opt = core.extend({}, defaultOption, opt);
 
 			let bI = core.getBaseIcon(opt.icon);
 			if (bI) {

@@ -5,7 +5,7 @@ import h from "./h.js";
 import p from "./p.js";
 import div from "./div.js";
 import imgtag from "./img.js";
-
+ 
 /**
  * opt:{tagoption}
  */
@@ -169,23 +169,17 @@ export class imgoverlay extends div {
 		}
 	}
 }
+
+
+
+
+const defaultHorizontalOption = { left: null, right: null, size: "auto", gap: 0 };
 /**
  * opt:{tagoption,left,right,size,gap}
  */
 export class horizontal extends div {
 	constructor(opt) {
-		super(
-			core.extend(
-				{},
-				{
-					left: null,
-					right: null,
-					size: "auto",
-					gap: 0,
-				},
-				opt
-			)
-		);
+		super(core.extend({}, defaultHorizontalOption, opt));
 	}
 
 	get data() {
@@ -193,6 +187,7 @@ export class horizontal extends div {
 	}
 	set data(opt) {
 		if (opt) {
+			opt = core.extend({}, defaultHorizontalOption, opt);
 			opt.gap = opt.class = core.merge.class(opt.class, ["row", opt.gap !== null ? `g-${opt.gap}` : null]);
 			opt.elem = [
 				new div({
@@ -234,20 +229,13 @@ export class link extends a {
 	}
 }
 
+const defaultImgOption = { placement: "top" };
 /**
  * opt:{tagoption,imgoption,placement}
  */
 export class img extends imgtag {
 	constructor(opt) {
-		super(
-			core.extend(
-				{},
-				{
-					placement: "top",
-				},
-				opt
-			)
-		);
+		super(core.extend({}, defaultImgOption, opt));
 	}
 
 	get data() {
@@ -255,6 +243,9 @@ export class img extends imgtag {
 	}
 	set data(opt) {
 		if (opt) {
+
+			opt = core.extend({}, defaultOption, opt);
+
 			opt.class = opt.placement
 				? core.merge.class(opt.class, [
 						opt.placement === "full" ? "card-img" : null,

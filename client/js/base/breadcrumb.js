@@ -7,22 +7,18 @@ import li from "./li.js";
 import label from "./label.js";
 import a from "./a.js";
 
+const defaultOption = {
+	label: "Breadcrumb",
+	divider: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E")`,
+	item: null,
+};
+
 /**
  * opt : {tagoption,label,divider,item:{label,icon,current,href,onclick,elem}}
  */
 export default class breadcrumb extends nav {
 	constructor(opt) {
-		super(
-			core.extend(
-				{},
-				{
-					label: "Breadcrumb",
-					divider: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E")`,
-					item: null,
-				},
-				opt
-			)
-		);
+		super(core.extend({}, defaultOption, opt));
 	}
 
 	get data() {
@@ -30,6 +26,8 @@ export default class breadcrumb extends nav {
 	}
 	set data(opt) {
 		if (opt) {
+			opt = core.extend({}, defaultOption, opt);
+
 			//check if item isnot array
 			opt.item = opt.item ? (Array.isArray(opt.item) ? opt.item : [opt.item]) : null;
 
