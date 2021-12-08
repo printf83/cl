@@ -38,6 +38,7 @@ import msg from "./base/msg.js";
 import menu from "./base/menu.js";
 import * as progress from "./base/progress.js";
 import offcanvas from "./base/offcanvas.js";
+import toc from "./base/toc.js";
 
 let increeseImgUrlIndex = true;
 let imgurlindex = 0;
@@ -50,6 +51,23 @@ function imgurl(width, height) {
 }
 let loream =
 	"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce hendrerit tincidunt nibh ut condimentum. Nulla vitae vulputate elit. Sed accumsan varius mauris, vel bibendum magna consequat eget. Vivamus felis dolor, laoreet et blandit ut, iaculis eu arcu. Proin dapibus, metus vitae iaculis venenatis, lacus purus commodo tellus, aliquam commodo ex metus vulputate mi. Nam eu lorem vel nisi scelerisque hendrerit et id justo. Nunc vestibulum eget est sed ullamcorper. Etiam pulvinar, dui eget vehicula molestie, sapien sapien lobortis nulla, nec cursus urna sapien imperdiet tortor. Nam vitae lacus sem. Praesent id arcu vitae sem ultrices rutrum ut ac mi.";
+
+let dropdownOption = [
+	{ href: "#", label: "Action" },
+	{
+		href: "#",
+		label: "Another action",
+	},
+	{
+		href: "#",
+		label: "Something else here",
+	},
+	{ value: "-" },
+	{
+		href: "#",
+		label: "Separated link",
+	},
+];
 
 function repeatdoform(max, cur, callback) {
 	if (cur >= 0) {
@@ -406,27 +424,62 @@ function doForm(max, cur) {
 					new toast("i", "Addctl function").show();
 				},
 			}),
-			new dropdown({
-				label: "Drowpdown",
-				color: "primary",
-				outline: true,
-				splittoggle: true,
-				option: [
-					{ href: "javascript:void(0);", label: "Action" },
-					{
-						href: "javascript:void(0);",
-						label: "Another action",
-					},
-					{
-						label: "Something else here",
-					},
-					{ value: "-" },
-					{
-						href: "javascript:void(0);",
-						label: "Separated link",
-					},
-				],
-			}),
+			new container.stack([
+				new dropdown({
+					label: "Drowpdown",
+					color: "primary",
+					outline: true,
+					splittoggle: true,
+					option: dropdownOption,
+				}),
+				new dropdown({
+					label: "Drowpdown",
+					icon: "fire",
+					color: "success",
+					splittoggle: true,
+					arrow: "start",
+					option: dropdownOption,
+				}),
+				new dropdown({
+					label: "Drowpdown",
+					color: "warning",
+					arrow: "up",
+					option: dropdownOption,
+				}),
+				new dropdown({
+					label: "Drowpdown",
+					color: "danger",
+					arrow: "end",
+					option: dropdownOption,
+				}),
+				new dropdown({
+					weight: "lg",
+					label: "Drowpdown",
+					color: "info",
+					outline: true,
+					arrow: "end",
+					option: dropdownOption,
+				}),
+				new dropdown({
+					dark: true,
+					weight: "md",
+					label: "Drowpdown",
+					color: "secondary",
+					arrow: "end",
+					splittoggle: true,
+					outline: true,
+					option: dropdownOption,
+				}),
+				new dropdown({
+					dark: true,
+					weight: "sm",
+					label: "Drowpdown",
+					color: "secondary",
+					arrow: "end",
+					splittoggle: true,
+					option: dropdownOption,
+				}),
+			]),
 			new tab({
 				type: "pill",
 				align: "center",
@@ -536,19 +589,7 @@ function doForm(max, cur) {
 								}),
 								new navbar.item({
 									label: "Pricing",
-									option: [
-										{ label: "Action" },
-										{
-											label: "Another action",
-										},
-										{
-											label: "Something else here",
-										},
-										{ value: "-" },
-										{
-											label: "Separated link",
-										},
-									],
+									option: dropdownOption,
 								}),
 								new navbar.item({
 									label: "Disabled",
@@ -578,7 +619,7 @@ function doForm(max, cur) {
 					{ label: "A1", elem: "A1 Item" },
 					{ label: "A2", elem: "A2 Item" },
 					{ label: "A3", elem: "A3 Item" },
-					{ label: "A4", elem: "A4 Item" },
+					{ label: "A4", elem: new toc({ item: [{ label: "A" }, { label: "B" }, { label: "C" }] }) },
 				],
 			}),
 		])

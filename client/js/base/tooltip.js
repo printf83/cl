@@ -25,6 +25,8 @@ export default class tooltip extends tag {
 		if (opt && opt.elem) {
 			opt = core.extend({}, defaultOption, opt);
 
+			//todo: handle multiple elem
+
 			let tmp = opt.elem.data;
 			tmp.attr = core.merge.attr(tmp.attr, {
 				title: opt.type === "popover" ? opt.title : opt.msg,

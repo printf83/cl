@@ -6,13 +6,12 @@ import button from "./button.js";
 import ul from "./ul.js";
 import li from "./li.js";
 import div from "./div.js";
-import label from "./label.js";
 
 /**
- * opt : {tagoption}
+ * opt : {tagoption,icon,label,active,item:{itemOption}}
+ * itemOption{tagoption,buttonoption,active}
  */
 const defaultOption = {
-	tag: "div",
 	icon: null,
 	label: null,
 	active: false,
@@ -33,6 +32,8 @@ export default class menu extends div {
 	}
 	set data(opt) {
 		opt = core.extend({}, defaultOption, opt);
+
+		opt.item = Array.isArray(opt.item) ? opt.item : [opt.item];
 
 		opt.id = opt.id ? opt.id : core.UUID();
 

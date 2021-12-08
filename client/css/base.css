@@ -1,3 +1,5 @@
+/* cl-menu */
+
 .cl-menu-toggle {
 	color: rgba(var(--bs-gray), 0.7);
 	font-weight: calc(var(--bs-body-font-weight) * 1.5);
@@ -60,3 +62,5 @@
 .bg-dark .cl-menu-container li div.active {
 	color: rgba(var(--bs-light-rgb), 0.9);
 }
+
+/* cl-toc */
