@@ -196,6 +196,11 @@ export default class input extends tag {
 			//create mainctl base on opt
 			let m = core.extend({}, opt);
 
+			m.value =
+				["date", "datetime", "month", "datetime-local", "time", "week"].indexOf(m.type) > -1
+					? moment(m.value)
+					: m.value;
+
 			m.attr = core.merge.attr(m.attr, {
 				min: m.min,
 				max: m.max,
@@ -342,11 +347,6 @@ export default class input extends tag {
 					m.attr = core.merge.attr(m.attr, {
 						type: opt.type,
 						"aria-label": opt.hidelabel && opt.label ? opt.label : null,
-						value:
-							["date", "datetime", "month", "datetime-local", "time", "week"].indexOf(opt.value) > -1
-								? moment(opt.value)
-								: opt.value,
-
 						list: opt.option ? `${opt.id}-dl` : null,
 					});
 

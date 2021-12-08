@@ -420,7 +420,8 @@ function doForm(max, cur) {
 			new input({
 				type: "email",
 				label: "Email address",
-				style: { color: "red" },
+				textcolor: "light",
+				color: "danger",
 				floatlabel: true,
 			}),
 			new input({
