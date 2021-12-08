@@ -5,154 +5,112 @@ import label from "./label.js";
 import button from "./button.js";
 import * as inputgroup from "./inputgroup.js";
 import div from "./div.js";
-import option from "./option.js";
+import * as option from "./option.js";
+
+const defaultOption = {
+	type: "text", //checkbox,radio,text,number,textarea
+	label: null,
+	hidelabel: false,
+	floatlabel: false,
+
+	inline: false,
+	labelsize: null,
+	ctlsize: null,
+	size: null,
+	weight: null,
+
+	value: null,
+	checked: false,
+	placeholder: null,
+	option: null,
+
+	numctl: false,
+	addctl: null,
+
+	min: null,
+	max: null,
+	step: null,
+	rows: null,
+	multiple: false,
+	required: false,
+
+	valid: null,
+	invalid: null,
+
+	before: null,
+	after: null,
+
+	plaintext: false,
+	readonly: false,
+	disabled: false,
+
+	container: true,
+	flex: false,
+	nowarp: false,
+};
 
 /**
- * label
- * label, color
- * label, onclick
- * label, color, onclick
- * opt : {attr,id,name,type,label,hidelabel,floatlabel,inline,labelsize,ctlsize,size,weight,value,checked,placeholder,option,numctl,addctl,min,max,step,row,multiple,required,valid,invalid,before,after,plaintext,readonly,disabled,container,flex,nowarp,onclick,onchange,onclick,onfocus,onblur}
+ * opt : {tagoption,id,name,type,label,hidelabel,floatlabel,inline,labelsize,ctlsize,size,weight,value,checked,placeholder,option,numctl,addctl,min,max,step,row,multiple,required,valid,invalid,before,after,plaintext,readonly,disabled,container,flex,nowarp,onclick,onchange,onclick,onfocus,onblur}
  */
 export default class input extends tag {
-	constructor(...arg) {
+	constructor(opt) {
 		super();
-		if (arg && arg.length > 0) {
-			let t = {
-				label: null,
-				color: null,
-				onclick: null,
-			};
-			if (arg.length === 3) {
-				t.label = arg[0];
-				t.color = arg[1];
-				t.onclick = arg[2];
-			} else if (arg.length === 2 && arg[1] instanceof Function) {
-				t.label = arg[0];
-				t.onclick = arg[1];
-			} else if (arg.length === 2 && typeof arg[1] === "string") {
-				t.label = arg[0];
-				t.color = arg[1];
-			} else if (arg.length === 1 && typeof arg[0] === "string") {
-				t.label = arg[0];
-			} else if (arg.length === 1) {
-				t = arg[0];
-			} else {
-				console.error("Unsupported argument", arg);
-			}
-
-			this.data = core.extend(
-				{},
-				{
-					attr: null,
-
-					id: null,
-					name: null,
-
-					type: "text", //checkbox,radio,text,number,textarea
-					label: null,
-					hidelabel: false,
-					floatlabel: false,
-
-					inline: false,
-					labelsize: null,
-					ctlsize: null,
-					size: null,
-					weight: null,
-
-					value: null,
-					checked: false,
-					placeholder: null,
-					option: null,
-
-					numctl: false,
-					addctl: null,
-
-					min: null,
-					max: null,
-					step: null,
-					row: null,
-					multiple: false,
-					required: false,
-
-					valid: null,
-					invalid: null,
-
-					before: null,
-					after: null,
-
-					plaintext: false,
-					readonly: false,
-					disabled: false,
-
-					container: true,
-					flex: false,
-					nowarp: false,
-
-					onclick: null,
-					onchange: null,
-					onclick: null,
-					onfocus: null,
-					onblur: null,
-				},
-				t
-			);
-		} else {
-			this.data = null;
-		}
+		this.data = core.extend({}, defaultOption, opt);
 	}
 
 	get data() {
 		return super.data;
 	}
-	set data(d) {
-		if (d) {
+	set data(opt) {
+		if (opt) {
+			opt = core.extend({}, defaultOption, opt);
+
 			//invalid and valid feedback only work one
-			if (d.valid && d.invalid) {
-				d.valid = null;
+			if (opt.valid && opt.invalid) {
+				opt.valid = null;
 			}
 
 			//floating label required label
 			//disable floatlabel if no label
-			if (d.floatlabel && !d.label && !d.hidelabel) {
-				d.floatlabel = false;
+			if (opt.floatlabel && !opt.label && !opt.hidelabel) {
+				opt.floatlabel = false;
 			}
 
 			//floating label not works with some input
-			if (d.floatlabel) {
-				if (["checkbox", "radio", "switch", "file"].includes(d.type) || d.readonly) {
-					d.floatlabel = false;
+			if (opt.floatlabel) {
+				if (["checkbox", "radio", "switch", "file"].includes(opt.type) || opt.readonly) {
+					opt.floatlabel = false;
 				} else {
-					if (d.label && !d.placeholder) {
-						d.placeholder = d.label;
+					if (opt.label && !opt.placeholder) {
+						opt.placeholder = opt.label;
 					}
 				}
 			}
 
 			//if has label need id is mandatori
-			if ((d.label && !d.id) || (d.option && d.type !== "select")) {
-				d.id = core.UUID();
+			if ((opt.label && !opt.id) || (opt.option && opt.type !== "select")) {
+				opt.id = core.UUID();
 			}
 
 			//automark aftertype if addctl provided
-			if (d.addctl) {
-				d.after = null;
+			if (opt.addctl) {
+				opt.after = null;
 			}
 
 			//automark aftertype and beforetype if numctl provided
-			if (d.numctl && d.type === "number") {
-				d.before = null;
-				d.after = null;
+			if (opt.numctl && opt.type === "number") {
+				opt.before = null;
+				opt.after = null;
 			}
 
 			//before control
-			let beforectl = d.before
-				? typeof d.before === "string" || d.before.hasOwnProperty("clicon") //d.beforetype === "text"
-					? new inputgroup.text(d.before)
+			let beforectl = opt.before
+				? typeof opt.before === "string" || opt.before.hasOwnProperty("clicon") //d.beforetype === "text"
+					? new inputgroup.text({ elem: opt.before })
 					: new tag({
-							elem: d.before,
+							elem: opt.before,
 					  })
-				: d.type === "number" && d.numctl
+				: opt.type === "number" && opt.numctl
 				? new button({
 						icon: "minus",
 						color: "primary",
@@ -173,15 +131,15 @@ export default class input extends tag {
 				: null;
 
 			//after control
-			let afterctl = d.after
-				? typeof d.after === "string" || d.after.hasOwnProperty("clicon") //d.aftertype === "text"
-					? new inputgroup.text(d.after)
+			let afterctl = opt.after
+				? typeof opt.after === "string" || opt.after.hasOwnProperty("clicon") //d.aftertype === "text"
+					? new inputgroup.text({ elem: opt.after })
 					: new tag({
-							elem: d.after,
+							elem: opt.after,
 					  })
-				: d.type === "number" && d.numctl
+				: opt.type === "number" && opt.numctl
 				? new button({
-						icon: "plus",
+						icon: { icon: "plus" },
 						color: "primary",
 						onclick: function (e) {
 							let sender = e.currentTarget;
@@ -197,273 +155,202 @@ export default class input extends tag {
 							if (val + step > max) input.value = max;
 						},
 				  })
-				: d.addctl
+				: opt.addctl
 				? new button({
-						icon: "plus",
+						icon: { icon: "plus" },
 						color: "primary",
-						onclick: d.addctl,
+						onclick: opt.addctl,
 				  })
 				: null;
 
 			//valid msg
-			let validmsg = d.valid ? new div("valid-feedback", d.valid) : null;
+			let validmsg = opt.valid ? new div({ class: "valid-feedback", elem: opt.valid }) : null;
 
 			//invalid msg
-			let invalidmsg = d.invalid ? new div("invalid-feedback", d.invalid) : null;
+			let invalidmsg = opt.invalid ? new div({ class: "invalid-feedback", elem: opt.invalid }) : null;
 
 			//datalist
 			let datalistctl = null;
-			if (d.option && d.type !== "select") {
+			if (opt.option && opt.type !== "select") {
 				datalistctl = new tag({
 					tag: "datalist",
-					id: `${d.id}-dl`,
-					elem: new option(d.option, d.value),
+					id: `${opt.id}-dl`,
+					elem: new option.select({ item: opt.option, selected: opt.value }),
 				});
 			}
 
 			//label
 			let labelctl = null;
-			if (d.label && !d.hidelabel) {
+			if (opt.label && !opt.hidelabel) {
 				labelctl = new label({
-					for: d.id,
-					label: d.label,
-					class: ["checkbox", "radio", "switch", "file"].includes(d.type)
+					for: opt.id,
+					label: opt.label,
+					class: ["checkbox", "radio", "switch", "file"].includes(opt.type)
 						? "form-check-label"
-						: d.labelsize
-						? ["col-form-label"].concat(core.multiClass(d.labelsize, "col-$1", null, "col"))
+						: opt.labelsize
+						? ["col-form-label"].concat(core.multiClass(opt.labelsize, "col-$1", null, "col"))
 						: "form-label",
 				});
 			}
 
+			//create mainctl base on opt
+			let m = core.extend({}, opt);
+
+			m.value =
+				["date", "datetime", "month", "datetime-local", "time", "week"].indexOf(m.type) > -1
+					? moment(m.value)
+					: m.value;
+
+			m.attr = core.merge.attr(m.attr, {
+				min: m.min,
+				max: m.max,
+				step: m.step,
+				rows: m.rows,
+				multiple: m.multiple,
+				required: m.required,
+				value: m.value,
+				checked: m.checked,
+				placeholder: m.placeholder,
+			});
+
+			delete m.type;
+
+			delete m.value;
+			delete m.checked;
+			delete m.placeholder;
+
+			delete m.min;
+			delete m.max;
+			delete m.step;
+			delete m.rows;
+			delete m.multiple;
+			delete m.required;
+
+			delete m.plaintext;
+
+			delete m.container;
+			delete m.flex;
+			delete m.nowarp;
+
+			delete m.option;
+
 			//main control
 			let mainctl = null;
-			switch (d.type) {
+			switch (opt.type) {
 				case "switch":
 				case "checkbox":
 				case "radio":
-					mainctl = new tag({
-						tag: "input",
-
-						id: d.id,
-						name: d.name,
-						style: d.style,
-
-						align: d.align,
-						color: d.color,
-						textcolor: d.textcolor,
-						bordercolor: d.bordercolor,
-						border: d.border,
-
-						onchange: d.onchange,
-						onclick: d.onclick,
-						onfocus: d.onfocus,
-						onblur: d.onblur,
-
-						class: "form-check-input",
-						attr: core.merge.attr(d.attr, {
-							type: d.type === "switch" ? "checkbox" : d.type,
-
-							readonly: d.readonly,
-							disabled: d.disabled,
-							required: d.required,
-							value: d.value,
-							checked: d.checked,
-							"aria-label": d.hidelabel && d.label ? d.label : null,
-						}),
+					m.tag = "input";
+					m.class = core.merge.class(m.class, "form-check-input");
+					m.attr = core.merge.attr(m.attr, {
+						type: opt.type === "switch" ? "checkbox" : opt.type,
+						"aria-label": opt.hidelabel && opt.label ? opt.label : null,
 					});
-
+					mainctl = new tag(m);
 					break;
 				case "textarea":
-					mainctl = new tag({
-						tag: "textarea",
-
-						id: d.id,
-						name: d.name,
-						style: d.style,
-
-						align: d.align,
-						color: d.color,
-						textcolor: d.textcolor,
-						bordercolor: d.bordercolor,
-						border: d.border,
-
-						onchange: d.onchange,
-						onclick: d.onclick,
-						onfocus: d.onfocus,
-						onblur: d.onblur,
-
-						class: [
-							d.plaintext && d.readonly ? "form-control-plaintext" : "form-control",
-							d.weight &&
-							!(d.before || d.after || d.addctl !== null || (d.type === "number" && d.numctl === true))
-								? `form-control-${d.weight}`
-								: null,
-							d.label && d.floatlabel
-								? core.combineArray(
-										[
-											d.before || d.after ? "rounded-0" : null,
-											d.before ? "rounded-end" : null,
-											d.after ? "rounded-start" : null,
-										],
-										" "
-								  )
-								: null,
-						],
-						attr: core.merge.attr(d.attr, {
-							placeholder: d.placeholder,
-							readonly: d.readonly,
-							disabled: d.disabled,
-							required: d.required,
-							rows: d.row,
-
-							"aria-label": d.hidelabel && d.label ? d.label : null,
-						}),
-						elem: d.value,
+					m.tag = "textarea";
+					m.class = core.merge.class(m.class, [
+						opt.plaintext && opt.readonly ? "form-control-plaintext" : "form-control",
+						opt.weight && !(opt.before || opt.after) ? `form-control-${opt.weight}` : null,
+						opt.label && opt.floatlabel
+							? core.combineArray(
+									[
+										opt.before || opt.after ? "rounded-0" : null,
+										opt.before ? "rounded-end" : null,
+										opt.after ? "rounded-start" : null,
+									],
+									" "
+							  )
+							: null,
+					]);
+					m.attr = core.merge.attr(m.attr, {
+						"aria-label": opt.hidelabel && opt.label ? opt.label : null,
 					});
+					m.elem = m.value;
+
+					delete m.value;
+
+					mainctl = new tag(m);
 					break;
 				case "select":
-					mainctl = new tag({
-						tag: "select",
+					m.tag = "select";
+					m.class = core.merge.class(m.class, [
+						opt.plaintext && opt.readonly ? "form-select-plaintext" : "form-select",
+						opt.weight && !(opt.before || opt.after || opt.addctl !== null)
+							? `form-select-${opt.weight}`
+							: null,
+						opt.label && opt.floatlabel
+							? core.combineArray(
+									[
+										opt.before || opt.after ? "rounded-0" : null,
+										opt.before ? "rounded-end" : null,
+										opt.after ? "rounded-start" : null,
+									],
+									" "
+							  )
+							: null,
+					]);
 
-						id: d.id,
-						name: d.name,
-						style: d.style,
-
-						align: d.align,
-						color: d.color,
-						textcolor: d.textcolor,
-						bordercolor: d.bordercolor,
-						border: d.border,
-
-						onchange: d.onchange,
-						onclick: d.onclick,
-						onfocus: d.onfocus,
-						onblur: d.onblur,
-
-						class: core.merge.class(d.class, [
-							d.plaintext && d.readonly ? "form-select-plaintext" : "form-select",
-							d.weight &&
-							!(d.before || d.after || d.addctl !== null || (d.type === "number" && d.numctl === true))
-								? `form-select-${d.weight}`
-								: null,
-							d.label && d.floatlabel
-								? core.combineArray(
-										[
-											d.before || d.after ? "rounded-0" : null,
-											d.before ? "rounded-end" : null,
-											d.after ? "rounded-start" : null,
-										],
-										" "
-								  )
-								: null,
-						]),
-						attr: core.merge.attr(d.attr, {
-							"aria-label": d.hidelabel && d.label ? d.label : null,
-
-							readonly: d.readonly,
-							disabled: d.disabled,
-							required: d.required,
-							rows: d.row,
-							multiple: d.multiple,
-						}),
-						elem: new option(d.option, d.value),
+					m.attr = core.merge.attr(m.attr, {
+						"aria-label": opt.hidelabel && opt.label ? opt.label : null,
 					});
+
+					m.elem = new option.select({ item: opt.option, selected: opt.value });
+
+					mainctl = new tag(m);
 					break;
 				case "datalist":
-					mainctl = new tag({
-						tag: "datalist",
+					m.tag = "datalist";
+					m.elem = new option.select({ item: opt.option, selected: opt.value });
 
-						id: d.id,
-						name: d.name,
-						style: d.style,
-						attr: d.attr,
-
-						align: d.align,
-						color: d.color,
-						textcolor: d.textcolor,
-						bordercolor: d.bordercolor,
-						border: d.border,
-
-						onclick: d.onclick,
-						onchange: d.onchange,
-						onfocus: d.onfocus,
-						onblur: d.onblur,
-
-						elem: new option(d.option, d.value),
-					});
+					mainctl = new tag(m);
 					break;
 				default:
-					mainctl = new tag({
-						tag: "input",
+					m.tag = "input";
+					m.class = core.merge.class(m.class, [
+						opt.type !== "range"
+							? core.combineArray(
+									[
+										opt.plaintext && opt.readonly ? "form-control-plaintext" : "form-control",
+										,
+										opt.weight &&
+										!(
+											opt.before ||
+											opt.after ||
+											opt.addctl !== null ||
+											(opt.type === "number" && opt.numctl === true)
+										)
+											? `form-control-${opt.weight}`
+											: null,
+									],
+									" "
+							  )
+							: "form-range",
+						opt.type === "color"
+							? core.combineArray(["form-control-color", opt.floatlabel ? "w-100" : null], " ")
+							: null,
+						opt.label && opt.floatlabel
+							? core.combineArray(
+									[
+										opt.before || opt.after || opt.numctl ? "rounded-0" : null,
+										opt.before ? "rounded-end" : null,
+										opt.after ? "rounded-start" : null,
+									],
+									" "
+							  )
+							: opt.label && opt.numctl
+							? "rounded-0"
+							: null,
+					]);
 
-						id: d.id,
-						name: d.name,
-						style: d.style,
-
-						align: d.align,
-						color: d.color,
-						textcolor: d.textcolor,
-						bordercolor: d.bordercolor,
-						border: d.border,
-
-						onchange: d.onchange,
-						onclick: d.onclick,
-						onfocus: d.onfocus,
-						onblur: d.onblur,
-
-						class: core.merge.class(d.class, [
-							d.type !== "range"
-								? core.combineArray(
-										[
-											d.plaintext && d.readonly ? "form-control-plaintext" : "form-control",
-											,
-											d.weight &&
-											!(
-												d.before ||
-												d.after ||
-												d.addctl !== null ||
-												(d.type === "number" && d.numctl === true)
-											)
-												? `form-control-${d.weight}`
-												: null,
-										],
-										" "
-								  )
-								: "form-range",
-							d.type === "color"
-								? core.combineArray(["form-control-color", d.floatlabel ? "w-100" : null], " ")
-								: null,
-							d.label && d.floatlabel
-								? core.combineArray(
-										[
-											d.before || d.after || d.numctl ? "rounded-0" : null,
-											d.before ? "rounded-end" : null,
-											d.after ? "rounded-start" : null,
-										],
-										" "
-								  )
-								: d.label && d.numctl
-								? "rounded-0"
-								: null,
-						]),
-						attr: core.merge.attr(d.attr, {
-							type: d.type,
-							"aria-label": d.hidelabel && d.label ? d.label : null,
-							placeholder: d.placeholder,
-							min: d.min,
-							max: d.max,
-							step: d.step,
-							readonly: d.readonly,
-							disabled: d.disabled,
-							required: d.required,
-							value:
-								["date", "datetime", "month", "datetime-local", "time", "week"].indexOf(d.value) > -1
-									? moment(d.value)
-									: d.value,
-
-							list: d.option ? `${d.id}-dl` : null,
-						}),
+					m.attr = core.merge.attr(m.attr, {
+						type: opt.type,
+						"aria-label": opt.hidelabel && opt.label ? opt.label : null,
+						list: opt.option ? `${opt.id}-dl` : null,
 					});
+
+					mainctl = new tag(m);
 					break;
 			}
 
@@ -474,8 +361,8 @@ export default class input extends tag {
 			if (beforectl) ctl.push(beforectl);
 
 			//add label
-			if (labelctl && d.floatlabel) {
-				ctl.push(new div("form-floating flex-grow-1", [mainctl, labelctl]));
+			if (labelctl && opt.floatlabel) {
+				ctl.push(new div({ class: "form-floating flex-grow-1", elem: [mainctl, labelctl] }));
 
 				labelctl = null;
 			} else {
@@ -489,45 +376,47 @@ export default class input extends tag {
 			ctl.push(validmsg);
 			ctl.push(invalidmsg);
 
-			if (d.type === "hidden") {
-				ctl = [new div("d-none", ctl)];
+			if (opt.type === "hidden") {
+				ctl = [new div({ display: "none", elem: ctl })];
 			} else {
-				if (d.flex) {
-					ctl = [new div("d-flex", ctl)];
+				if (opt.flex) {
+					ctl = [new div({ display: "flex", elem: ctl })];
 				} else {
-					if (["checkbox", "radio", "switch"].includes(d.type)) {
+					if (["checkbox", "radio", "switch"].includes(opt.type)) {
 						ctl.push(labelctl);
 						ctl = [
-							new div(
-								[
+							new div({
+								class: [
 									"form-check",
-									d.label && d.inline ? "form-check-inline" : null,
-									d.type === "switch" ? "form-switch" : null,
-									d.valid || d.invalid ? "has-validation" : null,
+									opt.label && opt.inline ? "form-check-inline" : null,
+									opt.type === "switch" ? "form-switch" : null,
+									opt.valid || opt.invalid ? "has-validation" : null,
 								],
-								ctl
-							),
+								elem: ctl,
+							}),
 						];
 					} else {
 						ctl = [
-							new div(
-								[
+							new div({
+								class: [
 									"input-group",
-									d.nowarp ? "flex-nowarp" : null,
-									d.weight ? `input-group-${d.weight}` : null,
-									d.valid || d.invalid ? "has-validation" : null,
+									opt.nowarp ? "flex-nowarp" : null,
+									opt.weight ? `input-group-${opt.weight}` : null,
+									opt.valid || opt.invalid ? "has-validation" : null,
 								],
-								ctl
-							),
+								elem: ctl,
+							}),
 						];
 
 						//put ctl in div.col-auto if labelsize is set
-						if (d.labelsize || d.ctlsize) {
+						if (opt.labelsize || opt.ctlsize) {
 							ctl = [
-								new div(
-									d.ctlsize ? core.multiClass(d.ctlsize, "col-$1", null, "col") : "col-auto",
-									ctl
-								),
+								new div({
+									class: opt.ctlsize
+										? core.multiClass(opt.ctlsize, "col-$1", null, "col")
+										: "col-auto",
+									elem: ctl,
+								}),
 							];
 						}
 
@@ -536,17 +425,15 @@ export default class input extends tag {
 				}
 			}
 
-			if (d.size) {
+			if (opt.size) {
 				super.data = {
-					elem: new div(core.multiClass(d.size, "col-$1", null, "col"), ctl),
+					elem: new div({ class: core.multiClass(opt.size, "col-$1", null, "col"), elem: ctl }),
 				};
 			} else {
 				super.data = {
 					elem: ctl,
 				};
 			}
-		} else {
-			super.data = null;
 		}
 	}
 }

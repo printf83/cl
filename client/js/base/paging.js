@@ -1,12 +1,28 @@
 "use strict";
 import * as core from "./core.js";
 import * as cl from "./cl.js";
-import tag from "./tag.js";
+import div from "./div.js";
 import li from "./li.js";
 import a from "./a.js";
 import ul from "./ul.js";
 import icon from "./icon.js";
 
+const defaultOption = {
+	total: 0,
+	skip: 0,
+	limit: 0,
+	max: 5,
+	weight: null,
+	align: "center", //start|end|center(default)
+	overflow: true,
+	onchange: null,
+	firstlast: true,
+	nextprev: true,
+	labelfirst: null,
+	labellast: null,
+	labelnext: null,
+	labelprev: null,
+};
 /**
  * [item:{title,icon,divider,label,href,onclick}]
  * opt : {attr,id,class,style,item,divider}
@@ -29,55 +45,27 @@ function pagingonchange(sender, data) {
 	cl.replaceWith(container, new paging(data));
 }
 
-export default class paging extends tag {
-	constructor(...arg) {
-		super();
-
-		if (arg && arg.length > 0) {
-			this.data = core.extend(
-				{},
-				{
-					attr: null,
-
-					id: null,
-					class: null,
-					style: null,
-
-					total: 0,
-					skip: 0,
-					limit: 0,
-					max: 5,
-					weight: null,
-					align: "center", //start|end|center(default)
-					overflow: true,
-					onchange: null,
-					firstlast: true,
-					nextprev: true,
-					labelfirst: null,
-					labellast: null,
-					labelnext: null,
-					labelprev: null,
-				},
-				arg[0]
-			);
-		} else {
-			this.data = null;
-		}
+export default class paging extends div {
+	constructor(opt) {
+		super(opt);
 	}
 
 	get data() {
 		return super.data;
 	}
-	set data(d) {
-		if (d) {
-			let curpage = d.skip / d.limit + 1;
-			let btncount = parseInt(d.total / d.limit, 10) + (d.total % d.limit > 0 ? 1 : 0);
+	set data(opt) {
+		if (opt) {
+			opt = core.extend({}, defaultOption, opt);
+			let data = core.extend({}, opt);
 
-			if (d.total > d.limit) {
+			let curpage = opt.skip / opt.limit + 1;
+			let btncount = parseInt(opt.total / opt.limit, 10) + (opt.total % opt.limit > 0 ? 1 : 0);
+
+			if (opt.total > opt.limit) {
 				let item = [];
 
 				//first
-				if (d.firstlast) {
+				if (opt.firstlast) {
 					item.push(
 						new li({
 							class: ["page-item", curpage > 1 ? null : "disabled"],
@@ -90,17 +78,17 @@ export default class paging extends tag {
 								},
 								href: "javascript:void(0)",
 								onclick: function (sender) {
-									d.skip = 0;
-									pagingonchange(sender.currentTarget, d);
+									data.skip = 0;
+									pagingonchange(sender.currentTarget, data);
 								},
-								elem: d.labelfirst ? d.labelfirst : new icon("angle-double-left"),
+								elem: opt.labelfirst ? opt.labelfirst : new icon("angle-double-left"),
 							}),
 						})
 					);
 				}
 
 				//prev
-				if (d.nextprev) {
+				if (opt.nextprev) {
 					item.push(
 						new li({
 							class: ["page-item", curpage > 1 ? null : "disabled"],
@@ -113,10 +101,10 @@ export default class paging extends tag {
 								},
 								href: "javascript:void(0)",
 								onclick: function (sender) {
-									d.skip = (curpage - 2) * d.limit;
-									pagingonchange(sender.currentTarget, d);
+									data.skip = (curpage - 2) * data.limit;
+									pagingonchange(sender.currentTarget, data);
 								},
-								elem: d.labelprev ? d.labelprev : new icon("angle-left"),
+								elem: opt.labelprev ? opt.labelprev : new icon("angle-left"),
 							}),
 						})
 					);
@@ -126,20 +114,20 @@ export default class paging extends tag {
 				var x = 1;
 				var y = btncount;
 				var c = curpage;
-				if (d.max > btncount) {
-					d.max = btncount;
+				if (opt.max > btncount) {
+					opt.max = btncount;
 				}
 
-				if (d.max < 3) {
-					d.max = 3;
+				if (opt.max < 3) {
+					opt.max = 3;
 				}
 
-				if (d.max % 2 === 0) {
-					d.max = d.max + 1;
+				if (opt.max % 2 === 0) {
+					opt.max = opt.max + 1;
 				}
 
 				//limit button
-				if (y > d.max) {
+				if (y > opt.max) {
 					//example for 10
 
 					//x,2,3,4,5
@@ -154,19 +142,19 @@ export default class paging extends tag {
 
 					//6,7,8,x,10
 					//6,7,8,9,x
-					var md = parseInt(d.max / 2, 10) + 1;
+					var md = parseInt(opt.max / 2, 10) + 1;
 
 					x = c - md + 1;
 					y = c + md - 1;
 
 					if (x < 1) {
 						x = 1;
-						y = d.max;
+						y = opt.max;
 					}
 
 					if (y > btncount) {
 						y = btncount;
-						x = y - d.max + 1;
+						x = y - opt.max + 1;
 					}
 
 					if (x < 1) {
@@ -187,8 +175,8 @@ export default class paging extends tag {
 								href: "javascript:void(0)",
 								onclick: function (sender) {
 									let xnum = parseInt(sender.currentTarget.innerText, 10);
-									d.skip = (xnum - 1) * d.limit;
-									pagingonchange(sender.currentTarget, d);
+									data.skip = (xnum - 1) * data.limit;
+									pagingonchange(sender.currentTarget, data);
 								},
 								elem: x.toString(),
 							}),
@@ -197,7 +185,7 @@ export default class paging extends tag {
 				}
 
 				//next
-				if (d.nextprev) {
+				if (opt.nextprev) {
 					item.push(
 						new li({
 							class: ["page-item", curpage < btncount ? null : "disabled"],
@@ -210,17 +198,17 @@ export default class paging extends tag {
 								},
 								href: "javascript:void(0)",
 								onclick: function (sender) {
-									d.skip = curpage * d.limit;
-									pagingonchange(sender.currentTarget, d);
+									data.skip = curpage * data.limit;
+									pagingonchange(sender.currentTarget, data);
 								},
-								elem: d.labelnext ? d.labelnext : new icon("angle-right"),
+								elem: opt.labelnext ? opt.labelnext : new icon("angle-right"),
 							}),
 						})
 					);
 				}
 
 				//last
-				if (d.firstlast) {
+				if (opt.firstlast) {
 					item.push(
 						new li({
 							class: ["page-item", curpage < btncount ? null : "disabled"],
@@ -233,51 +221,41 @@ export default class paging extends tag {
 								},
 								href: "javascript:void(0)",
 								onclick: function (sender) {
-									d.skip = (btncount - 1) * d.limit;
-									pagingonchange(sender.currentTarget, d);
+									data.skip = (btncount - 1) * data.limit;
+									pagingonchange(sender.currentTarget, data);
 								},
-								elem: d.labellast ? d.labellast : new icon("angle-double-right"),
+								elem: opt.labellast ? opt.labellast : new icon("angle-double-right"),
 							}),
 						})
 					);
 				}
 
-				//save in memory
-				//ns.data.set(d.id, d);
+				opt.class = core.merge.class(opt.class, ["pagination", opt.weight ? `pagination-${opt.weight}` : null]);
+				opt.elem = item;
+
+				delete opt.total;
+				delete opt.skip;
+				delete opt.limit;
+				delete opt.max;
+				delete opt.weight;
+				delete opt.firstlast;
+				delete opt.nextprev;
+				delete opt.labelfirst;
+				delete opt.labellast;
+				delete opt.labelnext;
+				delete opt.labelprev;
+
 				super.data = {
-					tag: "div",
-
-					id: d.id,
-					name: d.name,
-					attr: d.attr,
-					style: d.style,
-
-					align: d.align,
-					color: d.color,
-					textcolor: d.textcolor,
-					bordercolor: d.bordercolor,
-					border: d.border,
-
-					onchange: d.onchange,
-					onclick: d.onclick,
-					onfocus: d.onfocus,
-					onblur: d.onblur,
-
-					class: core.merge.class(d.class, [
-						"d-flex",
-						"p-1",
-						"cl-paging",
-						d.align ? "justify-content-" + d.align : null,
-						d.overflow ? "overflow-auto" : null,
-					]),
-					elem: new ul(
-						["pagination", d.weight ? `pagination-${d.weight}` : null, d.overflow ? "mx-5" : null],
-						item
-					),
+					display: "flex",
+					padding: 3,
+					justifyContent: opt.align ? opt.align : null,
+					class: ["cl-paging", opt.overflow ? "overflow-auto" : null],
+					elem: new ul(opt),
 				};
+
+				delete opt.align;
+				delete opt.overflow;
 			}
-		} else {
-			super.data = null;
 		}
 	}
 }

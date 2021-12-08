@@ -1,141 +1,85 @@
 "use strict";
 import * as core from "./core.js";
-import tag from "./tag.js";
 import icon from "./icon.js";
 import div from "./div.js";
 import h from "./h.js";
 
+const defaultOption = {
+	icon: null,
+	weight: "md",
+	elem: null,
+};
 /**
- * weight,icon,label
- * icon,label
- * label
- * opt : {attr,class,icon,weight,elem}
+ * opt : {tagoption,icon,weight,elem}
  */
-export default class msg extends tag {
-	constructor(...arg) {
-		super();
-		if (arg && arg.length > 0) {
-			let t = {
-				weight: null,
-				icon: null, //sm|md|lg
-				elem: null,
-			};
-			if (arg.length === 3) {
-				t.weight = arg[0];
-				t.icon = arg[1];
-				t.elem = arg[2];
-			} else if (arg.length === 2) {
-				t.icon = arg[0];
-				t.elem = arg[1];
-			} else if (
-				arg.length === 1 &&
-				(typeof arg[0] === "string" || Array.isArray(arg[0]) || arg[0].hasOwnProperty("cl"))
-			) {
-				t.elem = arg[0];
-			} else if (arg.length === 1) {
-				t = arg[0];
-			} else {
-				console.error("Unsupported argument", arg);
-			}
-
-			this.data = core.extend(
-				{},
-				{
-					attr: null,
-					class: null,
-					icon: null,
-					weight: null, //font size fs-1 to fs-6 or display-1 to display-6 (any class for i)
-					elem: null,
-				},
-				t
-			);
-		} else {
-			this.data = null;
-		}
+export default class msg extends div {
+	constructor(opt) {
+		super(opt);
 	}
 
 	get data() {
 		return super.data;
 	}
-	set data(d) {
-		if (d && (d.icon || d.elem)) {
-			switch (d.weight) {
+	set data(opt) {
+		if (opt) {
+			opt = core.extend({}, defaultOption, opt);
+
+			switch (opt.weight) {
 				case "sm":
 				case "md":
-					super.data = {
-						tag: "div",
-
-						id: d.id,
-						name: d.name,
-						attr: d.attr,
-						style: d.style,
-
-						align: d.align,
-						color: d.color,
-						textcolor: d.textcolor,
-						bordercolor: d.bordercolor,
-						border: d.border,
-
-						onchange: d.onchange,
-						onclick: d.onclick,
-						onfocus: d.onfocus,
-						onblur: d.onblur,
-
-						class: core.merge.class(d.class, ["d-flex", "align-items-stretch", "gap-2"]),
-
-						elem: [
-							d.icon
-								? new div(
-										"d-flex align-item-start",
-										new div(d.weight === "sm" ? "fs-4" : "display-4", new icon(d.icon))
-								  )
-								: null,
-							new div("d-flex align-items-center", new div("text-break", d.elem)),
-						],
-					};
+					opt.display = "flex";
+					opt.alignItem = "stretch";
+					opt.gap = 2;
+					opt.elem = [
+						opt.icon
+							? new div({
+									display: "flex",
+									alignItem: "start",
+									marginEnd: 2,
+									elem: new div({
+										class: opt.weight === "sm" ? "fs-5" : "display-4",
+										elem: new icon(opt.icon),
+									}),
+							  })
+							: null,
+						new div({
+							display: "flex",
+							alignItem: "center",
+							elem: new div({ class: "text-break", elem: opt.elem }),
+						}),
+					];
 
 					break;
 				case "lg":
-					super.data = {
-						tag: "div",
+					if (opt.icon && typeof opt.icon === "object") {
+						opt.icon.weight = "2x";
+					}
 
-						id: d.id,
-						name: d.name,
-						attr: d.attr,
-						class: d.class,
-						style: d.style,
-
-						align: d.align,
-						color: d.color,
-						textcolor: d.textcolor,
-						bordercolor: d.bordercolor,
-						border: d.border,
-
-						onchange: d.onchange,
-						onclick: d.onclick,
-						onfocus: d.onfocus,
-						onblur: d.onblur,
-
-						elem: [
-							d.icon
-								? new h(
-										1,
-										"display-1 text-center mx-3",
-										typeof d.icon === "string"
-											? new icon({ icon: d.icon, weight: "2x" })
-											: new icon(d.icon)
-								  )
-								: null,
-							new div("text-center", new div("text-break", d.elem)),
-						],
-					};
+					opt.elem = [
+						opt.icon
+							? new h({
+									level: 1,
+									class: "display-1",
+									align: "center",
+									marginX: 3,
+									elem: new icon(opt.icon),
+							  })
+							: null,
+						new div({
+							align: "center",
+							elem: new div({ class: "text-break", elem: opt.elem }),
+						}),
+					];
 
 					break;
 				default:
-					console.error("Unsupported weight", d.weight);
+					console.error("Unsupported weight", opt.weight);
 			}
-		} else {
-			super.data = null;
+
+			delete opt.weight;
+			delete opt.icon;
+
+			super.data = opt;
 		}
 	}
 }

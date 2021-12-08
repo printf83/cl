@@ -1,63 +1,46 @@
 import * as core from "./core.js";
 import tag from "./tag.js";
 
+const defaultOption = {
+	elem: null,
+	title: null,
+	msg: null,
+	type: null,
+	placement: "top",
+	trigger: "focus",
+};
 /**
  * elem, msg
  * elem, opt : {attr,title,msg,type,placement,trigger}
  */
 export default class tooltip extends tag {
-	constructor(elem, ...arg) {
-		super();
-
-		if (elem && arg && arg.length > 0) {
-			let t = {
-				msg: null,
-			};
-
-			if (arg.length === 1 && typeof arg[0] === "string") {
-				t = {
-					msg: arg[0],
-				};
-			} else if (arg.length === 1) {
-				t = arg[0];
-			} else {
-				console.error("Unsupported argument", arg);
-			}
-
-			this.data = core.extend(
-				{},
-				{
-					_target: elem,
-
-					attr: null,
-					title: null,
-					msg: null,
-					type: null,
-					placement: "top",
-					trigger: "focus",
-				},
-				t
-			);
-		} else {
-			this.data = { _target: elem };
-		}
+	constructor(opt) {
+		super(opt);
 	}
 
 	get data() {
 		return super.data;
 	}
-	set data(d) {
-		if (d && d._target) {
-			let tmp = d._target.data;
-			tmp.attr = core.merge.attr(tmp.attr, {
-				title: d.type === "popover" ? d.title : d.msg,
-				"data-bs-toggle": d.type,
-				"data-bs-content": d.type === "popover" ? d.msg : null,
-				"data-bs-trigger": d.type === "popover" ? d.trigger : null,
-				"data-bs-placement": d.type ? d.placement : null,
-				"data-bs-html": d.type && core.isHTML(d.msg) ? "true" : null,
-			});
-			super.data = tmp;
+	set data(opt) {
+		if (opt && opt.elem) {
+			if (opt.elem.hasOwnProperty("cl")) {
+				opt = core.extend({}, defaultOption, opt);
+
+				let tmp = opt.elem.data;
+				tmp.attr = core.merge.attr(tmp.attr, {
+					title: opt.type === "popover" ? opt.title : opt.msg,
+					"data-bs-toggle": opt.type,
+					"data-bs-content": opt.type === "popover" ? opt.msg : null,
+					"data-bs-trigger": opt.type === "popover" ? opt.trigger : null,
+					"data-bs-placement": opt.type ? opt.placement : null,
+					"data-bs-html": opt.type && core.isHTML(opt.msg) ? "true" : null,
+				});
+
+				super.data = tmp;
+			} else {
+				console.error("Tooltip unsupported element", opt.elem);
+				super.data = null;
+			}
 		} else {
 			super.data = null;
 		}

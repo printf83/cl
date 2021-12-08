@@ -9,46 +9,40 @@ import div from "./div.js";
  * msg, button : {label,color,onclick}
  * opt : {modal option}
  */
-export class form extends tag {
+export class form extends div {
 	constructor(elem, gap = 2, col = 1) {
-		if (elem) {
-			super({
-				elem: new div(
-					"container p-0",
-					new div(
-						`row row-cols-${col} g-${gap}`,
-						Array.isArray(elem)
-							? elem.map(function (i) {
-									return new div("col", i);
-							  })
-							: new div("col", elem)
-					)
-				),
-			});
-		} else {
-			super();
-		}
+		super({
+			padding: 0,
+			class: "container",
+			elem: new div({
+				gap: gap,
+				row: true,
+				class: `row-cols-${col}`,
+				elem: Array.isArray(elem)
+					? elem.map(function (i) {
+							return new div({ col: true, elem: i });
+					  })
+					: new div({ col: true, elem: elem }),
+			}),
+		});
 	}
 }
 
-export class stack extends tag {
+export class stack extends div {
 	constructor(elem, gap = 2, col = "auto") {
-		if (elem) {
-			super({
-				elem: new div(
-					"container p-0",
-					new div(
-						`row row-cols-${col} g-${gap}`,
-						Array.isArray(elem)
-							? elem.map(function (i) {
-									return new div("col", i);
-							  })
-							: new div("col", elem)
-					)
-				),
-			});
-		} else {
-			super();
-		}
+		super({
+			padding: 0,
+			class: "container",
+			elem: new div({
+				row: true,
+				gap: gap,
+				class: `row-cols-${col}`,
+				elem: Array.isArray(elem)
+					? elem.map(function (i) {
+							return new div({ col: true, elem: i });
+					  })
+					: new div({ col: true, elem: elem }),
+			}),
+		});
 	}
 }

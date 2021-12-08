@@ -6,10 +6,10 @@ import tag from "./tag.js";
  * opt : {tagoption}
  */
 const defaultOption = {
-	tag: "strong",
+	tag: "nav",
 };
 
-export default class strong extends tag {
+export default class nav extends tag {
 	constructor(opt) {
 		super(opt);
 	}

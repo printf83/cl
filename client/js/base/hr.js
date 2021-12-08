@@ -2,33 +2,20 @@
 import * as core from "./core.js";
 import tag from "./tag.js";
 
+const defaultOption = { tag: "hr" };
+
 /**
- * class,style,elem
- * class,elem
- * [elem]
- * opt : {attr,class,style,id,name,onclick,elem}
+ * opt : {tagoption}
  */
 export default class hr extends tag {
-	constructor(...arg) {
-		if (arg && arg.length > 0) {
-			if (arg.length === 1) {
-				if (typeof arg[0] === "string" || Array.isArray(arg[0])) {
-					super({ tag: "hr", attr: { class: arg[0] } });
-				} else {
-					super({ tag: "hr", attr: arg[0] });
-				}
-			} else {
-				console.error("Unsupported argument", arg);
-			}
-		} else {
-			super({ tag: "hr" });
-		}
+	constructor(opt) {
+		super(core.extend({}, defaultOption, opt));
 	}
 
 	get data() {
 		return super.data;
 	}
-	set data(arg) {
-		super.data = core.extend({}, { tag: "hr" }, arg);
+	set data(opt) {
+		super.data = core.extend({}, defaultOption, opt);
 	}
 }

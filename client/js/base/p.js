@@ -1,22 +1,23 @@
 "use strict";
 import * as core from "./core.js";
-import cont from "./cont.js";
+import tag from "./tag.js";
 
 /**
- * class,style,elem
- * class,elem
- * [elem]
- * opt :{attr,class,style,id,name,onclick,elem}
+ * opt : {tagoption}
  */
-export default class p extends cont {
-	constructor(...arg) {
-		super("p", ...arg);
+const defaultOption = {
+	tag: "p",
+};
+
+export default class p extends tag {
+	constructor(opt) {
+		super(opt);
 	}
 
 	get data() {
 		return super.data;
 	}
-	set data(arg) {
-		super.data = core.extend({}, { tag: "p" }, arg);
+	set data(opt) {
+		super.data = core.extend({}, defaultOption, opt);
 	}
 }

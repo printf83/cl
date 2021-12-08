@@ -4,147 +4,85 @@ import h from "./h.js";
 import div from "./div.js";
 import button from "./button.js";
 
+const defaultOption = {
+	id: null,
+	flush: false,
+	autoclose: true,
+	item: null,
+};
+
+const defaultItemOption = { id: null, label: null, icon: null, active: false, elem: null };
+
 /**
- * [item:{title,icon,active,elem}]
- * opt : {attr,id,class,style,item,flush,autoclose}
+ * opt : {tagoption,flush,autoclose,item:[{id,label,icon,active,elem}]}
  */
 export default class accordion extends div {
-	constructor(...arg) {
-		super();
-
-		if (arg && arg.length > 0) {
-			let t = {
-				item: null,
-			};
-
-			if (arg.length === 1) {
-				if (Array.isArray(arg[0])) {
-					t.item = arg[0];
-				} else {
-					t = arg[0];
-				}
-			} else {
-				console.error("Unsupported argument", arg);
-			}
-
-			this.data = core.extend(
-				{},
-				{
-					attr: null,
-
-					id: null,
-					class: null,
-					style: null,
-					item: null,
-
-					flush: false,
-					autoclose: true,
-				},
-				t
-			);
-		} else {
-			this.data = null;
-		}
+	constructor(opt) {
+		super(opt);
 	}
 
 	get data() {
 		return super.data;
 	}
-	set data(d) {
-		if (d) {
+	set data(opt) {
+		if (opt) {
 			//check if item isnot array
-			d.item = d.item ? (Array.isArray(d.item) ? d.item : [d.item]) : null;
+			opt.item = opt.item ? (Array.isArray(opt.item) ? opt.item : [opt.item]) : null;
 
 			//id require if autoclose
-			d.id = d.id || d.autoclose ? core.UUID() : null;
+			opt.id = opt.id || opt.autoclose ? core.UUID() : null;
 
 			//check if any item active
-			let activeitem = d.item?.find((i) => {
+			let activeitem = opt.item?.find((i) => {
 				return i.active === true;
 			});
 
-			if (d.item && !activeitem) {
-				d.item[0].active = true;
+			if (opt.item && !activeitem) {
+				opt.item[0].active = true;
 			}
 
-			super.data = {
-				id: d.id,
-				name: d.name,
-				attr: d.attr,
-				style: d.style,
+			opt.class = core.merge.class(opt.class, ["accordion", opt.flush ? "accordion-flush" : null]);
+			opt.elem =
+				opt.item && opt.item.length > 0
+					? opt.item.map(function (i) {
+							i = core.extend({}, defaultItemOption, i);
 
-				align: d.align,
-				color: d.color,
-				textcolor: d.textcolor,
-				bordercolor: d.bordercolor,
-				border: d.border,
+							i.id = i.id || core.UUID();
 
-				onclick: d.onclick,
-				onchange: d.onchange,
-				onfocus: d.onfocus,
-				onblur: d.onblur,
-
-				class: core.merge.class(d.class, ["accordion", d.flush ? "accordion-flush" : null]),
-				elem:
-					d.item && d.item.length > 0
-						? d.item.map(function (i) {
-								i = core.extend(
-									{},
-									{
-										id: null,
-										title: null,
-										icon: null,
-										active: false,
-										elem: null,
-									},
-									i
-								);
-
-								let id = i.id || core.UUID();
-								return new div("accordion-item", [
-									new h(2, {
-										id: `${id}-head`,
+							return new div({
+								class: "accordion-item",
+								elem: [
+									new h({
+										level: 2,
+										id: `${i.id}-head`,
 										class: "accordion-header",
 										elem: new button({
-											label: i.title,
+											label: i.label,
 											icon: i.icon,
 											class: ["accordion-button", !i.active ? "collapsed" : null],
 											attr: {
 												"data-bs-toggle": "collapse",
-												"data-bs-target": `#${id}-body`,
-												"aria-controls": `${id}-body`,
+												"data-bs-target": `#${i.id}-body`,
+												"aria-controls": `${i.id}-body`,
 												"aria-expanded": i.active ? "true" : "false",
 											},
 										}),
-										//create button from tag to prevent btn class on accordion-button
-										// elem: new tag({
-										// 	tag: "button",
-										// 	attr: {
-										// 		type: "button",
-										// 		class: ["accordion-button", !i.active ? "collapsed" : null],
-										// 		"data-bs-toggle": "collapse",
-										// 		"data-bs-target": `#${id}-body`,
-										// 		"aria-controls": `${id}-body`,
-										// 		"aria-expanded": i.active ? "true" : "false",
-										// 	},
-										// 	elem: new label(i.icon, i.title),
-										// }),
 									}),
 									new div({
-										id: `${id}-body`,
+										id: `${i.id}-body`,
 										class: ["accordion-collapse", "collapse", i.active ? "show" : null],
 										attr: {
-											"aria-labelledby": `${id}-head`,
-											"data-bs-parent": d.autoclose ? `#${d.id}` : null,
+											"aria-labelledby": `${i.id}-head`,
+											"data-bs-parent": opt.autoclose ? `#${opt.id}` : null,
 										},
-										elem: new div("accordion-body", i.elem),
+										elem: new div({ class: "accordion-body", elem: i.elem }),
 									}),
-								]);
-						  })
-						: null,
-			};
-		} else {
-			super.data = null;
+								],
+							});
+					  })
+					: null;
+
+			super.data = opt;
 		}
 	}
 }

@@ -1,0 +1,66 @@
+/* cl-menu */
+
+.cl-menu-toggle {
+	color: rgba(var(--bs-gray), 0.7);
+	font-weight: calc(var(--bs-body-font-weight) * 1.5);
+	padding: 0.25rem 0.5rem;
+	border-radius: 0.2rem;
+	display: inline-block;
+}
+.bg-dark .cl-menu-toggle {
+	color: rgba(var(--bs-light-rgb), 0.7);
+}
+.cl-menu-toggle:hover {
+	background-color: rgba(var(--bs-primary-rgb), 0.1);
+}
+.bg-dark .cl-menu-toggle:hover {
+	background-color: rgba(var(--bs-primary-rgb), 0.1);
+}
+.cl-menu-toggle::before {
+	text-align: center;
+	width: 1.25em;
+	line-height: 0;
+	content: "\f054";
+	font-family: "Font Awesome 5 Free";
+	font-weight: 900;
+	transition: transform 0.35s ease;
+	transform-origin: 0.5em 50%;
+	display: inline-block;
+}
+.cl-menu-toggle[aria-expanded="true"] {
+	color: rgba(var(--bs-gray), 0.9);
+}
+.bg-dark .cl-menu-toggle[aria-expanded="true"] {
+	color: rgba(var(--bs-light-rgb), 0.9);
+}
+.cl-menu-toggle[aria-expanded="true"]::before {
+	transform: rotate(90deg);
+}
+.cl-menu-container {
+	padding-left: 1.25rem;
+	list-style: none;
+	margin: 0;
+}
+.cl-menu-container li div {
+	color: rgba(var(--bs-gray), 0.7);
+	padding: 0.25rem 0.5rem;
+	border-radius: 0.2rem;
+}
+.bg-dark .cl-menu-container li div {
+	color: rgba(var(--bs-light-rgb), 0.7);
+}
+.cl-menu-container li div:hover {
+	background-color: rgba(var(--bs-primary-rgb), 0.1);
+}
+.bg-dark .cl-menu-container li div:hover {
+	background-color: rgba(var(--bs-primary-rgb), 0.1);
+}
+.cl-menu-container li div.active {
+	font-weight: calc(var(--bs-body-font-weight) * 1.5);
+	color: rgba(var(--bs-gray), 0.9);
+}
+.bg-dark .cl-menu-container li div.active {
+	color: rgba(var(--bs-light-rgb), 0.9);
+}
+
+/* cl-toc */

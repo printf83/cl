@@ -20,13 +20,13 @@ export function removeEmptyArray(arr) {
 }
 
 const _baseIcon = {
-	i: { icon: "info-circle", style: "fas", color: "info" },
-	"!": { icon: "exclamation-triangle", style: "fas", color: "warning" },
-	"!!": { icon: "exclamation-triangle", style: "fas", color: "danger" },
-	"?": { icon: "question-circle", style: "fas", color: "success" },
-	"/": { icon: "check-circle", style: "fas", color: "success" },
-	x: { icon: "times-circle", style: "fas", color: "danger" },
-	"-": { icon: "minus-circle", style: "fas", color: "danger" },
+	i: { icon: "info-circle", type: "fas", color: "info" },
+	"!": { icon: "exclamation-triangle", type: "fas", color: "warning" },
+	"!!": { icon: "exclamation-triangle", type: "fas", color: "danger" },
+	"?": { icon: "question-circle", type: "fas", color: "success" },
+	"/": { icon: "check-circle", type: "fas", color: "success" },
+	x: { icon: "times-circle", type: "fas", color: "danger" },
+	"-": { icon: "minus-circle", type: "fas", color: "danger" },
 };
 
 export function getBaseIcon(icon, baseIcon, baseColor) {
@@ -39,7 +39,7 @@ export function getBaseIcon(icon, baseIcon, baseColor) {
 
 			return {
 				icon: bI.icon,
-				style: bI.style,
+				type: bI.type,
 				color: bI.color,
 				textcolor: bC?.textcolor,
 			};
@@ -219,26 +219,33 @@ function isListed(val, listed) {
 }
 
 function isSupported(val, supported, unsupported) {
-	if (isListed(val, unsupported)) {
+	if (unsupported && isListed(val, unsupported)) {
 		return false;
-	} else {
-		return isListed(val, supported);
 	}
+
+	if (supported && isListed(val, supported)) {
+		return true;
+	}
+
+	return true;
 }
 
 export function multiClass(val, format, supported, unsupported) {
-	//core.multiClass(["lg-12","xl-3","md-2","2"],"col-$1")
-	return val
-		? Array.isArray(val)
-			? val
-					.map(function (i) {
-						return isSupported(i, supported, unsupported) ? format.replace("$1", i) : i;
-					})
-					.join(" ")
-			: isSupported(val, supported, unsupported)
-			? format.replace("$1", val)
-			: val
-		: null;
+	if (val || val === 0) {
+		return val || val === 0
+			? Array.isArray(val)
+				? val
+						.map(function (i) {
+							return isSupported(i, supported, unsupported) ? format.replace("$1", i) : i;
+						})
+						.join(" ")
+				: isSupported(val, supported, unsupported)
+				? format.replace("$1", val)
+				: val
+			: null;
+	} else {
+		return val;
+	}
 }
 export function documentReady(callback) {
 	if (document.readyState != "loading") {

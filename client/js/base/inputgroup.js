@@ -4,142 +4,62 @@ import tag from "./tag.js";
 import label from "./label.js";
 import div from "./div.js";
 
+const defaultOption = {
+	for: null,
+	label: null,
+	elem: null,
+	nowarp: false,
+};
 /**
- * for,label,elem
- * label,elem
- * [elem],
- * opt : {attr,for,label,elem,nowarp}
+ * opt : {tagoption}
  */
 export class container extends tag {
-	constructor(...arg) {
+	constructor(opt) {
 		super();
-
-		if (arg && arg.length > 0) {
-			let t = {
-				for: null,
-				label: null,
-				elem: null,
-			};
-
-			if (arg.length === 3) {
-				t.for = arg[0];
-				t.label = arg[1];
-				t.elem = arg[2];
-			} else if (arg.length === 2) {
-				t.label = arg[0];
-				t.elem = arg[1];
-			} else if (arg.length === 1 && (Array.isArray(arg[0]) || arg[0].hasOwnProperty("cl"))) {
-				t.elem = arg[0];
-			} else if (arg.length === 1) {
-				t = arg[0];
-			} else {
-				console.error("Unsupported argument", arg);
-			}
-
-			this.data = core.extend(
-				{},
-				{
-					for: null,
-					label: null,
-					attr: null,
-					elem: null,
-					nowarp: false,
-				},
-				t
-			);
-		} else {
-			this.data = null;
-		}
+		this.data = core.extend({}, defaultOption, opt);
 	}
 
 	get data() {
 		return super.data;
 	}
-	set data(d) {
-		if (d) {
+	set data(opt) {
+		if (opt) {
+			opt = core.extend({}, defaultOption, opt);
+
+			let ctllabel = opt.label ? new label({ for: opt.for, class: "form-label", label: opt.label }) : null;
+
+			delete opt.label;
+			delete opt.for;
+
+			let ctlmain = new div(opt);
+			let t = ctlmain.data;
+			t.class = core.merge.class(t.class, ["input-group", opt.nowarp ? "flex-nowarp" : null]);
+
+			delete t.nowarp;
+			ctlmain.data = t;
+
 			super.data = {
-				id: d.id,
-				name: d.name,
-				style: d.style,
-				class: d.class,
-
-				onchange: d.onchange,
-				onclick: d.onclick,
-				onfocus: d.onfocus,
-				onblur: d.onblur,
-
-				elem: [
-					d.label ? new label(d.for, "form-label", d.label) : null,
-					new div({
-						attr: d.attr,
-						class: ["input-group", d.nowarp ? "flex-nowarp" : null],
-						elem: d.elem,
-					}),
-				],
+				elem: [ctllabel, ctlmain],
 			};
-		} else {
-			super.data = null;
 		}
 	}
 }
 
 /**
- * [elem]
- * opt : {attr,elem}
+ * opt : {tagoption}
  */
 export class text extends div {
-	constructor(...arg) {
-		super();
-		if (arg && arg.length > 0) {
-			let t = {
-				elem: null,
-			};
-
-			if (
-				arg.length === 1 &&
-				(typeof arg[0] === "string" || Array.isArray(arg[0]) || arg[0].hasOwnProperty("cl"))
-			) {
-				t.elem = arg[0];
-			} else if (arg.length === 1) {
-				t = arg[0];
-			} else {
-				console.error("Unsupported argument", arg);
-			}
-
-			this.data = core.extend(
-				{},
-				{
-					attr: null,
-					elem: null,
-				},
-				t
-			);
-		} else {
-			this.data = null;
-		}
+	constructor(opt) {
+		super(opt);
 	}
 
 	get data() {
 		return super.data;
 	}
-	set data(d) {
-		if (d) {
-			super.data = {
-				id: d.id,
-				name: d.name,
-				style: d.style,
-				attr: d.attr,
-
-				onchange: d.onchange,
-				onclick: d.onclick,
-				onfocus: d.onfocus,
-				onblur: d.onblur,
-
-				class: ["input-group-text"],
-				elem: d.elem,
-			};
-		} else {
-			super.data = null;
+	set data(opt) {
+		if (opt) {
+			opt.class = core.merge.class(opt.class, "input-group-text");
+			super.data = opt;
 		}
 	}
 }
