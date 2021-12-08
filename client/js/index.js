@@ -72,15 +72,19 @@ let dropdownOption = [
 function repeatdoform(max, cur, callback) {
 	if (cur >= 0) {
 		doForm(max, cur);
-		setTimeout(
-			function (m, t, c) {
-				repeatdoform(m, t, c);
-			},
-			0,
-			max,
-			cur - 1,
-			callback
-		);
+		if (max > 10) {
+			setTimeout(
+				function (m, t, c) {
+					repeatdoform(m, t, c);
+				},
+				0,
+				max,
+				cur - 1,
+				callback
+			);
+		} else {
+			repeatdoform(max, cur - 1, callback);
+		}
 	} else {
 		callback();
 	}
@@ -203,7 +207,7 @@ function doForm(max, cur) {
 						color: "info",
 						label: "Inputbox",
 						onclick: function () {
-							new dlg.inputbox("text", "Textbox Input", function (_sender, data) {
+							new dlg.inputbox("date", "Textbox Input", function (_sender, data) {
 								new toast("!!", JSON.stringify(data)).show();
 							}).show();
 						},
@@ -416,6 +420,7 @@ function doForm(max, cur) {
 			new input({
 				type: "email",
 				label: "Email address",
+				style: { color: "red" },
 				floatlabel: true,
 			}),
 			new input({
