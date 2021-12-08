@@ -22,7 +22,7 @@ const defaultSelectItemOption = {
  */
 export class select extends tag {
 	constructor(opt) {
-		super(core.extend({}, defaultOption, opt));
+		super(opt);
 	}
 
 	get data() {
@@ -85,7 +85,7 @@ const defaultDropdownItemOption = {
  */
 export class dropdown extends tag {
 	constructor(opt) {
-		super(core.extend({}, defaultOption, opt));
+		super(opt);
 	}
 
 	get data() {

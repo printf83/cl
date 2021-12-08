@@ -29,7 +29,7 @@ const defaultItemOption = {
  */
 export default class carousel extends div {
 	constructor(opt) {
-		super(core.extend({}, defaultOption, opt));
+		super(opt);
 	}
 
 	get data() {

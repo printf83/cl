@@ -96,12 +96,13 @@ export class group extends div {
 		}
 	}
 }
+const defaultTitleOption = { level: 5 };
 /**
  * opt:{tagoption}
  */
 export class title extends h {
 	constructor(opt) {
-		super(5, opt);
+		super(opt);
 	}
 
 	get data() {
@@ -109,17 +110,20 @@ export class title extends h {
 	}
 	set data(opt) {
 		if (opt) {
+			opt = core.extend({}, defaultTitleOption, opt);
 			opt.class = core.merge.class(opt.class, "card-title");
 			super.data = opt;
 		}
 	}
 }
+
+const defaultSubtitleOption = { level: 6, marginBottom: 2 };
 /**
  * opt:{tagoption}
  */
 export class subtitle extends h {
 	constructor(opt) {
-		super(6, opt);
+		super(opt);
 	}
 
 	get data() {
@@ -127,7 +131,7 @@ export class subtitle extends h {
 	}
 	set data(opt) {
 		if (opt) {
-			opt.marginBottom = 2;
+			opt = core.extend({}, defaultSubtitleOption, opt);
 			opt.class = core.merge.class(opt.class, "card-subtitle");
 			super.data = opt;
 		}
@@ -176,7 +180,7 @@ const defaultHorizontalOption = { left: null, right: null, size: "auto", gap: 0 
  */
 export class horizontal extends div {
 	constructor(opt) {
-		super(core.extend({}, defaultHorizontalOption, opt));
+		super(opt);
 	}
 
 	get data() {
@@ -232,7 +236,7 @@ const defaultImgOption = { placement: "top" };
  */
 export class img extends imgtag {
 	constructor(opt) {
-		super(core.extend({}, defaultImgOption, opt));
+		super(opt);
 	}
 
 	get data() {

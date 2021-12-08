@@ -47,7 +47,7 @@ function pagingonchange(sender, data) {
 
 export default class paging extends div {
 	constructor(opt) {
-		super(core.extend({}, defaultOption, opt));
+		super(opt);
 	}
 
 	get data() {

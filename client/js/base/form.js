@@ -8,7 +8,7 @@ const defaultOption = { tag: "form" };
  */
 export default class form extends tag {
 	constructor(opt) {
-		super(core.extend({}, defaultOption, opt));
+		super(opt);
 	}
 
 	get data() {

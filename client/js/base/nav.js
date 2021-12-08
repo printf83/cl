@@ -11,7 +11,7 @@ const defaultOption = {
 
 export default class nav extends tag {
 	constructor(opt) {
-		super(core.extend({}, defaultOption, opt));
+		super(opt);
 	}
 
 	get data() {

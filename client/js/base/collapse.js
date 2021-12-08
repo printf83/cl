@@ -18,7 +18,7 @@ const defaultToggleOption = {
  */
 export class toggle extends tag {
 	constructor(opt) {
-		super(core.extend({}, defaultToggleOption, opt));
+		super(opt);
 	}
 
 	get data() {
@@ -59,7 +59,7 @@ const defaultContainerOption = {
  */
 export class container extends div {
 	constructor(opt) {
-		super(core.extend({}, defaultContainerOption, opt));
+		super(opt);
 	}
 
 	get data() {

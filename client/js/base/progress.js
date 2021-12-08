@@ -12,7 +12,7 @@ const defaultContainerOption = {
  */
 export class container extends div {
 	constructor(opt) {
-		super(core.extend({}, defaultContainerOption, opt));
+		super(opt);
 	}
 
 	get data() {
@@ -60,7 +60,7 @@ const defaultBarOption = {
  */
 export class bar extends div {
 	constructor(opt) {
-		super(core.extend({}, defaultBarOption, opt));
+		super(opt);
 	}
 
 	get data() {

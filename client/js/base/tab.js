@@ -25,7 +25,7 @@ export default class tab extends div {
 	cltab = 1;
 
 	constructor(opt) {
-		super(core.extend({}, defaultOption, opt));
+		super(opt);
 	}
 
 	get data() {

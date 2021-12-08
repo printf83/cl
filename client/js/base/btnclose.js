@@ -8,7 +8,7 @@ const defaultOption = { label: "Close", dismiss: null, dark: true };
  */
 export default class btnclose extends button {
 	constructor(opt) {
-		super(core.extend({}, defaultOption, opt));
+		super(opt);
 	}
 
 	get data() {

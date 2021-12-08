@@ -28,7 +28,7 @@ const defaultContainerOption = {
 
 export class container extends nav {
 	constructor(opt) {
-		super(core.extend({}, defaultContainerOption, opt));
+		super(opt);
 	}
 
 	get data() {
@@ -97,7 +97,7 @@ const defaultBrandOption = {
 
 export class brand extends tag {
 	constructor(opt) {
-		super(core.extend({}, defaultBrandOption, opt));
+		super(opt);
 	}
 
 	get data() {
@@ -131,7 +131,7 @@ const defaultToggleOption = {
 };
 export class toggle extends collapse.toggle {
 	constructor(opt) {
-		super(core.extend({}, defaultToggleOption, opt));
+		super(opt);
 	}
 
 	get data() {
@@ -159,7 +159,7 @@ const defaultFormContainerOption = {
 };
 export class formcontainer extends form {
 	constructor(opt) {
-		super(core.extend({}, defaultFormContainerOption, opt));
+		super(opt);
 	}
 
 	get data() {
@@ -192,7 +192,7 @@ const defaultOffcanvasContainerOption = {
 
 export class offcanvascontainer extends div {
 	constructor(opt) {
-		super(core.extend({}, defaultOffcanvasContainerOption, opt));
+		super(opt);
 	}
 
 	get data() {
@@ -240,7 +240,7 @@ const defaultItemContainerOption = {
 
 export class itemcontainer extends div {
 	constructor(opt) {
-		super(core.extend({}, defaultItemContainerOption, opt));
+		super(opt);
 	}
 
 	get data() {
@@ -282,7 +282,7 @@ const defaultItemOption = {
 };
 export class item extends div {
 	constructor(opt) {
-		super(core.extend({}, defaultItemOption, opt));
+		super(opt);
 	}
 
 	get data() {

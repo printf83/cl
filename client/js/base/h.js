@@ -8,7 +8,7 @@ const defaultOption = { level: 1 };
  */
 export default class h extends tag {
 	constructor(opt) {
-		super(core.extend({}, defaultOption, opt));
+		super(opt);
 	}
 
 	get data() {

@@ -39,9 +39,14 @@ import msg from "./base/msg.js";
 import * as progress from "./base/progress.js";
 import offcanvas from "./base/offcanvas.js";
 
+let increeseImgUrlIndex = true;
 let imgurlindex = 0;
 function imgurl(width, height) {
-	return `https://picsum.photos/seed/${imgurlindex++}/${width ? width : 800}/${height ? height : 400}.webp`;
+	if (increeseImgUrlIndex) {
+		return `https://picsum.photos/seed/${imgurlindex++}/${width ? width : 800}/${height ? height : 400}.webp`;
+	} else {
+		return `https://picsum.photos/seed/${imgurlindex}/${width ? width : 800}/${height ? height : 400}.webp`;
+	}
 }
 let loream =
 	"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce hendrerit tincidunt nibh ut condimentum. Nulla vitae vulputate elit. Sed accumsan varius mauris, vel bibendum magna consequat eget. Vivamus felis dolor, laoreet et blandit ut, iaculis eu arcu. Proin dapibus, metus vitae iaculis venenatis, lacus purus commodo tellus, aliquam commodo ex metus vulputate mi. Nam eu lorem vel nisi scelerisque hendrerit et id justo. Nunc vestibulum eget est sed ullamcorper. Etiam pulvinar, dui eget vehicula molestie, sapien sapien lobortis nulla, nec cursus urna sapien imperdiet tortor. Nam vitae lacus sem. Praesent id arcu vitae sem ultrices rutrum ut ac mi.";
@@ -86,12 +91,26 @@ function doForm(max, cur) {
 					},
 				}),
 				new button({
-					color: "danger",
+					color: "warning",
 					label: `Regenerate root 100 times`,
 					onclick: function () {
+						increeseImgUrlIndex = false;
 						repeatdoform(100, 99, function () {
 							cl.init(root);
 							console.log("Complete regenerate");
+							increeseImgUrlIndex = true;
+						});
+					},
+				}),
+				new button({
+					color: "danger",
+					label: `Regenerate root 5000 times`,
+					onclick: function () {
+						increeseImgUrlIndex = false;
+						repeatdoform(5000, 4999, function () {
+							cl.init(root);
+							console.log("Complete regenerate");
+							increeseImgUrlIndex = true;
 						});
 					},
 				}),

@@ -14,7 +14,7 @@ const defaultOption = {
 
 export default class img extends tag {
 	constructor(opt) {
-		super(core.extend({}, defaultOption, opt));
+		super(opt);
 	}
 
 	get data() {

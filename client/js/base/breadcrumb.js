@@ -18,7 +18,7 @@ const defaultOption = {
  */
 export default class breadcrumb extends nav {
 	constructor(opt) {
-		super(core.extend({}, defaultOption, opt));
+		super(opt);
 	}
 
 	get data() {

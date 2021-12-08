@@ -3,8 +3,6 @@ import * as core from "./core.js";
 import label from "./label.js";
 import span from "./span.js";
 
-
-
 const defaultOption = {
 	icon: null,
 
@@ -22,7 +20,7 @@ const defaultOption = {
  */
 export default class badge extends span {
 	constructor(opt) {
-		super(core.extend({}, defaultOption, opt));
+		super(opt);
 	}
 
 	get data() {

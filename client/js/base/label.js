@@ -17,7 +17,7 @@ const defaultOption = {
  */
 export default class label extends tag {
 	constructor(opt) {
-		super(core.extend({}, defaultOption, opt));
+		super(opt);
 	}
 
 	get data() {

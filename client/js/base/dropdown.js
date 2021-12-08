@@ -50,7 +50,7 @@ const defaultOption = {
  */
 export default class dropdown extends tag {
 	constructor(opt) {
-		super(core.extend({}, defaultOption, opt));
+		super(opt);
 	}
 
 	get data() {
