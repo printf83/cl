@@ -224,7 +224,7 @@ function doForm(max, cur) {
 								elem: new msg({
 									weight: "lg",
 									icon: "i",
-									elem: "Hello world",
+									elem: [new h({ level: 3, elem: "Hello world" }), loream],
 								}),
 								button: [
 									{
