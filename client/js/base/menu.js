@@ -42,14 +42,16 @@ export default class menu extends div {
 				toggle: "collapse",
 				show: opt.active,
 				elem: new button({
+					class: "cl-menu-toggle",
 					label: opt.label,
 					icon: opt.icon,
 				}),
 			}),
 			new collapse.container({
 				id: opt.id,
+				show: opt.active,
 				elem: new ul({
-					class: "btn-toggle-nav",
+					class: "cl-menu-container",
 					elem: opt.item.map(function (i) {
 						if (typeof i === "string") {
 							i = {
@@ -58,7 +60,8 @@ export default class menu extends div {
 						}
 
 						i = core.extend({}, defaultItemOption, i);
-						i.class = core.merge.class(["d-inline-block", i.active ? "active" : null], i.class);
+
+						i.class = core.merge.class([, i.active ? "active" : null], i.class);
 
 						delete i.active;
 
@@ -70,6 +73,7 @@ export default class menu extends div {
 			}),
 		];
 
+		delete opt.id;
 		delete opt.icon;
 		delete opt.label;
 		delete opt.active;

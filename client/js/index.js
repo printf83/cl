@@ -278,12 +278,18 @@ function doForm(max, cur) {
 						color: "primary",
 						onclick: function () {
 							new offcanvas({
-								// color: "dark",
-								// textcolor: "light",
+								color: "dark",
+								textcolor: "light",
 								title: "Title",
 								icon: "fire",
 								elem: [
 									new menu({ label: "AAA", item: [{ label: "1" }, { label: "2" }, { label: "3" }] }),
+									new menu({
+										label: "BBB",
+										active: true,
+										item: [{ label: "1", active: true }, { label: "2" }, { label: "3" }],
+									}),
+									new menu({ label: "CCC", item: [{ label: "1" }, { label: "2" }, { label: "3" }] }),
 								],
 							}).show();
 						},

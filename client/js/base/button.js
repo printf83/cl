@@ -50,9 +50,9 @@ export default class button extends tag {
 				opt.textcolor = opt.textcolor || bI.textcolor;
 			}
 
-			opt.tag = opt.href ? "a" : "button";
+			opt.tag = opt.href ? "a" : opt.color || opt.outline || opt.weight ? "button" : "div";
 			opt.class = core.merge.class(opt.class, [
-				opt.type === "a" ? null : "btn",
+				opt.type === "a" ? null : opt.color || opt.outline || opt.weight ? "btn" : null,
 				opt.nowarp ? "text-nowarp" : null,
 				opt.weight ? `btn-${opt.weight}` : null,
 				opt.color ? (opt.outline ? `btn-outline-${opt.color}` : `btn-${opt.color}`) : null,
@@ -91,6 +91,8 @@ export default class button extends tag {
 			delete opt.outline;
 			delete opt.hidelabel;
 			delete opt.nowarp;
+
+			delete opt.btnclass;
 
 			super.data = opt;
 		}
