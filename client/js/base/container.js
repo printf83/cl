@@ -28,7 +28,7 @@ export class form extends div {
 	}
 }
 
-export class stack extends tag {
+export class stack extends div {
 	constructor(elem, gap = 2, col = "auto") {
 		super({
 			padding: 0,
