@@ -100,6 +100,7 @@ function doForm(max, cur) {
 
 	cl.replaceChild(
 		root,
+
 		new container.form([
 			new container.stack([
 				new button({
