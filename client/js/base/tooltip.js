@@ -1,26 +1,21 @@
 import * as core from "./core.js";
 import tag from "./tag.js";
 
+const defaultOption = {
+	elem: null,
+	title: null,
+	msg: null,
+	type: null,
+	placement: "top",
+	trigger: "focus",
+};
 /**
  * elem, msg
  * elem, opt : {attr,title,msg,type,placement,trigger}
  */
 export default class tooltip extends tag {
 	constructor(opt) {
-		super(
-			core.extend(
-				{},
-				{
-					elem: null,
-					title: null,
-					msg: null,
-					type: null,
-					placement: "top",
-					trigger: "focus",
-				},
-				opt
-			)
-		);
+		super(core.extend({}, defaultOption, opt));
 	}
 
 	get data() {
@@ -28,6 +23,8 @@ export default class tooltip extends tag {
 	}
 	set data(opt) {
 		if (opt && opt.elem) {
+			opt = core.extend({}, defaultOption, opt);
+
 			let tmp = opt.elem.data;
 			tmp.attr = core.merge.attr(tmp.attr, {
 				title: opt.type === "popover" ? opt.title : opt.msg,

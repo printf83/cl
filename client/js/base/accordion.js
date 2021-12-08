@@ -18,7 +18,7 @@ const defaultItemOption = { id: null, label: null, icon: null, active: false, el
  */
 export default class accordion extends div {
 	constructor(opt) {
-		super(core.extend({}, defaultOption, opt));
+		super(opt);
 	}
 
 	get data() {
@@ -52,7 +52,8 @@ export default class accordion extends div {
 							return new div({
 								class: "accordion-item",
 								elem: [
-									new h(2, {
+									new h({
+										level: 2,
 										id: `${i.id}-head`,
 										class: "accordion-header",
 										elem: new button({

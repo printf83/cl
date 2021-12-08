@@ -5,7 +5,7 @@ import h from "./h.js";
 import p from "./p.js";
 import div from "./div.js";
 import imgtag from "./img.js";
- 
+
 /**
  * opt:{tagoption}
  */
@@ -170,9 +170,6 @@ export class imgoverlay extends div {
 	}
 }
 
-
-
-
 const defaultHorizontalOption = { left: null, right: null, size: "auto", gap: 0 };
 /**
  * opt:{tagoption,left,right,size,gap}
@@ -243,8 +240,7 @@ export class img extends imgtag {
 	}
 	set data(opt) {
 		if (opt) {
-
-			opt = core.extend({}, defaultOption, opt);
+			opt = core.extend({}, defaultImgOption, opt);
 
 			opt.class = opt.placement
 				? core.merge.class(opt.class, [

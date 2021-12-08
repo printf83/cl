@@ -21,6 +21,64 @@ function c2(val, format) {
 	return null;
 }
 
+const defaultOption = {
+	tag: null,
+
+	id: null,
+	name: null,
+
+	class: null,
+	style: null,
+	attr: null,
+
+	href: null,
+	onclick: null,
+	onchange: null,
+	onfocus: null,
+	onblur: null,
+
+	align: null,
+	position: null,
+	overflow: null,
+	opacity: null,
+
+	color: null,
+	gradient: false,
+	coloropacity: null,
+
+	textcolor: null,
+	textopacity: null,
+
+	padding: null,
+	paddingX: null,
+	paddingY: null,
+	paddingTop: null,
+	paddingBottom: null,
+	paddingStart: null,
+	paddingEnd: null,
+
+	margin: null,
+	marginX: null,
+	marginY: null,
+	marginTop: null,
+	marginBottom: null,
+	marginStart: null,
+	marginEnd: null,
+
+	display: null,
+
+	shadow: null,
+
+	border: null,
+	bordercolor: null,
+	borderweight: null,
+
+	rounded: null,
+	roundedtype: null,
+
+	elem: null,
+};
+
 /**
  * opt : {tag,id,name,class,style,attr,href,onclick,onchange,onfocus,onblur,align,color,textcolor,bordercolor,border,elem}
  */
@@ -30,67 +88,7 @@ export default class tag {
 
 	constructor(opt) {
 		if (opt) {
-			this.data = core.extend(
-				{},
-				{
-					tag: null,
-
-					id: null,
-					name: null,
-
-					class: null,
-					style: null,
-					attr: null,
-
-					href: null,
-					onclick: null,
-					onchange: null,
-					onfocus: null,
-					onblur: null,
-
-					align: null,
-					position: null,
-					overflow: null,
-					opacity: null,
-
-					color: null,
-					gradient: false,
-					coloropacity: null,
-
-					textcolor: null,
-					textopacity: null,
-
-					padding: null,
-					paddingX: null,
-					paddingY: null,
-					paddingTop: null,
-					paddingBottom: null,
-					paddingStart: null,
-					paddingEnd: null,
-
-					margin: null,
-					marginX: null,
-					marginY: null,
-					marginTop: null,
-					marginBottom: null,
-					marginStart: null,
-					marginEnd: null,
-
-					display: null,
-
-					shadow: null,
-
-					border: null,
-					bordercolor: null,
-					borderweight: null,
-
-					rounded: null,
-					roundedtype: null,
-
-					elem: null,
-				},
-				opt
-			);
+			this.data = opt; //core.extend({}, defaultOption, opt);
 		}
 	}
 
@@ -99,6 +97,8 @@ export default class tag {
 	}
 	set data(opt) {
 		if (opt) {
+			opt = core.extend({}, defaultOption, opt);
+
 			this._d = {
 				tag: opt.tag,
 				attr: core.merge.attr(opt.attr, {

@@ -14,25 +14,21 @@ import span from "./span.js";
 import a from "./a.js";
 import * as option from "./option.js";
 
+const defaultContainerOption = {
+	body: {
+		fluid: true,
+	},
+
+	expand: null, //sm|md|lg|xl|xxl|null|''
+	dark: false, //light|dark
+	color: null, //danger|primary|dark|warning|...
+	position: null, //fixed-top|fixed-bottom|sticky-top|null
+	elem: null,
+};
+
 export class container extends nav {
 	constructor(opt) {
-		super(
-			core.extend(
-				{},
-				{
-					body: {
-						fluid: true,
-					},
-
-					expand: null, //sm|md|lg|xl|xxl|null|''
-					dark: false, //light|dark
-					color: null, //danger|primary|dark|warning|...
-					position: null, //fixed-top|fixed-bottom|sticky-top|null
-					elem: null,
-				},
-				opt
-			)
-		);
+		super(core.extend({}, defaultContainerOption, opt));
 	}
 
 	get data() {
@@ -40,6 +36,8 @@ export class container extends nav {
 	}
 	set data(opt) {
 		if (opt) {
+			opt = core.extend({}, defaultContainerOption, opt);
+
 			opt.class = core.merge.class(opt.class, [
 				"navbar",
 				opt.expand || opt.expand === ""
@@ -83,27 +81,23 @@ export class container extends nav {
 	}
 }
 
+const defaultBrandOption = {
+	id: null,
+	attr: null,
+	class: null,
+	style: null,
+
+	href: null,
+	onclick: null,
+	label: null,
+	icon: null,
+	img: null,
+	elem: null,
+};
+
 export class brand extends tag {
 	constructor(opt) {
-		super(
-			core.extend(
-				{},
-				{
-					id: null,
-					attr: null,
-					class: null,
-					style: null,
-
-					href: null,
-					onclick: null,
-					label: null,
-					icon: null,
-					img: null,
-					elem: null,
-				},
-				opt
-			)
-		);
+		super(core.extend({}, defaultBrandOption, opt));
 	}
 
 	get data() {
@@ -111,6 +105,8 @@ export class brand extends tag {
 	}
 	set data(opt) {
 		if (opt) {
+			opt = core.extend({}, defaultBrandOption, opt);
+
 			opt.tag = opt.href ? "a" : "h1";
 			opt.marginBottom = !opt.href ? 0 : null;
 			opt.class = core.merge.class(opt.class, "navbar-brand");
@@ -129,18 +125,13 @@ export class brand extends tag {
 	}
 }
 
+const defaultToggleOption = {
+	target: null,
+	toggle: "collapse", //collapse | offcanvas
+};
 export class toggle extends collapse.toggle {
 	constructor(opt) {
-		super(
-			core.extend(
-				{},
-				{
-					target: null,
-					toggle: "collapse", //collapse | offcanvas
-				},
-				opt
-			)
-		);
+		super(core.extend({}, defaultToggleOption, opt));
 	}
 
 	get data() {
@@ -148,6 +139,8 @@ export class toggle extends collapse.toggle {
 	}
 	set data(opt) {
 		if (opt) {
+			opt = core.extend({}, defaultToggleOption, opt);
+
 			opt.elem =
 				opt.elem ||
 				new button({
@@ -161,23 +154,26 @@ export class toggle extends collapse.toggle {
 	}
 }
 
+const defaultFormContainerOption = {
+	display: "flex",
+};
 export class formcontainer extends form {
 	constructor(opt) {
-		super(core.extend({}, { display: "flex", opt }));
+		super(core.extend({}, defaultFormContainerOption, opt));
 	}
 
 	get data() {
 		return super.data;
 	}
 	set data(opt) {
-		opt.display = "flex";
+		opt = core.extend({}, defaultFormContainerOption, opt);
 		super.data = opt;
 	}
 }
 
 export class collapsecontainer extends div {
 	constructor(opt) {
-		super(core.extend({}, { class: ["collapse", "navbar-collapse"] }, opt));
+		super(opt);
 	}
 
 	get data() {
@@ -189,15 +185,22 @@ export class collapsecontainer extends div {
 	}
 }
 
+const defaultOffcanvasContainerOption = {
+	icon: null,
+	title: null,
+};
+
 export class offcanvascontainer extends div {
 	constructor(opt) {
-		super(core.extend({}, { icon: null, title: null }, opt));
+		super(core.extend({}, defaultOffcanvasContainerOption, opt));
 	}
 
 	get data() {
 		return super.data;
 	}
 	set data(opt) {
+		opt = core.extend({}, defaultOffcanvasContainerOption, opt);
+
 		opt.id = opt.id || core.UUID();
 		opt.attr = core.merge.attr(opt.attr, {
 			tabindex: "-1",
@@ -210,7 +213,8 @@ export class offcanvascontainer extends div {
 			new div({
 				class: "offcanvas-header",
 				elem: [
-					new h(5, {
+					new h({
+						level: 5,
 						class: "offcanvas-title",
 						id: `${opt.id}-label`,
 						elem: new label({ icon: opt.icon, title: opt.title }),
@@ -228,25 +232,23 @@ export class offcanvascontainer extends div {
 	}
 }
 
+const defaultItemContainerOption = {
+	scroll: null,
+	mxauto: true,
+	parenttype: "collapse", //collapse|offcanvas|null
+};
+
 export class itemcontainer extends div {
 	constructor(opt) {
-		super(
-			core.extend(
-				{},
-				{
-					scroll: null,
-					mxauto: true,
-					parenttype: "collapse", //collapse|offcanvas|null
-				},
-				opt
-			)
-		);
+		super(core.extend({}, defaultItemContainerOption, opt));
 	}
 
 	get data() {
 		return super.data;
 	}
 	set data(opt) {
+		opt = core.extend({}, defaultItemContainerOption, opt);
+
 		opt.style = core.merge.style(opt.style, { "--bs-scroll-height": opt.scroll });
 		opt.marginEnd = opt.mxauto ? "auto" : null;
 
@@ -271,21 +273,16 @@ export class itemcontainer extends div {
 	}
 }
 
+const defaultItemOption = {
+	option: null,
+	icon: null,
+	label: null,
+	active: false,
+	disabled: false,
+};
 export class item extends div {
 	constructor(opt) {
-		super(
-			core.extend(
-				{},
-				{
-					option: null,
-					icon: null,
-					label: null,
-					active: false,
-					disabled: false,
-				},
-				opt
-			)
-		);
+		super(core.extend({}, defaultItemOption, opt));
 	}
 
 	get data() {
@@ -293,6 +290,8 @@ export class item extends div {
 	}
 	set data(opt) {
 		if (opt) {
+			opt = core.extend({}, defaultItemOption, opt);
+
 			opt.id = opt.id || core.UUID();
 			opt.class = core.merge.class(opt.class, ["nav-item", opt.option ? "dropdown" : null]);
 
@@ -336,7 +335,7 @@ export class item extends div {
 
 export default class text extends span {
 	constructor(opt) {
-		super(core.extend({}, { class: "navbar-text" }, opt));
+		super(opt);
 	}
 
 	get data() {

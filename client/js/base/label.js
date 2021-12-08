@@ -4,25 +4,20 @@ import tag from "./tag.js";
 import span from "./span.js";
 import icon from "./icon.js";
 
+const defaultOption = {
+	tag: "label",
+	for: null,
+	icon: null,
+	elem: null,
+	label: null,
+	hidelabel: false,
+};
 /**
  * opt : {tagoption,for,elem,icon,label,hidelabel}
  */
 export default class label extends tag {
 	constructor(opt) {
-		super(
-			core.extend(
-				{},
-				{
-					tag: "label",
-					for: null,
-					icon: null,
-					elem: null,
-					label: null,
-					hidelabel: false,
-				},
-				opt
-			)
-		);
+		super(core.extend({}, defaultOption, opt));
 	}
 
 	get data() {
@@ -30,6 +25,8 @@ export default class label extends tag {
 	}
 	set data(opt) {
 		if (opt) {
+			opt = core.extend({}, defaultOption, opt);
+
 			opt.attr = core.merge.attr(opt.attr, {
 				for: opt.for,
 			});

@@ -82,7 +82,8 @@ export default class modal extends div {
 							border: !opt.divider ? "bottom-0" : null,
 							class: ["modal-header"],
 							elem: [
-								new h(5, {
+								new h({
+									level: 5,
 									class: "modal-title",
 									elem: new label({ icon: opt.icon, label: opt.title }),
 								}),

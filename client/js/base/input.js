@@ -7,68 +7,66 @@ import * as inputgroup from "./inputgroup.js";
 import div from "./div.js";
 import * as option from "./option.js";
 
+const defaultOption = {
+	attr: null,
+
+	id: null,
+	name: null,
+
+	type: "text", //checkbox,radio,text,number,textarea
+	label: null,
+	hidelabel: false,
+	floatlabel: false,
+
+	inline: false,
+	labelsize: null,
+	ctlsize: null,
+	size: null,
+	weight: null,
+
+	value: null,
+	checked: false,
+	placeholder: null,
+	option: null,
+
+	numctl: false,
+	addctl: null,
+
+	min: null,
+	max: null,
+	step: null,
+	row: null,
+	multiple: false,
+	required: false,
+
+	valid: null,
+	invalid: null,
+
+	before: null,
+	after: null,
+
+	plaintext: false,
+	readonly: false,
+	disabled: false,
+
+	container: true,
+	flex: false,
+	nowarp: false,
+
+	onclick: null,
+	onchange: null,
+	onclick: null,
+	onfocus: null,
+	onblur: null,
+};
+
 /**
  * opt : {attr,id,name,type,label,hidelabel,floatlabel,inline,labelsize,ctlsize,size,weight,value,checked,placeholder,option,numctl,addctl,min,max,step,row,multiple,required,valid,invalid,before,after,plaintext,readonly,disabled,container,flex,nowarp,onclick,onchange,onclick,onfocus,onblur}
  */
 export default class input extends tag {
 	constructor(opt) {
 		super();
-		this.data = core.extend(
-			{},
-			{
-				attr: null,
-
-				id: null,
-				name: null,
-
-				type: "text", //checkbox,radio,text,number,textarea
-				label: null,
-				hidelabel: false,
-				floatlabel: false,
-
-				inline: false,
-				labelsize: null,
-				ctlsize: null,
-				size: null,
-				weight: null,
-
-				value: null,
-				checked: false,
-				placeholder: null,
-				option: null,
-
-				numctl: false,
-				addctl: null,
-
-				min: null,
-				max: null,
-				step: null,
-				row: null,
-				multiple: false,
-				required: false,
-
-				valid: null,
-				invalid: null,
-
-				before: null,
-				after: null,
-
-				plaintext: false,
-				readonly: false,
-				disabled: false,
-
-				container: true,
-				flex: false,
-				nowarp: false,
-
-				onclick: null,
-				onchange: null,
-				onclick: null,
-				onfocus: null,
-				onblur: null,
-			},
-			opt
-		);
+		this.data = core.extend({}, defaultOption, opt);
 	}
 
 	get data() {
@@ -76,6 +74,8 @@ export default class input extends tag {
 	}
 	set data(opt) {
 		if (opt) {
+			opt = core.extend({}, defaultOption, opt);
+
 			//invalid and valid feedback only work one
 			if (opt.valid && opt.invalid) {
 				opt.valid = null;

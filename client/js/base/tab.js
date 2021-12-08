@@ -7,6 +7,15 @@ import li from "./li.js";
 import a from "./a.js";
 import label from "./label.js";
 
+const defaultOption = {
+	type: "tab", //null|tab|pill
+	headalign: null, //tab align
+	size: null, //need to set for vertical. only used if has body
+	animated: true,
+	flush: false,
+
+	item: [],
+};
 /**
  * opt:{tagoption,type,headalign,size,animated,flush,item:{tabitem}}
  * tabitem : {id,label,icon,hidelabel,disable,active,option,elem}
@@ -16,21 +25,7 @@ export default class tab extends div {
 	cltab = 1;
 
 	constructor(opt) {
-		super(
-			core.extend(
-				{},
-				{
-					type: "tab", //null|tab|pill
-					headalign: null, //tab align
-					size: null, //need to set for vertical. only used if has body
-					animated: true,
-					flush: false,
-
-					item: [],
-				},
-				opt
-			)
-		);
+		super(core.extend({}, defaultOption, opt));
 	}
 
 	get data() {
@@ -38,6 +33,8 @@ export default class tab extends div {
 	}
 	set data(opt) {
 		if (opt) {
+			opt = core.extend({}, defaultOption, opt);
+
 			//check if item isnot array
 			opt.item = opt.item ? (Array.isArray(opt.item) ? opt.item : [opt.item]) : null;
 

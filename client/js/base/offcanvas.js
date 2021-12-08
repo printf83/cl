@@ -6,6 +6,15 @@ import label from "./label.js";
 import div from "./div.js";
 import btnclose from "./btnclose.js";
 
+const defaultOption = {
+	placement: "start",
+	close: true,
+	title: null,
+	icon: null,
+	scroll: true,
+	backdrop: false,
+	elem: null,
+};
 /**
  * option : {attr,id,class,static,title,icon,footer,button,animated,debug,scrollable,center,size,fullscreen,focus,align,color,textcolor,bordercolor,border,divider,centerbutton,elem}
  */
@@ -16,19 +25,7 @@ export default class container extends div {
 	constructor(opt) {
 		super();
 
-		this.data = core.extend(
-			{},
-			{
-				placement: "start",
-				close: true,
-				title: null,
-				icon: null,
-				scroll: true,
-				backdrop: false,
-				elem: null,
-			},
-			opt
-		);
+		this.data = core.extend({}, defaultOption, opt);
 	}
 
 	get data() {
@@ -36,6 +33,8 @@ export default class container extends div {
 	}
 	set data(opt) {
 		if (opt) {
+			opt = core.extend({}, defaultOption, opt);
+
 			opt.id = opt.id ? opt.id : core.UUID();
 
 			var header = null;
@@ -44,7 +43,8 @@ export default class container extends div {
 					class: "offcanvas-header",
 					elem: [
 						opt.title || opt.icon
-							? new h(5, {
+							? new h({
+									level: 5,
 									class: "offcanvas-title",
 									id: `${opt.id}-label`,
 									elem: new label({ icon: opt.icon, label: opt.title }),

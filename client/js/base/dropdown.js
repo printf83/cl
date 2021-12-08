@@ -6,6 +6,41 @@ import * as option from "./option.js";
 import div from "./div.js";
 import ul from "./ul.js";
 
+const defaultOption = {
+	attr: null, //combine to container
+
+	id: null,
+	name: null,
+
+	type: "button",
+	label: null,
+	icon: null,
+	badge: null,
+	value: null,
+	checked: false,
+
+	color: null,
+	textcolor: null,
+	weight: null,
+	disabled: false,
+	outline: false,
+	hidelabel: false,
+	nowarp: false,
+
+	onclick: null,
+	href: null,
+
+	option: null,
+	container: "btn-group",
+	arrow: "down",
+	splittoggle: false,
+	aligment: null,
+	offset: null,
+	reference: null,
+	autoclose: true,
+	dark: false,
+};
+
 /**
  * label, option
  * label, color, option
@@ -13,49 +48,9 @@ import ul from "./ul.js";
  * label, color, onclick, option
  * opt {...buttonopt,option,container,arrow,splittoggle,aligment,offset,autoclose}
  */
-
 export default class dropdown extends tag {
 	constructor(opt) {
-		super(
-			core.extend(
-				{},
-				{
-					attr: null, //combine to container
-
-					id: null,
-					name: null,
-
-					type: "button",
-					label: null,
-					icon: null,
-					badge: null,
-					value: null,
-					checked: false,
-
-					color: null,
-					textcolor: null,
-					weight: null,
-					disabled: false,
-					outline: false,
-					hidelabel: false,
-					nowarp: false,
-
-					onclick: null,
-					href: null,
-
-					option: null,
-					container: "btn-group",
-					arrow: "down",
-					splittoggle: false,
-					aligment: null,
-					offset: null,
-					reference: null,
-					autoclose: true,
-					dark: false,
-				},
-				opt
-			)
-		);
+		super(core.extend({}, defaultOption, opt));
 	}
 
 	get data() {
@@ -63,6 +58,8 @@ export default class dropdown extends tag {
 	}
 	set data(opt) {
 		if (opt) {
+			opt = core.extend({}, defaultOption, opt);
+
 			opt.id = opt.id || core.UUID();
 
 			let menuctl = new ul({

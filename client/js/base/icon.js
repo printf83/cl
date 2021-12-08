@@ -2,6 +2,19 @@
 import * as core from "./core.js";
 import tag from "./tag.js";
 
+const defaultOption = {
+	tag: "i",
+	type: "fas",
+	icon: null,
+	weight: null,
+	fixwidth: true,
+	spin: false,
+	rotate: null,
+	color: null,
+	inverse: false,
+	elem: null,
+	stack: 0,
+};
 /**
  * opt : {tagoption,type,icon,weight,fixwidth,spin,rotate,color,inverse,elem,stack}
  */
@@ -39,23 +52,7 @@ export default class icon extends tag {
 				console.error("Unsupported argument", arg);
 			}
 
-			this.data = core.extend(
-				{},
-				{
-					tag: "i",
-					type: "fas",
-					icon: null,
-					weight: null,
-					fixwidth: true,
-					spin: false,
-					rotate: null,
-					color: null,
-					inverse: false,
-					elem: null,
-					stack: 0,
-				},
-				t
-			);
+			this.data = core.extend({}, defaultOption, t);
 		} else {
 			this.data = null;
 		}
@@ -66,6 +63,8 @@ export default class icon extends tag {
 	}
 	set data(opt) {
 		if (opt) {
+			opt = core.extend({}, defaultOption, opt);
+
 			//baseicon
 			let bI = core.getBaseIcon(opt.icon);
 			if (bI) {

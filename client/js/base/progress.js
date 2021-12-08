@@ -1,22 +1,18 @@
 "use strict";
 import * as core from "./core.js";
 import div from "./div.js";
+
+const defaultContainerOption = {
+	height: null,
+	item: null,
+};
 /**
  * opt : {tagoption,height,item : {baritem}}
  * baritem : {tagoption,label,stripe,animated,min,max,value}
  */
 export class container extends div {
 	constructor(opt) {
-		super(
-			core.extend(
-				{},
-				{
-					height: null,
-					item: null,
-				},
-				opt
-			)
-		);
+		super(core.extend({}, defaultContainerOption, opt));
 	}
 
 	get data() {
@@ -24,6 +20,8 @@ export class container extends div {
 	}
 	set data(opt) {
 		if (opt) {
+			opt = core.extend({}, defaultContainerOption, opt);
+
 			opt.class = core.merge.class(opt.class, "progress");
 			opt.style = core.merge.style(opt.style, {
 				height: opt.height > 0 ? `${opt.height}px` : null,
@@ -48,25 +46,21 @@ export class container extends div {
 	}
 }
 
+const defaultBarOption = {
+	label: false,
+	stripe: false,
+	animate: false,
+	min: 0,
+	max: 100,
+	value: 0,
+};
+
 /**
  * opt : {tagoption,label,stripe,animated,min,max,value}
  */
 export class bar extends div {
 	constructor(opt) {
-		super(
-			core.extend(
-				{},
-				{
-					label: false,
-					stripe: false,
-					animate: false,
-					min: 0,
-					max: 100,
-					value: 0,
-				},
-				opt
-			)
-		);
+		super(core.extend({}, defaultBarOption, opt));
 	}
 
 	get data() {
@@ -74,6 +68,8 @@ export class bar extends div {
 	}
 	set data(opt) {
 		if (opt) {
+			opt = core.extend({}, defaultBarOption, opt);
+
 			if (opt.value > opt.max) {
 				opt.value = opt.max;
 			}

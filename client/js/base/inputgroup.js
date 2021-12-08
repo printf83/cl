@@ -4,22 +4,19 @@ import tag from "./tag.js";
 import label from "./label.js";
 import div from "./div.js";
 
+const defaultOption = {
+	for: null,
+	label: null,
+	elem: null,
+	nowarp: false,
+};
 /**
  * opt : {tagoption}
  */
 export class container extends tag {
 	constructor(opt) {
 		super();
-		this.data = core.extend(
-			{},
-			{
-				for: null,
-				label: null,
-				elem: null,
-				nowarp: false,
-			},
-			opt
-		);
+		this.data = core.extend({}, defaultOption, opt);
 	}
 
 	get data() {
@@ -27,7 +24,7 @@ export class container extends tag {
 	}
 	set data(opt) {
 		if (opt) {
-			super.data = core.extend({}, super.data, opt);
+			opt = core.extend({}, defaultOption, opt);
 
 			let ctllabel = opt.label ? new label({ for: opt.for, class: "form-label", label: opt.label }) : null;
 

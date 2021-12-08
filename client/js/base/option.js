@@ -7,22 +7,22 @@ import span from "./span.js";
 import hr from "./hr.js";
 import h from "./h.js";
 
+const defaultOption = {
+	item: null,
+	selected: null,
+};
+const defaultSelectItemOption = {
+	value: null,
+	label: null,
+	selected: false,
+};
 /**
  * opt : {tagoption,item : {selectitem},selected}
  * selectitem : [string]|[{tagoption,elem,value,label,icon,active,disabled,interactive}]
  */
 export class select extends tag {
 	constructor(opt) {
-		super(
-			core.extend(
-				{},
-				{
-					item: null,
-					selected: null,
-				},
-				opt
-			)
-		);
+		super(core.extend({}, defaultOption, opt));
 	}
 
 	get data() {
@@ -30,6 +30,8 @@ export class select extends tag {
 	}
 	set data(opt) {
 		if (opt) {
+			opt = core.extend({}, defaultOption, opt);
+
 			opt.selected = Array.isArray(opt.selected) ? opt.selected : [opt.selected];
 			opt.item = Array.isArray(opt.item) ? opt.item : [opt.item];
 			opt.elem = opt.item.map(function (i) {
@@ -43,15 +45,7 @@ export class select extends tag {
 						elem: i,
 					});
 				} else {
-					i = core.extend(
-						{},
-						{
-							value: null,
-							label: null,
-							selected: false,
-						},
-						i
-					);
+					i = core.extend({}, defaultSelectItemOption, i);
 
 					i.tag = "option";
 					i.attr = core.merge.attr(i.attr, {
@@ -76,22 +70,22 @@ export class select extends tag {
 	}
 }
 
+const defaultDropdownItemOption = {
+	value: null,
+	label: null,
+	icon: null,
+
+	active: false,
+	disabled: false,
+	interactive: true,
+};
 /**
  * opt : {tagoption,item : dropdownitem,selected}
  * dropdownitem : [string]|[{tagoption,elem,value,label,icon,active,disabled,interactive}]
  */
 export class dropdown extends tag {
 	constructor(opt) {
-		super(
-			core.extend(
-				{},
-				{
-					item: null,
-					selected: null,
-				},
-				opt
-			)
-		);
+		super(core.extend({}, defaultOption, opt));
 	}
 
 	get data() {
@@ -99,6 +93,8 @@ export class dropdown extends tag {
 	}
 	set data(opt) {
 		if (opt) {
+			opt = core.extend({}, defaultOption, opt);
+
 			opt.selected = Array.isArray(opt.selected) ? opt.selected : [opt.selected];
 			opt.item = Array.isArray(opt.item) ? opt.item : [opt.item];
 			opt.elem = opt.item.map(function (i) {
@@ -114,23 +110,12 @@ export class dropdown extends tag {
 						}),
 					});
 				} else {
-					i = core.extend(
-						{},
-						{
-							value: null,
-							label: null,
-							icon: null,
-
-							active: false,
-							disabled: false,
-							interactive: true,
-						},
-						i
-					);
+					i = core.extend({}, defaultDropdownItemOption, i);
 
 					if (i.value === "-") {
 						if (i.label) {
-							i.elem = new h(6, {
+							i.elem = new h({
+								level: 6,
 								class: "dropdown-header",
 								elem: new label({ icon: i.icon, label: i.label }),
 							});

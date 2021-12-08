@@ -4,22 +4,17 @@ import icon from "./icon.js";
 import div from "./div.js";
 import h from "./h.js";
 
+const defaultOption = {
+	icon: null,
+	weight: "md",
+	elem: null,
+};
 /**
  * opt : {tagoption,icon,weight,elem}
  */
 export default class msg extends div {
 	constructor(opt) {
-		super(
-			core.extend(
-				{},
-				{
-					icon: null,
-					weight: "md",
-					elem: null,
-				},
-				opt
-			)
-		);
+		super(core.extend({}, defaultOption, opt));
 	}
 
 	get data() {
@@ -27,6 +22,8 @@ export default class msg extends div {
 	}
 	set data(opt) {
 		if (opt) {
+			opt = core.extend({}, defaultOption, opt);
+
 			switch (opt.weight) {
 				case "sm":
 				case "md":
@@ -60,7 +57,8 @@ export default class msg extends div {
 
 					opt.elem = [
 						opt.icon
-							? new h(1, {
+							? new h({
+									level: 1,
 									class: "display-1",
 									align: "center",
 									marginX: 3,

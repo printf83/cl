@@ -216,7 +216,10 @@ function doForm(max, cur) {
 					new alert.link({ label: "Google", href: "http://google.com" }),
 				],
 			}),
-			new h(3, { elem: ["Hello World H3", new badge({ label: "Test Badge", marginStart: 2, pill: true })] }),
+			new h({
+				level: 3,
+				elem: ["Hello World H3", new badge({ label: "Test Badge", marginStart: 2, pill: true })],
+			}),
 			new p({ elem: "Test p" }),
 
 			new div({
@@ -462,16 +465,14 @@ function doForm(max, cur) {
 					new navbar.brand({
 						label: "Navbar",
 					}),
-					new input({ type: "text", before: "@", placeholder: "Username", size: "col" }),
 					new navbar.formcontainer({
 						elem: [
 							new input({
 								type: "search",
 								placeholder: "Search",
 								hiddenlabel: "Search",
-								marginEnd: 2,
 							}),
-							new button({ label: "Search", color: "success", outline: true }),
+							new button({ label: "Search", color: "success", outline: true, marginStart: 2 }),
 						],
 					}),
 				],

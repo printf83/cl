@@ -6,27 +6,30 @@ import span from "./span.js";
 import button from "./button.js";
 import img from "./img.js";
 
+const defaultOption = {
+	control: true,
+	touch: true,
+	slide: true,
+	fade: false,
+	indicators: true,
+	dark: false,
+	item: null,
+};
+
+const defaultItemOption = {
+	src: null,
+	alt: null,
+	caption: null,
+	text: null,
+	interval: 0,
+};
 /**
  * opt : {tagoption,control,touch,slide,fade,indicators,dark,item : {imgitem}}
  * imgitem : {tagoption,src,alt,caption,text,interval}
  */
 export default class carousel extends div {
 	constructor(opt) {
-		super(
-			core.extend(
-				{},
-				{
-					control: true,
-					touch: true,
-					slide: true,
-					fade: false,
-					indicators: true,
-					dark: false,
-					item: null,
-				},
-				opt
-			)
-		);
+		super(core.extend({}, defaultOption, opt));
 	}
 
 	get data() {
@@ -34,13 +37,7 @@ export default class carousel extends div {
 	}
 	set data(opt) {
 		if (opt) {
-			const itemOption = {
-				src: null,
-				alt: null,
-				caption: null,
-				text: null,
-				interval: 0,
-			};
+			opt = core.extend({}, defaultOption, opt);
 
 			opt.item = Array.isArray(opt.item) ? opt.item : [opt.item];
 
@@ -68,7 +65,7 @@ export default class carousel extends div {
 									};
 								}
 
-								i = core.extend({}, itemOption, i);
+								i = core.extend({}, defaultItemOption, i);
 
 								return new button({
 									class: ix === 0 ? "active" : null,
@@ -91,7 +88,7 @@ export default class carousel extends div {
 							};
 						}
 
-						i = core.extend({}, itemOption, i);
+						i = core.extend({}, defaultItemOption, i);
 
 						return new div({
 							class: ["carousel-item", ix === 0 ? "active" : null],
@@ -110,7 +107,7 @@ export default class carousel extends div {
 											display: ["none", "md-block"],
 											class: "carousel-caption",
 											elem: [
-												i.caption ? new h(5, { elem: i.caption }) : null,
+												i.caption ? new h({ level: 5, elem: i.caption }) : null,
 												i.text ? new p({ elem: i.text }) : null,
 											],
 									  })

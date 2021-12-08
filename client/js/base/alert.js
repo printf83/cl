@@ -12,7 +12,7 @@ const defaultOption = { icon: null, color: null, message: null, close: false };
  */
 export class container extends div {
 	constructor(opt) {
-		super(core.extend({}, defaultOption, opt));
+		super(opt);
 	}
 
 	get data() {
@@ -77,17 +77,18 @@ export class link extends a {
 	}
 	set data(opt) {
 		if (opt) {
-			opt = core.extend({}, super.data, opt);
 			opt.class = core.merge.class(opt.class, "alert-link");
+			super.data = opt;
 		}
-
-		super.data = opt;
 	}
 }
 
+const defaultHeadingOption = {
+	level: 4,
+};
 export class heading extends h {
 	constructor(opt) {
-		super(4, opt);
+		super(opt);
 	}
 
 	get data() {
@@ -95,10 +96,9 @@ export class heading extends h {
 	}
 	set data(opt) {
 		if (opt) {
-			opt = core.extend({}, super.data, opt);
+			opt = core.extend({}, defaultHeadingOption, opt);
 			opt.class = core.merge.class(opt.class, "heading");
+			super.data = opt;
 		}
-
-		super.data = opt;
 	}
 }

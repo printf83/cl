@@ -7,6 +7,22 @@ import a from "./a.js";
 import ul from "./ul.js";
 import icon from "./icon.js";
 
+const defaultOption = {
+	total: 0,
+	skip: 0,
+	limit: 0,
+	max: 5,
+	weight: null,
+	align: "center", //start|end|center(default)
+	overflow: true,
+	onchange: null,
+	firstlast: true,
+	nextprev: true,
+	labelfirst: null,
+	labellast: null,
+	labelnext: null,
+	labelprev: null,
+};
 /**
  * [item:{title,icon,divider,label,href,onclick}]
  * opt : {attr,id,class,style,item,divider}
@@ -31,28 +47,7 @@ function pagingonchange(sender, data) {
 
 export default class paging extends div {
 	constructor(opt) {
-		super(
-			core.extend(
-				{},
-				{
-					total: 0,
-					skip: 0,
-					limit: 0,
-					max: 5,
-					weight: null,
-					align: "center", //start|end|center(default)
-					overflow: true,
-					onchange: null,
-					firstlast: true,
-					nextprev: true,
-					labelfirst: null,
-					labellast: null,
-					labelnext: null,
-					labelprev: null,
-				},
-				opt
-			)
-		);
+		super(core.extend({}, defaultOption, opt));
 	}
 
 	get data() {
@@ -60,6 +55,7 @@ export default class paging extends div {
 	}
 	set data(opt) {
 		if (opt) {
+			opt = core.extend({}, defaultOption, opt);
 			let data = core.extend({}, opt);
 
 			let curpage = opt.skip / opt.limit + 1;

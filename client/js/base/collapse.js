@@ -4,25 +4,21 @@ import tag from "./tag.js";
 import div from "./div.js";
 import button from "./button.js";
 
+const defaultToggleOption = {
+	elem: null,
+
+	target: null,
+	show: false,
+
+	toggle: "collapse", //collapse | offcanvas
+};
+
 /**
  * opt: {tagoption,elem,target,show,toggle}
  */
 export class toggle extends tag {
 	constructor(opt) {
-		super(
-			core.extend(
-				{},
-				{
-					elem: null,
-
-					target: null,
-					show: false,
-
-					toggle: "collapse", //collapse | offcanvas
-				},
-				opt
-			)
-		);
+		super(core.extend({}, defaultToggleOption, opt));
 	}
 
 	get data() {
@@ -30,6 +26,8 @@ export class toggle extends tag {
 	}
 	set data(opt) {
 		if (opt) {
+			opt = core.extend({}, defaultToggleOption, opt);
+
 			if (!opt.elem) {
 				opt.elem = new button({
 					icon: "bars",
@@ -48,23 +46,20 @@ export class toggle extends tag {
 		}
 	}
 }
+
+const defaultContainerOption = {
+	elem: null,
+	id: null,
+	class: null,
+	show: false,
+};
+
 /**
  * opt: {tagoption,elem,id,show}
  */
 export class container extends div {
 	constructor(opt) {
-		super(
-			core.extend(
-				{},
-				{
-					elem: null,
-					id: null,
-					class: null,
-					show: false,
-				},
-				opt
-			)
-		);
+		super(core.extend({}, defaultContainerOption, opt));
 	}
 
 	get data() {
@@ -72,6 +67,8 @@ export class container extends div {
 	}
 	set data(opt) {
 		if (opt) {
+			opt = core.extend({}, defaultContainerOption, opt);
+
 			if (!opt.elem) {
 				opt.elem = new div({ elem: "" });
 			}

@@ -9,6 +9,22 @@ import strong from "./strong.js";
 import small from "./small.js";
 import btnclose from "./btnclose.js";
 
+const defaultOption = {
+	animate: true,
+	title: null,
+	icon: null,
+
+	close: true,
+	autohide: true,
+	delay: 5000,
+	date: new Date(),
+	timer: true,
+	position: "top-0 end-0",
+
+	elem: null,
+
+	debug: false,
+};
 /**
  * color,textcolor,icon,msg
  * color,icon,msg
@@ -74,26 +90,7 @@ export default class toast extends div {
 				console.error("Unsupported argument", arg);
 			}
 
-			this.data = core.extend(
-				{},
-				{
-					animate: true,
-					title: null,
-					icon: null,
-
-					close: true,
-					autohide: true,
-					delay: 5000,
-					date: new Date(),
-					timer: true,
-					position: "top-0 end-0",
-
-					elem: null,
-
-					debug: false,
-				},
-				t
-			);
+			this.data = core.extend({}, defaultOption, t);
 		} else {
 			this.data = null;
 		}
@@ -104,6 +101,8 @@ export default class toast extends div {
 	}
 	set data(opt) {
 		if (opt) {
+			opt = core.extend({}, defaultOption, opt);
+
 			let bI = core.getBaseIcon(opt.icon);
 			if (bI) {
 				opt.icon = bI.icon;
