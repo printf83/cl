@@ -35,6 +35,10 @@ export class toggle extends tag {
 			}
 
 			let t = opt.elem.data;
+			t.class = core.merge.class(t.class, [
+				opt.toggle === "collapse" ? "btn-toggle" : null,
+				opt.show && opt.toggle === "collapse" ? "collapsed" : null,
+			]);
 			t.attr = core.merge.attr(t.attr, {
 				"aria-controls": opt.target,
 				"aria-expanded": opt.show ? "true" : "false",

@@ -35,7 +35,7 @@ import * as navbar from "./base/navbar.js";
 import p from "./base/p.js";
 import tooltip from "./base/tooltip.js";
 import msg from "./base/msg.js";
-// import * as option from "./base/option.js";
+import menu from "./base/menu.js";
 import * as progress from "./base/progress.js";
 import offcanvas from "./base/offcanvas.js";
 
@@ -278,11 +278,13 @@ function doForm(max, cur) {
 						color: "primary",
 						onclick: function () {
 							new offcanvas({
-								color: "dark",
-								textcolor: "light",
+								// color: "dark",
+								// textcolor: "light",
 								title: "Title",
 								icon: "fire",
-								elem: "Hello",
+								elem: [
+									new menu({ label: "AAA", item: [{ label: "1" }, { label: "2" }, { label: "3" }] }),
+								],
 							}).show();
 						},
 					}),
