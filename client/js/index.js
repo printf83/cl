@@ -76,7 +76,7 @@ function repeatdoform(max, cur, callback) {
 			function (m, t, c) {
 				repeatdoform(m, t, c);
 			},
-			1,
+			0,
 			max,
 			cur - 1,
 			callback
@@ -102,9 +102,10 @@ function doForm(max, cur) {
 					color: "primary",
 					label: `Regenerate root 1 times`,
 					onclick: function () {
+						console.time("Regenerate");
 						repeatdoform(1, 0, function () {
+							console.timeEnd("Regenerate");
 							cl.init(root);
-							console.log("Complete regenerate");
 						});
 					},
 				}),
@@ -113,9 +114,10 @@ function doForm(max, cur) {
 					label: `Regenerate root 100 times`,
 					onclick: function () {
 						increeseImgUrlIndex = false;
+						console.time("Regenerate");
 						repeatdoform(100, 99, function () {
+							console.timeEnd("Regenerate");
 							cl.init(root);
-							console.log("Complete regenerate");
 							increeseImgUrlIndex = true;
 						});
 					},
@@ -125,9 +127,10 @@ function doForm(max, cur) {
 					label: `Regenerate root 5000 times`,
 					onclick: function () {
 						increeseImgUrlIndex = false;
+						console.time("Regenerate");
 						repeatdoform(5000, 4999, function () {
+							console.timeEnd("Regenerate");
 							cl.init(root);
-							console.log("Complete regenerate");
 							increeseImgUrlIndex = true;
 						});
 					},

@@ -23,21 +23,24 @@ export default class tooltip extends tag {
 	}
 	set data(opt) {
 		if (opt && opt.elem) {
-			opt = core.extend({}, defaultOption, opt);
+			if (opt.elem.hasOwnProperty("cl")) {
+				opt = core.extend({}, defaultOption, opt);
 
-			//todo: handle multiple elem
+				let tmp = opt.elem.data;
+				tmp.attr = core.merge.attr(tmp.attr, {
+					title: opt.type === "popover" ? opt.title : opt.msg,
+					"data-bs-toggle": opt.type,
+					"data-bs-content": opt.type === "popover" ? opt.msg : null,
+					"data-bs-trigger": opt.type === "popover" ? opt.trigger : null,
+					"data-bs-placement": opt.type ? opt.placement : null,
+					"data-bs-html": opt.type && core.isHTML(opt.msg) ? "true" : null,
+				});
 
-			let tmp = opt.elem.data;
-			tmp.attr = core.merge.attr(tmp.attr, {
-				title: opt.type === "popover" ? opt.title : opt.msg,
-				"data-bs-toggle": opt.type,
-				"data-bs-content": opt.type === "popover" ? opt.msg : null,
-				"data-bs-trigger": opt.type === "popover" ? opt.trigger : null,
-				"data-bs-placement": opt.type ? opt.placement : null,
-				"data-bs-html": opt.type && core.isHTML(opt.msg) ? "true" : null,
-			});
-
-			super.data = tmp;
+				super.data = tmp;
+			} else {
+				console.error("Tooltip unsupported element", opt.elem);
+				super.data = null;
+			}
 		} else {
 			super.data = null;
 		}
