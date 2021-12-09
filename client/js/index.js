@@ -17,7 +17,7 @@ import * as card from "./base/card.js";
 import small from "./base/small.js";
 import modal from "./base/modal.js";
 import toast from "./base/toast.js";
-// import msg from "./base/msg.js";
+import example from "./base/example.js";
 import * as dlg from "./base/dlg.js";
 import * as container from "./base/container.js";
 import * as alert from "./base/alert.js";
@@ -39,6 +39,24 @@ import menu from "./base/menu.js";
 import * as progress from "./base/progress.js";
 import offcanvas from "./base/offcanvas.js";
 import toc from "./base/toc.js";
+
+function beautifyjs(str) {
+	let optJS = {
+		preserve_newlines: true,
+		max_preserve_newlines: 100,
+		keep_array_indentation: false,
+		brace_style: "collapse,preserve-inline",
+	};
+	var result = js_beautify(str, optJS);
+	return result;
+}
+
+function beautifyhtml(str) {
+	var result = html_beautify(str);
+	return result;
+
+	// return str;
+}
 
 let increeseImgUrlIndex = true;
 let imgurlindex = 0;
@@ -112,6 +130,7 @@ function doForm(max, cur) {
 						console.time("Regenerate");
 						repeatdoform(1, 0, function () {
 							console.timeEnd("Regenerate");
+							PR.prettyPrint();
 							cl.init(root);
 						});
 					},
@@ -124,6 +143,7 @@ function doForm(max, cur) {
 						console.time("Regenerate");
 						repeatdoform(100, 99, function () {
 							console.timeEnd("Regenerate");
+							PR.prettyPrint();
 							cl.init(root);
 							increeseImgUrlIndex = true;
 						});
@@ -137,6 +157,7 @@ function doForm(max, cur) {
 						console.time("Regenerate");
 						repeatdoform(5000, 4999, function () {
 							console.timeEnd("Regenerate");
+							PR.prettyPrint();
 							cl.init(root);
 							increeseImgUrlIndex = true;
 						});
@@ -146,6 +167,119 @@ function doForm(max, cur) {
 			new progress.container({
 				item: { min: 0, max: max, value: max - cur, label: true, stripe: true, animate: true, color: "danger" },
 			}),
+
+			new example({
+				title: "Hello Example",
+				msg: "Hello Example Msg",
+				beautifyjs: beautifyjs,
+				beautifyhtml: beautifyhtml,
+				code: function () {
+					return new btngroup({
+						elem: [
+							new button({
+								color: "primary",
+								outline: true,
+								label: "Modal With Tab",
+								onclick: function () {
+									new modal({
+										elem: new tab({
+											border: false,
+											rounded: false,
+											item: [
+												{ label: "1", elem: "1" },
+												{ label: "2", elem: "2" },
+												{ label: "3", elem: "3" },
+											],
+										}),
+										button: [
+											{
+												label: "AAA",
+												onclick: function (_sender, data) {
+													new toast("i", JSON.stringify(data)).show();
+													return true;
+												},
+											},
+											{
+												label: "BBB",
+												onclick: function () {
+													return true;
+												},
+											},
+										],
+										footer: new input({ type: "switch", name: "showagain", label: "Show again" }),
+									}).show();
+								},
+							}),
+							new button({
+								color: "primary",
+								label: "Msgbox",
+								onclick: function () {
+									new dlg.msgbox("/", "This is success msgbox", function () {
+										new toast("/", "This is success toast").show();
+									}).show();
+								},
+							}),
+							new button({
+								color: "secondary",
+								label: "Confirmbox",
+								onclick: function () {
+									new dlg.confirmbox("x", "This is confirmbox", [
+										function () {
+											new toast("!", "First button callback").show();
+										},
+										function () {
+											new toast("!", "Second button callback").show();
+										},
+									]).show();
+								},
+							}),
+							new button({
+								icon: "fire",
+								color: "info",
+								label: "Inputbox",
+								onclick: function () {
+									new dlg.inputbox("date", "Textbox Input", function (_sender, data) {
+										new toast("!!", JSON.stringify(data)).show();
+									}).show();
+								},
+							}),
+							new button({
+								icon: "fire",
+								color: "warning",
+								label: "Large Modal",
+								onclick: function () {
+									new modal({
+										divider: false,
+										centerbutton: true,
+										elem: new msg({
+											weight: "lg",
+											icon: "i",
+											elem: [new h({ level: 3, elem: "Hello world" }), loream],
+										}),
+										button: [
+											{
+												label: "Okay",
+												color: "primary",
+												onclick: function (_sender, data) {
+													return true;
+												},
+											},
+											{
+												label: "Cancel",
+												onclick: function () {
+													return true;
+												},
+											},
+										],
+										footer: new input({ type: "switch", name: "showagain", label: "Show again" }),
+									}).show();
+								},
+							}),
+						],
+					});
+				},
+			}),
+
 			new btngroup({
 				elem: [
 					new button({
@@ -660,6 +794,7 @@ function doForm(max, cur) {
 core.documentReady(() => {
 	repeatdoform(1, 0, function () {
 		let root = document.getElementById("root");
+		PR.prettyPrint();
 		cl.init(root);
 		console.log("Complete generate");
 	});
