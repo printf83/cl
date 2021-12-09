@@ -197,7 +197,7 @@ export class container extends tag {
 				}
 				//put in th
 				tmp_head = new thead({
-					elem: th,
+					elem: new tr({ elem: th }),
 				});
 			}
 
@@ -259,7 +259,7 @@ export class container extends tag {
 				}
 				//put in th
 				tmp_foot = new tfoot({
-					elem: tf,
+					elem: new tr({ elem: tf }),
 				});
 			}
 		}
