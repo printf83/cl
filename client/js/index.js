@@ -634,9 +634,17 @@ function doForm(max, cur) {
 					{
 						label: "A3",
 						elem: new table.container({
+							striped: true,
+							color: "primary",
+							shadow: true,
+							rownumber: true,
+							hover: true,
 							item: [
-								["A", "B", "C"],
-								["A", "B", "C"],
+								["H1", "H2", "H3"],
+								[
+									new table.td({ elem: "AAA", colspan: 2, align: "center", bordercolor: "danger" }),
+									"C",
+								],
 								["A", "B", "C"],
 								["A", "B", "C"],
 							],

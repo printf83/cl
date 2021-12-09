@@ -224,7 +224,7 @@ export class container extends tag {
 				});
 
 				if (opt.rownumber) {
-					tmp.unshift(new td({ head: true, scope: "row", elem: x }));
+					tmp.unshift(new td({ head: true, scope: "row", elem: x.toString() }));
 				}
 
 				tb.push(new tr({ elem: tmp }));
