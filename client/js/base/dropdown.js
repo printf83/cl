@@ -3,7 +3,6 @@ import * as core from "./core.js";
 import tag from "./tag.js";
 import button from "./button.js";
 import * as option from "./option.js";
-import div from "./div.js";
 import ul from "./ul.js";
 import btngroup from "./btngroup.js";
 

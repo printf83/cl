@@ -1,7 +1,6 @@
 "use strict";
 import * as core from "./core.js";
 import * as collapse from "./collapse.js";
-import tag from "./tag.js";
 import button from "./button.js";
 import ul from "./ul.js";
 import li from "./li.js";

@@ -3,7 +3,6 @@ import * as core from "./core.js";
 import msg from "./msg.js";
 import modal from "./modal.js";
 import p from "./p.js";
-import div from "./div.js";
 import input from "./input.js";
 import * as container from "./container.js";
 

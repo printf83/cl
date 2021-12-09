@@ -1,7 +1,6 @@
 "use strict";
 import * as core from "./core.js";
 import * as cl from "./cl.js";
-import tag from "./tag.js";
 import label from "./label.js";
 import msg from "./msg.js";
 import div from "./div.js";

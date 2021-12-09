@@ -1,5 +1,4 @@
 "use strict";
-import tag from "./tag.js";
 import div from "./div.js";
 
 /**
