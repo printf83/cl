@@ -26,7 +26,7 @@ import hr from "./base/hr.js";
 import btngroup from "./base/btngroup.js";
 import input from "./base/input.js";
 import icon from "./base/icon.js";
-// import msg from "./base/msg.js";
+import * as table from "./base/table.js";
 import dropdown from "./base/dropdown.js";
 import accordion from "./base/accordion.js";
 import breadcrumb from "./base/breadcrumb.js";
@@ -43,11 +43,13 @@ import toc from "./base/toc.js";
 let increeseImgUrlIndex = true;
 let imgurlindex = 0;
 function imgurl(width, height) {
-	if (increeseImgUrlIndex) {
-		return `https://picsum.photos/seed/${imgurlindex++}/${width ? width : 800}/${height ? height : 400}.webp`;
-	} else {
-		return `https://picsum.photos/seed/${imgurlindex}/${width ? width : 800}/${height ? height : 400}.webp`;
-	}
+	// if (increeseImgUrlIndex) {
+	// 	return `https://picsum.photos/seed/${imgurlindex++}/${width ? width : 800}/${height ? height : 400}.webp`;
+	// } else {
+	// 	return `https://picsum.photos/seed/${imgurlindex}/${width ? width : 800}/${height ? height : 400}.webp`;
+	// }
+
+	return "../img/img.svg";
 }
 let loream =
 	"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce hendrerit tincidunt nibh ut condimentum. Nulla vitae vulputate elit. Sed accumsan varius mauris, vel bibendum magna consequat eget. Vivamus felis dolor, laoreet et blandit ut, iaculis eu arcu. Proin dapibus, metus vitae iaculis venenatis, lacus purus commodo tellus, aliquam commodo ex metus vulputate mi. Nam eu lorem vel nisi scelerisque hendrerit et id justo. Nunc vestibulum eget est sed ullamcorper. Etiam pulvinar, dui eget vehicula molestie, sapien sapien lobortis nulla, nec cursus urna sapien imperdiet tortor. Nam vitae lacus sem. Praesent id arcu vitae sem ultrices rutrum ut ac mi.";
@@ -360,8 +362,9 @@ function doForm(max, cur) {
 				elem: new card.container({
 					color: "primary",
 					coloropacity: 25,
-					textcolor: "primary",
+					textcolor: "danger",
 					borderweight: 3,
+					bordercolor: "success",
 					elem: new card.horizontal({
 						left: new card.img({
 							placement: "left",
@@ -628,7 +631,17 @@ function doForm(max, cur) {
 				item: [
 					{ label: "A1", elem: "A1 Item" },
 					{ label: "A2", elem: "A2 Item" },
-					{ label: "A3", elem: "A3 Item" },
+					{
+						label: "A3",
+						elem: new table.container({
+							item: [
+								["A", "B", "C"],
+								["A", "B", "C"],
+								["A", "B", "C"],
+								["A", "B", "C"],
+							],
+						}),
+					},
 					{ label: "A4", elem: new toc({ item: [{ label: "A" }, { label: "B" }, { label: "C" }] }) },
 				],
 			}),

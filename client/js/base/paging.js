@@ -81,7 +81,9 @@ export default class paging extends div {
 									data.skip = 0;
 									pagingonchange(sender.currentTarget, data);
 								},
-								elem: opt.labelfirst ? opt.labelfirst : new icon("angle-double-left"),
+								elem: opt.labelfirst
+									? opt.labelfirst
+									: new icon({ type: "fas", icon: "angle-double-left" }),
 							}),
 						})
 					);
@@ -104,7 +106,7 @@ export default class paging extends div {
 									data.skip = (curpage - 2) * data.limit;
 									pagingonchange(sender.currentTarget, data);
 								},
-								elem: opt.labelprev ? opt.labelprev : new icon("angle-left"),
+								elem: opt.labelprev ? opt.labelprev : new icon({ type: "fas", icon: "angle-left" }),
 							}),
 						})
 					);
@@ -201,7 +203,7 @@ export default class paging extends div {
 									data.skip = curpage * data.limit;
 									pagingonchange(sender.currentTarget, data);
 								},
-								elem: opt.labelnext ? opt.labelnext : new icon("angle-right"),
+								elem: opt.labelnext ? opt.labelnext : new icon({ type: "fas", icon: "angle-right" }),
 							}),
 						})
 					);
@@ -224,7 +226,9 @@ export default class paging extends div {
 									data.skip = (btncount - 1) * data.limit;
 									pagingonchange(sender.currentTarget, data);
 								},
-								elem: opt.labellast ? opt.labellast : new icon("angle-double-right"),
+								elem: opt.labellast
+									? opt.labellast
+									: new icon({ type: "fas", icon: "angle-double-right" }),
 							}),
 						})
 					);

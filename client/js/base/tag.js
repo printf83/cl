@@ -21,6 +21,19 @@ function c2(val, format) {
 	return null;
 }
 
+function c3(val, iftrue, iffalse, format) {
+	if (val !== null && val !== undefined) {
+		if (val === true) {
+			return iftrue;
+		} else if (val === false) {
+			return iffalse;
+		} else {
+			return core.multiClass(val, format);
+		}
+	}
+	return null;
+}
+
 const defaultOption = {
 	tag: null,
 
@@ -154,11 +167,8 @@ export default class tag {
 
 					opt.row ? "row" : null,
 
-					opt.col && opt.col !== undefined
-						? opt.col === true
-							? "col"
-							: core.multiClass(opt.col, "col-$1")
-						: null,
+					c2(opt.rowcol, "row-cols-$1"),
+					c3(opt.col, "col", null, "col-$1"),
 
 					opt.float ? core.multiClass(opt.float, "float-$1") : null,
 					opt.alignItem ? core.multiClass(opt.alignItem, "align-items-$1") : null,

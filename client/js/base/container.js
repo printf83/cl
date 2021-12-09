@@ -17,7 +17,7 @@ export class form extends div {
 			elem: new div({
 				gap: gap,
 				row: true,
-				class: `row-cols-${col}`,
+				rowcol: col,
 				elem: Array.isArray(elem)
 					? elem.map(function (i) {
 							return new div({ col: true, elem: i });
@@ -36,7 +36,7 @@ export class stack extends div {
 			elem: new div({
 				row: true,
 				gap: gap,
-				class: `row-cols-${col}`,
+				rowcol: col,
 				elem: Array.isArray(elem)
 					? elem.map(function (i) {
 							return new div({ col: true, elem: i });
