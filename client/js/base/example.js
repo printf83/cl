@@ -12,7 +12,7 @@ import p from "./p.js";
 function codecontainer(type, code, beautify) {
 	return new tag({
 		tag: "code",
-		class: "overflow-auto",
+		overflow: "auto",
 		display: "block",
 		elem: new tag({
 			tag: "pre",

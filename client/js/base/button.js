@@ -56,8 +56,9 @@ export default class button extends tag {
 				opt.nowarp ? "text-nowarp" : null,
 				opt.weight ? `btn-${opt.weight}` : null,
 				opt.color ? (opt.outline ? `btn-outline-${opt.color}` : `btn-${opt.color}`) : null,
-				opt.badge && typeof opt.badge === "object" && opt.badge.notification ? "position-relative" : null,
 			]);
+
+			opt.position = opt.badge && typeof opt.badge === "object" && opt.badge.notification ? "relative" : null;
 
 			opt.attr = core.merge.attr(opt.attr, {
 				value: opt.value,

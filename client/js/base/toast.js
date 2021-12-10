@@ -210,13 +210,13 @@ export default class toast extends div {
 			cl.appendChild(
 				document.body,
 				new div({
-					class: "position-absolute",
+					position: "absolute",
 					attr: {
 						"aria-live": "polite",
 						"aria-atomic": "true",
 					},
 					style: { "z-index": 2 },
-					elem: new div({ class: ["toast-container", "position-fixed", "p-3", position] }),
+					elem: new div({ class: ["toast-container", position], position: "fixed", padding: 3 }),
 				})
 			);
 
@@ -314,6 +314,6 @@ export default class toast extends div {
 
 	static hide(element) {
 		let tst = bootstrap.Toast.getInstance(element);
-		tst.hide();
+		tst?.hide();
 	}
 }

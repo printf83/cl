@@ -252,8 +252,9 @@ export default class paging extends div {
 				super.data = {
 					display: "flex",
 					padding: 3,
+					overflow: opt.overflow ? "auto" : null,
 					justifyContent: opt.align ? opt.align : null,
-					class: ["cl-paging", opt.overflow ? "overflow-auto" : null],
+					class: "cl-paging",
 					elem: new ul(opt),
 				};
 

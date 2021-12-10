@@ -41,39 +41,6 @@ import offcanvas from "./base/offcanvas.js";
 import toc from "./base/toc.js";
 
 function beautifyjs(str) {
-	// indent_size (default 4)          - indentation size,
-	// indent_char (default space)      - character to indent with,
-	// preserve_newlines (default true) - whether existing line breaks should be preserved,
-	// max_preserve_newlines (default unlimited) - maximum number of line breaks to be preserved in one chunk,
-
-	// jslint_happy (default false) - if true, then jslint-stricter mode is enforced.
-
-	//         jslint_happy        !jslint_happy
-	//         ---------------------------------
-	//         function ()         function()
-
-	//         switch () {         switch() {
-	//         case 1:               case 1:
-	//           break;                break;
-	//         }                   }
-
-	// space_after_anon_function (default false) - should the space before an anonymous function's parens be added, "function()" vs "function ()",
-	//       NOTE: This option is overriden by jslint_happy (i.e. if jslint_happy is true, space_after_anon_function is true by design)
-
-	// brace_style (default "collapse") - "collapse" | "expand" | "end-expand" | "none" | any of the former + ",preserve-inline"
-	//         put braces on the same line as control statements (default), or put braces on own line (Allman / ANSI style), or just put end braces on own line, or attempt to keep them where they are.
-	//         preserve-inline will try to preserve inline blocks of curly braces
-
-	// space_before_conditional (default true) - should the space before conditional statement be added, "if(true)" vs "if (true)",
-
-	// unescape_strings (default false) - should printable characters in strings encoded in \xNN notation be unescaped, "example" vs "\x65\x78\x61\x6d\x70\x6c\x65"
-
-	// wrap_line_length (default unlimited) - lines should wrap at next opportunity after this number of characters.
-	//       NOTE: This is not a hard limit. Lines will continue until a point where a newline would
-	//             be preserved if it were present.
-
-	// end_with_newline (default false)  - end output with a newline
-
 	return js_beautify(str, {
 		preserve_newlines: true,
 		max_preserve_newlines: 100,
@@ -83,23 +50,6 @@ function beautifyjs(str) {
 }
 
 function beautifyhtml(str) {
-	// indent_inner_html (default false)  — indent <head> and <body> sections,
-	// indent_size (default 4)          — indentation size,
-	// indent_char (default space)      — character to indent with,
-	// wrap_line_length (default 250)            -  maximum amount of characters per line (0 = disable)
-	// brace_style (default "collapse") - "collapse" | "expand" | "end-expand" | "none"
-	// put braces on the same line as control statements (default), or put braces on own line (Allman / ANSI style), or just put end braces on own line, or attempt to keep them where they are.
-	// inline (defaults to inline tags) - list of tags to be considered inline tags
-	// unformatted (defaults to inline tags) - list of tags, that shouldn't be reformatted
-	// content_unformatted (defaults to ["pre", "textarea"] tags) - list of tags, whose content shouldn't be reformatted
-	// indent_scripts (default normal)  - "keep"|"separate"|"normal"
-	// preserve_newlines (default true) - whether existing line breaks before elements should be preserved
-	// 					Only works before elements, not inside tags or for text.
-	// max_preserve_newlines (default unlimited) - maximum number of line breaks to be preserved in one chunk
-	// indent_handlebars (default false) - format and indent {{#foo}} and {{/foo}}
-	// end_with_newline (false)          - end with a newline
-	// extra_liners(default [head, body, /html]) -List of tags that should have an extra newline before them.
-
 	str = str.replace(/\>/g, ">\n");
 	str = str.replace(/\</g, "\n<");
 	str = str.replace(/\n\n/g, "\n");
@@ -233,34 +183,35 @@ function doForm(max, cur) {
 				beautifyjs: beautifyjs,
 				beautifyhtml: beautifyhtml,
 				code: function () {
-					return new modal({
-						debug: true, //preview purpose only
-						elem: new tab({
-							border: false,
-							rounded: false,
-							item: [
-								{ label: "1", elem: "1" },
-								{ label: "2", elem: "2" },
-								{ label: "3", elem: "3" },
-							],
-						}),
-						button: [
-							{
-								label: "AAA",
-								onclick: function (_sender, data) {
-									new toast("i", JSON.stringify(data)).show();
-									return true;
-								},
-							},
-							{
-								label: "BBB",
-								onclick: function () {
-									return true;
-								},
-							},
-						],
-						footer: new input({ type: "switch", name: "showagain", label: "Show again" }),
-					});
+					return new toast({ icon: "fire", title: "Title", elem: "Body", debug: true });
+					// return new modal({
+					// 	debug: true, //preview purpose only
+					// 	elem: new tab({
+					// 		border: false,
+					// 		rounded: false,
+					// 		item: [
+					// 			{ label: "1", elem: "1" },
+					// 			{ label: "2", elem: "2" },
+					// 			{ label: "3", elem: "3" },
+					// 		],
+					// 	}),
+					// 	button: [
+					// 		{
+					// 			label: "AAA",
+					// 			onclick: function (_sender, data) {
+					// 				new toast("i", JSON.stringify(data)).show();
+					// 				return true;
+					// 			},
+					// 		},
+					// 		{
+					// 			label: "BBB",
+					// 			onclick: function () {
+					// 				return true;
+					// 			},
+					// 		},
+					// 	],
+					// 	footer: new input({ type: "switch", name: "showagain", label: "Show again" }),
+					// });
 				},
 			}),
 

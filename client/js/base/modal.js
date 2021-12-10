@@ -356,6 +356,6 @@ export default class modal extends div {
 
 	static hide(element) {
 		let mdl = bootstrap.Modal.getInstance(element);
-		mdl.hide();
+		mdl?.hide();
 	}
 }

@@ -38,8 +38,10 @@ export default class badge extends span {
 
 			opt.class = core.merge.class(opt.class, [
 				"badge",
-				opt.notification ? "position-absolute top-0 start-100 translate-middle" : null,
+				opt.notification ? "top-0 start-100 translate-middle" : null,
 			]);
+
+			opt.position = opt.notification ? "absolute" : null;
 
 			opt.elem = [
 				opt.label || opt.icon
