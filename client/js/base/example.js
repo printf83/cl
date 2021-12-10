@@ -59,6 +59,10 @@ export default class example extends div {
 	set data(opt) {
 		opt = core.extend({}, defaultOption, opt);
 
+		if (opt.title && !opt.code) {
+			opt.anchor = false;
+		}
+
 		let ctltitle = null;
 		if (opt.title) {
 			ctltitle = new tag({
@@ -106,6 +110,7 @@ export default class example extends div {
 			item.push({
 				color: "light",
 				label: "html",
+				icon: "code",
 				elem: codecontainer("html", cl.html(opt.code()), opt.beautifyhtml),
 			});
 		}
@@ -115,6 +120,7 @@ export default class example extends div {
 				item.push({
 					color: "light",
 					label: sampleKey,
+					icon: "link",
 					elem: codecontainer("js", opt.sample[sampleKey].toString(), opt.beautifyjs),
 				});
 			});
@@ -124,6 +130,7 @@ export default class example extends div {
 			item.push({
 				color: "light",
 				label: "code",
+				icon: "fire",
 				active: true,
 				elem: codecontainer("js", opt.code.toString(), opt.beautifyjs),
 			});
@@ -135,9 +142,8 @@ export default class example extends div {
 				ctlmsg ? new div({ elem: ctlmsg }) : null,
 				opt.code
 					? new card.container({
-							rounded: "top",
+							rounded: ["top", "0"],
 							border: "bottom-0",
-							class: "rounded-0",
 							elem: new card.body({ elem: opt.code() }),
 					  })
 					: null,

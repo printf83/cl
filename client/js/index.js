@@ -42,7 +42,7 @@ import toc from "./base/toc.js";
 import tag from "./base/tag.js";
 
 function gen_example(opt) {
-	opt = core.extend({}, { title: null, msg: null, option: null, code: null }, opt);
+	opt = core.extend({}, { anchor: true, title: null, msg: null, option: null, code: null, sample: null }, opt);
 
 	let m = opt.msg ? (Array.isArray(opt.msg) ? opt.msg : [opt.msg]) : [];
 
@@ -69,6 +69,7 @@ function gen_example(opt) {
 		beautifyjs: beautifyjs,
 		beautifyhtml: beautifyhtml,
 		code: opt.code,
+		sample: opt.sample,
 	});
 }
 function beautifyjs(str) {
@@ -252,6 +253,11 @@ function doForm(max, cur) {
 							}).show();
 						},
 					});
+				},
+				sample: {
+					test1: function () {
+						return ["A", "B", "C"];
+					},
 				},
 			}),
 
