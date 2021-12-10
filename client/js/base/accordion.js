@@ -11,10 +11,12 @@ const defaultOption = {
 	item: null,
 };
 
-const defaultItemOption = { id: null, label: null, icon: null, active: false, elem: null };
+const defaultItemOption = { label: null, icon: null, active: false, elem: null };
 
 /**
- * opt : {tagoption,flush,autoclose,item:[{id,label,icon,active,elem}]}
+ * opt : {tagoption,flush,autoclose,item:[{itemOption}]}
+ * itemOption: {tagoption,label,icon,active,elem}
+ *
  */
 export default class accordion extends div {
 	constructor(opt) {
@@ -49,6 +51,15 @@ export default class accordion extends div {
 
 							i.id = i.id || core.UUID();
 
+							let t = core.extend({}, i);
+
+							t.class = core.merge.class(t.class, "accordion-body");
+
+							delete t.id;
+							delete t.label;
+							delete t.icon;
+							delete t.active;
+
 							return new div({
 								class: "accordion-item",
 								elem: [
@@ -75,7 +86,7 @@ export default class accordion extends div {
 											"aria-labelledby": `${i.id}-head`,
 											"data-bs-parent": opt.autoclose ? `#${opt.id}` : null,
 										},
-										elem: new div({ class: "accordion-body", elem: i.elem }),
+										elem: new div(t),
 									}),
 								],
 							});

@@ -197,7 +197,6 @@ export class horizontal extends div {
 				}),
 				new div({
 					col: true,
-					class: "col",
 					elem: opt.right,
 				}),
 			];

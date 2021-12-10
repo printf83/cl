@@ -101,10 +101,19 @@ export default class example extends div {
 		}
 
 		let item = [];
-		item.push({ label: "html", elem: codecontainer("html", cl.html(opt.code()), opt.beautifyhtml) });
+
+		if (opt.code) {
+			item.push({
+				color: "light",
+				label: "html",
+				elem: codecontainer("html", cl.html(opt.code()), opt.beautifyhtml),
+			});
+		}
+
 		if (opt.sample) {
 			Object.keys(opt.sample).forEach((sampleKey) => {
 				item.push({
+					color: "light",
 					label: sampleKey,
 					elem: codecontainer("js", opt.sample[sampleKey].toString(), opt.beautifyjs),
 				});
@@ -113,6 +122,7 @@ export default class example extends div {
 
 		if (opt.code) {
 			item.push({
+				color: "light",
 				label: "code",
 				active: true,
 				elem: codecontainer("js", opt.code.toString(), opt.beautifyjs),
@@ -123,17 +133,21 @@ export default class example extends div {
 			elem: [
 				ctltitle,
 				ctlmsg ? new div({ elem: ctlmsg }) : null,
-				new card.container({
-					rounded: "top",
-					border: "bottom-0",
-					class: "rounded-0",
-					elem: new card.body({ elem: opt.code() }),
-				}),
-				new accordion({
-					border: true,
-					flush: true,
-					item: item,
-				}),
+				opt.code
+					? new card.container({
+							rounded: "top",
+							border: "bottom-0",
+							class: "rounded-0",
+							elem: new card.body({ elem: opt.code() }),
+					  })
+					: null,
+				opt.code
+					? new accordion({
+							border: true,
+							flush: true,
+							item: item,
+					  })
+					: null,
 			],
 		};
 	}

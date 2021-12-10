@@ -39,7 +39,38 @@ import menu from "./base/menu.js";
 import * as progress from "./base/progress.js";
 import offcanvas from "./base/offcanvas.js";
 import toc from "./base/toc.js";
+import tag from "./base/tag.js";
 
+function gen_example(opt) {
+	opt = core.extend({}, { title: null, msg: null, option: null, code: null }, opt);
+
+	let m = opt.msg ? (Array.isArray(opt.msg) ? opt.msg : [opt.msg]) : [];
+
+	if (opt.option) {
+		m.push(
+			new table.container({
+				caption: "Available option",
+				captiontop: true,
+				item: opt.option.map(function (i, ix) {
+					if (ix > 0) {
+						i[0] = { elem: new tag({ tag: "code", elem: i[0] }) };
+						return i;
+					} else {
+						return i;
+					}
+				}),
+			})
+		);
+	}
+
+	return new example({
+		title: opt.title,
+		msg: m,
+		beautifyjs: beautifyjs,
+		beautifyhtml: beautifyhtml,
+		code: opt.code,
+	});
+}
 function beautifyjs(str) {
 	return js_beautify(str, {
 		preserve_newlines: true,
@@ -184,34 +215,43 @@ function doForm(max, cur) {
 				beautifyhtml: beautifyhtml,
 				code: function () {
 					return new toast({ icon: "fire", title: "Title", elem: "Body", debug: true });
-					// return new modal({
-					// 	debug: true, //preview purpose only
-					// 	elem: new tab({
-					// 		border: false,
-					// 		rounded: false,
-					// 		item: [
-					// 			{ label: "1", elem: "1" },
-					// 			{ label: "2", elem: "2" },
-					// 			{ label: "3", elem: "3" },
-					// 		],
-					// 	}),
-					// 	button: [
-					// 		{
-					// 			label: "AAA",
-					// 			onclick: function (_sender, data) {
-					// 				new toast("i", JSON.stringify(data)).show();
-					// 				return true;
-					// 			},
-					// 		},
-					// 		{
-					// 			label: "BBB",
-					// 			onclick: function () {
-					// 				return true;
-					// 			},
-					// 		},
-					// 	],
-					// 	footer: new input({ type: "switch", name: "showagain", label: "Show again" }),
-					// });
+				},
+			}),
+
+			gen_example({ title: "Title of example 1" }),
+			gen_example({ title: "Title of example 2", msg: "Msg or example 2" }),
+			gen_example({
+				title: "Title of example 3",
+				msg: "Msg or example 3",
+				option: [
+					["Option", "Value", "Description"],
+					["elem", "{}", "Element"],
+				],
+			}),
+			gen_example({
+				title: "Title of example 4",
+				option: [
+					["Option", "Value", "Description"],
+					["elem", "{}", "Element"],
+				],
+			}),
+			gen_example({
+				title: "Title of example 5",
+				msg: "Msg or example 5",
+				option: [
+					["Option", "Value", "Description"],
+					["elem", "{}", "Element"],
+				],
+				code: function () {
+					return new button({
+						label: "Click Me!",
+						color: "danger",
+						onclick: function () {
+							new dlg.msgbox("!", "Simple msgbox", function () {
+								new toast("/", "Msgbox callback").show();
+							}).show();
+						},
+					});
 				},
 			}),
 
