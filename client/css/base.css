@@ -12,7 +12,12 @@
 }
 .cl-menu-toggle:hover {
 	background-color: rgba(var(--bs-primary-rgb), 0.1);
+	cursor: pointer;
 }
+.cl-menu-toggle:hover label {
+	cursor: pointer;
+}
+
 .bg-dark .cl-menu-toggle:hover {
 	background-color: rgba(var(--bs-primary-rgb), 0.1);
 }
@@ -46,11 +51,19 @@
 	padding: 0.25rem 0.5rem;
 	border-radius: 0.2rem;
 }
+
+.cl-menu-container li div:hover,
+.cl-menu-container li div:hover label
+ {
+	cursor: pointer;
+}
+
 .bg-dark .cl-menu-container li div {
 	color: rgba(var(--bs-light-rgb), 0.7);
 }
 .cl-menu-container li div:hover {
 	background-color: rgba(var(--bs-primary-rgb), 0.1);
+	
 }
 .bg-dark .cl-menu-container li div:hover {
 	background-color: rgba(var(--bs-primary-rgb), 0.1);
@@ -61,6 +74,13 @@
 }
 .bg-dark .cl-menu-container li div.active {
 	color: rgba(var(--bs-light-rgb), 0.9);
+}
+
+/* cl-toc*/
+.cl-toc li div:hover,
+.cl-toc li div:hover label{
+	text-decoration: underline;
+	cursor: pointer;
 }
 
 /* anchorjs */
