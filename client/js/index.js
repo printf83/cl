@@ -272,13 +272,20 @@ function gen_content(m1, m2) {
 				cl.replaceChild(
 					document.getElementById("root"),
 					new div({
+						marginBottom: 3,
 						elem: m.source.map(function (i) {
 							return gen_example(i);
 						}),
 					})
 				);
+
+				cl.init(document.getElementById("root"));
+				PR.prettyPrint();
 			} else {
-				cl.replaceChild(document.getElementById("root"), new div({ elem: "No source available" }));
+				cl.replaceChild(
+					document.getElementById("root"),
+					new div({ marginBottom: 3, elem: "No source available" })
+				);
 			}
 
 			gen_toc();
@@ -346,6 +353,12 @@ function gen_menu(m1, m2, theme) {
 						let m2 = sender.getAttribute("cl-m2");
 
 						gen_content(m1, m2);
+
+						//remove active from all active element
+
+						let ulparent = sender.parentElement.parentElement;
+
+						sender.classList.add("active");
 					},
 				};
 			}),
