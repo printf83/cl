@@ -334,3 +334,7 @@ export function setValue(container, value) {
 		});
 	}
 }
+
+export function focusElement(elem) {
+	elem?.scrollIntoView({ behavior: "smooth", block: "end" });
+}

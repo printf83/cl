@@ -22,11 +22,45 @@
 		<link rel="stylesheet" href="css/prettify.css" />
 		<title>Index</title>
 	</head>
-	<body class="container p-2">
-		<div class="row">
-			<div id="root">
-				Please run <code>npm install</code> and <code>npm start</code> then navigate to
-				<a href="http://localhost:8081">http://localhost:8081</a> to view this template
+	<body>
+		<div id="navbar"></div>
+
+		<div class="container-lg pt-3">
+			<div class="row">
+				<div class="col col-12 col-md-3 col-xl-2">
+					<div
+						id="sidebar"
+						class="sticky-md-top overflow-auto collapse navbar-collapse d-md-block mt-3 cl-vh-menu"
+					></div>
+				</div>
+
+				<div class="col col-12 col-md-9 col-xl-10">
+					<div class="row">
+						<div class="col col-12 col-xl-10 order-2 order-xl-1">
+							<div id="root">
+								<div class="d-flex justify-content-center align-items-center w-100 h-100">
+									<span class="display-3">Loading</span>
+								</div>
+							</div>
+
+							<div class="text-center text-muted font-monospace mb-5">
+								<small id="processtime"></small>
+								<div class="d-block d-md-inline">
+									<span class="badge bg-secondary d-inline d-sm-none">xs</span>
+									<span class="badge bg-secondary d-none d-sm-inline d-md-none">sm</span>
+									<span class="badge bg-secondary d-none d-md-inline d-lg-none">md</span>
+									<span class="badge bg-secondary d-none d-lg-inline d-xl-none">lg</span>
+									<span class="badge bg-secondary d-none d-xl-inline d-xxl-none">xl</span>
+									<span class="badge bg-secondary d-none d-xxl-inline">xxl</span>
+								</div>
+							</div>
+						</div>
+
+						<div class="col col-12 col-xl-2 order-1 order-xl-2">
+							<div id="nextbar" class="sticky-lg-top overflow-auto mt-3 cl-vh-menu"></div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 

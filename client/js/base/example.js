@@ -80,7 +80,7 @@ export default class example extends div {
 									"aria-label": "Anchor",
 									"data-anchorjs-icon": "#",
 									onclick: function (event) {
-										core.focus(event.currentTarget.parent());
+										core.focusElement(event.currentTarget.parentNode);
 									},
 								},
 						  })
