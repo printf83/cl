@@ -7,13 +7,17 @@ import badge from "./badge.js";
 const defaultOption = {
 	tag: "button",
 
+	
 	type: "button",
 	label: null,
 	icon: null,
 	badge: null,
 	value: null,
+	
+	toggle:false,
 	checked: false,
 
+	
 	color: null,
 	weight: null,
 	disabled: false,
@@ -56,6 +60,7 @@ export default class button extends tag {
 				opt.nowarp ? "text-nowarp" : null,
 				opt.weight ? `btn-${opt.weight}` : null,
 				opt.color ? (opt.outline ? `btn-outline-${opt.color}` : `btn-${opt.color}`) : null,
+				opt.toggle && opt.active? "active":null
 			]);
 
 			opt.position = opt.badge && typeof opt.badge === "object" && opt.badge.notification ? "relative" : null;
@@ -66,6 +71,9 @@ export default class button extends tag {
 				role: "button",
 				disabled: opt.disabled,
 				type: opt.href ? null : opt.type,
+				"data-bs-toggle": opt.toggle ? "button" : null,
+				autocomplete: opt.toggle ? "off" : null,
+				"aria-pressed":opt.toggle && opt.active?"true":null,
 				"aria-label": opt.hidelabel && opt.label ? opt.label : null,
 				"aria-disabled": opt.href && opt.disabled ? "true" : null,
 			});

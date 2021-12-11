@@ -129,13 +129,13 @@ function gridcontainer(elem) {
 let increeseImgUrlIndex = true;
 let imgurlindex = 0;
 function imgurl(width, height) {
-	// if (increeseImgUrlIndex) {
-	// 	return `https://picsum.photos/seed/${imgurlindex++}/${width ? width : 800}/${height ? height : 400}.webp`;
-	// } else {
-	// 	return `https://picsum.photos/seed/${imgurlindex}/${width ? width : 800}/${height ? height : 400}.webp`;
-	// }
+	if (increeseImgUrlIndex) {
+		return `https://picsum.photos/seed/${imgurlindex++}/${width ? width : 800}/${height ? height : 400}.webp`;
+	} else {
+		return `https://picsum.photos/seed/${imgurlindex}/${width ? width : 800}/${height ? height : 400}.webp`;
+	}
 
-	return "../img/img.svg";
+	// return "../img/img.svg";
 }
 let loream =
 	"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce hendrerit tincidunt nibh ut condimentum. Nulla vitae vulputate elit. Sed accumsan varius mauris, vel bibendum magna consequat eget. Vivamus felis dolor, laoreet et blandit ut, iaculis eu arcu. Proin dapibus, metus vitae iaculis venenatis, lacus purus commodo tellus, aliquam commodo ex metus vulputate mi. Nam eu lorem vel nisi scelerisque hendrerit et id justo. Nunc vestibulum eget est sed ullamcorper. Etiam pulvinar, dui eget vehicula molestie, sapien sapien lobortis nulla, nec cursus urna sapien imperdiet tortor. Nam vitae lacus sem. Praesent id arcu vitae sem ultrices rutrum ut ac mi.";
@@ -156,6 +156,10 @@ let dropdownOption = [
 		label: "Separated link",
 	},
 ];
+
+let s_accordion = [
+
+]
 
 let s_button = [
 	// {
@@ -352,12 +356,16 @@ let s_button = [
 		container: stackcontainer,
 		code: function () {
 			return [
-				new button({ toggle: true, label: "Toggle button", color: "primary" }),
 				new button({
 					toggle: true,
+					label: "Toggle button",
+					color: "primary"
+				}),
+				new button({
+					toggle: true,
+					active: true,
 					label: "Active toggle button",
 					color: "primary",
-					active: true,
 				}),
 				new button({
 					toggle: true,
@@ -377,10 +385,10 @@ let s_button = [
 				new button({ toggle: true, label: "Toggle button", color: "primary" }),
 				new button({
 					toggle: true,
+					active: true,
 					href: "javascript:void(0)",
 					label: "Active toggle button",
 					color: "primary",
-					active: true,
 				}),
 				new button({
 					toggle: true,
@@ -393,34 +401,34 @@ let s_button = [
 		},
 	},
 
-	// ns.example({
-	// 	title: "Toggle state link",
-	// 	container: ns.cont.stack,
-	// 	code: function () {
-	// 		return [
-	// 			ns.button({
-	// 				toggle: true,
-	// 				href: "javascript:void(0)",
-	// 				label: "Toggle link",
-	// 				color: "primary",
-	// 			}),
-	// 			ns.button({
-	// 				toggle: true,
-	// 				href: "javascript:void(0)",
-	// 				label: "Active toggle link",
-	// 				color: "primary",
-	// 				active: true,
-	// 			}),
-	// 			ns.button({
-	// 				toggle: true,
-	// 				href: "javascript:void(0)",
-	// 				label: "Disabled toggle link",
-	// 				color: "primary",
-	// 				disabled: true,
-	// 			}),
-	// 		];
-	// 	},
-	// }),
+	{
+		title: "Toggle state link",
+		container: stackcontainer,
+		code: function () {
+			return [
+				new button({
+					toggle: true,
+					href: "javascript:void(0)",
+					label: "Toggle link",
+					color: "primary",
+				}),
+				new button({
+					toggle: true,
+					active:true,
+					href: "javascript:void(0)",
+					label: "Active toggle link",
+					color: "primary",
+				}),
+				new button({
+					toggle: true,
+					href: "javascript:void(0)",
+					label: "Disabled toggle link",
+					color: "primary",
+					disabled: true,
+				}),
+			];
+		},
+	},
 ];
 
 let db_menu = [
@@ -455,7 +463,7 @@ let db_menu = [
 		type: "menu",
 		title: "Components",
 		item: [
-			{ title: "Accordion", source: null },
+			{ title: "Accordion", source: s_accordion },
 			{ title: "Alert", source: null },
 			{ title: "Badge", source: null },
 			{ title: "Breadcrumb", source: null },
