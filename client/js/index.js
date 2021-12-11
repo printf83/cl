@@ -8,12 +8,13 @@ import * as navbar from "./base/navbar.js";
 import menu from "./base/menu.js";
 import toc from "./base/toc.js";
 import code from "./base/code.js";
+import msg from "./base/msg.js";
 
 import doc_button from "./doc/button.js";
 import doc_accordion from "./doc/accordion.js";
 import doc_alert from "./doc/alert.js";
 import doc_badge from "./doc/badge.js";
-import msg from "./base/msg.js";
+import doc_breadcrumb from "./doc/breadcrumb.js";
 
 let db_menu = [
 	{
@@ -37,7 +38,7 @@ let db_menu = [
 		item: [
 			{ title: "Form control", source: null },
 			{ title: "Select", source: null },
-			{ title: "Check &amp; radios", source: null },
+			{ title: "Check & radios", source: null },
 			{ title: "Range", source: null },
 			{ title: "Input group", source: null },
 			{ title: "Floating label", source: null },
@@ -50,7 +51,7 @@ let db_menu = [
 			{ title: "Accordion", source: doc_accordion },
 			{ title: "Alert", source: doc_alert },
 			{ title: "Badge", source: doc_badge },
-			{ title: "Breadcrumb", source: null },
+			{ title: "Breadcrumb", source: doc_breadcrumb },
 			{ title: "Button", source: doc_button },
 			{ title: "Button group", source: null },
 			{ title: "Card", source: null },

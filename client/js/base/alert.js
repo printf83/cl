@@ -31,7 +31,7 @@ export class container extends div {
 						icon: bI.icon,
 						type: bI.type,
 					},
-					msg: opt.elem,
+					elem: opt.elem,
 				});
 			}
 

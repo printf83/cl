@@ -57,10 +57,8 @@ export default [
 	{
 		title: "Icons",
 		code: function () {
-			return ["i", "!!", "!", "?", "-", "x", "/", "dosave", "dodelete", "lock", "shield", "logout"].map(function (
-				i
-			) {
-				return new alert.container({ icon: i, message: `An example alert with an <b>"${i}"</b> icon code` });
+			return ["i", "!!", "!", "?", "-", "x", "/"].map(function (i) {
+				return new alert.container({ icon: i, elem: `An example alert with an <b>"${i}"</b> icon code` });
 			});
 		},
 	},
