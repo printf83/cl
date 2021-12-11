@@ -85,52 +85,56 @@ function attachAttr(elems, arg) {
 }
 
 function build(container, arg) {
-	if (arg && arg.data) {
+	if (arg) {
+		arg = Array.isArray(arg) ? arg : [arg];
+
 		let hasContainer = container ? true : false;
 		container = container || document.createElement("div");
 
-		let element = arg.data.tag ? document.createElement(arg.data.tag) : container;
-		element = attachAttr(element, arg.data.attr);
+		arg.forEach(function (e) {
+			let element = e.data.tag ? document.createElement(e.data.tag) : container;
+			element = attachAttr(element, e.data.attr);
 
-		if (arg.data.elem) {
-			if (typeof arg.data.elem === "string") {
-				element.appendChild(document.createTextNode(arg.data.elem));
-			} else {
-				if (Array.isArray(arg.data.elem)) {
-					arg.data.elem.forEach(function (i) {
-						if (i) {
-							if (typeof i === "string") {
-								//console.info("i is text", i);
-								element.appendChild(document.createTextNode(i));
-							} else if (Array.isArray(i)) {
-								console.warn(
-									"i is array. This happen when you set elem: [[tag],tag]. It should be elem:[tag,tag]",
-									i
-								);
-								i.forEach(function (j) {
-									let t = build(element, j);
-									element = t ? t : element;
-								});
-							} else if (i.hasOwnProperty("cl")) {
-								let t = build(element, i);
-								element = t ? t : element;
-							} else {
-								console.info("i is not elem or [elem] or string", i);
-							}
-						}
-					});
+			if (e.data.elem) {
+				if (typeof e.data.elem === "string") {
+					element.appendChild(document.createTextNode(e.data.elem));
 				} else {
-					try {
-						let t = build(element, arg.data.elem);
-						element = t ? t : element;
-					} catch (ex) {
-						console.error(ex.message, arg.data.elem, element);
+					if (Array.isArray(e.data.elem)) {
+						e.data.elem.forEach(function (i) {
+							if (i) {
+								if (typeof i === "string") {
+									//console.info("i is text", i);
+									element.appendChild(document.createTextNode(i));
+								} else if (Array.isArray(i)) {
+									console.warn(
+										"i is array. This happen when you set elem: [[tag],tag]. It should be elem:[tag,tag]",
+										i
+									);
+									i.forEach(function (j) {
+										let t = build(element, j);
+										element = t ? t : element;
+									});
+								} else if (i.hasOwnProperty("cl")) {
+									let t = build(element, i);
+									element = t ? t : element;
+								} else {
+									console.info("i is not elem or [elem] or string", i);
+								}
+							}
+						});
+					} else {
+						try {
+							let t = build(element, e.data.elem);
+							element = t ? t : element;
+						} catch (ex) {
+							console.error(ex.message, e.data.elem, element);
+						}
 					}
 				}
 			}
-		}
 
-		if (arg.data.tag) container.appendChild(element);
+			if (e.data.tag) container.appendChild(element);
+		});
 
 		if (hasContainer) {
 			return container;

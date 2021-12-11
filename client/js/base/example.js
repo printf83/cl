@@ -8,6 +8,7 @@ import div from "./div.js";
 import label from "./label.js";
 import a from "./a.js";
 import p from "./p.js";
+import { container } from "./collapse.js";
 
 function codecontainer(type, code, beautify) {
 	return new tag({
@@ -108,7 +109,7 @@ export default class example extends div {
 
 		if (opt.code) {
 			item.push({
-				color: "light",
+				// color: "light",
 				label: "html",
 				icon: "code",
 				elem: codecontainer("html", cl.html(opt.code()), opt.beautifyhtml),
@@ -118,7 +119,7 @@ export default class example extends div {
 		if (opt.sample) {
 			Object.keys(opt.sample).forEach((sampleKey) => {
 				item.push({
-					color: "light",
+					// color: "light",
 					label: sampleKey,
 					icon: "link",
 					elem: codecontainer("js", opt.sample[sampleKey].toString(), opt.beautifyjs),
@@ -128,7 +129,7 @@ export default class example extends div {
 
 		if (opt.code) {
 			item.push({
-				color: "light",
+				// color: "light",
 				label: "code",
 				icon: "fire",
 				active: true,
@@ -137,6 +138,7 @@ export default class example extends div {
 		}
 
 		super.data = {
+			marginBottom: 5,
 			elem: [
 				ctltitle,
 				ctlmsg ? new div({ elem: ctlmsg }) : null,
@@ -144,7 +146,7 @@ export default class example extends div {
 					? new card.container({
 							rounded: ["top", "0"],
 							border: "bottom-0",
-							elem: new card.body({ elem: opt.code() }),
+							elem: new card.body({ elem: opt.container(opt.code()) }),
 					  })
 					: null,
 				opt.code

@@ -45,3 +45,15 @@ export class stack extends div {
 		});
 	}
 }
+
+export class grid extends div {
+	constructor(elem, gap = 2, col = null) {
+		super({
+			padding: 0,
+			display: "grid",
+			gap: gap,
+			col: col,
+			elem: elem,
+		});
+	}
+}

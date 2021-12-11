@@ -19,6 +19,10 @@ export function removeEmptyArray(arr) {
 	return arr.filter(Boolean);
 }
 
+export function capitalize(str) {
+	return str.toLowerCase().replace(/(^\w{1})|(\s+\w{1})/g, (match) => match.toUpperCase());
+}
+
 const _baseIcon = {
 	i: { icon: "info-circle", type: "fas", color: "info" },
 	"!": { icon: "exclamation-triangle", type: "fas", color: "warning" },
@@ -335,6 +339,7 @@ export function setValue(container, value) {
 	}
 }
 
-export function focusElement(elem) {
-	elem?.scrollIntoView({ behavior: "smooth", block: "end" });
+export function focusElement(elem, option) {
+	option = extend({}, { behavior: "smooth", block: "start" }, option);
+	elem?.scrollIntoView(option);
 }

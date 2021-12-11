@@ -44,7 +44,18 @@ import tag from "./base/tag.js";
 function gen_example(opt) {
 	opt = core.extend(
 		{},
-		{ id: null, anchor: true, title: null, msg: null, option: null, code: null, sample: null },
+		{
+			id: null,
+			anchor: true,
+			title: null,
+			msg: null,
+			option: null,
+			code: null,
+			sample: null,
+			container: function (elem) {
+				return elem;
+			},
+		},
 		opt
 	);
 
@@ -78,6 +89,7 @@ function gen_example(opt) {
 		msg: m,
 		beautifyjs: beautifyjs,
 		beautifyhtml: beautifyhtml,
+		container: opt.container,
 		code: opt.code,
 		sample: opt.sample,
 	});
@@ -100,6 +112,18 @@ function beautifyhtml(str) {
 		indent_inner_html: true,
 		indent_size: 4,
 	});
+}
+
+function stackcontainer(elem) {
+	return new container.stack(elem);
+}
+
+function formcontainer(elem) {
+	return new container.form(elem);
+}
+
+function gridcontainer(elem) {
+	return new container.grid(elem);
 }
 
 let increeseImgUrlIndex = true;
@@ -134,19 +158,269 @@ let dropdownOption = [
 ];
 
 let s_button = [
+	// {
+	// 	title: "Title of example 3",
+	// 	msg: "Msg or example 3",
+	// 	option: {
+	// 		"Available Option": [
+	// 			["Option", "Value", "Description"],
+	// 			["elem", "{}", "Element"],
+	// 		],
+	// 	},
+	// 	code: function () {
+	// 		return new button({ label: "Hello", icon: "fire", color: "primary" });
+	// 	},
+	// },
+
 	{
-		title: "Title of example 3",
-		msg: "Msg or example 3",
-		option: {
-			"Available Option": [
-				["Option", "Value", "Description"],
-				["elem", "{}", "Element"],
-			],
-		},
+		anchor: false,
+		title: "Buttons",
+		msg: "Use Bootstraps custom button styles for actions in forms, dialogs, and more with support for multiple sizes, states, and more.",
+	},
+
+	{
+		title: "Examples",
+		container: stackcontainer,
 		code: function () {
-			return new button({ label: "Hello", icon: "fire", color: "primary" });
+			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark", "link"].map(
+				function (i) {
+					return new button({ label: core.capitalize(i), color: i });
+				}
+			);
 		},
 	},
+
+	{
+		title: "Disable text wrapping",
+		container: stackcontainer,
+		code: function () {
+			return new button({
+				label: "Disable text wrapping button",
+				color: "primary",
+				nowarp: true,
+			});
+		},
+	},
+
+	{
+		title: "Button tags",
+		container: stackcontainer,
+		code: function () {
+			return [
+				new button({ label: "Link", color: "primary", href: "javascript:void(0);" }),
+				new button({ label: "Button", color: "primary" }),
+				new button({ label: "Input", color: "primary", type: "input" }),
+				new button({ label: "Submit", color: "primary", type: "submit" }),
+				new button({ label: "Reset", color: "primary", type: "reset" }),
+				new input({
+					class: "btn",
+					color: "primary",
+					textcolor: "light",
+					type: "button",
+					value: "Input button",
+				}),
+				new input({
+					class: "btn",
+					color: "primary",
+					textcolor: "light",
+					type: "submit",
+					value: "Input submit",
+				}),
+				new input({
+					class: "btn",
+					color: "primary",
+					textcolor: "light",
+					type: "reset",
+					value: "Input reset",
+				}),
+			];
+		},
+	},
+
+	{
+		title: "Outline button",
+		container: stackcontainer,
+		code: function () {
+			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark", "link"].map(
+				function (i) {
+					return new button({ outline: true, label: core.capitalize(i), color: i });
+				}
+			);
+		},
+	},
+
+	{
+		title: "Large Size",
+		container: stackcontainer,
+		code: function () {
+			return [
+				new button({ weight: "lg", label: "Large button", color: "primary" }),
+				new button({ weight: "lg", label: "Large button", color: "secondary" }),
+			];
+		},
+	},
+
+	{
+		title: "Small Size",
+		container: stackcontainer,
+		code: function () {
+			return [
+				new button({ weight: "sm", label: "Small button", color: "primary" }),
+				new button({ weight: "sm", label: "Small button", color: "secondary" }),
+			];
+		},
+	},
+
+	{
+		title: "Disabled state",
+		container: stackcontainer,
+		code: function () {
+			return [
+				new button({ disabled: true, weight: "lg", label: "Disabled button", color: "primary" }),
+				new button({ disabled: true, weight: "lg", label: "Disabled button", color: "secondary" }),
+			];
+		},
+	},
+
+	{
+		title: "Disabled button link state",
+		container: stackcontainer,
+		code: function () {
+			return [
+				new button({
+					disabled: true,
+					weight: "lg",
+					label: "Primary link",
+					color: "primary",
+					href: "javascript:void(0);",
+				}),
+				new button({
+					disabled: true,
+					weight: "lg",
+					label: "Link",
+					color: "secondary",
+					href: "javascript:void(0);",
+				}),
+			];
+		},
+	},
+
+	{
+		title: "Block buttons",
+		code: function () {
+			return new container.grid([
+				new button({ label: "Button", color: "primary" }),
+				new button({ label: "Button", color: "primary" }),
+				new button({ label: "Button", color: "primary" }),
+			]);
+		},
+	},
+
+	{
+		title: "Centered in horizontal",
+		code: function () {
+			return new div({
+				display: "grid",
+				gap: "2",
+				col: 6,
+				marginX: "auto",
+				elem: [
+					new button({ label: "Button", color: "primary" }),
+					new button({ label: "Button", color: "primary" }),
+					new button({ label: "Button", color: "primary" }),
+				],
+			});
+		},
+	},
+
+	{
+		title: "Right align",
+		code: function () {
+			return new div({
+				class: "d-grid gap-2 d-md-flex justify-content-md-end",
+				elem: [
+					new button({ label: "Button", color: "primary" }),
+					new button({ label: "Button", color: "primary" }),
+					new button({ label: "Button", color: "primary" }),
+				],
+			});
+		},
+	},
+
+	{
+		title: "Toggle state button",
+		container: stackcontainer,
+		code: function () {
+			return [
+				new button({ toggle: true, label: "Toggle button", color: "primary" }),
+				new button({
+					toggle: true,
+					label: "Active toggle button",
+					color: "primary",
+					active: true,
+				}),
+				new button({
+					toggle: true,
+					label: "Disabled toggle button",
+					color: "primary",
+					disabled: true,
+				}),
+			];
+		},
+	},
+
+	{
+		title: "Toggle state button",
+		container: stackcontainer,
+		code: function () {
+			return [
+				new button({ toggle: true, label: "Toggle button", color: "primary" }),
+				new button({
+					toggle: true,
+					href: "javascript:void(0)",
+					label: "Active toggle button",
+					color: "primary",
+					active: true,
+				}),
+				new button({
+					toggle: true,
+					href: "javascript:void(0)",
+					label: "Disabled toggle button",
+					color: "primary",
+					disabled: true,
+				}),
+			];
+		},
+	},
+
+	// ns.example({
+	// 	title: "Toggle state link",
+	// 	container: ns.cont.stack,
+	// 	code: function () {
+	// 		return [
+	// 			ns.button({
+	// 				toggle: true,
+	// 				href: "javascript:void(0)",
+	// 				label: "Toggle link",
+	// 				color: "primary",
+	// 			}),
+	// 			ns.button({
+	// 				toggle: true,
+	// 				href: "javascript:void(0)",
+	// 				label: "Active toggle link",
+	// 				color: "primary",
+	// 				active: true,
+	// 			}),
+	// 			ns.button({
+	// 				toggle: true,
+	// 				href: "javascript:void(0)",
+	// 				label: "Disabled toggle link",
+	// 				color: "primary",
+	// 				disabled: true,
+	// 			}),
+	// 		];
+	// 	},
+	// }),
 ];
 
 let db_menu = [
@@ -346,17 +620,26 @@ function gen_menu(m1, m2, theme) {
 					attr: {
 						"cl-m1": i.title,
 						"cl-m2": j.title,
+						"cl-m3": i.type,
 					},
 					onclick: function (event) {
 						let sender = event.currentTarget;
+
 						let m1 = sender.getAttribute("cl-m1");
 						let m2 = sender.getAttribute("cl-m2");
+						let m3 = sender.getAttribute("cl-m3");
 
 						gen_content(m1, m2);
 
-						//remove active from all active element
+						let activeItem = [].slice.call(
+							document.getElementById("sidebar").getElementsByClassName("active")
+						);
 
-						let ulparent = sender.parentElement.parentElement;
+						activeItem.forEach(function (i) {
+							if (i.getAttribute("cl-m3") === m3) {
+								i.classList.remove("active");
+							}
+						});
 
 						sender.classList.add("active");
 					},
