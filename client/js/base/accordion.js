@@ -11,7 +11,7 @@ const defaultOption = {
 	item: null,
 };
 
-const defaultItemOption = { label: null, icon: null, active: false, elem: null };
+const defaultItemOption = { label: null, icon: null, active: false, item: null };
 
 /**
  * opt : {tagoption,flush,autoclose,item:[{itemOption}]}

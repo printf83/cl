@@ -8,18 +8,17 @@ import div from "./div.js";
 import label from "./label.js";
 import a from "./a.js";
 import p from "./p.js";
-import { container } from "./collapse.js";
+import code from "./code.js";
+import pre from "./pre.js";
 
-function codecontainer(type, code, beautify) {
-	return new tag({
-		tag: "code",
+function codecontainer(type, strcode, beautify) {
+	return new code({
 		overflow: "auto",
 		display: "block",
-		elem: new tag({
-			tag: "pre",
+		elem: new pre({
 			class: `prettyprint lang-${type}`,
 			attr: { lang: type },
-			elem: beautify(code),
+			elem: beautify(strcode),
 		}),
 	});
 }

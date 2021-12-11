@@ -97,14 +97,21 @@ function build(container, arg) {
 
 			if (e.data.elem) {
 				if (typeof e.data.elem === "string") {
-					element.appendChild(document.createTextNode(e.data.elem));
+					if (core.isHTML(e.data.elem) && e.data.tag !== "pre") {
+						element.insertAdjacentHTML("beforeend", e.data.elem);
+					} else {
+						element.appendChild(document.createTextNode(e.data.elem));
+					}
 				} else {
 					if (Array.isArray(e.data.elem)) {
 						e.data.elem.forEach(function (i) {
 							if (i) {
 								if (typeof i === "string") {
-									//console.info("i is text", i);
-									element.appendChild(document.createTextNode(i));
+									if (core.isHTML(i) && e.data.tag !== "pre") {
+										element.insertAdjacentHTML("beforeend", i);
+									} else {
+										element.appendChild(document.createTextNode(i));
+									}
 								} else if (Array.isArray(i)) {
 									console.warn(
 										"i is array. This happen when you set elem: [[tag],tag]. It should be elem:[tag,tag]",

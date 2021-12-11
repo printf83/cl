@@ -6,9 +6,9 @@ import msg from "./msg.js";
 import div from "./div.js";
 import btnclose from "./btnclose.js";
 
-const defaultOption = { icon: null, color: null, message: null, close: false };
+const defaultOption = { icon: null, color: null, elem: null, close: false };
 /**
- * opt : {tagoption,icon,color,message,close}
+ * opt : {tagoption,icon,color,elem,close}
  */
 export class container extends div {
 	constructor(opt) {
@@ -25,14 +25,14 @@ export class container extends div {
 			let bI = core.getBaseIcon(opt.icon);
 			if (bI) {
 				opt.color = opt.color || bI.color;
-				opt.elem = new msg(
-					"sm",
-					{
+				opt.elem = new msg({
+					weight: "sm",
+					icon: {
 						icon: bI.icon,
 						type: bI.type,
 					},
-					opt.elem
-				);
+					msg: opt.elem,
+				});
 			}
 
 			opt.class = core.merge.class(opt.class, [
@@ -48,7 +48,7 @@ export class container extends div {
 			opt.elem = new div({
 				class: "d-flex align-items-stretch",
 				elem: [
-					new div({ class: "w-100", elem: opt.elem || opt.msg }),
+					new div({ class: "w-100", elem: opt.elem }),
 					opt.close
 						? new btnclose({
 								dismiss: "alert",

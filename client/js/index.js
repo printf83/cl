@@ -2,14 +2,9 @@
 import * as core from "./base/core.js";
 import * as cl from "./base/cl.js";
 import div from "./base/div.js";
-// import p from "./base/p.js";
 import a from "./base/a.js";
 import button from "./base/button.js";
-// import * as inputgroup from "./base/inputgroup.js";
-// import icon from "./base/icon.js";
 import badge from "./base/badge.js";
-// import input from "./base/input.js";
-// import label from "./base/label.js";
 import carousel from "./base/carousel.js";
 import tab from "./base/tab.js";
 import * as collapse from "./base/collapse.js";
@@ -40,6 +35,8 @@ import * as progress from "./base/progress.js";
 import offcanvas from "./base/offcanvas.js";
 import toc from "./base/toc.js";
 import tag from "./base/tag.js";
+import code from "./base/code.js";
+import b from "./base/b.js";
 
 function gen_example(opt) {
 	opt = core.extend(
@@ -71,7 +68,7 @@ function gen_example(opt) {
 					captiontop: true,
 					item: opt.option[optionName].map(function (i, ix) {
 						if (ix > 0) {
-							i[0] = { elem: new tag({ tag: "code", elem: i[0] }) };
+							i[0] = { elem: new code({ elem: i[0] }) };
 							return i;
 						} else {
 							return i;
@@ -126,40 +123,192 @@ function gridcontainer(elem) {
 	return new container.grid(elem);
 }
 
-let increeseImgUrlIndex = true;
-let imgurlindex = 0;
-function imgurl(width, height) {
-	if (increeseImgUrlIndex) {
-		return `https://picsum.photos/seed/${imgurlindex++}/${width ? width : 800}/${height ? height : 400}.webp`;
-	} else {
-		return `https://picsum.photos/seed/${imgurlindex}/${width ? width : 800}/${height ? height : 400}.webp`;
-	}
+let imgindex = 0;
+let textindex = 0;
 
-	// return "../img/img.svg";
-}
-let loream =
-	"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce hendrerit tincidunt nibh ut condimentum. Nulla vitae vulputate elit. Sed accumsan varius mauris, vel bibendum magna consequat eget. Vivamus felis dolor, laoreet et blandit ut, iaculis eu arcu. Proin dapibus, metus vitae iaculis venenatis, lacus purus commodo tellus, aliquam commodo ex metus vulputate mi. Nam eu lorem vel nisi scelerisque hendrerit et id justo. Nunc vestibulum eget est sed ullamcorper. Etiam pulvinar, dui eget vehicula molestie, sapien sapien lobortis nulla, nec cursus urna sapien imperdiet tortor. Nam vitae lacus sem. Praesent id arcu vitae sem ultrices rutrum ut ac mi.";
+let textdb = [
+	"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur elit massa, elementum vel metus id, congue sollicitudin lectus. Praesent ultricies felis eget nisl volutpat gravida. In eleifend iaculis viverra. Proin ut gravida elit, id posuere velit. Nulla congue enim at odio eleifend accumsan. Curabitur felis quam, feugiat in tincidunt ac, pulvinar eu diam. Nullam non erat orci. Sed gravida, ante sed vestibulum accumsan, elit metus feugiat ex, in gravida dolor nunc fermentum magna.",
+	"Nam tempor maximus ante vel malesuada. Vivamus nibh neque, cursus finibus risus vel, porttitor accumsan lacus. Nulla facilisi. Sed sit amet sagittis magna, id cursus est. Quisque convallis vel magna quis vestibulum. Curabitur placerat diam odio, in tincidunt felis viverra ac. Aenean quis ante diam. Sed sit amet lectus rutrum tortor feugiat auctor. Fusce euismod est nec posuere accumsan. Donec sodales cursus maximus. Nulla tincidunt quam quis lacus suscipit, ut lobortis erat fringilla. Praesent id diam nec metus mollis maximus. Nam vestibulum lectus quis velit dictum ornare. Phasellus vitae accumsan nisl, sed aliquet nisl. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.",
+	"Donec vehicula elit vel purus euismod, et aliquet nisl molestie. Phasellus at porttitor neque. Donec et orci mi. Nulla a laoreet tortor. Cras ac massa ipsum. Suspendisse mi diam, sodales nec felis sit amet, ullamcorper aliquet tellus. In vitae urna ipsum. Donec cursus rutrum magna. Quisque sed nisi a lacus accumsan mollis.",
+	"Cras felis orci, feugiat ac volutpat non, porttitor at leo. Mauris sit amet eros tincidunt, cursus felis sit amet, molestie erat. Cras rutrum mi sed nunc tempor, id viverra metus aliquet. Sed aliquet scelerisque rutrum. Donec blandit ante et mauris scelerisque, congue venenatis tortor vehicula. Sed ornare ipsum sed cursus euismod. Aenean placerat nibh nisi, ac pretium nulla aliquet vitae. Mauris vel mauris urna. Morbi ultrices enim tellus, quis volutpat velit feugiat vitae. Vivamus hendrerit consequat rhoncus. In at efficitur lectus, vel volutpat massa. Donec consectetur scelerisque lacinia. Sed tristique risus ac mi efficitur consequat.",
+	"Phasellus quis feugiat magna. Fusce placerat, metus eget tempor placerat, velit neque aliquam turpis, vel gravida ex leo sit amet diam. Aenean facilisis vulputate metus, ac dapibus felis vulputate non. Sed vehicula ante nec odio dapibus, id convallis libero auctor. Vivamus facilisis sed tellus a mattis. Donec bibendum imperdiet dui eget porttitor. Nam aliquam mi a nunc luctus rutrum.",
+];
 
-let dropdownOption = [
-	{ href: "#", label: "Action" },
-	{
-		href: "#",
-		label: "Another action",
+let sample = {
+	img: function (width, height) {
+		return `https://picsum.photos/seed/${imgindex++}/${width ? width : 800}/${height ? height : 400}.webp`;
 	},
-	{
-		href: "#",
-		label: "Something else here",
+	text: function () {
+		if (textindex >= textdb.length) {
+			textindex = 0;
+		}
+		return textdb[textindex++];
 	},
-	{ value: "-" },
+	dropdownoption: function () {
+		return [
+			{ href: "#", label: "Action" },
+			{
+				href: "#",
+				label: "Another action",
+			},
+			{
+				href: "#",
+				label: "Something else here",
+			},
+			{ value: "-" },
+			{
+				href: "#",
+				label: "Separated link",
+			},
+		];
+	},
+	accordionitem: function () {
+		return [
+			{
+				label: "Accordion Item 1",
+				elem: ["<b>This is the first item's accordion body.</b> ", sample.text()],
+			},
+			{
+				label: "Accordion Item 2",
+				elem: ["<b>This is the second item's accordion body.</b> ", sample.text()],
+			},
+			{
+				label: "Accordion Item 3",
+				elem: ["<b>This is the third item's accordion body.</b> ", sample.text()],
+			},
+		];
+	},
+};
+
+let s_alert = [
 	{
-		href: "#",
-		label: "Separated link",
+		title: "Alert",
+		msg: "Provide contextual feedback messages for typical user actions with the handful of available and flexible alert messages.",
+		anchor: false,
+	},
+
+	{
+		title: "Example",
+		code: function () {
+			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map(function (i) {
+				return new alert.container({ color: i, elem: `A simple ${i} alert—check it out!` });
+			});
+		},
+	},
+
+	{
+		title: "Link color",
+		code: function () {
+			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map(function (i) {
+				return new alert.container({
+					color: i,
+					elem: [
+						`A simple ${i} alert with `,
+						new alert.link({ label: "an example link", href: "javascript:void(0);" }),
+						`. Give it a click if you like.`,
+					],
+				});
+			});
+		},
+	},
+
+	{
+		title: "Additional content",
+		code: function () {
+			return new alert.container({
+				color: "success",
+				elem: [
+					new alert.heading({ elem: "Well done!" }),
+					new p({
+						elem: "Aww yeah, you successfully read this important alert message. This example text is going to run a bit longer so that you can see how spacing within an alert works with this kind of content.",
+					}),
+					new hr(),
+					new p({
+						marginBottom: 0,
+						elem: "Whenever you need to, be sure to use margin utilities to keep things nice and tidy.",
+					}),
+				],
+			});
+		},
+	},
+
+	{
+		title: "Icons",
+		code: function () {
+			return ["i", "!!", "!", "?", "-", "x", "/", "dosave", "dodelete", "lock", "shield", "logout"].map(function (
+				i
+			) {
+				return new alert.container({ icon: i, message: `An example alert with an <b>"${i}"</b> icon code` });
+			});
+		},
+	},
+
+	{
+		title: "Dismissing",
+		code: function () {
+			return new alert.container({
+				close: true,
+				color: "warning",
+				elem: "<strong>Holy guacamole!</strong> You should check in on some of those fields below.",
+			});
+		},
 	},
 ];
 
 let s_accordion = [
+	{
+		title: "Accordion",
+		msg: "Build vertically collapsing accordions in combination with our Collapse JavaScript plugin.",
+		anchor: false,
+	},
+	{
+		title: "Example",
+		msg: "Click the accordions below to expand/collapse the accordion content.",
+		sample: { "sample.text": sample.text },
+		code: function () {
+			return new accordion({
+				item: [
+					{
+						label: "Accordion Item 1",
+						elem: ["<b>This is the first item's accordion body.</b> ", sample.text()],
+					},
+					{
+						label: "Accordion Item 2",
+						elem: ["<b>This is the second item's accordion body.</b> ", sample.text()],
+					},
+					{
+						label: "Accordion Item 3",
+						elem: ["<b>This is the third item's accordion body.</b> ", sample.text()],
+					},
+				],
+			});
+		},
+	},
 
-]
+	{
+		title: "Flush",
+		msg: "Set {{flush:true}} to remove the default background-color, some borders, and some rounded corners to render accordions edge-to-edge with their parent container.",
+		sample: { "sample.text": sample.text, "sample.accordionitem": sample.accordionitem },
+		code: function () {
+			return new accordion({
+				flush: true,
+				item: sample.accordionitem(),
+			});
+		},
+	},
+
+	{
+		title: "Always open",
+		msg: "Set {{autoclose:false}} to make accordion items stay open when another item is opened.",
+		sample: { "sample.text": sample.text, "sample.accordionitem": sample.accordionitem },
+		code: function () {
+			return new accordion({
+				autoclose: false,
+				item: sample.accordionitem(),
+			});
+		},
+	},
+];
 
 let s_button = [
 	// {
@@ -359,7 +508,7 @@ let s_button = [
 				new button({
 					toggle: true,
 					label: "Toggle button",
-					color: "primary"
+					color: "primary",
 				}),
 				new button({
 					toggle: true,
@@ -414,7 +563,7 @@ let s_button = [
 				}),
 				new button({
 					toggle: true,
-					active:true,
+					active: true,
 					href: "javascript:void(0)",
 					label: "Active toggle link",
 					color: "primary",
@@ -464,7 +613,7 @@ let db_menu = [
 		title: "Components",
 		item: [
 			{ title: "Accordion", source: s_accordion },
-			{ title: "Alert", source: null },
+			{ title: "Alert", source: s_alert },
 			{ title: "Badge", source: null },
 			{ title: "Breadcrumb", source: null },
 			{ title: "Button", source: s_button },
@@ -533,9 +682,9 @@ let db_menu = [
 
 function find_menu(m1, m2) {
 	let m1_index = db_menu.findIndex((i) => i.title === m1);
-	if (m1_index) {
+	if (m1_index > -1) {
 		let m2_index = db_menu[m1_index].item.findIndex((i) => i.title === m2);
-		if (m2_index) {
+		if (m2_index > -1) {
 			return {
 				type: db_menu[m1_index].type,
 				source: db_menu[m1_index].item[m2_index].source,
@@ -551,26 +700,33 @@ function gen_content(m1, m2) {
 	if (m) {
 		if (m.type === "menu") {
 			if (m.source) {
-				cl.replaceChild(
-					document.getElementById("root"),
-					new div({
-						marginBottom: 3,
-						elem: m.source.map(function (i) {
-							return gen_example(i);
-						}),
-					})
-				);
+				setTimeout(
+					function (m) {
+						cl.replaceChild(
+							document.getElementById("root"),
+							new div({
+								marginBottom: 3,
+								elem: m.source.map(function (i) {
+									return gen_example(i);
+								}),
+							})
+						);
 
-				cl.init(document.getElementById("root"));
-				PR.prettyPrint();
+						cl.init(document.getElementById("root"));
+						PR.prettyPrint();
+
+						gen_toc();
+					},
+					1,
+					m
+				);
 			} else {
 				cl.replaceChild(
 					document.getElementById("root"),
 					new div({ marginBottom: 3, elem: "No source available" })
 				);
+				gen_toc();
 			}
-
-			gen_toc();
 		} else if (m.type === "navigate") {
 			window.location = m.source;
 		} else if (m.type === "theme") {
