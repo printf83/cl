@@ -88,67 +88,69 @@ function build(container, arg) {
 	if (arg) {
 		arg = Array.isArray(arg) ? arg : [arg];
 
-		let hasContainer = container ? true : false;
-		container = container || document.createElement("div");
+		if (arg.length > 0) {
+			let hasContainer = container ? true : false;
+			container = container || document.createElement("div");
 
-		arg.forEach(function (e) {
-			let element = e.data.tag ? document.createElement(e.data.tag) : container;
-			element = attachAttr(element, e.data.attr);
+			arg.forEach(function (e) {
+				let element = e.data.tag ? document.createElement(e.data.tag) : container;
+				element = attachAttr(element, e.data.attr);
 
-			if (e.data.elem) {
-				if (typeof e.data.elem === "string") {
-					if (core.isHTML(e.data.elem) && e.data.tag !== "pre") {
-						element.insertAdjacentHTML("beforeend", e.data.elem);
+				if (e.data.elem) {
+					if (typeof e.data.elem === "string") {
+						if (core.isHTML(e.data.elem) && e.data.tag !== "pre") {
+							element.insertAdjacentHTML("beforeend", e.data.elem);
+						} else {
+							element.appendChild(document.createTextNode(e.data.elem));
+						}
 					} else {
-						element.appendChild(document.createTextNode(e.data.elem));
-					}
-				} else {
-					if (Array.isArray(e.data.elem)) {
-						e.data.elem.forEach(function (i) {
-							if (i) {
-								if (typeof i === "string") {
-									if (core.isHTML(i) && e.data.tag !== "pre") {
-										element.insertAdjacentHTML("beforeend", i);
-									} else {
-										element.appendChild(document.createTextNode(i));
-									}
-								} else if (Array.isArray(i)) {
-									console.warn(
-										"i is array. This happen when you set elem: [[tag],tag]. It should be elem:[tag,tag]",
-										i
-									);
-									i.forEach(function (j) {
-										let t = build(element, j);
+						if (Array.isArray(e.data.elem)) {
+							e.data.elem.forEach(function (i) {
+								if (i) {
+									if (typeof i === "string") {
+										if (core.isHTML(i) && e.data.tag !== "pre") {
+											element.insertAdjacentHTML("beforeend", i);
+										} else {
+											element.appendChild(document.createTextNode(i));
+										}
+									} else if (Array.isArray(i)) {
+										console.warn(
+											"i is array. This happen when you set elem: [[tag],tag]. It should be elem:[tag,tag]",
+											i
+										);
+										i.forEach(function (j) {
+											let t = build(element, j);
+											element = t ? t : element;
+										});
+									} else if (i.hasOwnProperty("cl")) {
+										let t = build(element, i);
 										element = t ? t : element;
-									});
-								} else if (i.hasOwnProperty("cl")) {
-									let t = build(element, i);
-									element = t ? t : element;
-								} else {
-									console.info("i is not elem or [elem] or string", i);
+									} else {
+										console.info("i is not elem or [elem] or string", i);
+									}
 								}
+							});
+						} else {
+							try {
+								let t = build(element, e.data.elem);
+								element = t ? t : element;
+							} catch (ex) {
+								console.error(ex.message, e.data.elem, element);
 							}
-						});
-					} else {
-						try {
-							let t = build(element, e.data.elem);
-							element = t ? t : element;
-						} catch (ex) {
-							console.error(ex.message, e.data.elem, element);
 						}
 					}
 				}
+
+				if (e.data.tag) container.appendChild(element);
+			});
+
+			if (hasContainer) {
+				return container;
+			} else {
+				let result = container.childNodes;
+				container = null;
+				return result;
 			}
-
-			if (e.data.tag) container.appendChild(element);
-		});
-
-		if (hasContainer) {
-			return container;
-		} else {
-			let result = container.childNodes;
-			container = null;
-			return result;
 		}
 	}
 	return null;

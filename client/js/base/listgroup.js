@@ -1,0 +1,145 @@
+"use strict";
+import * as core from "./core.js";
+import label from "./label.js";
+import tag from "./tag.js";
+
+/**
+ * opt : {tagoption}
+ */
+const defaultContainerOption = {
+	type: "ul",
+	flush: false,
+	horizontal: null,
+	label: null,
+	icon: null,
+};
+
+const defaultItemOption = {
+	type: null, //null|checkbox|radio|switch
+	disabled: false,
+	action: false,
+	value: null,
+	active: false,
+	checked: null, //if check
+	color: null,
+};
+
+export class container extends tag {
+	constructor(opt) {
+		super(opt);
+	}
+
+	get data() {
+		return super.data;
+	}
+	set data(opt) {
+		opt = core.extend({}, defaultContainerOption, opt);
+
+		let ctllabel = null;
+
+		if (opt.label) {
+			opt.id = opt.id || ns.core.UUID();
+
+			ctllabel = new label({
+				class: "form-label",
+				for: opt.id,
+				label: opt.label,
+				icon: opt.icon,
+			});
+		}
+
+		delete opt.label;
+		delete opt.icon;
+
+		if (opt.horizontal === true) {
+			opt.horizontal = "horizontal";
+		}
+
+		opt.tag = opt.type;
+
+		opt.class = core.merge.class(opt.class, [
+			"list-group",
+			opt.flush ? "list-group-flush" : null,
+			opt.numbered ? "list-group-numbered" : null,
+			core.multiClass(opt.horizontal, "list-group-$1", null, "horizontal"),
+		]);
+
+		delete opt.type;
+		delete opt.flush;
+		delete opt.horizontal;
+
+		if (ctllabel) {
+			super.data = {
+				elem: [ctllabel, new tag(opt)],
+			};
+		} else {
+			super.data = opt;
+		}
+	}
+}
+
+export class item extends tag {
+	constructor(opt) {
+		super(opt);
+	}
+
+	get data() {
+		return super.data;
+	}
+	set data(opt) {
+		opt = core.extend({}, defaultItemOption, opt);
+
+		if (opt.type === "checkbox" || opt.type === "radio" || opt.type === "switch") {
+			let ctl = core.extend({}, opt);
+			ctl.tag = "input";
+
+			ctl.class = core.merge.class(ctl.class, [
+				"form-check-input",
+				"me-2",
+				opt.type === "switch" ? "ms-0" : null,
+			]);
+
+			ctl.attr = core.merge.attr(ctl.attr, {
+				type: opt.type === "switch" ? "checkbox" : opt.type,
+			});
+
+			opt = {
+				tag: "label",
+				class: core.merge.class(opt.class, [
+					"list-group-item",
+					opt.type === "switch" ? "form-switch" : null,
+					opt.disabled ? "disabled" : null,
+					opt.action ? "list-group-item-action" : null,
+					opt.color ? `list-group-item-${opt.color}` : null,
+				]),
+				attr: core.merge.attr(opt.attr, { disabled: !opt.href && opt.disabled ? "" : null }),
+				elem: [new tag(ctl)],
+			};
+		} else {
+			opt.tag = opt.href ? "a" : opt.onclick instanceof Function ? "button" : "li";
+
+			opt.class = core.merge.class(opt.class, [
+				"list-group-item",
+				opt.active ? "active" : null,
+				opt.disabled ? "disabled" : null,
+				opt.action ? "list-group-item-action" : null,
+				opt.color ? `list-group-item-${opt.color}` : null,
+			]);
+
+			opt.attr = core.merge.attr(opt.attr, {
+				disabled: !opt.href && opt.disabled ? "" : null,
+				tabindex: opt.href && opt.disabled ? "-1" : null,
+				"aria-disabled": opt.href && opt.disabled ? "true" : null,
+			});
+		}
+
+		delete opt.type;
+		delete opt.active;
+		delete opt.disabled;
+		delete opt.action;
+		delete opt.value;
+		delete opt.checked;
+
+		super.data = opt;
+	}
+}

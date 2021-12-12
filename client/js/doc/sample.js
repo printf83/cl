@@ -1,3 +1,5 @@
+import * as card from "../base/card.js";
+
 let imgindex = 0;
 let textindex = 0;
 
@@ -53,5 +55,245 @@ export function accordionitem() {
 			label: "Accordion Item 3",
 			elem: ["<b>This is the third item's accordion body.</b> ", text()],
 		},
+	];
+}
+
+export function cardwithimg() {
+	return [
+		new card.container({
+			elem: [
+				new card.img({
+					placement: "top",
+					src: img(),
+				}),
+				new card.body({
+					elem: [
+						new card.title({ elem: "Card Title" }),
+						new card.text({
+							elem: "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.",
+						}),
+					],
+				}),
+			],
+		}),
+		new card.container({
+			elem: [
+				new card.img({
+					placement: "top",
+					src: img(),
+				}),
+				new card.body({
+					elem: [
+						new card.title({ elem: "Card Title" }),
+						new card.text({
+							elem: "This card has supporting text below as a natural lead-in to additional content.",
+						}),
+					],
+				}),
+			],
+		}),
+		new card.container({
+			elem: [
+				new card.img({
+					placement: "top",
+					src: img(),
+				}),
+				new card.body({
+					elem: [
+						new card.title({ elem: "Card Title" }),
+						new card.text({
+							elem: "This card has supporting text below as a natural lead-in to additional content.",
+						}),
+					],
+				}),
+			],
+		}),
+		new card.container({
+			elem: [
+				new card.img({
+					placement: "top",
+					src: img(),
+				}),
+				new card.body({
+					elem: [
+						new card.title({ elem: "Card Title" }),
+						new card.text({
+							elem: "This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.",
+						}),
+					],
+				}),
+			],
+		}),
+	];
+}
+
+export function cardwithfooter() {
+	return [
+		new card.container({
+			elem: [
+				new card.img({
+					placement: "top",
+					src: img(),
+				}),
+				new card.body({
+					elem: [
+						new card.title({ elem: "Card Title" }),
+						new card.text({
+							elem: "This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.",
+						}),
+					],
+				}),
+				new card.footer({ elem: "Last updated 3 mins ago" }),
+			],
+		}),
+		new card.container({
+			elem: [
+				new card.img({
+					placement: "top",
+					src: img(),
+				}),
+				new card.body({
+					elem: [
+						new card.title({ elem: "Card Title" }),
+						new card.text({
+							elem: "This card has supporting text below as a natural lead-in to additional content.",
+						}),
+					],
+				}),
+				new card.footer({ elem: "Last updated 3 mins ago" }),
+			],
+		}),
+		new card.container({
+			elem: [
+				new card.img({
+					placement: "top",
+					src: img(),
+				}),
+				new card.body({
+					elem: [
+						new card.title({ elem: "Card Title" }),
+						new card.text({
+							elem: "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.",
+						}),
+					],
+				}),
+				new card.footer({ elem: "Last updated 3 mins ago" }),
+			],
+		}),
+	];
+}
+
+export function cardh100() {
+	return [
+		new card.container({
+			class: "h-100",
+			elem: [
+				new card.img({
+					placement: "top",
+					src: img(),
+				}),
+				new card.body({
+					elem: [
+						new card.title({ elem: "Card Title" }),
+						new card.text({
+							elem: "This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.",
+						}),
+					],
+				}),
+			],
+		}),
+		new card.container({
+			class: "h-100",
+			elem: [
+				new card.img({
+					placement: "top",
+					src: img(),
+				}),
+				new card.body({
+					elem: [
+						new card.title({ elem: "Card Title" }),
+						new card.text({
+							elem: "This card has supporting text below as a natural lead-in to additional content.",
+						}),
+					],
+				}),
+			],
+		}),
+		new card.container({
+			class: "h-100",
+			elem: [
+				new card.img({
+					placement: "top",
+					src: img(),
+				}),
+				new card.body({
+					elem: [
+						new card.title({ elem: "Card Title" }),
+						new card.text({
+							elem: "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.",
+						}),
+					],
+				}),
+			],
+		}),
+	];
+}
+
+export function cardwithfooterh100() {
+	return [
+		new card.container({
+			class: "h-100",
+			elem: [
+				new card.img({
+					placement: "top",
+					src: img(),
+				}),
+				new card.body({
+					elem: [
+						new card.title({ elem: "Card Title" }),
+						new card.text({
+							elem: "This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.",
+						}),
+					],
+				}),
+				new card.footer({ elem: "Last updated 3 mins ago" }),
+			],
+		}),
+		new card.container({
+			class: "h-100",
+			elem: [
+				new card.img({
+					placement: "top",
+					src: img(),
+				}),
+				new card.body({
+					elem: [
+						new card.title({ elem: "Card Title" }),
+						new card.text({
+							elem: "This card has supporting text below as a natural lead-in to additional content.",
+						}),
+					],
+				}),
+				new card.footer({ elem: "Last updated 3 mins ago" }),
+			],
+		}),
+		new card.container({
+			class: "h-100",
+			elem: [
+				new card.img({
+					placement: "top",
+					src: img(),
+				}),
+				new card.body({
+					elem: [
+						new card.title({ elem: "Card Title" }),
+						new card.text({
+							elem: "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.",
+						}),
+					],
+				}),
+				new card.footer({ elem: "Last updated 3 mins ago" }),
+			],
+		}),
 	];
 }

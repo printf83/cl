@@ -189,14 +189,15 @@ export class horizontal extends div {
 	set data(opt) {
 		if (opt) {
 			opt = core.extend({}, defaultHorizontalOption, opt);
-			opt.gap = opt.class = core.merge.class(opt.class, ["row", opt.gap !== null ? `g-${opt.gap}` : null]);
+
+			opt.class = core.merge.class(opt.class, "row");
 			opt.elem = [
 				new div({
 					col: opt.size === "col" ? true : opt.size,
 					elem: opt.left,
 				}),
 				new div({
-					col: true,
+					col: "auto",
 					elem: opt.right,
 				}),
 			];

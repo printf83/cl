@@ -71,7 +71,7 @@ export default class example extends div {
 				paddingTop: 3,
 				id: opt.id,
 				elem: [
-					new label({ label: opt.title }),
+					new label({ label: opt.title.replace(/\{\{/g, "<code>").replace(/\}\}/g, "</code>") }),
 					opt.anchor
 						? new a({
 								class: "anchorjs-link",
@@ -97,7 +97,10 @@ export default class example extends div {
 
 			ctlmsg = opt.msg.map(function (i) {
 				if (typeof i === "string") {
-					return new p({ class: opt.anchor ? null : "fw-lighter fs-5", elem: i });
+					return new p({
+						class: opt.anchor ? null : "fw-lighter fs-5",
+						elem: i.replace(/\{\{/g, "<code>").replace(/\}\}/g, "</code>"),
+					});
 				} else {
 					return i;
 				}

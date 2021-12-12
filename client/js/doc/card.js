@@ -2,11 +2,13 @@ import * as core from "../base/core.js";
 import * as doc_core from "./core.js";
 import * as sample from "./sample.js";
 import * as card from "../base/card.js";
+import * as listgroup from "../base/listgroup.js";
 import button from "../base/button.js";
-import input from "../base/input.js";
 import div from "../base/div.js";
 import tag from "../base/tag.js";
 import p from "../base/p.js";
+import tab from "../base/tab.js";
+import small from "../base/small.js";
 
 export default [
 	{
@@ -42,49 +44,45 @@ export default [
 
 	{
 		title: "Body",
-		msg: "The building block of a card is the {{new card.body}}. Use it whenever you need a padded section within a card.",
+		msg: "The building block of a card is the {{card.body}}. Use it whenever you need a padded section within a card.",
 		code: function () {
-			return new card.container([new card.body({ elem: "This is some text within a card body." })]);
+			return new card.container({ elem: new card.body({ elem: "This is some text within a card body." }) });
 		},
 	},
 
 	{
 		title: "Titles, text, and links",
 		msg: [
-			"Card titles are used by adding {{new card.title}}. In the same way, links are added and placed next to each other by adding {{new card.link}}.",
-			"Subtitles are used by adding a {{new card.subtitle}}. If the {{new card.title}} and the {{new card.subtitle}} items are placed in a {{new card.body}} item, the card title and subtitle are aligned nicely.",
+			"Card titles are used by adding {{card.title}}. In the same way, links are added and placed next to each other by adding {{card.link}}.",
+			"Subtitles are used by adding a {{card.subtitle}}. If the {{card.title}} and the {{card.subtitle}} items are placed in a {{card.body}} item, the card title and subtitle are aligned nicely.",
 		],
 		code: function () {
 			return new card.container({
 				style: { width: "18rem" },
-				elem: [
-					new card.body({
-						elem: [
-							new card.title({ elem: "Card Title" }),
-							new card.subtitle("Card subtitle"),
-							new card.text({
-								elem: "Some quick example text to build on the card title and make up the bulk of the card's content.",
-							}),
-							//new a example
-							new card.link({
-								href: "#",
-								elem: "Link 1",
-							}),
-							//new card.link example
-							new card.link({
-								href: "#",
-								elem: "Link 2",
-							}),
-						],
-					}),
-				],
+				elem: new card.body({
+					elem: [
+						new card.title({ elem: "Card Title" }),
+						new card.subtitle("Card subtitle"),
+						new card.text({
+							elem: "Some quick example text to build on the card title and make up the bulk of the card's content.",
+						}),
+						new card.link({
+							href: "#",
+							elem: "Link 1",
+						}),
+						new card.link({
+							href: "#",
+							elem: "Link 2",
+						}),
+					],
+				}),
 			});
 		},
 	},
 
 	{
 		title: "Images",
-		msg: '{{placement: "top"}} places an {{new card.img}} to the top of the card. With {{new card.text}}, text can be added to the card. Text within {{new card.text}} can also be styled with the standard HTML tags.',
+		msg: '{{placement: "top"}} places an {{card.img}} to the top of the card. With {{card.text}}, text can be added to the card. Text within {{card.text}} can also be styled with the standard HTML tags.',
 		sample: { "sample.img": sample.img },
 		code: function () {
 			return new card.container({
@@ -95,11 +93,9 @@ export default [
 						src: sample.img(),
 					}),
 					new card.body({
-						elem: [
-							new card.text({
-								elem: "Some quick example text to build on the card title and make up the bulk of the card's content.",
-							}),
-						],
+						elem: new card.text({
+							elem: "Some quick example text to build on the card title and make up the bulk of the card's content.",
+						}),
 					}),
 				],
 			});
@@ -115,9 +111,9 @@ export default [
 				elem: new listgroup.container({
 					flush: true,
 					elem: [
-						new listgroup.item("An item"),
-						new listgroup.item("A second item"),
-						new listgroup.item("A third item"),
+						new listgroup.item({ elem: "An item" }),
+						new listgroup.item({ elem: "A second item" }),
+						new listgroup.item({ elem: "A third item" }),
 					],
 				}),
 			});
@@ -134,9 +130,9 @@ export default [
 					new listgroup.container({
 						flush: true,
 						elem: [
-							new listgroup.item("An item"),
-							new listgroup.item("A second item"),
-							new listgroup.item("A third item"),
+							new listgroup.item({ elem: "An item" }),
+							new listgroup.item({ elem: "A second item" }),
+							new listgroup.item({ elem: "A third item" }),
 						],
 					}),
 				],
@@ -153,9 +149,9 @@ export default [
 					new listgroup.container({
 						flush: true,
 						elem: [
-							new listgroup.item("An item"),
-							new listgroup.item("A second item"),
-							new listgroup.item("A third item"),
+							new listgroup.item({ elem: "An item" }),
+							new listgroup.item({ elem: "A second item" }),
+							new listgroup.item({ elem: "A third item" }),
 						],
 					}),
 					new card.footer({
@@ -190,19 +186,17 @@ export default [
 					new listgroup.container({
 						flush: true,
 						elem: [
-							new listgroup.item("An item"),
-							new listgroup.item("A second item"),
-							new listgroup.item("A third item"),
+							new listgroup.item({ elem: "An item" }),
+							new listgroup.item({ elem: "A second item" }),
+							new listgroup.item({ elem: "A third item" }),
 						],
 					}),
 					new card.body({
 						elem: [
-							//new a example
-							new a({
-								class: "card-link",
+							new card.link({
+								href: "#",
 								elem: "Link 1",
 							}),
-							//new card.link example
 							new card.link({
 								href: "#",
 								elem: "Link 2",
@@ -237,7 +231,7 @@ export default [
 
 	{
 		title: "Header with {{h*}} class",
-		msg: 'Card headers can be styled by adding {{class: "h*"}} elements into {{new card.header}}.',
+		msg: 'Card headers can be styled by adding {{class: "h*"}} elements into {{card.header}}.',
 		code: function () {
 			return new card.container({
 				elem: [
@@ -266,29 +260,27 @@ export default [
 				elem: [
 					new card.header({ elem: "Quote" }),
 					new card.body({
-						elem: [
-							new tag({
-								tag: "blockquote",
-								class: "mb-0",
-								elem: [
-									new p({
-										elem: "A well-known quote, contained in a blockquote element.",
-									}),
-									new tag({
-										tag: "footer",
-										class: "blockquote-footer",
-										elem: [
-											"Someone famous in",
-											new tag({
-												tag: "cite",
-												attr: { title: "Source Title" },
-												elem: "Source Title",
-											}),
-										],
-									}),
-								],
-							}),
-						],
+						elem: new tag({
+							tag: "blockquote",
+							class: "mb-0",
+							elem: [
+								new p({
+									elem: "A well-known quote, contained in a blockquote element.",
+								}),
+								new tag({
+									tag: "footer",
+									class: "blockquote-footer",
+									elem: [
+										"Someone famous in",
+										new tag({
+											tag: "cite",
+											attr: { title: "Source Title" },
+											elem: "Source Title",
+										}),
+									],
+								}),
+							],
+						}),
 					}),
 				],
 			});
@@ -326,40 +318,44 @@ export default [
 		title: "Using grid markup",
 		msg: "Using the grid, wrap cards in columns and rows as needed.",
 		code: function () {
-			return new div("row", [
-				new div(
-					"col-sm-6",
-					new card.container({
-						elem: [
-							new card.body({
-								elem: [
-									new card.title({ elem: "Special title treatment" }),
-									new card.text({
-										elem: "With supporting text below as a natural lead-in to additional content.",
-									}),
-									new button({ label: "Go somewhere", color: "primary" }),
-								],
-							}),
-						],
-					})
-				),
-				new div(
-					"col-sm-6",
-					new card.container({
-						elem: [
-							new card.body({
-								elem: [
-									new card.title({ elem: "Special title treatment" }),
-									new card.text({
-										elem: "With supporting text below as a natural lead-in to additional content.",
-									}),
-									new button({ label: "Go somewhere", color: "primary" }),
-								],
-							}),
-						],
-					})
-				),
-			]);
+			return new div({
+				row: true,
+				gap: 2,
+				elem: [
+					new div({
+						col: "sm-6",
+						elem: new card.container({
+							elem: [
+								new card.body({
+									elem: [
+										new card.title({ elem: "Special title treatment" }),
+										new card.text({
+											elem: "With supporting text below as a natural lead-in to additional content.",
+										}),
+										new button({ label: "Go somewhere", color: "primary" }),
+									],
+								}),
+							],
+						}),
+					}),
+					new div({
+						col: "sm-6",
+						elem: new card.container({
+							elem: [
+								new card.body({
+									elem: [
+										new card.title({ elem: "Special title treatment" }),
+										new card.text({
+											elem: "With supporting text below as a natural lead-in to additional content.",
+										}),
+										new button({ label: "Go somewhere", color: "primary" }),
+									],
+								}),
+							],
+						}),
+					}),
+				],
+			});
 		},
 	},
 
@@ -479,12 +475,12 @@ export default [
 
 	{
 		title: "Tab in card",
-		msg: "{{new nav}} is working navbar in card",
+		msg: "{{tab}} is working navbar in card",
 		sample: { "sample.text": sample.text },
 		code: function () {
-			return new nav({
+			return new tab({
 				style: "tab",
-				elem: [
+				item: [
 					{
 						label: "First",
 						active: true,
@@ -507,9 +503,9 @@ export default [
 		title: "Pill style tab",
 		sample: { "sample.text": sample.text },
 		code: function () {
-			return new nav({
+			return new tab({
 				style: "pill",
-				elem: [
+				item: [
 					{
 						label: "First",
 						active: true,
@@ -546,7 +542,7 @@ export default [
 								new card.text({
 									elem: "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.",
 								}),
-								new card.textsmall({ elem: "Last updated 3 mins ago" }),
+								new card.text({ color: "muted", elem: new small({ elem: "Last updated 3 mins ago" }) }),
 							],
 						}),
 					],
@@ -559,7 +555,7 @@ export default [
 								new card.text({
 									elem: "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.",
 								}),
-								new card.textsmall({ elem: "Last updated 3 mins ago" }),
+								new card.text({ color: "muted", elem: new small({ elem: "Last updated 3 mins ago" }) }),
 							],
 						}),
 						new card.img({
@@ -582,13 +578,15 @@ export default [
 					new card.img({
 						src: sample.img(),
 					}),
-					new card.imgoverlay([
-						new card.title({ elem: "Card Title" }),
-						new card.text({
-							elem: "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.",
-						}),
-						new card.text("Last updated 3 mins ago"),
-					]),
+					new card.imgoverlay({
+						elem: [
+							new card.title({ elem: "Card Title" }),
+							new card.text({
+								elem: "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.",
+							}),
+							new card.text({ color: "muted", elem: new small({ elem: "Last updated 3 mins ago" }) }),
+						],
+					}),
 				],
 			});
 		},
@@ -601,7 +599,7 @@ export default [
 			return new card.container({
 				elem: [
 					new card.horizontal({
-						size: "col-4",
+						col: "sm-4",
 						left: [
 							new card.img({
 								placement: "top",
@@ -615,7 +613,10 @@ export default [
 									new card.text({
 										elem: "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.",
 									}),
-									new card.textsmall({ elem: "Last updated 3 mins ago" }),
+									new card.text({
+										color: "muted",
+										elem: new small({ elem: "Last updated 3 mins ago" }),
+									}),
 								],
 							}),
 						],
@@ -666,7 +667,7 @@ export default [
 							new card.header({ elem: "Header" }),
 							new card.body({
 								elem: [
-									new card.title({ elem: `${i.capitalize()} card title` }),
+									new card.title({ elem: `${core.capitalize(i)} card title` }),
 									new card.text({
 										elem: `Some quick example text to build on the ${i} card title and make up the bulk of the card's content.`,
 									}),
@@ -724,7 +725,7 @@ export default [
 						new card.body({
 							textcolor: i.textcolor,
 							elem: [
-								new card.title({ elem: `${i.color.capitalize()} card title` }),
+								new card.title({ elem: `${core.capitalize(i.color)} card title` }),
 								new card.text({
 									elem: "Some quick example text to build on the card title and make up the bulk of the card's content.",
 								}),
@@ -771,28 +772,30 @@ export default [
 	{
 		title: "Card groups",
 		container: doc_core.stackcontainer,
-		sample: { "sample.img": sample.img, "sample.card": sample.card },
+		sample: { "sample.img": sample.img, "sample.cardwithimg": sample.cardwithimg },
 		code: function () {
-			return new card.group([
-				new card.container({
-					elem: [
-						new card.img({
-							placement: "top",
-							src: sample.img(),
-						}),
-						new card.body({
-							elem: [
-								new card.title({ elem: "Card Title" }),
-								new card.text({
-									elem: "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.",
-								}),
-							],
-						}),
-					],
-				}),
-				sample.card()[1],
-				sample.card()[2],
-			]);
+			return new card.group({
+				elem: [
+					new card.container({
+						elem: [
+							new card.img({
+								placement: "top",
+								src: sample.img(),
+							}),
+							new card.body({
+								elem: [
+									new card.title({ elem: "Card Title" }),
+									new card.text({
+										elem: "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.",
+									}),
+								],
+							}),
+						],
+					}),
+					sample.cardwithimg()[1],
+					sample.cardwithimg()[2],
+				],
+			});
 		},
 	},
 
@@ -804,53 +807,55 @@ export default [
 			"sample.cardwithfooter": sample.cardwithfooter,
 		},
 		code: function () {
-			return new card.group([
-				new card.container({
-					elem: [
-						new card.img({
-							placement: "top",
-							src: sample.img(),
-						}),
-						new card.body({
-							elem: [
-								new card.title({ elem: "Card Title" }),
-								new card.text({
-									elem: "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.",
-								}),
-							],
-						}),
-						new card.footer({ elem: "Last updated 3 mins ago" }),
-					],
-				}),
+			return new card.group({
+				elem: [
+					new card.container({
+						elem: [
+							new card.img({
+								placement: "top",
+								src: sample.img(),
+							}),
+							new card.body({
+								elem: [
+									new card.title({ elem: "Card Title" }),
+									new card.text({
+										elem: "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.",
+									}),
+								],
+							}),
+							new card.footer({ elem: "Last updated 3 mins ago" }),
+						],
+					}),
 
-				sample.cardwithfooter()[1],
-				sample.cardwithfooter()[2],
-			]);
+					sample.cardwithfooter()[1],
+					sample.cardwithfooter()[2],
+				],
+			});
 		},
 	},
 
 	{
 		title: "Card grid using {{row-cols-md-2}}",
-		sample: { "sample.card": sample.card },
+		sample: { "sample.cardwithimg": sample.cardwithimg },
 		code: function () {
 			return new div("row row-cols-1 row-cols-md-2 g-4", [
-				new div({ col: true, elem: sample.cardh()[0] }),
-				new div({ col: true, elem: sample.cardh()[1] }),
-				new div({ col: true, elem: sample.cardh()[2] }),
-				new div({ col: true, elem: sample.cardh()[3] }),
+				new div({ col: true, elem: sample.cardwithimg()[0] }),
+				new div({ col: true, elem: sample.cardwithimg()[1] }),
+				new div({ col: true, elem: sample.cardwithimg()[2] }),
+				new div({ col: true, elem: sample.cardwithimg()[3] }),
 			]);
 		},
 	},
 
 	{
 		title: "Card grid using {{row-cols-md-3}}",
-		sample: { "sample.card": sample.card },
+		sample: { "sample.cardwithimg": sample.cardwithimg },
 		code: function () {
 			return new div("row row-cols-1 row-cols-md-3 g-4", [
-				new div({ col: true, elem: sample.cardh()[0] }),
-				new div({ col: true, elem: sample.cardh()[1] }),
-				new div({ col: true, elem: sample.cardh()[2] }),
-				new div({ col: true, elem: sample.cardh()[3] }),
+				new div({ col: true, elem: sample.cardwithimg()[0] }),
+				new div({ col: true, elem: sample.cardwithimg()[1] }),
+				new div({ col: true, elem: sample.cardwithimg()[2] }),
+				new div({ col: true, elem: sample.cardwithimg()[3] }),
 			]);
 		},
 	},
