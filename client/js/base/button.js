@@ -7,17 +7,15 @@ import badge from "./badge.js";
 const defaultOption = {
 	tag: "button",
 
-	
 	type: "button",
 	label: null,
 	icon: null,
 	badge: null,
 	value: null,
-	
-	toggle:false,
+
+	toggle: false,
 	checked: false,
 
-	
 	color: null,
 	weight: null,
 	disabled: false,
@@ -60,7 +58,7 @@ export default class button extends tag {
 				opt.nowarp ? "text-nowarp" : null,
 				opt.weight ? `btn-${opt.weight}` : null,
 				opt.color ? (opt.outline ? `btn-outline-${opt.color}` : `btn-${opt.color}`) : null,
-				opt.toggle && opt.active? "active":null
+				opt.toggle && opt.active ? "active" : null,
 			]);
 
 			opt.position = opt.badge && typeof opt.badge === "object" && opt.badge.notification ? "relative" : null;
@@ -70,13 +68,33 @@ export default class button extends tag {
 				checked: opt.checked,
 				role: "button",
 				disabled: opt.disabled,
-				type: opt.href ? null : opt.type,
+				type: opt.href || opt.type === "checkbox" || opt.type === "radio" ? null : opt.type,
 				"data-bs-toggle": opt.toggle ? "button" : null,
 				autocomplete: opt.toggle ? "off" : null,
-				"aria-pressed":opt.toggle && opt.active?"true":null,
+				"aria-pressed": opt.toggle && opt.active ? "true" : null,
 				"aria-label": opt.hidelabel && opt.label ? opt.label : null,
 				"aria-disabled": opt.href && opt.disabled ? "true" : null,
 			});
+
+			let mainctl = null;
+			if (opt.type === "checkbox" || opt.type === "radio") {
+				opt.id = opt.id || core.UUID();
+
+				mainctl = new tag({
+					tag: "input",
+					class: "btn-check",
+					id: opt.id,
+					name: opt.name,
+					attr: { autocomplete: "off", type: opt.type },
+				});
+
+				opt.attr = core.merge.attr(opt.attr, { for: opt.id });
+				opt.tag = "label";
+
+				opt.elem = opt.label;
+				delete opt.id;
+				delete opt.name;
+			}
 
 			opt.elem = opt.elem
 				? opt.elem
@@ -101,9 +119,13 @@ export default class button extends tag {
 			delete opt.hidelabel;
 			delete opt.nowarp;
 
-			delete opt.btnclass;
-
-			super.data = opt;
+			if (mainctl) {
+				super.data = {
+					elem: [mainctl, new tag(opt)],
+				};
+			} else {
+				super.data = opt;
+			}
 		}
 	}
 }

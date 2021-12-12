@@ -166,10 +166,12 @@ export default [
 
 	{
 		title: "Mix toolbar",
+		container: doc_core.formcontainer,
 		code: function () {
 			return [
 				new btntoolbar({
 					label: "Toolbar with button groups",
+					gap: 2,
 					elem: [
 						new btngroup({
 							label: "First group",
@@ -190,6 +192,7 @@ export default [
 
 				new btntoolbar({
 					label: "Toolbar with button groups",
+					gap: 2,
 					justifyContent: "between",
 					elem: [
 						new btngroup({
@@ -214,6 +217,7 @@ export default [
 
 	{
 		title: "Sizing",
+		container: doc_core.formcontainer,
 		code: function () {
 			return [
 				new btngroup({
