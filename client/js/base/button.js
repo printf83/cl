@@ -98,12 +98,14 @@ export default class button extends tag {
 				delete opt.id;
 				delete opt.name;
 			} else {
-				opt.elem = [
-					opt.label || opt.icon
-						? new label({ icon: opt.icon, label: opt.label, hidelabel: opt.hidelabel })
-						: null,
-					opt.badge ? new badge(opt.badge) : null,
-				];
+				opt.elem = opt.elem
+					? opt.elem
+					: [
+							opt.label || opt.icon
+								? new label({ icon: opt.icon, label: opt.label, hidelabel: opt.hidelabel })
+								: null,
+							opt.badge ? new badge(opt.badge) : null,
+					  ];
 			}
 
 			delete opt.type;

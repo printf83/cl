@@ -18,6 +18,7 @@ import doc_badge from "./doc/badge.js";
 import doc_breadcrumb from "./doc/breadcrumb.js";
 import doc_btngroup from "./doc/btngroup.js";
 import doc_card from "./doc/card.js";
+import doc_carousel from "./doc/carousel.js";
 
 let db_menu = [
 	{
@@ -58,7 +59,7 @@ let db_menu = [
 			{ title: "Button", source: doc_button },
 			{ title: "Button group", source: doc_btngroup },
 			{ title: "Card", source: doc_card },
-			{ title: "Carosel", source: null },
+			{ title: "Carosel", source: doc_carousel },
 			{ title: "Close button", source: null },
 			{ title: "Collapse", source: null },
 			{ title: "Dropdown", source: null },
@@ -358,7 +359,7 @@ core.documentReady(() => {
 	cl.replaceChild(
 		document.getElementById("sidebar"),
 		new div({
-			elem: gen_menu("Components", "Button", null),
+			elem: gen_menu("Components", "Carosel", null),
 		})
 	);
 
@@ -370,5 +371,5 @@ core.documentReady(() => {
 		})
 	);
 
-	gen_content("Components", "Button");
+	gen_content("Components", "Carosel");
 });

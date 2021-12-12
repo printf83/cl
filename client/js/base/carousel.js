@@ -5,13 +5,14 @@ import h from "./h.js";
 import span from "./span.js";
 import button from "./button.js";
 import img from "./img.js";
+import p from "./p.js";
 
 const defaultOption = {
-	control: true,
+	control: false,
 	touch: true,
 	slide: true,
 	fade: false,
-	indicators: true,
+	indicators: false,
 	dark: false,
 	item: null,
 };
@@ -38,6 +39,8 @@ export default class carousel extends div {
 	set data(opt) {
 		if (opt) {
 			opt = core.extend({}, defaultOption, opt);
+
+			opt.id = opt.id || core.UUID();
 
 			opt.item = Array.isArray(opt.item) ? opt.item : [opt.item];
 
