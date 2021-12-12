@@ -76,11 +76,13 @@ export default class button extends tag {
 				"aria-disabled": opt.href && opt.disabled ? "true" : null,
 			});
 
-			let mainctl = null;
+			let m = null;
 			if (opt.type === "checkbox" || opt.type === "radio") {
 				opt.id = opt.id || core.UUID();
 
-				mainctl = new tag({
+				m = core.extend({}, opt);
+
+				m = new tag({
 					tag: "input",
 					class: "btn-check",
 					id: opt.id,
@@ -91,19 +93,18 @@ export default class button extends tag {
 				opt.attr = core.merge.attr(opt.attr, { for: opt.id });
 				opt.tag = "label";
 
-				opt.elem = opt.label;
+				opt.elem = [opt.icon ? new icon(opt.icon) : null, opt.label, opt.badge ? new badge(opt.badge) : null];
+
 				delete opt.id;
 				delete opt.name;
+			} else {
+				opt.elem = [
+					opt.label || opt.icon
+						? new label({ icon: opt.icon, label: opt.label, hidelabel: opt.hidelabel })
+						: null,
+					opt.badge ? new badge(opt.badge) : null,
+				];
 			}
-
-			opt.elem = opt.elem
-				? opt.elem
-				: [
-						opt.label || opt.icon
-							? new label({ icon: opt.icon, label: opt.label, hidelabel: opt.hidelabel })
-							: null,
-						opt.badge ? new badge(opt.badge) : null,
-				  ];
 
 			delete opt.type;
 			delete opt.label;
@@ -119,9 +120,9 @@ export default class button extends tag {
 			delete opt.hidelabel;
 			delete opt.nowarp;
 
-			if (mainctl) {
+			if (m) {
 				super.data = {
-					elem: [mainctl, new tag(opt)],
+					elem: [m, new tag(opt)],
 				};
 			} else {
 				super.data = opt;

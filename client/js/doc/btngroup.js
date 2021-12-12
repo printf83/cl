@@ -1,6 +1,4 @@
-import * as core from "../base/core.js";
 import * as doc_core from "./core.js";
-import * as container from "../base/container.js";
 import btngroup from "../base/btngroup.js";
 import btntoolbar from "../base/btntoolbar.js";
 import button from "../base/button.js";
