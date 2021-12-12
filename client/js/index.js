@@ -10,6 +10,7 @@ import toc from "./base/toc.js";
 import code from "./base/code.js";
 import msg from "./base/msg.js";
 
+import * as sample from "./doc/sample.js";
 import doc_button from "./doc/button.js";
 import doc_accordion from "./doc/accordion.js";
 import doc_alert from "./doc/alert.js";
@@ -213,6 +214,8 @@ function gen_content(m1, m2) {
 			if (m.source) {
 				setTimeout(
 					function (m) {
+						sample.resetindex();
+
 						cl.replaceChild(
 							document.getElementById("root"),
 							new div({

@@ -599,11 +599,11 @@ export default [
 			return new card.container({
 				elem: [
 					new card.horizontal({
-						col: "sm-4",
+						size: "sm-4",
 						left: [
 							new card.img({
-								placement: "top",
-								src: sample.img(400, 800),
+								placement: "left",
+								src: sample.img(400, 400),
 							}),
 						],
 						right: [
