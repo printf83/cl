@@ -168,8 +168,8 @@ export default class tag {
 
 					c2(opt.display, "d-$1"),
 
-					opt.display !== "grid" ? c2(opt.gap, "g-$1") : null,
-					opt.display === "grid" ? c2(opt.gap, "gap-$1") : null,
+					opt.display !== "grid" && opt?.attr?.role !== "toolbar" ? c2(opt.gap, "g-$1") : null,
+					opt.display === "grid" || opt?.attr?.role === "toolbar" ? c2(opt.gap, "gap-$1") : null,
 
 					opt.row ? "row" : null,
 

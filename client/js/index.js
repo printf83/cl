@@ -15,6 +15,7 @@ import doc_accordion from "./doc/accordion.js";
 import doc_alert from "./doc/alert.js";
 import doc_badge from "./doc/badge.js";
 import doc_breadcrumb from "./doc/breadcrumb.js";
+import doc_btngroup from "./doc/btngroup.js";
 
 let db_menu = [
 	{
@@ -53,7 +54,7 @@ let db_menu = [
 			{ title: "Badge", source: doc_badge },
 			{ title: "Breadcrumb", source: doc_breadcrumb },
 			{ title: "Button", source: doc_button },
-			{ title: "Button group", source: null },
+			{ title: "Button group", source: doc_btngroup },
 			{ title: "Card", source: null },
 			{ title: "Carosel", source: null },
 			{ title: "Close button", source: null },
