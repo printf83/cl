@@ -479,7 +479,7 @@ export default [
 		sample: { "sample.text": sample.text },
 		code: function () {
 			return new tab({
-				style: "tab",
+				type: "tab",
 				item: [
 					{
 						label: "First",
@@ -504,7 +504,7 @@ export default [
 		sample: { "sample.text": sample.text },
 		code: function () {
 			return new tab({
-				style: "pill",
+				type: "pill",
 				item: [
 					{
 						label: "First",
@@ -658,25 +658,33 @@ export default [
 		title: "Example background and color",
 		container: doc_core.stackcontainer,
 		code: function () {
-			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark", "link"].map(
-				function (i) {
-					return new card.container({
-						color: i,
-						style: { width: "18rem" },
-						elem: [
-							new card.header({ elem: "Header" }),
-							new card.body({
-								elem: [
-									new card.title({ elem: `${core.capitalize(i)} card title` }),
-									new card.text({
-										elem: `Some quick example text to build on the ${i} card title and make up the bulk of the card's content.`,
-									}),
-								],
-							}),
-						],
-					});
-				}
-			);
+			return [
+				{ color: "primary", textcolor: "light" },
+				{ color: "secondary", textcolor: "light" },
+				{ color: "success", textcolor: "light" },
+				{ color: "danger", textcolor: "light" },
+				{ color: "warning" },
+				{ color: "info" },
+				{ color: "light" },
+				{ color: "dark", textcolor: "light" },
+			].map(function (i) {
+				return new card.container({
+					color: i.color,
+					textcolor: i.textcolor,
+					style: { width: "18rem" },
+					elem: [
+						new card.header({ elem: "Header" }),
+						new card.body({
+							elem: [
+								new card.title({ elem: `${core.capitalize(i.color)} card title` }),
+								new card.text({
+									elem: `Some quick example text to build on the ${i.color} card title and make up the bulk of the card's content.`,
+								}),
+							],
+						}),
+					],
+				});
+			});
 		},
 	},
 
@@ -747,7 +755,7 @@ export default [
 				elem: [
 					new card.header({
 						color: "transparent",
-						bordercolor: "success",
+						class: "border-success",
 						elem: "Header",
 					}),
 					new card.body({
@@ -760,8 +768,8 @@ export default [
 						],
 					}),
 					new card.footer({
+						class: "border-success",
 						color: "transparent",
-						bordercolor: "success",
 						elem: "Footer",
 					}),
 				],
@@ -838,12 +846,17 @@ export default [
 		title: "Card grid using {{row-cols-md-2}}",
 		sample: { "sample.cardwithimg": sample.cardwithimg },
 		code: function () {
-			return new div("row row-cols-1 row-cols-md-2 g-4", [
-				new div({ col: true, elem: sample.cardwithimg()[0] }),
-				new div({ col: true, elem: sample.cardwithimg()[1] }),
-				new div({ col: true, elem: sample.cardwithimg()[2] }),
-				new div({ col: true, elem: sample.cardwithimg()[3] }),
-			]);
+			return new div({
+				row: true,
+				rowcol: [1, "md-2"],
+				gap: 4,
+				elem: [
+					new div({ col: true, elem: sample.cardwithimg()[0] }),
+					new div({ col: true, elem: sample.cardwithimg()[1] }),
+					new div({ col: true, elem: sample.cardwithimg()[2] }),
+					new div({ col: true, elem: sample.cardwithimg()[3] }),
+				],
+			});
 		},
 	},
 
@@ -851,12 +864,17 @@ export default [
 		title: "Card grid using {{row-cols-md-3}}",
 		sample: { "sample.cardwithimg": sample.cardwithimg },
 		code: function () {
-			return new div("row row-cols-1 row-cols-md-3 g-4", [
-				new div({ col: true, elem: sample.cardwithimg()[0] }),
-				new div({ col: true, elem: sample.cardwithimg()[1] }),
-				new div({ col: true, elem: sample.cardwithimg()[2] }),
-				new div({ col: true, elem: sample.cardwithimg()[3] }),
-			]);
+			return new div({
+				row: true,
+				rowcol: [1, "md-3"],
+				gap: 4,
+				elem: [
+					new div({ col: true, elem: sample.cardwithimg()[0] }),
+					new div({ col: true, elem: sample.cardwithimg()[1] }),
+					new div({ col: true, elem: sample.cardwithimg()[2] }),
+					new div({ col: true, elem: sample.cardwithimg()[3] }),
+				],
+			});
 		},
 	},
 
@@ -864,31 +882,36 @@ export default [
 		title: "Card grid with {{h-100}} class",
 		sample: { "sample.img": sample.img, "sample.cardh100": sample.cardh100 },
 		code: function () {
-			return new div("row row-cols-1 row-cols-md-3 g-4", [
-				new div(
-					"col",
-					new card.container({
-						class: "h-100",
-						elem: [
-							new card.img({
-								placement: "top",
-								src: sample.img(),
-							}),
-							new card.body({
-								elem: [
-									new card.title({ elem: "Card Title" }),
-									new card.text({
-										elem: "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.",
-									}),
-								],
-							}),
-						],
-					})
-				),
-				new div({ col: true, elem: sample.cardh100()[0] }),
-				new div({ col: true, elem: sample.cardh100()[1] }),
-				new div({ col: true, elem: sample.cardh100()[2] }),
-			]);
+			return new div({
+				row: true,
+				rowcol: [1, "md-3"],
+				gap: 4,
+				elem: [
+					new div({
+						col: true,
+						elem: new card.container({
+							class: "h-100",
+							elem: [
+								new card.img({
+									placement: "top",
+									src: sample.img(),
+								}),
+								new card.body({
+									elem: [
+										new card.title({ elem: "Card Title" }),
+										new card.text({
+											elem: "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.",
+										}),
+									],
+								}),
+							],
+						}),
+					}),
+					new div({ col: true, elem: sample.cardh100()[0] }),
+					new div({ col: true, elem: sample.cardh100()[1] }),
+					new div({ col: true, elem: sample.cardh100()[2] }),
+				],
+			});
 		},
 	},
 
@@ -899,32 +922,37 @@ export default [
 			"sample.cardwithfooterh100": sample.cardwithfooterh100,
 		},
 		code: function () {
-			return new div("row row-cols-1 row-cols-md-3 g-4", [
-				new div(
-					"col",
-					new card.container({
-						class: "h-100",
-						elem: [
-							new card.img({
-								placement: "top",
-								src: sample.img(),
-							}),
-							new card.body({
-								elem: [
-									new card.title({ elem: "Card Title" }),
-									new card.text({
-										elem: "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.",
-									}),
-								],
-							}),
-							new card.footer({ elem: "Last updated 3 mins ago" }),
-						],
-					})
-				),
-				new div({ col: true, elem: sample.cardwithfooterh100()[0] }),
-				new div({ col: true, elem: sample.cardwithfooterh100()[1] }),
-				new div({ col: true, elem: sample.cardwithfooterh100()[2] }),
-			]);
+			return new div({
+				row: true,
+				rowcol: [1, "md-3"],
+				gap: 4,
+				elem: [
+					new div({
+						col: true,
+						elem: new card.container({
+							class: "h-100",
+							elem: [
+								new card.img({
+									placement: "top",
+									src: sample.img(),
+								}),
+								new card.body({
+									elem: [
+										new card.title({ elem: "Card Title" }),
+										new card.text({
+											elem: "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.",
+										}),
+									],
+								}),
+								new card.footer({ elem: "Last updated 3 mins ago" }),
+							],
+						}),
+					}),
+					new div({ col: true, elem: sample.cardwithfooterh100()[0] }),
+					new div({ col: true, elem: sample.cardwithfooterh100()[1] }),
+					new div({ col: true, elem: sample.cardwithfooterh100()[2] }),
+				],
+			});
 		},
 	},
 ];
