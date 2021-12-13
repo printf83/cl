@@ -1,3 +1,4 @@
+"use strict";
 import * as doc_core from "./core.js";
 import btngroup from "../base/btngroup.js";
 import btntoolbar from "../base/btntoolbar.js";

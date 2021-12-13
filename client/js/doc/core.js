@@ -1,3 +1,4 @@
+"use strict";
 import * as container from "../base/container.js";
 
 export function stackcontainer(elem) {

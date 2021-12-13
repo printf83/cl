@@ -1,3 +1,4 @@
+"use strict";
 import * as sample from "./sample.js";
 import carousel from "../base/carousel.js";
 

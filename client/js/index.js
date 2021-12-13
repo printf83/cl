@@ -19,7 +19,8 @@ import doc_breadcrumb from "./doc/breadcrumb.js";
 import doc_btngroup from "./doc/btngroup.js";
 import doc_card from "./doc/card.js";
 import doc_carousel from "./doc/carousel.js";
-
+import doc_btnclose from "./doc/btnclose.js";
+import doc_collapse from "./doc/collapse.js";
 let db_menu = [
 	{
 		type: "menu",
@@ -60,8 +61,8 @@ let db_menu = [
 			{ title: "Button group", source: doc_btngroup },
 			{ title: "Card", source: doc_card },
 			{ title: "Carosel", source: doc_carousel },
-			{ title: "Close button", source: null },
-			{ title: "Collapse", source: null },
+			{ title: "Close button", source: doc_btnclose },
+			{ title: "Collapse", source: doc_collapse },
 			{ title: "Dropdown", source: null },
 			{ title: "List group", source: null },
 			{ title: "Modal", source: null },
@@ -128,6 +129,7 @@ function gen_example(opt) {
 			anchor: true,
 			title: null,
 			msg: null,
+			dark: false,
 			option: null,
 			code: null,
 			sample: null,
@@ -166,6 +168,7 @@ function gen_example(opt) {
 		anchor: opt.anchor,
 		title: opt.title,
 		msg: m,
+		dark: opt.dark,
 		beautifyjs: beautifyjs,
 		beautifyhtml: beautifyhtml,
 		container: opt.container,
@@ -359,7 +362,7 @@ core.documentReady(() => {
 	cl.replaceChild(
 		document.getElementById("sidebar"),
 		new div({
-			elem: gen_menu("Components", "Carosel", null),
+			elem: gen_menu("Components", "Close button", null),
 		})
 	);
 
@@ -371,5 +374,5 @@ core.documentReady(() => {
 		})
 	);
 
-	gen_content("Components", "Carosel");
+	gen_content("Components", "Close button");
 });

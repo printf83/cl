@@ -1,3 +1,4 @@
+"use strict";
 import * as card from "../base/card.js";
 
 let imgindex = 0;

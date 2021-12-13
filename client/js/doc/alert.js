@@ -1,3 +1,4 @@
+"use strict";
 import * as alert from "../base/alert.js";
 import p from "../base/p.js";
 import hr from "../base/hr.js";

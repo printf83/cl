@@ -148,6 +148,7 @@ export default class example extends div {
 					? new card.container({
 							rounded: ["top", "0"],
 							border: "bottom-0",
+							color: opt.dark ? "dark" : null,
 							elem: new card.body({ elem: opt.container(opt.code()) }),
 					  })
 					: null,

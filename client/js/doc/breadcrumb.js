@@ -1,3 +1,4 @@
+"use strict";
 import breadcrumb from "../base/breadcrumb.js";
 
 export default [
