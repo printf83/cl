@@ -21,7 +21,13 @@ import doc_card from "./doc/card.js";
 import doc_carousel from "./doc/carousel.js";
 import doc_btnclose from "./doc/btnclose.js";
 import doc_collapse from "./doc/collapse.js";
-let db_menu = [
+import doc_dropdown from "./doc/dropdown.js";
+
+const def_m1 = "Components";
+const def_m2 = "Dropdown";
+const def_theme = "journal";
+
+const db_menu = [
 	{
 		type: "menu",
 		title: "Getting started",
@@ -63,7 +69,7 @@ let db_menu = [
 			{ title: "Carosel", source: doc_carousel },
 			{ title: "Close button", source: doc_btnclose },
 			{ title: "Collapse", source: doc_collapse },
-			{ title: "Dropdown", source: null },
+			{ title: "Dropdown", source: doc_dropdown },
 			{ title: "List group", source: null },
 			{ title: "Modal", source: null },
 			{ title: "Tab", source: null },
@@ -362,7 +368,7 @@ core.documentReady(() => {
 	cl.replaceChild(
 		document.getElementById("sidebar"),
 		new div({
-			elem: gen_menu("Components", "Close button", null),
+			elem: gen_menu(def_m1, def_m2, def_theme),
 		})
 	);
 
@@ -374,5 +380,5 @@ core.documentReady(() => {
 		})
 	);
 
-	gen_content("Components", "Close button");
+	gen_content(def_m1, def_m2);
 });
