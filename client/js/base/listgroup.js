@@ -60,7 +60,7 @@ export class container extends tag {
 		opt.class = core.merge.class(opt.class, [
 			"list-group",
 			opt.flush ? "list-group-flush" : null,
-			opt.numbered ? "list-group-numbered" : null,
+			opt.type === "ol" ? "list-group-numbered" : null,
 			core.multiClass(opt.horizontal, "list-group-$1", null, "horizontal"),
 		]);
 
@@ -103,6 +103,8 @@ export class item extends tag {
 				type: opt.type === "switch" ? "checkbox" : opt.type,
 			});
 
+			delete ctl.color;
+
 			opt = {
 				tag: "label",
 				class: core.merge.class(opt.class, [
@@ -113,7 +115,7 @@ export class item extends tag {
 					opt.color ? `list-group-item-${opt.color}` : null,
 				]),
 				attr: core.merge.attr(opt.attr, { disabled: !opt.href && opt.disabled ? "" : null }),
-				elem: [new tag(ctl)],
+				elem: [new tag(ctl), opt.label],
 			};
 		} else {
 			opt.tag = opt.href ? "a" : opt.onclick instanceof Function ? "button" : "li";
@@ -139,6 +141,7 @@ export class item extends tag {
 		delete opt.action;
 		delete opt.value;
 		delete opt.checked;
+		delete opt.color;
 
 		super.data = opt;
 	}

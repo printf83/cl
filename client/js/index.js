@@ -22,9 +22,10 @@ import doc_carousel from "./doc/carousel.js";
 import doc_btnclose from "./doc/btnclose.js";
 import doc_collapse from "./doc/collapse.js";
 import doc_dropdown from "./doc/dropdown.js";
+import doc_listgroup from "./doc/listgroup.js";
 
 const def_m1 = "Components";
-const def_m2 = "Dropdown";
+const def_m2 = "List group";
 const def_theme = "journal";
 
 const db_menu = [
@@ -70,7 +71,7 @@ const db_menu = [
 			{ title: "Close button", source: doc_btnclose },
 			{ title: "Collapse", source: doc_collapse },
 			{ title: "Dropdown", source: doc_dropdown },
-			{ title: "List group", source: null },
+			{ title: "List group", source: doc_listgroup },
 			{ title: "Modal", source: null },
 			{ title: "Tab", source: null },
 			{ title: "Navbar", source: null },

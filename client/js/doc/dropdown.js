@@ -165,8 +165,7 @@ export default [
 			return new navbar.container({
 				expand: "lg",
 				color: "dark",
-				light: "dark",
-				href: "javascript:void(0);",
+				textcolor: "light",
 				elem: [
 					new navbar.toggle({
 						id,
@@ -452,10 +451,14 @@ export default [
 					color: "secondary",
 					option: [
 						{
-							elem: new div("text-muted p-4", null, { width: "200px" }, [
-								new p("Some example text that's free-flowing within the dropdown menu."),
-								new p("mb-0", "And this is more example text."),
-							]),
+							elem: new div({
+								class: "text-muted p-4",
+								style: { width: "200px" },
+								elem: [
+									new p({ elem: "Some example text that's free-flowing within the dropdown menu." }),
+									new p({ marginBottom: 0, elem: "And this is more example text." }),
+								],
+							}),
 						},
 					],
 				}),
@@ -473,29 +476,35 @@ export default [
 					autoclose: "outside",
 					option: [
 						{
-							elem: new div("p-3 row row-cols-1 g-3", [
-								new input({
-									size: "col",
-									type: "email",
-									label: "Email address",
-									placeholder: "email@example.com",
-								}),
-								new input({
-									size: "col",
-									type: "password",
-									label: "Password",
-									placeholder: "Password",
-								}),
-								new input({ size: "col", type: "checkbox", label: "Remember me" }),
-								new div(
-									"col",
-									new button({
-										type: "submit",
-										color: "primary",
-										label: "Sign in",
-									})
-								),
-							]),
+							elem: new div({
+								padding: 3,
+								gap: 3,
+								row: true,
+								rowcol: 1,
+								elem: [
+									new input({
+										size: "col",
+										type: "email",
+										label: "Email address",
+										placeholder: "email@example.com",
+									}),
+									new input({
+										size: "col",
+										type: "password",
+										label: "Password",
+										placeholder: "Password",
+									}),
+									new input({ size: "col", type: "checkbox", label: "Remember me" }),
+									new div({
+										col: true,
+										elem: new button({
+											type: "submit",
+											color: "primary",
+											label: "Sign in",
+										}),
+									}),
+								],
+							}),
 						},
 						{ value: "-" },
 						{ href: "javascript:void(0)", label: "New around here? Sign up" },
@@ -555,7 +564,7 @@ export default [
 				new dropdown({
 					label: "Manual close",
 					color: "secondary",
-					autoclose: false,
+					autoclose: "false",
 					option: sample.dropdownitem(),
 				}),
 			];

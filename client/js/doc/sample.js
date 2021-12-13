@@ -1,5 +1,8 @@
 "use strict";
 import * as card from "../base/card.js";
+import * as listgroup from "../base/listgroup.js";
+import div from "../base/div.js";
+import badge from "../base/badge.js";
 
 let imgindex = 0;
 let textindex = 0;
@@ -301,5 +304,42 @@ export function cardwithfooterh100() {
 				new card.footer({ elem: "Last updated 3 mins ago" }),
 			],
 		}),
+	];
+}
+
+export function listgroupitem() {
+	return [
+		new listgroup.item({ elem: "An item" }),
+		new listgroup.item({ elem: "A second item" }),
+		new listgroup.item({ elem: "A third item" }),
+		new listgroup.item({ elem: "A fourth item" }),
+		new listgroup.item({ elem: "And a fifth one" }),
+	];
+}
+
+export function listgroupitemcustomcontent() {
+	return new div({
+		display: "flex",
+		justifyContent: "between",
+		alignItem: "start",
+		elem: [
+			new div({
+				class: "ms-2 me-auto",
+				elem: [new div({ class: "fw-bold", elem: "Subheading" }), "Cras justo odio"],
+			}),
+			new badge({
+				pill: true,
+				color: "primary",
+				label: "14",
+			}),
+		],
+	});
+}
+
+export function listgroupitem3() {
+	return [
+		new listgroup.item({ elem: "An item" }),
+		new listgroup.item({ elem: "A second item" }),
+		new listgroup.item({ elem: "A third item" }),
 	];
 }

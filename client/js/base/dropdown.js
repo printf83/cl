@@ -96,13 +96,7 @@ export default class dropdown extends tag {
 				super.data = {
 					tag: opt.container ? "div" : null,
 					class: opt.container ? [opt.container, opt.arrow ? `drop${opt.arrow}` : null] : null,
-					elem: opt.splittoggle
-						? new btngroup({
-								weight: opt.weight,
-								vertical: opt.vertical,
-								elem: [btnctl, splitctl, menuctl],
-						  })
-						: [btnctl, menuctl],
+					elem: [btnctl, splitctl, menuctl],
 				};
 			}
 		}
