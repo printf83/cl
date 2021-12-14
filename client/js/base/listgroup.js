@@ -134,7 +134,7 @@ export class item extends tag {
 				"list-group-item",
 				opt.active ? "active" : null,
 				opt.disabled ? "disabled" : null,
-				opt.action ? "list-group-item-action" : null,
+				opt.action || opt.tag === "a" || opt.tag === "button" ? "list-group-item-action" : null,
 				opt.color ? `list-group-item-${opt.color}` : null,
 			]);
 
