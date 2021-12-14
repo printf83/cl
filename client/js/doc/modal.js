@@ -12,6 +12,7 @@ import input from "../base/input.js";
 import a from "../base/a.js";
 import h from "../base/h.js";
 import hr from "../base/hr.js";
+import tooltip from "../base/tooltip.js";
 
 export default [
 	{
@@ -581,6 +582,7 @@ export default [
 						animate: false,
 						title: "Modal title",
 						elem: "Dialog without fade effect",
+						button: "Okay",
 					}).show();
 				},
 			});

@@ -105,8 +105,11 @@ export class item extends tag {
 
 			ctl.attr = core.merge.attr(ctl.attr, {
 				type: opt.type === "switch" ? "checkbox" : opt.type,
+				checked: opt.checked,
 			});
 
+			delete opt.type;
+			delete ctl.checked;
 			delete ctl.color;
 
 			opt = {
