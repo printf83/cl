@@ -25,7 +25,7 @@ import doc_dropdown from "./doc/dropdown.js";
 import doc_listgroup from "./doc/listgroup.js";
 
 const def_m1 = "Components";
-const def_m2 = "List group";
+const def_m2 = "Button";
 const def_theme = "journal";
 
 const db_menu = [

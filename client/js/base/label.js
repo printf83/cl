@@ -3,6 +3,7 @@ import * as core from "./core.js";
 import tag from "./tag.js";
 import span from "./span.js";
 import icon from "./icon.js";
+import { container } from "./listgroup.js";
 
 const defaultOption = {
 	tag: "label",
@@ -27,26 +28,41 @@ export default class label extends tag {
 		if (opt) {
 			opt = core.extend({}, defaultOption, opt);
 
-			opt.attr = core.merge.attr(opt.attr, {
-				for: opt.for,
-			});
+			if (opt.for) {
+				opt.attr = core.merge.attr(opt.attr, {
+					for: opt.for,
+				});
 
-			opt.elem = opt.elem || [
-				opt.icon
-					? new span({ marginEnd: opt.label && !opt.hidelabel ? 2 : null, elem: new icon(opt.icon) })
-					: null,
-				opt.label
-					? opt.hidelabel
-						? new span({ class: "visually-hidden", elem: opt.label })
-						: opt.label
-					: null,
-			];
+				opt.elem = opt.elem || [
+					opt.icon
+						? new span({ marginEnd: opt.label && !opt.hidelabel ? 2 : null, elem: new icon(opt.icon) })
+						: null,
+					opt.label
+						? opt.hidelabel
+							? new span({ class: "visually-hidden", elem: opt.label })
+							: opt.label
+						: null,
+				];
 
-			delete opt.for;
-			delete opt.icon;
-			delete opt.label;
+				delete opt.for;
+				delete opt.icon;
+				delete opt.label;
 
-			super.data = opt;
+				super.data = opt;
+			} else {
+				super.data = {
+					elem: opt.elem || [
+						opt.icon
+							? new span({ marginEnd: opt.label && !opt.hidelabel ? 2 : null, elem: new icon(opt.icon) })
+							: null,
+						opt.label
+							? opt.hidelabel
+								? new span({ class: "visually-hidden", elem: opt.label })
+								: opt.label
+							: null,
+					],
+				};
+			}
 		}
 	}
 }

@@ -45,7 +45,7 @@ export default class button extends tag {
 			if (bI) {
 				opt.icon = {
 					icon: bI.icon,
-					style: bI.style,
+					type: bI.type,
 				};
 
 				opt.color = opt.color || bI.color;
@@ -78,22 +78,25 @@ export default class button extends tag {
 
 			let m = null;
 			if (opt.type === "checkbox" || opt.type === "radio") {
-				opt.id = opt.id || core.UUID();
-
 				m = core.extend({}, opt);
+				m.id = m.id || core.UUID();
+				opt.id = m.id;
 
-				m = new tag({
-					tag: "input",
-					class: "btn-check",
-					id: opt.id,
-					name: opt.name,
-					attr: { autocomplete: "off", type: opt.type },
+				m.tag = "input";
+				m.class = core.merge.class(m.class, "btn-check");
+				m.attr = core.merge.attr(m.attr, {
+					autocomplete: "off",
+					type: m.type,
 				});
 
-				opt.attr = core.merge.attr(opt.attr, { for: opt.id });
-				opt.tag = "label";
+				m = new tag(m);
 
-				opt.elem = [opt.icon ? new icon(opt.icon) : null, opt.label, opt.badge ? new badge(opt.badge) : null];
+				opt.tag = "label";
+				opt.attr = core.merge.attr(opt.attr, { for: opt.id });
+				opt.elem = [
+					new label({ icon: opt.icon, label: opt.label, hidelabel: opt.hidelabel }),
+					opt.badge ? new badge(opt.badge) : null,
+				];
 
 				delete opt.id;
 				delete opt.name;
@@ -102,7 +105,11 @@ export default class button extends tag {
 					? opt.elem
 					: [
 							opt.label || opt.icon
-								? new label({ icon: opt.icon, label: opt.label, hidelabel: opt.hidelabel })
+								? new label({
+										icon: opt.icon,
+										label: opt.label,
+										hidelabel: opt.hidelabel,
+								  })
 								: null,
 							opt.badge ? new badge(opt.badge) : null,
 					  ];
