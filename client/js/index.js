@@ -9,6 +9,7 @@ import menu from "./base/menu.js";
 import toc from "./base/toc.js";
 import code from "./base/code.js";
 import msg from "./base/msg.js";
+import * as dlg from "./base/dlg.js";
 
 import * as sample from "./doc/sample.js";
 import doc_button from "./doc/button.js";

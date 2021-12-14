@@ -1,7 +1,7 @@
 "use strict";
 import * as card from "../base/card.js";
 import * as listgroup from "../base/listgroup.js";
-import * as dlg from "../base/dlg.js";
+import toast from "../base/toast.js";
 import input from "../base/input.js";
 import * as container from "../base/container.js";
 import modal from "../base/modal.js";
@@ -91,7 +91,7 @@ export function form() {
 					name: "sex",
 					value: "s",
 					label: "Secret",
-					active: true,
+					checked: true,
 				}),
 				new listgroup.item({
 					type: "radio",
@@ -443,9 +443,9 @@ export function listgroupitem3() {
 }
 
 export function dlgFn(recipient) {
-	new dlg.box({
+	new modal({
 		title: "Modal title",
-		elem: new cont.singlecolumn([
+		elem: new container.form([
 			new input({
 				type: "text",
 				name: "recipient",
@@ -459,44 +459,32 @@ export function dlgFn(recipient) {
 				value: "",
 			}),
 		]),
-		button: "sendmessageclose",
-	})
-		.then((data) => {
-			new toast("i", `Result from dialog is <b>${JSON.stringify(data)}</b>`);
-		})
-		.catch(() => {});
-}
-
-export function dlgFirstModal() {
-	new dlg.box({
-		title: "Modal 1",
-		elem: "Show a second modal and close this one with the button below.",
-		button: [{ label: "Show second modal", onclick: "ex.sample.dlgSecondModal()" }],
-	});
-}
-
-export function dlgSecondModal() {
-	new dlg.box({
-		title: "Modal 2",
-		elem: "Close this modal and show the first with the button below.",
-		button: [{ label: "Show first modal", onclick: "ex.sample.dlgFirstModal()" }],
-	});
+		button: [
+			{
+				label: "Send message",
+				onclick: function (event, data) {
+					new toast("i", `Result from dialog is <b>${JSON.stringify(data)}</b>`).show();
+				},
+			},
+			"Close",
+		],
+	}).show();
 }
 
 export function dlgFullscreenFn(fullscreen) {
-	new dlg.box({
+	new modal({
 		fullscreen: fullscreen,
 		title: "Modal title",
 		elem: `Dialog with {{fullscreen : <b>${fullscreen}</b>}} option`,
-		button: "okayonly",
-	});
+		button: ["Okay"],
+	}).show();
 }
 
 export function dlgSizeFn(size) {
-	new dlg.box({
+	new modal({
 		size: size,
 		title: "Modal title",
 		elem: `Dialog with {{size : <b>${size}</b>}} option`,
-		button: "okayonly",
-	});
+		button: ["Okay"],
+	}).show();
 }

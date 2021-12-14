@@ -227,7 +227,6 @@ export default class modal extends div {
 			super.data = {
 				id: opt.id,
 				name: opt.name,
-
 				class: core.merge.class(opt.class, [
 					"modal",
 					opt.animate && !opt.debug && "fade",
@@ -301,7 +300,7 @@ export default class modal extends div {
 
 				//remove show from backdrop
 				if (amdl[amdl.length - 2].dataset.bsBackdrop === "static") {
-					amdl[amdl.length - 2].nextSibling.classList.remove("show");
+					amdl[amdl.length - 2].nextSibling?.classList.remove("show");
 				}
 			}
 		}
@@ -328,7 +327,7 @@ export default class modal extends div {
 
 					//add show backdrop
 					if (amdl[amdl.length - 2].dataset.bsBackdrop === "static") {
-						amdl[amdl.length - 2].nextSibling.classList.add("show");
+						amdl[amdl.length - 2].nextSibling?.classList.add("show");
 					}
 				}
 			}

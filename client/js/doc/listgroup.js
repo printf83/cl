@@ -328,7 +328,7 @@ export default [
 						type: "checkbox",
 						value: "2",
 						label: "Second checkbox",
-						active: true,
+						checked: true,
 					}),
 					new listgroup.item({
 						type: "checkbox",
@@ -340,7 +340,6 @@ export default [
 						type: "checkbox",
 						value: "4",
 						label: "Fourth checkbox",
-						color: "primary",
 					}),
 					new listgroup.item({ type: "checkbox", value: "5", label: "Fifth checkbox" }),
 				],
@@ -365,7 +364,7 @@ export default [
 						name: "g10",
 						value: "2",
 						label: "Second radio",
-						active: true,
+						checked: true,
 					}),
 					new listgroup.item({
 						type: "radio",
@@ -379,7 +378,6 @@ export default [
 						name: "g10",
 						value: "4",
 						label: "Fourth radio",
-						color: "primary",
 					}),
 					new listgroup.item({
 						type: "radio",
@@ -403,7 +401,7 @@ export default [
 						type: "switch",
 						value: "2",
 						label: "Second switch",
-						active: true,
+						checked: true,
 					}),
 					new listgroup.item({
 						type: "switch",
@@ -415,7 +413,6 @@ export default [
 						type: "switch",
 						value: "4",
 						label: "Fourth switch",
-						color: "primary",
 					}),
 					new listgroup.item({ type: "switch", value: "5", label: "Fifth switch" }),
 				],

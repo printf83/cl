@@ -24,7 +24,7 @@ export function capitalize(str) {
 }
 
 const _baseIcon = {
-	i: { icon: "info-circle", type: "fas", color: "info" },
+	i: { icon: "info-circle", type: "fas", color: "primary" },
 	"!": { icon: "exclamation-triangle", type: "fas", color: "warning" },
 	"!!": { icon: "exclamation-triangle", type: "fas", color: "danger" },
 	"?": { icon: "question-circle", type: "fas", color: "success" },

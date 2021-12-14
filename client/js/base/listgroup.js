@@ -38,7 +38,7 @@ export class container extends tag {
 		let ctllabel = null;
 
 		if (opt.label) {
-			opt.id = opt.id || ns.core.UUID();
+			opt.id = opt.id || core.UUID();
 
 			ctllabel = new label({
 				class: "form-label",
