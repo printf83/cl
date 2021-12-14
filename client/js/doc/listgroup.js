@@ -139,16 +139,35 @@ export default [
 			return new listgroup.container({
 				type: "ol",
 				elem: [
-					new listgroup.item({ elem: sample.listgroupitemcustomcontent() }),
-					new listgroup.item({ elem: sample.listgroupitemcustomcontent() }),
-					new listgroup.item({ elem: sample.listgroupitemcustomcontent() }),
+					new listgroup.item({
+						display: "flex",
+						justifyContent: "between",
+						alignItem: "start",
+						elem: sample.listgroupitemcustomcontent(),
+					}),
+					new listgroup.item({
+						display: "flex",
+						justifyContent: "between",
+						alignItem: "start",
+						elem: sample.listgroupitemcustomcontent(),
+					}),
+					new listgroup.item({
+						display: "flex",
+						justifyContent: "between",
+						alignItem: "start",
+						elem: sample.listgroupitemcustomcontent(),
+					}),
 				],
 			});
 		},
 	},
 
 	{
-		title: "Numbered custom content",
+		title: "Horizontal",
+		msg: [
+			"Add {{.list-group-horizontal}} to change the layout of list group items from vertical to horizontal across all breakpoints. Alternatively, choose a responsive variant {{.list-group-horizontal-{sm|md|lg|xl|xxl} }}to make a list group horizontal starting at that breakpoint’s {{min-width}}. Currently <b>horizontal list groups cannot be combined with flush list groups.</b>",
+			"<b>ProTip:</b> Want equal-width list group items when horizontal? Add {{.flex-fill}} to each list group item.",
+		],
 		container: doc_core.stackcontainer,
 		sample: { "sample.listgroupitem3": sample.listgroupitem3 },
 		code: function () {
@@ -270,17 +289,17 @@ export default [
 							class: "w-100",
 							display: "flex",
 							justifyContent: "between",
-							else: [
+							elem: [
 								new h({ level: 5, marginBottom: 1, elem: title }),
 								new small({
-									color: !active ? "muted" : null,
+									textcolor: !active ? "muted" : null,
 									elem: `${days} days ago`,
 								}),
 							],
 						}),
 						new p({ marginBottom: 1, elem: "Some placeholder content in a paragraph." }),
 						new small({
-							color: !active ? "muted" : null,
+							textcolor: !active ? "muted" : null,
 							elem: `And some${!active ? " muted" : ""} small print.`,
 						}),
 					],

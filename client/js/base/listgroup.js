@@ -61,7 +61,11 @@ export class container extends tag {
 			"list-group",
 			opt.flush ? "list-group-flush" : null,
 			opt.type === "ol" ? "list-group-numbered" : null,
-			core.multiClass(opt.horizontal, "list-group-$1", null, "horizontal"),
+			opt.horizontal === true
+				? "horizontal"
+				: opt.horizontal === false
+				? null
+				: core.multiClass(opt.horizontal, "list-group-horizontal-$1"),
 		]);
 
 		delete opt.type;
@@ -110,11 +114,17 @@ export class item extends tag {
 				class: core.merge.class(opt.class, [
 					"list-group-item",
 					opt.type === "switch" ? "form-switch" : null,
+					opt.active ? "active" : null,
 					opt.disabled ? "disabled" : null,
 					opt.action ? "list-group-item-action" : null,
 					opt.color ? `list-group-item-${opt.color}` : null,
 				]),
-				attr: core.merge.attr(opt.attr, { disabled: !opt.href && opt.disabled ? "" : null }),
+				attr: core.merge.attr(opt.attr, {
+					disabled: !opt.href && opt.disabled ? "" : null,
+					tabindex: opt.href && opt.disabled ? "-1" : null,
+					"aria-disabled": opt.href && opt.disabled ? "true" : null,
+					"aria-current": opt.active ? "true" : null,
+				}),
 				elem: [new tag(ctl), opt.label],
 			};
 		} else {
@@ -132,6 +142,7 @@ export class item extends tag {
 				disabled: !opt.href && opt.disabled ? "" : null,
 				tabindex: opt.href && opt.disabled ? "-1" : null,
 				"aria-disabled": opt.href && opt.disabled ? "true" : null,
+				"aria-current": opt.active ? "true" : null,
 			});
 		}
 

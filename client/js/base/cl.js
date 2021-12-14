@@ -97,7 +97,8 @@ function build(container, arg) {
 				element = attachAttr(element, e.data.attr);
 
 				if (e.data.elem) {
-					if (typeof e.data.elem === "string") {
+					let elemType = typeof e.data.elem;
+					if (elemType === "string" || elemType === "number" || elemType === "boolean") {
 						if (core.isHTML(e.data.elem) && e.data.tag !== "pre") {
 							element.insertAdjacentHTML("beforeend", e.data.elem);
 						} else {
@@ -107,7 +108,8 @@ function build(container, arg) {
 						if (Array.isArray(e.data.elem)) {
 							e.data.elem.forEach(function (i) {
 								if (i) {
-									if (typeof i === "string") {
+									let iElemType = typeof i;
+									if (iElemType === "string" || iElemType === "number" || iElemType === "boolean") {
 										if (core.isHTML(i) && e.data.tag !== "pre") {
 											element.insertAdjacentHTML("beforeend", i);
 										} else {
@@ -126,7 +128,7 @@ function build(container, arg) {
 										let t = build(element, i);
 										element = t ? t : element;
 									} else {
-										console.info("i is not elem or [elem] or string", i);
+										console.info("i is not elem or [elem] or string or number or boolean", i);
 									}
 								}
 							});

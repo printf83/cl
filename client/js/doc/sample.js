@@ -318,22 +318,17 @@ export function listgroupitem() {
 }
 
 export function listgroupitemcustomcontent() {
-	return new div({
-		display: "flex",
-		justifyContent: "between",
-		alignItem: "start",
-		elem: [
-			new div({
-				class: "ms-2 me-auto",
-				elem: [new div({ class: "fw-bold", elem: "Subheading" }), "Cras justo odio"],
-			}),
-			new badge({
-				pill: true,
-				color: "primary",
-				label: "14",
-			}),
-		],
-	});
+	return [
+		new div({
+			class: "ms-2 me-auto",
+			elem: [new div({ class: "fw-bold", elem: "Subheading" }), "Cras justo odio"],
+		}),
+		new badge({
+			pill: true,
+			color: "primary",
+			label: "14",
+		}),
+	];
 }
 
 export function listgroupitem3() {
