@@ -1,6 +1,10 @@
 "use strict";
 import * as card from "../base/card.js";
 import * as listgroup from "../base/listgroup.js";
+import * as dlg from "../base/dlg.js";
+import input from "../base/input.js";
+import * as container from "../base/container.js";
+import modal from "../base/modal.js";
 import div from "../base/div.js";
 import badge from "../base/badge.js";
 
@@ -31,6 +35,15 @@ export function text() {
 	return textdb[textindex++];
 }
 
+export function optionitem() {
+	return [
+		{ value: "", label: "Open this select menu", selected: true },
+		{ value: "1", label: "One" },
+		{ value: "2", label: "Two" },
+		{ value: "3", label: "Three" },
+	];
+}
+
 export function dropdownitem() {
 	return [
 		{ href: "#", label: "Action" },
@@ -48,6 +61,96 @@ export function dropdownitem() {
 			label: "Separated link",
 		},
 	];
+}
+
+export function form() {
+	return new container.form([
+		new input({
+			label: "Name",
+			required: true,
+			invalid: "Please provide name",
+			name: "name",
+			type: "text",
+		}),
+		new input({
+			label: "Age",
+			required: true,
+			invalid: "Please provide age",
+			name: "age",
+			type: "number",
+			min: 13,
+			max: 100,
+			after: "Years old",
+		}),
+		new listgroup.container({
+			label: "Sex",
+			type: "div",
+			elem: [
+				new listgroup.item({
+					type: "radio",
+					name: "sex",
+					value: "s",
+					label: "Secret",
+					active: true,
+				}),
+				new listgroup.item({
+					type: "radio",
+					name: "sex",
+					value: "m",
+					label: "Male",
+				}),
+				new listgroup.item({
+					type: "radio",
+					name: "sex",
+					value: "f",
+					label: "Female",
+				}),
+			],
+		}),
+		new listgroup.container({
+			label: "Interest",
+			type: "div",
+			elem: [
+				new listgroup.item({
+					type: "checkbox",
+					name: "interest",
+					value: "sports",
+					label: "Sports",
+				}),
+				new listgroup.item({
+					type: "checkbox",
+					name: "interest",
+					value: "business",
+					label: "Business",
+				}),
+				new listgroup.item({
+					type: "checkbox",
+					name: "interest",
+					value: "social",
+					label: "Social",
+				}),
+				new listgroup.item({
+					type: "checkbox",
+					name: "interest",
+					value: "internet",
+					label: "Internet",
+				}),
+			],
+		}),
+		new input({
+			label: "Country",
+			required: true,
+			invalid: "Please choose country",
+			name: "country",
+			type: "select",
+			option: [
+				{ value: "", label: "" },
+				{ value: "my", label: "Malaysia" },
+				{ value: "in", label: "Indonesia" },
+				{ value: "sg", label: "Singapore" },
+			],
+		}),
+	]);
 }
 
 export function accordionitem() {
@@ -337,4 +440,63 @@ export function listgroupitem3() {
 		new listgroup.item({ elem: "A second item" }),
 		new listgroup.item({ elem: "A third item" }),
 	];
+}
+
+export function dlgFn(recipient) {
+	new dlg.box({
+		title: "Modal title",
+		elem: new cont.singlecolumn([
+			new input({
+				type: "text",
+				name: "recipient",
+				label: "Recipient:",
+				value: recipient,
+			}),
+			new input({
+				type: "textarea",
+				name: "message",
+				label: "Message:",
+				value: "",
+			}),
+		]),
+		button: "sendmessageclose",
+	})
+		.then((data) => {
+			new toast("i", `Result from dialog is <b>${JSON.stringify(data)}</b>`);
+		})
+		.catch(() => {});
+}
+
+export function dlgFirstModal() {
+	new dlg.box({
+		title: "Modal 1",
+		elem: "Show a second modal and close this one with the button below.",
+		button: [{ label: "Show second modal", onclick: "ex.sample.dlgSecondModal()" }],
+	});
+}
+
+export function dlgSecondModal() {
+	new dlg.box({
+		title: "Modal 2",
+		elem: "Close this modal and show the first with the button below.",
+		button: [{ label: "Show first modal", onclick: "ex.sample.dlgFirstModal()" }],
+	});
+}
+
+export function dlgFullscreenFn(fullscreen) {
+	new dlg.box({
+		fullscreen: fullscreen,
+		title: "Modal title",
+		elem: `Dialog with {{fullscreen : <b>${fullscreen}</b>}} option`,
+		button: "okayonly",
+	});
+}
+
+export function dlgSizeFn(size) {
+	new dlg.box({
+		size: size,
+		title: "Modal title",
+		elem: `Dialog with {{size : <b>${size}</b>}} option`,
+		button: "okayonly",
+	});
 }

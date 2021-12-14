@@ -23,9 +23,10 @@ import doc_btnclose from "./doc/btnclose.js";
 import doc_collapse from "./doc/collapse.js";
 import doc_dropdown from "./doc/dropdown.js";
 import doc_listgroup from "./doc/listgroup.js";
+import doc_modal from "./doc/modal.js";
 
 const def_m1 = "Components";
-const def_m2 = "Button";
+const def_m2 = "Modal";
 const def_theme = "journal";
 
 const db_menu = [
@@ -72,7 +73,7 @@ const db_menu = [
 			{ title: "Collapse", source: doc_collapse },
 			{ title: "Dropdown", source: doc_dropdown },
 			{ title: "List group", source: doc_listgroup },
-			{ title: "Modal", source: null },
+			{ title: "Modal", source: doc_modal },
 			{ title: "Tab", source: null },
 			{ title: "Navbar", source: null },
 			{ title: "Offcanvas", source: null },
