@@ -1,4 +1,5 @@
 "use strict";
+import * as doc_core from "./core.js";
 import breadcrumb from "../base/breadcrumb.js";
 
 export default [
@@ -10,6 +11,7 @@ export default [
 
 	{
 		title: "Example",
+		container: doc_core.formcontainer,
 		code: function () {
 			return [
 				new breadcrumb({
@@ -22,6 +24,11 @@ export default [
 					],
 				}),
 				new breadcrumb({
+					color: "light",
+					border: true,
+					bordercolor: "primary",
+					rounded: true,
+					padding: 2,
 					item: [
 						{ label: "Home", href: "#" },
 						{ label: "Library", href: "#" },

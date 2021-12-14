@@ -83,7 +83,7 @@ export default class button extends tag {
 				opt.id = m.id;
 
 				m.tag = "input";
-				m.class = core.merge.class(m.class, "btn-check");
+				m.class = "btn-check";
 				m.attr = core.merge.attr(m.attr, {
 					autocomplete: "off",
 					type: m.type,

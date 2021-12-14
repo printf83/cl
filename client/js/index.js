@@ -264,19 +264,22 @@ function gen_content(m1, m2) {
 		} else if (m.type === "navigate") {
 			window.location = m.source;
 		} else if (m.type === "theme") {
-			let cltheme = document.getElementById("nstheme");
-			if (m.source) {
-				cltheme.href = `https://cdn.jsdelivr.net/npm/bootswatch@5.1.1/dist/${m.source}/bootstrap.min.css`;
-				cltheme.removeAttribute("disabled");
-			} else {
-				cltheme.setAttribute("disabled", "disabled");
-			}
+			set_theme(m.source);
 		} else {
 			console.warn("Unsupported type", m);
 		}
 	}
 }
 
+function set_theme(theme) {
+	let cltheme = document.getElementById("nstheme");
+	if (theme) {
+		cltheme.href = `https://cdn.jsdelivr.net/npm/bootswatch@5.1.1/dist/${theme}/bootstrap.min.css`;
+		cltheme.removeAttribute("disabled");
+	} else {
+		cltheme.setAttribute("disabled", "disabled");
+	}
+}
 function gen_toc() {
 	let li = [];
 	let anchor = [].slice.call(document.getElementById("root").getElementsByClassName("anchorjs-link"));
@@ -384,4 +387,5 @@ core.documentReady(() => {
 	);
 
 	gen_content(def_m1, def_m2);
+	set_theme(def_theme);
 });
