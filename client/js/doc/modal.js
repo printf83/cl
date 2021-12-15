@@ -28,7 +28,7 @@ export default [
 	{
 		title: "Simple msgbox components",
 		msg: "Below is a static modal example (meaning its position and display have been overridden). Included are the modal header, modal body (required for padding), and modal footer (optional). We ask that you include modal headers with dismiss actions whenever possible, or provide another explicit dismiss action.",
-		viewclass: "ns-modal-preview",
+		viewclass: "cl-modal-preview",
 		code: function () {
 			return new modal({
 				title: "Modal Title",
@@ -74,7 +74,7 @@ export default [
 	{
 		title: "Simple inputbox components",
 		msg: "Below is a static modal example (meaning its position and display have been overridden). Included are the modal header, modal body (required for padding), and modal footer (optional). We ask that you include modal headers with dismiss actions whenever possible, or provide another explicit dismiss action.",
-		viewclass: "ns-modal-preview",
+		viewclass: "cl-modal-preview",
 		code: function () {
 			return new dlg.inputbox(
 				"text",
@@ -90,7 +90,7 @@ export default [
 	{
 		title: "Simple inputbox components with select",
 		msg: "Below is a static modal example (meaning its position and display have been overridden). Included are the modal header, modal body (required for padding), and modal footer (optional). We ask that you include modal headers with dismiss actions whenever possible, or provide another explicit dismiss action.",
-		viewclass: "ns-modal-preview",
+		viewclass: "cl-modal-preview",
 		code: function () {
 			return new dlg.inputbox(
 				new input({ type: "select", option: sample.optionitem(), name: "value" }),
@@ -142,7 +142,7 @@ export default [
 	{
 		title: "Inputbox with multiple input",
 		msg: "Below is a static modal example (meaning its position and display have been overridden). Included are the modal header, modal body (required for padding), and modal footer (optional). We ask that you include modal headers with dismiss actions whenever possible, or provide another explicit dismiss action.",
-		viewclass: "ns-modal-preview",
+		viewclass: "cl-modal-preview",
 		sample: { "sample.form": sample.form },
 		code: function () {
 			return new dlg.inputbox(
@@ -182,11 +182,11 @@ export default [
 	{
 		title: "Confirmbox",
 		msg: "Below is a static modal example (meaning its position and display have been overridden). Included are the modal header, modal body (required for padding), and modal footer (optional). We ask that you include modal headers with dismiss actions whenever possible, or provide another explicit dismiss action.",
-		viewclass: "ns-modal-preview",
+		viewclass: "cl-modal-preview",
 		code: function () {
 			return new dlg.confirmbox(
 				"?",
-				"This is example msgbox with <b>yesno</b> button",
+				"This is example msgbox with <b>Okay and Cancel</b> button",
 				function () {
 					new toast("i", "Callback").show();
 				},
@@ -232,7 +232,7 @@ export default [
 	{
 		title: "Dialog box",
 		msg: "Below is a static modal example (meaning its position and display have been overridden). Included are the modal header, modal body (required for padding), and modal footer (optional). We ask that you include modal headers with dismiss actions whenever possible, or provide another explicit dismiss action.",
-		viewclass: "ns-modal-preview",
+		viewclass: "cl-modal-preview",
 		code: function () {
 			return new modal({
 				title: "Modal title",
@@ -247,7 +247,7 @@ export default [
 		title: "Live example",
 		code: function () {
 			return new button({
-				label: "Show modal dialog",
+				label: "Show live modal dialog",
 				color: "primary",
 				onclick: function () {
 					new modal({
@@ -268,6 +268,7 @@ export default [
 
 	{
 		title: "Checkbox in footer",
+		viewclass: "cl-modal-preview",
 		code: function () {
 			return new modal({
 				title: "Modal title",
@@ -290,20 +291,25 @@ export default [
 	{
 		title: "Disable static backdrop",
 		code: function () {
-			return new modal({
-				static: false,
-				title: "Modal title",
-				elem: "By default, modal dialog will not close if you click outside or press escape key. To allow modal dialog to close when click outside or press escape key, set {{static: false}} option",
-				button: [
-					{
-						label: "Understand",
-						onclick: function (event, data) {
-							new toast("i", `Result from dialog is <b>${JSON.stringify(data)}</b>`).show();
-						},
-					},
-					"Close",
-				],
-				debug: true, //this last option is for this documentation preview only
+			return new button({
+				label: "Show live modal dialog",
+				color: "primary",
+				onclick: function () {
+					new modal({
+						static: false,
+						title: "Modal title",
+						elem: "By default, modal dialog will not close if you click outside or press escape key. To allow modal dialog to close when click outside or press escape key, set {{static: false}} option",
+						button: [
+							{
+								label: "Understand",
+								onclick: function (event, data) {
+									new toast("i", `Result from dialog is <b>${JSON.stringify(data)}</b>`).show();
+								},
+							},
+							"Close",
+						],
+					}).show();
+				},
 			});
 		},
 	},
@@ -312,30 +318,35 @@ export default [
 		title: "Disable scrolling long content",
 		sample: { "sample.text": sample.text },
 		code: function () {
-			return new modal({
-				scrollable: false,
-				title: "Modal title",
-				elem: [
-					new p({
-						elem: "By default, modal dialog will activate scrolling inside modal dialog. To disabled it, set {{scrollable: false}} option.",
-					}),
-					new p({ elem: sample.text() }),
-					new p({ elem: sample.text() }),
-					new p({ elem: sample.text() }),
-					new p({ elem: sample.text() }),
-					new p({ elem: sample.text() }),
-					new p({ elem: sample.text() }),
-				],
-				button: [
-					{
-						label: "Understand",
-						onclick: function (event, data) {
-							new toast("i", `Result from dialog is <b>${JSON.stringify(data)}</b>`).show();
-						},
-					},
-					"Close",
-				],
-				debug: true, //this last option is for this documentation preview only
+			return new button({
+				label: "Show live modal dialog",
+				color: "primary",
+				onclick: function () {
+					new modal({
+						scrollable: false,
+						title: "Modal title",
+						elem: [
+							new p({
+								elem: "By default, modal dialog will activate scrolling inside modal dialog. To disabled it, set {{scrollable: false}} option.",
+							}),
+							new p({ elem: sample.text() }),
+							new p({ elem: sample.text() }),
+							new p({ elem: sample.text() }),
+							new p({ elem: sample.text() }),
+							new p({ elem: sample.text() }),
+							new p({ elem: sample.text() }),
+						],
+						button: [
+							{
+								label: "Understand",
+								onclick: function (event, data) {
+									new toast("i", `Result from dialog is <b>${JSON.stringify(data)}</b>`).show();
+								},
+							},
+							"Close",
+						],
+					}).show();
+				},
 			});
 		},
 	},
@@ -343,26 +354,32 @@ export default [
 	{
 		title: "Disable vertically centered",
 		code: function () {
-			return new modal({
-				center: false,
-				title: "Modal title",
-				elem: "By default, modal dialog will vertically centered when shown. To disabled it, set {{center: false}} option.",
-				button: [
-					{
-						label: "Save changes",
-						onclick: function (event, data) {
-							new toast("i", `Result from dialog is <b>${JSON.stringify(data)}</b>`).show();
-						},
-					},
-					"Close",
-				],
-				debug: true, //this last option is for this documentation preview only
+			return new button({
+				label: "Show live modal dialog",
+				color: "primary",
+				onclick: function () {
+					new modal({
+						center: false,
+						title: "Modal title",
+						elem: "By default, modal dialog will vertically centered when shown. To disabled it, set {{center: false}} option.",
+						button: [
+							{
+								label: "Save changes",
+								onclick: function (event, data) {
+									new toast("i", `Result from dialog is <b>${JSON.stringify(data)}</b>`).show();
+								},
+							},
+							"Close",
+						],
+					}).show();
+				},
 			});
 		},
 	},
 
 	{
 		title: "Custom button",
+		viewclass: "cl-modal-preview",
 		code: function () {
 			return new modal({
 				title: "Modal title",
@@ -394,7 +411,7 @@ export default [
 		title: "Tooltips and popovers",
 		code: function () {
 			return new button({
-				label: "Show modal dialog",
+				label: "Show live modal dialog",
 				color: "primary",
 				onclick: function () {
 					new modal({
@@ -452,51 +469,62 @@ export default [
 	{
 		title: "Using the grid",
 		code: function () {
-			return new modal({
-				title: "Grids in modal",
-				elem: new div({
-					class: "container-fluid ns-higlight-col",
-					elem: [
-						new div({
-							class: "row",
-							elem: [
-								new div({ class: "col-md-4", elem: ".col-md-4" }),
-								new div({ class: "col-md-4 ms-auto", elem: ".col-md-4 .ms-auto" }),
-							],
-						}),
-						new div({
-							class: "row",
-							elem: [
-								new div({ class: "col-md-3 ms-auto", elem: ".col-md-3 .ms-auto" }),
-								new div({ class: "col-md-2 ms-auto", elem: ".col-md-2 .ms-auto" }),
-							],
-						}),
-						new div({
-							class: "row",
-							elem: [new div({ class: "col-md-6 ms-auto", elem: ".col-md-6 .ms-auto" })],
-						}),
-						new div({
-							class: "row",
+			return new button({
+				label: "Show live modal dialog",
+				color: "primary",
+				onclick: function () {
+					new modal({
+						title: "Grids in modal",
+						elem: new div({
+							class: "container-fluid cl-higlight-col",
 							elem: [
 								new div({
-									class: "col-sm-9",
+									class: "row",
 									elem: [
-										"Level 1: .col-md-9",
+										new div({ class: "col-md-4", elem: ".col-md-4" }),
+										new div({ class: "col-md-4 ms-auto", elem: ".col-md-4 .ms-auto" }),
+									],
+								}),
+								new div({
+									class: "row",
+									elem: [
+										new div({ class: "col-md-3 ms-auto", elem: ".col-md-3 .ms-auto" }),
+										new div({ class: "col-md-2 ms-auto", elem: ".col-md-2 .ms-auto" }),
+									],
+								}),
+								new div({
+									class: "row",
+									elem: [new div({ class: "col-md-6 ms-auto", elem: ".col-md-6 .ms-auto" })],
+								}),
+								new div({
+									class: "row",
+									elem: [
 										new div({
-											class: "row",
+											class: "col-sm-9",
 											elem: [
-												new div({ class: "col-8 col-sm-6", elem: "Level 2: .col-8 .col-sm-6" }),
-												new div({ class: "col-4 col-sm-6", elem: "Level 2: .col-4 .col-sm-6" }),
+												"Level 1: .col-md-9",
+												new div({
+													class: "row",
+													elem: [
+														new div({
+															class: "col-8 col-sm-6",
+															elem: "Level 2: .col-8 .col-sm-6",
+														}),
+														new div({
+															class: "col-4 col-sm-6",
+															elem: "Level 2: .col-4 .col-sm-6",
+														}),
+													],
+												}),
 											],
 										}),
 									],
 								}),
 							],
 						}),
-					],
-				}),
-				button: ["Save change", "Close"],
-				debug: true, //this last option is for this documentation preview only
+						button: ["Save change", "Close"],
+					}).show();
+				},
 			});
 		},
 	},
@@ -575,7 +603,7 @@ export default [
 		title: "Remove animation",
 		code: function () {
 			return new button({
-				label: "Show simple dialog",
+				label: "Show live modal dialog",
 				color: "primary",
 				onclick: function () {
 					new modal({
