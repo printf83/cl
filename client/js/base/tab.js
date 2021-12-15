@@ -9,7 +9,7 @@ import label from "./label.js";
 
 const defaultOption = {
 	type: "tab", //null|tab|pill
-	headalign: null, //tab align
+	headAlign: null, //tab align
 	size: null, //need to set for vertical. only used if has body
 	animated: true,
 	flush: false,
@@ -17,7 +17,7 @@ const defaultOption = {
 	item: [],
 };
 /**
- * opt:{tagoption,type,headalign,size,animated,flush,item:{tabitem}}
+ * opt:{tagoption,type,headAlign,size,animated,flush,item:{tabitem}}
  * tabitem : {id,label,icon,hidelabel,disable,active,option,elem}
  */
 
@@ -47,8 +47,8 @@ export default class tab extends div {
 				opt.item[0].active = true;
 			}
 
-			//auto size if vertical headalign
-			if (!opt.size && (opt.headalign === "vertical" || opt.headalign === "vertical-right")) {
+			//auto size if vertical headAlign
+			if (!opt.size && (opt.headAlign === "vertical" || opt.headAlign === "vertical-right")) {
 				opt.size = "col-sm-12 col-md-6 col-lg-4";
 			}
 
@@ -152,21 +152,21 @@ export default class tab extends div {
 					//card-header-tabs if has body (will wrap in card)
 					bodyItem && bodyItem.length > 0
 						? opt.type === "tab"
-							? "card-" + (opt.headalign === "vertical-right" ? "footer" : "header") + "-tabs"
+							? "card-" + (opt.headAlign === "vertical-right" ? "footer" : "header") + "-tabs"
 							: opt.type === "pill"
-							? "card-" + (opt.headalign === "vertical-right" ? "footer" : "header") + "-pills"
-							: "card-" + (opt.headalign === "vertical-right" ? "footer" : "header") + "-tabs"
+							? "card-" + (opt.headAlign === "vertical-right" ? "footer" : "header") + "-pills"
+							: "card-" + (opt.headAlign === "vertical-right" ? "footer" : "header") + "-tabs"
 						: null,
 					opt.column ? "flex-column mb-auto" : null,
 					opt.flush ? "nav-flush" : null,
 					opt.type === "tab" ? "nav-tabs" : opt.type === "pill" ? "nav-pills" : null,
-					opt.headalign === "right"
+					opt.headAlign === "right"
 						? "justify-content-end"
-						: opt.headalign === "center"
+						: opt.headAlign === "center"
 						? "justify-content-center"
-						: opt.headalign === "vertical" || opt.headalign === "vertical-right"
+						: opt.headAlign === "vertical" || opt.headAlign === "vertical-right"
 						? "flex-column mb-auto"
-						: opt.headalign === "fill"
+						: opt.headAlign === "fill"
 						? "nav-fill"
 						: null,
 				],
@@ -190,7 +190,7 @@ export default class tab extends div {
 				opt.class = core.merge.class(opt.class, "card");
 				opt.padding = 0;
 				opt.elem = opt.size
-					? opt.headalign === "vertical-right"
+					? opt.headAlign === "vertical-right"
 						? [
 								new div({
 									row: true,
@@ -231,7 +231,7 @@ export default class tab extends div {
 
 			delete opt.item;
 			delete opt.type;
-			delete opt.headalign;
+			delete opt.headAlign;
 			delete opt.size;
 			delete opt.animated;
 			delete opt.flush;

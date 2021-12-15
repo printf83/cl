@@ -1,3 +1,9 @@
+@media (min-width: 768px) {
+	.cl-vh-menu {
+		max-height: calc(100vh - 5.5rem) !important;
+	}
+}
+
 .cl-modal-preview {
 	background-color: var(--bs-light);
 	padding: 0;

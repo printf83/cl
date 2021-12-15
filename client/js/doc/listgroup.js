@@ -9,10 +9,10 @@ import h from "../base/h.js";
 import badge from "../base/badge.js";
 
 /* 
-    \}\),\n+\t+new example\(\{
+    \}\),\n+\t+ns.example\(\{
     },\n\n\t{
     
-    new 
+    ns. 
     new 
 
     elems:

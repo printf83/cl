@@ -25,9 +25,10 @@ import doc_collapse from "./doc/collapse.js";
 import doc_dropdown from "./doc/dropdown.js";
 import doc_listgroup from "./doc/listgroup.js";
 import doc_modal from "./doc/modal.js";
+import doc_tab from "./doc/tab.js";
 
 const def_m1 = "Components";
-const def_m2 = "Modal";
+const def_m2 = "Tab";
 const def_theme = "journal";
 
 const db_menu = [
@@ -75,7 +76,7 @@ const db_menu = [
 			{ title: "Dropdown", source: doc_dropdown },
 			{ title: "List group", source: doc_listgroup },
 			{ title: "Modal", source: doc_modal },
-			{ title: "Tab", source: null },
+			{ title: "Tab", source: doc_tab },
 			{ title: "Navbar", source: null },
 			{ title: "Offcanvas", source: null },
 			{ title: "Paging", source: null },

@@ -488,3 +488,30 @@ export function dlgSizeFn(size) {
 		button: ["Okay"],
 	}).show();
 }
+
+export function tab() {
+	return [
+		{ label: "First", elem: "This is first tab. " + text() },
+		{ label: "Second", elem: "This is second tab. " + text() },
+		{ label: "Third", elem: "This is third tab. " + text() },
+		{ label: "Disabled", disabled: true, elem: "This is last tab. " + text() },
+	];
+}
+
+export function dropdowntab() {
+	return [
+		{ label: "First", elem: "This is first tab. " + text() },
+		{
+			label: "Second",
+			elem: "This is second tab. " + text(),
+			option: [
+				{ href: "#", label: "Action" },
+				{ href: "#", label: "Another action" },
+				{ value: "-", label: "" },
+				{ href: "#", label: "Something else here" },
+			],
+		},
+		{ label: "Third", elem: "This is third tab. " + text() },
+		{ label: "Disabled", disabled: true, elem: "This is last tab. " + text() },
+	];
+}
