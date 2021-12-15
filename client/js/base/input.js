@@ -211,6 +211,9 @@ export default class input extends tag {
 				value: m.value,
 				checked: m.checked,
 				placeholder: m.placeholder,
+
+				disabled: m.disabled,
+				readOnly: m.readonly,
 			});
 
 			delete m.type;
@@ -227,6 +230,9 @@ export default class input extends tag {
 			delete m.required;
 
 			delete m.plaintext;
+
+			delete m.disabled;
+			delete m.readonly;
 
 			delete m.container;
 			delete m.flex;

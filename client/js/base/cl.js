@@ -35,7 +35,7 @@ const booleanAttr = [
 	"novalidate",
 	"open",
 	"playsinline",
-	"readonly",
+	"readOnly",
 	"required",
 	"reversed",
 	"selected",

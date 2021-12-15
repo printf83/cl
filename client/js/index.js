@@ -9,7 +9,8 @@ import menu from "./base/menu.js";
 import toc from "./base/toc.js";
 import code from "./base/code.js";
 import msg from "./base/msg.js";
-import * as dlg from "./base/dlg.js";
+
+import doc_formcontrol from "./doc/formcontrol.js";
 
 import * as sample from "./doc/sample.js";
 import doc_button from "./doc/button.js";
@@ -27,8 +28,8 @@ import doc_listgroup from "./doc/listgroup.js";
 import doc_modal from "./doc/modal.js";
 import doc_tab from "./doc/tab.js";
 
-const def_m1 = "Components";
-const def_m2 = "Tab";
+const def_m1 = "Forms";
+const def_m2 = "Form control";
 const def_theme = "journal";
 
 const db_menu = [
@@ -51,7 +52,7 @@ const db_menu = [
 		type: "menu",
 		title: "Forms",
 		item: [
-			{ title: "Form control", source: null },
+			{ title: "Form control", source: doc_formcontrol },
 			{ title: "Select", source: null },
 			{ title: "Check & radios", source: null },
 			{ title: "Range", source: null },
