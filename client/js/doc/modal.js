@@ -28,7 +28,7 @@ export default [
 	{
 		title: "Simple msgbox components",
 		msg: "Below is a static modal example (meaning its position and display have been overridden). Included are the modal header, modal body (required for padding), and modal footer (optional). We ask that you include modal headers with dismiss actions whenever possible, or provide another explicit dismiss action.",
-		pclass: "ns-modal-preview",
+		viewclass: "ns-modal-preview",
 		code: function () {
 			return new modal({
 				title: "Modal Title",
@@ -74,7 +74,7 @@ export default [
 	{
 		title: "Simple inputbox components",
 		msg: "Below is a static modal example (meaning its position and display have been overridden). Included are the modal header, modal body (required for padding), and modal footer (optional). We ask that you include modal headers with dismiss actions whenever possible, or provide another explicit dismiss action.",
-		pclass: "ns-modal-preview",
+		viewclass: "ns-modal-preview",
 		code: function () {
 			return new dlg.inputbox(
 				"text",
@@ -90,7 +90,7 @@ export default [
 	{
 		title: "Simple inputbox components with select",
 		msg: "Below is a static modal example (meaning its position and display have been overridden). Included are the modal header, modal body (required for padding), and modal footer (optional). We ask that you include modal headers with dismiss actions whenever possible, or provide another explicit dismiss action.",
-		pclass: "ns-modal-preview",
+		viewclass: "ns-modal-preview",
 		code: function () {
 			return new dlg.inputbox(
 				new input({ type: "select", option: sample.optionitem(), name: "value" }),
@@ -142,7 +142,7 @@ export default [
 	{
 		title: "Inputbox with multiple input",
 		msg: "Below is a static modal example (meaning its position and display have been overridden). Included are the modal header, modal body (required for padding), and modal footer (optional). We ask that you include modal headers with dismiss actions whenever possible, or provide another explicit dismiss action.",
-		pclass: "ns-modal-preview",
+		viewclass: "ns-modal-preview",
 		sample: { "sample.form": sample.form },
 		code: function () {
 			return new dlg.inputbox(
@@ -182,7 +182,7 @@ export default [
 	{
 		title: "Confirmbox",
 		msg: "Below is a static modal example (meaning its position and display have been overridden). Included are the modal header, modal body (required for padding), and modal footer (optional). We ask that you include modal headers with dismiss actions whenever possible, or provide another explicit dismiss action.",
-		pclass: "ns-modal-preview",
+		viewclass: "ns-modal-preview",
 		code: function () {
 			return new dlg.confirmbox(
 				"?",
@@ -232,7 +232,7 @@ export default [
 	{
 		title: "Dialog box",
 		msg: "Below is a static modal example (meaning its position and display have been overridden). Included are the modal header, modal body (required for padding), and modal footer (optional). We ask that you include modal headers with dismiss actions whenever possible, or provide another explicit dismiss action.",
-		pclass: "ns-modal-preview",
+		viewclass: "ns-modal-preview",
 		code: function () {
 			return new modal({
 				title: "Modal title",
