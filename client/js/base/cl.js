@@ -64,12 +64,12 @@ function attachAttr(elems, arg) {
 				} else {
 					if (arg[i] instanceof Function && arg[i] !== undefined) {
 						//console.warn(`Element ${elemInfo(elems)} has ${i} function`);
-						elems.addEventListener(i.startsWith("on") ? i.substr(2) : i, arg[i], false);
+						elems.addEventListener(i.startsWith("on") ? i.substring(2) : i, arg[i], false);
 
 						//create function to remove EventListener
 						elems.detachEventListener = function (sender) {
 							if (DEBUG) console.log(`Remove ${i} from ${elemInfo(sender)}`);
-							sender.removeEventListener(i.startsWith("on") ? i.substr(2) : i, arg[i], false);
+							sender.removeEventListener(i.startsWith("on") ? i.substring(2) : i, arg[i], false);
 							sender.detachEventListener = null;
 							delete sender.detachEventListener;
 						};
