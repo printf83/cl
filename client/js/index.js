@@ -11,6 +11,7 @@ import code from "./base/code.js";
 import msg from "./base/msg.js";
 
 import doc_formcontrol from "./doc/formcontrol.js";
+import doc_select from "./doc/select.js";
 
 import * as sample from "./doc/sample.js";
 import doc_button from "./doc/button.js";
@@ -29,7 +30,7 @@ import doc_modal from "./doc/modal.js";
 import doc_tab from "./doc/tab.js";
 
 const def_m1 = "Forms";
-const def_m2 = "Form control";
+const def_m2 = "Select";
 const def_theme = "journal";
 
 const db_menu = [
@@ -53,7 +54,7 @@ const db_menu = [
 		title: "Forms",
 		item: [
 			{ title: "Form control", source: doc_formcontrol },
-			{ title: "Select", source: null },
+			{ title: "Select", source: doc_select },
 			{ title: "Check & radios", source: null },
 			{ title: "Range", source: null },
 			{ title: "Input group", source: null },
