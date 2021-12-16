@@ -375,6 +375,11 @@ export default class input extends tag {
 				ctl.push(mainctl);
 			}
 
+			//add datalist
+			if (datalistctl) {
+				ctl.push(datalistctl);
+			}
+
 			//add after element
 			ctl.push(afterctl);
 
