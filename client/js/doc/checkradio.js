@@ -1,10 +1,5 @@
 "use strict";
 import * as doc_core from "./core.js";
-import * as sample from "./sample.js";
-import * as listgroup from "../base/listgroup.js";
-import div from "../base/div.js";
-import p from "../base/p.js";
-import small from "../base/small.js";
 import button from "../base/button.js";
 import input from "../base/input.js";
 

@@ -13,6 +13,7 @@ import msg from "./base/msg.js";
 import doc_formcontrol from "./doc/formcontrol.js";
 import doc_select from "./doc/select.js";
 import doc_checkradio from "./doc/checkradio.js";
+import doc_range from "./doc/range.js";
 
 import * as sample from "./doc/sample.js";
 import doc_button from "./doc/button.js";
@@ -31,7 +32,7 @@ import doc_modal from "./doc/modal.js";
 import doc_tab from "./doc/tab.js";
 
 const def_m1 = "Forms";
-const def_m2 = "Check & radios";
+const def_m2 = "Range";
 const def_theme = "journal";
 
 const db_menu = [
@@ -57,7 +58,7 @@ const db_menu = [
 			{ title: "Form control", source: doc_formcontrol },
 			{ title: "Select", source: doc_select },
 			{ title: "Check & radios", source: doc_checkradio },
-			{ title: "Range", source: null },
+			{ title: "Range", source: doc_range },
 			{ title: "Input group", source: null },
 			{ title: "Floating label", source: null },
 		],
