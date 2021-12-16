@@ -23,6 +23,9 @@ import badge from "../base/badge.js";
 
     javascript:void(0)
     #
+
+	container: new cont.stack(),
+	container: doc_core.stackcontainer,
 */
 
 export default [
