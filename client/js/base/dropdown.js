@@ -24,6 +24,8 @@ const defaultOption = {
  * opt {...buttonopt,option,container,arrow,splittoggle,aligment,offset,autoclose}
  */
 export default class dropdown extends tag {
+	cldropdown = 1;
+
 	constructor(opt) {
 		super(opt);
 	}

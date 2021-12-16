@@ -103,6 +103,23 @@ export default class input extends tag {
 				opt.after = null;
 			}
 
+			// //autochange dropdown container
+			// if (opt.before) {
+			// 	if (opt.before.hasOwnProperty("cldropdown")) {
+			// 		let tmpbefore = opt.before.data;
+			// 		tmpbefore.container = null;
+			// 		opt.before.data = tmpbefore;
+			// 	}
+			// }
+
+			// if (opt.after) {
+			// 	if (opt.after.hasOwnProperty("cldropdown")) {
+			// 		let tmpafter = opt.after.data;
+			// 		tmpafter.container = null;
+			// 		opt.after.data = tmpafter;
+			// 	}
+			// }
+
 			//before control
 			let beforectl = opt.before
 				? typeof opt.before === "string" || opt.before.hasOwnProperty("clicon") //d.beforetype === "text"
@@ -407,17 +424,19 @@ export default class input extends tag {
 							}),
 						];
 					} else {
-						ctl = [
-							new div({
-								class: [
-									"input-group",
-									opt.nowarp ? "flex-nowarp" : null,
-									opt.weight ? `input-group-${opt.weight}` : null,
-									opt.valid || opt.invalid ? "has-validation" : null,
-								],
-								elem: ctl,
-							}),
-						];
+						if (opt.container) {
+							ctl = [
+								new div({
+									class: [
+										"input-group",
+										opt.nowarp ? "flex-nowarp" : null,
+										opt.weight ? `input-group-${opt.weight}` : null,
+										opt.valid || opt.invalid ? "has-validation" : null,
+									],
+									elem: ctl,
+								}),
+							];
+						}
 
 						//put ctl in div.col-auto if labelsize is set
 						if (opt.labelsize || opt.ctlsize) {
