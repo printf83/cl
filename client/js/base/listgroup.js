@@ -75,7 +75,7 @@ export default class listgroup extends tag {
 			i = core.extend({}, defaultItemOption, i);
 
 			if (i.type === "checkbox" || i.type === "radio" || i.type === "switch") {
-				let ctl = core.extend({}, opt);
+				let ctl = core.extend({}, i);
 				ctl.tag = "input";
 
 				ctl.class = core.merge.class(ctl.class, [
@@ -93,7 +93,7 @@ export default class listgroup extends tag {
 				delete ctl.checked;
 				delete ctl.color;
 
-				opt = {
+				i = {
 					tag: "label",
 					class: core.merge.class(i.class, [
 						"list-group-item",
