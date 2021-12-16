@@ -1,7 +1,7 @@
 "use strict";
 import * as doc_core from "./core.js";
 import * as sample from "./sample.js";
-import * as listgroup from "../base/listgroup.js";
+import listgroup from "../base/listgroup.js";
 import div from "../base/div.js";
 import p from "../base/p.js";
 import small from "../base/small.js";
@@ -39,20 +39,20 @@ export default [
 		title: "Basic example",
 		sample: { "sample.listgroupitem": sample.listgroupitem },
 		code: function () {
-			return new listgroup.container({ elem: sample.listgroupitem() });
+			return new listgroup({ item: sample.listgroupitem() });
 		},
 	},
 
 	{
 		title: "Active items",
 		code: function () {
-			return new listgroup.container({
-				elem: [
-					new listgroup.item({ elem: "An active item", active: true }),
-					new listgroup.item({ elem: "A second item" }),
-					new listgroup.item({ elem: "A third item" }),
-					new listgroup.item({ elem: "A fourth item" }),
-					new listgroup.item({ elem: "And a fifth one" }),
+			return new listgroup({
+				item: [
+					{ elem: "An active item", active: true },
+					{ elem: "A second item" },
+					{ elem: "A third item" },
+					{ elem: "A fourth item" },
+					{ elem: "And a fifth one" },
 				],
 			});
 		},
@@ -61,13 +61,13 @@ export default [
 	{
 		title: "Disabled items",
 		code: function () {
-			return new listgroup.container({
-				elem: [
-					new listgroup.item({ elem: "A disabled item", disabled: true }),
-					new listgroup.item({ elem: "A second item" }),
-					new listgroup.item({ elem: "A third item" }),
-					new listgroup.item({ elem: "A fourth item" }),
-					new listgroup.item({ elem: "And a fifth one" }),
+			return new listgroup({
+				item: [
+					{ elem: "An disabled item", disabled: true },
+					{ elem: "A second item" },
+					{ elem: "A third item" },
+					{ elem: "A fourth item" },
+					{ elem: "And a fifth one" },
 				],
 			});
 		},
@@ -76,18 +76,18 @@ export default [
 	{
 		title: "List group of links",
 		code: function () {
-			return new listgroup.container({
+			return new listgroup({
 				type: "div",
-				elem: [
-					new listgroup.item({
+				item: [
+					{
 						href: "#",
 						elem: "A disabled item",
 						disabled: true,
-					}),
-					new listgroup.item({ href: "#", elem: "A second item" }),
-					new listgroup.item({ href: "#", elem: "A third item" }),
-					new listgroup.item({ href: "#", elem: "A fourth item" }),
-					new listgroup.item({ href: "#", elem: "And a fifth one" }),
+					},
+					{ href: "#", elem: "A second item" },
+					{ href: "#", elem: "A third item" },
+					{ href: "#", elem: "A fourth item" },
+					{ href: "#", elem: "And a fifth one" },
 				],
 			});
 		},
@@ -96,18 +96,18 @@ export default [
 	{
 		title: "List group of buttons",
 		code: function () {
-			return new listgroup.container({
+			return new listgroup({
 				type: "div",
-				elem: [
-					new listgroup.item({
+				item: [
+					{
 						onclick: function () {},
 						elem: "A disabled item",
 						disabled: true,
-					}),
-					new listgroup.item({ onclick: function () {}, elem: "A second item" }),
-					new listgroup.item({ onclick: function () {}, elem: "A third item" }),
-					new listgroup.item({ onclick: function () {}, elem: "A fourth item" }),
-					new listgroup.item({ onclick: function () {}, elem: "And a fifth one" }),
+					},
+					{ onclick: function () {}, elem: "A second item" },
+					{ onclick: function () {}, elem: "A third item" },
+					{ onclick: function () {}, elem: "A fourth item" },
+					{ onclick: function () {}, elem: "And a fifth one" },
 				],
 			});
 		},
@@ -117,9 +117,9 @@ export default [
 		title: "Flush",
 		sample: { "sample.listgroupitem": sample.listgroupitem },
 		code: function () {
-			return new listgroup.container({
+			return new listgroup({
 				flush: true,
-				elem: sample.listgroupitem(),
+				item: sample.listgroupitem(),
 			});
 		},
 	},
@@ -128,9 +128,9 @@ export default [
 		title: "Numbered",
 		sample: { "sample.listgroupitem": sample.listgroupitem },
 		code: function () {
-			return new listgroup.container({
+			return new listgroup({
 				type: "ol",
-				elem: sample.listgroupitem(),
+				item: sample.listgroupitem(),
 			});
 		},
 	},
@@ -139,27 +139,27 @@ export default [
 		title: "Numbered custom content",
 		sample: { "sample.listgroupitemcustomcontent": sample.listgroupitemcustomcontent },
 		code: function () {
-			return new listgroup.container({
+			return new listgroup({
 				type: "ol",
-				elem: [
-					new listgroup.item({
+				item: [
+					{
 						display: "flex",
 						justifyContent: "between",
 						alignItem: "start",
 						elem: sample.listgroupitemcustomcontent(),
-					}),
-					new listgroup.item({
+					},
+					{
 						display: "flex",
 						justifyContent: "between",
 						alignItem: "start",
 						elem: sample.listgroupitemcustomcontent(),
-					}),
-					new listgroup.item({
+					},
+					{
 						display: "flex",
 						justifyContent: "between",
 						alignItem: "start",
 						elem: sample.listgroupitemcustomcontent(),
-					}),
+					},
 				],
 			});
 		},
@@ -175,39 +175,39 @@ export default [
 		sample: { "sample.listgroupitem3": sample.listgroupitem3 },
 		code: function () {
 			return [
-				new listgroup.container({
+				new listgroup({
 					horizontal: true,
-					elem: sample.listgroupitem3(),
+					item: sample.listgroupitem3(),
 				}),
 
-				new listgroup.container({
+				new listgroup({
 					horizontal: "sm",
-					elem: sample.listgroupitem3(),
+					item: sample.listgroupitem3(),
 				}),
 
-				new listgroup.container({
+				new listgroup({
 					horizontal: "md",
-					elem: sample.listgroupitem3(),
+					item: sample.listgroupitem3(),
 				}),
 
-				new listgroup.container({
+				new listgroup({
 					horizontal: "lg",
-					elem: sample.listgroupitem3(),
+					item: sample.listgroupitem3(),
 				}),
 
-				new listgroup.container({
+				new listgroup({
 					horizontal: "xl",
-					elem: sample.listgroupitem3(),
+					item: sample.listgroupitem3(),
 				}),
 
-				new listgroup.container({
+				new listgroup({
 					horizontal: "xxl",
-					elem: sample.listgroupitem3(),
+					item: sample.listgroupitem3(),
 				}),
 
-				new listgroup.container({
+				new listgroup({
 					horizontal: ["md", "xxl"],
-					elem: sample.listgroupitem3(),
+					item: sample.listgroupitem3(),
 				}),
 			];
 		},
@@ -216,8 +216,8 @@ export default [
 	{
 		title: "Contextual classes",
 		code: function () {
-			return new listgroup.container({
-				elem: [new listgroup.item({ color: "primary", elem: `A simple primary list group item` })],
+			return new listgroup({
+				item: [{ color: "primary", elem: `A simple primary list group item` }],
 			});
 		},
 	},
@@ -225,11 +225,11 @@ export default [
 	{
 		title: "Contextual classes example",
 		code: function () {
-			return new listgroup.container({
-				elem: ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map(function (
+			return new listgroup({
+				item: ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map(function (
 					i
 				) {
-					return new listgroup.item({ color: i, elem: `A simple ${i} list group item` });
+					return { color: i, elem: `A simple ${i} list group item` };
 				}),
 			});
 		},
@@ -238,17 +238,17 @@ export default [
 	{
 		title: "Contextual classes with action example",
 		code: function () {
-			return new listgroup.container({
+			return new listgroup({
 				type: "div",
-				elem: ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map(function (
+				item: ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map(function (
 					i
 				) {
-					return new listgroup.item({
+					return {
 						action: true,
 						href: "#;",
 						color: i,
 						elem: `A simple ${i} list group item`,
-					});
+					};
 				}),
 			});
 		},
@@ -258,7 +258,7 @@ export default [
 		title: "With badge",
 		code: function () {
 			let itemfn = function (text, badgeLabel) {
-				return new listgroup.item({
+				return {
 					display: "flex",
 					justifyContent: "between",
 					alignItem: "start",
@@ -270,11 +270,11 @@ export default [
 							label: badgeLabel,
 						}),
 					],
-				});
+				};
 			};
 
-			return new listgroup.container({
-				elem: [itemfn("A list item", 14), itemfn("A second list item", 2), itemfn("A third list item", 1)],
+			return new listgroup({
+				item: [itemfn("A list item", 14), itemfn("A second list item", 2), itemfn("A third list item", 1)],
 			});
 		},
 	},
@@ -283,7 +283,7 @@ export default [
 		title: "Custom content",
 		code: function () {
 			let itemfn = function (title, active, days) {
-				return new listgroup.item({
+				return {
 					href: "#",
 					action: true,
 					active: active,
@@ -306,12 +306,12 @@ export default [
 							elem: `And some${!active ? " muted" : ""} small print.`,
 						}),
 					],
-				});
+				};
 			};
 
-			return new listgroup.container({
+			return new listgroup({
 				type: "div",
-				elem: [
+				item: [
 					itemfn("List group item heading 1", true, 1),
 					itemfn("List group item heading 2", false, 3),
 					itemfn("List group item heading 3", false, 7),
@@ -323,28 +323,28 @@ export default [
 	{
 		title: "Checkboxes",
 		code: function () {
-			return new listgroup.container({
+			return new listgroup({
 				type: "div",
-				elem: [
-					new listgroup.item({ type: "checkbox", value: "1", label: "First checkbox" }),
-					new listgroup.item({
+				item: [
+					{ type: "checkbox", value: "1", label: "First checkbox" },
+					{
 						type: "checkbox",
 						value: "2",
 						label: "Second checkbox",
 						checked: true,
-					}),
-					new listgroup.item({
+					},
+					{
 						type: "checkbox",
 						value: "3",
 						label: "Third checkbox",
 						disabled: true,
-					}),
-					new listgroup.item({
+					},
+					{
 						type: "checkbox",
 						value: "4",
 						label: "Fourth checkbox",
-					}),
-					new listgroup.item({ type: "checkbox", value: "5", label: "Fifth checkbox" }),
+					},
+					{ type: "checkbox", value: "5", label: "Fifth checkbox" },
 				],
 			});
 		},
@@ -353,41 +353,41 @@ export default [
 	{
 		title: "Radio",
 		code: function () {
-			return new listgroup.container({
+			return new listgroup({
 				type: "div",
-				elem: [
-					new listgroup.item({
+				item: [
+					{
 						type: "radio",
 						name: "g10",
 						value: "1",
 						label: "First radio",
-					}),
-					new listgroup.item({
+					},
+					{
 						type: "radio",
 						name: "g10",
 						value: "2",
 						label: "Second radio",
 						checked: true,
-					}),
-					new listgroup.item({
+					},
+					{
 						type: "radio",
 						name: "g10",
 						value: "3",
 						label: "Third radio",
 						disabled: true,
-					}),
-					new listgroup.item({
+					},
+					{
 						type: "radio",
 						name: "g10",
 						value: "4",
 						label: "Fourth radio",
-					}),
-					new listgroup.item({
+					},
+					{
 						type: "radio",
 						name: "g10",
 						value: "5",
 						label: "Fifth radio",
-					}),
+					},
 				],
 			});
 		},
@@ -396,28 +396,28 @@ export default [
 	{
 		title: "Switch",
 		code: function () {
-			return new listgroup.container({
+			return new listgroup({
 				type: "div",
-				elem: [
-					new listgroup.item({ type: "switch", value: "1", label: "First switch" }),
-					new listgroup.item({
+				item: [
+					{ type: "switch", value: "1", label: "First switch" },
+					{
 						type: "switch",
 						value: "2",
 						label: "Second switch",
 						checked: true,
-					}),
-					new listgroup.item({
+					},
+					{
 						type: "switch",
 						value: "3",
 						label: "Third switch",
 						disabled: true,
-					}),
-					new listgroup.item({
+					},
+					{
 						type: "switch",
 						value: "4",
 						label: "Fourth switch",
-					}),
-					new listgroup.item({ type: "switch", value: "5", label: "Fifth switch" }),
+					},
+					{ type: "switch", value: "5", label: "Fifth switch" },
 				],
 			});
 		},

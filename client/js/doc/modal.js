@@ -530,6 +530,64 @@ export default [
 	},
 
 	{
+		title: "Using the grid (Easy function)",
+		code: function () {
+			return new button({
+				label: "Show live modal dialog",
+				color: "primary",
+				onclick: function () {
+					//create function for easy create div
+					let fnDiv = function (className, element) {
+						return new div({ class: className, elem: element });
+					};
+
+					new modal({
+						title: "Grids in modal",
+						elem: fnDiv("container-fluid cl-higlight-col", [
+							fnDiv("row", [
+								fnDiv("col-md-4", ".col-md-4"),
+								fnDiv("col-md-4 ms-auto", ".col-md-4 .ms-auto"),
+							]),
+							fnDiv("row", [
+								fnDiv("col-md-3 ms-auto", ".col-md-3 .ms-auto"),
+								fnDiv("col-md-2 ms-auto", ".col-md-2 .ms-auto"),
+							]),
+							fnDiv("row", fnDiv("col-md-6 ms-auto", ".col-md-6 .ms-auto")),
+							fnDiv("row", [
+								fnDiv("col-sm-9", [
+									"Level 1: .col-md-9",
+									fnDiv("row", [
+										fnDiv("col-8 col-sm-6", "Level 2: .col-8 .col-sm-6"),
+										fnDiv("col-4 col-sm-6", "Level 2: .col-4 .col-sm-6"),
+									]),
+								]),
+							]),
+						]),
+						button: ["Save change", "Close"],
+					}).show();
+				},
+			});
+		},
+	},
+
+	{
+		title: "Using the grid (Direct HTML)",
+		code: function () {
+			return new button({
+				label: "Show live modal dialog",
+				color: "primary",
+				onclick: function () {
+					new modal({
+						title: "Grids in modal",
+						elem: `<div class="container-fluid cl-higlight-col"><div class="row"><div class="col-md-4">.col-md-4</div><div class="col-md-4 ms-auto">.col-md-4 .ms-auto</div></div><div class="row"><div class="col-md-3 ms-auto">.col-md-3 .ms-auto</div><div class="col-md-2 ms-auto">.col-md-2 .ms-auto</div></div><div class="row"><div class="col-md-6 ms-auto">.col-md-6 .ms-auto</div></div><div class="row"><div class="col-sm-9">Level 1: .col-md-9<div class="row"><div class="col-8 col-sm-6">Level 2: .col-8 .col-sm-6</div><div class="col-4 col-sm-6">Level 2: .col-4 .col-sm-6</div></div></div></div></div>`,
+						button: ["Save change", "Close"],
+					}).show();
+				},
+			});
+		},
+	},
+
+	{
 		title: "Varying modal content",
 		container: doc_core.stackcontainer,
 		sample: { "sample.dlgFn": sample.dlgFn },

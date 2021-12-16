@@ -34,7 +34,7 @@ import doc_tab from "./doc/tab.js";
 
 const def_m1 = "Forms";
 const def_m2 = "Input group";
-const def_theme = "journal";
+const def_theme = "zephyr";
 
 const db_menu = [
 	{

@@ -3,7 +3,7 @@ import * as core from "../base/core.js";
 import * as doc_core from "./core.js";
 import * as sample from "./sample.js";
 import * as card from "../base/card.js";
-import * as listgroup from "../base/listgroup.js";
+import listgroup from "../base/listgroup.js";
 import button from "../base/button.js";
 import div from "../base/div.js";
 import tag from "../base/tag.js";
@@ -109,13 +109,9 @@ export default [
 		code: function () {
 			return new card.container({
 				style: { width: "18rem" },
-				elem: new listgroup.container({
+				elem: new listgroup({
 					flush: true,
-					elem: [
-						new listgroup.item({ elem: "An item" }),
-						new listgroup.item({ elem: "A second item" }),
-						new listgroup.item({ elem: "A third item" }),
-					],
+					item: [{ elem: "An item" }, { elem: "A second item" }, { elem: "A third item" }],
 				}),
 			});
 		},
@@ -128,13 +124,9 @@ export default [
 				style: { width: "18rem" },
 				elem: [
 					new card.header({ elem: "Feature" }),
-					new listgroup.container({
+					new listgroup({
 						flush: true,
-						elem: [
-							new listgroup.item({ elem: "An item" }),
-							new listgroup.item({ elem: "A second item" }),
-							new listgroup.item({ elem: "A third item" }),
-						],
+						item: [{ elem: "An item" }, { elem: "A second item" }, { elem: "A third item" }],
 					}),
 				],
 			});
@@ -147,13 +139,9 @@ export default [
 			return new card.container({
 				style: { width: "18rem" },
 				elem: [
-					new listgroup.container({
+					new listgroup({
 						flush: true,
-						elem: [
-							new listgroup.item({ elem: "An item" }),
-							new listgroup.item({ elem: "A second item" }),
-							new listgroup.item({ elem: "A third item" }),
-						],
+						item: [{ elem: "An item" }, { elem: "A second item" }, { elem: "A third item" }],
 					}),
 					new card.footer({
 						muted: false,
@@ -184,13 +172,9 @@ export default [
 							}),
 						],
 					}),
-					new listgroup.container({
+					new listgroup({
 						flush: true,
-						elem: [
-							new listgroup.item({ elem: "An item" }),
-							new listgroup.item({ elem: "A second item" }),
-							new listgroup.item({ elem: "A third item" }),
-						],
+						item: [{ elem: "An item" }, { elem: "A second item" }, { elem: "A third item" }],
 					}),
 					new card.body({
 						elem: [

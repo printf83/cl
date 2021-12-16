@@ -24,11 +24,6 @@ export default [
 					],
 				}),
 				new breadcrumb({
-					color: "light",
-					border: true,
-					bordercolor: "primary",
-					rounded: true,
-					padding: 2,
 					item: [
 						{ label: "Home", href: "#" },
 						{ label: "Library", href: "#" },

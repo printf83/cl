@@ -1,6 +1,6 @@
 "use strict";
 import * as card from "../base/card.js";
-import * as listgroup from "../base/listgroup.js";
+import listgroup from "../base/listgroup.js";
 import toast from "../base/toast.js";
 import input from "../base/input.js";
 import * as container from "../base/container.js";
@@ -82,59 +82,59 @@ export function form() {
 			max: 100,
 			after: "Years old",
 		}),
-		new listgroup.container({
+		new listgroup({
 			label: "Sex",
 			type: "div",
-			elem: [
-				new listgroup.item({
+			item: [
+				{
 					type: "radio",
 					name: "sex",
 					value: "s",
 					label: "Secret",
 					checked: true,
-				}),
-				new listgroup.item({
+				},
+				{
 					type: "radio",
 					name: "sex",
 					value: "m",
 					label: "Male",
-				}),
-				new listgroup.item({
+				},
+				{
 					type: "radio",
 					name: "sex",
 					value: "f",
 					label: "Female",
-				}),
+				},
 			],
 		}),
-		new listgroup.container({
+		new listgroup({
 			label: "Interest",
 			type: "div",
-			elem: [
-				new listgroup.item({
+			item: [
+				{
 					type: "checkbox",
 					name: "interest",
 					value: "sports",
 					label: "Sports",
-				}),
-				new listgroup.item({
+				},
+				{
 					type: "checkbox",
 					name: "interest",
 					value: "business",
 					label: "Business",
-				}),
-				new listgroup.item({
+				},
+				{
 					type: "checkbox",
 					name: "interest",
 					value: "social",
 					label: "Social",
-				}),
-				new listgroup.item({
+				},
+				{
 					type: "checkbox",
 					name: "interest",
 					value: "internet",
 					label: "Internet",
-				}),
+				},
 			],
 		}),
 		new input({
@@ -412,11 +412,11 @@ export function cardwithfooterh100() {
 
 export function listgroupitem() {
 	return [
-		new listgroup.item({ elem: "An item" }),
-		new listgroup.item({ elem: "A second item" }),
-		new listgroup.item({ elem: "A third item" }),
-		new listgroup.item({ elem: "A fourth item" }),
-		new listgroup.item({ elem: "And a fifth one" }),
+		{ elem: "An item" },
+		{ elem: "A second item" },
+		{ elem: "A third item" },
+		{ elem: "A fourth item" },
+		{ elem: "And a fifth one" },
 	];
 }
 
@@ -435,11 +435,7 @@ export function listgroupitemcustomcontent() {
 }
 
 export function listgroupitem3() {
-	return [
-		new listgroup.item({ elem: "An item" }),
-		new listgroup.item({ elem: "A second item" }),
-		new listgroup.item({ elem: "A third item" }),
-	];
+	return [{ elem: "An item" }, { elem: "A second item" }, { elem: "A third item" }];
 }
 
 export function dlgFn(recipient) {

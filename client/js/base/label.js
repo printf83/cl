@@ -3,7 +3,6 @@ import * as core from "./core.js";
 import tag from "./tag.js";
 import span from "./span.js";
 import icon from "./icon.js";
-import { container } from "./listgroup.js";
 
 const defaultOption = {
 	tag: "label",
