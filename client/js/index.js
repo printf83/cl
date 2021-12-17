@@ -39,7 +39,7 @@ import doc_paging from "./doc/paging.js";
 import doc_icon from "./doc/icon.js";
 
 const def_m1 = "Components";
-const def_m2 = "Paging";
+const def_m2 = "Card";
 const def_theme = null;
 
 const db_menu = [
@@ -234,33 +234,81 @@ function find_menu(m1, m2) {
 	return null;
 }
 
-function gen_content(m1, m2) {
+function gen_content(m1, m2, sender) {
 	let m = find_menu(m1, m2);
 	if (m) {
 		if (m.type === "menu") {
 			if (m.source) {
+				if (sender) {
+					sender.innerText = "Loading";
+				}
 				setTimeout(
-					function (m) {
-						sample.resetindex();
+					function (m, sender) {
+						let p = function (m) {
+							return new Promise(function (res, rej) {
+								try {
+									sample.resetindex();
 
-						cl.replaceChild(
-							document.getElementById("root"),
-							new div({
-								marginBottom: 3,
-								elem: m.source.map(function (i) {
-									return gen_example(i);
-								}),
+									cl.replaceChild(
+										document.getElementById("root"),
+										new div({
+											marginBottom: 3,
+											elem: m.source.map(function (i) {
+												return gen_example(i);
+											}),
+										})
+									);
+
+									cl.init(document.getElementById("root"));
+									PR.prettyPrint();
+
+									gen_toc();
+									res();
+								} catch (ex) {
+									rej(ex);
+								}
+							});
+						};
+
+						p(m)
+							.then(function () {
+								if (sender) {
+									sender.innerText = m2;
+								}
 							})
-						);
-
-						cl.init(document.getElementById("root"));
-						PR.prettyPrint();
-
-						gen_toc();
+							.catch(function () {
+								if (sender) {
+									sender.innerText = m2;
+								}
+							});
 					},
-					1,
-					m
+					0,
+					m,
+					sender
 				);
+
+				// setTimeout(
+				// 	function (m) {
+				// 		sample.resetindex();
+
+				// 		cl.replaceChild(
+				// 			document.getElementById("root"),
+				// 			new div({
+				// 				marginBottom: 3,
+				// 				elem: m.source.map(function (i) {
+				// 					return gen_example(i);
+				// 				}),
+				// 			})
+				// 		);
+
+				// 		cl.init(document.getElementById("root"));
+				// 		PR.prettyPrint();
+
+				// 		gen_toc();
+				// 	},
+				// 	1,
+				// 	m
+				// );
 			} else {
 				cl.replaceChild(
 					document.getElementById("root"),
@@ -344,7 +392,7 @@ function gen_menu(m1, m2, theme) {
 						let m2 = sender.getAttribute("cl-m2");
 						let m3 = sender.getAttribute("cl-m3");
 
-						gen_content(m1, m2);
+						gen_content(m1, m2, sender);
 
 						let activeItem = [].slice.call(
 							document.getElementById("sidebar").getElementsByClassName("active")

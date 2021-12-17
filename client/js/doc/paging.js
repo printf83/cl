@@ -4,7 +4,7 @@ import icon from "../base/icon.js";
 
 export default [
 	{
-		title: "paging",
+		title: "Paging",
 		msg: "Documentation and examples for showing paging to indicate a series of related content exists across multiple pages.",
 		anchor: false,
 	},
