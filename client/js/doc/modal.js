@@ -298,7 +298,7 @@ export default [
 					new modal({
 						static: false,
 						title: "Modal title",
-						elem: "By default, modal dialog will not close if you click outside or press escape key. To allow modal dialog to close when click outside or press escape key, set {{static: false}} option",
+						elem: "By default, modal dialog will not close if you click outside or press escape key. To allow modal dialog to close when click outside or press escape key, set <code>static: false</code> option",
 						button: [
 							{
 								label: "Understand",
@@ -327,7 +327,7 @@ export default [
 						title: "Modal title",
 						elem: [
 							new p({
-								elem: "By default, modal dialog will activate scrolling inside modal dialog. To disabled it, set {{scrollable: false}} option.",
+								elem: "By default, modal dialog will activate scrolling inside modal dialog. To disabled it, set <code>scrollable: false</code> option.",
 							}),
 							new p({ elem: sample.text() }),
 							new p({ elem: sample.text() }),
@@ -361,7 +361,7 @@ export default [
 					new modal({
 						center: false,
 						title: "Modal title",
-						elem: "By default, modal dialog will vertically centered when shown. To disabled it, set {{center: false}} option.",
+						elem: "By default, modal dialog will vertically centered when shown. To disabled it, set <code>center: false</code> option.",
 						button: [
 							{
 								label: "Save changes",

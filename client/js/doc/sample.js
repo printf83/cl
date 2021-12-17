@@ -471,7 +471,7 @@ export function dlgFullscreenFn(fullscreen) {
 	new modal({
 		fullscreen: fullscreen,
 		title: "Modal title",
-		elem: `Dialog with {{fullscreen : <b>${fullscreen}</b>}} option`,
+		elem: `Dialog with <code>fullscreen : <b>${fullscreen}</b></code> option`,
 		button: ["Okay"],
 	}).show();
 }
@@ -480,7 +480,7 @@ export function dlgSizeFn(size) {
 	new modal({
 		size: size,
 		title: "Modal title",
-		elem: `Dialog with {{size : <b>${size}</b>}} option`,
+		elem: `Dialog with <code>size : <b>${size}</b></code> option`,
 		button: ["Okay"],
 	}).show();
 }

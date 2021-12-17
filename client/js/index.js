@@ -33,9 +33,11 @@ import doc_listgroup from "./doc/listgroup.js";
 import doc_modal from "./doc/modal.js";
 import doc_tab from "./doc/tab.js";
 
-const def_m1 = "Forms";
-const def_m2 = "Input group";
-const def_theme = "zephyr";
+import doc_icon from "./doc/icon.js";
+
+const def_m1 = "Extend";
+const def_m2 = "Icon";
+const def_theme = null;
 
 const db_menu = [
 	{
@@ -96,7 +98,7 @@ const db_menu = [
 	{
 		type: "menu",
 		title: "Extend",
-		item: [{ title: "Icon", source: null }],
+		item: [{ title: "Icon", source: doc_icon }],
 	},
 	{
 		type: "navigate",
