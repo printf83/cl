@@ -180,7 +180,7 @@ export function cardwithimg() {
 			elem: [
 				new card.img({
 					placement: "top",
-					src: img(),
+					src: img(415, 207),
 				}),
 				new card.body({
 					elem: [
@@ -196,7 +196,7 @@ export function cardwithimg() {
 			elem: [
 				new card.img({
 					placement: "top",
-					src: img(),
+					src: img(415, 207),
 				}),
 				new card.body({
 					elem: [
@@ -212,7 +212,7 @@ export function cardwithimg() {
 			elem: [
 				new card.img({
 					placement: "top",
-					src: img(),
+					src: img(415, 207),
 				}),
 				new card.body({
 					elem: [
@@ -228,7 +228,7 @@ export function cardwithimg() {
 			elem: [
 				new card.img({
 					placement: "top",
-					src: img(),
+					src: img(415, 207),
 				}),
 				new card.body({
 					elem: [
@@ -249,7 +249,7 @@ export function cardwithfooter() {
 			elem: [
 				new card.img({
 					placement: "top",
-					src: img(),
+					src: img(415, 207),
 				}),
 				new card.body({
 					elem: [
@@ -266,7 +266,7 @@ export function cardwithfooter() {
 			elem: [
 				new card.img({
 					placement: "top",
-					src: img(),
+					src: img(415, 207),
 				}),
 				new card.body({
 					elem: [
@@ -283,7 +283,7 @@ export function cardwithfooter() {
 			elem: [
 				new card.img({
 					placement: "top",
-					src: img(),
+					src: img(415, 207),
 				}),
 				new card.body({
 					elem: [
@@ -306,7 +306,7 @@ export function cardh100() {
 			elem: [
 				new card.img({
 					placement: "top",
-					src: img(),
+					src: img(415, 207),
 				}),
 				new card.body({
 					elem: [
@@ -323,7 +323,7 @@ export function cardh100() {
 			elem: [
 				new card.img({
 					placement: "top",
-					src: img(),
+					src: img(415, 207),
 				}),
 				new card.body({
 					elem: [
@@ -340,7 +340,7 @@ export function cardh100() {
 			elem: [
 				new card.img({
 					placement: "top",
-					src: img(),
+					src: img(415, 207),
 				}),
 				new card.body({
 					elem: [
@@ -362,7 +362,7 @@ export function cardwithfooterh100() {
 			elem: [
 				new card.img({
 					placement: "top",
-					src: img(),
+					src: img(415, 207),
 				}),
 				new card.body({
 					elem: [
@@ -380,7 +380,7 @@ export function cardwithfooterh100() {
 			elem: [
 				new card.img({
 					placement: "top",
-					src: img(),
+					src: img(415, 207),
 				}),
 				new card.body({
 					elem: [
@@ -398,7 +398,7 @@ export function cardwithfooterh100() {
 			elem: [
 				new card.img({
 					placement: "top",
-					src: img(),
+					src: img(415, 207),
 				}),
 				new card.body({
 					elem: [

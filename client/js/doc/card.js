@@ -27,7 +27,7 @@ export default [
 				elem: [
 					new card.img({
 						placement: "top",
-						src: sample.img(),
+						src: sample.img(286, 143),
 					}),
 					new card.body({
 						elem: [
@@ -91,7 +91,7 @@ export default [
 				elem: [
 					new card.img({
 						placement: "top",
-						src: sample.img(),
+						src: sample.img(286, 143),
 					}),
 					new card.body({
 						elem: new card.text({
@@ -162,7 +162,7 @@ export default [
 				elem: [
 					new card.img({
 						placement: "top",
-						src: sample.img(),
+						src: sample.img(286, 143),
 					}),
 					new card.body({
 						elem: [
@@ -519,7 +519,7 @@ export default [
 					elem: [
 						new card.img({
 							placement: "top",
-							src: sample.img(),
+							src: sample.img(857, 428),
 						}),
 						new card.body({
 							elem: [
@@ -545,7 +545,7 @@ export default [
 						}),
 						new card.img({
 							placement: "bottom",
-							src: sample.img(),
+							src: sample.img(857, 428),
 						}),
 					],
 				}),
@@ -561,7 +561,7 @@ export default [
 				textcolor: "light",
 				elem: [
 					new card.img({
-						src: sample.img(),
+						src: sample.img(857, 428),
 					}),
 					new card.imgoverlay({
 						elem: [
@@ -588,7 +588,7 @@ export default [
 						left: [
 							new card.img({
 								placement: "left",
-								src: sample.img(400, 400),
+								src: sample.img(285, 285),
 							}),
 						],
 						right: [
@@ -773,7 +773,7 @@ export default [
 						elem: [
 							new card.img({
 								placement: "top",
-								src: sample.img(),
+								src: sample.img(286, 143),
 							}),
 							new card.body({
 								elem: [
@@ -806,7 +806,7 @@ export default [
 						elem: [
 							new card.img({
 								placement: "top",
-								src: sample.img(),
+								src: sample.img(286, 143),
 							}),
 							new card.body({
 								elem: [
@@ -879,7 +879,7 @@ export default [
 							elem: [
 								new card.img({
 									placement: "top",
-									src: sample.img(),
+									src: sample.img(286, 143),
 								}),
 								new card.body({
 									elem: [
@@ -919,7 +919,7 @@ export default [
 							elem: [
 								new card.img({
 									placement: "top",
-									src: sample.img(),
+									src: sample.img(286, 143),
 								}),
 								new card.body({
 									elem: [
