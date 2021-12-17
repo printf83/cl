@@ -133,8 +133,7 @@ export default [
 				title: "Modal title",
 				elem: new tab({
 					type: "tab",
-					border: false, //!important
-					rounded: false, //!important
+					flush: true, //!important
 					item: sample.dropdowntab(),
 				}),
 				button: ["Understand", "Close"],
@@ -152,8 +151,7 @@ export default [
 				title: "Modal title",
 				elem: new tab({
 					type: "pill",
-					border: false, //!important
-					rounded: false, //!important
+					flush: true, //!important
 					item: sample.dropdowntab(),
 				}),
 				button: ["Understand", "Close"],

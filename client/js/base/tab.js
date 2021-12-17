@@ -35,6 +35,11 @@ export default class tab extends div {
 		if (opt) {
 			opt = core.extend({}, defaultOption, opt);
 
+			if (opt.flush) {
+				opt.rounded = false;
+				opt.border = false;
+			}
+
 			//check if item isnot array
 			opt.item = opt.item ? (Array.isArray(opt.item) ? opt.item : [opt.item]) : null;
 
@@ -158,7 +163,7 @@ export default class tab extends div {
 							: "card-" + (opt.headAlign === "vertical-right" ? "footer" : "header") + "-tabs"
 						: null,
 					opt.column ? "flex-column mb-auto" : null,
-					opt.flush ? "nav-flush" : null,
+					// opt.flush ? "nav-flush" : null,
 					opt.type === "tab" ? "nav-tabs" : opt.type === "pill" ? "nav-pills" : null,
 					opt.headAlign === "right"
 						? "justify-content-end"
