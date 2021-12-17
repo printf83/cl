@@ -237,8 +237,12 @@ export default class toast extends div {
 
 			setTimeout(
 				function (dom, tst) {
-					//tst.destroy();
+					tst.dispose();
 					cl.removeElement(dom);
+					dom.remove();
+
+					this.mdl = null;
+					this.dom = null;
 
 					this.tst = null;
 					this.dom = null;

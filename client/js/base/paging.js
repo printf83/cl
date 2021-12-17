@@ -30,6 +30,7 @@ const defaultOption = {
 
 function pagingonchange(sender, data) {
 	let container = sender.closest(".cl-paging");
+	let ulcontainer = container.firstChild;
 	var event = new CustomEvent("change", {
 		currentTarget: sender,
 		detail: {
@@ -40,7 +41,7 @@ function pagingonchange(sender, data) {
 		},
 	});
 
-	container.dispatchEvent(event);
+	ulcontainer.dispatchEvent(event);
 
 	cl.replaceWith(container, new paging(data));
 }

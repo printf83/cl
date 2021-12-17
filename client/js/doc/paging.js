@@ -1,6 +1,7 @@
 "use strict";
 import paging from "../base/paging.js";
 import icon from "../base/icon.js";
+import toast from "../base/toast.js";
 
 export default [
 	{
@@ -17,9 +18,9 @@ export default [
 				skip: 20, // record number to show
 				total: 1260, // total record
 				max: 3, // max number show in control
-				onchange: function (skip, sender) {
+				onchange: function (event) {
 					//function called when skip change
-					new toast("i", `Skip changed to ${skip}`).show();
+					new toast("i", `Skip changed to ${event.detail.skip}`).show();
 				},
 			});
 		},
@@ -33,8 +34,8 @@ export default [
 				skip: 60,
 				total: 1260,
 				max: 5,
-				onchange: function (skip, sender) {
-					new toast("i", `Skip changed to ${skip}`).show();
+				onchange: function (event) {
+					new toast("i", `Skip changed to ${event.detail.skip}`).show();
 				},
 			});
 		},
@@ -52,8 +53,8 @@ export default [
 				labellast: "Last",
 				labelnext: new icon("arrow-right"),
 				labelprev: new icon("arrow-left"),
-				onchange: function (skip, sender) {
-					new toast("i", `Skip changed to ${skip}`).show();
+				onchange: function (event) {
+					new toast("i", `Skip changed to ${event.detail.skip}`).show();
 				},
 			});
 		},
@@ -68,8 +69,8 @@ export default [
 				total: 1260,
 				max: 3,
 				showfirstlast: false,
-				onchange: function (skip, sender) {
-					new toast("i", `Skip changed to ${skip}`).show();
+				onchange: function (event) {
+					new toast("i", `Skip changed to ${event.detail.skip}`).show();
 				},
 			});
 		},
@@ -84,8 +85,8 @@ export default [
 				total: 1260,
 				max: 3,
 				shownextprev: false,
-				onchange: function (skip, sender) {
-					new toast("i", `Skip changed to ${skip}`).show();
+				onchange: function (event) {
+					new toast("i", `Skip changed to ${event.detail.skip}`).show();
 				},
 			});
 		},
@@ -104,8 +105,8 @@ export default [
 				total: 1260,
 				max: 3,
 				weight: "lg",
-				onchange: function (skip, sender) {
-					new toast("i", `Skip changed to ${skip}`).show();
+				onchange: function (event) {
+					new toast("i", `Skip changed to ${event.detail.skip}`).show();
 				},
 			});
 		},
@@ -120,8 +121,8 @@ export default [
 				total: 1260,
 				max: 3,
 				weight: "sm",
-				onchange: function (skip, sender) {
-					new toast("i", `Skip changed to ${skip}`).show();
+				onchange: function (event) {
+					new toast("i", `Skip changed to ${event.detail.skip}`).show();
 				},
 			});
 		},
@@ -140,8 +141,8 @@ export default [
 				total: 1260,
 				max: 3,
 				align: "start",
-				onchange: function (skip, sender) {
-					new toast("i", `Skip changed to ${skip}`).show();
+				onchange: function (event) {
+					new toast("i", `Skip changed to ${event.detail.skip}`).show();
 				},
 			});
 		},
@@ -156,8 +157,8 @@ export default [
 				total: 1260,
 				max: 3,
 				align: "end",
-				onchange: function (skip, sender) {
-					new toast("i", `Skip changed to ${skip}`).show();
+				onchange: function (event) {
+					new toast("i", `Skip changed to ${event.detail.skip}`).show();
 				},
 			});
 		},

@@ -1,7 +1,7 @@
 "use strict";
 import * as core from "./core.js";
 
-const DEBUG = false;
+const DEBUG = true;
 
 function elemInfo(elem) {
 	let a1 = elem.localName;
@@ -259,10 +259,29 @@ export function html(data) {
 export function init(container) {
 	let popoverTriggerList = [].slice.call(container.querySelectorAll('[data-bs-toggle="popover"]'));
 	popoverTriggerList.map(function (popoverTriggerEl) {
-		return new bootstrap.Popover(popoverTriggerEl);
+		let elem = new bootstrap.Popover(popoverTriggerEl);
+
+		elem.detachEventListener = function (sender) {
+			if (DEBUG) console.log(`Remove popover from ${elemInfo(sender)}`);
+			bootstrap.Popover.getInstance(sender)?.dispose();
+			sender.detachEventListener = null;
+			delete sender.detachEventListener;
+		};
+
+		return elem;
 	});
+
 	let tooltipTriggerList = [].slice.call(container.querySelectorAll('[data-bs-toggle="tooltip"]'));
 	tooltipTriggerList.map(function (tooltipTriggerEl) {
-		return new bootstrap.Tooltip(tooltipTriggerEl);
+		let elem = new bootstrap.Tooltip(tooltipTriggerEl);
+
+		elem.detachEventListener = function (sender) {
+			if (DEBUG) console.log(`Remove tooltip from ${elemInfo(sender)}`);
+			bootstrap.Tooltip.getInstance(sender)?.dispose();
+			sender.detachEventListener = null;
+			delete sender.detachEventListener;
+		};
+
+		return elem;
 	});
 }
