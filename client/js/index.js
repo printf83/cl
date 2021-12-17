@@ -35,11 +35,12 @@ import doc_tab from "./doc/tab.js";
 import doc_navbar from "./doc/navbar.js";
 import doc_offcanvas from "./doc/offcanvas.js";
 import doc_paging from "./doc/paging.js";
+import doc_popover from "./doc/popover.js";
 
 import doc_icon from "./doc/icon.js";
 
 const def_m1 = "Components";
-const def_m2 = "Card";
+const def_m2 = "Popover";
 const def_theme = null;
 
 const db_menu = [
@@ -91,7 +92,7 @@ const db_menu = [
 			{ title: "Navbar", source: doc_navbar },
 			{ title: "Offcanvas", source: doc_offcanvas },
 			{ title: "Paging", source: doc_paging },
-			{ title: "Popover", source: null },
+			{ title: "Popover", source: doc_popover },
 			{ title: "Progress", source: null },
 			{ title: "Spinners", source: null },
 			{ title: "Toast", source: null },
@@ -242,73 +243,73 @@ function gen_content(m1, m2, sender) {
 				if (sender) {
 					sender.innerText = "Loading";
 				}
-				setTimeout(
-					function (m, sender) {
-						let p = function (m) {
-							return new Promise(function (res, rej) {
-								try {
-									sample.resetindex();
-
-									cl.replaceChild(
-										document.getElementById("root"),
-										new div({
-											marginBottom: 3,
-											elem: m.source.map(function (i) {
-												return gen_example(i);
-											}),
-										})
-									);
-
-									cl.init(document.getElementById("root"));
-									PR.prettyPrint();
-
-									gen_toc();
-									res();
-								} catch (ex) {
-									rej(ex);
-								}
-							});
-						};
-
-						p(m)
-							.then(function () {
-								if (sender) {
-									sender.innerText = m2;
-								}
-							})
-							.catch(function () {
-								if (sender) {
-									sender.innerText = m2;
-								}
-							});
-					},
-					0,
-					m,
-					sender
-				);
-
 				// setTimeout(
-				// 	function (m) {
-				// 		sample.resetindex();
+				// 	function (m, sender) {
+				// 		let p = function (m) {
+				// 			return new Promise(function (res, rej) {
+				// 				try {
+				// 					sample.resetindex();
 
-				// 		cl.replaceChild(
-				// 			document.getElementById("root"),
-				// 			new div({
-				// 				marginBottom: 3,
-				// 				elem: m.source.map(function (i) {
-				// 					return gen_example(i);
-				// 				}),
+				// 					cl.replaceChild(
+				// 						document.getElementById("root"),
+				// 						new div({
+				// 							marginBottom: 3,
+				// 							elem: m.source.map(function (i) {
+				// 								return gen_example(i);
+				// 							}),
+				// 						})
+				// 					);
+
+				// 					cl.init(document.getElementById("root"));
+				// 					PR.prettyPrint();
+
+				// 					gen_toc();
+				// 					res();
+				// 				} catch (ex) {
+				// 					rej(ex);
+				// 				}
+				// 			});
+				// 		};
+
+				// 		p(m)
+				// 			.then(function () {
+				// 				if (sender) {
+				// 					sender.innerText = m2;
+				// 				}
 				// 			})
-				// 		);
-
-				// 		cl.init(document.getElementById("root"));
-				// 		PR.prettyPrint();
-
-				// 		gen_toc();
+				// 			.catch(function () {
+				// 				if (sender) {
+				// 					sender.innerText = m2;
+				// 				}
+				// 			});
 				// 	},
-				// 	1,
-				// 	m
+				// 	0,
+				// 	m,
+				// 	sender
 				// );
+
+				setTimeout(
+					function (m) {
+						sample.resetindex();
+
+						cl.replaceChild(
+							document.getElementById("root"),
+							new div({
+								marginBottom: 3,
+								elem: m.source.map(function (i) {
+									return gen_example(i);
+								}),
+							})
+						);
+
+						cl.init(document.getElementById("root"));
+						PR.prettyPrint();
+
+						gen_toc();
+					},
+					1,
+					m
+				);
 			} else {
 				cl.replaceChild(
 					document.getElementById("root"),

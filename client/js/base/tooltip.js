@@ -32,7 +32,7 @@ export default class tooltip extends tag {
 					"data-bs-toggle": opt.type,
 					"data-bs-content": opt.type === "popover" ? opt.msg : null,
 					"data-bs-trigger": opt.type === "popover" ? opt.trigger : null,
-					"data-bs-placement": opt.type ? opt.placement : null,
+					"data-bs-placement": opt.placement ? opt.placement : null,
 					"data-bs-html": opt.type && core.isHTML(opt.msg) ? "true" : null,
 				});
 
