@@ -7,6 +7,8 @@ import * as container from "../base/container.js";
 import modal from "../base/modal.js";
 import div from "../base/div.js";
 import badge from "../base/badge.js";
+import * as navbar from "../base/navbar.js";
+import button from "../base/button.js";
 
 let imgindex = 0;
 let textindex = 0;
@@ -509,5 +511,45 @@ export function dropdowntab() {
 		},
 		{ label: "Third", elem: "This is third tab. " + text() },
 		{ label: "Disabled", disabled: true, elem: "This is last tab. " + text() },
+	];
+}
+
+export function navbaritem(id, title) {
+	return [
+		new navbar.toggle({
+			target: `#${id}`,
+			toggle: "collapse",
+		}),
+
+		new navbar.brand({
+			label: title ? title : "Navbar",
+		}),
+
+		new navbar.collapsecontainer({
+			id: id,
+			elem: [
+				new navbar.itemcontainer({
+					parenttype: "collapse",
+					elem: [
+						new navbar.item({ label: "Home", active: true }),
+						new navbar.item({ label: "Link" }),
+						new navbar.item({
+							label: "Dropdown",
+							option: dropdownitem(),
+						}),
+						new navbar.item({ label: "Disabled", disabled: true }),
+					],
+				}),
+				new navbar.formcontainer([
+					new input({
+						type: "search",
+						placeholder: "Search",
+						hiddenlabel: "Search",
+						class: "me-2",
+					}),
+					new button({ label: "Search", color: "success", outline: true }),
+				]),
+			],
+		}),
 	];
 }

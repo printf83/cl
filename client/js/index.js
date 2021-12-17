@@ -32,11 +32,12 @@ import doc_dropdown from "./doc/dropdown.js";
 import doc_listgroup from "./doc/listgroup.js";
 import doc_modal from "./doc/modal.js";
 import doc_tab from "./doc/tab.js";
+import doc_navbar from "./doc/navbar.js";
 
 import doc_icon from "./doc/icon.js";
 
-const def_m1 = "Extend";
-const def_m2 = "Icon";
+const def_m1 = "Components";
+const def_m2 = "Navbar";
 const def_theme = null;
 
 const db_menu = [
@@ -85,7 +86,7 @@ const db_menu = [
 			{ title: "List group", source: doc_listgroup },
 			{ title: "Modal", source: doc_modal },
 			{ title: "Tab", source: doc_tab },
-			{ title: "Navbar", source: null },
+			{ title: "Navbar", source: doc_navbar },
 			{ title: "Offcanvas", source: null },
 			{ title: "Paging", source: null },
 			{ title: "Popover", source: null },

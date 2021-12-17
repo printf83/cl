@@ -182,7 +182,6 @@ export class collapsecontainer extends div {
 	set data(opt) {
 		opt.class = core.merge.class(opt.class, ["collapse", "navbar-collapse"]);
 		super.data = opt;
-
 	}
 }
 
@@ -231,7 +230,6 @@ export class offcanvascontainer extends div {
 		delete opt.title;
 
 		super.data = opt;
-
 	}
 }
 
@@ -260,7 +258,6 @@ export class itemcontainer extends div {
 		} else if (opt.parenttype === "offcanvas") {
 			opt.justifyContent = "end";
 			opt.paddingEnd = 3;
-
 		}
 		opt.class = core.merge.class(opt.class, [
 			"navbar-nav",
@@ -337,7 +334,7 @@ export class item extends div {
 	}
 }
 
-export default class text extends span {
+export class text extends span {
 	constructor(opt) {
 		super(opt);
 	}
