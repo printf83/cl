@@ -103,6 +103,18 @@ export default [
 	},
 
 	{
+		title: "Flush",
+		sample: { "sample.tab": sample.tab },
+		code: function () {
+			return new tab({
+				type: "tab",
+				flush: true,
+				item: sample.tab(),
+			});
+		},
+	},
+
+	{
 		title: "Dropdown tab",
 		sample: { "sample.dropdowntab": sample.dropdowntab },
 		code: function () {
