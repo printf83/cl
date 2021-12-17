@@ -36,11 +36,12 @@ import doc_navbar from "./doc/navbar.js";
 import doc_offcanvas from "./doc/offcanvas.js";
 import doc_paging from "./doc/paging.js";
 import doc_popover from "./doc/popover.js";
+import doc_progress from "./doc/progress.js";
 
 import doc_icon from "./doc/icon.js";
 
 const def_m1 = "Components";
-const def_m2 = "Popover";
+const def_m2 = "Progress";
 const def_theme = null;
 
 const db_menu = [
@@ -93,7 +94,7 @@ const db_menu = [
 			{ title: "Offcanvas", source: doc_offcanvas },
 			{ title: "Paging", source: doc_paging },
 			{ title: "Popover", source: doc_popover },
-			{ title: "Progress", source: null },
+			{ title: "Progress", source: doc_progress },
 			{ title: "Spinners", source: null },
 			{ title: "Toast", source: null },
 			{ title: "Tooltips", source: null },

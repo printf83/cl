@@ -26,16 +26,15 @@ export class container extends div {
 			opt.style = core.merge.style(opt.style, {
 				height: opt.height > 0 ? `${opt.height}px` : null,
 			});
+
+			opt.item = opt.item ? (Array.isArray(opt.item) ? opt.item : [opt.item]) : null;
+
 			opt.elem = opt.elem
 				? opt.elem
 				: opt.item
-				? Array.isArray(opt.item)
-					? opt.item.map(function (i) {
-							return i.hasOwnProperty("cl") ? i : new bar(i);
-					  })
-					: opt.item.hasOwnProperty("cl")
-					? opt.item
-					: new bar(opt.item)
+				? opt.item.map(function (i) {
+						return i.hasOwnProperty("cl") ? i : new bar(i);
+				  })
 				: null;
 
 			delete opt.height;
@@ -49,7 +48,7 @@ export class container extends div {
 const defaultBarOption = {
 	label: false,
 	stripe: false,
-	animate: false,
+	animated: false,
 	min: 0,
 	max: 100,
 	value: 0,
@@ -83,7 +82,7 @@ export class bar extends div {
 			opt.class = core.merge.class(opt.class, [
 				"progress-bar",
 				opt.stripe ? "progress-bar-striped" : null,
-				opt.animate ? "progress-bar-animated" : null,
+				opt.animated ? "progress-bar-animated" : null,
 			]);
 
 			opt.attr = core.merge.attr(opt.attr, {
