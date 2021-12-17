@@ -239,10 +239,6 @@ export default class toast extends div {
 				function (dom, tst) {
 					tst.dispose();
 					cl.removeElement(dom);
-					dom.remove();
-
-					this.mdl = null;
-					this.dom = null;
 
 					this.tst = null;
 					this.dom = null;

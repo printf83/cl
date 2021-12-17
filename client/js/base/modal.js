@@ -338,8 +338,7 @@ export default class modal extends div {
 			setTimeout(
 				function (dom, mdl) {
 					mdl.dispose();
-					cl.removeChildElement(dom);
-					dom.remove();
+					cl.removeElement(dom);
 
 					this.mdl = null;
 					this.dom = null;
