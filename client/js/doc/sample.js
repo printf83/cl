@@ -9,6 +9,8 @@ import div from "../base/div.js";
 import badge from "../base/badge.js";
 import * as navbar from "../base/navbar.js";
 import button from "../base/button.js";
+import dropdown from "../base/dropdown.js";
+import p from "../base/p.js";
 
 let imgindex = 0;
 let textindex = 0;
@@ -552,4 +554,19 @@ export function navbaritem(id, title) {
 			],
 		}),
 	];
+}
+
+export function offcanvasbody() {
+	return new div({
+		elem: [
+			new p({
+				elem: "Some text as placeholder. In real life you can have the elements you have chosen. Like, text, images, lists, etc.",
+			}),
+			new dropdown({
+				label: "Drowdown button",
+				color: "secondary",
+				option: dropdownitem(),
+			}),
+		],
+	});
 }

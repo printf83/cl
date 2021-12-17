@@ -33,11 +33,12 @@ import doc_listgroup from "./doc/listgroup.js";
 import doc_modal from "./doc/modal.js";
 import doc_tab from "./doc/tab.js";
 import doc_navbar from "./doc/navbar.js";
+import doc_offcanvas from "./doc/offcanvas.js";
 
 import doc_icon from "./doc/icon.js";
 
 const def_m1 = "Components";
-const def_m2 = "Navbar";
+const def_m2 = "Offcanvas";
 const def_theme = null;
 
 const db_menu = [
@@ -87,7 +88,7 @@ const db_menu = [
 			{ title: "Modal", source: doc_modal },
 			{ title: "Tab", source: doc_tab },
 			{ title: "Navbar", source: doc_navbar },
-			{ title: "Offcanvas", source: null },
+			{ title: "Offcanvas", source: doc_offcanvas },
 			{ title: "Paging", source: null },
 			{ title: "Popover", source: null },
 			{ title: "Progress", source: null },
