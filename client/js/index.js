@@ -241,9 +241,9 @@ function gen_content(m1, m2, sender) {
 	if (m) {
 		if (m.type === "menu") {
 			if (m.source) {
-				if (sender) {
-					sender.innerText = "Loading";
-				}
+				// if (sender) {
+				// 	sender.innerText = "Loading";
+				// }
 				// setTimeout(
 				// 	function (m, sender) {
 				// 		let p = function (m) {
