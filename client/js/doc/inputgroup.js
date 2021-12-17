@@ -127,14 +127,27 @@ export default [
 		container: doc_core.formcontainer,
 		code: function () {
 			return [
-				new input({
-					type: "text",
-					before: new input({ type: "checkbox", flex: true, class: "mt-0" }),
+				new inputgroup.container({
+					elem: [
+						new inputgroup.text({
+							elem: new input({ type: "checkbox", flex: true, class: "mt-0" }),
+						}),
+						new input({
+							type: "text",
+							container: false,
+						}),
+					],
 				}),
-
-				new input({
-					type: "text",
-					before: new input({ type: "radio", flex: true, class: "mt-0" }),
+				new inputgroup.container({
+					elem: [
+						new inputgroup.text({
+							elem: new input({ type: "radio", flex: true, class: "mt-0" }),
+						}),
+						new input({
+							type: "text",
+							container: false,
+						}),
+					],
 				}),
 			];
 		},

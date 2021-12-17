@@ -15,6 +15,7 @@ import doc_select from "./doc/select.js";
 import doc_checkradio from "./doc/checkradio.js";
 import doc_range from "./doc/range.js";
 import doc_inputgroup from "./doc/inputgroup.js";
+import doc_floatinglabel from "./doc/floatinglabel.js";
 
 import * as sample from "./doc/sample.js";
 import doc_button from "./doc/button.js";
@@ -61,7 +62,7 @@ const db_menu = [
 			{ title: "Check & radios", source: doc_checkradio },
 			{ title: "Range", source: doc_range },
 			{ title: "Input group", source: doc_inputgroup },
-			{ title: "Floating label", source: null },
+			{ title: "Floating label", source: doc_floatinglabel },
 		],
 	},
 	{
