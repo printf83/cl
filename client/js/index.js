@@ -10,6 +10,9 @@ import toc from "./base/toc.js";
 import code from "./base/code.js";
 import msg from "./base/msg.js";
 
+import doc_grid from "./doc/grid.js";
+import doc_column from "./doc/column.js";
+
 import doc_formcontrol from "./doc/formcontrol.js";
 import doc_select from "./doc/select.js";
 import doc_checkradio from "./doc/checkradio.js";
@@ -42,8 +45,8 @@ import doc_tooltip from "./doc/tooltip.js";
 
 import doc_icon from "./doc/icon.js";
 
-const def_m1 = "Components";
-const def_m2 = "Tooltips";
+const def_m1 = "Layout";
+const def_m2 = "Column";
 const def_theme = "pulse";
 
 const db_menu = [
@@ -57,8 +60,8 @@ const db_menu = [
 		title: "Layout",
 		item: [
 			{ title: "Containers", source: null },
-			{ title: "Grid", source: null },
-			{ title: "Column", source: null },
+			{ title: "Grid", source: doc_grid },
+			{ title: "Column", source: doc_column },
 			{ title: "Gutter", source: null },
 		],
 	},
