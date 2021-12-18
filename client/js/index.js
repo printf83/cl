@@ -37,11 +37,13 @@ import doc_offcanvas from "./doc/offcanvas.js";
 import doc_paging from "./doc/paging.js";
 import doc_popover from "./doc/popover.js";
 import doc_progress from "./doc/progress.js";
+import doc_toast from "./doc/toast.js";
+import doc_tooltip from "./doc/tooltip.js";
 
 import doc_icon from "./doc/icon.js";
 
 const def_m1 = "Components";
-const def_m2 = "Progress";
+const def_m2 = "Toast";
 const def_theme = null;
 
 const db_menu = [
@@ -95,9 +97,8 @@ const db_menu = [
 			{ title: "Paging", source: doc_paging },
 			{ title: "Popover", source: doc_popover },
 			{ title: "Progress", source: doc_progress },
-			{ title: "Spinners", source: null },
-			{ title: "Toast", source: null },
-			{ title: "Tooltips", source: null },
+			{ title: "Toast", source: doc_toast },
+			{ title: "Tooltips", source: doc_tooltip },
 		],
 	},
 	{
@@ -241,76 +242,77 @@ function gen_content(m1, m2, sender) {
 	if (m) {
 		if (m.type === "menu") {
 			if (m.source) {
-				// if (sender) {
-				// 	sender.innerText = "Loading";
-				// }
-				// setTimeout(
-				// 	function (m, sender) {
-				// 		let p = function (m) {
-				// 			return new Promise(function (res, rej) {
-				// 				try {
-				// 					sample.resetindex();
-
-				// 					cl.replaceChild(
-				// 						document.getElementById("root"),
-				// 						new div({
-				// 							marginBottom: 3,
-				// 							elem: m.source.map(function (i) {
-				// 								return gen_example(i);
-				// 							}),
-				// 						})
-				// 					);
-
-				// 					cl.init(document.getElementById("root"));
-				// 					PR.prettyPrint();
-
-				// 					gen_toc();
-				// 					res();
-				// 				} catch (ex) {
-				// 					rej(ex);
-				// 				}
-				// 			});
-				// 		};
-
-				// 		p(m)
-				// 			.then(function () {
-				// 				if (sender) {
-				// 					sender.innerText = m2;
-				// 				}
-				// 			})
-				// 			.catch(function () {
-				// 				if (sender) {
-				// 					sender.innerText = m2;
-				// 				}
-				// 			});
-				// 	},
-				// 	0,
-				// 	m,
-				// 	sender
-				// );
-
+				if (sender) {
+					sender.innerText = "Loading";
+				}
 				setTimeout(
-					function (m) {
-						sample.resetindex();
+					function (m, sender) {
+						let p = function (m) {
+							return new Promise(function (res, rej) {
+								try {
+									sample.resetindex();
 
-						cl.replaceChild(
-							document.getElementById("root"),
-							new div({
-								marginBottom: 3,
-								elem: m.source.map(function (i) {
-									return gen_example(i);
-								}),
+									cl.replaceChild(
+										document.getElementById("root"),
+										new div({
+											marginBottom: 3,
+											elem: m.source.map(function (i) {
+												return gen_example(i);
+											}),
+										})
+									);
+
+									cl.init(document.getElementById("root"));
+									PR.prettyPrint();
+
+									gen_toc();
+									res();
+								} catch (ex) {
+									rej(ex);
+								}
+							});
+						};
+
+						p(m)
+							.then(function () {
+								if (sender) {
+									sender.innerText = m2;
+								}
 							})
-						);
-
-						cl.init(document.getElementById("root"));
-						PR.prettyPrint();
-
-						gen_toc();
+							.catch(function (ex) {
+								console.error(ex);
+								if (sender) {
+									sender.innerText = m2;
+								}
+							});
 					},
-					1,
-					m
+					0,
+					m,
+					sender
 				);
+
+				// setTimeout(
+				// 	function (m) {
+				// 		sample.resetindex();
+
+				// 		cl.replaceChild(
+				// 			document.getElementById("root"),
+				// 			new div({
+				// 				marginBottom: 3,
+				// 				elem: m.source.map(function (i) {
+				// 					return gen_example(i);
+				// 				}),
+				// 			})
+				// 		);
+
+				// 		cl.init(document.getElementById("root"));
+				// 		PR.prettyPrint();
+
+				// 		gen_toc();
+				// 	},
+				// 	1,
+				// 	m
+				// );
 			} else {
 				cl.replaceChild(
 					document.getElementById("root"),
