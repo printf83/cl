@@ -194,6 +194,7 @@ function startmemoryleaktest(sender, limit) {
 			function () {
 				sender.classList.remove("active");
 				cl.init(document.getElementById("root"));
+				PR.prettyPrint();
 			}
 		);
 	}
