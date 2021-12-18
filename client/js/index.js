@@ -117,34 +117,26 @@ const db_menu = [
 		item: [
 			{
 				title: "Memory Test 10",
-				source: function () {
-					memoryleaktest(0, 10, function () {
-						cl.init(document.getElementById("root"));
-					});
+				source: function (event) {
+					startmemoryleaktest(event.currentTarget, 10);
 				},
 			},
 			{
 				title: "Memory Test 100",
-				source: function () {
-					memoryleaktest(0, 100, function () {
-						cl.init(document.getElementById("root"));
-					});
+				source: function (event) {
+					startmemoryleaktest(event.currentTarget, 100);
 				},
 			},
 			{
 				title: "Memory Test 1000",
-				source: function () {
-					memoryleaktest(0, 1000, function () {
-						cl.init(document.getElementById("root"));
-					});
+				source: function (event) {
+					startmemoryleaktest(event.currentTarget, 1000);
 				},
 			},
 			{
 				title: "Memory Test 5000",
-				source: function () {
-					memoryleaktest(0, 5000, function () {
-						cl.init(document.getElementById("root"));
-					});
+				source: function (event) {
+					startmemoryleaktest(event.currentTarget, 5000);
 				},
 			},
 		],
@@ -183,11 +175,36 @@ const db_menu = [
 	},
 ];
 
+function startmemoryleaktest(sender, limit) {
+	if (memoryleaktestrun === true) {
+		memoryleaktestrun = false;
+	} else {
+		sender.classList.add("active");
+		memoryleaktestrun = true;
+		memoryleaktest(
+			0,
+			limit,
+			function (i, l) {
+				if (i === l || memoryleaktestrun === false) {
+					sender.innerText = `Memory Test ${l}`;
+				} else {
+					sender.innerText = `Memory Test ${parseInt((i / l) * 100, 10)}%`;
+				}
+			},
+			function () {
+				sender.classList.remove("active");
+				cl.init(document.getElementById("root"));
+			}
+		);
+	}
+}
+
+let memoryleaktestrun = false;
 let ix1 = 0;
 let ix2 = 0;
-function memoryleaktest(index, limit, callback) {
-	if (index < limit) {
-		document.title = `Memory Test ${parseInt((index / limit) * 100, 10)}%`;
+function memoryleaktest(index, limit, progressupdate, callback) {
+	if (index < limit && memoryleaktestrun === true) {
+		progressupdate(index, limit);
 
 		let process = true;
 		if (db_menu[ix1].type === "menu") {
@@ -210,7 +227,7 @@ function memoryleaktest(index, limit, callback) {
 							callback();
 						} else {
 							ix2 = ix2 + 1;
-							memoryleaktest(index + 1, limit, callback);
+							memoryleaktest(index + 1, limit, progressupdate, callback);
 						}
 					},
 					0,
@@ -220,10 +237,11 @@ function memoryleaktest(index, limit, callback) {
 				);
 			});
 		} else {
-			memoryleaktest(index, limit, callback);
+			memoryleaktest(index, limit, progressupdate, callback);
 		}
 	} else {
-		document.title = "Index";
+		memoryleaktestrun = false;
+		progressupdate(index, limit);
 		callback();
 	}
 }
@@ -344,7 +362,6 @@ function gen_content(m1, m2, callback) {
 										})
 									);
 
-									PR.prettyPrint();
 									gen_toc();
 
 									res();
@@ -387,7 +404,6 @@ function gen_content(m1, m2, callback) {
 				// 			})
 				// 		);
 
-				// 		PR.prettyPrint();
 				// 		gen_toc();
 
 				// 		if (callback instanceof Function) {
@@ -413,7 +429,6 @@ function gen_content(m1, m2, callback) {
 				// 	})
 				// );
 
-				// PR.prettyPrint();
 				// gen_toc();
 
 				// if (callback instanceof Function) {
@@ -512,12 +527,6 @@ function gen_menu(m1, m2, theme) {
 									let m2 = sender.getAttribute("cl-m2");
 									let m3 = sender.getAttribute("cl-m3");
 
-									sender.innerText = "Loading...";
-									gen_content(m1, m2, function () {
-										cl.init(document.getElementById("root"));
-										sender.innerText = m2;
-									});
-
 									let activeItem = [].slice.call(
 										document.getElementById("sidebar").getElementsByClassName("active")
 									);
@@ -529,6 +538,17 @@ function gen_menu(m1, m2, theme) {
 									});
 
 									sender.classList.add("active");
+
+									if (i.type === "menu") {
+										sender.innerText = "Loading...";
+										gen_content(m1, m2, function () {
+											cl.init(document.getElementById("root"));
+											PR.prettyPrint();
+											sender.innerText = m2;
+										});
+									} else {
+										gen_content(m1, m2);
+									}
 							  }
 							: j.source,
 				};
@@ -575,6 +595,7 @@ core.documentReady(() => {
 
 	gen_content(def_m1, def_m2, function () {
 		cl.init(document.getElementById("root"));
+		PR.prettyPrint();
 	});
 
 	set_theme(def_theme);
