@@ -16,7 +16,7 @@ const defaultOption = {
 	close: true,
 	autohide: true,
 	delay: 5000,
-	date: new Date(),
+	date: null,
 	timer: true,
 	position: "top-0 end-0",
 
@@ -24,15 +24,8 @@ const defaultOption = {
 
 	debug: false,
 };
-/**
- * color,textcolor,icon,msg
- * color,icon,msg
- * color,msg
- * color,[elem]
- * color,elem
- * elem
- * [elem]
- * msg
+/**g
+ * icon,msg
  * opt : {attr,id,class,animate,title,icon,elem,close,autohide,delay,color,textcolor,bordercolor,border,date,timer,position,debug}
  */
 
@@ -45,19 +38,37 @@ export default class toast extends div {
 
 		if (arg && arg.length > 0) {
 			let t = {
-				textcolor: null,
-				color: null,
 				elem: null,
+				debug: null,
 			};
-			if (arg.length === 4) {
-				t.color = arg[0];
-				t.textcolor = arg[1];
-				t.elem = new msg({ weight: "sm", icon: arg[2], elem: arg[3] });
-			} else if (arg.length === 3) {
-				t.color = arg[0];
-				t.elem = new msg({ weight: "sm", icon: arg[1], elem: arg[2] });
+
+			if (arg.length === 3) {
+				let bI = core.getBaseIcon(arg[0]);
+
+				if (bI) {
+					t.color = bI.color;
+					t.textcolor = bI.textcolor;
+					t.elem = new msg({
+						weight: "sm",
+						icon: {
+							icon: bI.icon,
+							type: bI.type,
+						},
+						elem: arg[1],
+					});
+				} else {
+					t.color = arg[0];
+					if (typeof arg[1] === "string") {
+						t.elem = new msg({ weight: "sm", elem: arg[1] });
+					} else {
+						t.elem = arg[1];
+					}
+				}
+
+				t.debug = arg[2]?.debug === true ? true : false;
 			} else if (arg.length === 2) {
 				let bI = core.getBaseIcon(arg[0]);
+
 				if (bI) {
 					t.color = bI.color;
 					t.textcolor = bI.textcolor;
@@ -108,6 +119,9 @@ export default class toast extends div {
 				opt.color = opt.color || bI.color;
 				opt.textcolor = opt.textcolor || bI.textcolor;
 			}
+
+			//generate date
+			opt.date = opt.date || new Date();
 
 			//generate id
 			opt.id = opt.id || core.UUID();

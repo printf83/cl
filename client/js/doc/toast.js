@@ -1,36 +1,13 @@
 "use strict";
 import * as doc_core from "./core.js";
-import * as sample from "./sample.js";
-import listgroup from "../base/listgroup.js";
-import div from "../base/div.js";
-import p from "../base/p.js";
-import small from "../base/small.js";
-import h from "../base/h.js";
-import badge from "../base/badge.js";
-import button from "./button.js";
-
-/* 
-    \}\),\n+\t+new example\(\{
-    },\n\n\t{
-    
-    new  
-    new 
-
-    elem:
-    elem:
-
-    sample
-    sample
-
-    #
-    #
-
-	container: doc_core.stackcontainer(),
-	container: doc_core.stackcontainer,
-*/
+import * as core from "../base/core.js";
+import input from "../base/input.js";
+import toast from "../base/toast.js";
+import button from "../base/button.js";
+import msg from "../base/msg.js";
 
 export default [
-    {
+	{
 		title: "Toasts",
 		msg: "Push notifications to your visitors with a toast, a lightweight and easily customizable alert message.",
 		anchor: false,
@@ -49,23 +26,32 @@ export default [
 		viewclass: "cl-modal-preview",
 		code: function () {
 			return new toast({
+				color: "primary",
+				textcolor: "light",
 				icon: { icon: "fire", color: "primary" },
 				title: "Bootstrap",
-                msg: "Hello, world! This is a toast message.",
-            });
+				elem: "Hello, world! This is a toast message.",
+				debug: true, //this last option is for this documentation preview only
+			});
 		},
 	},
 
 	{
 		title: "Live",
 		msg: "Click the button below to show a toast (positioned with our utilities in the top right corner)",
-		label: "Show live toast",
-        code: function () {
-            return new button({ label: "", color: "primary", onclick: function () { } });
-			new toast({
-				icon: { icon: "fire", color: "primary" },
-				title: "Bootstrap",
-				msg: "Hello, world! This is a toast message.",
+		code: function () {
+			return new button({
+				label: "Show live toast",
+				color: "primary",
+				onclick: function () {
+					new toast({
+						color: "primary",
+						textcolor: "light",
+						icon: { icon: "fire", color: "primary" },
+						title: "Bootstrap",
+						elem: "Hello, world! This is a toast message.",
+					}).show();
+				},
 			});
 		},
 	},
@@ -76,10 +62,12 @@ export default [
 		dark: true,
 		code: function () {
 			return new toast({
+				color: "primary",
+				textcolor: "light",
 				icon: { icon: "fire", color: "primary" },
 				title: "Bootstrap",
-				msg: "Hello, world! This is a toast message.",
-				show: false, //for example only (should be remove for live version)
+				elem: "Hello, world! This is a toast message.",
+				debug: true, //this last option is for this documentation preview only
 			});
 		},
 	},
@@ -87,35 +75,41 @@ export default [
 	{
 		title: "Stacking",
 		msg: "Toast automatically stacking",
-		label: "Show live toast",
-        code: function () {
-            return new button({ label: "", color: "primary", onclick: function () { } });
-			new toast({
-				icon: { icon: "fire", color: "primary" },
-				title: "Bootstrap",
-				msg: "Heads up, toasts will stack automatically. Second toast will appear in 2 second.",
-			});
+		code: function () {
+			return new button({
+				label: "Show live toast",
+				color: "primary",
+				onclick: function () {
+					new toast({
+						color: "primary",
+						textcolor: "light",
+						icon: { icon: "fire", color: "primary" },
+						title: "Bootstrap",
+						elem: "Heads up, toasts will stack automatically. Second toast will appear in 2 second.",
+					}).show();
 
-			//show second toast after 2 second
-			setTimeout(function () {
-				new toast({
-					icon: { icon: "fire", color: "primary" },
-					title: "Bootstrap",
-					msg: "See? Just like this.",
-				});
-			}, 2000);
+					//show second toast after 2 second
+					setTimeout(function () {
+						new toast({
+							color: "success",
+							textcolor: "light",
+							icon: { icon: "fire", color: "success" },
+							title: "Bootstrap",
+							elem: "See? Just like this.",
+						}).show();
+					}, 2000);
+				},
+			});
 		},
 	},
 
 	{
 		title: "Base icon",
-		container: new cont.formcontainer,
+		container: doc_core.formcontainer,
 		code: function () {
-			return ["i", "!!", "!", "?", "-", "x", "/", "dosave", "dodelete", "lock", "shield", "logout"].map(function (
-				i
-			) {
-				//for example only (last and second last argument should be remove for live version)
-				return new toast(i, `Example <b>${i}</b> icon toast`, null, false);
+			return ["i", "!!", "!", "?", "-", "x", "/"].map(function (i) {
+				//this last argument is for this documentation preview only
+				return new toast(i, `Example <b>${i}</b> icon toast`, { debug: true });
 			});
 		},
 	},
@@ -131,12 +125,14 @@ export default [
 					after: new button({
 						label: "Show",
 						color: "primary",
-						onclick: function (sender) {
-							var icon = new core.getvalue($(sender).parent().find("select"));
-							new toast(icon, `Example <b>${icon}</b> icon toast`);
+						textcolor: "light",
+						onclick: function (event) {
+							let sender = event.currentTarget;
+							let icon = sender.previousSibling.value;
+							new toast(icon, `Example <b>${icon}</b> icon toast`).show();
 						},
 					}),
-					option: ["i", "!!", "!", "?", "-", "x", "/", "dosave", "dodelete", "lock", "shield", "logout"],
+					option: ["i", "!!", "!", "?", "-", "x", "/"],
 				}),
 			];
 		},
@@ -144,55 +140,27 @@ export default [
 
 	{
 		title: "Color",
-		container: new cont.formcontainer,
+		container: doc_core.formcontainer,
 		code: function () {
-			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map(function (i) {
-				//for example only (show option should be remove for live version)
-				return new toast({ color: i, msg: `Example <b>${i}</b> toast`, show: false });
+			return [
+				{ color: "primary", textcolor: "light" },
+				{ color: "secondary", textcolor: "light" },
+				{ color: "success", textcolor: "light" },
+				{ color: "danger", textcolor: "light" },
+				{ color: "warning", textcolor: "dark" },
+				{ color: "info", textcolor: "dark" },
+				{ color: "light", textcolor: "dark" },
+				{ color: "dark", textcolor: "light" },
+			].map(function (i) {
+				return new toast({
+					color: i.color,
+					textcolor: i.textcolor,
+					elem: new msg({ weight: "sm", icon: "fire", elem: `Example <b>${i.color}</b> toast` }),
+					debug: true, //this last argument is for this documentation preview only
+				});
 			});
 		},
 	},
-
-	{
-		title: "Color live",
-		code: function () {
-			return [
-				new input({
-					type: "select",
-					before: "color:",
-					aftertype: "button",
-					after: new button({
-						label: "Show",
-						color: "primary",
-						onclick: function (sender) {
-							var color = new core.getvalue($(sender).parent().find("select"));
-							new toast({ color: color, msg: `Example <b>${color}</b> toast` });
-						},
-					}),
-					option: ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"],
-				}),
-			];
-		},
-	},
-
-	// {
-	// 	title: "Color",
-	// 	container: doc_core.stackcontainer,
-	// 	code: function () {
-	// 		return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map(function (i) {
-	// 			return new button({
-	// 				color: i,
-	// 				label: i.capitalize(),
-	// 				onclick: function () {
-	// 					new toast({
-	// 						color: i,
-	// 						msg: `Example <b>${i}</b> toast`,
-	// 					});
-	// 				},
-	// 			});
-	// 		});
-	// 	},
-	// },
 
 	{
 		title: "Position",
@@ -215,7 +183,10 @@ export default [
 					color: "primary",
 					label: i.label,
 					onclick: function () {
-						new toast({ position: i.position, icon: "i", msg: `${i.label} toast.` }).show();
+						new toast({
+							position: i.position,
+							elem: new msg({ weight: "sm", icon: "fire", elem: `${i.label} toast.` }),
+						}).show();
 					},
 				});
 			});
@@ -224,34 +195,39 @@ export default [
 
 	{
 		title: "Disable autoclose",
-		label: "Show toast",
-        code: function () {
-            return new button({
-                label: "", color: "primary", onclick: function () { 
-                    new toast({
-				autohide: false,
-				color: "warning",
-				icon: { icon: "fire", color: "danger" },
-				title: "Toast header",
-				msg: "Hello, world! This is a toast message.",
+		code: function () {
+			return new button({
+				label: "Show live toast",
+				color: "primary",
+				onclick: function () {
+					new toast({
+						autohide: false,
+						color: "warning",
+						icon: { icon: "fire", color: "danger" },
+						title: "Toast header",
+						elem: "Hello, world! This is a toast message.",
+					}).show();
+				},
 			});
-            } });
-			
 		},
 	},
 
 	{
 		title: "Delay autoclose",
-		label: "Show toast",
-        code: function () {
-            return new button({ label: "", color: "primary", onclick: function () { } });
-			new toast({
-				delay: 10000,
+		code: function () {
+			return new button({
+				label: "Show live toast",
 				color: "primary",
-				icon: { icon: "fire", color: "info" },
-				title: "Toast header",
-				msg: "This toast will close in 10 seconds.",
+				onclick: function () {
+					new toast({
+						delay: 10000,
+						color: "primary",
+						icon: { icon: "fire", color: "info" },
+						title: "Toast header",
+						elem: "This toast will close in 10 seconds.",
+					}).show();
+				},
 			});
 		},
-    },
-]
+	},
+];

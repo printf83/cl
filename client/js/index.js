@@ -43,7 +43,7 @@ import doc_tooltip from "./doc/tooltip.js";
 import doc_icon from "./doc/icon.js";
 
 const def_m1 = "Components";
-const def_m2 = "Toast";
+const def_m2 = "Tooltips";
 const def_theme = null;
 
 const db_menu = [
@@ -112,6 +112,22 @@ const db_menu = [
 		item: [{ title: "Sandbox", source: "sandbox.html" }],
 	},
 	{
+		type: "action",
+		title: "Action",
+		item: [
+			{
+				title: "Memory Leak Test",
+				source: function () {
+					memoryleaktest(0, 1000, function () {
+						cl.init(document.getElementById("root"));
+						PR.prettyPrint();
+						gen_toc();
+					});
+				},
+			},
+		],
+	},
+	{
 		type: "theme",
 		title: "Theme",
 		item: [
@@ -144,6 +160,51 @@ const db_menu = [
 		],
 	},
 ];
+
+let ix1 = 0;
+let ix2 = 0;
+function memoryleaktest(index, limit, callback) {
+	if (index < limit) {
+		document.title = `Memory Leak Test ${parseInt((index / limit) * 100, 10)}%`;
+
+		let process = true;
+		if (db_menu[ix1].type === "menu") {
+			if (ix2 >= db_menu[ix1].item.length) {
+				ix1 = ix1 + 1;
+				ix2 = 0;
+				process = false;
+			}
+		} else {
+			ix1 = 0;
+			ix2 = 0;
+			process = false;
+		}
+
+		if (process) {
+			gen_content(db_menu[ix1].title, db_menu[ix1].item[ix2].title, null, function () {
+				setTimeout(
+					function (index, limit, callback) {
+						if (index >= limit) {
+							callback();
+						} else {
+							ix2 = ix2 + 1;
+							memoryleaktest(index + 1, limit, callback);
+						}
+					},
+					0,
+					index,
+					limit,
+					callback
+				);
+			});
+		} else {
+			memoryleaktest(index, limit, callback);
+		}
+	} else {
+		document.title = "Index";
+		callback();
+	}
+}
 
 function gen_example(opt) {
 	opt = core.extend(
@@ -237,64 +298,60 @@ function find_menu(m1, m2) {
 	return null;
 }
 
-function gen_content(m1, m2, sender) {
+function gen_content(m1, m2, sender, callback) {
 	let m = find_menu(m1, m2);
 	if (m) {
 		if (m.type === "menu") {
 			if (m.source) {
-				if (sender) {
-					sender.innerText = "Loading";
-				}
-				setTimeout(
-					function (m, sender) {
-						let p = function (m) {
-							return new Promise(function (res, rej) {
-								try {
-									sample.resetindex();
-
-									cl.replaceChild(
-										document.getElementById("root"),
-										new div({
-											marginBottom: 3,
-											elem: m.source.map(function (i) {
-												return gen_example(i);
-											}),
-										})
-									);
-
-									cl.init(document.getElementById("root"));
-									PR.prettyPrint();
-
-									gen_toc();
-									res();
-								} catch (ex) {
-									rej(ex);
-								}
-							});
-						};
-
-						p(m)
-							.then(function () {
-								if (sender) {
-									sender.innerText = m2;
-								}
-							})
-							.catch(function (ex) {
-								console.error(ex);
-								if (sender) {
-									sender.innerText = m2;
-								}
-							});
-					},
-					0,
-					m,
-					sender
-				);
-
+				//==============
+				// if (sender) {
+				// 	sender.innerText = "Loading";
+				// }
+				// setTimeout(
+				// 	function (m, sender) {
+				// 		let p = function (m) {
+				// 			return new Promise(function (res, rej) {
+				// 				try {
+				// 					sample.resetindex();
+				// 					cl.replaceChild(
+				// 						document.getElementById("root"),
+				// 						new div({
+				// 							marginBottom: 3,
+				// 							elem: m.source.map(function (i) {
+				// 								return gen_example(i);
+				// 							}),
+				// 						})
+				// 					);
+				// 					cl.init(document.getElementById("root"));
+				// 					PR.prettyPrint();
+				// 					gen_toc();
+				// 					res();
+				// 				} catch (ex) {
+				// 					rej(ex);
+				// 				}
+				// 			});
+				// 		};
+				// 		p(m)
+				// 			.then(function () {
+				// 				if (sender) {
+				// 					sender.innerText = m2;
+				// 				}
+				// 			})
+				// 			.catch(function (ex) {
+				// 				console.error(ex);
+				// 				if (sender) {
+				// 					sender.innerText = m2;
+				// 				}
+				// 			});
+				// 	},
+				// 	0,
+				// 	m,
+				// 	sender
+				// );
+				//==============
 				// setTimeout(
 				// 	function (m) {
 				// 		sample.resetindex();
-
 				// 		cl.replaceChild(
 				// 			document.getElementById("root"),
 				// 			new div({
@@ -304,15 +361,29 @@ function gen_content(m1, m2, sender) {
 				// 				}),
 				// 			})
 				// 		);
-
 				// 		cl.init(document.getElementById("root"));
 				// 		PR.prettyPrint();
-
 				// 		gen_toc();
 				// 	},
 				// 	1,
 				// 	m
 				// );
+
+				//==============
+				sample.resetindex();
+				cl.replaceChild(
+					document.getElementById("root"),
+					new div({
+						marginBottom: 3,
+						elem: m.source.map(function (i) {
+							return gen_example(i);
+						}),
+					})
+				);
+
+				//cl.init(document.getElementById("root"));
+				PR.prettyPrint();
+				gen_toc();
 			} else {
 				cl.replaceChild(
 					document.getElementById("root"),
@@ -329,11 +400,17 @@ function gen_content(m1, m2, sender) {
 			}
 		} else if (m.type === "navigate") {
 			window.location = m.source;
+		} else if (m.type === "action") {
+			m.source();
 		} else if (m.type === "theme") {
 			set_theme(m.source);
 		} else {
 			console.warn("Unsupported type", m);
 		}
+	}
+
+	if (callback instanceof Function) {
+		callback();
 	}
 }
 
@@ -396,7 +473,11 @@ function gen_menu(m1, m2, theme) {
 						let m2 = sender.getAttribute("cl-m2");
 						let m3 = sender.getAttribute("cl-m3");
 
-						gen_content(m1, m2, sender);
+						gen_content(m1, m2, sender, function () {
+							cl.init(document.getElementById("root"));
+							PR.prettyPrint();
+							gen_toc();
+						});
 
 						let activeItem = [].slice.call(
 							document.getElementById("sidebar").getElementsByClassName("active")
@@ -452,6 +533,11 @@ core.documentReady(() => {
 		})
 	);
 
-	gen_content(def_m1, def_m2);
+	gen_content(def_m1, def_m2, null, function () {
+		cl.init(document.getElementById("root"));
+		PR.prettyPrint();
+		gen_toc();
+	});
+
 	set_theme(def_theme);
 });

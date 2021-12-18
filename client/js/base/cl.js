@@ -1,7 +1,7 @@
 "use strict";
 import * as core from "./core.js";
 
-const DEBUG = true;
+const DEBUG = false;
 
 function elemInfo(elem) {
 	let a1 = elem.localName;
