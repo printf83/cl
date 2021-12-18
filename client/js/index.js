@@ -44,7 +44,7 @@ import doc_icon from "./doc/icon.js";
 
 const def_m1 = "Components";
 const def_m2 = "Tooltips";
-const def_theme = null;
+const def_theme = "pulse";
 
 const db_menu = [
 	{
