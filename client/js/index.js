@@ -116,12 +116,34 @@ const db_menu = [
 		title: "Action",
 		item: [
 			{
-				title: "Memory Leak Test",
+				title: "Memory Test 10",
+				source: function () {
+					memoryleaktest(0, 10, function () {
+						cl.init(document.getElementById("root"));
+					});
+				},
+			},
+			{
+				title: "Memory Test 100",
+				source: function () {
+					memoryleaktest(0, 100, function () {
+						cl.init(document.getElementById("root"));
+					});
+				},
+			},
+			{
+				title: "Memory Test 1000",
 				source: function () {
 					memoryleaktest(0, 1000, function () {
 						cl.init(document.getElementById("root"));
-						PR.prettyPrint();
-						gen_toc();
+					});
+				},
+			},
+			{
+				title: "Memory Test 5000",
+				source: function () {
+					memoryleaktest(0, 5000, function () {
+						cl.init(document.getElementById("root"));
 					});
 				},
 			},
@@ -165,7 +187,7 @@ let ix1 = 0;
 let ix2 = 0;
 function memoryleaktest(index, limit, callback) {
 	if (index < limit) {
-		document.title = `Memory Leak Test ${parseInt((index / limit) * 100, 10)}%`;
+		document.title = `Memory Test ${parseInt((index / limit) * 100, 10)}%`;
 
 		let process = true;
 		if (db_menu[ix1].type === "menu") {
@@ -181,7 +203,7 @@ function memoryleaktest(index, limit, callback) {
 		}
 
 		if (process) {
-			gen_content(db_menu[ix1].title, db_menu[ix1].item[ix2].title, null, function () {
+			gen_content(db_menu[ix1].title, db_menu[ix1].item[ix2].title, function () {
 				setTimeout(
 					function (index, limit, callback) {
 						if (index >= limit) {
@@ -298,59 +320,62 @@ function find_menu(m1, m2) {
 	return null;
 }
 
-function gen_content(m1, m2, sender, callback) {
+function gen_content(m1, m2, callback) {
 	let m = find_menu(m1, m2);
 	if (m) {
 		if (m.type === "menu") {
 			if (m.source) {
-				//==============
-				// if (sender) {
-				// 	sender.innerText = "Loading";
-				// }
+				//=============
+				//LOADER TYPE 1
+				//=============
+				setTimeout(
+					function (m, callback) {
+						let p = function (m) {
+							return new Promise(function (res, rej) {
+								try {
+									sample.resetindex();
+									cl.replaceChild(
+										document.getElementById("root"),
+										new div({
+											marginBottom: 3,
+											elem: m.source.map(function (i) {
+												return gen_example(i);
+											}),
+										})
+									);
+
+									PR.prettyPrint();
+									gen_toc();
+
+									res();
+								} catch (ex) {
+									rej(ex);
+								}
+							});
+						};
+						p(m)
+							.then(function () {
+								if (callback instanceof Function) {
+									callback();
+								}
+							})
+							.catch(function (ex) {
+								console.error(ex);
+								if (callback instanceof Function) {
+									callback();
+								}
+							});
+					},
+					0,
+					m,
+					callback
+				);
+
+				//=============
+				//LOADER TYPE 2
+				//=============
 				// setTimeout(
-				// 	function (m, sender) {
-				// 		let p = function (m) {
-				// 			return new Promise(function (res, rej) {
-				// 				try {
-				// 					sample.resetindex();
-				// 					cl.replaceChild(
-				// 						document.getElementById("root"),
-				// 						new div({
-				// 							marginBottom: 3,
-				// 							elem: m.source.map(function (i) {
-				// 								return gen_example(i);
-				// 							}),
-				// 						})
-				// 					);
-				// 					cl.init(document.getElementById("root"));
-				// 					PR.prettyPrint();
-				// 					gen_toc();
-				// 					res();
-				// 				} catch (ex) {
-				// 					rej(ex);
-				// 				}
-				// 			});
-				// 		};
-				// 		p(m)
-				// 			.then(function () {
-				// 				if (sender) {
-				// 					sender.innerText = m2;
-				// 				}
-				// 			})
-				// 			.catch(function (ex) {
-				// 				console.error(ex);
-				// 				if (sender) {
-				// 					sender.innerText = m2;
-				// 				}
-				// 			});
-				// 	},
-				// 	0,
-				// 	m,
-				// 	sender
-				// );
-				//==============
-				// setTimeout(
-				// 	function (m) {
+				// 	function (m, callback) {
 				// 		sample.resetindex();
 				// 		cl.replaceChild(
 				// 			document.getElementById("root"),
@@ -361,29 +386,39 @@ function gen_content(m1, m2, sender, callback) {
 				// 				}),
 				// 			})
 				// 		);
-				// 		cl.init(document.getElementById("root"));
+
 				// 		PR.prettyPrint();
 				// 		gen_toc();
+
+				// 		if (callback instanceof Function) {
+				// 			callback();
+				// 		}
 				// 	},
-				// 	1,
-				// 	m
+				// 	0,
+				// 	m,
+				// 	callback
 				// );
 
-				//==============
-				sample.resetindex();
-				cl.replaceChild(
-					document.getElementById("root"),
-					new div({
-						marginBottom: 3,
-						elem: m.source.map(function (i) {
-							return gen_example(i);
-						}),
-					})
-				);
+				//=============
+				//LOADER TYPE 3
+				//=============
+				// sample.resetindex();
+				// cl.replaceChild(
+				// 	document.getElementById("root"),
+				// 	new div({
+				// 		marginBottom: 3,
+				// 		elem: m.source.map(function (i) {
+				// 			return gen_example(i);
+				// 		}),
+				// 	})
+				// );
 
-				//cl.init(document.getElementById("root"));
-				PR.prettyPrint();
-				gen_toc();
+				// PR.prettyPrint();
+				// gen_toc();
+
+				// if (callback instanceof Function) {
+				// 	callback();
+				// }
 			} else {
 				cl.replaceChild(
 					document.getElementById("root"),
@@ -396,7 +431,12 @@ function gen_content(m1, m2, sender, callback) {
 						}),
 					})
 				);
+
 				gen_toc();
+
+				if (callback instanceof Function) {
+					callback();
+				}
 			}
 		} else if (m.type === "navigate") {
 			window.location = m.source;
@@ -407,10 +447,6 @@ function gen_content(m1, m2, sender, callback) {
 		} else {
 			console.warn("Unsupported type", m);
 		}
-	}
-
-	if (callback instanceof Function) {
-		callback();
 	}
 }
 
@@ -423,6 +459,7 @@ function set_theme(theme) {
 		cltheme.setAttribute("disabled", "disabled");
 	}
 }
+
 function gen_toc() {
 	let li = [];
 	let anchor = [].slice.call(document.getElementById("root").getElementsByClassName("anchorjs-link"));
@@ -466,31 +503,34 @@ function gen_menu(m1, m2, theme) {
 						"cl-m2": j.title,
 						"cl-m3": i.type,
 					},
-					onclick: function (event) {
-						let sender = event.currentTarget;
+					onclick:
+						i.type !== "action"
+							? function (event) {
+									let sender = event.currentTarget;
 
-						let m1 = sender.getAttribute("cl-m1");
-						let m2 = sender.getAttribute("cl-m2");
-						let m3 = sender.getAttribute("cl-m3");
+									let m1 = sender.getAttribute("cl-m1");
+									let m2 = sender.getAttribute("cl-m2");
+									let m3 = sender.getAttribute("cl-m3");
 
-						gen_content(m1, m2, sender, function () {
-							cl.init(document.getElementById("root"));
-							PR.prettyPrint();
-							gen_toc();
-						});
+									sender.innerText = "Loading...";
+									gen_content(m1, m2, function () {
+										cl.init(document.getElementById("root"));
+										sender.innerText = m2;
+									});
 
-						let activeItem = [].slice.call(
-							document.getElementById("sidebar").getElementsByClassName("active")
-						);
+									let activeItem = [].slice.call(
+										document.getElementById("sidebar").getElementsByClassName("active")
+									);
 
-						activeItem.forEach(function (i) {
-							if (i.getAttribute("cl-m3") === m3) {
-								i.classList.remove("active");
-							}
-						});
+									activeItem.forEach(function (i) {
+										if (i.getAttribute("cl-m3") === m3) {
+											i.classList.remove("active");
+										}
+									});
 
-						sender.classList.add("active");
-					},
+									sender.classList.add("active");
+							  }
+							: j.source,
 				};
 			}),
 		});
@@ -533,10 +573,8 @@ core.documentReady(() => {
 		})
 	);
 
-	gen_content(def_m1, def_m2, null, function () {
+	gen_content(def_m1, def_m2, function () {
 		cl.init(document.getElementById("root"));
-		PR.prettyPrint();
-		gen_toc();
 	});
 
 	set_theme(def_theme);
