@@ -507,7 +507,7 @@ export default [
 								new card.text(
 									"This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer."
 								),
-								new card.text({ color: "muted", elem: new small({ elem: "Last updated 3 mins ago" }) }),
+								new card.text({ color: "muted", elem: new small("Last updated 3 mins ago") }),
 							],
 						}),
 					],
@@ -669,14 +669,14 @@ export default [
 				bordercolor: "primary",
 				style: { width: "18rem" },
 				elem: [
-					new card.header({ elem: "Header" }),
+					new card.header("Header"),
 					new card.body({
 						textcolor: "primary",
 						elem: [
-							new card.title({ elem: `Primary card title` }),
-							new card.text({
-								elem: "Some quick example text to build on the card title and make up the bulk of the card's content.",
-							}),
+							new card.title("Primary card title"),
+							new card.text(
+								"Some quick example text to build on the card title and make up the bulk of the card's content."
+							),
 						],
 					}),
 				],
@@ -696,20 +696,20 @@ export default [
 				{ color: "warning" },
 				{ color: "info" },
 				{ color: "light" },
-				{ color: "dark", textcolor: "dark" },
+				{ color: "dark", textcolor: "light" },
 			].map(function (i) {
 				return new card.container({
 					bordercolor: i.color,
 					style: { width: "18rem" },
 					elem: [
-						new card.header({ elem: "Header" }),
+						new card.header("Header"),
 						new card.body({
 							textcolor: i.textcolor,
 							elem: [
-								new card.title({ elem: `${core.capitalize(i.color)} card title` }),
-								new card.text({
-									elem: "Some quick example text to build on the card title and make up the bulk of the card's content.",
-								}),
+								new card.title(`${core.capitalize(i.color)} card title`),
+								new card.text(
+									"Some quick example text to build on the card title and make up the bulk of the card's content."
+								),
 							],
 						}),
 					],
@@ -734,10 +734,10 @@ export default [
 					new card.body({
 						textcolor: "success",
 						elem: [
-							new card.title(`Success card title`),
-							new card.text({
-								elem: "Some quick example text to build on the card title and make up the bulk of the card's content.",
-							}),
+							new card.title("Success card title"),
+							new card.text(
+								"Some quick example text to build on the card title and make up the bulk of the card's content."
+							),
 						],
 					}),
 					new card.footer({
@@ -766,9 +766,9 @@ export default [
 							new card.body({
 								elem: [
 									new card.title("Card Title"),
-									new card.text({
-										elem: "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.",
-									}),
+									new card.text(
+										"This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer."
+									),
 								],
 							}),
 						],
@@ -799,12 +799,12 @@ export default [
 							new card.body({
 								elem: [
 									new card.title("Card Title"),
-									new card.text({
-										elem: "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.",
-									}),
+									new card.text(
+										"This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer."
+									),
 								],
 							}),
-							new card.footer({ elem: "Last updated 3 mins ago" }),
+							new card.footer("Last updated 3 mins ago"),
 						],
 					}),
 
@@ -872,9 +872,9 @@ export default [
 								new card.body({
 									elem: [
 										new card.title("Card Title"),
-										new card.text({
-											elem: "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.",
-										}),
+										new card.text(
+											"This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer."
+										),
 									],
 								}),
 							],
@@ -912,12 +912,12 @@ export default [
 								new card.body({
 									elem: [
 										new card.title("Card Title"),
-										new card.text({
-											elem: "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.",
-										}),
+										new card.text(
+											"This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer."
+										),
 									],
 								}),
-								new card.footer({ elem: "Last updated 3 mins ago" }),
+								new card.footer("Last updated 3 mins ago"),
 							],
 						}),
 					}),

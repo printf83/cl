@@ -68,10 +68,10 @@ export default [
 					class: id3,
 					elem: new card.container({
 						elem: [
-							new card.header({ elem: "Card 1" }),
-							new card.body({
-								elem: "Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.",
-							}),
+							new card.header("Card 1"),
+							new card.body(
+								"Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger."
+							),
 						],
 					}),
 				}),
@@ -80,10 +80,10 @@ export default [
 					class: id3,
 					elem: new card.container({
 						elem: [
-							new card.header({ elem: "Card 2" }),
-							new card.body({
-								elem: "Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.",
-							}),
+							new card.header("Card 2"),
+							new card.body(
+								"Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger."
+							),
 						],
 					}),
 				}),

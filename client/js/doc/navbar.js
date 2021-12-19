@@ -299,7 +299,7 @@ export default [
 			return new navbar.container({
 				expand: "lg",
 				color: "light",
-				elem: new navbar.text({ elem: "Navbar text with an inline element" }),
+				elem: new navbar.text("Navbar text with an inline element"),
 			});
 		},
 	},
@@ -342,7 +342,7 @@ export default [
 									}),
 								],
 							}),
-							new navbar.text({ elem: "Navbar text with an inline element" }),
+							new navbar.text("Navbar text with an inline element"),
 						],
 					}),
 				],

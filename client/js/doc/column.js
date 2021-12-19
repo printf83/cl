@@ -256,9 +256,9 @@ export default [
 		code: function () {
 			return new div("clearfix", [
 				new img({ src: sample.img(200, 200), class: "col-md-6 float-md-end mb-3 ms-md-3" }),
-				new p({ elem: sample.text() }),
-				new p({ elem: sample.text() }),
-				new p({ elem: sample.text() }),
+				new p(sample.text()),
+				new p(sample.text()),
+				new p(sample.text()),
 			]);
 		},
 	},

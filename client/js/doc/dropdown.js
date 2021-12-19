@@ -455,7 +455,7 @@ export default [
 								class: "text-muted p-4",
 								style: { width: "200px" },
 								elem: [
-									new p({ elem: "Some example text that's free-flowing within the dropdown menu." }),
+									new p("Some example text that's free-flowing within the dropdown menu."),
 									new p({ marginBottom: 0, elem: "And this is more example text." }),
 								],
 							}),

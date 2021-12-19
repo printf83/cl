@@ -329,12 +329,12 @@ export default [
 							new p({
 								elem: "By default, modal dialog will activate scrolling inside modal dialog. To disabled it, set <code>scrollable: false</code> option.",
 							}),
-							new p({ elem: sample.text() }),
-							new p({ elem: sample.text() }),
-							new p({ elem: sample.text() }),
-							new p({ elem: sample.text() }),
-							new p({ elem: sample.text() }),
-							new p({ elem: sample.text() }),
+							new p(sample.text()),
+							new p(sample.text()),
+							new p(sample.text()),
+							new p(sample.text()),
+							new p(sample.text()),
+							new p(sample.text()),
 						],
 						button: [
 							{

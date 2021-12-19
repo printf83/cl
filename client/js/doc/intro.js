@@ -2,6 +2,19 @@
 import div from "../base/div.js";
 import a from "../base/a.js";
 import icon from "../base/icon.js";
+import * as alert from "../base/alert.js";
+import * as card from "../base/card.js";
+import code from "../base/code.js";
+import pre from "../base/pre.js";
+
+function beautifyjs(str) {
+	return js_beautify(str, {
+		preserve_newlines: true,
+		max_preserve_newlines: 100,
+		keep_array_indentation: false,
+		brace_style: "collapse,preserve-inline",
+	});
+}
 
 export default [
 	{
@@ -14,24 +27,66 @@ export default [
 				new icon({ type: "fab", icon: "node-js" }),
 				new icon("leaf"),
 			]),
-			new div("text-center mt-5", "This is an alpha version. Don't used it on production."),
+
+			new alert.container({
+				icon: "!",
+				elem: "<b>Warning!</b> This is an alpha version. Don't used it on production.",
+				align: "center",
+				marginTop: 5,
+			}),
+
 			new div(
 				"text-center",
-				"Build Full Stack Web Application using JS, Bootstrap, Fontawesome, NodeJS, And Mongodb using NS"
+				"Build Full Stack Web Application using JS, Bootstrap, Fontawesome, NodeJS, And Mongodb using BS5 JS Builder"
 			),
 			new div("text-center", "For Pro JS Developer only"),
-			new div("text-center mt-5", "<code>ns.build.append(container,nshelper|nstag)</code>"),
-			new div("text-center", "<code>ns.build.prepend(container,nshelper|nstag)</code>"),
-			new div("text-center", "<code>ns.build.replace(container,nshelper|nstag)</code>"),
-			new div("text-center", "<code>ns.build.html(container,nshelper|nstag)</code>"),
-			new div("text-center mt-5", "Example : "),
-			new div(
-				"text-center",
-				"<code>ns.build.append(document.body,ns.button({label:'Hello World', color:'primary'}))</code>"
-			),
-			new div("text-center", "<code>ns.build.append(document.body,{tag:'p',elems:'Hello World'})</code>"),
 
-			new div("text-center mt-5", [new a({ label: "Github", href: "https://github.com/printf83/cl" })]),
+			new card.container({
+				marginY: 3,
+				elem: new card.body(
+					new code(
+						new pre({
+							class: "prettyprint lang-js",
+							marginBottom: 0,
+							elem: beautifyjs(`
+								cl.appendChild(dom,cltag);
+								cl.prependChild(dom,cltag);
+								cl.replaceChild(dom,cltag);
+								cl.replaceWith(dom,cltag);
+								let htmlOutput = cl.html(cltag);
+							`),
+						})
+					)
+				),
+			}),
+
+			new div("text-center mt-5", "Example : "),
+
+			new card.container({
+				marginY: 3,
+				elem: new card.body(
+					new code(
+						new pre({
+							class: "prettyprint lang-js",
+							marginBottom: 0,
+							elem: beautifyjs(`
+								"use strict";
+								import * as core from "./base/core.js";
+								import * as cl from "./base/cl.js";
+								import button from "./base/button.js";
+								import p from "./base/p.js";
+
+								core.documentReady(() => {
+									cl.appendChild(document.body,new button({label:'Hello World!', color:'primary'}));
+									cl.appendChild(document.body,new p('Hello World!'));
+								});
+							`),
+						})
+					)
+				),
+			}),
+
+			new div("text-center mt-5", new a({ label: "Github", href: "https://github.com/printf83/cl" })),
 		],
 	},
 ];

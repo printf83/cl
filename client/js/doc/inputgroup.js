@@ -51,7 +51,7 @@ export default [
 						type: "text",
 						placeholder: "Username",
 					}),
-					new inputgroup.text({ elem: "@" }),
+					new inputgroup.text("@"),
 					new input({
 						label: "Server",
 						hidelabel: true,
@@ -85,7 +85,7 @@ export default [
 				new inputgroup.container({
 					class: "flex-nowarp",
 					elem: [
-						new inputgroup.text({ elem: "@" }),
+						new inputgroup.text("@"),
 						new input({
 							placeholder: "Username",
 							type: "text",
@@ -160,7 +160,7 @@ export default [
 			return [
 				new inputgroup.container({
 					elem: [
-						new inputgroup.text({ elem: "First and last name" }),
+						new inputgroup.text("First and last name"),
 						new input({
 							label: "First name",
 							hidelabel: true,
@@ -186,8 +186,8 @@ export default [
 			return [
 				new inputgroup.container({
 					elem: [
-						new inputgroup.text({ elem: "$" }),
-						new inputgroup.text({ elem: "0.00" }),
+						new inputgroup.text("$"),
+						new inputgroup.text("0.00"),
 						new input({
 							label: "Dollar amount (with dot and two decimal places)",
 							hidelabel: true,
@@ -205,8 +205,8 @@ export default [
 							type: "number",
 							container: false,
 						}),
-						new inputgroup.text({ elem: "$" }),
-						new inputgroup.text({ elem: "0.00" }),
+						new inputgroup.text("$"),
+						new inputgroup.text("0.00"),
 					],
 				}),
 			];

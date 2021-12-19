@@ -33,6 +33,38 @@ export function img(width, height) {
 	//return `https://picsum.photos/seed/${imgindex++}/${width ? width : 800}/${height ? height : 400}.webp`;
 }
 
+// export function svgimg(width = 300, height = 283) {
+// 	let svgdata = `<svg version="1.0" xmlns="http://www.w3.org/2000/svg"
+//  width="${width}pt" height="${height}pt" viewBox="0 0 ${width} ${height}"
+//  preserveAspectRatio="xMidYMid meet">
+// <g transform="translate(0.000000,283.000000) scale(0.100000,-0.100000)"
+// fill="#666666" stroke="none">
+// <path d="M606 2161 c-15 -10 -37 -32 -47 -47 -18 -28 -19 -59 -19 -685 l0
+// -656 23 -34 c49 -74 -12 -70 982 -67 l890 3 33 23 c65 47 62 16 62 727 0 717
+// 2 694 -65 735 -32 20 -47 20 -931 20 -864 0 -900 -1 -928 -19z m1832 -15 c15
+// -8 36 -24 47 -36 20 -22 20 -36 20 -679 0 -640 0 -657 -20 -683 -11 -15 -33
+// -32 -50 -38 -44 -16 -1775 -14 -1809 2 -14 6 -34 23 -43 37 -17 24 -18 74 -20
+// 676 l-2 650 26 33 c14 19 35 37 47 42 11 5 416 9 899 9 735 1 882 -1 905 -13z"/>
+// <path d="M783 2062 c-67 -2 -105 -7 -112 -15 -18 -22 -10 -1211 8 -1230 9 -10
+// 1703 -9 1713 1 4 4 10 279 14 612 6 531 5 607 -8 617 -11 10 -185 13 -764 15
+// -412 2 -795 2 -851 0z m1602 -390 l0 -369 -45 38 c-211 177 -527 227 -802 126
+// -102 -37 -175 -84 -255 -164 l-72 -73 -63 16 c-125 32 -320 3 -420 -62 -21
+// -13 -40 -24 -43 -24 -3 0 -5 198 -5 440 l0 440 853 0 852 0 0 -368z m-375
+// -197 c98 -23 228 -83 293 -137 32 -26 65 -48 73 -48 12 0 14 -39 14 -235 l0
+// -235 -855 0 -855 0 0 166 c0 127 3 165 12 162 7 -3 41 10 75 28 34 19 74 36
+// 87 38 14 3 30 7 36 11 11 7 214 8 245 1 11 -2 33 -9 48 -15 26 -10 32 -7 104
+// 64 43 41 80 75 84 75 4 0 14 6 21 14 38 37 203 103 292 116 89 13 258 10 326
+// -5z"/>
+// <path d="M1054 1810 c-139 -31 -193 -200 -96 -304 110 -118 313 -39 315 122 2
+// 115 -109 207 -219 182z m113 -39 c61 -28 79 -70 74 -178 0 -18 -12 -45 -28
+// -63 -42 -50 -100 -67 -168 -49 -67 18 -96 50 -109 121 -24 133 104 226 231
+// 169z"/>
+// </g>
+// </svg>`;
+
+// 	return "data:image/svg+xml;charset=UTF-8," + encodeURIComponent(svgdata);
+// }
+
 export function text() {
 	if (textindex >= textdb.length) {
 		textindex = 0;
@@ -185,10 +217,10 @@ export function cardwithimg() {
 				}),
 				new card.body({
 					elem: [
-						new card.title({ elem: "Card Title" }),
-						new card.text({
-							elem: "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.",
-						}),
+						new card.title("Card Title"),
+						new card.text(
+							"This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer."
+						),
 					],
 				}),
 			],
@@ -201,10 +233,10 @@ export function cardwithimg() {
 				}),
 				new card.body({
 					elem: [
-						new card.title({ elem: "Card Title" }),
-						new card.text({
-							elem: "This card has supporting text below as a natural lead-in to additional content.",
-						}),
+						new card.title("Card Title"),
+						new card.text(
+							"This card has supporting text below as a natural lead-in to additional content."
+						),
 					],
 				}),
 			],
@@ -217,10 +249,10 @@ export function cardwithimg() {
 				}),
 				new card.body({
 					elem: [
-						new card.title({ elem: "Card Title" }),
-						new card.text({
-							elem: "This card has supporting text below as a natural lead-in to additional content.",
-						}),
+						new card.title("Card Title"),
+						new card.text(
+							"This card has supporting text below as a natural lead-in to additional content."
+						),
 					],
 				}),
 			],
@@ -233,10 +265,10 @@ export function cardwithimg() {
 				}),
 				new card.body({
 					elem: [
-						new card.title({ elem: "Card Title" }),
-						new card.text({
-							elem: "This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.",
-						}),
+						new card.title("Card Title"),
+						new card.text(
+							"This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action."
+						),
 					],
 				}),
 			],
@@ -254,13 +286,13 @@ export function cardwithfooter() {
 				}),
 				new card.body({
 					elem: [
-						new card.title({ elem: "Card Title" }),
-						new card.text({
-							elem: "This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.",
-						}),
+						new card.title("Card Title"),
+						new card.text(
+							"This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action."
+						),
 					],
 				}),
-				new card.footer({ elem: "Last updated 3 mins ago" }),
+				new card.footer("Last updated 3 mins ago"),
 			],
 		}),
 		new card.container({
@@ -271,13 +303,13 @@ export function cardwithfooter() {
 				}),
 				new card.body({
 					elem: [
-						new card.title({ elem: "Card Title" }),
-						new card.text({
-							elem: "This card has supporting text below as a natural lead-in to additional content.",
-						}),
+						new card.title("Card Title"),
+						new card.text(
+							"This card has supporting text below as a natural lead-in to additional content."
+						),
 					],
 				}),
-				new card.footer({ elem: "Last updated 3 mins ago" }),
+				new card.footer("Last updated 3 mins ago"),
 			],
 		}),
 		new card.container({
@@ -288,13 +320,13 @@ export function cardwithfooter() {
 				}),
 				new card.body({
 					elem: [
-						new card.title({ elem: "Card Title" }),
-						new card.text({
-							elem: "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.",
-						}),
+						new card.title("Card Title"),
+						new card.text(
+							"This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer."
+						),
 					],
 				}),
-				new card.footer({ elem: "Last updated 3 mins ago" }),
+				new card.footer("Last updated 3 mins ago"),
 			],
 		}),
 	];
@@ -311,10 +343,10 @@ export function cardh100() {
 				}),
 				new card.body({
 					elem: [
-						new card.title({ elem: "Card Title" }),
-						new card.text({
-							elem: "This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.",
-						}),
+						new card.title("Card Title"),
+						new card.text(
+							"This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action."
+						),
 					],
 				}),
 			],
@@ -328,10 +360,10 @@ export function cardh100() {
 				}),
 				new card.body({
 					elem: [
-						new card.title({ elem: "Card Title" }),
-						new card.text({
-							elem: "This card has supporting text below as a natural lead-in to additional content.",
-						}),
+						new card.title("Card Title"),
+						new card.text(
+							"This card has supporting text below as a natural lead-in to additional content."
+						),
 					],
 				}),
 			],
@@ -345,10 +377,10 @@ export function cardh100() {
 				}),
 				new card.body({
 					elem: [
-						new card.title({ elem: "Card Title" }),
-						new card.text({
-							elem: "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.",
-						}),
+						new card.title("Card Title"),
+						new card.text(
+							"This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer."
+						),
 					],
 				}),
 			],
@@ -367,13 +399,13 @@ export function cardwithfooterh100() {
 				}),
 				new card.body({
 					elem: [
-						new card.title({ elem: "Card Title" }),
-						new card.text({
-							elem: "This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.",
-						}),
+						new card.title("Card Title"),
+						new card.text(
+							"This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action."
+						),
 					],
 				}),
-				new card.footer({ elem: "Last updated 3 mins ago" }),
+				new card.footer("Last updated 3 mins ago"),
 			],
 		}),
 		new card.container({
@@ -385,13 +417,13 @@ export function cardwithfooterh100() {
 				}),
 				new card.body({
 					elem: [
-						new card.title({ elem: "Card Title" }),
-						new card.text({
-							elem: "This card has supporting text below as a natural lead-in to additional content.",
-						}),
+						new card.title("Card Title"),
+						new card.text(
+							"This card has supporting text below as a natural lead-in to additional content."
+						),
 					],
 				}),
-				new card.footer({ elem: "Last updated 3 mins ago" }),
+				new card.footer("Last updated 3 mins ago"),
 			],
 		}),
 		new card.container({
@@ -403,13 +435,13 @@ export function cardwithfooterh100() {
 				}),
 				new card.body({
 					elem: [
-						new card.title({ elem: "Card Title" }),
-						new card.text({
-							elem: "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.",
-						}),
+						new card.title("Card Title"),
+						new card.text(
+							"This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer."
+						),
 					],
 				}),
-				new card.footer({ elem: "Last updated 3 mins ago" }),
+				new card.footer("Last updated 3 mins ago"),
 			],
 		}),
 	];
@@ -429,7 +461,7 @@ export function listgroupitemcustomcontent() {
 	return [
 		new div({
 			class: "ms-2 me-auto",
-			elem: [new div({ class: "fw-bold", elem: "Subheading" }), "Cras justo odio"],
+			elem: [new div("fw-bold", "Subheading"), "Cras justo odio"],
 		}),
 		new badge({
 			pill: true,
