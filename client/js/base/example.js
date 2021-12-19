@@ -10,17 +10,38 @@ import a from "./a.js";
 import p from "./p.js";
 import code from "./code.js";
 import pre from "./pre.js";
+import button from "./button.js";
+import toast from "./toast.js";
 
 function codecontainer(type, strcode, beautify) {
-	return new code({
-		overflow: "auto",
-		display: "block",
-		elem: new pre({
-			class: `prettyprint lang-${type}`,
-			attr: { lang: type },
-			elem: beautify(strcode),
+	return [
+		new div({
+			position: "relative",
+			float: "right",
+			elem: new button({
+				label: "Copy",
+				outline: true,
+				color: "primary",
+				weight: "sm",
+				align: "end",
+				class: "position-absolute end-0",
+				onclick: function (event) {
+					let str = event.currentTarget.parentElement.nextSibling.firstChild.innerText;
+					navigator.clipboard.writeText(str);
+					new toast("/", "Copied to clipboard").show();
+				},
+			}),
 		}),
-	});
+		new code({
+			overflow: "auto",
+			display: "block",
+			elem: new pre({
+				class: `prettyprint lang-${type}`,
+				attr: { lang: type },
+				elem: beautify(strcode),
+			}),
+		}),
+	];
 }
 
 const defaultOption = {

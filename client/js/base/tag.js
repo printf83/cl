@@ -86,6 +86,11 @@ const defaultOption = {
 	bordercolor: null,
 	borderweight: null,
 
+	row: null,
+	col: null,
+	rowcol: null,
+	gap: null,
+
 	rounded: null,
 	roundedtype: null,
 
