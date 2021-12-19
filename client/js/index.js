@@ -10,8 +10,12 @@ import toc from "./base/toc.js";
 import code from "./base/code.js";
 import msg from "./base/msg.js";
 
+import doc_intro from "./doc/intro.js";
+
+import doc_container from "./doc/container.js";
 import doc_grid from "./doc/grid.js";
 import doc_column from "./doc/column.js";
+import doc_gutter from "./doc/gutter.js";
 
 import doc_formcontrol from "./doc/formcontrol.js";
 import doc_select from "./doc/select.js";
@@ -45,24 +49,24 @@ import doc_tooltip from "./doc/tooltip.js";
 
 import doc_icon from "./doc/icon.js";
 
-const def_m1 = "Layout";
-const def_m2 = "Column";
+const def_m1 = "Getting started";
+const def_m2 = "Introduction";
 const def_theme = "pulse";
 
 const db_menu = [
 	{
 		type: "menu",
 		title: "Getting started",
-		item: [{ title: "Introduction", source: null }],
+		item: [{ title: "Introduction", source: doc_intro }],
 	},
 	{
 		type: "menu",
 		title: "Layout",
 		item: [
-			{ title: "Containers", source: null },
+			{ title: "Containers", source: doc_container },
 			{ title: "Grid", source: doc_grid },
 			{ title: "Column", source: doc_column },
-			{ title: "Gutter", source: null },
+			{ title: "Gutter", source: doc_gutter },
 		],
 	},
 	{

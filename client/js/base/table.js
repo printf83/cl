@@ -21,6 +21,8 @@ const defaultContainerOption = {
 	rownumber: false,
 	header: true,
 	footer: false,
+
+	item: null,
 };
 /**
  * opt : {tagoption}
