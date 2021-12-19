@@ -98,7 +98,7 @@ export default class example extends div {
 			ctlmsg = opt.msg.map(function (i) {
 				if (typeof i === "string") {
 					return new p({
-						class: opt.anchor ? null : "fw-lighter fs-5",
+						class: opt.anchor || opt.msg.length >= 3 ? null : "fw-lighter fs-5",
 						elem: i.replace(/\{\{/g, "<code>").replace(/\}\}/g, "</code>"),
 					});
 				} else {
