@@ -582,6 +582,7 @@ export default [
 		sample: { "sample.img": sample.img },
 		code: function () {
 			return new card.container({
+				class: "h-100",
 				elem: [
 					new card.horizontal({
 						size: "sm-4",
@@ -591,20 +592,30 @@ export default [
 								src: sample.img(285, 285),
 							}),
 						],
-						right: [
-							new card.body({
-								elem: [
-									new card.title({ elem: "Card Title" }),
-									new card.text({
-										elem: "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.",
-									}),
-									new card.text({
-										color: "muted",
-										elem: new small({ elem: "Last updated 3 mins ago" }),
-									}),
-								],
-							}),
-						],
+						right: new card.container({
+							class: "h-100",
+							flush: true,
+							elem: [
+								new card.header({
+									elem: "Header",
+								}),
+								new card.body({
+									elem: [
+										new card.title({ elem: "Card Title" }),
+										new card.text({
+											elem: "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.",
+										}),
+										new card.text({
+											color: "muted",
+											elem: new small({ elem: "Last updated 3 mins ago" }),
+										}),
+									],
+								}),
+								new card.footer({
+									elem: "Footer",
+								}),
+							],
+						}),
 					}),
 				],
 			});

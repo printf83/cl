@@ -6,6 +6,7 @@ import p from "./p.js";
 import div from "./div.js";
 import imgtag from "./img.js";
 
+const defaultContainerOption = { flush: false };
 /**
  * opt:{tagoption}
  */
@@ -19,7 +20,16 @@ export class container extends div {
 	}
 	set data(opt) {
 		if (opt) {
+			opt = core.extend({}, defaultContainerOption, opt);
 			opt.class = core.merge.class(opt.class, "card");
+
+			if (opt.flush) {
+				opt.rounded = false;
+				opt.border = false;
+			}
+
+			delete opt.flush;
+
 			super.data = opt;
 		}
 	}
