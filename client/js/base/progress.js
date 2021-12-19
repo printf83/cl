@@ -11,8 +11,8 @@ const defaultContainerOption = {
  * baritem : {tagoption,label,stripe,animated,min,max,value}
  */
 export class container extends div {
-	constructor(opt) {
-		super(opt);
+	constructor(...opt) {
+		super(...opt);
 	}
 
 	get data() {
@@ -58,8 +58,8 @@ const defaultBarOption = {
  * opt : {tagoption,label,stripe,animated,min,max,value}
  */
 export class bar extends div {
-	constructor(opt) {
-		super(opt);
+	constructor(...opt) {
+		super(...opt);
 	}
 
 	get data() {

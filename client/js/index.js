@@ -286,7 +286,7 @@ function gen_example(opt) {
 					captiontop: true,
 					item: opt.option[optionName].map(function (i, ix) {
 						if (ix > 0) {
-							i[0] = { elem: new code({ elem: i[0] }) };
+							i[0] = { elem: new code(i[0]) };
 							return i;
 						} else {
 							return i;

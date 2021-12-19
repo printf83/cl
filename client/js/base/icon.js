@@ -22,34 +22,34 @@ const defaultOption = {
 export default class icon extends tag {
 	clicon = 1;
 
-	constructor(...arg) {
+	constructor(...opt) {
 		super();
-		if (arg && arg.length > 0) {
+		if (opt && opt.length > 0) {
 			let t = {
 				type: null,
 				icon: null,
 			};
-			if (arg.length === 1) {
-				if (typeof arg[0] === "string") {
+			if (opt.length === 1) {
+				if (typeof opt[0] === "string") {
 					t = {
 						type: "fas",
-						icon: arg[0],
+						icon: opt[0],
 					};
-				} else if (Array.isArray(arg[0]) && arg[0].length === 2) {
+				} else if (Array.isArray(opt[0]) && opt[0].length === 2) {
 					t = {
-						type: arg[0][0],
-						icon: arg[0][1],
+						type: opt[0][0],
+						icon: opt[0][1],
 					};
 				} else {
-					t = arg[0];
+					t = opt[0];
 				}
-			} else if (arg.length === 2) {
+			} else if (opt.length === 2) {
 				t = {
-					type: arg[0],
-					icon: arg[1],
+					type: opt[0],
+					icon: opt[1],
 				};
 			} else {
-				console.error("Unsupported argument", arg);
+				console.error("Unsupported argument", opt);
 			}
 
 			this.data = core.extend({}, defaultOption, t);

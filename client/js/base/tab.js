@@ -24,8 +24,8 @@ const defaultOption = {
 export default class tab extends div {
 	cltab = 1;
 
-	constructor(opt) {
-		super(opt);
+	constructor(...opt) {
+		super(...opt);
 	}
 
 	get data() {

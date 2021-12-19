@@ -45,7 +45,7 @@ export default [
 					elem: [
 						new navbar.brand({
 							label: "Navbar",
-							href: "#;",
+							href: "#",
 						}),
 					],
 				}),
@@ -72,7 +72,7 @@ export default [
 				elem: [
 					new navbar.brand({
 						icon: { icon: "fire", color: "danger" },
-						href: "#;",
+						href: "#",
 					}),
 				],
 			});
@@ -89,7 +89,7 @@ export default [
 					new navbar.brand({
 						icon: { icon: "fire", color: "danger" },
 						label: "Navbar",
-						href: "#;",
+						href: "#",
 					}),
 				],
 			});
@@ -125,20 +125,20 @@ export default [
 								elem: [
 									new navbar.item({
 										label: "Home",
-										href: "#;",
+										href: "#",
 										active: true,
 									}),
 									new navbar.item({
 										label: "Features",
-										href: "#;",
+										href: "#",
 									}),
 									new navbar.item({
 										label: "Pricing",
-										href: "#;",
+										href: "#",
 									}),
 									new navbar.item({
 										label: "Disabled",
-										href: "#;",
+										href: "#",
 										disabled: true,
 									}),
 								],
@@ -176,12 +176,12 @@ export default [
 								elem: [
 									new navbar.item({
 										label: "Home",
-										href: "#;",
+										href: "#",
 										active: true,
 									}),
 									new navbar.item({
 										label: "Features",
-										href: "#;",
+										href: "#",
 									}),
 									new navbar.item({
 										label: "Pricing",
@@ -189,7 +189,7 @@ export default [
 									}),
 									new navbar.item({
 										label: "Disabled",
-										href: "#;",
+										href: "#",
 										disabled: true,
 									}),
 								],
@@ -329,16 +329,16 @@ export default [
 								elem: [
 									new navbar.item({
 										label: "Home",
-										href: "#;",
+										href: "#",
 										active: true,
 									}),
 									new navbar.item({
 										label: "Features",
-										href: "#;",
+										href: "#",
 									}),
 									new navbar.item({
 										label: "Pricing",
-										href: "#;",
+										href: "#",
 									}),
 								],
 							}),
@@ -395,7 +395,7 @@ export default [
 					elem: [
 						new navbar.brand({
 							label: "Navbar",
-							href: "#;",
+							href: "#",
 						}),
 					],
 				}),
@@ -413,7 +413,7 @@ export default [
 				elem: [
 					new navbar.brand({
 						label: "Navbar",
-						href: "#;",
+						href: "#",
 					}),
 				],
 			});
@@ -430,7 +430,7 @@ export default [
 				elem: [
 					new navbar.brand({
 						label: "Navbar",
-						href: "#;",
+						href: "#",
 					}),
 				],
 			});
@@ -683,7 +683,7 @@ export default [
 					elem: [
 						new navbar.brand({
 							label: "Navbar",
-							href: "#;",
+							href: "#",
 						}),
 						new navbar.toggle({
 							target: `#${id}`,

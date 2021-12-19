@@ -14,8 +14,8 @@ const defaultOption = {
  * elem, opt : {attr,title,msg,type,placement,trigger}
  */
 export default class tooltip extends tag {
-	constructor(opt) {
-		super(opt);
+	constructor(...opt) {
+		super(...opt);
 	}
 
 	get data() {

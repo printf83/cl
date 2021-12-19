@@ -22,10 +22,10 @@ export default class container extends div {
 	_n = null;
 	_m = null;
 
-	constructor(opt) {
-		super();
+	constructor(...opt) {
+		super(...opt);
 
-		this.data = core.extend({}, defaultOption, opt);
+		// this.data = core.extend({}, defaultOption, opt);
 	}
 
 	get data() {

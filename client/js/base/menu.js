@@ -22,8 +22,8 @@ const defaultItemOption = {
 };
 
 export default class menu extends div {
-	constructor(opt) {
-		super(opt);
+	constructor(...opt) {
+		super(...opt);
 	}
 
 	get data() {

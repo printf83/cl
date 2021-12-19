@@ -33,17 +33,17 @@ export default class toast extends div {
 	_n = null;
 	_m = null;
 
-	constructor(...arg) {
+	constructor(...opt) {
 		super();
 
-		if (arg && arg.length > 0) {
+		if (opt && opt.length > 0) {
 			let t = {
 				elem: null,
 				debug: null,
 			};
 
-			if (arg.length === 3) {
-				let bI = core.getBaseIcon(arg[0]);
+			if (opt.length === 3) {
+				let bI = core.getBaseIcon(opt[0]);
 
 				if (bI) {
 					t.color = bI.color;
@@ -54,20 +54,20 @@ export default class toast extends div {
 							icon: bI.icon,
 							type: bI.type,
 						},
-						elem: arg[1],
+						elem: opt[1],
 					});
 				} else {
-					t.color = arg[0];
-					if (typeof arg[1] === "string") {
-						t.elem = new msg({ weight: "sm", elem: arg[1] });
+					t.color = opt[0];
+					if (typeof opt[1] === "string") {
+						t.elem = new msg({ weight: "sm", elem: opt[1] });
 					} else {
-						t.elem = arg[1];
+						t.elem = opt[1];
 					}
 				}
 
-				t.debug = arg[2]?.debug === true ? true : false;
-			} else if (arg.length === 2) {
-				let bI = core.getBaseIcon(arg[0]);
+				t.debug = opt[2]?.debug === true ? true : false;
+			} else if (opt.length === 2) {
+				let bI = core.getBaseIcon(opt[0]);
 
 				if (bI) {
 					t.color = bI.color;
@@ -78,26 +78,26 @@ export default class toast extends div {
 							icon: bI.icon,
 							type: bI.type,
 						},
-						elem: arg[1],
+						elem: opt[1],
 					});
 				} else {
-					t.color = arg[0];
-					if (typeof arg[1] === "string") {
-						t.elem = new msg({ weight: "sm", elem: arg[1] });
+					t.color = opt[0];
+					if (typeof opt[1] === "string") {
+						t.elem = new msg({ weight: "sm", elem: opt[1] });
 					} else {
-						t.elem = arg[1];
+						t.elem = opt[1];
 					}
 				}
-			} else if (arg.length === 1) {
-				if (typeof arg[0] === "string") {
-					t.elem = new msg({ weight: "sm", elem: arg[0] });
-				} else if (Array.isArray(arg[0]) || arg[0].hasOwnProperty("cl")) {
-					t.elem = arg[0];
+			} else if (opt.length === 1) {
+				if (typeof opt[0] === "string") {
+					t.elem = new msg({ weight: "sm", elem: opt[0] });
+				} else if (Array.isArray(opt[0]) || opt[0].hasOwnProperty("cl")) {
+					t.elem = opt[0];
 				} else {
-					t = arg[0];
+					t = opt[0];
 				}
 			} else {
-				console.error("Unsupported argument", arg);
+				console.error("Unsupported argument", opt);
 			}
 
 			this.data = core.extend({}, defaultOption, t);

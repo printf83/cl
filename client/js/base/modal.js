@@ -8,6 +8,38 @@ import div from "./div.js";
 import btnclose from "./btnclose.js";
 import * as container from "./container.js";
 
+const defaultOption = {
+	attr: null, //combine to container
+
+	id: null,
+	class: null,
+	static: true,
+	title: null,
+	icon: null,
+	footer: null,
+	button: null,
+	animate: true,
+	scrollable: true,
+	center: true,
+	size: null,
+	fullscreen: false,
+	focus: true,
+
+	align: null, //left,right,center
+	color: null,
+	textcolor: null,
+	bordercolor: null,
+	border: true,
+
+	defautlbtncolor: "primary",
+	divider: true,
+	centerbutton: false,
+
+	elem: null,
+
+	debug: false,
+};
+
 /**
  * option : {attr,id,class,static,title,icon,footer,button,animated,debug,scrollable,center,size,fullscreen,focus,align,color,textcolor,bordercolor,border,divider,centerbutton,elem}
  */
@@ -15,44 +47,8 @@ export default class modal extends div {
 	_n = null;
 	_m = null;
 
-	constructor(opt) {
-		super();
-
-		this.data = core.extend(
-			{},
-			{
-				attr: null, //combine to container
-
-				id: null,
-				class: null,
-				static: true,
-				title: null,
-				icon: null,
-				footer: null,
-				button: null,
-				animate: true,
-				scrollable: true,
-				center: true,
-				size: null,
-				fullscreen: false,
-				focus: true,
-
-				align: null, //left,right,center
-				color: null,
-				textcolor: null,
-				bordercolor: null,
-				border: true,
-
-				defautlbtncolor: "primary",
-				divider: true,
-				centerbutton: false,
-
-				elem: null,
-
-				debug: false,
-			},
-			opt
-		);
+	constructor(...opt) {
+		super(...opt);
 	}
 
 	get data() {
@@ -60,6 +56,8 @@ export default class modal extends div {
 	}
 	set data(opt) {
 		if (opt) {
+			opt = core.extend({}, defaultOption, opt);
+
 			let bI = core.getBaseIcon(opt.icon);
 			let defButtonColor = opt.defautlbtncolor;
 			if (bI) {

@@ -39,10 +39,10 @@ function btnBuilder(btn, defButton, defColor, pushCancel) {
  * opt : {modal option}
  */
 export class msgbox extends modal {
-	constructor(...arg) {
-		if (arg && arg.length > 0) {
-			if (arg.length === 4) {
-				let bI = core.getBaseIcon(arg[0]);
+	constructor(...opt) {
+		if (opt && opt.length > 0) {
+			if (opt.length === 4) {
+				let bI = core.getBaseIcon(opt[0]);
 
 				super({
 					elem: new msg({
@@ -52,15 +52,15 @@ export class msgbox extends modal {
 									icon: bI.icon,
 									color: bI.color,
 							  }
-							: arg[0],
-						elem: arg[1],
+							: opt[0],
+						elem: opt[1],
 					}),
 					defautlbtncolor: bI ? bI.color : null,
-					button: btnBuilder(arg[2], ["Okay"], bI?.color, false),
-					debug: arg[3]?.debug === true ? true : false,
+					button: btnBuilder(opt[2], ["Okay"], bI?.color, false),
+					debug: opt[3]?.debug === true ? true : false,
 				});
-			} else if (arg.length === 3) {
-				let bI = core.getBaseIcon(arg[0]);
+			} else if (opt.length === 3) {
+				let bI = core.getBaseIcon(opt[0]);
 
 				super({
 					elem: new msg({
@@ -70,21 +70,21 @@ export class msgbox extends modal {
 									icon: bI.icon,
 									color: bI.color,
 							  }
-							: arg[0],
-						elem: arg[1],
+							: opt[0],
+						elem: opt[1],
 					}),
 					defautlbtncolor: bI ? bI.color : null,
-					button: btnBuilder(arg[2], ["Okay"], bI?.color, false),
+					button: btnBuilder(opt[2], ["Okay"], bI?.color, false),
 				});
-			} else if (arg.length === 2) {
+			} else if (opt.length === 2) {
 				super({
-					elem: new msg({ weight: "md", elem: arg[0] }),
-					button: btnBuilder(arg[2], ["Okay"], null, false),
+					elem: new msg({ weight: "md", elem: opt[0] }),
+					button: btnBuilder(opt[2], ["Okay"], null, false),
 				});
-			} else if (arg.length === 1) {
-				super(arg[0]);
+			} else if (opt.length === 1) {
+				super(opt[0]);
 			} else {
-				console.error("Unsupported argument", arg);
+				console.error("Unsupported argument", opt);
 			}
 		} else {
 			super();
@@ -104,10 +104,10 @@ export class msgbox extends modal {
  * opt : {modal option}
  */
 export class confirmbox extends modal {
-	constructor(...arg) {
-		if (arg && arg.length > 0) {
-			if (arg.length === 4) {
-				let bI = core.getBaseIcon(arg[0]);
+	constructor(...opt) {
+		if (opt && opt.length > 0) {
+			if (opt.length === 4) {
+				let bI = core.getBaseIcon(opt[0]);
 
 				super({
 					elem: new msg({
@@ -117,15 +117,15 @@ export class confirmbox extends modal {
 									icon: bI.icon,
 									color: bI.color,
 							  }
-							: arg[0],
-						elem: arg[1],
+							: opt[0],
+						elem: opt[1],
 					}),
 					defautlbtncolor: bI ? bI.color : null,
-					button: btnBuilder(arg[2], ["Okay", "Cancel", "Retry"], bI?.color, true),
-					debug: arg[3]?.debug === true ? true : false,
+					button: btnBuilder(opt[2], ["Okay", "Cancel", "Retry"], bI?.color, true),
+					debug: opt[3]?.debug === true ? true : false,
 				});
-			} else if (arg.length === 3) {
-				let bI = core.getBaseIcon(arg[0]);
+			} else if (opt.length === 3) {
+				let bI = core.getBaseIcon(opt[0]);
 
 				super({
 					elem: new msg({
@@ -135,21 +135,21 @@ export class confirmbox extends modal {
 									icon: bI.icon,
 									color: bI.color,
 							  }
-							: arg[0],
-						elem: arg[1],
+							: opt[0],
+						elem: opt[1],
 					}),
 					defautlbtncolor: bI ? bI.color : null,
-					button: btnBuilder(arg[2], ["Okay", "Cancel", "Retry"], bI?.color, true),
+					button: btnBuilder(opt[2], ["Okay", "Cancel", "Retry"], bI?.color, true),
 				});
-			} else if (arg.length === 2) {
+			} else if (opt.length === 2) {
 				super({
-					elem: new msg({ weight: "md", elem: arg[0] }),
-					button: btnBuilder(arg[1], ["Okay", "Cancel", "Retry"], null, true),
+					elem: new msg({ weight: "md", elem: opt[0] }),
+					button: btnBuilder(opt[1], ["Okay", "Cancel", "Retry"], null, true),
 				});
-			} else if (arg.length === 1) {
-				super(arg[0]);
+			} else if (opt.length === 1) {
+				super(opt[0]);
 			} else {
-				console.error("Unsupported argument", arg);
+				console.error("Unsupported argument", opt);
 			}
 		} else {
 			super();
@@ -183,28 +183,28 @@ function elemBuilder(elem) {
  * opt : {modal option}
  */
 export class inputbox extends modal {
-	constructor(...arg) {
-		if (arg && arg.length > 0) {
-			if (arg.length === 4) {
+	constructor(...opt) {
+		if (opt && opt.length > 0) {
+			if (opt.length === 4) {
 				super({
-					elem: [new p({ elem: arg[1] }), elemBuilder(arg[0])],
-					button: btnBuilder(arg[2], ["Okay", "Cancel", "Retry"], null, true),
-					debug: arg[3]?.debug === true ? true : false,
+					elem: [new p({ elem: opt[1] }), elemBuilder(opt[0])],
+					button: btnBuilder(opt[2], ["Okay", "Cancel", "Retry"], null, true),
+					debug: opt[3]?.debug === true ? true : false,
 				});
-			} else if (arg.length === 3) {
+			} else if (opt.length === 3) {
 				super({
-					elem: [new p({ elem: arg[1] }), elemBuilder(arg[0])],
-					button: btnBuilder(arg[2], ["Okay", "Cancel", "Retry"], null, true),
+					elem: [new p({ elem: opt[1] }), elemBuilder(opt[0])],
+					button: btnBuilder(opt[2], ["Okay", "Cancel", "Retry"], null, true),
 				});
-			} else if (arg.length === 2) {
+			} else if (opt.length === 2) {
 				super({
-					elem: elemBuilder(arg[0]),
-					button: btnBuilder(arg[1], ["Okay", "Cancel", "Retry"], null, true),
+					elem: elemBuilder(opt[0]),
+					button: btnBuilder(opt[1], ["Okay", "Cancel", "Retry"], null, true),
 				});
-			} else if (arg.length === 1) {
-				super(arg[0]);
+			} else if (opt.length === 1) {
+				super(opt[0]);
 			} else {
-				console.error("Unsupported argument", arg);
+				console.error("Unsupported argument", opt);
 			}
 		} else {
 			super();

@@ -11,8 +11,8 @@ const defaultContainerOption = { flush: false };
  * opt:{tagoption}
  */
 export class container extends div {
-	constructor(opt) {
-		super(opt);
+	constructor(...opt) {
+		super(...opt);
 	}
 
 	get data() {
@@ -38,8 +38,8 @@ export class container extends div {
  * opt:{tagoption}
  */
 export class header extends div {
-	constructor(opt) {
-		super(opt);
+	constructor(...opt) {
+		super(...opt);
 	}
 
 	get data() {
@@ -56,8 +56,8 @@ export class header extends div {
  * opt:{tagoption}
  */
 export class body extends div {
-	constructor(opt) {
-		super(opt);
+	constructor(...opt) {
+		super(...opt);
 	}
 
 	get data() {
@@ -74,8 +74,8 @@ export class body extends div {
  * opt:{tagoption}
  */
 export class footer extends div {
-	constructor(opt) {
-		super(opt);
+	constructor(...opt) {
+		super(...opt);
 	}
 
 	get data() {
@@ -92,8 +92,8 @@ export class footer extends div {
  * opt:{tagoption}
  */
 export class group extends div {
-	constructor(opt) {
-		super(opt);
+	constructor(...opt) {
+		super(...opt);
 	}
 
 	get data() {
@@ -111,8 +111,8 @@ const defaultTitleOption = { level: 5 };
  * opt:{tagoption}
  */
 export class title extends h {
-	constructor(opt) {
-		super(opt);
+	constructor(...opt) {
+		super(...opt);
 	}
 
 	get data() {
@@ -132,8 +132,8 @@ const defaultSubtitleOption = { level: 6, marginBottom: 2 };
  * opt:{tagoption}
  */
 export class subtitle extends h {
-	constructor(opt) {
-		super(opt);
+	constructor(...opt) {
+		super(...opt);
 	}
 
 	get data() {
@@ -151,8 +151,8 @@ export class subtitle extends h {
  * opt:{tagoption}
  */
 export class text extends p {
-	constructor(opt) {
-		super(opt);
+	constructor(...opt) {
+		super(...opt);
 	}
 
 	get data() {
@@ -169,8 +169,8 @@ export class text extends p {
  * opt:{tagoption}
  */
 export class imgoverlay extends div {
-	constructor(opt) {
-		super(opt);
+	constructor(...opt) {
+		super(...opt);
 	}
 
 	get data() {
@@ -189,8 +189,8 @@ const defaultHorizontalOption = { left: null, right: null, size: "auto", gap: 0 
  * opt:{tagoption,left,right,size,gap}
  */
 export class horizontal extends div {
-	constructor(opt) {
-		super(opt);
+	constructor(...opt) {
+		super(...opt);
 	}
 
 	get data() {
@@ -225,8 +225,8 @@ export class horizontal extends div {
  * opt:{tagoption}
  */
 export class link extends a {
-	constructor(opt) {
-		super(opt);
+	constructor(...opt) {
+		super(...opt);
 	}
 
 	get data() {
@@ -245,8 +245,8 @@ const defaultImgOption = { placement: "top" };
  * opt:{tagoption,imgoption,placement}
  */
 export class img extends imgtag {
-	constructor(opt) {
-		super(opt);
+	constructor(...opt) {
+		super(...opt);
 	}
 
 	get data() {

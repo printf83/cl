@@ -11,8 +11,8 @@ const defaultOption = { icon: null, color: null, elem: null, close: false };
  * opt : {tagoption,icon,color,elem,close}
  */
 export class container extends div {
-	constructor(opt) {
-		super(opt);
+	constructor(...opt) {
+		super(...opt);
 	}
 
 	get data() {
@@ -68,8 +68,8 @@ export class container extends div {
 }
 
 export class link extends a {
-	constructor(opt) {
-		super(opt);
+	constructor(...opt) {
+		super(...opt);
 	}
 
 	get data() {
@@ -87,8 +87,8 @@ const defaultHeadingOption = {
 	level: 4,
 };
 export class heading extends h {
-	constructor(opt) {
-		super(opt);
+	constructor(...opt) {
+		super(...opt);
 	}
 
 	get data() {

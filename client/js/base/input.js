@@ -53,9 +53,8 @@ const defaultOption = {
  * opt : {tagoption,id,name,type,label,hidelabel,floatlabel,inline,labelsize,ctlsize,size,weight,value,checked,placeholder,option,numctl,addctl,min,max,step,row,multiple,required,valid,invalid,before,after,plaintext,readonly,disabled,container,flex,nowarp,onclick,onchange,onclick,onfocus,onblur}
  */
 export default class input extends tag {
-	constructor(opt) {
-		super();
-		this.data = core.extend({}, defaultOption, opt);
+	constructor(...opt) {
+		super(...opt);
 	}
 
 	get data() {

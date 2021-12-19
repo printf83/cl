@@ -27,8 +27,8 @@ const defaultContainerOption = {
 };
 
 export class container extends nav {
-	constructor(opt) {
-		super(opt);
+	constructor(...opt) {
+		super(...opt);
 	}
 
 	get data() {
@@ -96,8 +96,8 @@ const defaultBrandOption = {
 };
 
 export class brand extends tag {
-	constructor(opt) {
-		super(opt);
+	constructor(...opt) {
+		super(...opt);
 	}
 
 	get data() {
@@ -130,8 +130,8 @@ const defaultToggleOption = {
 	toggle: "collapse", //collapse | offcanvas
 };
 export class toggle extends collapse.toggle {
-	constructor(opt) {
-		super(opt);
+	constructor(...opt) {
+		super(...opt);
 	}
 
 	get data() {
@@ -158,8 +158,8 @@ const defaultFormContainerOption = {
 	display: "flex",
 };
 export class formcontainer extends form {
-	constructor(opt) {
-		super(opt);
+	constructor(...opt) {
+		super(...opt);
 	}
 
 	get data() {
@@ -172,8 +172,8 @@ export class formcontainer extends form {
 }
 
 export class collapsecontainer extends div {
-	constructor(opt) {
-		super(opt);
+	constructor(...opt) {
+		super(...opt);
 	}
 
 	get data() {
@@ -191,8 +191,8 @@ const defaultOffcanvasContainerOption = {
 };
 
 export class offcanvascontainer extends div {
-	constructor(opt) {
-		super(opt);
+	constructor(...opt) {
+		super(...opt);
 	}
 
 	get data() {
@@ -240,8 +240,8 @@ const defaultItemContainerOption = {
 };
 
 export class itemcontainer extends div {
-	constructor(opt) {
-		super(opt);
+	constructor(...opt) {
+		super(...opt);
 	}
 
 	get data() {
@@ -282,8 +282,8 @@ const defaultItemOption = {
 	disabled: false,
 };
 export class item extends div {
-	constructor(opt) {
-		super(opt);
+	constructor(...opt) {
+		super(...opt);
 	}
 
 	get data() {
@@ -335,8 +335,8 @@ export class item extends div {
 }
 
 export class text extends span {
-	constructor(opt) {
-		super(opt);
+	constructor(...opt) {
+		super(...opt);
 	}
 
 	get data() {

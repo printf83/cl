@@ -29,8 +29,8 @@ const defaultItemOption = {
  * imgitem : {tagoption,src,alt,caption,text,interval}
  */
 export default class carousel extends div {
-	constructor(opt) {
-		super(opt);
+	constructor(...opt) {
+		super(...opt);
 	}
 
 	get data() {
@@ -111,7 +111,7 @@ export default class carousel extends div {
 											class: "carousel-caption",
 											elem: [
 												i.caption ? new h({ level: 5, elem: i.caption }) : null,
-												i.text ? new p({ elem: i.text }) : null,
+												i.text ? new p(i.text) : null,
 											],
 									  })
 									: null,

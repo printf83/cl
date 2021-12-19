@@ -19,8 +19,8 @@ const defaultItemOption = { label: null, icon: null, active: false, item: null }
  *
  */
 export default class accordion extends div {
-	constructor(opt) {
-		super(opt);
+	constructor(...opt) {
+		super(...opt);
 	}
 
 	get data() {

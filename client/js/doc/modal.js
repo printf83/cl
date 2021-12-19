@@ -442,7 +442,7 @@ export default [
 										type: "tooltip",
 										msg: "Tooltip for link 1",
 										elem: new a({
-											href: "#;",
+											href: "#",
 											label: "This link",
 										}),
 									}),
@@ -451,7 +451,7 @@ export default [
 										type: "tooltip",
 										msg: "Tooltip for link 2",
 										elem: new a({
-											href: "#;",
+											href: "#",
 											label: "that link",
 										}),
 									}),
@@ -475,90 +475,22 @@ export default [
 				onclick: function () {
 					new modal({
 						title: "Grids in modal",
-						elem: new div({
-							class: "container-fluid cl-highlight-col",
-							elem: [
-								new div({
-									class: "row",
-									elem: [
-										new div({ class: "col-md-4", elem: ".col-md-4" }),
-										new div({ class: "col-md-4 ms-auto", elem: ".col-md-4 .ms-auto" }),
-									],
-								}),
-								new div({
-									class: "row",
-									elem: [
-										new div({ class: "col-md-3 ms-auto", elem: ".col-md-3 .ms-auto" }),
-										new div({ class: "col-md-2 ms-auto", elem: ".col-md-2 .ms-auto" }),
-									],
-								}),
-								new div({
-									class: "row",
-									elem: [new div({ class: "col-md-6 ms-auto", elem: ".col-md-6 .ms-auto" })],
-								}),
-								new div({
-									class: "row",
-									elem: [
-										new div({
-											class: "col-sm-9",
-											elem: [
-												"Level 1: .col-md-9",
-												new div({
-													class: "row",
-													elem: [
-														new div({
-															class: "col-8 col-sm-6",
-															elem: "Level 2: .col-8 .col-sm-6",
-														}),
-														new div({
-															class: "col-4 col-sm-6",
-															elem: "Level 2: .col-4 .col-sm-6",
-														}),
-													],
-												}),
-											],
-										}),
-									],
-								}),
-							],
-						}),
-						button: ["Save change", "Close"],
-					}).show();
-				},
-			});
-		},
-	},
-
-	{
-		title: "Using the grid (Easy function)",
-		code: function () {
-			return new button({
-				label: "Show live modal dialog",
-				color: "primary",
-				onclick: function () {
-					//create function for easy create div
-					let fnDiv = function (className, element) {
-						return new div({ class: className, elem: element });
-					};
-
-					new modal({
-						title: "Grids in modal",
-						elem: fnDiv("container-fluid cl-highlight-col", [
-							fnDiv("row", [
-								fnDiv("col-md-4", ".col-md-4"),
-								fnDiv("col-md-4 ms-auto", ".col-md-4 .ms-auto"),
+						elem: new div("container-fluid cl-highlight-col", [
+							new div("row", [
+								new div("col-md-4", ".col-md-4"),
+								new div("col-md-4 ms-auto", ".col-md-4 .ms-auto"),
 							]),
-							fnDiv("row", [
-								fnDiv("col-md-3 ms-auto", ".col-md-3 .ms-auto"),
-								fnDiv("col-md-2 ms-auto", ".col-md-2 .ms-auto"),
+							new div("row", [
+								new div("col-md-3 ms-auto", ".col-md-3 .ms-auto"),
+								new div("col-md-2 ms-auto", ".col-md-2 .ms-auto"),
 							]),
-							fnDiv("row", fnDiv("col-md-6 ms-auto", ".col-md-6 .ms-auto")),
-							fnDiv("row", [
-								fnDiv("col-sm-9", [
+							new div("row", new div("col-md-6 ms-auto", ".col-md-6 .ms-auto")),
+							new div("row", [
+								new div("col-sm-9", [
 									"Level 1: .col-md-9",
-									fnDiv("row", [
-										fnDiv("col-8 col-sm-6", "Level 2: .col-8 .col-sm-6"),
-										fnDiv("col-4 col-sm-6", "Level 2: .col-4 .col-sm-6"),
+									new div("row", [
+										new div("col-8 col-sm-6", "Level 2: .col-8 .col-sm-6"),
+										new div("col-4 col-sm-6", "Level 2: .col-4 .col-sm-6"),
 									]),
 								]),
 							]),

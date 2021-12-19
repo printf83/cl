@@ -41,10 +41,10 @@ export default [
 			return new alert.container({
 				color: "success",
 				elem: [
-					new alert.heading({ elem: "Well done!" }),
-					new p({
-						elem: "Aww yeah, you successfully read this important alert message. This example text is going to run a bit longer so that you can see how spacing within an alert works with this kind of content.",
-					}),
+					new alert.heading("Well done!"),
+					new p(
+						"Aww yeah, you successfully read this important alert message. This example text is going to run a bit longer so that you can see how spacing within an alert works with this kind of content."
+					),
 					new hr(),
 					new p({
 						marginBottom: 0,

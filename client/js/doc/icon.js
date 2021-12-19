@@ -218,11 +218,11 @@ export default [
 				color: "primary",
 				icon: "fire",
 				option: [
-					{ href: "#;", label: "Copy", icon: "copy" },
-					{ href: "#;", label: "Cut", icon: "cut" },
-					{ href: "#;", label: "Paste", icon: "paste" },
+					{ href: "#", label: "Copy", icon: "copy" },
+					{ href: "#", label: "Cut", icon: "cut" },
+					{ href: "#", label: "Paste", icon: "paste" },
 					{ value: "-" },
-					{ href: "#;", label: "Setting", icon: "sliders-h" },
+					{ href: "#", label: "Setting", icon: "sliders-h" },
 				],
 			});
 		},
@@ -238,7 +238,7 @@ export default [
 					new navbar.brand({
 						label: "Navbar",
 						icon: { icon: "fire", color: "danger" },
-						href: "#;",
+						href: "#",
 					}),
 				],
 			});

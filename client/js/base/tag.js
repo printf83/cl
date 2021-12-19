@@ -99,9 +99,24 @@ export default class tag {
 	_d = null;
 	cl = 1; //name tag "cl" so we can check hasOwnProperty("cl")
 
-	constructor(opt) {
-		if (opt) {
-			this.data = opt;
+	constructor(...opt) {
+		if (opt && opt.length > 0) {
+			if (opt.length === 2) {
+				this.data = {
+					class: opt[0],
+					elem: opt[1],
+				};
+			} else if (opt.length === 1) {
+				if (typeof opt[0] === "object") {
+					if (opt[0].hasOwnProperty("cl")) {
+						this.data = { elem: opt[0] };
+					} else {
+						this.data = opt[0];
+					}
+				} else {
+					this.data = { elem: opt[0] };
+				}
+			}
 		}
 	}
 

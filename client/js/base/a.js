@@ -8,8 +8,8 @@ const defaultOption = { tag: "a", icon: null, label: null };
  * opt : {tagoption,icon,label}
  */
 export default class a extends tag {
-	constructor(opt) {
-		super(opt);
+	constructor(...opt) {
+		super(...opt);
 	}
 
 	get data() {

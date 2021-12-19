@@ -3,10 +3,6 @@ import div from "../base/div.js";
 import ul from "../base/ul.js";
 import li from "../base/li.js";
 
-function fnDiv(className, element) {
-	return new div({ class: className, elem: element });
-}
-
 export default [
 	{
 		title: "Gutters",
@@ -34,26 +30,27 @@ export default [
 	{
 		title: "Horizontal gutters",
 		msg: "{{.gx-*}} classes can be used to control the horizontal gutter widths. The {{.container}} or {{.container-fluid}} parent may need to be adjusted if larger gutters are used too to avoid unwanted overflow, using a matching padding utility. For example, in the following example we’ve increased the padding with {{.px-4}}:",
-		sample: { fnDiv: fnDiv },
 		code: function () {
-			return fnDiv(
+			return new div(
 				"container px-4",
-				fnDiv("row gx-5", Array(2).fill(fnDiv("col", fnDiv("p-3 border bg-light", "Custom column padding"))))
+				new div(
+					"row gx-5",
+					Array(2).fill(new div("col", new div("p-3 border bg-light", "Custom column padding")))
+				)
 			);
 		},
 	},
 
 	{
 		msg: "An alternative solution is to add a wrapper around the {{.row}} with the {{.overflow-hidden}} class:",
-		sample: { fnDiv: fnDiv },
 		code: function () {
-			return fnDiv(
+			return new div(
 				"container overflow-hidden",
-				fnDiv(
+				new div(
 					"row gx-5",
-					fnDiv(
+					new div(
 						"row gx-5",
-						Array(2).fill(fnDiv("col", fnDiv("p-3 border bg-light", "Custom column padding")))
+						Array(2).fill(new div("col", new div("p-3 border bg-light", "Custom column padding")))
 					)
 				)
 			);
@@ -63,11 +60,13 @@ export default [
 	{
 		title: "Vertical gutters",
 		msg: "{{.gy-*}} classes can be used to control the vertical gutter widths. Like the horizontal gutters, the vertical gutters can cause some overflow below the {{.row}} at the end of a page. If this occurs, you add a wrapper around {{.row}} with the {{.overflow-hidden}} class:",
-		sample: { fnDiv: fnDiv },
 		code: function () {
-			return fnDiv(
+			return new div(
 				"container overflow-hidden",
-				fnDiv("row gy-5", Array(4).fill(fnDiv("col-6", fnDiv("p-3 border bg-light", "Custom column padding"))))
+				new div(
+					"row gy-5",
+					Array(4).fill(new div("col-6", new div("p-3 border bg-light", "Custom column padding")))
+				)
 			);
 		},
 	},
@@ -75,11 +74,13 @@ export default [
 	{
 		title: "Horizontal & vertical gutters",
 		msg: "{{.g-*}} classes can be used to control the horizontal gutter widths, for the following example we use a smaller gutter width, so there won’t be a need to add the {{.overflow-hidden}} wrapper class.",
-		sample: { fnDiv: fnDiv },
 		code: function () {
-			return fnDiv(
+			return new div(
 				"container",
-				fnDiv("row g-2", Array(4).fill(fnDiv("col-6", fnDiv("p-3 border bg-light", "Custom column padding"))))
+				new div(
+					"row g-2",
+					Array(4).fill(new div("col-6", new div("p-3 border bg-light", "Custom column padding")))
+				)
 			);
 		},
 	},
@@ -87,13 +88,12 @@ export default [
 	{
 		title: "Row columns gutters",
 		msg: "Gutter classes can also be added to <a href='https://getbootstrap.com/docs/5.0/layout/grid/#row-columns'>row columns</a>. In the following example, we use responsive row columns and responsive gutter classes.",
-		sample: { fnDiv: fnDiv },
 		code: function () {
-			return fnDiv(
+			return new div(
 				"container",
-				fnDiv(
+				new div(
 					"row row-cols-2 row-cols-lg-5 g-2 g-lg-3",
-					Array(10).fill(fnDiv("col-6", fnDiv("p-3 border bg-light", "Row column")))
+					Array(10).fill(new div("col-6", new div("p-3 border bg-light", "Row column")))
 				)
 			);
 		},
@@ -106,12 +106,11 @@ export default [
 			"<b>Need an edge-to-edge design?</b> Drop the parent {{.container}} or {{.container-fluid.}}",
 			"In practice, here’s how it looks. Note you can continue to use this with all other predefined grid classes (including column widths, responsive tiers, reorders, and more).",
 		],
-		sample: { fnDiv: fnDiv },
 		viewclass: "cl-highlight-col",
 		code: function () {
-			return fnDiv("row g-0", [
-				fnDiv("col-sm-6 col-md-8", ".col-sm-6 .col-md-8"),
-				fnDiv("col-6 col-md-4", ".col-6 .col-md-4"),
+			return new div("row g-0", [
+				new div("col-sm-6 col-md-8", ".col-sm-6 .col-md-8"),
+				new div("col-6 col-md-4", ".col-6 .col-md-4"),
 			]);
 		},
 	},

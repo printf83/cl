@@ -17,8 +17,8 @@ const defaultToggleOption = {
  * opt: {tagoption,elem,target,show,toggle}
  */
 export class toggle extends tag {
-	constructor(opt) {
-		super(opt);
+	constructor(...opt) {
+		super(...opt);
 	}
 
 	get data() {
@@ -62,8 +62,8 @@ const defaultContainerOption = {
  * opt: {tagoption,elem,id,show}
  */
 export class container extends div {
-	constructor(opt) {
-		super(opt);
+	constructor(...opt) {
+		super(...opt);
 	}
 
 	get data() {

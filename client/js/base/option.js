@@ -21,8 +21,8 @@ const defaultSelectItemOption = {
  * selectitem : [string]|[{tagoption,elem,value,label,icon,active,disabled,interactive}]
  */
 export class select extends tag {
-	constructor(opt) {
-		super(opt);
+	constructor(...opt) {
+		super(...opt);
 	}
 
 	get data() {
@@ -84,8 +84,8 @@ const defaultDropdownItemOption = {
  * dropdownitem : [string]|[{tagoption,elem,value,label,icon,active,disabled,interactive}]
  */
 export class dropdown extends tag {
-	constructor(opt) {
-		super(opt);
+	constructor(...opt) {
+		super(...opt);
 	}
 
 	get data() {

@@ -16,8 +16,8 @@ const defaultOption = {
  * opt : {tagoption,for,elem,icon,label,hidelabel}
  */
 export default class label extends tag {
-	constructor(opt) {
-		super(opt);
+	constructor(...opt) {
+		super(...opt);
 	}
 
 	get data() {

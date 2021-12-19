@@ -245,7 +245,7 @@ export default [
 				) {
 					return {
 						action: true,
-						href: "#;",
+						href: "#",
 						color: i,
 						elem: `A simple ${i} list group item`,
 					};

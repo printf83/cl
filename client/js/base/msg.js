@@ -13,8 +13,8 @@ const defaultOption = {
  * opt : {tagoption,icon,weight,elem}
  */
 export default class msg extends div {
-	constructor(opt) {
-		super(opt);
+	constructor(...opt) {
+		super(...opt);
 	}
 
 	get data() {

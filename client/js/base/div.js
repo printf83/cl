@@ -10,8 +10,8 @@ const defaultOption = {
 };
 
 export default class div extends tag {
-	constructor(opt) {
-		super(opt);
+	constructor(...opt) {
+		super(...opt);
 	}
 
 	get data() {

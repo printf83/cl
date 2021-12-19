@@ -14,9 +14,8 @@ const defaultOption = {
  * opt : {tagoption}
  */
 export class container extends tag {
-	constructor(opt) {
-		super();
-		this.data = core.extend({}, defaultOption, opt);
+	constructor(...opt) {
+		super(...opt);
 	}
 
 	get data() {
@@ -49,8 +48,8 @@ export class container extends tag {
  * opt : {tagoption}
  */
 export class text extends div {
-	constructor(opt) {
-		super(opt);
+	constructor(...opt) {
+		super(...opt);
 	}
 
 	get data() {

@@ -17,8 +17,8 @@ const defaultOption = {
  * opt : {tagoption,label,divider,item:{label,icon,current,href,onclick,elem}}
  */
 export default class breadcrumb extends nav {
-	constructor(opt) {
-		super(opt);
+	constructor(...opt) {
+		super(...opt);
 	}
 
 	get data() {

@@ -28,8 +28,8 @@ const defaultContainerOption = {
  * opt : {tagoption}
  */
 export class tr extends tag {
-	constructor(opt) {
-		super(opt);
+	constructor(...opt) {
+		super(...opt);
 	}
 
 	get data() {
@@ -44,8 +44,8 @@ export class tr extends tag {
  * opt : {tagoption}
  */
 export class thead extends tag {
-	constructor(opt) {
-		super(opt);
+	constructor(...opt) {
+		super(...opt);
 	}
 
 	get data() {
@@ -70,8 +70,8 @@ export class thead extends tag {
  * opt : {tagoption}
  */
 export class tbody extends tag {
-	constructor(opt) {
-		super(opt);
+	constructor(...opt) {
+		super(...opt);
 	}
 
 	get data() {
@@ -83,8 +83,8 @@ export class tbody extends tag {
 }
 
 export class tfoot extends tag {
-	constructor(opt) {
-		super(opt);
+	constructor(...opt) {
+		super(...opt);
 	}
 
 	get data() {
@@ -109,8 +109,8 @@ export class tfoot extends tag {
  * opt : {tagoption,scope,colspan,rowspan,head}
  */
 export class td extends tag {
-	constructor(opt) {
-		super(opt);
+	constructor(...opt) {
+		super(...opt);
 	}
 
 	get data() {
@@ -141,8 +141,8 @@ export class td extends tag {
  * opt : {tagoption,scope,colspan,rowspan,head}
  */
 export class container extends tag {
-	constructor(opt) {
-		super(opt);
+	constructor(...opt) {
+		super(...opt);
 	}
 
 	get data() {

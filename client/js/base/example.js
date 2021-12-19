@@ -49,8 +49,8 @@ const defaultOption = {
  * opt : {tagoption,icon,label}
  */
 export default class example extends div {
-	constructor(opt) {
-		super(opt);
+	constructor(...opt) {
+		super(...opt);
 	}
 
 	get data() {

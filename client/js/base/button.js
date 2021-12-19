@@ -30,8 +30,8 @@ const defaultOption = {
  * option : {tagoption,type,label,icon,badge,value,checked,color,weight,disabled,outline,hidelabel,nowarp,elem}
  */
 export default class button extends tag {
-	constructor(opt) {
-		super(opt);
+	constructor(...opt) {
+		super(...opt);
 	}
 
 	get data() {

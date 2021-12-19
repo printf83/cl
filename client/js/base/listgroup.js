@@ -26,8 +26,8 @@ const defaultItemOption = {
 };
 
 export default class listgroup extends tag {
-	constructor(opt) {
-		super(opt);
+	constructor(...opt) {
+		super(...opt);
 	}
 
 	get data() {

@@ -26,8 +26,8 @@ const defaultOption = {
 export default class dropdown extends tag {
 	cldropdown = 1;
 
-	constructor(opt) {
-		super(opt);
+	constructor(...opt) {
+		super(...opt);
 	}
 
 	get data() {

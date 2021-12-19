@@ -19,8 +19,8 @@ const defaultOption = {
  * opt : {tagoption,icon,label,elem,asst,notification,pill,color}
  */
 export default class badge extends span {
-	constructor(opt) {
-		super(opt);
+	constructor(...opt) {
+		super(...opt);
 	}
 
 	get data() {
