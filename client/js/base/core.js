@@ -343,3 +343,46 @@ export function focusElement(elem, option) {
 	option = extend({}, { behavior: "smooth", block: "start" }, option);
 	elem?.scrollIntoView(option);
 }
+
+function getElementValue(element) {
+	let type = element.getAttribute("type");
+	switch (type) {
+		case "radio":
+		case "checkbox":
+			if (element.checked) {
+				return element.value;
+			}
+
+			break;
+		default:
+			return element.value ? element.value : null;
+	}
+
+	return null;
+}
+
+export function validate(container, callback) {
+	var listofctl = container.querySelectorAll("[name]");
+	if (listofctl) {
+		container.classList.remove("was-validated");
+		listofctl.forEach(function (ctl) {
+			if (ctl.hasAttribute("required")) {
+				if (getElementValue(ctl) !== null) {
+					ctl.classList.add("is-valid");
+					ctl.classList.remove("is-invalid");
+				} else {
+					ctl.classList.add("is-invalid");
+					ctl.classList.remove("is-valid");
+				}
+			}
+		});
+		container.classList.add("was-validated");
+
+		var invalidctl = container.querySelectorAll(".is-invalid");
+		if (invalidctl && invalidctl.length > 0) {
+			callback(false);
+		} else {
+			callback(true);
+		}
+	}
+}

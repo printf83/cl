@@ -1,8 +1,10 @@
 "use strict";
+import * as core from "../base/core.js";
 import * as doc_core from "./core.js";
 import * as sample from "./sample.js";
 import button from "../base/button.js";
 import input from "../base/input.js";
+import toast from "../base/toast.js";
 
 export default [
 	{
@@ -58,7 +60,9 @@ export default [
 					label: "Validate",
 					color: "primary",
 					onclick: function (event) {
-						// new validate($(event.currentTarget).closest(".card-body"));
+						core.validate(event.currentTarget.parentElement, function (result) {
+							new toast("i", `Result: ${result}`).show();
+						});
 					},
 				}),
 			});

@@ -54,6 +54,11 @@ const defaultOption = {
 	position: null,
 	overflow: null,
 	opacity: null,
+	display: null,
+	float: null,
+	alignItem: null,
+	justifyContent: null,
+	shadow: null,
 
 	color: null,
 	gradient: false,
@@ -77,10 +82,6 @@ const defaultOption = {
 	marginBottom: null,
 	marginStart: null,
 	marginEnd: null,
-
-	display: null,
-
-	shadow: null,
 
 	border: null,
 	bordercolor: null,
@@ -161,10 +162,6 @@ export default class tag {
 					c3(opt.shadow, "shadow", "shadow-none", "shadow-$1", null, "shadow"),
 					c3(opt.border, "border", "border-0", "border-$1", null, "border"),
 					c3(opt.rounded, "rounded", "rounded-0", "rounded-$1", null, "rounded"),
-
-					// c1(opt.shadow, "shadow", "shadow-none", `shadow-${opt.shadow}`),
-					// c1(opt.border, "border", "border-0", `border-${opt.border}`),
-					// c1(opt.rounded, "rounded", "rounded-0", `rounded-${opt.rounded}`),
 
 					c1(opt.borderweight, null, null, `border border-${opt.borderweight}`),
 					c1(opt.bordercolor, null, null, `border border-${opt.bordercolor}`),
