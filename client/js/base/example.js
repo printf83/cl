@@ -19,16 +19,22 @@ function codecontainer(type, strcode, beautify) {
 			position: "relative",
 			float: "right",
 			elem: new button({
+				icon: { type: "far", icon: "clipboard" },
 				label: "Copy",
-				outline: true,
-				color: "primary",
-				weight: "sm",
+				hidelabel: true,
+				textcolor: "primary",
 				align: "end",
+				padding: 1,
 				class: "position-absolute end-0",
 				onclick: function (event) {
 					let str = event.currentTarget.parentElement.nextSibling.firstChild.innerText;
-					navigator.clipboard.writeText(str);
-					new toast("/", "Copied to clipboard").show();
+
+					try {
+						navigator.clipboard.writeText(str);
+						new toast("/", "Copied to clipboard").show();
+					} catch (ex) {
+						new toast("!!", `Error when copy code to clipboard. ${ex}`).show();
+					}
 				},
 			}),
 		}),
