@@ -87,9 +87,11 @@ export default class listgroup extends tag {
 				ctl.attr = core.merge.attr(ctl.attr, {
 					type: i.type === "switch" ? "checkbox" : i.type,
 					checked: i.checked,
+					value: i.value,
 				});
 
-				delete i.type;
+				delete ctl.type;
+				delete ctl.value;
 				delete ctl.checked;
 				delete ctl.color;
 
