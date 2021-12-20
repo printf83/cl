@@ -276,22 +276,26 @@ function gen_example(opt) {
 
 	opt.id = opt.id || core.UUID();
 
-	let m = opt.msg ? (Array.isArray(opt.msg) ? opt.msg : [opt.msg]) : [];
+	opt.msg = opt.msg ? (Array.isArray(opt.msg) ? opt.msg : [opt.msg]) : null;
+
+	let m = null;
+
+	if (opt.msg) {
+		m = [];
+		opt.msg.forEach(function (i) {
+			m.push(i);
+		});
+	}
 
 	if (opt.option) {
-		Object.keys(opt.option).forEach((optionName) => {
+		if (m === null) {
+			m = [];
+		}
+
+		Object.keys(opt.option).forEach(function (optionName) {
 			m.push(
 				new table.container({
-					caption: optionName,
-					captiontop: true,
-					item: opt.option[optionName].map(function (i, ix) {
-						if (ix > 0) {
-							i[0] = { elem: new code(i[0]) };
-							return i;
-						} else {
-							return i;
-						}
-					}),
+					item: opt.option[optionName],
 				})
 			);
 		});
