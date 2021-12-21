@@ -30,7 +30,7 @@ export default [
 
 			new alert.container({
 				icon: "!",
-				elem: "<b>Warning!</b> This is an alpha version. Don't used it on production.",
+				elem: "<b>Warning!</b> This is an alpha version. Please don't used it on production.",
 				align: "center",
 				marginTop: 5,
 			}),

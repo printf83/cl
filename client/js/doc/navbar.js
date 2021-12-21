@@ -2,12 +2,12 @@
 import * as core from "../base/core.js";
 import * as doc_core from "./core.js";
 import * as sample from "./sample.js";
-import listgroup from "../base/listgroup.js";
 import div from "../base/div.js";
-import p from "../base/p.js";
 import button from "../base/button.js";
 import input from "../base/input.js";
 import * as navbar from "../base/navbar.js";
+import h from "../base/h.js";
+import span from "../base/span.js";
 
 export default [
 	{
@@ -668,12 +668,8 @@ export default [
 				new navbar.collapsecontainer({
 					id: id,
 					elem: new div("p-2", [
-						{ tag: "h5", elem: "Collapsed content" },
-						{
-							tag: "span",
-							class: "text-muted",
-							elem: "Toggleable via the navbar brand.",
-						},
+						new h({ level: 5, elem: "Collapsed content" }),
+						new span("text-muted", "Toggleable via the navbar brand."),
 					]),
 				}),
 

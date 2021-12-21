@@ -229,20 +229,12 @@ function memoryleaktest(index, limit, progressupdate, callback) {
 
 		if (process) {
 			gen_content(db_menu[ix1].title, db_menu[ix1].item[ix2].title, function () {
-				setTimeout(
-					function (index, limit, callback) {
-						if (index >= limit) {
-							callback();
-						} else {
-							ix2 = ix2 + 1;
-							memoryleaktest(index + 1, limit, progressupdate, callback);
-						}
-					},
-					0,
-					index,
-					limit,
-					callback
-				);
+				if (index >= limit) {
+					callback();
+				} else {
+					ix2 = ix2 + 1;
+					memoryleaktest(index + 1, limit, progressupdate, callback);
+				}
 			});
 		} else {
 			memoryleaktest(index, limit, progressupdate, callback);

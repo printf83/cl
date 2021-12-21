@@ -5,6 +5,7 @@ const app = express();
 
 app.set("trust proxy", 1);
 app.use(express.json());
+//app.use(express.static(path.join(__dirname, "client"), { maxAge: 3600000 }));
 app.use(express.static(path.join(__dirname, "client")));
 
 const envPORT = process.env.PORT || 8081;
