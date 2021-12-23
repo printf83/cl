@@ -184,6 +184,7 @@ export default class example extends div {
 					? new accordion({
 							border: true,
 							flush: true,
+							autoclose:false,
 							item: item,
 					  })
 					: null,

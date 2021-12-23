@@ -28,11 +28,14 @@ export default class accordion extends div {
 	}
 	set data(opt) {
 		if (opt) {
+
+			opt = core.extend({}, defaultOption, opt);
+
 			//check if item isnot array
 			opt.item = opt.item ? (Array.isArray(opt.item) ? opt.item : [opt.item]) : null;
 
 			//id require if autoclose
-			opt.id = opt.id || opt.autoclose ? core.UUID() : null;
+			opt.id = opt.id || (opt.autoclose ? core.UUID() : null);
 
 			//check if any item active
 			let activeitem = opt.item?.find((i) => {
