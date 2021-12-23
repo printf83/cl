@@ -9,6 +9,7 @@ const defaultOption = {
 	label: null,
 	elem: null,
 	nowarp: false,
+	weight: null,
 };
 /**
  * opt : {tagoption}
@@ -32,9 +33,15 @@ export class container extends tag {
 
 			let ctlmain = new div(opt);
 			let t = ctlmain.data;
-			t.class = core.merge.class(t.class, ["input-group", opt.nowarp ? "flex-nowarp" : null]);
+			t.class = core.merge.class(t.class, [
+				"input-group",
+				opt.weight ? `input-group-${opt.weight}` : null,
+				opt.nowarp ? "flex-nowarp" : null,
+			]);
 
+			delete t.weight;
 			delete t.nowarp;
+
 			ctlmain.data = t;
 
 			super.data = {

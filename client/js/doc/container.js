@@ -2,7 +2,7 @@
 import div from "../base/div.js";
 import ul from "../base/ul.js";
 import li from "../base/li.js";
-import * as table from "../base/table.js";
+import * as doc_core from "./core.js";
 
 export default [
 	{
@@ -51,26 +51,6 @@ export default [
 			}),
 			"The table below illustrates how each container’s {{max-width}} compares to the original {{.container}} and {{.container-fluid}} across each breakpoint.",
 			"See them in action and compare them in our <a href='https://getbootstrap.com/docs/5.1/examples/grid/#containers'>Grid example</a>.",
-			// new table.container({
-			// 	item: [
-			// 		[
-			// 			"",
-			// 			"<b>Extra small</b><br/>&lt;576px",
-			// 			"<b>Small</b><br/>≥576px",
-			// 			"<b>Medium</b><br/>≥768px",
-			// 			"<b>Large</b><br/>≥992px",
-			// 			"<b>X-Large</b><br/>≥1200px",
-			// 			"<b>XX-Large</b><br/>≥1400px",
-			// 		],
-			// 		["<code>.container</code>", "100%", "540px", "720px", "960px", "1140px", "1320px"],
-			// 		["<code>.container-sm</code>", "100%", "540px", "720px", "960px", "1140px", "1320px"],
-			// 		["<code>.container-md</code>", "100%", "100%", "720px", "960px", "1140px", "1320px"],
-			// 		["<code>.container-lg</code>", "100%", "100%", "100%", "960px", "1140px", "1320px"],
-			// 		["<code>.container-xl</code>", "100%", "100%", "100%", "100%", "1140px", "1320px"],
-			// 		["<code>.container-xxl</code>", "100%", "100%", "100%", "100%", "100%", "1320px"],
-			// 		["<code>.container-fluid</code>", "100%", "100%", "100%", "100%", "100%", "100%"],
-			// 	],
-			// }),
 		],
 	},
 

@@ -6,6 +6,8 @@ import * as alert from "../base/alert.js";
 import * as card from "../base/card.js";
 import code from "../base/code.js";
 import pre from "../base/pre.js";
+// import * as inputgroup from "../base/inputgroup.js";
+// import small from "../base/small.js";
 
 function beautifyjs(str) {
 	return js_beautify(str, {
@@ -87,6 +89,26 @@ export default [
 			}),
 
 			new div("text-center mt-5", new a({ label: "Github", href: "https://github.com/printf83/cl" })),
+
+			//plan to have this as element
+			//element name : pill
+			// new div(
+			// 	new inputgroup.container({
+			// 		weight: "sm",
+			// 		elem: [
+			// 			new inputgroup.text({
+			// 				border: false,
+			// 				elem: new small(new icon("eye")),
+			// 			}),
+			// 			new inputgroup.text({
+			// 				border: false,
+			// 				color: "primary",
+			// 				textcolor: "light",
+			// 				elem: new small("h"),
+			// 			}),
+			// 		],
+			// 	})
+			// ),
 		],
 	},
 ];

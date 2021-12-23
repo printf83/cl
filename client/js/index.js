@@ -355,6 +355,8 @@ function gen_content(m1, m2, callback) {
 						let p = function (m) {
 							return new Promise(function (res, rej) {
 								try {
+									let processtimestart = window.performance.now();
+
 									sample.resetindex();
 									cl.replaceChild(
 										document.getElementById("root"),
@@ -366,7 +368,19 @@ function gen_content(m1, m2, callback) {
 										})
 									);
 
+									let processtimeend = window.performance.now();
+
 									gen_toc();
+
+									//count pagespeed
+									document.getElementById("pagespeed").innerText = `${(
+										processtimeend - processtimestart
+									).toFixed(2)} ms`;
+
+									//count page weight
+									document.getElementById("pageweight").innerText = `${core.countElement(
+										document.getElementById("root")
+									)} items`;
 
 									res();
 								} catch (ex) {
@@ -603,4 +617,6 @@ core.documentReady(() => {
 	});
 
 	set_theme(def_theme);
+
+	cl.init(document.body);
 });
