@@ -51,7 +51,7 @@ import doc_icon from "./doc/icon.js";
 
 const def_m1 = "Getting started";
 const def_m2 = "Introduction";
-const def_theme = "pulse";
+const def_theme = null;
 
 const db_menu = [
 	{
@@ -500,6 +500,12 @@ function gen_content(m1, m2, callback) {
 				);
 
 				gen_toc();
+
+				//count pagespeed
+				document.getElementById("pagespeed").innerText = `0 ms`;
+
+				//count page weight
+				document.getElementById("pageweight").innerText = `0 item`;
 
 				if (callback instanceof Function) {
 					callback();

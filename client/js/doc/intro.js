@@ -88,29 +88,36 @@ export default [
 				),
 			}),
 
-			new div("text-center mt-5", new a({ label: "Github", href: "https://github.com/printf83/cl" })),
+			new div(
+				"d-flex justify-content-center mb-5 gap-2",
+				new a({
+					class: "text-decoration-none",
+					elem: new pill({ icon: { type: "fab", icon: "github" }, label: "Github" }),
+					href: "https://github.com/printf83/cl",
+				})
+			),
 
-			new div("d-flex justify-content-center mb-5 gap-2", [
-				new pill({ title: "Title", label: "Label" }),
-				new pill({ title: "Title", label: "Label", color: "secondary" }),
-				new pill({ title: "Title", label: "Label", color: "success" }),
-				new pill({ title: "Title", label: "Label", color: "danger" }),
-				new pill({ title: "Title", label: "Label", color: "warning" }),
-			]),
+			// new div("d-flex justify-content-center mb-5 gap-2", [
+			// 	new pill({ title: "Title", label: "Label" }),
+			// 	new pill({ title: "Title", label: "Label", color: "secondary" }),
+			// 	new pill({ title: "Title", label: "Label", color: "success" }),
+			// 	new pill({ title: "Title", label: "Label", color: "danger" }),
+			// 	new pill({ title: "Title", label: "Label", color: "warning" }),
+			// ]),
 
-			new div("d-flex justify-content-center mb-5 gap-2", [
-				new pill({ icon: "i", label: "Info" }),
-				new pill({ icon: "!", label: "Warning" }),
-				new pill({ icon: "x", label: "Critical" }),
-				new pill({ icon: "-", label: "Stop" }),
-				new pill({ icon: "/", label: "Success" }),
-			]),
+			// new div("d-flex justify-content-center mb-5 gap-2", [
+			// 	new pill({ icon: "i", label: "Info" }),
+			// 	new pill({ icon: "!", label: "Warning" }),
+			// 	new pill({ icon: "x", label: "Critical" }),
+			// 	new pill({ icon: "-", label: "Stop" }),
+			// 	new pill({ icon: "/", label: "Success" }),
+			// ]),
 
-			new div("d-flex justify-content-center mb-5 gap-2", [
-				new pill({ title: "Viewport", icon: "eye", label: "Info" }),
-				new pill({ title: "Build speed", icon: "stopwatch", label: "Warning" }),
-				new pill({ title: "Page weight", icon: "balance-scale", label: "Critical" }),
-			]),
+			// new div("d-flex justify-content-center mb-5 gap-2", [
+			// 	new pill({ title: "Viewport", icon: "eye", label: "Info" }),
+			// 	new pill({ title: "Build speed", icon: "stopwatch", label: "Warning" }),
+			// 	new pill({ title: "Page weight", icon: "balance-scale", label: "Critical" }),
+			// ]),
 		],
 	},
 ];
