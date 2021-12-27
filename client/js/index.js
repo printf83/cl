@@ -7,7 +7,6 @@ import * as table from "./base/table.js";
 import * as navbar from "./base/navbar.js";
 import menu from "./base/menu.js";
 import toc from "./base/toc.js";
-import code from "./base/code.js";
 import msg from "./base/msg.js";
 
 import doc_intro from "./doc/intro.js";
@@ -48,9 +47,11 @@ import doc_toast from "./doc/toast.js";
 import doc_tooltip from "./doc/tooltip.js";
 
 import doc_icon from "./doc/icon.js";
+import doc_menu from "./doc/menu.js";
+import doc_toc from "./doc/toc.js";
 
-const def_m1 = "Getting started";
-const def_m2 = "Introduction";
+const def_m1 = "Extra";
+const def_m2 = "Table of content";
 const def_theme = null;
 
 const db_menu = [
@@ -113,8 +114,8 @@ const db_menu = [
 		title: "Extra",
 		item: [
 			{ title: "Icon", source: doc_icon },
-			{ title: "Menu", source: null },
-			{ title: "Table of content", source: null },
+			{ title: "Menu", source: doc_menu },
+			{ title: "Table of content", source: doc_toc },
 			{ title: "Pill", source: null },
 			{ title: "Example", source: null },
 			{ title: "Label", source: null },

@@ -54,7 +54,7 @@ export default class button extends tag {
 
 			opt.tag = opt.href ? "a" : opt.color || opt.outline || opt.weight ? "button" : "div";
 			opt.class = core.merge.class(opt.class, [
-				opt.type === "a" ? null : opt.color || opt.outline || opt.weight ? "btn" : null,
+				opt.type === "a" ? "text-decoration-none" : opt.color || opt.outline || opt.weight ? "btn" : null,
 				opt.nowarp ? "text-nowarp" : null,
 				opt.weight ? `btn-${opt.weight}` : null,
 				opt.color ? (opt.outline ? `btn-outline-${opt.color}` : `btn-${opt.color}`) : null,
