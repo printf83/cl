@@ -240,7 +240,7 @@ export class container extends tag {
 				//================
 
 				let tf = [];
-				tf = a[len - 1].map(function (i) {
+				tf = a[len].map(function (i) {
 					if (typeof i === "object") {
 						if (i.hasOwnProperty("cl")) {
 							return i;

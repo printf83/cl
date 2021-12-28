@@ -51,9 +51,12 @@ import doc_menu from "./doc/menu.js";
 import doc_toc from "./doc/toc.js";
 import doc_pill from "./doc/pill.js";
 import doc_example from "./doc/example.js";
+import doc_label from "./doc/label.js";
+import doc_msg from "./doc/msg.js";
+import doc_table from "./doc/table.js";
 
-const def_m1 = "Extra";
-const def_m2 = "Example";
+const def_m1 = "Getting started";
+const def_m2 = "Introduction";
 const def_theme = null;
 
 const db_menu = [
@@ -120,9 +123,9 @@ const db_menu = [
 			{ title: "Table of content", source: doc_toc },
 			{ title: "Pill", source: doc_pill },
 			{ title: "Example", source: doc_example },
-			{ title: "Label", source: null },
-			{ title: "Msg", source: null },
-			{ title: "Table", source: null },
+			{ title: "Label", source: doc_label },
+			{ title: "Msg", source: doc_msg },
+			{ title: "Table", source: doc_table },
 		],
 	},
 	{
