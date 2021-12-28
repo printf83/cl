@@ -71,6 +71,8 @@ const defaultOption = {
 	container: function (elem) {
 		return elem;
 	},
+
+	debug: false,
 };
 /**
  * opt : {tagoption,icon,label}
@@ -101,14 +103,16 @@ export default class example extends div {
 					new label({ label: opt.title.replace(/\{\{/g, "<code>").replace(/\}\}/g, "</code>") }),
 					opt.anchor
 						? new a({
-								class: "anchorjs-link",
+								class: ["anchorjs-link", opt.debug ? "anchorjs-link-debug" : null],
 								paddingStart: 2,
 								attr: {
 									"aria-label": "Anchor",
 									"data-anchorjs-icon": "#",
-									onclick: function (event) {
-										core.focusElement(event.currentTarget.parentNode);
-									},
+									onclick: opt.debug
+										? null
+										: function (event) {
+												core.focusElement(event.currentTarget.parentNode);
+										  },
 								},
 						  })
 						: null,
@@ -184,7 +188,7 @@ export default class example extends div {
 					? new accordion({
 							border: true,
 							flush: true,
-							autoclose:false,
+							autoclose: false,
 							item: item,
 					  })
 					: null,

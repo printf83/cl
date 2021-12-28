@@ -603,3 +603,22 @@ export function offcanvasbody() {
 		],
 	});
 }
+
+export function beautifyjs(str) {
+	return js_beautify(str, {
+		preserve_newlines: true,
+		max_preserve_newlines: 100,
+		keep_array_indentation: false,
+		brace_style: "collapse,preserve-inline",
+	});
+}
+
+export function beautifyhtml(str) {
+	str = str.replace(/\>/g, ">\n");
+	str = str.replace(/\</g, "\n<");
+	str = str.replace(/\n\n/g, "\n");
+	return html_beautify(str, {
+		indent_inner_html: true,
+		indent_size: 4,
+	});
+}

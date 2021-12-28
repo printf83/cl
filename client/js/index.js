@@ -49,9 +49,11 @@ import doc_tooltip from "./doc/tooltip.js";
 import doc_icon from "./doc/icon.js";
 import doc_menu from "./doc/menu.js";
 import doc_toc from "./doc/toc.js";
+import doc_pill from "./doc/pill.js";
+import doc_example from "./doc/example.js";
 
 const def_m1 = "Extra";
-const def_m2 = "Table of content";
+const def_m2 = "Example";
 const def_theme = null;
 
 const db_menu = [
@@ -116,8 +118,8 @@ const db_menu = [
 			{ title: "Icon", source: doc_icon },
 			{ title: "Menu", source: doc_menu },
 			{ title: "Table of content", source: doc_toc },
-			{ title: "Pill", source: null },
-			{ title: "Example", source: null },
+			{ title: "Pill", source: doc_pill },
+			{ title: "Example", source: doc_example },
 			{ title: "Label", source: null },
 			{ title: "Msg", source: null },
 			{ title: "Table", source: null },
@@ -543,18 +545,21 @@ function gen_toc() {
 			new toc({
 				label: "On this page",
 				item: anchor.map(function (i) {
-					let parent = i.parentElement;
-					let id = parent.id;
-					return {
-						label: parent.innerText,
-						attr: { "cl-target-id": id },
-						onclick: function (event) {
-							let sender = event.currentTarget;
-							let id = sender.getAttribute("cl-target-id");
-							core.focusElement(document.getElementById(id));
-						},
-						level: parent.nodeName === "H3" ? 1 : 0,
-					};
+					//remove debug example
+					if (!i.classList.contains("anchorjs-link-debug")) {
+						let parent = i.parentElement;
+						let id = parent.id;
+						return {
+							label: parent.innerText,
+							attr: { "cl-target-id": id },
+							onclick: function (event) {
+								let sender = event.currentTarget;
+								let id = sender.getAttribute("cl-target-id");
+								core.focusElement(document.getElementById(id));
+							},
+							level: parent.nodeName === "H3" ? 1 : 0,
+						};
+					}
 				}),
 			})
 		);
