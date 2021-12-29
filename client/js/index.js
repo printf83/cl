@@ -55,8 +55,10 @@ import doc_label from "./doc/label.js";
 import doc_msg from "./doc/msg.js";
 import doc_table from "./doc/table.js";
 
-const def_m1 = "Getting started";
-const def_m2 = "Introduction";
+import doc_tag from "./doc/tag.js";
+
+const def_m1 = "Basic";
+const def_m2 = "Tag";
 const def_theme = null;
 
 const db_menu = [
@@ -132,7 +134,7 @@ const db_menu = [
 		type: "menu",
 		title: "Basic",
 		item: [
-			{ title: "Tag", source: null },
+			{ title: "Tag", source: doc_tag },
 			{ title: "Anchor", source: null },
 			{ title: "Bold", source: null },
 			{ title: "Code", source: null },

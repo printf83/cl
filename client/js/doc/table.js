@@ -1,9 +1,4 @@
-import * as core from "../base/core.js";
-import * as doc_core from "./core.js";
 import * as sample from "./sample.js";
-import msg from "../base/msg.js";
-import modal from "../base/modal.js";
-import toast from "../base/toast.js";
 import * as table from "../base/table.js";
 
 export default [
