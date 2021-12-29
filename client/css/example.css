@@ -43,13 +43,9 @@
 .cl-highlight-container .container-md,
 .cl-highlight-container .container-sm,
 .cl-highlight-container .container-xl,
-.cl-highlight-container .container-xxl {
-	border: 1px solid var(--bs-gray-300);
-	background-color: rgba(var(--bs-dark-rgb), 0.03);
-	padding: 0.75rem;
-}
-
-.cl-highlight-div div {
+.cl-highlight-container .container-xxl,
+.cl-highlight-div div,
+.cl-highlight-element {
 	border: 1px solid var(--bs-gray-300);
 	background-color: rgba(var(--bs-dark-rgb), 0.03);
 	padding: 0.75rem;

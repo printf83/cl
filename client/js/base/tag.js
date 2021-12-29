@@ -51,6 +51,16 @@ const defaultOption = {
 	onblur: null,
 
 	align: null,
+	warp: null,
+	wordbreak: null,
+	texttransform: null,
+
+	fontSize: null,
+	fontWeight: null,
+	fontItalic: null,
+	lineHeight: null,
+	monospace: null,
+
 	position: null,
 	overflow: null,
 	opacity: null,
@@ -147,7 +157,7 @@ export default class tag {
 				style: opt.style,
 
 				class: core.merge.class(opt.class, [
-					opt.align ? `text-${opt.align}` : null,
+					c2(opt.align, "text-$1"),
 					opt.position ? `position-${opt.position}` : null,
 					opt.overflow ? `overflow-${opt.overflow}` : null,
 					opt.opacity ? `opacity-${opt.opacity}` : null,
@@ -158,6 +168,15 @@ export default class tag {
 
 					opt.textcolor ? `text-${opt.textcolor}` : null,
 					opt.textopacity ? `text-opacity-${opt.textopacity}` : null,
+
+					opt.warp !== null ? (opt.warp === true ? "text-warp" : "text-nowarp") : null,
+					opt.wordbreak ? "text-break" : null,
+					opt.texttransform ? `text-${opt.texttransform}` : null,
+					opt.fontSize ? `fs-${opt.fontSize}` : null,
+					opt.fontWeight ? `fw-${opt.fontWeight}` : null,
+					opt.fontItalic !== null ? (opt.fontItalic === true ? "fst-italic" : "fst-normal") : null,
+					opt.lineHeight ? `lh-${opt.lineHeight}` : null,
+					opt.monospace ? "font-monospace" : null,
 
 					c3(opt.shadow, "shadow", "shadow-none", "shadow-$1", null, "shadow"),
 					c3(opt.border, "border", "border-0", "border-$1", null, "border"),
