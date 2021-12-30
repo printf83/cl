@@ -55,10 +55,13 @@ import doc_label from "./doc/label.js";
 import doc_msg from "./doc/msg.js";
 import doc_table from "./doc/table.js";
 
-import doc_tag from "./doc/tag.js";
+import doc_tag_base from "./doc/tag.base.js";
+import doc_tag_text from "./doc/tag.text.js";
+import doc_tag_background from "./doc/tag.background.js";
+import doc_tag_border from "./doc/tag.border.js";
 
-const def_m1 = "Basic";
-const def_m2 = "Tag";
+const def_m1 = "Tag";
+const def_m2 = "Borders";
 const def_theme = null;
 
 const db_menu = [
@@ -132,9 +135,18 @@ const db_menu = [
 	},
 	{
 		type: "menu",
-		title: "Basic",
+		title: "Tag",
 		item: [
-			{ title: "Tag", source: doc_tag },
+			{ title: "Base", source: doc_tag_base },
+			{ title: "Text", source: doc_tag_text },
+			{ title: "Background", source: doc_tag_background },
+			{ title: "Borders", source: doc_tag_border },
+		],
+	},
+	{
+		type: "menu",
+		title: "Extend tag",
+		item: [
 			{ title: "Anchor", source: null },
 			{ title: "Bold", source: null },
 			{ title: "Code", source: null },

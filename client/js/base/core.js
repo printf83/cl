@@ -54,12 +54,16 @@ export function getBaseIcon(icon, baseIcon, baseColor) {
 
 const _baseColor = {
 	primary: { textcolor: "light" },
+	secondary: { textcolor: "light" },
 	warning: { textcolor: "dark" },
 	success: { textcolor: "light" },
 	danger: { textcolor: "light" },
 	info: { textcolor: "dark" },
 	dark: { textcolor: "light" },
 	light: { textcolor: "dark" },
+	body: { textcolor: "light" },
+	white: { textcolor: "dark" },
+	transparent: { textcolor: "dark" },
 };
 
 export function getBaseColor(color, baseColor) {
@@ -67,6 +71,16 @@ export function getBaseColor(color, baseColor) {
 	if (color && typeof color === "string") {
 		if (baseColor.hasOwnProperty(color)) {
 			return baseColor[color];
+		}
+	}
+	return null;
+}
+
+export function getTextColorBaseOnColor(color, baseColor) {
+	baseColor = baseColor || _baseColor;
+	if (color && typeof color === "string") {
+		if (baseColor.hasOwnProperty(color)) {
+			return baseColor[color].textcolor;
 		}
 	}
 	return null;

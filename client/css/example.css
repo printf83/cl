@@ -51,6 +51,18 @@
 	padding: 0.75rem;
 }
 
+.cl-highlight-box .col div {
+	background-color: rgba(var(--bs-dark-rgb), 0.03);
+	width: 5rem;
+	height: 5rem;
+}
+
+.cl-highlight-box-dark .col div {
+	background-color: rgba(var(--bs-dark-rgb), 0.3);
+	width: 5rem;
+	height: 5rem;
+}
+
 .svgimg {
 	background: rgba(var(--bs-primary-rgb), 0.125);
 }
