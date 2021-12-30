@@ -55,11 +55,12 @@ const defaultOption = {
 	wordbreak: null,
 	texttransform: null,
 
-	fontSize: null,
-	fontWeight: null,
-	fontItalic: null,
-	lineHeight: null,
+	fontsize: null,
+	fontweight: null,
+	fontitalic: null,
+	lineheight: null,
 	monospace: null,
+	textdecoration: null,
 
 	position: null,
 	overflow: null,
@@ -172,10 +173,17 @@ export default class tag {
 					opt.warp !== null ? (opt.warp === true ? "text-warp" : "text-nowarp") : null,
 					opt.wordbreak ? "text-break" : null,
 					opt.texttransform ? `text-${opt.texttransform}` : null,
-					opt.fontSize ? `fs-${opt.fontSize}` : null,
-					opt.fontWeight ? `fw-${opt.fontWeight}` : null,
-					opt.fontItalic !== null ? (opt.fontItalic === true ? "fst-italic" : "fst-normal") : null,
-					opt.lineHeight ? `lh-${opt.lineHeight}` : null,
+					opt.fontsize ? `fs-${opt.fontsize}` : null,
+					opt.fontweight ? `fw-${opt.fontweight}` : null,
+					opt.fontitalic !== null ? (opt.fontitalic === true ? "fst-italic" : "fst-normal") : null,
+					opt.textdecoration !== null
+						? opt.textdecoration === true
+							? "text-decoration-underline"
+							: opt.textdecoration === "false"
+							? "text-decoration-none"
+							: `text-decoration-${opt.textdecoration}`
+						: null,
+					opt.lineheight ? `lh-${opt.lineheight}` : null,
 					opt.monospace ? "font-monospace" : null,
 
 					c3(opt.shadow, "shadow", "shadow-none", "shadow-$1", null, "shadow"),

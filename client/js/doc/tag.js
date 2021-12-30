@@ -301,22 +301,22 @@ export default [
 	},
 
 	{
-		title: "fontSize",
+		title: "fontsize",
 		msg: ["Create class <code>fs-{value}</code> for element", "Supported value: <code>null | 1...6</code>"],
 		container: doc_core.formcontainer,
 		code: function () {
 			return [null, 1, 2, 3, 4, 5, 6].map(function (i) {
 				return new tag({
 					tag: "div",
-					fontSize: i,
-					elem: `Example element with <code>fontSize: ${i}</code>`,
+					fontsize: i,
+					elem: `Example element with <code>fontsize: ${i}</code>`,
 				});
 			});
 		},
 	},
 
 	{
-		title: "fontWeight",
+		title: "fontweight",
 		msg: [
 			"Create class <code>fw-{value}</code> for element",
 			"Supported value: <code>null | bold | bolder | normal | light | lighter</code>",
@@ -326,15 +326,15 @@ export default [
 			return [null, "bold", "bolder", "normal", "light", "lighter"].map(function (i) {
 				return new tag({
 					tag: "div",
-					fontWeight: i,
-					elem: `Example element with <code>fontWeight: ${i}</code>`,
+					fontweight: i,
+					elem: `Example element with <code>fontweight: ${i}</code>`,
 				});
 			});
 		},
 	},
 
 	{
-		title: "fontItalic",
+		title: "fontitalic",
 		msg: [
 			"Create class <code>fst-italic | fst-normal</code> for element",
 			"Supported value: <code>null | boolean</code>",
@@ -344,15 +344,46 @@ export default [
 			return [null, true, false].map(function (i) {
 				return new tag({
 					tag: "div",
-					fontItalic: i,
-					elem: `Example element with <code>fontItalic: ${i}</code>`,
+					fontitalic: i,
+					elem: `Example element with <code>fontitalic: ${i}</code>`,
 				});
 			});
 		},
 	},
-
 	{
-		title: "lineHeight",
+		title: "Reset color",
+		msg: ["Reset a text or link’s color with .text-reset, so that it inherits the color from its parent."],
+		code: function () {
+			return new tag({
+				tag: "p",
+				textcolor: "muted",
+				elem: [
+					"Muted text with a ",
+					new tag({ tag: "a", href: "#", textcolor: "reset", elem: "reset link" }),
+					".",
+				],
+			});
+		},
+	},
+	{
+		title: "textdecoration",
+		msg: [
+			"Create class <code>text-decoration-{value}</code> for element",
+			"Supported value: <code>null | boolean | underline | line-through | none</code>",
+		],
+		container: doc_core.formcontainer,
+		code: function () {
+			return [null, true, false, "underline", "line-through", "none"].map(function (i) {
+				return new tag({
+					tag: "div",
+					textdecoration: i,
+					elem: `Example element with <code>textdecoration: ${i}</code>`,
+				});
+			});
+		},
+	},
+	{
+		title: "lineheight",
 		msg: [
 			"Create class <code>lh-{value}</code> for element",
 			"Supported value: <code>null | 1 | sm | base | lg</code>",
@@ -363,8 +394,8 @@ export default [
 				return new tag({
 					tag: "div",
 					class: "cl-highlight-element",
-					lineHeight: i,
-					elem: `Example element with <code>lineHeight: ${i}</code>. ${sample.text()}`,
+					lineheight: i,
+					elem: `Example element with <code>lineheight: ${i}</code>. ${sample.text()}`,
 				});
 			});
 		},
