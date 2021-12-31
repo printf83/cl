@@ -35,11 +35,11 @@ export default [
 			"Supported value: <code>null | boolean</code>",
 		],
 		container: doc_core.formcontainer,
+		viewclass: "cl-highlight-box",
 		code: function () {
 			return [null, true, false].map(function (i) {
 				return new tag({
 					tag: "div",
-					class: "cl-highlight-element",
 					warp: i,
 					style: { width: "8rem" },
 					elem: "Example element with long text",
@@ -52,11 +52,11 @@ export default [
 		title: "wordbreak",
 		msg: ["Create class <code>text-break</code> for element", "Supported value: <code>null | boolean</code>"],
 		container: doc_core.formcontainer,
+		viewclass: "cl-highlight-box",
 		code: function () {
 			return [null, true, false].map(function (i) {
 				return new tag({
 					tag: "div",
-					class: "cl-highlight-element",
 					wordbreak: i,
 					style: { width: "8rem" },
 					elem: "Exampleelementwithlongtext",

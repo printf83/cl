@@ -59,9 +59,21 @@ import doc_tag_base from "./doc/tag.base.js";
 import doc_tag_text from "./doc/tag.text.js";
 import doc_tag_background from "./doc/tag.background.js";
 import doc_tag_border from "./doc/tag.border.js";
+import doc_tag_color from "./doc/tag.color.js";
+import doc_tag_display from "./doc/tag.display.js";
+import doc_tag_flex from "./doc/tag.color.js";
+import doc_tag_float from "./doc/tag.color.js";
+import doc_tag_interaction from "./doc/tag.color.js";
+import doc_tag_overflow from "./doc/tag.color.js";
+import doc_tag_position from "./doc/tag.color.js";
+import doc_tag_shadow from "./doc/tag.color.js";
+import doc_tag_size from "./doc/tag.color.js";
+import doc_tag_spacing from "./doc/tag.color.js";
+import doc_tag_valign from "./doc/tag.color.js";
+import doc_tag_visibility from "./doc/tag.color.js";
 
 const def_m1 = "Tag";
-const def_m2 = "Borders";
+const def_m2 = "Display";
 const def_theme = null;
 
 const db_menu = [
@@ -138,9 +150,22 @@ const db_menu = [
 		title: "Tag",
 		item: [
 			{ title: "Base", source: doc_tag_base },
-			{ title: "Text", source: doc_tag_text },
+
 			{ title: "Background", source: doc_tag_background },
 			{ title: "Borders", source: doc_tag_border },
+			{ title: "Colors", source: doc_tag_color },
+			{ title: "Display", source: doc_tag_display },
+			{ title: "Flex", source: doc_tag_flex },
+			{ title: "Float", source: doc_tag_float },
+			{ title: "Interactions", source: doc_tag_interaction },
+			{ title: "Overflow", source: doc_tag_overflow },
+			{ title: "Position", source: doc_tag_position },
+			{ title: "Shadows", source: doc_tag_shadow },
+			{ title: "Sizing", source: doc_tag_size },
+			{ title: "Spacing", source: doc_tag_spacing },
+			{ title: "Text", source: doc_tag_text },
+			{ title: "Vertical align", source: doc_tag_valign },
+			{ title: "Visibility", source: doc_tag_visibility },
 		],
 	},
 	{

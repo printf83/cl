@@ -53,14 +53,12 @@
 
 .cl-highlight-box .col div {
 	background-color: rgba(var(--bs-dark-rgb), 0.03);
-	width: 5rem;
-	height: 5rem;
+	padding: 2rem;
 }
 
 .cl-highlight-box-dark .col div {
 	background-color: rgba(var(--bs-dark-rgb), 0.3);
-	width: 5rem;
-	height: 5rem;
+	padding: 2rem;
 }
 
 .svgimg {
