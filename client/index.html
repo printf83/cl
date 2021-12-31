@@ -23,7 +23,7 @@
 		<link rel="stylesheet" href="css/prettify.css" />
 		<title>BS5 JS Builder</title>
 	</head>
-	<body>
+	<body class="position-relative">
 		<div id="navbar"></div>
 
 		<div class="container-lg pt-3">
@@ -74,12 +74,12 @@
 											<i class="fas fa-eye"></i>
 										</div>
 										<div class="bg-primary text-light border-0 input-group-text">
-											<small class="d-inline d-sm-none">XS</small>
-											<small class="d-none d-sm-inline d-md-none">SM</small>
-											<small class="d-none d-md-inline d-lg-none">MD</small>
-											<small class="d-none d-lg-inline d-xl-none">LG</small>
-											<small class="d-none d-xl-inline d-xxl-none">XL</small>
-											<small class="d-none d-xxl-inline">XXL</small>
+											<small class="d-inline d-sm-none">xs</small>
+											<small class="d-none d-sm-inline d-md-none">sm</small>
+											<small class="d-none d-md-inline d-lg-none">md</small>
+											<small class="d-none d-lg-inline d-xl-none">lg</small>
+											<small class="d-none d-xl-inline d-xxl-none">xl</small>
+											<small class="d-none d-xxl-inline">xxl</small>
 										</div>
 									</div>
 								</div>
@@ -115,7 +115,7 @@
 											<i class="fas fa-balance-scale"></i>
 										</div>
 										<div class="bg-primary text-light border-0 input-group-text">
-											<small id="pageweight">0 mb</small>
+											<small id="pageweight">0 items</small>
 										</div>
 									</div>
 								</div>
@@ -134,6 +134,25 @@
 				</div>
 			</div>
 		</div>
+
+		<div class="fixed-bottom bottom-0 end-0 start-100">
+			<div class="float-end pb-3 pe-3">
+				<button
+					type="button"
+					class="btn btn-danger btn-floating btn-lg rounded-circle"
+					id="backtotop"
+					onclick="backtotop()"
+				>
+					<i class="fas fa-arrow-up"></i>
+				</button>
+			</div>
+		</div>
+
+		<script>
+			function backtotop() {
+				document.getElementById("root").scrollIntoView({ behavior: "smooth", block: "start" });
+			}
+		</script>
 
 		<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/moment@2.29.1"></script>
