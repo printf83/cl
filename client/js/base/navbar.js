@@ -108,7 +108,7 @@ export class brand extends tag {
 			opt = core.extend({}, defaultBrandOption, opt);
 
 			opt.tag = opt.href ? "a" : "h1";
-			opt.marginBottom = !opt.href ? 0 : null;
+			opt.marginbottom = !opt.href ? 0 : null;
 			opt.class = core.merge.class(opt.class, "navbar-brand");
 			opt.elem =
 				opt.elem ||
@@ -251,13 +251,13 @@ export class itemcontainer extends div {
 		opt = core.extend({}, defaultItemContainerOption, opt);
 
 		opt.style = core.merge.style(opt.style, { "--bs-scroll-height": opt.scroll });
-		opt.marginEnd = opt.mxauto ? "auto" : null;
+		opt.marginend = opt.mxauto ? "auto" : null;
 
 		if (opt.parenttype === "collapse") {
-			opt.marginBottom = opt.parenttype === "collapse" ? [(2, "lg-0")] : null;
+			opt.marginbottom = opt.parenttype === "collapse" ? [(2, "lg-0")] : null;
 		} else if (opt.parenttype === "offcanvas") {
-			opt.justifyContent = "end";
-			opt.paddingEnd = 3;
+			opt.justifycontent = "end";
+			opt.paddingend = 3;
 		}
 		opt.class = core.merge.class(opt.class, [
 			"navbar-nav",

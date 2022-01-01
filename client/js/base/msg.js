@@ -28,14 +28,14 @@ export default class msg extends div {
 				case "sm":
 				case "md":
 					opt.display = "flex";
-					opt.alignItem = "stretch";
+					opt.alignitem = "stretch";
 					opt.gap = 2;
 					opt.elem = [
 						opt.icon
 							? new div({
 									display: "flex",
-									alignItem: "start",
-									marginEnd: 2,
+									alignitem: "start",
+									marginend: 2,
 									elem: new div({
 										class: opt.weight === "sm" ? "fs-5" : "display-4",
 										elem: new icon(opt.icon),
@@ -44,7 +44,7 @@ export default class msg extends div {
 							: null,
 						new div({
 							display: "flex",
-							alignItem: "center",
+							alignitem: "center",
 							elem: new div({ class: "text-break", elem: opt.elem }),
 						}),
 					];
@@ -61,7 +61,7 @@ export default class msg extends div {
 									level: 1,
 									class: "display-1",
 									align: "center",
-									marginX: 3,
+									marginx: 3,
 									elem: new icon(opt.icon),
 							  })
 							: null,

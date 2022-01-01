@@ -34,7 +34,7 @@ export default class label extends tag {
 
 				opt.elem = opt.elem || [
 					opt.icon
-						? new span({ marginEnd: opt.label && !opt.hidelabel ? 2 : null, elem: new icon(opt.icon) })
+						? new span({ marginend: opt.label && !opt.hidelabel ? 2 : null, elem: new icon(opt.icon) })
 						: null,
 					opt.label
 						? opt.hidelabel
@@ -52,7 +52,7 @@ export default class label extends tag {
 				super.data = {
 					elem: opt.elem || [
 						opt.icon
-							? new span({ marginEnd: opt.label && !opt.hidelabel ? 2 : null, elem: new icon(opt.icon) })
+							? new span({ marginend: opt.label && !opt.hidelabel ? 2 : null, elem: new icon(opt.icon) })
 							: null,
 						opt.label
 							? opt.hidelabel

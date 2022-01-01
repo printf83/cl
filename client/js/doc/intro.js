@@ -34,7 +34,7 @@ export default [
 				icon: "!",
 				elem: "<b>Warning!</b> This is an alpha version. Please don't used it on production.",
 				align: "center",
-				marginTop: 5,
+				margintop: 5,
 			}),
 
 			new div(
@@ -44,12 +44,12 @@ export default [
 			new div("text-center", "For Pro JS Developer only"),
 
 			new card.container({
-				marginY: 3,
+				marginy: 3,
 				elem: new card.body(
 					new code(
 						new pre({
 							class: "prettyprint lang-js",
-							marginBottom: 0,
+							marginbottom: 0,
 							elem: beautifyjs(`
 								cl.appendChild(dom,cltag);
 								cl.prependChild(dom,cltag);
@@ -65,12 +65,12 @@ export default [
 			new div("text-center mt-5", "Example : "),
 
 			new card.container({
-				marginY: 3,
+				marginy: 3,
 				elem: new card.body(
 					new code(
 						new pre({
 							class: "prettyprint lang-js",
-							marginBottom: 0,
+							marginbottom: 0,
 							elem: beautifyjs(`
 								"use strict";
 								import * as core from "./base/core.js";

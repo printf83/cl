@@ -97,14 +97,14 @@ export default class example extends div {
 			ctltitle = new tag({
 				tag: opt.code ? "h3" : opt.anchor ? "h2" : "h1",
 				class: !opt.anchor ? "fs-1" : null,
-				paddingTop: 3,
+				paddingtop: 3,
 				id: opt.id,
 				elem: [
 					new label({ label: opt.title.replace(/\{\{/g, "<code>").replace(/\}\}/g, "</code>") }),
 					opt.anchor
 						? new a({
 								class: ["anchorjs-link", opt.debug ? "anchorjs-link-debug" : null],
-								paddingStart: 2,
+								paddingstart: 2,
 								attr: {
 									"aria-label": "Anchor",
 									"data-anchorjs-icon": "#",
@@ -171,7 +171,7 @@ export default class example extends div {
 		}
 
 		super.data = {
-			marginBottom: 5,
+			marginbottom: 5,
 			elem: [
 				ctltitle,
 				ctlmsg ? new div({ elem: ctlmsg }) : null,

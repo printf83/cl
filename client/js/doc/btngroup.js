@@ -192,7 +192,7 @@ export default [
 				new btntoolbar({
 					label: "Toolbar with button groups",
 					gap: 2,
-					justifyContent: "between",
+					justifycontent: "between",
 					elem: [
 						new btngroup({
 							label: "First group",

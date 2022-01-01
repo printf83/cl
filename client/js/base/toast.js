@@ -156,18 +156,18 @@ export default class toast extends div {
 				class: "toast-body",
 				elem: new div({
 					display: "flex",
-					alignItem: "stretch",
+					alignitem: "stretch",
 					elem: [
-						new div({ marginEnd: "auto", elem: opt.elem }),
+						new div({ marginend: "auto", elem: opt.elem }),
 						!(opt.icon || opt.title) && opt.close
 							? new div({
-									marginStart: 2,
+									marginstart: 2,
 									elem: new btnclose({
 										dismiss: "toast",
 										dark: opt.textcolor
 											? !(opt.textcolor === "light" || opt.textcolor === "white")
 											: true,
-										marginY: 1,
+										marginy: 1,
 									}),
 							  })
 							: null,

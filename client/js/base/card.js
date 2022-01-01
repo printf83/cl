@@ -127,7 +127,7 @@ export class title extends h {
 	}
 }
 
-const defaultSubtitleOption = { level: 6, marginBottom: 2 };
+const defaultSubtitleOption = { level: 6, marginbottom: 2 };
 /**
  * opt:{tagoption}
  */

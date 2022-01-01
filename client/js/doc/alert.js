@@ -47,7 +47,7 @@ export default [
 					),
 					new hr(),
 					new p({
-						marginBottom: 0,
+						marginbottom: 0,
 						elem: "Whenever you need to, be sure to use margin utilities to keep things nice and tidy.",
 					}),
 				],

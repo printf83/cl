@@ -144,20 +144,20 @@ export default [
 				item: [
 					{
 						display: "flex",
-						justifyContent: "between",
-						alignItem: "start",
+						justifycontent: "between",
+						alignitem: "start",
 						elem: sample.listgroupitemcustomcontent(),
 					},
 					{
 						display: "flex",
-						justifyContent: "between",
-						alignItem: "start",
+						justifycontent: "between",
+						alignitem: "start",
 						elem: sample.listgroupitemcustomcontent(),
 					},
 					{
 						display: "flex",
-						justifyContent: "between",
-						alignItem: "start",
+						justifycontent: "between",
+						alignitem: "start",
 						elem: sample.listgroupitemcustomcontent(),
 					},
 				],
@@ -260,8 +260,8 @@ export default [
 			let itemfn = function (text, badgeLabel) {
 				return {
 					display: "flex",
-					justifyContent: "between",
-					alignItem: "start",
+					justifycontent: "between",
+					alignitem: "start",
 					elem: [
 						text,
 						new badge({
@@ -291,16 +291,16 @@ export default [
 						new div({
 							class: "w-100",
 							display: "flex",
-							justifyContent: "between",
+							justifycontent: "between",
 							elem: [
-								new h({ level: 5, marginBottom: 1, elem: title }),
+								new h({ level: 5, marginbottom: 1, elem: title }),
 								new small({
 									textcolor: !active ? "muted" : null,
 									elem: `${days} days ago`,
 								}),
 							],
 						}),
-						new p({ marginBottom: 1, elem: "Some placeholder content in a paragraph." }),
+						new p({ marginbottom: 1, elem: "Some placeholder content in a paragraph." }),
 						new small({
 							textcolor: !active ? "muted" : null,
 							elem: `And some${!active ? " muted" : ""} small print.`,

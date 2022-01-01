@@ -29,6 +29,26 @@
 	padding: 0.75rem;
 }
 
+.cl-highlight-col-div .col div {
+	border: 1px solid rgba(var(--bs-dark-rgb), 0.05);
+	background-color: rgba(var(--bs-dark-rgb), 0.03);
+	padding: 0.75rem;
+}
+
+.cl-highlight,
+.cl-highlight-flex .col .d-flex,
+.cl-highlight-flex .col .d-flex > div {
+	border: 1px solid rgba(var(--bs-dark-rgb), 0.05);
+	background-color: rgba(var(--bs-dark-rgb), 0.03);
+}
+
+.cl-highlight-padding,
+.cl-highlight-flex .col .d-flex > div {
+	border: 1px solid rgba(var(--bs-dark-rgb), 0.05);
+	background-color: rgba(var(--bs-dark-rgb), 0.03);
+	padding: 0.75rem;
+}
+
 .cl-highlight-row .row {
 	background-color: rgba(var(--bs-danger-rgb), 0.125);
 }

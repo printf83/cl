@@ -18,7 +18,7 @@ export default [
 			return [1, 2, 3, 4, 5, 6].map(function (i) {
 				return new h({
 					level: i,
-					elem: [`Example heading #${i}`, new badge({ label: "New", marginStart: 3 })],
+					elem: [`Example heading #${i}`, new badge({ label: "New", marginstart: 3 })],
 				});
 			});
 		},
@@ -30,7 +30,7 @@ export default [
 			return new button({
 				label: "Notifications",
 				color: "primary",
-				badge: { label: "4", marginStart: 3 },
+				badge: { label: "4", marginstart: 3 },
 			});
 		},
 	},

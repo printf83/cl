@@ -61,7 +61,7 @@ import doc_tag_background from "./doc/tag.background.js";
 import doc_tag_border from "./doc/tag.border.js";
 import doc_tag_color from "./doc/tag.color.js";
 import doc_tag_display from "./doc/tag.display.js";
-import doc_tag_flex from "./doc/tag.color.js";
+import doc_tag_flex from "./doc/tag.flex.js";
 import doc_tag_float from "./doc/tag.color.js";
 import doc_tag_interaction from "./doc/tag.color.js";
 import doc_tag_overflow from "./doc/tag.color.js";
@@ -73,7 +73,7 @@ import doc_tag_valign from "./doc/tag.color.js";
 import doc_tag_visibility from "./doc/tag.color.js";
 
 const def_m1 = "Tag";
-const def_m2 = "Display";
+const def_m2 = "Flex";
 const def_theme = null;
 
 const db_menu = [
@@ -440,7 +440,7 @@ function gen_content(m1, m2, callback) {
 									cl.replaceChild(
 										document.getElementById("root"),
 										new div({
-											marginBottom: 3,
+											marginbottom: 3,
 											elem: m.source.map(function (i) {
 												return gen_example(i);
 											}),
@@ -494,7 +494,7 @@ function gen_content(m1, m2, callback) {
 				// 		cl.replaceChild(
 				// 			document.getElementById("root"),
 				// 			new div({
-				// 				marginBottom: 3,
+				// 				marginbottom: 3,
 				// 				elem: m.source.map(function (i) {
 				// 					return gen_example(i);
 				// 				}),
@@ -519,7 +519,7 @@ function gen_content(m1, m2, callback) {
 				// cl.replaceChild(
 				// 	document.getElementById("root"),
 				// 	new div({
-				// 		marginBottom: 3,
+				// 		marginbottom: 3,
 				// 		elem: m.source.map(function (i) {
 				// 			return gen_example(i);
 				// 		}),
@@ -535,7 +535,7 @@ function gen_content(m1, m2, callback) {
 				cl.replaceChild(
 					document.getElementById("root"),
 					new div({
-						marginBottom: 3,
+						marginbottom: 3,
 						elem: new msg({
 							weight: "lg",
 							icon: "!",

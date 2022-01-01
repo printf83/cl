@@ -1,7 +1,6 @@
 import * as sample from "./sample.js";
 import * as doc_core from "./core.js";
 import tag from "../base/tag.js";
-import div from "../base/div.js";
 
 export default [
 	{
@@ -24,14 +23,16 @@ export default [
 		title: "Examples",
 		code: function () {
 			return [
-				new div({
+				new tag({
+					tag: "div",
 					display: "inline",
 					padding: 2,
 					color: "primary",
 					textcolor: "white",
 					elem: "d-inline",
 				}),
-				new div({
+				new tag({
+					tag: "div",
 					display: "inline",
 					padding: 2,
 					color: "dark",
@@ -45,14 +46,16 @@ export default [
 	{
 		code: function () {
 			return [
-				new div({
+				new tag({
+					tag: "div",
 					display: "block",
 					padding: 2,
 					color: "primary",
 					textcolor: "white",
 					elem: "d-inline",
 				}),
-				new div({
+				new tag({
+					tag: "div",
 					display: "block",
 					padding: 2,
 					color: "dark",

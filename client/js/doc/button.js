@@ -172,7 +172,7 @@ export default [
 				display: "grid",
 				gap: "2",
 				col: 6,
-				marginX: "auto",
+				marginx: "auto",
 				elem: [
 					new button({ label: "Button", color: "primary" }),
 					new button({ label: "Button", color: "primary" }),

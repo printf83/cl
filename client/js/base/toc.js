@@ -29,7 +29,7 @@ export default class toc extends div {
 		opt.class = core.merge.class(opt.class, "cl-toc");
 		opt.elem = [
 			new h({ level: 6, elem: new label({ icon: opt.icon, label: opt.label }) }),
-			new hr({ marginX: 1 }),
+			new hr({ marginx: 1 }),
 			new ul({
 				class: ["list-unstyled", "small"],
 				elem: opt.item.map(function (i) {

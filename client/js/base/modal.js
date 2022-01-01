@@ -179,8 +179,8 @@ export default class modal extends div {
 
 				//container for button
 				ctlButton = opt.centerbutton
-					? new div({ display: "grid", gap: 2, col: [12, "md-6"], marginX: "auto", elem: btn })
-					: new div({ justifyContent: "end", elem: new container.stack(btn) });
+					? new div({ display: "grid", gap: 2, col: [12, "md-6"], marginx: "auto", elem: btn })
+					: new div({ justifycontent: "end", elem: new container.stack(btn) });
 			}
 
 			//mix footer and button
@@ -210,7 +210,7 @@ export default class modal extends div {
 							class: "container-fluid",
 							elem: new div({
 								row: true,
-								alignItem: "center",
+								alignitem: "center",
 								elem: [
 									new div({ col: true, elem: ctlControl }),
 									new div({ col: "auto", elem: ctlButton }),
