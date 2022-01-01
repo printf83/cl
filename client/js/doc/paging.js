@@ -68,7 +68,7 @@ export default [
 				skip: 60,
 				total: 1260,
 				max: 3,
-				showfirstlast: false,
+				firstlast: false,
 				onchange: function (event) {
 					new toast("i", `Skip changed to ${event.detail.skip}`).show();
 				},
@@ -84,7 +84,7 @@ export default [
 				skip: 60,
 				total: 1260,
 				max: 3,
-				shownextprev: false,
+				nextprev: false,
 				onchange: function (event) {
 					new toast("i", `Skip changed to ${event.detail.skip}`).show();
 				},
