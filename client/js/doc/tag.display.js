@@ -1,5 +1,3 @@
-import * as sample from "./sample.js";
-import * as doc_core from "./core.js";
 import tag from "../base/tag.js";
 import ul from "../base/ul.js";
 import * as table from "../base/table.js";

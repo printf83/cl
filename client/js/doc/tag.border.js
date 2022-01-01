@@ -1,4 +1,3 @@
-import * as core from "../base/core.js";
 import * as doc_core from "./core.js";
 import tag from "../base/tag.js";
 

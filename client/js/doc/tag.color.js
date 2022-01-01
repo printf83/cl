@@ -1,4 +1,3 @@
-import * as sample from "./sample.js";
 import * as doc_core from "./core.js";
 import tag from "../base/tag.js";
 import * as alert from "../base/alert.js";
