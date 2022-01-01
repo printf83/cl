@@ -89,7 +89,7 @@ export default class example extends div {
 		opt = core.extend({}, defaultOption, opt);
 
 		if (opt.title && !opt.code) {
-			opt.anchor = false;
+			opt.anchor = opt.anchor === null ? false : opt.anchor;
 		}
 
 		let ctltitle = null;

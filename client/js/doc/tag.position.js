@@ -22,6 +22,7 @@ export default [
 				}),
 			}),
 		],
+		anchor: true,
 	},
 
 	{
@@ -46,6 +47,7 @@ export default [
 				],
 			}),
 		],
+		anchor: true,
 	},
 
 	{
@@ -97,7 +99,6 @@ export default [
 	},
 
 	{
-		title: "Center elements",
 		msg: [
 			"By adding {{.translate-middle-x}} or {{.translate-middle-y}} classes, elements can be positioned only in horizontal or vertical direction.",
 		],
@@ -215,7 +216,7 @@ export default [
 				margin: 4,
 				elem: [
 					new progress.container({
-						style: { height: "1px" },
+						height: 1,
 						elem: new progress.bar({
 							value: 50,
 						}),
