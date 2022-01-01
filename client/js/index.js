@@ -64,8 +64,8 @@ import doc_tag_display from "./doc/tag.display.js";
 import doc_tag_flex from "./doc/tag.flex.js";
 import doc_tag_float from "./doc/tag.float.js";
 import doc_tag_interaction from "./doc/tag.interaction.js";
-import doc_tag_overflow from "./doc/tag.color.js";
-import doc_tag_position from "./doc/tag.color.js";
+import doc_tag_overflow from "./doc/tag.overflow.js";
+import doc_tag_position from "./doc/tag.position.js";
 import doc_tag_shadow from "./doc/tag.color.js";
 import doc_tag_size from "./doc/tag.color.js";
 import doc_tag_spacing from "./doc/tag.color.js";
@@ -73,7 +73,7 @@ import doc_tag_valign from "./doc/tag.color.js";
 import doc_tag_visibility from "./doc/tag.color.js";
 
 const def_m1 = "Tag";
-const def_m2 = "Interactions";
+const def_m2 = "Position";
 const def_theme = null;
 
 const db_menu = [

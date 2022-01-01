@@ -87,6 +87,9 @@ export class bar extends div {
 
 			opt.attr = core.merge.attr(opt.attr, {
 				role: "progressbar",
+				"aria-valuenow": opt.value,
+				"aria-valuemin": opt.min,
+				"aria-valuemax": opt.max,
 			});
 
 			opt.style = core.merge.style(opt.style, {

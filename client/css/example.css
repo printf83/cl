@@ -84,3 +84,18 @@
 .svgimg {
 	background: rgba(var(--bs-primary-rgb), 0.125);
 }
+
+.cl-highlight-position > div {
+	padding: 3rem;
+}
+
+.cl-highlight-position .position-relative {
+	background-color: rgba(var(--bs-dark-rgb), 0.03);
+	height: 12rem;
+}
+
+.cl-highlight-position .position-relative > div {
+	background-color: rgb(var(--bs-dark-rgb));
+	padding: 1rem;
+	border-radius: 0.25rem;
+}

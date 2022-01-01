@@ -61,7 +61,11 @@ export default class button extends tag {
 				opt.toggle && opt.active ? "active" : null,
 			]);
 
-			opt.position = opt.badge && typeof opt.badge === "object" && opt.badge.notification ? "relative" : null;
+			opt.position = opt.position
+				? opt.position
+				: opt.badge && typeof opt.badge === "object" && opt.badge.notification
+				? "relative"
+				: null;
 
 			opt.attr = core.merge.attr(opt.attr, {
 				value: opt.value,

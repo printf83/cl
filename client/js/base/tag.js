@@ -115,6 +115,12 @@ const defaultOption = {
 	rounded: null,
 	roundedtype: null,
 
+	tmiddle: null,
+	top: null,
+	bottom: null,
+	start: null,
+	end: null,
+
 	elem: null,
 };
 
@@ -228,6 +234,9 @@ export default class tag {
 					opt.display !== "grid" && opt?.attr?.role !== "toolbar" ? c2(opt.gap, "g-$1") : null,
 					opt.display === "grid" || opt?.attr?.role === "toolbar" ? c2(opt.gap, "gap-$1") : null,
 
+					// opt.gap ? c2(opt.gap, "g-$1") : null,
+					// opt.gap ? c2(opt.gap, "gap-$1") : null,
+
 					opt.row ? "row" : null,
 
 					c2(opt.flex, "flex-$1"),
@@ -241,6 +250,12 @@ export default class tag {
 					opt.alignself ? core.multiClass(opt.alignself, "align-self-$1") : null,
 					opt.aligncontent ? core.multiClass(opt.aligncontent, "align-content-$1") : null,
 					opt.justifycontent ? core.multiClass(opt.justifycontent, "justify-content-$1") : null,
+
+					c1(opt.tmiddle, "translate-middle", null, `translate-middle-${opt.tmiddle}`),
+					c1(opt.top, null, null, `top-${opt.top}`),
+					c1(opt.bottom, null, null, `bottom-${opt.bottom}`),
+					c1(opt.start, null, null, `start-${opt.start}`),
+					c1(opt.end, null, null, `end-${opt.end}`),
 				]),
 			}),
 			elem: opt.elem,

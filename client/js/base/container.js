@@ -57,3 +57,22 @@ export class grid extends div {
 		});
 	}
 }
+
+// export class grid extends div {
+// 	constructor(elem, gap = 2, col = null) {
+// 		super({
+// 			paddingx: gap,
+// 			display: "grid",
+// 			elem: new div({
+// 				row: true,
+// 				gap: gap,
+// 				rowcol: col,
+// 				elem: Array.isArray(elem)
+// 					? elem.map(function (i) {
+// 							return new div({ col: true, elem: i });
+// 					  })
+// 					: new div({ col: true, elem: elem }),
+// 			}),
+// 		});
+// 	}
+// }
