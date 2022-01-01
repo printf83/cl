@@ -131,6 +131,7 @@ export default [
 		code: function () {
 			return new tag({
 				tag: "button",
+				class: "btn btn-primary",
 				onclick: function (event) {
 					event.currentTarget.innerText = "onclick trigged";
 				},

@@ -124,11 +124,7 @@ export default [
 					tag: "div",
 					display: "flex",
 					justifycontent: i,
-					elem: [
-						new tag({ tag: "div", elem: "Flex item" }),
-						new tag({ tag: "div", elem: "Flex item" }),
-						new tag({ tag: "div", elem: "Flex item" }),
-					],
+					elem: Array(3).fill(new tag({ tag: "div", elem: "Flex item" })),
 				});
 			});
 		},
@@ -161,11 +157,7 @@ export default [
 					style: { height: "6rem" },
 					display: "flex",
 					alignitem: i,
-					elem: [
-						new tag({ tag: "div", elem: "Flex item" }),
-						new tag({ tag: "div", elem: "Flex item" }),
-						new tag({ tag: "div", elem: "Flex item" }),
-					],
+					elem: Array(3).fill(new tag({ tag: "div", elem: "Flex item" })),
 				});
 			});
 		},
@@ -312,11 +304,7 @@ export default [
 				new tag({
 					tag: "div",
 					display: "flex",
-					elem: [
-						new tag({ tag: "div", elem: "Flex item" }),
-						new tag({ tag: "div", elem: "Flex item" }),
-						new tag({ tag: "div", elem: "Flex item" }),
-					],
+					elem: Array(3).fill(new tag({ tag: "div", elem: "Flex item" })),
 				}),
 				new tag({
 					tag: "div",
