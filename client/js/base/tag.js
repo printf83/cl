@@ -50,6 +50,9 @@ const defaultOption = {
 	onfocus: null,
 	onblur: null,
 
+	userselect: null,
+	pointerevent: null,
+
 	align: null,
 	wrap: null,
 	wordbreak: null,
@@ -164,6 +167,9 @@ export default class tag {
 				style: opt.style,
 
 				class: core.merge.class(opt.class, [
+					opt.userselect ? `user-select-${opt.userselect}` : null,
+					opt.pointerevent ? `pe-${opt.pointerevent}` : null,
+
 					c2(opt.align, "text-$1"),
 					opt.position ? `position-${opt.position}` : null,
 					opt.overflow ? `overflow-${opt.overflow}` : null,
