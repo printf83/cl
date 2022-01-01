@@ -2,7 +2,6 @@ import * as sample from "./sample.js";
 import * as doc_core from "./core.js";
 import tag from "../base/tag.js";
 import ul from "../base/ul.js";
-import div from "../base/div.js";
 
 export default [
 	{
@@ -479,5 +478,98 @@ export default [
 					.flat(),
 			}),
 		],
+	},
+
+	{
+		title: "Align content",
+		msg: [
+			"Use {{aligncontent}} property on {{display:flex}} containers to align flex items together on the cross axis. Choose from {{start}} (browser default), {{end}}, {{center}}, {{between}}, {{around}}, or {{stretch}}. To demonstrate these utilities, we’ve enforced {{flex:wrap}} and increased the number of flex items.",
+			"<b>Heads up!</b> This property has no effect on single rows of flex items.",
+		],
+		container: doc_core.formcontainer,
+		viewclass: "cl-highlight-flex",
+		code: function () {
+			return ["start", "end", "center", "between", "around", "stretch"].map(function (i) {
+				return new tag({
+					tag: "div",
+					style: { height: "12rem" },
+					display: "flex",
+					flex: "wrap",
+					aligncontent: i,
+					elem: Array(15).fill(new tag({ tag: "div", elem: "Flex item" })),
+				});
+			});
+		},
+	},
+
+	{
+		msg: [
+			"Additionally there are also responsive {{aligncontent}} property.",
+			new ul({
+				item: ["", "sm-", "md-", "lg-", "xl-", "xxl-"]
+					.map(function (i) {
+						return ["start", "end", "center", "between", "around", "stretch"].map(function (j) {
+							return `<code>${i}${j}</code>`;
+						});
+					})
+					.flat(),
+			}),
+		],
+	},
+
+	{
+		title: "Media object",
+		msg: "Looking to replicate the media object component from Bootstrap 4? Recreate it in no time with a few flex utilities that allow even more flexibility and customization than before.",
+		code: function () {
+			return new tag({
+				tag: "div",
+				display: "flex",
+				elem: [
+					new tag({
+						tag: "div",
+						flex: "shrink-0",
+						elem: new tag({
+							tag: "img",
+							attr: { alt: "Image", src: sample.img(84, 80) },
+							style: { height: "5rem" },
+						}),
+					}),
+					new tag({
+						tag: "div",
+						marginstart: 3,
+						flex: "grow-1",
+						elem: "This is some content from a media component. You can replace this with any content and adjust it as needed.",
+					}),
+				],
+			});
+		},
+	},
+
+	{
+		msg: "And say you want to vertically center the content next to the image:",
+		code: function () {
+			return new tag({
+				tag: "div",
+				display: "flex",
+				alignitem: "center",
+				elem: [
+					new tag({
+						tag: "div",
+						flex: "shrink-0",
+						elem: new tag({
+							tag: "img",
+							attr: { alt: "Image", src: sample.img(84, 80) },
+							style: { height: "5rem" },
+						}),
+					}),
+					new tag({
+						tag: "div",
+						marginstart: 3,
+						flex: "grow-1",
+						elem: "This is some content from a media component. You can replace this with any content and adjust it as needed.",
+					}),
+				],
+			});
+		},
 	},
 ];

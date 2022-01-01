@@ -69,6 +69,7 @@ const defaultOption = {
 	float: null,
 	alignitem: null,
 	alignself: null,
+	aligncontent: null,
 	justifycontent: null,
 	shadow: null,
 
@@ -232,6 +233,7 @@ export default class tag {
 					opt.float ? core.multiClass(opt.float, "float-$1") : null,
 					opt.alignitem ? core.multiClass(opt.alignitem, "align-items-$1") : null,
 					opt.alignself ? core.multiClass(opt.alignself, "align-self-$1") : null,
+					opt.aligncontent ? core.multiClass(opt.aligncontent, "align-content-$1") : null,
 					opt.justifycontent ? core.multiClass(opt.justifycontent, "justify-content-$1") : null,
 				]),
 			}),
