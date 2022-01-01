@@ -4,23 +4,18 @@ import tag from "../base/tag.js";
 
 export default [
 	{
-		title: "Bootstrap class helper for border",
-		msg: "This property is create to help user to create <code>class</code> property base on bootstrap class.",
+		title: "Borders",
+		msg: "Use border utilities to quickly style the border and border-radius of an element. Great for images, buttons, or any other element.",
 		anchor: false,
 	},
 
 	{
-		title: "border",
-		msg: ["Use border utilities to add or remove an element’s borders. Choose from all borders or one at a time."],
+		title: "Border",
+		msg: "Use {{border}} property to add or remove an element’s borders. Choose from all borders or one at a time.",
 	},
 
 	{
 		title: "Additive",
-		msg: [
-			"Create class <code>border-{value}</code> for element",
-			"Supported value: <code>null | true | top | end | bottom | start | </code>",
-			"This property support multiple provided in array",
-		],
 		container: doc_core.stackcontainer,
 		viewclass: "cl-highlight-box",
 		code: function () {
@@ -35,11 +30,6 @@ export default [
 
 	{
 		title: "Subtractive",
-		msg: [
-			"Create class <code>border-{value}</code> for element",
-			"Supported value: <code>null | false | top-0 | end-0 | bottom-0 | start-0</code>",
-			"This property support multiple provided in array",
-		],
 		container: doc_core.stackcontainer,
 		viewclass: "cl-highlight-box",
 		code: function () {
@@ -53,12 +43,8 @@ export default [
 	},
 
 	{
-		title: "bordercolor",
-		msg: [
-			"Create class <code>border border-{value}</code> for element",
-			"Supported value: <code>null | BSColor</code>",
-			"This property support multiple provided in array",
-		],
+		title: "Border color",
+		msg: "Change the border color using {{bordercolor}} property on our theme colors.",
 		container: doc_core.stackcontainer,
 		viewclass: "cl-highlight-box",
 		code: function () {
@@ -74,12 +60,8 @@ export default [
 	},
 
 	{
-		title: "borderweight",
-		msg: [
-			"Create class <code>border border-{value}</code> for element",
-			"Supported value: <code>null | 0...5</code>",
-			"This property support multiple provided in array",
-		],
+		title: "Border-width",
+		msg: "Change the border width using {{borderweight}} property.",
 		container: doc_core.stackcontainer,
 		viewclass: "cl-highlight-box",
 		code: function () {
@@ -93,12 +75,8 @@ export default [
 	},
 
 	{
-		title: "rounded",
-		msg: [
-			"Create class <code>border border-{value}</code> for element",
-			"Supported value: <code>null | 0...3</code>",
-			"This property support multiple provided in array",
-		],
+		title: "Sizes",
+		msg: "Change the border radius size {{rounded}} property.",
 		container: doc_core.stackcontainer,
 		viewclass: "cl-highlight-box-dark",
 		code: function () {
@@ -112,12 +90,8 @@ export default [
 	},
 
 	{
-		title: "roundedtype",
-		msg: [
-			"Create class <code>border border-{value}</code> for element",
-			"Supported value: <code>null | top | end | bottom | start | pill | circle</code>",
-			"This property support multiple provided in array",
-		],
+		title: "Border-radius",
+		msg: "Change the border radius style {{roundedtype}} property.",
 		container: doc_core.stackcontainer,
 		viewclass: "cl-highlight-box-dark",
 		code: function () {

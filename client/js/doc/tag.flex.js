@@ -200,8 +200,8 @@ export default [
 					display: "flex",
 					elem: [
 						new tag({ tag: "div", elem: "Flex item" }),
-						new div({ tag: "div", alignself: i, elem: "Flex item" }),
-						new div({ tag: "div", elem: "Flex item" }),
+						new tag({ tag: "div", alignself: i, elem: "Flex item" }),
+						new tag({ tag: "div", elem: "Flex item" }),
 					],
 				});
 			});
@@ -215,6 +215,264 @@ export default [
 				item: ["", "sm-", "md-", "lg-", "xl-", "xxl-"]
 					.map(function (i) {
 						return ["start", "end", "center", "baseline", "stretch"].map(function (j) {
+							return `<code>${i}${j}</code>`;
+						});
+					})
+					.flat(),
+			}),
+		],
+	},
+
+	{
+		title: "Fill",
+		msg: "Use the {{flex:fill}} property on a series of sibling elements to force them into widths equal to their content (or equal widths if their content does not surpass their border-boxes) while taking up all available horizontal space.",
+		container: doc_core.formcontainer,
+		viewclass: "cl-highlight-flex",
+		code: function () {
+			return new tag({
+				tag: "div",
+				display: "flex",
+				elem: [
+					new tag({ tag: "div", flex: "fill", elem: "Flex item with a lot of content" }),
+					new tag({ tag: "div", flex: "fill", elem: "Flex item" }),
+					new tag({ tag: "div", flex: "fill", elem: "Flex item" }),
+				],
+			});
+		},
+	},
+
+	{
+		msg: [
+			"Responsive variations also exist for {{flex:fill}} property.",
+			new ul({
+				item: ["", "sm-", "md-", "lg-", "xl-", "xxl-"]
+					.map(function (i) {
+						return `<code>${i}fill</code>`;
+					})
+					.flat(),
+			}),
+		],
+	},
+
+	{
+		title: "Grow and shrink",
+		msg: "Use {{flex:grow-*}} property to toggle a flex item’s ability to grow to fill available space. In the example below, the {{flex:grow-1}} elements uses all available space it can, while allowing the remaining two flex items their necessary space.",
+		container: doc_core.formcontainer,
+		viewclass: "cl-highlight-flex",
+		code: function () {
+			return new tag({
+				tag: "div",
+				display: "flex",
+				elem: [
+					new tag({ tag: "div", flex: "glow-1", elem: "Flex item" }),
+					new tag({ tag: "div", elem: "Flex item" }),
+					new tag({ tag: "div", elem: "Third flex item" }),
+				],
+			});
+		},
+	},
+
+	{
+		msg: "Use {{flex:shrink-*}} property to toggle a flex item’s ability to shrink to fill available space. In the example below, the second flex item with {{flex:shrink-1}} is forced to wrap its contents to a new line, “shrinking” to allow more space for the previous flex item with {{.w-100}}",
+		container: doc_core.formcontainer,
+		viewclass: "cl-highlight-flex",
+		code: function () {
+			return new tag({
+				tag: "div",
+				display: "flex",
+				elem: [
+					new tag({ tag: "div", class: "w-100", elem: "Flex item" }),
+					new tag({ tag: "div", flex: "shrink-1", elem: "Flex item" }),
+				],
+			});
+		},
+	},
+
+	{
+		msg: [
+			"Responsive variations also exist for {{flex:grow}} and {{flex:shrink}} property.",
+			new ul({
+				item: ["", "sm-", "md-", "lg-", "xl-", "xxl-"]
+					.map(function (i) {
+						return ["grow-0", "grow-1", "shrink-0", "shrink-1"].map(function (j) {
+							return `<code>${i}${j}</code>`;
+						});
+					})
+					.flat(),
+			}),
+		],
+	},
+
+	{
+		title: "Auto margins",
+		msg: "Flexbox can do some pretty awesome things when you mix flex alignments with auto margins. Shown below are three examples of controlling flex items via auto margins: default (no auto margin), pushing two items to the right ({{marginend:auto}}), and pushing two items to the left ({{marginstart:auto}}).",
+		container: doc_core.formcontainer,
+		viewclass: "cl-highlight-flex",
+		code: function () {
+			return [
+				new tag({
+					tag: "div",
+					display: "flex",
+					elem: [
+						new tag({ tag: "div", elem: "Flex item" }),
+						new tag({ tag: "div", elem: "Flex item" }),
+						new tag({ tag: "div", elem: "Flex item" }),
+					],
+				}),
+				new tag({
+					tag: "div",
+					display: "flex",
+					elem: [
+						new tag({ tag: "div", marginend: "auto", elem: "Flex item" }),
+						new tag({ tag: "div", elem: "Flex item" }),
+						new tag({ tag: "div", elem: "Flex item" }),
+					],
+				}),
+				new tag({
+					tag: "div",
+					display: "flex",
+					elem: [
+						new tag({ tag: "div", elem: "Flex item" }),
+						new tag({ tag: "div", elem: "Flex item" }),
+						new tag({ tag: "div", marginstart: "auto", elem: "Flex item" }),
+					],
+				}),
+			];
+		},
+	},
+
+	{
+		title: "With alignitem property",
+		msg: "Vertically move one flex item to the top or bottom of a container by mixing {{alignitem}}, {{flex:column}}, and {{margintop:auto}} or {{marginbottom:auto}}.",
+		container: doc_core.formcontainer,
+		viewclass: "cl-highlight-flex",
+		code: function () {
+			return [
+				new tag({
+					tag: "div",
+					style: { height: "12rem" },
+					display: "flex",
+					alignitem: "start",
+					flex: "column",
+					elem: [
+						new tag({ tag: "div", marginbottom: "auto", elem: "Flex item" }),
+						new tag({ tag: "div", elem: "Flex item" }),
+						new tag({ tag: "div", elem: "Flex item" }),
+					],
+				}),
+				new tag({
+					tag: "div",
+					style: { height: "12rem" },
+					display: "flex",
+					alignitem: "end",
+					flex: "column",
+					elem: [
+						new tag({ tag: "div", elem: "Flex item" }),
+						new tag({ tag: "div", elem: "Flex item" }),
+						new tag({ tag: "div", margintop: "auto", elem: "Flex item" }),
+					],
+				}),
+			];
+		},
+	},
+
+	{
+		title: "Warp",
+		msg: "Change how flex items wrap in a {{display:flex}} container. Choose from no wrapping at all (the browser default) with {{flex:nowrap}}, wrapping with {{flex:wrap}}, or reverse wrapping with {{flex:wrap-reverse}}",
+		container: doc_core.formcontainer,
+		viewclass: "cl-highlight-flex",
+		code: function () {
+			return new tag({
+				tag: "div",
+				display: "flex",
+				flex: "nowrap",
+				elem: Array(6).fill(new tag({ tag: "div", elem: "Flex item" })),
+			});
+		},
+	},
+
+	{
+		container: doc_core.formcontainer,
+		viewclass: "cl-highlight-flex",
+		code: function () {
+			return new tag({
+				tag: "div",
+				display: "flex",
+				flex: "wrap",
+				elem: Array(15).fill(new tag({ tag: "div", elem: "Flex item" })),
+			});
+		},
+	},
+
+	{
+		container: doc_core.formcontainer,
+		viewclass: "cl-highlight-flex",
+		code: function () {
+			return new tag({
+				tag: "div",
+				display: "flex",
+				flex: "wrap-reverse",
+				elem: Array(15).fill(new tag({ tag: "div", elem: "Flex item" })),
+			});
+		},
+	},
+
+	{
+		msg: [
+			"Responsive variations also exist for {{flex:wrap}} property.",
+			new ul({
+				item: ["", "sm-", "md-", "lg-", "xl-", "xxl-"]
+					.map(function (i) {
+						return ["nowrap", "wrap", "wrap-reverse"].map(function (j) {
+							return `<code>${i}${j}</code>`;
+						});
+					})
+					.flat(),
+			}),
+		],
+	},
+
+	{
+		title: "Order",
+		msg: "Change the <i>visual</i> order of specific flex items with a handful of {{order}} property. We only provide options for making an item first or last, as well as a reset to use the DOM order. As {{order}} takes any integer value from 0 to 5, add custom CSS for any additional values needed.",
+		container: doc_core.formcontainer,
+		viewclass: "cl-highlight-flex",
+		code: function () {
+			return new tag({
+				tag: "div",
+				display: "flex",
+				flex: "nowrap",
+				elem: [
+					new tag({ tag: "div", order: 3, elem: "First flex item" }),
+					new tag({ tag: "div", order: 2, elem: "Second flex item" }),
+					new tag({ tag: "div", order: 1, elem: "Third flex item" }),
+				],
+			});
+		},
+	},
+
+	{
+		msg: [
+			"Responsive variations also exist for {{order}} property.",
+			new ul({
+				item: ["", "sm-", "md-", "lg-", "xl-", "xxl-"]
+					.map(function (i) {
+						return [0, 1, 2, 3, 4, 5].map(function (j) {
+							return `<code>${i}${j}</code>`;
+						});
+					})
+					.flat(),
+			}),
+		],
+	},
+
+	{
+		msg: [
+			"Additionally there are also responsive {{order:first}} and {{order:last}} property that change the order of an element by applying order: -1 and order: 6, respectively.",
+			new ul({
+				item: ["", "sm-", "md-", "lg-", "xl-", "xxl-"]
+					.map(function (i) {
+						return ["first", "last"].map(function (j) {
 							return `<code>${i}${j}</code>`;
 						});
 					})

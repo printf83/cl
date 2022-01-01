@@ -21,13 +21,13 @@ const defaultOption = {
 	disabled: false,
 	outline: false,
 	hidelabel: false,
-	nowarp: false,
+	nowrap: false,
 
 	elem: null,
 };
 
 /**
- * option : {tagoption,type,label,icon,badge,value,checked,color,weight,disabled,outline,hidelabel,nowarp,elem}
+ * option : {tagoption,type,label,icon,badge,value,checked,color,weight,disabled,outline,hidelabel,nowrap,elem}
  */
 export default class button extends tag {
 	constructor(...opt) {
@@ -55,7 +55,7 @@ export default class button extends tag {
 			opt.tag = opt.href ? "a" : opt.color || opt.outline || opt.weight ? "button" : "div";
 			opt.class = core.merge.class(opt.class, [
 				opt.type === "a" ? "text-decoration-none" : opt.color || opt.outline || opt.weight ? "btn" : null,
-				opt.nowarp ? "text-nowarp" : null,
+				opt.nowrap ? "text-nowrap" : null,
 				opt.weight ? `btn-${opt.weight}` : null,
 				opt.color ? (opt.outline ? `btn-outline-${opt.color}` : `btn-${opt.color}`) : null,
 				opt.toggle && opt.active ? "active" : null,
@@ -127,7 +127,7 @@ export default class button extends tag {
 			delete opt.disabled;
 			delete opt.outline;
 			delete opt.hidelabel;
-			delete opt.nowarp;
+			delete opt.nowrap;
 
 			if (m) {
 				super.data = {

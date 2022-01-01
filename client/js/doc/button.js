@@ -46,7 +46,7 @@ export default [
 			return new button({
 				label: "Disable text wrapping button",
 				color: "primary",
-				nowarp: true,
+				nowrap: true,
 			});
 		},
 	},

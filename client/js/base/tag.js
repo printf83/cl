@@ -51,7 +51,7 @@ const defaultOption = {
 	onblur: null,
 
 	align: null,
-	warp: null,
+	wrap: null,
 	wordbreak: null,
 	texttransform: null,
 
@@ -76,6 +76,7 @@ const defaultOption = {
 	gradient: false,
 	coloropacity: null,
 
+	linkcolor: null,
 	textcolor: null,
 	textopacity: null,
 
@@ -100,6 +101,7 @@ const defaultOption = {
 	borderweight: null,
 
 	flex: null,
+	order: null,
 
 	row: null,
 	col: null,
@@ -170,10 +172,11 @@ export default class tag {
 					opt.gradient ? "bg-gradient" : null,
 					opt.coloropacity ? `bg-opacity-${opt.coloropacity}` : null,
 
+					opt.linkcolor ? `link-${opt.linkcolor}` : null,
 					opt.textcolor ? `text-${opt.textcolor}` : null,
 					opt.textopacity ? `text-opacity-${opt.textopacity}` : null,
 
-					opt.warp !== null ? (opt.warp === true ? "text-warp" : "text-nowarp") : null,
+					opt.wrap !== null ? (opt.wrap === true ? "text-wrap" : "text-nowrap") : null,
 					opt.wordbreak ? "text-break" : null,
 					opt.texttransform ? `text-${opt.texttransform}` : null,
 					opt.fontsize ? `fs-${opt.fontsize}` : null,
@@ -221,6 +224,7 @@ export default class tag {
 					opt.row ? "row" : null,
 
 					c2(opt.flex, "flex-$1"),
+					c2(opt.order, "order-$1"),
 
 					c2(opt.rowcol, "row-cols-$1"),
 					c3(opt.col, "col", null, "col-$1", null, "col"),

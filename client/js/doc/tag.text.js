@@ -1,22 +1,22 @@
 import * as sample from "./sample.js";
 import * as doc_core from "./core.js";
 import tag from "../base/tag.js";
+import * as alert from "../base/alert.js";
 
 export default [
 	{
-		title: "Bootstrap class helper for text",
-		msg: "This property is create to help user to create <code>class</code> property base on bootstrap class.",
+		title: "Text",
+		msg: "Documentation and examples for common text utilities to control alignment, wrapping, weight, and more.",
 		anchor: false,
 	},
 
 	{
-		title: "align",
+		title: "Text alignment",
 		msg: [
-			"Create class <code>text-{value}</code> for element",
-			"Supported value: <code>null | start | center | end | viewport-size</code>",
-			"This property support multiple provided in array",
+			"Easily realign text to components with text alignment classes. For start, end, and center alignment, responsive classes are available that use the same viewport width breakpoints as the grid system.",
 		],
 		container: doc_core.formcontainer,
+		viewclass: "cl-highlight-col",
 		code: function () {
 			return [null, "start", "center", "end", ["end", "md-start", "lg-center"]].map(function (i) {
 				return new tag({
@@ -29,48 +29,65 @@ export default [
 	},
 
 	{
-		title: "warp",
-		msg: [
-			"Create class <code>text-warp|text-nowarp</code> for element",
-			"Supported value: <code>null | boolean</code>",
-		],
-		container: doc_core.formcontainer,
-		viewclass: "cl-highlight-box",
+		msg: new alert.container({
+			color: "primary",
+			elem: "Note that we don’t provide utility classes for justified text. While, aesthetically, justified text might look more appealing, it does make word-spacing more random and therefore harder to read.",
+		}),
+	},
+
+	{
+		title: "Text wrapping and overflow",
+		msg: ["Wrap text with a {{wrap:true}} property"],
 		code: function () {
-			return [null, true, false].map(function (i) {
-				return new tag({
-					tag: "div",
-					warp: i,
-					style: { width: "8rem" },
-					elem: "Example element with long text",
-				});
+			return new tag({
+				tag: "div",
+				class: "cl-highlight",
+				wrap: true,
+				style: { width: "8rem" },
+				elem: "This text should wrap.",
 			});
 		},
 	},
 
 	{
-		title: "wordbreak",
-		msg: ["Create class <code>text-break</code> for element", "Supported value: <code>null | boolean</code>"],
-		container: doc_core.formcontainer,
-		viewclass: "cl-highlight-box",
+		title: "Text wrapping and overflow",
+		msg: ["Wrap text with a {{wrap}} property"],
 		code: function () {
-			return [null, true, false].map(function (i) {
-				return new tag({
-					tag: "div",
-					wordbreak: i,
-					style: { width: "8rem" },
-					elem: "Exampleelementwithlongtext",
-				});
+			return new tag({
+				tag: "div",
+				class: "cl-highlight",
+				wrap: false,
+				style: { width: "8rem" },
+				elem: "This text should overflow the parent.",
 			});
 		},
 	},
 
 	{
-		title: "texttransform",
+		title: "Word break",
 		msg: [
-			"Create class <code>text-{value}</code> for element",
-			"Supported value: <code>null | lowercase | uppercase | capitalize</code>",
+			"Prevent long strings of text from breaking your components' layout by using .text-break to set word-wrap: break-word and word-break: break-word. We use word-wrap instead of the more common overflow-wrap for wider browser support, and add the deprecated word-break: break-word to avoid issues with flex containers.",
 		],
+		code: function () {
+			return new tag({
+				tag: "div",
+				class: "cl-highlight",
+				wordbreak: true,
+				elem: "mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm",
+			});
+		},
+	},
+
+	{
+		msg: new alert.container({
+			color: "warning",
+			elem: "Note that breaking words isn’t possible in Arabic, which is the most used RTL language. Therefore .text-break is removed from our RTL compiled CSS.",
+		}),
+	},
+
+	{
+		title: "Text transform",
+		msg: ["Transform text in components with text {{texttransform}} property."],
 		container: doc_core.formcontainer,
 		code: function () {
 			return [null, "lowercase", "uppercase", "capitalize"].map(function (i) {
@@ -84,8 +101,10 @@ export default [
 	},
 
 	{
-		title: "fontsize",
-		msg: ["Create class <code>fs-{value}</code> for element", "Supported value: <code>null | 1...6</code>"],
+		title: "Font size",
+		msg: [
+			"Quickly change the font-size of text using {{fontsize}} property. While our heading classes (e.g., {{.h1}}–{{.h6}}) apply {{fontsize}}, {{fontweight}}, and {{lineheight}}, these utilities <i>only</i> apply {{font-size}}. Sizing for these utilities matches HTML’s heading elements, so as the number increases, their size decreases.",
+		],
 		container: doc_core.formcontainer,
 		code: function () {
 			return [null, 1, 2, 3, 4, 5, 6].map(function (i) {
@@ -99,11 +118,8 @@ export default [
 	},
 
 	{
-		title: "fontweight",
-		msg: [
-			"Create class <code>fw-{value}</code> for element",
-			"Supported value: <code>null | bold | bolder | normal | light | lighter</code>",
-		],
+		title: "Font weight",
+		msg: ["Quickly change the font-weight of text with these {{fontweight}}."],
 		container: doc_core.formcontainer,
 		code: function () {
 			return [null, "bold", "bolder", "normal", "light", "lighter"].map(function (i) {
@@ -117,11 +133,8 @@ export default [
 	},
 
 	{
-		title: "fontitalic",
-		msg: [
-			"Create class <code>fst-italic | fst-normal</code> for element",
-			"Supported value: <code>null | boolean</code>",
-		],
+		title: "Font italics",
+		msg: ["Quickly change the font-style of text with these {{fontitalic}}."],
 		container: doc_core.formcontainer,
 		code: function () {
 			return [null, true, false].map(function (i) {
@@ -133,27 +146,10 @@ export default [
 			});
 		},
 	},
+
 	{
-		title: "Reset color",
-		msg: ["Reset a text or link’s color with .text-reset, so that it inherits the color from its parent."],
-		code: function () {
-			return new tag({
-				tag: "p",
-				textcolor: "muted",
-				elem: [
-					"Muted text with a ",
-					new tag({ tag: "a", href: "#", textcolor: "reset", elem: "reset link" }),
-					".",
-				],
-			});
-		},
-	},
-	{
-		title: "textdecoration",
-		msg: [
-			"Create class <code>text-decoration-{value}</code> for element",
-			"Supported value: <code>null | boolean | underline | line-through | none</code>",
-		],
+		title: "Text decoration",
+		msg: ["Decorate text in components with {{textdecoration}} property."],
 		container: doc_core.formcontainer,
 		code: function () {
 			return [null, true, false, "underline", "line-through", "none"].map(function (i) {
@@ -165,12 +161,23 @@ export default [
 			});
 		},
 	},
+
 	{
-		title: "lineheight",
-		msg: [
-			"Create class <code>lh-{value}</code> for element",
-			"Supported value: <code>null | 1 | sm | base | lg</code>",
-		],
+		title: "Monospace",
+		msg: ["Change a selection to our monospace font stack with {{monospace}} property."],
+		container: doc_core.formcontainer,
+		code: function () {
+			return new tag({
+				tag: "div",
+				monospace: true,
+				elem: `Example element with <code>monospace: true</code>`,
+			});
+		},
+	},
+
+	{
+		title: "Line height",
+		msg: ["Change the line height with {{lineheight}} property"],
 		container: doc_core.formcontainer,
 		code: function () {
 			return [null, 1, "sm", "base", "lg"].map(function (i) {

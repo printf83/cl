@@ -46,11 +46,11 @@ const defaultOption = {
 
 	container: true,
 	flex: false,
-	nowarp: false,
+	nowrap: false,
 };
 
 /**
- * opt : {tagoption,id,name,type,label,hidelabel,floatlabel,inline,labelsize,ctlsize,size,weight,value,checked,placeholder,option,numctl,addctl,min,max,step,row,multiple,required,valid,invalid,before,after,plaintext,readonly,disabled,container,flex,nowarp,onclick,onchange,onclick,onfocus,onblur}
+ * opt : {tagoption,id,name,type,label,hidelabel,floatlabel,inline,labelsize,ctlsize,size,weight,value,checked,placeholder,option,numctl,addctl,min,max,step,row,multiple,required,valid,invalid,before,after,plaintext,readonly,disabled,container,flex,nowrap,onclick,onchange,onclick,onfocus,onblur}
  */
 export default class input extends tag {
 	constructor(...opt) {
@@ -252,7 +252,7 @@ export default class input extends tag {
 
 			delete m.container;
 			delete m.flex;
-			delete m.nowarp;
+			delete m.nowrap;
 
 			delete m.option;
 
@@ -428,7 +428,7 @@ export default class input extends tag {
 								new div({
 									class: [
 										"input-group",
-										opt.nowarp ? "flex-nowarp" : null,
+										opt.nowrap ? "flex-nowrap" : null,
 										opt.weight ? `input-group-${opt.weight}` : null,
 										opt.valid || opt.invalid ? "has-validation" : null,
 									],

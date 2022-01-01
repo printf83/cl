@@ -76,14 +76,14 @@ export default [
 		code: function () {
 			return [
 				new input({
-					nowarp: true,
+					nowrap: true,
 					placeholder: "Username",
 					type: "text",
 					before: "@",
 				}),
 
 				new inputgroup.container({
-					class: "flex-nowarp",
+					class: "flex-nowrap",
 					elem: [
 						new inputgroup.text("@"),
 						new input({

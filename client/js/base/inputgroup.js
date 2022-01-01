@@ -8,7 +8,7 @@ const defaultOption = {
 	for: null,
 	label: null,
 	elem: null,
-	nowarp: false,
+	nowrap: false,
 	weight: null,
 };
 /**
@@ -36,11 +36,11 @@ export class container extends tag {
 			t.class = core.merge.class(t.class, [
 				"input-group",
 				opt.weight ? `input-group-${opt.weight}` : null,
-				opt.nowarp ? "flex-nowarp" : null,
+				opt.nowrap ? "flex-nowrap" : null,
 			]);
 
 			delete t.weight;
-			delete t.nowarp;
+			delete t.nowrap;
 
 			ctlmain.data = t;
 

@@ -4,17 +4,15 @@ import tag from "../base/tag.js";
 
 export default [
 	{
-		title: "Bootstrap class helper for background",
-		msg: "This property is create to help user to create <code>class</code> property base on bootstrap class.",
+		title: "Background",
+		msg: "Convey meaning through {{color}} property and add decoration with {{gradients}} property.",
 		anchor: false,
 	},
 
 	{
-		title: "color",
+		title: "Background color",
 		msg: [
-			"Create class <code>bg-{value}</code> for element",
-			"Supported value: <code>null | BSColor</code>",
-			"This property support multiple provided in array",
+			"Similar to the contextual text color classes, set the background of an element to any contextual class. Background utilities <b>do not set</b> {{color}}, so in some cases you’ll want to use {{textcolor}} property.",
 		],
 		container: doc_core.formcontainer,
 		code: function () {
@@ -44,11 +42,9 @@ export default [
 	},
 
 	{
-		title: "gradient",
+		title: "Background gradient",
 		msg: [
-			"Create class <code>bg-gradient</code> for element",
-			"Supported value: <code>null | boolean</code>",
-			"This property support multiple provided in array",
+			"By setting {{gradient:true}} property, a linear gradient is added as background image to the backgrounds. This gradient starts with a semi-transparent white which fades out to the bottom.",
 		],
 		container: doc_core.formcontainer,
 		code: function () {
