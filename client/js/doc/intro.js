@@ -39,8 +39,6 @@ export default [
 					elem: "<b>Warning!</b> This framework create by <b>one developer</b> only for research on build full stack webapps only using simple framework.",
 				}),
 				color: "warning",
-				// icon: { icon: "!", weight: "lg" },
-				// elem: "<b>Warning!</b> This framework create by <b>one developer</b> only for research on build full stack webapps only using simple framework.",
 				align: "center",
 				margintop: 5,
 			}),
