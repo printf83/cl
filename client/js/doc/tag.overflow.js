@@ -1,5 +1,4 @@
 import tag from "../base/tag.js";
-import * as doc_core from "./core.js";
 import div from "../base/div.js";
 
 export default [

@@ -99,3 +99,24 @@
 	padding: 1rem;
 	border-radius: 0.25rem;
 }
+
+.cl-highlight-shadow .col div,
+.cl-highlight-size .col div,
+.cl-highlight-size-height .col div {
+	border: 1px solid var(--bs-gray-300);
+	background-color: rgba(var(--bs-dark-rgb), 0.03);
+	padding: 0.75rem;
+}
+
+.cl-highlight-shadow .col div {
+	margin: 1rem 0.75rem;
+}
+
+.cl-highlight-size-height .col div {
+	padding-top: unset;
+	padding-bottom: unset;
+}
+
+.cl-highlight-size-height .col {
+	height: 12rem !important;
+}
