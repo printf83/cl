@@ -43,17 +43,17 @@
 }
 
 .cl-highlight-padding,
-.cl-highlight-flex .col .d-flex > div {
+.cl-highlight-flex .card-body .col .d-flex > div {
 	border: 1px solid rgba(var(--bs-dark-rgb), 0.05);
 	background-color: rgba(var(--bs-dark-rgb), 0.03);
 	padding: 0.75rem;
 }
 
-.cl-highlight-row .row {
+.cl-highlight-row .card-body .row {
 	background-color: rgba(var(--bs-danger-rgb), 0.125);
 }
 
-.cl-highlight-container div + div {
+.cl-highlight-container .card-body div + div {
 	margin-top: 1rem;
 }
 
@@ -64,19 +64,19 @@
 .cl-highlight-container .container-sm,
 .cl-highlight-container .container-xl,
 .cl-highlight-container .container-xxl,
-.cl-highlight-div div,
+.cl-highlight-div .card-body div,
 .cl-highlight-element {
 	border: 1px solid var(--bs-gray-300);
 	background-color: rgba(var(--bs-dark-rgb), 0.03);
 	padding: 0.75rem;
 }
 
-.cl-highlight-box .col div {
+.cl-highlight-box .card-body.col div {
 	background-color: rgba(var(--bs-dark-rgb), 0.03);
 	padding: 2rem;
 }
 
-.cl-highlight-box-dark .col div {
+.cl-highlight-box-dark .card-body .col div {
 	background-color: rgba(var(--bs-dark-rgb), 0.3);
 	padding: 2rem;
 }
@@ -85,7 +85,7 @@
 	background: rgba(var(--bs-primary-rgb), 0.125);
 }
 
-.cl-highlight-position > div {
+.cl-highlight-position .card-body > div {
 	padding: 3rem;
 }
 
@@ -112,11 +112,11 @@
 	margin: 1rem 0.75rem;
 }
 
-.cl-highlight-size-height .col div {
+.cl-highlight-size-height .card-body .col div {
 	padding-top: unset;
 	padding-bottom: unset;
 }
 
-.cl-highlight-size-height .col {
+.cl-highlight-size-height .card-body .col {
 	height: 12rem !important;
 }
