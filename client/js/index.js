@@ -68,12 +68,12 @@ import doc_tag_overflow from "./doc/tag.overflow.js";
 import doc_tag_position from "./doc/tag.position.js";
 import doc_tag_shadow from "./doc/tag.shadow.js";
 import doc_tag_size from "./doc/tag.size.js";
-import doc_tag_spacing from "./doc/tag.color.js";
-import doc_tag_valign from "./doc/tag.color.js";
-import doc_tag_visibility from "./doc/tag.color.js";
+import doc_tag_spacing from "./doc/tag.spacing.js";
+import doc_tag_valign from "./doc/tag.valign.js";
+import doc_tag_visibility from "./doc/tag.visibility.js";
 
-const def_m1 = "Tag";
-const def_m2 = "Sizing";
+const def_m1 = "Getting started";
+const def_m2 = "Introduction";
 const def_theme = null;
 
 const db_menu = [

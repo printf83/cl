@@ -65,13 +65,14 @@
 .cl-highlight-container .container-xl,
 .cl-highlight-container .container-xxl,
 .cl-highlight-div .card-body div,
-.cl-highlight-element {
+.cl-highlight-element,
+.cl-highlight-grid-div .d-grid div {
 	border: 1px solid var(--bs-gray-300);
 	background-color: rgba(var(--bs-dark-rgb), 0.03);
 	padding: 0.75rem;
 }
 
-.cl-highlight-box .card-body.col div {
+.cl-highlight-box .card-body .col div {
 	background-color: rgba(var(--bs-dark-rgb), 0.03);
 	padding: 2rem;
 }

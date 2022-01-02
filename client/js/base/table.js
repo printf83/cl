@@ -158,7 +158,7 @@ export class container extends tag {
 			opt.hover ? "table-hover" : null,
 			opt.captiontop ? "caption-top" : null,
 			opt.size ? `table-${opt.size}` : null,
-			opt.border
+			opt.border !== null
 				? opt.border === false
 					? "table-borderless"
 					: opt.border === true

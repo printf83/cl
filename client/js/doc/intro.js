@@ -7,6 +7,8 @@ import * as card from "../base/card.js";
 import code from "../base/code.js";
 import pre from "../base/pre.js";
 import pill from "../base/pill.js";
+import msg from "../base/msg.js";
+
 // import small from "../base/small.js";
 
 function beautifyjs(str) {
@@ -31,8 +33,14 @@ export default [
 			]),
 
 			new alert.container({
-				icon: "!",
-				elem: "<b>Warning!</b> This is an alpha version. Please don't used it on production.",
+				elem: new msg({
+					weight: "md",
+					icon: "!",
+					elem: "<b>Warning!</b> This framework create by <b>one developer</b> only for research on build full stack webapps only using simple framework.",
+				}),
+				color: "warning",
+				// icon: { icon: "!", weight: "lg" },
+				// elem: "<b>Warning!</b> This framework create by <b>one developer</b> only for research on build full stack webapps only using simple framework.",
 				align: "center",
 				margintop: 5,
 			}),
@@ -41,7 +49,6 @@ export default [
 				"text-center",
 				"Build Full Stack Web Application using JS, Bootstrap, Fontawesome, NodeJS, And Mongodb using BS5 JS Builder"
 			),
-			new div("text-center", "For Pro JS Developer only"),
 
 			new card.container({
 				marginy: 3,

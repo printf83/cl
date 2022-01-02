@@ -53,7 +53,9 @@ const defaultOption = {
 	userselect: null,
 	pointerevent: null,
 
+	visible: null,
 	align: null,
+	valign: null,
 	wrap: null,
 	wordbreak: null,
 	texttransform: null,
@@ -176,7 +178,11 @@ export default class tag {
 					opt.userselect ? `user-select-${opt.userselect}` : null,
 					opt.pointerevent ? `pe-${opt.pointerevent}` : null,
 
+					opt.visible !== null ? (opt.visible === true ? "visible" : "invisible") : null,
+
 					c2(opt.align, "text-$1"),
+					c2(opt.valign, "align-$1"),
+
 					opt.position ? `position-${opt.position}` : null,
 					opt.overflow ? `overflow-${opt.overflow}` : null,
 					opt.opacity ? `opacity-${opt.opacity}` : null,
