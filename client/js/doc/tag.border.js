@@ -32,12 +32,14 @@ export default [
 		container: doc_core.stackcontainer,
 		viewclass: "cl-highlight-box",
 		code: function () {
-			return [null, false, "top-0", "end-0", "bottom-0", "start-0", ["bottom-0", "start-0"]].map(function (i) {
-				return new tag({
-					tag: "div",
-					border: ["border", i],
-				});
-			});
+			return [null, false, "top-0", "end-0", "bottom-0", "start-0", ["border", "bottom-0", "start-0"]].map(
+				function (i) {
+					return new tag({
+						tag: "div",
+						border: Array.isArray(i) ? i : ["border", i],
+					});
+				}
+			);
 		},
 	},
 
