@@ -72,8 +72,26 @@ import doc_tag_spacing from "./doc/tag.spacing.js";
 import doc_tag_valign from "./doc/tag.valign.js";
 import doc_tag_visibility from "./doc/tag.visibility.js";
 
-const def_m1 = "Getting started";
-const def_m2 = "Introduction";
+import doc_tag_ex_a from "./doc/tag.ex.a.js";
+import doc_tag_ex_b from "./doc/tag.ex.b.js";
+import doc_tag_ex_code from "./doc/tag.ex.a.js";
+import doc_tag_ex_div from "./doc/tag.ex.a.js";
+import doc_tag_ex_form from "./doc/tag.ex.a.js";
+import doc_tag_ex_header from "./doc/tag.ex.a.js";
+import doc_tag_ex_hr from "./doc/tag.ex.a.js";
+import doc_tag_ex_img from "./doc/tag.ex.a.js";
+import doc_tag_ex_li from "./doc/tag.ex.a.js";
+import doc_tag_ex_nav from "./doc/tag.ex.a.js";
+import doc_tag_ex_ol from "./doc/tag.ex.a.js";
+import doc_tag_ex_p from "./doc/tag.ex.a.js";
+import doc_tag_ex_pre from "./doc/tag.ex.a.js";
+import doc_tag_ex_small from "./doc/tag.ex.a.js";
+import doc_tag_ex_span from "./doc/tag.ex.a.js";
+import doc_tag_ex_strong from "./doc/tag.ex.a.js";
+import doc_tag_ex_ul from "./doc/tag.ex.a.js";
+
+const def_m1 = "Extend tag";
+const def_m2 = "Anchor";
 const def_theme = null;
 
 const db_menu = [
@@ -172,24 +190,23 @@ const db_menu = [
 		type: "menu",
 		title: "Extend tag",
 		item: [
-			{ title: "Anchor", source: null },
-			{ title: "Bold", source: null },
-			{ title: "Code", source: null },
-			{ title: "Div", source: null },
-			{ title: "Form", source: null },
-			{ title: "Header", source: null },
-			{ title: "Horizontal line", source: null },
-			{ title: "Image", source: null },
-			{ title: "La", source: null },
-			{ title: "List item", source: null },
-			{ title: "Navigation", source: null },
-			{ title: "Ordered list", source: null },
-			{ title: "Paragraph", source: null },
-			{ title: "Pre", source: null },
-			{ title: "Small", source: null },
-			{ title: "Span", source: null },
-			{ title: "Strong", source: null },
-			{ title: "Unordered list", source: null },
+			{ title: "Anchor", source: doc_tag_ex_a },
+			{ title: "Bold", source: doc_tag_ex_b },
+			{ title: "Code", source: doc_tag_ex_code },
+			{ title: "Div", source: doc_tag_ex_div },
+			{ title: "Form", source: doc_tag_ex_form },
+			{ title: "Header", source: doc_tag_ex_header },
+			{ title: "Horizontal line", source: doc_tag_ex_hr },
+			{ title: "Image", source: doc_tag_ex_img },
+			{ title: "List item", source: doc_tag_ex_li },
+			{ title: "Navigation", source: doc_tag_ex_nav },
+			{ title: "Ordered list", source: doc_tag_ex_ol },
+			{ title: "Paragraph", source: doc_tag_ex_p },
+			{ title: "Pre", source: doc_tag_ex_pre },
+			{ title: "Small", source: doc_tag_ex_small },
+			{ title: "Span", source: doc_tag_ex_span },
+			{ title: "Strong", source: doc_tag_ex_strong },
+			{ title: "Unordered list", source: doc_tag_ex_ul },
 		],
 	},
 	{

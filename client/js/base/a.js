@@ -3,7 +3,7 @@ import * as core from "./core.js";
 import tag from "./tag.js";
 import label from "./label.js";
 
-const defaultOption = { tag: "a", icon: null, label: null };
+const defaultOption = { tag: "a", icon: null, label: null, color: null };
 /**
  * opt : {tagoption,icon,label}
  */
@@ -20,6 +20,9 @@ export default class a extends tag {
 
 		opt.elem = opt.elem || (opt.label || opt.icon ? new label({ icon: opt.icon, label: opt.label }) : opt.href);
 
+		opt.linkcolor = opt.linkcolor || opt.color;
+
+		delete opt.color;
 		delete opt.icon;
 		delete opt.label;
 
