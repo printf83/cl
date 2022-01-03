@@ -1,18 +1,17 @@
 import { tagprop } from "./sample.js";
-import b from "../base/b.js";
-import div from "../base/div.js";
+import form from "../base/form.js";
 import * as doc_core from "./core.js";
 
 export default [
 	{
-		title: "Bold",
-		msg: ["Helper to create {{&lt;b&gt;&lt;/b&gt;}} tag"],
+		title: "Form",
+		msg: ["Helper to create {{&lt;form&gt;&lt;/form&gt;}} tag"],
 		anchor: false,
 	},
 
 	{
 		msg: [
-			"Shortcut for {{new tag({tag:'b'})}}",
+			"Shortcut for {{new tag({tag:'form'})}}",
 			"This component is extended from {{tag}} component, so any property on tag component, will also work on this component.",
 			"Property inherits from tag component:",
 			tagprop(),
@@ -22,17 +21,11 @@ export default [
 	{
 		title: "Example",
 		code: function () {
-			return new div({
-				elem: [
-					"This is ",
-					new b({
-						attr: {
-							"data-test": "test",
-						},
-						elem: "Bold",
-					}),
-					" text",
-				],
+			return new form({
+				attr: {
+					"data-test": "test",
+				},
+				elem: "Example",
 			});
 		},
 	},
@@ -43,9 +36,9 @@ export default [
 		container: doc_core.formcontainer,
 		code: function () {
 			return [
-				new b({ elem: "Using elem property" }),
-				new b("Direct elem property"),
-				new b("classname", "Direct class and elem property"),
+				new form({ elem: "Using elem property" }),
+				new form("Direct elem property"),
+				new form("classname", "Direct class and elem property"),
 			];
 		},
 	},

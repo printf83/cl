@@ -74,9 +74,9 @@ import doc_tag_visibility from "./doc/tag.visibility.js";
 
 import doc_tag_ex_a from "./doc/tag.ex.a.js";
 import doc_tag_ex_b from "./doc/tag.ex.b.js";
-import doc_tag_ex_code from "./doc/tag.ex.a.js";
-import doc_tag_ex_div from "./doc/tag.ex.a.js";
-import doc_tag_ex_form from "./doc/tag.ex.a.js";
+import doc_tag_ex_code from "./doc/tag.ex.code.js";
+import doc_tag_ex_div from "./doc/tag.ex.div.js";
+import doc_tag_ex_form from "./doc/tag.ex.form.js";
 import doc_tag_ex_header from "./doc/tag.ex.a.js";
 import doc_tag_ex_hr from "./doc/tag.ex.a.js";
 import doc_tag_ex_img from "./doc/tag.ex.a.js";
@@ -91,7 +91,7 @@ import doc_tag_ex_strong from "./doc/tag.ex.a.js";
 import doc_tag_ex_ul from "./doc/tag.ex.a.js";
 
 const def_m1 = "Extend tag";
-const def_m2 = "Anchor";
+const def_m2 = "Form";
 const def_theme = null;
 
 const db_menu = [
@@ -193,7 +193,7 @@ const db_menu = [
 			{ title: "Anchor", source: doc_tag_ex_a },
 			{ title: "Bold", source: doc_tag_ex_b },
 			{ title: "Code", source: doc_tag_ex_code },
-			{ title: "Div", source: doc_tag_ex_div },
+			{ title: "Division", source: doc_tag_ex_div },
 			{ title: "Form", source: doc_tag_ex_form },
 			{ title: "Header", source: doc_tag_ex_header },
 			{ title: "Horizontal line", source: doc_tag_ex_hr },

@@ -643,3 +643,103 @@ export function table(header, footer) {
 	}
 	return rtn;
 }
+
+function isListed(val, listed) {
+	if (listed) {
+		if (Array.isArray(listed) && listed.includes(val)) {
+			return true;
+		} else {
+			return listed === val;
+		}
+	} else {
+		return false;
+	}
+}
+
+export function tagprop(exclude) {
+	let tprop = [
+		"id",
+		"name",
+		"class",
+		"style",
+		"attr",
+		"href",
+		"onclick",
+		"onchange",
+		"onfocus",
+		"onblur",
+		"userselect",
+		"pointerevent",
+		"visible",
+		"align",
+		"valign",
+		"wrap",
+		"wordbreak",
+		"texttransform",
+		"fontsize",
+		"fontweight",
+		"fontitalic",
+		"lineheight",
+		"monospace",
+		"textdecoration",
+		"position",
+		"overflow",
+		"opacity",
+		"display",
+		"float",
+		"alignitem",
+		"alignself",
+		"aligncontent",
+		"justifycontent",
+		"shadow",
+		"gradient",
+		"coloropacity",
+		"color",
+		"linkcolor",
+		"textcolor",
+		"textopacity",
+		"padding",
+		"paddingx",
+		"paddingy",
+		"paddingtop",
+		"paddingbottom",
+		"paddingstart",
+		"paddingend",
+		"margin",
+		"marginx",
+		"marginy",
+		"margintop",
+		"marginbottom",
+		"marginstart",
+		"marginend",
+		"border",
+		"bordercolor",
+		"borderweight",
+		"flex",
+		"order",
+		"row",
+		"col",
+		"rowcol",
+		"gap",
+		"rounded",
+		"roundedtype",
+		"tmiddle",
+		"top",
+		"bottom",
+		"start",
+		"end",
+	];
+
+	let f = tprop
+		.map(function (i) {
+			if (!isListed(i, exclude)) {
+				return `<code>${i}</code>`;
+			} else {
+				return null;
+			}
+		})
+		.filter(Boolean);
+
+	let l = f.pop();
+	return f.join(", ") + " and " + l;
+}
