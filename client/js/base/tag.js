@@ -141,7 +141,7 @@ export default class tag {
 					elem: opt[1],
 				};
 			} else if (opt.length === 1) {
-				if (typeof opt[0] === "object") {
+				if (typeof opt[0] === "object" && !Array.isArray(opt[0])) {
 					if (opt[0].hasOwnProperty("cl")) {
 						this.data = { elem: opt[0] };
 					} else {

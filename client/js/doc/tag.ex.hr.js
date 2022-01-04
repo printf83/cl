@@ -4,7 +4,7 @@ import * as doc_core from "./core.js";
 
 export default [
 	{
-		title: "Form",
+		title: "Horizontal rule",
 		msg: ["Helper to create {{&lt;hr&gt;}} tag"],
 		anchor: false,
 	},
