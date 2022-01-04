@@ -29,8 +29,8 @@ export function resetindex() {
 }
 
 export function img(width, height) {
-	//return "./img/img3.svg";
-	return `https://picsum.photos/seed/${imgindex++}/${width ? width : 800}/${height ? height : 400}.webp`;
+	return "./img/img3.svg";
+	//return `https://picsum.photos/seed/${imgindex++}/${width ? width : 800}/${height ? height : 400}.webp`;
 }
 
 // export function svgimg(width = 300, height = 283) {
