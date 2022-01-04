@@ -1,17 +1,17 @@
 import { tagprop } from "./sample.js";
-import code from "../base/code.js";
+import pre from "../base/pre.js";
 import * as doc_core from "./core.js";
 
 export default [
 	{
-		title: "Code",
-		msg: ["Helper to create {{&lt;code&gt;&lt;/code&gt;}} tag"],
+		title: "Preformatted",
+		msg: ["Helper to create {{&lt;pre&gt;&lt;/pre&gt;}} tag"],
 		anchor: false,
 	},
 
 	{
 		msg: [
-			"Shortcut for {{new tag({tag:'code'})}}",
+			"Shortcut for {{new tag({tag:'pre'})}}",
 			"This component is extended from {{tag}} component, so any property on tag component, will also work on this component.",
 			"Property inherits from tag component:",
 			tagprop(),
@@ -21,7 +21,7 @@ export default [
 	{
 		title: "Example",
 		code: function () {
-			return new code({
+			return new pre({
 				attr: {
 					"data-test": "test",
 				},
@@ -36,9 +36,9 @@ export default [
 		container: doc_core.formcontainer,
 		code: function () {
 			return [
-				new code({ class: "classname", elem: "<div>Using elem property</div>" }),
-				new code("classname", "<div>Direct class and elem property</div>"),
-				new code("<div>Direct elem property</div>"),
+				new pre({ class: "classname", elem: "<div>Using elem property</div>" }),
+				new pre("classname", "<div>Direct class and elem property</div>"),
+				new pre("<div>Direct elem property</div>"),
 			];
 		},
 	},

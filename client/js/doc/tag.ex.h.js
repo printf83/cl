@@ -24,7 +24,7 @@ export default [
 		container: doc_core.formcontainer,
 		code: function () {
 			return new h({
-				level: 6,
+				level: 5,
 				attr: {
 					"data-test": "test",
 				},

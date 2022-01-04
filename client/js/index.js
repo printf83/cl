@@ -83,15 +83,15 @@ import doc_tag_ex_img from "./doc/tag.ex.img.js";
 import doc_tag_ex_li from "./doc/tag.ex.li.js";
 import doc_tag_ex_nav from "./doc/tag.ex.nav.js";
 import doc_tag_ex_ol from "./doc/tag.ex.ol.js";
-import doc_tag_ex_p from "./doc/tag.ex.a.js";
-import doc_tag_ex_pre from "./doc/tag.ex.a.js";
-import doc_tag_ex_small from "./doc/tag.ex.a.js";
-import doc_tag_ex_span from "./doc/tag.ex.a.js";
-import doc_tag_ex_strong from "./doc/tag.ex.a.js";
+import doc_tag_ex_p from "./doc/tag.ex.p.js";
+import doc_tag_ex_pre from "./doc/tag.ex.pre.js";
+import doc_tag_ex_small from "./doc/tag.ex.small.js";
+import doc_tag_ex_span from "./doc/tag.ex.span.js";
+import doc_tag_ex_strong from "./doc/tag.ex.strong.js";
 import doc_tag_ex_ul from "./doc/tag.ex.ul.js";
 
 const def_m1 = "Extend tag";
-const def_m2 = "Navigation";
+const def_m2 = "Preformatted";
 const def_theme = null;
 
 const db_menu = [
@@ -202,7 +202,7 @@ const db_menu = [
 			{ title: "Navigation", source: doc_tag_ex_nav },
 			{ title: "Ordered list", source: doc_tag_ex_ol },
 			{ title: "Paragraph", source: doc_tag_ex_p },
-			{ title: "Pre", source: doc_tag_ex_pre },
+			{ title: "Preformatted", source: doc_tag_ex_pre },
 			{ title: "Small", source: doc_tag_ex_small },
 			{ title: "Span", source: doc_tag_ex_span },
 			{ title: "Strong", source: doc_tag_ex_strong },

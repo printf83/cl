@@ -29,7 +29,7 @@ export default [
 						attr: {
 							"data-test": "test",
 						},
-						elem: "Bold",
+						elem: "bold",
 					}),
 					" text",
 				],
@@ -44,8 +44,8 @@ export default [
 		code: function () {
 			return [
 				new b({ class: "classname", elem: "Using elem property" }),
-				new b("Direct elem property"),
 				new b("classname", "Direct class and elem property"),
+				new b("Direct elem property"),
 			];
 		},
 	},

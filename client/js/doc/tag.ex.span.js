@@ -1,17 +1,18 @@
 import { tagprop } from "./sample.js";
-import code from "../base/code.js";
+import span from "../base/span.js";
+import div from "../base/div.js";
 import * as doc_core from "./core.js";
 
 export default [
 	{
-		title: "Code",
-		msg: ["Helper to create {{&lt;code&gt;&lt;/code&gt;}} tag"],
+		title: "Span",
+		msg: ["Helper to create {{&lt;span&gt;&lt;/span&gt;}} tag"],
 		anchor: false,
 	},
 
 	{
 		msg: [
-			"Shortcut for {{new tag({tag:'code'})}}",
+			"Shortcut for {{new tag({tag:'span'})}}",
 			"This component is extended from {{tag}} component, so any property on tag component, will also work on this component.",
 			"Property inherits from tag component:",
 			tagprop(),
@@ -21,11 +22,17 @@ export default [
 	{
 		title: "Example",
 		code: function () {
-			return new code({
-				attr: {
-					"data-test": "test",
-				},
-				elem: "<div>Example</div>",
+			return new div({
+				elem: [
+					"This is ",
+					new span({
+						attr: {
+							"data-test": "test",
+						},
+						elem: "span",
+					}),
+					" text",
+				],
 			});
 		},
 	},
@@ -36,9 +43,9 @@ export default [
 		container: doc_core.formcontainer,
 		code: function () {
 			return [
-				new code({ class: "classname", elem: "<div>Using elem property</div>" }),
-				new code("classname", "<div>Direct class and elem property</div>"),
-				new code("<div>Direct elem property</div>"),
+				new span({ class: "classname", elem: "Using elem property" }),
+				new span("classname", "Direct class and elem property"),
+				new span("Direct elem property"),
 			];
 		},
 	},

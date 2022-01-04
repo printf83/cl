@@ -1,17 +1,18 @@
 import { tagprop } from "./sample.js";
-import code from "../base/code.js";
+import strong from "../base/strong.js";
+import div from "../base/div.js";
 import * as doc_core from "./core.js";
 
 export default [
 	{
-		title: "Code",
-		msg: ["Helper to create {{&lt;code&gt;&lt;/code&gt;}} tag"],
+		title: "Strong",
+		msg: ["Helper to create {{&lt;strong&gt;&lt;/strong&gt;}} tag"],
 		anchor: false,
 	},
 
 	{
 		msg: [
-			"Shortcut for {{new tag({tag:'code'})}}",
+			"Shortcut for {{new tag({tag:'strong'})}}",
 			"This component is extended from {{tag}} component, so any property on tag component, will also work on this component.",
 			"Property inherits from tag component:",
 			tagprop(),
@@ -21,11 +22,17 @@ export default [
 	{
 		title: "Example",
 		code: function () {
-			return new code({
-				attr: {
-					"data-test": "test",
-				},
-				elem: "<div>Example</div>",
+			return new div({
+				elem: [
+					"This is ",
+					new strong({
+						attr: {
+							"data-test": "test",
+						},
+						elem: "strong",
+					}),
+					" text",
+				],
 			});
 		},
 	},
@@ -36,9 +43,9 @@ export default [
 		container: doc_core.formcontainer,
 		code: function () {
 			return [
-				new code({ class: "classname", elem: "<div>Using elem property</div>" }),
-				new code("classname", "<div>Direct class and elem property</div>"),
-				new code("<div>Direct elem property</div>"),
+				new strong({ class: "classname", elem: "Using elem property" }),
+				new strong("classname", "Direct class and elem property"),
+				new strong("Direct elem property"),
 			];
 		},
 	},
