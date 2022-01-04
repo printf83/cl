@@ -16,6 +16,9 @@ export default class hr extends tag {
 		return super.data;
 	}
 	set data(opt) {
-		super.data = core.extend({}, defaultOption, opt);
+		opt = core.extend({}, defaultOption, opt);
+
+		delete opt.elem;
+		super.data = opt;
 	}
 }

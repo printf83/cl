@@ -1,6 +1,7 @@
 import { tagprop } from "./sample.js";
 import ul from "../base/ul.js";
 import a from "../base/a.js";
+import * as doc_core from "./core.js";
 
 export default [
 	{
@@ -36,20 +37,46 @@ export default [
 			"We add some special property into this component:",
 			new ul({
 				item: [
-					"<code>icon${i}</code> - only works if elem not provided",
-					"<code>label${i}</code> - only works if elem not provided",
-					"<code>color${i}</code> - will change to <code>linkcolor</code> when added to tag component later",
+					"<code>icon</code> - only works if elem not provided",
+					"<code>label</code> - only works if elem not provided",
+					"<code>color</code> - shortcut to <code>linkcolor</code>. If you like to change the background color, you need to set <code>class:bg-*</code>",
 				],
 			}),
 		],
+		container: doc_core.formcontainer,
 		code: function () {
-			return new a({
-				href: "https://getbootstrap.com/docs/5.0",
-				color: "success",
-				textdecoration: "none",
-				label: "Bootstrap",
-				icon: { type: "fab", icon: "bootstrap" },
-			});
+			return [
+				new a({
+					href: "https://getbootstrap.com/docs/5.0",
+					color: "success",
+					textdecoration: "none",
+					label: "Bootstrap",
+					icon: { type: "fab", icon: "bootstrap" },
+				}),
+				new a({
+					href: "https://getbootstrap.com/docs/5.0",
+					color: "light",
+					class: "bg-primary",
+					padding: 2,
+					rounded: true,
+					textdecoration: "none",
+					label: "Bootstrap",
+					icon: { type: "fab", icon: "bootstrap" },
+				}),
+			];
+		},
+	},
+
+	{
+		title: "Easy option",
+		msg: "This component also supported easy option.",
+		container: doc_core.formcontainer,
+		code: function () {
+			return [
+				new a({ href: "https://getbootstrap.com/docs/5.0", class: "classname", elem: "Bootstrap" }),
+				new a("https://getbootstrap.com/docs/5.0", "Bootstrap"),
+				new a("https://getbootstrap.com/docs/5.0"),
+			];
 		},
 	},
 ];

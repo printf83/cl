@@ -36,7 +36,7 @@ export default [
 		container: doc_core.formcontainer,
 		code: function () {
 			return [
-				new form({ elem: "Using elem property" }),
+				new form({ class: "classname", elem: "Using elem property" }),
 				new form("Direct elem property"),
 				new form("classname", "Direct class and elem property"),
 			];

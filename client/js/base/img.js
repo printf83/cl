@@ -14,7 +14,21 @@ const defaultOption = {
 
 export default class img extends tag {
 	constructor(...opt) {
-		super(...opt);
+		super();
+		if (opt && opt.length > 0) {
+			if (opt.length === 2) {
+				this.data = {
+					class: opt[0],
+					src: opt[1],
+				};
+			} else if (opt.length === 1) {
+				if (typeof opt[0] === "object") {
+					this.data = opt[0];
+				} else {
+					this.data = { src: opt[0] };
+				}
+			}
+		}
 	}
 
 	get data() {

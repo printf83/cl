@@ -9,7 +9,21 @@ const defaultOption = { tag: "a", icon: null, label: null, color: null };
  */
 export default class a extends tag {
 	constructor(...opt) {
-		super(...opt);
+		super();
+		if (opt && opt.length > 0) {
+			if (opt.length === 2) {
+				this.data = {
+					href: opt[0],
+					elem: opt[1],
+				};
+			} else if (opt.length === 1) {
+				if (typeof opt[0] === "object") {
+					this.data = opt[0];
+				} else {
+					this.data = { href: opt[0], elem: opt[0] };
+				}
+			}
+		}
 	}
 
 	get data() {

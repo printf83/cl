@@ -77,9 +77,9 @@ import doc_tag_ex_b from "./doc/tag.ex.b.js";
 import doc_tag_ex_code from "./doc/tag.ex.code.js";
 import doc_tag_ex_div from "./doc/tag.ex.div.js";
 import doc_tag_ex_form from "./doc/tag.ex.form.js";
-import doc_tag_ex_header from "./doc/tag.ex.a.js";
-import doc_tag_ex_hr from "./doc/tag.ex.a.js";
-import doc_tag_ex_img from "./doc/tag.ex.a.js";
+import doc_tag_ex_h from "./doc/tag.ex.h.js";
+import doc_tag_ex_hr from "./doc/tag.ex.hr.js";
+import doc_tag_ex_img from "./doc/tag.ex.img.js";
 import doc_tag_ex_li from "./doc/tag.ex.a.js";
 import doc_tag_ex_nav from "./doc/tag.ex.a.js";
 import doc_tag_ex_ol from "./doc/tag.ex.a.js";
@@ -91,7 +91,7 @@ import doc_tag_ex_strong from "./doc/tag.ex.a.js";
 import doc_tag_ex_ul from "./doc/tag.ex.a.js";
 
 const def_m1 = "Extend tag";
-const def_m2 = "Form";
+const def_m2 = "Horizontal rule";
 const def_theme = null;
 
 const db_menu = [
@@ -195,8 +195,8 @@ const db_menu = [
 			{ title: "Code", source: doc_tag_ex_code },
 			{ title: "Division", source: doc_tag_ex_div },
 			{ title: "Form", source: doc_tag_ex_form },
-			{ title: "Header", source: doc_tag_ex_header },
-			{ title: "Horizontal line", source: doc_tag_ex_hr },
+			{ title: "Heading", source: doc_tag_ex_h },
+			{ title: "Horizontal rule", source: doc_tag_ex_hr },
 			{ title: "Image", source: doc_tag_ex_img },
 			{ title: "List item", source: doc_tag_ex_li },
 			{ title: "Navigation", source: doc_tag_ex_nav },

@@ -43,7 +43,7 @@ export default [
 		container: doc_core.formcontainer,
 		code: function () {
 			return [
-				new b({ elem: "Using elem property" }),
+				new b({ class: "classname", elem: "Using elem property" }),
 				new b("Direct elem property"),
 				new b("classname", "Direct class and elem property"),
 			];
