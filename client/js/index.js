@@ -90,8 +90,8 @@ import doc_tag_ex_span from "./doc/tag.ex.span.js";
 import doc_tag_ex_strong from "./doc/tag.ex.strong.js";
 import doc_tag_ex_ul from "./doc/tag.ex.ul.js";
 
-const def_m1 = "Extend tag";
-const def_m2 = "Preformatted";
+const def_m1 = "Getting started";
+const def_m2 = "Introduction";
 const def_theme = null;
 
 const db_menu = [
