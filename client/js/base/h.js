@@ -24,7 +24,7 @@ export default class h extends tag {
 					};
 				} else {
 					this.data = {
-						level: 1,
+						level: 5,
 						class: opt[0],
 						elem: opt[1],
 					};
@@ -48,6 +48,7 @@ export default class h extends tag {
 	}
 	set data(opt) {
 		opt = core.extend({}, defaultOption, opt);
+		opt.level = opt.level || 5;
 		opt.tag = `h${opt.level}`;
 
 		delete opt.level;

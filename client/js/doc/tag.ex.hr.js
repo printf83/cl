@@ -20,12 +20,16 @@ export default [
 
 	{
 		title: "Example",
+		container: doc_core.formcontainer,
 		code: function () {
-			return new hr({
-				attr: {
-					"data-test": "test",
-				},
-			});
+			return [
+				new hr(),
+				new hr({
+					attr: {
+						"data-test": "test",
+					},
+				}),
+			];
 		},
 	},
 ];

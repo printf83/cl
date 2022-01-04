@@ -21,6 +21,7 @@ export default [
 
 	{
 		title: "Example",
+		container: doc_core.formcontainer,
 		code: function () {
 			return new h({
 				level: 6,
@@ -37,7 +38,7 @@ export default [
 		msg: [
 			"We add some special property into this component:",
 			new ul({
-				item: ["<code>level</code> - to set heading level. The value should 1 to 6. Default is 1"],
+				item: ["<code>level</code> - to set heading level. The value should 1 to 6. Default is 5"],
 			}),
 		],
 		container: doc_core.formcontainer,
