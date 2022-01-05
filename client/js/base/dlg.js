@@ -6,12 +6,6 @@ import p from "./p.js";
 import input from "./input.js";
 import * as container from "./container.js";
 
-let debug = false;
-
-export function setDebug(isdebug) {
-	debug = isdebug;
-}
-
 function btnBuilder(btn, defButton, defColor, pushCancel) {
 	let argBtn = Array.isArray(btn) ? btn : [btn];
 	if (pushCancel && argBtn.length === 1) argBtn.push("Cancel");
