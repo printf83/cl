@@ -36,10 +36,13 @@ export default class badge extends span {
 			opt.borderweight = opt.borderweight || opt.notification ? 2 : null;
 			opt.bordercolor = opt.bordercolor || opt.notification ? "white" : null;
 
-			opt.class = core.merge.class(opt.class, [
-				"badge",
-				opt.notification ? "top-0 start-100 translate-middle" : null,
-			]);
+			opt.class = core.merge.class(opt.class, ["badge"]);
+
+			if (opt.notification) {
+				opt.top = "0";
+				opt.start = "100";
+				opt.tmiddle = true;
+			}
 
 			opt.position = opt.notification ? "absolute" : null;
 

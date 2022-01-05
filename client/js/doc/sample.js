@@ -28,14 +28,10 @@ export function resetindex() {
 	textindex = 0;
 }
 
-export function img(width, height) {
-	return svgimg(width, height);
-	//return "./img/img3.svg";
-	//return `https://picsum.photos/seed/${imgindex++}/${width ? width : 800}/${height ? height : 400}.webp`;
-}
-
 let svgdb = {};
-export function svgimg(width = 300, height = 283) {
+export function img(width = 300, height = 283) {
+	// style="background-color:rgba(0,0,0,.125);"
+
 	if (svgdb.hasOwnProperty(`${width}_${height}`)) {
 		return svgdb[`${width}_${height}`];
 	} else {

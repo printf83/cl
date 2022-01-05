@@ -186,7 +186,9 @@ export default [
 		title: "Right align",
 		code: function () {
 			return new div({
-				class: "d-grid gap-2 d-md-flex justify-content-md-end",
+				display: ["grid", "md-flex"],
+				justifycontent: "md-end",
+				gap: 2,
 				elem: [
 					new button({ label: "Button", color: "primary" }),
 					new button({ label: "Button", color: "primary" }),

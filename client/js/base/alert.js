@@ -46,7 +46,8 @@ export class container extends div {
 			});
 
 			opt.elem = new div({
-				class: "d-flex align-items-stretch",
+				display: "flex",
+				alignitem: "stretch",
 				elem: [
 					new div({ class: "w-100", elem: opt.elem }),
 					opt.close
