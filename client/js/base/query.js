@@ -245,7 +245,7 @@ let fn = {
 					class: [opt.useopricon ? "font-fa" : null].filter(Boolean).join(" "),
 					type: "select",
 					name: "opr",
-					size: useopricon ? "col-4 col-lg-3 px-2" : "col-sm-5 col-md-4 col-lg-3 px-2",
+					// size: useopricon ? "col-4 col-lg-3 px-2" : "col-sm-5 col-md-4 col-lg-3 px-2",
 					value: core.getValue(opr),
 					option: opr_opt,
 				})
@@ -257,7 +257,7 @@ let fn = {
 				new input({
 					type: item && item.type ? item.type : "text",
 					name: "value",
-					size: "",
+					// size: "",
 					placeholder: item.placeholder ? item.placeholder : null,
 					value: core.getValue(val),
 					option: item && item.option ? item.option : null,
@@ -364,18 +364,6 @@ let fn = {
 				// size: useopricon ? "col-4 col-lg-3 px-2" : "col-sm-5 col-md-4 col-lg-3 px-2",
 			});
 
-			// return new div("d-flex", [
-			// 	sel_from,
-			// 	sel_opr,
-			// 	new button({
-			// 		color: "danger",
-			// 		icon: "trash",
-			// 		onclick: function (event) {
-			// 			fn.sort.remove(event);
-			// 		},
-			// 	}),
-			// ]);
-
 			return new div({
 				display: "flex",
 				elem: new div({
@@ -450,7 +438,7 @@ let fn = {
 					class: [opt.useopricon ? "font-fa" : null].filter(Boolean).join(" "),
 					type: "select",
 					name: "opr",
-					size: useopricon ? "col-4 col-lg-3 px-2" : "col-sm-5 col-md-4 col-lg-3 px-2",
+					// size: useopricon ? "col-4 col-lg-3 px-2" : "col-sm-5 col-md-4 col-lg-3 px-2",
 					value: core.getValue(opr),
 					option: opr_opt,
 				})
@@ -794,7 +782,7 @@ function elemBuilder(opt) {
 					type: "checkbox",
 					label: item.label,
 					name: item.value,
-					size: "6",
+					size: 6,
 					checked:
 						opt.data && fn.isPrototypeExists(opt.data.field, item.value) && opt.data.field[item.value] === 0
 							? false
