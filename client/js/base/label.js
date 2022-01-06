@@ -57,6 +57,8 @@ export default class label extends tag {
 						opt.label
 							? opt.hidelabel
 								? new span({ class: "visually-hidden", elem: opt.label })
+								: opt.icon
+								? new span({ display: ["none", "md-inline"], elem: opt.label })
 								: opt.label
 							: null,
 					],

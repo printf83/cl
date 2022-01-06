@@ -105,7 +105,7 @@ let fn = {
 				},
 				option: from_opt,
 				value: f,
-				size: "",
+				//size: "",
 			});
 
 			//gen opr option
@@ -151,37 +151,54 @@ let fn = {
 				name: "opr",
 				option: opr_opt,
 				value: o,
-				size: useopricon ? "col-4 col-lg-3 px-2" : "col-sm-5 col-md-4 col-lg-3 px-2",
+				//size: useopricon ? "col-4 col-lg-3 px-2" : "col-sm-5 col-md-4 col-lg-3 px-2",
 			});
 
-			return new div("d-flex", [
-				new div("container p-0", [
-					new div(
-						"row g-2",
-						new div("d-flex", [
-							sel_from,
-							sel_opr,
-							new button({
-								color: "danger",
-								icon: "trash",
-								onclick: function (event) {
-									fn.filter.remove(event);
-								},
+			return new div({
+				display: "flex",
+				elem: new div({
+					class: "container",
+					padding: 0,
+					elem: [
+						new div({
+							row: true,
+							elem: new div({
+								col: true,
+								elem: new div({
+									display: "flex",
+									gap: 2,
+									elem: [
+										sel_from,
+										sel_opr,
+										new button({
+											color: "danger",
+											icon: "trash",
+											onclick: function (event) {
+												fn.filter.remove(event);
+											},
+										}),
+									],
+								}),
 							}),
-						])
-					),
-					new div("row mt-2", [
-						new input({
-							type: item && item.type ? item.type : "text",
-							name: "value",
-							value: v,
-							size: "12",
-							placeholder: item.placeholder ? item.placeholder : null,
-							option: item && item.option ? item.option : null,
 						}),
-					]),
-				]),
-			]);
+
+						new div({
+							row: true,
+							paddingy: 2,
+							elem: new div({
+								col: true,
+								elem: new input({
+									type: item && item.type ? item.type : "text",
+									name: "value",
+									value: v,
+									placeholder: item.placeholder ? item.placeholder : null,
+									option: item && item.option ? item.option : null,
+								}),
+							}),
+						}),
+					],
+				}),
+			});
 		},
 		add: function (event, animate) {
 			let sender = event.currentTarget;
@@ -189,7 +206,7 @@ let fn = {
 			let opt = db[`${id}-data`];
 
 			cl.prependChild(
-				sender.closest(".item"),
+				sender.closest(".col"),
 				new div(
 					["item", animate ? "cl-fadeslidein" : null].filter(Boolean).join(" "),
 					fn.filter.item(opt.useopricon, opt.field, null, null, null)
@@ -325,7 +342,6 @@ let fn = {
 				},
 				option: from_opt,
 				value: f,
-				size: "",
 			});
 
 			//gen opr option
@@ -345,20 +361,50 @@ let fn = {
 				name: "opr",
 				option: opr_opt,
 				value: o ? o : opr_opt ? opr_opt[0].value : null,
-				size: useopricon ? "col-4 col-lg-3 px-2" : "col-sm-5 col-md-4 col-lg-3 px-2",
+				// size: useopricon ? "col-4 col-lg-3 px-2" : "col-sm-5 col-md-4 col-lg-3 px-2",
 			});
 
-			return new div("d-flex", [
-				sel_from,
-				sel_opr,
-				new button({
-					color: "danger",
-					icon: "trash",
-					onclick: function (event) {
-						fn.sort.remove(event);
-					},
+			// return new div("d-flex", [
+			// 	sel_from,
+			// 	sel_opr,
+			// 	new button({
+			// 		color: "danger",
+			// 		icon: "trash",
+			// 		onclick: function (event) {
+			// 			fn.sort.remove(event);
+			// 		},
+			// 	}),
+			// ]);
+
+			return new div({
+				display: "flex",
+				elem: new div({
+					class: "container",
+					padding: 0,
+					elem: new div({
+						row: true,
+						paddingbottom: 2,
+						elem: new div({
+							col: true,
+							elem: new div({
+								display: "flex",
+								gap: 2,
+								elem: [
+									sel_from,
+									sel_opr,
+									new button({
+										color: "danger",
+										icon: "trash",
+										onclick: function (event) {
+											fn.sort.remove(event);
+										},
+									}),
+								],
+							}),
+						}),
+					}),
 				}),
-			]);
+			});
 		},
 		add: function (event, animate) {
 			let sender = event.currentTarget;
@@ -366,7 +412,7 @@ let fn = {
 			let opt = db[`${id}-data`];
 
 			cl.prependChild(
-				sender.closest(".item"),
+				sender.closest(".col"),
 				new div(
 					["item", animate ? "cl-fadeslidein" : null].filter(Boolean).join(" "),
 					fn.sort.item(opt.useopricon, opt.field, null, null)
@@ -761,10 +807,9 @@ function elemBuilder(opt) {
 	//put in tab and return
 	return new tab({
 		id: id,
-		border: false,
-		rounded: false,
-		align: "center",
-		style: "pill",
+		flush: true,
+		headAlign: "center",
+		type: "pill",
 		item: [
 			{
 				label: "Filter",
@@ -822,12 +867,10 @@ function elemBuilder(opt) {
 						padding: 0,
 						class: "container cl-field-rule",
 						elem: new div({
-							gap: 2,
 							row: true,
-							rowcol: 1,
 							elem: [
 								new div({
-									col: true,
+									col: 6,
 									elem: new input({
 										type: "number",
 										name: "limit",
@@ -836,12 +879,11 @@ function elemBuilder(opt) {
 										step: opt.limit.step,
 										value: opt.data.limit,
 										numctl: true,
-										size: "6",
 										label: "Record per Page",
 									}),
 								}),
 								new div({
-									col: true,
+									col: 6,
 									elem: new input({
 										type: "number",
 										name: "step",
@@ -850,7 +892,6 @@ function elemBuilder(opt) {
 										step: opt.skip.step,
 										value: opt.data.skip / opt.data.limit + 1,
 										numctl: true,
-										size: "6",
 										label: "Current Page",
 									}),
 								}),
