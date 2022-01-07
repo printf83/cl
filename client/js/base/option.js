@@ -74,6 +74,8 @@ const defaultDropdownItemOption = {
 	value: null,
 	label: null,
 	icon: null,
+	iconafter: false,
+	showlabel: null,
 
 	active: false,
 	disabled: false,
@@ -139,6 +141,8 @@ export class dropdown extends tag {
 								elem: new label({
 									label: i.label,
 									icon: i.icon,
+									iconafter: i.iconafter,
+									showlabel: i.showlabel,
 								}),
 							});
 						}

@@ -21,6 +21,8 @@ const defaultOption = {
 	disabled: false,
 	outline: false,
 	hidelabel: false,
+	showlabel: null,
+	iconafter: false,
 	nowrap: false,
 
 	elem: null,
@@ -113,6 +115,8 @@ export default class button extends tag {
 										icon: opt.icon,
 										label: opt.label,
 										hidelabel: opt.hidelabel,
+										showlabel: opt.showlabel,
+										iconafter: opt.iconafter,
 								  })
 								: null,
 							opt.badge ? new badge(opt.badge) : null,
@@ -131,6 +135,8 @@ export default class button extends tag {
 			delete opt.disabled;
 			delete opt.outline;
 			delete opt.hidelabel;
+			delete opt.showlabel;
+			delete opt.iconafter;
 			delete opt.nowrap;
 
 			if (m) {

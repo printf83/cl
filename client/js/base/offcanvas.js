@@ -11,6 +11,8 @@ const defaultOption = {
 	close: true,
 	title: null,
 	icon: null,
+	showtitle: null,
+	iconafter: false,
 	scroll: true,
 	backdrop: false,
 	elem: null,
@@ -47,7 +49,12 @@ export default class container extends div {
 									level: 5,
 									class: "offcanvas-title",
 									id: `${opt.id}-label`,
-									elem: new label({ icon: opt.icon, label: opt.title }),
+									elem: new label({
+										icon: opt.icon,
+										label: opt.title,
+										showlabel: opt.showtitle,
+										iconafter: opt.iconafter,
+									}),
 							  })
 							: null,
 						opt.close
@@ -86,6 +93,8 @@ export default class container extends div {
 			delete opt.icon;
 			delete opt.scroll;
 			delete opt.backdrop;
+			delete opt.showtitle;
+			delete opt.iconafter;
 
 			super.data = opt;
 		}

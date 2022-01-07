@@ -11,7 +11,7 @@ const defaultOption = {
 	item: null,
 };
 
-const defaultItemOption = { label: null, icon: null, active: false, item: null };
+const defaultItemOption = { label: null, icon: null, showlabel: null, iconafter: false, active: false, item: null };
 
 /**
  * opt : {tagoption,flush,autoclose,item:[{itemOption}]}
@@ -28,7 +28,6 @@ export default class accordion extends div {
 	}
 	set data(opt) {
 		if (opt) {
-
 			opt = core.extend({}, defaultOption, opt);
 
 			//check if item isnot array
@@ -62,6 +61,8 @@ export default class accordion extends div {
 							delete t.label;
 							delete t.icon;
 							delete t.active;
+							delete t.iconafter;
+							delete t.showlabel;
 
 							return new div({
 								class: "accordion-item",
@@ -73,6 +74,8 @@ export default class accordion extends div {
 										elem: new button({
 											label: i.label,
 											icon: i.icon,
+											showlabel: i.showlabel,
+											iconafter: i.iconafter,
 											class: ["accordion-button", !i.active ? "collapsed" : null],
 											attr: {
 												"data-bs-toggle": "collapse",

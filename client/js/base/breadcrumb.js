@@ -13,6 +13,17 @@ const defaultOption = {
 	item: null,
 };
 
+const defaultItemOption = {
+	label: null,
+	icon: null,
+	showlabel: null,
+	iconafter: false,
+	current: false,
+	href: null,
+	onclick: null,
+	elem: null,
+};
+
 /**
  * opt : {tagoption,label,divider,item:{label,icon,current,href,onclick,elem}}
  */
@@ -53,18 +64,7 @@ export default class breadcrumb extends nav {
 						margin: "0",
 						class: ["breadcrumb"],
 						elem: opt.item.map(function (i) {
-							i = core.extend(
-								{},
-								{
-									label: null,
-									icon: null,
-									current: false,
-									href: null,
-									onclick: null,
-									elem: null,
-								},
-								i
-							);
+							i = core.extend({}, defaultItemOption, i);
 
 							return new li({
 								class: ["breadcrumb-item", i.current ? "active" : null],
@@ -76,6 +76,8 @@ export default class breadcrumb extends nav {
 												? new label({
 														icon: i.icon,
 														label: i.label,
+														showlabel: i.showlabel,
+														iconafter: i.iconafter,
 												  })
 												: i.href
 												? new a({
@@ -83,13 +85,23 @@ export default class breadcrumb extends nav {
 														elem: new label({
 															icon: i.icon,
 															label: i.label,
+															showlabel: i.showlabel,
+															iconafter: i.iconafter,
 														}),
 												  })
 												: i.onclick
-												? new button({ label: i.label, icon: i.icon, onclick: i.onclick })
+												? new button({
+														label: i.label,
+														icon: i.icon,
+														showlabel: i.showlabel,
+														iconafter: i.iconafter,
+														onclick: i.onclick,
+												  })
 												: new label({
 														icon: i.icon,
 														label: i.label,
+														showlabel: i.showlabel,
+														iconafter: i.iconafter,
 												  }),
 									  ],
 							});
@@ -99,6 +111,8 @@ export default class breadcrumb extends nav {
 
 			delete opt.label;
 			delete opt.icon;
+			delete opt.showlabel;
+			delete opt.iconafter;
 			delete opt.divider;
 
 			super.data = opt;

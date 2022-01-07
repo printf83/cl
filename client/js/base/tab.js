@@ -16,6 +16,20 @@ const defaultOption = {
 
 	item: [],
 };
+
+const defaultItemOption = {
+	id: null,
+	label: null,
+	icon: null,
+	hidelabel: false,
+	showlabel: "md",
+	iconafter: false,
+	disable: false,
+	active: false,
+	option: null,
+	elem: null,
+};
+
 /**
  * opt:{tagoption,type,headAlign,size,animated,flush,item:{tabitem}}
  * tabitem : {id,label,icon,hidelabel,disable,active,option,elem}
@@ -70,20 +84,7 @@ export default class tab extends div {
 					}
 				}
 
-				i = core.extend(
-					{},
-					{
-						id: null,
-						label: null,
-						icon: null,
-						hidelabel: false,
-						disable: false,
-						active: false,
-						option: null,
-						elem: null,
-					},
-					i
-				);
+				i = core.extend({}, defaultItemOption, i);
 
 				//create id for tab elem
 				i.id = i.id ? i.id : i.elem ? core.UUID() : null;
@@ -119,6 +120,8 @@ export default class tab extends div {
 								elem: new label({
 									label: i.label,
 									icon: i.icon,
+									showlabel: i.showlabel,
+									iconafter: i.iconafter,
 									hidelabel: i.hidelabel,
 								}),
 							}),

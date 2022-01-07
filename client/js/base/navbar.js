@@ -91,6 +91,10 @@ const defaultBrandOption = {
 	onclick: null,
 	label: null,
 	icon: null,
+
+	showlabel: null,
+	iconafter: false,
+
 	img: null,
 	elem: null,
 };
@@ -115,6 +119,8 @@ export class brand extends tag {
 				new label({
 					icon: opt.icon,
 					label: opt.label,
+					showlabel: opt.showlabel,
+					iconafter: opt.iconafter,
 				});
 
 			delete opt.icon;
@@ -278,6 +284,8 @@ const defaultItemOption = {
 	option: null,
 	icon: null,
 	label: null,
+	showlabel: null,
+	iconafter: false,
 	active: false,
 	disabled: false,
 };
@@ -311,7 +319,12 @@ export class item extends div {
 						"data-bs-toggle": opt.option ? "dropdown" : null,
 						"aria-expanded": opt.option ? "false" : null,
 					},
-					elem: new label({ icon: opt.icon, label: opt.label }),
+					elem: new label({
+						icon: opt.icon,
+						label: opt.label,
+						showlabel: opt.showlabel,
+						iconafter: opt.iconafter,
+					}),
 				}),
 				opt.option
 					? new ul({
@@ -328,6 +341,8 @@ export class item extends div {
 			delete opt.option;
 			delete opt.icon;
 			delete opt.label;
+			delete opt.iconafter;
+			delete opt.showlabel;
 
 			super.data = opt;
 		}

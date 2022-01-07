@@ -187,6 +187,27 @@ export default [
 						icon: "fire",
 					},
 				}),
+				new button({ label: "Button", color: "primary", icon: "fire", iconafter: true, showlabel: "md" }),
+				new button({
+					label: "Button",
+					color: "warning",
+					icon: {
+						color: "danger",
+						icon: "fire",
+					},
+					iconafter: true,
+					showlabel: "md",
+				}),
+				new button({
+					label: "Button",
+					color: "success",
+					icon: {
+						color: "warning",
+						icon: "fire",
+					},
+					iconafter: true,
+					showlabel: "md",
+				}),
 			];
 		},
 	},
@@ -210,38 +231,67 @@ export default [
 
 	{
 		title: "Dropdown & item",
-		container: doc_core.stackcontainer,
+		container: doc_core.formcontainer,
 		sample: { "sample.dropdownitem": sample.dropdownitem },
 		code: function () {
-			return new dropdown({
-				label: "Dropdown",
-				color: "primary",
-				icon: "fire",
-				option: [
-					{ href: "#", label: "Copy", icon: "copy" },
-					{ href: "#", label: "Cut", icon: "cut" },
-					{ href: "#", label: "Paste", icon: "paste" },
-					{ value: "-" },
-					{ href: "#", label: "Setting", icon: "sliders-h" },
-				],
-			});
+			return [
+				new dropdown({
+					label: "Dropdown",
+					color: "primary",
+					icon: "fire",
+					option: [
+						{ href: "#", label: "Copy", icon: "copy" },
+						{ href: "#", label: "Cut", icon: "cut" },
+						{ href: "#", label: "Paste", icon: "paste" },
+						{ value: "-" },
+						{ href: "#", label: "Setting", icon: "sliders-h" },
+					],
+				}),
+				new dropdown({
+					label: "Dropdown",
+					color: "primary",
+					icon: "fire",
+					iconafter: true,
+					option: [
+						{ href: "#", label: "Copy", icon: "copy", iconafter: true },
+						{ href: "#", label: "Cut", icon: "cut", iconafter: true },
+						{ href: "#", label: "Paste", icon: "paste", iconafter: true },
+						{ value: "-" },
+						{ href: "#", label: "Setting", icon: "sliders-h", iconafter: true },
+					],
+				}),
+			];
 		},
 	},
 
 	{
 		title: "Navbar",
-		container: doc_core.stackcontainer,
+		container: doc_core.formcontainer,
 		code: function () {
-			return new navbar.container({
-				expand: "lg",
-				elem: [
-					new navbar.brand({
-						label: "Navbar",
-						icon: { icon: "fire", color: "danger" },
-						href: "#",
-					}),
-				],
-			});
+			return [
+				new navbar.container({
+					expand: "lg",
+					elem: [
+						new navbar.brand({
+							label: "Navbar",
+							icon: { icon: "fire", color: "danger" },
+							href: "#",
+						}),
+					],
+				}),
+				new navbar.container({
+					expand: "lg",
+					elem: [
+						new navbar.brand({
+							label: "Navbar",
+							icon: { icon: "fire", color: "danger" },
+							iconafter: true,
+							showlabel: "md",
+							href: "#",
+						}),
+					],
+				}),
+			];
 		},
 	},
 

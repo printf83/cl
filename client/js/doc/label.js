@@ -29,6 +29,17 @@ export default [
 	},
 
 	{
+		title: "Icon after",
+		code: function () {
+			return new label({
+				icon: "fire",
+				label: "Label",
+				iconafter: true,
+			});
+		},
+	},
+
+	{
 		title: "Label for",
 		container: doc_core.formcontainer,
 		code: function () {
@@ -41,6 +52,34 @@ export default [
 				}),
 				new input({ type: "text", id: id }),
 			];
+		},
+	},
+
+	{
+		title: "Label hide",
+		msg: "Show icon only and label is hidden. Put label inside {{span.visually-hidden}}",
+		container: doc_core.formcontainer,
+		code: function () {
+			return new label({
+				icon: "fire",
+				label: "This is .visually-hidden label",
+				hidelabel: true,
+			});
+		},
+	},
+
+	{
+		title: "Label show",
+		msg: "Show icon only until viewport or higher",
+		container: doc_core.formcontainer,
+		code: function () {
+			return [null, "sm", "md", "lg", "xl", "xxl"].map(function (i) {
+				return new label({
+					icon: "fire",
+					showlabel: i,
+					label: i ? `Show on ${i}` : "Always show label",
+				});
+			});
 		},
 	},
 ];
