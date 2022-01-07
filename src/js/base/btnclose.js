@@ -6,7 +6,7 @@ const defaultOption = { label: "Close", dismiss: null, dark: true, disabled: fal
 /**
  * opt : {tagoption,label,dismiss,dark}
  */
-export default class btnclose extends button {
+export default class extends button {
 	constructor(opt) {
 		super(core.extend({}, defaultOption, opt));
 	}

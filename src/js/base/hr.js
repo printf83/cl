@@ -7,7 +7,7 @@ const defaultOption = { tag: "hr" };
 /**
  * opt : {tagoption}
  */
-export default class hr extends tag {
+export default class extends tag {
 	constructor(opt) {
 		super(core.extend({}, defaultOption, opt));
 	}

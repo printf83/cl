@@ -31,7 +31,7 @@ const defaultOption = {
 /**
  * option : {tagoption,type,label,icon,badge,value,checked,color,weight,disabled,outline,hidelabel,nowrap,elem}
  */
-export default class button extends tag {
+export default class extends tag {
 	constructor(...opt) {
 		super(...opt);
 	}

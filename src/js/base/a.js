@@ -7,7 +7,7 @@ const defaultOption = { tag: "a", icon: null, label: null, color: null };
 /**
  * opt : {tagoption,icon,label}
  */
-export default class a extends tag {
+export default class extends tag {
 	constructor(...opt) {
 		super();
 		if (opt && opt.length > 0) {

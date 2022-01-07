@@ -14,7 +14,7 @@ const defaultItemOption = { level: 1 };
  * opt : {tagoption,icon,label,item:{itemOption}}
  * itemOpt:{tagoption,buttonOption,level}
  */
-export default class toc extends div {
+export default class extends div {
 	constructor(...opt) {
 		super(...opt);
 	}

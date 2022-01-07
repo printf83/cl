@@ -129,7 +129,7 @@ const defaultOption = {
 /**
  * opt : {tag,id,name,class,style,attr,href,onclick,onchange,onfocus,onblur,align,color,textcolor,bordercolor,border,elem}
  */
-export default class tag {
+export default class {
 	_d = null;
 	cl = 1; //name tag "cl" so we can check hasOwnProperty("cl")
 

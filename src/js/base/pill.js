@@ -10,7 +10,7 @@ const defaultOption = { icon: null, label: null, title: null, color: null };
 /**
  * opt : {tagoption,icon,label}
  */
-export default class pill extends div {
+export default class extends div {
 	constructor(...opt) {
 		super(...opt);
 	}

@@ -28,7 +28,7 @@ const defaultItemOption = {
  * opt : {tagoption,control,touch,slide,fade,indicators,dark,item : {imgitem}}
  * imgitem : {tagoption,src,alt,caption,text,interval}
  */
-export default class carousel extends div {
+export default class extends div {
 	constructor(...opt) {
 		super(...opt);
 	}

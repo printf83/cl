@@ -35,7 +35,7 @@ const defaultItemOption = {
  * tabitem : {id,label,icon,hidelabel,disable,active,option,elem}
  */
 
-export default class tab extends div {
+export default class extends div {
 	cltab = 1;
 
 	constructor(...opt) {

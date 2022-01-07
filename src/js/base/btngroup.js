@@ -6,7 +6,7 @@ const defaultOption = { label: null, weight: null, vertical: false, elem: null }
 /**
  * opt : {tagoption,label,weight,vertical,elem}
  */
-export default class btngroup extends div {
+export default class extends div {
 	constructor(...opt) {
 		super(...opt);
 	}

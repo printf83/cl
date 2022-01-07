@@ -29,7 +29,7 @@ const defaultOption = {
  * opt : {attr,id,class,animate,title,icon,elem,close,autohide,delay,color,textcolor,bordercolor,border,date,timer,position,debug}
  */
 
-export default class toast extends div {
+export default class extends div {
 	_n = null;
 	_m = null;
 

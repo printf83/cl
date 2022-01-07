@@ -892,7 +892,7 @@ function elemBuilder(opt) {
 	});
 }
 
-export default class query extends modal {
+export default class extends modal {
 	constructor(...opt) {
 		if (opt && opt.length > 0) {
 			if (opt.length === 3) {

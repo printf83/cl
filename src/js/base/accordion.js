@@ -18,7 +18,7 @@ const defaultItemOption = { label: null, icon: null, showlabel: null, iconafter:
  * itemOption: {tagoption,label,icon,active,elem}
  *
  */
-export default class accordion extends div {
+export default class extends div {
 	constructor(...opt) {
 		super(...opt);
 	}
