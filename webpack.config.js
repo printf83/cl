@@ -1,9 +1,9 @@
 const path = require("path");
 
 module.exports = {
-	entry: { index: "./client/index.js", sandbox: "./client/sandbox.js" },
+	entry: { index: "./docs/index.js", sandbox: "./docs/sandbox.js" },
 	output: {
-		path: path.resolve(__dirname, "./client/dist"),
+		path: path.resolve(__dirname, "./docs/dist"),
 		filename: "[name].bundle.js",
 	},
 	module: {
