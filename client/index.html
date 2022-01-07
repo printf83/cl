@@ -5,6 +5,10 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="description" content="Testing website" />
 
+		<link
+			rel="stylesheet"
+			href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css"
+		/>
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" />
 		<link
 			rel="stylesheet"
@@ -12,18 +16,6 @@
 			id="nstheme"
 			disabled="disabled"
 		/>
-		<!-- disabled="disabled" -->
-		<link
-			rel="stylesheet"
-			href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css"
-		/>
-
-		<link rel="stylesheet" href="css/base.css" />
-		<link rel="stylesheet" href="css/animation.css" />
-		<link rel="stylesheet" href="css/example.css" />
-		<link rel="stylesheet" href="css/prettify.css" />
-
-		<link rel="modulepreload" href="js/index.js" />
 
 		<title>BS5 JS Builder</title>
 	</head>
@@ -52,18 +44,6 @@
 									</p>
 								</div>
 							</div>
-
-							<!-- <div class="text-center text-muted font-monospace mb-5">
-								<small id="processtime"></small>
-								<div class="d-block d-md-inline">
-									<span class="badge bg-secondary d-inline d-sm-none">xs</span>
-									<span class="badge bg-secondary d-none d-sm-inline d-md-none">sm</span>
-									<span class="badge bg-secondary d-none d-md-inline d-lg-none">md</span>
-									<span class="badge bg-secondary d-none d-lg-inline d-xl-none">lg</span>
-									<span class="badge bg-secondary d-none d-xl-inline d-xxl-none">xl</span>
-									<span class="badge bg-secondary d-none d-xxl-inline">xxl</span>
-								</div>
-							</div> -->
 
 							<div class="d-flex justify-content-center mb-5 gap-2">
 								<!-- Viewport start -->
@@ -160,7 +140,6 @@
 
 		<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/moment@2.29.1"></script>
-		<!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script> -->
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4"></script>
 
@@ -170,6 +149,6 @@
 
 		<script src="https://cdn.jsdelivr.net/npm/code-prettify@0.1.0/src/prettify.min.js?style=default"></script>
 
-		<script type="module" src="./js/index.js"></script>
+		<script src="./dist/index.bundle.js"></script>
 	</body>
 </html>

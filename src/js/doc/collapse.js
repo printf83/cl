@@ -1,6 +1,6 @@
 "use strict";
 import * as core from "../base/core.js";
-import * as doc_core from "../doc/core.js";
+import * as doc_core from "./core.js";
 import * as collapse from "../base/collapse.js";
 import * as card from "../base/card.js";
 import button from "../base/button.js";
