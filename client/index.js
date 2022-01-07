@@ -1,8 +1,8 @@
 "use strict";
-import "../css/base.css";
-import "../css/example.css";
-import "../css/prettify.css";
-import "../css/example.css";
+import "../src/css/base.css";
+import "../src/css/example.css";
+import "../src/css/prettify.css";
+import "../src/css/example.css";
 
 import * as core from "../src/js/base/core.js";
 import * as cl from "../src/js/base/cl.js";

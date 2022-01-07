@@ -1,9 +1,19 @@
 {
-  "dependencies": {
-    "css-loader": "^6.5.1",
-    "express": "^4.17.1",
-    "style-loader": "^3.3.1",
-    "webpack": "^5.65.0",
-    "webpack-cli": "^4.9.1"
-  }
+	"name": "cl",
+	"version": "1.0.0",
+	"description": "Build Full Stack Web Application using JS, Bootstrap, Fontawesome, NodeJS, And Mongodb using BS5 JS Builder",
+	"author": "printf83@gmail.com",
+	"license": "MIT",
+	"private": false,
+	"main": "server.js",
+	"dependencies": {
+		"css-loader": "^6.5.1",
+		"express": "^4.17.1",
+		"style-loader": "^3.3.1",
+		"webpack": "^5.65.0",
+		"webpack-cli": "^4.9.1"
+	},
+	"scripts": {
+		"build": "webpack"
+	}
 }
