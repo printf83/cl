@@ -20,7 +20,7 @@ const defaultOption = {
 /**
  * option : {attr,id,class,static,title,icon,footer,button,animated,debug,scrollable,center,size,fullscreen,focus,align,color,textcolor,bordercolor,border,divider,centerbutton,elem}
  */
-export default class extends div {
+export default class offcanvas extends div {
 	_n = null;
 	_m = null;
 

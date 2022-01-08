@@ -17,18 +17,18 @@ module.exports = {
 	},
 	mode: "production",
 	optimization: {
-		minimize: true,
-		minimizer: [
-			new TerserPlugin({
-				terserOptions: {
-					mangle: false,
-					enclose: false,
-					toplevel: false,
-					keep_classnames: true,
-					keep_fnames: true,
-					compress: false,
-				},
-			}),
-		],
+		minimize: false,
+		// minimizer: [
+		// 	new TerserPlugin({
+		// 		terserOptions: {
+		// 			// mangle: false,
+		// 			// enclose: false,
+		// 			// toplevel: false,
+		// 			keep_classnames: true,
+		// 			keep_fnames: true,
+		// 			// compress: false,
+		// 		},
+		// 	}),
+		// ],
 	},
 };

@@ -12,7 +12,7 @@ const defaultOption = {
 	alt: "Image",
 };
 
-export default class extends tag {
+export default class img extends tag {
 	constructor(...opt) {
 		super();
 		if (opt && opt.length > 0) {

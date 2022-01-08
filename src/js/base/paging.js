@@ -46,7 +46,7 @@ function pagingonchange(sender, data) {
 	cl.replaceWith(container, new paging(data));
 }
 
-export default class extends div {
+export default class paging extends div {
 	constructor(...opt) {
 		super(...opt);
 	}

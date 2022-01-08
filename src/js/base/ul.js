@@ -11,7 +11,7 @@ const defaultOption = {
 	item: null,
 };
 
-export default class extends tag {
+export default class ul extends tag {
 	constructor(...opt) {
 		super(...opt);
 	}

@@ -6,7 +6,7 @@ const defaultOption = { tag: "form" };
 /**
  * opt : {tagoption}
  */
-export default class extends tag {
+export default class form extends tag {
 	constructor(...opt) {
 		super(...opt);
 	}

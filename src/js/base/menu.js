@@ -21,7 +21,7 @@ const defaultItemOption = {
 	active: false,
 };
 
-export default class extends div {
+export default class menu extends div {
 	constructor(...opt) {
 		super(...opt);
 	}

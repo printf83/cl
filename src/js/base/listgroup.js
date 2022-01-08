@@ -25,7 +25,7 @@ const defaultItemOption = {
 	color: null,
 };
 
-export default class extends tag {
+export default class listgroup extends tag {
 	constructor(...opt) {
 		super(...opt);
 	}

@@ -9,7 +9,7 @@ const defaultOption = {
 	tag: "code",
 };
 
-export default class extends tag {
+export default class code extends tag {
 	constructor(...opt) {
 		super(...opt);
 	}

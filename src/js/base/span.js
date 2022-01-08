@@ -9,7 +9,7 @@ const defaultOption = {
 	tag: "span",
 };
 
-export default class extends tag {
+export default class span extends tag {
 	constructor(...opt) {
 		super(...opt);
 	}

@@ -6,7 +6,7 @@ const defaultOption = { label: null, elem: null };
 /**
  * opt : {tagoption,label,elem}
  */
-export default class extends div {
+export default class btntoolbar extends div {
 	constructor(...opt) {
 		super(...opt);
 	}
