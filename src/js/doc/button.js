@@ -7,20 +7,6 @@ import input from "../base/input.js";
 import div from "../base/div.js";
 
 export default [
-	// {
-	// 	title: "Title of example 3",
-	// 	msg: "Msg or example 3",
-	// 	option: {
-	// 		"Available Option": [
-	// 			["Option", "Value", "Description"],
-	// 			["elem", "{}", "Element"],
-	// 		],
-	// 	},
-	// 	code: function () {
-	// 		return new button({ label: "Hello", icon: "fire", color: "primary" });
-	// 	},
-	// },
-
 	{
 		anchor: false,
 		title: "Buttons",

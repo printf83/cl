@@ -1,11 +1,21 @@
 import * as doc_core from "./core.js";
 import tag from "../base/tag.js";
+import $ from "../base/all.js";
 
 export default [
 	{
 		title: "Tag base property",
 		msg: "Every component is extended from this component. This is base property for tag component.",
 		anchor: false,
+	},
+
+	{
+		title: "tag",
+		msg: ["Create tag name for tag"],
+		container: doc_core.formcontainer,
+		code: function () {
+			return new $.button({ label: "AAA" });
+		},
 	},
 
 	//=============================
