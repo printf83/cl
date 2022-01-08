@@ -1,6 +1,6 @@
 import * as doc_core from "./core.js";
+import button from "../base/button.js";
 import tag from "../base/tag.js";
-import $ from "../base/all.js";
 
 export default [
 	{
@@ -14,7 +14,7 @@ export default [
 		msg: ["Create tag name for tag"],
 		container: doc_core.formcontainer,
 		code: function () {
-			return new $.button({ label: "AAA" });
+			return new button({ label: "AAA" });
 		},
 	},
 
