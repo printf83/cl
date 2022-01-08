@@ -4,14 +4,14 @@ import $ from "../component.js";
 export default [
 	{
 		title: "Display property",
-		msg: "Quickly and responsively toggle the display value of components and more with our display utilities. Includes support for some of the more common values, as well as some extras for controlling display when printing.",
+		msg: "Quickly and responsively toggle the display value of components and more with Bootstrap display utilities. Includes support for some of the more common values, as well as some extras for controlling display when printing.",
 		anchor: false,
 	},
 
 	{
 		title: "How it works",
 		msg: [
-			"Change the value of the display property with our responsive display utility classes. We purposely support only a subset of all possible values for {{display}}. Classes can be combined for various effects as you need.",
+			"Change the value of the display property with Bootstrap responsive display utility classes. We purposely support only a subset of all possible values for {{display}}. Classes can be combined for various effects as you need.",
 		],
 	},
 
@@ -146,8 +146,8 @@ export default [
 	{
 		title: "Display in print",
 		msg: [
-			"Change the {{display}} value of elements when printing with our print display utility classes. Includes support for the same display values as our responsive display utilities.",
-			"Includes support for the same {{display}} values as our responsive {{viewport}} utilities.",
+			"Change the {{display}} value of elements when printing with Bootstrap print display utility classes. Includes support for the same display values as Bootstrap responsive display utilities.",
+			"Includes support for the same {{display}} values as Bootstrap responsive {{viewport}} utilities.",
 			new $.ul({
 				item: [
 					"none",

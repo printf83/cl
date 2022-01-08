@@ -5,7 +5,7 @@ import $ from "../component.js";
 export default [
 	{
 		title: "Sizing",
-		msg: "Easily make an element as wide or as tall with our width and height utilities.",
+		msg: "Easily make an element as wide or as tall with Bootstrap width and height utilities.",
 		anchor: false,
 	},
 

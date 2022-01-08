@@ -80,7 +80,7 @@ export default [
 	{
 		msg: new $.alert.container({
 			color: "warning",
-			elem: "Note that breaking words isn’t possible in Arabic, which is the most used RTL language. Therefore .text-break is removed from our RTL compiled CSS.",
+			elem: "Note that breaking words isn’t possible in Arabic, which is the most used RTL language. Therefore .text-break is removed from Bootstrap RTL compiled CSS.",
 		}),
 	},
 
@@ -102,7 +102,7 @@ export default [
 	{
 		title: "Font size",
 		msg: [
-			"Quickly change the font-size of text using {{fontsize}} property. While our heading classes (e.g., {{.h1}}–{{.h6}}) apply {{fontsize}}, {{fontweight}}, and {{lineheight}}, these utilities <i>only</i> apply {{font-size}}. Sizing for these utilities matches HTML’s heading elements, so as the number increases, their size decreases.",
+			"Quickly change the font-size of text using {{fontsize}} property. While Bootstrap heading classes (e.g., {{.h1}}–{{.h6}}) apply {{fontsize}}, {{fontweight}}, and {{lineheight}}, these utilities <i>only</i> apply {{font-size}}. Sizing for these utilities matches HTML’s heading elements, so as the number increases, their size decreases.",
 		],
 		container: sample.formcontainer,
 		code: function () {
@@ -163,7 +163,7 @@ export default [
 
 	{
 		title: "Monospace",
-		msg: ["Change a selection to our monospace font stack with {{monospace}} property."],
+		msg: ["Change a selection to Bootstrap monospace font stack with {{monospace}} property."],
 		container: sample.formcontainer,
 		code: function () {
 			return new $.tag({

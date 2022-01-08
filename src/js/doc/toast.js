@@ -16,7 +16,7 @@ export default [
 	{
 		title: "Basic",
 		msg: [
-			"To encourage extensible and predictable toasts, we recommend a header and body. Toast headers use {{display: flex}}, allowing easy alignment of content thanks to our margin and flexbox utilities.",
+			"To encourage extensible and predictable toasts, we recommend a header and body. Toast headers use {{display: flex}}, allowing easy alignment of content thanks to Bootstrap margin and flexbox utilities.",
 			"Toasts are as flexible as you need and have very little required markup. At a minimum, we require a single element to contain your “toasted” content and strongly encourage a dismiss button.",
 		],
 		viewclass: "cl-modal-preview",
@@ -34,7 +34,7 @@ export default [
 
 	{
 		title: "Live",
-		msg: "Click the button below to show a toast (positioned with our utilities in the top right corner)",
+		msg: "Click the button below to show a toast (positioned with Bootstrap utilities in the top right corner)",
 		code: function () {
 			return new $.button({
 				label: "Show live toast",

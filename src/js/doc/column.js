@@ -5,14 +5,14 @@ import $ from "../component.js";
 export default [
 	{
 		title: "Columns",
-		msg: "Learn how to modify columns with a handful of options for alignment, ordering, and offsetting thanks to our flexbox grid system. Plus, see how to use column classes to manage widths of non-grid elements.",
+		msg: "Learn how to modify columns with a handful of options for alignment, ordering, and offsetting thanks to Bootstrap flexbox grid system. Plus, see how to use column classes to manage widths of non-grid elements.",
 		anchor: false,
 	},
 
 	{
 		msg: new $.alert.container({
 			color: "primary",
-			elem: "<b>Heads up!</b> Be sure to <a href='https://getbootstrap.com/docs/5.1/layout/grid/'>read the Grid page</a> first before diving into how to modify and customize your grid columnew $.",
+			elem: "<b>Heads up!</b> Be sure to <a href='https://getbootstrap.com/docs/5.1/layout/grid/'>read the Grid page</a> first before diving into how to modify and customize your grid column",
 		}),
 	},
 
@@ -24,7 +24,7 @@ export default [
 					elem: "<b>Columns build on the grid’s flexbox architecture.</b> Flexbox means we have options for changing individual columns and modifying groups of columns at the row level. You choose how columns grow, shrink, or otherwise change.",
 				}),
 				new $.li({
-					elem: "<b>When building grid layouts, all content goes in columnew $.</b> The hierarchy of Bootstrap’s grid goes from container to row to column to your content. On rare occasions, you may combine content and column, but be aware there can be unintended consequences.",
+					elem: "<b>When building grid layouts, all content goes in column</b> The hierarchy of Bootstrap’s grid goes from container to row to column to your content. On rare occasions, you may combine content and column, but be aware there can be unintended consequences.",
 				}),
 				new $.li({
 					elem: "<b>Bootstrap includes predefined classes for creating fast, responsive layouts.</b> With six breakpoints and a dozen columns at each grid tier, we have dozens of classes already built for you to create your desired layouts. This can be disabled via Sass if you wish.",
@@ -35,7 +35,7 @@ export default [
 
 	{
 		title: "Alignment",
-		msg: "Use flexbox alignment utilities to vertically and horizontally align columnew $.",
+		msg: "Use flexbox alignment utilities to vertically and horizontally align column",
 	},
 
 	{
@@ -132,7 +132,7 @@ export default [
 	},
 
 	{
-		msg: "You may also apply this break at specific breakpoints with our responsive display utilities.",
+		msg: "You may also apply this break at specific breakpoints with Bootstrap responsive display utilities.",
 		viewclass: "cl-highlight-col",
 		code: function () {
 			return new $.div(
@@ -170,12 +170,12 @@ export default [
 
 	{
 		title: "Offsetting columns",
-		msg: "You can offset grid columns in two ways: our responsive {{.offset-}} grid classes and our margin utilities. Grid classes are sized to match columns while margins are more useful for quick layouts where the width of the offset is variable.",
+		msg: "You can offset grid columns in two ways: Bootstrap responsive {{.offset-}} grid classes and Bootstrap margin utilities. Grid classes are sized to match columns while margins are more useful for quick layouts where the width of the offset is variable.",
 	},
 
 	{
 		title: "Offset classes",
-		msg: "Move columns to the right using {{.offset-md-*}} classes. These classes increase the left margin of a column by {{*}} columnew $. For example, {{.offset-md-4}} moves {{.col-md-4}} over four columnew $.",
+		msg: "Move columns to the right using {{.offset-md-*}} classes. These classes increase the left margin of a column by {{*}} column For example, {{.offset-md-4}} moves {{.col-md-4}} over four column",
 		viewclass: "cl-highlight-col",
 		code: function () {
 			return new $.div("container", [

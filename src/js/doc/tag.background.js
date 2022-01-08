@@ -33,7 +33,7 @@ export default [
 				return new $.tag({
 					tag: "div",
 					color: i,
-					textcolor: core.getTextColorBaseOnColor(i),
+					textcolor: $.core.getTextColorBaseOnColor(i),
 					padding: 3,
 					elem: `Example element with <b>color: ${i}</b>`,
 				});
@@ -66,7 +66,7 @@ export default [
 					tag: "div",
 					color: i,
 					gradient: true,
-					textcolor: core.getTextColorBaseOnColor(i),
+					textcolor: $.core.getTextColorBaseOnColor(i),
 					padding: 3,
 					elem: `Example element with <b>color: ${i}</b>`,
 				});

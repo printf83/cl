@@ -5,7 +5,7 @@ import $ from "../component.js";
 export default [
 	{
 		title: "Checks & radios",
-		msg: "Create consistent cross-browser and cross-device checkboxes and radios with our completely rewritten checks component.",
+		msg: "Create consistent cross-browser and cross-device checkboxes and radios with Bootstrap completely rewritten checks component.",
 		anchor: false,
 	},
 

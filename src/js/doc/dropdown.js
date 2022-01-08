@@ -155,7 +155,7 @@ export default [
 		dark: true,
 		sample: { "sample.dropdownitem": sample.dropdownitem },
 		code: function () {
-			var id = new $.$.core.UUID();
+			var id = new $.core.UUID();
 			return new $.navbar.container({
 				expand: "lg",
 				color: "dark",

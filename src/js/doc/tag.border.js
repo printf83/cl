@@ -46,7 +46,7 @@ export default [
 
 	{
 		title: "Border color",
-		msg: "Change the border color using {{bordercolor}} property on our theme colors.",
+		msg: "Change the border color using {{bordercolor}} property on Bootstrap theme colors.",
 		container: sample.stackcontainer,
 		viewclass: "cl-highlight-box",
 		code: function () {

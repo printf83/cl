@@ -5,7 +5,7 @@ import $ from "../component.js";
 export default [
 	{
 		title: "Badges",
-		msg: "Documentation and examples for badges, our small count and labeling component.",
+		msg: "Documentation and examples for badges, Bootstrap small count and labeling component.",
 		anchor: false,
 	},
 

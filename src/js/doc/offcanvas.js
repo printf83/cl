@@ -5,7 +5,7 @@ import $ from "../component.js";
 export default [
 	{
 		title: "Offcanvas",
-		msg: "Build hidden sidebars into your project for navigation, shopping carts, and more with a few classes and our JavaScript plugin.",
+		msg: "Build hidden sidebars into your project for navigation, shopping carts, and more with a few classes and Bootstrap JavaScript plugin.",
 		anchor: false,
 	},
 

@@ -47,7 +47,7 @@ export default [
 				],
 			}),
 			"The table below illustrates how each container’s {{max-width}} compares to the original {{.container}} and {{.container-fluid}} across each breakpoint.",
-			"See them in action and compare them in our <a href='https://getbootstrap.com/docs/5.1/examples/grid/#containers'>Grid example</a>.",
+			"See them in action and compare them in Bootstrap <a href='https://getbootstrap.com/docs/5.1/examples/grid/#containers'>Grid example</a>.",
 		],
 	},
 

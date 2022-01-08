@@ -5,7 +5,7 @@ import $ from "../component.js";
 export default [
 	{
 		title: "Collapse",
-		msg: "Toggle the visibility of content across your project with a few classes and our JavaScript pluginew $.",
+		msg: "Toggle the visibility of content across your project with a few classes and Bootstrap JavaScript pluginew $.",
 		anchor: false,
 	},
 	{

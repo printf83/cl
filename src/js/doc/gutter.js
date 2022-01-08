@@ -16,7 +16,7 @@ export default [
 					elem: "<b>Gutters are the gaps between column content, created by horizontal <code>padding</code>.</b> We set <code>padding-right</code> and <code>padding-left</code> on each column, and use negative margin to offset that at the start and end of each row to align content.",
 				}),
 				new $.li({
-					elem: "<b>Gutters start at <code>1.5rem </code>(<code>24px</code>) wide.</b> This allows us to match our grid to the <a href='https://getbootstrap.com/docs/5.0/utilities/spacing/'>padding and margin spacers</a> scale.",
+					elem: "<b>Gutters start at <code>1.5rem </code>(<code>24px</code>) wide.</b> This allows us to match Bootstrap grid to the <a href='https://getbootstrap.com/docs/5.0/utilities/spacing/'>padding and margin spacers</a> scale.",
 				}),
 				new $.li({
 					elem: "<b>Gutters can be responsively adjusted.</b> Use breakpoint-specific gutter classes to modify horizontal gutters, vertical gutters, and all gutters.",
@@ -100,7 +100,7 @@ export default [
 	{
 		title: "No gutters",
 		msg: [
-			"The gutters between columns in our predefined grid classes can be removed with {{.g-0}}. This removes the negative {{margins}} from {{.row}} and the horizontal {{padding}} from all immediate children columnew $.",
+			"The gutters between columns in Bootstrap predefined grid classes can be removed with {{.g-0}}. This removes the negative {{margins}} from {{.row}} and the horizontal {{padding}} from all immediate children column",
 			"<b>Need an edge-to-edge design?</b> Drop the parent {{.container}} or {{.container-fluid.}}",
 			"In practice, here’s how it looks. Note you can continue to use this with all other predefined grid classes (including column widths, responsive tiers, reorders, and more).",
 		],

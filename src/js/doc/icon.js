@@ -11,7 +11,7 @@ export default [
 
 	{
 		msg: [
-			"While Bootstrap doesn’t include an icon set by default, we do have our own comprehensive icon library called Bootstrap Iconew $. Feel free to use them or any other icon set in your project. We’ve included details for Bootstrap Icons and other preferred icon sets below.",
+			"While Bootstrap doesn’t include an icon set by default, we do have Bootstrap own comprehensive icon library called Bootstrap Iconew $. Feel free to use them or any other icon set in your project. We’ve included details for Bootstrap Icons and other preferred icon sets below.",
 			"While most icon sets include multiple file formats, we prefer SVG implementations for their improved accessibility and vector support.",
 		],
 	},

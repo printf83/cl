@@ -329,7 +329,7 @@ export default [
 
 	{
 		title: "Using utilities",
-		msg: "Use our handful of available sizing utilities to quickly set a card’s width.",
+		msg: "Use Bootstrap handful of available sizing utilities to quickly set a card’s width.",
 		code: function () {
 			return [
 				new $.card.container({

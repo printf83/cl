@@ -4,7 +4,7 @@ import $ from "../component.js";
 export default [
 	{
 		title: "Range",
-		msg: "Use our custom range inputs for consistent cross-browser styling and built-in customization.",
+		msg: "Use Bootstrap custom range inputs for consistent cross-browser styling and built-in customization.",
 		anchor: false,
 	},
 

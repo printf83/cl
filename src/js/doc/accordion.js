@@ -5,7 +5,7 @@ import $ from "../component.js";
 export default [
 	{
 		title: "Accordion",
-		msg: "Build vertically collapsing accordions in combination with our Collapse JavaScript plugin.",
+		msg: "Build vertically collapsing accordions in combination with Bootstrap Collapse JavaScript plugin.",
 		anchor: false,
 	},
 	{

@@ -89,7 +89,7 @@ export default [
 
 	{
 		title: "Gap",
-		msg: "When using {{display:grid}}, you can make use of {{gap}} property on the parent grid container. This can save on having to add margin utilities to individual grid items (children of a {{display:grid}} container). Gap utilities are responsive by default, and are generated via our utilities API, based on the {{$spacers}} Sass map.",
+		msg: "When using {{display:grid}}, you can make use of {{gap}} property on the parent grid container. This can save on having to add margin utilities to individual grid items (children of a {{display:grid}} container). Gap utilities are responsive by default, and are generated via Bootstrap utilities API, based on the {{$spacers}} Sass map.",
 		viewclass: "cl-highlight-grid-div",
 		code: function () {
 			return new $.tag({

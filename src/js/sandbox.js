@@ -4,7 +4,7 @@ import "../css/animation.css";
 
 import $ from "./component.js";
 
-core.documentReady(() => {
+$.core.documentReady(() => {
 	//topbar
 	$.cl.replaceChild(document.getElementById("root"), new $.div("Hello Sandbox"));
 	new $.query({}, [

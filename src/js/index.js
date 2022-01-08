@@ -409,6 +409,8 @@ function beautifyjs(str) {
 		brace_style: "collapse,preserve-inline",
 	};
 
+	str = str.replace(/v.Z./g, "$.");
+
 	return js_beautify(str);
 }
 
