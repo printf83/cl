@@ -1,7 +1,6 @@
+"use strict";
 import { tagprop } from "./sample.js";
-import span from "../base/span.js";
-import div from "../base/div.js";
-import * as doc_core from "./core.js";
+import $ from "../component.js";
 
 export default [
 	{
@@ -12,7 +11,7 @@ export default [
 
 	{
 		msg: [
-			"Shortcut for {{new tag({tag:'span'})}}",
+			"Shortcut for {{new $.tag({tag:'span'})}}",
 			"This component is extended from {{tag}} component, so any property on tag component, will also work on this component.",
 			"Property inherits from tag component:",
 			tagprop(),
@@ -22,10 +21,10 @@ export default [
 	{
 		title: "Example",
 		code: function () {
-			return new div({
+			return new $.div({
 				elem: [
 					"This is ",
-					new span({
+					new $.span({
 						attr: {
 							"data-test": "test",
 						},
@@ -40,12 +39,12 @@ export default [
 	{
 		title: "Easy option",
 		msg: "This component also supported easy option.",
-		container: doc_core.formcontainer,
+		container: $.container.form,
 		code: function () {
 			return [
-				new span({ class: "classname", elem: "Using elem property" }),
-				new span("classname", "Direct class and elem property"),
-				new span("Direct elem property"),
+				new $.span({ class: "classname", elem: "Using elem property" }),
+				new $.span("classname", "Direct class and elem property"),
+				new $.span("Direct elem property"),
 			];
 		},
 	},

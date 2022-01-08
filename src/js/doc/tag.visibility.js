@@ -1,5 +1,5 @@
-import tag from "../base/tag.js";
-import * as alert from "../base/alert.js";
+"use strict";
+import $ from "../component.js";
 
 export default [
 	{
@@ -11,7 +11,7 @@ export default [
 	{
 		msg: [
 			"Set the {{visibility}} of elements with our {{visible}} property. These property do not modify the {{display}} value at all and do not affect layout – {{visible:false}} elements still take up space in the page.",
-			new alert.container({
+			new $.alert.container({
 				color: "warning",
 				elem: "Elements with the <code>visible:false</code> property will be hidden <i>both</i> visually and for assistive technology/screen reader users.",
 			}),
@@ -19,7 +19,7 @@ export default [
 		],
 		code: function () {
 			return [null, false, true].map(function (i) {
-				return new tag({ tag: "div", visible: i, elem: `Example element with <code>visible:${i}</code>.` });
+				return new $.tag({ tag: "div", visible: i, elem: `Example element with <code>visible:${i}</code>.` });
 			});
 		},
 	},

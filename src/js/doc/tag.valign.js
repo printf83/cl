@@ -1,5 +1,5 @@
-import tag from "../base/tag.js";
-import * as table from "../base/table.js";
+"use strict";
+import $ from "../component.js";
 
 export default [
 	{
@@ -17,7 +17,7 @@ export default [
 		],
 		code: function () {
 			return ["baseline", "top", "middle", "bottom", "text-top", "text-bottom"].map(function (i) {
-				return new tag({ tag: "span", valign: i, elem: ` ${i} ` });
+				return new $.tag({ tag: "span", valign: i, elem: ` ${i} ` });
 			});
 		},
 	},
@@ -25,13 +25,13 @@ export default [
 	{
 		msg: "With table cell",
 		code: function () {
-			return new table.container({
+			return new $.table.container({
 				style: { height: "8rem" },
 				border: false,
-				elem: new table.tbody({
-					elem: new table.tr({
+				elem: new $.table.tbody({
+					elem: new $.table.tr({
 						elem: ["baseline", "top", "middle", "bottom", "text-top", "text-bottom"].map(function (i) {
-							return new table.td({ valign: i, elem: i });
+							return new $.table.td({ valign: i, elem: i });
 						}),
 					}),
 				}),

@@ -1,8 +1,6 @@
 "use strict";
-import * as doc_core from "./core.js";
 import * as sample from "./sample.js";
-import button from "../base/button.js";
-import offcanvas from "../base/offcanvas.js";
+import $ from "../component.js";
 
 export default [
 	{
@@ -15,11 +13,11 @@ export default [
 		title: "Offcanvas",
 		sample: { "sample.offcanvasbody": sample.offcanvasbody },
 		code: function () {
-			return new button({
+			return new $.button({
 				label: "Show offcanvas",
 				color: "primary",
 				onclick: function () {
-					new offcanvas({
+					new $.offcanvas({
 						close: true,
 						backdrop: true,
 						color: "light",
@@ -39,11 +37,11 @@ export default [
 		title: "Top",
 		sample: { "sample.offcanvasbody": sample.offcanvasbody },
 		code: function () {
-			return new button({
+			return new $.button({
 				label: "Show top offcanvas",
 				color: "primary",
 				onclick: function () {
-					new offcanvas({
+					new $.offcanvas({
 						close: true,
 						backdrop: true,
 						placement: "top",
@@ -61,11 +59,11 @@ export default [
 		label: "Show bottom offcanvas",
 		sample: { "sample.offcanvasbody": sample.offcanvasbody },
 		code: function () {
-			return new button({
+			return new $.button({
 				label: "Show bottom offcanvas",
 				color: "primary",
 				onclick: function () {
-					new offcanvas({
+					new $.offcanvas({
 						close: true,
 						backdrop: true,
 						placement: "bottom",
@@ -83,11 +81,11 @@ export default [
 		label: "Show end offcanvas",
 		sample: { "sample.offcanvasbody": sample.offcanvasbody },
 		code: function () {
-			return new button({
+			return new $.button({
 				label: "Show end offcanvas",
 				color: "primary",
 				onclick: function () {
-					new offcanvas({
+					new $.offcanvas({
 						close: true,
 						backdrop: true,
 						placement: "end",
@@ -102,15 +100,15 @@ export default [
 
 	{
 		title: "Backdrop",
-		container: doc_core.stackcontainer,
+		container: $.container.stack,
 		sample: { "sample.offcanvasbody": sample.offcanvasbody },
 		code: function () {
 			return [
-				new button({
+				new $.button({
 					label: "Enable body scrolling",
 					color: "primary",
 					onclick: function () {
-						new offcanvas({
+						new $.offcanvas({
 							close: true,
 							scroll: true,
 							backdrop: false,
@@ -121,11 +119,11 @@ export default [
 					},
 				}),
 
-				new button({
+				new $.button({
 					label: "Enable backdrop",
 					color: "primary",
 					onclick: function () {
-						new offcanvas({
+						new $.offcanvas({
 							close: true,
 							scroll: false,
 							backdrop: true,
@@ -136,11 +134,11 @@ export default [
 					},
 				}),
 
-				new button({
+				new $.button({
 					label: "Enable both scrolling & backdrop",
 					color: "primary",
 					onclick: function () {
-						new offcanvas({
+						new $.offcanvas({
 							close: true,
 							backdrop: true,
 							scroll: true,

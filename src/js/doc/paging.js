@@ -1,7 +1,5 @@
 "use strict";
-import paging from "../base/paging.js";
-import icon from "../base/icon.js";
-import toast from "../base/toast.js";
+import $ from "../component.js";
 
 export default [
 	{
@@ -13,14 +11,14 @@ export default [
 	{
 		title: "Example",
 		code: function () {
-			return new paging({
+			return new $.paging({
 				limit: 10, // limit record in one page
 				skip: 20, // record number to show
 				total: 1260, // total record
 				max: 3, // max number show in control
 				onchange: function (event) {
 					//function called when skip change
-					new toast("i", `Skip changed to ${event.detail.skip}`).show();
+					new $.toast("i", `Skip changed to ${event.detail.skip}`).show();
 				},
 			});
 		},
@@ -29,13 +27,13 @@ export default [
 	{
 		title: "Show 5 button ",
 		code: function () {
-			return new paging({
+			return new $.paging({
 				limit: 10,
 				skip: 60,
 				total: 1260,
 				max: 5,
 				onchange: function (event) {
-					new toast("i", `Skip changed to ${event.detail.skip}`).show();
+					new $.toast("i", `Skip changed to ${event.detail.skip}`).show();
 				},
 			});
 		},
@@ -44,17 +42,17 @@ export default [
 	{
 		title: "Custom icon",
 		code: function () {
-			return new paging({
+			return new $.paging({
 				limit: 10,
 				skip: 60,
 				total: 1260,
 				max: 3,
 				labelfirst: "First",
 				labellast: "Last",
-				labelnext: new icon("arrow-right"),
-				labelprev: new icon("arrow-left"),
+				labelnext: new $.icon("arrow-right"),
+				labelprev: new $.icon("arrow-left"),
 				onchange: function (event) {
-					new toast("i", `Skip changed to ${event.detail.skip}`).show();
+					new $.toast("i", `Skip changed to ${event.detail.skip}`).show();
 				},
 			});
 		},
@@ -63,14 +61,14 @@ export default [
 	{
 		title: "Hide first and last control",
 		code: function () {
-			return new paging({
+			return new $.paging({
 				limit: 10,
 				skip: 60,
 				total: 1260,
 				max: 3,
 				firstlast: false,
 				onchange: function (event) {
-					new toast("i", `Skip changed to ${event.detail.skip}`).show();
+					new $.toast("i", `Skip changed to ${event.detail.skip}`).show();
 				},
 			});
 		},
@@ -79,14 +77,14 @@ export default [
 	{
 		title: "Hide next and prev control",
 		code: function () {
-			return new paging({
+			return new $.paging({
 				limit: 10,
 				skip: 60,
 				total: 1260,
 				max: 3,
 				nextprev: false,
 				onchange: function (event) {
-					new toast("i", `Skip changed to ${event.detail.skip}`).show();
+					new $.toast("i", `Skip changed to ${event.detail.skip}`).show();
 				},
 			});
 		},
@@ -99,14 +97,14 @@ export default [
 	{
 		title: "Large",
 		code: function () {
-			return new paging({
+			return new $.paging({
 				limit: 10,
 				skip: 60,
 				total: 1260,
 				max: 3,
 				weight: "lg",
 				onchange: function (event) {
-					new toast("i", `Skip changed to ${event.detail.skip}`).show();
+					new $.toast("i", `Skip changed to ${event.detail.skip}`).show();
 				},
 			});
 		},
@@ -115,14 +113,14 @@ export default [
 	{
 		title: "Small",
 		code: function () {
-			return new paging({
+			return new $.paging({
 				limit: 10,
 				skip: 60,
 				total: 1260,
 				max: 3,
 				weight: "sm",
 				onchange: function (event) {
-					new toast("i", `Skip changed to ${event.detail.skip}`).show();
+					new $.toast("i", `Skip changed to ${event.detail.skip}`).show();
 				},
 			});
 		},
@@ -135,14 +133,14 @@ export default [
 	{
 		title: "Start",
 		code: function () {
-			return new paging({
+			return new $.paging({
 				limit: 10,
 				skip: 60,
 				total: 1260,
 				max: 3,
 				align: "start",
 				onchange: function (event) {
-					new toast("i", `Skip changed to ${event.detail.skip}`).show();
+					new $.toast("i", `Skip changed to ${event.detail.skip}`).show();
 				},
 			});
 		},
@@ -151,14 +149,14 @@ export default [
 	{
 		title: "End",
 		code: function () {
-			return new paging({
+			return new $.paging({
 				limit: 10,
 				skip: 60,
 				total: 1260,
 				max: 3,
 				align: "end",
 				onchange: function (event) {
-					new toast("i", `Skip changed to ${event.detail.skip}`).show();
+					new $.toast("i", `Skip changed to ${event.detail.skip}`).show();
 				},
 			});
 		},

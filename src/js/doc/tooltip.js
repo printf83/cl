@@ -1,8 +1,5 @@
 "use strict";
-import * as doc_core from "./core.js";
-import tooltip from "../base/tooltip.js";
-import button from "../base/button.js";
-import span from "../base/span.js";
+import $ from "../component.js";
 
 export default [
 	{
@@ -13,54 +10,54 @@ export default [
 
 	{
 		title: "Four direction",
-		container: doc_core.stackcontainer,
+		container: $.container.stack,
 		code: function () {
 			return [
-				new tooltip({
+				new $.tooltip({
 					type: "tooltip",
 					msg: "Top tooltip",
 					placement: "top",
-					elem: new button({
+					elem: new $.button({
 						label: "Tooltip on top",
 						color: "secondary",
 					}),
 				}),
 
-				new tooltip({
+				new $.tooltip({
 					type: "tooltip",
 					msg: "Left tooltip",
 					placement: "left",
-					elem: new button({
+					elem: new $.button({
 						label: "Tooltip on left",
 						color: "secondary",
 					}),
 				}),
 
-				new tooltip({
+				new $.tooltip({
 					type: "tooltip",
 					msg: "Right tooltip",
 					placement: "right",
-					elem: new button({
+					elem: new $.button({
 						label: "Tooltip on right",
 						color: "secondary",
 					}),
 				}),
 
-				new tooltip({
+				new $.tooltip({
 					type: "tooltip",
 					msg: "Bottom tooltip",
 					placement: "bottom",
-					elem: new button({
+					elem: new $.button({
 						label: "Tooltip on bottom",
 						color: "secondary",
 					}),
 				}),
 
-				new tooltip({
+				new $.tooltip({
 					type: "tooltip",
 					msg: "<em>Tooltip</em> <u>with</u> <b>HTML</b>",
 					placement: "right",
-					elem: new button({
+					elem: new $.button({
 						label: "Tooltip with HTML",
 						color: "secondary",
 					}),
@@ -75,14 +72,14 @@ export default [
 			"Elements with the disabled attribute aren’t interactive, meaning users cannot hover or click them to trigger a tooltip (or popover). As a workaround, you’ll want to trigger the popover from a wrapper {{div}} or {{span}}, ideally made keyboard-focusable using {{tabindex='0'}}.",
 		],
 		code: function () {
-			return new tooltip({
+			return new $.tooltip({
 				type: "tooltip",
 				msg: "And here's some amazing content. It's very engaging. Right?",
 				placement: "right",
-				elem: new span({
+				elem: new $.span({
 					display: "inline-block",
 					attr: { tabindex: "0" },
-					elem: new button({
+					elem: new $.button({
 						label: "Dismissible tooltip",
 						color: "primary",
 						disabled: true,

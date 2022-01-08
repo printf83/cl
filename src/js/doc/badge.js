@@ -1,9 +1,5 @@
 "use strict";
-import * as core from "../base/core.js";
-import * as doc_core from "./core.js";
-import badge from "../base/badge.js";
-import h from "../base/h.js";
-import button from "../base/button.js";
+import $ from "../component.js";
 
 export default [
 	{
@@ -16,9 +12,9 @@ export default [
 		title: "Example",
 		code: function () {
 			return [1, 2, 3, 4, 5, 6].map(function (i) {
-				return new h({
+				return new $.h({
 					level: i,
-					elem: [`Example heading #${i}`, new badge({ label: "New", marginstart: 3 })],
+					elem: [`Example heading #${i}`, new $.badge({ label: "New", marginstart: 3 })],
 				});
 			});
 		},
@@ -27,7 +23,7 @@ export default [
 	{
 		title: "Buttons",
 		code: function () {
-			return new button({
+			return new $.button({
 				label: "Notifications",
 				color: "primary",
 				badge: { label: "4", marginstart: 3 },
@@ -38,7 +34,7 @@ export default [
 	{
 		title: "Positioned",
 		code: function () {
-			return new button({
+			return new $.button({
 				label: "Inbox",
 				color: "primary",
 				badge: {
@@ -54,14 +50,14 @@ export default [
 	{
 		title: "Notification",
 		code: function () {
-			return new button({
+			return new $.button({
 				label: "Profile",
 				color: "primary",
 				badge: {
 					border: "light",
 					color: "danger",
 					notification: true,
-					asst: "New Message",
+					asst: "new $.Message",
 				},
 			});
 		},
@@ -69,20 +65,20 @@ export default [
 
 	{
 		title: "Background color",
-		container: doc_core.stackcontainer,
+		container: $.container.stack,
 		code: function () {
 			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map(function (i) {
-				return new badge({ label: core.capitalize(i), color: i });
+				return new $.badge({ label: $.core.capitalize(i), color: i });
 			});
 		},
 	},
 
 	{
 		title: "Pill badge",
-		container: doc_core.stackcontainer,
+		container: $.container.stack,
 		code: function () {
 			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map(function (i) {
-				return new badge({ pill: true, label: core.capitalize(i), color: i });
+				return new $.badge({ pill: true, label: $.core.capitalize(i), color: i });
 			});
 		},
 	},

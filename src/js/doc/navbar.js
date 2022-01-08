@@ -1,13 +1,6 @@
 "use strict";
-import * as core from "../base/core.js";
-import * as doc_core from "./core.js";
 import * as sample from "./sample.js";
-import div from "../base/div.js";
-import button from "../base/button.js";
-import input from "../base/input.js";
-import * as navbar from "../base/navbar.js";
-import h from "../base/h.js";
-import span from "../base/span.js";
+import $ from "../component.js";
 
 export default [
 	{
@@ -20,8 +13,8 @@ export default [
 		title: "Supported content",
 		sample: { "sample.navbaritem": sample.navbaritem },
 		code: function () {
-			var id = core.UUID();
-			return new navbar.container({
+			var id = $.core.UUID();
+			return new $.navbar.container({
 				expand: "lg",
 				color: "light",
 				elem: sample.navbaritem(id),
@@ -35,26 +28,26 @@ export default [
 
 	{
 		title: "Text",
-		msg: "Add your text within an element with the {{new navbar.brand}}.",
-		container: doc_core.formcontainer,
+		msg: "Add your text within an element with the {{new $.navbar.brand}}.",
+		container: $.container.form,
 		code: function () {
 			return [
-				new navbar.container({
+				new $.navbar.container({
 					expand: "lg",
 					color: "light",
 					elem: [
-						new navbar.brand({
+						new $.navbar.brand({
 							label: "Navbar",
 							href: "#",
 						}),
 					],
 				}),
 
-				new navbar.container({
+				new $.navbar.container({
 					expand: "lg",
 					color: "light",
 					elem: [
-						new navbar.brand({
+						new $.navbar.brand({
 							label: "Navbar",
 						}),
 					],
@@ -66,11 +59,11 @@ export default [
 	{
 		title: "Icon",
 		code: function () {
-			return new navbar.container({
+			return new $.navbar.container({
 				expand: "lg",
 				color: "light",
 				elem: [
-					new navbar.brand({
+					new $.navbar.brand({
 						icon: { icon: "fire", color: "danger" },
 						href: "#",
 					}),
@@ -82,11 +75,11 @@ export default [
 	{
 		title: "Icon and text",
 		code: function () {
-			return new navbar.container({
+			return new $.navbar.container({
 				expand: "lg",
 				color: "light",
 				elem: [
-					new navbar.brand({
+					new $.navbar.brand({
 						icon: { icon: "fire", color: "danger" },
 						label: "Navbar",
 						href: "#",
@@ -103,40 +96,40 @@ export default [
 	{
 		title: "Nav item",
 		code: function () {
-			var id = core.UUID();
-			return new navbar.container({
+			var id = $.core.UUID();
+			return new $.navbar.container({
 				expand: "lg",
 				color: "light",
 				elem: [
-					new navbar.toggle({
-						target: `#${id}`, //this id must same with new navbar.collapsecontainer id
+					new $.navbar.toggle({
+						target: `#${id}`, //this id must same with new $.navbar.collapsecontainer id
 						toggle: "collapse",
 					}),
 
-					new navbar.brand({
+					new $.navbar.brand({
 						label: "Navbar",
 					}),
 
-					new navbar.collapsecontainer({
-						id: id, //this id must same with new navbar.toggle id
+					new $.navbar.collapsecontainer({
+						id: id, //this id must same with new $.navbar.toggle id
 						elem: [
-							new navbar.itemcontainer({
+							new $.navbar.itemcontainer({
 								parenttype: "collapse",
 								elem: [
-									new navbar.item({
+									new $.navbar.item({
 										label: "Home",
 										href: "#",
 										active: true,
 									}),
-									new navbar.item({
+									new $.navbar.item({
 										label: "Features",
 										href: "#",
 									}),
-									new navbar.item({
+									new $.navbar.item({
 										label: "Pricing",
 										href: "#",
 									}),
-									new navbar.item({
+									new $.navbar.item({
 										label: "Disabled",
 										href: "#",
 										disabled: true,
@@ -154,40 +147,40 @@ export default [
 		title: "Nav item dropdown",
 		sample: { "sample.dropdownitem": sample.dropdownitem },
 		code: function () {
-			var id = core.UUID();
-			return new navbar.container({
+			var id = $.core.UUID();
+			return new $.navbar.container({
 				expand: "lg",
 				color: "light",
 				elem: [
-					new navbar.toggle({
-						target: `#${id}`, //this id must same with new navbar.collapsecontainer id
+					new $.navbar.toggle({
+						target: `#${id}`, //this id must same with new $.navbar.collapsecontainer id
 						toggle: "collapse",
 					}),
 
-					new navbar.brand({
+					new $.navbar.brand({
 						label: "Navbar",
 					}),
 
-					new navbar.collapsecontainer({
-						id: id, //this id must same with new navbar.toggle id
+					new $.navbar.collapsecontainer({
+						id: id, //this id must same with new $.navbar.toggle id
 						elem: [
-							new navbar.itemcontainer({
+							new $.navbar.itemcontainer({
 								parenttype: "collapse",
 								elem: [
-									new navbar.item({
+									new $.navbar.item({
 										label: "Home",
 										href: "#",
 										active: true,
 									}),
-									new navbar.item({
+									new $.navbar.item({
 										label: "Features",
 										href: "#",
 									}),
-									new navbar.item({
+									new $.navbar.item({
 										label: "Pricing",
 										option: sample.dropdownitem(),
 									}),
-									new navbar.item({
+									new $.navbar.item({
 										label: "Disabled",
 										href: "#",
 										disabled: true,
@@ -204,19 +197,19 @@ export default [
 	{
 		title: "Nav with form",
 		code: function () {
-			return new navbar.container({
+			return new $.navbar.container({
 				expand: "lg",
 				color: "light",
 				elem: [
-					new navbar.formcontainer({
+					new $.navbar.formcontainer({
 						elem: [
-							new input({
+							new $.input({
 								type: "search",
 								placeholder: "Search",
 								hiddenlabel: "Search",
 								class: "me-2",
 							}),
-							new button({ label: "Search", color: "success", outline: true }),
+							new $.button({ label: "Search", color: "success", outline: true }),
 						],
 					}),
 				],
@@ -227,23 +220,23 @@ export default [
 	{
 		title: "Nav with form and header",
 		code: function () {
-			return new navbar.container({
+			return new $.navbar.container({
 				expand: "lg",
 				color: "light",
 				elem: [
-					new navbar.brand({
+					new $.navbar.brand({
 						label: "Navbar",
 					}),
 
-					new navbar.formcontainer({
+					new $.navbar.formcontainer({
 						elem: [
-							new input({
+							new $.input({
 								type: "search",
 								placeholder: "Search",
 								hiddenlabel: "Search",
 								class: "me-2",
 							}),
-							new button({ label: "Search", color: "success", outline: true }),
+							new $.button({ label: "Search", color: "success", outline: true }),
 						],
 					}),
 				],
@@ -254,11 +247,11 @@ export default [
 	{
 		title: "Nav with input group",
 		code: function () {
-			return new navbar.container({
+			return new $.navbar.container({
 				expand: "lg",
 				color: "light",
 				elem: [
-					new input({
+					new $.input({
 						type: "text",
 						before: "@",
 						placeholder: "Username",
@@ -271,18 +264,18 @@ export default [
 	{
 		title: "Nav with button",
 		code: function () {
-			return new navbar.container({
+			return new $.navbar.container({
 				expand: "lg",
 				color: "light",
 				containerclass: "justify-content-start gap-2",
 				elem: [
-					new button({
+					new $.button({
 						label: "Main button",
 						color: "success",
 						outline: true,
 						weight: "lg",
 					}),
-					new button({
+					new $.button({
 						label: "Small button",
 						color: "secondary",
 						outline: true,
@@ -296,10 +289,10 @@ export default [
 	{
 		title: "Nav with text",
 		code: function () {
-			return new navbar.container({
+			return new $.navbar.container({
 				expand: "lg",
 				color: "light",
-				elem: new navbar.text("Navbar text with an inline element"),
+				elem: new $.navbar.text("Navbar text with an inline element"),
 			});
 		},
 	},
@@ -307,42 +300,42 @@ export default [
 	{
 		title: "Mix and match",
 		code: function () {
-			var id = core.UUID();
-			return new navbar.container({
+			var id = $.core.UUID();
+			return new $.navbar.container({
 				expand: "lg",
 				color: "light",
 				elem: [
-					new navbar.brand({
+					new $.navbar.brand({
 						label: "Navbar w/ text",
 					}),
 
-					new navbar.toggle({
-						target: `#${id}`, //this id must same with new navbar.collapsecontainer id
+					new $.navbar.toggle({
+						target: `#${id}`, //this id must same with new $.navbar.collapsecontainer id
 						toggle: "collapse",
 					}),
 
-					new navbar.collapsecontainer({
-						id: id, //this id must same with new navbar.toggle id
+					new $.navbar.collapsecontainer({
+						id: id, //this id must same with new $.navbar.toggle id
 						elem: [
-							new navbar.itemcontainer({
+							new $.navbar.itemcontainer({
 								parenttype: "collapse",
 								elem: [
-									new navbar.item({
+									new $.navbar.item({
 										label: "Home",
 										href: "#",
 										active: true,
 									}),
-									new navbar.item({
+									new $.navbar.item({
 										label: "Features",
 										href: "#",
 									}),
-									new navbar.item({
+									new $.navbar.item({
 										label: "Pricing",
 										href: "#",
 									}),
 								],
 							}),
-							new navbar.text("Navbar text with an inline element"),
+							new $.navbar.text("Navbar text with an inline element"),
 						],
 					}),
 				],
@@ -354,24 +347,24 @@ export default [
 		title: "Color schemes",
 		sample: { "sample.navbaritem": sample.navbaritem },
 		code: function () {
-			var id1 = core.UUID();
-			var id2 = core.UUID();
-			var id3 = core.UUID();
+			var id1 = $.core.UUID();
+			var id2 = $.core.UUID();
+			var id3 = $.core.UUID();
 
 			return [
-				new navbar.container({
+				new $.navbar.container({
 					expand: "lg",
 					color: "dark",
 					textcolor: "light",
 					elem: sample.navbaritem(id1),
 				}),
-				new navbar.container({
+				new $.navbar.container({
 					expand: "lg",
 					color: "primary",
 					textcolor: "light",
 					elem: sample.navbaritem(id2),
 				}),
-				new navbar.container({
+				new $.navbar.container({
 					expand: "lg",
 					style: { backgroundColor: "#e3f2fd" },
 					elem: sample.navbaritem(id3),
@@ -387,13 +380,13 @@ export default [
 	{
 		title: "Inside container",
 		code: function () {
-			return new div({
+			return new $.div({
 				class: "container",
-				elem: new navbar.container({
+				elem: new $.navbar.container({
 					expand: "lg",
 					color: "light",
 					elem: [
-						new navbar.brand({
+						new $.navbar.brand({
 							label: "Navbar",
 							href: "#",
 						}),
@@ -406,12 +399,12 @@ export default [
 	{
 		title: "Change container fluid",
 		code: function () {
-			return new navbar.container({
+			return new $.navbar.container({
 				expand: "lg",
 				color: "light",
 				containerfluid: "md",
 				elem: [
-					new navbar.brand({
+					new $.navbar.brand({
 						label: "Navbar",
 						href: "#",
 					}),
@@ -423,12 +416,12 @@ export default [
 	{
 		title: "Position",
 		code: function () {
-			return new navbar.container({
+			return new $.navbar.container({
 				expand: "lg",
 				color: "light",
 				position: null, //fixed-top|fixed-bottom|sticky-top|null
 				elem: [
-					new navbar.brand({
+					new $.navbar.brand({
 						label: "Navbar",
 						href: "#",
 					}),
@@ -440,51 +433,51 @@ export default [
 	{
 		title: "Scrolling",
 		msg: [
-			"Add {{scroll:'height'}} option to a {{new navbar.itemcontainer}} to enable vertical scrolling within the toggleable contents of a collapsed navbar. At larger viewports when the navbar is expanded, content will appear as it does in a default navbar.",
+			"Add {{scroll:'height'}} option to a {{new $.navbar.itemcontainer}} to enable vertical scrolling within the toggleable contents of a collapsed navbar. At larger viewports when the navbar is expanded, content will appear as it does in a default navbar.",
 			"Please note that this behavior comes with a potential drawback of overflow—when setting overflow-y: auto (required to scroll the content here), overflow-x is the equivalent of auto, which will crop some horizontal content.",
 			"Here’s an example navbar using {{scroll:'height'}}, with some extra margin utilities for optimum spacing.",
 		],
 		sample: { "sample.dropdownitem": sample.dropdownitem },
 		code: function () {
-			var id = core.UUID();
-			return new navbar.container({
+			var id = $.core.UUID();
+			return new $.navbar.container({
 				expand: "lg",
 				color: "light",
 				elem: [
-					new navbar.toggle({
+					new $.navbar.toggle({
 						target: `#${id}`,
 						toggle: "collapse",
 					}),
 
-					new navbar.brand({
+					new $.navbar.brand({
 						label: "Navbar",
 					}),
 
-					new navbar.collapsecontainer({
+					new $.navbar.collapsecontainer({
 						id: id,
 						elem: [
-							new navbar.itemcontainer({
+							new $.navbar.itemcontainer({
 								parenttype: "collapse",
 								scroll: "100px", //set scroll height here
 								elem: [
-									new navbar.item({ label: "Home", active: true }),
-									new navbar.item("Link"),
-									new navbar.item({
+									new $.navbar.item({ label: "Home", active: true }),
+									new $.navbar.item("Link"),
+									new $.navbar.item({
 										label: "Dropdown",
 										option: sample.dropdownitem(),
 									}),
-									new navbar.item({ label: "Disabled", disabled: true }),
+									new $.navbar.item({ label: "Disabled", disabled: true }),
 								],
 							}),
-							new navbar.formcontainer({
+							new $.navbar.formcontainer({
 								elem: [
-									new input({
+									new $.input({
 										type: "search",
 										placeholder: "Search",
 										hiddenlabel: "Search",
 										class: "me-2",
 									}),
-									new button({ label: "Search", color: "success", outline: true }),
+									new $.button({ label: "Search", color: "success", outline: true }),
 								],
 							}),
 						],
@@ -497,26 +490,26 @@ export default [
 	{
 		title: "Responsive behaviors",
 		msg: [
-			"{{new navbar.container}} can use {{new navbar.toggle}}, {{new navbar.collapsecontainer}}, and add {{expand:'sm|md|lg|xl|xxl'}} option into {{new navbar.container}} to determine when their content collapses behind a button. In combination with other option, you can easily choose when to show or hide particular elements.",
-			"For {{new navbar.container}} that never collapse, add the {{expand:''}} option on the {{new navbar.container}}. For {{new navbar.container}} that always collapse, don’t add any .navbar-expand class.",
+			"{{new $.navbar.container}} can use {{new $.navbar.toggle}}, {{new $.navbar.collapsecontainer}}, and add {{expand:'sm|md|lg|xl|xxl'}} option into {{new $.navbar.container}} to determine when their content collapses behind a button. In combination with other option, you can easily choose when to show or hide particular elements.",
+			"For {{new $.navbar.container}} that never collapse, add the {{expand:''}} option on the {{new $.navbar.container}}. For {{new $.navbar.container}} that always collapse, don’t add any .navbar-expand class.",
 		],
 		sample: { "sample.navbaritem": sample.navbaritem },
 		code: function () {
-			var id1 = core.UUID();
-			var id2 = core.UUID();
-			var id3 = core.UUID();
+			var id1 = $.core.UUID();
+			var id2 = $.core.UUID();
+			var id3 = $.core.UUID();
 			return [
-				new navbar.container({
+				new $.navbar.container({
 					expand: "lg",
 					color: "light",
 					elem: sample.navbaritem(id1, "lg"),
 				}),
-				new navbar.container({
+				new $.navbar.container({
 					expand: "",
 					color: "light",
 					elem: sample.navbaritem(id2, '""'),
 				}),
-				new navbar.container({
+				new $.navbar.container({
 					expand: null,
 					color: "light",
 					elem: sample.navbaritem(id3, "null"),
@@ -532,123 +525,123 @@ export default [
 			"With no .navbar-brand shown at the smallest breakpoint",
 		],
 		code: function () {
-			var id1 = core.UUID();
-			var id2 = core.UUID();
-			var id3 = core.UUID();
+			var id1 = $.core.UUID();
+			var id2 = $.core.UUID();
+			var id3 = $.core.UUID();
 			return [
-				new navbar.container({
+				new $.navbar.container({
 					expand: "lg",
 					color: "light",
 					elem: [
-						new navbar.toggle({
+						new $.navbar.toggle({
 							target: `#${id1}`,
 							toggle: "collapse",
 						}),
 
-						new navbar.collapsecontainer({
+						new $.navbar.collapsecontainer({
 							id: id1,
 							elem: [
-								new navbar.brand({
+								new $.navbar.brand({
 									//brand inside collapsecontainer
 									label: "Hidden brand",
 								}),
-								new navbar.itemcontainer({
+								new $.navbar.itemcontainer({
 									parenttype: "collapse",
 									elem: [
-										new navbar.item({ label: "Home", active: true }),
-										new navbar.item("Link"),
-										new navbar.item({ label: "Disabled", disabled: true }),
+										new $.navbar.item({ label: "Home", active: true }),
+										new $.navbar.item("Link"),
+										new $.navbar.item({ label: "Disabled", disabled: true }),
 									],
 								}),
-								new navbar.formcontainer({
+								new $.navbar.formcontainer({
 									elem: [
-										new input({
+										new $.input({
 											type: "search",
 											placeholder: "Search",
 											hiddenlabel: "Search",
 											class: "me-2",
 										}),
-										new button({ label: "Search", color: "success", outline: true }),
+										new $.button({ label: "Search", color: "success", outline: true }),
 									],
 								}),
 							],
 						}),
 					],
 				}),
-				new navbar.container({
+				new $.navbar.container({
 					expand: "lg",
 					color: "light",
 					elem: [
-						new navbar.brand({
+						new $.navbar.brand({
 							//brand before toggle
 							label: "Navbar",
 						}),
 
-						new navbar.toggle({
+						new $.navbar.toggle({
 							target: `#${id2}`,
 							toggle: "collapse",
 						}),
 
-						new navbar.collapsecontainer({
+						new $.navbar.collapsecontainer({
 							id: id2,
 							elem: [
-								new navbar.itemcontainer({
+								new $.navbar.itemcontainer({
 									parenttype: "collapse",
 									elem: [
-										new navbar.item({ label: "Home", active: true }),
-										new navbar.item("Link"),
-										new navbar.item({ label: "Disabled", disabled: true }),
+										new $.navbar.item({ label: "Home", active: true }),
+										new $.navbar.item("Link"),
+										new $.navbar.item({ label: "Disabled", disabled: true }),
 									],
 								}),
-								new navbar.formcontainer({
+								new $.navbar.formcontainer({
 									elem: [
-										new input({
+										new $.input({
 											type: "search",
 											placeholder: "Search",
 											hiddenlabel: "Search",
 											class: "me-2",
 										}),
-										new button({ label: "Search", color: "success", outline: true }),
+										new $.button({ label: "Search", color: "success", outline: true }),
 									],
 								}),
 							],
 						}),
 					],
 				}),
-				new navbar.container({
+				new $.navbar.container({
 					expand: "lg",
 					color: "light",
 					elem: [
-						new navbar.toggle({
+						new $.navbar.toggle({
 							target: `#${id3}`,
 							toggle: "collapse",
 						}),
 
-						new navbar.brand({
+						new $.navbar.brand({
 							//brand after toggle
 							label: "Navbar",
 						}),
 
-						new navbar.collapsecontainer({
+						new $.navbar.collapsecontainer({
 							id: id3,
 							elem: [
-								new navbar.itemcontainer({
+								new $.navbar.itemcontainer({
 									parenttype: "collapse",
 									elem: [
-										new navbar.item({ label: "Home", active: true }),
-										new navbar.item("Link"),
-										new navbar.item({ label: "Disabled", disabled: true }),
+										new $.navbar.item({ label: "Home", active: true }),
+										new $.navbar.item("Link"),
+										new $.navbar.item({ label: "Disabled", disabled: true }),
 									],
 								}),
-								new navbar.formcontainer({
+								new $.navbar.formcontainer({
 									elem: [
-										new input({
+										new $.input({
 											type: "search",
 											placeholder: "Search",
 											hiddenlabel: "Search",
 											class: "me-2",
 										}),
-										new button({ label: "Search", color: "success", outline: true }),
+										new $.button({ label: "Search", color: "success", outline: true }),
 									],
 								}),
 							],
@@ -662,26 +655,26 @@ export default [
 	{
 		title: "External content",
 		code: function () {
-			var id = core.UUID();
+			var id = $.core.UUID();
 			return [
 				//collapsecontainer outside container
-				new navbar.collapsecontainer({
+				new $.navbar.collapsecontainer({
 					id: id,
-					elem: new div("p-2", [
-						new h({ level: 5, elem: "Collapsed content" }),
-						new span("text-muted", "Toggleable via the navbar brand."),
+					elem: new $.div("p-2", [
+						new $.h({ level: 5, elem: "Collapsed content" }),
+						new $.span("text-muted", "Toggleable via the navbar brand."),
 					]),
 				}),
 
-				new navbar.container({
+				new $.navbar.container({
 					expand: null,
 					color: "light",
 					elem: [
-						new navbar.brand({
+						new $.navbar.brand({
 							label: "Navbar",
 							href: "#",
 						}),
-						new navbar.toggle({
+						new $.navbar.toggle({
 							target: `#${id}`,
 							toggle: "collapse",
 						}),

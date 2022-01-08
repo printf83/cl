@@ -1,6 +1,5 @@
-import * as core from "../base/core.js";
-import * as doc_core from "./core.js";
-import tag from "../base/tag.js";
+"use strict";
+import $ from "../component.js";
 
 export default [
 	{
@@ -14,7 +13,7 @@ export default [
 		msg: [
 			"Similar to the contextual text color classes, set the background of an element to any contextual class. Background utilities <b>do not set</b> {{color}}, so in some cases you’ll want to use {{textcolor}} property.",
 		],
-		container: doc_core.formcontainer,
+		container: $.container.form,
 		code: function () {
 			return [
 				null,
@@ -30,7 +29,7 @@ export default [
 				"white",
 				"transparent",
 			].map(function (i) {
-				return new tag({
+				return new $.tag({
 					tag: "div",
 					color: i,
 					textcolor: core.getTextColorBaseOnColor(i),
@@ -46,7 +45,7 @@ export default [
 		msg: [
 			"By setting {{gradient:true}} property, a linear gradient is added as background image to the backgrounds. This gradient starts with a semi-transparent white which fades out to the bottom.",
 		],
-		container: doc_core.formcontainer,
+		container: $.container.form,
 		code: function () {
 			return [
 				null,
@@ -62,7 +61,7 @@ export default [
 				"white",
 				"transparent",
 			].map(function (i) {
-				return new tag({
+				return new $.tag({
 					tag: "div",
 					color: i,
 					gradient: true,

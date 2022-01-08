@@ -1,15 +1,5 @@
 "use strict";
-import div from "../base/div.js";
-import a from "../base/a.js";
-import icon from "../base/icon.js";
-import * as alert from "../base/alert.js";
-import * as card from "../base/card.js";
-import code from "../base/code.js";
-import pre from "../base/pre.js";
-import pill from "../base/pill.js";
-import msg from "../base/msg.js";
-
-// import small from "../base/small.js";
+import $ from "../component.js";
 
 function beautifyjs(str) {
 	return js_beautify(str, {
@@ -23,17 +13,17 @@ function beautifyjs(str) {
 export default [
 	{
 		msg: [
-			new div("text-center display-1", document.title),
-			new div("text-center display-5 text-primary", [
-				new icon({ type: "fab", icon: "bootstrap" }),
-				new icon("swatchbook"),
-				new icon({ type: "fab", icon: "font-awesome-flag" }),
-				new icon({ type: "fab", icon: "node-js" }),
-				new icon("leaf"),
+			new $.div("text-center display-1", document.title),
+			new $.div("text-center display-5 text-primary", [
+				new $.icon({ type: "fab", icon: "bootstrap" }),
+				new $.icon("swatchbook"),
+				new $.icon({ type: "fab", icon: "font-awesome-flag" }),
+				new $.icon({ type: "fab", icon: "node-js" }),
+				new $.icon("leaf"),
 			]),
 
-			new alert.container({
-				elem: new msg({
+			new $.alert.container({
+				elem: new $.msg({
 					weight: "md",
 					icon: "!",
 					elem: "<b>Warning!</b> This framework create by <b>one developer</b> only for research on build full stack webapps only using simple framework.",
@@ -42,22 +32,22 @@ export default [
 				margintop: 5,
 			}),
 
-			new div(
+			new $.div(
 				"text-center",
 				"Build Full Stack Web Application using JS, Bootstrap, Fontawesome, NodeJS, And Mongodb using BS5 JS Builder"
 			),
 
-			new card.container({
+			new $.card.container({
 				marginy: 3,
-				elem: new card.body(
-					new code(
-						new pre({
+				elem: new $.card.body(
+					new $.code(
+						new $.pre({
 							class: "prettyprint lang-js",
 							marginbottom: 0,
 							elem: beautifyjs(`
 								cl.appendChild(dom,cltag);
 								cl.prependChild(dom,cltag);
-								cl.replaceChild(dom,cltag);
+								$.cl.replaceChild(dom,cltag);
 								cl.replaceWith(dom,cltag);
 								let htmlOutput = cl.html(cltag);
 							`),
@@ -66,17 +56,17 @@ export default [
 				),
 			}),
 
-			new div({
+			new $.div({
 				align: "center",
 				margintop: 5,
 				elem: "Example : ",
 			}),
 
-			new card.container({
+			new $.card.container({
 				marginy: 3,
-				elem: new card.body(
-					new code(
-						new pre({
+				elem: new $.card.body(
+					new $.code(
+						new $.pre({
 							class: "prettyprint lang-js",
 							marginbottom: 0,
 							elem: beautifyjs(`
@@ -87,8 +77,8 @@ export default [
 								import p from "./base/p.js";
 
 								core.documentReady(() => {
-									cl.appendChild(document.body,new button({label:'Hello World!', color:'primary'}));
-									cl.appendChild(document.body,new p('Hello World!'));
+									cl.appendChild(document.body,new $.button({label:'Hello World!', color:'primary'}));
+									cl.appendChild(document.body,new $.p('Hello World!'));
 								});
 							`),
 						})
@@ -96,14 +86,14 @@ export default [
 				),
 			}),
 
-			new div({
+			new $.div({
 				display: "flex",
 				justifycontent: "center",
 				marginbottom: 5,
 				gap: 2,
-				elem: new a({
+				elem: new $.a({
 					class: "text-decoration-none",
-					elem: new pill({ icon: { type: "fab", icon: "github" }, label: "Github" }),
+					elem: new $.pill({ icon: { type: "fab", icon: "github" }, label: "Github" }),
 					href: "https://github.com/printf83/cl",
 				}),
 			}),

@@ -1,7 +1,6 @@
 "use strict";
-import * as doc_core from "./core.js";
-import input from "../base/input.js";
-import button from "../base/button.js";
+import $ from "../component.js";
+
 export default [
 	{
 		title: "Form controls",
@@ -11,15 +10,15 @@ export default [
 
 	{
 		title: "Example",
-		container: doc_core.formcontainer,
+		container: $.container.form,
 		code: function () {
 			return [
-				new input({
+				new $.input({
 					label: "Email address",
 					type: "email",
 					placeholder: "name@example.com",
 				}),
-				new input({
+				new $.input({
 					label: "Example textarea",
 					type: "textarea",
 				}),
@@ -29,19 +28,19 @@ export default [
 
 	{
 		title: "Sizing",
-		container: doc_core.formcontainer,
+		container: $.container.form,
 		code: function () {
 			return [
-				new input({
+				new $.input({
 					weight: "lg",
 					type: "text",
 					placeholder: 'weight:"lg"',
 				}),
-				new input({
+				new $.input({
 					type: "text",
 					placeholder: "Default input",
 				}),
-				new input({
+				new $.input({
 					weight: "sm",
 					type: "text",
 					placeholder: 'weight:"sm"',
@@ -52,15 +51,15 @@ export default [
 
 	{
 		title: "Disabled",
-		container: doc_core.formcontainer,
+		container: $.container.form,
 		code: function () {
 			return [
-				new input({
+				new $.input({
 					disabled: true,
 					type: "text",
 					placeholder: "Disabled input",
 				}),
-				new input({
+				new $.input({
 					disabled: true,
 					readonly: true,
 					type: "text",
@@ -72,9 +71,9 @@ export default [
 
 	{
 		title: "Readonly",
-		container: doc_core.formcontainer,
+		container: $.container.form,
 		code: function () {
-			return new input({
+			return new $.input({
 				readonly: true,
 				type: "text",
 				placeholder: "Readonly input here...",
@@ -84,10 +83,10 @@ export default [
 
 	{
 		title: "Readonly plain text",
-		container: doc_core.formcontainer,
+		container: $.container.form,
 		code: function () {
 			return [
-				new input({
+				new $.input({
 					label: "Email",
 					labelsize: "sm-2",
 					ctlsize: "sm-10",
@@ -96,7 +95,7 @@ export default [
 					plaintext: true,
 					value: "name@example.com",
 				}),
-				new input({
+				new $.input({
 					label: "Password",
 					labelsize: "sm-2",
 					ctlsize: "sm-10",
@@ -108,10 +107,10 @@ export default [
 
 	{
 		title: "Readonly plain text (Stack)",
-		container: doc_core.stackcontainer,
+		container: $.container.stack,
 		code: function () {
 			return [
-				new input({
+				new $.input({
 					label: "Email",
 					hidelabel: true,
 					type: "email",
@@ -119,13 +118,13 @@ export default [
 					plaintext: true,
 					value: "name@example.com",
 				}),
-				new input({
+				new $.input({
 					label: "Password",
 					hidelabel: true,
 					placeholder: "Password",
 					type: "password",
 				}),
-				new button({
+				new $.button({
 					type: "submit",
 					label: "Confirm identity",
 					color: "primary",
@@ -136,14 +135,14 @@ export default [
 
 	{
 		title: "File input",
-		container: doc_core.formcontainer,
+		container: $.container.form,
 		code: function () {
 			return [
-				new input({ label: "Default file input example", type: "file" }),
-				new input({ label: "Multiple files input example", type: "file", multiple: true }),
-				new input({ label: "Disabled file input example", type: "file", disabled: true }),
-				new input({ label: "Small file input example", type: "file", weight: "sm" }),
-				new input({ label: "Large file input example", type: "file", weight: "lg" }),
+				new $.input({ label: "Default file input example", type: "file" }),
+				new $.input({ label: "Multiple files input example", type: "file", multiple: true }),
+				new $.input({ label: "Disabled file input example", type: "file", disabled: true }),
+				new $.input({ label: "Small file input example", type: "file", weight: "sm" }),
+				new $.input({ label: "Large file input example", type: "file", weight: "lg" }),
 			];
 		},
 	},
@@ -151,9 +150,9 @@ export default [
 	// {
 	// 	title: "File Input",
 	// 	msg: "This control is {{link}} to backend",
-	// 	container: doc_core.formcontainer,
+	// 	container: $.container.form,
 	// 	code: function () {
-	// 		return new file.ctl({
+	// 		return new $.file.ctl({
 	// 			label: "Picture",
 	// 			accepe: "image/gif,image/bmp,image/x-windows-bmp,image/jpeg,image/png",
 	// 			value: null,
@@ -164,20 +163,20 @@ export default [
 
 	{
 		title: "Color",
-		container: doc_core.formcontainer,
+		container: $.container.form,
 		code: function () {
-			return new input({ label: "Color picker", type: "color" });
+			return new $.input({ label: "Color picker", type: "color" });
 		},
 	},
 
 	{
 		title: "Datalist",
-		container: doc_core.formcontainer,
+		container: $.container.form,
 		code: function () {
-			return new input({
+			return new $.input({
 				label: "Datalist example",
 				type: "text",
-				option: ["San Francisco", "New York", "Seattle", "Los Angeles", "Chicago"],
+				option: ["San Francisco", "new $.York", "Seattle", "Los Angeles", "Chicago"],
 			});
 		},
 	},

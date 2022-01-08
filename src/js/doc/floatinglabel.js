@@ -1,10 +1,6 @@
 "use strict";
-import * as core from "../base/core.js";
-import * as doc_core from "./core.js";
 import * as sample from "./sample.js";
-import button from "../base/button.js";
-import input from "../base/input.js";
-import toast from "../base/toast.js";
+import $ from "../component.js";
 
 export default [
 	{
@@ -15,16 +11,16 @@ export default [
 
 	{
 		title: "Example",
-		container: doc_core.formcontainer,
+		container: $.container.form,
 		code: function () {
 			return [
-				new input({
+				new $.input({
 					type: "email",
 					label: "Email address",
 					floatlabel: true,
 				}),
 
-				new input({
+				new $.input({
 					type: "password",
 					label: "Password",
 					floatlabel: true,
@@ -36,7 +32,7 @@ export default [
 	{
 		title: "Value already defind",
 		code: function () {
-			return new input({
+			return new $.input({
 				type: "email",
 				label: "Email address",
 				floatlabel: true,
@@ -48,7 +44,7 @@ export default [
 	{
 		title: "Validation",
 		code: function () {
-			return new input({
+			return new $.input({
 				type: "email",
 				name: "email",
 				label: "Email address",
@@ -56,12 +52,12 @@ export default [
 				required: true,
 				invalid: "Please provide email",
 				aftertype: "button",
-				after: new button({
+				after: new $.button({
 					label: "Validate",
 					color: "primary",
 					onclick: function (event) {
 						core.validate(event.currentTarget.parentElement, function (result) {
-							new toast("i", `Result: ${result}`).show();
+							new $.toast("i", `Result: ${result}`).show();
 						});
 					},
 				}),
@@ -72,7 +68,7 @@ export default [
 	{
 		title: "Textareas",
 		code: function () {
-			return new input({
+			return new $.input({
 				type: "textarea",
 				label: "Comments",
 				floatlabel: true,
@@ -83,7 +79,7 @@ export default [
 	{
 		title: "Textareas With Height Setting",
 		code: function () {
-			return new input({
+			return new $.input({
 				type: "textarea",
 				label: "Comments",
 				style: { height: "100px" },
@@ -96,7 +92,7 @@ export default [
 		title: "Select",
 		sample: { "sample.optionitem": sample.optionitem },
 		code: function () {
-			return new input({
+			return new $.input({
 				label: "Works with selects",
 				type: "select",
 				floatlabel: true,

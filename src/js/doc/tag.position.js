@@ -1,9 +1,5 @@
-import tag from "../base/tag.js";
-import * as doc_core from "./core.js";
-import ul from "../base/ul.js";
-import button from "../base/button.js";
-import * as progress from "../base/progress.js";
-import div from "../base/div.js";
+"use strict";
+import $ from "../component.js";
 
 export default [
 	{
@@ -16,7 +12,7 @@ export default [
 		title: "Position values",
 		msg: [
 			"Quick {{position}} property are available, though they are not responsive.",
-			new ul({
+			new $.ul({
 				item: ["static", "relative", "absolute", "fixed", "sticky"].map(function (i) {
 					return `<code>${i}</code>`;
 				}),
@@ -30,7 +26,7 @@ export default [
 		msg: [
 			"Arrange elements easily with the edge positioning utilities. The format is <code>{property}-{position}</code>.",
 			"Where <i>property</i> is one of:",
-			new ul({
+			new $.ul({
 				item: [
 					"<code>top</code> - for the vertical <code>top</code> position",
 					"<code>start</code> - for the vertical <code>left</code> position (in LTR)",
@@ -39,7 +35,7 @@ export default [
 				],
 			}),
 			"Where <i>position</i> is one of:",
-			new ul({
+			new $.ul({
 				item: [
 					"<code>0</code> - for <code>0</code> edge position",
 					"<code>50</code> - for <code>50%</code> edge position",
@@ -53,7 +49,7 @@ export default [
 	{
 		viewclass: "cl-highlight-position",
 		code: function () {
-			return new tag({
+			return new $.tag({
 				tag: "div",
 				position: "relative",
 				elem: [
@@ -64,7 +60,7 @@ export default [
 					{ tag: "div", position: "absolute", bottom: 0, start: 0 },
 					{ tag: "div", position: "absolute", bottom: 0, end: 0 },
 				].map(function (i) {
-					return new tag(i);
+					return new $.tag(i);
 				}),
 			});
 		},
@@ -78,7 +74,7 @@ export default [
 		],
 		viewclass: "cl-highlight-position",
 		code: function () {
-			return new tag({
+			return new $.tag({
 				tag: "div",
 				position: "relative",
 				elem: [
@@ -92,7 +88,7 @@ export default [
 					{ tag: "div", position: "absolute", top: 100, start: 50, tmiddle: true },
 					{ tag: "div", position: "absolute", top: 100, start: 100, tmiddle: true },
 				].map(function (i) {
-					return new tag(i);
+					return new $.tag(i);
 				}),
 			});
 		},
@@ -104,7 +100,7 @@ export default [
 		],
 		viewclass: "cl-highlight-position",
 		code: function () {
-			return new tag({
+			return new $.tag({
 				tag: "div",
 				position: "relative",
 				elem: [
@@ -118,7 +114,7 @@ export default [
 					{ tag: "div", position: "absolute", bottom: 0, start: 50, tmiddle: "x" },
 					{ tag: "div", position: "absolute", bottom: 0, end: 0 },
 				].map(function (i) {
-					return new tag(i);
+					return new $.tag(i);
 				}),
 			});
 		},
@@ -128,17 +124,17 @@ export default [
 		title: "Examples",
 		msg: "Here are some real life examples of these classes:",
 		container: function (elem) {
-			return new div({ display: "flex", justifycontent: "around", elem: elem });
+			return new $.div({ display: "flex", justifycontent: "around", elem: elem });
 		},
 		code: function () {
 			return [
-				new tag({
+				new $.tag({
 					tag: "button",
 					position: "relative",
 					class: "btn btn-primary",
 					elem: [
 						"Mail",
-						new tag({
+						new $.tag({
 							tag: "span",
 							position: "absolute",
 							top: 0,
@@ -147,18 +143,18 @@ export default [
 							class: "badge",
 							rounded: "pill",
 							color: "secondary",
-							elem: ["+99", new tag({ tag: "span", class: "visually-hidden", elem: "unread message" })],
+							elem: ["+99", new $.tag({ tag: "span", class: "visually-hidden", elem: "unread message" })],
 						}),
 					],
 				}),
 
-				new tag({
+				new $.tag({
 					tag: "button",
 					position: "relative",
 					class: "btn btn-dark",
 					elem: [
 						"Marker",
-						new tag({
+						new $.tag({
 							tag: "svg",
 							attr: {
 								height: "1em",
@@ -173,7 +169,7 @@ export default [
 							tmiddle: true,
 							class: "bi bi-caret-down-fill",
 							margintop: 1,
-							elem: new tag({
+							elem: new $.tag({
 								tag: "path",
 								attr: {
 									d: "M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z",
@@ -183,13 +179,13 @@ export default [
 					],
 				}),
 
-				new tag({
+				new $.tag({
 					tag: "button",
 					position: "relative",
 					class: "btn btn-primary",
 					elem: [
 						"Alerts",
-						new tag({
+						new $.tag({
 							tag: "span",
 							position: "absolute",
 							top: 0,
@@ -200,7 +196,7 @@ export default [
 							bordercolor: "light",
 							color: "danger",
 							padding: 2,
-							elem: new tag({ tag: "span", class: "visually-hidden", elem: "unread message" }),
+							elem: new $.tag({ tag: "span", class: "visually-hidden", elem: "unread message" }),
 						}),
 					],
 				}),
@@ -209,20 +205,20 @@ export default [
 	},
 
 	{
-		msg: "You can use these classes with existing components to create new ones. Remember that you can extend its functionality by adding entries to the $position-values variable.",
+		msg: "You can use these classes with existing components to create new $.ones. Remember that you can extend its functionality by adding entries to the $position-values variable.",
 		code: function () {
-			return new div({
+			return new $.div({
 				position: "relative",
 				margin: 4,
 				elem: [
-					new progress.container({
+					new $.progress.container({
 						height: 1,
-						elem: new progress.bar({
+						elem: new $.progress.bar({
 							value: 50,
 						}),
 					}),
 
-					new button({
+					new $.button({
 						position: "absolute",
 						top: 0,
 						start: 0,
@@ -233,7 +229,7 @@ export default [
 						style: { width: "2rem", height: "2rem" },
 						label: "1",
 					}),
-					new button({
+					new $.button({
 						position: "absolute",
 						top: 0,
 						start: 50,
@@ -244,7 +240,7 @@ export default [
 						style: { width: "2rem", height: "2rem" },
 						label: "2",
 					}),
-					new button({
+					new $.button({
 						position: "absolute",
 						top: 0,
 						start: 100,

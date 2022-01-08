@@ -1,7 +1,6 @@
+"use strict";
 import { tagprop } from "./sample.js";
-import small from "../base/small.js";
-import div from "../base/div.js";
-import * as doc_core from "./core.js";
+import $ from "../component.js";
 
 export default [
 	{
@@ -12,7 +11,7 @@ export default [
 
 	{
 		msg: [
-			"Shortcut for {{new tag({tag:'small'})}}",
+			"Shortcut for {{new $.tag({tag:'small'})}}",
 			"This component is extended from {{tag}} component, so any property on tag component, will also work on this component.",
 			"Property inherits from tag component:",
 			tagprop(),
@@ -22,10 +21,10 @@ export default [
 	{
 		title: "Example",
 		code: function () {
-			return new div({
+			return new $.div({
 				elem: [
 					"This is ",
-					new small({
+					new $.small({
 						attr: {
 							"data-test": "test",
 						},
@@ -40,12 +39,12 @@ export default [
 	{
 		title: "Easy option",
 		msg: "This component also supported easy option.",
-		container: doc_core.formcontainer,
+		container: $.container.form,
 		code: function () {
 			return [
-				new small({ class: "classname", elem: "Using elem property" }),
-				new small("classname", "Direct class and elem property"),
-				new small("Direct elem property"),
+				new $.small({ class: "classname", elem: "Using elem property" }),
+				new $.small("classname", "Direct class and elem property"),
+				new $.small("Direct elem property"),
 			];
 		},
 	},

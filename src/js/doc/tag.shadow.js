@@ -1,6 +1,5 @@
-import tag from "../base/tag.js";
-import * as doc_core from "./core.js";
-import ul from "../base/ul.js";
+"use strict";
+import $ from "../component.js";
 
 export default [
 	{
@@ -13,17 +12,17 @@ export default [
 		title: "Examples",
 		msg: [
 			"Supported value for {{shadow}} property.",
-			new ul({
+			new $.ul({
 				item: ["none", "sm", "true", "lg"].map(function (i) {
 					return `<code>${i}</code>`;
 				}),
 			}),
 		],
-		container: doc_core.formcontainer,
+		container: $.container.form,
 		viewclass: "cl-highlight-shadow",
 		code: function () {
 			return ["none", "sm", true, "lg"].map(function (i) {
-				return new tag({
+				return new $.tag({
 					tag: "div",
 					shadow: i,
 					elem: `This is an example of using <code>shadow:${i}</code>`,

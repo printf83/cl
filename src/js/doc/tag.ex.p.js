@@ -1,5 +1,6 @@
+"use strict";
 import { tagprop } from "./sample.js";
-import p from "../base/p.js";
+import $ from "../component.js";
 
 export default [
 	{
@@ -10,7 +11,7 @@ export default [
 
 	{
 		msg: [
-			"Shortcut for {{new tag({tag:'p'})}}",
+			"Shortcut for {{new $.tag({tag:'p'})}}",
 			"This component is extended from {{tag}} component, so any property on tag component, will also work on this component.",
 			"Property inherits from tag component:",
 			tagprop(),
@@ -20,7 +21,7 @@ export default [
 	{
 		title: "Example",
 		code: function () {
-			return new p({
+			return new $.p({
 				elem: "Example paragraph element",
 			});
 		},
@@ -31,9 +32,9 @@ export default [
 		msg: "This component also supported easy option.",
 		code: function () {
 			return [
-				new p({ class: "classname", elem: "Using elem property" }),
-				new p("Direct elem property"),
-				new p("classname", "Direct class and elem property"),
+				new $.p({ class: "classname", elem: "Using elem property" }),
+				new $.p("Direct elem property"),
+				new $.p("classname", "Direct class and elem property"),
 			];
 		},
 	},

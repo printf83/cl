@@ -1,6 +1,5 @@
-import tag from "../base/tag.js";
-import * as doc_core from "./core.js";
-import ul from "../base/ul.js";
+"use strict";
+import $ from "../component.js";
 
 export default [
 	{
@@ -23,11 +22,11 @@ export default [
 			"Spacing utilities that apply to all breakpoints, from {{xs}} to {{xxl}}, have no breakpoint abbreviation in them. This is because those classes are applied from {{min-width: 0}} and up, and thus are not bound by a media query. The remaining breakpoints, however, do include a breakpoint abbreviation.",
 			"The classes are named using the format <code>{property}:{sides}-{size} for xs and {property}{sides}:{breakpoint}-{size}</code> for {{sm}}, {{md}}, {{lg}}, {{xl}}, and {{xxl}}.",
 			"Where <i>property</i> is one of:",
-			new ul({
+			new $.ul({
 				item: ["margin", "padding"],
 			}),
 			"Where <i>sides</i> is one of:",
-			new ul({
+			new $.ul({
 				item: [
 					"<code>top</code> - for set <code>margin-top</code> or <code>padding-top</code>",
 					"<code>bottom</code> - for set <code>margin-bottom</code> or <code>padding-bottom</code>",
@@ -39,7 +38,7 @@ export default [
 				],
 			}),
 			"Where <i>size</i> is one on:",
-			new ul({
+			new $.ul({
 				item: [
 					"<code>0</code> - for eliminate the <code>margin</code> or <code>padding</code> by setting it to <code>0</code>",
 					"<code>1</code> - (by default) to set <code>margin</code> or <code>padding</code> to <code>$spacer * .25</code>",
@@ -58,7 +57,7 @@ export default [
 		msg: "Additionally, Bootstrap also includes an {{marginx:auto}} property for horizontally centering fixed-width block level content—that is, content that has {{display:block}} and a {{width}} set—by setting the horizontal margins to {{auto}}.",
 		viewclass: "cl-highlight-div",
 		code: function () {
-			return new tag({
+			return new $.tag({
 				tag: "div",
 				marginx: "auto",
 				style: { width: "12rem" },
@@ -75,10 +74,10 @@ export default [
 		],
 
 		viewclass: "cl-highlight-col-div",
-		container: doc_core.stackcontainer,
+		container: $.container.stack,
 		code: function () {
 			return [null, 1, "n1"].map(function (i) {
-				return new tag({
+				return new $.tag({
 					tag: "div",
 					margintop: i,
 					elem: `Example element`,
@@ -92,14 +91,14 @@ export default [
 		msg: "When using {{display:grid}}, you can make use of {{gap}} property on the parent grid container. This can save on having to add margin utilities to individual grid items (children of a {{display:grid}} container). Gap utilities are responsive by default, and are generated via our utilities API, based on the {{$spacers}} Sass map.",
 		viewclass: "cl-highlight-grid-div",
 		code: function () {
-			return new tag({
+			return new $.tag({
 				tag: "div",
 				display: "grid",
 				gap: 3,
 				elem: [
-					new tag({ tag: "div", elem: "Grid item 1" }),
-					new tag({ tag: "div", elem: "Grid item 2" }),
-					new tag({ tag: "div", elem: "Grid item 3" }),
+					new $.tag({ tag: "div", elem: "Grid item 1" }),
+					new $.tag({ tag: "div", elem: "Grid item 2" }),
+					new $.tag({ tag: "div", elem: "Grid item 3" }),
 				],
 			});
 		},
