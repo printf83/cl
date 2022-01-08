@@ -1,17 +1,17 @@
 "use strict";
-import input from "../base/input.js";
+import $ from "../component.js";
 
 export default [
 	{
 		title: "Range",
-		msg: "Use our custom range inputs for consistent cross-browser styling and built-in customization.",
+		msg: "Use Bootstrap custom range inputs for consistent cross-browser styling and built-in customization.",
 		anchor: false,
 	},
 
 	{
 		title: "Example Range",
 		code: function () {
-			return new input({
+			return new $.input({
 				label: "Simple Range",
 				type: "range",
 				value: 50,
@@ -22,7 +22,7 @@ export default [
 	{
 		title: "Disable",
 		code: function () {
-			return new input({
+			return new $.input({
 				label: "Disable Range",
 				type: "range",
 				disabled: true,
@@ -34,7 +34,7 @@ export default [
 	{
 		title: "Min and max",
 		code: function () {
-			return new input({
+			return new $.input({
 				label: "Example Range",
 				type: "range",
 				value: 2.5,
@@ -47,7 +47,7 @@ export default [
 	{
 		title: "Step",
 		code: function () {
-			return new input({
+			return new $.input({
 				label: "Example Range",
 				type: "range",
 				value: 2.5,

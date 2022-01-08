@@ -1,10 +1,6 @@
 "use strict";
-import * as doc_core from "./core.js";
-import * as core from "../base/core.js";
-import input from "../base/input.js";
-import toast from "../base/toast.js";
-import button from "../base/button.js";
-import msg from "../base/msg.js";
+import * as sample from "./sample.js";
+import $ from "../component.js";
 
 export default [
 	{
@@ -20,12 +16,12 @@ export default [
 	{
 		title: "Basic",
 		msg: [
-			"To encourage extensible and predictable toasts, we recommend a header and body. Toast headers use {{display: flex}}, allowing easy alignment of content thanks to our margin and flexbox utilities.",
+			"To encourage extensible and predictable toasts, we recommend a header and body. Toast headers use {{display: flex}}, allowing easy alignment of content thanks to Bootstrap margin and flexbox utilities.",
 			"Toasts are as flexible as you need and have very little required markup. At a minimum, we require a single element to contain your “toasted” content and strongly encourage a dismiss button.",
 		],
 		viewclass: "cl-modal-preview",
 		code: function () {
-			return new toast({
+			return new $.toast({
 				color: "primary",
 				textcolor: "light",
 				icon: { icon: "fire", color: "primary" },
@@ -38,13 +34,13 @@ export default [
 
 	{
 		title: "Live",
-		msg: "Click the button below to show a toast (positioned with our utilities in the top right corner)",
+		msg: "Click the button below to show a toast (positioned with Bootstrap utilities in the top right corner)",
 		code: function () {
-			return new button({
+			return new $.button({
 				label: "Show live toast",
 				color: "primary",
 				onclick: function () {
-					new toast({
+					new $.toast({
 						color: "primary",
 						textcolor: "light",
 						icon: { icon: "fire", color: "primary" },
@@ -61,7 +57,7 @@ export default [
 		msg: "Toasts are slightly translucent to blend in with what’s below them.",
 		dark: true,
 		code: function () {
-			return new toast({
+			return new $.toast({
 				color: "primary",
 				textcolor: "light",
 				icon: { icon: "fire", color: "primary" },
@@ -76,11 +72,11 @@ export default [
 		title: "Stacking",
 		msg: "Toast automatically stacking",
 		code: function () {
-			return new button({
+			return new $.button({
 				label: "Show live toast",
 				color: "primary",
 				onclick: function () {
-					new toast({
+					new $.toast({
 						color: "primary",
 						textcolor: "light",
 						icon: { icon: "fire", color: "primary" },
@@ -90,7 +86,7 @@ export default [
 
 					//show second toast after 2 second
 					setTimeout(function () {
-						new toast({
+						new $.toast({
 							color: "success",
 							textcolor: "light",
 							icon: { icon: "fire", color: "success" },
@@ -105,11 +101,11 @@ export default [
 
 	{
 		title: "Base icon",
-		container: doc_core.formcontainer,
+		container: sample.formcontainer,
 		code: function () {
 			return ["i", "!!", "!", "?", "-", "x", "/"].map(function (i) {
 				//this last argument is for this documentation preview only
-				return new toast(i, `Example <b>${i}</b> icon toast`, { debug: true });
+				return new $.toast(i, `Example <b>${i}</b> icon toast`, { debug: true });
 			});
 		},
 	},
@@ -118,18 +114,18 @@ export default [
 		title: "Base icon live",
 		code: function () {
 			return [
-				new input({
+				new $.input({
 					type: "select",
 					before: "icon:",
 					aftertype: "button",
-					after: new button({
+					after: new $.button({
 						label: "Show",
 						color: "primary",
 						textcolor: "light",
 						onclick: function (event) {
 							let sender = event.currentTarget;
 							let icon = sender.previousSibling.value;
-							new toast(icon, `Example <b>${icon}</b> icon toast`).show();
+							new $.toast(icon, `Example <b>${icon}</b> icon toast`).show();
 						},
 					}),
 					option: ["i", "!!", "!", "?", "-", "x", "/"],
@@ -140,7 +136,7 @@ export default [
 
 	{
 		title: "Color",
-		container: doc_core.formcontainer,
+		container: sample.formcontainer,
 		code: function () {
 			return [
 				{ color: "primary", textcolor: "light" },
@@ -152,10 +148,10 @@ export default [
 				{ color: "light", textcolor: "dark" },
 				{ color: "dark", textcolor: "light" },
 			].map(function (i) {
-				return new toast({
+				return new $.toast({
 					color: i.color,
 					textcolor: i.textcolor,
-					elem: new msg({ weight: "sm", icon: "fire", elem: `Example <b>${i.color}</b> toast` }),
+					elem: new $.msg({ weight: "sm", icon: "fire", elem: `Example <b>${i.color}</b> toast` }),
 					debug: true, //this last argument is for this documentation preview only
 				});
 			});
@@ -164,7 +160,7 @@ export default [
 
 	{
 		title: "Position",
-		container: doc_core.stackcontainer,
+		container: sample.stackcontainer,
 		code: function () {
 			return [
 				{ label: "Top left", position: "top-0 start-0" },
@@ -179,13 +175,13 @@ export default [
 				{ label: "Bottom center", position: "bottom-0 start-50 translate-middle-x" },
 				{ label: "Bottom right", position: "bottom-0 end-0" },
 			].map(function (i) {
-				return new button({
+				return new $.button({
 					color: "primary",
 					label: i.label,
 					onclick: function () {
-						new toast({
+						new $.toast({
 							position: i.position,
-							elem: new msg({ weight: "sm", icon: "fire", elem: `${i.label} toast.` }),
+							elem: new $.msg({ weight: "sm", icon: "fire", elem: `${i.label} toast.` }),
 						}).show();
 					},
 				});
@@ -196,11 +192,11 @@ export default [
 	{
 		title: "Disable autoclose",
 		code: function () {
-			return new button({
+			return new $.button({
 				label: "Show live toast",
 				color: "primary",
 				onclick: function () {
-					new toast({
+					new $.toast({
 						autohide: false,
 						color: "warning",
 						icon: { icon: "fire", color: "danger" },
@@ -215,11 +211,11 @@ export default [
 	{
 		title: "Delay autoclose",
 		code: function () {
-			return new button({
+			return new $.button({
 				label: "Show live toast",
 				color: "primary",
 				onclick: function () {
-					new toast({
+					new $.toast({
 						delay: 10000,
 						color: "primary",
 						icon: { icon: "fire", color: "info" },

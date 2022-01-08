@@ -1,16 +1,5 @@
 "use strict";
-import * as card from "../base/card.js";
-import listgroup from "../base/listgroup.js";
-import toast from "../base/toast.js";
-import input from "../base/input.js";
-import * as container from "../base/container.js";
-import modal from "../base/modal.js";
-import div from "../base/div.js";
-import badge from "../base/badge.js";
-import * as navbar from "../base/navbar.js";
-import button from "../base/button.js";
-import dropdown from "../base/dropdown.js";
-import p from "../base/p.js";
+import $ from "../component.js";
 
 let imgindex = 0;
 let textindex = 0;
@@ -105,15 +94,15 @@ export function dropdownitem() {
 }
 
 export function form() {
-	return new container.form([
-		new input({
+	return new $.container.form([
+		new $.input({
 			label: "Name",
 			required: true,
 			invalid: "Please provide name",
 			name: "name",
 			type: "text",
 		}),
-		new input({
+		new $.input({
 			label: "Age",
 			required: true,
 			invalid: "Please provide age",
@@ -123,7 +112,7 @@ export function form() {
 			max: 100,
 			after: "Years old",
 		}),
-		new listgroup({
+		new $.listgroup({
 			label: "Sex",
 			type: "div",
 			item: [
@@ -148,7 +137,7 @@ export function form() {
 				},
 			],
 		}),
-		new listgroup({
+		new $.listgroup({
 			label: "Interest",
 			type: "div",
 			item: [
@@ -178,7 +167,7 @@ export function form() {
 				},
 			],
 		}),
-		new input({
+		new $.input({
 			label: "Country",
 			required: true,
 			invalid: "Please choose country",
@@ -213,64 +202,64 @@ export function accordionitem() {
 
 export function cardwithimg() {
 	return [
-		new card.container({
+		new $.card.container({
 			elem: [
-				new card.img({
+				new $.card.img({
 					placement: "top",
 					src: img(415, 207),
 				}),
-				new card.body({
+				new $.card.body({
 					elem: [
-						new card.title("Card Title"),
-						new card.text(
+						new $.card.title("Card Title"),
+						new $.card.text(
 							"This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer."
 						),
 					],
 				}),
 			],
 		}),
-		new card.container({
+		new $.card.container({
 			elem: [
-				new card.img({
+				new $.card.img({
 					placement: "top",
 					src: img(415, 207),
 				}),
-				new card.body({
+				new $.card.body({
 					elem: [
-						new card.title("Card Title"),
-						new card.text(
+						new $.card.title("Card Title"),
+						new $.card.text(
 							"This card has supporting text below as a natural lead-in to additional content."
 						),
 					],
 				}),
 			],
 		}),
-		new card.container({
+		new $.card.container({
 			elem: [
-				new card.img({
+				new $.card.img({
 					placement: "top",
 					src: img(415, 207),
 				}),
-				new card.body({
+				new $.card.body({
 					elem: [
-						new card.title("Card Title"),
-						new card.text(
+						new $.card.title("Card Title"),
+						new $.card.text(
 							"This card has supporting text below as a natural lead-in to additional content."
 						),
 					],
 				}),
 			],
 		}),
-		new card.container({
+		new $.card.container({
 			elem: [
-				new card.img({
+				new $.card.img({
 					placement: "top",
 					src: img(415, 207),
 				}),
-				new card.body({
+				new $.card.body({
 					elem: [
-						new card.title("Card Title"),
-						new card.text(
+						new $.card.title("Card Title"),
+						new $.card.text(
 							"This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action."
 						),
 					],
@@ -282,55 +271,55 @@ export function cardwithimg() {
 
 export function cardwithfooter() {
 	return [
-		new card.container({
+		new $.card.container({
 			elem: [
-				new card.img({
+				new $.card.img({
 					placement: "top",
 					src: img(415, 207),
 				}),
-				new card.body({
+				new $.card.body({
 					elem: [
-						new card.title("Card Title"),
-						new card.text(
+						new $.card.title("Card Title"),
+						new $.card.text(
 							"This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action."
 						),
 					],
 				}),
-				new card.footer("Last updated 3 mins ago"),
+				new $.card.footer("Last updated 3 mins ago"),
 			],
 		}),
-		new card.container({
+		new $.card.container({
 			elem: [
-				new card.img({
+				new $.card.img({
 					placement: "top",
 					src: img(415, 207),
 				}),
-				new card.body({
+				new $.card.body({
 					elem: [
-						new card.title("Card Title"),
-						new card.text(
+						new $.card.title("Card Title"),
+						new $.card.text(
 							"This card has supporting text below as a natural lead-in to additional content."
 						),
 					],
 				}),
-				new card.footer("Last updated 3 mins ago"),
+				new $.card.footer("Last updated 3 mins ago"),
 			],
 		}),
-		new card.container({
+		new $.card.container({
 			elem: [
-				new card.img({
+				new $.card.img({
 					placement: "top",
 					src: img(415, 207),
 				}),
-				new card.body({
+				new $.card.body({
 					elem: [
-						new card.title("Card Title"),
-						new card.text(
+						new $.card.title("Card Title"),
+						new $.card.text(
 							"This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer."
 						),
 					],
 				}),
-				new card.footer("Last updated 3 mins ago"),
+				new $.card.footer("Last updated 3 mins ago"),
 			],
 		}),
 	];
@@ -338,51 +327,51 @@ export function cardwithfooter() {
 
 export function cardh100() {
 	return [
-		new card.container({
+		new $.card.container({
 			class: "h-100",
 			elem: [
-				new card.img({
+				new $.card.img({
 					placement: "top",
 					src: img(415, 207),
 				}),
-				new card.body({
+				new $.card.body({
 					elem: [
-						new card.title("Card Title"),
-						new card.text(
+						new $.card.title("Card Title"),
+						new $.card.text(
 							"This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action."
 						),
 					],
 				}),
 			],
 		}),
-		new card.container({
+		new $.card.container({
 			class: "h-100",
 			elem: [
-				new card.img({
+				new $.card.img({
 					placement: "top",
 					src: img(415, 207),
 				}),
-				new card.body({
+				new $.card.body({
 					elem: [
-						new card.title("Card Title"),
-						new card.text(
+						new $.card.title("Card Title"),
+						new $.card.text(
 							"This card has supporting text below as a natural lead-in to additional content."
 						),
 					],
 				}),
 			],
 		}),
-		new card.container({
+		new $.card.container({
 			class: "h-100",
 			elem: [
-				new card.img({
+				new $.card.img({
 					placement: "top",
 					src: img(415, 207),
 				}),
-				new card.body({
+				new $.card.body({
 					elem: [
-						new card.title("Card Title"),
-						new card.text(
+						new $.card.title("Card Title"),
+						new $.card.text(
 							"This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer."
 						),
 					],
@@ -394,58 +383,58 @@ export function cardh100() {
 
 export function cardwithfooterh100() {
 	return [
-		new card.container({
+		new $.card.container({
 			class: "h-100",
 			elem: [
-				new card.img({
+				new $.card.img({
 					placement: "top",
 					src: img(415, 207),
 				}),
-				new card.body({
+				new $.card.body({
 					elem: [
-						new card.title("Card Title"),
-						new card.text(
+						new $.card.title("Card Title"),
+						new $.card.text(
 							"This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action."
 						),
 					],
 				}),
-				new card.footer("Last updated 3 mins ago"),
+				new $.card.footer("Last updated 3 mins ago"),
 			],
 		}),
-		new card.container({
+		new $.card.container({
 			class: "h-100",
 			elem: [
-				new card.img({
+				new $.card.img({
 					placement: "top",
 					src: img(415, 207),
 				}),
-				new card.body({
+				new $.card.body({
 					elem: [
-						new card.title("Card Title"),
-						new card.text(
+						new $.card.title("Card Title"),
+						new $.card.text(
 							"This card has supporting text below as a natural lead-in to additional content."
 						),
 					],
 				}),
-				new card.footer("Last updated 3 mins ago"),
+				new $.card.footer("Last updated 3 mins ago"),
 			],
 		}),
-		new card.container({
+		new $.card.container({
 			class: "h-100",
 			elem: [
-				new card.img({
+				new $.card.img({
 					placement: "top",
 					src: img(415, 207),
 				}),
-				new card.body({
+				new $.card.body({
 					elem: [
-						new card.title("Card Title"),
-						new card.text(
+						new $.card.title("Card Title"),
+						new $.card.text(
 							"This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer."
 						),
 					],
 				}),
-				new card.footer("Last updated 3 mins ago"),
+				new $.card.footer("Last updated 3 mins ago"),
 			],
 		}),
 	];
@@ -463,11 +452,11 @@ export function listgroupitem() {
 
 export function listgroupitemcustomcontent() {
 	return [
-		new div({
+		new $.div({
 			class: "ms-2 me-auto",
-			elem: [new div("fw-bold", "Subheading"), "Cras justo odio"],
+			elem: [new $.div("fw-bold", "Subheading"), "Cras justo odio"],
 		}),
-		new badge({
+		new $.badge({
 			pill: true,
 			color: "primary",
 			label: "14",
@@ -480,16 +469,16 @@ export function listgroupitem3() {
 }
 
 export function dlgFn(recipient) {
-	new modal({
+	new $.modal({
 		title: "Modal title",
-		elem: new container.form([
-			new input({
+		elem: new $.container.form([
+			new $.input({
 				type: "text",
 				name: "recipient",
 				label: "Recipient:",
 				value: recipient,
 			}),
-			new input({
+			new $.input({
 				type: "textarea",
 				name: "message",
 				label: "Message:",
@@ -500,7 +489,7 @@ export function dlgFn(recipient) {
 			{
 				label: "Send message",
 				onclick: function (event, data) {
-					new toast("i", `Result from dialog is <b>${JSON.stringify(data)}</b>`).show();
+					new $.toast("i", `Result from dialog is <b>${JSON.stringify(data)}</b>`).show();
 				},
 			},
 			"Close",
@@ -509,7 +498,7 @@ export function dlgFn(recipient) {
 }
 
 export function dlgFullscreenFn(fullscreen) {
-	new modal({
+	new $.modal({
 		fullscreen: fullscreen,
 		title: "Modal title",
 		elem: `Dialog with <code>fullscreen : <b>${fullscreen}</b></code> option`,
@@ -518,7 +507,7 @@ export function dlgFullscreenFn(fullscreen) {
 }
 
 export function dlgSizeFn(size) {
-	new modal({
+	new $.modal({
 		size: size,
 		title: "Modal title",
 		elem: `Dialog with <code>size : <b>${size}</b></code> option`,
@@ -555,38 +544,38 @@ export function dropdowntab() {
 
 export function navbaritem(id, title) {
 	return [
-		new navbar.toggle({
+		new $.navbar.toggle({
 			target: `#${id}`,
 			toggle: "collapse",
 		}),
 
-		new navbar.brand({
+		new $.navbar.brand({
 			label: title ? title : "Navbar",
 		}),
 
-		new navbar.collapsecontainer({
+		new $.navbar.collapsecontainer({
 			id: id,
 			elem: [
-				new navbar.itemcontainer({
+				new $.navbar.itemcontainer({
 					parenttype: "collapse",
 					elem: [
-						new navbar.item({ label: "Home", active: true }),
-						new navbar.item({ label: "Link" }),
-						new navbar.item({
+						new $.navbar.item({ label: "Home", active: true }),
+						new $.navbar.item({ label: "Link" }),
+						new $.navbar.item({
 							label: "Dropdown",
 							option: dropdownitem(),
 						}),
-						new navbar.item({ label: "Disabled", disabled: true }),
+						new $.navbar.item({ label: "Disabled", disabled: true }),
 					],
 				}),
-				new navbar.formcontainer([
-					new input({
+				new $.navbar.formcontainer([
+					new $.input({
 						type: "search",
 						placeholder: "Search",
 						hiddenlabel: "Search",
 						class: "me-2",
 					}),
-					new button({ label: "Search", color: "success", outline: true }),
+					new $.button({ label: "Search", color: "success", outline: true }),
 				]),
 			],
 		}),
@@ -594,12 +583,12 @@ export function navbaritem(id, title) {
 }
 
 export function offcanvasbody() {
-	return new div({
+	return new $.div({
 		elem: [
-			new p({
+			new $.p({
 				elem: "Some text as placeholder. In real life you can have the elements you have chosen. Like, text, images, lists, etc.",
 			}),
-			new dropdown({
+			new $.dropdown({
 				label: "Drowdown button",
 				color: "secondary",
 				option: dropdownitem(),
@@ -747,4 +736,12 @@ export function tagprop(exclude) {
 
 	let l = f.pop();
 	return f.join(", ") + " and " + l;
+}
+
+export function formcontainer(elem) {
+	return new $.container.form(elem);
+}
+
+export function stackcontainer(elem) {
+	return new $.container.stack(elem);
 }

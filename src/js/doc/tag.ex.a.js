@@ -1,7 +1,6 @@
-import { tagprop } from "./sample.js";
-import ul from "../base/ul.js";
-import a from "../base/a.js";
-import * as doc_core from "./core.js";
+"use strict";
+import * as sample from "./sample.js";
+import $ from "../component.js";
 
 export default [
 	{
@@ -12,17 +11,17 @@ export default [
 
 	{
 		msg: [
-			"Shortcut for {{new tag({tag:'a'})}}",
+			"Shortcut for {{new $.tag({tag:'a'})}}",
 			"This component is extended from {{tag}} component, so any property on tag component, will also work on this component.",
 			"Property inherits from tag component:",
-			tagprop("color"),
+			sample.tagprop("color"),
 		],
 	},
 
 	{
 		title: "Example",
 		code: function () {
-			return new a({
+			return new $.a({
 				href: "https://getbootstrap.com/docs/5.0",
 				linkcolor: "danger",
 				textdecoration: "none",
@@ -35,7 +34,7 @@ export default [
 		title: "Addtional property",
 		msg: [
 			"We add some special property into this component:",
-			new ul({
+			new $.ul({
 				item: [
 					"<code>icon</code> - only works if elem not provided",
 					"<code>label</code> - only works if elem not provided",
@@ -43,17 +42,17 @@ export default [
 				],
 			}),
 		],
-		container: doc_core.formcontainer,
+		container: sample.formcontainer,
 		code: function () {
 			return [
-				new a({
+				new $.a({
 					href: "https://getbootstrap.com/docs/5.0",
 					color: "success",
 					textdecoration: "none",
 					label: "Bootstrap",
 					icon: { type: "fab", icon: "bootstrap" },
 				}),
-				new a({
+				new $.a({
 					href: "https://getbootstrap.com/docs/5.0",
 					color: "light",
 					class: "bg-primary",
@@ -70,12 +69,12 @@ export default [
 	{
 		title: "Easy option",
 		msg: "This component also supported easy option.",
-		container: doc_core.formcontainer,
+		container: sample.formcontainer,
 		code: function () {
 			return [
-				new a({ href: "https://getbootstrap.com/docs/5.0", class: "classname", elem: "Bootstrap" }),
-				new a("https://getbootstrap.com/docs/5.0", "Bootstrap"),
-				new a("https://getbootstrap.com/docs/5.0"),
+				new $.a({ href: "https://getbootstrap.com/docs/5.0", class: "classname", elem: "Bootstrap" }),
+				new $.a("https://getbootstrap.com/docs/5.0", "Bootstrap"),
+				new $.a("https://getbootstrap.com/docs/5.0"),
 			];
 		},
 	},

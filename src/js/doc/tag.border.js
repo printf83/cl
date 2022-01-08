@@ -1,5 +1,6 @@
-import * as doc_core from "./core.js";
-import tag from "../base/tag.js";
+"use strict";
+import * as sample from "./sample.js";
+import $ from "../component.js";
 
 export default [
 	{
@@ -15,11 +16,11 @@ export default [
 
 	{
 		title: "Additive",
-		container: doc_core.stackcontainer,
+		container: sample.stackcontainer,
 		viewclass: "cl-highlight-box",
 		code: function () {
 			return [null, true, "top", "end", "bottom", "start", ["bottom", "start"]].map(function (i) {
-				return new tag({
+				return new $.tag({
 					tag: "div",
 					border: i,
 				});
@@ -29,12 +30,12 @@ export default [
 
 	{
 		title: "Subtractive",
-		container: doc_core.stackcontainer,
+		container: sample.stackcontainer,
 		viewclass: "cl-highlight-box",
 		code: function () {
 			return [null, false, "top-0", "end-0", "bottom-0", "start-0", ["border", "bottom-0", "start-0"]].map(
 				function (i) {
-					return new tag({
+					return new $.tag({
 						tag: "div",
 						border: Array.isArray(i) ? i : ["border", i],
 					});
@@ -45,13 +46,13 @@ export default [
 
 	{
 		title: "Border color",
-		msg: "Change the border color using {{bordercolor}} property on our theme colors.",
-		container: doc_core.stackcontainer,
+		msg: "Change the border color using {{bordercolor}} property on Bootstrap theme colors.",
+		container: sample.stackcontainer,
 		viewclass: "cl-highlight-box",
 		code: function () {
 			return [null, "primary", "secondary", "success", "danger", "warning", "info", "light", "dark", "white"].map(
 				function (i) {
-					return new tag({
+					return new $.tag({
 						tag: "div",
 						bordercolor: i,
 					});
@@ -63,11 +64,11 @@ export default [
 	{
 		title: "Border-width",
 		msg: "Change the border width using {{borderweight}} property.",
-		container: doc_core.stackcontainer,
+		container: sample.stackcontainer,
 		viewclass: "cl-highlight-box",
 		code: function () {
 			return [null, 0, 1, 2, 3, 4, 5].map(function (i) {
-				return new tag({
+				return new $.tag({
 					tag: "div",
 					borderweight: i,
 				});
@@ -78,11 +79,11 @@ export default [
 	{
 		title: "Sizes",
 		msg: "Change the border radius size {{rounded}} property.",
-		container: doc_core.stackcontainer,
+		container: sample.stackcontainer,
 		viewclass: "cl-highlight-box-dark",
 		code: function () {
 			return [null, 0, 1, 2, 3].map(function (i) {
-				return new tag({
+				return new $.tag({
 					tag: "div",
 					rounded: i,
 				});
@@ -93,11 +94,11 @@ export default [
 	{
 		title: "Border-radius",
 		msg: "Change the border radius style {{roundedtype}} property.",
-		container: doc_core.stackcontainer,
+		container: sample.stackcontainer,
 		viewclass: "cl-highlight-box-dark",
 		code: function () {
 			return [null, "top", "end", "bottom", "start", "pill", "circle"].map(function (i) {
-				return new tag({
+				return new $.tag({
 					tag: "div",
 					roundedtype: i,
 					style: {

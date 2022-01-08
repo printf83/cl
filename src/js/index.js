@@ -4,15 +4,7 @@ import "../css/example.css";
 import "../css/prettify.css";
 import "../css/example.css";
 
-import * as core from "./base/core.js";
-import * as cl from "./base/cl.js";
-import div from "./base/div.js";
-import example from "./base/example.js";
-import * as table from "./base/table.js";
-import * as navbar from "./base/navbar.js";
-import menu from "./base/menu.js";
-import toc from "./base/toc.js";
-import msg from "./base/msg.js";
+import $ from "./component.js";
 
 import doc_intro from "./doc/intro.js";
 
@@ -301,7 +293,7 @@ function startmemoryleaktest(sender, limit) {
 			},
 			function () {
 				sender.classList.remove("active");
-				cl.init(document.getElementById("root"));
+				$.cl.init(document.getElementById("root"));
 				PR.prettyPrint();
 			}
 		);
@@ -348,7 +340,7 @@ function memoryleaktest(index, limit, progressupdate, callback) {
 }
 
 function gen_example(opt) {
-	opt = core.extend(
+	opt = $.core.extend(
 		{},
 		{
 			id: null,
@@ -367,7 +359,7 @@ function gen_example(opt) {
 		opt
 	);
 
-	opt.id = opt.id || core.UUID();
+	opt.id = opt.id || $.core.UUID();
 
 	opt.msg = opt.msg ? (Array.isArray(opt.msg) ? opt.msg : [opt.msg]) : null;
 
@@ -387,14 +379,14 @@ function gen_example(opt) {
 
 		Object.keys(opt.option).forEach(function (optionName) {
 			m.push(
-				new table.container({
+				new $.table.container({
 					item: opt.option[optionName],
 				})
 			);
 		});
 	}
 
-	return new example({
+	return new $.example({
 		id: opt.id,
 		anchor: opt.anchor,
 		title: opt.title,
@@ -416,6 +408,8 @@ function beautifyjs(str) {
 		keep_array_indentation: false,
 		brace_style: "collapse,preserve-inline",
 	};
+
+	str = str.replace(/v.Z./g, "$.");
 
 	return js_beautify(str);
 }
@@ -463,9 +457,9 @@ function gen_content(m1, m2, callback) {
 									let processtimestart = window.performance.now();
 
 									sample.resetindex();
-									cl.replaceChild(
+									$.cl.replaceChild(
 										document.getElementById("root"),
-										new div({
+										new $.div({
 											marginbottom: 3,
 											elem: m.source.map(function (i) {
 												return gen_example(i);
@@ -483,7 +477,7 @@ function gen_content(m1, m2, callback) {
 									).toFixed(2)} ms`;
 
 									//count page weight
-									document.getElementById("pageweight").innerText = `${core.countElement(
+									document.getElementById("pageweight").innerText = `${$.core.countElement(
 										document.getElementById("root")
 									)} items`;
 
@@ -517,9 +511,9 @@ function gen_content(m1, m2, callback) {
 				// setTimeout(
 				// 	function (m, callback) {
 				// 		sample.resetindex();
-				// 		cl.replaceChild(
+				// 		$.cl.replaceChild(
 				// 			document.getElementById("root"),
-				// 			new div({
+				// 			new $.div({
 				// 				marginbottom: 3,
 				// 				elem: m.source.map(function (i) {
 				// 					return gen_example(i);
@@ -542,9 +536,9 @@ function gen_content(m1, m2, callback) {
 				//LOADER TYPE 3
 				//=============
 				// sample.resetindex();
-				// cl.replaceChild(
+				// $.cl.replaceChild(
 				// 	document.getElementById("root"),
-				// 	new div({
+				// 	new $.div({
 				// 		marginbottom: 3,
 				// 		elem: m.source.map(function (i) {
 				// 			return gen_example(i);
@@ -558,11 +552,11 @@ function gen_content(m1, m2, callback) {
 				// 	callback();
 				// }
 			} else {
-				cl.replaceChild(
+				$.cl.replaceChild(
 					document.getElementById("root"),
-					new div({
+					new $.div({
 						marginbottom: 3,
-						elem: new msg({
+						elem: new $.msg({
 							weight: "lg",
 							icon: "!",
 							elem: `Documentation for <b>${m1}</b> - <b>${m2}</b> not yet available`,
@@ -608,9 +602,9 @@ function gen_toc() {
 	let li = [];
 	let anchor = [].slice.call(document.getElementById("root").getElementsByClassName("anchorjs-link"));
 	if (anchor && anchor.length > 0) {
-		cl.replaceChild(
+		$.cl.replaceChild(
 			document.getElementById("nextbar"),
-			new toc({
+			new $.toc({
 				label: "On this page",
 				item: anchor.map(function (i) {
 					//remove debug example
@@ -623,7 +617,7 @@ function gen_toc() {
 							onclick: function (event) {
 								let sender = event.currentTarget;
 								let id = sender.getAttribute("cl-target-id");
-								core.focusElement(document.getElementById(id));
+								$.core.focusElement(document.getElementById(id));
 							},
 							level: parent.nodeName === "H3" ? 1 : 0,
 						};
@@ -632,13 +626,13 @@ function gen_toc() {
 			})
 		);
 	} else {
-		cl.replaceChild(document.getElementById("nextbar"), null);
+		$.cl.replaceChild(document.getElementById("nextbar"), null);
 	}
 }
 
 function gen_menu(m1, m2, theme) {
 	return db_menu.map(function (i) {
-		return new menu({
+		return new $.menu({
 			label: i.title,
 			active: i.title === m1,
 			item: i.item.map(function (j) {
@@ -674,7 +668,7 @@ function gen_menu(m1, m2, theme) {
 									if (i.type === "menu") {
 										sender.innerText = "Loading...";
 										gen_content(m1, m2, function () {
-											cl.init(document.getElementById("root"));
+											$.cl.init(document.getElementById("root"));
 											PR.prettyPrint();
 											sender.innerText = m2;
 										});
@@ -690,47 +684,47 @@ function gen_menu(m1, m2, theme) {
 }
 
 //test upload from laptop
-core.documentReady(() => {
+$.core.documentReady(() => {
 	//topbar
-	cl.replaceChild(
+	$.cl.replaceChild(
 		document.getElementById("navbar"),
-		new navbar.container({
+		new $.navbar.container({
 			color: "primary",
 			textcolor: "light",
 			expand: "lg",
 			body: { fluid: "lg" },
 			elem: [
-				new navbar.toggle({
+				new $.navbar.toggle({
 					target: `#sidebar`,
 					toggle: "collapse",
 				}),
-				new navbar.brand({ label: "cl", icon: "fire" }),
+				new $.navbar.brand({ label: "cl", icon: "fire" }),
 			],
 		})
 	);
 
 	//sidebar
-	cl.replaceChild(
+	$.cl.replaceChild(
 		document.getElementById("sidebar"),
-		new div({
+		new $.div({
 			elem: gen_menu(def_m1, def_m2, def_theme),
 		})
 	);
 
 	//nextbar
-	cl.replaceChild(
+	$.cl.replaceChild(
 		document.getElementById("nextbar"),
-		new div({
+		new $.div({
 			elem: "Loading...",
 		})
 	);
 
 	gen_content(def_m1, def_m2, function () {
-		cl.init(document.getElementById("root"));
+		$.cl.init(document.getElementById("root"));
 		PR.prettyPrint();
 	});
 
 	set_theme(def_theme);
 
-	cl.init(document.body);
+	$.cl.init(document.body);
 });

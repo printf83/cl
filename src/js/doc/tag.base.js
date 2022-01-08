@@ -1,6 +1,6 @@
-import * as doc_core from "./core.js";
-import button from "../base/button.js";
-import tag from "../base/tag.js";
+"use strict";
+import * as sample from "./sample.js";
+import $ from "../component.js";
 
 export default [
 	{
@@ -12,9 +12,9 @@ export default [
 	{
 		title: "tag",
 		msg: ["Create tag name for tag"],
-		container: doc_core.formcontainer,
+		container: sample.formcontainer,
 		code: function () {
-			return new button({ label: "AAA" });
+			return new $.button({ label: "AAA" });
 		},
 	},
 
@@ -25,14 +25,14 @@ export default [
 	{
 		title: "tag",
 		msg: ["Create tag name for tag"],
-		container: doc_core.formcontainer,
+		container: sample.formcontainer,
 		code: function () {
 			return [
-				new tag({ tag: "div", elem: "DIV element" }),
-				new tag({ tag: "span", elem: "SPAN element" }),
-				new tag({ tag: "p", elem: "P element" }),
-				new tag({ tag: "b", elem: "B element" }),
-				new tag({ tag: "i", elem: "I element" }),
+				new $.tag({ tag: "div", elem: "DIV element" }),
+				new $.tag({ tag: "span", elem: "SPAN element" }),
+				new $.tag({ tag: "p", elem: "P element" }),
+				new $.tag({ tag: "b", elem: "B element" }),
+				new $.tag({ tag: "i", elem: "I element" }),
 			];
 		},
 	},
@@ -40,24 +40,28 @@ export default [
 	{
 		title: "elem",
 		msg: ["Create element inside tag"],
-		container: doc_core.formcontainer,
+		container: sample.formcontainer,
 		code: function () {
 			return [
-				new tag({ tag: "div", class: "cl-highlight-div cl-highlight-element", elem: "String" }),
-				new tag({
+				new $.tag({ tag: "div", class: "cl-highlight-div cl-highlight-element", elem: "String" }),
+				new $.tag({
 					tag: "div",
 					class: "cl-highlight-div cl-highlight-element",
 					elem: ["String", "<div>Sub element</div>"],
 				}),
-				new tag({
+				new $.tag({
 					tag: "div",
 					class: "cl-highlight-div cl-highlight-element",
-					elem: new tag({ tag: "div", elem: "Sub element" }),
+					elem: new $.tag({ tag: "div", elem: "Sub element" }),
 				}),
-				new tag({
+				new $.tag({
 					tag: "div",
 					class: "cl-highlight-div cl-highlight-element",
-					elem: ["Sub element 1", "<div>Sub element 2</div>", new tag({ tag: "div", elem: "Sub element 3" })],
+					elem: [
+						"Sub element 1",
+						"<div>Sub element 2</div>",
+						new $.tag({ tag: "div", elem: "Sub element 3" }),
+					],
 				}),
 			];
 		},
@@ -67,9 +71,9 @@ export default [
 		title: "elem (without tag)",
 		msg: ["Create element inside tag that change parent property"],
 		code: function () {
-			return new tag({
+			return new $.tag({
 				tag: "div",
-				elem: new tag({
+				elem: new $.tag({
 					attr: { class: "hello" },
 					elem: "This sub element tag not have tag property",
 				}),
@@ -81,7 +85,7 @@ export default [
 		title: "attr",
 		msg: ["Create attribute for element"],
 		code: function () {
-			return new tag({
+			return new $.tag({
 				tag: "div",
 				attr: { id: "elementID", class: "elementClass", style: { color: "#555" } },
 				elem: "Example element",
@@ -101,7 +105,7 @@ export default [
 		title: "id",
 		msg: ["Create attribute <code>id</code> for element", "Shortcut for : <code>attr:{id:value}</code>"],
 		code: function () {
-			return new tag({
+			return new $.tag({
 				tag: "div",
 				id: "elementID2",
 				elem: "Example element",
@@ -112,7 +116,7 @@ export default [
 		title: "name",
 		msg: ["Create attribute <code>name</code> for element", "Shortcut for : <code>attr:{id:value}</code>"],
 		code: function () {
-			return new tag({
+			return new $.tag({
 				tag: "div",
 				name: "elementName",
 				elem: "Example element",
@@ -127,7 +131,7 @@ export default [
 			"Shortcut for : <code>attr:{href:value}</code>",
 		],
 		code: function () {
-			return new tag({
+			return new $.tag({
 				tag: "a",
 				href: "https://www.getbootstrap.com",
 				elem: "www.getbootstrap.com",
@@ -139,7 +143,7 @@ export default [
 		title: "onclick",
 		msg: ["Create attribute <code>onclick</code> for  element", "Shortcut for : <code>attr:{onclick:value}</code>"],
 		code: function () {
-			return new tag({
+			return new $.tag({
 				tag: "button",
 				class: "btn btn-primary",
 				onclick: function (event) {
@@ -157,7 +161,7 @@ export default [
 			"Shortcut for : <code>attr:{onchange:value}</code>",
 		],
 		code: function () {
-			return new tag({
+			return new $.tag({
 				tag: "input",
 				attr: {
 					class: "form-control",
@@ -175,7 +179,7 @@ export default [
 		title: "onfocus",
 		msg: ["Create attribute <code>onfocus</code> for  element", "Shortcut for : <code>attr:{onfocus:value}</code>"],
 		code: function () {
-			return new tag({
+			return new $.tag({
 				tag: "input",
 				attr: {
 					class: "form-control",
@@ -193,7 +197,7 @@ export default [
 		title: "onblur",
 		msg: ["Create attribute <code>onblur</code> for  element", "Shortcut for : <code>attr:{onblur:value}</code>"],
 		code: function () {
-			return new tag({
+			return new $.tag({
 				tag: "input",
 				attr: {
 					class: "form-control",
@@ -211,7 +215,7 @@ export default [
 		title: "style",
 		msg: ["Create attribute <code>style</code> for  element", "Shortcut for : <code>attr:{style:value}</code>"],
 		code: function () {
-			return new tag({
+			return new $.tag({
 				tag: "div",
 				style: {
 					border: "1px solid rgba(95,95,95,0.5)",

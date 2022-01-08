@@ -1,7 +1,5 @@
 "use strict";
-import * as alert from "../base/alert.js";
-import p from "../base/p.js";
-import hr from "../base/hr.js";
+import $ from "../component.js";
 
 export default [
 	{
@@ -14,7 +12,7 @@ export default [
 		title: "Example",
 		code: function () {
 			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map(function (i) {
-				return new alert.container({ color: i, elem: `A simple ${i} alert—check it out!` });
+				return new $.alert.container({ color: i, elem: `A simple ${i} alert—check it out!` });
 			});
 		},
 	},
@@ -23,11 +21,11 @@ export default [
 		title: "Link color",
 		code: function () {
 			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map(function (i) {
-				return new alert.container({
+				return new $.alert.container({
 					color: i,
 					elem: [
 						`A simple ${i} alert with `,
-						new alert.link({ label: "an example link", href: "javascript:void(0);" }),
+						new $.alert.link({ label: "an example link", href: "javascript:void(0);" }),
 						`. Give it a click if you like.`,
 					],
 				});
@@ -38,15 +36,15 @@ export default [
 	{
 		title: "Additional content",
 		code: function () {
-			return new alert.container({
+			return new $.alert.container({
 				color: "success",
 				elem: [
-					new alert.heading("Well done!"),
-					new p(
+					new $.alert.heading("Well done!"),
+					new $.p(
 						"Aww yeah, you successfully read this important alert message. This example text is going to run a bit longer so that you can see how spacing within an alert works with this kind of content."
 					),
-					new hr(),
-					new p({
+					new $.hr(),
+					new $.p({
 						marginbottom: 0,
 						elem: "Whenever you need to, be sure to use margin utilities to keep things nice and tidy.",
 					}),
@@ -59,7 +57,7 @@ export default [
 		title: "Icons",
 		code: function () {
 			return ["i", "!!", "!", "?", "-", "x", "/"].map(function (i) {
-				return new alert.container({ icon: i, elem: `An example alert with an <b>"${i}"</b> icon code` });
+				return new $.alert.container({ icon: i, elem: `An example alert with an <b>"${i}"</b> icon code` });
 			});
 		},
 	},
@@ -67,7 +65,7 @@ export default [
 	{
 		title: "Dismissing",
 		code: function () {
-			return new alert.container({
+			return new $.alert.container({
 				close: true,
 				color: "warning",
 				elem: "<strong>Holy guacamole!</strong> You should check in on some of those fields below.",

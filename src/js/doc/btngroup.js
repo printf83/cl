@@ -1,10 +1,6 @@
 "use strict";
-import * as doc_core from "./core.js";
-import btngroup from "../base/btngroup.js";
-import btntoolbar from "../base/btntoolbar.js";
-import button from "../base/button.js";
-import input from "../base/input.js";
-import dropdown from "../base/dropdown.js";
+import * as sample from "./sample.js";
+import $ from "../component.js";
 
 export default [
 	{
@@ -16,12 +12,12 @@ export default [
 	{
 		title: "Basic example",
 		code: function () {
-			return new btngroup({
+			return new $.btngroup({
 				label: "Basic example",
 				elem: [
-					new button({ label: "Left", color: "primary" }),
-					new button({ label: "Middle", color: "primary" }),
-					new button({ label: "Right", color: "primary" }),
+					new $.button({ label: "Left", color: "primary" }),
+					new $.button({ label: "Middle", color: "primary" }),
+					new $.button({ label: "Right", color: "primary" }),
 				],
 			});
 		},
@@ -30,17 +26,17 @@ export default [
 	{
 		title: "Link example",
 		code: function () {
-			return new btngroup({
+			return new $.btngroup({
 				label: "Link example",
 				elem: [
-					new button({
+					new $.button({
 						href: "#",
 						label: "Active link",
 						color: "primary",
 						active: true,
 					}),
-					new button({ href: "#", label: "Link", color: "primary" }),
-					new button({ href: "#", label: "Link", color: "primary" }),
+					new $.button({ href: "#", label: "Link", color: "primary" }),
+					new $.button({ href: "#", label: "Link", color: "primary" }),
 				],
 			});
 		},
@@ -49,12 +45,12 @@ export default [
 	{
 		title: "Mixed styles",
 		code: function () {
-			return new btngroup({
+			return new $.btngroup({
 				label: "Basic mixed styles example",
 				elem: [
-					new button({ label: "Left", color: "danger" }),
-					new button({ label: "Middle", color: "warning" }),
-					new button({ label: "Right", color: "success" }),
+					new $.button({ label: "Left", color: "danger" }),
+					new $.button({ label: "Middle", color: "warning" }),
+					new $.button({ label: "Right", color: "success" }),
 				],
 			});
 		},
@@ -63,12 +59,12 @@ export default [
 	{
 		title: "Outlined styles",
 		code: function () {
-			return new btngroup({
+			return new $.btngroup({
 				label: "Basic outlined styles example",
 				elem: [
-					new button({ outline: true, label: "Left", color: "primary" }),
-					new button({ outline: true, label: "Middle", color: "primary" }),
-					new button({ outline: true, label: "Right", color: "primary" }),
+					new $.button({ outline: true, label: "Left", color: "primary" }),
+					new $.button({ outline: true, label: "Middle", color: "primary" }),
+					new $.button({ outline: true, label: "Right", color: "primary" }),
 				],
 			});
 		},
@@ -77,17 +73,17 @@ export default [
 	{
 		title: "Checkbox button styles",
 		code: function () {
-			return new btngroup({
+			return new $.btngroup({
 				label: "Checkbox button styles example",
 				elem: [
-					new button({ type: "checkbox", outline: true, label: "Left", color: "primary" }),
-					new button({
+					new $.button({ type: "checkbox", outline: true, label: "Left", color: "primary" }),
+					new $.button({
 						type: "checkbox",
 						outline: true,
 						label: "Middle",
 						color: "primary",
 					}),
-					new button({
+					new $.button({
 						type: "checkbox",
 						outline: true,
 						label: "Right",
@@ -101,24 +97,24 @@ export default [
 	{
 		title: "Radio button styles",
 		code: function () {
-			return new btngroup({
+			return new $.btngroup({
 				label: "Radio button styles example",
 				elem: [
-					new button({
+					new $.button({
 						name: "g6",
 						type: "radio",
 						outline: true,
 						label: "Left",
 						color: "primary",
 					}),
-					new button({
+					new $.button({
 						name: "g6",
 						type: "radio",
 						outline: true,
 						label: "Middle",
 						color: "primary",
 					}),
-					new button({
+					new $.button({
 						name: "g6",
 						type: "radio",
 						outline: true,
@@ -133,30 +129,30 @@ export default [
 	{
 		title: "Button toolbar",
 		code: function () {
-			return new btntoolbar({
+			return new $.btntoolbar({
 				label: "Toolbar with button groups",
 				gap: 2,
 				elem: [
-					new btngroup({
+					new $.btngroup({
 						label: "First group",
 						elem: [
-							new button({ label: "1", color: "primary" }),
-							new button({ label: "2", color: "primary" }),
-							new button({ label: "3", color: "primary" }),
-							new button({ label: "4", color: "primary" }),
+							new $.button({ label: "1", color: "primary" }),
+							new $.button({ label: "2", color: "primary" }),
+							new $.button({ label: "3", color: "primary" }),
+							new $.button({ label: "4", color: "primary" }),
 						],
 					}),
-					new btngroup({
+					new $.btngroup({
 						label: "Second group",
 						elem: [
-							new button({ label: "5", color: "secondary" }),
-							new button({ label: "6", color: "secondary" }),
-							new button({ label: "7", color: "secondary" }),
+							new $.button({ label: "5", color: "secondary" }),
+							new $.button({ label: "6", color: "secondary" }),
+							new $.button({ label: "7", color: "secondary" }),
 						],
 					}),
-					new btngroup({
+					new $.btngroup({
 						label: "Third group",
-						elem: [new button({ label: "8", color: "info" })],
+						elem: [new $.button({ label: "8", color: "info" })],
 					}),
 				],
 			});
@@ -165,23 +161,23 @@ export default [
 
 	{
 		title: "Mix toolbar",
-		container: doc_core.formcontainer,
+		container: sample.formcontainer,
 		code: function () {
 			return [
-				new btntoolbar({
+				new $.btntoolbar({
 					label: "Toolbar with button groups",
 					gap: 2,
 					elem: [
-						new btngroup({
+						new $.btngroup({
 							label: "First group",
 							elem: [
-								new button({ label: "1", color: "secondary", outline: true }),
-								new button({ label: "2", color: "secondary", outline: true }),
-								new button({ label: "3", color: "secondary", outline: true }),
-								new button({ label: "4", color: "secondary", outline: true }),
+								new $.button({ label: "1", color: "secondary", outline: true }),
+								new $.button({ label: "2", color: "secondary", outline: true }),
+								new $.button({ label: "3", color: "secondary", outline: true }),
+								new $.button({ label: "4", color: "secondary", outline: true }),
 							],
 						}),
-						new input({
+						new $.input({
 							type: "text",
 							placeholder: "Input group example",
 							before: "@",
@@ -189,21 +185,21 @@ export default [
 					],
 				}),
 
-				new btntoolbar({
+				new $.btntoolbar({
 					label: "Toolbar with button groups",
 					gap: 2,
 					justifycontent: "between",
 					elem: [
-						new btngroup({
+						new $.btngroup({
 							label: "First group",
 							elem: [
-								new button({ label: "1", color: "secondary", outline: true }),
-								new button({ label: "2", color: "secondary", outline: true }),
-								new button({ label: "3", color: "secondary", outline: true }),
-								new button({ label: "4", color: "secondary", outline: true }),
+								new $.button({ label: "1", color: "secondary", outline: true }),
+								new $.button({ label: "2", color: "secondary", outline: true }),
+								new $.button({ label: "3", color: "secondary", outline: true }),
+								new $.button({ label: "4", color: "secondary", outline: true }),
 							],
 						}),
-						new input({
+						new $.input({
 							type: "text",
 							placeholder: "Input group example",
 							before: "@",
@@ -216,30 +212,30 @@ export default [
 
 	{
 		title: "Sizing",
-		container: doc_core.formcontainer,
+		container: sample.formcontainer,
 		code: function () {
 			return [
-				new btngroup({
+				new $.btngroup({
 					weight: "lg",
 					elem: [
-						new button({ outline: true, label: "Left", color: "secondary" }),
-						new button({ outline: true, label: "Middle", color: "secondary" }),
-						new button({ outline: true, label: "Right", color: "secondary" }),
+						new $.button({ outline: true, label: "Left", color: "secondary" }),
+						new $.button({ outline: true, label: "Middle", color: "secondary" }),
+						new $.button({ outline: true, label: "Right", color: "secondary" }),
 					],
 				}),
-				new btngroup({
+				new $.btngroup({
 					elem: [
-						new button({ outline: true, label: "Left", color: "secondary" }),
-						new button({ outline: true, label: "Middle", color: "secondary" }),
-						new button({ outline: true, label: "Right", color: "secondary" }),
+						new $.button({ outline: true, label: "Left", color: "secondary" }),
+						new $.button({ outline: true, label: "Middle", color: "secondary" }),
+						new $.button({ outline: true, label: "Right", color: "secondary" }),
 					],
 				}),
-				new btngroup({
+				new $.btngroup({
 					weight: "sm",
 					elem: [
-						new button({ outline: true, label: "Left", color: "secondary" }),
-						new button({ outline: true, label: "Middle", color: "secondary" }),
-						new button({ outline: true, label: "Right", color: "secondary" }),
+						new $.button({ outline: true, label: "Left", color: "secondary" }),
+						new $.button({ outline: true, label: "Middle", color: "secondary" }),
+						new $.button({ outline: true, label: "Right", color: "secondary" }),
 					],
 				}),
 			];
@@ -249,12 +245,12 @@ export default [
 	{
 		title: "Nesting",
 		code: function () {
-			return new btngroup({
+			return new $.btngroup({
 				label: "Button group with nested dropdown",
 				elem: [
-					new button({ label: "1", color: "primary" }),
-					new button({ label: "2", color: "primary" }),
-					new dropdown({
+					new $.button({ label: "1", color: "primary" }),
+					new $.button({ label: "2", color: "primary" }),
+					new $.dropdown({
 						label: "Dropdown",
 						color: "primary",
 						container: "btn-group",
@@ -271,15 +267,15 @@ export default [
 	{
 		title: "Vertical variation",
 		code: function () {
-			return new btngroup({
+			return new $.btngroup({
 				vertical: true,
 				elem: [
-					new button({ label: "Button", color: "dark" }),
-					new button({ label: "Button", color: "dark" }),
-					new button({ label: "Button", color: "dark" }),
-					new button({ label: "Button", color: "dark" }),
-					new button({ label: "Button", color: "dark" }),
-					new button({ label: "Button", color: "dark" }),
+					new $.button({ label: "Button", color: "dark" }),
+					new $.button({ label: "Button", color: "dark" }),
+					new $.button({ label: "Button", color: "dark" }),
+					new $.button({ label: "Button", color: "dark" }),
+					new $.button({ label: "Button", color: "dark" }),
+					new $.button({ label: "Button", color: "dark" }),
 				],
 			});
 		},
@@ -288,12 +284,12 @@ export default [
 	{
 		title: "Vertical variation with dropdown",
 		code: function () {
-			return new btngroup({
+			return new $.btngroup({
 				vertical: true,
 				elem: [
-					new button({ label: "Button", color: "primary" }),
-					new button({ label: "Button", color: "primary" }),
-					new dropdown({
+					new $.button({ label: "Button", color: "primary" }),
+					new $.button({ label: "Button", color: "primary" }),
+					new $.dropdown({
 						label: "Dropdown",
 						color: "primary",
 						container: "btn-group",
@@ -302,9 +298,9 @@ export default [
 							{ href: "#", label: "Dropdown link" },
 						],
 					}),
-					new button({ label: "Button", color: "primary" }),
-					new button({ label: "Button", color: "primary" }),
-					new dropdown({
+					new $.button({ label: "Button", color: "primary" }),
+					new $.button({ label: "Button", color: "primary" }),
+					new $.dropdown({
 						label: "Dropdown",
 						color: "primary",
 						container: "btn-group",
@@ -313,7 +309,7 @@ export default [
 							{ href: "#", label: "Dropdown link" },
 						],
 					}),
-					new dropdown({
+					new $.dropdown({
 						label: "Dropdown",
 						color: "primary",
 						container: "btn-group",
@@ -322,7 +318,7 @@ export default [
 							{ href: "#", label: "Dropdown link" },
 						],
 					}),
-					new dropdown({
+					new $.dropdown({
 						label: "Dropdown",
 						color: "primary",
 						container: "btn-group",
@@ -339,10 +335,10 @@ export default [
 	{
 		title: "Vertical variation with radio button",
 		code: function () {
-			return new btngroup({
+			return new $.btngroup({
 				vertical: true,
 				elem: [
-					new button({
+					new $.button({
 						name: "g9",
 						type: "radio",
 						outline: true,
@@ -350,14 +346,14 @@ export default [
 						color: "danger",
 						checked: true,
 					}),
-					new button({
+					new $.button({
 						name: "g9",
 						type: "radio",
 						outline: true,
 						label: "Radio 2",
 						color: "danger",
 					}),
-					new button({
+					new $.button({
 						name: "g9",
 						type: "radio",
 						outline: true,

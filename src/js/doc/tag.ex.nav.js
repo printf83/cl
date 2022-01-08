@@ -1,6 +1,6 @@
-import { tagprop } from "./sample.js";
-import nav from "../base/nav.js";
-import * as doc_core from "./core.js";
+"use strict";
+import * as sample from "./sample.js";
+import $ from "../component.js";
 
 export default [
 	{
@@ -11,17 +11,17 @@ export default [
 
 	{
 		msg: [
-			"Shortcut for {{new tag({tag:'nav'})}}",
+			"Shortcut for {{new $.tag({tag:'nav'})}}",
 			"This component is extended from {{tag}} component, so any property on tag component, will also work on this component.",
 			"Property inherits from tag component:",
-			tagprop(),
+			sample.tagprop(),
 		],
 	},
 
 	{
 		title: "Example",
 		code: function () {
-			return new nav({
+			return new $.nav({
 				attr: { "data-test": "test" },
 				elem: "Example navigation",
 			});
@@ -31,12 +31,12 @@ export default [
 	{
 		title: "Easy option",
 		msg: "This component also supported easy option.",
-		container: doc_core.formcontainer,
+		container: sample.formcontainer,
 		code: function () {
 			return [
-				new nav({ class: "classname", elem: "Navigation 1" }),
-				new nav("classname", "Navigation 2"),
-				new nav("Navigation 3"),
+				new $.nav({ class: "classname", elem: "Navigation 1" }),
+				new $.nav("classname", "Navigation 2"),
+				new $.nav("Navigation 3"),
 			];
 		},
 	},

@@ -1,32 +1,6 @@
 "use strict";
-import * as doc_core from "./core.js";
 import * as sample from "./sample.js";
-import listgroup from "../base/listgroup.js";
-import div from "../base/div.js";
-import p from "../base/p.js";
-import small from "../base/small.js";
-import h from "../base/h.js";
-import badge from "../base/badge.js";
-
-/* 
-    \}\),\n+\t+ns.example\(\{
-    },\n\n\t{
-    
-    ns. 
-    new 
-
-    elems:
-    elem:
-
-    ex.sample
-    sample
-
-    javascript:void(0)
-    #
-
-	container: new cont.stack(),
-	container: doc_core.stackcontainer,
-*/
+import $ from "../component.js";
 
 export default [
 	{
@@ -39,14 +13,14 @@ export default [
 		title: "Basic example",
 		sample: { "sample.listgroupitem": sample.listgroupitem },
 		code: function () {
-			return new listgroup({ item: sample.listgroupitem() });
+			return new $.listgroup({ item: sample.listgroupitem() });
 		},
 	},
 
 	{
 		title: "Active items",
 		code: function () {
-			return new listgroup({
+			return new $.listgroup({
 				item: [
 					{ elem: "An active item", active: true },
 					{ elem: "A second item" },
@@ -61,7 +35,7 @@ export default [
 	{
 		title: "Disabled items",
 		code: function () {
-			return new listgroup({
+			return new $.listgroup({
 				item: [
 					{ elem: "An disabled item", disabled: true },
 					{ elem: "A second item" },
@@ -76,7 +50,7 @@ export default [
 	{
 		title: "List group of links",
 		code: function () {
-			return new listgroup({
+			return new $.listgroup({
 				type: "div",
 				item: [
 					{
@@ -96,7 +70,7 @@ export default [
 	{
 		title: "List group of buttons",
 		code: function () {
-			return new listgroup({
+			return new $.listgroup({
 				type: "div",
 				item: [
 					{
@@ -117,7 +91,7 @@ export default [
 		title: "Flush",
 		sample: { "sample.listgroupitem": sample.listgroupitem },
 		code: function () {
-			return new listgroup({
+			return new $.listgroup({
 				flush: true,
 				item: sample.listgroupitem(),
 			});
@@ -128,7 +102,7 @@ export default [
 		title: "Numbered",
 		sample: { "sample.listgroupitem": sample.listgroupitem },
 		code: function () {
-			return new listgroup({
+			return new $.listgroup({
 				type: "ol",
 				item: sample.listgroupitem(),
 			});
@@ -139,7 +113,7 @@ export default [
 		title: "Numbered custom content",
 		sample: { "sample.listgroupitemcustomcontent": sample.listgroupitemcustomcontent },
 		code: function () {
-			return new listgroup({
+			return new $.listgroup({
 				type: "ol",
 				item: [
 					{
@@ -171,41 +145,41 @@ export default [
 			"Add {{.list-group-horizontal}} to change the layout of list group items from vertical to horizontal across all breakpoints. Alternatively, choose a responsive variant {{.list-group-horizontal-{sm|md|lg|xl|xxl} }}to make a list group horizontal starting at that breakpoint’s {{min-width}}. Currently <b>horizontal list groups cannot be combined with flush list groups.</b>",
 			"<b>ProTip:</b> Want equal-width list group items when horizontal? Add {{.flex-fill}} to each list group item.",
 		],
-		container: doc_core.stackcontainer,
+		container: sample.stackcontainer,
 		sample: { "sample.listgroupitem3": sample.listgroupitem3 },
 		code: function () {
 			return [
-				new listgroup({
+				new $.listgroup({
 					horizontal: true,
 					item: sample.listgroupitem3(),
 				}),
 
-				new listgroup({
+				new $.listgroup({
 					horizontal: "sm",
 					item: sample.listgroupitem3(),
 				}),
 
-				new listgroup({
+				new $.listgroup({
 					horizontal: "md",
 					item: sample.listgroupitem3(),
 				}),
 
-				new listgroup({
+				new $.listgroup({
 					horizontal: "lg",
 					item: sample.listgroupitem3(),
 				}),
 
-				new listgroup({
+				new $.listgroup({
 					horizontal: "xl",
 					item: sample.listgroupitem3(),
 				}),
 
-				new listgroup({
+				new $.listgroup({
 					horizontal: "xxl",
 					item: sample.listgroupitem3(),
 				}),
 
-				new listgroup({
+				new $.listgroup({
 					horizontal: ["md", "xxl"],
 					item: sample.listgroupitem3(),
 				}),
@@ -216,7 +190,7 @@ export default [
 	{
 		title: "Contextual classes",
 		code: function () {
-			return new listgroup({
+			return new $.listgroup({
 				item: [{ color: "primary", elem: `A simple primary list group item` }],
 			});
 		},
@@ -225,7 +199,7 @@ export default [
 	{
 		title: "Contextual classes example",
 		code: function () {
-			return new listgroup({
+			return new $.listgroup({
 				item: ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map(function (
 					i
 				) {
@@ -238,7 +212,7 @@ export default [
 	{
 		title: "Contextual classes with action example",
 		code: function () {
-			return new listgroup({
+			return new $.listgroup({
 				type: "div",
 				item: ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map(function (
 					i
@@ -264,7 +238,7 @@ export default [
 					alignitem: "start",
 					elem: [
 						text,
-						new badge({
+						new $.badge({
 							pill: true,
 							color: "primary",
 							label: badgeLabel,
@@ -273,7 +247,7 @@ export default [
 				};
 			};
 
-			return new listgroup({
+			return new $.listgroup({
 				item: [itemfn("A list item", 14), itemfn("A second list item", 2), itemfn("A third list item", 1)],
 			});
 		},
@@ -288,20 +262,20 @@ export default [
 					action: true,
 					active: active,
 					elem: [
-						new div({
+						new $.div({
 							class: "w-100",
 							display: "flex",
 							justifycontent: "between",
 							elem: [
-								new h({ level: 5, marginbottom: 1, elem: title }),
-								new small({
+								new $.h({ level: 5, marginbottom: 1, elem: title }),
+								new $.small({
 									textcolor: !active ? "muted" : null,
 									elem: `${days} days ago`,
 								}),
 							],
 						}),
-						new p({ marginbottom: 1, elem: "Some placeholder content in a paragraph." }),
-						new small({
+						new $.p({ marginbottom: 1, elem: "Some placeholder content in a paragraph." }),
+						new $.small({
 							textcolor: !active ? "muted" : null,
 							elem: `And some${!active ? " muted" : ""} small print.`,
 						}),
@@ -309,7 +283,7 @@ export default [
 				};
 			};
 
-			return new listgroup({
+			return new $.listgroup({
 				type: "div",
 				item: [
 					itemfn("List group item heading 1", true, 1),
@@ -323,7 +297,7 @@ export default [
 	{
 		title: "Checkboxes",
 		code: function () {
-			return new listgroup({
+			return new $.listgroup({
 				type: "div",
 				item: [
 					{ type: "checkbox", value: "1", label: "First checkbox" },
@@ -353,7 +327,7 @@ export default [
 	{
 		title: "Radio",
 		code: function () {
-			return new listgroup({
+			return new $.listgroup({
 				type: "div",
 				item: [
 					{
@@ -396,7 +370,7 @@ export default [
 	{
 		title: "Switch",
 		code: function () {
-			return new listgroup({
+			return new $.listgroup({
 				type: "div",
 				item: [
 					{ type: "switch", value: "1", label: "First switch" },

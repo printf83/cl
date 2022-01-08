@@ -1,5 +1,5 @@
-import tag from "../base/tag.js";
-import * as table from "../base/table.js";
+"use strict";
+import $ from "../component.js";
 
 export default [
 	{
@@ -12,12 +12,12 @@ export default [
 		msg: [
 			"Change the alignment of elements with the {{valign}} property. Please note that vertical-align only affects {{inline}}, {{inline-block}}, {{inline-table}}, and {{table cell}} elements.",
 			"Choose from {{baseline}}, {{top}}, {{middle}}, {{bottom}}, {{text-bottom}}, and {{text-top}} as needed.",
-			"To vertically center non-inline content (like {{div}} and more), use our <b>flex box utilities</b>.",
+			"To vertically center non-inline content (like {{div}} and more), use Bootstrap <b>flex box utilities</b>.",
 			"With inline elements:",
 		],
 		code: function () {
 			return ["baseline", "top", "middle", "bottom", "text-top", "text-bottom"].map(function (i) {
-				return new tag({ tag: "span", valign: i, elem: ` ${i} ` });
+				return new $.tag({ tag: "span", valign: i, elem: ` ${i} ` });
 			});
 		},
 	},
@@ -25,13 +25,13 @@ export default [
 	{
 		msg: "With table cell",
 		code: function () {
-			return new table.container({
+			return new $.table.container({
 				style: { height: "8rem" },
 				border: false,
-				elem: new table.tbody({
-					elem: new table.tr({
+				elem: new $.table.tbody({
+					elem: new $.table.tr({
 						elem: ["baseline", "top", "middle", "bottom", "text-top", "text-bottom"].map(function (i) {
-							return new table.td({ valign: i, elem: i });
+							return new $.table.td({ valign: i, elem: i });
 						}),
 					}),
 				}),

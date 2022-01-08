@@ -1,5 +1,5 @@
-import toc from "../base/toc.js";
-import toast from "../base/toast.js";
+"use strict";
+import $ from "../component.js";
 
 export default [
 	{
@@ -9,7 +9,7 @@ export default [
 	{
 		title: "Example",
 		code: function () {
-			return new toc({
+			return new $.toc({
 				label: "On this page",
 				item: [
 					{ label: "Item 1" },
@@ -25,7 +25,7 @@ export default [
 	{
 		title: "Level",
 		code: function () {
-			return new toc({
+			return new $.toc({
 				label: "On this page",
 				item: [
 					{ label: "Item 1" },
@@ -41,7 +41,7 @@ export default [
 	{
 		title: "With icon",
 		code: function () {
-			return new toc({
+			return new $.toc({
 				icon: "fire",
 				label: "Example",
 				item: [
@@ -58,7 +58,7 @@ export default [
 	{
 		title: "Link",
 		code: function () {
-			return new toc({
+			return new $.toc({
 				label: "Example",
 				item: [
 					{ label: "BS5 JS Builder", href: "#" },
@@ -73,31 +73,31 @@ export default [
 	{
 		title: "Function",
 		code: function () {
-			return new toc({
+			return new $.toc({
 				label: "Example",
 				item: [
 					{
 						label: "Show info toast",
 						onclick: function () {
-							new toast("i", "Info toast").show();
+							new $.toast("i", "Info toast").show();
 						},
 					},
 					{
 						label: "Show warning toast",
 						onclick: function () {
-							new toast("!", "Warning toast").show();
+							new $.toast("!", "Warning toast").show();
 						},
 					},
 					{
 						label: "Show success toast",
 						onclick: function () {
-							new toast("/", "Success toast").show();
+							new $.toast("/", "Success toast").show();
 						},
 					},
 					{
 						label: "Show critical toast",
 						onclick: function () {
-							new toast("x", "Critical toast").show();
+							new $.toast("x", "Critical toast").show();
 						},
 					},
 				],

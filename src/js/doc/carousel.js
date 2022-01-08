@@ -1,6 +1,6 @@
 "use strict";
 import * as sample from "./sample.js";
-import carousel from "../base/carousel.js";
+import $ from "../component.js";
 
 export default [
 	{
@@ -13,7 +13,7 @@ export default [
 		title: "Slide only",
 		sample: { "sample.img": sample.img },
 		code: function () {
-			return new carousel({
+			return new $.carousel({
 				item: [
 					sample.img(857, 428),
 					sample.img(857, 428),
@@ -30,7 +30,7 @@ export default [
 		title: "With control",
 		sample: { "sample.img": sample.img },
 		code: function () {
-			return new carousel({
+			return new $.carousel({
 				control: true,
 				item: [
 					sample.img(857, 428),
@@ -48,7 +48,7 @@ export default [
 		title: "With indicator",
 		sample: { "sample.img": sample.img },
 		code: function () {
-			return new carousel({
+			return new $.carousel({
 				control: true,
 				indicators: true,
 				item: [
@@ -67,7 +67,7 @@ export default [
 		title: "With caption",
 		sample: { "sample.img": sample.img },
 		code: function () {
-			return new carousel({
+			return new $.carousel({
 				control: true,
 				indicators: true,
 				item: [
@@ -110,7 +110,7 @@ export default [
 		title: "Crossfade",
 		sample: { "sample.img": sample.img },
 		code: function () {
-			return new carousel({
+			return new $.carousel({
 				control: true,
 				fade: true,
 				item: [
@@ -129,7 +129,7 @@ export default [
 		title: "Individual interval",
 		sample: { "sample.img": sample.img },
 		code: function () {
-			return new carousel({
+			return new $.carousel({
 				control: true,
 				indicators: true,
 				item: [
@@ -148,7 +148,7 @@ export default [
 		title: "Disable touch swiping",
 		sample: { "sample.img": sample.img },
 		code: function () {
-			return new carousel({
+			return new $.carousel({
 				control: true,
 				touch: false,
 				item: [
@@ -167,7 +167,7 @@ export default [
 		title: "Dark variant",
 		sample: { "sample.img": sample.img },
 		code: function () {
-			return new carousel({
+			return new $.carousel({
 				control: true,
 				indicators: true,
 				dark: true,

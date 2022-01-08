@@ -1,5 +1,5 @@
-import menu from "../base/menu.js";
-import toast from "../base/toast.js";
+"use strict";
+import $ from "../component.js";
 
 export default [
 	{
@@ -38,7 +38,7 @@ export default [
 					],
 				},
 			].map(function (i) {
-				return new menu(i);
+				return new $.menu(i);
 			});
 		},
 	},
@@ -76,7 +76,7 @@ export default [
 					],
 				},
 			].map(function (i) {
-				return new menu(i);
+				return new $.menu(i);
 			});
 		},
 	},
@@ -97,7 +97,7 @@ export default [
 					],
 				},
 			].map(function (i) {
-				return new menu(i);
+				return new $.menu(i);
 			});
 		},
 	},
@@ -116,7 +116,7 @@ export default [
 					],
 				},
 			].map(function (i) {
-				return new menu(i);
+				return new $.menu(i);
 			});
 		},
 	},
@@ -131,31 +131,31 @@ export default [
 						{
 							label: "Show info toast",
 							onclick: function () {
-								new toast("i", "Info toast").show();
+								new $.toast("i", "Info toast").show();
 							},
 						},
 						{
 							label: "Show warning toast",
 							onclick: function () {
-								new toast("!", "Warning toast").show();
+								new $.toast("!", "Warning toast").show();
 							},
 						},
 						{
 							label: "Show success toast",
 							onclick: function () {
-								new toast("/", "Success toast").show();
+								new $.toast("/", "Success toast").show();
 							},
 						},
 						{
 							label: "Show critical toast",
 							onclick: function () {
-								new toast("x", "Critical toast").show();
+								new $.toast("x", "Critical toast").show();
 							},
 						},
 					],
 				},
 			].map(function (i) {
-				return new menu(i);
+				return new $.menu(i);
 			});
 		},
 	},

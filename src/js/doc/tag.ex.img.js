@@ -1,8 +1,7 @@
-import { tagprop } from "./sample.js";
-import img from "../base/img.js";
-import * as doc_core from "./core.js";
+"use strict";
 import * as sample from "./sample.js";
-import ul from "../base/ul.js";
+import $ from "../component.js";
+
 export default [
 	{
 		title: "Image",
@@ -12,17 +11,17 @@ export default [
 
 	{
 		msg: [
-			"Shortcut for {{new tag({tag:'img'})}}",
+			"Shortcut for {{new $.tag({tag:'img'})}}",
 			"This component is extended from {{tag}} component, so any property on tag component, will also work on this component.",
 			"Property inherits from tag component:",
-			tagprop("elem"),
+			sample.tagprop("elem"),
 		],
 	},
 
 	{
 		title: "Example",
 		code: function () {
-			return new img({
+			return new $.img({
 				src: sample.img(100, 100),
 				alt: "Sample Image",
 				class: "img-fluid",
@@ -35,7 +34,7 @@ export default [
 		title: "Addtional property",
 		msg: [
 			"We add some special property into this component:",
-			new ul({
+			new $.ul({
 				item: [
 					"<code>src</code> - to set src attribute. Shortcut from <code>{attr:src}</code>",
 					"<code>alt</code> - to set alt attribute. Shortcut from <code>{attr:alt}</code>",
@@ -47,12 +46,12 @@ export default [
 	{
 		title: "Easy option",
 		msg: "This component also supported easy option.",
-		container: doc_core.stackcontainer,
+		container: sample.stackcontainer,
 		code: function () {
 			return [
-				new img({ src: sample.img(100, 100), class: "img-thumbnail", alt: "Sample Image" }),
-				new img("img-thumbnail", sample.img(100, 100)),
-				new img(sample.img(100, 100)),
+				new $.img({ src: sample.img(100, 100), class: "img-thumbnail", alt: "Sample Image" }),
+				new $.img("img-thumbnail", sample.img(100, 100)),
+				new $.img(sample.img(100, 100)),
 			];
 		},
 	},
