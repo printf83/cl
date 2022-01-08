@@ -1,4 +1,5 @@
 "use strict";
+import * as sample from "./sample.js";
 import $ from "../component.js";
 
 export default [
@@ -100,7 +101,7 @@ export default [
 
 	{
 		title: "Base icon",
-		container: $.container.form,
+		container: sample.formcontainer,
 		code: function () {
 			return ["i", "!!", "!", "?", "-", "x", "/"].map(function (i) {
 				//this last argument is for this documentation preview only
@@ -135,7 +136,7 @@ export default [
 
 	{
 		title: "Color",
-		container: $.container.form,
+		container: sample.formcontainer,
 		code: function () {
 			return [
 				{ color: "primary", textcolor: "light" },
@@ -159,7 +160,7 @@ export default [
 
 	{
 		title: "Position",
-		container: $.container.stack,
+		container: sample.stackcontainer,
 		code: function () {
 			return [
 				{ label: "Top left", position: "top-0 start-0" },

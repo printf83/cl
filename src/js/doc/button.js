@@ -1,4 +1,5 @@
 "use strict";
+import * as sample from "./sample.js";
 import $ from "../component.js";
 
 export default [
@@ -10,7 +11,7 @@ export default [
 
 	{
 		title: "Examples",
-		container: $.container.stack,
+		container: sample.stackcontainer,
 		code: function () {
 			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark", "link"].map(
 				function (i) {
@@ -22,7 +23,7 @@ export default [
 
 	{
 		title: "Disable text wrapping",
-		container: $.container.stack,
+		container: sample.stackcontainer,
 		code: function () {
 			return new $.button({
 				label: "Disable text wrapping button",
@@ -34,7 +35,7 @@ export default [
 
 	{
 		title: "Button tags",
-		container: $.container.stack,
+		container: sample.stackcontainer,
 		code: function () {
 			return [
 				new $.button({ label: "Link", color: "primary", href: "javascript:void(0);" }),
@@ -69,7 +70,7 @@ export default [
 
 	{
 		title: "Outline button",
-		container: $.container.stack,
+		container: sample.stackcontainer,
 		code: function () {
 			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark", "link"].map(
 				function (i) {
@@ -81,7 +82,7 @@ export default [
 
 	{
 		title: "Large Size",
-		container: $.container.stack,
+		container: sample.stackcontainer,
 		code: function () {
 			return [
 				new $.button({ weight: "lg", label: "Large button", color: "primary" }),
@@ -92,7 +93,7 @@ export default [
 
 	{
 		title: "Small Size",
-		container: $.container.stack,
+		container: sample.stackcontainer,
 		code: function () {
 			return [
 				new $.button({ weight: "sm", label: "Small button", color: "primary" }),
@@ -103,7 +104,7 @@ export default [
 
 	{
 		title: "Disabled state",
-		container: $.container.stack,
+		container: sample.stackcontainer,
 		code: function () {
 			return [
 				new $.button({ disabled: true, weight: "lg", label: "Disabled button", color: "primary" }),
@@ -114,7 +115,7 @@ export default [
 
 	{
 		title: "Disabled button link state",
-		container: $.container.stack,
+		container: sample.stackcontainer,
 		code: function () {
 			return [
 				new $.button({
@@ -181,7 +182,7 @@ export default [
 
 	{
 		title: "Toggle state button",
-		container: $.container.stack,
+		container: sample.stackcontainer,
 		code: function () {
 			return [
 				new $.button({
@@ -207,7 +208,7 @@ export default [
 
 	{
 		title: "Toggle state button",
-		container: $.container.stack,
+		container: sample.stackcontainer,
 		code: function () {
 			return [
 				new $.button({ toggle: true, label: "Toggle button", color: "primary" }),
@@ -231,7 +232,7 @@ export default [
 
 	{
 		title: "Toggle state link",
-		container: $.container.stack,
+		container: sample.stackcontainer,
 		code: function () {
 			return [
 				new $.button({

@@ -1,4 +1,5 @@
 "use strict";
+import * as sample from "./sample.js";
 import $ from "../component.js";
 
 export default [
@@ -8,7 +9,7 @@ export default [
 	},
 	{
 		title: "Example",
-		container: $.container.stack,
+		container: sample.stackcontainer,
 		code: function () {
 			return [
 				{ title: "Title", label: "Label" },
@@ -25,7 +26,7 @@ export default [
 	},
 	{
 		title: "Icon",
-		container: $.container.stack,
+		container: sample.stackcontainer,
 		code: function () {
 			return [
 				{ icon: "fire", label: "Label" },
@@ -42,7 +43,7 @@ export default [
 	},
 	{
 		title: "Base icon",
-		container: $.container.stack,
+		container: sample.stackcontainer,
 		code: function () {
 			return [
 				{ icon: "i", title: "Title", label: "Info" },
@@ -59,7 +60,7 @@ export default [
 
 	{
 		title: "Icon with title",
-		container: $.container.stack,
+		container: sample.stackcontainer,
 		code: function () {
 			return [
 				{ icon: "i", title: "Info", label: "Label" },

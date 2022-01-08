@@ -2,26 +2,6 @@
 import * as sample from "./sample.js";
 import $ from "../component.js";
 
-/* 
-    \}\),\n+\t+ns.example\(\{
-    },\n\n\t{
-    
-    ns. 
-    new $.
-
-    elems:
-    elem:
-
-    ex.sample
-    sample
-
-    javascript:void(0)
-    #
-
-	container: new $.cont.stack(),
-	container: $.container.stack,
-*/
-
 export default [
 	{
 		title: "List group",
@@ -165,7 +145,7 @@ export default [
 			"Add {{.list-group-horizontal}} to change the layout of list group items from vertical to horizontal across all breakpoints. Alternatively, choose a responsive variant {{.list-group-horizontal-{sm|md|lg|xl|xxl} }}to make a list group horizontal starting at that breakpoint’s {{min-width}}. Currently <b>horizontal list groups cannot be combined with flush list groups.</b>",
 			"<b>ProTip:</b> Want equal-width list group items when horizontal? Add {{.flex-fill}} to each list group item.",
 		],
-		container: $.container.stack,
+		container: sample.stackcontainer,
 		sample: { "sample.listgroupitem3": sample.listgroupitem3 },
 		code: function () {
 			return [

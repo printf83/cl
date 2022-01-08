@@ -1,4 +1,5 @@
 "use strict";
+import * as sample from "./sample.js";
 import $ from "../component.js";
 
 export default [
@@ -18,7 +19,7 @@ export default [
 				}),
 			}),
 		],
-		container: $.container.form,
+		container: sample.formcontainer,
 		viewclass: "cl-highlight-shadow",
 		code: function () {
 			return ["none", "sm", true, "lg"].map(function (i) {

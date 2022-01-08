@@ -293,7 +293,7 @@ function startmemoryleaktest(sender, limit) {
 			},
 			function () {
 				sender.classList.remove("active");
-				cl.init(document.getElementById("root"));
+				$.cl.init(document.getElementById("root"));
 				PR.prettyPrint();
 			}
 		);
@@ -340,7 +340,7 @@ function memoryleaktest(index, limit, progressupdate, callback) {
 }
 
 function gen_example(opt) {
-	opt = core.extend(
+	opt = $.core.extend(
 		{},
 		{
 			id: null,
@@ -359,7 +359,7 @@ function gen_example(opt) {
 		opt
 	);
 
-	opt.id = opt.id || core.UUID();
+	opt.id = opt.id || $.core.UUID();
 
 	opt.msg = opt.msg ? (Array.isArray(opt.msg) ? opt.msg : [opt.msg]) : null;
 
@@ -475,7 +475,7 @@ function gen_content(m1, m2, callback) {
 									).toFixed(2)} ms`;
 
 									//count page weight
-									document.getElementById("pageweight").innerText = `${core.countElement(
+									document.getElementById("pageweight").innerText = `${$.core.countElement(
 										document.getElementById("root")
 									)} items`;
 
@@ -615,7 +615,7 @@ function gen_toc() {
 							onclick: function (event) {
 								let sender = event.currentTarget;
 								let id = sender.getAttribute("cl-target-id");
-								core.focusElement(document.getElementById(id));
+								$.core.focusElement(document.getElementById(id));
 							},
 							level: parent.nodeName === "H3" ? 1 : 0,
 						};
@@ -666,7 +666,7 @@ function gen_menu(m1, m2, theme) {
 									if (i.type === "menu") {
 										sender.innerText = "Loading...";
 										gen_content(m1, m2, function () {
-											cl.init(document.getElementById("root"));
+											$.cl.init(document.getElementById("root"));
 											PR.prettyPrint();
 											sender.innerText = m2;
 										});
@@ -682,7 +682,7 @@ function gen_menu(m1, m2, theme) {
 }
 
 //test upload from laptop
-core.documentReady(() => {
+$.core.documentReady(() => {
 	//topbar
 	$.cl.replaceChild(
 		document.getElementById("navbar"),
@@ -718,11 +718,11 @@ core.documentReady(() => {
 	);
 
 	gen_content(def_m1, def_m2, function () {
-		cl.init(document.getElementById("root"));
+		$.cl.init(document.getElementById("root"));
 		PR.prettyPrint();
 	});
 
 	set_theme(def_theme);
 
-	cl.init(document.body);
+	$.cl.init(document.body);
 });

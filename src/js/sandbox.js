@@ -2,7 +2,7 @@
 import "../css/base.css";
 import "../css/animation.css";
 
-import $ from "../component.js";
+import $ from "./component.js";
 
 core.documentReady(() => {
 	//topbar

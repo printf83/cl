@@ -1,4 +1,5 @@
 "use strict";
+import * as sample from "./sample.js";
 import $ from "../component.js";
 
 export default [
@@ -13,7 +14,7 @@ export default [
 		msg: [
 			"These utility classes float an element to the left or right, or disable floating, based on the current viewport size using the CSS float property. {{!important}} is included to avoid specificity issues. These use the same viewport breakpoints as our grid system. Please be aware float utilities have no effect on flex items.",
 		],
-		container: $.container.form,
+		container: sample.formcontainer,
 		code: function () {
 			return [
 				new $.tag({
@@ -38,7 +39,7 @@ export default [
 	{
 		title: "Responsive",
 		msg: ["Responsive variations also exist for each {{float}} value."],
-		container: $.container.form,
+		container: sample.formcontainer,
 		code: function () {
 			return [
 				new $.tag({

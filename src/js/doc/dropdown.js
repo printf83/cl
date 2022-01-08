@@ -48,7 +48,7 @@ export default [
 
 	{
 		title: "Color varian",
-		container: $.container.stack,
+		container: sample.stackcontainer,
 		sample: { "sample.dropdownitem": sample.dropdownitem },
 		code: function () {
 			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map(function (i) {
@@ -76,7 +76,7 @@ export default [
 
 	{
 		title: "Split button color variant",
-		container: $.container.stack,
+		container: sample.stackcontainer,
 		sample: { "sample.dropdownitem": sample.dropdownitem },
 		code: function () {
 			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map(function (i) {
@@ -92,7 +92,7 @@ export default [
 
 	{
 		title: "Large size",
-		container: $.container.stack,
+		container: sample.stackcontainer,
 		sample: { "sample.dropdownitem": sample.dropdownitem },
 		code: function () {
 			return [
@@ -115,7 +115,7 @@ export default [
 
 	{
 		title: "Small size",
-		container: $.container.stack,
+		container: sample.stackcontainer,
 		sample: { "sample.dropdownitem": sample.dropdownitem },
 		code: function () {
 			return [
@@ -138,7 +138,7 @@ export default [
 
 	{
 		title: "Dark dropdown",
-		container: $.container.stack,
+		container: sample.stackcontainer,
 		sample: { "sample.dropdownitem": sample.dropdownitem },
 		code: function () {
 			return new $.dropdown({
@@ -193,7 +193,7 @@ export default [
 
 	{
 		title: "Dropup",
-		container: $.container.stack,
+		container: sample.stackcontainer,
 		sample: { "sample.dropdownitem": sample.dropdownitem },
 		code: function () {
 			return [
@@ -216,7 +216,7 @@ export default [
 
 	{
 		title: "Dropend",
-		container: $.container.stack,
+		container: sample.stackcontainer,
 		sample: { "sample.dropdownitem": sample.dropdownitem },
 		code: function () {
 			return [
@@ -239,7 +239,7 @@ export default [
 
 	{
 		title: "Dropstart",
-		container: $.container.stack,
+		container: sample.stackcontainer,
 		sample: { "sample.dropdownitem": sample.dropdownitem },
 		code: function () {
 			return [
@@ -351,7 +351,7 @@ export default [
 
 	{
 		title: "Alignment options",
-		container: $.container.stack,
+		container: sample.stackcontainer,
 		sample: { "sample.dropdownitem": sample.dropdownitem },
 		code: function () {
 			return [
@@ -511,7 +511,7 @@ export default [
 
 	{
 		title: "Dropdown options",
-		container: $.container.stack,
+		container: sample.stackcontainer,
 		sample: { "sample.dropdownitem": sample.dropdownitem },
 		code: function () {
 			return [
@@ -534,7 +534,7 @@ export default [
 
 	{
 		title: "Auto close behavior",
-		container: $.container.stack,
+		container: sample.stackcontainer,
 		sample: { "sample.dropdownitem": sample.dropdownitem },
 		code: function () {
 			return [

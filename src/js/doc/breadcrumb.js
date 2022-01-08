@@ -1,4 +1,5 @@
 "use strict";
+import * as sample from "./sample.js";
 import $ from "../component.js";
 
 export default [
@@ -10,7 +11,7 @@ export default [
 
 	{
 		title: "Example",
-		container: $.container.form,
+		container: sample.formcontainer,
 		code: function () {
 			return [
 				new $.breadcrumb({

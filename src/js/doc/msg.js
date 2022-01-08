@@ -10,7 +10,7 @@ export default [
 
 	{
 		title: "Label only",
-		container: $.container.form,
+		container: sample.formcontainer,
 		code: function () {
 			return [
 				new $.msg("Message"),
@@ -33,7 +33,7 @@ export default [
 
 	{
 		title: "Weight",
-		container: $.container.form,
+		container: sample.formcontainer,
 		viewclass: "cl-highlight-col",
 		code: function () {
 			let id = $.core.UUID();
@@ -59,7 +59,7 @@ export default [
 
 	{
 		title: "Weight : sm",
-		container: $.container.form,
+		container: sample.formcontainer,
 		viewclass: "cl-modal-preview",
 		code: function () {
 			let id = $.core.UUID();

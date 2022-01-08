@@ -1,4 +1,5 @@
 "use strict";
+import * as sample from "./sample.js";
 import $ from "../component.js";
 
 export default [
@@ -10,7 +11,7 @@ export default [
 
 	{
 		title: "Relative to the parent",
-		container: $.container.form,
+		container: sample.formcontainer,
 		viewclass: "cl-highlight-size",
 		code: function () {
 			return [25, 50, 75, 100, "auto"].map(function (i) {
@@ -24,7 +25,7 @@ export default [
 	},
 
 	{
-		container: $.container.stack,
+		container: sample.stackcontainer,
 		viewclass: "cl-highlight-size-height",
 		code: function () {
 			return [25, 50, 75, 100, "auto"].map(function (i) {

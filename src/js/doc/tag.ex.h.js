@@ -1,5 +1,5 @@
 "use strict";
-import { tagprop } from "./sample.js";
+import * as sample from "./sample.js";
 import $ from "../component.js";
 
 export default [
@@ -14,13 +14,13 @@ export default [
 			"Shortcut for {{new $.tag({tag:'h{level}'})}}",
 			"This component is extended from {{tag}} component, so any property on tag component, will also work on this component.",
 			"Property inherits from tag component:",
-			tagprop(),
+			sample.tagprop(),
 		],
 	},
 
 	{
 		title: "Example",
-		container: $.container.form,
+		container: sample.formcontainer,
 		code: function () {
 			return new $.h({
 				level: 5,
@@ -40,7 +40,7 @@ export default [
 				item: ["<code>level</code> - to set heading level. The value should 1 to 6. Default is 5"],
 			}),
 		],
-		container: $.container.form,
+		container: sample.formcontainer,
 		code: function () {
 			return [null, 1, 2, 3, 4, 5, 6].map(function (i) {
 				return new $.h({ level: i, elem: `Example <code>level:${i}</code> heading` });
@@ -51,7 +51,7 @@ export default [
 	{
 		title: "Easy option",
 		msg: "This component also supported easy option.",
-		container: $.container.form,
+		container: sample.formcontainer,
 		code: function () {
 			return [
 				new $.h({ level: 5, class: "classname", elem: "Using elem property" }),

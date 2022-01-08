@@ -29,7 +29,7 @@ export default [
 	{
 		title: "Text",
 		msg: "Add your text within an element with the {{new $.navbar.brand}}.",
-		container: $.container.form,
+		container: sample.formcontainer,
 		code: function () {
 			return [
 				new $.navbar.container({

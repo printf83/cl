@@ -1,4 +1,5 @@
 "use strict";
+import * as sample from "./sample.js";
 import $ from "../component.js";
 
 export default [
@@ -74,7 +75,7 @@ export default [
 		],
 
 		viewclass: "cl-highlight-col-div",
-		container: $.container.stack,
+		container: sample.stackcontainer,
 		code: function () {
 			return [null, 1, "n1"].map(function (i) {
 				return new $.tag({

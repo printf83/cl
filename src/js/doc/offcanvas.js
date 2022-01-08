@@ -100,7 +100,7 @@ export default [
 
 	{
 		title: "Backdrop",
-		container: $.container.stack,
+		container: sample.stackcontainer,
 		sample: { "sample.offcanvasbody": sample.offcanvasbody },
 		code: function () {
 			return [

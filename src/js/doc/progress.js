@@ -1,4 +1,5 @@
 "use strict";
+import * as sample from "./sample.js";
 import $ from "../component.js";
 
 export default [
@@ -10,7 +11,7 @@ export default [
 
 	{
 		title: "Example",
-		container: $.container.form,
+		container: sample.formcontainer,
 		code: function () {
 			return [
 				new $.progress.container({ item: { value: 0 } }),
@@ -38,7 +39,7 @@ export default [
 
 	{
 		title: "Color",
-		container: $.container.form,
+		container: sample.formcontainer,
 		code: function () {
 			return [
 				new $.progress.container({ item: { color: "success", value: 25 } }),
@@ -51,7 +52,7 @@ export default [
 
 	{
 		title: "Height",
-		container: $.container.form,
+		container: sample.formcontainer,
 		code: function () {
 			return [
 				new $.progress.container({ height: 1, item: { value: 25 } }),
@@ -75,7 +76,7 @@ export default [
 
 	{
 		title: "Striped",
-		container: $.container.form,
+		container: sample.formcontainer,
 		code: function () {
 			return [
 				new $.progress.container({ item: { stripe: true, color: "primary", value: 10 } }),
@@ -89,7 +90,7 @@ export default [
 
 	{
 		title: "Animated",
-		container: $.container.form,
+		container: sample.formcontainer,
 		code: function () {
 			return [
 				new $.progress.container({ item: { stripe: true, animated: true, color: "primary", value: 10 } }),

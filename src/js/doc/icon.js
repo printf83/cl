@@ -18,7 +18,7 @@ export default [
 
 	// {
 	// 	title: "Favicon",
-	// 	container: $.container.stack,
+	// 	container: sample.stackcontainer,
 	// 	code: function () {
 	// 		return new $.icon("favicon");
 	// 	},
@@ -26,7 +26,7 @@ export default [
 
 	{
 		title: "Base icon",
-		container: $.container.stack,
+		container: sample.stackcontainer,
 		code: function () {
 			return ["i", "!!", "!", "?", "-", "x", "/"].map(function (i) {
 				return new $.icon(i);
@@ -36,7 +36,7 @@ export default [
 
 	{
 		title: "Fontawesome icon",
-		container: $.container.stack,
+		container: sample.stackcontainer,
 		code: function () {
 			return [
 				"address-book",
@@ -60,7 +60,7 @@ export default [
 
 	{
 		title: "Fontawesome brand icon",
-		container: $.container.stack,
+		container: sample.stackcontainer,
 		code: function () {
 			return [
 				"github",
@@ -88,7 +88,7 @@ export default [
 
 	{
 		title: "Fixwidth",
-		container: $.container.stack,
+		container: sample.stackcontainer,
 		code: function () {
 			return [
 				new $.icon({
@@ -111,7 +111,7 @@ export default [
 
 	{
 		title: "Size",
-		container: $.container.stack,
+		container: sample.stackcontainer,
 		code: function () {
 			return ["xs", "sm", null, "lg", "2x", "3x", "4x"].map(function (i) {
 				return new $.icon({ type: "fab", icon: "node-js", weight: i });
@@ -121,7 +121,7 @@ export default [
 
 	{
 		title: "Rotate",
-		container: $.container.stack,
+		container: sample.stackcontainer,
 		code: function () {
 			return [
 				new $.icon({ type: "fab", icon: "node-js", rotate: 90 }),
@@ -136,7 +136,7 @@ export default [
 
 	{
 		title: "Spin",
-		container: $.container.stack,
+		container: sample.stackcontainer,
 		code: function () {
 			return [
 				new $.icon({ type: "fab", icon: "node-js", spin: true }),
@@ -161,7 +161,7 @@ export default [
 
 	{
 		title: "Button",
-		container: $.container.stack,
+		container: sample.stackcontainer,
 		code: function () {
 			return [
 				new $.button({ label: "Button", color: "primary", icon: "fire" }),
@@ -208,7 +208,7 @@ export default [
 
 	{
 		title: "Textbox",
-		container: $.container.stack,
+		container: sample.stackcontainer,
 		code: function () {
 			return [
 				new $.input({ type: "text", before: new $.icon("fire") }),
@@ -225,7 +225,7 @@ export default [
 
 	{
 		title: "Dropdown & item",
-		container: $.container.form,
+		container: sample.formcontainer,
 		sample: { "sample.dropdownitem": sample.dropdownitem },
 		code: function () {
 			return [
@@ -260,7 +260,7 @@ export default [
 
 	{
 		title: "Navbar",
-		container: $.container.form,
+		container: sample.formcontainer,
 		code: function () {
 			return [
 				new $.navbar.container({

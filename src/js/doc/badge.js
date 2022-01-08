@@ -1,4 +1,5 @@
 "use strict";
+import * as sample from "./sample.js";
 import $ from "../component.js";
 
 export default [
@@ -65,7 +66,7 @@ export default [
 
 	{
 		title: "Background color",
-		container: $.container.stack,
+		container: sample.stackcontainer,
 		code: function () {
 			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map(function (i) {
 				return new $.badge({ label: $.core.capitalize(i), color: i });
@@ -75,7 +76,7 @@ export default [
 
 	{
 		title: "Pill badge",
-		container: $.container.stack,
+		container: sample.stackcontainer,
 		code: function () {
 			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map(function (i) {
 				return new $.badge({ pill: true, label: $.core.capitalize(i), color: i });

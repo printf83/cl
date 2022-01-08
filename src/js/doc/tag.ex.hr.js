@@ -1,5 +1,5 @@
 "use strict";
-import { tagprop } from "./sample.js";
+import * as sample from "./sample.js";
 import $ from "../component.js";
 
 export default [
@@ -14,13 +14,13 @@ export default [
 			"Shortcut for {{new $.tag({tag:'hr'})}}",
 			"This component is extended from {{tag}} component, so any property on tag component, will also work on this component.",
 			"Property inherits from tag component:",
-			tagprop("elem"),
+			sample.tagprop("elem"),
 		],
 	},
 
 	{
 		title: "Example",
-		container: $.container.form,
+		container: sample.formcontainer,
 		code: function () {
 			return [
 				new $.hr(),

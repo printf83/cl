@@ -1,4 +1,5 @@
 "use strict";
+import * as sample from "./sample.js";
 import $ from "../component.js";
 
 export default [
@@ -13,7 +14,7 @@ export default [
 		msg: [
 			"Colorize text with {{textcolor}} property. If you want to colorize links, you can use the {{linkcolor}} property which have :hover and :focus states.",
 		],
-		container: $.container.form,
+		container: sample.formcontainer,
 		code: function () {
 			return [
 				null,
@@ -57,7 +58,7 @@ export default [
 	},
 
 	{
-		container: $.container.form,
+		container: sample.formcontainer,
 		code: function () {
 			return [null, "primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map(
 				function (i) {

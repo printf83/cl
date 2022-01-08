@@ -1,4 +1,5 @@
 "use strict";
+import * as sample from "./sample.js";
 import $ from "../component.js";
 
 export default [
@@ -39,7 +40,7 @@ export default [
 
 	{
 		title: "Label for",
-		container: $.container.form,
+		container: sample.formcontainer,
 		code: function () {
 			let id = $.core.UUID();
 			return [
@@ -56,7 +57,7 @@ export default [
 	{
 		title: "Label hide",
 		msg: "Show icon only and label is hidden. Put label inside {{span.visually-hidden}}",
-		container: $.container.form,
+		container: sample.formcontainer,
 		code: function () {
 			return new $.label({
 				icon: "fire",
@@ -69,7 +70,7 @@ export default [
 	{
 		title: "Label show",
 		msg: "Show icon only until viewport or higher",
-		container: $.container.form,
+		container: sample.formcontainer,
 		code: function () {
 			return [null, "sm", "md", "lg", "xl", "xxl"].map(function (i) {
 				return new $.label({

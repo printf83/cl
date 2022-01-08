@@ -1,4 +1,5 @@
 "use strict";
+import * as sample from "./sample.js";
 import $ from "../component.js";
 
 export default [
@@ -160,7 +161,7 @@ export default [
 
 	{
 		title: "Mix toolbar",
-		container: $.container.form,
+		container: sample.formcontainer,
 		code: function () {
 			return [
 				new $.btntoolbar({
@@ -211,7 +212,7 @@ export default [
 
 	{
 		title: "Sizing",
-		container: $.container.form,
+		container: sample.formcontainer,
 		code: function () {
 			return [
 				new $.btngroup({

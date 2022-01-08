@@ -390,7 +390,7 @@ export default [
 	{
 		title: "Text alignment",
 		msg: 'You can quickly change the text alignment of any card—in its entirety or specific parts—with {{align:"null|center|end"}}.',
-		container: $.container.stack,
+		container: sample.stackcontainer,
 		code: function () {
 			return [
 				new $.card.container({
@@ -494,7 +494,7 @@ export default [
 
 	{
 		title: "Images",
-		container: $.container.stack,
+		container: sample.stackcontainer,
 		sample: { "sample.img": sample.img },
 		code: function () {
 			return [
@@ -612,7 +612,7 @@ export default [
 
 	{
 		title: "Background and color",
-		container: $.container.stack,
+		container: sample.stackcontainer,
 		code: function () {
 			return new $.card.container({
 				color: "primary",
@@ -635,7 +635,7 @@ export default [
 
 	{
 		title: "Example background and color",
-		container: $.container.stack,
+		container: sample.stackcontainer,
 		code: function () {
 			return [
 				{ color: "primary", textcolor: "light" },
@@ -669,7 +669,7 @@ export default [
 
 	{
 		title: "Border color",
-		container: $.container.stack,
+		container: sample.stackcontainer,
 		code: function () {
 			return new $.card.container({
 				bordercolor: "primary",
@@ -692,7 +692,7 @@ export default [
 
 	{
 		title: "Example border color",
-		container: $.container.stack,
+		container: sample.stackcontainer,
 		code: function () {
 			return [
 				{ color: "primary", textcolor: "primary" },
@@ -726,7 +726,7 @@ export default [
 
 	{
 		title: "Mixins utilities",
-		container: $.container.stack,
+		container: sample.stackcontainer,
 		code: function () {
 			return new $.card.container({
 				bordercolor: "success",
@@ -758,7 +758,7 @@ export default [
 
 	{
 		title: "Card groups",
-		container: $.container.stack,
+		container: sample.stackcontainer,
 		sample: { "sample.img": sample.img, "sample.cardwithimg": sample.cardwithimg },
 		code: function () {
 			return new $.card.group({
@@ -788,7 +788,7 @@ export default [
 
 	{
 		title: "Card groups with footer",
-		container: $.container.stack,
+		container: sample.stackcontainer,
 		sample: {
 			"sample.img": sample.img,
 			"sample.cardwithfooter": sample.cardwithfooter,

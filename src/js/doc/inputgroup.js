@@ -11,7 +11,7 @@ export default [
 
 	{
 		title: "Basic example",
-		container: $.container.form,
+		container: sample.formcontainer,
 		code: function () {
 			return [
 				new $.input({
@@ -68,7 +68,7 @@ export default [
 
 	{
 		title: "Wrapping",
-		container: $.container.form,
+		container: sample.formcontainer,
 		code: function () {
 			return [
 				new $.input({
@@ -95,7 +95,7 @@ export default [
 
 	{
 		title: "Sizing",
-		container: $.container.form,
+		container: sample.formcontainer,
 		code: function () {
 			return [
 				new $.input({
@@ -120,7 +120,7 @@ export default [
 
 	{
 		title: "Checkboxes and radios",
-		container: $.container.form,
+		container: sample.formcontainer,
 		code: function () {
 			return [
 				new $.inputgroup.container({
@@ -151,7 +151,7 @@ export default [
 
 	{
 		title: "Multiple inputs",
-		container: $.container.form,
+		container: sample.formcontainer,
 		code: function () {
 			return [
 				new $.inputgroup.container({
@@ -177,7 +177,7 @@ export default [
 
 	{
 		title: "Multiple addons",
-		container: $.container.form,
+		container: sample.formcontainer,
 		code: function () {
 			return [
 				new $.inputgroup.container({
@@ -211,7 +211,7 @@ export default [
 
 	{
 		title: "Button addons",
-		container: $.container.form,
+		container: sample.formcontainer,
 		code: function () {
 			return [
 				new $.input({
@@ -281,7 +281,7 @@ export default [
 
 	{
 		title: "Buttons with dropdowns",
-		container: $.container.form,
+		container: sample.formcontainer,
 		sample: { "sample.dropdownitem": sample.dropdownitem },
 		code: function () {
 			return [
@@ -336,7 +336,7 @@ export default [
 
 	{
 		title: "Segmented buttons",
-		container: $.container.form,
+		container: sample.formcontainer,
 		sample: { "sample.dropdownitem": sample.dropdownitem },
 		code: function () {
 			return [
@@ -373,7 +373,7 @@ export default [
 
 	{
 		title: "Segmented buttons",
-		container: $.container.form,
+		container: sample.formcontainer,
 		sample: { "sample.optionitem": sample.optionitem },
 		code: function () {
 			return [
@@ -414,7 +414,7 @@ export default [
 
 	{
 		title: "Custom file input",
-		container: $.container.form,
+		container: sample.formcontainer,
 		code: function () {
 			return [
 				new $.input({

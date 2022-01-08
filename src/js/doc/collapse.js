@@ -1,4 +1,5 @@
 "use strict";
+import * as sample from "./sample.js";
 import $ from "../component.js";
 
 export default [
@@ -9,7 +10,7 @@ export default [
 	},
 	{
 		title: "Example",
-		container: $.container.stack,
+		container: sample.stackcontainer,
 		code: function () {
 			let id = $.core.UUID();
 
@@ -40,7 +41,7 @@ export default [
 
 	{
 		title: "Multiple targets",
-		container: $.container.stack,
+		container: sample.stackcontainer,
 		code: function () {
 			let id1 = $.core.UUID();
 			let id2 = $.core.UUID();

@@ -1,4 +1,5 @@
 "use strict";
+import * as sample from "./sample.js";
 import $ from "../component.js";
 
 export default [
@@ -15,7 +16,7 @@ export default [
 
 	{
 		title: "Additive",
-		container: $.container.stack,
+		container: sample.stackcontainer,
 		viewclass: "cl-highlight-box",
 		code: function () {
 			return [null, true, "top", "end", "bottom", "start", ["bottom", "start"]].map(function (i) {
@@ -29,7 +30,7 @@ export default [
 
 	{
 		title: "Subtractive",
-		container: $.container.stack,
+		container: sample.stackcontainer,
 		viewclass: "cl-highlight-box",
 		code: function () {
 			return [null, false, "top-0", "end-0", "bottom-0", "start-0", ["border", "bottom-0", "start-0"]].map(
@@ -46,7 +47,7 @@ export default [
 	{
 		title: "Border color",
 		msg: "Change the border color using {{bordercolor}} property on our theme colors.",
-		container: $.container.stack,
+		container: sample.stackcontainer,
 		viewclass: "cl-highlight-box",
 		code: function () {
 			return [null, "primary", "secondary", "success", "danger", "warning", "info", "light", "dark", "white"].map(
@@ -63,7 +64,7 @@ export default [
 	{
 		title: "Border-width",
 		msg: "Change the border width using {{borderweight}} property.",
-		container: $.container.stack,
+		container: sample.stackcontainer,
 		viewclass: "cl-highlight-box",
 		code: function () {
 			return [null, 0, 1, 2, 3, 4, 5].map(function (i) {
@@ -78,7 +79,7 @@ export default [
 	{
 		title: "Sizes",
 		msg: "Change the border radius size {{rounded}} property.",
-		container: $.container.stack,
+		container: sample.stackcontainer,
 		viewclass: "cl-highlight-box-dark",
 		code: function () {
 			return [null, 0, 1, 2, 3].map(function (i) {
@@ -93,7 +94,7 @@ export default [
 	{
 		title: "Border-radius",
 		msg: "Change the border radius style {{roundedtype}} property.",
-		container: $.container.stack,
+		container: sample.stackcontainer,
 		viewclass: "cl-highlight-box-dark",
 		code: function () {
 			return [null, "top", "end", "bottom", "start", "pill", "circle"].map(function (i) {

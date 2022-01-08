@@ -14,7 +14,7 @@ export default [
 		msg: [
 			"Easily realign text to components with text alignment classes. For start, end, and center alignment, responsive classes are available that use the same viewport width breakpoints as the grid system.",
 		],
-		container: $.container.form,
+		container: sample.formcontainer,
 		viewclass: "cl-highlight-col",
 		code: function () {
 			return [null, "start", "center", "end", ["end", "md-start", "lg-center"]].map(function (i) {
@@ -87,7 +87,7 @@ export default [
 	{
 		title: "Text transform",
 		msg: ["Transform text in components with text {{texttransform}} property."],
-		container: $.container.form,
+		container: sample.formcontainer,
 		code: function () {
 			return [null, "lowercase", "uppercase", "capitalize"].map(function (i) {
 				return new $.tag({
@@ -104,7 +104,7 @@ export default [
 		msg: [
 			"Quickly change the font-size of text using {{fontsize}} property. While our heading classes (e.g., {{.h1}}–{{.h6}}) apply {{fontsize}}, {{fontweight}}, and {{lineheight}}, these utilities <i>only</i> apply {{font-size}}. Sizing for these utilities matches HTML’s heading elements, so as the number increases, their size decreases.",
 		],
-		container: $.container.form,
+		container: sample.formcontainer,
 		code: function () {
 			return [null, 1, 2, 3, 4, 5, 6].map(function (i) {
 				return new $.tag({
@@ -119,7 +119,7 @@ export default [
 	{
 		title: "Font weight",
 		msg: ["Quickly change the font-weight of text with these {{fontweight}}."],
-		container: $.container.form,
+		container: sample.formcontainer,
 		code: function () {
 			return [null, "bold", "bolder", "normal", "light", "lighter"].map(function (i) {
 				return new $.tag({
@@ -134,7 +134,7 @@ export default [
 	{
 		title: "Font italics",
 		msg: ["Quickly change the font-style of text with these {{fontitalic}}."],
-		container: $.container.form,
+		container: sample.formcontainer,
 		code: function () {
 			return [null, true, false].map(function (i) {
 				return new $.tag({
@@ -149,7 +149,7 @@ export default [
 	{
 		title: "Text decoration",
 		msg: ["Decorate text in components with {{textdecoration}} property."],
-		container: $.container.form,
+		container: sample.formcontainer,
 		code: function () {
 			return [null, true, false, "underline", "line-through", "none"].map(function (i) {
 				return new $.tag({
@@ -164,7 +164,7 @@ export default [
 	{
 		title: "Monospace",
 		msg: ["Change a selection to our monospace font stack with {{monospace}} property."],
-		container: $.container.form,
+		container: sample.formcontainer,
 		code: function () {
 			return new $.tag({
 				tag: "div",
@@ -177,7 +177,7 @@ export default [
 	{
 		title: "Line height",
 		msg: ["Change the line height with {{lineheight}} property"],
-		container: $.container.form,
+		container: sample.formcontainer,
 		code: function () {
 			return [null, 1, "sm", "base", "lg"].map(function (i) {
 				return new $.tag({

@@ -24,7 +24,7 @@ export default [
 
 	{
 		title: "Sizing",
-		container: $.container.form,
+		container: sample.formcontainer,
 		sample: { "sample.optionitem": sample.optionitem },
 		code: function () {
 			return [

@@ -1,4 +1,5 @@
 "use strict";
+import * as sample from "./sample.js";
 import $ from "../component.js";
 
 export default [
@@ -25,7 +26,7 @@ export default [
 	{
 		title: "White variant",
 		dark: true,
-		container: $.container.stack,
+		container: sample.stackcontainer,
 		code: function () {
 			return [new $.btnclose({ dark: false }), new $.btnclose({ dark: false, disabled: true })];
 		},

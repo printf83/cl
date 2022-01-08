@@ -38,7 +38,7 @@ export default [
 
 	{
 		title: "Simple msgbox live",
-		container: $.container.stack,
+		container: sample.stackcontainer,
 		code: function () {
 			return [
 				{ label: "Info", icon: "i" },
@@ -93,7 +93,7 @@ export default [
 
 	{
 		title: "Simple inputbox live",
-		container: $.container.stack,
+		container: sample.stackcontainer,
 		code: function () {
 			return [
 				{ label: "Text", type: "text" },
@@ -185,7 +185,7 @@ export default [
 
 	{
 		title: "Simple confirmbox live",
-		container: $.container.stack,
+		container: sample.stackcontainer,
 		code: function () {
 			return [
 				{ label: "Info", icon: "i" },
@@ -509,7 +509,7 @@ export default [
 
 	{
 		title: "Varying modal content",
-		container: $.container.stack,
+		container: sample.stackcontainer,
 		sample: { "sample.dlgFn": sample.dlgFn },
 		code: function () {
 			return [
@@ -597,7 +597,7 @@ export default [
 
 	{
 		title: "Optional sizes",
-		container: $.container.stack,
+		container: sample.stackcontainer,
 		sample: { "sample.dlgSizeFn": sample.dlgSizeFn },
 		code: function () {
 			return [
@@ -628,7 +628,7 @@ export default [
 
 	{
 		title: "Fullscreen Modal",
-		container: $.container.stack,
+		container: sample.stackcontainer,
 		sample: { "sample.dlgFullscreenFn": sample.dlgFullscreenFn },
 		code: function () {
 			return [

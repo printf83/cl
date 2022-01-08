@@ -1,4 +1,5 @@
 "use strict";
+import * as sample from "./sample.js";
 import $ from "../component.js";
 
 export default [
@@ -11,7 +12,7 @@ export default [
 	{
 		title: "tag",
 		msg: ["Create tag name for tag"],
-		container: $.container.form,
+		container: sample.formcontainer,
 		code: function () {
 			return new $.button({ label: "AAA" });
 		},
@@ -24,7 +25,7 @@ export default [
 	{
 		title: "tag",
 		msg: ["Create tag name for tag"],
-		container: $.container.form,
+		container: sample.formcontainer,
 		code: function () {
 			return [
 				new $.tag({ tag: "div", elem: "DIV element" }),
@@ -39,7 +40,7 @@ export default [
 	{
 		title: "elem",
 		msg: ["Create element inside tag"],
-		container: $.container.form,
+		container: sample.formcontainer,
 		code: function () {
 			return [
 				new $.tag({ tag: "div", class: "cl-highlight-div cl-highlight-element", elem: "String" }),

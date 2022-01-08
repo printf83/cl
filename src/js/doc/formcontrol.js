@@ -1,4 +1,5 @@
 "use strict";
+import * as sample from "./sample.js";
 import $ from "../component.js";
 
 export default [
@@ -10,7 +11,7 @@ export default [
 
 	{
 		title: "Example",
-		container: $.container.form,
+		container: sample.formcontainer,
 		code: function () {
 			return [
 				new $.input({
@@ -28,7 +29,7 @@ export default [
 
 	{
 		title: "Sizing",
-		container: $.container.form,
+		container: sample.formcontainer,
 		code: function () {
 			return [
 				new $.input({
@@ -51,7 +52,7 @@ export default [
 
 	{
 		title: "Disabled",
-		container: $.container.form,
+		container: sample.formcontainer,
 		code: function () {
 			return [
 				new $.input({
@@ -71,7 +72,7 @@ export default [
 
 	{
 		title: "Readonly",
-		container: $.container.form,
+		container: sample.formcontainer,
 		code: function () {
 			return new $.input({
 				readonly: true,
@@ -83,7 +84,7 @@ export default [
 
 	{
 		title: "Readonly plain text",
-		container: $.container.form,
+		container: sample.formcontainer,
 		code: function () {
 			return [
 				new $.input({
@@ -107,7 +108,7 @@ export default [
 
 	{
 		title: "Readonly plain text (Stack)",
-		container: $.container.stack,
+		container: sample.stackcontainer,
 		code: function () {
 			return [
 				new $.input({
@@ -135,7 +136,7 @@ export default [
 
 	{
 		title: "File input",
-		container: $.container.form,
+		container: sample.formcontainer,
 		code: function () {
 			return [
 				new $.input({ label: "Default file input example", type: "file" }),
@@ -150,7 +151,7 @@ export default [
 	// {
 	// 	title: "File Input",
 	// 	msg: "This control is {{link}} to backend",
-	// 	container: $.container.form,
+	// 	container: sample.formcontainer,
 	// 	code: function () {
 	// 		return new $.file.ctl({
 	// 			label: "Picture",
@@ -163,7 +164,7 @@ export default [
 
 	{
 		title: "Color",
-		container: $.container.form,
+		container: sample.formcontainer,
 		code: function () {
 			return new $.input({ label: "Color picker", type: "color" });
 		},
@@ -171,7 +172,7 @@ export default [
 
 	{
 		title: "Datalist",
-		container: $.container.form,
+		container: sample.formcontainer,
 		code: function () {
 			return new $.input({
 				label: "Datalist example",

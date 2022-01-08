@@ -737,3 +737,11 @@ export function tagprop(exclude) {
 	let l = f.pop();
 	return f.join(", ") + " and " + l;
 }
+
+export function formcontainer(elem) {
+	return new $.container.form(elem);
+}
+
+export function stackcontainer(elem) {
+	return new $.container.stack(elem);
+}
