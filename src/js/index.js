@@ -410,22 +410,26 @@ function gen_example(opt) {
 }
 
 function beautifyjs(str) {
-	return js_beautify(str, {
+	let opt = {
 		preserve_newlines: true,
 		max_preserve_newlines: 100,
 		keep_array_indentation: false,
 		brace_style: "collapse,preserve-inline",
-	});
+	};
+
+	return js_beautify(str);
 }
 
 function beautifyhtml(str) {
+	let opt = {
+		indent_inner_html: true,
+		indent_size: 4,
+	};
+
 	str = str.replace(/\>/g, ">\n");
 	str = str.replace(/\</g, "\n<");
 	str = str.replace(/\n\n/g, "\n");
-	return html_beautify(str, {
-		indent_inner_html: true,
-		indent_size: 4,
-	});
+	return html_beautify(str);
 }
 
 function find_menu(m1, m2) {
