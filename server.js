@@ -18,6 +18,12 @@ app.use(
 		},
 	})
 );
+app.use(helmet.hidePoweredBy());
+app.use(helmet.xssFilter());
+app.use(helmet.noSniff());
+app.use(helmet.frameguard());
+app.use(helmet.hsts());
+
 app.use(express.static(path.join(__dirname, "docs")));
 
 const envPORT = process.env.PORT || 8081;
