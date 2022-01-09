@@ -1,4 +1,6 @@
 "use strict";
+const LIBNAME = /l.Z/g;
+
 import "../css/sample.css";
 
 import * as sample from "./doc/sample.js";
@@ -327,7 +329,7 @@ function beautifyjs(str) {
 		brace_style: "collapse,preserve-inline",
 	};
 
-	str = str.replace(/h.Z./g, "$.");
+	str = str.replace(LIBNAME, "$.");
 
 	return js_beautify(str);
 }
