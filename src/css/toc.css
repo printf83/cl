@@ -1,0 +1,15 @@
+.cl-toc li div,
+.cl-toc li div label,
+.cl-toc li a,
+.cl-toc li a label {
+	text-decoration: none;
+	color: var(--bs-body-color);
+}
+
+.cl-toc li div:hover,
+.cl-toc li div:hover label,
+.cl-toc li a:hover,
+.cl-toc li a:hover label {
+	text-decoration: underline;
+	cursor: pointer;
+}

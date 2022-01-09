@@ -44,6 +44,44 @@ export default [
 	},
 
 	{
+		title: "Dark background",
+		dark: true,
+		code: function () {
+			return [
+				{
+					label: "Menu 1",
+					item: [
+						{ label: "Sub menu 1.1" },
+						{ label: "Sub menu 1.2" },
+						{ label: "Sub menu 1.3" },
+						{ label: "Sub menu 1.4" },
+					],
+				},
+				{
+					label: "Menu 2",
+					item: [
+						{ label: "Sub menu 2.1" },
+						{ label: "Sub menu 2.2" },
+						{ label: "Sub menu 2.3" },
+						{ label: "Sub menu 2.4" },
+					],
+				},
+				{
+					label: "Menu 3",
+					item: [
+						{ label: "Sub menu 3.1" },
+						{ label: "Sub menu 3.2" },
+						{ label: "Sub menu 3.3" },
+						{ label: "Sub menu 3.4" },
+					],
+				},
+			].map(function (i) {
+				return new $.menu(i);
+			});
+		},
+	},
+
+	{
 		title: "Auto expand",
 		code: function () {
 			return [

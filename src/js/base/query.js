@@ -1,4 +1,6 @@
 "use strict";
+import "../../css/animation.css";
+
 import * as core from "./core.js";
 import modal from "./modal.js";
 import input from "./input.js";

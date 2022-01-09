@@ -1,4 +1,7 @@
 "use strict";
+import "../../css/anchor.css";
+import "../../css/prettify.css";
+
 import * as core from "./core.js";
 import * as card from "./card.js";
 import accordion from "./accordion.js";

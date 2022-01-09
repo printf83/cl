@@ -1,91 +1,9 @@
 "use strict";
-import "../css/base.css";
-import "../css/example.css";
-import "../css/prettify.css";
-import "../css/example.css";
-
-import $ from "./component.js";
-
-import doc_intro from "./doc/intro.js";
-
-import doc_container from "./doc/container.js";
-import doc_grid from "./doc/grid.js";
-import doc_column from "./doc/column.js";
-import doc_gutter from "./doc/gutter.js";
-
-import doc_formcontrol from "./doc/formcontrol.js";
-import doc_select from "./doc/select.js";
-import doc_checkradio from "./doc/checkradio.js";
-import doc_range from "./doc/range.js";
-import doc_inputgroup from "./doc/inputgroup.js";
-import doc_floatinglabel from "./doc/floatinglabel.js";
+import "../css/sample.css";
 
 import * as sample from "./doc/sample.js";
-import doc_button from "./doc/button.js";
-import doc_accordion from "./doc/accordion.js";
-import doc_alert from "./doc/alert.js";
-import doc_badge from "./doc/badge.js";
-import doc_breadcrumb from "./doc/breadcrumb.js";
-import doc_btngroup from "./doc/btngroup.js";
-import doc_card from "./doc/card.js";
-import doc_carousel from "./doc/carousel.js";
-import doc_btnclose from "./doc/btnclose.js";
-import doc_collapse from "./doc/collapse.js";
-import doc_dropdown from "./doc/dropdown.js";
-import doc_listgroup from "./doc/listgroup.js";
-import doc_modal from "./doc/modal.js";
-import doc_tab from "./doc/tab.js";
-import doc_navbar from "./doc/navbar.js";
-import doc_offcanvas from "./doc/offcanvas.js";
-import doc_paging from "./doc/paging.js";
-import doc_popover from "./doc/popover.js";
-import doc_progress from "./doc/progress.js";
-import doc_toast from "./doc/toast.js";
-import doc_tooltip from "./doc/tooltip.js";
-
-import doc_icon from "./doc/icon.js";
-import doc_menu from "./doc/menu.js";
-import doc_toc from "./doc/toc.js";
-import doc_pill from "./doc/pill.js";
-import doc_example from "./doc/example.js";
-import doc_label from "./doc/label.js";
-import doc_msg from "./doc/msg.js";
-import doc_table from "./doc/table.js";
-
-import doc_tag_base from "./doc/tag.base.js";
-import doc_tag_text from "./doc/tag.text.js";
-import doc_tag_background from "./doc/tag.background.js";
-import doc_tag_border from "./doc/tag.border.js";
-import doc_tag_color from "./doc/tag.color.js";
-import doc_tag_display from "./doc/tag.display.js";
-import doc_tag_flex from "./doc/tag.flex.js";
-import doc_tag_float from "./doc/tag.float.js";
-import doc_tag_interaction from "./doc/tag.interaction.js";
-import doc_tag_overflow from "./doc/tag.overflow.js";
-import doc_tag_position from "./doc/tag.position.js";
-import doc_tag_shadow from "./doc/tag.shadow.js";
-import doc_tag_size from "./doc/tag.size.js";
-import doc_tag_spacing from "./doc/tag.spacing.js";
-import doc_tag_valign from "./doc/tag.valign.js";
-import doc_tag_visibility from "./doc/tag.visibility.js";
-
-import doc_tag_ex_a from "./doc/tag.ex.a.js";
-import doc_tag_ex_b from "./doc/tag.ex.b.js";
-import doc_tag_ex_code from "./doc/tag.ex.code.js";
-import doc_tag_ex_div from "./doc/tag.ex.div.js";
-import doc_tag_ex_form from "./doc/tag.ex.form.js";
-import doc_tag_ex_h from "./doc/tag.ex.h.js";
-import doc_tag_ex_hr from "./doc/tag.ex.hr.js";
-import doc_tag_ex_img from "./doc/tag.ex.img.js";
-import doc_tag_ex_li from "./doc/tag.ex.li.js";
-import doc_tag_ex_nav from "./doc/tag.ex.nav.js";
-import doc_tag_ex_ol from "./doc/tag.ex.ol.js";
-import doc_tag_ex_p from "./doc/tag.ex.p.js";
-import doc_tag_ex_pre from "./doc/tag.ex.pre.js";
-import doc_tag_ex_small from "./doc/tag.ex.small.js";
-import doc_tag_ex_span from "./doc/tag.ex.span.js";
-import doc_tag_ex_strong from "./doc/tag.ex.strong.js";
-import doc_tag_ex_ul from "./doc/tag.ex.ul.js";
+import doc from "./doc.js";
+import $ from "./component.js";
 
 const def_m1 = "Getting started";
 const def_m2 = "Introduction";
@@ -95,115 +13,115 @@ const db_menu = [
 	{
 		type: "menu",
 		title: "Getting started",
-		item: [{ title: "Introduction", source: doc_intro }],
+		item: [{ title: "Introduction", source: doc.intro }],
 	},
 	{
 		type: "menu",
 		title: "Layout",
 		item: [
-			{ title: "Containers", source: doc_container },
-			{ title: "Grid", source: doc_grid },
-			{ title: "Column", source: doc_column },
-			{ title: "Gutter", source: doc_gutter },
+			{ title: "Containers", source: doc.container },
+			{ title: "Grid", source: doc.grid },
+			{ title: "Column", source: doc.column },
+			{ title: "Gutter", source: doc.gutter },
 		],
 	},
 	{
 		type: "menu",
 		title: "Forms",
 		item: [
-			{ title: "Form control", source: doc_formcontrol },
-			{ title: "Select", source: doc_select },
-			{ title: "Check & radios", source: doc_checkradio },
-			{ title: "Range", source: doc_range },
-			{ title: "Input group", source: doc_inputgroup },
-			{ title: "Floating label", source: doc_floatinglabel },
+			{ title: "Form control", source: doc.formcontrol },
+			{ title: "Select", source: doc.select },
+			{ title: "Check & radios", source: doc.checkradio },
+			{ title: "Range", source: doc.range },
+			{ title: "Input group", source: doc.inputgroup },
+			{ title: "Floating label", source: doc.floatinglabel },
 		],
 	},
 	{
 		type: "menu",
 		title: "Components",
 		item: [
-			{ title: "Accordion", source: doc_accordion },
-			{ title: "Alert", source: doc_alert },
-			{ title: "Badge", source: doc_badge },
-			{ title: "Breadcrumb", source: doc_breadcrumb },
-			{ title: "Button", source: doc_button },
-			{ title: "Button group", source: doc_btngroup },
-			{ title: "Card", source: doc_card },
-			{ title: "Carosel", source: doc_carousel },
-			{ title: "Close button", source: doc_btnclose },
-			{ title: "Collapse", source: doc_collapse },
-			{ title: "Dropdown", source: doc_dropdown },
-			{ title: "List group", source: doc_listgroup },
-			{ title: "Modal", source: doc_modal },
-			{ title: "Tab", source: doc_tab },
-			{ title: "Navbar", source: doc_navbar },
-			{ title: "Offcanvas", source: doc_offcanvas },
-			{ title: "Paging", source: doc_paging },
-			{ title: "Popover", source: doc_popover },
-			{ title: "Progress", source: doc_progress },
-			{ title: "Toast", source: doc_toast },
-			{ title: "Tooltips", source: doc_tooltip },
+			{ title: "Accordion", source: doc.accordion },
+			{ title: "Alert", source: doc.alert },
+			{ title: "Badge", source: doc.badge },
+			{ title: "Breadcrumb", source: doc.breadcrumb },
+			{ title: "Button", source: doc.button },
+			{ title: "Button group", source: doc.btngroup },
+			{ title: "Card", source: doc.card },
+			{ title: "Carosel", source: doc.carousel },
+			{ title: "Close button", source: doc.btnclose },
+			{ title: "Collapse", source: doc.collapse },
+			{ title: "Dropdown", source: doc.dropdown },
+			{ title: "List group", source: doc.listgroup },
+			{ title: "Modal", source: doc.modal },
+			{ title: "Tab", source: doc.tab },
+			{ title: "Navbar", source: doc.navbar },
+			{ title: "Offcanvas", source: doc.offcanvas },
+			{ title: "Paging", source: doc.paging },
+			{ title: "Popover", source: doc.popover },
+			{ title: "Progress", source: doc.progress },
+			{ title: "Toast", source: doc.toast },
+			{ title: "Tooltips", source: doc.tooltip },
 		],
 	},
 	{
 		type: "menu",
 		title: "Extra",
 		item: [
-			{ title: "Icon", source: doc_icon },
-			{ title: "Menu", source: doc_menu },
-			{ title: "Table of content", source: doc_toc },
-			{ title: "Pill", source: doc_pill },
-			{ title: "Example", source: doc_example },
-			{ title: "Label", source: doc_label },
-			{ title: "Msg", source: doc_msg },
-			{ title: "Table", source: doc_table },
+			{ title: "Icon", source: doc.icon },
+			{ title: "Menu", source: doc.menu },
+			{ title: "Table of content", source: doc.toc },
+			{ title: "Pill", source: doc.pill },
+			{ title: "Example", source: doc.example },
+			{ title: "Label", source: doc.label },
+			{ title: "Msg", source: doc.msg },
+			{ title: "Table", source: doc.table },
 		],
 	},
 	{
 		type: "menu",
 		title: "Tag",
 		item: [
-			{ title: "Base", source: doc_tag_base },
+			{ title: "Base", source: doc.tag_base },
 
-			{ title: "Background", source: doc_tag_background },
-			{ title: "Borders", source: doc_tag_border },
-			{ title: "Colors", source: doc_tag_color },
-			{ title: "Display", source: doc_tag_display },
-			{ title: "Flex", source: doc_tag_flex },
-			{ title: "Float", source: doc_tag_float },
-			{ title: "Interactions", source: doc_tag_interaction },
-			{ title: "Overflow", source: doc_tag_overflow },
-			{ title: "Position", source: doc_tag_position },
-			{ title: "Shadows", source: doc_tag_shadow },
-			{ title: "Sizing", source: doc_tag_size },
-			{ title: "Spacing", source: doc_tag_spacing },
-			{ title: "Text", source: doc_tag_text },
-			{ title: "Vertical align", source: doc_tag_valign },
-			{ title: "Visibility", source: doc_tag_visibility },
+			{ title: "Background", source: doc.tag_background },
+			{ title: "Borders", source: doc.tag_border },
+			{ title: "Colors", source: doc.tag_color },
+			{ title: "Display", source: doc.tag_display },
+			{ title: "Flex", source: doc.tag_flex },
+			{ title: "Float", source: doc.tag_float },
+			{ title: "Interactions", source: doc.tag_interaction },
+			{ title: "Overflow", source: doc.tag_overflow },
+			{ title: "Position", source: doc.tag_position },
+			{ title: "Shadows", source: doc.tag_shadow },
+			{ title: "Sizing", source: doc.tag_size },
+			{ title: "Spacing", source: doc.tag_spacing },
+			{ title: "Text", source: doc.tag_text },
+			{ title: "Vertical align", source: doc.tag_valign },
+			{ title: "Visibility", source: doc.tag_visibility },
 		],
 	},
 	{
 		type: "menu",
 		title: "Extend tag",
 		item: [
-			{ title: "Anchor", source: doc_tag_ex_a },
-			{ title: "Bold", source: doc_tag_ex_b },
-			{ title: "Code", source: doc_tag_ex_code },
-			{ title: "Division", source: doc_tag_ex_div },
-			{ title: "Form", source: doc_tag_ex_form },
-			{ title: "Heading", source: doc_tag_ex_h },
-			{ title: "Horizontal rule", source: doc_tag_ex_hr },
-			{ title: "Image", source: doc_tag_ex_img },
-			{ title: "List item", source: doc_tag_ex_li },
-			{ title: "Navigation", source: doc_tag_ex_nav },
-			{ title: "Ordered list", source: doc_tag_ex_ol },
-			{ title: "Paragraph", source: doc_tag_ex_p },
-			{ title: "Preformatted", source: doc_tag_ex_pre },
-			{ title: "Small", source: doc_tag_ex_small },
-			{ title: "Span", source: doc_tag_ex_span },
-			{ title: "Strong", source: doc_tag_ex_strong },
-			{ title: "Unordered list", source: doc_tag_ex_ul },
+			{ title: "Anchor", source: doc.tag_ex_a },
+			{ title: "Bold", source: doc.tag_ex_b },
+			{ title: "Code", source: doc.tag_ex_code },
+			{ title: "Division", source: doc.tag_ex_div },
+			{ title: "Form", source: doc.tag_ex_form },
+			{ title: "Heading", source: doc.tag_ex_h },
+			{ title: "Horizontal rule", source: doc.tag_ex_hr },
+			{ title: "Image", source: doc.tag_ex_img },
+			{ title: "List item", source: doc.tag_ex_li },
+			{ title: "Navigation", source: doc.tag_ex_nav },
+			{ title: "Ordered list", source: doc.tag_ex_ol },
+			{ title: "Paragraph", source: doc.tag_ex_p },
+			{ title: "Preformatted", source: doc.tag_ex_pre },
+			{ title: "Small", source: doc.tag_ex_small },
+			{ title: "Span", source: doc.tag_ex_span },
+			{ title: "Strong", source: doc.tag_ex_strong },
+			{ title: "Unordered list", source: doc.tag_ex_ul },
 		],
 	},
 	{
@@ -409,7 +327,7 @@ function beautifyjs(str) {
 		brace_style: "collapse,preserve-inline",
 	};
 
-	str = str.replace(/v.Z./g, "$.");
+	str = str.replace(/h.Z./g, "$.");
 
 	return js_beautify(str);
 }

@@ -1,4 +1,6 @@
 "use strict";
+import "../../css/menu.css";
+
 import * as core from "./core.js";
 import * as collapse from "./collapse.js";
 import button from "./button.js";
