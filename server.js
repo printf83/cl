@@ -6,7 +6,18 @@ const app = express();
 
 app.set("trust proxy", 1);
 app.use(express.json());
-app.use(helmet());
+app.use(
+	helmet({
+		directives: {
+			defaultSrc: ["'self'"],
+			scriptSrc: ["'self'", "'unsafe-inline'", "https://cdn.jsdelivr.net", "https://cdnjs.cloudflare.com"],
+			styleSrc: ["'self'"],
+			imgSrc: ["*", "data:"],
+			connectSrc: ["'self'"],
+			frameSrc: ["'self'"],
+		},
+	})
+);
 app.use(express.static(path.join(__dirname, "docs")));
 
 const envPORT = process.env.PORT || 8081;
