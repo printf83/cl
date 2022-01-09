@@ -6,7 +6,6 @@ module.exports = {
 		index: "./src/js/index.js",
 		sandbox: "./src/js/sandbox.js",
 		component: "./src/js/component.js",
-		doc: "./src/js/doc.js",
 	},
 	output: {
 		path: path.resolve(__dirname, "./docs/dist"),
@@ -26,6 +25,7 @@ module.exports = {
 		minimize: true,
 		minimizer: [
 			new TerserPlugin({
+				extractComments: false,
 				terserOptions: {
 					mangle: false,
 					enclose: true,

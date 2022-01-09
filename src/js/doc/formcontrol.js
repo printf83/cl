@@ -177,7 +177,7 @@ export default [
 			return new $.input({
 				label: "Datalist example",
 				type: "text",
-				option: ["San Francisco", "new $.York", "Seattle", "Los Angeles", "Chicago"],
+				option: ["San Francisco", "New York", "Seattle", "Los Angeles", "Chicago"],
 			});
 		},
 	},
