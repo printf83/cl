@@ -647,4 +647,9 @@ $.core.documentReady(() => {
 	set_theme(def_theme);
 
 	$.core.init(document.body);
+
+	//backtotop
+	document.getElementById("backtotop").addEventListener("click", function () {
+		document.getElementById("root").scrollIntoView({ behavior: "smooth", block: "start" });
+	});
 });

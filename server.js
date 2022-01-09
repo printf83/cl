@@ -7,11 +7,11 @@ const app = express();
 app.set("trust proxy", 1);
 app.use(express.json());
 app.use(
-	helmet({
+	helmet.contentSecurityPolicy({
 		directives: {
 			defaultSrc: ["'self'"],
-			scriptSrc: ["'self'", "'unsafe-inline'", "https://cdn.jsdelivr.net", "https://cdnjs.cloudflare.com"],
-			styleSrc: ["'self'"],
+			scriptSrc: ["'self'", "'unsafe-inline'", "https://cdnjs.cloudflare.com", "https://cdn.jsdelivr.net"],
+			styleSrc: ["'self'", "'unsafe-inline'", "https://cdn.jsdelivr.net", "https://fonts.googleapis.com"],
 			imgSrc: ["*", "data:"],
 			connectSrc: ["'self'"],
 			frameSrc: ["'self'"],
