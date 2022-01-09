@@ -293,7 +293,7 @@ function startmemoryleaktest(sender, limit) {
 			},
 			function () {
 				sender.classList.remove("active");
-				$.cl.init(document.getElementById("root"));
+				$.core.init(document.getElementById("root"));
 				PR.prettyPrint();
 			}
 		);
@@ -457,7 +457,7 @@ function gen_content(m1, m2, callback) {
 									let processtimestart = window.performance.now();
 
 									sample.resetindex();
-									$.cl.replaceChild(
+									$.core.replaceChild(
 										document.getElementById("root"),
 										new $.div({
 											marginbottom: 3,
@@ -511,7 +511,7 @@ function gen_content(m1, m2, callback) {
 				// setTimeout(
 				// 	function (m, callback) {
 				// 		sample.resetindex();
-				// 		$.cl.replaceChild(
+				// 		$.core.replaceChild(
 				// 			document.getElementById("root"),
 				// 			new $.div({
 				// 				marginbottom: 3,
@@ -536,7 +536,7 @@ function gen_content(m1, m2, callback) {
 				//LOADER TYPE 3
 				//=============
 				// sample.resetindex();
-				// $.cl.replaceChild(
+				// $.core.replaceChild(
 				// 	document.getElementById("root"),
 				// 	new $.div({
 				// 		marginbottom: 3,
@@ -552,7 +552,7 @@ function gen_content(m1, m2, callback) {
 				// 	callback();
 				// }
 			} else {
-				$.cl.replaceChild(
+				$.core.replaceChild(
 					document.getElementById("root"),
 					new $.div({
 						marginbottom: 3,
@@ -602,7 +602,7 @@ function gen_toc() {
 	let li = [];
 	let anchor = [].slice.call(document.getElementById("root").getElementsByClassName("anchorjs-link"));
 	if (anchor && anchor.length > 0) {
-		$.cl.replaceChild(
+		$.core.replaceChild(
 			document.getElementById("nextbar"),
 			new $.toc({
 				label: "On this page",
@@ -626,7 +626,7 @@ function gen_toc() {
 			})
 		);
 	} else {
-		$.cl.replaceChild(document.getElementById("nextbar"), null);
+		$.core.replaceChild(document.getElementById("nextbar"), null);
 	}
 }
 
@@ -668,7 +668,7 @@ function gen_menu(m1, m2, theme) {
 									if (i.type === "menu") {
 										sender.innerText = "Loading...";
 										gen_content(m1, m2, function () {
-											$.cl.init(document.getElementById("root"));
+											$.core.init(document.getElementById("root"));
 											PR.prettyPrint();
 											sender.innerText = m2;
 										});
@@ -686,7 +686,7 @@ function gen_menu(m1, m2, theme) {
 //test upload from laptop
 $.core.documentReady(() => {
 	//topbar
-	$.cl.replaceChild(
+	$.core.replaceChild(
 		document.getElementById("navbar"),
 		new $.navbar.container({
 			color: "primary",
@@ -704,7 +704,7 @@ $.core.documentReady(() => {
 	);
 
 	//sidebar
-	$.cl.replaceChild(
+	$.core.replaceChild(
 		document.getElementById("sidebar"),
 		new $.div({
 			elem: gen_menu(def_m1, def_m2, def_theme),
@@ -712,7 +712,7 @@ $.core.documentReady(() => {
 	);
 
 	//nextbar
-	$.cl.replaceChild(
+	$.core.replaceChild(
 		document.getElementById("nextbar"),
 		new $.div({
 			elem: "Loading...",
@@ -720,11 +720,11 @@ $.core.documentReady(() => {
 	);
 
 	gen_content(def_m1, def_m2, function () {
-		$.cl.init(document.getElementById("root"));
+		$.core.init(document.getElementById("root"));
 		PR.prettyPrint();
 	});
 
 	set_theme(def_theme);
 
-	$.cl.init(document.body);
+	$.core.init(document.body);
 });

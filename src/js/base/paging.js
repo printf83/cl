@@ -1,6 +1,5 @@
 "use strict";
 import * as core from "./core.js";
-import * as cl from "./cl.js";
 import div from "./div.js";
 import li from "./li.js";
 import a from "./a.js";
@@ -43,7 +42,7 @@ function pagingonchange(sender, data) {
 
 	ulcontainer.dispatchEvent(event);
 
-	cl.replaceWith(container, new paging(data));
+	core.replaceWith(container, new paging(data));
 }
 
 export default class paging extends div {

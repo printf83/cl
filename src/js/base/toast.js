@@ -1,6 +1,5 @@
 "use strict";
 import * as core from "./core.js";
-import * as cl from "./cl.js";
 import label from "./label.js";
 import msg from "./msg.js";
 import div from "./div.js";
@@ -221,7 +220,7 @@ export default class toast extends div {
 		let container = document.body.getElementsByClassName(containerQuery)[0];
 		if (!container || container.length === 0) {
 			//build container
-			cl.appendChild(
+			core.appendChild(
 				document.body,
 				new div({
 					position: "absolute",
@@ -239,7 +238,7 @@ export default class toast extends div {
 		}
 
 		//add into document
-		this.dom = cl.appendChild(container, this);
+		this.dom = core.appendChild(container, this);
 		this.tst = new bootstrap.Toast(this.dom);
 
 		toast.timer(this.dom.getElementsByClassName("timer")[0]);
@@ -252,7 +251,7 @@ export default class toast extends div {
 			setTimeout(
 				function (dom, tst) {
 					tst.dispose();
-					cl.removeElement(dom);
+					core.removeElement(dom);
 
 					this.tst = null;
 					this.dom = null;

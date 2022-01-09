@@ -6,7 +6,7 @@ import $ from "./component.js";
 
 $.core.documentReady(() => {
 	//topbar
-	$.cl.replaceChild(document.getElementById("root"), new $.div("Hello Sandbox"));
+	$.core.replaceChild(document.getElementById("root"), new $.div("Hello Sandbox"));
 	new $.query({}, [
 		function (event, data) {
 			console.log(data);

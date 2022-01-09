@@ -1,6 +1,5 @@
 "use strict";
 import * as core from "./core.js";
-import * as cl from "./cl.js";
 import h from "./h.js";
 import label from "./label.js";
 import button from "./button.js";
@@ -280,7 +279,7 @@ export default class modal extends div {
 
 	show = function () {
 		//add into document
-		this.dom = cl.appendChild(document.body, this);
+		this.dom = core.appendChild(document.body, this);
 		this.mdl = new bootstrap.Modal(this.dom);
 
 		// hide previous modal
@@ -305,7 +304,7 @@ export default class modal extends div {
 
 		//set init
 		this.dom.addEventListener("shown.bs.modal", function (event) {
-			cl.init(event.currentTarget);
+			core.init(event.currentTarget);
 		});
 
 		//set destroy after hide
@@ -336,7 +335,7 @@ export default class modal extends div {
 			setTimeout(
 				function (dom, mdl) {
 					mdl.dispose();
-					cl.removeElement(dom);
+					core.removeElement(dom);
 
 					this.mdl = null;
 					this.dom = null;

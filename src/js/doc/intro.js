@@ -45,11 +45,11 @@ export default [
 							class: "prettyprint lang-js",
 							marginbottom: 0,
 							elem: beautifyjs(`
-								$.cl.appendChild(dom,cltag);
-								$.cl.prependChild(dom,cltag);
-								$.cl.replaceChild(dom,cltag);
-								$.cl.replaceWith(dom,cltag);
-								let htmlOutput = $.cl.html(cltag);
+								$.core.appendChild(dom,cltag);
+								$.core.prependChild(dom,cltag);
+								$.core.replaceChild(dom,cltag);
+								$.core.replaceWith(dom,cltag);
+								let htmlOutput = $.core.html(cltag);
 							`),
 						})
 					)
@@ -74,8 +74,8 @@ export default [
 								import $ from "./component.js";
 								
 								$.core.documentReady(() => {
-									$.cl.appendChild(document.body,new $.button({label:'Hello World!', color:'primary'}));
-									$.cl.appendChild(document.body,new $.p('Hello World!'));
+									$.core.appendChild(document.body,new $.button({label:'Hello World!', color:'primary'}));
+									$.core.appendChild(document.body,new $.p('Hello World!'));
 								});
 							`),
 						})

@@ -1,6 +1,5 @@
 "use strict";
 import * as core from "./core.js";
-import * as cl from "./cl.js";
 import h from "./h.js";
 import label from "./label.js";
 import div from "./div.js";
@@ -116,12 +115,12 @@ export default class offcanvas extends div {
 
 	show = function () {
 		//add into document
-		this.dom = cl.appendChild(document.body, this);
+		this.dom = core.appendChild(document.body, this);
 		this.ofc = new bootstrap.Offcanvas(this.dom);
 
 		//set init
 		this.dom.addEventListener("shown.bs.offcanvas", function (event) {
-			cl.init(event.currentTarget);
+			core.init(event.currentTarget);
 		});
 
 		//set destroy after hide
@@ -132,7 +131,7 @@ export default class offcanvas extends div {
 			setTimeout(
 				function (dom, ofc) {
 					ofc.dispose();
-					cl.removeChildElement(dom);
+					core.removeChildElement(dom);
 					dom.remove();
 
 					this.ofc = null;

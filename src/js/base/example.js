@@ -1,6 +1,5 @@
 "use strict";
 import * as core from "./core.js";
-import * as cl from "./cl.js";
 import * as card from "./card.js";
 import accordion from "./accordion.js";
 import tag from "./tag.js";
@@ -145,7 +144,7 @@ export default class example extends div {
 				// color: "light",
 				label: "html",
 				icon: "code",
-				elem: codecontainer("html", cl.html(opt.code()), opt.beautifyhtml),
+				elem: codecontainer("html", core.html(opt.code()), opt.beautifyhtml),
 			});
 		}
 

@@ -1,5 +1,4 @@
 "use strict";
-import * as cl from "./cl.js";
 import * as core from "./core.js";
 import modal from "./modal.js";
 import input from "./input.js";
@@ -205,7 +204,7 @@ let fn = {
 			let id = sender.closest(".card[id]").getAttribute("id");
 			let opt = db[`${id}-data`];
 
-			cl.prependChild(
+			core.prependChild(
 				sender.closest(".col"),
 				new div(
 					["item", animate ? "cl-fadeslidein" : null].filter(Boolean).join(" "),
@@ -239,7 +238,7 @@ let fn = {
 			//generate opr option base on itemtype
 			let opr_opt = fn.filter.opr(opt.useopricon, item ? item.type : null);
 
-			cl.replaceWith(
+			core.replaceWith(
 				opr.parent,
 				new input({
 					class: [opt.useopricon ? "font-fa" : null].filter(Boolean).join(" "),
@@ -252,7 +251,7 @@ let fn = {
 			);
 
 			//set val from frm value
-			cl.replaceWith(
+			core.replaceWith(
 				val,
 				new input({
 					type: item && item.type ? item.type : "text",
@@ -270,7 +269,7 @@ let fn = {
 
 			setTimeout(
 				function (sender) {
-					cl.removeElement(sender.closest(".item"));
+					core.removeElement(sender.closest(".item"));
 				},
 				500,
 				sender
@@ -399,7 +398,7 @@ let fn = {
 			let id = sender.closest(".card[id]").getAttribute("id");
 			let opt = db[`${id}-data`];
 
-			cl.prependChild(
+			core.prependChild(
 				sender.closest(".col"),
 				new div(
 					["item", animate ? "cl-fadeslidein" : null].filter(Boolean).join(" "),
@@ -432,7 +431,7 @@ let fn = {
 			//generate opr option base on itemtype
 			let opr_opt = fn.sort.opr(opt.useopricon, item ? item.type : null);
 
-			cl.replaceWith(
+			core.replaceWith(
 				opr.parent,
 				new input({
 					class: [opt.useopricon ? "font-fa" : null].filter(Boolean).join(" "),
@@ -450,7 +449,7 @@ let fn = {
 
 			setTimeout(
 				function (sender) {
-					cl.removeElement(sender.closest(".item"));
+					core.removeElement(sender.closest(".item"));
 				},
 				500,
 				sender

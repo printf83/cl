@@ -1,3 +1,4 @@
+"use strict";
 import a from "./base/a.js";
 import accordion from "./base/accordion.js";
 import * as alert from "./base/alert.js";
@@ -10,7 +11,6 @@ import btntoolbar from "./base/btntoolbar.js";
 import button from "./base/button.js";
 import * as card from "./base/card.js";
 import carousel from "./base/carousel.js";
-import * as cl from "./base/cl.js";
 import code from "./base/code.js";
 import * as collapse from "./base/collapse.js";
 import * as container from "./base/container.js";
@@ -67,7 +67,6 @@ export default {
 	button,
 	card,
 	carousel,
-	cl,
 	code,
 	collapse,
 	container,
