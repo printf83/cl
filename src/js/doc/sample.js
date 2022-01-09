@@ -587,14 +587,12 @@ fill="#999" stroke="none">
 	},
 	beautifyjs: function (str) {
 		let opt = {
-			preserve_newlines: true,
-			max_preserve_newlines: 100,
-			keep_array_indentation: false,
-			brace_style: "collapse,preserve-inline",
+			max_preserve_newlines: 50,
+			brace_style: "collapse",
 		};
 
 		str = str.replace(/component.Z./g, "$.");
-		str = str.replace(/sample.Z./g, "sample.");
+		str = str.replace(/doc_sample./g, "sample.");
 
 		return js_beautify(str, opt);
 	},

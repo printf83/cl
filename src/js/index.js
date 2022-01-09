@@ -1,6 +1,6 @@
 "use strict";
 const LIBNAME = /component.Z./g;
-const SAMPLELIBNAME = /sample.Z./g;
+const SAMPLELIBNAME = /doc_sample./g;
 
 import "../css/sample.css";
 
@@ -324,10 +324,7 @@ function gen_example(opt) {
 
 function beautifyjs(str) {
 	let opt = {
-		// preserve_newlines: true,
 		max_preserve_newlines: 50,
-		// keep_array_indentation: false,
-		// brace_style: "collapse,preserve-inline",
 		brace_style: "collapse",
 	};
 
