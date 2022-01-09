@@ -1,9 +1,10 @@
 "use strict";
 const LIBNAME = /component.Z./g;
+const SAMPLELIBNAME = /sample.Z./g;
 
 import "../css/sample.css";
 
-import * as sample from "./doc/sample.js";
+import sample from "./doc/sample.js";
 import doc from "./doc.js";
 import $ from "./component.js";
 
@@ -323,15 +324,17 @@ function gen_example(opt) {
 
 function beautifyjs(str) {
 	let opt = {
-		preserve_newlines: true,
-		max_preserve_newlines: 100,
-		keep_array_indentation: false,
-		brace_style: "collapse,preserve-inline",
+		// preserve_newlines: true,
+		max_preserve_newlines: 50,
+		// keep_array_indentation: false,
+		// brace_style: "collapse,preserve-inline",
+		brace_style: "collapse",
 	};
 
 	str = str.replace(LIBNAME, "$.");
+	str = str.replace(SAMPLELIBNAME, "sample.");
 
-	return js_beautify(str);
+	return js_beautify(str, opt);
 }
 
 function beautifyhtml(str) {
@@ -343,7 +346,7 @@ function beautifyhtml(str) {
 	str = str.replace(/\>/g, ">\n");
 	str = str.replace(/\</g, "\n<");
 	str = str.replace(/\n\n/g, "\n");
-	return html_beautify(str);
+	return html_beautify(str, opt);
 }
 
 function find_menu(m1, m2) {

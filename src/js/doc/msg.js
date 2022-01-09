@@ -1,5 +1,5 @@
 "use strict";
-import * as sample from "./sample.js";
+import sample from "./sample.js";
 import $ from "../component.js";
 
 export default [
@@ -23,6 +23,7 @@ export default [
 
 	{
 		title: "With icon",
+		sample: { "sample.text": sample.text },
 		code: function () {
 			return new $.msg({
 				icon: "fire",
@@ -35,6 +36,7 @@ export default [
 		title: "Weight",
 		container: sample.formcontainer,
 		viewclass: "cl-highlight-col",
+		sample: { "sample.text": sample.text },
 		code: function () {
 			let id = $.core.UUID();
 			return [
@@ -61,6 +63,7 @@ export default [
 		title: "Weight : sm",
 		container: sample.formcontainer,
 		viewclass: "cl-modal-preview",
+		sample: { "sample.text": sample.text },
 		code: function () {
 			let id = $.core.UUID();
 			return [
@@ -83,6 +86,7 @@ export default [
 	{
 		title: "Weight : md",
 		viewclass: "cl-modal-preview",
+		sample: { "sample.text": sample.text },
 		code: function () {
 			let id = $.core.UUID();
 			return new $.modal({
@@ -101,6 +105,7 @@ export default [
 	{
 		title: "Weight : lg",
 		viewclass: "cl-modal-preview",
+		sample: { "sample.text": sample.text },
 		code: function () {
 			let id = $.core.UUID();
 			return new $.modal({

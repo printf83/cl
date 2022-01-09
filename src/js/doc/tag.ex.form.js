@@ -1,5 +1,5 @@
 "use strict";
-import * as sample from "./sample.js";
+import sample from "./sample.js";
 import $ from "../component.js";
 
 export default [

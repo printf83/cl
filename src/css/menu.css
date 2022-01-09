@@ -82,3 +82,9 @@
 .bg-dark .cl-menu-container li a.active {
 	color: rgba(var(--bs-light-rgb), 0.9);
 }
+
+@media (min-width: 768px) {
+	.cl-vh-menu {
+		max-height: calc(100vh - 5.5rem) !important;
+	}
+}

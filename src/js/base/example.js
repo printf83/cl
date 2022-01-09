@@ -144,7 +144,6 @@ export default class example extends div {
 
 		if (opt.code) {
 			item.push({
-				// color: "light",
 				label: "html",
 				icon: "code",
 				elem: codecontainer("html", core.html(opt.code()), opt.beautifyhtml),
@@ -154,8 +153,8 @@ export default class example extends div {
 		if (opt.sample) {
 			Object.keys(opt.sample).forEach((sampleKey) => {
 				item.push({
-					// color: "light",
 					label: sampleKey,
+					// label: opt.sample[sampleKey].name(),
 					icon: "link",
 					elem: codecontainer("js", opt.sample[sampleKey].toString(), opt.beautifyjs),
 				});
@@ -164,7 +163,6 @@ export default class example extends div {
 
 		if (opt.code) {
 			item.push({
-				// color: "light",
 				label: "code",
 				icon: "fire",
 				active: true,

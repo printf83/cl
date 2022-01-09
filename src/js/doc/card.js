@@ -1,11 +1,11 @@
 "use strict";
-import * as sample from "./sample.js";
+import sample from "./sample.js";
 import $ from "../component.js";
 
 export default [
 	{
 		title: "Cards",
-		msg: "Bootstrap’s cards provide a flexible and extensible content container with multiple variants and optionew $.",
+		msg: "Bootstrap’s cards provide a flexible and extensible content container with multiple variants and option.",
 		anchor: false,
 	},
 

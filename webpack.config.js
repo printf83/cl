@@ -28,7 +28,7 @@ module.exports = {
 			new TerserPlugin({
 				terserOptions: {
 					mangle: false,
-					enclose: false,
+					enclose: true,
 					toplevel: false,
 					keep_classnames: true,
 					keep_fnames: true,

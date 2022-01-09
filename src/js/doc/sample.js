@@ -1,9 +1,7 @@
 "use strict";
 import $ from "../component.js";
 
-let imgindex = 0;
 let textindex = 0;
-
 let textdb = [
 	"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur elit massa, elementum vel metus id, congue sollicitudin lectus. Praesent ultricies felis eget nisl volutpat gravida. In eleifend iaculis viverra. Proin ut gravida elit, id posuere velit. Nulla congue enim at odio eleifend accumsan. Curabitur felis quam, feugiat in tincidunt ac, pulvinar eu diam. Nullam non erat orci. Sed gravida, ante sed vestibulum accumsan, elit metus feugiat ex, in gravida dolor nunc fermentum magna.",
 	"Nam tempor maximus ante vel malesuada. Vivamus nibh neque, cursus finibus risus vel, porttitor accumsan lacus. Nulla facilisi. Sed sit amet sagittis magna, id cursus est. Quisque convallis vel magna quis vestibulum. Curabitur placerat diam odio, in tincidunt felis viverra ac. Aenean quis ante diam. Sed sit amet lectus rutrum tortor feugiat auctor. Fusce euismod est nec posuere accumsan. Donec sodales cursus maximus. Nulla tincidunt quam quis lacus suscipit, ut lobortis erat fringilla. Praesent id diam nec metus mollis maximus. Nam vestibulum lectus quis velit dictum ornare. Phasellus vitae accumsan nisl, sed aliquet nisl. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.",
@@ -11,20 +9,29 @@ let textdb = [
 	"Cras felis orci, feugiat ac volutpat non, porttitor at leo. Mauris sit amet eros tincidunt, cursus felis sit amet, molestie erat. Cras rutrum mi sed nunc tempor, id viverra metus aliquet. Sed aliquet scelerisque rutrum. Donec blandit ante et mauris scelerisque, congue venenatis tortor vehicula. Sed ornare ipsum sed cursus euismod. Aenean placerat nibh nisi, ac pretium nulla aliquet vitae. Mauris vel mauris urna. Morbi ultrices enim tellus, quis volutpat velit feugiat vitae. Vivamus hendrerit consequat rhoncus. In at efficitur lectus, vel volutpat massa. Donec consectetur scelerisque lacinia. Sed tristique risus ac mi efficitur consequat.",
 	"Phasellus quis feugiat magna. Fusce placerat, metus eget tempor placerat, velit neque aliquam turpis, vel gravida ex leo sit amet diam. Aenean facilisis vulputate metus, ac dapibus felis vulputate non. Sed vehicula ante nec odio dapibus, id convallis libero auctor. Vivamus facilisis sed tellus a mattis. Donec bibendum imperdiet dui eget porttitor. Nam aliquam mi a nunc luctus rutrum.",
 ];
+let svgdb = {};
 
-export function resetindex() {
-	imgindex = 0;
-	textindex = 0;
+function isListed(val, listed) {
+	if (listed) {
+		if (Array.isArray(listed) && listed.includes(val)) {
+			return true;
+		} else {
+			return listed === val;
+		}
+	} else {
+		return false;
+	}
 }
 
-let svgdb = {};
-export function img(width = 300, height = 283) {
-	// style="background-color:rgba(0,0,0,.125);"
+export default {
+	resetindex: function () {
+		textindex = 0;
+	},
+	img: function (width = 300, height = 283) {
+		// style="background-color:rgba(0,0,0,.125);"
 
-	if (svgdb.hasOwnProperty(`${width}_${height}`)) {
-		return svgdb[`${width}_${height}`];
-	} else {
-		let svgdata = `<svg version="1.0" xmlns="http://www.w3.org/2000/svg"
+		if (!svgdb.hasOwnProperty(`${width}_${height}`)) {
+			let svgdata = `<svg version="1.0" xmlns="http://www.w3.org/2000/svg"
  width="${width}pt" height="${height}pt" viewBox="0 0 300 283"
  style="background-color:rgba(0,0,0,.125);"
  preserveAspectRatio="xMidYMid meet">
@@ -53,695 +60,667 @@ fill="#999" stroke="none">
 </g>
 </svg>`;
 
-		svgdb[`${width}_${height}`] = "data:image/svg+xml;charset=UTF-8," + encodeURIComponent(svgdata);
-		return svgdb[`${width}_${height}`];
-	}
-}
-
-export function text() {
-	if (textindex >= textdb.length) {
-		textindex = 0;
-	}
-	return textdb[textindex++];
-}
-
-export function optionitem() {
-	return [
-		{ value: "", label: "Open this select menu", selected: true },
-		{ value: "1", label: "One" },
-		{ value: "2", label: "Two" },
-		{ value: "3", label: "Three" },
-	];
-}
-
-export function dropdownitem() {
-	return [
-		{ href: "#", label: "Action" },
-		{
-			href: "#",
-			label: "Another action",
-		},
-		{
-			href: "#",
-			label: "Something else here",
-		},
-		{ value: "-" },
-		{
-			href: "#",
-			label: "Separated link",
-		},
-	];
-}
-
-export function form() {
-	return new $.container.form([
-		new $.input({
-			label: "Name",
-			required: true,
-			invalid: "Please provide name",
-			name: "name",
-			type: "text",
-		}),
-		new $.input({
-			label: "Age",
-			required: true,
-			invalid: "Please provide age",
-			name: "age",
-			type: "number",
-			min: 13,
-			max: 100,
-			after: "Years old",
-		}),
-		new $.listgroup({
-			label: "Sex",
-			type: "div",
-			item: [
-				{
-					type: "radio",
-					name: "sex",
-					value: "s",
-					label: "Secret",
-					checked: true,
-				},
-				{
-					type: "radio",
-					name: "sex",
-					value: "m",
-					label: "Male",
-				},
-				{
-					type: "radio",
-					name: "sex",
-					value: "f",
-					label: "Female",
-				},
-			],
-		}),
-		new $.listgroup({
-			label: "Interest",
-			type: "div",
-			item: [
-				{
-					type: "checkbox",
-					name: "interest",
-					value: "sports",
-					label: "Sports",
-				},
-				{
-					type: "checkbox",
-					name: "interest",
-					value: "business",
-					label: "Business",
-				},
-				{
-					type: "checkbox",
-					name: "interest",
-					value: "social",
-					label: "Social",
-				},
-				{
-					type: "checkbox",
-					name: "interest",
-					value: "internet",
-					label: "Internet",
-				},
-			],
-		}),
-		new $.input({
-			label: "Country",
-			required: true,
-			invalid: "Please choose country",
-			name: "country",
-			type: "select",
-			option: [
-				{ value: "", label: "" },
-				{ value: "my", label: "Malaysia" },
-				{ value: "in", label: "Indonesia" },
-				{ value: "sg", label: "Singapore" },
-			],
-		}),
-	]);
-}
-
-export function accordionitem() {
-	return [
-		{
-			label: "Accordion Item 1",
-			elem: ["<b>This is the first item's accordion body.</b> ", text()],
-		},
-		{
-			label: "Accordion Item 2",
-			elem: ["<b>This is the second item's accordion body.</b> ", text()],
-		},
-		{
-			label: "Accordion Item 3",
-			elem: ["<b>This is the third item's accordion body.</b> ", text()],
-		},
-	];
-}
-
-export function cardwithimg() {
-	return [
-		new $.card.container({
-			elem: [
-				new $.card.img({
-					placement: "top",
-					src: img(415, 207),
-				}),
-				new $.card.body({
-					elem: [
-						new $.card.title("Card Title"),
-						new $.card.text(
-							"This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer."
-						),
-					],
-				}),
-			],
-		}),
-		new $.card.container({
-			elem: [
-				new $.card.img({
-					placement: "top",
-					src: img(415, 207),
-				}),
-				new $.card.body({
-					elem: [
-						new $.card.title("Card Title"),
-						new $.card.text(
-							"This card has supporting text below as a natural lead-in to additional content."
-						),
-					],
-				}),
-			],
-		}),
-		new $.card.container({
-			elem: [
-				new $.card.img({
-					placement: "top",
-					src: img(415, 207),
-				}),
-				new $.card.body({
-					elem: [
-						new $.card.title("Card Title"),
-						new $.card.text(
-							"This card has supporting text below as a natural lead-in to additional content."
-						),
-					],
-				}),
-			],
-		}),
-		new $.card.container({
-			elem: [
-				new $.card.img({
-					placement: "top",
-					src: img(415, 207),
-				}),
-				new $.card.body({
-					elem: [
-						new $.card.title("Card Title"),
-						new $.card.text(
-							"This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action."
-						),
-					],
-				}),
-			],
-		}),
-	];
-}
-
-export function cardwithfooter() {
-	return [
-		new $.card.container({
-			elem: [
-				new $.card.img({
-					placement: "top",
-					src: img(415, 207),
-				}),
-				new $.card.body({
-					elem: [
-						new $.card.title("Card Title"),
-						new $.card.text(
-							"This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action."
-						),
-					],
-				}),
-				new $.card.footer("Last updated 3 mins ago"),
-			],
-		}),
-		new $.card.container({
-			elem: [
-				new $.card.img({
-					placement: "top",
-					src: img(415, 207),
-				}),
-				new $.card.body({
-					elem: [
-						new $.card.title("Card Title"),
-						new $.card.text(
-							"This card has supporting text below as a natural lead-in to additional content."
-						),
-					],
-				}),
-				new $.card.footer("Last updated 3 mins ago"),
-			],
-		}),
-		new $.card.container({
-			elem: [
-				new $.card.img({
-					placement: "top",
-					src: img(415, 207),
-				}),
-				new $.card.body({
-					elem: [
-						new $.card.title("Card Title"),
-						new $.card.text(
-							"This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer."
-						),
-					],
-				}),
-				new $.card.footer("Last updated 3 mins ago"),
-			],
-		}),
-	];
-}
-
-export function cardh100() {
-	return [
-		new $.card.container({
-			class: "h-100",
-			elem: [
-				new $.card.img({
-					placement: "top",
-					src: img(415, 207),
-				}),
-				new $.card.body({
-					elem: [
-						new $.card.title("Card Title"),
-						new $.card.text(
-							"This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action."
-						),
-					],
-				}),
-			],
-		}),
-		new $.card.container({
-			class: "h-100",
-			elem: [
-				new $.card.img({
-					placement: "top",
-					src: img(415, 207),
-				}),
-				new $.card.body({
-					elem: [
-						new $.card.title("Card Title"),
-						new $.card.text(
-							"This card has supporting text below as a natural lead-in to additional content."
-						),
-					],
-				}),
-			],
-		}),
-		new $.card.container({
-			class: "h-100",
-			elem: [
-				new $.card.img({
-					placement: "top",
-					src: img(415, 207),
-				}),
-				new $.card.body({
-					elem: [
-						new $.card.title("Card Title"),
-						new $.card.text(
-							"This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer."
-						),
-					],
-				}),
-			],
-		}),
-	];
-}
-
-export function cardwithfooterh100() {
-	return [
-		new $.card.container({
-			class: "h-100",
-			elem: [
-				new $.card.img({
-					placement: "top",
-					src: img(415, 207),
-				}),
-				new $.card.body({
-					elem: [
-						new $.card.title("Card Title"),
-						new $.card.text(
-							"This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action."
-						),
-					],
-				}),
-				new $.card.footer("Last updated 3 mins ago"),
-			],
-		}),
-		new $.card.container({
-			class: "h-100",
-			elem: [
-				new $.card.img({
-					placement: "top",
-					src: img(415, 207),
-				}),
-				new $.card.body({
-					elem: [
-						new $.card.title("Card Title"),
-						new $.card.text(
-							"This card has supporting text below as a natural lead-in to additional content."
-						),
-					],
-				}),
-				new $.card.footer("Last updated 3 mins ago"),
-			],
-		}),
-		new $.card.container({
-			class: "h-100",
-			elem: [
-				new $.card.img({
-					placement: "top",
-					src: img(415, 207),
-				}),
-				new $.card.body({
-					elem: [
-						new $.card.title("Card Title"),
-						new $.card.text(
-							"This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer."
-						),
-					],
-				}),
-				new $.card.footer("Last updated 3 mins ago"),
-			],
-		}),
-	];
-}
-
-export function listgroupitem() {
-	return [
-		{ elem: "An item" },
-		{ elem: "A second item" },
-		{ elem: "A third item" },
-		{ elem: "A fourth item" },
-		{ elem: "And a fifth one" },
-	];
-}
-
-export function listgroupitemcustomcontent() {
-	return [
-		new $.div({
-			class: "ms-2 me-auto",
-			elem: [new $.div("fw-bold", "Subheading"), "Cras justo odio"],
-		}),
-		new $.badge({
-			pill: true,
-			color: "primary",
-			label: "14",
-		}),
-	];
-}
-
-export function listgroupitem3() {
-	return [{ elem: "An item" }, { elem: "A second item" }, { elem: "A third item" }];
-}
-
-export function dlgFn(recipient) {
-	new $.modal({
-		title: "Modal title",
-		elem: new $.container.form([
-			new $.input({
-				type: "text",
-				name: "recipient",
-				label: "Recipient:",
-				value: recipient,
-			}),
-			new $.input({
-				type: "textarea",
-				name: "message",
-				label: "Message:",
-				value: "",
-			}),
-		]),
-		button: [
-			{
-				label: "Send message",
-				onclick: function (event, data) {
-					new $.toast("i", `Result from dialog is <b>${JSON.stringify(data)}</b>`).show();
-				},
-			},
-			"Close",
-		],
-	}).show();
-}
-
-export function dlgFullscreenFn(fullscreen) {
-	new $.modal({
-		fullscreen: fullscreen,
-		title: "Modal title",
-		elem: `Dialog with <code>fullscreen : <b>${fullscreen}</b></code> option`,
-		button: ["Okay"],
-	}).show();
-}
-
-export function dlgSizeFn(size) {
-	new $.modal({
-		size: size,
-		title: "Modal title",
-		elem: `Dialog with <code>size : <b>${size}</b></code> option`,
-		button: ["Okay"],
-	}).show();
-}
-
-export function tab() {
-	return [
-		{ label: "First", elem: "This is first tab. " + text() },
-		{ label: "Second", elem: "This is second tab. " + text() },
-		{ label: "Third", elem: "This is third tab. " + text() },
-		{ label: "Disabled", disabled: true, elem: "This is last tab. " + text() },
-	];
-}
-
-export function dropdowntab() {
-	return [
-		{ label: "First", elem: "This is first tab. " + text() },
-		{
-			label: "Second",
-			elem: "This is second tab. " + text(),
-			option: [
-				{ href: "#", label: "Action" },
-				{ href: "#", label: "Another action" },
-				{ value: "-", label: "" },
-				{ href: "#", label: "Something else here" },
-			],
-		},
-		{ label: "Third", elem: "This is third tab. " + text() },
-		{ label: "Disabled", disabled: true, elem: "This is last tab. " + text() },
-	];
-}
-
-export function navbaritem(id, title) {
-	return [
-		new $.navbar.toggle({
-			target: `#${id}`,
-			toggle: "collapse",
-		}),
-
-		new $.navbar.brand({
-			label: title ? title : "Navbar",
-		}),
-
-		new $.navbar.collapsecontainer({
-			id: id,
-			elem: [
-				new $.navbar.itemcontainer({
-					parenttype: "collapse",
-					elem: [
-						new $.navbar.item({ label: "Home", active: true }),
-						new $.navbar.item({ label: "Link" }),
-						new $.navbar.item({
-							label: "Dropdown",
-							option: dropdownitem(),
-						}),
-						new $.navbar.item({ label: "Disabled", disabled: true }),
-					],
-				}),
-				new $.navbar.formcontainer([
-					new $.input({
-						type: "search",
-						placeholder: "Search",
-						hiddenlabel: "Search",
-						class: "me-2",
-					}),
-					new $.button({ label: "Search", color: "success", outline: true }),
-				]),
-			],
-		}),
-	];
-}
-
-export function offcanvasbody() {
-	return new $.div({
-		elem: [
-			new $.p({
-				elem: "Some text as placeholder. In real life you can have the elements you have chosen. Like, text, images, lists, etc.",
-			}),
-			new $.dropdown({
-				label: "Drowdown button",
-				color: "secondary",
-				option: dropdownitem(),
-			}),
-		],
-	});
-}
-
-export function beautifyjs(str) {
-	return js_beautify(str, {
-		preserve_newlines: true,
-		max_preserve_newlines: 100,
-		keep_array_indentation: false,
-		brace_style: "collapse,preserve-inline",
-	});
-}
-
-export function beautifyhtml(str) {
-	str = str.replace(/\>/g, ">\n");
-	str = str.replace(/\</g, "\n<");
-	str = str.replace(/\n\n/g, "\n");
-	return html_beautify(str, {
-		indent_inner_html: true,
-		indent_size: 4,
-	});
-}
-
-export function table(header, footer) {
-	let rtn = [
-		["1/6/2020", "East", "Jones", "Pencil", "95", "1.99", "189.05"],
-		["1/23/2020", "Central", "Kivell", "Binder", "50", "19.99", "999.50"],
-		["2/9/2020", "Central", "Jardine", "Pencil", "36", "4.99", "179.64"],
-		["2/26/2020", "Central", "Gill", "Pen", "27", "19.99", "539.73"],
-		["3/15/2020", "West", "Sorvino", "Pencil", "56", "2.99", "167.44"],
-		["4/1/2020", "East", "Jones", "Binder", "60", "4.99", "299.40"],
-		["4/18/2020", "Central", "Andrews", "Pencil", "75", "1.99", "149.25"],
-	];
-
-	if (header) {
-		rtn.unshift(["OrderDate", "Region", "Rep", "Item", "Units", "UnitCost", "Total"]);
-	}
-
-	if (footer) {
-		rtn.push(["", "", "", "", "", "Total", "2,524.01"]);
-	}
-	return rtn;
-}
-
-function isListed(val, listed) {
-	if (listed) {
-		if (Array.isArray(listed) && listed.includes(val)) {
-			return true;
-		} else {
-			return listed === val;
+			svgdb[`${width}_${height}`] = "data:image/svg+xml;charset=UTF-8," + encodeURIComponent(svgdata);
 		}
-	} else {
-		return false;
-	}
-}
 
-export function tagprop(exclude) {
-	let tprop = [
-		"id",
-		"name",
-		"class",
-		"style",
-		"attr",
-		"href",
-		"onclick",
-		"onchange",
-		"onfocus",
-		"onblur",
-		"userselect",
-		"pointerevent",
-		"visible",
-		"align",
-		"valign",
-		"wrap",
-		"wordbreak",
-		"texttransform",
-		"fontsize",
-		"fontweight",
-		"fontitalic",
-		"lineheight",
-		"monospace",
-		"textdecoration",
-		"position",
-		"overflow",
-		"opacity",
-		"display",
-		"float",
-		"alignitem",
-		"alignself",
-		"aligncontent",
-		"justifycontent",
-		"shadow",
-		"gradient",
-		"coloropacity",
-		"color",
-		"linkcolor",
-		"textcolor",
-		"textopacity",
-		"padding",
-		"paddingx",
-		"paddingy",
-		"paddingtop",
-		"paddingbottom",
-		"paddingstart",
-		"paddingend",
-		"margin",
-		"marginx",
-		"marginy",
-		"margintop",
-		"marginbottom",
-		"marginstart",
-		"marginend",
-		"border",
-		"bordercolor",
-		"borderweight",
-		"flex",
-		"order",
-		"row",
-		"col",
-		"rowcol",
-		"gap",
-		"rounded",
-		"roundedtype",
-		"tmiddle",
-		"top",
-		"bottom",
-		"start",
-		"end",
-		"elem",
-	];
+		return svgdb[`${width}_${height}`];
+	},
+	text: function () {
+		if (textindex >= textdb.length) {
+			textindex = 0;
+		}
+		return textdb[textindex++];
+	},
+	optionitem: function () {
+		return [
+			{ value: "", label: "Open this select menu", selected: true },
+			{ value: "1", label: "One" },
+			{ value: "2", label: "Two" },
+			{ value: "3", label: "Three" },
+		];
+	},
+	dropdownitem: function () {
+		return [
+			{ href: "#", label: "Action" },
+			{
+				href: "#",
+				label: "Another action",
+			},
+			{
+				href: "#",
+				label: "Something else here",
+			},
+			{ value: "-" },
+			{
+				href: "#",
+				label: "Separated link",
+			},
+		];
+	},
+	form: function () {
+		return new $.container.form([
+			new $.input({
+				label: "Name",
+				required: true,
+				invalid: "Please provide name",
+				name: "name",
+				type: "text",
+			}),
+			new $.input({
+				label: "Age",
+				required: true,
+				invalid: "Please provide age",
+				name: "age",
+				type: "number",
+				min: 13,
+				max: 100,
+				after: "Years old",
+			}),
+			new $.listgroup({
+				label: "Sex",
+				type: "div",
+				item: [
+					{
+						type: "radio",
+						name: "sex",
+						value: "s",
+						label: "Secret",
+						checked: true,
+					},
+					{
+						type: "radio",
+						name: "sex",
+						value: "m",
+						label: "Male",
+					},
+					{
+						type: "radio",
+						name: "sex",
+						value: "f",
+						label: "Female",
+					},
+				],
+			}),
+			new $.listgroup({
+				label: "Interest",
+				type: "div",
+				item: [
+					{
+						type: "checkbox",
+						name: "interest",
+						value: "sports",
+						label: "Sports",
+					},
+					{
+						type: "checkbox",
+						name: "interest",
+						value: "business",
+						label: "Business",
+					},
+					{
+						type: "checkbox",
+						name: "interest",
+						value: "social",
+						label: "Social",
+					},
+					{
+						type: "checkbox",
+						name: "interest",
+						value: "internet",
+						label: "Internet",
+					},
+				],
+			}),
+			new $.input({
+				label: "Country",
+				required: true,
+				invalid: "Please choose country",
+				name: "country",
+				type: "select",
+				option: [
+					{ value: "", label: "" },
+					{ value: "my", label: "Malaysia" },
+					{ value: "in", label: "Indonesia" },
+					{ value: "sg", label: "Singapore" },
+				],
+			}),
+		]);
+	},
+	accordionitem: function () {
+		return [
+			{
+				label: "Accordion Item 1",
+				elem: ["<b>This is the first item's accordion body.</b> ", this.text()],
+			},
+			{
+				label: "Accordion Item 2",
+				elem: ["<b>This is the second item's accordion body.</b> ", this.text()],
+			},
+			{
+				label: "Accordion Item 3",
+				elem: ["<b>This is the third item's accordion body.</b> ", this.text()],
+			},
+		];
+	},
+	cardwithimg: function () {
+		return [
+			new $.card.container({
+				elem: [
+					new $.card.img({
+						placement: "top",
+						src: this.img(415, 207),
+					}),
+					new $.card.body({
+						elem: [
+							new $.card.title("Card Title"),
+							new $.card.text(
+								"This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer."
+							),
+						],
+					}),
+				],
+			}),
+			new $.card.container({
+				elem: [
+					new $.card.img({
+						placement: "top",
+						src: this.img(415, 207),
+					}),
+					new $.card.body({
+						elem: [
+							new $.card.title("Card Title"),
+							new $.card.text(
+								"This card has supporting text below as a natural lead-in to additional content."
+							),
+						],
+					}),
+				],
+			}),
+			new $.card.container({
+				elem: [
+					new $.card.img({
+						placement: "top",
+						src: this.img(415, 207),
+					}),
+					new $.card.body({
+						elem: [
+							new $.card.title("Card Title"),
+							new $.card.text(
+								"This card has supporting text below as a natural lead-in to additional content."
+							),
+						],
+					}),
+				],
+			}),
+			new $.card.container({
+				elem: [
+					new $.card.img({
+						placement: "top",
+						src: this.img(415, 207),
+					}),
+					new $.card.body({
+						elem: [
+							new $.card.title("Card Title"),
+							new $.card.text(
+								"This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action."
+							),
+						],
+					}),
+				],
+			}),
+		];
+	},
+	cardwithfooter: function () {
+		return [
+			new $.card.container({
+				elem: [
+					new $.card.img({
+						placement: "top",
+						src: this.img(415, 207),
+					}),
+					new $.card.body({
+						elem: [
+							new $.card.title("Card Title"),
+							new $.card.text(
+								"This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action."
+							),
+						],
+					}),
+					new $.card.footer("Last updated 3 mins ago"),
+				],
+			}),
+			new $.card.container({
+				elem: [
+					new $.card.img({
+						placement: "top",
+						src: this.img(415, 207),
+					}),
+					new $.card.body({
+						elem: [
+							new $.card.title("Card Title"),
+							new $.card.text(
+								"This card has supporting text below as a natural lead-in to additional content."
+							),
+						],
+					}),
+					new $.card.footer("Last updated 3 mins ago"),
+				],
+			}),
+			new $.card.container({
+				elem: [
+					new $.card.img({
+						placement: "top",
+						src: this.img(415, 207),
+					}),
+					new $.card.body({
+						elem: [
+							new $.card.title("Card Title"),
+							new $.card.text(
+								"This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer."
+							),
+						],
+					}),
+					new $.card.footer("Last updated 3 mins ago"),
+				],
+			}),
+		];
+	},
+	cardh100: function () {
+		return [
+			new $.card.container({
+				class: "h-100",
+				elem: [
+					new $.card.img({
+						placement: "top",
+						src: this.img(415, 207),
+					}),
+					new $.card.body({
+						elem: [
+							new $.card.title("Card Title"),
+							new $.card.text(
+								"This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action."
+							),
+						],
+					}),
+				],
+			}),
+			new $.card.container({
+				class: "h-100",
+				elem: [
+					new $.card.img({
+						placement: "top",
+						src: this.img(415, 207),
+					}),
+					new $.card.body({
+						elem: [
+							new $.card.title("Card Title"),
+							new $.card.text(
+								"This card has supporting text below as a natural lead-in to additional content."
+							),
+						],
+					}),
+				],
+			}),
+			new $.card.container({
+				class: "h-100",
+				elem: [
+					new $.card.img({
+						placement: "top",
+						src: this.img(415, 207),
+					}),
+					new $.card.body({
+						elem: [
+							new $.card.title("Card Title"),
+							new $.card.text(
+								"This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer."
+							),
+						],
+					}),
+				],
+			}),
+		];
+	},
+	cardwithfooterh100: function () {
+		return [
+			new $.card.container({
+				class: "h-100",
+				elem: [
+					new $.card.img({
+						placement: "top",
+						src: this.img(415, 207),
+					}),
+					new $.card.body({
+						elem: [
+							new $.card.title("Card Title"),
+							new $.card.text(
+								"This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action."
+							),
+						],
+					}),
+					new $.card.footer("Last updated 3 mins ago"),
+				],
+			}),
+			new $.card.container({
+				class: "h-100",
+				elem: [
+					new $.card.img({
+						placement: "top",
+						src: this.img(415, 207),
+					}),
+					new $.card.body({
+						elem: [
+							new $.card.title("Card Title"),
+							new $.card.text(
+								"This card has supporting text below as a natural lead-in to additional content."
+							),
+						],
+					}),
+					new $.card.footer("Last updated 3 mins ago"),
+				],
+			}),
+			new $.card.container({
+				class: "h-100",
+				elem: [
+					new $.card.img({
+						placement: "top",
+						src: this.img(415, 207),
+					}),
+					new $.card.body({
+						elem: [
+							new $.card.title("Card Title"),
+							new $.card.text(
+								"This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer."
+							),
+						],
+					}),
+					new $.card.footer("Last updated 3 mins ago"),
+				],
+			}),
+		];
+	},
+	listgroupitem: function () {
+		return [
+			{ elem: "An item" },
+			{ elem: "A second item" },
+			{ elem: "A third item" },
+			{ elem: "A fourth item" },
+			{ elem: "And a fifth one" },
+		];
+	},
+	listgroupitemcustomcontent: function () {
+		return [
+			new $.div({
+				class: "ms-2 me-auto",
+				elem: [new $.div("fw-bold", "Subheading"), "Cras justo odio"],
+			}),
+			new $.badge({
+				pill: true,
+				color: "primary",
+				label: "14",
+			}),
+		];
+	},
+	listgroupitem3: function () {
+		return [{ elem: "An item" }, { elem: "A second item" }, { elem: "A third item" }];
+	},
+	dlgFn: function (recipient) {
+		new $.modal({
+			title: "Modal title",
+			elem: new $.container.form([
+				new $.input({
+					type: "text",
+					name: "recipient",
+					label: "Recipient:",
+					value: recipient,
+				}),
+				new $.input({
+					type: "textarea",
+					name: "message",
+					label: "Message:",
+					value: "",
+				}),
+			]),
+			button: [
+				{
+					label: "Send message",
+					onclick: function (event, data) {
+						new $.toast("i", `Result from dialog is <b>${JSON.stringify(data)}</b>`).show();
+					},
+				},
+				"Close",
+			],
+		}).show();
+	},
+	dlgFullscreenFn: function (fullscreen) {
+		new $.modal({
+			fullscreen: fullscreen,
+			title: "Modal title",
+			elem: `Dialog with <code>fullscreen : <b>${fullscreen}</b></code> option`,
+			button: ["Okay"],
+		}).show();
+	},
+	dlgSizeFn: function (size) {
+		new $.modal({
+			size: size,
+			title: "Modal title",
+			elem: `Dialog with <code>size : <b>${size}</b></code> option`,
+			button: ["Okay"],
+		}).show();
+	},
+	tab: function () {
+		return [
+			{ label: "First", elem: "This is first tab. " + this.text() },
+			{ label: "Second", elem: "This is second tab. " + this.text() },
+			{ label: "Third", elem: "This is third tab. " + this.text() },
+			{ label: "Disabled", disabled: true, elem: "This is last tab. " + this.text() },
+		];
+	},
+	dropdowntab: function () {
+		return [
+			{ label: "First", elem: "This is first tab. " + this.text() },
+			{
+				label: "Second",
+				elem: "This is second tab. " + this.text(),
+				option: [
+					{ href: "#", label: "Action" },
+					{ href: "#", label: "Another action" },
+					{ value: "-", label: "" },
+					{ href: "#", label: "Something else here" },
+				],
+			},
+			{ label: "Third", elem: "This is third tab. " + this.text() },
+			{ label: "Disabled", disabled: true, elem: "This is last tab. " + this.text() },
+		];
+	},
+	navbaritem: function (id, title) {
+		return [
+			new $.navbar.toggle({
+				target: `#${id}`,
+				toggle: "collapse",
+			}),
 
-	let f = tprop
-		.map(function (i) {
-			if (!isListed(i, exclude)) {
-				return `<code>${i}</code>`;
-			} else {
-				return null;
-			}
-		})
-		.filter(Boolean);
+			new $.navbar.brand({
+				label: title ? title : "Navbar",
+			}),
 
-	let l = f.pop();
-	return f.join(", ") + " and " + l;
-}
+			new $.navbar.collapsecontainer({
+				id: id,
+				elem: [
+					new $.navbar.itemcontainer({
+						parenttype: "collapse",
+						elem: [
+							new $.navbar.item({ label: "Home", active: true }),
+							new $.navbar.item({ label: "Link" }),
+							new $.navbar.item({
+								label: "Dropdown",
+								option: this.dropdownitem(),
+							}),
+							new $.navbar.item({ label: "Disabled", disabled: true }),
+						],
+					}),
+					new $.navbar.formcontainer([
+						new $.input({
+							type: "search",
+							placeholder: "Search",
+							hiddenlabel: "Search",
+							class: "me-2",
+						}),
+						new $.button({ label: "Search", color: "success", outline: true }),
+					]),
+				],
+			}),
+		];
+	},
+	offcanvasbody: function () {
+		return new $.div({
+			elem: [
+				new $.p({
+					elem: "Some text as placeholder. In real life you can have the elements you have chosen. Like, text, images, lists, etc.",
+				}),
+				new $.dropdown({
+					label: "Drowdown button",
+					color: "secondary",
+					option: this.dropdownitem(),
+				}),
+			],
+		});
+	},
+	beautifyjs: function (str) {
+		let opt = {
+			preserve_newlines: true,
+			max_preserve_newlines: 100,
+			keep_array_indentation: false,
+			brace_style: "collapse,preserve-inline",
+		};
 
-export function formcontainer(elem) {
-	return new $.container.form(elem);
-}
+		str = str.replace(/component.Z./g, "$.");
+		str = str.replace(/sample.Z./g, "sample.");
 
-export function stackcontainer(elem) {
-	return new $.container.stack(elem);
-}
+		return js_beautify(str, opt);
+	},
+	beautifyhtml: function (str) {
+		let opt = {
+			indent_inner_html: true,
+			indent_size: 4,
+		};
+
+		str = str.replace(/\>/g, ">\n");
+		str = str.replace(/\</g, "\n<");
+		str = str.replace(/\n\n/g, "\n");
+		return html_beautify(str, opt);
+	},
+	table: function (header, footer) {
+		let rtn = [
+			["1/6/2020", "East", "Jones", "Pencil", "95", "1.99", "189.05"],
+			["1/23/2020", "Central", "Kivell", "Binder", "50", "19.99", "999.50"],
+			["2/9/2020", "Central", "Jardine", "Pencil", "36", "4.99", "179.64"],
+			["2/26/2020", "Central", "Gill", "Pen", "27", "19.99", "539.73"],
+			["3/15/2020", "West", "Sorvino", "Pencil", "56", "2.99", "167.44"],
+			["4/1/2020", "East", "Jones", "Binder", "60", "4.99", "299.40"],
+			["4/18/2020", "Central", "Andrews", "Pencil", "75", "1.99", "149.25"],
+		];
+
+		if (header) {
+			rtn.unshift(["OrderDate", "Region", "Rep", "Item", "Units", "UnitCost", "Total"]);
+		}
+
+		if (footer) {
+			rtn.push(["", "", "", "", "", "Total", "2,524.01"]);
+		}
+		return rtn;
+	},
+	tagprop: function (exclude) {
+		let tprop = [
+			"id",
+			"name",
+			"class",
+			"style",
+			"attr",
+			"href",
+			"onclick",
+			"onchange",
+			"onfocus",
+			"onblur",
+			"userselect",
+			"pointerevent",
+			"visible",
+			"align",
+			"valign",
+			"wrap",
+			"wordbreak",
+			"texttransform",
+			"fontsize",
+			"fontweight",
+			"fontitalic",
+			"lineheight",
+			"monospace",
+			"textdecoration",
+			"position",
+			"overflow",
+			"opacity",
+			"display",
+			"float",
+			"alignitem",
+			"alignself",
+			"aligncontent",
+			"justifycontent",
+			"shadow",
+			"gradient",
+			"coloropacity",
+			"color",
+			"linkcolor",
+			"textcolor",
+			"textopacity",
+			"padding",
+			"paddingx",
+			"paddingy",
+			"paddingtop",
+			"paddingbottom",
+			"paddingstart",
+			"paddingend",
+			"margin",
+			"marginx",
+			"marginy",
+			"margintop",
+			"marginbottom",
+			"marginstart",
+			"marginend",
+			"border",
+			"bordercolor",
+			"borderweight",
+			"flex",
+			"order",
+			"row",
+			"col",
+			"rowcol",
+			"gap",
+			"rounded",
+			"roundedtype",
+			"tmiddle",
+			"top",
+			"bottom",
+			"start",
+			"end",
+			"elem",
+		];
+
+		let f = tprop
+			.map(function (i) {
+				if (!isListed(i, exclude)) {
+					return `<code>${i}</code>`;
+				} else {
+					return null;
+				}
+			})
+			.filter(Boolean);
+
+		let l = f.pop();
+		return f.join(", ") + " and " + l;
+	},
+	formcontainer: function (elem) {
+		return new $.container.form(elem);
+	},
+	stackcontainer: function (elem) {
+		return new $.container.stack(elem);
+	},
+};

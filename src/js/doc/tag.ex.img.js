@@ -1,5 +1,5 @@
 "use strict";
-import * as sample from "./sample.js";
+import sample from "./sample.js";
 import $ from "../component.js";
 
 export default [
@@ -20,6 +20,7 @@ export default [
 
 	{
 		title: "Example",
+		sample: { "sample.img": sample.img },
 		code: function () {
 			return new $.img({
 				src: sample.img(100, 100),
@@ -46,6 +47,7 @@ export default [
 	{
 		title: "Easy option",
 		msg: "This component also supported easy option.",
+		sample: { "sample.img": sample.img },
 		container: sample.stackcontainer,
 		code: function () {
 			return [
