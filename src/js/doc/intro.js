@@ -23,12 +23,8 @@ export default [
 			]),
 
 			new $.alert.container({
-				elem: new $.msg({
-					weight: "md",
-					icon: "!",
-					elem: "<b>Warning!</b> This framework create by <b>one developer</b> only for research on build full stack webapps only using simple framework.",
-				}),
-				color: "warning",
+				icon: "i",
+				elem: "<b>Warning!</b> This framework create by <b>one developer</b> only for research on build full stack webapps only using simple framework.",
 				margintop: 5,
 			}),
 
@@ -88,11 +84,18 @@ export default [
 				justifycontent: "center",
 				marginbottom: 5,
 				gap: 2,
-				elem: new $.a({
-					class: "text-decoration-none",
-					elem: new $.pill({ icon: { type: "fab", icon: "github" }, label: "Github" }),
-					href: "https://github.com/printf83/cl",
-				}),
+				elem: [
+					new $.a({
+						class: "text-decoration-none",
+						elem: new $.pill({ icon: { type: "fab", icon: "github" }, label: "Github" }),
+						href: "https://github.com/printf83/cl",
+					}),
+					new $.a({
+						class: "text-decoration-none",
+						elem: new $.pill({ icon: { icon: "at" }, label: "Send Email", color: "danger" }),
+						href: "mailto:printf83@gmail.com?subject=bs5-js-builder&body=I%20have%20a%20question%20about%20...",
+					}),
+				],
 			}),
 		],
 	},
