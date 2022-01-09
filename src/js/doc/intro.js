@@ -23,8 +23,8 @@ export default [
 			]),
 
 			new $.alert.container({
-				icon: "i",
-				elem: "<b>Warning!</b> This framework create by <b>one developer</b> only for research on build full stack webapps only using simple framework.",
+				icon: "!",
+				elem: "<b>Warning!</b> This framework create by <b>one developer</b> only for research on build full stack webapps only using super simple framework.",
 				margintop: 5,
 			}),
 
@@ -92,7 +92,7 @@ export default [
 					}),
 					new $.a({
 						class: "text-decoration-none",
-						elem: new $.pill({ icon: { icon: "at" }, label: "Send Email", color: "danger" }),
+						elem: new $.pill({ icon: { icon: "at" }, label: "Send email", color: "danger" }),
 						href: "mailto:printf83@gmail.com?subject=bs5-js-builder&body=I%20have%20a%20question%20about%20...",
 					}),
 				],

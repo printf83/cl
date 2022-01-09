@@ -8,8 +8,8 @@ import sample from "./doc/sample.js";
 import doc from "./doc.js";
 import $ from "./component.js";
 
-const def_m1 = "Getting started";
-const def_m2 = "Introduction";
+const def_m1 = "Components";
+const def_m2 = "Modal";
 const def_theme = null;
 
 const db_menu = [
