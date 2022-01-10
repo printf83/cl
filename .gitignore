@@ -80,7 +80,8 @@ typings/
 
 # Nuxt.js build / generate output
 .nuxt
-dist
+# vvvv--- disable because gh-page
+# dist
 
 # Gatsby files
 .cache/
