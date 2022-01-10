@@ -8,9 +8,9 @@ import sample from "./doc/sample.js";
 import doc from "./doc.js";
 import $ from "./component.js";
 
-const def_m1 = "Components";
-const def_m2 = "Modal";
-const def_theme = null;
+let def_m1 = "Components";
+let def_m2 = "Modal";
+let def_theme = null;
 
 const db_menu = [
 	{
@@ -390,7 +390,7 @@ function gen_content(m1, m2, callback) {
 									let processtimeend = window.performance.now();
 
 									gen_toc();
-
+									gen_url(m1, m2);
 									//count pagespeed
 									document.getElementById("pagespeed").innerText = `${(
 										processtimeend - processtimestart
@@ -485,6 +485,7 @@ function gen_content(m1, m2, callback) {
 				);
 
 				gen_toc();
+				gen_url(m1, m2);
 
 				//count pagespeed
 				document.getElementById("pagespeed").innerText = `0 ms`;
@@ -548,6 +549,87 @@ function gen_toc() {
 	} else {
 		$.core.replaceChild(document.getElementById("nextbar"), null);
 	}
+}
+
+function gen_url(m1, m2) {
+	let title = `BS5 JS Builder - ${m1} | ${m2}`;
+	let path = `?m1=${encodeURI(m1)}&m2=${encodeURI(m2)}`;
+	let data = `${m1}.${m2}`;
+
+	window.history.pushState(data, title, path);
+	document.title = title;
+}
+
+function get_url() {
+	let d = getAllUrlParams();
+	return d
+		? {
+				m1: decodeURI(d["m1"]),
+				m2: decodeURI(d["m2"]),
+		  }
+		: null;
+}
+
+function getAllUrlParams(url) {
+	// get query string from url (optional) or window
+	var queryString = url ? url.split("?")[1] : window.location.search.slice(1);
+
+	// we'll store the parameters here
+	var obj = {};
+
+	// if query string exists
+	if (queryString) {
+		// stuff after # is not part of query string, so get rid of it
+		queryString = queryString.split("#")[0];
+
+		// split our query string into its component parts
+		var arr = queryString.split("&");
+
+		for (var i = 0; i < arr.length; i++) {
+			// separate the keys and the values
+			var a = arr[i].split("=");
+
+			// set parameter name and value (use 'true' if empty)
+			var paramName = a[0];
+			var paramValue = typeof a[1] === "undefined" ? true : a[1];
+
+			// (optional) keep case consistent
+			// paramName = paramName.toLowerCase();
+			// if (typeof paramValue === "string") paramValue = paramValue.toLowerCase();
+
+			// if the paramName ends with square brackets, e.g. colors[] or colors[2]
+			if (paramName.match(/\[(\d+)?\]$/)) {
+				// create key if it doesn't exist
+				var key = paramName.replace(/\[(\d+)?\]/, "");
+				if (!obj[key]) obj[key] = [];
+
+				// if it's an indexed array e.g. colors[2]
+				if (paramName.match(/\[\d+\]$/)) {
+					// get the index value and add the entry at the appropriate position
+					var index = /\[(\d+)\]/.exec(paramName)[1];
+					obj[key][index] = paramValue;
+				} else {
+					// otherwise add the value to the end of the array
+					obj[key].push(paramValue);
+				}
+			} else {
+				// we're dealing with a string
+				if (!obj[paramName]) {
+					// if it doesn't exist, create property
+					obj[paramName] = paramValue;
+				} else if (obj[paramName] && typeof obj[paramName] === "string") {
+					// if property does exist and it's a string, convert it to an array
+					obj[paramName] = [obj[paramName]];
+					obj[paramName].push(paramValue);
+				} else {
+					// otherwise add the property
+					obj[paramName].push(paramValue);
+				}
+			}
+		}
+	}
+
+	return obj;
 }
 
 function gen_menu(m1, m2, theme) {
@@ -623,6 +705,13 @@ $.core.documentReady(() => {
 		})
 	);
 
+	//set def_m1 and m2
+	let set_m = get_url();
+	if (set_m && set_m.m1 !== undefined && set_m.m2 !== undefined) {
+		def_m1 = set_m.m1;
+		def_m2 = set_m.m2;
+	}
+
 	//sidebar
 	$.core.replaceChild(
 		document.getElementById("sidebar"),
@@ -635,7 +724,7 @@ $.core.documentReady(() => {
 	$.core.replaceChild(
 		document.getElementById("nextbar"),
 		new $.div({
-			elem: "Loading...",
+			elem: "",
 		})
 	);
 

@@ -27,6 +27,9 @@ app.use(helmet.frameguard());
 app.use(helmet.hsts());
 
 app.use(express.static(path.join(__dirname, "docs")));
+// app.get("*", function (req, res) {
+// 	res.redirect("/");
+// });
 
 const envPORT = process.env.PORT || 8081;
 var server = app.listen(envPORT, function () {
