@@ -6,6 +6,7 @@ module.exports = {
 		index: "./src/js/index.js",
 		sandbox: "./src/js/sandbox.js",
 		component: "./src/js/component.js",
+		sample: "./src/js/doc/sample.js",
 	},
 	output: {
 		path: path.resolve(__dirname, "./docs/dist"),
