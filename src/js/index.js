@@ -1,6 +1,6 @@
 "use strict";
 const LIBNAME = /component.Z./g;
-const SAMPLELIBNAME = /doc_sample./g;
+const SAMPLELIBNAME = /sample.Z./g;
 
 import "../css/sample.css";
 
@@ -8,8 +8,8 @@ import sample from "./doc/sample.js";
 import doc from "./doc.js";
 import $ from "./component.js";
 
-let def_m1 = "Components";
-let def_m2 = "Modal";
+let def_m1 = "Getting started";
+let def_m2 = "Introduction";
 let def_theme = null;
 
 const db_menu = [
