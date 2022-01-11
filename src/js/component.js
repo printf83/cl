@@ -28,6 +28,7 @@ import img from "./base/img.js";
 import input from "./base/input.js";
 import * as inputgroup from "./base/inputgroup.js";
 import label from "./base/label.js";
+import * as layout from "./base/layout.js";
 import li from "./base/li.js";
 import listgroup from "./base/listgroup.js";
 import menu from "./base/menu.js";
@@ -84,6 +85,7 @@ export default {
 	input,
 	inputgroup,
 	label,
+	layout,
 	li,
 	listgroup,
 	menu,

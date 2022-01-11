@@ -5,24 +5,15 @@ import $ from "../component.js";
 export default [
 	{
 		title: "Icons",
-		msg: "Guidance and suggestions for using external icon libraries with Bootstrap.",
+		msg: "Using icon from FontAwesome with BS5 Js Builder",
 		anchor: false,
 	},
 
 	{
 		msg: [
-			"While Bootstrap doesn’t include an icon set by default, we do have Bootstrap own comprehensive icon library called Bootstrap Iconew $. Feel free to use them or any other icon set in your project. We’ve included details for Bootstrap Icons and other preferred icon sets below.",
-			"While most icon sets include multiple file formats, we prefer SVG implementations for their improved accessibility and vector support.",
+			"While Bootstrap doesn’t include an icon set by default, so we add support for FontAwesome because it has more icon.",
 		],
 	},
-
-	// {
-	// 	title: "Favicon",
-	// 	container: sample.stackcontainer,
-	// 	code: function () {
-	// 		return new $.icon("favicon");
-	// 	},
-	// },
 
 	{
 		title: "Base icon",

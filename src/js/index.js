@@ -1,12 +1,13 @@
 "use strict";
 const LIBNAME = /component.Z./g;
-const SAMPLELIBNAME = /sample.Z./g;
+const SAMPLELIBNAME = /doc_sample./g;
 
 import "../css/sample.css";
 
 import sample from "./doc/sample.js";
 import doc from "./doc.js";
 import $ from "./component.js";
+import tag from "./base/tag";
 
 let def_m1 = "Getting started";
 let def_m2 = "Introduction";
@@ -79,6 +80,7 @@ const db_menu = [
 			{ title: "Label", source: doc.label },
 			{ title: "Msg", source: doc.msg },
 			{ title: "Table", source: doc.table },
+			{ title: "Layout", source: doc.layout },
 		],
 	},
 	{
@@ -626,26 +628,7 @@ function gen_menu(m1, m2, theme) {
 	});
 }
 
-//test upload from laptop
 $.core.documentReady(() => {
-	//topbar
-	$.core.replaceChild(
-		document.getElementById("navbar"),
-		new $.navbar.container({
-			color: "primary",
-			textcolor: "light",
-			expand: "lg",
-			body: { fluid: "lg" },
-			elem: [
-				new $.navbar.toggle({
-					target: `#sidebar`,
-					toggle: "collapse",
-				}),
-				new $.navbar.brand({ label: "cl", icon: "fire" }),
-			],
-		})
-	);
-
 	//set def_m1 and m2
 	let m = get_url();
 	if (m && m.m1 !== "undefined" && m.m2 !== "undefined") {
@@ -653,19 +636,75 @@ $.core.documentReady(() => {
 		def_m2 = m.m2;
 	}
 
-	//sidebar
-	$.core.replaceChild(
-		document.getElementById("sidebar"),
-		new $.div({
-			elem: gen_menu(def_m1, def_m2, def_theme),
-		})
-	);
+	$.core.replaceWith(
+		document.getElementById("main"),
+		new $.layout.l1({
+			topid: "navbar",
+			leftid: "sidebar",
+			rightid: "nextbar",
+			mainid: "root",
 
-	//nextbar
-	$.core.replaceChild(
-		document.getElementById("nextbar"),
-		new $.div({
-			elem: "",
+			topelem: new $.navbar.container({
+				color: "primary",
+				textcolor: "light",
+				expand: "lg",
+				body: { fluid: "lg" },
+				elem: [
+					new $.navbar.toggle({
+						target: `#sidebar`,
+						toggle: "collapse",
+					}),
+					new $.navbar.brand({ label: "cl", icon: "fire" }),
+				],
+			}),
+			leftelem: new $.tag({
+				class: ["sticky-md-top", "collapse", "navbar-collapse", "cl-vh-menu"],
+				overflow: "auto",
+				display: "md-block",
+				margintop: 3,
+				elem: gen_menu(def_m1, def_m2, def_theme),
+			}),
+			rightelem: new $.tag({
+				class: ["sticky-lg-top", "cl-vh-menu"],
+				overflow: "auto",
+				margintop: 3,
+				elem: "",
+			}),
+			footerelem: new $.div({
+				display: "flex",
+				justifycontent: "center",
+				marginbottom: 5,
+				gap: 2,
+				elem: [
+					new $.pill({
+						icon: "eye",
+						title: "Viewport",
+						color: "primary",
+						elem: [
+							new $.small("d-inline d-sm-none", "xs"),
+							new $.small("d-none d-sm-inline d-md-none", "sm"),
+							new $.small("d-none d-md-inline d-lg-none", "md"),
+							new $.small("d-none d-lg-inline d-xl-none", "lg"),
+							new $.small("d-none d-xl-inline d-xxl-none", "xl"),
+							new $.small("d-none d-xxl-inline", "xxl"),
+						],
+					}),
+					new $.pill({
+						icon: "stopwatch",
+						title: "Build speed",
+						color: "primary",
+						elem: [new $.small({ id: "pagespeed", elem: "0 ms" })],
+					}),
+					new $.pill({
+						icon: "balance-scale",
+						title: "Page weight",
+						color: "primary",
+						elem: [new $.small({ id: "pageweight", elem: "0 item" })],
+					}),
+				],
+			}),
+
+			backtotop: true,
 		})
 	);
 
@@ -677,9 +716,4 @@ $.core.documentReady(() => {
 	set_theme(def_theme);
 
 	$.core.init(document.body);
-
-	//backtotop
-	document.getElementById("backtotop").addEventListener("click", function () {
-		document.getElementById("root").scrollIntoView({ behavior: "smooth", block: "start" });
-	});
 });

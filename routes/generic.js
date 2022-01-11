@@ -1,16 +1,16 @@
 module.exports = function (app, dbname) {
 	const db = require(`../models/${dbname}.js`);
 
-	var fn = {
+	const fn = {
 		/**
 		 * use to create excel file
 		 */
 		colName(n) {
-			var ordA = "A".charCodeAt(0);
-			var ordZ = "Z".charCodeAt(0);
-			var len = ordZ - ordA + 1;
+			let ordA = "A".charCodeAt(0);
+			let ordZ = "Z".charCodeAt(0);
+			let len = ordZ - ordA + 1;
 
-			var s = "";
+			let s = "";
 			while (n >= 0) {
 				s = String.fromCharCode((n % len) + ordA) + s;
 				n = Math.floor(n / len) - 1;
@@ -22,9 +22,9 @@ module.exports = function (app, dbname) {
 		 */
 		excel: function (req, res) {
 			try {
-				var qs = JSON.parse(req.query.q);
+				let qs = JSON.parse(req.query.q);
 
-				var d = db.find(qs.filter ? qs.filter : null, qs.field ? qs.field : null);
+				let d = db.find(qs.filter ? qs.filter : null, qs.field ? qs.field : null);
 				d.collation({ locale: "en" });
 				d.sort(qs.sort ? qs.sort : null);
 
@@ -35,7 +35,7 @@ module.exports = function (app, dbname) {
 				d.then((tmp) => {
 					if (tmp) {
 						//convert data to json and back to array
-						var data = JSON.parse(JSON.stringify(tmp));
+						let data = JSON.parse(JSON.stringify(tmp));
 
 						//generate excel
 						const exceljs = require("exceljs");
@@ -63,9 +63,9 @@ module.exports = function (app, dbname) {
 
 						//populate data into excel
 						if (data && data.length > 0) {
-							var keys = Object.keys(data[0]);
+							let keys = Object.keys(data[0]);
 							keys.forEach(function (i, colIndex) {
-								var col = fn.colName(colIndex);
+								let col = fn.colName(colIndex);
 								ws.getCell(col + "1").value = i;
 								data.forEach(function (j, rowIndex) {
 									ws.getCell(col + (rowIndex + 2)).value = j[i];
@@ -78,9 +78,9 @@ module.exports = function (app, dbname) {
 
 						//auto width column
 						ws.columns.forEach(function (column, i) {
-							var maxLength = 0;
+							let maxLength = 0;
 							column["eachCell"]({ includeEmpty: true }, function (cell) {
-								var columnLength = cell.value ? cell.value.toString().length + 2 : 10;
+								let columnLength = cell.value ? cell.value.toString().length + 2 : 10;
 								if (columnLength > maxLength) {
 									maxLength = columnLength;
 								}
@@ -124,7 +124,7 @@ module.exports = function (app, dbname) {
 		 */
 		list: function (req, res) {
 			try {
-				var q = req.body;
+				let q = req.body;
 				db.aggregate(
 					[
 						q.filter ? { $match: q.filter } : null,
@@ -141,7 +141,7 @@ module.exports = function (app, dbname) {
 					].filter(Boolean)
 				)
 					.then((data) => {
-						var t = JSON.parse(JSON.stringify(data));
+						let t = JSON.parse(JSON.stringify(data));
 						res.send({
 							data: t[0].data,
 							total: t[0].total.length > 0 ? t[0].total[0].count : 0,
@@ -160,7 +160,7 @@ module.exports = function (app, dbname) {
 		 */
 		aggregate: function (req, res) {
 			try {
-				var d;
+				let d;
 				if (req.body.pipe) {
 					if (req.body.opt) {
 						d = db.aggregate(req.body.pipe, req.body.opt);
@@ -205,7 +205,7 @@ module.exports = function (app, dbname) {
 		 * multiple create return array of record id, example : [id1,id2,id3]
 		 */
 		create: function (req, res) {
-			var i = req.body;
+			let i = req.body;
 			if (i) {
 				if (!Array.isArray(i)) {
 					//handle single
@@ -224,7 +224,7 @@ module.exports = function (app, dbname) {
 						});
 				} else {
 					//handle multiple
-					var p = [];
+					let p = [];
 					i.forEach((data) => {
 						p.push(fn.createOne(data));
 					});
@@ -254,7 +254,7 @@ module.exports = function (app, dbname) {
 		 * multiple find return array of record, example : [record1,record2,record3]
 		 */
 		find: function (req, res) {
-			var i = req.params.id.split(",");
+			let i = req.params.id.split(",");
 			if (i && i.length > 0) {
 				if (i.length === 1) {
 					//handle single
@@ -274,7 +274,7 @@ module.exports = function (app, dbname) {
 						});
 				} else {
 					//handle multiple
-					var p = [];
+					let p = [];
 					i.forEach((id) => {
 						p.push(fn.findOne(id));
 					});
@@ -308,7 +308,7 @@ module.exports = function (app, dbname) {
 		 * multiple update return array of id updated record, example : [id1,id2,id3]
 		 */
 		update: function (req, res) {
-			var i = req.params.id.split(",");
+			let i = req.params.id.split(",");
 			if (i && i.length > 0) {
 				if (i.length === 1) {
 					//handle single
@@ -327,7 +327,7 @@ module.exports = function (app, dbname) {
 						});
 				} else {
 					//handle multiple
-					var p = [];
+					let p = [];
 					i.forEach((id) => {
 						p.push(fn.updateOne(id, req.body));
 					});
@@ -355,7 +355,7 @@ module.exports = function (app, dbname) {
 		 * multiple delete return array of id deleted record, example : [id1,id2,id3]
 		 */
 		delete: function (req, res) {
-			var i = req.params.id.split(",");
+			let i = req.params.id.split(",");
 			if (i && i.length > 0) {
 				if (i.length === 1) {
 					//handle single
@@ -374,7 +374,7 @@ module.exports = function (app, dbname) {
 						});
 				} else {
 					//handle multiple
-					var p = [];
+					let p = [];
 					i.forEach((id) => {
 						p.push(fn.deleteOne(id));
 					});

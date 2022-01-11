@@ -20,116 +20,15 @@
 		<title>BS5 JS Builder</title>
 	</head>
 	<body class="position-relative">
-		<div id="navbar"></div>
-
-		<div class="container-lg pt-3">
-			<div class="row">
-				<div class="col col-12 col-md-3 col-xl-2">
-					<div
-						id="sidebar"
-						class="sticky-md-top overflow-auto collapse navbar-collapse d-md-block mt-3 cl-vh-menu"
-						style="z-index: 0"
-					></div>
-				</div>
-
-				<div class="col col-12 col-md-9 col-xl-10">
-					<div class="row">
-						<div class="col col-12 col-xl-10 order-2 order-xl-1">
-							<div id="root">
-								<div class="text-center">
-									<p class="display-3">Please wait</p>
-									<p>
-										<span class="me-1"><i class="fas fa-spinner fa-fw fa-spin"></i></span>
-										Downloading application asset...
-									</p>
-								</div>
-							</div>
-
-							<div class="d-flex justify-content-center mb-5 gap-2">
-								<!-- Viewport start -->
-								<div>
-									<div
-										class="input-group input-group-sm"
-										title="Viewport"
-										data-bs-toggle="tooltip"
-										data-bs-placement="top"
-									>
-										<div class="border-0 input-group-text text-primary bg-primary bg-opacity-25">
-											<i class="fas fa-eye"></i>
-										</div>
-										<div class="bg-primary text-light border-0 input-group-text">
-											<small class="d-inline d-sm-none">xs</small>
-											<small class="d-none d-sm-inline d-md-none">sm</small>
-											<small class="d-none d-md-inline d-lg-none">md</small>
-											<small class="d-none d-lg-inline d-xl-none">lg</small>
-											<small class="d-none d-xl-inline d-xxl-none">xl</small>
-											<small class="d-none d-xxl-inline">xxl</small>
-										</div>
-									</div>
-								</div>
-								<!-- Viewport End -->
-
-								<!-- Build speed start -->
-								<div>
-									<div
-										class="input-group input-group-sm"
-										title="Build speed"
-										data-bs-toggle="tooltip"
-										data-bs-placement="top"
-									>
-										<div class="border-0 input-group-text text-primary bg-primary bg-opacity-25">
-											<i class="fas fa-stopwatch"></i>
-										</div>
-										<div class="bg-primary text-light border-0 input-group-text">
-											<small id="pagespeed">0 ms</small>
-										</div>
-									</div>
-								</div>
-								<!-- Build speed End -->
-
-								<!-- pageweight start -->
-								<div>
-									<div
-										class="input-group input-group-sm"
-										title="Page weight"
-										data-bs-toggle="tooltip"
-										data-bs-placement="top"
-									>
-										<div class="border-0 input-group-text text-primary bg-primary bg-opacity-25">
-											<i class="fas fa-balance-scale"></i>
-										</div>
-										<div class="bg-primary text-light border-0 input-group-text">
-											<small id="pageweight">0 items</small>
-										</div>
-									</div>
-								</div>
-								<!-- pageweight -->
-							</div>
-						</div>
-
-						<div class="col col-12 col-xl-2 order-1 order-xl-2">
-							<div
-								id="nextbar"
-								class="sticky-lg-top overflow-auto mt-3 cl-vh-menu"
-								style="z-index: 0"
-							></div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<div class="fixed-bottom bottom-0 end-0 start-100">
-			<div class="float-end pb-3 pe-3">
-				<button
-					type="button"
-					class="btn btn-danger btn-floating btn-lg rounded-circle"
-					id="backtotop"
-					aria-label="Back to top"
-				>
-					<i class="fas fa-arrow-up"></i>
-				</button>
-			</div>
+		<div class="text-center" id="main">
+			<p class="display-3">Please wait</p>
+			<p>
+				<span class="me-1"><i class="fas fa-spinner fa-fw fa-spin"></i></span>
+				Downloading application asset...
+			</p>
+			<noscript>
+				<p class="text-danger">Your browser does not support JavaScript!</p>
+			</noscript>
 		</div>
 
 		<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>

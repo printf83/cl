@@ -6,7 +6,7 @@ import small from "./small.js";
 import tooltip from "./tooltip.js";
 import icon from "./icon.js";
 
-const defaultOption = { icon: null, label: null, title: null, color: null };
+const defaultOption = { icon: null, label: null, title: null, color: null, elem: null };
 /**
  * opt : {tagoption,icon,label}
  */
@@ -52,7 +52,7 @@ export default class pill extends div {
 					border: false,
 					color: opt.color,
 					textcolor: opt.textcolor,
-					elem: new small(opt.label),
+					elem: opt.elem || new small(opt.label),
 				}),
 			],
 		});

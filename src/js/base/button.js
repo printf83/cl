@@ -24,6 +24,7 @@ const defaultOption = {
 	showlabel: null,
 	iconafter: false,
 	nowrap: false,
+	floating: false,
 
 	elem: null,
 };
@@ -54,6 +55,10 @@ export default class button extends tag {
 				opt.textcolor = opt.textcolor || bI.textcolor;
 			}
 
+			if (opt.type === "checkbox" || opt.type === "radio") {
+				opt.outline = true;
+			}
+
 			opt.tag = opt.href ? "a" : opt.color || opt.outline || opt.weight ? "button" : "div";
 			opt.class = core.merge.class(opt.class, [
 				opt.type === "a" ? "text-decoration-none" : opt.color || opt.outline || opt.weight ? "btn" : null,
@@ -61,6 +66,7 @@ export default class button extends tag {
 				opt.weight ? `btn-${opt.weight}` : null,
 				opt.color ? (opt.outline ? `btn-outline-${opt.color}` : `btn-${opt.color}`) : null,
 				opt.toggle && opt.active ? "active" : null,
+				opt.floating ? "btn-floating" : null,
 			]);
 
 			opt.position = opt.position
@@ -138,6 +144,7 @@ export default class button extends tag {
 			delete opt.showlabel;
 			delete opt.iconafter;
 			delete opt.nowrap;
+			delete opt.floating;
 
 			if (m) {
 				super.data = {

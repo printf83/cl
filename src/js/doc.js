@@ -44,6 +44,7 @@ import example from "./doc/example.js";
 import label from "./doc/label.js";
 import msg from "./doc/msg.js";
 import table from "./doc/table.js";
+import layout from "./doc/layout.js";
 
 import tag_base from "./doc/tag.base.js";
 import tag_text from "./doc/tag.text.js";
@@ -123,6 +124,7 @@ export default {
 	label,
 	msg,
 	table,
+	layout,
 
 	tag_base,
 	tag_text,

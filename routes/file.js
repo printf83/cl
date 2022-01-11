@@ -4,10 +4,10 @@ module.exports = function (app) {
 	const multer = require("multer");
 	const uploader = multer({ dest: "tmp/" });
 
-	var fn = {
+	const fn = {
 		upload: function (req, res) {
 			if (req.files && req.files.length > 0) {
-				var files = [];
+				let files = [];
 				req.files.forEach((file) => {
 					files.push({
 						fieldname: file.fieldname,
@@ -51,7 +51,7 @@ module.exports = function (app) {
 									"Cache-Control": "public, max-age=604800, immutable",
 								});
 
-								var filestream = fs.createReadStream(data.path);
+								let filestream = fs.createReadStream(data.path);
 
 								filestream.pipe(res);
 							} else {
@@ -68,8 +68,8 @@ module.exports = function (app) {
 				});
 		},
 		info: function (req, res) {
-			var i = req.params.id.split(",");
-			var p = [];
+			let i = req.params.id.split(",");
+			let p = [];
 			i.forEach((id) => {
 				p.push(
 					new Promise((res, _rej) => {
@@ -126,8 +126,8 @@ module.exports = function (app) {
 				});
 		},
 		delete: function (req, res) {
-			var i = req.params.id.split(",");
-			var p = [];
+			let i = req.params.id.split(",");
+			let p = [];
 			i.forEach((id) => {
 				p.push(fn.deleteuploadedfile(id));
 			});
@@ -152,8 +152,8 @@ module.exports = function (app) {
 				});
 		},
 		save: function (req, res) {
-			var i = req.params.id.split(",");
-			var p = [];
+			let i = req.params.id.split(",");
+			let p = [];
 			i.forEach((id) => {
 				p.push(fn.saveuploadedfile(id));
 			});
@@ -269,8 +269,8 @@ module.exports = function (app) {
 				fs.rename(oldPath, newPath, function (err) {
 					if (err) {
 						if (err.code === "EXDEV") {
-							var readStream = fs.createReadStream(oldPath);
-							var writeStream = fs.createWriteStream(newPath);
+							let readStream = fs.createReadStream(oldPath);
+							let writeStream = fs.createWriteStream(newPath);
 
 							readStream.on("error", rej);
 							writeStream.on("error", rej);
