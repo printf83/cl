@@ -553,7 +553,7 @@ function gen_toc() {
 
 function gen_url(m1, m2) {
 	let title = `BS5 JS Builder - ${m1} | ${m2}`;
-	let path = `?m1=${encodeURI(m1)}&m2=${encodeURI(m2)}`;
+	let path = `?m1=${encodeURIComponent(m1)}&m2=${encodeURIComponent(m2)}`;
 	let data = `${m1}.${m2}`;
 
 	window.history.pushState(data, title, path);
@@ -567,8 +567,8 @@ function get_url() {
 	let m2 = p.get("m2");
 	return m1 && m2
 		? {
-				m1: decodeURI(m1),
-				m2: decodeURI(m2),
+				m1: decodeURIComponent(m1),
+				m2: decodeURIComponent(m2),
 		  }
 		: null;
 }

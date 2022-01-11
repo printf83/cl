@@ -1,8 +1,16 @@
 "use strict";
-var path = require("path");
-var express = require("express");
-var helmet = require("helmet");
-var compression = require("compression");
+// create .env file with this value
+// PORT=value
+// SESSIONSECRET=value
+// DBURL=value
+
+require("dotenv").config();
+
+const path = require("path");
+const express = require("express");
+const helmet = require("helmet");
+const compression = require("compression");
+
 const app = express();
 
 app.set("trust proxy", 1);
@@ -27,14 +35,11 @@ app.use(helmet.frameguard());
 app.use(helmet.hsts());
 
 app.use(express.static(path.join(__dirname, "docs")));
-// app.get("*", function (req, res) {
-// 	res.redirect("/");
-// });
 
 const envPORT = process.env.PORT || 8081;
-var server = app.listen(envPORT, function () {
-	var host = server.address().address;
-	var port = server.address().port;
+const server = app.listen(envPORT, function () {
+	let host = server.address().address;
+	let port = server.address().port;
 
 	console.info(`App listening at http://${host}:${port}`);
 });
