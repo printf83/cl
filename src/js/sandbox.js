@@ -3,6 +3,8 @@ import $ from "./component.js";
 import * as db from "../js/base/api.js";
 import button from "./base/button.js";
 
+let qr = null;
+
 $.core.documentReady(() => {
 	$.core.replaceChild(
 		document.getElementById("root"),
@@ -48,7 +50,7 @@ $.core.documentReady(() => {
 				color: "success",
 				onclick: function () {
 					new $.dlg.inputbox("text", "ID", function (_event, data) {
-						db.api.delete(
+						db.api.update(
 							{
 								name: "customer",
 								id: data.value,
@@ -89,6 +91,7 @@ $.core.documentReady(() => {
 					db.api.list(
 						{
 							name: "customer",
+							data: qr,
 						},
 						function (result) {
 							console.log(result);
@@ -103,6 +106,7 @@ $.core.documentReady(() => {
 					db.api.option(
 						{
 							name: "customer",
+							data: qr,
 						},
 						function (result) {
 							console.log(result);
@@ -151,7 +155,7 @@ $.core.documentReady(() => {
 						},
 						[
 							function (event, data) {
-								new $.toast("/", JSON.stringify(data)).show();
+								qr = data;
 							},
 						]
 					).show();

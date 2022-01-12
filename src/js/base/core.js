@@ -316,7 +316,7 @@ export function getValue(container) {
 
 					break;
 				default:
-					rtn[name] = i.value ? i.value : null;
+					rtn[name] = i.value ? (isNaN(i.value) ? i.value : Number.parseFloat(i.value)) : null;
 			}
 		});
 
@@ -329,7 +329,11 @@ export function getValue(container) {
 			case "checkbox":
 				return container.checked;
 			default:
-				return container.value;
+				return container.value
+					? isNaN(container.value)
+						? container.value
+						: Number.parseFloat(container.value)
+					: null;
 		}
 	}
 }

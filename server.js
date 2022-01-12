@@ -10,10 +10,10 @@ const path = require("path");
 const express = require("express");
 const helmet = require("helmet");
 const compression = require("compression");
-
 const app = express();
 
 app.set("trust proxy", 1);
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(compression());
 app.use(

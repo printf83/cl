@@ -205,6 +205,7 @@ module.exports = function (app, dbname) {
 		 * multiple create return array of record id, example : [id1,id2,id3]
 		 */
 		create: function (req, res) {
+			console.log(req.body);
 			let i = req.body;
 			if (i) {
 				if (!Array.isArray(i)) {
@@ -240,7 +241,7 @@ module.exports = function (app, dbname) {
 						});
 				}
 			} else {
-				res.status(500).send("Please provide ID");
+				res.status(500).send("Please provide data");
 			}
 		},
 		/**

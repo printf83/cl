@@ -4,7 +4,6 @@ import * as core from "./core.js";
 
 const defaultOption = {
 	callback: function (data) {},
-	contenttype: "application/json",
 	type: "GET",
 	url: null,
 	data: null,
@@ -13,7 +12,6 @@ const defaultOption = {
 
 const defaultOptionPost = {
 	callback: function (data) {},
-	contenttype: "application/x-www-form-urlencoded",
 	type: "POST",
 	url: null,
 	data: null,
@@ -23,7 +21,6 @@ const defaultOptionPost = {
 const defaultOptionUpload = {
 	callback: function (data) {},
 	progress: null,
-	contenttype: "multipart/form-data",
 	type: "POST",
 	url: null,
 	data: null,
@@ -41,8 +38,8 @@ const fn = {
 			}
 		};
 		req.open(opt.type, opt.url, opt.async);
-		req.setRequestHeader("Content-Type", opt.contenttype);
-		req.send(this.genformdata(opt.data));
+		req.setRequestHeader("Content-Type", "application/json");
+		req.send(opt.data ? JSON.stringify(opt.data) : null);
 	},
 	post: function (opt) {
 		opt = core.extend({}, defaultOptionPost, opt);
@@ -55,8 +52,8 @@ const fn = {
 		};
 
 		req.open(opt.type, opt.url, opt.async);
-		req.setRequestHeader("Content-Type", opt.contenttype);
-		req.send(this.genformdata(opt.data));
+		req.setRequestHeader("Content-Type", "application/json");
+		req.send(opt.data ? JSON.stringify(opt.data) : null);
 	},
 	upload: function (opt) {
 		opt = core.extend({}, defaultOptionUpload, opt);
@@ -78,7 +75,7 @@ const fn = {
 		}
 
 		req.open(opt.type, opt.url, opt.async);
-		req.setRequestHeader("Content-Type", opt.contenttype);
+		req.setRequestHeader("Content-Type", "multipart/form-data");
 		req.send(this.genformdata(opt.data));
 	},
 	download: function (url) {
