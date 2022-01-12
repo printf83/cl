@@ -102,23 +102,6 @@ export default class input extends tag {
 				opt.after = null;
 			}
 
-			// //autochange dropdown container
-			// if (opt.before) {
-			// 	if (opt.before.hasOwnProperty("cldropdown")) {
-			// 		let tmpbefore = opt.before.data;
-			// 		tmpbefore.container = null;
-			// 		opt.before.data = tmpbefore;
-			// 	}
-			// }
-
-			// if (opt.after) {
-			// 	if (opt.after.hasOwnProperty("cldropdown")) {
-			// 		let tmpafter = opt.after.data;
-			// 		tmpafter.container = null;
-			// 		opt.after.data = tmpafter;
-			// 	}
-			// }
-
 			//before control
 			let beforectl = opt.before
 				? typeof opt.before === "string" || opt.before.hasOwnProperty("clicon") //d.beforetype === "text"

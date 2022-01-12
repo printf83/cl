@@ -213,7 +213,7 @@ export function UUID(format) {
 
 export function isHTML(str) {
 	if (typeof str === "string") {
-		return /<\/?[a-z][\s\S]*>/i.test(str);
+		return /<\/?[a-z][\s\S]*>/i.test(str) || /\&\#\x\S{4}\;/i.test(str);
 	}
 }
 
@@ -292,37 +292,51 @@ export function getValue(container) {
 
 		elem.forEach(function (i) {
 			let type = i.getAttribute("type");
+			let name = i.getAttribute("name");
+
 			switch (type) {
 				case "radio":
+					if (!rtn.hasOwnProperty(name)) {
+						rtn[name] = null;
+					}
+
 					if (i.checked) {
-						rtn[i.getAttribute("name")] = i.value;
+						rtn[name] = i.value;
 					}
 
 					break;
 				case "checkbox":
-					if (!rtn.hasOwnProperty(i.getAttribute("name"))) {
-						rtn[i.getAttribute("name")] = [];
+					if (!rtn.hasOwnProperty(name)) {
+						rtn[name] = [];
 					}
 
 					if (i.checked) {
-						rtn[i.getAttribute("name")].push(i.value);
+						rtn[name].push(i.value);
 					}
 
 					break;
 				default:
-					rtn[i.getAttribute("name")] = i.value ? i.value : null;
+					rtn[name] = i.value ? i.value : null;
 			}
 		});
 
 		return rtn;
-	}
+	} else {
+		let type = container.getAttribute("type");
 
-	return null;
+		switch (type) {
+			case "radio":
+			case "checkbox":
+				return container.checked;
+			default:
+				return container.value;
+		}
+	}
 }
 
 export function setValue(container, value) {
 	let elem = container.querySelectorAll("[name]");
-	if (elem && elem.length > 0 && value) {
+	if (elem && elem.length > 0) {
 		elem.forEach(function (i) {
 			let val = value[i.getAttribute("name")];
 			if (val) {
@@ -345,6 +359,17 @@ export function setValue(container, value) {
 				}
 			}
 		});
+	} else {
+		let type = container.getAttribute("type");
+
+		switch (type) {
+			case "radio":
+			case "checkbox":
+				container.checked = value;
+				break;
+			default:
+				container.value = value;
+		}
 	}
 }
 

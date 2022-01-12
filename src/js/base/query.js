@@ -1,5 +1,6 @@
 "use strict";
 import "../../css/animation.css";
+import "../../css/query.css";
 
 import * as core from "./core.js";
 import modal from "./modal.js";
@@ -7,7 +8,6 @@ import input from "./input.js";
 import div from "./div.js";
 import tab from "./tab.js";
 import button from "./button.js";
-import { container } from "./inputgroup.js";
 
 let db = {};
 
@@ -241,12 +241,11 @@ let fn = {
 			let opr_opt = fn.filter.opr(opt.useopricon, item ? item.type : null);
 
 			core.replaceWith(
-				opr.parent,
+				opr.parentNode,
 				new input({
 					class: [opt.useopricon ? "font-fa" : null].filter(Boolean).join(" "),
 					type: "select",
 					name: "opr",
-					// size: useopricon ? "col-4 col-lg-3 px-2" : "col-sm-5 col-md-4 col-lg-3 px-2",
 					value: core.getValue(opr),
 					option: opr_opt,
 				})
@@ -254,7 +253,7 @@ let fn = {
 
 			//set val from frm value
 			core.replaceWith(
-				val,
+				val.parentNode,
 				new input({
 					type: item && item.type ? item.type : "text",
 					name: "value",
@@ -289,22 +288,22 @@ let fn = {
 						case "email":
 						case "select":
 							rtn = [
-								{ value: 1, label: "&#xf15d;" },
-								{ value: -1, label: "&#xf15e;" },
+								{ value: "1", label: "&#xf15d;" },
+								{ value: "-1", label: "&#xf15e;" },
 							];
 							break;
 						case "tel":
 						case "check":
 							rtn = [
-								{ value: 1, label: "&#xf884;" },
-								{ value: -1, label: "&#xf885;" },
+								{ value: "1", label: "&#xf884;" },
+								{ value: "-1", label: "&#xf885;" },
 							];
 							break;
 						case "date":
 						case "number":
 							rtn = [
-								{ value: 1, label: "&#xf162;" },
-								{ value: -1, label: "&#xf163;" },
+								{ value: "1", label: "&#xf162;" },
+								{ value: "-1", label: "&#xf163;" },
 							];
 							break;
 						default:
@@ -312,8 +311,8 @@ let fn = {
 					}
 				} else {
 					rtn = [
-						{ value: 1, label: "Ascending" },
-						{ value: -1, label: "Descending" },
+						{ value: "1", label: "Ascending" },
+						{ value: "-1", label: "Descending" },
 					];
 				}
 			}
@@ -434,12 +433,11 @@ let fn = {
 			let opr_opt = fn.sort.opr(opt.useopricon, item ? item.type : null);
 
 			core.replaceWith(
-				opr.parent,
+				opr.parentNode,
 				new input({
 					class: [opt.useopricon ? "font-fa" : null].filter(Boolean).join(" "),
 					type: "select",
 					name: "opr",
-					// size: useopricon ? "col-4 col-lg-3 px-2" : "col-sm-5 col-md-4 col-lg-3 px-2",
 					value: core.getValue(opr),
 					option: opr_opt,
 				})
@@ -460,7 +458,7 @@ let fn = {
 	},
 	get: function (container) {
 		// console.log(container);
-		//collect filter rule
+		// collect filter rule
 		let q_filter = null;
 
 		let filter_container = container.getElementsByClassName("cl-filter-rule")[0];
@@ -660,7 +658,7 @@ const defElemOption = {
 		//if no item type, no sort and no search
 		{ value: "_id", label: "ID", type: "text" },
 	],
-	useopricon: false, // use TEXT in operator select box
+	useopricon: true, // use TEXT in operator select box
 };
 
 function elemBuilder(opt) {
