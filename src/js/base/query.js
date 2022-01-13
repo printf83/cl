@@ -631,11 +631,6 @@ function btnBuilder(btn, defButton, defColor, pushCancel) {
 
 const defElemOption = {
 	data: {
-		// current filter state
-		// filter: [{name:{$eq:"a"}}],
-		// sort: {name:1},
-		// limit: 20,
-		// skip: 0,
 		filter: null,
 		sort: null,
 		limit: 10,
@@ -660,6 +655,232 @@ const defElemOption = {
 	useopricon: true, // use TEXT in operator select box
 };
 
+// function elemBuilder(opt) {
+// 	opt = core.extend({}, defElemOption, opt);
+
+// 	//generate id for dialog
+// 	let id = core.UUID();
+
+// 	//keep data in global
+// 	db[`${id}-data`] = opt;
+
+// 	//gen filter list
+// 	let filter_list = [];
+
+// 	//populate opt.data.filter into filter list
+// 	if (opt.data.filter) {
+// 		/*
+// 				$and:[
+// 					{$or:[]},
+// 					{name:{$eq:value}}
+// 				]
+// 				*/
+
+// 		// $and:[] is mandatory
+// 		if (opt.data.filter["$and"]) {
+// 			//process each $and item
+// 			opt.data.filter["$and"].forEach(function (i) {
+// 				//$and item
+// 				if (i["$or"]) {
+// 					i["$or"].forEach(function (j) {
+// 						let f2_name = Object.keys(j)[0];
+// 						let f2_info = j[f2_name];
+// 						let f2_opr = Object.keys(f2_info)[0];
+// 						let f2_value = f2_info[f2_opr];
+
+// 						filter_list.push(
+// 							new div("item", fn.filter.item(opt.useopricon, opt.field, f2_name, f2_opr, f2_value))
+// 						);
+// 					});
+// 				} else {
+// 					let f1_name = Object.keys(i)[0];
+// 					let f1_info = i[f1_name];
+// 					let f1_opr = Object.keys(f1_info)[0];
+// 					let f1_value = f1_info[f1_opr];
+
+// 					filter_list.push(
+// 						new div("item", fn.filter.item(opt.useopricon, opt.field, f1_name, f1_opr, f1_value))
+// 					);
+// 				}
+// 			});
+// 		}
+// 	}
+
+// 	//add filter button
+// 	filter_list.push(
+// 		new div(
+// 			"item",
+// 			new button({
+// 				icon: "plus",
+// 				color: "primary",
+// 				class: "col-12",
+// 				label: "Add New Filter Rule",
+// 				onclick: function (sender) {
+// 					fn.filter.add(sender, true);
+// 				}, //"fn.filter.add(this," + (opt.useopricon ? "true" : "false") + ")",
+// 			})
+// 		)
+// 	);
+
+// 	//gen sort list
+// 	let sort_list = [];
+
+// 	//populate opt.data.sort into sort list
+// 	if (opt.data.sort) {
+// 		Object.keys(opt.data.sort).forEach(function (attrKey) {
+// 			if (opt.data.sort[attrKey]) {
+// 				sort_list.push(
+// 					new div("item", fn.sort.item(opt.useopricon, opt.field, attrKey, opt.data.sort[attrKey]))
+// 				);
+// 			}
+// 		});
+// 	}
+
+// 	//add sort button
+// 	sort_list.push(
+// 		new div(
+// 			"item",
+// 			new button({
+// 				icon: "plus",
+// 				color: "primary",
+// 				class: "col-12",
+// 				label: "Add New Sort Rule",
+// 				onclick: function (sender) {
+// 					fn.sort.add(sender, true);
+// 				}, //"fn.sort.add(this," + (opt.useopricon ? "true" : "false") + ")",
+// 			})
+// 		)
+// 	);
+
+// 	//gen field list
+// 	let field_list = [];
+
+// 	//__v
+// 	field_list.push(
+// 		new input({
+// 			type: "checkbox",
+// 			label: "Version",
+// 			name: "__v",
+// 			size: "6",
+// 			checked:
+// 				opt.data && fn.isPrototypeExists(opt.data.field, "__v") && opt.data.field["__v"] === 0 ? false : true,
+// 		})
+// 	);
+
+// 	//other field
+// 	if (opt.field) {
+// 		opt.field.forEach(function (item) {
+// 			field_list.push(
+// 				new input({
+// 					type: "checkbox",
+// 					label: item.label,
+// 					name: item.value,
+// 					size: 6,
+// 					checked:
+// 						opt.data && fn.isPrototypeExists(opt.data.field, item.value) && opt.data.field[item.value] === 0
+// 							? false
+// 							: true,
+// 				})
+// 			);
+// 		});
+// 	}
+
+// 	//put in tab and return
+// 	return new tab({
+// 		id: id,
+// 		flush: true,
+// 		headAlign: "center",
+// 		type: "pill",
+// 		item: [
+// 			{
+// 				label: "Filter",
+// 				icon: "filter",
+// 				elem: new div({
+// 					padding: 0,
+// 					class: "container cl-filter-rule",
+// 					elem: new div({
+// 						gap: 2,
+// 						row: true,
+// 						rowcol: 1,
+// 						elem: new div({ col: true, elem: filter_list }),
+// 					}),
+// 				}),
+// 			},
+// 			{
+// 				label: "Sort",
+// 				icon: "sort",
+// 				elem: new div({
+// 					padding: 0,
+// 					class: "container cl-sort-rule",
+// 					elem: new div({
+// 						gap: 2,
+// 						row: true,
+// 						rowcol: 1,
+// 						elem: new div({ col: true, elem: sort_list }),
+// 					}),
+// 				}),
+// 			},
+// 			{
+// 				label: "Fields",
+// 				icon: "tasks",
+// 				elem: new div({
+// 					padding: 0,
+// 					class: "container cl-field-rule",
+// 					elem: new div({
+// 						gap: 2,
+// 						row: true,
+// 						rowcol: 1,
+// 						elem: field_list.map(function (i) {
+// 							return new div({ col: true, elem: i });
+// 						}),
+// 					}),
+// 				}),
+// 			},
+// 			{
+// 				label: "Page",
+// 				icon: "list-ol",
+// 				elem: [
+// 					new div({
+// 						padding: 0,
+// 						class: "container cl-page-rule",
+// 						elem: new div({
+// 							row: true,
+// 							elem: [
+// 								new div({
+// 									col: 6,
+// 									elem: new input({
+// 										type: "number",
+// 										name: "limit",
+// 										min: opt.limit.min,
+// 										max: opt.limit.max,
+// 										step: opt.limit.step,
+// 										value: opt.data.limit,
+// 										numctl: true,
+// 										label: "Record per Page",
+// 									}),
+// 								}),
+// 								new div({
+// 									col: 6,
+// 									elem: new input({
+// 										type: "number",
+// 										name: "step",
+// 										min: opt.skip.min,
+// 										max: opt.skip.max,
+// 										step: opt.skip.step,
+// 										value: opt.data.skip / opt.data.limit + 1,
+// 										numctl: true,
+// 										label: "Current Page",
+// 									}),
+// 								}),
+// 							],
+// 						}),
+// 					}),
+// 				],
+// 			},
+// 		],
+// 	});
+// }
+
 function elemBuilder(opt) {
 	opt = core.extend({}, defElemOption, opt);
 
@@ -668,127 +889,6 @@ function elemBuilder(opt) {
 
 	//keep data in global
 	db[`${id}-data`] = opt;
-
-	//gen filter list
-	let filter_list = [];
-
-	//populate opt.data.filter into filter list
-	if (opt.data.filter) {
-		/* 
-				$and:[
-					{$or:[]},
-					{name:{$eq:value}}
-				]
-				*/
-
-		// $and:[] is mandatory
-		if (opt.data.filter["$and"]) {
-			//process each $and item
-			opt.data.filter["$and"].forEach(function (i) {
-				//$and item
-				if (i["$or"]) {
-					i["$or"].forEach(function (j) {
-						let f2_name = Object.keys(j)[0];
-						let f2_info = j[f2_name];
-						let f2_opr = Object.keys(f2_info)[0];
-						let f2_value = f2_info[f2_opr];
-
-						filter_list.push(
-							new div("item", fn.filter.item(opt.useopricon, opt.field, f2_name, f2_opr, f2_value))
-						);
-					});
-				} else {
-					let f1_name = Object.keys(i)[0];
-					let f1_info = i[f1_name];
-					let f1_opr = Object.keys(f1_info)[0];
-					let f1_value = f1_info[f1_opr];
-
-					filter_list.push(
-						new div("item", fn.filter.item(opt.useopricon, opt.field, f1_name, f1_opr, f1_value))
-					);
-				}
-			});
-		}
-	}
-
-	//add filter button
-	filter_list.push(
-		new div(
-			"item",
-			new button({
-				icon: "plus",
-				color: "primary",
-				class: "col-12",
-				label: "Add New Filter Rule",
-				onclick: function (sender) {
-					fn.filter.add(sender, true);
-				}, //"fn.filter.add(this," + (opt.useopricon ? "true" : "false") + ")",
-			})
-		)
-	);
-
-	//gen sort list
-	let sort_list = [];
-
-	//populate opt.data.sort into sort list
-	if (opt.data.sort) {
-		Object.keys(opt.data.sort).forEach(function (attrKey) {
-			if (opt.data.sort[attrKey]) {
-				sort_list.push(
-					new div("item", fn.sort.item(opt.useopricon, opt.field, attrKey, opt.data.sort[attrKey]))
-				);
-			}
-		});
-	}
-
-	//add sort button
-	sort_list.push(
-		new div(
-			"item",
-			new button({
-				icon: "plus",
-				color: "primary",
-				class: "col-12",
-				label: "Add New Sort Rule",
-				onclick: function (sender) {
-					fn.sort.add(sender, true);
-				}, //"fn.sort.add(this," + (opt.useopricon ? "true" : "false") + ")",
-			})
-		)
-	);
-
-	//gen field list
-	let field_list = [];
-
-	//__v
-	field_list.push(
-		new input({
-			type: "checkbox",
-			label: "Version",
-			name: "__v",
-			size: "6",
-			checked:
-				opt.data && fn.isPrototypeExists(opt.data.field, "__v") && opt.data.field["__v"] === 0 ? false : true,
-		})
-	);
-
-	//other field
-	if (opt.field) {
-		opt.field.forEach(function (item) {
-			field_list.push(
-				new input({
-					type: "checkbox",
-					label: item.label,
-					name: item.value,
-					size: 6,
-					checked:
-						opt.data && fn.isPrototypeExists(opt.data.field, item.value) && opt.data.field[item.value] === 0
-							? false
-							: true,
-				})
-			);
-		});
-	}
 
 	//put in tab and return
 	return new tab({
@@ -800,46 +900,36 @@ function elemBuilder(opt) {
 			{
 				label: "Filter",
 				icon: "filter",
-				elem: new div({
-					padding: 0,
-					class: "container cl-filter-rule",
-					elem: new div({
-						gap: 2,
-						row: true,
-						rowcol: 1,
-						elem: new div({ col: true, elem: filter_list }),
-					}),
-				}),
+				elem: filterBuilder(
+					{
+						add: filterAddBuilder(),
+						useopricon: opt.useopricon,
+						field: opt.field,
+					},
+					opt.data.filter
+				),
 			},
 			{
 				label: "Sort",
 				icon: "sort",
-				elem: new div({
-					padding: 0,
-					class: "container cl-sort-rule",
-					elem: new div({
-						gap: 2,
-						row: true,
-						rowcol: 1,
-						elem: new div({ col: true, elem: sort_list }),
-					}),
-				}),
+				elem: sortBuilder(
+					{
+						add: sortAddBuilder(),
+						useopricon: opt.useopricon,
+						field: opt.field,
+					},
+					opt.data.sort
+				),
 			},
 			{
 				label: "Fields",
 				icon: "tasks",
-				elem: new div({
-					padding: 0,
-					class: "container cl-field-rule",
-					elem: new div({
-						gap: 2,
-						row: true,
-						rowcol: 1,
-						elem: field_list.map(function (i) {
-							return new div({ col: true, elem: i });
-						}),
-					}),
-				}),
+				elem: fieldBuilder(
+					{
+						field: opt.field,
+					},
+					opt.data.field
+				),
 			},
 			{
 				label: "Page",
@@ -847,35 +937,34 @@ function elemBuilder(opt) {
 				elem: [
 					new div({
 						padding: 0,
-						class: "container cl-field-rule",
+						class: "container cl-page-rule",
 						elem: new div({
+							gap: 2,
 							row: true,
+							rowcol: 1,
 							elem: [
 								new div({
-									col: 6,
-									elem: new input({
-										type: "number",
-										name: "limit",
-										min: opt.limit.min,
-										max: opt.limit.max,
-										step: opt.limit.step,
-										value: opt.data.limit,
-										numctl: true,
-										label: "Record per Page",
-									}),
+									col: true,
+									elem: limitBuilder(
+										{
+											min: opt.limit.min,
+											max: opt.limit.max,
+											step: opt.limit.step,
+										},
+										opt.data.limit
+									),
 								}),
 								new div({
-									col: 6,
-									elem: new input({
-										type: "number",
-										name: "step",
-										min: opt.skip.min,
-										max: opt.skip.max,
-										step: opt.skip.step,
-										value: opt.data.skip / opt.data.limit + 1,
-										numctl: true,
-										label: "Current Page",
-									}),
+									col: true,
+									elem: pageBuilder(
+										{
+											min: opt.skip.min,
+											max: opt.skip.max,
+											step: opt.skip.step,
+											limit: opt.data.limit,
+										},
+										opt.data.skip
+									),
 								}),
 							],
 						}),
@@ -883,6 +972,184 @@ function elemBuilder(opt) {
 				],
 			},
 		],
+	});
+}
+
+function filterAddBuilder() {
+	return new button({
+		icon: "plus",
+		color: "primary",
+		col: 12,
+		label: "Add Filter",
+		onclick: function (sender) {
+			fn.filter.add(sender, true);
+		},
+	});
+}
+
+function filterBuilder(opt, data) {
+	//gen filter list
+	let list = [];
+
+	//populate data into filter list
+	if (data) {
+		/* 
+				$and:[
+					{$or:[]},
+					{name:{$eq:value}}
+				]
+				*/
+
+		// $and:[] is mandatory
+		if (data["$and"]) {
+			//process each $and item
+			data["$and"].forEach(function (i) {
+				//$and item
+				if (i["$or"]) {
+					i["$or"].forEach(function (j) {
+						let name = Object.keys(j)[0];
+						let info = j[name];
+						let opr = Object.keys(info)[0];
+						let val = info[opr];
+
+						list.push(new div("item", fn.filter.item(opt.useopricon, opt.field, name, opr, val)));
+					});
+				} else {
+					let name = Object.keys(i)[0];
+					let info = i[name];
+					let opr = Object.keys(info)[0];
+					let val = info[opr];
+
+					list.push(new div("item", fn.filter.item(opt.useopricon, opt.field, name, opr, val)));
+				}
+			});
+		}
+	}
+
+	//add filter button
+	if (opt.add) {
+		list.push(new div("item", opt.add));
+	}
+
+	return new div({
+		padding: 0,
+		class: "container",
+		elem: new div({
+			gap: 2,
+			row: true,
+			rowcol: 1,
+			elem: new div({ col: true, class: "cl-filter-rule", id: opt.id, elem: list }),
+		}),
+	});
+}
+
+function sortAddBuilder() {
+	return new button({
+		icon: "plus",
+		color: "primary",
+		col: 12,
+		label: "Add Sort",
+		onclick: function (sender) {
+			fn.sort.add(sender, true);
+		},
+	});
+}
+
+function sortBuilder(opt, data) {
+	//gen sort list
+	let list = [];
+
+	//populate opt.data.sort into sort list
+	if (data) {
+		Object.keys(data).forEach(function (i) {
+			if (data[i]) {
+				list.push(new div("item", fn.sort.item(opt.useopricon, opt.field, i, data[i])));
+			}
+		});
+	}
+
+	//add sort button
+	if (opt.add) {
+		list.push(new div("item", opt.add));
+	}
+
+	return new div({
+		padding: 0,
+		class: "container",
+		elem: new div({
+			gap: 2,
+			row: true,
+			rowcol: 1,
+			elem: new div({ col: true, class: "cl-sort-rule", id: opt.id, elem: list }),
+		}),
+	});
+}
+
+function fieldBuilder(opt, data) {
+	//gen field list
+	let list = [];
+
+	//__v
+	list.push(
+		new input({
+			type: "checkbox",
+			label: "Version",
+			name: "__v",
+			// size: 6,
+			checked: data && fn.isPrototypeExists(data, "__v") && data["__v"] === 0 ? false : true,
+		})
+	);
+
+	//other field
+	if (opt.field) {
+		opt.field.forEach(function (i) {
+			list.push(
+				new input({
+					type: "checkbox",
+					label: i.label,
+					name: i.value,
+					// size: 6,
+					checked: data && fn.isPrototypeExists(data, i.value) && data[i.value] === 0 ? false : true,
+				})
+			);
+		});
+	}
+
+	return new div({
+		padding: 0,
+		class: "container",
+		elem: new div({
+			gap: 2,
+			row: true,
+			rowcol: 1,
+			elem: new div({ col: true, class: "cl-field-rule", id: opt.id, elem: list }),
+		}),
+	});
+}
+
+function limitBuilder(opt, data) {
+	return new input({
+		type: "number",
+		name: "limit",
+		min: opt.min,
+		max: opt.max,
+		step: opt.step,
+		value: data,
+		numctl: true,
+		label: "Record per Page",
+	});
+}
+
+function pageBuilder(opt, data) {
+	return new input({
+		type: "number",
+		name: "step",
+		min: opt.min,
+		max: opt.max,
+		step: opt.step,
+		value: data / opt.limit + 1,
+		numctl: true,
+		label: "Current Page",
 	});
 }
 
