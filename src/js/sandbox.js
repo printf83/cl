@@ -163,7 +163,7 @@ $.core.documentReady(() => {
 					},
 				}),
 			]),
-			new $.input({ type: "textarea", id: "output" }),
+			new $.input({ type: "textarea", id: "output", rows: 10 }),
 		])
 	);
 });

@@ -106,7 +106,6 @@ let fn = {
 				},
 				option: from_opt,
 				value: f,
-				//size: "",
 			});
 
 			//gen opr option
@@ -808,9 +807,7 @@ function elemBuilder(opt) {
 						gap: 2,
 						row: true,
 						rowcol: 1,
-						elem: filter_list.map(function (i) {
-							return new div({ col: true, elem: i });
-						}),
+						elem: new div({ col: true, elem: filter_list }),
 					}),
 				}),
 			},
@@ -824,9 +821,7 @@ function elemBuilder(opt) {
 						gap: 2,
 						row: true,
 						rowcol: 1,
-						elem: sort_list.map(function (i) {
-							return new div({ col: true, elem: i });
-						}),
+						elem: new div({ col: true, elem: sort_list }),
 					}),
 				}),
 			},

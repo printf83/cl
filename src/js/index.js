@@ -1,13 +1,12 @@
 "use strict";
 const LIBNAME = /component.Z./g;
-const SAMPLELIBNAME = /sample.Z./g;
+const SAMPLELIBNAME = /doc_sample./g;
 
 import "../css/sample.css";
 
 import sample from "./doc/sample.js";
 import doc from "./doc.js";
 import $ from "./component.js";
-import tag from "./base/tag";
 
 let def_m1 = "Getting started";
 let def_m2 = "Introduction";
