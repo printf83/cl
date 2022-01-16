@@ -44,7 +44,7 @@ import paging from "./base/paging.js";
 import pill from "./base/pill.js";
 import pre from "./base/pre.js";
 import * as progress from "./base/progress.js";
-import query from "./base/query.js";
+import * as query from "./base/query.js";
 import small from "./base/small.js";
 import span from "./base/span.js";
 import strong from "./base/strong.js";

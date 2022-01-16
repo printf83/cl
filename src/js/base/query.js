@@ -9,7 +9,8 @@ import div from "./div.js";
 import tab from "./tab.js";
 import button from "./button.js";
 
-let db = {};
+let db_filter = {};
+let db_sort = {};
 
 let fn = {
 	isPrototypeExists: function (obj, prototypeName) {
@@ -127,7 +128,7 @@ let fn = {
 
 				//like : { $regex: VALUETOFIND, $options: "i" };
 				//notlike : { $regex: "^((?!" + VALUETOFIND + ").)*$", $options: "i" };
-				if (v.startsWith("^((?!")) {
+				if (v.toString().startsWith("^((?!")) {
 					o = "$nelike";
 					v = v.substring(5, v.length - 5);
 				} else {
@@ -202,11 +203,12 @@ let fn = {
 		},
 		add: function (event, animate) {
 			let sender = event.currentTarget;
-			let id = sender.closest(".card[id]").getAttribute("id");
-			let opt = db[`${id}-data`];
+			let id = sender.getAttribute("data-cl-container");
+			let container = document.getElementById(id);
+			let opt = db_filter[id];
 
 			core.prependChild(
-				sender.closest(".col"),
+				container,
 				new div(
 					["item", animate ? "cl-fadeslidein" : null].filter(Boolean).join(" "),
 					fn.filter.item(opt.useopricon, opt.field, null, null, null)
@@ -214,20 +216,17 @@ let fn = {
 			);
 
 			setTimeout(
-				function (sender) {
-					sender
-						.closest(".container")
-						.querySelectorAll(".cl-fadeslidein")[0]
-						.classList.remove("cl-fadeslidein");
+				function (container) {
+					container.querySelectorAll(".cl-fadeslidein")[0].classList.remove("cl-fadeslidein");
 				},
 				500,
-				sender
+				container
 			);
 		},
 		change: function (event, useopricon) {
 			let sender = event.currentTarget;
-			let id = sender.closest(".card[id]").getAttribute("id");
-			let opt = db[`${id}-data`];
+			let id = sender.closest(".cl-filter-rule").getAttribute("id");
+			let opt = db_filter[id];
 
 			let opr = sender.closest(".item").querySelectorAll("select[name='opr']")[0];
 			let val = sender.closest(".item").querySelectorAll("[name='value']")[0];
@@ -237,12 +236,12 @@ let fn = {
 			});
 
 			//generate opr option base on itemtype
-			let opr_opt = fn.filter.opr(opt.useopricon, item ? item.type : null);
+			let opr_opt = fn.filter.opr(useopricon, item ? item.type : null);
 
 			core.replaceWith(
 				opr.parentNode,
 				new input({
-					class: [opt.useopricon ? "font-fa" : null].filter(Boolean).join(" "),
+					class: [useopricon ? "font-fa" : null].filter(Boolean).join(" "),
 					type: "select",
 					name: "opr",
 					value: core.getValue(opr),
@@ -274,6 +273,193 @@ let fn = {
 				500,
 				sender
 			);
+		},
+		get: function (container) {
+			let result = null;
+			let item = container.querySelectorAll("select[name='from']");
+
+			if (item && item.length > 0) {
+				//get filter item and put in array
+				let tmp_result = [];
+
+				item.forEach(function (selfrom) {
+					let selopr = selfrom.closest(".item").querySelectorAll("select[name='opr']")[0];
+					let oprval = core.getValue(selopr);
+					let inputval = selfrom.closest(".item").querySelectorAll("[name='value']")[0];
+
+					if (oprval === "$eqlike" || oprval === "$nelike") {
+						if (oprval === "$eqlike") {
+							oprval = "$eq";
+							inputval = { $regex: core.getValue(inputval).toString(), $options: "i" };
+						} else {
+							oprval = "$ne";
+							inputval = { $regex: "^((?!" + core.getValue(inputval) + ").)*$", $options: "i" };
+						}
+					} else {
+						inputval = core.getValue(inputval);
+						if (inputval === null) {
+							if (oprval === "$eq") {
+								inputval = { $exists: false, $eq: null };
+							} else if (oprval === "$ne") {
+								inputval = { $exists: true, $ne: null };
+							}
+						}
+					}
+
+					tmp_result.push({
+						f: core.getValue(selfrom),
+						o: oprval,
+						v: inputval,
+					});
+				});
+
+				//sort filter item
+				tmp_result.sort((a, b) => (a.f > b.f ? 1 : b.f > a.f ? -1 : 0));
+
+				//put in u_filter
+				let u_filter = [];
+				let l_filter = null;
+
+				tmp_result.forEach(function (i) {
+					if (l_filter === null || l_filter != i.f) {
+						//mongodb not support field:{opr:{regex:value}}
+						if (fn.isPrototypeExists(i.v, "$regex") || fn.isPrototypeExists(i.v, "$exists")) {
+							//change to field:{regex}
+							u_filter.push([
+								{
+									[i.f]: i.v,
+								},
+							]);
+						} else {
+							//change to field:{opr:value}
+							u_filter.push([
+								{
+									[i.f]: { [i.o]: i.v },
+								},
+							]);
+						}
+					} else {
+						//mongodb not support field:{opr:{regex:value}}
+						if (fn.isPrototypeExists(i.v, "$regex") || fn.isPrototypeExists(i.v, "$exists")) {
+							//change to field:{regex}
+							u_filter[u_filter.length - 1].push({
+								[i.f]: i.v,
+							});
+						} else {
+							//change to field:{opr:value}
+							u_filter[u_filter.length - 1].push({
+								[i.f]: { [i.o]: i.v },
+							});
+						}
+					}
+
+					l_filter = i.f;
+				});
+
+				//combine u_filter
+				result = {
+					["$and"]: [],
+				};
+
+				u_filter.forEach(function (i) {
+					if (i.length === 1) {
+						result["$and"].push(i[0]);
+					} else {
+						let v_filter = [];
+						i.forEach(function (j) {
+							v_filter.push(j);
+						});
+
+						result["$and"].push({
+							["$or"]: v_filter,
+						});
+					}
+				});
+			}
+
+			return result;
+		},
+		btn: function (containerid) {
+			return new button({
+				icon: "plus",
+				color: "primary",
+				col: 12,
+				label: "Add Filter",
+				attr: {
+					"data-cl-container": containerid,
+				},
+				onclick: function (event) {
+					fn.filter.add(event, true);
+				},
+			});
+		},
+		build: function (opt, data) {
+			//generate id for dialog
+			let id = opt.id || core.UUID();
+
+			//gen filter list
+			let list = [];
+
+			//populate data into filter list
+			if (data) {
+				/* 
+				$and:[
+					{$or:[]},
+					{name:{$eq:value}}
+				]
+				*/
+
+				// $and:[] is mandatory
+				if (data["$and"]) {
+					//process each $and item
+					data["$and"].forEach(function (i) {
+						//$and item
+						if (i["$or"]) {
+							i["$or"].forEach(function (j) {
+								let name = Object.keys(j)[0];
+								let info = j[name];
+								let opr = Object.keys(info)[0];
+								let val = info[opr];
+
+								list.push(new div("item", fn.filter.item(opt.useopricon, opt.field, name, opr, val)));
+							});
+						} else {
+							let name = Object.keys(i)[0];
+							let info = i[name];
+							let opr = Object.keys(info)[0];
+							let val = info[opr];
+
+							list.push(new div("item", fn.filter.item(opt.useopricon, opt.field, name, opr, val)));
+						}
+					});
+				}
+			}
+
+			//add filter button
+			if (opt.add) {
+				list.push(new div("item", opt.add));
+			}
+
+			//generate control
+			let result = new div({
+				padding: 0,
+				class: "container",
+				elem: new div({
+					gap: 2,
+					row: true,
+					rowcol: 1,
+					elem: new div({ col: true, class: "cl-filter-rule", id: id, elem: list }),
+				}),
+			});
+
+			//delete unsave option
+			delete opt.id;
+			delete opt.add;
+
+			//keep data in global
+			db_filter[id] = opt;
+
+			return result;
 		},
 	},
 	sort: {
@@ -395,11 +581,12 @@ let fn = {
 		},
 		add: function (event, animate) {
 			let sender = event.currentTarget;
-			let id = sender.closest(".card[id]").getAttribute("id");
-			let opt = db[`${id}-data`];
+			let id = sender.getAttribute("data-cl-container");
+			let container = document.getElementById(id);
+			let opt = db_sort[id];
 
 			core.prependChild(
-				sender.closest(".col"),
+				container,
 				new div(
 					["item", animate ? "cl-fadeslidein" : null].filter(Boolean).join(" "),
 					fn.sort.item(opt.useopricon, opt.field, null, null)
@@ -407,20 +594,17 @@ let fn = {
 			);
 
 			setTimeout(
-				function (sender) {
-					sender
-						.closest(".container")
-						.querySelectorAll(".cl-fadeslidein")[0]
-						.classList.remove("cl-fadeslidein");
+				function (container) {
+					container.querySelectorAll(".cl-fadeslidein")[0].classList.remove("cl-fadeslidein");
 				},
 				500,
-				sender
+				container
 			);
 		},
 		change: function (event, useopricon) {
 			let sender = event.currentTarget;
-			let id = sender.closest(".card[id]").getAttribute("id");
-			let opt = db[`${id}-data`];
+			let id = sender.closest(".cl-sort-rule").getAttribute("id");
+			let opt = db_sort[id];
 
 			let opr = sender.closest(".item").querySelectorAll("select[name='opr']")[0];
 			let frm = core.getValue(sender);
@@ -429,12 +613,12 @@ let fn = {
 			});
 
 			//generate opr option base on itemtype
-			let opr_opt = fn.sort.opr(opt.useopricon, item ? item.type : null);
+			let opr_opt = fn.sort.opr(useopricon, item ? item.type : null);
 
 			core.replaceWith(
 				opr.parentNode,
 				new input({
-					class: [opt.useopricon ? "font-fa" : null].filter(Boolean).join(" "),
+					class: [useopricon ? "font-fa" : null].filter(Boolean).join(" "),
 					type: "select",
 					name: "opr",
 					value: core.getValue(opr),
@@ -454,150 +638,189 @@ let fn = {
 				sender
 			);
 		},
+		get: function (container) {
+			let result = null;
+			let item = container.querySelectorAll("select[name='from']");
+
+			if (item && item.length > 0) {
+				result = {};
+				item.forEach(function (selfrom) {
+					let selopr = selfrom.closest(".item").querySelectorAll("select[name='opr']")[0];
+					result[core.getValue(selfrom)] = parseInt(core.getValue(selopr), 10);
+				});
+			}
+
+			return result;
+		},
+		btn: function (containerid) {
+			return new button({
+				icon: "plus",
+				color: "primary",
+				col: 12,
+				label: "Add Sort",
+				attr: {
+					"data-cl-container": containerid,
+				},
+				onclick: function (event) {
+					fn.sort.add(event, true);
+				},
+			});
+		},
+		build: function (opt, data) {
+			//generate id for dialog
+			let id = opt.id || core.UUID();
+
+			//gen sort list
+			let list = [];
+
+			//populate opt.data.sort into sort list
+			if (data) {
+				Object.keys(data).forEach(function (i) {
+					if (data[i]) {
+						list.push(new div("item", fn.sort.item(opt.useopricon, opt.field, i, data[i])));
+					}
+				});
+			}
+
+			//add sort button
+			if (opt.add) {
+				list.push(new div("item", opt.add));
+			}
+
+			//build control
+			let result = new div({
+				padding: 0,
+				class: "container",
+				elem: new div({
+					gap: 2,
+					row: true,
+					rowcol: 1,
+					elem: new div({ col: true, class: "cl-sort-rule", id: id, elem: list }),
+				}),
+			});
+
+			//delete unwanted
+			delete opt.id;
+			delete opt.add;
+
+			//keep data in global
+			db_sort[id] = opt;
+
+			return result;
+		},
+	},
+	field: {
+		get: function (container) {
+			let result = null;
+			let item = container.querySelectorAll("input[name]");
+
+			if (item && item.length > 0) {
+				result = {};
+				item.forEach(function (inputfield) {
+					if (!core.getValue(inputfield)) {
+						result[inputfield.getAttribute("name")] = 0;
+					}
+				});
+			}
+
+			return result;
+		},
+		build: function (opt, data) {
+			//gen field list
+			let list = [];
+
+			//__v
+			list.push(
+				new input({
+					type: "checkbox",
+					label: "Version",
+					name: "__v",
+					// size: 6,
+					checked: data && fn.isPrototypeExists(data, "__v") && data["__v"] === 0 ? false : true,
+				})
+			);
+
+			//other field
+			if (opt.field) {
+				opt.field.forEach(function (i) {
+					list.push(
+						new input({
+							type: "checkbox",
+							label: i.label,
+							name: i.value,
+							// size: 6,
+							checked: data && fn.isPrototypeExists(data, i.value) && data[i.value] === 0 ? false : true,
+						})
+					);
+				});
+			}
+
+			return new div({
+				padding: 0,
+				class: "container",
+				elem: new div({
+					gap: 2,
+					row: true,
+					rowcol: 1,
+					elem: new div({ col: true, class: "cl-field-rule", id: opt.id, elem: list }),
+				}),
+			});
+		},
+	},
+	limit: {
+		get: function (container) {
+			let item = container.querySelectorAll("input[name='limit']")[0];
+			return core.getValue(item);
+		},
+		build: function (opt, data) {
+			return new input({
+				type: "number",
+				name: "limit",
+				min: opt.min,
+				max: opt.max,
+				step: opt.step,
+				value: data,
+				numctl: true,
+				label: "Record per Page",
+			});
+		},
+	},
+	skip: {
+		get: function (container) {
+			let item = container.querySelectorAll("input[name='step']")[0];
+			return core.getValue(item) - 1;
+		},
+		build: function (opt, data) {
+			return new input({
+				type: "number",
+				name: "step",
+				min: opt.min,
+				max: opt.max,
+				step: opt.step,
+				value: data / opt.limit + 1,
+				numctl: true,
+				label: "Current Page",
+			});
+		},
 	},
 	get: function (container) {
-		// console.log(container);
-		// collect filter rule
-		let q_filter = null;
-
 		let filter_container = container.getElementsByClassName("cl-filter-rule")[0];
-		let filter_item = filter_container.querySelectorAll("select[name='from']");
-
-		if (filter_item && filter_item.length > 0) {
-			//get filter item and put in array
-			let t_filter = [];
-
-			filter_item.forEach(function (selfrom) {
-				let selopr = selfrom.closest(".item").querySelectorAll("select[name='opr']")[0];
-				let oprval = core.getValue(selopr);
-				let inputval = selfrom.closest(".item").querySelectorAll("[name='value']")[0];
-
-				if (oprval === "$eqlike" || oprval === "$nelike") {
-					if (oprval === "$eqlike") {
-						oprval = "$eq";
-						inputval = { $regex: core.getValue(inputval), $options: "i" };
-					} else {
-						oprval = "$ne";
-						inputval = { $regex: "^((?!" + core.getValue(inputval) + ").)*$", $options: "i" };
-					}
-				} else {
-					inputval = core.getValue(inputval);
-					if (inputval === null) {
-						if (oprval === "$eq") {
-							inputval = { $exists: false, $eq: null };
-						} else if (oprval === "$ne") {
-							inputval = { $exists: true, $ne: null };
-						}
-					}
-				}
-
-				t_filter.push({
-					f: core.getValue(selfrom),
-					o: oprval,
-					v: inputval,
-				});
-			});
-
-			//sort filter item
-			t_filter.sort((a, b) => (a.f > b.f ? 1 : b.f > a.f ? -1 : 0));
-
-			//put in u_filter
-			let u_filter = [];
-			let l_filter = null;
-
-			t_filter.forEach(function (i) {
-				if (l_filter === null || l_filter != i.f) {
-					//mongodb not support field:{opr:{regex:value}}
-					if (fn.isPrototypeExists(i.v, "$regex") || fn.isPrototypeExists(i.v, "$exists")) {
-						//change to field:{regex}
-						u_filter.push([
-							{
-								[i.f]: i.v,
-							},
-						]);
-					} else {
-						//change to field:{opr:value}
-						u_filter.push([
-							{
-								[i.f]: { [i.o]: i.v },
-							},
-						]);
-					}
-				} else {
-					//mongodb not support field:{opr:{regex:value}}
-					if (fn.isPrototypeExists(i.v, "$regex") || fn.isPrototypeExists(i.v, "$exists")) {
-						//change to field:{regex}
-						u_filter[u_filter.length - 1].push({
-							[i.f]: i.v,
-						});
-					} else {
-						//change to field:{opr:value}
-						u_filter[u_filter.length - 1].push({
-							[i.f]: { [i.o]: i.v },
-						});
-					}
-				}
-
-				l_filter = i.f;
-			});
-
-			//combine u_filter
-			q_filter = {
-				["$and"]: [],
-			};
-
-			u_filter.forEach(function (i) {
-				if (i.length === 1) {
-					q_filter["$and"].push(i[0]);
-				} else {
-					let v_filter = [];
-					i.forEach(function (j) {
-						v_filter.push(j);
-					});
-
-					q_filter["$and"].push({
-						["$or"]: v_filter,
-					});
-				}
-			});
-		}
-
-		//collect sort rule
-		let q_sort = null;
 		let sort_container = container.getElementsByClassName("cl-sort-rule")[0];
-		let sort_item = sort_container.querySelectorAll("select[name='from']");
-
-		if (sort_item && sort_item.length > 0) {
-			q_sort = {};
-			sort_item.forEach(function (selfrom) {
-				let selopr = selfrom.closest(".item").querySelectorAll("select[name='opr']")[0];
-				q_sort[core.getValue(selfrom)] = parseInt(core.getValue(selopr), 10);
-			});
-		}
-
-		//collect field rule
-		let q_field = null;
 		let field_container = container.getElementsByClassName("cl-field-rule")[0];
-		let field_item = field_container.querySelectorAll("input[name]");
+		let limit_container = container.querySelectorAll("input[name='limit']")[0].parentNode;
+		let skip_container = container.querySelectorAll("input[name='step']")[0].parentNode;
 
-		if (field_item && field_item.length > 0) {
-			q_field = {};
-			field_item.forEach(function (inputfield) {
-				if (!core.getValue(inputfield)) {
-					q_field[inputfield.getAttribute("name")] = 0;
-				}
-			});
-		}
-
-		//limit & sort
-		let t_limit = core.getValue(container.querySelectorAll("input[name='limit']")[0]);
-		let t_skip = (core.getValue(container.querySelectorAll("input[name='step']")[0]) - 1) * t_limit;
+		let t_filter = fn.filter.get(filter_container);
+		let t_sort = fn.filter.get(sort_container);
+		let t_field = fn.field.get(field_container);
+		let t_limit = fn.limit.get(limit_container);
+		let t_skip = fn.skip.get(skip_container) * t_limit;
 
 		//return collected data
 		return {
-			filter: q_filter,
-			sort: q_sort,
-			field: q_field,
+			filter: t_filter,
+			sort: t_sort,
+			field: t_field,
 			limit: t_limit,
 			skip: t_skip,
 		};
@@ -616,7 +839,7 @@ function btnBuilder(btn, defButton, defColor, pushCancel) {
 				onclick:
 					ix === 0
 						? function (sender) {
-								i(sender, fn.get(sender.closest(".modal")));
+								i(sender);
 								return true;
 						  }
 						: i,
@@ -655,244 +878,14 @@ const defElemOption = {
 	useopricon: true, // use TEXT in operator select box
 };
 
-// function elemBuilder(opt) {
-// 	opt = core.extend({}, defElemOption, opt);
-
-// 	//generate id for dialog
-// 	let id = core.UUID();
-
-// 	//keep data in global
-// 	db[`${id}-data`] = opt;
-
-// 	//gen filter list
-// 	let filter_list = [];
-
-// 	//populate opt.data.filter into filter list
-// 	if (opt.data.filter) {
-// 		/*
-// 				$and:[
-// 					{$or:[]},
-// 					{name:{$eq:value}}
-// 				]
-// 				*/
-
-// 		// $and:[] is mandatory
-// 		if (opt.data.filter["$and"]) {
-// 			//process each $and item
-// 			opt.data.filter["$and"].forEach(function (i) {
-// 				//$and item
-// 				if (i["$or"]) {
-// 					i["$or"].forEach(function (j) {
-// 						let f2_name = Object.keys(j)[0];
-// 						let f2_info = j[f2_name];
-// 						let f2_opr = Object.keys(f2_info)[0];
-// 						let f2_value = f2_info[f2_opr];
-
-// 						filter_list.push(
-// 							new div("item", fn.filter.item(opt.useopricon, opt.field, f2_name, f2_opr, f2_value))
-// 						);
-// 					});
-// 				} else {
-// 					let f1_name = Object.keys(i)[0];
-// 					let f1_info = i[f1_name];
-// 					let f1_opr = Object.keys(f1_info)[0];
-// 					let f1_value = f1_info[f1_opr];
-
-// 					filter_list.push(
-// 						new div("item", fn.filter.item(opt.useopricon, opt.field, f1_name, f1_opr, f1_value))
-// 					);
-// 				}
-// 			});
-// 		}
-// 	}
-
-// 	//add filter button
-// 	filter_list.push(
-// 		new div(
-// 			"item",
-// 			new button({
-// 				icon: "plus",
-// 				color: "primary",
-// 				class: "col-12",
-// 				label: "Add New Filter Rule",
-// 				onclick: function (sender) {
-// 					fn.filter.add(sender, true);
-// 				}, //"fn.filter.add(this," + (opt.useopricon ? "true" : "false") + ")",
-// 			})
-// 		)
-// 	);
-
-// 	//gen sort list
-// 	let sort_list = [];
-
-// 	//populate opt.data.sort into sort list
-// 	if (opt.data.sort) {
-// 		Object.keys(opt.data.sort).forEach(function (attrKey) {
-// 			if (opt.data.sort[attrKey]) {
-// 				sort_list.push(
-// 					new div("item", fn.sort.item(opt.useopricon, opt.field, attrKey, opt.data.sort[attrKey]))
-// 				);
-// 			}
-// 		});
-// 	}
-
-// 	//add sort button
-// 	sort_list.push(
-// 		new div(
-// 			"item",
-// 			new button({
-// 				icon: "plus",
-// 				color: "primary",
-// 				class: "col-12",
-// 				label: "Add New Sort Rule",
-// 				onclick: function (sender) {
-// 					fn.sort.add(sender, true);
-// 				}, //"fn.sort.add(this," + (opt.useopricon ? "true" : "false") + ")",
-// 			})
-// 		)
-// 	);
-
-// 	//gen field list
-// 	let field_list = [];
-
-// 	//__v
-// 	field_list.push(
-// 		new input({
-// 			type: "checkbox",
-// 			label: "Version",
-// 			name: "__v",
-// 			size: "6",
-// 			checked:
-// 				opt.data && fn.isPrototypeExists(opt.data.field, "__v") && opt.data.field["__v"] === 0 ? false : true,
-// 		})
-// 	);
-
-// 	//other field
-// 	if (opt.field) {
-// 		opt.field.forEach(function (item) {
-// 			field_list.push(
-// 				new input({
-// 					type: "checkbox",
-// 					label: item.label,
-// 					name: item.value,
-// 					size: 6,
-// 					checked:
-// 						opt.data && fn.isPrototypeExists(opt.data.field, item.value) && opt.data.field[item.value] === 0
-// 							? false
-// 							: true,
-// 				})
-// 			);
-// 		});
-// 	}
-
-// 	//put in tab and return
-// 	return new tab({
-// 		id: id,
-// 		flush: true,
-// 		headAlign: "center",
-// 		type: "pill",
-// 		item: [
-// 			{
-// 				label: "Filter",
-// 				icon: "filter",
-// 				elem: new div({
-// 					padding: 0,
-// 					class: "container cl-filter-rule",
-// 					elem: new div({
-// 						gap: 2,
-// 						row: true,
-// 						rowcol: 1,
-// 						elem: new div({ col: true, elem: filter_list }),
-// 					}),
-// 				}),
-// 			},
-// 			{
-// 				label: "Sort",
-// 				icon: "sort",
-// 				elem: new div({
-// 					padding: 0,
-// 					class: "container cl-sort-rule",
-// 					elem: new div({
-// 						gap: 2,
-// 						row: true,
-// 						rowcol: 1,
-// 						elem: new div({ col: true, elem: sort_list }),
-// 					}),
-// 				}),
-// 			},
-// 			{
-// 				label: "Fields",
-// 				icon: "tasks",
-// 				elem: new div({
-// 					padding: 0,
-// 					class: "container cl-field-rule",
-// 					elem: new div({
-// 						gap: 2,
-// 						row: true,
-// 						rowcol: 1,
-// 						elem: field_list.map(function (i) {
-// 							return new div({ col: true, elem: i });
-// 						}),
-// 					}),
-// 				}),
-// 			},
-// 			{
-// 				label: "Page",
-// 				icon: "list-ol",
-// 				elem: [
-// 					new div({
-// 						padding: 0,
-// 						class: "container cl-page-rule",
-// 						elem: new div({
-// 							row: true,
-// 							elem: [
-// 								new div({
-// 									col: 6,
-// 									elem: new input({
-// 										type: "number",
-// 										name: "limit",
-// 										min: opt.limit.min,
-// 										max: opt.limit.max,
-// 										step: opt.limit.step,
-// 										value: opt.data.limit,
-// 										numctl: true,
-// 										label: "Record per Page",
-// 									}),
-// 								}),
-// 								new div({
-// 									col: 6,
-// 									elem: new input({
-// 										type: "number",
-// 										name: "step",
-// 										min: opt.skip.min,
-// 										max: opt.skip.max,
-// 										step: opt.skip.step,
-// 										value: opt.data.skip / opt.data.limit + 1,
-// 										numctl: true,
-// 										label: "Current Page",
-// 									}),
-// 								}),
-// 							],
-// 						}),
-// 					}),
-// 				],
-// 			},
-// 		],
-// 	});
-// }
-
 function elemBuilder(opt) {
 	opt = core.extend({}, defElemOption, opt);
 
-	//generate id for dialog
+	// //generate id for dialog
 	let id = core.UUID();
-
-	//keep data in global
-	db[`${id}-data`] = opt;
 
 	//put in tab and return
 	return new tab({
-		id: id,
 		flush: true,
 		headAlign: "center",
 		type: "pill",
@@ -900,9 +893,10 @@ function elemBuilder(opt) {
 			{
 				label: "Filter",
 				icon: "filter",
-				elem: filterBuilder(
+				elem: fn.filter.build(
 					{
-						add: filterAddBuilder(),
+						add: fn.filter.btn(`${id}-filter`),
+						id: `${id}-filter`,
 						useopricon: opt.useopricon,
 						field: opt.field,
 					},
@@ -912,9 +906,10 @@ function elemBuilder(opt) {
 			{
 				label: "Sort",
 				icon: "sort",
-				elem: sortBuilder(
+				elem: fn.sort.build(
 					{
-						add: sortAddBuilder(),
+						add: fn.sort.btn(`${id}-sort`),
+						id: `${id}-sort`,
 						useopricon: opt.useopricon,
 						field: opt.field,
 					},
@@ -924,7 +919,7 @@ function elemBuilder(opt) {
 			{
 				label: "Fields",
 				icon: "tasks",
-				elem: fieldBuilder(
+				elem: fn.field.build(
 					{
 						field: opt.field,
 					},
@@ -945,7 +940,7 @@ function elemBuilder(opt) {
 							elem: [
 								new div({
 									col: true,
-									elem: limitBuilder(
+									elem: fn.limit.build(
 										{
 											min: opt.limit.min,
 											max: opt.limit.max,
@@ -956,7 +951,7 @@ function elemBuilder(opt) {
 								}),
 								new div({
 									col: true,
-									elem: pageBuilder(
+									elem: fn.skip.build(
 										{
 											min: opt.skip.min,
 											max: opt.skip.max,
@@ -975,199 +970,304 @@ function elemBuilder(opt) {
 	});
 }
 
-function filterAddBuilder() {
-	return new button({
-		icon: "plus",
-		color: "primary",
-		col: 12,
-		label: "Add Filter",
-		onclick: function (sender) {
-			fn.filter.add(sender, true);
-		},
-	});
-}
-
-function filterBuilder(opt, data) {
-	//gen filter list
-	let list = [];
-
-	//populate data into filter list
-	if (data) {
-		/* 
-				$and:[
-					{$or:[]},
-					{name:{$eq:value}}
-				]
-				*/
-
-		// $and:[] is mandatory
-		if (data["$and"]) {
-			//process each $and item
-			data["$and"].forEach(function (i) {
-				//$and item
-				if (i["$or"]) {
-					i["$or"].forEach(function (j) {
-						let name = Object.keys(j)[0];
-						let info = j[name];
-						let opr = Object.keys(info)[0];
-						let val = info[opr];
-
-						list.push(new div("item", fn.filter.item(opt.useopricon, opt.field, name, opr, val)));
-					});
-				} else {
-					let name = Object.keys(i)[0];
-					let info = i[name];
-					let opr = Object.keys(info)[0];
-					let val = info[opr];
-
-					list.push(new div("item", fn.filter.item(opt.useopricon, opt.field, name, opr, val)));
-				}
-			});
-		}
-	}
-
-	//add filter button
-	if (opt.add) {
-		list.push(new div("item", opt.add));
-	}
-
-	return new div({
-		padding: 0,
-		class: "container",
-		elem: new div({
-			gap: 2,
-			row: true,
-			rowcol: 1,
-			elem: new div({ col: true, class: "cl-filter-rule", id: opt.id, elem: list }),
-		}),
-	});
-}
-
-function sortAddBuilder() {
-	return new button({
-		icon: "plus",
-		color: "primary",
-		col: 12,
-		label: "Add Sort",
-		onclick: function (sender) {
-			fn.sort.add(sender, true);
-		},
-	});
-}
-
-function sortBuilder(opt, data) {
-	//gen sort list
-	let list = [];
-
-	//populate opt.data.sort into sort list
-	if (data) {
-		Object.keys(data).forEach(function (i) {
-			if (data[i]) {
-				list.push(new div("item", fn.sort.item(opt.useopricon, opt.field, i, data[i])));
-			}
-		});
-	}
-
-	//add sort button
-	if (opt.add) {
-		list.push(new div("item", opt.add));
-	}
-
-	return new div({
-		padding: 0,
-		class: "container",
-		elem: new div({
-			gap: 2,
-			row: true,
-			rowcol: 1,
-			elem: new div({ col: true, class: "cl-sort-rule", id: opt.id, elem: list }),
-		}),
-	});
-}
-
-function fieldBuilder(opt, data) {
-	//gen field list
-	let list = [];
-
-	//__v
-	list.push(
-		new input({
-			type: "checkbox",
-			label: "Version",
-			name: "__v",
-			// size: 6,
-			checked: data && fn.isPrototypeExists(data, "__v") && data["__v"] === 0 ? false : true,
-		})
-	);
-
-	//other field
-	if (opt.field) {
-		opt.field.forEach(function (i) {
-			list.push(
-				new input({
-					type: "checkbox",
-					label: i.label,
-					name: i.value,
-					// size: 6,
-					checked: data && fn.isPrototypeExists(data, i.value) && data[i.value] === 0 ? false : true,
-				})
-			);
-		});
-	}
-
-	return new div({
-		padding: 0,
-		class: "container",
-		elem: new div({
-			gap: 2,
-			row: true,
-			rowcol: 1,
-			elem: new div({ col: true, class: "cl-field-rule", id: opt.id, elem: list }),
-		}),
-	});
-}
-
-function limitBuilder(opt, data) {
-	return new input({
-		type: "number",
-		name: "limit",
-		min: opt.min,
-		max: opt.max,
-		step: opt.step,
-		value: data,
-		numctl: true,
-		label: "Record per Page",
-	});
-}
-
-function pageBuilder(opt, data) {
-	return new input({
-		type: "number",
-		name: "step",
-		min: opt.min,
-		max: opt.max,
-		step: opt.step,
-		value: data / opt.limit + 1,
-		numctl: true,
-		label: "Current Page",
-	});
-}
-
-export default class query extends modal {
+export class dialog extends modal {
 	constructor(...opt) {
 		if (opt && opt.length > 0) {
 			if (opt.length === 3) {
 				super({
 					title: "Query",
 					elem: elemBuilder(opt[0]),
-					button: btnBuilder(opt[1], ["Okay", "Cancel", "Retry"], null, true),
+					button: btnBuilder(
+						function (sender) {
+							opt[1][0](sender, fn.get(sender.closest(".modal")));
+						},
+						["Okay", "Cancel", "Retry"],
+						null,
+						true
+					),
 					debug: opt[2]?.debug === true ? true : false,
 				});
 			} else if (opt.length === 2) {
 				super({
 					title: "Query",
 					elem: elemBuilder(opt[0]),
-					button: btnBuilder(opt[1], ["Okay", "Cancel", "Retry"], null, true),
+					button: btnBuilder(
+						function (sender) {
+							opt[1][0](sender, fn.get(sender.closest(".modal")));
+						},
+						["Okay", "Cancel", "Retry"],
+						null,
+						true
+					),
+				});
+			} else {
+				console.error("Unsupported argument", opt);
+			}
+		} else {
+			super();
+		}
+	}
+}
+
+export class filter extends modal {
+	constructor(...opt) {
+		if (opt && opt.length > 0) {
+			let id = core.UUID();
+			if (opt.length === 3) {
+				super({
+					title: "Filter",
+					elem: fn.filter.build(
+						{
+							id: id,
+							useopricon: opt[0].useopricon,
+							field: opt[0].field,
+						},
+						opt[0].data
+					),
+					button: btnBuilder(
+						function (sender) {
+							opt[1][0](sender, fn.filter.get(sender.closest(".modal")));
+						},
+						["Okay", "Cancel", "Retry"],
+						null,
+						true
+					),
+					footer: fn.filter.btn(id),
+					debug: opt[2]?.debug === true ? true : false,
+				});
+			} else if (opt.length === 2) {
+				super({
+					title: "Filter",
+					elem: fn.filter.build(
+						{
+							id: id,
+							useopricon: opt[0].useopricon,
+							field: opt[0].field,
+						},
+						opt[0].data
+					),
+					button: btnBuilder(
+						function (sender) {
+							opt[1][0](sender, fn.filter.get(sender.closest(".modal")));
+						},
+						["Okay", "Cancel", "Retry"],
+						null,
+						true
+					),
+					footer: fn.filter.btn(id),
+				});
+			} else {
+				console.error("Unsupported argument", opt);
+			}
+		} else {
+			super();
+		}
+	}
+}
+
+export class sort extends modal {
+	constructor(...opt) {
+		if (opt && opt.length > 0) {
+			let id = core.UUID();
+			if (opt.length === 3) {
+				super({
+					title: "Sort",
+					elem: fn.sort.build(
+						{
+							id: id,
+							useopricon: opt[0].useopricon,
+							field: opt[0].field,
+						},
+						opt[0].data
+					),
+					button: btnBuilder(
+						function (sender) {
+							opt[1][0](sender, fn.sort.get(sender.closest(".modal")));
+						},
+						["Okay", "Cancel", "Retry"],
+						null,
+						true
+					),
+					footer: fn.sort.btn(id),
+					debug: opt[2]?.debug === true ? true : false,
+				});
+			} else if (opt.length === 2) {
+				super({
+					title: "Sort",
+					elem: fn.sort.build(
+						{
+							id: id,
+							useopricon: opt[0].useopricon,
+							field: opt[0].field,
+						},
+						opt[0].data
+					),
+					button: btnBuilder(
+						function (sender) {
+							opt[1][0](sender, fn.sort.get(sender.closest(".modal")));
+						},
+						["Okay", "Cancel", "Retry"],
+						null,
+						true
+					),
+					footer: fn.sort.btn(id),
+				});
+			} else {
+				console.error("Unsupported argument", opt);
+			}
+		} else {
+			super();
+		}
+	}
+}
+
+export class field extends modal {
+	constructor(...opt) {
+		if (opt && opt.length > 0) {
+			if (opt.length === 3) {
+				super({
+					title: "Field",
+					elem: fn.field.build(
+						{
+							field: opt[0].field,
+						},
+						opt[0].data
+					),
+					button: btnBuilder(
+						function (sender) {
+							opt[1][0](sender, fn.field.get(sender.closest(".modal")));
+						},
+						["Okay", "Cancel", "Retry"],
+						null,
+						true
+					),
+					debug: opt[2]?.debug === true ? true : false,
+				});
+			} else if (opt.length === 2) {
+				super({
+					title: "Field",
+					elem: fn.field.build(
+						{
+							field: opt[0].field,
+						},
+						opt[0].data
+					),
+					button: btnBuilder(
+						function (sender) {
+							opt[1][0](sender, fn.field.get(sender.closest(".modal")));
+						},
+						["Okay", "Cancel", "Retry"],
+						null,
+						true
+					),
+				});
+			} else {
+				console.error("Unsupported argument", opt);
+			}
+		} else {
+			super();
+		}
+	}
+}
+
+export class limit extends modal {
+	constructor(...opt) {
+		if (opt && opt.length > 0) {
+			if (opt.length === 3) {
+				super({
+					title: "Limit",
+					elem: fn.limit.build(
+						{
+							min: opt[0].min,
+							max: opt[0].max,
+							step: opt[0].step,
+						},
+						opt[0].data
+					),
+					button: btnBuilder(
+						function (sender) {
+							opt[1][0](sender, fn.limit.get(sender.closest(".modal")));
+						},
+						["Okay", "Cancel", "Retry"],
+						null,
+						true
+					),
+					debug: opt[2]?.debug === true ? true : false,
+				});
+			} else if (opt.length === 2) {
+				super({
+					title: "Limit",
+					elem: fn.limit.build(
+						{
+							min: opt[0].min,
+							max: opt[0].max,
+							step: opt[0].step,
+						},
+						opt[0].data
+					),
+					button: btnBuilder(
+						function (sender) {
+							opt[1][0](sender, fn.limit.get(sender.closest(".modal")));
+						},
+						["Okay", "Cancel", "Retry"],
+						null,
+						true
+					),
+				});
+			} else {
+				console.error("Unsupported argument", opt);
+			}
+		} else {
+			super();
+		}
+	}
+}
+
+export class page extends modal {
+	constructor(...opt) {
+		if (opt && opt.length > 0) {
+			if (opt.length === 3) {
+				super({
+					title: "Page",
+					elem: fn.skip.build(
+						{
+							min: opt[0].min,
+							max: opt[0].max,
+							step: opt[0].step,
+							limit: opt[0].limit,
+						},
+						opt[0].data
+					),
+					button: btnBuilder(
+						function (sender) {
+							opt[1][0](sender, fn.skip.get(sender.closest(".modal")));
+						},
+						["Okay", "Cancel", "Retry"],
+						null,
+						true
+					),
+					debug: opt[2]?.debug === true ? true : false,
+				});
+			} else if (opt.length === 2) {
+				super({
+					title: "Page",
+					elem: fn.skip.build(
+						{
+							min: opt[0].min,
+							max: opt[0].max,
+							step: opt[0].step,
+							limit: opt[0].limit,
+						},
+						opt[0].data
+					),
+					button: btnBuilder(
+						function (sender) {
+							opt[1][0](sender, fn.skip.get(sender.closest(".modal")));
+						},
+						["Okay", "Cancel", "Retry"],
+						null,
+						true
+					),
 				});
 			} else {
 				console.error("Unsupported argument", opt);

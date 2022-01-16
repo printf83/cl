@@ -286,93 +286,101 @@ export function countElement(node) {
 }
 
 export function getValue(container) {
-	let elem = container.querySelectorAll("[name]");
-	if (elem && elem.length > 0) {
-		let rtn = {};
+	if (container) {
+		let elem = container.querySelectorAll("[name]");
+		if (elem && elem.length > 0) {
+			let rtn = {};
 
-		elem.forEach(function (i) {
-			let type = i.getAttribute("type");
-			let name = i.getAttribute("name");
-
-			switch (type) {
-				case "radio":
-					if (!rtn.hasOwnProperty(name)) {
-						rtn[name] = null;
-					}
-
-					if (i.checked) {
-						rtn[name] = i.value;
-					}
-
-					break;
-				case "checkbox":
-					if (!rtn.hasOwnProperty(name)) {
-						rtn[name] = [];
-					}
-
-					if (i.checked) {
-						rtn[name].push(i.value);
-					}
-
-					break;
-				default:
-					rtn[name] = i.value ? (isNaN(i.value) ? i.value : Number.parseFloat(i.value)) : null;
-			}
-		});
-
-		return rtn;
-	} else {
-		let type = container.getAttribute("type");
-
-		switch (type) {
-			case "radio":
-			case "checkbox":
-				return container.checked;
-			default:
-				return container.value
-					? isNaN(container.value)
-						? container.value
-						: Number.parseFloat(container.value)
-					: null;
-		}
-	}
-}
-
-export function setValue(container, value) {
-	let elem = container.querySelectorAll("[name]");
-	if (elem && elem.length > 0) {
-		elem.forEach(function (i) {
-			let val = value[i.getAttribute("name")];
-			if (val) {
+			elem.forEach(function (i) {
 				let type = i.getAttribute("type");
+				let name = i.getAttribute("name");
+
 				switch (type) {
 					case "radio":
-						i.checked = i.value === val;
+						if (!rtn.hasOwnProperty(name)) {
+							rtn[name] = null;
+						}
 
-						break;
-					case "checkbox":
-						if (Array.isArray(val)) {
-							i.checked = val.includes(i.value);
-						} else {
-							i.checked = val === i.value;
+						if (i.checked) {
+							rtn[name] = i.value;
 						}
 
 						break;
-					default:
-						i.value = val;
-				}
-			}
-		});
-	} else {
-		let type = container.getAttribute("type");
+					case "checkbox":
+						if (!rtn.hasOwnProperty(name)) {
+							rtn[name] = [];
+						}
 
-		switch (type) {
-			case "radio":
-			case "checkbox":
-				container.checked = value;
-				break;
-			default:
-				container.value = value;
+						if (i.checked) {
+							rtn[name].push(i.value);
+						}
+
+						break;
+					case "number":
+						rtn[name] = i.value ? (isNaN(i.value) ? 0 : Number.parseFloat(i.value)) : 0;
+					default:
+						rtn[name] = i.value ? i.value : null;
+				}
+			});
+
+			return rtn;
+		} else {
+			let type = container.getAttribute("type");
+
+			switch (type) {
+				case "radio":
+				case "checkbox":
+					return container.checked;
+				default:
+					return container.value
+						? isNaN(container.value)
+							? container.value
+							: Number.parseFloat(container.value)
+						: null;
+			}
+		}
+	}
+
+	return null;
+}
+
+export function setValue(container, value) {
+	if (container) {
+		let elem = container.querySelectorAll("[name]");
+		if (elem && elem.length > 0) {
+			elem.forEach(function (i) {
+				let val = value[i.getAttribute("name")];
+				if (val) {
+					let type = i.getAttribute("type");
+					switch (type) {
+						case "radio":
+							i.checked = i.value === val;
+
+							break;
+						case "checkbox":
+							if (Array.isArray(val)) {
+								i.checked = val.includes(i.value);
+							} else {
+								i.checked = val === i.value;
+							}
+
+							break;
+						default:
+							i.value = val;
+					}
+				}
+			});
+		} else {
+			let type = container.getAttribute("type");
+
+			switch (type) {
+				case "radio":
+				case "checkbox":
+					container.checked = value;
+					break;
+				default:
+					container.value = value;
+			}
 		}
 	}
 }

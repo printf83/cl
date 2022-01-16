@@ -2,6 +2,32 @@
 import $ from "./component.js";
 import * as db from "../js/base/api.js";
 
+let q = {
+	field: [
+		{ value: "name", label: "Name", type: "text" },
+		{ value: "dob", label: "Date Of Birth", type: "date" },
+		{ value: "phone", label: "Phone", type: "tel" },
+		{ value: "picture", label: "Picture", type: "check" },
+		{ value: "email", label: "Email", type: "email" },
+		{
+			value: "state",
+			label: "State",
+			type: "select",
+			option: null,
+			placeholder: "Please Choose One",
+		},
+	],
+	limit: {
+		min: 1,
+		max: 100,
+		step: 5,
+	},
+	skip: {
+		min: 1,
+		max: 100,
+		step: 1,
+	},
+};
 let qr = {
 	filter: null,
 	sort: { state: -1, name: 1 },
@@ -121,41 +147,120 @@ $.core.documentReady(() => {
 					},
 				}),
 				new $.button({
-					label: "Show Query Dialog",
+					label: "Query",
 					color: "primary",
 					icon: "fire",
 					onclick: function () {
-						new $.query(
+						new $.query.dialog(
 							{
-								field: [
-									{ value: "name", label: "Name", type: "text" },
-									{ value: "dob", label: "Date Of Birth", type: "date" },
-									{ value: "phone", label: "Phone", type: "tel" },
-									{ value: "picture", label: "Picture", type: "check" },
-									{ value: "email", label: "Email", type: "email" },
-									{
-										value: "state",
-										label: "State",
-										type: "select",
-										option: null,
-										placeholder: "Please Choose One",
-									},
-								],
+								field: q.field,
+								limit: q.limit,
+								skip: q.skip,
 								data: qr,
-								limit: {
-									min: 1,
-									max: 100,
-									step: 5,
-								},
-								skip: {
-									min: 1,
-									max: 100,
-									step: 1,
-								},
 							},
 							[
 								function (event, data) {
 									qr = data;
+									$.core.setValue(document.getElementById("output"), JSON.stringify(data));
+								},
+							]
+						).show();
+					},
+				}),
+				new $.button({
+					label: "Filter",
+					color: "primary",
+					icon: "fire",
+					onclick: function () {
+						new $.query.filter(
+							{
+								field: q.field,
+								data: qr.filter,
+							},
+							[
+								function (event, data) {
+									qr.filter = data;
+									$.core.setValue(document.getElementById("output"), JSON.stringify(data));
+								},
+							]
+						).show();
+					},
+				}),
+				new $.button({
+					label: "Sort",
+					color: "primary",
+					icon: "fire",
+					onclick: function () {
+						new $.query.sort(
+							{
+								field: q.field,
+								data: qr.sort,
+							},
+							[
+								function (event, data) {
+									qr.sort = data;
+									$.core.setValue(document.getElementById("output"), JSON.stringify(data));
+								},
+							]
+						).show();
+					},
+				}),
+				new $.button({
+					label: "Field",
+					color: "primary",
+					icon: "fire",
+					onclick: function () {
+						new $.query.field(
+							{
+								field: q.field,
+								data: qr.field,
+							},
+							[
+								function (event, data) {
+									qr.field = data;
+									$.core.setValue(document.getElementById("output"), JSON.stringify(data));
+								},
+							]
+						).show();
+					},
+				}),
+				new $.button({
+					label: "Limit",
+					color: "primary",
+					icon: "fire",
+					onclick: function () {
+						new $.query.limit(
+							{
+								min: q.min,
+								max: q.max,
+								step: q.step,
+								data: qr.limit,
+							},
+							[
+								function (event, data) {
+									qr.limit = data;
+									$.core.setValue(document.getElementById("output"), JSON.stringify(data));
+								},
+							]
+						).show();
+					},
+				}),
+				new $.button({
+					label: "Page",
+					color: "primary",
+					icon: "fire",
+					onclick: function () {
+						new $.query.page(
+							{
+								min: q.min,
+								max: q.max,
+								step: q.step,
+								limit: qr.limit,
+								data: qr.skip,
+							},
+							[
+								function (event, data) {
+									qr.skip = data;
 									$.core.setValue(document.getElementById("output"), JSON.stringify(data));
 								},
 							]
