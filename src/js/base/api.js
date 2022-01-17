@@ -210,7 +210,7 @@ export const api = {
 			data: { field: { [opt.fieldkey]: 1, [opt.fieldname]: 1 }, sort: { [opt.fieldname]: 1 } },
 		});
 	},
-	excel: function (opt, callback) {
+	excel: function (opt) {
 		opt = core.extend(
 			{},
 			{
@@ -220,10 +220,7 @@ export const api = {
 			opt
 		);
 
-		fn.get({
-			callback: callback,
-			url: `api/${opt.name}-excel/?q=${JSON.stringify(opt.data)}`,
-		});
+		fn.download(`api/${opt.name}-excel/?q=${JSON.stringify(opt.data)}`);
 	},
 	aggregate: function (opt, callback) {
 		opt = core.extend(

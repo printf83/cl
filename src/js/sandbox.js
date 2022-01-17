@@ -149,6 +149,16 @@ $.core.documentReady(() => {
 					},
 				}),
 				new $.button({
+					label: "api.excel",
+					color: "primary",
+					onclick: function () {
+						db.api.excel({
+							name: "customer",
+							data: qr,
+						});
+					},
+				}),
+				new $.button({
 					label: "Query",
 					color: "primary",
 					icon: "fire",

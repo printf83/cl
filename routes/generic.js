@@ -22,11 +22,11 @@ module.exports = function (app, dbname) {
 		 */
 		excel: function (req, res) {
 			try {
-				let qs = JSON.parse(req.query.q);
+				let q = JSON.parse(req.query.q);
 
-				let d = db.find(qs.filter ? qs.filter : null, qs.field ? qs.field : null);
+				let d = db.find(q.filter ? q.filter : null, q.field ? q.field : null);
 				d.collation({ locale: "en" });
-				d.sort(qs.sort ? qs.sort : null);
+				d.sort(q.sort ? q.sort : null);
 
 				//not need to crop list
 				//d.skip(qs.skip ? qs.skip : null);
@@ -110,11 +110,9 @@ module.exports = function (app, dbname) {
 						}
 					})
 					.catch((err) => {
-						//console.error(err);
 						res.status(500).send(err.message);
 					});
 			} catch (err) {
-				//console.error(err);
 				res.status(500).send(err.message);
 			}
 		},
