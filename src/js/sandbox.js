@@ -27,7 +27,9 @@ let q = {
 		max: 100,
 		step: 1,
 	},
+	useopricon: true,
 };
+
 let qr = {
 	filter: null,
 	sort: { state: -1, name: 1 },
@@ -55,7 +57,7 @@ $.core.documentReady(() => {
 								},
 							},
 							function (result) {
-								$.core.setValue(document.getElementById("output"), JSON.stringify(result));
+								$.core.setValue(document.getElementById("output"), result);
 							}
 						);
 					},
@@ -71,7 +73,7 @@ $.core.documentReady(() => {
 									id: data.value,
 								},
 								function (result) {
-									$.core.setValue(document.getElementById("output"), JSON.stringify(result));
+									$.core.setValue(document.getElementById("output"), result);
 								}
 							);
 						}).show();
@@ -93,7 +95,7 @@ $.core.documentReady(() => {
 									},
 								},
 								function (result) {
-									$.core.setValue(document.getElementById("output"), JSON.stringify(result));
+									$.core.setValue(document.getElementById("output"), result);
 								}
 							);
 						}).show();
@@ -110,7 +112,7 @@ $.core.documentReady(() => {
 									id: data.value,
 								},
 								function (result) {
-									$.core.setValue(document.getElementById("output"), JSON.stringify(result));
+									$.core.setValue(document.getElementById("output"), result);
 								}
 							);
 						}).show();
@@ -156,6 +158,7 @@ $.core.documentReady(() => {
 								field: q.field,
 								limit: q.limit,
 								skip: q.skip,
+								useopricon: q.useopricon,
 								data: qr,
 							},
 							[
@@ -175,6 +178,7 @@ $.core.documentReady(() => {
 						new $.query.filter(
 							{
 								field: q.field,
+								useopricon: q.useopricon,
 								data: qr.filter,
 							},
 							[
@@ -194,6 +198,7 @@ $.core.documentReady(() => {
 						new $.query.sort(
 							{
 								field: q.field,
+								useopricon: q.useopricon,
 								data: qr.sort,
 							},
 							[
@@ -231,14 +236,16 @@ $.core.documentReady(() => {
 					onclick: function () {
 						new $.query.limit(
 							{
-								min: q.min,
-								max: q.max,
-								step: q.step,
+								min: q.limit.min,
+								max: q.limit.max,
+								step: q.limit.step,
 								data: qr.limit,
 							},
 							[
 								function (event, data) {
+									let skip = qr.skip / qr.limit;
 									qr.limit = data;
+									qr.skip = skip * qr.limit;
 									$.core.setValue(document.getElementById("output"), JSON.stringify(data));
 								},
 							]
@@ -252,9 +259,9 @@ $.core.documentReady(() => {
 					onclick: function () {
 						new $.query.page(
 							{
-								min: q.min,
-								max: q.max,
-								step: q.step,
+								min: q.skip.min,
+								max: q.skip.max,
+								step: q.skip.step,
 								limit: qr.limit,
 								data: qr.skip,
 							},

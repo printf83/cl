@@ -30,6 +30,8 @@ const defaultOption = {
 	bordercolor: null,
 	border: true,
 
+	bodyclass: null,
+
 	defautlbtncolor: "primary",
 	divider: true,
 	centerbutton: false,
@@ -102,7 +104,7 @@ export default class modal extends div {
 				: false;
 
 			//generate body
-			let ctlBody = new div({ class: ["modal-body"], padding: hastab ? 0 : null, elem: opt.elem });
+			let ctlBody = new div({ class: ["modal-body", opt.bodyclass], padding: hastab ? 0 : null, elem: opt.elem });
 
 			//generate control
 			let ctlControl = new div({ float: "start", class: ["footer-ctl"], elem: opt.footer });

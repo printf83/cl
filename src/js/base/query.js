@@ -379,14 +379,26 @@ let fn = {
 
 			return result;
 		},
-		btn: function (containerid) {
+		btn: function (opt) {
+			opt = core.extend(
+				{},
+				{
+					icon: "plus",
+					color: "primary",
+					label: null,
+					col: null,
+					container: null,
+				},
+				opt
+			);
+
 			return new button({
-				icon: "plus",
-				color: "primary",
-				col: 12,
-				label: "Add Filter",
+				icon: opt.icon,
+				color: opt.color,
+				col: opt.col,
+				label: opt.label,
 				attr: {
-					"data-cl-container": containerid,
+					"data-cl-container": opt.container,
 				},
 				onclick: function (event) {
 					fn.filter.add(event, true);
@@ -473,22 +485,22 @@ let fn = {
 						case "email":
 						case "select":
 							rtn = [
-								{ value: "1", label: "&#xf15d;" },
-								{ value: "-1", label: "&#xf15e;" },
+								{ value: 1, label: "&#xf15d;" },
+								{ value: -1, label: "&#xf15e;" },
 							];
 							break;
 						case "tel":
 						case "check":
 							rtn = [
-								{ value: "1", label: "&#xf884;" },
-								{ value: "-1", label: "&#xf885;" },
+								{ value: 1, label: "&#xf884;" },
+								{ value: -1, label: "&#xf885;" },
 							];
 							break;
 						case "date":
 						case "number":
 							rtn = [
-								{ value: "1", label: "&#xf162;" },
-								{ value: "-1", label: "&#xf163;" },
+								{ value: 1, label: "&#xf162;" },
+								{ value: -1, label: "&#xf163;" },
 							];
 							break;
 						default:
@@ -496,8 +508,8 @@ let fn = {
 					}
 				} else {
 					rtn = [
-						{ value: "1", label: "Ascending" },
-						{ value: "-1", label: "Descending" },
+						{ value: 1, label: "Ascending" },
+						{ value: -1, label: "Descending" },
 					];
 				}
 			}
@@ -652,14 +664,26 @@ let fn = {
 
 			return result;
 		},
-		btn: function (containerid) {
+		btn: function (opt) {
+			opt = core.extend(
+				{},
+				{
+					icon: "plus",
+					color: "primary",
+					label: null,
+					col: null,
+					container: null,
+				},
+				opt
+			);
+
 			return new button({
-				icon: "plus",
-				color: "primary",
-				col: 12,
-				label: "Add Sort",
+				icon: opt.icon,
+				color: opt.color,
+				col: opt.col,
+				label: opt.label,
 				attr: {
-					"data-cl-container": containerid,
+					"data-cl-container": opt.container,
 				},
 				onclick: function (event) {
 					fn.sort.add(event, true);
@@ -811,7 +835,7 @@ let fn = {
 		let skip_container = container.querySelectorAll("input[name='step']")[0].parentNode;
 
 		let t_filter = fn.filter.get(filter_container);
-		let t_sort = fn.filter.get(sort_container);
+		let t_sort = fn.sort.get(sort_container);
 		let t_field = fn.field.get(field_container);
 		let t_limit = fn.limit.get(limit_container);
 		let t_skip = fn.skip.get(skip_container) * t_limit;
@@ -895,7 +919,7 @@ function elemBuilder(opt) {
 				icon: "filter",
 				elem: fn.filter.build(
 					{
-						add: fn.filter.btn(`${id}-filter`),
+						add: fn.filter.btn({ container: `${id}-filter`, label: "Add new filter", col: 12 }),
 						id: `${id}-filter`,
 						useopricon: opt.useopricon,
 						field: opt.field,
@@ -908,7 +932,7 @@ function elemBuilder(opt) {
 				icon: "sort",
 				elem: fn.sort.build(
 					{
-						add: fn.sort.btn(`${id}-sort`),
+						add: fn.sort.btn({ container: `${id}-sort`, label: "Add new sort", col: 12 }),
 						id: `${id}-sort`,
 						useopricon: opt.useopricon,
 						field: opt.field,
@@ -973,36 +997,19 @@ function elemBuilder(opt) {
 export class dialog extends modal {
 	constructor(...opt) {
 		if (opt && opt.length > 0) {
-			if (opt.length === 3) {
-				super({
-					title: "Query",
-					elem: elemBuilder(opt[0]),
-					button: btnBuilder(
-						function (sender) {
-							opt[1][0](sender, fn.get(sender.closest(".modal")));
-						},
-						["Okay", "Cancel", "Retry"],
-						null,
-						true
-					),
-					debug: opt[2]?.debug === true ? true : false,
-				});
-			} else if (opt.length === 2) {
-				super({
-					title: "Query",
-					elem: elemBuilder(opt[0]),
-					button: btnBuilder(
-						function (sender) {
-							opt[1][0](sender, fn.get(sender.closest(".modal")));
-						},
-						["Okay", "Cancel", "Retry"],
-						null,
-						true
-					),
-				});
-			} else {
-				console.error("Unsupported argument", opt);
-			}
+			super({
+				title: "Query",
+				elem: elemBuilder(opt[0]),
+				button: btnBuilder(
+					function (sender) {
+						opt[1][0](sender, fn.get(sender.closest(".modal")));
+					},
+					["Okay", "Cancel", "Retry"],
+					null,
+					true
+				),
+				debug: opt.length > 2 && opt[2]?.debug === true ? true : false,
+			});
 		} else {
 			super();
 		}
@@ -1013,52 +1020,28 @@ export class filter extends modal {
 	constructor(...opt) {
 		if (opt && opt.length > 0) {
 			let id = core.UUID();
-			if (opt.length === 3) {
-				super({
-					title: "Filter",
-					elem: fn.filter.build(
-						{
-							id: id,
-							useopricon: opt[0].useopricon,
-							field: opt[0].field,
-						},
-						opt[0].data
-					),
-					button: btnBuilder(
-						function (sender) {
-							opt[1][0](sender, fn.filter.get(sender.closest(".modal")));
-						},
-						["Okay", "Cancel", "Retry"],
-						null,
-						true
-					),
-					footer: fn.filter.btn(id),
-					debug: opt[2]?.debug === true ? true : false,
-				});
-			} else if (opt.length === 2) {
-				super({
-					title: "Filter",
-					elem: fn.filter.build(
-						{
-							id: id,
-							useopricon: opt[0].useopricon,
-							field: opt[0].field,
-						},
-						opt[0].data
-					),
-					button: btnBuilder(
-						function (sender) {
-							opt[1][0](sender, fn.filter.get(sender.closest(".modal")));
-						},
-						["Okay", "Cancel", "Retry"],
-						null,
-						true
-					),
-					footer: fn.filter.btn(id),
-				});
-			} else {
-				console.error("Unsupported argument", opt);
-			}
+			super({
+				title: "Filter",
+				bodyclass: "pb-2",
+				elem: fn.filter.build(
+					{
+						id: id,
+						useopricon: opt[0].useopricon,
+						field: opt[0].field,
+					},
+					opt[0].data
+				),
+				button: btnBuilder(
+					function (sender) {
+						opt[1][0](sender, fn.filter.get(sender.closest(".modal")));
+					},
+					["Okay", "Cancel", "Retry"],
+					null,
+					true
+				),
+				footer: fn.filter.btn({ container: id }),
+				debug: opt.length > 2 && opt[2]?.debug === true ? true : false,
+			});
 		} else {
 			super();
 		}
@@ -1069,52 +1052,28 @@ export class sort extends modal {
 	constructor(...opt) {
 		if (opt && opt.length > 0) {
 			let id = core.UUID();
-			if (opt.length === 3) {
-				super({
-					title: "Sort",
-					elem: fn.sort.build(
-						{
-							id: id,
-							useopricon: opt[0].useopricon,
-							field: opt[0].field,
-						},
-						opt[0].data
-					),
-					button: btnBuilder(
-						function (sender) {
-							opt[1][0](sender, fn.sort.get(sender.closest(".modal")));
-						},
-						["Okay", "Cancel", "Retry"],
-						null,
-						true
-					),
-					footer: fn.sort.btn(id),
-					debug: opt[2]?.debug === true ? true : false,
-				});
-			} else if (opt.length === 2) {
-				super({
-					title: "Sort",
-					elem: fn.sort.build(
-						{
-							id: id,
-							useopricon: opt[0].useopricon,
-							field: opt[0].field,
-						},
-						opt[0].data
-					),
-					button: btnBuilder(
-						function (sender) {
-							opt[1][0](sender, fn.sort.get(sender.closest(".modal")));
-						},
-						["Okay", "Cancel", "Retry"],
-						null,
-						true
-					),
-					footer: fn.sort.btn(id),
-				});
-			} else {
-				console.error("Unsupported argument", opt);
-			}
+			super({
+				title: "Sort",
+				bodyclass: "pb-2",
+				elem: fn.sort.build(
+					{
+						id: id,
+						useopricon: opt[0].useopricon,
+						field: opt[0].field,
+					},
+					opt[0].data
+				),
+				button: btnBuilder(
+					function (sender) {
+						opt[1][0](sender, fn.sort.get(sender.closest(".modal")));
+					},
+					["Okay", "Cancel", "Retry"],
+					null,
+					true
+				),
+				footer: fn.sort.btn({ container: id }),
+				debug: opt.length > 2 && opt[2]?.debug === true ? true : false,
+			});
 		} else {
 			super();
 		}
@@ -1124,46 +1083,24 @@ export class sort extends modal {
 export class field extends modal {
 	constructor(...opt) {
 		if (opt && opt.length > 0) {
-			if (opt.length === 3) {
-				super({
-					title: "Field",
-					elem: fn.field.build(
-						{
-							field: opt[0].field,
-						},
-						opt[0].data
-					),
-					button: btnBuilder(
-						function (sender) {
-							opt[1][0](sender, fn.field.get(sender.closest(".modal")));
-						},
-						["Okay", "Cancel", "Retry"],
-						null,
-						true
-					),
-					debug: opt[2]?.debug === true ? true : false,
-				});
-			} else if (opt.length === 2) {
-				super({
-					title: "Field",
-					elem: fn.field.build(
-						{
-							field: opt[0].field,
-						},
-						opt[0].data
-					),
-					button: btnBuilder(
-						function (sender) {
-							opt[1][0](sender, fn.field.get(sender.closest(".modal")));
-						},
-						["Okay", "Cancel", "Retry"],
-						null,
-						true
-					),
-				});
-			} else {
-				console.error("Unsupported argument", opt);
-			}
+			super({
+				title: "Field",
+				elem: fn.field.build(
+					{
+						field: opt[0].field,
+					},
+					opt[0].data
+				),
+				button: btnBuilder(
+					function (sender) {
+						opt[1][0](sender, fn.field.get(sender.closest(".modal")));
+					},
+					["Okay", "Cancel", "Retry"],
+					null,
+					true
+				),
+				debug: opt.length > 2 && opt[2]?.debug === true ? true : false,
+			});
 		} else {
 			super();
 		}
@@ -1173,50 +1110,26 @@ export class field extends modal {
 export class limit extends modal {
 	constructor(...opt) {
 		if (opt && opt.length > 0) {
-			if (opt.length === 3) {
-				super({
-					title: "Limit",
-					elem: fn.limit.build(
-						{
-							min: opt[0].min,
-							max: opt[0].max,
-							step: opt[0].step,
-						},
-						opt[0].data
-					),
-					button: btnBuilder(
-						function (sender) {
-							opt[1][0](sender, fn.limit.get(sender.closest(".modal")));
-						},
-						["Okay", "Cancel", "Retry"],
-						null,
-						true
-					),
-					debug: opt[2]?.debug === true ? true : false,
-				});
-			} else if (opt.length === 2) {
-				super({
-					title: "Limit",
-					elem: fn.limit.build(
-						{
-							min: opt[0].min,
-							max: opt[0].max,
-							step: opt[0].step,
-						},
-						opt[0].data
-					),
-					button: btnBuilder(
-						function (sender) {
-							opt[1][0](sender, fn.limit.get(sender.closest(".modal")));
-						},
-						["Okay", "Cancel", "Retry"],
-						null,
-						true
-					),
-				});
-			} else {
-				console.error("Unsupported argument", opt);
-			}
+			super({
+				title: "Limit",
+				elem: fn.limit.build(
+					{
+						min: opt[0].min,
+						max: opt[0].max,
+						step: opt[0].step,
+					},
+					opt[0].data
+				),
+				button: btnBuilder(
+					function (sender) {
+						opt[1][0](sender, fn.limit.get(sender.closest(".modal")));
+					},
+					["Okay", "Cancel", "Retry"],
+					null,
+					true
+				),
+				debug: opt.length > 2 && opt[2]?.debug === true ? true : false,
+			});
 		} else {
 			super();
 		}
@@ -1226,52 +1139,27 @@ export class limit extends modal {
 export class page extends modal {
 	constructor(...opt) {
 		if (opt && opt.length > 0) {
-			if (opt.length === 3) {
-				super({
-					title: "Page",
-					elem: fn.skip.build(
-						{
-							min: opt[0].min,
-							max: opt[0].max,
-							step: opt[0].step,
-							limit: opt[0].limit,
-						},
-						opt[0].data
-					),
-					button: btnBuilder(
-						function (sender) {
-							opt[1][0](sender, fn.skip.get(sender.closest(".modal")));
-						},
-						["Okay", "Cancel", "Retry"],
-						null,
-						true
-					),
-					debug: opt[2]?.debug === true ? true : false,
-				});
-			} else if (opt.length === 2) {
-				super({
-					title: "Page",
-					elem: fn.skip.build(
-						{
-							min: opt[0].min,
-							max: opt[0].max,
-							step: opt[0].step,
-							limit: opt[0].limit,
-						},
-						opt[0].data
-					),
-					button: btnBuilder(
-						function (sender) {
-							opt[1][0](sender, fn.skip.get(sender.closest(".modal")));
-						},
-						["Okay", "Cancel", "Retry"],
-						null,
-						true
-					),
-				});
-			} else {
-				console.error("Unsupported argument", opt);
-			}
+			super({
+				title: "Page",
+				elem: fn.skip.build(
+					{
+						min: opt[0].min,
+						max: opt[0].max,
+						step: opt[0].step,
+						limit: opt[0].limit,
+					},
+					opt[0].data
+				),
+				button: btnBuilder(
+					function (sender) {
+						opt[1][0](sender, fn.skip.get(sender.closest(".modal")) * opt[0].limit);
+					},
+					["Okay", "Cancel", "Retry"],
+					null,
+					true
+				),
+				debug: opt.length > 2 && opt[2]?.debug === true ? true : false,
+			});
 		} else {
 			super();
 		}

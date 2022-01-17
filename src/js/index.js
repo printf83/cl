@@ -1,6 +1,6 @@
 "use strict";
 const LIBNAME = /component.Z./g;
-const SAMPLELIBNAME = /doc_sample./g;
+const SAMPLELIBNAME = /doc_sample.Z./g;
 
 import "../css/sample.css";
 
