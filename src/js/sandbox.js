@@ -27,7 +27,7 @@ let q = {
 		max: 100,
 		step: 1,
 	},
-	useopricon: true,
+	useopricon: false,
 };
 
 let qr = {

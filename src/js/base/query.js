@@ -32,7 +32,7 @@ const defaultBuildOption = {
 		//if no item type, no sort and no search
 		{ value: "_id", label: "ID", type: "text" },
 	],
-	useopricon: true, // use TEXT in operator select box
+	useopricon: false, // use TEXT in operator select box
 };
 
 const defaultFilterBtnOption = { icon: "plus", color: "primary", label: null, col: null, container: null };
