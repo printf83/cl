@@ -418,9 +418,9 @@ function getElementValue(element) {
 			break;
 		case "number":
 		case "range":
-			return parseNumber(container.value);
+			return parseNumber(element.value);
 		default:
-			return container.value;
+			return element.value;
 	}
 
 	return null;
@@ -432,7 +432,8 @@ export function validate(container, callback) {
 		container.classList.remove("was-validated");
 		listofctl.forEach(function (ctl) {
 			if (ctl.hasAttribute("required")) {
-				if (getElementValue(ctl) !== null) {
+				let val = getElementValue(ctl);
+				if (val !== null && val !== "") {
 					ctl.classList.add("is-valid");
 					ctl.classList.remove("is-invalid");
 				} else {
@@ -444,10 +445,18 @@ export function validate(container, callback) {
 		container.classList.add("was-validated");
 
 		var invalidctl = container.querySelectorAll(".is-invalid");
-		if (invalidctl && invalidctl.length > 0) {
-			callback(false);
+		if (callback) {
+			if (invalidctl && invalidctl.length > 0) {
+				callback(false);
+			} else {
+				callback(true);
+			}
 		} else {
-			callback(true);
+			if (invalidctl && invalidctl.length > 0) {
+				return false;
+			} else {
+				return true;
+			}
 		}
 	}
 }

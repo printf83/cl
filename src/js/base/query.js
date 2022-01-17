@@ -187,7 +187,7 @@ let fn = {
 
 				//like : { $regex: VALUETOFIND, $options: "i" };
 				//notlike : { $regex: "^((?!" + VALUETOFIND + ").)*$", $options: "i" };
-				if (v.toString().startsWith("^((?!")) {
+				if (v.startsWith("^((?!")) {
 					o = "$nelike";
 					v = v.substring(5, v.length - 5);
 				} else {
@@ -250,6 +250,7 @@ let fn = {
 								elem: new input({
 									type: item && item.type ? item.type : "text",
 									name: "value",
+									required: true,
 									value: v,
 									placeholder: item.placeholder ? item.placeholder : null,
 									option: item && item.option ? item.option : null,
@@ -349,7 +350,7 @@ let fn = {
 					if (oprval === "$eqlike" || oprval === "$nelike") {
 						if (oprval === "$eqlike") {
 							oprval = "$eq";
-							inputval = { $regex: core.getValue(inputval).toString(), $options: "i" };
+							inputval = { $regex: core.getValue(inputval), $options: "i" };
 						} else {
 							oprval = "$ne";
 							inputval = { $regex: "^((?!" + core.getValue(inputval) + ").)*$", $options: "i" };
@@ -912,8 +913,12 @@ function btnBuilder(btn, defButton, defColor, pushCancel) {
 				onclick:
 					ix === 0
 						? function (sender) {
-								i(sender);
-								return true;
+								if (core.validate(sender.closest(".modal"))) {
+									i(sender);
+									return true;
+								} else {
+									return false;
+								}
 						  }
 						: i,
 			};
