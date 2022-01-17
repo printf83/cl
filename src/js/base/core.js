@@ -317,7 +317,8 @@ export function getValue(container) {
 
 						break;
 					case "number":
-						rtn[name] = i.value ? (isNaN(i.value) ? 0 : Number.parseFloat(i.value)) : 0;
+					case "range":
+						rtn[name] = parseNumber(i.value);
 					default:
 						rtn[name] = i.value ? i.value : null;
 				}
@@ -331,12 +332,11 @@ export function getValue(container) {
 				case "radio":
 				case "checkbox":
 					return container.checked;
+				case "number":
+				case "range":
+					return parseNumber(container.value);
 				default:
-					return container.value
-						? isNaN(container.value)
-							? container.value
-							: Number.parseFloat(container.value)
-						: null;
+					return container.value ? container.value : null;
 			}
 		}
 	}
@@ -385,6 +385,22 @@ export function setValue(container, value) {
 	}
 }
 
+function isFloat(val) {
+	return parseFloat(val.match(/^-?\d*(\.\d+)?$/)) > 0;
+}
+
+function parseNumber(val) {
+	if (!isNaN(val)) {
+		if (isFloat(val)) {
+			return Number.parseFloat(val);
+		} else {
+			return Number.parseInt(val);
+		}
+	} else {
+		return val;
+	}
+}
+
 export function focusElement(elem, option) {
 	option = extend({}, { behavior: "smooth", block: "start" }, option);
 	elem?.scrollIntoView(option);
@@ -400,8 +416,11 @@ function getElementValue(element) {
 			}
 
 			break;
+		case "number":
+		case "range":
+			return parseNumber(container.value);
 		default:
-			return element.value ? element.value : null;
+			return container.value;
 	}
 
 	return null;

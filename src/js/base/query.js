@@ -9,6 +9,65 @@ import div from "./div.js";
 import tab from "./tab.js";
 import button from "./button.js";
 
+const defaultBuildOption = {
+	data: {
+		filter: null,
+		sort: null,
+		limit: 10,
+		skip: 0,
+		field: { __v: 0 },
+	},
+	limit: {
+		min: 1,
+		max: 100,
+		step: 5,
+	},
+	skip: {
+		min: 1,
+		max: 100,
+		step: 1,
+	},
+	field: [
+		//required by sort and search
+		//if no item type, no sort and no search
+		{ value: "_id", label: "ID", type: "text" },
+	],
+	useopricon: true, // use TEXT in operator select box
+};
+
+const defaultFilterBtnOption = { icon: "plus", color: "primary", label: null, col: null, container: null };
+const defaultFilterBuildOption = {
+	id: null,
+	field: null,
+	add: null,
+	useopricon: false,
+};
+
+const defaultSortBtnOption = { icon: "plus", color: "primary", label: null, col: null, container: null };
+const defaultSortBuildOption = {
+	id: null,
+	field: null,
+	add: null,
+	useopricon: false,
+};
+
+const defaultFieldBuildOption = {
+	field: null,
+};
+
+const defaultLimitBuildOption = {
+	min: 0,
+	max: 100,
+	step: 5,
+};
+
+const defaultSkipBuildOption = {
+	min: 0,
+	max: 100,
+	step: 5,
+	limit: 0,
+};
+
 let db_filter = {};
 let db_sort = {};
 
@@ -380,17 +439,7 @@ let fn = {
 			return result;
 		},
 		btn: function (opt) {
-			opt = core.extend(
-				{},
-				{
-					icon: "plus",
-					color: "primary",
-					label: null,
-					col: null,
-					container: null,
-				},
-				opt
-			);
+			opt = core.extend({}, defaultFilterBtnOption, opt);
 
 			return new button({
 				icon: opt.icon,
@@ -406,6 +455,8 @@ let fn = {
 			});
 		},
 		build: function (opt, data) {
+			opt = core.extend({}, defaultFilterBuildOption, opt);
+
 			//generate id for dialog
 			let id = opt.id || core.UUID();
 
@@ -665,17 +716,7 @@ let fn = {
 			return result;
 		},
 		btn: function (opt) {
-			opt = core.extend(
-				{},
-				{
-					icon: "plus",
-					color: "primary",
-					label: null,
-					col: null,
-					container: null,
-				},
-				opt
-			);
+			opt = core.extend({}, defaultSortBtnOption, opt);
 
 			return new button({
 				icon: opt.icon,
@@ -691,6 +732,8 @@ let fn = {
 			});
 		},
 		build: function (opt, data) {
+			opt = core.extend({}, defaultSortBuildOption, opt);
+
 			//generate id for dialog
 			let id = opt.id || core.UUID();
 
@@ -750,6 +793,8 @@ let fn = {
 			return result;
 		},
 		build: function (opt, data) {
+			opt = core.extend({}, defaultFieldBuildOption, opt);
+
 			//gen field list
 			let list = [];
 
@@ -797,6 +842,8 @@ let fn = {
 			return core.getValue(item);
 		},
 		build: function (opt, data) {
+			opt = core.extend({}, defaultLimitBuildOption, opt);
+
 			return new input({
 				type: "number",
 				name: "limit",
@@ -815,6 +862,8 @@ let fn = {
 			return core.getValue(item) - 1;
 		},
 		build: function (opt, data) {
+			opt = core.extend({}, defaultSkipBuildOption, opt);
+
 			return new input({
 				type: "number",
 				name: "step",
@@ -876,34 +925,8 @@ function btnBuilder(btn, defButton, defColor, pushCancel) {
 	});
 }
 
-const defElemOption = {
-	data: {
-		filter: null,
-		sort: null,
-		limit: 10,
-		skip: 0,
-		field: { __v: 0 },
-	},
-	limit: {
-		min: 1,
-		max: 100,
-		step: 5,
-	},
-	skip: {
-		min: 1,
-		max: 100,
-		step: 1,
-	},
-	field: [
-		//required by sort and search
-		//if no item type, no sort and no search
-		{ value: "_id", label: "ID", type: "text" },
-	],
-	useopricon: true, // use TEXT in operator select box
-};
-
 function elemBuilder(opt) {
-	opt = core.extend({}, defElemOption, opt);
+	opt = core.extend({}, defaultBuildOption, opt);
 
 	// //generate id for dialog
 	let id = core.UUID();

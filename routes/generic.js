@@ -211,8 +211,8 @@ module.exports = function (app, dbname) {
 					//handle single
 					fn.createOne(i)
 						.then((result) => {
-							if (typeof result !== "string") {
-								res.send(result._id);
+							if (typeof result === "object") {
+								res.send(result.id);
 							} else if (result === "Not found") {
 								res.status(404).send("Not found");
 							} else {
@@ -232,7 +232,7 @@ module.exports = function (app, dbname) {
 					Promise.all(p)
 						.then((result) => {
 							res.send(
-								result.map((item) => (typeof item.result !== "string" ? item.id : null)).filter(Boolean)
+								result.map((item) => (typeof item.result === "object" ? item.id : null)).filter(Boolean)
 							);
 						})
 						.catch((err) => {
@@ -260,7 +260,7 @@ module.exports = function (app, dbname) {
 					//handle single
 					fn.findOne(i[0])
 						.then((item) => {
-							if (typeof item.result !== "string") {
+							if (typeof item.result === "object") {
 								res.status(200).send(item.result);
 							} else if (item.result === "Not found") {
 								res.status(404).send("Not found");
@@ -283,7 +283,7 @@ module.exports = function (app, dbname) {
 						.then((result) => {
 							res.send(
 								result
-									.map((item) => (typeof item.result !== "string" ? item.result : null))
+									.map((item) => (typeof item.result === "object" ? item.result : null))
 									.filter(Boolean)
 							);
 						})
