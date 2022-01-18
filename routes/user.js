@@ -2,15 +2,16 @@ const bcrypt = require("bcrypt");
 const saltround = 50;
 
 module.exports = function (app) {
-	const db = require(`../models/user.js`);
+	const $ = require(`../models/user.js`);
 
 	const fn = {
 		validate: function (req, res) {
 			let { username, password } = req.body;
 			if (username && password) {
-				db.find({
-					username: username,
-				})
+				$.db
+					.find({
+						username: username,
+					})
 					.then((data) => {
 						if (data) {
 							bcrypt.compare(password, data.password, function (err, res) {
@@ -59,7 +60,7 @@ module.exports = function (app) {
 			try {
 				let qs = JSON.parse(req.query.q);
 
-				let d = db.find(qs.filter ? qs.filter : null, qs.field ? qs.field : null);
+				let d = $.db.find(qs.filter ? qs.filter : null, qs.field ? qs.field : null);
 				d.collation({ locale: "en" });
 				d.sort(qs.sort ? qs.sort : null);
 
@@ -162,21 +163,23 @@ module.exports = function (app) {
 		list: function (req, res) {
 			try {
 				let q = req.body;
-				db.aggregate(
-					[
-						q.filter ? { $match: q.filter } : null,
-						q.sort ? { $sort: q.sort } : null,
-						q.field ? { $project: q.field } : null,
-						{
-							$facet: {
-								data: [q.skip ? { $skip: q.skip } : null, q.limit ? { $limit: q.limit } : null].filter(
-									Boolean
-								),
-								total: [{ $count: "count" }],
+				$.db
+					.aggregate(
+						[
+							q.filter ? { $match: q.filter } : null,
+							q.sort ? { $sort: q.sort } : null,
+							q.field ? { $project: q.field } : null,
+							{
+								$facet: {
+									data: [
+										q.skip ? { $skip: q.skip } : null,
+										q.limit ? { $limit: q.limit } : null,
+									].filter(Boolean),
+									total: [{ $count: "count" }],
+								},
 							},
-						},
-					].filter(Boolean)
-				)
+						].filter(Boolean)
+					)
 					.then((data) => {
 						let t = JSON.parse(JSON.stringify(data));
 
@@ -204,15 +207,15 @@ module.exports = function (app) {
 				let d;
 				if (req.body.pipe) {
 					if (req.body.opt) {
-						d = db.aggregate(req.body.pipe, req.body.opt);
+						d = $.db.aggregate(req.body.pipe, req.body.opt);
 					} else {
-						d = db.aggregate(req.body.pipe);
+						d = $.db.aggregate(req.body.pipe);
 					}
 				} else {
 					if (req.body.opt) {
-						d = db.aggregate(null, req.body.opt);
+						d = $.db.aggregate(null, req.body.opt);
 					} else {
-						d = db.aggregate();
+						d = $.db.aggregate();
 					}
 				}
 
@@ -498,7 +501,8 @@ module.exports = function (app) {
 			return new Promise((res, rej) => {
 				try {
 					if (id) {
-						db.findById(id)
+						$.db
+							.findById(id)
 							.then((data) => {
 								if (data) {
 									//remove password
@@ -534,7 +538,8 @@ module.exports = function (app) {
 			return new Promise((res, rej) => {
 				if (id && data) {
 					//find data
-					db.findById(id)
+					$.db
+						.findById(id)
 						.then((olddata) => {
 							if (olddata) {
 								//validate password
@@ -547,7 +552,8 @@ module.exports = function (app) {
 													//change data password to hash
 													data.password = hash;
 
-													db.findByIdAndUpdate(id, data)
+													$.db
+														.findByIdAndUpdate(id, data)
 														.then((data) => {
 															if (data) {
 																//send {id: id, result: true} if updated
@@ -594,14 +600,16 @@ module.exports = function (app) {
 		deleteOne: function (id) {
 			return new Promise((res, rej) => {
 				if (id) {
-					db.findById(id)
+					$.db
+						.findById(id)
 						.then((olddata) => {
 							if (olddata) {
 								//validate password
 								bcrypt.compare(data.password, olddata.password, function (err, res) {
 									if (!err) {
 										if (res === true) {
-											db.findByIdAndRemove(id)
+											$.db
+												.findByIdAndRemove(id)
 												.then((success) => {
 													if (success) {
 														//send {id: id, result: true} if deleted

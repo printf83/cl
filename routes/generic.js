@@ -1,5 +1,5 @@
 module.exports = function (app, dbname) {
-	const db = require(`../models/${dbname}.js`);
+	const $ = require(`../models/${dbname}.js`);
 
 	const fn = {
 		/**
@@ -24,7 +24,7 @@ module.exports = function (app, dbname) {
 			try {
 				let q = JSON.parse(req.query.q);
 
-				let d = db.find(q.filter ? q.filter : null, q.field ? q.field : null);
+				let d = $.db.find(q.filter ? q.filter : null, q.field ? q.field : null);
 				d.collation({ locale: "en" });
 				d.sort(q.sort ? q.sort : null);
 
@@ -123,7 +123,7 @@ module.exports = function (app, dbname) {
 		list: function (req, res) {
 			try {
 				let q = req.body;
-				db.aggregate(
+				$.db.aggregate(
 					[
 						q.filter ? { $match: q.filter } : null,
 						q.sort ? { $sort: q.sort } : null,
@@ -161,15 +161,15 @@ module.exports = function (app, dbname) {
 				let d;
 				if (req.body.pipe) {
 					if (req.body.opt) {
-						d = db.aggregate(req.body.pipe, req.body.opt);
+						d = $.db.aggregate(req.body.pipe, req.body.opt);
 					} else {
-						d = db.aggregate(req.body.pipe);
+						d = $.db.aggregate(req.body.pipe);
 					}
 				} else {
 					if (req.body.opt) {
-						d = db.aggregate(null, req.body.opt);
+						d = $.db.aggregate(null, req.body.opt);
 					} else {
-						d = db.aggregate();
+						d = $.db.aggregate();
 					}
 				}
 
@@ -430,7 +430,7 @@ module.exports = function (app, dbname) {
 			return new Promise((res, rej) => {
 				try {
 					if (id) {
-						db.findById(id)
+						$.db.findById(id)
 							.then((data) => {
 								if (data) {
 									//send {id:record} if found
@@ -462,7 +462,7 @@ module.exports = function (app, dbname) {
 		updateOne: function (id, data) {
 			return new Promise((res, rej) => {
 				if (id && data) {
-					db.findByIdAndUpdate(id, data)
+					$.db.findByIdAndUpdate(id, data)
 						.then((data) => {
 							if (data) {
 								//send {id: id, result: true} if updated
@@ -490,7 +490,7 @@ module.exports = function (app, dbname) {
 		deleteOne: function (id) {
 			return new Promise((res, rej) => {
 				if (id) {
-					db.findByIdAndRemove(id)
+					$.db.findByIdAndRemove(id)
 						.then((success) => {
 							if (success) {
 								//send {id: id, result: true} if deleted

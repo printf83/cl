@@ -1,8 +1,6 @@
 const mongoose = require("mongoose");
-
-module.exports = mongoose.model(
-	"state",
-	mongoose.Schema({
-		name: { type: String, require: true },
-	})
-);
+const schema = mongoose.Schema({
+	name: { type: String, require: true },
+});
+const db = mongoose.model("state", schema);
+module.exports = { db, schema };

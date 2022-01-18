@@ -1,5 +1,5 @@
 module.exports = function (app) {
-	const db = require("../models/file.js");
+	const $ = require("../models/file.js");
 	const fs = require("fs");
 	const multer = require("multer");
 	const uploader = multer({ dest: "tmp/" });
@@ -24,7 +24,8 @@ module.exports = function (app) {
 				});
 
 				// Save a file info in the MongoDB
-				db.insertMany(files)
+				$.db
+					.insertMany(files)
 					.then((data) => {
 						res.send(
 							data.map((item) => {
@@ -39,7 +40,8 @@ module.exports = function (app) {
 			}
 		},
 		download: function (req, res) {
-			db.findOne({ _id: req.params.id })
+			$.db
+				.findOne({ _id: req.params.id })
 				.then((data) => {
 					if (data) {
 						fs.access(data.path, fs.constants.R_OK, (err) => {
@@ -73,7 +75,8 @@ module.exports = function (app) {
 			i.forEach((id) => {
 				p.push(
 					new Promise((res, _rej) => {
-						db.findOne({ _id: id })
+						$.db
+							.findOne({ _id: id })
 							.then((data) => {
 								if (data) {
 									res({
@@ -181,14 +184,16 @@ module.exports = function (app) {
 			// Find file in db then delete the original file from tmp or file
 
 			return new Promise((res, _rej) => {
-				db.findOne({ _id: id })
+				$.db
+					.findOne({ _id: id })
 					.then((data) => {
 						if (data) {
 							//move file to deleted dir
 							fn.fs_unlink(data.path)
 								.then(() => {
 									// Find file and remove it
-									db.findByIdAndRemove({ _id: id })
+									$.db
+										.findByIdAndRemove({ _id: id })
 										.then((data) => {
 											if (data) {
 												res({ id: id, result: true });
@@ -219,7 +224,8 @@ module.exports = function (app) {
 			// Find file in db then move the original file from tmp to file
 
 			return new Promise((res, _rej) => {
-				db.findOne({ _id: id })
+				$.db
+					.findOne({ _id: id })
 					.then((data) => {
 						if (data) {
 							if (data.destination === "tmp/") {
@@ -227,14 +233,15 @@ module.exports = function (app) {
 								fn.fs_move(data.path, `file/${data.filename}`)
 									.then(function () {
 										// Find file and update it
-										db.findOneAndUpdate(
-											{ _id: id },
-											{
-												destination: "file/",
-												path: `file/${data.filename}`,
-											},
-											{ new: false }
-										)
+										$.db
+											.findOneAndUpdate(
+												{ _id: id },
+												{
+													destination: "file/",
+													path: `file/${data.filename}`,
+												},
+												{ new: false }
+											)
 											.then((data) => {
 												if (data) {
 													res({ id: id, result: true });
