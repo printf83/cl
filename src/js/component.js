@@ -20,6 +20,7 @@ import div from "./base/div.js";
 import * as dlg from "./base/dlg.js";
 import dropdown from "./base/dropdown.js";
 import example from "./base/example.js";
+import file from "./base/file.js";
 import form from "./base/form.js";
 import h from "./base/h.js";
 import hr from "./base/hr.js";
@@ -77,6 +78,7 @@ export default {
 	dlg,
 	dropdown,
 	example,
+	file,
 	form,
 	h,
 	hr,

@@ -43,6 +43,7 @@ $.core.documentReady(() => {
 		document.getElementById("root"),
 		new $.container.form([
 			new $.container.stack([
+				new $.file({}),
 				new $.button({
 					label: "api.create",
 					color: "primary",
