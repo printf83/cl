@@ -1,83 +1,169 @@
-// "use strict";
-// import * as core from "./core.js";
-// import tag from "./tag.js";
-// import label from "./label.js";
-// import badge from "./badge.js";
+"use strict";
+import * as core from "./core.js";
+import tag from "./tag.js";
+import label from "./label.js";
+import badge from "./badge.js";
 
-// const fn = {
-// 	onview: function (sender) {
-// 		var container = $(sender).closest(".file-upload-controller");
-// 		var ctl = $(container).find("input[type='hidden']");
-// 		var data = $(ctl).val();
+const fn = {
+	onview: function (sender) {
+		// var container = $(sender).closest(".file-upload-controller");
+		// var ctl = $(container).find("input[type='hidden']");
+		// var data = $(ctl).val();
+		// if (data) {
+		// 	//need to convert id,id,id to Array
+		// 	if (data.indexOf(",") > -1) {
+		// 		ns.file.view(data.split(","), sender);
+		// 	} else {
+		// 		ns.file.view(data, sender);
+		// 	}
+		// }
+	},
+	onchange: function (sender) {
+		// var container = $(sender).closest(".file-upload-controller");
+		// var ctl = $(container).find("input[type='hidden']");
+		// var id = $(ctl).attr("id");
+		// var value = $(ctl).val();
+		// var btnview = $(`#${id}-view`);
+		// var btndelete = $(`#${id}-delete`);
+		// if (value) {
+		// 	$(btnview).removeAttr("disabled").removeClass("disabled btn-secondary").addClass("btn-success");
+		// 	$(btndelete).removeAttr("disabled").removeClass("disabled btn-secondary").addClass("btn-danger");
+		// } else {
+		// 	$(btnview).prop("disabled", true).addClass("disabled btn-secondary").removeClass("btn-success");
+		// 	$(btndelete).prop("disabled", true).addClass("disabled btn-secondary").removeClass("btn-danger");
+		// }
+	},
+	ondelete: function (sender) {
+		// var container = $(sender).closest(".file-upload-controller");
+		// var ctl = $(container).find("input[type='hidden']");
+		// $(ctl).val("");
+		// $(ctl).trigger("change");
+	},
+	onupload: function (sender) {
+		// var container = $(sender).closest(".file-upload-controller");
+		// var ctl = $(container).find("input[type='hidden']");
+		// var accept = $(ctl).attr("data-ns-accept");
+		// var multiple = $(ctl).attr("data-ns-multiple");
+		// accept = accept
+		// 	? accept
+		// 	: "image/gif,image/bmp,image/x-windows-bmp,image/jpeg,image/png,application/pdf,application/zip,application/json,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.openxmlformats-officedocument.wordprocessingml.document,text/plain,text/html";
+		// multiple = multiple ? ns.core.parseBool(multiple) : false;
+		// ns.file
+		// 	.upload({
+		// 		multiple: multiple,
+		// 	})
+		// 	.then((data) => {
+		// 		$(ctl).val(data);
+		// 		$(ctl).trigger("change");
+		// 	}, ns.core.errorHandler);
+	},
+};
 
-// 		if (data) {
-// 			//need to convert id,id,id to Array
-// 			if (data.indexOf(",") > -1) {
-// 				ns.file.view(data.split(","), sender);
-// 			} else {
-// 				ns.file.view(data, sender);
-// 			}
-// 		}
-// 	},
-// 	onchange: function (sender) {
-// 		var container = $(sender).closest(".file-upload-controller");
-// 		var ctl = $(container).find("input[type='hidden']");
-// 		var id = $(ctl).attr("id");
-// 		var value = $(ctl).val();
+const defaultOption = {
+	tag: "div",
 
-// 		var btnview = $(`#${id}-view`);
-// 		var btndelete = $(`#${id}-delete`);
+	label: null,
+	labelsize: null,
+	hidelabel: false,
+	readonly: false,
+	disabled: false,
+	multiple: false,
+	value: null,
+	accept: "image/gif,image/bmp,image/x-windows-bmp,image/jpeg,image/png,application/pdf,application/zip,application/json,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.openxmlformats-officedocument.wordprocessingml.document,text/plain,text/html",
+};
 
-// 		if (value) {
-// 			$(btnview).removeAttr("disabled").removeClass("disabled btn-secondary").addClass("btn-success");
-// 			$(btndelete).removeAttr("disabled").removeClass("disabled btn-secondary").addClass("btn-danger");
-// 		} else {
-// 			$(btnview).prop("disabled", true).addClass("disabled btn-secondary").removeClass("btn-success");
-// 			$(btndelete).prop("disabled", true).addClass("disabled btn-secondary").removeClass("btn-danger");
-// 		}
-// 	},
-// 	ondelete: function (sender) {
-// 		var container = $(sender).closest(".file-upload-controller");
-// 		var ctl = $(container).find("input[type='hidden']");
+export default class file extends tag {
+	constructor(opt) {
+		super(opt);
+	}
 
-// 		$(ctl).val("");
-// 		$(ctl).trigger("change");
-// 	},
-// 	onupload: function (sender) {
-// 		var container = $(sender).closest(".file-upload-controller");
-// 		var ctl = $(container).find("input[type='hidden']");
+	get data() {
+		return super.data;
+	}
+	set data(opt) {
+		opt = core.extend({}, defaultOption, opt);
 
-// 		var accept = $(ctl).attr("data-ns-accept");
-// 		var multiple = $(ctl).attr("data-ns-multiple");
+		//generate id
+		let id = opt.id || core.UUID();
 
-// 		accept = accept
-// 			? accept
-// 			: "image/gif,image/bmp,image/x-windows-bmp,image/jpeg,image/png,application/pdf,application/zip,application/json,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.openxmlformats-officedocument.wordprocessingml.document,text/plain,text/html";
-// 		multiple = multiple ? ns.core.parseBool(multiple) : false;
+		//generate control
+		var ctl = [];
 
-// 		ns.file
-// 			.upload({
-// 				multiple: multiple,
-// 			})
-// 			.then((data) => {
-// 				$(ctl).val(data);
-// 				$(ctl).trigger("change");
-// 			}, ns.core.errorHandler);
-// 	},
-// };
+        //generate label
+        if (opt.label && !opt.hidelabel) {
+			ctl.push(
+				new label({
+					for: id,
+					label: opt.label,
+					class: opt.labelsize
+						? ["col-form-label"].concat(core.multiClass(opt.labelsize, "col-$1", null, "col"))
+						: "form-label",
+				})
+			);
+		}
 
-// const defaultOption = {
-// 	tag: "div",
+		//create main control to handle value
+		ctl.push(
+			new tag({
+				tag: "input",
+				id: id,
+				name: opt.name,
+				onchange: fn.onchange,
+				attr: {
+					type: "hidden",
+					readonly: opt.readonly,
+					disabled: opt.disabled,
+					value: opt.value,
+				},
+			})
+		);
 
-// 	label: null,
-// 	readonly: false,
-// 	disabled: false,
-// 	multiple: false,
-// 	value: null,
-// 	accept: "image/gif,image/bmp,image/x-windows-bmp,image/jpeg,image/png,application/pdf,application/zip,application/json,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.openxmlformats-officedocument.wordprocessingml.document,text/plain,text/html",
-// };
+		//add button base on value
+		ctl.push(
+			new div({
+				row: true,
+				attr: { "data-cl-container": id },
+				elem: new btngroup([
+					new button({
+						id: `${id}-view`,
+						label: "View",
+						icon: "eye",
+						color: opt.value ? "success" : "secondary",
+						class: "w-100",
+						disabled: opt.value ? false : true,
+						onclick: fn.onview,
+					}),
 
-// export default class file extends tag {}
+					new button({
+						id: `${id}-delete`,
+						icon: "times",
+						color: opt.value ? "danger" : "secondary",
+						class: "w-0",
+						disabled: opt.disabled ? true : opt.readonly ? true : opt.value ? false : true,
+						onclick: fn.ondelete,
+					}),
+
+					new button({
+						id: `${id}-upload`,
+						icon: "upload",
+						color: "primary",
+						class: "w-0",
+						disabled: opt.disabled ? true : opt.readonly ? true : false,
+						onclick: fn.onupload,
+					}),
+				]),
+			})
+		);
+
+        delete opt.id
+        delete opt.name
+        delete opt.disabled
+        delete opt.readonly
+        delete opt.
+        
+		super.data = { elem: ctl };
+	}
+}
 
 // //file contorl (upload,download,view,save)
 // //author: printf83@gmail.com (c) 2020 - 2021
