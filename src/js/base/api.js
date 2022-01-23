@@ -75,8 +75,7 @@ const fn = {
 		}
 
 		req.open(opt.type, opt.url, opt.async);
-		req.setRequestHeader("Content-Type", "multipart/form-data");
-		req.send(this.genformdata(opt.data));
+		req.send(this.genfileformdata(opt.data));
 	},
 	download: function (url) {
 		window.location = url;
@@ -88,6 +87,13 @@ const fn = {
 			return res;
 		}
 		return null;
+	},
+	genfileformdata: function (files) {
+		var data = new FormData();
+		for (var x = 0; x < files.length; x++) {
+			data.append("file", files[x]);
+		}
+		return data;
 	},
 };
 

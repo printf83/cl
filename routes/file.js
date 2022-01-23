@@ -7,6 +7,8 @@ module.exports = function (app) {
 	const fn = {
 		upload: function (req, res) {
 			if (req.files && req.files.length > 0) {
+				console.log(req.files);
+
 				let files = [];
 				req.files.forEach((file) => {
 					files.push({

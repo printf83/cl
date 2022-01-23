@@ -1,61 +1,101 @@
 "use strict";
 import * as core from "./core.js";
+import * as db from "./api.js";
+
 import tag from "./tag.js";
+import div from "./div.js";
+import btngroup from "./btngroup.js";
+import button from "./button.js";
 import label from "./label.js";
-import badge from "./badge.js";
+
+let db_opt = {};
 
 const fn = {
-	onview: function (sender) {
-		// var container = $(sender).closest(".file-upload-controller");
-		// var ctl = $(container).find("input[type='hidden']");
-		// var data = $(ctl).val();
-		// if (data) {
-		// 	//need to convert id,id,id to Array
-		// 	if (data.indexOf(",") > -1) {
-		// 		ns.file.view(data.split(","), sender);
-		// 	} else {
-		// 		ns.file.view(data, sender);
-		// 	}
-		// }
+	onview: function (event) {
+		let sender = event.currentTarget;
+		let container = sender.closest("div[data-cl-container]");
+		let id = container.getAttribute("data-cl-container");
+		let ctl = container.parentNode.querySelectorAll(`#${id}`)[0];
+		let value = ctl.value;
+
+		if (value) {
+			db.file.info(value, function (data) {
+				console.log(data);
+			});
+		}
 	},
-	onchange: function (sender) {
-		// var container = $(sender).closest(".file-upload-controller");
-		// var ctl = $(container).find("input[type='hidden']");
-		// var id = $(ctl).attr("id");
-		// var value = $(ctl).val();
-		// var btnview = $(`#${id}-view`);
-		// var btndelete = $(`#${id}-delete`);
-		// if (value) {
-		// 	$(btnview).removeAttr("disabled").removeClass("disabled btn-secondary").addClass("btn-success");
-		// 	$(btndelete).removeAttr("disabled").removeClass("disabled btn-secondary").addClass("btn-danger");
-		// } else {
-		// 	$(btnview).prop("disabled", true).addClass("disabled btn-secondary").removeClass("btn-success");
-		// 	$(btndelete).prop("disabled", true).addClass("disabled btn-secondary").removeClass("btn-danger");
-		// }
+	onchange: function (event) {
+		let ctl = event.currentTarget;
+		let container = ctl.parentNode;
+		let id = ctl.getAttribute("id");
+
+		let value = ctl.value;
+		let btnview = container.parentNode.querySelectorAll(`#${id}-view`)[0];
+		let btndelete = container.parentNode.querySelectorAll(`#${id}-delete`)[0];
+
+		if (value) {
+			btnview.removeAttribute("disabled");
+			btnview.classList.remove("disabled");
+			btnview.classList.remove("btn-secondary");
+			btnview.classList.add("btn-success");
+
+			btndelete.removeAttribute("disabled");
+			btndelete.classList.remove("disabled");
+			btndelete.classList.remove("btn-secondary");
+			btndelete.classList.add("btn-danger");
+		} else {
+			btnview.setAttribute("disabled", true);
+			btnview.classList.remove("btn-success");
+			btnview.classList.add("disabled");
+			btnview.classList.add("btn-secondary");
+
+			btndelete.setAttribute("disabled", true);
+			btndelete.classList.remove("btn-danger");
+			btndelete.classList.add("disabled");
+			btndelete.classList.add("btn-secondary");
+		}
 	},
-	ondelete: function (sender) {
-		// var container = $(sender).closest(".file-upload-controller");
-		// var ctl = $(container).find("input[type='hidden']");
-		// $(ctl).val("");
-		// $(ctl).trigger("change");
+	ondelete: function (event) {
+		let sender = event.currentTarget;
+		let container = sender.closest("div[data-cl-container]");
+		let id = container.getAttribute("data-cl-container");
+		let ctl = container.parentNode.querySelectorAll(`#${id}`)[0];
+		ctl.value = null;
+		ctl.dispatchEvent(new Event("change"));
 	},
-	onupload: function (sender) {
-		// var container = $(sender).closest(".file-upload-controller");
-		// var ctl = $(container).find("input[type='hidden']");
-		// var accept = $(ctl).attr("data-ns-accept");
-		// var multiple = $(ctl).attr("data-ns-multiple");
-		// accept = accept
-		// 	? accept
-		// 	: "image/gif,image/bmp,image/x-windows-bmp,image/jpeg,image/png,application/pdf,application/zip,application/json,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.openxmlformats-officedocument.wordprocessingml.document,text/plain,text/html";
-		// multiple = multiple ? ns.core.parseBool(multiple) : false;
-		// ns.file
-		// 	.upload({
-		// 		multiple: multiple,
-		// 	})
-		// 	.then((data) => {
-		// 		$(ctl).val(data);
-		// 		$(ctl).trigger("change");
-		// 	}, ns.core.errorHandler);
+	onupload: function (event) {
+		let sender = event.currentTarget;
+		let container = sender.closest("div[data-cl-container]");
+		let id = container.getAttribute("data-cl-container");
+		let opt = db_opt[id];
+		let ctl = container.parentNode.querySelectorAll(`#${id}`)[0];
+
+		let fu = core.UUID();
+		core.appendChild(
+			document.body,
+			new tag({
+				tag: "input",
+				attr: {
+					id: fu,
+					type: "file",
+					multiple: opt.multiple,
+					accept: opt.accept ? opt.accept : null,
+				},
+				style: { display: "none" },
+				onchange: function (event) {
+					let sender = event.currentTarget;
+					let data = sender.files;
+
+					db.file.upload(data, null, function (data) {
+						core.removeElement(sender);
+						ctl.value = JSON.parse(data);
+						ctl.dispatchEvent(new Event("change"));
+					});
+				},
+			})
+		);
+
+		document.getElementById(fu).click();
 	},
 };
 
@@ -89,8 +129,8 @@ export default class file extends tag {
 		//generate control
 		var ctl = [];
 
-        //generate label
-        if (opt.label && !opt.hidelabel) {
+		//generate label
+		if (opt.label && !opt.hidelabel) {
 			ctl.push(
 				new label({
 					for: id,
@@ -155,12 +195,11 @@ export default class file extends tag {
 			})
 		);
 
-        delete opt.id
-        delete opt.name
-        delete opt.disabled
-        delete opt.readonly
-        delete opt.
-        
+		db_opt[id] = {
+			multiple: opt.multiple,
+			accept: opt.accept,
+		};
+
 		super.data = { elem: ctl };
 	}
 }
