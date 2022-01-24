@@ -27,32 +27,61 @@ const fn = {
 	onchange: function (event) {
 		let ctl = event.currentTarget;
 		let container = ctl.parentNode;
+		let btngroup = container.querySelectorAll(".btn-group")[0];
 		let id = ctl.getAttribute("id");
-
+		let opt = db_opt[id];
 		let value = ctl.value;
-		let btnview = container.parentNode.querySelectorAll(`#${id}-view`)[0];
-		let btndelete = container.parentNode.querySelectorAll(`#${id}-delete`)[0];
 
 		if (value) {
-			btnview.removeAttribute("disabled");
-			btnview.classList.remove("disabled");
-			btnview.classList.remove("btn-secondary");
-			btnview.classList.add("btn-success");
+			//remove btn upload
+			let btnupload = btngroup.querySelectorAll(`#${id}-upload`)[0];
+			core.removeElement(btnupload);
 
-			btndelete.removeAttribute("disabled");
-			btndelete.classList.remove("disabled");
-			btndelete.classList.remove("btn-secondary");
-			btndelete.classList.add("btn-danger");
+			//add btn view
+			core.appendChild(
+				btngroup,
+				new button({
+					id: `${id}-view`,
+					label: "View",
+					icon: "eye",
+					color: "success",
+					class: "w-100",
+					onclick: fn.onview,
+				})
+			);
+
+			//add btn delete
+			core.appendChild(
+				btngroup,
+				new button({
+					id: `${id}-delete`,
+					icon: "times",
+					color: "danger",
+					class: "w-0",
+					disabled: opt.disabled ? true : opt.readonly ? true : false,
+					onclick: fn.ondelete,
+				})
+			);
 		} else {
-			btnview.setAttribute("disabled", true);
-			btnview.classList.remove("btn-success");
-			btnview.classList.add("disabled");
-			btnview.classList.add("btn-secondary");
+			let btnview = btngroup.querySelectorAll(`#${id}-view`)[0];
+			let btndelete = btngroup.querySelectorAll(`#${id}-delete`)[0];
 
-			btndelete.setAttribute("disabled", true);
-			btndelete.classList.remove("btn-danger");
-			btndelete.classList.add("disabled");
-			btndelete.classList.add("btn-secondary");
+			core.removeElement(btnview);
+			core.removeElement(btndelete);
+
+			//add btn upload
+			core.appendChild(
+				btngroup,
+				new button({
+					id: `${id}-upload`,
+					icon: "upload",
+					label: "Upload",
+					color: "primary",
+					class: "w-100",
+					disabled: opt.disabled ? true : opt.readonly ? true : false,
+					onclick: fn.onupload,
+				})
+			);
 		}
 	},
 	ondelete: function (event) {
@@ -163,35 +192,38 @@ export default class file extends tag {
 			new div({
 				row: true,
 				attr: { "data-cl-container": id },
-				elem: new btngroup([
-					new button({
-						id: `${id}-view`,
-						label: "View",
-						icon: "eye",
-						color: opt.value ? "success" : "secondary",
-						class: "w-100",
-						disabled: opt.value ? false : true,
-						onclick: fn.onview,
-					}),
-
-					new button({
-						id: `${id}-delete`,
-						icon: "times",
-						color: opt.value ? "danger" : "secondary",
-						class: "w-0",
-						disabled: opt.disabled ? true : opt.readonly ? true : opt.value ? false : true,
-						onclick: fn.ondelete,
-					}),
-
-					new button({
-						id: `${id}-upload`,
-						icon: "upload",
-						color: "primary",
-						class: "w-0",
-						disabled: opt.disabled ? true : opt.readonly ? true : false,
-						onclick: fn.onupload,
-					}),
-				]),
+				elem: new btngroup(
+					opt.value
+						? [
+								new button({
+									id: `${id}-view`,
+									label: "View",
+									icon: "eye",
+									color: "success",
+									class: "w-100",
+									onclick: fn.onview,
+								}),
+								new button({
+									id: `${id}-delete`,
+									icon: "times",
+									color: "danger",
+									class: "w-0",
+									disabled: opt.disabled ? true : opt.readonly ? true : false,
+									onclick: fn.ondelete,
+								}),
+						  ]
+						: [
+								new button({
+									id: `${id}-upload`,
+									icon: "upload",
+									label: "Upload",
+									color: "primary",
+									class: "w-100",
+									disabled: opt.disabled ? true : opt.readonly ? true : false,
+									onclick: fn.onupload,
+								}),
+						  ]
+				),
 			})
 		);
 
