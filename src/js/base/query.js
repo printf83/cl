@@ -1051,6 +1051,7 @@ export class filter extends modal {
 			super({
 				title: "Filter",
 				bodyclass: "pb-2",
+				bodyminheight: "7.3rem",
 				elem: fn.filter.build(
 					{
 						id: id,
@@ -1083,6 +1084,7 @@ export class sort extends modal {
 			super({
 				title: "Sort",
 				bodyclass: "pb-2",
+				bodyminheight: "4.4rem",
 				elem: fn.sort.build(
 					{
 						id: id,

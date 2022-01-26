@@ -65,7 +65,7 @@ const fn = {
 			}
 		};
 
-		if (typeof opt.onprogress === "function") {
+		if (typeof opt.progress === "function") {
 			req.onprogress = function (event) {
 				if (event.lengthComputable) {
 					var percentComplete = parseInt((event.loaded / event.total) * 100, 10);

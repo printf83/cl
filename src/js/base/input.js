@@ -146,9 +146,10 @@ export default class input extends tag {
 							let input = parent.getElementsByTagName("input")[0];
 							let val = parseInt(input.value);
 							let max = parseInt(input.max);
+							let min = parseInt(input.min);
 							let step = parseInt(input.step);
 
-							val = val || max;
+							val = val || min;
 							step = step || 1;
 							input.value = val + step;
 							if (val + step > max) input.value = max;

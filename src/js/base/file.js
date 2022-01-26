@@ -1,4 +1,6 @@
 "use strict";
+import "../../css/file.css";
+
 import * as core from "./core.js";
 import * as db from "./api.js";
 
@@ -11,6 +13,30 @@ import modal from "./modal.js";
 import icon from "./icon.js";
 import span from "./span.js";
 import img from "./img.js";
+import input from "./input.js";
+
+const defaultOption = {
+	tag: "div",
+
+	label: null,
+	labelsize: null,
+	hidelabel: false,
+	readonly: false,
+	disabled: false,
+	multiple: false,
+	value: null,
+	accept: "image/gif,image/bmp,image/x-windows-bmp,image/jpeg,image/png,application/pdf,application/zip,application/json,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.openxmlformats-officedocument.wordprocessingml.document,text/plain,text/html",
+
+	uploadlabel: "Upload",
+	uploadicon: "upload",
+	uploadcolor: "primary",
+	viewlabel: "View",
+	viewicon: "eye",
+	viewcolor: "success",
+	deletelabel: null,
+	deleteicon: "times",
+	deletecolor: "danger",
+};
 
 let db_opt = {};
 
@@ -157,7 +183,7 @@ const fn = {
 	},
 	onchange: function (event) {
 		let ctl = event.currentTarget;
-		let container = ctl.parentNode;
+		let container = ctl.parentNode.parentNode;
 		let btngroup = container.querySelectorAll(".btn-group")[0];
 		let id = ctl.getAttribute("id");
 		let opt = db_opt[id];
@@ -173,9 +199,9 @@ const fn = {
 				btngroup,
 				new button({
 					id: `${id}-view`,
-					label: "View",
-					icon: "eye",
-					color: "success",
+					label: opt.viewlabel,
+					icon: opt.viewicon,
+					color: opt.viewcolor,
 					class: "w-100",
 					onclick: fn.onview,
 				})
@@ -186,8 +212,9 @@ const fn = {
 				btngroup,
 				new button({
 					id: `${id}-delete`,
-					icon: "times",
-					color: "danger",
+					label: opt.deletelabel,
+					icon: opt.deleteicon,
+					color: opt.deletecolor,
 					class: "w-0",
 					disabled: opt.disabled ? true : opt.readonly ? true : false,
 					onclick: fn.ondelete,
@@ -205,9 +232,9 @@ const fn = {
 				btngroup,
 				new button({
 					id: `${id}-upload`,
-					icon: "upload",
-					label: "Upload",
-					color: "primary",
+					label: opt.uploadlabel,
+					icon: opt.uploadicon,
+					color: opt.uploadcolor,
 					class: "w-100",
 					disabled: opt.disabled ? true : opt.readonly ? true : false,
 					onclick: fn.onupload,
@@ -234,12 +261,23 @@ const fn = {
 		let ctl = container.parentNode.querySelectorAll(`#${id}`)[0];
 
 		let fu = core.UUID();
+
+		//append div into button
+		core.appendChild(
+			sender,
+			new span({
+				id: `${fu}-progress`,
+				class: "cl-fu-progress",
+			})
+		);
+
+		//append file uploader into document
 		core.appendChild(
 			document.body,
 			new tag({
 				tag: "input",
+				id: fu,
 				attr: {
-					id: fu,
 					type: "file",
 					multiple: opt.multiple,
 					accept: opt.accept ? opt.accept : null,
@@ -247,32 +285,27 @@ const fn = {
 				style: { display: "none" },
 				onchange: function (event) {
 					let sender = event.currentTarget;
+					let id = sender.getAttribute("id");
 					let data = sender.files;
 
-					db.file.upload(data, null, function (data) {
-						core.removeElement(sender);
-						ctl.value = data;
-						ctl.dispatchEvent(new Event("change"));
-					});
+					db.file.upload(
+						data,
+						function (percentComplete) {
+							let fuprg = document.getElementById(`${id}-progress`);
+							fuprg.style.width = `${percentComplete}%`;
+						},
+						function (data) {
+							core.removeElement(sender);
+							ctl.value = data;
+							ctl.dispatchEvent(new Event("change"));
+						}
+					);
 				},
 			})
 		);
 
 		document.getElementById(fu).click();
 	},
-};
-
-const defaultOption = {
-	tag: "div",
-
-	label: null,
-	labelsize: null,
-	hidelabel: false,
-	readonly: false,
-	disabled: false,
-	multiple: false,
-	value: null,
-	accept: "image/gif,image/bmp,image/x-windows-bmp,image/jpeg,image/png,application/pdf,application/zip,application/json,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.openxmlformats-officedocument.wordprocessingml.document,text/plain,text/html",
 };
 
 export default class file extends tag {
@@ -307,17 +340,14 @@ export default class file extends tag {
 
 		//create main control to handle value
 		ctl.push(
-			new tag({
-				tag: "input",
+			new input({
 				id: id,
 				name: opt.name,
+				type: "hidden",
 				onchange: fn.onchange,
-				attr: {
-					type: "hidden",
-					readonly: opt.readonly,
-					disabled: opt.disabled,
-					value: opt.value,
-				},
+				readonly: opt.readonly,
+				disabled: opt.disabled,
+				value: opt.value,
 			})
 		);
 
@@ -331,16 +361,17 @@ export default class file extends tag {
 						? [
 								new button({
 									id: `${id}-view`,
-									label: "View",
-									icon: "eye",
-									color: "success",
+									label: opt.viewlabel,
+									icon: opt.viewicon,
+									color: opt.viewcolor,
 									class: "w-100",
 									onclick: fn.onview,
 								}),
 								new button({
 									id: `${id}-delete`,
-									icon: "times",
-									color: "danger",
+									label: opt.deletelabel,
+									icon: opt.deleteicon,
+									color: opt.deletecolor,
 									class: "w-0",
 									disabled: opt.disabled ? true : opt.readonly ? true : false,
 									onclick: fn.ondelete,
@@ -349,9 +380,9 @@ export default class file extends tag {
 						: [
 								new button({
 									id: `${id}-upload`,
-									icon: "upload",
-									label: "Upload",
-									color: "primary",
+									label: opt.uploadlabel,
+									icon: opt.uploadicon,
+									color: opt.uploadcolor,
 									class: "w-100",
 									disabled: opt.disabled ? true : opt.readonly ? true : false,
 									onclick: fn.onupload,
@@ -364,6 +395,21 @@ export default class file extends tag {
 		db_opt[id] = {
 			multiple: opt.multiple,
 			accept: opt.accept,
+
+			readonly: opt.readonly,
+			disabled: opt.disabled,
+
+			uploadlabel: opt.uploadlabel,
+			uploadicon: opt.uploadicon,
+			uploadcolor: opt.uploadcolor,
+
+			deletelabel: opt.deletelabel,
+			deleteicon: opt.deleteicon,
+			deletecolor: opt.deletecolor,
+
+			viewlabel: opt.viewlabel,
+			viewicon: opt.viewicon,
+			viewcolor: opt.viewcolor,
 		};
 
 		super.data = { elem: ctl };
