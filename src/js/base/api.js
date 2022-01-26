@@ -24,7 +24,7 @@ const defaultOptionUpload = {
 	type: "POST",
 	url: null,
 	data: null,
-	async: true,
+	async: false,
 };
 
 const fn = {
@@ -89,11 +89,19 @@ const fn = {
 		return null;
 	},
 	genfileformdata: function (files) {
-		var data = new FormData();
-		for (var x = 0; x < files.length; x++) {
+		let data = new FormData();
+		for (let x = 0; x < files.length; x++) {
 			data.append("file", files[x]);
 		}
 		return data;
+	},
+	getfilelength: function (files) {
+		let result = 0;
+		for (let x = 0; x < files.length; x++) {
+			result += files[0].length;
+		}
+
+		return result;
 	},
 };
 
