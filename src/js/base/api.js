@@ -239,7 +239,9 @@ export const api = {
 		);
 
 		fn.post({
-			callback: callback,
+			callback: function (result) {
+				callback(JSON.parse(result));
+			},
 			url: `api/${opt.name}-aggregate`,
 			data: opt.data,
 		});
@@ -250,12 +252,14 @@ export const file = {
 	upload: function (file, progress, callback) {
 		fn.upload({
 			progress: progress,
-			callback: callback,
+			callback: function (result) {
+				callback(JSON.parse(result));
+			},
 			url: `/api/file`,
 			data: file,
 		});
 	},
-	download: function (opt) {
+	download: function (id) {
 		fn.download(this.url(id));
 	},
 	url: function (id) {
@@ -263,20 +267,26 @@ export const file = {
 	},
 	info: function (id, callback) {
 		fn.get({
-			callback: callback,
+			callback: function (result) {
+				callback(JSON.parse(result));
+			},
 			url: `/api/file-info/${Array.isArray(id) ? id.join(",") : id}`,
 		});
 	},
 	save: function (id, callback) {
 		fn.get({
-			callback: callback,
+			callback: function (result) {
+				callback(JSON.parse(result));
+			},
 			url: `/api/file/${Array.isArray(id) ? id.join(",") : id}`,
 			type: "PUT",
 		});
 	},
 	delete: function (id, callback) {
 		fn.get({
-			callback: callback,
+			callback: function (result) {
+				callback(JSON.parse(result));
+			},
 			url: `/api/file/${Array.isArray(id) ? id.join(",") : id}`,
 			type: "DELETE",
 		});

@@ -107,7 +107,7 @@ export default class modal extends div {
 			let ctlBody = new div({ class: ["modal-body", opt.bodyclass], padding: hastab ? 0 : null, elem: opt.elem });
 
 			//generate control
-			let ctlControl = new div({ float: "start", class: ["footer-ctl"], elem: opt.footer });
+			let ctlControl = opt.footer ? new div({ float: "start", class: ["footer-ctl"], elem: opt.footer }) : null;
 
 			//generate button
 			let ctlButton = null;

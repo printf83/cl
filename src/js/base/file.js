@@ -7,6 +7,10 @@ import div from "./div.js";
 import btngroup from "./btngroup.js";
 import button from "./button.js";
 import label from "./label.js";
+import modal from "./modal.js";
+import icon from "./icon.js";
+import span from "./span.js";
+import img from "./img.js";
 
 let db_opt = {};
 
@@ -21,6 +25,133 @@ const fn = {
 		if (value) {
 			db.file.info(value, function (data) {
 				console.log(data);
+
+				if (data) {
+					if (data.length === 1) {
+						//if only one file
+						//preview : "image/gif,image/bmp,image/x-windows-bmp,image/jpeg,image/png,
+						//download : application / pdf, application / zip, application / json, application / vnd.openxmlformats - officedocument.spreadsheetml.sheet, application / vnd.openxmlformats - officedocument.wordprocessingml.document, text / plain, text / html";
+						switch (data[0].mimetype) {
+							case "image/png":
+							case "image/jpeg":
+							case "image/gif":
+							case "image/bmp":
+							case "image/x-windows-bmp":
+								//if picture. do preview
+
+								new modal({
+									title: null,
+									button: null,
+									static: false,
+									size: "lg",
+									elem: new img({
+										class: "img-fluid mx-auto d-block rounded btn p-0",
+										attr: {
+											"data-cl-file": data[0].id,
+										},
+										src: db.file.url(data[0].id),
+										onclick: function (event) {
+											let sender = event.currentTarget;
+											let fileid = sender.getAttribute("data-cl-file");
+											db.file.download(fileid);
+										},
+									}),
+								}).show();
+
+								break;
+
+							default:
+								//if other. do download
+								db.file.download(data[0].id);
+
+								break;
+						}
+					} else {
+						//if multiple file
+						//change size base on img count
+						let thumbnailsize = 12;
+						switch (data.length) {
+							case 1:
+								thumbnailsize = 12;
+								break;
+							case 2:
+								thumbnailsize = 6;
+								break;
+							case 3:
+								thumbnailsize = 4;
+								break;
+							default:
+								thumbnailsize = 3;
+						}
+
+						//create preview base on file type
+						let list = [];
+
+						data.forEach((i) => {
+							switch (i.mimetype) {
+								case "image/png":
+								case "image/jpeg":
+								case "image/gif":
+								case "image/bmp":
+								case "image/x-windows-bmp":
+									//if picture. do preview
+									list.push(
+										new div(
+											`col-${thumbnailsize}`,
+											new div({
+												class: "btn border p-1",
+												attr: {
+													"data-cl-file": i.id,
+												},
+												onclick: function (event) {
+													let sender = event.currentTarget;
+													let fileid = sender.getAttribute("data-cl-file");
+													db.file.download(fileid);
+												},
+												elem: new img({
+													class: "img-fluid mx-auto d-block rounded",
+													src: db.file.url(i.id),
+												}),
+											})
+										)
+									);
+									break;
+
+								default:
+									list.push(
+										new div(
+											`d-flex align-items-stretch col-${thumbnailsize}`,
+											new div({
+												class: "btn border p-1 d-flex justify-content-center w-100",
+												attr: {
+													"data-cl-file": i.id,
+												},
+												onclick: function (event) {
+													let sender = event.currentTarget;
+													let fileid = sender.getAttribute("data-cl-file");
+													db.file.download(fileid);
+												},
+												elem: new span(
+													"align-self-center",
+													new icon({ icon: "download", weight: "2x" })
+												),
+											})
+										)
+									);
+
+									break;
+							}
+						});
+
+						new modal({
+							title: null,
+							button: null,
+							static: false,
+							size: "lg",
+							elem: new div("container p-0", new div("d-flex justify-content-center row g-3", list)),
+						}).show();
+					}
+				}
 			});
 		}
 	},
@@ -89,8 +220,11 @@ const fn = {
 		let container = sender.closest("div[data-cl-container]");
 		let id = container.getAttribute("data-cl-container");
 		let ctl = container.parentNode.querySelectorAll(`#${id}`)[0];
-		ctl.value = null;
-		ctl.dispatchEvent(new Event("change"));
+
+		db.file.delete(ctl.value, function (data) {
+			ctl.value = null;
+			ctl.dispatchEvent(new Event("change"));
+		});
 	},
 	onupload: function (event) {
 		let sender = event.currentTarget;
@@ -117,7 +251,7 @@ const fn = {
 
 					db.file.upload(data, null, function (data) {
 						core.removeElement(sender);
-						ctl.value = JSON.parse(data);
+						ctl.value = data;
 						ctl.dispatchEvent(new Event("change"));
 					});
 				},
