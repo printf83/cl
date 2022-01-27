@@ -105,5 +105,5 @@ typings/
 .tern-port
 
 #tmp
-tmp
-file/*
+./tmp/*
+./file/*

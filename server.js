@@ -6,6 +6,7 @@
 
 require("dotenv").config();
 
+const fs = require("fs");
 const path = require("path");
 const express = require("express");
 const helmet = require("helmet");
@@ -46,6 +47,7 @@ const dbconfig = {
 };
 
 const mongoose = require("mongoose");
+const { fstat } = require("fs");
 mongoose.Promise = global.Promise;
 
 mongoose
@@ -58,6 +60,12 @@ mongoose
 		console.error(err);
 		console.warn("Continue without connecting to MongoDB.");
 	});
+
+//delete tmp folder
+fs.rmSync("./tmp", { recursive: true, force: true });
+
+//create file folder
+fs.mkdir("./file", (err) => {});
 
 //setup router
 require("./routes/file.js")(app); //file upload, download handler (required)
