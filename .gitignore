@@ -106,3 +106,4 @@ typings/
 
 #tmp
 tmp
+file/*

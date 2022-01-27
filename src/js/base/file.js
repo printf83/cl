@@ -324,6 +324,12 @@ const fn = {
 
 		document.getElementById(fu).click();
 	},
+	onsave: function (element) {
+		let value = element.value;
+		if (value) {
+			db.file.save(value, function (data) {});
+		}
+	},
 };
 
 export default class file extends div {
@@ -431,5 +437,9 @@ export default class file extends div {
 		};
 
 		super.data = { elem: ctl };
+	}
+
+	static save(element) {
+		fn.onsave(element);
 	}
 }

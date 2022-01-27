@@ -43,7 +43,16 @@ $.core.documentReady(() => {
 		document.getElementById("root"),
 		new $.container.form([
 			new $.container.stack([
-				new $.file({ multiple: true }),
+				new $.file({ id: "test-file-uploader", multiple: true }),
+				new $.button({
+					label: "save file",
+					color: "success",
+					icon: "save",
+					onclick: function () {
+						let ctl = document.getElementById("test-file-uploader");
+						$.file.save(ctl);
+					},
+				}),
 				new $.button({
 					label: "api.create",
 					color: "primary",

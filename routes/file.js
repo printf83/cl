@@ -225,12 +225,14 @@ module.exports = function (app) {
 		saveuploadedfile: function (id) {
 			// Find file in db then move the original file from tmp to file
 
-			return new Promise((res, _rej) => {
+			return new Promise((res, rej) => {
 				$.db
 					.findOne({ _id: id })
 					.then((data) => {
 						if (data) {
 							if (data.destination === "tmp/") {
+								//create file dir if not exists
+
 								//move file to file dir
 								fn.fs_move(data.path, `file/${data.filename}`)
 									.then(function () {
