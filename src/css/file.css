@@ -1,6 +1,6 @@
 .cl-fu-progress {
 	position: absolute;
-	background-color: rgba(var(--bs-gray), 0.5);
+	background-color: rgba(var(--bs-light-rgb), 0.5);
 	display: block;
 	height: 100%;
 	top: 0;
