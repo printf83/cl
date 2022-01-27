@@ -4,7 +4,6 @@ import "../../css/file.css";
 import * as core from "./core.js";
 import * as db from "./api.js";
 
-import tag from "./tag.js";
 import div from "./div.js";
 import btngroup from "./btngroup.js";
 import button from "./button.js";
@@ -16,8 +15,6 @@ import img from "./img.js";
 import input from "./input.js";
 
 const defaultOption = {
-	tag: "div",
-
 	label: null,
 	labelsize: null,
 	hidelabel: false,
@@ -57,6 +54,7 @@ const fn = {
 						//if only one file
 						//preview : "image/gif,image/bmp,image/x-windows-bmp,image/jpeg,image/png,
 						//download : application / pdf, application / zip, application / json, application / vnd.openxmlformats - officedocument.spreadsheetml.sheet, application / vnd.openxmlformats - officedocument.wordprocessingml.document, text / plain, text / html";
+
 						switch (data[0].mimetype) {
 							case "image/png":
 							case "image/jpeg":
@@ -71,7 +69,10 @@ const fn = {
 									static: false,
 									size: "lg",
 									elem: new img({
-										class: "img-fluid mx-auto d-block rounded btn p-0",
+										class: "img-fluid mx-auto btn",
+										display: "block",
+										rounded: true,
+										padding: 0,
 										attr: {
 											"data-cl-file": data[0].id,
 										},
@@ -122,9 +123,10 @@ const fn = {
 								case "image/x-windows-bmp":
 									//if picture. do preview
 									list.push(
-										new div(
-											`col-${thumbnailsize}`,
-											new div({
+										new div({
+											col: thumbnailsize,
+											padding: 0,
+											elem: new div({
 												class: "btn border p-1",
 												attr: {
 													"data-cl-file": i.id,
@@ -138,17 +140,24 @@ const fn = {
 													class: "img-fluid mx-auto d-block rounded",
 													src: db.file.url(i.id),
 												}),
-											})
-										)
+											}),
+										})
 									);
 									break;
 
 								default:
 									list.push(
-										new div(
-											`d-flex align-items-stretch col-${thumbnailsize}`,
-											new div({
-												class: "btn border p-1 d-flex justify-content-center w-100",
+										new div({
+											display: "flex",
+											alignitem: "stretch",
+											col: thumbnailsize,
+											padding: 0,
+											elem: new div({
+												border: true,
+												padding: 5,
+												display: "flex",
+												justifycontent: "center",
+												class: "btn w-100",
 												attr: {
 													"data-cl-file": i.id,
 												},
@@ -157,12 +166,12 @@ const fn = {
 													let fileid = sender.getAttribute("data-cl-file");
 													db.file.download(fileid);
 												},
-												elem: new span(
-													"align-self-center",
-													new icon({ icon: "download", weight: "2x" })
-												),
-											})
-										)
+												elem: new span({
+													alignself: "center",
+													elem: new icon({ icon: "download", color: "muted", weight: "2x" }),
+												}),
+											}),
+										})
 									);
 
 									break;
@@ -174,7 +183,17 @@ const fn = {
 							button: null,
 							static: false,
 							size: "lg",
-							elem: new div("container p-0", new div("d-flex justify-content-center row g-3", list)),
+							elem: new div({
+								class: "container",
+								padding: 0,
+								elem: new div({
+									display: "flex",
+									justifycontent: "center",
+									row: true,
+									gap: 3,
+									elem: list,
+								}),
+							}),
 						}).show();
 					}
 				}
@@ -274,11 +293,10 @@ const fn = {
 		//append file uploader into document
 		core.appendChild(
 			document.body,
-			new tag({
-				tag: "input",
+			new input({
+				type: "file",
 				id: fu,
 				attr: {
-					type: "file",
 					multiple: opt.multiple,
 					accept: opt.accept ? opt.accept : null,
 				},
@@ -308,7 +326,7 @@ const fn = {
 	},
 };
 
-export default class file extends tag {
+export default class file extends div {
 	constructor(opt) {
 		super(opt);
 	}
