@@ -2,7 +2,7 @@
 import $ from "./component.js";
 import * as db from "../js/base/api.js";
 
-let q = {
+let query_setting = {
 	field: [
 		{ value: "name", label: "Name", type: "text" },
 		{ value: "dob", label: "Date Of Birth", type: "date" },
@@ -30,9 +30,9 @@ let q = {
 	useopricon: false,
 };
 
-let qr = {
+let query_data = {
 	filter: null,
-	sort: { state: -1, name: 1 },
+	sort: { name: 1 },
 	field: { __v: 0 },
 	limit: 10,
 	skip: 0,
@@ -135,7 +135,7 @@ $.core.documentReady(() => {
 						db.api.list(
 							{
 								name: "customer",
-								data: qr,
+								data: query_data,
 							},
 							function (result) {
 								$.core.setValue(document.getElementById("output"), JSON.stringify(result));
@@ -150,7 +150,7 @@ $.core.documentReady(() => {
 						db.api.option(
 							{
 								name: "customer",
-								data: qr,
+								data: query_data,
 							},
 							function (result) {
 								$.core.setValue(document.getElementById("output"), JSON.stringify(result));
@@ -164,7 +164,7 @@ $.core.documentReady(() => {
 					onclick: function () {
 						db.api.excel({
 							name: "customer",
-							data: qr,
+							data: query_data,
 						});
 					},
 				}),
@@ -175,15 +175,15 @@ $.core.documentReady(() => {
 					onclick: function () {
 						new $.query.dialog(
 							{
-								field: q.field,
-								limit: q.limit,
-								skip: q.skip,
-								useopricon: q.useopricon,
-								data: qr,
+								field: query_setting.field,
+								limit: query_setting.limit,
+								skip: query_setting.skip,
+								useopricon: query_setting.useopricon,
+								data: query_data,
 							},
 							[
 								function (event, data) {
-									qr = data;
+									query_data = data;
 									$.core.setValue(document.getElementById("output"), JSON.stringify(data));
 								},
 							]
@@ -197,13 +197,13 @@ $.core.documentReady(() => {
 					onclick: function () {
 						new $.query.filter(
 							{
-								field: q.field,
-								useopricon: q.useopricon,
-								data: qr.filter,
+								field: query_setting.field,
+								useopricon: query_setting.useopricon,
+								data: query_data.filter,
 							},
 							[
 								function (event, data) {
-									qr.filter = data;
+									query_data.filter = data;
 									$.core.setValue(document.getElementById("output"), JSON.stringify(data));
 								},
 							]
@@ -217,13 +217,13 @@ $.core.documentReady(() => {
 					onclick: function () {
 						new $.query.sort(
 							{
-								field: q.field,
-								useopricon: q.useopricon,
-								data: qr.sort,
+								field: query_setting.field,
+								useopricon: query_setting.useopricon,
+								data: query_data.sort,
 							},
 							[
 								function (event, data) {
-									qr.sort = data;
+									query_data.sort = data;
 									$.core.setValue(document.getElementById("output"), JSON.stringify(data));
 								},
 							]
@@ -237,12 +237,12 @@ $.core.documentReady(() => {
 					onclick: function () {
 						new $.query.field(
 							{
-								field: q.field,
-								data: qr.field,
+								field: query_setting.field,
+								data: query_data.field,
 							},
 							[
 								function (event, data) {
-									qr.field = data;
+									query_data.field = data;
 									$.core.setValue(document.getElementById("output"), JSON.stringify(data));
 								},
 							]
@@ -256,16 +256,16 @@ $.core.documentReady(() => {
 					onclick: function () {
 						new $.query.limit(
 							{
-								min: q.limit.min,
-								max: q.limit.max,
-								step: q.limit.step,
-								data: qr.limit,
+								min: query_setting.limit.min,
+								max: query_setting.limit.max,
+								step: query_setting.limit.step,
+								data: query_data.limit,
 							},
 							[
 								function (event, data) {
-									let skip = qr.skip / qr.limit;
-									qr.limit = data;
-									qr.skip = skip * qr.limit;
+									let skip = query_data.skip / query_data.limit;
+									query_data.limit = data;
+									query_data.skip = skip * query_data.limit;
 									$.core.setValue(document.getElementById("output"), JSON.stringify(data));
 								},
 							]
@@ -279,15 +279,15 @@ $.core.documentReady(() => {
 					onclick: function () {
 						new $.query.page(
 							{
-								min: q.skip.min,
-								max: q.skip.max,
-								step: q.skip.step,
-								limit: qr.limit,
-								data: qr.skip,
+								min: query_setting.skip.min,
+								max: query_setting.skip.max,
+								step: query_setting.skip.step,
+								limit: query_data.limit,
+								data: query_data.skip,
 							},
 							[
 								function (event, data) {
-									qr.skip = data;
+									query_data.skip = data;
 									$.core.setValue(document.getElementById("output"), JSON.stringify(data));
 								},
 							]
@@ -296,6 +296,13 @@ $.core.documentReady(() => {
 				}),
 			]),
 			new $.input({ type: "textarea", id: "output", rows: 10 }),
+			new $.list({
+				id: "main_list",
+				query: query_data,
+				name: "customer",
+			}),
 		])
 	);
+
+	$.list.load();
 });

@@ -32,6 +32,7 @@ import label from "./base/label.js";
 import * as layout from "./base/layout.js";
 import li from "./base/li.js";
 import listgroup from "./base/listgroup.js";
+import list from "./base/list.js";
 import menu from "./base/menu.js";
 import modal from "./base/modal.js";
 import msg from "./base/msg.js";
@@ -90,6 +91,7 @@ export default {
 	layout,
 	li,
 	listgroup,
+	list,
 	menu,
 	modal,
 	msg,

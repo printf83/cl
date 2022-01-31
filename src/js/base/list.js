@@ -1,19 +1,18 @@
 "use strict";
 import * as core from "./core.js";
-import h from "./h.js";
+import * as db from "./api.js";
 import div from "./div.js";
-import button from "./button.js";
 
-const fn = {};
-
-const defaultOption = {
-	id: null,
-	flush: false,
-	autoclose: true,
-	item: null,
+const fn = {
+	load: function () {
+		console.log("load");
+	},
 };
 
-const defaultItemOption = { label: null, icon: null, showlabel: null, iconafter: false, active: false, item: null };
+const defaultOption = {
+	query: null,
+	name: null,
+};
 
 export class container extends div {
 	constructor(...opt) {
@@ -27,9 +26,13 @@ export class container extends div {
 		if (opt) {
 			opt = core.extend({}, defaultOption, opt);
 
+			opt.id = opt.id || core.UUID();
+
 			super.data = opt;
 		}
 	}
+
+	static load = fn.load;
 }
 
 // (function (ns) {
