@@ -104,6 +104,6 @@ dist
 .tern-port
 
 #cl
-./tmp/*
-./file/*
-./docs/dist/*
+.tmp/*
+.file/*
+.docs/dist/*

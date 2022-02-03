@@ -32,6 +32,8 @@ export default class list extends div {
 
 			opt.id = opt.id || core.UUID();
 
+			opt.class = core.merge.class(opt.class, "cl-list");
+
 			db_opt[opt.id] = core.extend({}, opt);
 
 			delete opt.query;
