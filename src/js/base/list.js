@@ -18,7 +18,7 @@ const defaultOption = {
 	name: null,
 };
 
-export default class list extends div {
+export class container extends div {
 	constructor(...opt) {
 		super(...opt);
 	}

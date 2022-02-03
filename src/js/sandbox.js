@@ -296,7 +296,7 @@ $.core.documentReady(() => {
 				}),
 			]),
 			new $.input({ type: "textarea", id: "output", rows: 10 }),
-			new $.list({
+			new $.list.container({
 				id: "main_list",
 				query: query_data,
 				name: "customer",
@@ -304,5 +304,5 @@ $.core.documentReady(() => {
 		])
 	);
 
-	$.list.load("main_list");
+	$.list.container.load("main_list");
 });
