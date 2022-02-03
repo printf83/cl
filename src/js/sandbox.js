@@ -304,5 +304,5 @@ $.core.documentReady(() => {
 		])
 	);
 
-	$.list.load();
+	$.list.load("main_list");
 });

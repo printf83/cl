@@ -4,17 +4,21 @@ import * as db from "./api.js";
 import div from "./div.js";
 
 const fn = {
-	load: function () {
-		console.log("load");
+	load: function (id) {
+		if (db_opt[id]) {
+			console.log(db_opt[id]);
+		}
 	},
 };
+
+const db_opt = {};
 
 const defaultOption = {
 	query: null,
 	name: null,
 };
 
-export class container extends div {
+export default class list extends div {
 	constructor(...opt) {
 		super(...opt);
 	}
@@ -27,6 +31,11 @@ export class container extends div {
 			opt = core.extend({}, defaultOption, opt);
 
 			opt.id = opt.id || core.UUID();
+
+			db_opt[opt.id] = core.extend({}, opt);
+
+			delete opt.query;
+			delete opt.name;
 
 			super.data = opt;
 		}
