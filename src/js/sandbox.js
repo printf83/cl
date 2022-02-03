@@ -304,5 +304,5 @@ $.core.documentReady(() => {
 		])
 	);
 
-	$.list.container.load("main_list");
+	$.list.container.load("main_list", { name: "state", query: query_data });
 });

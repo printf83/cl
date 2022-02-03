@@ -4,10 +4,22 @@ import * as db from "./api.js";
 import div from "./div.js";
 
 const fn = {
-	load: function (id) {
+	set: function (id, opt) {
+		db_opt[id] = core.extend({}, defaultOption, opt);
+	},
+	get: function (id) {
 		if (db_opt[id]) {
-			console.log(db_opt[id]);
+			return db_opt[id];
+		} else {
+			return null;
 		}
+	},
+	load: function (id, opt) {
+		this.set(id, opt);
+		console.log(this.get(id));
+	},
+	reload: function (id) {
+		console.log(this.get(id));
 	},
 };
 
@@ -44,6 +56,7 @@ export class container extends div {
 	}
 
 	static load = fn.load;
+	static reload = fn.reload;
 }
 
 // (function (ns) {
