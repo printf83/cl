@@ -1,6 +1,7 @@
 "use strict";
 import * as core from "./core.js";
 import * as db from "./api.js";
+import * as query from "./query.js";
 import div from "./div.js";
 import paging from "./paging.js";
 
@@ -30,17 +31,162 @@ const fn = {
 				function (result) {
 					let cont = document.getElementById(id);
 					core.removeChildElement(cont);
-					core.appendChild(cont, opt.items(result.data));
+					core.appendChild(cont, new div("list-group", opt.items(result.data)));
 					core.appendChild(
 						cont,
 						new paging({
 							total: result.total,
 							skip: opt.query.skip,
 							limit: opt.query.limit,
+							onchange: fn.pagechange,
+							attr: { "data-cl-container": id },
 						})
 					);
 				}
 			);
+		}
+	},
+	pagechange: function (event) {
+		let sender = event.currentTarget;
+		let container = sender.closest(".pagination");
+		let id = container.getAttribute("data-cl-container");
+
+		let opt = fn.get(id);
+		if (opt) {
+			opt.query.skip = event.detail.skip;
+			fn.set(id, opt);
+			fn.reload(id);
+		}
+	},
+	query: {
+		all: function (id) {
+			let opt = fn.get(id);
+			if (opt) {
+				new query.dialog(
+					{
+						field: opt.setting.field,
+						limit: opt.setting.limit,
+						skip: opt.setting.skip,
+						useopricon: opt.setting.useopricon,
+						data: opt.query,
+					},
+					[
+						function (_event, data) {
+							opt.query = data;
+							fn.set(id, opt);
+							fn.reload(id);
+						},
+					]
+				).show();
+			}
+		},
+		filter: function (id) {
+			let opt = fn.get(id);
+			if (opt) {
+				new query.filter(
+					{
+						field: opt.setting.field,
+						useopricon: opt.setting.useopricon,
+						data: opt.query.filter,
+					},
+					[
+						function (_event, data) {
+							opt.query.filter = data;
+							fn.set(id, opt);
+							fn.reload(id);
+						},
+					]
+				).show();
+			}
+		},
+		sort: function (id) {
+			let opt = fn.get(id);
+			if (opt) {
+				new query.sort(
+					{
+						field: opt.setting.field,
+						useopricon: opt.setting.useopricon,
+						data: opt.query.sort,
+					},
+					[
+						function (_event, data) {
+							opt.query.sort = data;
+							fn.set(id, opt);
+							fn.reload(id);
+						},
+					]
+				).show();
+			}
+		},
+		field: function (id) {
+			let opt = fn.get(id);
+			if (opt) {
+				new query.field(
+					{
+						field: opt.setting.field,
+						data: opt.query.field,
+					},
+					[
+						function (_event, data) {
+							opt.query.field = data;
+							fn.set(id, opt);
+							fn.reload(id);
+						},
+					]
+				).show();
+			}
+		},
+		limit: function (id) {
+			let opt = fn.get(id);
+			if (opt) {
+				new query.limit(
+					{
+						min: opt.setting.limit.min,
+						max: opt.setting.limit.max,
+						step: opt.setting.limit.step,
+						data: opt.query.limit,
+					},
+					[
+						function (_event, data) {
+							let skip = opt.query.skip / opt.query.limit;
+							opt.query.limit = data;
+							opt.query.skip = skip * opt.query.limit;
+							fn.set(id, opt);
+							fn.reload(id);
+						},
+					]
+				).show();
+			}
+		},
+		page: function (id) {
+			let opt = fn.get(id);
+			if (opt) {
+				new query.page(
+					{
+						min: opt.setting.skip.min,
+						max: opt.setting.skip.max,
+						step: opt.setting.skip.step,
+						limit: opt.query.limit,
+						data: opt.query.skip,
+					},
+					[
+						function (_event, data) {
+							opt.query.skip = data;
+							fn.set(id, opt);
+							fn.reload(id);
+						},
+					]
+				).show();
+			}
+		},
+	},
+	excel: function (id) {
+		let opt = fn.get(id);
+		if (opt) {
+			db.api.excel({
+				name: opt.name,
+				data: opt.query,
+			});
 		}
 	},
 };
@@ -48,6 +194,7 @@ const fn = {
 const db_opt = {};
 
 const defaultOption = {
+	setting: null,
 	query: null,
 	name: null,
 	items: function (data) {
@@ -71,12 +218,14 @@ export class container extends div {
 
 			opt.id = opt.id || core.UUID();
 
-			opt.class = core.merge.class(opt.class, ["cl-list", "list-group"]);
+			opt.class = core.merge.class(opt.class, ["cl-list"]);
 
 			db_opt[opt.id] = core.extend({}, opt);
 
+			delete opt.setting;
 			delete opt.query;
 			delete opt.name;
+			delete opt.items;
 
 			super.data = opt;
 		}
@@ -84,6 +233,8 @@ export class container extends div {
 
 	static load = fn.load;
 	static reload = fn.reload;
+	static query = fn.query;
+	static excel = fn.excel;
 }
 
 // (function (ns) {

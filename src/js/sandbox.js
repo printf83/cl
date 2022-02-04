@@ -162,10 +162,11 @@ $.core.documentReady(() => {
 					label: "api.excel",
 					color: "primary",
 					onclick: function () {
-						db.api.excel({
-							name: "customer",
-							data: query_data,
-						});
+						$.list.container.excel("main_list");
+						// db.api.excel({
+						// 	name: "customer",
+						// 	data: query_data,
+						// });
 					},
 				}),
 				new $.button({
@@ -173,21 +174,22 @@ $.core.documentReady(() => {
 					color: "primary",
 					icon: "fire",
 					onclick: function () {
-						new $.query.dialog(
-							{
-								field: query_setting.field,
-								limit: query_setting.limit,
-								skip: query_setting.skip,
-								useopricon: query_setting.useopricon,
-								data: query_data,
-							},
-							[
-								function (event, data) {
-									query_data = data;
-									$.core.setValue(document.getElementById("output"), JSON.stringify(data));
-								},
-							]
-						).show();
+						$.list.container.query.all("main_list");
+						// new $.query.dialog(
+						// 	{
+						// 		field: query_setting.field,
+						// 		limit: query_setting.limit,
+						// 		skip: query_setting.skip,
+						// 		useopricon: query_setting.useopricon,
+						// 		data: query_data,
+						// 	},
+						// 	[
+						// 		function (event, data) {
+						// 			query_data = data;
+						// 			$.core.setValue(document.getElementById("output"), JSON.stringify(data));
+						// 		},
+						// 	]
+						// ).show();
 					},
 				}),
 				new $.button({
@@ -195,19 +197,20 @@ $.core.documentReady(() => {
 					color: "primary",
 					icon: "fire",
 					onclick: function () {
-						new $.query.filter(
-							{
-								field: query_setting.field,
-								useopricon: query_setting.useopricon,
-								data: query_data.filter,
-							},
-							[
-								function (event, data) {
-									query_data.filter = data;
-									$.core.setValue(document.getElementById("output"), JSON.stringify(data));
-								},
-							]
-						).show();
+						$.list.container.query.filter("main_list");
+						// new $.query.filter(
+						// 	{
+						// 		field: query_setting.field,
+						// 		useopricon: query_setting.useopricon,
+						// 		data: query_data.filter,
+						// 	},
+						// 	[
+						// 		function (event, data) {
+						// 			query_data.filter = data;
+						// 			$.core.setValue(document.getElementById("output"), JSON.stringify(data));
+						// 		},
+						// 	]
+						// ).show();
 					},
 				}),
 				new $.button({
@@ -215,19 +218,20 @@ $.core.documentReady(() => {
 					color: "primary",
 					icon: "fire",
 					onclick: function () {
-						new $.query.sort(
-							{
-								field: query_setting.field,
-								useopricon: query_setting.useopricon,
-								data: query_data.sort,
-							},
-							[
-								function (event, data) {
-									query_data.sort = data;
-									$.core.setValue(document.getElementById("output"), JSON.stringify(data));
-								},
-							]
-						).show();
+						$.list.container.query.sort("main_list");
+						// new $.query.sort(
+						// 	{
+						// 		field: query_setting.field,
+						// 		useopricon: query_setting.useopricon,
+						// 		data: query_data.sort,
+						// 	},
+						// 	[
+						// 		function (event, data) {
+						// 			query_data.sort = data;
+						// 			$.core.setValue(document.getElementById("output"), JSON.stringify(data));
+						// 		},
+						// 	]
+						// ).show();
 					},
 				}),
 				new $.button({
@@ -235,18 +239,19 @@ $.core.documentReady(() => {
 					color: "primary",
 					icon: "fire",
 					onclick: function () {
-						new $.query.field(
-							{
-								field: query_setting.field,
-								data: query_data.field,
-							},
-							[
-								function (event, data) {
-									query_data.field = data;
-									$.core.setValue(document.getElementById("output"), JSON.stringify(data));
-								},
-							]
-						).show();
+						$.list.container.query.field("main_list");
+						// new $.query.field(
+						// 	{
+						// 		field: query_setting.field,
+						// 		data: query_data.field,
+						// 	},
+						// 	[
+						// 		function (event, data) {
+						// 			query_data.field = data;
+						// 			$.core.setValue(document.getElementById("output"), JSON.stringify(data));
+						// 		},
+						// 	]
+						// ).show();
 					},
 				}),
 				new $.button({
@@ -254,22 +259,23 @@ $.core.documentReady(() => {
 					color: "primary",
 					icon: "fire",
 					onclick: function () {
-						new $.query.limit(
-							{
-								min: query_setting.limit.min,
-								max: query_setting.limit.max,
-								step: query_setting.limit.step,
-								data: query_data.limit,
-							},
-							[
-								function (event, data) {
-									let skip = query_data.skip / query_data.limit;
-									query_data.limit = data;
-									query_data.skip = skip * query_data.limit;
-									$.core.setValue(document.getElementById("output"), JSON.stringify(data));
-								},
-							]
-						).show();
+						$.list.container.query.limit("main_list");
+						// new $.query.limit(
+						// 	{
+						// 		min: query_setting.limit.min,
+						// 		max: query_setting.limit.max,
+						// 		step: query_setting.limit.step,
+						// 		data: query_data.limit,
+						// 	},
+						// 	[
+						// 		function (event, data) {
+						// 			let skip = query_data.skip / query_data.limit;
+						// 			query_data.limit = data;
+						// 			query_data.skip = skip * query_data.limit;
+						// 			$.core.setValue(document.getElementById("output"), JSON.stringify(data));
+						// 		},
+						// 	]
+						// ).show();
 					},
 				}),
 				new $.button({
@@ -277,27 +283,29 @@ $.core.documentReady(() => {
 					color: "primary",
 					icon: "fire",
 					onclick: function () {
-						new $.query.page(
-							{
-								min: query_setting.skip.min,
-								max: query_setting.skip.max,
-								step: query_setting.skip.step,
-								limit: query_data.limit,
-								data: query_data.skip,
-							},
-							[
-								function (event, data) {
-									query_data.skip = data;
-									$.core.setValue(document.getElementById("output"), JSON.stringify(data));
-								},
-							]
-						).show();
+						$.list.container.query.page("main_list");
+						// new $.query.page(
+						// 	{
+						// 		min: query_setting.skip.min,
+						// 		max: query_setting.skip.max,
+						// 		step: query_setting.skip.step,
+						// 		limit: query_data.limit,
+						// 		data: query_data.skip,
+						// 	},
+						// 	[
+						// 		function (event, data) {
+						// 			query_data.skip = data;
+						// 			$.core.setValue(document.getElementById("output"), JSON.stringify(data));
+						// 		},
+						// 	]
+						// ).show();
 					},
 				}),
 			]),
 			new $.input({ type: "textarea", id: "output", rows: 10 }),
 			new $.list.container({
 				id: "main_list",
+				setting: query_setting,
 				query: query_data,
 				name: "customer",
 			}),
