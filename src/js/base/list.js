@@ -29,19 +29,22 @@ const fn = {
 					data: opt.query,
 				},
 				function (result) {
-					let cont = document.getElementById(id);
-					core.removeChildElement(cont);
-					core.appendChild(cont, new div("list-group", opt.items(result.data)));
-					core.appendChild(
-						cont,
-						new paging({
-							total: result.total,
-							skip: opt.query.skip,
-							limit: opt.query.limit,
-							onchange: fn.pagechange,
-							attr: { "data-cl-container": id },
-						})
-					);
+					let container = document.getElementById(id);
+					core.removeChildElement(container);
+					core.appendChild(container, new div("list-group", opt.items(result.data)));
+
+					if (result.total > opt.query.limit) {
+						core.appendChild(
+							container,
+							new paging({
+								total: result.total,
+								skip: opt.query.skip,
+								limit: opt.query.limit,
+								onchange: fn.pagechange,
+								attr: { "data-cl-container": id },
+							})
+						);
+					}
 				}
 			);
 		}
@@ -220,7 +223,7 @@ export class container extends div {
 
 			opt.class = core.merge.class(opt.class, ["cl-list"]);
 
-			db_opt[opt.id] = core.extend({}, opt);
+			fn.set(opt.id, opt);
 
 			delete opt.setting;
 			delete opt.query;

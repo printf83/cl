@@ -97,13 +97,13 @@ let fn = {
 					case "tel":
 					case "email":
 						rtn = [
+							{ value: "$eqlike", label: useopricon ? "&#xf52c; &#xf069;" : "Like" },
+							{ value: "$nelike", label: useopricon ? "&#xf53e; &#xf069;" : "Not Like" },
 							{ value: "$eq", label: useopricon ? "&#xf52c;" : "Equal" },
 							{
 								value: "$ne",
 								label: useopricon ? "&#xf53e;" : "Not Equal",
 							},
-							{ value: "$eqlike", label: useopricon ? "&#xf52c; &#xf069;" : "Like" },
-							{ value: "$nelike", label: useopricon ? "&#xf53e; &#xf069;" : "Not Like" },
 						];
 
 						break;
