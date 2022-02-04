@@ -2,6 +2,7 @@
 import * as core from "./core.js";
 import * as db from "./api.js";
 import div from "./div.js";
+import paging from "./paging.js";
 
 const fn = {
 	set: function (id, opt) {
@@ -15,11 +16,32 @@ const fn = {
 		}
 	},
 	load: function (id, opt) {
-		this.set(id, opt);
-		console.log(this.get(id));
+		fn.set(id, opt);
+		fn.reload(id);
 	},
 	reload: function (id) {
-		console.log(this.get(id));
+		let opt = fn.get(id);
+		if (opt) {
+			db.api.list(
+				{
+					name: opt.name,
+					data: opt.query,
+				},
+				function (result) {
+					let cont = document.getElementById(id);
+					core.removeChildElement(cont);
+					core.appendChild(cont, opt.items(result.data));
+					core.appendChild(
+						cont,
+						new paging({
+							total: result.total,
+							skip: opt.query.skip,
+							limit: opt.query.limit,
+						})
+					);
+				}
+			);
+		}
 	},
 };
 
@@ -28,6 +50,11 @@ const db_opt = {};
 const defaultOption = {
 	query: null,
 	name: null,
+	items: function (data) {
+		return data.map(function (i) {
+			return new div("list-group-item", JSON.stringify(i));
+		});
+	},
 };
 
 export class container extends div {
@@ -44,7 +71,7 @@ export class container extends div {
 
 			opt.id = opt.id || core.UUID();
 
-			opt.class = core.merge.class(opt.class, "cl-list");
+			opt.class = core.merge.class(opt.class, ["cl-list", "list-group"]);
 
 			db_opt[opt.id] = core.extend({}, opt);
 
