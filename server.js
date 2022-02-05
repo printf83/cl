@@ -1,9 +1,4 @@
 "use strict";
-// create .env file with this value
-// PORT=value
-// SESSIONSECRET=value
-// DBURL=value
-
 require("dotenv").config();
 
 if (process.env.DBURL) {
