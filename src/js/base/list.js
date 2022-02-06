@@ -4,6 +4,7 @@ import * as db from "./api.js";
 import * as query from "./query.js";
 import div from "./div.js";
 import paging from "./paging.js";
+import listgroup from "./listgroup.js";
 
 const fn = {
 	set: function (id, opt) {
@@ -31,20 +32,24 @@ const fn = {
 				function (result) {
 					let container = document.getElementById(id);
 					core.removeChildElement(container);
-					core.appendChild(container, new div("list-group", opt.items(result.data)));
+					core.appendChild(container, new listgroup({ item: opt.items(result.data, opt.item) }));
 
-					if (result.total > opt.query.limit) {
-						core.appendChild(
-							container,
-							new paging({
-								total: result.total,
-								skip: opt.query.skip,
-								limit: opt.query.limit,
-								onchange: fn.pagechange,
-								attr: { "data-cl-container": id },
-							})
-						);
+					if (opt.paging) {
+						if (result.total > opt.query.limit) {
+							core.appendChild(
+								container,
+								new paging({
+									total: result.total,
+									skip: opt.query.skip,
+									limit: opt.query.limit,
+									onchange: fn.pagechange,
+									attr: { "data-cl-container": id },
+								})
+							);
+						}
 					}
+
+					core.init(container);
 				}
 			);
 		}
@@ -200,11 +205,24 @@ const defaultOption = {
 	setting: null,
 	query: null,
 	name: null,
-	items: function (data) {
+	paging: true,
+	items: function (data, item) {
 		return data.map(function (i) {
-			return new div("list-group-item", JSON.stringify(i));
+			return { elem: item(i) };
 		});
 	},
+	item: function (data) {
+		return new item({
+			name: JSON.stringify(data),
+		});
+	},
+};
+
+const defaultItemOption = {
+	key: null,
+	picture: null,
+	name: null,
+	detail: null,
 };
 
 export class container extends div {
@@ -228,6 +246,7 @@ export class container extends div {
 			delete opt.setting;
 			delete opt.query;
 			delete opt.name;
+			delete opt.paging;
 			delete opt.items;
 
 			super.data = opt;
@@ -238,6 +257,24 @@ export class container extends div {
 	static reload = fn.reload;
 	static query = fn.query;
 	static excel = fn.excel;
+}
+
+export class item extends div {
+	constructor(...opt) {
+		super(...opt);
+	}
+
+	get data() {
+		return super.data;
+	}
+	set data(opt) {
+		opt = core.extend({}, defaultItemOption, opt);
+
+		super.data = {
+			attr: { "data-key": opt.key },
+			elem: [new div(opt.name), opt.detail ? new div(opt.detail) : null],
+		};
+	}
 }
 
 // (function (ns) {

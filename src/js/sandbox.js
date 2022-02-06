@@ -1,6 +1,9 @@
 "use strict";
 import $ from "./component.js";
 import * as db from "../js/base/api.js";
+import { item } from "./base/list.js";
+import span from "./base/span.js";
+import div from "./base/div.js";
 
 let query_setting = {
 	field: [
@@ -308,6 +311,39 @@ $.core.documentReady(() => {
 				setting: query_setting,
 				query: query_data,
 				name: "customer",
+				paging: true,
+				item: function (i) {
+					return new $.list.item({
+						key: i._id,
+						name: i.name,
+						detail: new $.div(
+							"container p-0",
+							new $.div("g-2 row row-cols-auto", [
+								i.phone
+									? new $.pill({
+											title: "Phone",
+											icon: "phone",
+											label: i.phone,
+									  })
+									: null,
+								i.dob
+									? new $.pill({
+											title: "Date of birth",
+											icon: "calendar",
+											label: i.dob,
+									  })
+									: null,
+								i.email
+									? new $.pill({
+											title: "Email",
+											icon: "at",
+											label: i.email,
+									  })
+									: null,
+							])
+						),
+					});
+				},
 			}),
 		])
 	);
