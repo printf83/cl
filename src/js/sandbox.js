@@ -312,32 +312,47 @@ $.core.documentReady(() => {
 				query: query_data,
 				name: "customer",
 				paging: true,
-				item: function (i) {
+				editor: function (data, readonly) {
+					return [
+						new $.input({ type: "text", label: "Name", name: "name", value: data ? data.name : null }),
+						new $.input({
+							type: "date",
+							label: "Date of birth",
+							name: "dob",
+							value: data ? data.dob : null,
+						}),
+						new $.input({ type: "text", label: "Phone", name: "phone", value: data ? data.phone : null }),
+						new $.file({ label: "Picture", name: "picture", value: data ? data.picture : null }),
+						new $.input({ type: "email", label: "Email", name: "email", value: data ? data.email : null }),
+						new $.input({ type: "select", label: "State", name: "state", value: data ? data.state : null }),
+					];
+				},
+				item: function (data) {
 					return new $.list.item({
-						key: i._id,
-						name: i.name,
+						key: data._id,
+						name: data.name,
 						detail: new $.div(
 							"container p-0",
 							new $.div("g-2 row row-cols-auto", [
-								i.phone
+								data.phone
 									? new $.pill({
 											title: "Phone",
 											icon: "phone",
-											label: i.phone,
+											label: data.phone,
 									  })
 									: null,
-								i.dob
+								data.dob
 									? new $.pill({
 											title: "Date of birth",
 											icon: "calendar",
-											label: i.dob,
+											label: data.dob,
 									  })
 									: null,
-								i.email
+								data.email
 									? new $.pill({
 											title: "Email",
 											icon: "at",
-											label: i.email,
+											label: data.email,
 									  })
 									: null,
 							])
