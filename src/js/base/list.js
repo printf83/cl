@@ -5,6 +5,10 @@ import * as query from "./query.js";
 import div from "./div.js";
 import paging from "./paging.js";
 import listgroup from "./listgroup.js";
+import btngroup from "./btngroup.js";
+import img from "./img.js";
+import button from "./button.js";
+import * as dlg from "./dlg.js";
 
 const fn = {
 	set: function (id, opt) {
@@ -197,6 +201,110 @@ const fn = {
 			});
 		}
 	},
+	edititem: function (event) {
+		let sender = event.currentTarget.closest("div[data-key]");
+		let key = sender.getAttribute("data-key");
+		let container = sender.closest(".cl-list");
+		let id = container.getAttribute("id");
+		let opt = fn.get(id);
+		if (opt) {
+			db.api.load(
+				{
+					name: opt.name,
+					id: key,
+				},
+				function (data) {
+					new dlg.confirmbox({
+						elem: opt.editor(data),
+						button: [
+							{
+								label: "Save",
+								onclick: function (data) {
+									data._id = key;
+									db.api.update(
+										{
+											name: opt.name,
+											id: key,
+											data: data,
+										},
+										function (data) {}
+									);
+								},
+							},
+							{
+								label: "Cancel",
+							},
+						],
+					}).show();
+				}
+			);
+		}
+	},
+	copyitem: function (event) {
+		let sender = event.currentTarget.closest("div[data-key]");
+		let key = sender.getAttribute("data-key");
+		let container = sender.closest(".cl-list");
+		let id = container.getAttribute("id");
+		let opt = fn.get(id);
+		if (opt) {
+			db.api.load(
+				{
+					name: opt.name,
+					id: key,
+				},
+				function (data) {
+					delete data._id;
+					new dlg.confirmbox({
+						elem: opt.editor(data),
+						button: [
+							{
+								label: "Save",
+								onclick: function (data) {
+									db.api.create(
+										{
+											name: opt.name,
+											data: data,
+										},
+										function (data) {}
+									);
+								},
+							},
+							{
+								label: "Cancel",
+							},
+						],
+					}).show();
+				}
+			);
+		}
+	},
+	deleteitem: function (event) {
+		let sender = event.currentTarget.closest("div[data-key]");
+		let key = sender.getAttribute("data-key");
+		let container = sender.closest(".cl-list");
+		let id = container.getAttribute("id");
+		let opt = fn.get(id);
+		if (opt) {
+			new dlg.confirmbox("!!", "Are you sure", [
+				{
+					label: "Yes, delete",
+					color: "danger",
+					onclick: function () {
+						db.api.delete(
+							{
+								name: opt.name,
+								id: key,
+							},
+							function (data) {}
+						);
+					},
+				},
+				{
+					label: "Cancel",
+				},
+			]).show();
+		}
+	},
 };
 
 const db_opt = {};
@@ -272,7 +380,21 @@ export class item extends div {
 
 		super.data = {
 			attr: { "data-key": opt.key },
-			elem: [new div(opt.name), opt.detail ? new div(opt.detail) : null],
+			elem: [
+				opt.picture
+					? new div({
+							elem: new img({ src: db.file.url(opt.picture) }),
+					  })
+					: null,
+				new div({ elem: [new div(opt.name), opt.detail ? new div(opt.detail) : null] }),
+				new btngroup({
+					elem: [
+						new button({ icon: "edit", color: "primary", onclick: fn.edititem }),
+						new button({ icon: "copy", color: "success", onclick: fn.copyitem }),
+						new button({ icon: "trash", color: "danger", onclick: fn.deleteitem }),
+					],
+				}),
+			],
 		};
 	}
 }

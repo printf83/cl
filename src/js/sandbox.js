@@ -331,6 +331,7 @@ $.core.documentReady(() => {
 					return new $.list.item({
 						key: data._id,
 						name: data.name,
+						picture: data.picture,
 						detail: new $.div(
 							"container p-0",
 							new $.div("g-2 row row-cols-auto", [
