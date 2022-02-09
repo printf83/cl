@@ -196,10 +196,23 @@ export default class input extends tag {
 			//create mainctl base on opt
 			let m = core.extend({}, opt);
 
-			m.value =
-				["date", "datetime", "month", "datetime-local", "time", "week"].indexOf(m.type) > -1
-					? moment(m.value)
-					: m.value;
+			if (["date", "datetime", "month", "datetime-local", "time", "week"].indexOf(m.type) > -1) {
+				switch (m.type) {
+					case "date":
+						m.value = moment(m.value).format("YYYY-MM-DD");
+						break;
+					case "month":
+						m.value = moment(m.value).format("YYYY-MM");
+						break;
+					default:
+						m.value = moment(m.value).format();
+				}
+			}
+
+			// m.value =
+			// 	["date", "datetime", "month", "datetime-local", "time", "week"].indexOf(m.type) > -1
+			// 		? moment(m.value).format()
+			// 		: m.value;
 
 			m.attr = core.merge.attr(m.attr, {
 				min: m.min,

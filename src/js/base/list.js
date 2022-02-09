@@ -1,4 +1,6 @@
 "use strict";
+import "../../css/list.css";
+
 import * as core from "./core.js";
 import * as db from "./api.js";
 import * as query from "./query.js";
@@ -9,6 +11,8 @@ import btngroup from "./btngroup.js";
 import img from "./img.js";
 import button from "./button.js";
 import * as dlg from "./dlg.js";
+import icon from "./icon.js";
+import h from "./h.js";
 
 const fn = {
 	set: function (id, opt) {
@@ -201,6 +205,33 @@ const fn = {
 			});
 		}
 	},
+	checkmode(id, check) {
+		if (check === null) {
+			if (document.getElementById(id).classList.contains("check")) {
+				check = false;
+			} else {
+				check = true;
+			}
+		}
+
+		if (check) {
+			document.getElementById(id).classList.add("check");
+		} else {
+			document.getElementById(id).classList.remove("check");
+		}
+	},
+	checkitem: function (event) {
+		let sender = event.currentTarget.closest("div[data-key]");
+		let container = sender.closest(".cl-list");
+
+		if (container.classList.contains("check")) {
+			if (sender.classList.contains("check")) {
+				sender.classList.remove("check");
+			} else {
+				sender.classList.add("check");
+			}
+		}
+	},
 	edititem: function (event) {
 		let sender = event.currentTarget.closest("div[data-key]");
 		let key = sender.getAttribute("data-key");
@@ -214,12 +245,11 @@ const fn = {
 					id: key,
 				},
 				function (data) {
-					new dlg.confirmbox({
-						elem: opt.editor(data),
-						button: [
+					if (data) {
+						new dlg.inputbox(opt.editor(data), null, [
 							{
 								label: "Save",
-								onclick: function (data) {
+								onclick: function (_event, data) {
 									data._id = key;
 									db.api.update(
 										{
@@ -227,15 +257,17 @@ const fn = {
 											id: key,
 											data: data,
 										},
-										function (data) {}
+										function (data) {
+											fn.reload(id);
+										}
 									);
 								},
 							},
 							{
 								label: "Cancel",
 							},
-						],
-					}).show();
+						]).show();
+					}
 				}
 			);
 		}
@@ -253,27 +285,28 @@ const fn = {
 					id: key,
 				},
 				function (data) {
-					delete data._id;
-					new dlg.confirmbox({
-						elem: opt.editor(data),
-						button: [
+					if (data) {
+						delete data._id;
+						new dlg.inputbox(opt.editor(data), null, [
 							{
 								label: "Save",
-								onclick: function (data) {
+								onclick: function (_event, data) {
 									db.api.create(
 										{
 											name: opt.name,
 											data: data,
 										},
-										function (data) {}
+										function (data) {
+											fn.reload(id);
+										}
 									);
 								},
 							},
 							{
 								label: "Cancel",
 							},
-						],
-					}).show();
+						]).show();
+					}
 				}
 			);
 		}
@@ -285,7 +318,7 @@ const fn = {
 		let id = container.getAttribute("id");
 		let opt = fn.get(id);
 		if (opt) {
-			new dlg.confirmbox("!!", "Are you sure", [
+			new dlg.confirmbox("!!", "Are you sure delete this record?", [
 				{
 					label: "Yes, delete",
 					color: "danger",
@@ -295,7 +328,9 @@ const fn = {
 								name: opt.name,
 								id: key,
 							},
-							function (data) {}
+							function (data) {
+								fn.reload(id);
+							}
 						);
 					},
 				},
@@ -365,6 +400,7 @@ export class container extends div {
 	static reload = fn.reload;
 	static query = fn.query;
 	static excel = fn.excel;
+	static checkmode = fn.checkmode;
 }
 
 export class item extends div {
@@ -380,19 +416,54 @@ export class item extends div {
 
 		super.data = {
 			attr: { "data-key": opt.key },
+			display: "flex",
+			justifycontent: "between",
+			onclick: fn.checkitem,
 			elem: [
-				opt.picture
-					? new div({
-							elem: new img({ src: db.file.url(opt.picture) }),
-					  })
-					: null,
-				new div({ elem: [new div(opt.name), opt.detail ? new div(opt.detail) : null] }),
-				new btngroup({
+				new div({
+					display: "flex",
+					justifycontent: "start",
+					alignself: "center",
 					elem: [
-						new button({ icon: "edit", color: "primary", onclick: fn.edititem }),
-						new button({ icon: "copy", color: "success", onclick: fn.copyitem }),
-						new button({ icon: "trash", color: "danger", onclick: fn.deleteitem }),
+						new div({
+							display: "flex",
+							alignself: "center",
+							justifycontent: "center",
+							elem: [
+								opt.picture
+									? new div({
+											class: "cl-list-img",
+											marginend: 3,
+											style: { width: "3rem" },
+											elem: new img({ class: "img-fluid", src: db.file.url(opt.picture) }),
+									  })
+									: null,
+								new icon({
+									class: "cl-list-check",
+									marginend: 3,
+									icon: "check-circle",
+									color: "secondary",
+									weight: "2x",
+								}),
+							],
+						}),
+						new div({
+							elem: [new h({ level: 6, elem: opt.name }), opt.detail ? new div(opt.detail) : null],
+						}),
 					],
+				}),
+
+				new div({
+					class: "cl-list-ctl",
+					display: "flex",
+					alignself: "center",
+					elem: new btngroup({
+						elem: [
+							new button({ icon: "edit", color: "primary", onclick: fn.edititem }),
+							new button({ icon: "copy", color: "success", onclick: fn.copyitem }),
+							new button({ icon: "trash", color: "danger", onclick: fn.deleteitem }),
+						],
+					}),
 				}),
 			],
 		};

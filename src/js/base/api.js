@@ -133,7 +133,9 @@ export const api = {
 		);
 
 		fn.get({
-			callback: callback,
+			callback: function (result) {
+				callback(JSON.parse(result));
+			},
 			url: `api/${opt.name}/${Array.isArray(opt.id) ? opt.id.join(",") : opt.id}`,
 		});
 	},

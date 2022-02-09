@@ -1,0 +1,25 @@
+.cl-list .cl-list-img,
+.cl-list .cl-list-ctl {
+	display: block !important;
+}
+
+.cl-list .cl-list-check {
+	display: none !important;
+}
+
+.cl-list.check .cl-list-img,
+.cl-list.check .cl-list-ctl {
+	display: none !important;
+}
+
+.cl-list.check .cl-list-check {
+	display: block !important;
+}
+
+.cl-list.check .check .cl-list-check {
+	color: var(--bs-primary) !important;
+}
+
+.cl-list.check .list-group-item div[data-key] {
+	cursor: pointer;
+}
