@@ -206,7 +206,7 @@ const fn = {
 		}
 	},
 	checkmode(id, check) {
-		if (check === null) {
+		if (typeof check === "undefined") {
 			if (document.getElementById(id).classList.contains("check")) {
 				check = false;
 			} else {
@@ -218,6 +218,22 @@ const fn = {
 			document.getElementById(id).classList.add("check");
 		} else {
 			document.getElementById(id).classList.remove("check");
+		}
+	},
+	checkall: function (id) {
+		let container = document.getElementById(id);
+		if (container.classList.contains("check")) {
+			let checked = container.querySelectorAll("div.check[data-key]");
+			let items = container.querySelectorAll("div[data-key]");
+			if (items.length === checked.length) {
+				items.forEach(function (item) {
+					item.classList.remove("check");
+				});
+			} else {
+				items.forEach(function (item) {
+					item.classList.add("check");
+				});
+			}
 		}
 	},
 	checkitem: function (event) {
@@ -401,6 +417,7 @@ export class container extends div {
 	static query = fn.query;
 	static excel = fn.excel;
 	static checkmode = fn.checkmode;
+	static checkall = fn.checkall;
 }
 
 export class item extends div {

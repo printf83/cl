@@ -314,7 +314,14 @@ $.core.documentReady(() => {
 							label: "Check Mode",
 							color: "warning",
 							onclick: function () {
-								$.list.container.checkmode("main_list", null);
+								$.list.container.checkmode("main_list");
+							},
+						}),
+						new $.button({
+							label: "Check All",
+							color: "warning",
+							onclick: function () {
+								$.list.container.checkall("main_list");
 							},
 						}),
 					]),
