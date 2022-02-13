@@ -35,7 +35,7 @@ function btnBuilder(btn, defButton, defColor, pushCancel) {
 export class msgbox extends modal {
 	constructor(...opt) {
 		if (opt && opt.length > 0) {
-			if (opt.length === 4) {
+			if (opt.length === 5) {
 				let bI = core.getBaseIcon(opt[0]);
 
 				super({
@@ -51,7 +51,26 @@ export class msgbox extends modal {
 					}),
 					defautlbtncolor: bI ? bI.color : null,
 					button: btnBuilder(opt[2], ["Okay"], bI?.color, false),
-					debug: opt[3]?.debug === true ? true : false,
+					title: opt[3],
+					debug: opt[4]?.debug === true ? true : false,
+				});
+			} else if (opt.length === 4) {
+				let bI = core.getBaseIcon(opt[0]);
+
+				super({
+					elem: new msg({
+						weight: "md",
+						icon: bI
+							? {
+									icon: bI.icon,
+									color: bI.color,
+							  }
+							: opt[0],
+						elem: opt[1],
+					}),
+					defautlbtncolor: bI ? bI.color : null,
+					button: btnBuilder(opt[2], ["Okay"], bI?.color, false),
+					title: opt[3],
 				});
 			} else if (opt.length === 3) {
 				let bI = core.getBaseIcon(opt[0]);
@@ -100,7 +119,7 @@ export class msgbox extends modal {
 export class confirmbox extends modal {
 	constructor(...opt) {
 		if (opt && opt.length > 0) {
-			if (opt.length === 4) {
+			if (opt.length === 5) {
 				let bI = core.getBaseIcon(opt[0]);
 
 				super({
@@ -116,7 +135,26 @@ export class confirmbox extends modal {
 					}),
 					defautlbtncolor: bI ? bI.color : null,
 					button: btnBuilder(opt[2], ["Okay", "Cancel", "Retry"], bI?.color, true),
-					debug: opt[3]?.debug === true ? true : false,
+					title: opt[3],
+					debug: opt[4]?.debug === true ? true : false,
+				});
+			} else if (opt.length === 4) {
+				let bI = core.getBaseIcon(opt[0]);
+
+				super({
+					elem: new msg({
+						weight: "md",
+						icon: bI
+							? {
+									icon: bI.icon,
+									color: bI.color,
+							  }
+							: opt[0],
+						elem: opt[1],
+					}),
+					defautlbtncolor: bI ? bI.color : null,
+					button: btnBuilder(opt[2], ["Okay", "Cancel", "Retry"], bI?.color, true),
+					title: opt[3],
 				});
 			} else if (opt.length === 3) {
 				let bI = core.getBaseIcon(opt[0]);
@@ -179,11 +217,18 @@ function elemBuilder(elem) {
 export class inputbox extends modal {
 	constructor(...opt) {
 		if (opt && opt.length > 0) {
-			if (opt.length === 4) {
+			if (opt.length === 5) {
 				super({
 					elem: [new p({ elem: opt[1] }), elemBuilder(opt[0])],
 					button: btnBuilder(opt[2], ["Okay", "Cancel", "Retry"], null, true),
-					debug: opt[3]?.debug === true ? true : false,
+					title: opt[3],
+					debug: opt[4]?.debug === true ? true : false,
+				});
+			} else if (opt.length === 4) {
+				super({
+					elem: [new p({ elem: opt[1] }), elemBuilder(opt[0])],
+					button: btnBuilder(opt[2], ["Okay", "Cancel", "Retry"], null, true),
+					title: opt[3],
 				});
 			} else if (opt.length === 3) {
 				super({

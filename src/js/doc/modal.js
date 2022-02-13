@@ -50,9 +50,14 @@ export default [
 					label: i.label,
 					icon: i.icon,
 					onclick: function () {
-						new $.dlg.msgbox(i.icon, `This is example msgbox with <b>${i.icon}</b> icon`, function () {
-							new $.toast(i.icon, "After user click <b>Okay</b> button").show();
-						}).show();
+						new $.dlg.msgbox(
+							i.icon,
+							`This is example msgbox with <b>${i.icon}</b> icon`,
+							function () {
+								new $.toast(i.icon, "After user click <b>Okay</b> button").show();
+							},
+							"Title"
+						).show();
 					},
 				});
 			});
@@ -70,6 +75,7 @@ export default [
 				function (event, data) {
 					new $.toast("i", `Result from dlg.inputbox is : ${JSON.stringify(data)}`).show();
 				},
+				"Title",
 				{ debug: true } //this last argument is for this documentation preview only
 			);
 		},
@@ -86,6 +92,7 @@ export default [
 				function (event, data) {
 					new $.toast("i", `Result from dlg.inputbox is : ${JSON.stringify(data)}`).show();
 				},
+				"Title",
 				{ debug: true } //this last argument is for this documentation preview only
 			);
 		},
@@ -119,7 +126,8 @@ export default [
 								function (event) {
 									new $.toast("x", `You not give anything in inputbox`).show();
 								},
-							]
+							],
+							"Title"
 						).show();
 					},
 				});
@@ -139,6 +147,7 @@ export default [
 				function (event, data) {
 					new $.toast("/", `You give <b>${JSON.stringify(data)}</b> in inputbox`).show();
 				},
+				"Title",
 				{ debug: true } //this last argument is for this documentation preview only
 			);
 		},
@@ -153,15 +162,20 @@ export default [
 				label: "Show inputbox with multiple input",
 				color: "primary",
 				onclick: function () {
-					new $.dlg.inputbox(sample.form(), null, function (event, data) {
-						new $.toast({
-							delay: 10000,
-							color: "success",
-							icon: "fire",
-							title: "Result",
-							elem: `${JSON.stringify(data)}`,
-						}).show();
-					}).show();
+					new $.dlg.inputbox(
+						sample.form(),
+						null,
+						function (event, data) {
+							new $.toast({
+								delay: 10000,
+								color: "success",
+								icon: "fire",
+								title: "Result",
+								elem: `${JSON.stringify(data)}`,
+							}).show();
+						},
+						"Title"
+					).show();
 				},
 			});
 		},
@@ -178,6 +192,7 @@ export default [
 				function () {
 					new $.toast("i", "Callback").show();
 				},
+				"Title",
 				{ debug: true } //this last argument is for this documentation preview only
 			);
 		},
@@ -197,20 +212,25 @@ export default [
 					label: i.label,
 					icon: i.icon,
 					onclick: function () {
-						new $.dlg.confirmbox(i.icon, `This is example confirmbox with <b>${i.icon}</b> icon`, [
-							{
-								label: "Yes",
-								onclick: function () {
-									new $.toast("/", "After user click <b>Yes</b> button").show();
+						new $.dlg.confirmbox(
+							i.icon,
+							`This is example confirmbox with <b>${i.icon}</b> icon`,
+							[
+								{
+									label: "Yes",
+									onclick: function () {
+										new $.toast("/", "After user click <b>Yes</b> button").show();
+									},
 								},
-							},
-							{
-								label: "No",
-								onclick: function () {
-									new $.toast("x", "After user not click <b>No</b> button").show();
+								{
+									label: "No",
+									onclick: function () {
+										new $.toast("x", "After user not click <b>No</b> button").show();
+									},
 								},
-							},
-						]).show();
+							],
+							"Title"
+						).show();
 					},
 				});
 			});

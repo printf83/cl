@@ -20,6 +20,6 @@
 	color: var(--bs-primary) !important;
 }
 
-.cl-list.check .list-group-item div[data-key] {
+.cl-list .list-group-item div[data-key] {
 	cursor: pointer;
 }

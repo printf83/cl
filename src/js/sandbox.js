@@ -65,92 +65,94 @@ $.core.documentReady(() => {
 							label: "api.create",
 							color: "primary",
 							onclick: function () {
-								db.api.create(
-									{
-										name: "customer",
-										data: {
-											name: "Test User",
-											dob: "1983-09-13",
-											phone: "0123456789",
-										},
-									},
-									function (result) {
-										$.core.setValue(document.getElementById("output"), result);
-									}
-								);
+								$.list.container.item.add("main_list");
+
+								// db.api.create(
+								// 	{
+								// 		name: "customer",
+								// 		data: {
+								// 			name: "Test User",
+								// 			dob: "1983-09-13",
+								// 			phone: "0123456789",
+								// 		},
+								// 	},
+								// 	function (result) {
+								// 		$.core.setValue(document.getElementById("output"), result);
+								// 	}
+								// );
 							},
 						}),
-						new $.button({
-							label: "api.load",
-							color: "info",
-							onclick: function () {
-								new $.dlg.inputbox("text", "ID", function (_event, data) {
-									db.api.load(
-										{
-											name: "customer",
-											id: data.value,
-										},
-										function (result) {
-											$.core.setValue(document.getElementById("output"), result);
-										}
-									);
-								}).show();
-							},
-						}),
-						new $.button({
-							label: "api.update",
-							color: "success",
-							onclick: function () {
-								new $.dlg.inputbox("text", "ID", function (_event, data) {
-									db.api.update(
-										{
-											name: "customer",
-											id: data.value,
-											data: {
-												name: "Test User Update",
-												dob: "1983-09-13",
-												phone: "0123456789",
-											},
-										},
-										function (result) {
-											$.core.setValue(document.getElementById("output"), result);
-										}
-									);
-								}).show();
-							},
-						}),
-						new $.button({
-							label: "api.delete",
-							color: "danger",
-							onclick: function () {
-								new $.dlg.inputbox("text", "ID", function (_event, data) {
-									db.api.delete(
-										{
-											name: "customer",
-											id: data.value,
-										},
-										function (result) {
-											$.core.setValue(document.getElementById("output"), result);
-										}
-									);
-								}).show();
-							},
-						}),
-						new $.button({
-							label: "api.list",
-							color: "primary",
-							onclick: function () {
-								db.api.list(
-									{
-										name: "customer",
-										data: query_data,
-									},
-									function (result) {
-										$.core.setValue(document.getElementById("output"), JSON.stringify(result));
-									}
-								);
-							},
-						}),
+						// new $.button({
+						// 	label: "api.load",
+						// 	color: "info",
+						// 	onclick: function () {
+						// 		new $.dlg.inputbox("text", "ID", function (_event, data) {
+						// 			db.api.load(
+						// 				{
+						// 					name: "customer",
+						// 					id: data.value,
+						// 				},
+						// 				function (result) {
+						// 					$.core.setValue(document.getElementById("output"), result);
+						// 				}
+						// 			);
+						// 		}).show();
+						// 	},
+						// }),
+						// new $.button({
+						// 	label: "api.update",
+						// 	color: "success",
+						// 	onclick: function () {
+						// 		new $.dlg.inputbox("text", "ID", function (_event, data) {
+						// 			db.api.update(
+						// 				{
+						// 					name: "customer",
+						// 					id: data.value,
+						// 					data: {
+						// 						name: "Test User Update",
+						// 						dob: "1983-09-13",
+						// 						phone: "0123456789",
+						// 					},
+						// 				},
+						// 				function (result) {
+						// 					$.core.setValue(document.getElementById("output"), result);
+						// 				}
+						// 			);
+						// 		}).show();
+						// 	},
+						// }),
+						// new $.button({
+						// 	label: "api.delete",
+						// 	color: "danger",
+						// 	onclick: function () {
+						// 		new $.dlg.inputbox("text", "ID", function (_event, data) {
+						// 			db.api.delete(
+						// 				{
+						// 					name: "customer",
+						// 					id: data.value,
+						// 				},
+						// 				function (result) {
+						// 					$.core.setValue(document.getElementById("output"), result);
+						// 				}
+						// 			);
+						// 		}).show();
+						// 	},
+						// }),
+						// new $.button({
+						// 	label: "api.list",
+						// 	color: "primary",
+						// 	onclick: function () {
+						// 		db.api.list(
+						// 			{
+						// 				name: "customer",
+						// 				data: query_data,
+						// 			},
+						// 			function (result) {
+						// 				$.core.setValue(document.getElementById("output"), JSON.stringify(result));
+						// 			}
+						// 		);
+						// 	},
+						// }),
 						new $.button({
 							label: "api.option",
 							color: "primary",
@@ -375,31 +377,75 @@ $.core.documentReady(() => {
 								}),
 							];
 						},
-						item: function (data) {
-							return new $.list.item({
-								key: data._id,
-								name: data.name,
-								picture: data.picture,
-								// detail: new $.small([data.phone, data.dob, data.email].filter(Boolean).join(" | ")),
-								detail: new $.div(
-									"container p-0",
-									new $.div("g-2 row row-cols-auto", [
-										data.phone
-											? new $.pill({
-													icon: "phone",
-													label: data.phone,
-											  })
-											: null,
-										data.email
-											? new $.pill({
-													icon: "at",
-													label: data.email,
-											  })
-											: null,
-									])
-								),
+						items: function (data) {
+							let lastgroup = null;
+							let result = [];
+							data.forEach(function (i) {
+								if (i.state && lastgroup !== i.state) {
+									lastgroup = i.state;
+									let iname = dbstate.filter(function (el) {
+										return el.value === i.state;
+									})[0]?.label;
+
+									result.push({
+										elem: new $.list.group({ key: i.state, name: iname }),
+									});
+								}
+
+								result.push({
+									elem: new $.list.item({
+										key: i._id,
+										name: i.name,
+										picture: i.picture,
+										detail: new $.small([i.phone, i.dob, i.email].filter(Boolean).join(" | ")),
+										// detail: new $.div(
+										// 	"container p-0",
+										// 	new $.div("g-2 row row-cols-auto", [
+										// 		data.phone
+										// 			? new $.pill({
+										// 					icon: "phone",
+										// 					label: data.phone,
+										// 			  })
+										// 			: null,
+										// 		data.email
+										// 			? new $.pill({
+										// 					icon: "at",
+										// 					label: data.email,
+										// 			  })
+										// 			: null,
+										// 	])
+										// ),
+									}),
+								});
 							});
+
+							return result;
 						},
+						// item: function (data) {
+						// 	return new $.list.item({
+						// 		key: data._id,
+						// 		name: data.name,
+						// 		picture: data.picture,
+						// 		// detail: new $.small([data.phone, data.dob, data.email].filter(Boolean).join(" | ")),
+						// 		detail: new $.div(
+						// 			"container p-0",
+						// 			new $.div("g-2 row row-cols-auto", [
+						// 				data.phone
+						// 					? new $.pill({
+						// 							icon: "phone",
+						// 							label: data.phone,
+						// 					  })
+						// 					: null,
+						// 				data.email
+						// 					? new $.pill({
+						// 							icon: "at",
+						// 							label: data.email,
+						// 					  })
+						// 					: null,
+						// 			])
+						// 		),
+						// 	});
+						// },
 					}),
 				])
 			);

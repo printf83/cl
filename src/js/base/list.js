@@ -13,6 +13,7 @@ import button from "./button.js";
 import * as dlg from "./dlg.js";
 import icon from "./icon.js";
 import h from "./h.js";
+import b from "./b";
 
 const fn = {
 	genname: function (names) {
@@ -244,28 +245,33 @@ const fn = {
 			if (checked) {
 				let opt = fn.get(id);
 
-				new dlg.confirmbox("!!", `Are you sure delete ${fn.genname(checked.map((i) => i.name))} record?`, [
-					{
-						label: "Yes, delete",
-						color: "danger",
-						onclick: function () {
-							db.api.delete(
-								{
-									name: opt.name,
-									id: checked.map(function (i) {
-										return i.key;
-									}),
-								},
-								function (data) {
-									fn.reload(id);
-								}
-							);
+				new dlg.confirmbox(
+					"!!",
+					`Are you sure delete ${fn.genname(checked.map((i) => i.name))} record?`,
+					[
+						{
+							label: "Yes, delete",
+							color: "danger",
+							onclick: function () {
+								db.api.delete(
+									{
+										name: opt.name,
+										id: checked.map(function (i) {
+											return i.key;
+										}),
+									},
+									function (data) {
+										fn.reload(id);
+									}
+								);
+							},
 						},
-					},
-					{
-						label: "Cancel",
-					},
-				]).show();
+						{
+							label: "Cancel",
+						},
+					],
+					`Delete ${opt.name}`
+				).show();
 			}
 		},
 		mode: function (id, check) {
@@ -300,20 +306,61 @@ const fn = {
 			}
 		},
 		item: function (event) {
-			let sender = event.currentTarget.closest("div[data-key]");
-			let container = sender.closest(".cl-list");
+			event.stopPropagation();
 
-			if (container.classList.contains("check")) {
-				if (sender.classList.contains("check")) {
-					sender.classList.remove("check");
-				} else {
-					sender.classList.add("check");
-				}
+			let sender = event.currentTarget.closest("div[data-key]");
+			if (sender.classList.contains("check")) {
+				sender.classList.remove("check");
+			} else {
+				sender.classList.add("check");
 			}
 		},
 	},
 	item: {
+		action: function (event) {
+			event.stopPropagation();
+
+			let sender = event.currentTarget.closest("div[data-key]");
+			let container = sender.closest(".cl-list");
+
+			if (container.classList.contains("check")) {
+				fn.check.item(event);
+			} else {
+				fn.item.edit(event);
+			}
+		},
+		add: function (id) {
+			let opt = fn.get(id);
+			if (opt) {
+				new dlg.inputbox(
+					opt.editor(null),
+					null,
+					[
+						{
+							label: "Save",
+							onclick: function (_event, data) {
+								db.api.create(
+									{
+										name: opt.name,
+										data: data,
+									},
+									function (data) {
+										fn.reload(id);
+									}
+								);
+							},
+						},
+						{
+							label: "Cancel",
+						},
+					],
+					`Add ${opt.name}`
+				).show();
+			}
+		},
 		edit: function (event) {
+			event.stopPropagation();
+
 			let sender = event.currentTarget.closest("div[data-key]");
 			let key = sender.getAttribute("data-key");
 			let container = sender.closest(".cl-list");
@@ -327,33 +374,40 @@ const fn = {
 					},
 					function (data) {
 						if (data) {
-							new dlg.inputbox(opt.editor(data), null, [
-								{
-									label: "Save",
-									onclick: function (_event, data) {
-										data._id = key;
-										db.api.update(
-											{
-												name: opt.name,
-												id: key,
-												data: data,
-											},
-											function (data) {
-												fn.reload(id);
-											}
-										);
+							new dlg.inputbox(
+								opt.editor(data),
+								null,
+								[
+									{
+										label: "Save",
+										onclick: function (_event, data) {
+											data._id = key;
+											db.api.update(
+												{
+													name: opt.name,
+													id: key,
+													data: data,
+												},
+												function (data) {
+													fn.reload(id);
+												}
+											);
+										},
 									},
-								},
-								{
-									label: "Cancel",
-								},
-							]).show();
+									{
+										label: "Cancel",
+									},
+								],
+								`Edit ${opt.name}`
+							).show();
 						}
 					}
 				);
 			}
 		},
 		copy: function (event) {
+			event.stopPropagation();
+
 			let sender = event.currentTarget.closest("div[data-key]");
 			let key = sender.getAttribute("data-key");
 			let container = sender.closest(".cl-list");
@@ -368,31 +422,38 @@ const fn = {
 					function (data) {
 						if (data) {
 							delete data._id;
-							new dlg.inputbox(opt.editor(data), null, [
-								{
-									label: "Save",
-									onclick: function (_event, data) {
-										db.api.create(
-											{
-												name: opt.name,
-												data: data,
-											},
-											function (data) {
-												fn.reload(id);
-											}
-										);
+							new dlg.inputbox(
+								opt.editor(data),
+								null,
+								[
+									{
+										label: "Save",
+										onclick: function (_event, data) {
+											db.api.create(
+												{
+													name: opt.name,
+													data: data,
+												},
+												function (data) {
+													fn.reload(id);
+												}
+											);
+										},
 									},
-								},
-								{
-									label: "Cancel",
-								},
-							]).show();
+									{
+										label: "Cancel",
+									},
+								],
+								`Copy ${opt.name}`
+							).show();
 						}
 					}
 				);
 			}
 		},
 		delete: function (event) {
+			event.stopPropagation();
+
 			let sender = event.currentTarget.closest("div[data-key]");
 			let key = sender.getAttribute("data-key");
 			let name = sender.getAttribute("data-name");
@@ -400,26 +461,31 @@ const fn = {
 			let id = container.getAttribute("id");
 			let opt = fn.get(id);
 			if (opt) {
-				new dlg.confirmbox("!!", `Are you sure delete <b>${name ? name : "this"}</b> record?`, [
-					{
-						label: "Yes, delete",
-						color: "danger",
-						onclick: function () {
-							db.api.delete(
-								{
-									name: opt.name,
-									id: key,
-								},
-								function (data) {
-									fn.reload(id);
-								}
-							);
+				new dlg.confirmbox(
+					"!!",
+					`Are you sure delete <b>${name ? name : "this"}</b> record?`,
+					[
+						{
+							label: "Yes, delete",
+							color: "danger",
+							onclick: function () {
+								db.api.delete(
+									{
+										name: opt.name,
+										id: key,
+									},
+									function (data) {
+										fn.reload(id);
+									}
+								);
+							},
 						},
-					},
-					{
-						label: "Cancel",
-					},
-				]).show();
+						{
+							label: "Cancel",
+						},
+					],
+					`Delete ${opt.name}`
+				).show();
 			}
 		},
 	},
@@ -449,6 +515,11 @@ const defaultItemOption = {
 	picture: null,
 	name: null,
 	detail: null,
+};
+
+const defaultGroupOption = {
+	key: null,
+	name: null,
 };
 
 export class container extends div {
@@ -502,7 +573,7 @@ export class item extends div {
 			attr: { "data-key": opt.key, "data-name": opt.name },
 			display: "flex",
 			justifycontent: "between",
-			onclick: fn.check.item,
+			onclick: fn.item.action,
 			elem: [
 				new div({
 					display: "flex",
@@ -525,7 +596,7 @@ export class item extends div {
 								new icon({
 									class: "cl-list-check",
 									marginend: 3,
-									icon: "check-circle",
+									icon: "check",
 									color: "secondary",
 									weight: "2x",
 								}),
@@ -543,13 +614,29 @@ export class item extends div {
 					alignself: "center",
 					elem: new btngroup({
 						elem: [
-							new button({ icon: "edit", color: "primary", onclick: fn.item.edit }),
 							new button({ icon: "copy", color: "success", onclick: fn.item.copy }),
 							new button({ icon: "trash", color: "danger", onclick: fn.item.delete }),
 						],
 					}),
 				}),
 			],
+		};
+	}
+}
+
+export class group extends div {
+	constructor(...opt) {
+		super(...opt);
+	}
+
+	get data() {
+		return super.data;
+	}
+	set data(opt) {
+		opt = core.extend({}, defaultGroupOption, opt);
+
+		super.data = {
+			elem: new b(opt.name),
 		};
 	}
 }
