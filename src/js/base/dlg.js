@@ -219,20 +219,20 @@ export class inputbox extends modal {
 		if (opt && opt.length > 0) {
 			if (opt.length === 5) {
 				super({
-					elem: [new p({ elem: opt[1] }), elemBuilder(opt[0])],
+					elem: [opt[1] ? new p({ elem: opt[1] }) : null, elemBuilder(opt[0])].filter(Boolean),
 					button: btnBuilder(opt[2], ["Okay", "Cancel", "Retry"], null, true),
 					title: opt[3],
 					debug: opt[4]?.debug === true ? true : false,
 				});
 			} else if (opt.length === 4) {
 				super({
-					elem: [new p({ elem: opt[1] }), elemBuilder(opt[0])],
+					elem: [opt[1] ? new p({ elem: opt[1] }) : null, elemBuilder(opt[0])].filter(Boolean),
 					button: btnBuilder(opt[2], ["Okay", "Cancel", "Retry"], null, true),
 					title: opt[3],
 				});
 			} else if (opt.length === 3) {
 				super({
-					elem: [new p({ elem: opt[1] }), elemBuilder(opt[0])],
+					elem: [opt[1] ? new p({ elem: opt[1] }) : null, elemBuilder(opt[0])].filter(Boolean),
 					button: btnBuilder(opt[2], ["Okay", "Cancel", "Retry"], null, true),
 				});
 			} else if (opt.length === 2) {

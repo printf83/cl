@@ -165,6 +165,8 @@ export default class modal extends div {
 							color:
 								ix === 0 ? (i.color ? i.color : defButtonColor) : i.color ? i.color : "text-secondary", //i.color ? i.color : ix === 0 ? defButtonColor : "text-secondary",
 							onclick: function (event) {
+								event.stopPropagation();
+
 								let mdl = event.currentTarget.closest(".modal");
 								let formdata = core.getValue(mdl);
 								let result =

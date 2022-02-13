@@ -853,6 +853,7 @@ let fn = {
 				step: opt.step,
 				value: data,
 				numctl: true,
+				required: true,
 				label: "Record per Page",
 			});
 		},
@@ -873,6 +874,7 @@ let fn = {
 				step: opt.step,
 				value: data / opt.limit + 1,
 				numctl: true,
+				required: true,
 				label: "Current Page",
 			});
 		},

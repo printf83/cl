@@ -430,18 +430,29 @@ export function validate(container, callback) {
 	var listofctl = container.querySelectorAll("[name]");
 	if (listofctl) {
 		container.classList.remove("was-validated");
-		listofctl.forEach(function (ctl) {
-			if (ctl.hasAttribute("required")) {
-				let val = getElementValue(ctl);
-				if (val !== null && val !== "") {
-					ctl.classList.add("is-valid");
-					ctl.classList.remove("is-invalid");
-				} else {
-					ctl.classList.add("is-invalid");
-					ctl.classList.remove("is-valid");
+		listofctl.forEach(function (item) {
+			let id = item.getAttribute("id");
+			if (id) {
+				let ctl = document.getElementById(id);
+
+				if (ctl) {
+					if (ctl.hasAttribute("required")) {
+						let val = getElementValue(ctl);
+						if (val !== null && val !== "") {
+							ctl.classList.add("is-valid");
+							ctl.classList.remove("is-invalid");
+						} else {
+							ctl.classList.add("is-invalid");
+							ctl.classList.remove("is-valid");
+						}
+					} else {
+						ctl.classList.add("is-valid");
+						ctl.classList.remove("is-invalid");
+					}
 				}
 			}
 		});
+
 		container.classList.add("was-validated");
 
 		var invalidctl = container.querySelectorAll(".is-invalid");
