@@ -15,6 +15,23 @@ import icon from "./icon.js";
 import h from "./h.js";
 
 const fn = {
+	genname: function (names) {
+		if (names) {
+			names = Array.isArray(names) ? names : [names];
+
+			if (names.length === 1) {
+				return `<b>${names[0]}</b>`;
+			} else if (names.length === 2) {
+				return `<b>${names[0]}</b> and <b>${names[1]}</b>`;
+			} else if (names.length === 3) {
+				return `<b>${names[0]}</b>, <b>${names[1]}</b> and <b>${names[2]}</b>`;
+			} else {
+				return `<b>${names[0]}</b>, <b>${names[1]}</b>, <b>${names[2]}</b> and <b>${names.length - 3} more</b>`;
+			}
+		}
+
+		return null;
+	},
 	set: function (id, opt) {
 		db_opt[id] = core.extend({}, defaultOption, opt);
 	},
@@ -211,10 +228,10 @@ const fn = {
 			if (container.classList.contains("check")) {
 				let checked = container.querySelectorAll("div.check[data-key]");
 				if (checked && checked.length > 0) {
-					return Array.from(checked).map(function (item) {
+					return Array.from(checked).map(function (i) {
 						return {
-							key: item.getAttribute("data-key"),
-							name: item.getElementsByClassName("cl-list-name")?.textContent,
+							key: i.getAttribute("data-key"),
+							name: i.getAttribute("data-name"),
 						};
 					});
 				}
@@ -227,7 +244,7 @@ const fn = {
 			if (checked) {
 				let opt = fn.get(id);
 
-				new dlg.confirmbox("!!", `Are you sure delete <b>${checked.length}</b> record?`, [
+				new dlg.confirmbox("!!", `Are you sure delete ${fn.genname(checked.map((i) => i.name))} record?`, [
 					{
 						label: "Yes, delete",
 						color: "danger",
@@ -378,7 +395,7 @@ const fn = {
 		delete: function (event) {
 			let sender = event.currentTarget.closest("div[data-key]");
 			let key = sender.getAttribute("data-key");
-			let name = sender.getElementsByClassName("cl-list-name").textContent;
+			let name = sender.getAttribute("data-name");
 			let container = sender.closest(".cl-list");
 			let id = container.getAttribute("id");
 			let opt = fn.get(id);
@@ -482,7 +499,7 @@ export class item extends div {
 		opt = core.extend({}, defaultItemOption, opt);
 
 		super.data = {
-			attr: { "data-key": opt.key },
+			attr: { "data-key": opt.key, "data-name": opt.name },
 			display: "flex",
 			justifycontent: "between",
 			onclick: fn.check.item,
@@ -515,10 +532,7 @@ export class item extends div {
 							],
 						}),
 						new div({
-							elem: [
-								new h({ level: 6, class: "cl-list-name", elem: opt.name }),
-								opt.detail ? new div(opt.detail) : null,
-							],
+							elem: [new h({ level: 6, elem: opt.name }), opt.detail ? new div(opt.detail) : null],
 						}),
 					],
 				}),
