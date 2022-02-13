@@ -129,6 +129,11 @@ const db_menu = [
 		],
 	},
 	{
+		type: "menu",
+		title: "API",
+		item: [{ title: "Database", source: doc.db }],
+	},
+	{
 		type: "navigate",
 		title: "Others",
 		item: [{ title: "Sandbox", source: "sandbox.html" }],

@@ -19,7 +19,7 @@ export default [
 		viewclass: "cl-modal-preview",
 		code: function () {
 			return new $.modal({
-				title: "Modal Title",
+				title: "Modal title",
 				elem: new $.msg({
 					weight: "md",
 					icon: "i",
@@ -56,7 +56,7 @@ export default [
 							function () {
 								new $.toast(i.icon, "After user click <b>Okay</b> button").show();
 							},
-							"Title"
+							"Modal title"
 						).show();
 					},
 				});
@@ -75,7 +75,7 @@ export default [
 				function (event, data) {
 					new $.toast("i", `Result from dlg.inputbox is : ${JSON.stringify(data)}`).show();
 				},
-				"Title",
+				"Modal title",
 				{ debug: true } //this last argument is for this documentation preview only
 			);
 		},
@@ -92,7 +92,7 @@ export default [
 				function (event, data) {
 					new $.toast("i", `Result from dlg.inputbox is : ${JSON.stringify(data)}`).show();
 				},
-				"Title",
+				"Modal title",
 				{ debug: true } //this last argument is for this documentation preview only
 			);
 		},
@@ -127,7 +127,7 @@ export default [
 									new $.toast("x", `You not give anything in inputbox`).show();
 								},
 							],
-							"Title"
+							"Modal title"
 						).show();
 					},
 				});
@@ -147,7 +147,7 @@ export default [
 				function (event, data) {
 					new $.toast("/", `You give <b>${JSON.stringify(data)}</b> in inputbox`).show();
 				},
-				"Title",
+				"Modal title",
 				{ debug: true } //this last argument is for this documentation preview only
 			);
 		},
@@ -174,7 +174,7 @@ export default [
 								elem: `${JSON.stringify(data)}`,
 							}).show();
 						},
-						"Title"
+						"Modal title"
 					).show();
 				},
 			});
@@ -192,7 +192,7 @@ export default [
 				function () {
 					new $.toast("i", "Callback").show();
 				},
-				"Title",
+				"Modal title",
 				{ debug: true } //this last argument is for this documentation preview only
 			);
 		},
@@ -229,7 +229,7 @@ export default [
 									},
 								},
 							],
-							"Title"
+							"Modal title"
 						).show();
 					},
 				});

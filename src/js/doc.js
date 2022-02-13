@@ -81,6 +81,8 @@ import tag_ex_span from "./doc/tag.ex.span.js";
 import tag_ex_strong from "./doc/tag.ex.strong.js";
 import tag_ex_ul from "./doc/tag.ex.ul.js";
 
+import db from "./doc/db.js";
+
 export default {
 	intro,
 	container,
@@ -160,4 +162,6 @@ export default {
 	tag_ex_span,
 	tag_ex_strong,
 	tag_ex_ul,
+
+	db,
 };

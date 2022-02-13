@@ -16,6 +16,7 @@ import code from "./base/code.js";
 import * as collapse from "./base/collapse.js";
 import * as container from "./base/container.js";
 import * as core from "./base/core.js";
+import * as db from "../js/base/api.js";
 import div from "./base/div.js";
 import * as dlg from "./base/dlg.js";
 import dropdown from "./base/dropdown.js";
@@ -75,6 +76,7 @@ export default {
 	collapse,
 	container,
 	core,
+	db,
 	div,
 	dlg,
 	dropdown,

@@ -1,9 +1,5 @@
 "use strict";
 import $ from "./component.js";
-import * as db from "../js/base/api.js";
-import { item } from "./base/list.js";
-import span from "./base/span.js";
-import div from "./base/div.js";
 
 let query_setting = {
 	field: [
@@ -35,14 +31,14 @@ let query_setting = {
 
 let query_data = {
 	filter: null,
-	sort: { name: 1 },
+	sort: { state: 1, name: 1 },
 	field: { __v: 0 },
 	limit: 10,
 	skip: 0,
 };
 
 $.core.documentReady(() => {
-	db.api.option(
+	$.db.api.option(
 		{
 			name: "state",
 		},
@@ -67,7 +63,7 @@ $.core.documentReady(() => {
 							onclick: function () {
 								$.list.container.item.add("main_list");
 
-								// db.api.create(
+								// $.db.api.create(
 								// 	{
 								// 		name: "customer",
 								// 		data: {
@@ -87,7 +83,7 @@ $.core.documentReady(() => {
 						// 	color: "info",
 						// 	onclick: function () {
 						// 		new $.dlg.inputbox("text", "ID", function (_event, data) {
-						// 			db.api.load(
+						// 			$.db.api.load(
 						// 				{
 						// 					name: "customer",
 						// 					id: data.value,
@@ -104,7 +100,7 @@ $.core.documentReady(() => {
 						// 	color: "success",
 						// 	onclick: function () {
 						// 		new $.dlg.inputbox("text", "ID", function (_event, data) {
-						// 			db.api.update(
+						// 			$.db.api.update(
 						// 				{
 						// 					name: "customer",
 						// 					id: data.value,
@@ -126,7 +122,7 @@ $.core.documentReady(() => {
 						// 	color: "danger",
 						// 	onclick: function () {
 						// 		new $.dlg.inputbox("text", "ID", function (_event, data) {
-						// 			db.api.delete(
+						// 			$.db.api.delete(
 						// 				{
 						// 					name: "customer",
 						// 					id: data.value,
@@ -142,7 +138,7 @@ $.core.documentReady(() => {
 						// 	label: "api.list",
 						// 	color: "primary",
 						// 	onclick: function () {
-						// 		db.api.list(
+						// 		$.db.api.list(
 						// 			{
 						// 				name: "customer",
 						// 				data: query_data,
@@ -157,7 +153,7 @@ $.core.documentReady(() => {
 							label: "api.option",
 							color: "primary",
 							onclick: function () {
-								db.api.option(
+								$.db.api.option(
 									{
 										name: "customer",
 										data: query_data,
@@ -173,7 +169,7 @@ $.core.documentReady(() => {
 							color: "primary",
 							onclick: function () {
 								$.list.container.excel("main_list");
-								// db.api.excel({
+								// $.db.api.excel({
 								// 	name: "customer",
 								// 	data: query_data,
 								// });
