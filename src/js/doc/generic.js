@@ -19,7 +19,7 @@ export default [
 
 	{
 		msg: [
-			"Please create table using generic database in server.js. For this example, we create <b>customer</b> table",
+			"Please create table using generic database in <b>./server.js</b>. For this example, we create <b>customer</b> table with this code :",
 			new $.card.container({
 				marginy: 3,
 				elem: new $.card.body(
@@ -34,7 +34,7 @@ export default [
 					)
 				),
 			}),
-			"and models for <b>customer</b> table is created in <b>models</b>",
+			"Then we create models for <b>customer</b> table in <b>./models/customer.js</b>",
 			new $.card.container({
 				marginy: 3,
 				elem: new $.card.body(
