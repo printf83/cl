@@ -196,7 +196,9 @@ export const api = {
 			{},
 			{
 				name: null,
-				data: null,
+				filter: null,
+				limit: null,
+				skip: null,
 				fieldkey: "_id",
 				fieldname: "name",
 				emptylabel: null,
@@ -223,7 +225,13 @@ export const api = {
 				callback(tmp);
 			},
 			url: `api/${opt.name}-list`,
-			data: { field: { [opt.fieldkey]: 1, [opt.fieldname]: 1 }, sort: { [opt.fieldname]: 1 } },
+			data: {
+				filter: opt.filter,
+				limit: opt.limit,
+				skip: opt.skip,
+				field: { [opt.fieldkey]: 1, [opt.fieldname]: 1 },
+				sort: { [opt.fieldname]: 1 },
+			},
 		});
 	},
 	excel: function (opt) {

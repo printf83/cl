@@ -324,10 +324,14 @@ const fn = {
 
 		document.getElementById(fu).click();
 	},
-	onsave: function (element) {
+	onsave: function (element, callback) {
 		let value = element.value;
 		if (value) {
-			db.file.save(value, function (data) {});
+			db.file.save(value, function (data) {
+				if (typeof callback === "function") {
+					callback(data);
+				}
+			});
 		}
 	},
 };
@@ -439,7 +443,7 @@ export default class file extends div {
 		super.data = { elem: ctl };
 	}
 
-	static save(element) {
-		fn.onsave(element);
+	static save(element, callback) {
+		fn.onsave(element, callback);
 	}
 }

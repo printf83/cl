@@ -129,7 +129,12 @@ const db_menu = [
 	{
 		type: "menu",
 		title: "Database",
-		item: [{ title: "Generic", source: doc.generic }],
+		item: [
+			{ title: "Generic", source: doc.generic },
+			{ title: "File", source: doc.file },
+			{ title: "Query", source: doc.query },
+			{ title: "List", source: doc.list },
+		],
 	},
 	{
 		type: "navigate",

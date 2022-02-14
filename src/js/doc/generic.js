@@ -4,14 +4,14 @@ import $ from "../component.js";
 
 export default [
 	{
-		title: "Database",
-		msg: "Provide access to database.",
+		title: "Generic database",
+		msg: "Provide access to <b>cl genaric database</b> to make easy <b>CRUD</b> operation and others.",
 		anchor: false,
 	},
 
 	{
 		msg: [
-			"Please create table using generic database in <b>./server.js</b>. For this example, we create <b>customer</b> table with this code :",
+			"Please create table using <b>cl generic database</b> in <b>./server.js</b>. For this example, we create <b>customer</b> table with this code :",
 			new $.codepreview({
 				container: "card",
 				code: `
@@ -42,7 +42,7 @@ export default [
 	{
 		title: "Create",
 		msg: [
-			"Create new record from generic database using {{$.db.api.create}} function. Example :",
+			"Create new record from <b>cl generic database</b> using {{$.db.api.create}} function. Example :",
 			new $.ul({
 				item: [
 					"<code>$.db.api.create(opt,callback)</code>",
@@ -107,7 +107,7 @@ export default [
 	{
 		title: "Update",
 		msg: [
-			"Update existing record from generic database using {{$.db.api.update}} function. Example :",
+			"Update existing record from <b>cl generic database</b> using {{$.db.api.update}} function. Example :",
 			new $.ul({
 				item: [
 					"<code>$.db.api.update(opt,callback)</code>",
@@ -176,7 +176,7 @@ export default [
 	{
 		title: "Load",
 		msg: [
-			"Load existing record from generic database using {{$.db.api.load}} function. Example :",
+			"Load existing record from <b>cl generic database</b> using {{$.db.api.load}} function. Example :",
 			new $.ul({
 				item: [
 					"<code>$.db.api.load(opt,callback)</code>",
@@ -237,7 +237,7 @@ export default [
 	{
 		title: "Delete",
 		msg: [
-			"Delete existing record from generic database using {{$.db.api.delete}} function. Example :",
+			"Delete existing record from <b>cl generic database</b> using {{$.db.api.delete}} function. Example :",
 			new $.ul({
 				item: [
 					"<code>$.db.api.delete(opt,callback)</code>",
@@ -298,7 +298,7 @@ export default [
 	{
 		title: "List",
 		msg: [
-			"Get list of record from generic database using {{$.db.api.list}} function. Example :",
+			"Get list of record from <b>cl generic database</b> using {{$.db.api.list}} function. Example :",
 			new $.ul({
 				item: [
 					"<code>$.db.api.list(opt,callback)</code>",
@@ -391,7 +391,7 @@ export default [
 	{
 		title: "Option",
 		msg: [
-			"Get list of record from generic database using {{$.db.api.option}} function for {{select input}}. Example :",
+			"Get list of record from <b>cl generic database</b> using {{$.db.api.option}} function for {{select input}}. Example :",
 			new $.ul({
 				item: [
 					"<code>$.db.api.option(opt,callback)</code>",
@@ -455,9 +455,47 @@ export default [
 	},
 
 	{
+		msg: "Live example with filter",
+		container: sample.formcontainer,
+		code: function () {
+			let resultOutputId = $.core.UUID();
+			let selectInputId = $.core.UUID();
+
+			return [
+				new $.button({
+					label: "Load list option",
+					color: "primary",
+					icon: "folder-open",
+					onclick: function () {
+						//get record
+						$.db.api.option(
+							{
+								name: "customer",
+								filter: { $and: [{ name: { $regex: "s", $options: "i" } }] },
+								fieldkey: "_id",
+								fieldname: "name",
+							},
+							function (result) {
+								//result
+								document.getElementById(resultOutputId).value = JSON.stringify(result);
+								$.core.replaceChild(
+									document.getElementById(selectInputId),
+									new $.option.select({ item: result })
+								);
+							}
+						);
+					},
+				}),
+				new $.input({ type: "textarea", label: "Result", id: resultOutputId, rows: 10 }),
+				new $.input({ type: "select", label: "Sample", id: selectInputId }),
+			];
+		},
+	},
+
+	{
 		title: "XLSX file",
 		msg: [
-			"Get list of record from generic database in xlsx format using {{$.db.api.excel}} function. Example :",
+			"Get list of record from <b>cl generic database</b> in xlsx format using {{$.db.api.excel}} function. Example :",
 			new $.ul({
 				item: [
 					"<code>$.db.api.excel(opt)</code>",

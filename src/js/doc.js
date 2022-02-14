@@ -82,6 +82,9 @@ import tag_ex_strong from "./doc/tag.ex.strong.js";
 import tag_ex_ul from "./doc/tag.ex.ul.js";
 
 import generic from "./doc/generic.js";
+import file from "./doc/file.js";
+import query from "./doc/query.js";
+import list from "./doc/list.js";
 
 export default {
 	intro,
@@ -164,4 +167,7 @@ export default {
 	tag_ex_ul,
 
 	generic,
+	file,
+	query,
+	list,
 };
