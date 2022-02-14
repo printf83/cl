@@ -473,8 +473,6 @@ export default [
 						{
 							name: "customer",
 							data: {query}
-						},
-						function (result) {
 						}
 					);
 			`,
