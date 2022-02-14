@@ -490,7 +490,7 @@ function gen_content(m1, m2, callback) {
 function set_theme(theme) {
 	let cltheme = document.getElementById("nstheme");
 	if (theme) {
-		cltheme.href = `https://cdn.jsdelivr.net/npm/bootswatch@5.1.1/dist/${theme}/bootstrap.min.css`;
+		cltheme.href = `https://cdn.jsdelivr.net/npm/bootswatch@5.1.3/dist/${theme}/bootstrap.min.css`;
 		cltheme.removeAttribute("disabled");
 	} else {
 		cltheme.setAttribute("disabled", "disabled");
