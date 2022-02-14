@@ -313,6 +313,7 @@ export default [
 					$.db.api.list(
 						{
 							name: "customer",
+							data: {query}
 						},
 						function (result) {
 						}
@@ -334,7 +335,7 @@ export default [
 					color: "primary",
 					icon: "folder-open",
 					onclick: function () {
-						//delete record
+						//get record
 						$.db.api.list(
 							{
 								name: "customer",
@@ -363,7 +364,7 @@ export default [
 					color: "primary",
 					icon: "folder-open",
 					onclick: function () {
-						//delete record
+						//get record
 						$.db.api.list(
 							{
 								name: "customer",
@@ -395,7 +396,7 @@ export default [
 				item: [
 					"<code>$.db.api.option(opt,callback)</code>",
 					"<code>$.db.api.option({name:tablename},callback)</code>",
-					"<code>$.db.api.option({name:tablename,data:query},callback)</code>",
+					"<code>$.db.api.option({name:tablename,fieldkey:_id,fieldname:name},callback)</code>",
 				],
 			}),
 			"This function will return <b>array of object</b> on callback if process is successful",
@@ -405,6 +406,8 @@ export default [
 					$.db.api.option(
 						{
 							name: "customer",
+							fieldkey: "_id",
+							fieldname: "name",
 						},
 						function (result) {
 						}
@@ -427,10 +430,12 @@ export default [
 					color: "primary",
 					icon: "folder-open",
 					onclick: function () {
-						//delete record
+						//get record
 						$.db.api.option(
 							{
 								name: "customer",
+								fieldkey: "_id",
+								fieldname: "name",
 							},
 							function (result) {
 								//result
@@ -446,6 +451,71 @@ export default [
 				new $.input({ type: "textarea", label: "Result", id: resultOutputId, rows: 10 }),
 				new $.input({ type: "select", label: "Sample", id: selectInputId }),
 			];
+		},
+	},
+
+	{
+		title: "XLSX file",
+		msg: [
+			"Get list of record from generic database in xlsx format using {{$.db.api.excel}} function. Example :",
+			new $.ul({
+				item: [
+					"<code>$.db.api.excel(opt)</code>",
+					"<code>$.db.api.excel({name:tablename})</code>",
+					"<code>$.db.api.excel({name:tablename,data:query})</code>",
+				],
+			}),
+			"This function will download <b>xlsx file</b> if process is successful",
+			new $.codepreview({
+				container: "card",
+				code: `
+					$.db.api.excel(
+						{
+							name: "customer",
+							data: {query}
+						},
+						function (result) {
+						}
+					);
+			`,
+			}),
+		],
+	},
+
+	{
+		msg: "Live example",
+		code: function () {
+			return new $.button({
+				label: "Download XLSX file",
+				color: "primary",
+				icon: "download",
+				onclick: function () {
+					$.db.api.excel({
+						name: "customer",
+					});
+				},
+			});
+		},
+	},
+
+	{
+		msg: "Live example with query",
+		code: function () {
+			return new $.button({
+				label: "Download XLSX file",
+				color: "primary",
+				icon: "download",
+				onclick: function () {
+					$.db.api.excel({
+						name: "customer",
+						data: {
+							filter: null,
+							sort: { state: 1, name: 1 },
+							field: { __v: 0, email: 0, dob: 0 },
+						},
+					});
+				},
+			});
 		},
 	},
 ];

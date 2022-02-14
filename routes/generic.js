@@ -22,11 +22,11 @@ module.exports = function (app, dbname) {
 		 */
 		excel: function (req, res) {
 			try {
-				let q = JSON.parse(req.query.q);
+				let q = req.query.q ? JSON.parse(req.query.q) : null;
 
-				let d = $.db.find(q.filter ? q.filter : null, q.field ? q.field : null);
+				let d = $.db.find(q?.filter ? q.filter : null, q?.field ? q.field : null);
 				d.collation({ locale: "en" });
-				d.sort(q.sort ? q.sort : null);
+				d.sort(q?.sort ? q.sort : null);
 
 				//not need to crop list
 				//d.skip(qs.skip ? qs.skip : null);

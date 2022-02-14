@@ -236,7 +236,11 @@ export const api = {
 			opt
 		);
 
-		fn.download(`api/${opt.name}-excel/?q=${JSON.stringify(opt.data)}`);
+		if (opt.data) {
+			fn.download(`api/${opt.name}-excel/?q=${JSON.stringify(opt.data)}`);
+		} else {
+			fn.download(`api/${opt.name}-excel`);
+		}
 	},
 	aggregate: function (opt, callback) {
 		opt = core.extend(
