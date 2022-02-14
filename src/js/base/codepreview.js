@@ -16,12 +16,16 @@ const SAMPLELIBNAME = /doc_sample.Z./g;
 
 function beautifyjs(str) {
 	let opt = {
+		preserve_newlines: false,
 		max_preserve_newlines: 50,
+		end_with_newline: true,
 		brace_style: "collapse",
 	};
 
 	str = str.replace(LIBNAME, "$.");
 	str = str.replace(SAMPLELIBNAME, "sample.");
+	str = str.replace(/\[/g, "[\n");
+	str = str.replace(/\]/g, "\n]");
 
 	return js_beautify(str, opt);
 }
@@ -29,6 +33,8 @@ function beautifyjs(str) {
 function beautifyhtml(str) {
 	let opt = {
 		indent_inner_html: true,
+		preserve_newlines: false,
+		end_with_newline: true,
 		indent_size: 4,
 	};
 
