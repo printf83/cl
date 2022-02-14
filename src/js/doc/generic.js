@@ -1,4 +1,5 @@
 "use strict";
+import sample from "./sample.js";
 import $ from "../component.js";
 
 function beautifyjs(str) {
@@ -67,6 +68,15 @@ export default [
 	{
 		title: "Create",
 		msg: [
+			"Create new record from generic database using {{$.db.api.create}} function. Example :",
+			new $.ul({
+				item: [
+					"<code>$.db.api.create(opt,callback)</code>",
+					"<code>$.db.api.create({name:tablename,data:object},callback)</code>",
+					"<code>$.db.api.create({name:tablename,data:[object]},callback)</code>",
+				],
+			}),
+			"This function will return <b>id</b> or <b>array of id</b> on callback if record successfuly created",
 			new $.card.container({
 				marginy: 3,
 				elem: new $.card.body(
@@ -95,6 +105,7 @@ export default [
 	},
 
 	{
+		msg: "Live example",
 		code: function () {
 			return new $.button({
 				label: "Create record",
@@ -111,13 +122,12 @@ export default [
 								phone: "0123456789",
 							},
 						},
-						function (data) {
-							//result
+						function (result) {
 							new $.dlg.inputbox(
 								[
 									new $.input({
 										type: "text",
-										value: data,
+										value: result,
 										label: "Result (copy this for future use)",
 									}),
 								],
@@ -133,6 +143,46 @@ export default [
 
 	{
 		title: "Update",
+		msg: [
+			"Update existing record from generic database using {{$.db.api.update}} function. Example :",
+			new $.ul({
+				item: [
+					"<code>$.db.api.update(opt,callback)</code>",
+					"<code>$.db.api.update({name:tablename,data:object,id:id},callback)</code>",
+				],
+			}),
+			"This function will return <b>id</b> on callback if record successfuly updated",
+			new $.card.container({
+				marginy: 3,
+				elem: new $.card.body(
+					new $.code(
+						new $.pre({
+							class: "prettyprint lang-js",
+							marginbottom: 0,
+							elem: beautifyjs(`
+								$.db.api.update(
+									{
+										name: "customer",
+										data: {
+											name: "Test user update",
+											phone: "012987654",
+											email: "test@test.com",
+										},
+										id: "id",
+									},
+									function (result) {
+									}
+								);
+							`),
+						})
+					)
+				),
+			}),
+		],
+	},
+
+	{
+		msg: "Live example",
 		code: function () {
 			return new $.button({
 				label: "Update record",
@@ -152,9 +202,9 @@ export default [
 								},
 								id: data.value,
 							},
-							function (data) {
+							function (result) {
 								//result
-								new $.toast("i", data).show();
+								new $.toast("i", result).show();
 							}
 						);
 					}).show();
@@ -165,6 +215,42 @@ export default [
 
 	{
 		title: "Load",
+		msg: [
+			"Load existing record from generic database using {{$.db.api.load}} function. Example :",
+			new $.ul({
+				item: [
+					"<code>$.db.api.load(opt,callback)</code>",
+					"<code>$.db.api.load({name:tablename,id:id},callback)</code>",
+					"<code>$.db.api.load({name:tablename,id:[id]},callback)</code>",
+				],
+			}),
+			"This function will return <b>object</b> or <b>array of object</b> on callback if record found",
+			new $.card.container({
+				marginy: 3,
+				elem: new $.card.body(
+					new $.code(
+						new $.pre({
+							class: "prettyprint lang-js",
+							marginbottom: 0,
+							elem: beautifyjs(`
+								$.db.api.load(
+									{
+										name: "customer",
+										id: "id",
+									},
+									function (result) {
+									}
+								);
+							`),
+						})
+					)
+				),
+			}),
+		],
+	},
+
+	{
+		msg: "Live example",
 		code: function () {
 			return new $.button({
 				label: "Load record",
@@ -179,9 +265,9 @@ export default [
 								name: "customer",
 								id: data.value,
 							},
-							function (data) {
+							function (result) {
 								//result
-								new $.toast("i", JSON.stringify(data)).show();
+								new $.toast("i", JSON.stringify(result)).show();
 							}
 						);
 					}).show();
@@ -192,6 +278,42 @@ export default [
 
 	{
 		title: "Delete",
+		msg: [
+			"Delete existing record from generic database using {{$.db.api.delete}} function. Example :",
+			new $.ul({
+				item: [
+					"<code>$.db.api.delete(opt,callback)</code>",
+					"<code>$.db.api.delete({name:tablename,id:id},callback)</code>",
+					"<code>$.db.api.delete({name:tablename,id:[id]},callback)</code>",
+				],
+			}),
+			"This function will return <b>id</b> or <b>array of id</b> on callback if record found and deleted",
+			new $.card.container({
+				marginy: 3,
+				elem: new $.card.body(
+					new $.code(
+						new $.pre({
+							class: "prettyprint lang-js",
+							marginbottom: 0,
+							elem: beautifyjs(`
+								$.db.api.delete(
+									{
+										name: "customer",
+										id: "id",
+									},
+									function (result) {
+									}
+								);
+							`),
+						})
+					)
+				),
+			}),
+		],
+	},
+
+	{
+		msg: "Live example",
 		code: function () {
 			return new $.button({
 				label: "Delete record",
@@ -206,14 +328,114 @@ export default [
 								name: "customer",
 								id: data.value,
 							},
-							function (data) {
+							function (result) {
 								//result
-								new $.toast("i", data).show();
+								new $.toast("i", result).show();
 							}
 						);
 					}).show();
 				},
 			});
+		},
+	},
+
+	{
+		title: "List",
+		msg: [
+			"Get list of record from generic database using {{$.db.api.list}} function. Example :",
+			new $.ul({
+				item: [
+					"<code>$.db.api.list(opt,callback)</code>",
+					"<code>$.db.api.list({name:tablename},callback)</code>",
+					"<code>$.db.api.list({name:tablename,data:query},callback)</code>",
+				],
+			}),
+			"This function will return <b>array of object</b> on callback if process is successful",
+			new $.card.container({
+				marginy: 3,
+				elem: new $.card.body(
+					new $.code(
+						new $.pre({
+							class: "prettyprint lang-js",
+							marginbottom: 0,
+							elem: beautifyjs(`
+								$.db.api.list(
+									{
+										name: "customer",
+									},
+									function (result) {
+									}
+								);
+							`),
+						})
+					)
+				),
+			}),
+		],
+	},
+
+	{
+		msg: "Live example",
+		container: sample.formcontainer,
+		code: function () {
+			let resultOutputId = $.core.UUID();
+			return [
+				new $.button({
+					label: "Load list",
+					color: "primary",
+					icon: "folder-open",
+					onclick: function (event) {
+						let sender = event.currentTarget;
+						//delete record
+						$.db.api.list(
+							{
+								name: "customer",
+							},
+							function (result) {
+								//result
+								document.getElementById(resultOutputId).value = JSON.stringify(result);
+							}
+						);
+					},
+				}),
+				new $.input({ type: "textarea", label: "Result", id: resultOutputId, rows: 10 }),
+			];
+		},
+	},
+
+	{
+		msg: "Live example with query",
+		container: sample.formcontainer,
+		code: function () {
+			let resultOutputId = $.core.UUID();
+			return [
+				new $.button({
+					label: "Load list",
+					color: "primary",
+					icon: "folder-open",
+					onclick: function (event) {
+						let sender = event.currentTarget;
+						//delete record
+						$.db.api.list(
+							{
+								name: "customer",
+								data: {
+									filter: null,
+									sort: { state: 1, name: 1 },
+									field: { __v: 0, email: 0, dob: 0 },
+									limit: 10,
+									skip: 0,
+								},
+							},
+							function (result) {
+								//result
+								document.getElementById(resultOutputId).value = JSON.stringify(result);
+							}
+						);
+					},
+				}),
+				new $.input({ type: "textarea", label: "Result", id: resultOutputId, rows: 10 }),
+			];
 		},
 	},
 ];
