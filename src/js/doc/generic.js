@@ -95,7 +95,6 @@ export default [
 	},
 
 	{
-		title: "Create record live example",
 		code: function () {
 			return new $.button({
 				label: "Create record",
