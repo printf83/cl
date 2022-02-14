@@ -130,8 +130,8 @@ const db_menu = [
 	},
 	{
 		type: "menu",
-		title: "API",
-		item: [{ title: "Database", source: doc.db }],
+		title: "Database",
+		item: [{ title: "Generic", source: doc.generic }],
 	},
 	{
 		type: "navigate",

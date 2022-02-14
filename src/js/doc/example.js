@@ -44,6 +44,21 @@ export default [
 	},
 
 	{
+		title: "Code without preview",
+		code: function () {
+			return new $.example({
+				title: "Title",
+				msg: "Message",
+				view: false,
+				code: function () {
+					new $.button({ label: "Button", color: "primary" });
+				},
+				debug: true, //this last option is for this documentation preview only
+			});
+		},
+	},
+
+	{
 		title: "Code with beautify",
 		sample: {
 			"sample.beautifyjs": sample.beautifyjs,

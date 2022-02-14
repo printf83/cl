@@ -1,6 +1,15 @@
 "use strict";
 import $ from "../component.js";
 
+function beautifyjs(str) {
+	return js_beautify(str, {
+		preserve_newlines: true,
+		max_preserve_newlines: 100,
+		keep_array_indentation: false,
+		brace_style: "collapse,preserve-inline",
+	});
+}
+
 export default [
 	{
 		title: "Database",
@@ -9,7 +18,72 @@ export default [
 	},
 
 	{
+		msg: [
+			"Please create table using generic database in server.js. For this example, we create <b>customer</b> table",
+			new $.card.container({
+				marginy: 3,
+				elem: new $.card.body(
+					new $.code(
+						new $.pre({
+							class: "prettyprint lang-js",
+							marginbottom: 0,
+							elem: beautifyjs(`
+								require("./routes/generic.js")(app, "customer");
+							`),
+						})
+					)
+				),
+			}),
+			"and models for <b>customer</b> table is created in <b>models</b>",
+			new $.card.container({
+				marginy: 3,
+				elem: new $.card.body(
+					new $.code(
+						new $.pre({
+							class: "prettyprint lang-js",
+							marginbottom: 0,
+							elem: beautifyjs(`
+								require("./routes/generic.js")(app, "customer");
+							`),
+						})
+					)
+				),
+			}),
+		],
+	},
+
+	{
 		title: "Create",
+		msg: [
+			new $.card.container({
+				marginy: 3,
+				elem: new $.card.body(
+					new $.code(
+						new $.pre({
+							class: "prettyprint lang-js",
+							marginbottom: 0,
+							elem: beautifyjs(`
+								$.db.api.create(
+									{
+										name: "customer",
+										data: {
+											name: "Test user",
+											dob: "1987-06-05",
+											phone: "0123456789",
+										},
+									},
+									function (result) {}
+								);
+							`),
+						})
+					)
+				),
+			}),
+		],
+	},
+
+	{
+		title: "Create record live example",
 		code: function () {
 			return new $.button({
 				label: "Create record",

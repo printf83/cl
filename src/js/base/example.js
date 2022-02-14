@@ -60,7 +60,7 @@ const defaultOption = {
 	code: null,
 	dark: false,
 	sample: null,
-
+	view: true,
 	viewclass: null,
 
 	beautifyhtml: function (str) {
@@ -142,7 +142,7 @@ export default class example extends div {
 
 		let item = [];
 
-		if (opt.code) {
+		if (opt.code && opt.view) {
 			item.push({
 				label: "html",
 				icon: "code",
@@ -175,10 +175,10 @@ export default class example extends div {
 			elem: [
 				ctltitle,
 				ctlmsg ? new div({ elem: ctlmsg }) : null,
-				opt.code
+				opt.code && opt.view
 					? new card.container({
-							rounded: ["top", "0"],
-							border: "bottom-0",
+							// rounded: ["top", "0"],
+							marginbottom: 3,
 							color: opt.dark ? "dark" : null,
 							class: opt.viewclass,
 							elem: new card.body({ elem: opt.container(opt.code()) }),
@@ -186,8 +186,8 @@ export default class example extends div {
 					: null,
 				opt.code
 					? new accordion({
-							border: true,
-							flush: true,
+							// border: opt.view ? ["top-0", "border"] : false,
+							// flush: opt.view ? true : false,
 							autoclose: false,
 							item: item,
 					  })
