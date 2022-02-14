@@ -97,7 +97,12 @@ export default class example extends div {
 		let ctltitle = null;
 		if (opt.title) {
 			ctltitle = new tag({
-				tag: opt.code ? "h3" : opt.anchor ? "h2" : "h1",
+				tag:
+					opt.code || (opt.msg && Array.isArray(opt.msg) && opt.msg.length >= 3)
+						? "h3"
+						: opt.anchor
+						? "h2"
+						: "h1",
 				class: !opt.anchor ? "fs-1" : null,
 				paddingtop: 3,
 				id: opt.id,
