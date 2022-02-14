@@ -1,15 +1,6 @@
 "use strict";
 import $ from "../component.js";
 
-function beautifyjs(str) {
-	return js_beautify(str, {
-		preserve_newlines: true,
-		max_preserve_newlines: 100,
-		keep_array_indentation: false,
-		brace_style: "collapse,preserve-inline",
-	});
-}
-
 export default [
 	{
 		msg: [
@@ -32,24 +23,15 @@ export default [
 				"text-center",
 				"Build Full Stack Web Application using JS, Bootstrap, Fontawesome, NodeJS, And Mongodb using BS5 JS Builder"
 			),
-
-			new $.card.container({
-				marginy: 3,
-				elem: new $.card.body(
-					new $.code(
-						new $.pre({
-							class: "prettyprint lang-js",
-							marginbottom: 0,
-							elem: beautifyjs(`
-								$.core.appendChild(dom,cltag);
-								$.core.prependChild(dom,cltag);
-								$.core.replaceChild(dom,cltag);
-								$.core.replaceWith(dom,cltag);
-								let htmlOutput = $.core.html(cltag);
-							`),
-						})
-					)
-				),
+			new $.codepreview({
+				container: "card",
+				code: `
+					$.core.appendChild(dom,cltag);
+					$.core.prependChild(dom,cltag);
+					$.core.replaceChild(dom,cltag);
+					$.core.replaceWith(dom,cltag);
+					let htmlOutput = $.core.html(cltag);
+			`,
 			}),
 
 			new $.div({
@@ -58,25 +40,17 @@ export default [
 				elem: "Example : ",
 			}),
 
-			new $.card.container({
-				marginy: 3,
-				elem: new $.card.body(
-					new $.code(
-						new $.pre({
-							class: "prettyprint lang-js",
-							marginbottom: 0,
-							elem: beautifyjs(`
-								"use strict";
-								import $ from "./component.js";
-								
-								$.core.documentReady(() => {
-									$.core.appendChild(document.body,new $.button({label:'Hello World!', color:'primary'}));
-									$.core.appendChild(document.body,new $.p('Hello World!'));
-								});
-							`),
-						})
-					)
-				),
+			new $.codepreview({
+				container: "card",
+				code: `
+					"use strict";
+					import $ from "./component.js";
+					
+					$.core.documentReady(() => {
+						$.core.appendChild(document.body,new $.button({label:'Hello World!', color:'primary'}));
+						$.core.appendChild(document.body,new $.p('Hello World!'));
+					});
+			`,
 			}),
 
 			new $.div({

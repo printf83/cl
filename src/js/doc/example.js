@@ -59,30 +59,7 @@ export default [
 	},
 
 	{
-		title: "Code with beautify",
-		sample: {
-			"sample.beautifyjs": sample.beautifyjs,
-			"sample.beautifyhtml": sample.beautifyhtml,
-		},
-		code: function () {
-			return new $.example({
-				title: "Title",
-				msg: "Message",
-				beautifyjs: sample.beautifyjs,
-				beautifyhtml: sample.beautifyhtml,
-				code: function () {
-					return new $.button({ label: "Button", color: "primary" });
-				},
-				debug: true, //this last option is for this documentation preview only
-			});
-		},
-	},
-	{
 		title: "Sample code",
-		sample: {
-			"sample.beautifyjs": sample.beautifyjs,
-			"sample.beautifyhtml": sample.beautifyhtml,
-		},
 		code: function () {
 			return new $.example({
 				title: "Title",
@@ -90,8 +67,6 @@ export default [
 				sample: {
 					"sample.optionitem": sample.optionitem,
 				},
-				beautifyjs: sample.beautifyjs,
-				beautifyhtml: sample.beautifyhtml,
 				code: function () {
 					return new $.input({ type: "select", option: sample.optionitem() });
 				},
@@ -102,17 +77,11 @@ export default [
 
 	{
 		title: "Dark view",
-		sample: {
-			"sample.beautifyjs": sample.beautifyjs,
-			"sample.beautifyhtml": sample.beautifyhtml,
-		},
 		code: function () {
 			return new $.example({
 				title: "Title",
 				msg: "Message",
 				dark: true,
-				beautifyjs: sample.beautifyjs,
-				beautifyhtml: sample.beautifyhtml,
 				code: function () {
 					return new $.toast({
 						color: "primary",
@@ -130,17 +99,11 @@ export default [
 
 	{
 		title: "View class",
-		sample: {
-			"sample.beautifyjs": sample.beautifyjs,
-			"sample.beautifyhtml": sample.beautifyhtml,
-		},
 		code: function () {
 			return new $.example({
 				title: "Title",
 				msg: "Message",
 				viewclass: "cl-highlight-col",
-				beautifyjs: sample.beautifyjs,
-				beautifyhtml: sample.beautifyhtml,
 				code: function () {
 					return new $.div("container", [
 						new $.div("row", [
@@ -162,16 +125,10 @@ export default [
 
 	{
 		title: "Item container",
-		sample: {
-			"sample.beautifyjs": sample.beautifyjs,
-			"sample.beautifyhtml": sample.beautifyhtml,
-		},
 		code: function () {
 			return new $.example({
 				title: "Title",
 				msg: "Message",
-				beautifyjs: sample.beautifyjs,
-				beautifyhtml: sample.beautifyhtml,
 				container: function (items) {
 					return new $.div(
 						"p-0 container",

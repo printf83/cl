@@ -585,28 +585,6 @@ fill="#999" stroke="none">
 			],
 		});
 	},
-	beautifyjs: function (str) {
-		let opt = {
-			max_preserve_newlines: 50,
-			brace_style: "collapse",
-		};
-
-		str = str.replace(/component.Z./g, "$.");
-		str = str.replace(/doc_sample./g, "sample.");
-
-		return js_beautify(str, opt);
-	},
-	beautifyhtml: function (str) {
-		let opt = {
-			indent_inner_html: true,
-			indent_size: 4,
-		};
-
-		str = str.replace(/\>/g, ">\n");
-		str = str.replace(/\</g, "\n<");
-		str = str.replace(/\n\n/g, "\n");
-		return html_beautify(str, opt);
-	},
 	table: function (header, footer) {
 		let rtn = [
 			["1/6/2020", "East", "Jones", "Pencil", "95", "1.99", "189.05"],

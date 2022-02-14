@@ -1,6 +1,4 @@
 "use strict";
-const LIBNAME = /component.Z./g;
-const SAMPLELIBNAME = /doc_sample.Z./g;
 
 import "../css/sample.css";
 
@@ -320,36 +318,10 @@ function gen_example(opt) {
 		msg: m,
 		dark: opt.dark,
 		viewclass: opt.viewclass,
-		beautifyjs: beautifyjs,
-		beautifyhtml: beautifyhtml,
 		container: opt.container,
 		code: opt.code,
 		sample: opt.sample,
 	});
-}
-
-function beautifyjs(str) {
-	let opt = {
-		max_preserve_newlines: 50,
-		brace_style: "collapse",
-	};
-
-	str = str.replace(LIBNAME, "$.");
-	str = str.replace(SAMPLELIBNAME, "sample.");
-
-	return js_beautify(str, opt);
-}
-
-function beautifyhtml(str) {
-	let opt = {
-		indent_inner_html: true,
-		indent_size: 4,
-	};
-
-	str = str.replace(/\>/g, ">\n");
-	str = str.replace(/\</g, "\n<");
-	str = str.replace(/\n\n/g, "\n");
-	return html_beautify(str, opt);
 }
 
 function find_menu(m1, m2) {

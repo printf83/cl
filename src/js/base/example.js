@@ -1,6 +1,5 @@
 "use strict";
 import "../../css/anchor.css";
-import "../../css/prettify.css";
 
 import * as core from "./core.js";
 import * as card from "./card.js";
@@ -10,47 +9,7 @@ import div from "./div.js";
 import label from "./label.js";
 import a from "./a.js";
 import p from "./p.js";
-import code from "./code.js";
-import pre from "./pre.js";
-import button from "./button.js";
-import toast from "./toast.js";
-
-function codecontainer(type, strcode, beautify) {
-	return [
-		new div({
-			position: "relative",
-			float: "right",
-			elem: new button({
-				icon: { type: "far", icon: "clipboard" },
-				label: "Copy",
-				hidelabel: true,
-				textcolor: "primary",
-				align: "end",
-				padding: 1,
-				class: "position-absolute end-0",
-				onclick: function (event) {
-					let str = event.currentTarget.parentElement.nextSibling.firstChild.innerText;
-
-					try {
-						navigator.clipboard.writeText(str);
-						new toast("/", "Copied to clipboard").show();
-					} catch (ex) {
-						new toast("!!", `Error when copy code to clipboard. ${ex}`).show();
-					}
-				},
-			}),
-		}),
-		new code({
-			overflow: "auto",
-			display: "block",
-			elem: new pre({
-				class: `prettyprint lang-${type}`,
-				attr: { lang: type },
-				elem: beautify(strcode),
-			}),
-		}),
-	];
-}
+import codepreview from "./codepreview.js";
 
 const defaultOption = {
 	title: null,
@@ -62,14 +21,6 @@ const defaultOption = {
 	sample: null,
 	view: true,
 	viewclass: null,
-
-	beautifyhtml: function (str) {
-		return str;
-	},
-	beautifyjs: function (str) {
-		return str;
-	},
-
 	container: function (elem) {
 		return elem;
 	},
@@ -151,7 +102,7 @@ export default class example extends div {
 			item.push({
 				label: "html",
 				icon: "code",
-				elem: codecontainer("html", core.html(opt.code()), opt.beautifyhtml),
+				elem: new codepreview({ type: "html", code: core.html(opt.code()), container: null }),
 			});
 		}
 
@@ -161,7 +112,7 @@ export default class example extends div {
 					label: sampleKey,
 					// label: opt.sample[sampleKey].name(),
 					icon: "link",
-					elem: codecontainer("js", opt.sample[sampleKey].toString(), opt.beautifyjs),
+					elem: new codepreview({ type: "js", code: opt.sample[sampleKey].toString(), container: null }),
 				});
 			});
 		}
@@ -171,7 +122,7 @@ export default class example extends div {
 				label: "code",
 				icon: "fire",
 				active: true,
-				elem: codecontainer("js", opt.code.toString(), opt.beautifyjs),
+				elem: new codepreview({ type: "js", code: opt.code.toString(), container: null }),
 			});
 		}
 

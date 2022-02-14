@@ -13,6 +13,7 @@ import button from "./base/button.js";
 import * as card from "./base/card.js";
 import carousel from "./base/carousel.js";
 import code from "./base/code.js";
+import codepreview from "./base/codepreview.js";
 import * as collapse from "./base/collapse.js";
 import * as container from "./base/container.js";
 import * as core from "./base/core.js";
@@ -73,6 +74,7 @@ export default {
 	card,
 	carousel,
 	code,
+	codepreview,
 	collapse,
 	container,
 	core,
