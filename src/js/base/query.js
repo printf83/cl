@@ -187,7 +187,7 @@ let fn = {
 
 				//like : { $regex: VALUETOFIND, $options: "i" };
 				//notlike : { $regex: "^((?!" + VALUETOFIND + ").)*$", $options: "i" };
-				if (v.startsWith("^((?!")) {
+				if (v && v.startsWith("^((?!")) {
 					o = "$nelike";
 					v = v.substring(5, v.length - 5);
 				} else {

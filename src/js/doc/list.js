@@ -449,4 +449,129 @@ export default [
 			];
 		},
 	},
+
+	{
+		title: "Query dialog",
+		container: sample.formcontainer,
+		code: function () {
+			let resultOutputId = $.core.UUID();
+
+			return [
+				new $.btngroup([
+					new $.button({
+						label: "Reload",
+						icon: "fire",
+						color: "primary",
+						onclick: function () {
+							$.list.container.reload(resultOutputId);
+						},
+					}),
+
+					new $.button({
+						label: "Add new",
+						icon: "floppy-disk",
+						color: "success",
+						onclick: function () {
+							$.list.container.item.add(resultOutputId);
+						},
+					}),
+
+					new $.button({
+						label: "Check mode",
+						icon: "list-check",
+						color: "warning",
+						onclick: function () {
+							$.list.container.check.mode(resultOutputId);
+						},
+					}),
+
+					new $.button({
+						label: "Check all",
+						icon: "check-double",
+						color: "warning",
+						onclick: function () {
+							$.list.container.check.all(resultOutputId);
+						},
+					}),
+
+					new $.button({
+						label: "Delete checked",
+						icon: "trash-can",
+						color: "danger",
+						onclick: function () {
+							$.list.container.check.delete(resultOutputId);
+						},
+					}),
+				]),
+				new $.btngroup([
+					new $.button({
+						label: "Query",
+						icon: "fire",
+						color: "primary",
+						onclick: function () {
+							$.list.container.query.all(resultOutputId);
+						},
+					}),
+
+					new $.button({
+						icon: "filter",
+						color: "primary",
+						onclick: function () {
+							$.list.container.query.filter(resultOutputId);
+						},
+					}),
+
+					new $.button({
+						icon: "sort",
+						color: "primary",
+						onclick: function () {
+							$.list.container.query.sort(resultOutputId);
+						},
+					}),
+
+					new $.button({
+						icon: "tasks",
+						color: "primary",
+						onclick: function () {
+							$.list.container.query.field(resultOutputId);
+						},
+					}),
+
+					new $.button({
+						icon: "list-ol",
+						color: "primary",
+						onclick: function () {
+							$.list.container.query.limit(resultOutputId);
+						},
+					}),
+
+					new $.button({
+						icon: { icon: "sort", rotate: 90 },
+						color: "primary",
+						onclick: function () {
+							$.list.container.query.page(resultOutputId);
+						},
+					}),
+				]),
+				new $.list.container({
+					id: resultOutputId,
+					setting: fn.setting,
+					query: fn.query,
+					editor: fn.editor,
+					name: "customer",
+					item: function (data) {
+						return new $.list.item({
+							key: data._id,
+							name: data.name,
+							picture: data.picture,
+							detail: new $.small([data.phone, data.dob, data.email].filter(Boolean).join(" | ")),
+							allow_delete: true,
+							allow_copy: true,
+							allow_action: true,
+						});
+					},
+				}),
+			];
+		},
+	},
 ];

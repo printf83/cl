@@ -326,7 +326,7 @@ export default [
 			return [
 				new $.button({
 					label: "Page Dialog",
-					icon: "list-ol",
+					icon: { icon: "sort", rotate: 90 },
 					color: "primary",
 					onclick: function () {
 						//edit query

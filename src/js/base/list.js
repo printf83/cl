@@ -508,10 +508,10 @@ const defaultOption = {
 	item: function (data) {
 		return new item({
 			name: JSON.stringify(data)
-				.replace(/\,/g, ", ")
-				.replace(/\:/g, " : ")
-				.replace(/\{/g, "{ ")
-				.replace(/\}/g, " }"),
+				.replace(/\,/g, ",<br/>")
+				.replace(/\:/g, ": ")
+				.replace(/\{/g, "{<br/>")
+				.replace(/\}/g, "<br/>}"),
 		});
 	},
 };
