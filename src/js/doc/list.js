@@ -393,6 +393,7 @@ export default [
 
 					new $.button({
 						label: "Add new",
+						showlabel: "lg",
 						icon: "floppy-disk",
 						color: "success",
 						onclick: function () {
@@ -402,6 +403,7 @@ export default [
 
 					new $.button({
 						label: "Check mode",
+						showlabel: "lg",
 						icon: "list-check",
 						color: "warning",
 						onclick: function () {
@@ -411,6 +413,7 @@ export default [
 
 					new $.button({
 						label: "Check all",
+						showlabel: "lg",
 						icon: "check-double",
 						color: "warning",
 						onclick: function () {
@@ -420,6 +423,7 @@ export default [
 
 					new $.button({
 						label: "Delete checked",
+						showlabel: "lg",
 						icon: "trash-can",
 						color: "danger",
 						onclick: function () {
@@ -469,6 +473,7 @@ export default [
 
 					new $.button({
 						label: "Add new",
+						showlabel: "lg",
 						icon: "floppy-disk",
 						color: "success",
 						onclick: function () {
@@ -478,6 +483,7 @@ export default [
 
 					new $.button({
 						label: "Check mode",
+						showlabel: "lg",
 						icon: "list-check",
 						color: "warning",
 						onclick: function () {
@@ -487,6 +493,7 @@ export default [
 
 					new $.button({
 						label: "Check all",
+						showlabel: "lg",
 						icon: "check-double",
 						color: "warning",
 						onclick: function () {
@@ -496,6 +503,7 @@ export default [
 
 					new $.button({
 						label: "Delete checked",
+						showlabel: "lg",
 						icon: "trash-can",
 						color: "danger",
 						onclick: function () {
@@ -506,6 +514,7 @@ export default [
 				new $.btngroup([
 					new $.button({
 						label: "Query",
+						showlabel: "lg",
 						icon: "fire",
 						color: "primary",
 						onclick: function () {

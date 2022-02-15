@@ -5,13 +5,13 @@ export default [
 	{
 		msg: [
 			new $.div("text-center display-1", document.title),
-			new $.div("text-center display-5 text-primary", [
-				new $.icon({ type: "fab", icon: "bootstrap" }),
-				new $.icon("swatchbook"),
-				new $.icon({ type: "fab", icon: "font-awesome-flag" }),
-				new $.icon({ type: "fab", icon: "node-js" }),
-				new $.icon("leaf"),
-			]),
+			// new $.div("text-center display-5 text-primary", [
+			// 	new $.icon({ type: "fab", icon: "bootstrap" }),
+			// 	new $.icon("swatchbook"),
+			// 	new $.icon({ type: "fab", icon: "font-awesome-flag" }),
+			// 	new $.icon({ type: "fab", icon: "node-js" }),
+			// 	new $.icon("leaf"),
+			// ]),
 
 			new $.alert.container({
 				icon: "!",
@@ -19,10 +19,55 @@ export default [
 				margintop: 5,
 			}),
 
-			new $.div(
-				"text-center",
-				"Build Full Stack Web Application using JS, Bootstrap, Fontawesome, NodeJS, And Mongodb using BS5 JS Builder"
-			),
+			new $.div({
+				align: "center",
+				marginbottom: 3,
+				elem: "Build Full Stack Web Application using ",
+			}),
+
+			new $.div({
+				display: "flex",
+				justifycontent: "center",
+				marginbottom: 4,
+				gap: 3,
+				elem: [
+					new $.a({
+						textdecoration: "none",
+						href: "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
+						elem: new $.pill({ icon: { icon: "js-square", type: "fab" }, label: "Javascript" }),
+					}),
+					new $.a({
+						textdecoration: "none",
+						href: "https://getbootstrap.com/",
+						elem: new $.pill({ icon: { icon: "bootstrap", type: "fab" }, label: "Bootstrap" }),
+					}),
+					new $.a({
+						textdecoration: "none",
+						href: "https://bootswatch.com/",
+						elem: new $.pill({ icon: { icon: "swatchbook" }, label: "Bootswatch" }),
+					}),
+					new $.a({
+						textdecoration: "none",
+						href: "https://fontawesome.com/",
+						elem: new $.pill({ icon: { icon: "font-awesome-flag", type: "fab" }, label: "Fontawesome" }),
+					}),
+					new $.a({
+						textdecoration: "none",
+						href: "https://nodejs.org/en/",
+						elem: new $.pill({ icon: { icon: "node-js", type: "fab" }, label: "NodeJS" }),
+					}),
+					new $.a({
+						textdecoration: "none",
+						href: "https://www.mongodb.com/",
+						elem: new $.pill({ icon: { icon: "leaf" }, label: "MongoDB" }),
+					}),
+					new $.a({
+						textdecoration: "none",
+						href: "http://bs5-js-builder.herokuapp.com/",
+						elem: new $.pill({ icon: { icon: "fire" }, label: "CL" }),
+					}),
+				],
+			}),
 			new $.codepreview({
 				container: "card",
 				code: `
@@ -56,7 +101,7 @@ export default [
 			new $.div({
 				display: "flex",
 				justifycontent: "center",
-				marginbottom: 5,
+				marginbottom: 3,
 				gap: 2,
 				elem: [
 					new $.a({
