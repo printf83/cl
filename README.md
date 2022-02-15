@@ -11,3 +11,6 @@
 *   PORT=8888
 *   DBURL=mongodb+srv://username:server/db?retryWrites=true&w=majority
 *   SESSIONSECRET=super-secret-session
+  
+-   # test server
+https://bs5-js-builder.herokuapp.com/
