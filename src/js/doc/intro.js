@@ -27,6 +27,7 @@ export default [
 
 			new $.div({
 				display: "flex",
+				flex: "wrap",
 				justifycontent: "center",
 				marginbottom: 4,
 				gap: 1,

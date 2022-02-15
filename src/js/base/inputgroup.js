@@ -8,7 +8,7 @@ const defaultOption = {
 	for: null,
 	label: null,
 	elem: null,
-	nowrap: false,
+	nowrap: true,
 	weight: null,
 };
 /**

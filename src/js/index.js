@@ -653,6 +653,7 @@ $.core.documentReady(() => {
 			}),
 			footerelem: new $.div({
 				display: "flex",
+				flex: "wrap",
 				justifycontent: "center",
 				marginbottom: 5,
 				gap: 2,
