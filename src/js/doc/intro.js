@@ -29,7 +29,7 @@ export default [
 				display: "flex",
 				justifycontent: "center",
 				marginbottom: 4,
-				gap: 3,
+				gap: 1,
 				elem: [
 					new $.a({
 						textdecoration: "none",
@@ -59,7 +59,7 @@ export default [
 					new $.a({
 						textdecoration: "none",
 						href: "https://www.mongodb.com/",
-						elem: new $.pill({ icon: { icon: "leaf" }, label: "MongoDB" }),
+						elem: new $.pill({ icon: { icon: "envira", type: "fab" }, label: "MongoDB" }),
 					}),
 					new $.a({
 						textdecoration: "none",
