@@ -420,7 +420,7 @@ export default [
 
 					new $.button({
 						label: "Delete checked",
-						icon: "trash-check",
+						icon: "trash-can",
 						color: "danger",
 						onclick: function () {
 							$.list.container.check.delete(resultOutputId);
