@@ -48,12 +48,12 @@ export default [
 
 	{
 		msg: [
-			"In this example we will use some outside variable that we declare as fn.",
+			"fn.setting",
 			new $.codepreview({
 				container: "card",
 				code: `
-					const fn = {
-						setting: {
+					function() {
+						return {
 							field: [
 								{ value: "name", label: "Name", type: "text" },
 								{ value: "dob", label: "Date Of Birth", type: "date" },
@@ -79,15 +79,23 @@ export default [
 								step: 1,
 							},
 							useopricon: false,
-						},
-						query: {
+						};
+					}
+			`,
+			}),
+			"fn.query",
+			new $.codepreview({
+				container: "card",
+				code: `
+					function() {
+						return {
 							filter: null,
 							sort: { state: 1, name: 1 },
 							field: { __v: 0 },
 							limit: 10,
 							skip: 0,
-						},
-					};
+						};
+					}
 			`,
 			}),
 		],

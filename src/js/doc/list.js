@@ -84,12 +84,12 @@ export default [
 
 	{
 		msg: [
-			"In this example we will use some outside variable that we declare as fn.",
+			"fn.setting",
 			new $.codepreview({
 				container: "card",
 				code: `
-					const fn = {
-						setting: {
+					function() {
+						return {
 							field: [
 								{ value: "name", label: "Name", type: "text" },
 								{ value: "dob", label: "Date Of Birth", type: "date" },
@@ -115,51 +115,65 @@ export default [
 								step: 1,
 							},
 							useopricon: false,
-						},
-						query: {
+						};
+					}
+			`,
+			}),
+			"fn.query",
+			new $.codepreview({
+				container: "card",
+				code: `
+					function() {
+						return {
 							filter: null,
 							sort: { state: 1, name: 1 },
 							field: { __v: 0 },
 							limit: 10,
 							skip: 0,
-						},
-						editor: function (data, readonly) {
-							return [
-								new $.input({
-									type: "text",
-									label: "Name",
-									name: "name",
-									value: data ? data.name : null,
-								}),
-								new $.input({
-									type: "date",
-									label: "Date of birth",
-									name: "dob",
-									value: data ? data.dob : null,
-								}),
-								new $.input({
-									type: "text",
-									label: "Phone",
-									name: "phone",
-									value: data ? data.phone : null,
-								}),
-								new $.file({ label: "Picture", name: "picture", value: data ? data.picture : null }),
-								new $.input({
-									type: "email",
-									label: "Email",
-									name: "email",
-									value: data ? data.email : null,
-								}),
-								new $.input({
-									type: "select",
-									label: "State",
-									name: "state",
-									option: null,
-									value: data ? data.state : null,
-								}),
-							];
-						},
-					};
+						};
+					}
+			`,
+			}),
+			"fn.editor",
+			new $.codepreview({
+				container: "card",
+				code: `
+					function (data, readonly) {
+						return [
+							new $.input({
+								type: "text",
+								label: "Name",
+								name: "name",
+								value: data ? data.name : null,
+							}),
+							new $.input({
+								type: "date",
+								label: "Date of birth",
+								name: "dob",
+								value: data ? data.dob : null,
+							}),
+							new $.input({
+								type: "text",
+								label: "Phone",
+								name: "phone",
+								value: data ? data.phone : null,
+							}),
+							new $.file({ label: "Picture", name: "picture", value: data ? data.picture : null }),
+							new $.input({
+								type: "email",
+								label: "Email",
+								name: "email",
+								value: data ? data.email : null,
+							}),
+							new $.input({
+								type: "select",
+								label: "State",
+								name: "state",
+								option: null,
+								value: data ? data.state : null,
+							}),
+						]
+					}
 			`,
 			}),
 		],
