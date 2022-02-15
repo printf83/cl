@@ -47,34 +47,7 @@ export default [
 	},
 
 	{
-		title: "List",
 		msg: [
-			"Get list of record from <b>cl generic database</b> using {{$.db.api.list}} function. Example :",
-			new $.ul({
-				item: [
-					"<code>$.db.api.list(opt,callback)</code>",
-					"<code>$.db.api.list({name:tablename},callback)</code>",
-					"<code>$.db.api.list({name:tablename,data:query},callback)</code>",
-				],
-			}),
-			"This function will return <b>array of object</b> on callback if process is successful",
-			new $.codepreview({
-				container: "card",
-				code: `
-					new $.query.dialog(
-						{
-							field: value, 		//field setting
-							limit: value, 		//limit setting
-							skip: value, 		//skip setting
-							useopricon: value, 	//useopricon setting
-							data: value, 		//data
-						},
-						[
-							function (_event, result) {	},
-						]
-					).show();
-			`,
-			}),
 			"In this example we will use some outside variable that we declare as fn.",
 			new $.codepreview({
 				container: "card",
@@ -167,7 +140,7 @@ export default [
 	},
 
 	{
-		Title: "Filter dialog",
+		title: "Filter dialog",
 		container: sample.formcontainer,
 		code: function () {
 			let resultOutputId = $.core.UUID();
@@ -211,7 +184,7 @@ export default [
 	},
 
 	{
-		Title: "Sort dialog",
+		title: "Sort dialog",
 		container: sample.formcontainer,
 		code: function () {
 			let resultOutputId = $.core.UUID();
@@ -255,7 +228,7 @@ export default [
 	},
 
 	{
-		Title: "Field dialog",
+		title: "Field dialog",
 		container: sample.formcontainer,
 		code: function () {
 			let resultOutputId = $.core.UUID();
@@ -298,7 +271,7 @@ export default [
 	},
 
 	{
-		Title: "Limit dialog",
+		title: "Limit dialog",
 		container: sample.formcontainer,
 		code: function () {
 			let resultOutputId = $.core.UUID();
@@ -345,7 +318,7 @@ export default [
 	},
 
 	{
-		Title: "Page dialog",
+		title: "Page dialog",
 		container: sample.formcontainer,
 		code: function () {
 			let resultOutputId = $.core.UUID();
