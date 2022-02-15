@@ -321,12 +321,14 @@ const fn = {
 			event.stopPropagation();
 
 			let sender = event.currentTarget.closest("div[data-key]");
-			let container = sender.closest(".cl-list");
+			if (sender) {
+				let container = sender.closest(".cl-list");
 
-			if (container.classList.contains("check")) {
-				fn.check.item(event);
-			} else {
-				fn.item.edit(event);
+				if (container.classList.contains("check")) {
+					fn.check.item(event);
+				} else {
+					fn.item.edit(event);
+				}
 			}
 		},
 		add: function (id) {
@@ -505,7 +507,11 @@ const defaultOption = {
 	},
 	item: function (data) {
 		return new item({
-			name: JSON.stringify(data),
+			name: JSON.stringify(data)
+				.replace(/\,/g, ", ")
+				.replace(/\:/g, " : ")
+				.replace(/\{/g, "{ ")
+				.replace(/\}/g, " }"),
 		});
 	},
 };
@@ -515,6 +521,9 @@ const defaultItemOption = {
 	picture: null,
 	name: null,
 	detail: null,
+	allow_action: false,
+	allow_copy: false,
+	allow_delete: false,
 };
 
 const defaultGroupOption = {
@@ -573,7 +582,7 @@ export class item extends div {
 			attr: { "data-key": opt.key, "data-name": opt.name },
 			display: "flex",
 			justifycontent: "between",
-			onclick: fn.item.action,
+			onclick: opt.allow_action ? fn.item.action : null,
 			elem: [
 				new div({
 					display: "flex",
@@ -608,17 +617,23 @@ export class item extends div {
 					],
 				}),
 
-				new div({
-					class: "cl-list-ctl",
-					display: "flex",
-					alignself: "center",
-					elem: new btngroup({
-						elem: [
-							new button({ icon: "copy", color: "success", onclick: fn.item.copy }),
-							new button({ icon: "trash", color: "danger", onclick: fn.item.delete }),
-						],
-					}),
-				}),
+				opt.allow_copy || opt.allow_delete
+					? new div({
+							class: "cl-list-ctl",
+							display: "flex",
+							alignself: "center",
+							elem: new btngroup({
+								elem: [
+									opt.allow_copy
+										? new button({ icon: "copy", color: "success", onclick: fn.item.copy })
+										: null,
+									opt.allow_delete
+										? new button({ icon: "trash", color: "danger", onclick: fn.item.delete })
+										: null,
+								].filter(Boolean),
+							}),
+					  })
+					: null,
 			],
 		};
 	}

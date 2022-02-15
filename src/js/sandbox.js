@@ -212,6 +212,9 @@ $.core.documentReady(() => {
 										name: i.name,
 										picture: i.picture,
 										detail: new $.small([i.phone, i.dob, i.email].filter(Boolean).join(" | ")),
+										allow_action: true,
+										allow_copy: true,
+										allow_delete: true,
 										// detail: new $.div(
 										// 	"container p-0",
 										// 	new $.div("g-2 row row-cols-auto", [
