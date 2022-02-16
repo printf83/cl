@@ -81,7 +81,9 @@ export default [
 					label: "Create record",
 					color: "success",
 					icon: "floppy-disk",
-					onclick: function () {
+					onclick: function (event) {
+						let sender = event.currentTarget;
+
 						//create record
 						$.db.api.create(
 							{
@@ -91,6 +93,7 @@ export default [
 									dob: "1987-06-05",
 									phone: "0123456789",
 								},
+								sender: sender,
 							},
 							function (result) {
 								//result
@@ -146,7 +149,9 @@ export default [
 					label: "Update record",
 					color: "primary",
 					icon: "pen-to-square",
-					onclick: function () {
+					onclick: function (event) {
+						let sender = event.currentTarget;
+
 						//get id
 						new $.dlg.inputbox("text", "ID", function (_event, data) {
 							//update record
@@ -159,6 +164,7 @@ export default [
 										email: "test@test.com",
 									},
 									id: data.value,
+									sender: sender,
 								},
 								function (result) {
 									//result
@@ -212,7 +218,9 @@ export default [
 					label: "Load record",
 					color: "primary",
 					icon: "folder-open",
-					onclick: function () {
+					onclick: function (event) {
+						let sender = event.currentTarget;
+
 						//get id
 						new $.dlg.inputbox("text", "ID", function (_event, data) {
 							//get record
@@ -220,6 +228,7 @@ export default [
 								{
 									name: "customer",
 									id: data.value,
+									sender: sender,
 								},
 								function (result) {
 									//result
@@ -273,7 +282,9 @@ export default [
 					label: "Delete record",
 					color: "danger",
 					icon: "trash-can",
-					onclick: function () {
+					onclick: function (event) {
+						let sender = event.currentTarget;
+
 						//get id
 						new $.dlg.inputbox("text", "ID", function (_event, data) {
 							//delete record
@@ -281,6 +292,7 @@ export default [
 								{
 									name: "customer",
 									id: data.value,
+									sender: sender,
 								},
 								function (result) {
 									//result
@@ -334,11 +346,14 @@ export default [
 					label: "Load list",
 					color: "primary",
 					icon: "folder-open",
-					onclick: function () {
+					onclick: function (event) {
+						let sender = event.currentTarget;
+
 						//get record
 						$.db.api.list(
 							{
 								name: "customer",
+								sender: sender,
 							},
 							function (result) {
 								//result
@@ -363,7 +378,9 @@ export default [
 					label: "Load list",
 					color: "primary",
 					icon: "folder-open",
-					onclick: function () {
+					onclick: function (event) {
+						let sender = event.currentTarget;
+
 						//get record
 						$.db.api.list(
 							{
@@ -375,6 +392,7 @@ export default [
 									limit: 10,
 									skip: 0,
 								},
+								sender: sender,
 							},
 							function (result) {
 								//result
@@ -429,13 +447,16 @@ export default [
 					label: "Load list option",
 					color: "primary",
 					icon: "folder-open",
-					onclick: function () {
+					onclick: function (event) {
+						let sender = event.currentTarget;
+
 						//get record
 						$.db.api.option(
 							{
 								name: "customer",
 								fieldkey: "_id",
 								fieldname: "name",
+								sender: sender,
 							},
 							function (result) {
 								//result
@@ -466,7 +487,9 @@ export default [
 					label: "Load list option",
 					color: "primary",
 					icon: "folder-open",
-					onclick: function () {
+					onclick: function (event) {
+						let sender = event.currentTarget;
+
 						//get record
 						$.db.api.option(
 							{
@@ -474,6 +497,7 @@ export default [
 								filter: { $and: [{ name: { $regex: "s", $options: "i" } }] },
 								fieldkey: "_id",
 								fieldname: "name",
+								sender: sender,
 							},
 							function (result) {
 								//result
@@ -525,9 +549,12 @@ export default [
 				label: "Download XLSX file",
 				color: "primary",
 				icon: "download",
-				onclick: function () {
+				onclick: function (event) {
+					let sender = event.currentTarget;
+
 					$.db.api.excel({
 						name: "customer",
+						sender: sender,
 					});
 				},
 			});
@@ -541,7 +568,9 @@ export default [
 				label: "Download XLSX file",
 				color: "primary",
 				icon: "download",
-				onclick: function () {
+				onclick: function (event) {
+					let sender = event.currentTarget;
+
 					$.db.api.excel({
 						name: "customer",
 						data: {
@@ -549,6 +578,7 @@ export default [
 							sort: { state: 1, name: 1 },
 							field: { __v: 0, email: 0, dob: 0 },
 						},
+						sender: sender,
 					});
 				},
 			});

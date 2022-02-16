@@ -43,17 +43,18 @@ const fn = {
 			return null;
 		}
 	},
-	load: function (id, opt) {
+	load: function (id, opt, sender) {
 		fn.set(id, opt);
-		fn.reload(id);
+		fn.reload(id, sender);
 	},
-	reload: function (id) {
+	reload: function (id, sender) {
 		let opt = fn.get(id);
 		if (opt) {
 			db.api.list(
 				{
 					name: opt.name,
 					data: opt.query,
+					sender: sender,
 				},
 				function (result) {
 					let container = document.getElementById(id);
@@ -76,7 +77,8 @@ const fn = {
 					}
 
 					core.init(container);
-				}
+				},
+				sender
 			);
 		}
 	},
@@ -89,11 +91,11 @@ const fn = {
 		if (opt) {
 			opt.query.skip = event.detail.skip;
 			fn.set(id, opt);
-			fn.reload(id);
+			fn.reload(id, sender);
 		}
 	},
 	query: {
-		all: function (id) {
+		all: function (id, sender) {
 			let opt = fn.get(id);
 			if (opt) {
 				new query.dialog(
@@ -108,13 +110,13 @@ const fn = {
 						function (_event, data) {
 							opt.query = data;
 							fn.set(id, opt);
-							fn.reload(id);
+							fn.reload(id, sender);
 						},
 					]
 				).show();
 			}
 		},
-		filter: function (id) {
+		filter: function (id, sender) {
 			let opt = fn.get(id);
 			if (opt) {
 				new query.filter(
@@ -127,13 +129,13 @@ const fn = {
 						function (_event, data) {
 							opt.query.filter = data;
 							fn.set(id, opt);
-							fn.reload(id);
+							fn.reload(id, sender);
 						},
 					]
 				).show();
 			}
 		},
-		sort: function (id) {
+		sort: function (id, sender) {
 			let opt = fn.get(id);
 			if (opt) {
 				new query.sort(
@@ -146,13 +148,13 @@ const fn = {
 						function (_event, data) {
 							opt.query.sort = data;
 							fn.set(id, opt);
-							fn.reload(id);
+							fn.reload(id, sender);
 						},
 					]
 				).show();
 			}
 		},
-		field: function (id) {
+		field: function (id, sender) {
 			let opt = fn.get(id);
 			if (opt) {
 				new query.field(
@@ -164,13 +166,13 @@ const fn = {
 						function (_event, data) {
 							opt.query.field = data;
 							fn.set(id, opt);
-							fn.reload(id);
+							fn.reload(id, sender);
 						},
 					]
 				).show();
 			}
 		},
-		limit: function (id) {
+		limit: function (id, sender) {
 			let opt = fn.get(id);
 			if (opt) {
 				new query.limit(
@@ -186,13 +188,13 @@ const fn = {
 							opt.query.limit = data;
 							opt.query.skip = skip * opt.query.limit;
 							fn.set(id, opt);
-							fn.reload(id);
+							fn.reload(id, sender);
 						},
 					]
 				).show();
 			}
 		},
-		page: function (id) {
+		page: function (id, sender) {
 			let opt = fn.get(id);
 			if (opt) {
 				new query.page(
@@ -207,19 +209,20 @@ const fn = {
 						function (_event, data) {
 							opt.query.skip = data;
 							fn.set(id, opt);
-							fn.reload(id);
+							fn.reload(id, sender);
 						},
 					]
 				).show();
 			}
 		},
 	},
-	excel: function (id) {
+	excel: function (id, sender) {
 		let opt = fn.get(id);
 		if (opt) {
 			db.api.excel({
 				name: opt.name,
 				data: opt.query,
+				sender: sender,
 			});
 		}
 	},
@@ -240,7 +243,7 @@ const fn = {
 
 			return null;
 		},
-		delete: function (id) {
+		delete: function (id, sender) {
 			let checked = fn.check.get(id);
 			if (checked) {
 				let opt = fn.get(id);
@@ -259,10 +262,12 @@ const fn = {
 										id: checked.map(function (i) {
 											return i.key;
 										}),
+										sender: sender,
 									},
 									function (data) {
-										fn.reload(id);
-									}
+										fn.reload(id, sender);
+									},
+									sender
 								);
 							},
 						},
@@ -327,11 +332,11 @@ const fn = {
 				if (container.classList.contains("check")) {
 					fn.check.item(event);
 				} else {
-					fn.item.edit(event);
+					fn.item.edit(event, sender);
 				}
 			}
 		},
-		add: function (id) {
+		add: function (id, sender) {
 			let opt = fn.get(id);
 			if (opt) {
 				new dlg.inputbox(
@@ -345,10 +350,12 @@ const fn = {
 									{
 										name: opt.name,
 										data: data,
+										sender: sender,
 									},
 									function (data) {
-										fn.reload(id);
-									}
+										fn.reload(id, sender);
+									},
+									sender
 								);
 							},
 						},
@@ -373,6 +380,7 @@ const fn = {
 					{
 						name: opt.name,
 						id: key,
+						sender: sender,
 					},
 					function (data) {
 						if (data) {
@@ -389,9 +397,10 @@ const fn = {
 													name: opt.name,
 													id: key,
 													data: data,
+													sender: sender,
 												},
 												function (data) {
-													fn.reload(id);
+													fn.reload(id, sender);
 												}
 											);
 										},
@@ -403,7 +412,8 @@ const fn = {
 								`Edit ${opt.name}`
 							).show();
 						}
-					}
+					},
+					sender
 				);
 			}
 		},
@@ -420,6 +430,7 @@ const fn = {
 					{
 						name: opt.name,
 						id: key,
+						sender: sender,
 					},
 					function (data) {
 						if (data) {
@@ -435,9 +446,10 @@ const fn = {
 												{
 													name: opt.name,
 													data: data,
+													sender: sender,
 												},
 												function (data) {
-													fn.reload(id);
+													fn.reload(id, sender);
 												}
 											);
 										},
@@ -449,7 +461,8 @@ const fn = {
 								`Copy ${opt.name}`
 							).show();
 						}
-					}
+					},
+					sender
 				);
 			}
 		},
@@ -475,9 +488,10 @@ const fn = {
 									{
 										name: opt.name,
 										id: key,
+										sender: sender,
 									},
 									function (data) {
-										fn.reload(id);
+										fn.reload(id, sender);
 									}
 								);
 							},

@@ -112,7 +112,8 @@ export default [
 					label: "Query Dialog",
 					icon: "fire",
 					color: "primary",
-					onclick: function () {
+					onclick: function (event) {
+						let sender = event.currentTarget;
 						//edit query
 						new $.query.dialog(
 							{
@@ -131,6 +132,7 @@ export default [
 										{
 											name: "customer",
 											data: fn.query,
+											sender: sender,
 										},
 										function (result) {
 											//result
@@ -158,7 +160,8 @@ export default [
 					label: "Filter Dialog",
 					icon: "filter",
 					color: "primary",
-					onclick: function () {
+					onclick: function (event) {
+						let sender = event.currentTarget;
 						//edit query
 						new $.query.filter(
 							{
@@ -175,6 +178,7 @@ export default [
 										{
 											name: "customer",
 											data: fn.query,
+											sender: sender,
 										},
 										function (result) {
 											//result
@@ -202,7 +206,9 @@ export default [
 					label: "Sort Dialog",
 					icon: "sort",
 					color: "primary",
-					onclick: function () {
+					onclick: function (event) {
+						let sender = event.currentTarget;
+
 						//edit query
 						new $.query.sort(
 							{
@@ -219,6 +225,7 @@ export default [
 										{
 											name: "customer",
 											data: fn.query,
+											sender: sender,
 										},
 										function (result) {
 											//result
@@ -246,7 +253,9 @@ export default [
 					label: "Field Dialog",
 					icon: "tasks",
 					color: "primary",
-					onclick: function () {
+					onclick: function (event) {
+						let sender = event.currentTarget;
+
 						//edit query
 						new $.query.field(
 							{
@@ -262,6 +271,7 @@ export default [
 										{
 											name: "customer",
 											data: fn.query,
+											sender: sender,
 										},
 										function (result) {
 											//result
@@ -289,7 +299,9 @@ export default [
 					label: "Limit Dialog",
 					icon: "list-ol",
 					color: "primary",
-					onclick: function () {
+					onclick: function (event) {
+						let sender = event.currentTarget;
+
 						//edit query
 						new $.query.limit(
 							{
@@ -309,6 +321,7 @@ export default [
 										{
 											name: "customer",
 											data: fn.query,
+											sender: sender,
 										},
 										function (result) {
 											//result
@@ -336,7 +349,9 @@ export default [
 					label: "Page Dialog",
 					icon: { icon: "sort", rotate: 90 },
 					color: "primary",
-					onclick: function () {
+					onclick: function (event) {
+						let sender = event.currentTarget;
+
 						//edit query
 						new $.query.page(
 							{
@@ -354,6 +369,7 @@ export default [
 										{
 											name: "customer",
 											data: fn.query,
+											sender: sender,
 										},
 										function (result) {
 											//result

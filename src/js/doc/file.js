@@ -29,17 +29,23 @@ export default [
 					label: "Save file",
 					color: "success",
 					icon: "floppy-disk",
-					onclick: function () {
-						$.file.save(document.getElementById(id), function (result) {
-							if (result) {
-								new $.toast(
-									"i",
-									`File ${
-										Array.isArray(result) ? result.join(",") : result
-									} move to <b>/file</b> folder`
-								).show();
-							}
-						});
+					onclick: function (event) {
+						let sender = event.currentTarget;
+
+						$.file.save(
+							document.getElementById(id),
+							function (result) {
+								if (result) {
+									new $.toast(
+										"i",
+										`File ${
+											Array.isArray(result) ? result.join(",") : result
+										} move to <b>/file</b> folder`
+									).show();
+								}
+							},
+							sender
+						);
 					},
 				}),
 			];

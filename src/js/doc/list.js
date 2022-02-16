@@ -190,8 +190,8 @@ export default [
 					label: "Reload",
 					icon: "fire",
 					color: "primary",
-					onclick: function () {
-						$.list.container.reload(resultOutputId);
+					onclick: function (event) {
+						$.list.container.reload(resultOutputId, event.currentTarget);
 					},
 				}),
 
@@ -216,8 +216,8 @@ export default [
 					label: "Reload",
 					icon: "fire",
 					color: "primary",
-					onclick: function () {
-						$.list.container.reload(resultOutputId);
+					onclick: function (event) {
+						$.list.container.reload(resultOutputId, event.currentTarget);
 					},
 				}),
 
@@ -243,8 +243,8 @@ export default [
 					label: "Reload",
 					icon: "fire",
 					color: "primary",
-					onclick: function () {
-						$.list.container.reload(resultOutputId);
+					onclick: function (event) {
+						$.list.container.reload(resultOutputId, event.currentTarget);
 					},
 				}),
 
@@ -277,8 +277,8 @@ export default [
 					label: "Reload",
 					icon: "fire",
 					color: "primary",
-					onclick: function () {
-						$.list.container.reload(resultOutputId);
+					onclick: function (event) {
+						$.list.container.reload(resultOutputId, event.currentTarget);
 					},
 				}),
 
@@ -312,8 +312,8 @@ export default [
 					label: "Reload",
 					icon: "fire",
 					color: "primary",
-					onclick: function () {
-						$.list.container.reload(resultOutputId);
+					onclick: function (event) {
+						$.list.container.reload(resultOutputId, event.currentTarget);
 					},
 				}),
 
@@ -351,8 +351,8 @@ export default [
 						label: "Reload",
 						icon: "fire",
 						color: "primary",
-						onclick: function () {
-							$.list.container.reload(resultOutputId);
+						onclick: function (event) {
+							$.list.container.reload(resultOutputId, event.currentTarget);
 						},
 					}),
 
@@ -360,8 +360,8 @@ export default [
 						label: "Add new",
 						icon: "floppy-disk",
 						color: "success",
-						onclick: function () {
-							$.list.container.item.add(resultOutputId);
+						onclick: function (event) {
+							$.list.container.item.add(resultOutputId, event.currentTarget);
 						},
 					}),
 				]),
@@ -400,8 +400,8 @@ export default [
 						label: "Reload",
 						icon: "fire",
 						color: "primary",
-						onclick: function () {
-							$.list.container.reload(resultOutputId);
+						onclick: function (event) {
+							$.list.container.reload(resultOutputId, event.currentTarget);
 						},
 					}),
 
@@ -410,8 +410,8 @@ export default [
 						showlabel: "lg",
 						icon: "floppy-disk",
 						color: "success",
-						onclick: function () {
-							$.list.container.item.add(resultOutputId);
+						onclick: function (event) {
+							$.list.container.item.add(resultOutputId, event.currentTarget);
 						},
 					}),
 
@@ -440,8 +440,8 @@ export default [
 						showlabel: "lg",
 						icon: "trash-can",
 						color: "danger",
-						onclick: function () {
-							$.list.container.check.delete(resultOutputId);
+						onclick: function (event) {
+							$.list.container.check.delete(resultOutputId, event.currentTarget);
 						},
 					}),
 				]),
@@ -480,8 +480,8 @@ export default [
 						label: "Reload",
 						icon: "fire",
 						color: "primary",
-						onclick: function () {
-							$.list.container.reload(resultOutputId);
+						onclick: function (event) {
+							$.list.container.reload(resultOutputId, event.currentTarget);
 						},
 					}),
 
@@ -490,8 +490,8 @@ export default [
 						showlabel: "lg",
 						icon: "floppy-disk",
 						color: "success",
-						onclick: function () {
-							$.list.container.item.add(resultOutputId);
+						onclick: function (event) {
+							$.list.container.item.add(resultOutputId, event.currentTarget);
 						},
 					}),
 
@@ -520,8 +520,8 @@ export default [
 						showlabel: "lg",
 						icon: "trash-can",
 						color: "danger",
-						onclick: function () {
-							$.list.container.check.delete(resultOutputId);
+						onclick: function (event) {
+							$.list.container.check.delete(resultOutputId, event.currentTarget);
 						},
 					}),
 				]),
@@ -531,48 +531,48 @@ export default [
 						showlabel: "lg",
 						icon: "fire",
 						color: "primary",
-						onclick: function () {
-							$.list.container.query.all(resultOutputId);
+						onclick: function (event) {
+							$.list.container.query.all(resultOutputId, event.currentTarget);
 						},
 					}),
 
 					new $.button({
 						icon: "filter",
 						color: "primary",
-						onclick: function () {
-							$.list.container.query.filter(resultOutputId);
+						onclick: function (event) {
+							$.list.container.query.filter(resultOutputId, event.currentTarget);
 						},
 					}),
 
 					new $.button({
 						icon: "sort",
 						color: "primary",
-						onclick: function () {
-							$.list.container.query.sort(resultOutputId);
+						onclick: function (event) {
+							$.list.container.query.sort(resultOutputId, event.currentTarget);
 						},
 					}),
 
 					new $.button({
 						icon: "tasks",
 						color: "primary",
-						onclick: function () {
-							$.list.container.query.field(resultOutputId);
+						onclick: function (event) {
+							$.list.container.query.field(resultOutputId, event.currentTarget);
 						},
 					}),
 
 					new $.button({
 						icon: "list-ol",
 						color: "primary",
-						onclick: function () {
-							$.list.container.query.limit(resultOutputId);
+						onclick: function (event) {
+							$.list.container.query.limit(resultOutputId, event.currentTarget);
 						},
 					}),
 
 					new $.button({
 						icon: { icon: "sort", rotate: 90 },
 						color: "primary",
-						onclick: function () {
-							$.list.container.query.page(resultOutputId);
+						onclick: function (event) {
+							$.list.container.query.page(resultOutputId, event.currentTarget);
 						},
 					}),
 				]),

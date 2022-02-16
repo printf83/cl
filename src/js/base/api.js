@@ -28,6 +28,43 @@ const defaultOptionUpload = {
 };
 
 const fn = {
+	sender: {
+		isfree: function (sender) {
+			if (sender) {
+				if (sender.classList.contains("disabled") || sender.disabled === true) {
+					return false;
+				}
+			}
+
+			return true;
+		},
+		setbusy: function (sender) {
+			if (sender) {
+				sender.classList.add("disabled");
+				sender.disabled = true;
+
+				//change icon
+				let ico = sender.querySelectorAll("i");
+				if (ico && ico.length > 0) {
+					ico[0].setAttribute("data-old-class", ico[0].getAttribute("class"));
+					ico[0].setAttribute("class", "fas fa-circle-notch fa-fw fa-spin");
+				}
+			}
+		},
+		setfree: function (sender) {
+			if (sender) {
+				sender.classList.remove("disabled");
+				sender.disabled = false;
+
+				//change icon
+				let ico = sender.querySelectorAll("i");
+				if (ico && ico.length > 0) {
+					ico[0].setAttribute("class", ico[0].getAttribute("data-old-class"));
+					ico[0].setAttribute("data-old-class", null);
+				}
+			}
+		},
+	},
 	get: function (opt) {
 		opt = core.extend({}, defaultOption, opt);
 
@@ -112,15 +149,28 @@ export const api = {
 			{
 				name: null,
 				data: null,
+				sender: null,
 			},
 			opt
 		);
 
-		fn.post({
-			callback: callback,
-			url: `api/${opt.name}`,
-			data: opt.data,
-		});
+		if (opt.name && opt.data) {
+			if (fn.sender.isfree(opt.sender)) {
+				fn.sender.setbusy(opt.sender);
+				fn.post({
+					callback: function (result) {
+						fn.sender.setfree(opt.sender);
+						if (typeof callback === "function") {
+							callback(result);
+						}
+					},
+					url: `api/${opt.name}`,
+					data: opt.data,
+				});
+			}
+		} else {
+			console.error("opt name and data is required");
+		}
 	},
 	load: function (opt, callback) {
 		opt = core.extend(
@@ -128,16 +178,27 @@ export const api = {
 			{
 				name: null,
 				id: null,
+				sender: null,
 			},
 			opt
 		);
 
-		fn.get({
-			callback: function (result) {
-				callback(JSON.parse(result));
-			},
-			url: `api/${opt.name}/${Array.isArray(opt.id) ? opt.id.join(",") : opt.id}`,
-		});
+		if (opt.name && opt.id) {
+			if (fn.sender.isfree(opt.sender)) {
+				fn.sender.setbusy(opt.sender);
+				fn.get({
+					callback: function (result) {
+						fn.sender.setfree(opt.sender);
+						if (typeof callback === "function") {
+							callback(JSON.parse(result));
+						}
+					},
+					url: `api/${opt.name}/${Array.isArray(opt.id) ? opt.id.join(",") : opt.id}`,
+				});
+			}
+		} else {
+			console.error("opt name and id is required");
+		}
 	},
 	update: function (opt, callback) {
 		opt = core.extend(
@@ -146,16 +207,29 @@ export const api = {
 				name: null,
 				id: null,
 				data: null,
+				sender: null,
 			},
 			opt
 		);
 
-		fn.get({
-			callback: callback,
-			type: "PUT",
-			url: `api/${opt.name}/${Array.isArray(opt.id) ? opt.id.join(",") : opt.id}`,
-			data: opt.data,
-		});
+		if (opt.name && opt.id && opt.data) {
+			if (fn.sender.isfree(opt.sender)) {
+				fn.sender.setbusy(opt.sender);
+				fn.get({
+					callback: function (result) {
+						fn.sender.setfree(opt.sender);
+						if (typeof callback === "function") {
+							callback(result);
+						}
+					},
+					type: "PUT",
+					url: `api/${opt.name}/${Array.isArray(opt.id) ? opt.id.join(",") : opt.id}`,
+					data: opt.data,
+				});
+			}
+		} else {
+			console.error("opt name, id and data is required");
+		}
 	},
 	delete: function (opt, callback) {
 		opt = core.extend(
@@ -163,15 +237,28 @@ export const api = {
 			{
 				name: null,
 				id: null,
+				sender: null,
 			},
 			opt
 		);
 
-		fn.get({
-			callback: callback,
-			type: "DELETE",
-			url: `api/${opt.name}/${Array.isArray(opt.id) ? opt.id.join(",") : opt.id}`,
-		});
+		if (opt.name && opt.id) {
+			if (fn.sender.isfree(opt.sender)) {
+				fn.sender.setbusy(opt.sender);
+				fn.get({
+					callback: function (result) {
+						fn.sender.setfree(opt.sender);
+						if (typeof callback === "function") {
+							callback(result);
+						}
+					},
+					type: "DELETE",
+					url: `api/${opt.name}/${Array.isArray(opt.id) ? opt.id.join(",") : opt.id}`,
+				});
+			}
+		} else {
+			console.error("opt name and id is required");
+		}
 	},
 	list: function (opt, callback) {
 		opt = core.extend(
@@ -179,17 +266,28 @@ export const api = {
 			{
 				name: null,
 				data: null,
+				sender: null,
 			},
 			opt
 		);
 
-		fn.post({
-			callback: function (result) {
-				callback(JSON.parse(result));
-			},
-			url: `api/${opt.name}-list`,
-			data: opt.data,
-		});
+		if (opt.name) {
+			if (fn.sender.isfree(opt.sender)) {
+				fn.sender.setbusy(opt.sender);
+				fn.post({
+					callback: function (result) {
+						fn.sender.setfree(opt.sender);
+						if (typeof callback === "function") {
+							callback(JSON.parse(result));
+						}
+					},
+					url: `api/${opt.name}-list`,
+					data: opt.data,
+				});
+			}
+		} else {
+			console.error("opt name is required");
+		}
 	},
 	option: function (opt, callback) {
 		opt = core.extend(
@@ -202,37 +300,48 @@ export const api = {
 				fieldkey: "_id",
 				fieldname: "name",
 				emptylabel: null,
+				sender: null,
 			},
 			opt
 		);
 
-		fn.post({
-			callback: function (result) {
-				let res = JSON.parse(result);
-				var tmp = res.data
-					? res.data.map((i) => {
-							return {
-								value: i[opt.fieldkey],
-								label: i[opt.fieldname],
-							};
-					  })
-					: [];
+		if (opt.name && opt.fieldkey && opt.fieldname) {
+			if (fn.sender.isfree(opt.sender)) {
+				fn.sender.setbusy(opt.sender);
+				fn.post({
+					callback: function (result) {
+						let res = JSON.parse(result);
+						var tmp = res.data
+							? res.data.map((i) => {
+									return {
+										value: i[opt.fieldkey],
+										label: i[opt.fieldname],
+									};
+							  })
+							: [];
 
-				if (opt.emptylabel !== null) {
-					tmp.unshift({ value: "", label: opt.emptylabel });
-				}
+						if (opt.emptylabel !== null) {
+							tmp.unshift({ value: "", label: opt.emptylabel });
+						}
 
-				callback(tmp);
-			},
-			url: `api/${opt.name}-list`,
-			data: {
-				filter: opt.filter,
-				limit: opt.limit,
-				skip: opt.skip,
-				field: { [opt.fieldkey]: 1, [opt.fieldname]: 1 },
-				sort: { [opt.fieldname]: 1 },
-			},
-		});
+						fn.sender.setfree(opt.sender);
+						if (typeof callback === "function") {
+							callback(tmp);
+						}
+					},
+					url: `api/${opt.name}-list`,
+					data: {
+						filter: opt.filter,
+						limit: opt.limit,
+						skip: opt.skip,
+						field: { [opt.fieldkey]: 1, [opt.fieldname]: 1 },
+						sort: { [opt.fieldname]: 1 },
+					},
+				});
+			}
+		} else {
+			console.error("opt name, fieldkey and fieldname is required");
+		}
 	},
 	excel: function (opt) {
 		opt = core.extend(
@@ -240,14 +349,31 @@ export const api = {
 			{
 				name: null,
 				data: null,
+				sender: null,
 			},
 			opt
 		);
 
-		if (opt.data) {
-			fn.download(`api/${opt.name}-excel/?q=${JSON.stringify(opt.data)}`);
+		if (opt.name) {
+			if (fn.sender.isfree(opt.sender)) {
+				fn.sender.setbusy(opt.sender);
+
+				setTimeout(
+					function (sender) {
+						fn.sender.setfree(sender);
+					},
+					3000,
+					opt.sender
+				);
+
+				if (opt.data) {
+					fn.download(`api/${opt.name}-excel/?q=${JSON.stringify(opt.data)}`);
+				} else {
+					fn.download(`api/${opt.name}-excel`);
+				}
+			}
 		} else {
-			fn.download(`api/${opt.name}-excel`);
+			console.error("opt name is required");
 		}
 	},
 	aggregate: function (opt, callback) {
@@ -256,61 +382,134 @@ export const api = {
 			{
 				name: null,
 				data: null,
+				sender: null,
 			},
 			opt
 		);
 
-		fn.post({
-			callback: function (result) {
-				callback(JSON.parse(result));
-			},
-			url: `api/${opt.name}-aggregate`,
-			data: opt.data,
-		});
+		if (opt.name) {
+			if (fn.sender.isfree(opt.sender)) {
+				fn.sender.setbusy(opt.sender);
+				fn.post({
+					callback: function (result) {
+						fn.sender.setfree(opt.sender);
+						if (typeof callback === "function") {
+							callback(JSON.parse(result));
+						}
+					},
+					url: `api/${opt.name}-aggregate`,
+					data: opt.data,
+				});
+			}
+		} else {
+			console.error("opt name is required");
+		}
 	},
 };
 
 export const file = {
-	upload: function (file, progress, callback) {
-		fn.upload({
-			progress: progress,
-			callback: function (result) {
-				callback(JSON.parse(result));
-			},
-			url: `/api/file`,
-			data: file,
-		});
+	upload: function (file, progress, callback, sender) {
+		if (file) {
+			if (fn.sender.isfree(sender)) {
+				fn.sender.setbusy(sender);
+				fn.upload({
+					progress: progress,
+					callback: function (result) {
+						fn.sender.setfree(sender);
+						if (typeof callback === "function") {
+							callback(JSON.parse(result));
+						}
+					},
+					url: `/api/file`,
+					data: file,
+				});
+			}
+		} else {
+			console.error("opt file is required");
+		}
 	},
-	download: function (id) {
-		fn.download(this.url(id));
+	download: function (id, sender) {
+		if (id) {
+			if (fn.sender.isfree(sender)) {
+				fn.sender.setbusy(sender);
+
+				setTimeout(
+					function (sender) {
+						fn.sender.setfree(sender);
+					},
+					3000,
+					sender
+				);
+
+				fn.download(this.url(id));
+			}
+		} else {
+			console.error("opt id is required");
+		}
 	},
 	url: function (id) {
-		return `api/file/${Array.isArray(id) ? id.join(",") : id}`;
+		if (id) {
+			return `api/file/${Array.isArray(id) ? id.join(",") : id}`;
+		} else {
+			console.error("opt id is required");
+			return null;
+		}
 	},
-	info: function (id, callback) {
-		fn.get({
-			callback: function (result) {
-				callback(JSON.parse(result));
-			},
-			url: `/api/file-info/${Array.isArray(id) ? id.join(",") : id}`,
-		});
+	info: function (id, callback, sender) {
+		if (id) {
+			if (fn.sender.isfree(sender)) {
+				fn.sender.setbusy(sender);
+				fn.get({
+					callback: function (result) {
+						fn.sender.setfree(sender);
+						if (typeof callback === "function") {
+							callback(JSON.parse(result));
+						}
+					},
+					url: `/api/file-info/${Array.isArray(id) ? id.join(",") : id}`,
+				});
+			}
+		} else {
+			console.error("opt id is required");
+		}
 	},
-	save: function (id, callback) {
-		fn.get({
-			callback: function (result) {
-				callback(JSON.parse(result));
-			},
-			url: `/api/file/${Array.isArray(id) ? id.join(",") : id}`,
-			type: "PUT",
-		});
+	save: function (id, callback, sender) {
+		if (id) {
+			if (fn.sender.isfree(sender)) {
+				fn.sender.setbusy(sender);
+				fn.get({
+					callback: function (result) {
+						fn.sender.setfree(sender);
+						if (typeof callback === "function") {
+							callback(JSON.parse(result));
+						}
+					},
+					url: `/api/file/${Array.isArray(id) ? id.join(",") : id}`,
+					type: "PUT",
+				});
+			}
+		} else {
+			console.error("opt id is required");
+		}
 	},
-	delete: function (id, callback) {
-		fn.get({
-			callback: function (result) {
-				callback(JSON.parse(result));
-			},
-			url: `/api/file/${Array.isArray(id) ? id.join(",") : id}`,
-			type: "DELETE",
-		});
+	delete: function (id, callback, sender) {
+		if (id) {
+			if (fn.sender.isfree(sender)) {
+				fn.sender.setbusy(sender);
+
+				fn.get({
+					callback: function (result) {
+						fn.sender.setfree(sender);
+						if (typeof callback === "function") {
+							callback(JSON.parse(result));
+						}
+					},
+					url: `/api/file/${Array.isArray(id) ? id.join(",") : id}`,
+					type: "DELETE",
+				});
+			}
+		} else {
+			console.error("opt id is required");
+		}
 	},
 };

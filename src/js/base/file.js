@@ -46,158 +46,164 @@ const fn = {
 		let value = ctl.value;
 
 		if (value) {
-			db.file.info(value, function (data) {
-				console.log(data);
+			db.file.info(
+				value,
+				function (data) {
+					if (data) {
+						if (data.length === 1) {
+							//if only one file
+							//preview : "image/gif,image/bmp,image/x-windows-bmp,image/jpeg,image/png,
+							//download : application / pdf, application / zip, application / json, application / vnd.openxmlformats - officedocument.spreadsheetml.sheet, application / vnd.openxmlformats - officedocument.wordprocessingml.document, text / plain, text / html";
 
-				if (data) {
-					if (data.length === 1) {
-						//if only one file
-						//preview : "image/gif,image/bmp,image/x-windows-bmp,image/jpeg,image/png,
-						//download : application / pdf, application / zip, application / json, application / vnd.openxmlformats - officedocument.spreadsheetml.sheet, application / vnd.openxmlformats - officedocument.wordprocessingml.document, text / plain, text / html";
-
-						switch (data[0].mimetype) {
-							case "image/png":
-							case "image/jpeg":
-							case "image/gif":
-							case "image/bmp":
-							case "image/x-windows-bmp":
-								//if picture. do preview
-
-								new modal({
-									title: null,
-									button: null,
-									static: false,
-									size: "lg",
-									elem: new img({
-										class: "img-fluid mx-auto btn",
-										display: "block",
-										rounded: true,
-										padding: 0,
-										attr: {
-											"data-cl-file": data[0].id,
-										},
-										src: db.file.url(data[0].id),
-										onclick: function (event) {
-											let sender = event.currentTarget;
-											let fileid = sender.getAttribute("data-cl-file");
-											db.file.download(fileid);
-										},
-									}),
-								}).show();
-
-								break;
-
-							default:
-								//if other. do download
-								db.file.download(data[0].id);
-
-								break;
-						}
-					} else {
-						//if multiple file
-						//change size base on img count
-						let thumbnailsize = 12;
-						switch (data.length) {
-							case 1:
-								thumbnailsize = 12;
-								break;
-							case 2:
-								thumbnailsize = 6;
-								break;
-							case 3:
-								thumbnailsize = 4;
-								break;
-							default:
-								thumbnailsize = 3;
-						}
-
-						//create preview base on file type
-						let list = [];
-
-						data.forEach((i) => {
-							switch (i.mimetype) {
+							switch (data[0].mimetype) {
 								case "image/png":
 								case "image/jpeg":
 								case "image/gif":
 								case "image/bmp":
 								case "image/x-windows-bmp":
 									//if picture. do preview
-									list.push(
-										new div({
-											col: thumbnailsize,
+
+									new modal({
+										title: null,
+										button: null,
+										static: false,
+										size: "lg",
+										elem: new img({
+											class: "img-fluid mx-auto btn",
+											display: "block",
+											rounded: true,
 											padding: 0,
-											elem: new div({
-												class: "btn border p-1",
-												attr: {
-													"data-cl-file": i.id,
-												},
-												onclick: function (event) {
-													let sender = event.currentTarget;
-													let fileid = sender.getAttribute("data-cl-file");
-													db.file.download(fileid);
-												},
-												elem: new img({
-													class: "img-fluid mx-auto d-block rounded",
-													src: db.file.url(i.id),
-												}),
-											}),
-										})
-									);
+											attr: {
+												"data-cl-file": data[0].id,
+											},
+											src: db.file.url(data[0].id),
+											onclick: function (event) {
+												let sender = event.currentTarget;
+												let fileid = sender.getAttribute("data-cl-file");
+												db.file.download(fileid, sender);
+											},
+										}),
+									}).show();
+
 									break;
 
 								default:
-									list.push(
-										new div({
-											display: "flex",
-											alignitem: "stretch",
-											col: thumbnailsize,
-											padding: 0,
-											elem: new div({
-												border: true,
-												padding: 5,
-												display: "flex",
-												justifycontent: "center",
-												class: "btn w-100",
-												attr: {
-													"data-cl-file": i.id,
-												},
-												onclick: function (event) {
-													let sender = event.currentTarget;
-													let fileid = sender.getAttribute("data-cl-file");
-													db.file.download(fileid);
-												},
-												elem: new span({
-													alignself: "center",
-													elem: new icon({ icon: "download", color: "muted", weight: "2x" }),
-												}),
-											}),
-										})
-									);
+									//if other. do download
+									db.file.download(data[0].id, sender);
 
 									break;
 							}
-						});
+						} else {
+							//if multiple file
+							//change size base on img count
+							let thumbnailsize = 12;
+							switch (data.length) {
+								case 1:
+									thumbnailsize = 12;
+									break;
+								case 2:
+									thumbnailsize = 6;
+									break;
+								case 3:
+									thumbnailsize = 4;
+									break;
+								default:
+									thumbnailsize = 3;
+							}
 
-						new modal({
-							title: null,
-							button: null,
-							static: false,
-							size: "lg",
-							elem: new div({
-								class: "container",
-								padding: 0,
+							//create preview base on file type
+							let list = [];
+
+							data.forEach((i) => {
+								switch (i.mimetype) {
+									case "image/png":
+									case "image/jpeg":
+									case "image/gif":
+									case "image/bmp":
+									case "image/x-windows-bmp":
+										//if picture. do preview
+										list.push(
+											new div({
+												col: thumbnailsize,
+												padding: 0,
+												elem: new div({
+													class: "btn border p-1",
+													attr: {
+														"data-cl-file": i.id,
+													},
+													onclick: function (event) {
+														let sender = event.currentTarget;
+														let fileid = sender.getAttribute("data-cl-file");
+														db.file.download(fileid, sender);
+													},
+													elem: new img({
+														class: "img-fluid mx-auto d-block rounded",
+														src: db.file.url(i.id),
+													}),
+												}),
+											})
+										);
+										break;
+
+									default:
+										list.push(
+											new div({
+												display: "flex",
+												alignitem: "stretch",
+												col: thumbnailsize,
+												padding: 0,
+												elem: new div({
+													border: true,
+													padding: 5,
+													display: "flex",
+													justifycontent: "center",
+													class: "btn w-100",
+													attr: {
+														"data-cl-file": i.id,
+													},
+													onclick: function (event) {
+														let sender = event.currentTarget;
+														let fileid = sender.getAttribute("data-cl-file");
+														db.file.download(fileid, sender);
+													},
+													elem: new span({
+														alignself: "center",
+														elem: new icon({
+															icon: "download",
+															color: "muted",
+															weight: "2x",
+														}),
+													}),
+												}),
+											})
+										);
+
+										break;
+								}
+							});
+
+							new modal({
+								title: null,
+								button: null,
+								static: false,
+								size: "lg",
 								elem: new div({
-									display: "flex",
-									justifycontent: "center",
-									row: true,
-									gap: 3,
-									elem: list,
+									class: "container",
+									padding: 0,
+									elem: new div({
+										display: "flex",
+										justifycontent: "center",
+										row: true,
+										gap: 3,
+										elem: list,
+									}),
 								}),
-							}),
-						}).show();
+							}).show();
+						}
 					}
-				}
-			});
+				},
+				sender
+			);
 		}
 	},
 	onchange: function (event) {
@@ -267,13 +273,18 @@ const fn = {
 		let id = container.getAttribute("data-cl-container");
 		let ctl = container.parentNode.querySelectorAll(`#${id}`)[0];
 
-		db.file.delete(ctl.value, function (data) {
-			ctl.value = null;
-			ctl.dispatchEvent(new Event("change"));
-		});
+		db.file.delete(
+			ctl.value,
+			function (data) {
+				ctl.value = null;
+				ctl.dispatchEvent(new Event("change"));
+			},
+			sender
+		);
 	},
 	onupload: function (event) {
 		let sender = event.currentTarget;
+		let btnupload = sender;
 		let container = sender.closest("div[data-cl-container]");
 		let id = container.getAttribute("data-cl-container");
 		let opt = db_opt[id];
@@ -316,7 +327,8 @@ const fn = {
 							core.removeElement(sender);
 							ctl.value = data;
 							ctl.dispatchEvent(new Event("change"));
-						}
+						},
+						btnupload
 					);
 				},
 			})
@@ -324,14 +336,18 @@ const fn = {
 
 		document.getElementById(fu).click();
 	},
-	onsave: function (element, callback) {
+	onsave: function (element, callback, sender) {
 		let value = element.value;
 		if (value) {
-			db.file.save(value, function (data) {
-				if (typeof callback === "function") {
-					callback(data);
-				}
-			});
+			db.file.save(
+				value,
+				function (data) {
+					if (typeof callback === "function") {
+						callback(data);
+					}
+				},
+				sender
+			);
 		}
 	},
 };
@@ -443,7 +459,7 @@ export default class file extends div {
 		super.data = { elem: ctl };
 	}
 
-	static save(element, callback) {
-		fn.onsave(element, callback);
+	static save(element, callback, sender) {
+		fn.onsave(element, callback, sender);
 	}
 }
