@@ -406,10 +406,9 @@ export default [
 					}),
 
 					new $.button({
-						label: "Add new",
-						showlabel: "lg",
 						icon: "floppy-disk",
 						color: "success",
+						outline: true,
 						onclick: function (event) {
 							$.list.container.item.add(resultOutputId, event.currentTarget);
 						},
@@ -486,40 +485,36 @@ export default [
 					}),
 
 					new $.button({
-						label: "Add new",
-						showlabel: "lg",
 						icon: "floppy-disk",
 						color: "success",
+						outline: true,
 						onclick: function (event) {
 							$.list.container.item.add(resultOutputId, event.currentTarget);
 						},
 					}),
 
 					new $.button({
-						label: "Check mode",
-						showlabel: "lg",
 						icon: "list-check",
 						color: "warning",
+						outline: true,
 						onclick: function () {
 							$.list.container.check.mode(resultOutputId);
 						},
 					}),
 
 					new $.button({
-						label: "Check all",
-						showlabel: "lg",
 						icon: "check-double",
 						color: "warning",
+						outline: true,
 						onclick: function () {
 							$.list.container.check.all(resultOutputId);
 						},
 					}),
 
 					new $.button({
-						label: "Delete checked",
-						showlabel: "lg",
 						icon: "trash-can",
 						color: "danger",
+						outline: true,
 						onclick: function (event) {
 							$.list.container.check.delete(resultOutputId, event.currentTarget);
 						},

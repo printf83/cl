@@ -31,7 +31,6 @@ function pagingonchange(sender, data) {
 	let container = sender.closest(".cl-paging");
 	let ulcontainer = container.firstChild;
 	var event = new CustomEvent("change", {
-		currentTarget: sender,
 		detail: {
 			total: data.total,
 			skip: data.skip,
@@ -77,9 +76,9 @@ export default class paging extends div {
 									"aria-label": "First Page",
 								},
 								href: "javascript:void(0)",
-								onclick: function (sender) {
+								onclick: function (event) {
 									data.skip = 0;
-									pagingonchange(sender.currentTarget, data);
+									pagingonchange(event.currentTarget, data);
 								},
 								elem: opt.labelfirst
 									? opt.labelfirst
@@ -102,9 +101,9 @@ export default class paging extends div {
 									"aria-label": "Previous Page",
 								},
 								href: "javascript:void(0)",
-								onclick: function (sender) {
+								onclick: function (event) {
 									data.skip = (curpage - 2) * data.limit;
-									pagingonchange(sender.currentTarget, data);
+									pagingonchange(event.currentTarget, data);
 								},
 								elem: opt.labelprev ? opt.labelprev : new icon({ type: "fas", icon: "angle-left" }),
 							}),
@@ -175,10 +174,10 @@ export default class paging extends div {
 									"aria-label": `Page ${x.toString()}`,
 								},
 								href: "javascript:void(0)",
-								onclick: function (sender) {
-									let xnum = parseInt(sender.currentTarget.innerText, 10);
+								onclick: function (event) {
+									let xnum = parseInt(event.currentTarget.innerText, 10);
 									data.skip = (xnum - 1) * data.limit;
-									pagingonchange(sender.currentTarget, data);
+									pagingonchange(event.currentTarget, data);
 								},
 								elem: x.toString(),
 							}),
@@ -199,9 +198,9 @@ export default class paging extends div {
 									"aria-label": "Next Page",
 								},
 								href: "javascript:void(0)",
-								onclick: function (sender) {
+								onclick: function (event) {
 									data.skip = curpage * data.limit;
-									pagingonchange(sender.currentTarget, data);
+									pagingonchange(event.currentTarget, data);
 								},
 								elem: opt.labelnext ? opt.labelnext : new icon({ type: "fas", icon: "angle-right" }),
 							}),
@@ -222,9 +221,9 @@ export default class paging extends div {
 									"aria-label": "Last Page",
 								},
 								href: "javascript:void(0)",
-								onclick: function (sender) {
+								onclick: function (event) {
 									data.skip = (btncount - 1) * data.limit;
-									pagingonchange(sender.currentTarget, data);
+									pagingonchange(event.currentTarget, data);
 								},
 								elem: opt.labellast
 									? opt.labellast

@@ -358,6 +358,7 @@ export default [
 								min: fn.setting.skip.min,
 								max: fn.setting.skip.max,
 								step: fn.setting.skip.step,
+								limit: fn.query.limit,
 								data: fn.query.skip,
 							},
 							[
