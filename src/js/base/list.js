@@ -422,9 +422,10 @@ const fn = {
 		copy: function (event) {
 			event.stopPropagation();
 
-			let sender = event.currentTarget.closest("div[data-key]");
-			let key = sender.getAttribute("data-key");
-			let container = sender.closest(".cl-list");
+			let sender = event.currentTarget;
+			let item = sender.closest("div[data-key]");
+			let key = item.getAttribute("data-key");
+			let container = item.closest(".cl-list");
 			let id = container.getAttribute("id");
 			let opt = fn.get(id);
 			if (opt) {
@@ -471,10 +472,11 @@ const fn = {
 		delete: function (event) {
 			event.stopPropagation();
 
-			let sender = event.currentTarget.closest("div[data-key]");
-			let key = sender.getAttribute("data-key");
-			let name = sender.getAttribute("data-name");
-			let container = sender.closest(".cl-list");
+			let sender = event.currentTarget;
+			let item = sender.closest("div[data-key]");
+			let key = item.getAttribute("data-key");
+			let name = item.getAttribute("data-name");
+			let container = item.closest(".cl-list");
 			let id = container.getAttribute("id");
 			let opt = fn.get(id);
 			if (opt) {

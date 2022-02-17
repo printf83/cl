@@ -29,6 +29,15 @@ const defaultOptionUpload = {
 
 const fn = {
 	sender: {
+		islist: function (sender) {
+			if (sender) {
+				if (sender.getAttribute("data-key") && sender.getAttribute("data-name")) {
+					return true;
+				}
+			}
+
+			return false;
+		},
 		isfree: function (sender) {
 			if (sender) {
 				if (sender.classList.contains("disabled") || sender.disabled === true) {
@@ -43,11 +52,16 @@ const fn = {
 				sender.classList.add("disabled");
 				sender.disabled = true;
 
-				//change icon
-				let ico = sender.querySelectorAll("i");
-				if (ico && ico.length > 0) {
-					ico[0].setAttribute("data-old-class", ico[0].getAttribute("class"));
-					ico[0].setAttribute("class", "fas fa-circle-notch fa-fw fa-spin");
+				if (fn.sender.islist(sender)) {
+					let ctl = sender.querySelectorAll("h6");
+					ctl[0].innerHTML = "<i class='fas fa-circle-notch fa-fw fa-spin'></i> Loading...";
+				} else {
+					//change icon
+					let ico = sender.querySelectorAll("i");
+					if (ico && ico.length > 0) {
+						ico[0].setAttribute("data-old-class", ico[0].getAttribute("class"));
+						ico[0].setAttribute("class", "fas fa-circle-notch fa-fw fa-spin");
+					}
 				}
 			}
 		},
@@ -56,11 +70,16 @@ const fn = {
 				sender.classList.remove("disabled");
 				sender.disabled = false;
 
-				//change icon
-				let ico = sender.querySelectorAll("i");
-				if (ico && ico.length > 0) {
-					ico[0].setAttribute("class", ico[0].getAttribute("data-old-class"));
-					ico[0].setAttribute("data-old-class", null);
+				if (fn.sender.islist(sender)) {
+					let ctl = sender.querySelectorAll("h6");
+					ctl[0].innerHTML = sender.getAttribute("data-name");
+				} else {
+					//change icon
+					let ico = sender.querySelectorAll("i");
+					if (ico && ico.length > 0) {
+						ico[0].setAttribute("class", ico[0].getAttribute("data-old-class"));
+						ico[0].setAttribute("data-old-class", null);
+					}
 				}
 			}
 		},

@@ -2,6 +2,7 @@
 import sample from "./sample.js";
 import $ from "../component.js";
 
+let dbstate = null;
 const fn = {
 	setting: {
 		field: [
@@ -14,7 +15,7 @@ const fn = {
 				value: "state",
 				label: "State",
 				type: "select",
-				option: null,
+				option: dbstate,
 				placeholder: "Please Choose One",
 			},
 		],
@@ -68,12 +69,35 @@ const fn = {
 				type: "select",
 				label: "State",
 				name: "state",
-				option: null,
+				option: function () {
+					return dbstate;
+				},
 				value: data ? data.state : null,
 			}),
 		];
 	},
 };
+
+function setup(callback) {
+	if (!dbstate) {
+		console.log("Init state database");
+
+		//get record
+		$.db.api.option(
+			{
+				name: "state",
+				fieldkey: "_id",
+				fieldname: "name",
+			},
+			function (result) {
+				dbstate = result;
+				callback();
+			}
+		);
+	} else {
+		callback();
+	}
+}
 
 export default [
 	{
@@ -480,7 +504,11 @@ export default [
 						icon: "fire",
 						color: "primary",
 						onclick: function (event) {
-							$.list.container.reload(resultOutputId, event.currentTarget);
+							setup(function () {
+								$.list.container.load(resultOutputId, { setting: fn.setting }, event.currentTarget);
+							});
+
+							//$.list.container.reload(resultOutputId, event.currentTarget);
 						},
 					}),
 
