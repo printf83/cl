@@ -13,6 +13,7 @@ import toast from "./toast.js";
 
 const LIBNAME = /component.Z./g;
 const SAMPLELIBNAME = /doc_sample.Z./g;
+const FNNAME = /list_fn./g;
 
 function beautifyjs(str) {
 	let opt = {
@@ -24,6 +25,7 @@ function beautifyjs(str) {
 
 	str = str.replace(LIBNAME, "$.");
 	str = str.replace(SAMPLELIBNAME, "sample.");
+	str = str.replace(FNNAME, "fn.");
 	str = str.replace(/\[/g, "[\n");
 	str = str.replace(/\]/g, "\n]");
 

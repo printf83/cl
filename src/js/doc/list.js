@@ -69,35 +69,68 @@ const fn = {
 				type: "select",
 				label: "State",
 				name: "state",
-				option: function () {
-					return dbstate;
-				},
+				option: dbstate,
 				value: data ? data.state : null,
 			}),
 		];
 	},
-};
+	items: function (data, item) {
+		let lastgroup = null;
+		let result = [];
+		data.forEach(function (i) {
+			if (dbstate) {
+				if (i.state && lastgroup !== i.state) {
+					lastgroup = i.state;
+					let iname = dbstate.filter(function (el) {
+						return el.value === i.state;
+					})[0]?.label;
 
-function setup(callback) {
-	if (!dbstate) {
-		console.log("Init state database");
-
-		//get record
-		$.db.api.option(
-			{
-				name: "state",
-				fieldkey: "_id",
-				fieldname: "name",
-			},
-			function (result) {
-				dbstate = result;
-				callback();
+					result.push({
+						elem: new $.list.group({ key: i.state, name: iname }),
+					});
+				}
 			}
-		);
-	} else {
-		callback();
-	}
-}
+
+			result.push({
+				elem: item(i),
+			});
+		});
+
+		return result;
+	},
+	item: function (data) {
+		return new $.list.item({
+			key: data._id,
+			name: data.name,
+			picture: data.picture,
+			detail: new $.small([data.phone, data.dob, data.email].filter(Boolean).join(" | ")),
+			allow_delete: true,
+			allow_copy: true,
+			allow_action: true,
+		});
+	},
+	state: function (callback, sender) {
+		if (!dbstate) {
+			console.log("Init state database");
+
+			//get record
+			$.db.api.option(
+				{
+					name: "state",
+					fieldkey: "_id",
+					fieldname: "name",
+					sender: sender,
+				},
+				function (result) {
+					dbstate = result;
+					callback();
+				}
+			);
+		} else {
+			callback();
+		}
+	},
+};
 
 export default [
 	{
@@ -277,14 +310,39 @@ export default [
 					setting: fn.setting,
 					query: fn.query,
 					name: "customer",
-					item: function (data) {
-						return new $.list.item({
-							key: data._id,
-							name: data.name,
-							picture: data.picture,
-							detail: new $.small([data.phone, data.dob, data.email].filter(Boolean).join(" | ")),
-						});
+					item: fn.item,
+				}),
+			];
+		},
+	},
+
+	{
+		title: "Group",
+		container: sample.formcontainer,
+		code: function () {
+			let resultOutputId = $.core.UUID();
+
+			return [
+				new $.button({
+					label: "Reload",
+					icon: "fire",
+					color: "primary",
+					onclick: function (event) {
+						let sender = event.currentTarget;
+						fn.state(function () {
+							$.list.container.set(resultOutputId, "items", fn.items);
+							$.list.container.reload(resultOutputId, sender);
+						}, sender);
 					},
+				}),
+
+				new $.list.container({
+					id: resultOutputId,
+					setting: fn.setting,
+					query: fn.query,
+					name: "customer",
+					items: fn.items,
+					item: fn.item,
 				}),
 			];
 		},
@@ -302,6 +360,7 @@ export default [
 					icon: "fire",
 					color: "primary",
 					onclick: function (event) {
+						$.list.container.set(resultOutputId, "items", fn.items);
 						$.list.container.reload(resultOutputId, event.currentTarget);
 					},
 				}),
@@ -311,15 +370,8 @@ export default [
 					setting: fn.setting,
 					query: fn.query,
 					name: "customer",
-					item: function (data) {
-						return new $.list.item({
-							key: data._id,
-							name: data.name,
-							picture: data.picture,
-							detail: new $.small([data.phone, data.dob, data.email].filter(Boolean).join(" | ")),
-							allow_delete: true,
-						});
-					},
+					items: fn.items,
+					item: fn.item,
 				}),
 			];
 		},
@@ -337,7 +389,12 @@ export default [
 					icon: "fire",
 					color: "primary",
 					onclick: function (event) {
-						$.list.container.reload(resultOutputId, event.currentTarget);
+						let sender = event.currentTarget;
+						fn.state(function () {
+							$.list.container.set(resultOutputId, "items", fn.items);
+							$.list.container.set(resultOutputId, "setting", fn.setting);
+							$.list.container.reload(resultOutputId, sender);
+						}, sender);
 					},
 				}),
 
@@ -347,17 +404,8 @@ export default [
 					query: fn.query,
 					editor: fn.editor,
 					name: "customer",
-					item: function (data) {
-						return new $.list.item({
-							key: data._id,
-							name: data.name,
-							picture: data.picture,
-							detail: new $.small([data.phone, data.dob, data.email].filter(Boolean).join(" | ")),
-							allow_delete: true,
-							allow_copy: true,
-							allow_action: true,
-						});
-					},
+					items: fn.items,
+					item: fn.item,
 				}),
 			];
 		},
@@ -376,7 +424,13 @@ export default [
 						icon: "fire",
 						color: "primary",
 						onclick: function (event) {
-							$.list.container.reload(resultOutputId, event.currentTarget);
+							let sender = event.currentTarget;
+							fn.state(function () {
+								$.list.container.set(resultOutputId, "items", fn.items);
+								$.list.container.set(resultOutputId, "setting", fn.setting);
+								$.list.container.set(resultOutputId, "editor", fn.editor);
+								$.list.container.reload(resultOutputId, sender);
+							}, sender);
 						},
 					}),
 
@@ -385,7 +439,12 @@ export default [
 						icon: "floppy-disk",
 						color: "success",
 						onclick: function (event) {
-							$.list.container.item.add(resultOutputId, event.currentTarget);
+							let sender = event.currentTarget;
+							fn.state(function () {
+								$.list.container.set(resultOutputId, "items", fn.items);
+								$.list.container.set(resultOutputId, "editor", fn.editor);
+								$.list.container.item.add(resultOutputId, sender);
+							}, sender);
 						},
 					}),
 				]),
@@ -396,17 +455,8 @@ export default [
 					query: fn.query,
 					editor: fn.editor,
 					name: "customer",
-					item: function (data) {
-						return new $.list.item({
-							key: data._id,
-							name: data.name,
-							picture: data.picture,
-							detail: new $.small([data.phone, data.dob, data.email].filter(Boolean).join(" | ")),
-							allow_delete: true,
-							allow_copy: true,
-							allow_action: true,
-						});
-					},
+					items: fn.items,
+					item: fn.item,
 				}),
 			];
 		},
@@ -425,7 +475,13 @@ export default [
 						icon: "fire",
 						color: "primary",
 						onclick: function (event) {
-							$.list.container.reload(resultOutputId, event.currentTarget);
+							let sender = event.currentTarget;
+							fn.state(function () {
+								$.list.container.set(resultOutputId, "items", fn.items);
+								$.list.container.set(resultOutputId, "setting", fn.setting);
+								$.list.container.set(resultOutputId, "editor", fn.editor);
+								$.list.container.reload(resultOutputId, sender);
+							}, sender);
 						},
 					}),
 
@@ -434,7 +490,12 @@ export default [
 						color: "success",
 						outline: true,
 						onclick: function (event) {
-							$.list.container.item.add(resultOutputId, event.currentTarget);
+							let sender = event.currentTarget;
+							fn.state(function () {
+								$.list.container.set(resultOutputId, "items", fn.items);
+								$.list.container.set(resultOutputId, "editor", fn.editor);
+								$.list.container.item.add(resultOutputId, sender);
+							}, sender);
 						},
 					}),
 
@@ -475,17 +536,8 @@ export default [
 					query: fn.query,
 					editor: fn.editor,
 					name: "customer",
-					item: function (data) {
-						return new $.list.item({
-							key: data._id,
-							name: data.name,
-							picture: data.picture,
-							detail: new $.small([data.phone, data.dob, data.email].filter(Boolean).join(" | ")),
-							allow_delete: true,
-							allow_copy: true,
-							allow_action: true,
-						});
-					},
+					items: fn.items,
+					item: fn.item,
 				}),
 			];
 		},
@@ -504,11 +556,13 @@ export default [
 						icon: "fire",
 						color: "primary",
 						onclick: function (event) {
-							setup(function () {
-								$.list.container.load(resultOutputId, { setting: fn.setting }, event.currentTarget);
-							});
-
-							//$.list.container.reload(resultOutputId, event.currentTarget);
+							let sender = event.currentTarget;
+							fn.state(function () {
+								$.list.container.set(resultOutputId, "setting", fn.setting);
+								$.list.container.set(resultOutputId, "editor", fn.editor);
+								$.list.container.set(resultOutputId, "items", fn.items);
+								$.list.container.reload(resultOutputId, sender);
+							}, sender);
 						},
 					}),
 
@@ -517,7 +571,12 @@ export default [
 						color: "success",
 						outline: true,
 						onclick: function (event) {
-							$.list.container.item.add(resultOutputId, event.currentTarget);
+							let sender = event.currentTarget;
+							fn.state(function () {
+								$.list.container.set(resultOutputId, "editor", fn.editor);
+								$.list.container.set(resultOutputId, "items", fn.items);
+								$.list.container.item.add(resultOutputId, sender);
+							}, sender);
 						},
 					}),
 
@@ -555,7 +614,12 @@ export default [
 						icon: "fire",
 						color: "primary",
 						onclick: function (event) {
-							$.list.container.query.all(resultOutputId, event.currentTarget);
+							let sender = event.currentTarget;
+							fn.state(function () {
+								$.list.container.set(resultOutputId, "items", fn.items);
+								$.list.container.set(resultOutputId, "setting", fn.setting);
+								$.list.container.query.all(resultOutputId, sender);
+							}, sender);
 						},
 					}),
 
@@ -563,7 +627,12 @@ export default [
 						icon: "filter",
 						color: "primary",
 						onclick: function (event) {
-							$.list.container.query.filter(resultOutputId, event.currentTarget);
+							let sender = event.currentTarget;
+							fn.state(function () {
+								$.list.container.set(resultOutputId, "items", fn.items);
+								$.list.container.set(resultOutputId, "setting", fn.setting);
+								$.list.container.query.filter(resultOutputId, sender);
+							}, sender);
 						},
 					}),
 
@@ -605,17 +674,8 @@ export default [
 					query: fn.query,
 					editor: fn.editor,
 					name: "customer",
-					item: function (data) {
-						return new $.list.item({
-							key: data._id,
-							name: data.name,
-							picture: data.picture,
-							detail: new $.small([data.phone, data.dob, data.email].filter(Boolean).join(" | ")),
-							allow_delete: true,
-							allow_copy: true,
-							allow_action: true,
-						});
-					},
+					items: fn.items,
+					item: fn.item,
 				}),
 			];
 		},

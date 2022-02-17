@@ -33,19 +33,28 @@ const fn = {
 
 		return null;
 	},
-	set: function (id, opt) {
-		db_opt[id] = core.extend({}, defaultOption, opt);
+	set: function (id, propertyName, value) {
+		if (propertyName) {
+			if (!db_opt[id]) {
+				console.warn(`db_opt['${id}'] not found`);
+				db_opt[id] = {};
+			}
+
+			db_opt[id][propertyName] = value;
+		} else {
+			db_opt[id] = core.extend({}, defaultOption, value);
+		}
 	},
-	get: function (id) {
+	get: function (id, propertyName) {
 		if (db_opt[id]) {
-			return db_opt[id];
+			if (propertyName) {
+				return db_opt[id][propertyName];
+			} else {
+				return db_opt[id];
+			}
 		} else {
 			return null;
 		}
-	},
-	load: function (id, opt, sender) {
-		fn.set(id, opt);
-		fn.reload(id, sender);
 	},
 	reload: function (id, sender) {
 		let opt = fn.get(id);
@@ -92,7 +101,7 @@ const fn = {
 		let opt = fn.get(id);
 		if (opt) {
 			opt.query.skip = event.detail.skip;
-			fn.set(id, opt);
+			fn.set(id, null, opt);
 			fn.reload(id, event.detail.sender);
 		}
 	},
@@ -102,16 +111,16 @@ const fn = {
 			if (opt) {
 				new query.dialog(
 					{
-						field: opt.setting.field,
-						limit: opt.setting.limit,
-						skip: opt.setting.skip,
-						useopricon: opt.setting.useopricon,
+						field: opt.setting?.field,
+						limit: opt.setting?.limit,
+						skip: opt.setting?.skip,
+						useopricon: opt.setting?.useopricon,
 						data: opt.query,
 					},
 					[
 						function (_event, data) {
 							opt.query = data;
-							fn.set(id, opt);
+							fn.set(id, null, opt);
 							fn.reload(id, sender);
 						},
 					]
@@ -123,14 +132,14 @@ const fn = {
 			if (opt) {
 				new query.filter(
 					{
-						field: opt.setting.field,
-						useopricon: opt.setting.useopricon,
-						data: opt.query.filter,
+						field: opt.setting?.field,
+						useopricon: opt.setting?.useopricon,
+						data: opt.query?.filter,
 					},
 					[
 						function (_event, data) {
 							opt.query.filter = data;
-							fn.set(id, opt);
+							fn.set(id, null, opt);
 							fn.reload(id, sender);
 						},
 					]
@@ -142,14 +151,14 @@ const fn = {
 			if (opt) {
 				new query.sort(
 					{
-						field: opt.setting.field,
-						useopricon: opt.setting.useopricon,
-						data: opt.query.sort,
+						field: opt.setting?.field,
+						useopricon: opt.setting?.useopricon,
+						data: opt.query?.sort,
 					},
 					[
 						function (_event, data) {
 							opt.query.sort = data;
-							fn.set(id, opt);
+							fn.set(id, null, opt);
 							fn.reload(id, sender);
 						},
 					]
@@ -161,13 +170,13 @@ const fn = {
 			if (opt) {
 				new query.field(
 					{
-						field: opt.setting.field,
-						data: opt.query.field,
+						field: opt.setting?.field,
+						data: opt.query?.field,
 					},
 					[
 						function (_event, data) {
 							opt.query.field = data;
-							fn.set(id, opt);
+							fn.set(id, null, opt);
 							fn.reload(id, sender);
 						},
 					]
@@ -179,17 +188,17 @@ const fn = {
 			if (opt) {
 				new query.limit(
 					{
-						min: opt.setting.limit.min,
-						max: opt.setting.limit.max,
-						step: opt.setting.limit.step,
-						data: opt.query.limit,
+						min: opt.setting?.limit?.min,
+						max: opt.setting?.limit?.max,
+						step: opt.setting?.limit?.step,
+						data: opt.query?.limit,
 					},
 					[
 						function (_event, data) {
 							let skip = opt.query.skip / opt.query.limit;
 							opt.query.limit = data;
 							opt.query.skip = skip * opt.query.limit;
-							fn.set(id, opt);
+							fn.set(id, null, opt);
 							fn.reload(id, sender);
 						},
 					]
@@ -201,16 +210,16 @@ const fn = {
 			if (opt) {
 				new query.page(
 					{
-						min: opt.setting.skip.min,
-						max: opt.setting.skip.max,
-						step: opt.setting.skip.step,
-						limit: opt.query.limit,
-						data: opt.query.skip,
+						min: opt.setting?.skip?.min,
+						max: opt.setting?.skip?.max,
+						step: opt.setting?.skip?.step,
+						limit: opt.query?.limit,
+						data: opt.query?.skip,
 					},
 					[
 						function (_event, data) {
 							opt.query.skip = data;
-							fn.set(id, opt);
+							fn.set(id, null, opt);
 							fn.reload(id, sender);
 						},
 					]
@@ -565,7 +574,7 @@ export class container extends div {
 
 			opt.class = core.merge.class(opt.class, ["cl-list"]);
 
-			fn.set(opt.id, opt);
+			fn.set(opt.id, null, opt);
 
 			delete opt.setting;
 			delete opt.query;
@@ -577,7 +586,8 @@ export class container extends div {
 		}
 	}
 
-	static load = fn.load;
+	static get = fn.get;
+	static set = fn.set;
 	static reload = fn.reload;
 	static query = fn.query;
 	static excel = fn.excel;
