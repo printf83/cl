@@ -123,6 +123,7 @@ const fn = {
 				},
 				function (result) {
 					dbstate = result;
+					fn.setting.field[fn.setting.field.length - 1].option = dbstate;
 					callback();
 				}
 			);
@@ -157,7 +158,7 @@ export default [
 									value: "state",
 									label: "State",
 									type: "select",
-									option: null,
+									option: dbstate,
 									placeholder: "Please Choose One",
 								},
 							],
@@ -226,11 +227,85 @@ export default [
 								type: "select",
 								label: "State",
 								name: "state",
-								option: null,
+								option: dbstate,
 								value: data ? data.state : null,
 							}),
 						]
 					}
+			`,
+			}),
+			"fn.items",
+			new $.codepreview({
+				container: "card",
+				code: `
+				function (data, item) {
+					let lastgroup = null;
+					let result = [];
+					data.forEach(function (i) {
+						if (dbstate) {
+							if (i.state && lastgroup !== i.state) {
+								lastgroup = i.state;
+								let iname = dbstate.filter(function (el) {
+									return el.value === i.state;
+								})[0]?.label;
+
+								result.push({
+									elem: new $.list.group({ key: i.state, name: iname }),
+								});
+							}
+						}
+
+						result.push({
+							elem: item(i),
+						});
+					});
+
+					return result;
+				}
+			`,
+			}),
+			"fn.item",
+			new $.codepreview({
+				container: "card",
+				code: `
+				function (data) {
+					return new $.list.item({
+						key: data._id,
+						name: data.name,
+						picture: data.picture,
+						detail: new $.small([data.phone, data.dob, data.email].filter(Boolean).join(" | ")),
+						allow_delete: true,
+						allow_copy: true,
+						allow_action: true,
+					});
+				}
+			`,
+			}),
+			"fn.state",
+			new $.codepreview({
+				container: "card",
+				code: `
+				function (callback, sender) {
+					if (!dbstate) {
+						console.log("Init state database");
+
+						//get record
+						$.db.api.option(
+							{
+								name: "state",
+								fieldkey: "_id",
+								fieldname: "name",
+								sender: sender,
+							},
+							function (result) {
+								dbstate = result;
+								callback();
+							}
+						);
+					} else {
+						callback();
+					}
+				}
 			`,
 			}),
 		],
