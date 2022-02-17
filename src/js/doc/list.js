@@ -1,6 +1,7 @@
 "use strict";
 import sample from "./sample.js";
 import $ from "../component.js";
+import div from "../base/div.js";
 
 let dbstate = null;
 const fn = {
@@ -319,20 +320,28 @@ export default [
 
 			return [
 				new $.button({
-					label: "Reload",
+					label: "Generate",
 					icon: "fire",
 					color: "primary",
 					onclick: function (event) {
-						$.list.container.reload(resultOutputId, event.currentTarget);
+						let sender = event.currentTarget;
+						fn.state(function () {
+							$.core.replaceWith(
+								document.getElementById(resultOutputId),
+								new $.list.container({
+									id: resultOutputId,
+									setting: fn.setting,
+									query: fn.query,
+									name: "customer",
+								})
+							);
+
+							$.list.container.reload(resultOutputId, sender);
+						}, sender);
 					},
 				}),
 
-				new $.list.container({
-					id: resultOutputId,
-					setting: fn.setting,
-					query: fn.query,
-					name: "customer",
-				}),
+				new div({ id: resultOutputId }),
 			];
 		},
 	},
@@ -345,21 +354,29 @@ export default [
 
 			return [
 				new $.button({
-					label: "Reload",
+					label: "Generate",
 					icon: "fire",
 					color: "primary",
 					onclick: function (event) {
-						$.list.container.reload(resultOutputId, event.currentTarget);
+						let sender = event.currentTarget;
+						fn.state(function () {
+							$.core.replaceWith(
+								document.getElementById(resultOutputId),
+								new $.list.container({
+									id: resultOutputId,
+									setting: fn.setting,
+									query: fn.query,
+									name: "customer",
+									paging: false,
+								})
+							);
+
+							$.list.container.reload(resultOutputId, sender);
+						}, sender);
 					},
 				}),
 
-				new $.list.container({
-					id: resultOutputId,
-					setting: fn.setting,
-					query: fn.query,
-					name: "customer",
-					paging: false,
-				}),
+				new div({ id: resultOutputId }),
 			];
 		},
 	},
@@ -372,21 +389,38 @@ export default [
 
 			return [
 				new $.button({
-					label: "Reload",
+					label: "Generate",
 					icon: "fire",
 					color: "primary",
 					onclick: function (event) {
-						$.list.container.reload(resultOutputId, event.currentTarget);
+						let sender = event.currentTarget;
+						fn.state(function () {
+							$.core.replaceWith(
+								document.getElementById(resultOutputId),
+								new $.list.container({
+									id: resultOutputId,
+									setting: fn.setting,
+									query: fn.query,
+									name: "customer",
+									item: function (data) {
+										return new $.list.item({
+											key: data._id,
+											name: data.name,
+											picture: data.picture,
+											detail: new $.small(
+												[data.phone, data.dob, data.email].filter(Boolean).join(" | ")
+											),
+										});
+									},
+								})
+							);
+
+							$.list.container.reload(resultOutputId, sender);
+						}, sender);
 					},
 				}),
 
-				new $.list.container({
-					id: resultOutputId,
-					setting: fn.setting,
-					query: fn.query,
-					name: "customer",
-					item: fn.item,
-				}),
+				new div({ id: resultOutputId }),
 			];
 		},
 	},
@@ -399,26 +433,39 @@ export default [
 
 			return [
 				new $.button({
-					label: "Reload",
+					label: "Generate",
 					icon: "fire",
 					color: "primary",
 					onclick: function (event) {
 						let sender = event.currentTarget;
 						fn.state(function () {
-							$.list.container.set(resultOutputId, "items", fn.items);
+							$.core.replaceWith(
+								document.getElementById(resultOutputId),
+								new $.list.container({
+									id: resultOutputId,
+									setting: fn.setting,
+									query: fn.query,
+									name: "customer",
+									items: fn.items,
+									item: function (data) {
+										return new $.list.item({
+											key: data._id,
+											name: data.name,
+											picture: data.picture,
+											detail: new $.small(
+												[data.phone, data.dob, data.email].filter(Boolean).join(" | ")
+											),
+										});
+									},
+								})
+							);
+
 							$.list.container.reload(resultOutputId, sender);
 						}, sender);
 					},
 				}),
 
-				new $.list.container({
-					id: resultOutputId,
-					setting: fn.setting,
-					query: fn.query,
-					name: "customer",
-					items: fn.items,
-					item: fn.item,
-				}),
+				new div({ id: resultOutputId }),
 			];
 		},
 	},
@@ -431,23 +478,41 @@ export default [
 
 			return [
 				new $.button({
-					label: "Reload",
+					label: "Generate",
 					icon: "fire",
 					color: "primary",
 					onclick: function (event) {
-						$.list.container.set(resultOutputId, "items", fn.items);
-						$.list.container.reload(resultOutputId, event.currentTarget);
+						let sender = event.currentTarget;
+						fn.state(function () {
+							$.core.replaceWith(
+								document.getElementById(resultOutputId),
+								new $.list.container({
+									id: resultOutputId,
+									setting: fn.setting,
+									query: fn.query,
+									editor: fn.editor,
+									name: "customer",
+									items: fn.items,
+									item: function (data) {
+										return new $.list.item({
+											key: data._id,
+											name: data.name,
+											picture: data.picture,
+											detail: new $.small(
+												[data.phone, data.dob, data.email].filter(Boolean).join(" | ")
+											),
+											allow_delete: true,
+										});
+									},
+								})
+							);
+
+							$.list.container.reload(resultOutputId, sender);
+						}, sender);
 					},
 				}),
 
-				new $.list.container({
-					id: resultOutputId,
-					setting: fn.setting,
-					query: fn.query,
-					name: "customer",
-					items: fn.items,
-					item: fn.item,
-				}),
+				new div({ id: resultOutputId }),
 			];
 		},
 	},
@@ -460,28 +525,31 @@ export default [
 
 			return [
 				new $.button({
-					label: "Reload",
+					label: "Generate",
 					icon: "fire",
 					color: "primary",
 					onclick: function (event) {
 						let sender = event.currentTarget;
 						fn.state(function () {
-							$.list.container.set(resultOutputId, "items", fn.items);
-							$.list.container.set(resultOutputId, "setting", fn.setting);
+							$.core.replaceWith(
+								document.getElementById(resultOutputId),
+								new $.list.container({
+									id: resultOutputId,
+									setting: fn.setting,
+									query: fn.query,
+									editor: fn.editor,
+									name: "customer",
+									items: fn.items,
+									item: fn.item,
+								})
+							);
+
 							$.list.container.reload(resultOutputId, sender);
 						}, sender);
 					},
 				}),
 
-				new $.list.container({
-					id: resultOutputId,
-					setting: fn.setting,
-					query: fn.query,
-					editor: fn.editor,
-					name: "customer",
-					items: fn.items,
-					item: fn.item,
-				}),
+				new div({ id: resultOutputId }),
 			];
 		},
 	},
@@ -493,46 +561,41 @@ export default [
 			let resultOutputId = $.core.UUID();
 
 			return [
-				new $.btngroup([
-					new $.button({
-						label: "Reload",
-						icon: "fire",
-						color: "primary",
-						onclick: function (event) {
-							let sender = event.currentTarget;
-							fn.state(function () {
-								$.list.container.set(resultOutputId, "items", fn.items);
-								$.list.container.set(resultOutputId, "setting", fn.setting);
-								$.list.container.set(resultOutputId, "editor", fn.editor);
-								$.list.container.reload(resultOutputId, sender);
-							}, sender);
-						},
-					}),
+				new $.button({
+					label: "Generate",
+					icon: "fire",
+					color: "primary",
+					onclick: function (event) {
+						let sender = event.currentTarget;
+						fn.state(function () {
+							$.core.replaceWith(
+								document.getElementById(resultOutputId),
+								new $.list.container({
+									id: resultOutputId,
+									setting: fn.setting,
+									query: fn.query,
+									editor: fn.editor,
+									name: "customer",
+									items: fn.items,
+									item: fn.item,
+								})
+							);
 
-					new $.button({
-						label: "Add new",
-						icon: "floppy-disk",
-						color: "success",
-						onclick: function (event) {
-							let sender = event.currentTarget;
-							fn.state(function () {
-								$.list.container.set(resultOutputId, "items", fn.items);
-								$.list.container.set(resultOutputId, "editor", fn.editor);
-								$.list.container.item.add(resultOutputId, sender);
-							}, sender);
-						},
-					}),
-				]),
-
-				new $.list.container({
-					id: resultOutputId,
-					setting: fn.setting,
-					query: fn.query,
-					editor: fn.editor,
-					name: "customer",
-					items: fn.items,
-					item: fn.item,
+							$.list.container.reload(resultOutputId, sender);
+						}, sender);
+					},
 				}),
+
+				new $.button({
+					label: "Add new",
+					icon: "floppy-disk",
+					color: "success",
+					onclick: function (event) {
+						$.list.container.item.add(resultOutputId, event.currentTarget);
+					},
+				}),
+
+				new div({ id: resultOutputId }),
 			];
 		},
 	},
@@ -544,36 +607,32 @@ export default [
 			let resultOutputId = $.core.UUID();
 
 			return [
+				new $.button({
+					label: "Generate",
+					icon: "fire",
+					color: "primary",
+					onclick: function (event) {
+						let sender = event.currentTarget;
+						fn.state(function () {
+							$.core.replaceWith(
+								document.getElementById(resultOutputId),
+								new $.list.container({
+									id: resultOutputId,
+									setting: fn.setting,
+									query: fn.query,
+									editor: fn.editor,
+									name: "customer",
+									items: fn.items,
+									item: fn.item,
+								})
+							);
+
+							$.list.container.reload(resultOutputId, sender);
+						}, sender);
+					},
+				}),
+
 				new $.btngroup([
-					new $.button({
-						label: "Reload",
-						icon: "fire",
-						color: "primary",
-						onclick: function (event) {
-							let sender = event.currentTarget;
-							fn.state(function () {
-								$.list.container.set(resultOutputId, "items", fn.items);
-								$.list.container.set(resultOutputId, "setting", fn.setting);
-								$.list.container.set(resultOutputId, "editor", fn.editor);
-								$.list.container.reload(resultOutputId, sender);
-							}, sender);
-						},
-					}),
-
-					new $.button({
-						icon: "floppy-disk",
-						color: "success",
-						outline: true,
-						onclick: function (event) {
-							let sender = event.currentTarget;
-							fn.state(function () {
-								$.list.container.set(resultOutputId, "items", fn.items);
-								$.list.container.set(resultOutputId, "editor", fn.editor);
-								$.list.container.item.add(resultOutputId, sender);
-							}, sender);
-						},
-					}),
-
 					new $.button({
 						label: "Check mode",
 						showlabel: "lg",
@@ -585,7 +644,7 @@ export default [
 					}),
 
 					new $.button({
-						label: "Check all",
+						label: "Select all",
 						showlabel: "lg",
 						icon: "check-double",
 						color: "warning",
@@ -605,15 +664,7 @@ export default [
 					}),
 				]),
 
-				new $.list.container({
-					id: resultOutputId,
-					setting: fn.setting,
-					query: fn.query,
-					editor: fn.editor,
-					name: "customer",
-					items: fn.items,
-					item: fn.item,
-				}),
+				new div({ id: resultOutputId }),
 			];
 		},
 	},
@@ -625,63 +676,31 @@ export default [
 			let resultOutputId = $.core.UUID();
 
 			return [
-				new $.btngroup([
-					new $.button({
-						label: "Reload",
-						icon: "fire",
-						color: "primary",
-						onclick: function (event) {
-							let sender = event.currentTarget;
-							fn.state(function () {
-								$.list.container.set(resultOutputId, "setting", fn.setting);
-								$.list.container.set(resultOutputId, "editor", fn.editor);
-								$.list.container.set(resultOutputId, "items", fn.items);
-								$.list.container.reload(resultOutputId, sender);
-							}, sender);
-						},
-					}),
+				new $.button({
+					label: "Generate",
+					icon: "fire",
+					color: "primary",
+					onclick: function (event) {
+						let sender = event.currentTarget;
+						fn.state(function () {
+							$.core.replaceWith(
+								document.getElementById(resultOutputId),
+								new $.list.container({
+									id: resultOutputId,
+									setting: fn.setting,
+									query: fn.query,
+									editor: fn.editor,
+									name: "customer",
+									items: fn.items,
+									item: fn.item,
+								})
+							);
 
-					new $.button({
-						icon: "floppy-disk",
-						color: "success",
-						outline: true,
-						onclick: function (event) {
-							let sender = event.currentTarget;
-							fn.state(function () {
-								$.list.container.set(resultOutputId, "editor", fn.editor);
-								$.list.container.set(resultOutputId, "items", fn.items);
-								$.list.container.item.add(resultOutputId, sender);
-							}, sender);
-						},
-					}),
+							$.list.container.reload(resultOutputId, sender);
+						}, sender);
+					},
+				}),
 
-					new $.button({
-						icon: "list-check",
-						color: "warning",
-						outline: true,
-						onclick: function () {
-							$.list.container.check.mode(resultOutputId);
-						},
-					}),
-
-					new $.button({
-						icon: "check-double",
-						color: "warning",
-						outline: true,
-						onclick: function () {
-							$.list.container.check.all(resultOutputId);
-						},
-					}),
-
-					new $.button({
-						icon: "trash-can",
-						color: "danger",
-						outline: true,
-						onclick: function (event) {
-							$.list.container.check.delete(resultOutputId, event.currentTarget);
-						},
-					}),
-				]),
 				new $.btngroup([
 					new $.button({
 						label: "Query",
@@ -689,12 +708,7 @@ export default [
 						icon: "fire",
 						color: "primary",
 						onclick: function (event) {
-							let sender = event.currentTarget;
-							fn.state(function () {
-								$.list.container.set(resultOutputId, "items", fn.items);
-								$.list.container.set(resultOutputId, "setting", fn.setting);
-								$.list.container.query.all(resultOutputId, sender);
-							}, sender);
+							$.list.container.query.all(resultOutputId, event.currentTarget);
 						},
 					}),
 
@@ -702,12 +716,7 @@ export default [
 						icon: "filter",
 						color: "primary",
 						onclick: function (event) {
-							let sender = event.currentTarget;
-							fn.state(function () {
-								$.list.container.set(resultOutputId, "items", fn.items);
-								$.list.container.set(resultOutputId, "setting", fn.setting);
-								$.list.container.query.filter(resultOutputId, sender);
-							}, sender);
+							$.list.container.query.filter(resultOutputId, event.currentTarget);
 						},
 					}),
 
@@ -743,15 +752,7 @@ export default [
 						},
 					}),
 				]),
-				new $.list.container({
-					id: resultOutputId,
-					setting: fn.setting,
-					query: fn.query,
-					editor: fn.editor,
-					name: "customer",
-					items: fn.items,
-					item: fn.item,
-				}),
+				new div({ id: resultOutputId }),
 			];
 		},
 	},

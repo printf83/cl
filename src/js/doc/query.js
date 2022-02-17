@@ -2,6 +2,8 @@
 import sample from "./sample.js";
 import $ from "../component.js";
 
+let dbstate = null;
+
 const fn = {
 	setting: {
 		field: [
@@ -14,7 +16,7 @@ const fn = {
 				value: "state",
 				label: "State",
 				type: "select",
-				option: null,
+				option: dbstate,
 				placeholder: "Please Choose One",
 			},
 		],
@@ -36,6 +38,28 @@ const fn = {
 		field: { __v: 0 },
 		limit: 10,
 		skip: 0,
+	},
+	state: function (callback, sender) {
+		if (!dbstate) {
+			console.log("Init state database");
+
+			//get record
+			$.db.api.option(
+				{
+					name: "state",
+					fieldkey: "_id",
+					fieldname: "name",
+					sender: sender,
+				},
+				function (result) {
+					dbstate = result;
+					fn.setting.field[fn.setting.field.length - 1].option = dbstate;
+					callback();
+				}
+			);
+		} else {
+			callback();
+		}
 	},
 };
 
@@ -64,7 +88,7 @@ export default [
 									value: "state",
 									label: "State",
 									type: "select",
-									option: null,
+									option: dbstate,
 									placeholder: "Please Choose One",
 								},
 							],
@@ -98,6 +122,34 @@ export default [
 					}
 			`,
 			}),
+			"fn.state",
+			new $.codepreview({
+				container: "card",
+				code: `
+					function (callback, sender) {
+						if (!dbstate) {
+							console.log("Init state database");
+
+							//get record
+							$.db.api.option(
+								{
+									name: "state",
+									fieldkey: "_id",
+									fieldname: "name",
+									sender: sender,
+								},
+								function (result) {
+									dbstate = result;
+									fn.setting.field[fn.setting.field.length - 1].option = dbstate;
+									callback();
+								}
+							);
+						} else {
+							callback();
+						}
+					}
+			`,
+			}),
 		],
 	},
 
@@ -114,34 +166,37 @@ export default [
 					color: "primary",
 					onclick: function (event) {
 						let sender = event.currentTarget;
-						//edit query
-						new $.query.dialog(
-							{
-								field: fn.setting.field,
-								limit: fn.setting.limit,
-								skip: fn.setting.skip,
-								useopricon: fn.setting.useopricon,
-								data: fn.query,
-							},
-							[
-								function (_event, data) {
-									fn.query = data;
 
-									//get record
-									$.db.api.list(
-										{
-											name: "customer",
-											data: fn.query,
-											sender: sender,
-										},
-										function (result) {
-											//result
-											document.getElementById(resultOutputId).value = JSON.stringify(result);
-										}
-									);
+						fn.state(function () {
+							//edit query
+							new $.query.dialog(
+								{
+									field: fn.setting.field,
+									limit: fn.setting.limit,
+									skip: fn.setting.skip,
+									useopricon: fn.setting.useopricon,
+									data: fn.query,
 								},
-							]
-						).show();
+								[
+									function (_event, data) {
+										fn.query = data;
+
+										//get record
+										$.db.api.list(
+											{
+												name: "customer",
+												data: fn.query,
+												sender: sender,
+											},
+											function (result) {
+												//result
+												document.getElementById(resultOutputId).value = JSON.stringify(result);
+											}
+										);
+									},
+								]
+							).show();
+						}, sender);
 					},
 				}),
 				new $.input({ type: "textarea", label: "Result", id: resultOutputId, rows: 10 }),
@@ -162,32 +217,35 @@ export default [
 					color: "primary",
 					onclick: function (event) {
 						let sender = event.currentTarget;
-						//edit query
-						new $.query.filter(
-							{
-								field: fn.setting.field,
-								useopricon: fn.setting.useopricon,
-								data: fn.query.filter,
-							},
-							[
-								function (_event, data) {
-									fn.query.filter = data;
 
-									//get record
-									$.db.api.list(
-										{
-											name: "customer",
-											data: fn.query,
-											sender: sender,
-										},
-										function (result) {
-											//result
-											document.getElementById(resultOutputId).value = JSON.stringify(result);
-										}
-									);
+						fn.state(function () {
+							//edit query
+							new $.query.filter(
+								{
+									field: fn.setting.field,
+									useopricon: fn.setting.useopricon,
+									data: fn.query.filter,
 								},
-							]
-						).show();
+								[
+									function (_event, data) {
+										fn.query.filter = data;
+
+										//get record
+										$.db.api.list(
+											{
+												name: "customer",
+												data: fn.query,
+												sender: sender,
+											},
+											function (result) {
+												//result
+												document.getElementById(resultOutputId).value = JSON.stringify(result);
+											}
+										);
+									},
+								]
+							).show();
+						}, sender);
 					},
 				}),
 				new $.input({ type: "textarea", label: "Result", id: resultOutputId, rows: 10 }),
