@@ -21,6 +21,7 @@ const defaultOption = {
 	labellast: null,
 	labelnext: null,
 	labelprev: null,
+	autoupdate: true,
 };
 /**
  * [item:{title,icon,divider,label,href,onclick}]
@@ -36,12 +37,15 @@ function pagingonchange(sender, data) {
 			skip: data.skip,
 			limit: data.limit,
 			max: data.max,
+			sender: sender,
 		},
 	});
 
 	ulcontainer.dispatchEvent(event);
 
-	core.replaceWith(container, new paging(data));
+	if (data.autoupdate) {
+		core.replaceWith(container, new paging(data));
+	}
 }
 
 export default class paging extends div {

@@ -70,6 +70,8 @@ const fn = {
 									skip: opt.query.skip,
 									limit: opt.query.limit,
 									onchange: fn.pagechange,
+									autoupdate: false,
+									nextprev: false,
 									attr: { "data-cl-container": id },
 								})
 							);
@@ -91,7 +93,7 @@ const fn = {
 		if (opt) {
 			opt.query.skip = event.detail.skip;
 			fn.set(id, opt);
-			fn.reload(id, sender);
+			fn.reload(id, event.detail.sender);
 		}
 	},
 	query: {

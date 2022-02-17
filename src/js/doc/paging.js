@@ -91,6 +91,22 @@ export default [
 	},
 
 	{
+		title: "Disable auto update",
+		code: function () {
+			return new $.paging({
+				limit: 10,
+				skip: 60,
+				total: 1260,
+				max: 3,
+				autoupdate: false,
+				onchange: function (event) {
+					new $.toast("i", `Skip changed to ${event.detail.skip}`).show();
+				},
+			});
+		},
+	},
+
+	{
 		title: "Size",
 	},
 
