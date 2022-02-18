@@ -1,7 +1,6 @@
 "use strict";
 import sample from "./sample.js";
 import $ from "../component.js";
-import div from "../base/div.js";
 
 let dbstate = null;
 const fn = {
@@ -143,8 +142,8 @@ export default [
 
 	{
 		msg: [
-			"fn.setting",
 			new $.codepreview({
+				title: "fn.setting",
 				container: "card",
 				code: `
 					function() {
@@ -178,8 +177,8 @@ export default [
 					}
 			`,
 			}),
-			"fn.query",
 			new $.codepreview({
+				title: "fn.query",
 				container: "card",
 				code: `
 					function() {
@@ -193,8 +192,8 @@ export default [
 					}
 			`,
 			}),
-			"fn.editor",
 			new $.codepreview({
+				title: "fn.editor",
 				container: "card",
 				code: `
 					function (data, readonly) {
@@ -235,8 +234,8 @@ export default [
 					}
 			`,
 			}),
-			"fn.items",
 			new $.codepreview({
+				title: "fn.items",
 				container: "card",
 				code: `
 				function (data, item) {
@@ -265,8 +264,8 @@ export default [
 				}
 			`,
 			}),
-			"fn.item",
 			new $.codepreview({
+				title: "fn.item",
 				container: "card",
 				code: `
 				function (data) {
@@ -282,8 +281,8 @@ export default [
 				}
 			`,
 			}),
-			"fn.state",
 			new $.codepreview({
+				title: "fn.state",
 				container: "card",
 				code: `
 				function (callback, sender) {
@@ -341,7 +340,7 @@ export default [
 					},
 				}),
 
-				new div({ id: resultOutputId }),
+				new $.div({ id: resultOutputId }),
 			];
 		},
 	},
@@ -376,7 +375,7 @@ export default [
 					},
 				}),
 
-				new div({ id: resultOutputId }),
+				new $.div({ id: resultOutputId }),
 			];
 		},
 	},
@@ -420,7 +419,7 @@ export default [
 					},
 				}),
 
-				new div({ id: resultOutputId }),
+				new $.div({ id: resultOutputId }),
 			];
 		},
 	},
@@ -465,7 +464,7 @@ export default [
 					},
 				}),
 
-				new div({ id: resultOutputId }),
+				new $.div({ id: resultOutputId }),
 			];
 		},
 	},
@@ -512,7 +511,7 @@ export default [
 					},
 				}),
 
-				new div({ id: resultOutputId }),
+				new $.div({ id: resultOutputId }),
 			];
 		},
 	},
@@ -549,7 +548,7 @@ export default [
 					},
 				}),
 
-				new div({ id: resultOutputId }),
+				new $.div({ id: resultOutputId }),
 			];
 		},
 	},
@@ -595,7 +594,7 @@ export default [
 					},
 				}),
 
-				new div({ id: resultOutputId }),
+				new $.div({ id: resultOutputId }),
 			];
 		},
 	},
@@ -664,7 +663,7 @@ export default [
 					}),
 				]),
 
-				new div({ id: resultOutputId }),
+				new $.div({ id: resultOutputId }),
 			];
 		},
 	},
@@ -752,7 +751,7 @@ export default [
 						},
 					}),
 				]),
-				new div({ id: resultOutputId }),
+				new $.div({ id: resultOutputId }),
 			];
 		},
 	},

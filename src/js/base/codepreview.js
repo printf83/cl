@@ -10,6 +10,7 @@ import code from "./code.js";
 import pre from "./pre.js";
 import button from "./button.js";
 import toast from "./toast.js";
+import small from "./small.js";
 
 const LIBNAME = /component.Z./g;
 const SAMPLELIBNAME = /doc_sample.Z./g;
@@ -99,6 +100,7 @@ const defaultOption = {
 	code: null,
 	type: "js",
 	container: "div",
+	title: null,
 };
 /**
  * opt : {tagoption,icon,label}
@@ -114,6 +116,10 @@ export default class codepreview extends tag {
 	set data(opt) {
 		opt = core.extend({}, defaultOption, opt);
 
+		if (opt.title) {
+			opt.container = "card";
+		}
+
 		if (opt.container === "div") {
 			super.data = {
 				elem: [
@@ -123,14 +129,35 @@ export default class codepreview extends tag {
 				],
 			};
 		} else if (opt.container === "card") {
-			super.data = {
-				elem: [
-					new card.container({
-						marginy: 3,
-						elem: new card.body({ elem: codecontainer(opt.type, opt.code) }),
-					}),
-				],
-			};
+			if (opt.title) {
+				super.data = {
+					elem: [
+						new div({
+							border: true,
+							rounded: "top",
+							paddingy: 1,
+							paddingx: 3,
+							color: "light",
+							elem: new small(opt.title),
+						}),
+						new card.container({
+							border: "top-0",
+							rounded: ["0", "bottom"],
+							marginbottom: 3,
+							elem: new card.body({ elem: codecontainer(opt.type, opt.code) }),
+						}),
+					],
+				};
+			} else {
+				super.data = {
+					elem: [
+						new card.container({
+							marginy: 3,
+							elem: new card.body({ elem: codecontainer(opt.type, opt.code) }),
+						}),
+					],
+				};
+			}
 		} else {
 			super.data = {
 				elem: codecontainer(opt.type, opt.code),

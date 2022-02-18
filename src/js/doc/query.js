@@ -72,8 +72,8 @@ export default [
 
 	{
 		msg: [
-			"fn.setting",
 			new $.codepreview({
+				title: "fn.setting",
 				container: "card",
 				code: `
 					function() {
@@ -107,8 +107,9 @@ export default [
 					}
 			`,
 			}),
-			"fn.query",
+
 			new $.codepreview({
+				title: "fn.query",
 				container: "card",
 				code: `
 					function() {
@@ -122,8 +123,8 @@ export default [
 					}
 			`,
 			}),
-			"fn.state",
 			new $.codepreview({
+				title: "fn.state",
 				container: "card",
 				code: `
 					function (callback, sender) {

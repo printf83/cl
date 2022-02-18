@@ -20,6 +20,7 @@ export default [
 			}),
 			"Then we create models for <b>customer</b> table in <b>./models/customer.js</b>",
 			new $.codepreview({
+				title: "customer.js",
 				container: "card",
 				code: `
 					const mongoose = require("mongoose");
