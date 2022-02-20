@@ -11,8 +11,10 @@ import pre from "./pre.js";
 import button from "./button.js";
 import toast from "./toast.js";
 import small from "./small.js";
+import b from "./b.js";
 
 const LIBNAME = /component.Z./g;
+const LIBNAME2 = /_component_js__WEBPACK_IMPORTED_MODULE_0__.Z./g;
 const SAMPLELIBNAME = /doc_sample.Z./g;
 const FNNAME = /list_fn./g;
 
@@ -24,6 +26,7 @@ function beautifyjs(str) {
 		brace_style: "collapse",
 	};
 
+	str = str.replace(LIBNAME2, "$.");
 	str = str.replace(LIBNAME, "$.");
 	str = str.replace(SAMPLELIBNAME, "sample.");
 	str = str.replace(FNNAME, "fn.");
@@ -129,35 +132,27 @@ export default class codepreview extends tag {
 				],
 			};
 		} else if (opt.container === "card") {
-			if (opt.title) {
-				super.data = {
-					elem: [
-						new div({
-							border: true,
-							rounded: "top",
-							paddingy: 1,
-							paddingx: 3,
-							color: "light",
-							elem: new small(opt.title),
-						}),
-						new card.container({
-							border: "top-0",
-							rounded: ["0", "bottom"],
-							marginbottom: 3,
-							elem: new card.body({ elem: codecontainer(opt.type, opt.code) }),
-						}),
-					],
-				};
-			} else {
-				super.data = {
-					elem: [
-						new card.container({
-							marginy: 3,
-							elem: new card.body({ elem: codecontainer(opt.type, opt.code) }),
-						}),
-					],
-				};
-			}
+			super.data = {
+				elem: [
+					opt.title
+						? new div({
+								border: true,
+								rounded: "top",
+								paddingy: 1,
+								paddingx: 3,
+								color: "light",
+								elem: new small(new b(opt.title)),
+						  })
+						: null,
+					new card.container({
+						marginy: !opt.title ? 3 : null,
+						border: opt.title ? "top-0" : null,
+						rounded: opt.title ? ["0", "bottom"] : null,
+						marginbottom: opt.title ? 3 : null,
+						elem: new card.body({ elem: codecontainer(opt.type, opt.code) }),
+					}),
+				],
+			};
 		} else {
 			super.data = {
 				elem: codecontainer(opt.type, opt.code),

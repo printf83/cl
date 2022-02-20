@@ -56,7 +56,7 @@ const fn = {
 			return null;
 		}
 	},
-	reload: function (id, sender) {
+	reload: function (id, sender, callback) {
 		let opt = fn.get(id);
 		if (opt) {
 			db.api.list(
@@ -88,6 +88,10 @@ const fn = {
 					}
 
 					core.init(container);
+
+					if (typeof callback === "function") {
+						callback(container);
+					}
 				},
 				sender
 			);
@@ -249,10 +253,36 @@ const fn = {
 							name: i.getAttribute("data-name"),
 						};
 					});
+				} else {
+					new dlg.msgbox("-", "No item selected.", function () {}).show();
 				}
 			}
 
 			return null;
+		},
+		set: function (id, data) {
+			if (data && data.length > 0) {
+				data = Array.isArray(data) ? data : [data];
+
+				let container = document.getElementById(id);
+				if (container.classList.contains("check")) {
+					//remove checked
+					let checked = container.querySelectorAll("div.check[data-key]");
+					if (checked && checked.length > 0) {
+						Array.from(checked).forEach(function (i) {
+							i.classList.remove("check");
+						});
+					}
+
+					//check data
+					data.forEach(function (i) {
+						let item = container.querySelectorAll(`div[data-key='${i}']`);
+						if (item && item.length > 0) {
+							item[0]?.classList.add("check");
+						}
+					});
+				}
+			}
 		},
 		delete: function (id, sender) {
 			let checked = fn.check.get(id);
@@ -574,7 +604,7 @@ export class container extends div {
 
 			opt.class = core.merge.class(opt.class, ["cl-list"]);
 
-			fn.set(opt.id, null, opt);
+			fn.set(opt.id, null, core.extend({}, opt));
 
 			delete opt.setting;
 			delete opt.query;

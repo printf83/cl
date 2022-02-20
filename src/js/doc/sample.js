@@ -1,6 +1,6 @@
 "use strict";
 import $ from "../component.js";
-
+let dbstate = null;
 let textindex = 0;
 let textdb = [
 	"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur elit massa, elementum vel metus id, congue sollicitudin lectus. Praesent ultricies felis eget nisl volutpat gravida. In eleifend iaculis viverra. Proin ut gravida elit, id posuere velit. Nulla congue enim at odio eleifend accumsan. Curabitur felis quam, feugiat in tincidunt ac, pulvinar eu diam. Nullam non erat orci. Sed gravida, ante sed vestibulum accumsan, elit metus feugiat ex, in gravida dolor nunc fermentum magna.",
@@ -698,5 +698,142 @@ fill="#999" stroke="none">
 	},
 	stackcontainer: function (elem) {
 		return new $.container.stack(elem);
+	},
+	query_setting: function (dbstate) {
+		return {
+			field: [
+				{ value: "name", label: "Name", type: "text" },
+				{ value: "dob", label: "Date Of Birth", type: "date" },
+				{ value: "phone", label: "Phone", type: "tel" },
+				{ value: "picture", label: "Picture", type: "check" },
+				{ value: "email", label: "Email", type: "email" },
+				{
+					value: "state",
+					label: "State",
+					type: "select",
+					option: dbstate,
+					placeholder: "Please Choose One",
+				},
+			],
+			limit: {
+				min: 1,
+				max: 100,
+				step: 5,
+			},
+			skip: {
+				min: 1,
+				max: 100,
+				step: 1,
+			},
+			useopricon: false,
+		};
+	},
+	query_data: {
+		filter: null,
+		sort: { state: 1, name: 1 },
+		field: { __v: 0 },
+		limit: 10,
+		skip: 0,
+	},
+	query_data_view: function () {
+		return {
+			filter: null,
+			sort: { state: 1, name: 1 },
+			field: { __v: 0 },
+			limit: 10,
+			skip: 0,
+		};
+	},
+	list_editor: function (data) {
+		return [
+			new $.input({
+				type: "text",
+				label: "Name",
+				name: "name",
+				value: data ? data.name : null,
+			}),
+			new $.input({
+				type: "date",
+				label: "Date of birth",
+				name: "dob",
+				value: data ? data.dob : null,
+			}),
+			new $.input({
+				type: "text",
+				label: "Phone",
+				name: "phone",
+				value: data ? data.phone : null,
+			}),
+			new $.file({ label: "Picture", name: "picture", value: data ? data.picture : null }),
+			new $.input({
+				type: "email",
+				label: "Email",
+				name: "email",
+				value: data ? data.email : null,
+			}),
+			new $.input({
+				type: "select",
+				label: "State",
+				name: "state",
+				option: dbstate,
+				value: data ? data.state : null,
+			}),
+		];
+	},
+	list_items: function (data, item) {
+		let lastgroup = null;
+		let result = [];
+		data.forEach(function (i) {
+			if (dbstate) {
+				if (i.state && lastgroup !== i.state) {
+					lastgroup = i.state;
+					let iname = dbstate.filter(function (el) {
+						return el.value === i.state;
+					})[0]?.label;
+
+					result.push({
+						elem: new $.list.group({ key: i.state, name: iname }),
+					});
+				}
+			}
+
+			result.push({
+				elem: item(i),
+			});
+		});
+
+		return result;
+	},
+	list_item: function (data) {
+		return new $.list.item({
+			key: data._id,
+			name: data.name,
+			picture: data.picture,
+			detail: new $.small([data.phone, data.dob, data.email].filter(Boolean).join(" | ")),
+			allow_delete: true,
+			allow_copy: true,
+			allow_action: true,
+		});
+	},
+	list_state: function (callback, sender) {
+		if (!dbstate) {
+			console.log("Init state database");
+
+			//get record
+			$.db.api.option(
+				{
+					name: "state",
+					fieldkey: "_id",
+					fieldname: "name",
+					sender: sender,
+				},
+				function (result) {
+					dbstate = result;
+					callback(dbstate);
+				}
+			);
+		} else {
+			callback(dbstate);
+		}
 	},
 };

@@ -92,7 +92,7 @@ export class msgbox extends modal {
 			} else if (opt.length === 2) {
 				super({
 					elem: new msg({ weight: "md", elem: opt[0] }),
-					button: btnBuilder(opt[2], ["Okay"], null, false),
+					button: btnBuilder(opt[1], ["Okay"], null, false),
 				});
 			} else if (opt.length === 1) {
 				super(opt[0]);

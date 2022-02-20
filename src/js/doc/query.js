@@ -2,67 +2,6 @@
 import sample from "./sample.js";
 import $ from "../component.js";
 
-let dbstate = null;
-
-const fn = {
-	setting: {
-		field: [
-			{ value: "name", label: "Name", type: "text" },
-			{ value: "dob", label: "Date Of Birth", type: "date" },
-			{ value: "phone", label: "Phone", type: "tel" },
-			{ value: "picture", label: "Picture", type: "check" },
-			{ value: "email", label: "Email", type: "email" },
-			{
-				value: "state",
-				label: "State",
-				type: "select",
-				option: dbstate,
-				placeholder: "Please Choose One",
-			},
-		],
-		limit: {
-			min: 1,
-			max: 100,
-			step: 5,
-		},
-		skip: {
-			min: 1,
-			max: 100,
-			step: 1,
-		},
-		useopricon: false,
-	},
-	query: {
-		filter: null,
-		sort: { state: 1, name: 1 },
-		field: { __v: 0 },
-		limit: 10,
-		skip: 0,
-	},
-	state: function (callback, sender) {
-		if (!dbstate) {
-			console.log("Init state database");
-
-			//get record
-			$.db.api.option(
-				{
-					name: "state",
-					fieldkey: "_id",
-					fieldname: "name",
-					sender: sender,
-				},
-				function (result) {
-					dbstate = result;
-					fn.setting.field[fn.setting.field.length - 1].option = dbstate;
-					callback();
-				}
-			);
-		} else {
-			callback();
-		}
-	},
-};
-
 export default [
 	{
 		title: "Query",
@@ -71,91 +10,37 @@ export default [
 	},
 
 	{
+		title: "Query dialog",
 		msg: [
+			"Using {{$.query.dialog}} to edit query for <b>cl generic database</b>.",
 			new $.codepreview({
-				title: "fn.setting",
 				container: "card",
 				code: `
-					function() {
-						return {
-							field: [
-								{ value: "name", label: "Name", type: "text" },
-								{ value: "dob", label: "Date Of Birth", type: "date" },
-								{ value: "phone", label: "Phone", type: "tel" },
-								{ value: "picture", label: "Picture", type: "check" },
-								{ value: "email", label: "Email", type: "email" },
-								{
-									value: "state",
-									label: "State",
-									type: "select",
-									option: dbstate,
-									placeholder: "Please Choose One",
-								},
-							],
-							limit: {
-								min: 1,
-								max: 100,
-								step: 5,
+					new $.query.dialog(
+						{
+							field: setting_fileld,
+							limit: setting_limit,
+							skip: setting_skip,
+							useopricon: setting_use_operation_icon,
+							data: query_data,
+						},
+						[
+							function (event, query_result) {
+								//callback if user press okay
 							},
-							skip: {
-								min: 1,
-								max: 100,
-								step: 1,
-							},
-							useopricon: false,
-						};
-					}
-			`,
-			}),
-
-			new $.codepreview({
-				title: "fn.query",
-				container: "card",
-				code: `
-					function() {
-						return {
-							filter: null,
-							sort: { state: 1, name: 1 },
-							field: { __v: 0 },
-							limit: 10,
-							skip: 0,
-						};
-					}
-			`,
-			}),
-			new $.codepreview({
-				title: "fn.state",
-				container: "card",
-				code: `
-					function (callback, sender) {
-						if (!dbstate) {
-							console.log("Init state database");
-
-							//get record
-							$.db.api.option(
-								{
-									name: "state",
-									fieldkey: "_id",
-									fieldname: "name",
-									sender: sender,
-								},
-								function (result) {
-									dbstate = result;
-									fn.setting.field[fn.setting.field.length - 1].option = dbstate;
-									callback();
-								}
-							);
-						} else {
-							callback();
-						}
-					}
+							function (event){
+								//callback if user press cancel
+							}
+						]
+					).show();
 			`,
 			}),
 		],
-	},
-
-	{
-		title: "Query dialog",
+		sample: {
+			"sample.query_setting": sample.query_setting,
+			"sample.query_data": sample.query_data_view,
+			"sample.list_state": sample.list_state,
+		},
 		container: sample.formcontainer,
 		code: function () {
 			let resultOutputId = $.core.UUID();
@@ -168,25 +53,25 @@ export default [
 					onclick: function (event) {
 						let sender = event.currentTarget;
 
-						fn.state(function () {
+						sample.list_state(function (dbstate) {
 							//edit query
 							new $.query.dialog(
 								{
-									field: fn.setting.field,
-									limit: fn.setting.limit,
-									skip: fn.setting.skip,
-									useopricon: fn.setting.useopricon,
-									data: fn.query,
+									field: sample.query_setting(dbstate).field,
+									limit: sample.query_setting(dbstate).limit,
+									skip: sample.query_setting(dbstate).skip,
+									useopricon: sample.query_setting(dbstate).useopricon,
+									data: sample.query_data,
 								},
 								[
 									function (_event, data) {
-										fn.query = data;
+										sample.query_data = data;
 
 										//get record
 										$.db.api.list(
 											{
 												name: "customer",
-												data: fn.query,
+												data: sample.query_data,
 												sender: sender,
 											},
 											function (result) {
@@ -207,6 +92,34 @@ export default [
 
 	{
 		title: "Filter dialog",
+		msg: [
+			"Using {{$.query.filter}} to edit query filter only for <b>cl generic database</b>.",
+			new $.codepreview({
+				container: "card",
+				code: `
+					new $.query.filter(
+						{
+							field: setting_fileld,
+							useopricon: setting_use_operation_icon,
+							data: query_filter_data,
+						},
+						[
+							function (event, query_filter_result) {
+								//callback if user press okay
+							},
+							function (event){
+								//callback if user press cancel
+							}
+						]
+					).show();
+			`,
+			}),
+		],
+		sample: {
+			"sample.query_setting": sample.query_setting,
+			"sample.query_data": sample.query_data_view,
+			"sample.list_state": sample.list_state,
+		},
 		container: sample.formcontainer,
 		code: function () {
 			let resultOutputId = $.core.UUID();
@@ -219,23 +132,23 @@ export default [
 					onclick: function (event) {
 						let sender = event.currentTarget;
 
-						fn.state(function () {
+						sample.list_state(function (dbstate) {
 							//edit query
 							new $.query.filter(
 								{
-									field: fn.setting.field,
-									useopricon: fn.setting.useopricon,
-									data: fn.query.filter,
+									field: sample.query_setting(dbstate).field,
+									useopricon: sample.query_setting(dbstate).useopricon,
+									data: sample.query_data.filter,
 								},
 								[
 									function (_event, data) {
-										fn.query.filter = data;
+										sample.query_data.filter = data;
 
 										//get record
 										$.db.api.list(
 											{
 												name: "customer",
-												data: fn.query,
+												data: sample.query_data,
 												sender: sender,
 											},
 											function (result) {
@@ -256,6 +169,33 @@ export default [
 
 	{
 		title: "Sort dialog",
+		msg: [
+			"Using {{$.query.sort}} to edit query sort only for <b>cl generic database</b>.",
+			new $.codepreview({
+				container: "card",
+				code: `
+					new $.query.sort(
+						{
+							field: setting_fileld,
+							useopricon: setting_use_operation_icon,
+							data: query_sort_data,
+						},
+						[
+							function (event, query_sort_result) {
+								//callback if user press okay
+							},
+							function (event){
+								//callback if user press cancel
+							}
+						]
+					).show();
+			`,
+			}),
+		],
+		sample: {
+			"sample.query_setting": sample.query_setting,
+			"sample.query_data": sample.query_data_view,
+		},
 		container: sample.formcontainer,
 		code: function () {
 			let resultOutputId = $.core.UUID();
@@ -271,19 +211,19 @@ export default [
 						//edit query
 						new $.query.sort(
 							{
-								field: fn.setting.field,
-								useopricon: fn.setting.useopricon,
-								data: fn.query.sort,
+								field: sample.query_setting().field,
+								useopricon: sample.query_setting().useopricon,
+								data: sample.query_data.sort,
 							},
 							[
 								function (_event, data) {
-									fn.query.sort = data;
+									sample.query_data.sort = data;
 
 									//get record
 									$.db.api.list(
 										{
 											name: "customer",
-											data: fn.query,
+											data: sample.query_data,
 											sender: sender,
 										},
 										function (result) {
@@ -303,6 +243,32 @@ export default [
 
 	{
 		title: "Field dialog",
+		msg: [
+			"Using {{$.query.field}} to edit query field only for <b>cl generic database</b>.",
+			new $.codepreview({
+				container: "card",
+				code: `
+					new $.query.field(
+						{
+							field: setting_fileld,
+							data: query_field_data,
+						},
+						[
+							function (event, query_field_result) {
+								//callback if user press okay
+							},
+							function (event){
+								//callback if user press cancel
+							}
+						]
+					).show();
+			`,
+			}),
+		],
+		sample: {
+			"sample.query_setting": sample.query_setting,
+			"sample.query_data": sample.query_data_view,
+		},
 		container: sample.formcontainer,
 		code: function () {
 			let resultOutputId = $.core.UUID();
@@ -318,18 +284,18 @@ export default [
 						//edit query
 						new $.query.field(
 							{
-								field: fn.setting.field,
-								data: fn.query.field,
+								field: sample.query_setting().field,
+								data: sample.query_data.field,
 							},
 							[
 								function (_event, data) {
-									fn.query.field = data;
+									sample.query_data.field = data;
 
 									//get record
 									$.db.api.list(
 										{
 											name: "customer",
-											data: fn.query,
+											data: sample.query_data,
 											sender: sender,
 										},
 										function (result) {
@@ -349,6 +315,34 @@ export default [
 
 	{
 		title: "Limit dialog",
+		msg: [
+			"Using {{$.query.limit}} to edit query limit only for <b>cl generic database</b>.",
+			new $.codepreview({
+				container: "card",
+				code: `
+					new $.query.limit(
+						{
+							min: setting_limit_min,
+							max: setting_limit_max,
+							step: setting_limit_step,
+							data: limit_data,
+						},
+						[
+							function (event, limit_result) {
+								//callback if user press okay
+							},
+							function (event){
+								//callback if user press cancel
+							}
+						]
+					).show();
+			`,
+			}),
+		],
+		sample: {
+			"sample.query_setting": sample.query_setting,
+			"sample.query_data": sample.query_data_view,
+		},
 		container: sample.formcontainer,
 		code: function () {
 			let resultOutputId = $.core.UUID();
@@ -364,22 +358,22 @@ export default [
 						//edit query
 						new $.query.limit(
 							{
-								min: fn.setting.limit.min,
-								max: fn.setting.limit.max,
-								step: fn.setting.limit.step,
-								data: fn.query.limit,
+								min: sample.query_setting().limit.min,
+								max: sample.query_setting().limit.max,
+								step: sample.query_setting().limit.step,
+								data: sample.query_data.limit,
 							},
 							[
 								function (_event, data) {
-									let skip = fn.query.skip / fn.query.limit;
-									fn.query.limit = data;
-									fn.query.skip = skip * fn.query.limit;
+									let skip = sample.query_data.skip / sample.query_data.limit;
+									sample.query_data.limit = data;
+									sample.query_data.skip = skip * sample.query_data.limit;
 
 									//get record
 									$.db.api.list(
 										{
 											name: "customer",
-											data: fn.query,
+											data: sample.query_data,
 											sender: sender,
 										},
 										function (result) {
@@ -399,6 +393,35 @@ export default [
 
 	{
 		title: "Page dialog",
+		msg: [
+			"Using {{$.query.limit}} to edit query limit only for <b>cl generic database</b>.",
+			new $.codepreview({
+				container: "card",
+				code: `
+					new $.query.limit(
+						{
+							min: setting_page_min,
+							max: setting_page_max,
+							step: setting_page_step,
+							limit: limit_data,
+							data: page_data,
+						},
+						[
+							function (event, page_result) {
+								//callback if user press okay
+							},
+							function (event){
+								//callback if user press cancel
+							}
+						]
+					).show();
+			`,
+			}),
+		],
+		sample: {
+			"sample.query_setting": sample.query_setting,
+			"sample.query_data": sample.query_data_view,
+		},
 		container: sample.formcontainer,
 		code: function () {
 			let resultOutputId = $.core.UUID();
@@ -414,21 +437,21 @@ export default [
 						//edit query
 						new $.query.page(
 							{
-								min: fn.setting.skip.min,
-								max: fn.setting.skip.max,
-								step: fn.setting.skip.step,
-								limit: fn.query.limit,
-								data: fn.query.skip,
+								min: sample.query_setting().skip.min,
+								max: sample.query_setting().skip.max,
+								step: sample.query_setting().skip.step,
+								limit: sample.query_data.limit,
+								data: sample.query_data.skip,
 							},
 							[
 								function (_event, data) {
-									fn.query.skip = data;
+									sample.query_data.skip = data;
 
 									//get record
 									$.db.api.list(
 										{
 											name: "customer",
-											data: fn.query,
+											data: sample.query_data,
 											sender: sender,
 										},
 										function (result) {

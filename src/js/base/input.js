@@ -231,7 +231,7 @@ export default class input extends tag {
 
 			delete m.type;
 
-			delete m.value;
+			// delete m.value;
 			delete m.checked;
 			delete m.placeholder;
 

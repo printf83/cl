@@ -2,137 +2,6 @@
 import sample from "./sample.js";
 import $ from "../component.js";
 
-let dbstate = null;
-const fn = {
-	setting: {
-		field: [
-			{ value: "name", label: "Name", type: "text" },
-			{ value: "dob", label: "Date Of Birth", type: "date" },
-			{ value: "phone", label: "Phone", type: "tel" },
-			{ value: "picture", label: "Picture", type: "check" },
-			{ value: "email", label: "Email", type: "email" },
-			{
-				value: "state",
-				label: "State",
-				type: "select",
-				option: dbstate,
-				placeholder: "Please Choose One",
-			},
-		],
-		limit: {
-			min: 1,
-			max: 100,
-			step: 5,
-		},
-		skip: {
-			min: 1,
-			max: 100,
-			step: 1,
-		},
-		useopricon: false,
-	},
-	query: {
-		filter: null,
-		sort: { state: 1, name: 1 },
-		field: { __v: 0 },
-		limit: 10,
-		skip: 0,
-	},
-	editor: function (data, readonly) {
-		return [
-			new $.input({
-				type: "text",
-				label: "Name",
-				name: "name",
-				value: data ? data.name : null,
-			}),
-			new $.input({
-				type: "date",
-				label: "Date of birth",
-				name: "dob",
-				value: data ? data.dob : null,
-			}),
-			new $.input({
-				type: "text",
-				label: "Phone",
-				name: "phone",
-				value: data ? data.phone : null,
-			}),
-			new $.file({ label: "Picture", name: "picture", value: data ? data.picture : null }),
-			new $.input({
-				type: "email",
-				label: "Email",
-				name: "email",
-				value: data ? data.email : null,
-			}),
-			new $.input({
-				type: "select",
-				label: "State",
-				name: "state",
-				option: dbstate,
-				value: data ? data.state : null,
-			}),
-		];
-	},
-	items: function (data, item) {
-		let lastgroup = null;
-		let result = [];
-		data.forEach(function (i) {
-			if (dbstate) {
-				if (i.state && lastgroup !== i.state) {
-					lastgroup = i.state;
-					let iname = dbstate.filter(function (el) {
-						return el.value === i.state;
-					})[0]?.label;
-
-					result.push({
-						elem: new $.list.group({ key: i.state, name: iname }),
-					});
-				}
-			}
-
-			result.push({
-				elem: item(i),
-			});
-		});
-
-		return result;
-	},
-	item: function (data) {
-		return new $.list.item({
-			key: data._id,
-			name: data.name,
-			picture: data.picture,
-			detail: new $.small([data.phone, data.dob, data.email].filter(Boolean).join(" | ")),
-			allow_delete: true,
-			allow_copy: true,
-			allow_action: true,
-		});
-	},
-	state: function (callback, sender) {
-		if (!dbstate) {
-			console.log("Init state database");
-
-			//get record
-			$.db.api.option(
-				{
-					name: "state",
-					fieldkey: "_id",
-					fieldname: "name",
-					sender: sender,
-				},
-				function (result) {
-					dbstate = result;
-					fn.setting.field[fn.setting.field.length - 1].option = dbstate;
-					callback();
-				}
-			);
-		} else {
-			callback();
-		}
-	},
-};
-
 export default [
 	{
 		title: "List",
@@ -141,265 +10,118 @@ export default [
 	},
 
 	{
-		msg: [
-			new $.codepreview({
-				title: "fn.setting",
-				container: "card",
-				code: `
-					function() {
-						return {
-							field: [
-								{ value: "name", label: "Name", type: "text" },
-								{ value: "dob", label: "Date Of Birth", type: "date" },
-								{ value: "phone", label: "Phone", type: "tel" },
-								{ value: "picture", label: "Picture", type: "check" },
-								{ value: "email", label: "Email", type: "email" },
-								{
-									value: "state",
-									label: "State",
-									type: "select",
-									option: dbstate,
-									placeholder: "Please Choose One",
-								},
-							],
-							limit: {
-								min: 1,
-								max: 100,
-								step: 5,
-							},
-							skip: {
-								min: 1,
-								max: 100,
-								step: 1,
-							},
-							useopricon: false,
-						};
-					}
-			`,
-			}),
-			new $.codepreview({
-				title: "fn.query",
-				container: "card",
-				code: `
-					function() {
-						return {
-							filter: null,
-							sort: { state: 1, name: 1 },
-							field: { __v: 0 },
-							limit: 10,
-							skip: 0,
-						};
-					}
-			`,
-			}),
-			new $.codepreview({
-				title: "fn.editor",
-				container: "card",
-				code: `
-					function (data, readonly) {
-						return [
-							new $.input({
-								type: "text",
-								label: "Name",
-								name: "name",
-								value: data ? data.name : null,
-							}),
-							new $.input({
-								type: "date",
-								label: "Date of birth",
-								name: "dob",
-								value: data ? data.dob : null,
-							}),
-							new $.input({
-								type: "text",
-								label: "Phone",
-								name: "phone",
-								value: data ? data.phone : null,
-							}),
-							new $.file({ label: "Picture", name: "picture", value: data ? data.picture : null }),
-							new $.input({
-								type: "email",
-								label: "Email",
-								name: "email",
-								value: data ? data.email : null,
-							}),
-							new $.input({
-								type: "select",
-								label: "State",
-								name: "state",
-								option: dbstate,
-								value: data ? data.state : null,
-							}),
-						]
-					}
-			`,
-			}),
-			new $.codepreview({
-				title: "fn.items",
-				container: "card",
-				code: `
-				function (data, item) {
-					let lastgroup = null;
-					let result = [];
-					data.forEach(function (i) {
-						if (dbstate) {
-							if (i.state && lastgroup !== i.state) {
-								lastgroup = i.state;
-								let iname = dbstate.filter(function (el) {
-									return el.value === i.state;
-								})[0]?.label;
-
-								result.push({
-									elem: new $.list.group({ key: i.state, name: iname }),
-								});
-							}
-						}
-
-						result.push({
-							elem: item(i),
-						});
-					});
-
-					return result;
-				}
-			`,
-			}),
-			new $.codepreview({
-				title: "fn.item",
-				container: "card",
-				code: `
-				function (data) {
-					return new $.list.item({
-						key: data._id,
-						name: data.name,
-						picture: data.picture,
-						detail: new $.small([data.phone, data.dob, data.email].filter(Boolean).join(" | ")),
-						allow_delete: true,
-						allow_copy: true,
-						allow_action: true,
-					});
-				}
-			`,
-			}),
-			new $.codepreview({
-				title: "fn.state",
-				container: "card",
-				code: `
-				function (callback, sender) {
-					if (!dbstate) {
-						console.log("Init state database");
-
-						//get record
-						$.db.api.option(
-							{
-								name: "state",
-								fieldkey: "_id",
-								fieldname: "name",
-								sender: sender,
-							},
-							function (result) {
-								dbstate = result;
-								callback();
-							}
-						);
-					} else {
-						callback();
-					}
-				}
-			`,
-			}),
-		],
-	},
-
-	{
 		title: "Example",
-		container: sample.formcontainer,
+		sample: {
+			"sample.query_setting": sample.query_setting,
+			"sample.query_data": sample.query_data_view,
+			"sample.list_state": sample.list_state,
+		},
 		code: function () {
 			let resultOutputId = $.core.UUID();
+			let btnGenerate = $.core.UUID();
 
 			return [
 				new $.button({
+					id: btnGenerate,
 					label: "Generate",
 					icon: "fire",
 					color: "primary",
 					onclick: function (event) {
 						let sender = event.currentTarget;
-						fn.state(function () {
+						sample.list_state(function (dbstate) {
 							$.core.replaceWith(
 								document.getElementById(resultOutputId),
 								new $.list.container({
 									id: resultOutputId,
-									setting: fn.setting,
-									query: fn.query,
+									setting: sample.query_setting(dbstate),
+									query: sample.query_data,
 									name: "customer",
 								})
 							);
 
-							$.list.container.reload(resultOutputId, sender);
+							$.list.container.reload(resultOutputId, sender, function () {
+								document.getElementById(btnGenerate).classList.add("d-none");
+								document.getElementById(resultOutputId).classList.remove("d-none");
+							});
 						}, sender);
 					},
 				}),
 
-				new $.div({ id: resultOutputId }),
+				new $.div({ id: resultOutputId, display: "none" }),
 			];
 		},
 	},
 
 	{
 		title: "No paging",
-		container: sample.formcontainer,
+		sample: {
+			"sample.query_setting": sample.query_setting,
+			"sample.query_data": sample.query_data_view,
+			"sample.list_state": sample.list_state,
+		},
 		code: function () {
 			let resultOutputId = $.core.UUID();
+			let btnGenerate = $.core.UUID();
 
 			return [
 				new $.button({
+					id: btnGenerate,
 					label: "Generate",
 					icon: "fire",
 					color: "primary",
 					onclick: function (event) {
 						let sender = event.currentTarget;
-						fn.state(function () {
+						sample.list_state(function (dbstate) {
 							$.core.replaceWith(
 								document.getElementById(resultOutputId),
 								new $.list.container({
 									id: resultOutputId,
-									setting: fn.setting,
-									query: fn.query,
+									setting: sample.query_setting(dbstate),
+									query: sample.query_data,
 									name: "customer",
 									paging: false,
 								})
 							);
 
-							$.list.container.reload(resultOutputId, sender);
+							$.list.container.reload(resultOutputId, sender, function () {
+								document.getElementById(btnGenerate).classList.add("d-none");
+								document.getElementById(resultOutputId).classList.remove("d-none");
+							});
 						}, sender);
 					},
 				}),
 
-				new $.div({ id: resultOutputId }),
+				new $.div({ id: resultOutputId, display: "none" }),
 			];
 		},
 	},
 
 	{
 		title: "Item",
-		container: sample.formcontainer,
+		sample: {
+			"sample.query_setting": sample.query_setting,
+			"sample.query_data": sample.query_data_view,
+			"sample.list_state": sample.list_state,
+		},
 		code: function () {
 			let resultOutputId = $.core.UUID();
+			let btnGenerate = $.core.UUID();
 
 			return [
 				new $.button({
+					id: btnGenerate,
 					label: "Generate",
 					icon: "fire",
 					color: "primary",
 					onclick: function (event) {
 						let sender = event.currentTarget;
-						fn.state(function () {
+						sample.list_state(function (dbstate) {
 							$.core.replaceWith(
 								document.getElementById(resultOutputId),
 								new $.list.container({
 									id: resultOutputId,
-									setting: fn.setting,
-									query: fn.query,
+									setting: sample.query_setting(dbstate),
+									query: sample.query_data,
 									name: "customer",
 									item: function (data) {
 										return new $.list.item({
@@ -414,38 +136,48 @@ export default [
 								})
 							);
 
-							$.list.container.reload(resultOutputId, sender);
+							$.list.container.reload(resultOutputId, sender, function () {
+								document.getElementById(btnGenerate).classList.add("d-none");
+								document.getElementById(resultOutputId).classList.remove("d-none");
+							});
 						}, sender);
 					},
 				}),
 
-				new $.div({ id: resultOutputId }),
+				new $.div({ id: resultOutputId, display: "none" }),
 			];
 		},
 	},
 
 	{
 		title: "Group",
-		container: sample.formcontainer,
+		sample: {
+			"sample.query_setting": sample.query_setting,
+			"sample.query_data": sample.query_data_view,
+			"sample.list_items": sample.list_items,
+			"sample.list_state": sample.list_state,
+		},
 		code: function () {
 			let resultOutputId = $.core.UUID();
+			let btnGenerate = $.core.UUID();
 
 			return [
 				new $.button({
+					id: btnGenerate,
 					label: "Generate",
 					icon: "fire",
 					color: "primary",
 					onclick: function (event) {
 						let sender = event.currentTarget;
-						fn.state(function () {
+						sample.list_state(function (dbstate) {
 							$.core.replaceWith(
 								document.getElementById(resultOutputId),
 								new $.list.container({
 									id: resultOutputId,
-									setting: fn.setting,
-									query: fn.query,
+									setting: sample.query_setting(dbstate),
+									query: sample.query_data,
 									name: "customer",
-									items: fn.items,
+									items: sample.list_items,
 									item: function (data) {
 										return new $.list.item({
 											key: data._id,
@@ -459,39 +191,60 @@ export default [
 								})
 							);
 
-							$.list.container.reload(resultOutputId, sender);
+							$.list.container.reload(resultOutputId, sender, function () {
+								document.getElementById(btnGenerate).classList.add("d-none");
+								document.getElementById(resultOutputId).classList.remove("d-none");
+							});
 						}, sender);
 					},
 				}),
 
-				new $.div({ id: resultOutputId }),
+				new $.div({ id: resultOutputId, display: "none" }),
 			];
 		},
 	},
 
 	{
 		title: "Allow delete",
-		container: sample.formcontainer,
+		msg: [
+			"You can set allowed action on {{$.list.item}}",
+			new $.ul({
+				item: [
+					"<code>allow_delete: true</code> to add delete button on item.",
+					"<code>allow_copy: true</code> to add copy button on item.",
+					"<code>allow_action: true</code> to allow edit and check on item.",
+				],
+			}),
+		],
+		sample: {
+			"sample.query_setting": sample.query_setting,
+			"sample.query_data": sample.query_data_view,
+			"sample.list_editor": sample.list_editor,
+			"sample.list_items": sample.list_items,
+			"sample.list_state": sample.list_state,
+		},
 		code: function () {
 			let resultOutputId = $.core.UUID();
+			let btnGenerate = $.core.UUID();
 
 			return [
 				new $.button({
+					id: btnGenerate,
 					label: "Generate",
 					icon: "fire",
 					color: "primary",
 					onclick: function (event) {
 						let sender = event.currentTarget;
-						fn.state(function () {
+						sample.list_state(function (dbstate) {
 							$.core.replaceWith(
 								document.getElementById(resultOutputId),
 								new $.list.container({
 									id: resultOutputId,
-									setting: fn.setting,
-									query: fn.query,
-									editor: fn.editor,
+									setting: sample.query_setting(dbstate),
+									query: sample.query_data,
+									editor: sample.list_editor,
 									name: "customer",
-									items: fn.items,
+									items: sample.list_items,
 									item: function (data) {
 										return new $.list.item({
 											key: data._id,
@@ -506,86 +259,122 @@ export default [
 								})
 							);
 
-							$.list.container.reload(resultOutputId, sender);
+							$.list.container.reload(resultOutputId, sender, function () {
+								document.getElementById(btnGenerate).classList.add("d-none");
+								document.getElementById(resultOutputId).classList.remove("d-none");
+							});
 						}, sender);
 					},
 				}),
 
-				new $.div({ id: resultOutputId }),
+				new $.div({ id: resultOutputId, display: "none" }),
 			];
 		},
 	},
 
 	{
 		title: "Editor",
-		container: sample.formcontainer,
+		msg: ["Please provide editor to allow <b>Add</b>, <b>Edit</b> and <b>Copy</b> function to work."],
+		sample: {
+			"sample.query_setting": sample.query_setting,
+			"sample.query_data": sample.query_data_view,
+			"sample.list_editor": sample.list_editor,
+			"sample.list_items": sample.list_items,
+			"sample.list_item": sample.list_item,
+			"sample.list_state": sample.list_state,
+		},
 		code: function () {
 			let resultOutputId = $.core.UUID();
+			let btnGenerate = $.core.UUID();
 
 			return [
 				new $.button({
+					id: btnGenerate,
 					label: "Generate",
 					icon: "fire",
 					color: "primary",
 					onclick: function (event) {
 						let sender = event.currentTarget;
-						fn.state(function () {
+						sample.list_state(function (dbstate) {
 							$.core.replaceWith(
 								document.getElementById(resultOutputId),
 								new $.list.container({
 									id: resultOutputId,
-									setting: fn.setting,
-									query: fn.query,
-									editor: fn.editor,
+									setting: sample.query_setting(dbstate),
+									query: sample.query_data,
+									editor: sample.list_editor,
 									name: "customer",
-									items: fn.items,
-									item: fn.item,
+									items: sample.list_items,
+									item: sample.list_item,
 								})
 							);
 
-							$.list.container.reload(resultOutputId, sender);
+							$.list.container.reload(resultOutputId, sender, function () {
+								document.getElementById(btnGenerate).classList.add("d-none");
+								document.getElementById(resultOutputId).classList.remove("d-none");
+							});
 						}, sender);
 					},
 				}),
 
-				new $.div({ id: resultOutputId }),
+				new $.div({ id: resultOutputId, display: "none" }),
 			];
 		},
 	},
 
 	{
 		title: "Add new record",
-		container: sample.formcontainer,
+		msg: [
+			"Use {{$.list.container.item.add(containerID, sender)}} to add new record into <b>cl generic database</b>. Please provide editor to use this function.",
+		],
+		sample: {
+			"sample.query_setting": sample.query_setting,
+			"sample.query_data": sample.query_data_view,
+			"sample.list_editor": sample.list_editor,
+			"sample.list_items": sample.list_items,
+			"sample.list_item": sample.list_item,
+			"sample.list_state": sample.list_state,
+		},
 		code: function () {
 			let resultOutputId = $.core.UUID();
+			let btnGenerate = $.core.UUID();
+			let btnAdd = $.core.UUID();
 
 			return [
 				new $.button({
+					id: btnGenerate,
 					label: "Generate",
 					icon: "fire",
 					color: "primary",
 					onclick: function (event) {
 						let sender = event.currentTarget;
-						fn.state(function () {
+						sample.list_state(function (dbstate) {
 							$.core.replaceWith(
 								document.getElementById(resultOutputId),
 								new $.list.container({
 									id: resultOutputId,
-									setting: fn.setting,
-									query: fn.query,
-									editor: fn.editor,
+									setting: sample.query_setting(dbstate),
+									query: sample.query_data,
+									editor: sample.list_editor,
 									name: "customer",
-									items: fn.items,
-									item: fn.item,
+									items: sample.list_items,
+									item: sample.list_item,
 								})
 							);
 
-							$.list.container.reload(resultOutputId, sender);
+							$.list.container.reload(resultOutputId, sender, function () {
+								document.getElementById(btnGenerate).classList.add("d-none");
+								document.getElementById(btnAdd).classList.remove("d-none");
+								document.getElementById(resultOutputId).classList.remove("d-none");
+							});
 						}, sender);
 					},
 				}),
 
 				new $.button({
+					display: "none",
+					marginbottom: 2,
+					id: btnAdd,
 					label: "Add new",
 					icon: "floppy-disk",
 					color: "success",
@@ -594,164 +383,265 @@ export default [
 					},
 				}),
 
-				new $.div({ id: resultOutputId }),
+				new $.div({ id: resultOutputId, display: "none" }),
 			];
 		},
 	},
 
 	{
 		title: "Check mode",
-		container: sample.formcontainer,
+		msg: [
+			"Using shortcut to handle check mode for {{$.list.container}}.",
+			new $.ul({
+				item: [
+					"<code>$.list.container.check.mode(containerID)</code> to change check mode.",
+					"<code>$.list.container.check.all(containerID)</code> to select, decelect all item.",
+					"<code>$.list.container.check.delete(containerID)</code> to delete all selected item.",
+					"<code>$.list.container.check.get(containerID)</code> to get selected item.",
+					"<code>$.list.container.check.set(containerID,data)</code> to set selected item.",
+				],
+			}),
+		],
+		sample: {
+			"sample.query_setting": sample.query_setting,
+			"sample.query_data": sample.query_data_view,
+			"sample.list_editor": sample.list_editor,
+			"sample.list_items": sample.list_items,
+			"sample.list_item": sample.list_item,
+			"sample.list_state": sample.list_state,
+		},
 		code: function () {
 			let resultOutputId = $.core.UUID();
+			let btnGenerate = $.core.UUID();
+			let btnCheck = $.core.UUID();
 
 			return [
 				new $.button({
+					id: btnGenerate,
 					label: "Generate",
 					icon: "fire",
 					color: "primary",
 					onclick: function (event) {
 						let sender = event.currentTarget;
-						fn.state(function () {
+						sample.list_state(function (dbstate) {
 							$.core.replaceWith(
 								document.getElementById(resultOutputId),
 								new $.list.container({
 									id: resultOutputId,
-									setting: fn.setting,
-									query: fn.query,
-									editor: fn.editor,
+									setting: sample.query_setting(dbstate),
+									query: sample.query_data,
+									editor: sample.list_editor,
 									name: "customer",
-									items: fn.items,
-									item: fn.item,
+									items: sample.list_items,
+									item: sample.list_item,
 								})
 							);
 
-							$.list.container.reload(resultOutputId, sender);
+							$.list.container.reload(resultOutputId, sender, function () {
+								document.getElementById(btnGenerate).classList.add("d-none");
+								document.getElementById(btnCheck).classList.remove("d-none");
+								document.getElementById(resultOutputId).classList.remove("d-none");
+							});
 						}, sender);
 					},
 				}),
 
-				new $.btngroup([
-					new $.button({
-						label: "Check mode",
-						showlabel: "lg",
-						icon: "list-check",
-						color: "warning",
-						onclick: function () {
-							$.list.container.check.mode(resultOutputId);
-						},
-					}),
+				new $.btngroup({
+					id: btnCheck,
+					marginbottom: 2,
+					display: "none",
+					elem: [
+						new $.button({
+							label: "Check mode",
+							showlabel: "lg",
+							icon: "list-check",
+							color: "warning",
+							onclick: function () {
+								$.list.container.check.mode(resultOutputId);
+							},
+						}),
 
-					new $.button({
-						label: "Select all",
-						showlabel: "lg",
-						icon: "check-double",
-						color: "warning",
-						onclick: function () {
-							$.list.container.check.all(resultOutputId);
-						},
-					}),
+						new $.button({
+							label: "Select all",
+							showlabel: "lg",
+							icon: "check-double",
+							color: "warning",
+							onclick: function () {
+								$.list.container.check.all(resultOutputId);
+							},
+						}),
 
-					new $.button({
-						label: "Delete checked",
-						showlabel: "lg",
-						icon: "trash-can",
-						color: "danger",
-						onclick: function (event) {
-							$.list.container.check.delete(resultOutputId, event.currentTarget);
-						},
-					}),
-				]),
+						new $.button({
+							label: "Delete checked",
+							showlabel: "lg",
+							icon: "trash-can",
+							color: "danger",
+							onclick: function (event) {
+								$.list.container.check.delete(resultOutputId, event.currentTarget);
+							},
+						}),
+						new $.button({
+							label: "Get checked",
+							showlabel: "lg",
+							icon: "download",
+							color: "primary",
+							onclick: function () {
+								let checked = $.list.container.check.get(resultOutputId);
+								//checked : [{key:value,name:value}]
+								if (checked) {
+									new $.dlg.inputbox(
+										new $.input({
+											type: "textarea",
+											value: checked
+												.map(function (i) {
+													return i.key;
+												})
+												.join(","),
+											name: "value",
+										}),
+										"ID",
+										function (_event, data) {}
+									).show();
+								}
+							},
+						}),
 
-				new $.div({ id: resultOutputId }),
+						new $.button({
+							label: "Set checked",
+							showlabel: "lg",
+							icon: "upload",
+							color: "primary",
+							onclick: function () {
+								new $.dlg.inputbox("textarea", "ID", function (_event, data) {
+									let checked = data.value.split(",");
+									$.list.container.check.set(resultOutputId, checked);
+								}).show();
+							},
+						}),
+					],
+				}),
+
+				new $.div({ id: resultOutputId, display: "none" }),
 			];
 		},
 	},
 
 	{
 		title: "Query dialog",
-		container: sample.formcontainer,
+		msg: [
+			"Using shortcut to show query dialog from {{$.list.container}}.",
+			new $.ul({
+				item: [
+					"<code>$.list.container.query.all(containerID,sender)</code> to show <b>Query Editor</b> dialog.",
+					"<code>$.list.container.query.filter(containerID,sender)</code> to show <b>Query Filter Editor</b> dialog.",
+					"<code>$.list.container.query.sort(containerID,sender)</code> to show <b>Query Sort Editor</b> dialog.",
+					"<code>$.list.container.query.field(containerID,sender)</code> to show <b>Query Field Editor</b> dialog.",
+					"<code>$.list.container.query.limit(containerID,sender)</code> to show <b>Query Limit Editor</b> dialog.",
+					"<code>$.list.container.query.page(containerID,sender)</code> to show <b>Query Page Editor</b> dialog.",
+				],
+			}),
+		],
+		sample: {
+			"sample.query_setting": sample.query_setting,
+			"sample.query_data": sample.query_data_view,
+			"sample.list_editor": sample.list_editor,
+			"sample.list_items": sample.list_items,
+			"sample.list_item": sample.list_item,
+			"sample.list_state": sample.list_state,
+		},
 		code: function () {
 			let resultOutputId = $.core.UUID();
+			let btnGenerate = $.core.UUID();
+			let btnQuery = $.core.UUID();
 
 			return [
 				new $.button({
+					id: btnGenerate,
 					label: "Generate",
 					icon: "fire",
 					color: "primary",
 					onclick: function (event) {
 						let sender = event.currentTarget;
-						fn.state(function () {
+						sample.list_state(function (dbstate) {
 							$.core.replaceWith(
 								document.getElementById(resultOutputId),
 								new $.list.container({
 									id: resultOutputId,
-									setting: fn.setting,
-									query: fn.query,
-									editor: fn.editor,
+									setting: sample.query_setting(dbstate),
+									query: sample.query_data,
+									editor: sample.list_editor,
 									name: "customer",
-									items: fn.items,
-									item: fn.item,
+									items: sample.list_items,
+									item: sample.list_item,
 								})
 							);
 
-							$.list.container.reload(resultOutputId, sender);
+							$.list.container.reload(resultOutputId, sender, function () {
+								document.getElementById(btnGenerate).classList.add("d-none");
+								document.getElementById(btnQuery).classList.remove("d-none");
+								document.getElementById(resultOutputId).classList.remove("d-none");
+							});
 						}, sender);
 					},
 				}),
 
-				new $.btngroup([
-					new $.button({
-						label: "Query",
-						showlabel: "lg",
-						icon: "fire",
-						color: "primary",
-						onclick: function (event) {
-							$.list.container.query.all(resultOutputId, event.currentTarget);
-						},
-					}),
+				new $.btngroup({
+					id: btnQuery,
+					marginbottom: 2,
+					display: "none",
+					elem: [
+						new $.button({
+							label: "Query",
+							showlabel: "lg",
+							icon: "fire",
+							color: "primary",
+							onclick: function (event) {
+								$.list.container.query.all(resultOutputId, event.currentTarget);
+							},
+						}),
 
-					new $.button({
-						icon: "filter",
-						color: "primary",
-						onclick: function (event) {
-							$.list.container.query.filter(resultOutputId, event.currentTarget);
-						},
-					}),
+						new $.button({
+							icon: "filter",
+							color: "primary",
+							onclick: function (event) {
+								$.list.container.query.filter(resultOutputId, event.currentTarget);
+							},
+						}),
 
-					new $.button({
-						icon: "sort",
-						color: "primary",
-						onclick: function (event) {
-							$.list.container.query.sort(resultOutputId, event.currentTarget);
-						},
-					}),
+						new $.button({
+							icon: "sort",
+							color: "primary",
+							onclick: function (event) {
+								$.list.container.query.sort(resultOutputId, event.currentTarget);
+							},
+						}),
 
-					new $.button({
-						icon: "tasks",
-						color: "primary",
-						onclick: function (event) {
-							$.list.container.query.field(resultOutputId, event.currentTarget);
-						},
-					}),
+						new $.button({
+							icon: "tasks",
+							color: "primary",
+							onclick: function (event) {
+								$.list.container.query.field(resultOutputId, event.currentTarget);
+							},
+						}),
 
-					new $.button({
-						icon: "list-ol",
-						color: "primary",
-						onclick: function (event) {
-							$.list.container.query.limit(resultOutputId, event.currentTarget);
-						},
-					}),
+						new $.button({
+							icon: "list-ol",
+							color: "primary",
+							onclick: function (event) {
+								$.list.container.query.limit(resultOutputId, event.currentTarget);
+							},
+						}),
 
-					new $.button({
-						icon: { icon: "sort", rotate: 90 },
-						color: "primary",
-						onclick: function (event) {
-							$.list.container.query.page(resultOutputId, event.currentTarget);
-						},
-					}),
-				]),
-				new $.div({ id: resultOutputId }),
+						new $.button({
+							icon: { icon: "sort", rotate: 90 },
+							color: "primary",
+							onclick: function (event) {
+								$.list.container.query.page(resultOutputId, event.currentTarget);
+							},
+						}),
+					],
+				}),
+				new $.div({ id: resultOutputId, display: "none" }),
 			];
 		},
 	},
