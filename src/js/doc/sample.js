@@ -780,26 +780,22 @@ fill="#999" stroke="none">
 			}),
 		];
 	},
-	list_items: function (data, item) {
+	list_items: function (data, item, group) {
 		let lastgroup = null;
 		let result = [];
 		data.forEach(function (i) {
 			if (dbstate) {
 				if (i.state && lastgroup !== i.state) {
 					lastgroup = i.state;
-					let iname = dbstate.filter(function (el) {
+					let state_name = dbstate.filter(function (el) {
 						return el.value === i.state;
 					})[0]?.label;
 
-					result.push({
-						elem: new $.list.group({ key: i.state, name: iname }),
-					});
+					result.push(group({ key: i.state, name: state_name }));
 				}
 			}
 
-			result.push({
-				elem: item(i),
-			});
+			result.push(item(i));
 		});
 
 		return result;
@@ -814,6 +810,9 @@ fill="#999" stroke="none">
 			allow_copy: true,
 			allow_action: true,
 		});
+	},
+	list_group: function (data) {
+		return new $.list.group({ key: data.key, name: data.name });
 	},
 	list_state: function (callback, sender) {
 		if (!dbstate) {

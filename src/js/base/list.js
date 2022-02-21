@@ -14,6 +14,8 @@ import * as dlg from "./dlg.js";
 import icon from "./icon.js";
 import h from "./h.js";
 import b from "./b";
+import li from "./li.js";
+import ul from "./ul.js";
 
 const fn = {
 	genname: function (names) {
@@ -68,7 +70,10 @@ const fn = {
 				function (result) {
 					let container = document.getElementById(id);
 					core.removeChildElement(container);
-					core.appendChild(container, new listgroup({ item: opt.items(result.data, opt.item) }));
+					core.appendChild(
+						container,
+						new ul({ class: "list-group", elem: opt.items(result.data, opt.item, opt.group) })
+					);
 
 					if (opt.paging) {
 						if (result.total > opt.query.limit) {
@@ -245,7 +250,7 @@ const fn = {
 		get: function (id) {
 			let container = document.getElementById(id);
 			if (container.classList.contains("check")) {
-				let checked = container.querySelectorAll("div.check[data-key]");
+				let checked = container.querySelectorAll(".check[data-key]");
 				if (checked && checked.length > 0) {
 					return Array.from(checked).map(function (i) {
 						return {
@@ -267,7 +272,7 @@ const fn = {
 				let container = document.getElementById(id);
 				if (container.classList.contains("check")) {
 					//remove checked
-					let checked = container.querySelectorAll("div.check[data-key]");
+					let checked = container.querySelectorAll(".check[data-key]");
 					if (checked && checked.length > 0) {
 						Array.from(checked).forEach(function (i) {
 							i.classList.remove("check");
@@ -338,8 +343,8 @@ const fn = {
 		all: function (id) {
 			let container = document.getElementById(id);
 			if (container.classList.contains("check")) {
-				let checked = container.querySelectorAll("div.check[data-key]");
-				let items = container.querySelectorAll("div[data-key]");
+				let checked = container.querySelectorAll(".check[data-key]");
+				let items = container.querySelectorAll("[data-key]");
 				if (items.length === checked.length) {
 					items.forEach(function (item) {
 						item.classList.remove("check");
@@ -354,7 +359,7 @@ const fn = {
 		item: function (event) {
 			event.stopPropagation();
 
-			let sender = event.currentTarget.closest("div[data-key]");
+			let sender = event.currentTarget.closest("[data-key]");
 			if (sender.classList.contains("check")) {
 				sender.classList.remove("check");
 			} else {
@@ -366,7 +371,7 @@ const fn = {
 		action: function (event) {
 			event.stopPropagation();
 
-			let sender = event.currentTarget.closest("div[data-key]");
+			let sender = event.currentTarget.closest("[data-key]");
 			if (sender) {
 				let container = sender.closest(".cl-list");
 
@@ -411,7 +416,7 @@ const fn = {
 		edit: function (event) {
 			event.stopPropagation();
 
-			let sender = event.currentTarget.closest("div[data-key]");
+			let sender = event.currentTarget.closest("[data-key]");
 			let key = sender.getAttribute("data-key");
 			let container = sender.closest(".cl-list");
 			let id = container.getAttribute("id");
@@ -462,7 +467,7 @@ const fn = {
 			event.stopPropagation();
 
 			let sender = event.currentTarget;
-			let item = sender.closest("div[data-key]");
+			let item = sender.closest("[data-key]");
 			let key = item.getAttribute("data-key");
 			let container = item.closest(".cl-list");
 			let id = container.getAttribute("id");
@@ -512,7 +517,7 @@ const fn = {
 			event.stopPropagation();
 
 			let sender = event.currentTarget;
-			let item = sender.closest("div[data-key]");
+			let item = sender.closest("[data-key]");
 			let key = item.getAttribute("data-key");
 			let name = item.getAttribute("data-name");
 			let container = item.closest(".cl-list");
@@ -557,13 +562,22 @@ const defaultOption = {
 	query: null,
 	name: null,
 	paging: true,
-	items: function (data, item) {
+	items: function (data, item, group) {
 		return data.map(function (i) {
-			return { elem: item(i) };
+			return item(i);
 		});
 	},
 	item: function (data) {
 		return new item({
+			name: JSON.stringify(data)
+				.replace(/\,/g, ",<br/>")
+				.replace(/\:/g, ": ")
+				.replace(/\{/g, "{<br/>")
+				.replace(/\}/g, "<br/>}"),
+		});
+	},
+	group: function (data) {
+		return new group({
 			name: JSON.stringify(data)
 				.replace(/\,/g, ",<br/>")
 				.replace(/\:/g, ": ")
@@ -625,7 +639,7 @@ export class container extends div {
 	static item = fn.item;
 }
 
-export class item extends div {
+export class item extends li {
 	constructor(...opt) {
 		super(...opt);
 	}
@@ -636,7 +650,10 @@ export class item extends div {
 	set data(opt) {
 		opt = core.extend({}, defaultItemOption, opt);
 
+		opt.class = core.merge.class(opt.class, "list-group-item");
+
 		super.data = {
+			class: opt.class,
 			attr: { "data-key": opt.key, "data-name": opt.name },
 			display: "flex",
 			justifycontent: "between",
@@ -697,7 +714,7 @@ export class item extends div {
 	}
 }
 
-export class group extends div {
+export class group extends li {
 	constructor(...opt) {
 		super(...opt);
 	}
@@ -708,7 +725,12 @@ export class group extends div {
 	set data(opt) {
 		opt = core.extend({}, defaultGroupOption, opt);
 
+		opt.class = core.merge.class(opt.class, "list-group-item");
+
 		super.data = {
+			class: opt.class,
+			color: "light",
+			align: "center",
 			elem: new b(opt.name),
 		};
 	}

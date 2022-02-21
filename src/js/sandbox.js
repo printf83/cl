@@ -201,13 +201,11 @@ $.core.documentReady(() => {
 										return el.value === i.state;
 									})[0]?.label;
 
-									result.push({
-										elem: new $.list.group({ key: i.state, name: iname }),
-									});
+									result.push(new $.list.group({ key: i.state, name: iname }));
 								}
 
-								result.push({
-									elem: new $.list.item({
+								result.push(
+									new $.list.item({
 										key: i._id,
 										name: i.name,
 										picture: i.picture,
@@ -232,8 +230,8 @@ $.core.documentReady(() => {
 										// 			: null,
 										// 	])
 										// ),
-									}),
-								});
+									})
+								);
 							});
 
 							return result;

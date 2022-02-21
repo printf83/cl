@@ -155,6 +155,7 @@ export default [
 			"sample.query_setting": sample.query_setting,
 			"sample.query_data": sample.query_data_view,
 			"sample.list_items": sample.list_items,
+			"sample.list_group": sample.list_group,
 			"sample.list_state": sample.list_state,
 		},
 		code: function () {
@@ -188,6 +189,7 @@ export default [
 											),
 										});
 									},
+									group: sample.list_group,
 								})
 							);
 
@@ -221,6 +223,7 @@ export default [
 			"sample.query_data": sample.query_data_view,
 			"sample.list_editor": sample.list_editor,
 			"sample.list_items": sample.list_items,
+			"sample.list_group": sample.list_group,
 			"sample.list_state": sample.list_state,
 		},
 		code: function () {
@@ -256,6 +259,7 @@ export default [
 											allow_delete: true,
 										});
 									},
+									group: sample.list_group,
 								})
 							);
 
@@ -281,6 +285,7 @@ export default [
 			"sample.list_editor": sample.list_editor,
 			"sample.list_items": sample.list_items,
 			"sample.list_item": sample.list_item,
+			"sample.list_group": sample.list_group,
 			"sample.list_state": sample.list_state,
 		},
 		code: function () {
@@ -306,6 +311,7 @@ export default [
 									name: "customer",
 									items: sample.list_items,
 									item: sample.list_item,
+									group: sample.list_group,
 								})
 							);
 
@@ -333,6 +339,7 @@ export default [
 			"sample.list_editor": sample.list_editor,
 			"sample.list_items": sample.list_items,
 			"sample.list_item": sample.list_item,
+			"sample.list_group": sample.list_group,
 			"sample.list_state": sample.list_state,
 		},
 		code: function () {
@@ -359,6 +366,7 @@ export default [
 									name: "customer",
 									items: sample.list_items,
 									item: sample.list_item,
+									group: sample.list_group,
 								})
 							);
 
@@ -408,6 +416,7 @@ export default [
 			"sample.list_editor": sample.list_editor,
 			"sample.list_items": sample.list_items,
 			"sample.list_item": sample.list_item,
+			"sample.list_group": sample.list_group,
 			"sample.list_state": sample.list_state,
 		},
 		code: function () {
@@ -434,6 +443,7 @@ export default [
 									name: "customer",
 									items: sample.list_items,
 									item: sample.list_item,
+									group: sample.list_group,
 								})
 							);
 
@@ -547,6 +557,7 @@ export default [
 			"sample.list_editor": sample.list_editor,
 			"sample.list_items": sample.list_items,
 			"sample.list_item": sample.list_item,
+			"sample.list_group": sample.list_group,
 			"sample.list_state": sample.list_state,
 		},
 		code: function () {
@@ -573,6 +584,7 @@ export default [
 									name: "customer",
 									items: sample.list_items,
 									item: sample.list_item,
+									group: sample.list_group,
 								})
 							);
 

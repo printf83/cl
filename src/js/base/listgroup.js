@@ -71,77 +71,79 @@ export default class listgroup extends tag {
 
 		opt.item = Array.isArray(opt.item) ? opt.item : [opt.item];
 
-		opt.elem = opt.item.map(function (i) {
-			i = core.extend({}, defaultItemOption, i);
+		opt.elem = opt.elem
+			? opt.elem
+			: opt.item.map(function (i) {
+					i = core.extend({}, defaultItemOption, i);
 
-			if (i.type === "checkbox" || i.type === "radio" || i.type === "switch") {
-				let ctl = core.extend({}, i);
-				ctl.tag = "input";
+					if (i.type === "checkbox" || i.type === "radio" || i.type === "switch") {
+						let ctl = core.extend({}, i);
+						ctl.tag = "input";
 
-				ctl.class = core.merge.class(ctl.class, [
-					"form-check-input",
-					"me-2",
-					i.type === "switch" ? "ms-0" : null,
-				]);
+						ctl.class = core.merge.class(ctl.class, [
+							"form-check-input",
+							"me-2",
+							i.type === "switch" ? "ms-0" : null,
+						]);
 
-				ctl.attr = core.merge.attr(ctl.attr, {
-					type: i.type === "switch" ? "checkbox" : i.type,
-					checked: i.checked,
-					value: i.value,
-				});
+						ctl.attr = core.merge.attr(ctl.attr, {
+							type: i.type === "switch" ? "checkbox" : i.type,
+							checked: i.checked,
+							value: i.value,
+						});
 
-				delete ctl.type;
-				delete ctl.value;
-				delete ctl.checked;
-				delete ctl.color;
+						delete ctl.type;
+						delete ctl.value;
+						delete ctl.checked;
+						delete ctl.color;
 
-				i = {
-					tag: "label",
-					class: core.merge.class(i.class, [
-						"list-group-item",
-						i.type === "switch" ? "form-switch" : null,
-						i.active ? "active" : null,
-						i.disabled ? "disabled" : null,
-						i.action ? "list-group-item-action" : null,
-						i.color ? `list-group-item-${i.color}` : null,
-					]),
-					attr: core.merge.attr(i.attr, {
-						disabled: !i.href && i.disabled ? "" : null,
-						tabindex: i.href && i.disabled ? "-1" : null,
-						"aria-disabled": i.href && i.disabled ? "true" : null,
-						"aria-current": i.active ? "true" : null,
-					}),
-					elem: [new tag(ctl), i.label],
-				};
-			} else {
-				i.tag = i.href ? "a" : i.onclick instanceof Function ? "button" : "li";
+						i = {
+							tag: "label",
+							class: core.merge.class(i.class, [
+								"list-group-item",
+								i.type === "switch" ? "form-switch" : null,
+								i.active ? "active" : null,
+								i.disabled ? "disabled" : null,
+								i.action ? "list-group-item-action" : null,
+								i.color ? `list-group-item-${i.color}` : null,
+							]),
+							attr: core.merge.attr(i.attr, {
+								disabled: !i.href && i.disabled ? "" : null,
+								tabindex: i.href && i.disabled ? "-1" : null,
+								"aria-disabled": i.href && i.disabled ? "true" : null,
+								"aria-current": i.active ? "true" : null,
+							}),
+							elem: [new tag(ctl), i.label],
+						};
+					} else {
+						i.tag = i.href ? "a" : i.onclick instanceof Function ? "button" : "li";
 
-				i.class = core.merge.class(i.class, [
-					"list-group-item",
-					i.active ? "active" : null,
-					i.disabled ? "disabled" : null,
-					i.action || i.tag === "a" || i.tag === "button" ? "list-group-item-action" : null,
-					i.color ? `list-group-item-${i.color}` : null,
-				]);
+						i.class = core.merge.class(i.class, [
+							"list-group-item",
+							i.active ? "active" : null,
+							i.disabled ? "disabled" : null,
+							i.action || i.tag === "a" || i.tag === "button" ? "list-group-item-action" : null,
+							i.color ? `list-group-item-${i.color}` : null,
+						]);
 
-				i.attr = core.merge.attr(i.attr, {
-					disabled: !i.href && i.disabled ? "" : null,
-					tabindex: i.href && i.disabled ? "-1" : null,
-					"aria-disabled": i.href && i.disabled ? "true" : null,
-					"aria-current": i.active ? "true" : null,
-				});
-			}
+						i.attr = core.merge.attr(i.attr, {
+							disabled: !i.href && i.disabled ? "" : null,
+							tabindex: i.href && i.disabled ? "-1" : null,
+							"aria-disabled": i.href && i.disabled ? "true" : null,
+							"aria-current": i.active ? "true" : null,
+						});
+					}
 
-			delete i.type;
-			delete i.active;
-			delete i.disabled;
-			delete i.action;
-			delete i.value;
-			delete i.checked;
-			delete i.color;
+					delete i.type;
+					delete i.active;
+					delete i.disabled;
+					delete i.action;
+					delete i.value;
+					delete i.checked;
+					delete i.color;
 
-			return new tag(i);
-		});
+					return new tag(i);
+			  });
 
 		delete opt.item;
 		delete opt.type;
