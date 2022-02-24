@@ -21,10 +21,63 @@ export default [
 		title: "Example",
 		container: sample.stackcontainer,
 		code: function () {
-			let id = $.core.UUID();
+			let fileUploadID = $.core.UUID();
+
+			return new $.file({ id: fileUploadID });
+		},
+	},
+	{
+		title: "Multiple",
+		container: sample.stackcontainer,
+		code: function () {
+			let fileUploadID = $.core.UUID();
+
+			return new $.file({ id: fileUploadID, multiple: true });
+		},
+	},
+	{
+		title: "File type",
+		container: sample.stackcontainer,
+		code: function () {
+			let fileUploadID = $.core.UUID();
+
+			return new $.file({
+				id: fileUploadID,
+				multiple: true,
+				accept: "image/gif,image/bmp,image/x-windows-bmp,image/jpeg,image/png",
+			});
+		},
+	},
+	{
+		title: "Label, color & icon",
+		container: sample.stackcontainer,
+		code: function () {
+			let fileUploadID = $.core.UUID();
+
+			return new $.file({
+				id: fileUploadID,
+				multiple: true,
+				accept: "application/pdf",
+				uploadlabel: "Upload PDF",
+				uploadicon: "file-pdf",
+				uploadcolor: "primary",
+				viewlabel: "View PDF",
+				viewicon: "glasses",
+				viewcolor: "success",
+				deletelabel: null,
+				deleteicon: "trash-alt",
+				deletecolor: "danger",
+			});
+		},
+	},
+	{
+		title: "Save",
+		container: sample.stackcontainer,
+		code: function () {
+			let fileUploadID = $.core.UUID();
 
 			return [
-				new $.file({ id: id }),
+				new $.file({ id: fileUploadID }),
 				new $.button({
 					label: "Save file",
 					color: "success",
