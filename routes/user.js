@@ -645,6 +645,8 @@ module.exports = function (app) {
 		},
 	};
 
+	const fn2 = {};
+
 	//validate user
 	app.post(`/api/user-validate`, fn.validate);
 
