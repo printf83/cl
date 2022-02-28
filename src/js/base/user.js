@@ -7,7 +7,6 @@ import icon from "./icon.js";
 import h from "./h.js";
 import button from "./button.js";
 import form from "./form.js";
-import span from "./span.js";
 
 let defaultSignInOption = {
 	id: null,
