@@ -33,6 +33,10 @@ const defaultOption = {
 	rows: null,
 	multiple: false,
 	required: false,
+	minlength: null,
+	maxlength: null,
+	inputmode: null,
+	pattern: null,
 
 	valid: null,
 	invalid: null,
@@ -50,7 +54,7 @@ const defaultOption = {
 };
 
 /**
- * opt : {tagoption,id,name,type,label,hidelabel,floatlabel,inline,labelsize,ctlsize,size,weight,value,checked,placeholder,option,numctl,addctl,min,max,step,row,multiple,required,valid,invalid,before,after,plaintext,readonly,disabled,container,flex,nowrap,onclick,onchange,onclick,onfocus,onblur}
+ * opt : {tagoption,id,name,type,label,hidelabel,floatlabel,inline,labelsize,ctlsize,size,weight,value,checked,placeholder,option,numctl,addctl,min,max,step,row,multiple,required,minlengh,maxlenght,inputmode,pattern,valid,invalid,before,after,plaintext,readonly,disabled,container,flex,nowrap,onclick,onchange,onclick,onfocus,onblur}
  */
 export default class input extends tag {
 	constructor(...opt) {
@@ -221,6 +225,10 @@ export default class input extends tag {
 				rows: m.rows,
 				multiple: m.multiple,
 				required: m.required,
+				minlength: m.minlength,
+				maxlength: m.maxlength,
+				inputmode: m.inputmode,
+				pattern: m.pattern,
 				value: m.value,
 				checked: m.checked,
 				placeholder: m.placeholder,
@@ -241,6 +249,10 @@ export default class input extends tag {
 			delete m.rows;
 			delete m.multiple;
 			delete m.required;
+			delete m.minlength;
+			delete m.maxlength;
+			delete m.inputmode;
+			delete m.pattern;
 
 			delete m.plaintext;
 

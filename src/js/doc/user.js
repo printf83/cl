@@ -12,7 +12,30 @@ export default [
 	{
 		title: "Login",
 		code: function () {
-			return new $.user.login();
+			return new $.user.signin({
+				email: "example@example.com",
+			});
+		},
+	},
+
+	{
+		title: "Register",
+		code: function () {
+			return new $.user.signup();
+		},
+	},
+
+	{
+		title: "Reset password",
+		code: function () {
+			return new $.user.resetpass();
+		},
+	},
+
+	{
+		title: "Change password",
+		code: function () {
+			return new $.user.changepass();
 		},
 	},
 ];

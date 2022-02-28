@@ -426,6 +426,39 @@ function getElementValue(element) {
 	return null;
 }
 
+function validateElem(ctl) {
+	let val = getElementValue(ctl);
+
+	//validate required
+	if (ctl.hasAttribute("required")) {
+		if (val === null || val === "") {
+			return false;
+		}
+	}
+
+	//validate minlength
+	if (ctl.hasAttribute("minlength")) {
+		if (val.length < parseInt(ctl.getAttribute("minlength"))) {
+			return false;
+		}
+	}
+
+	//validate minlength
+	if (ctl.hasAttribute("maxlenght")) {
+		if (val.length < parseInt(ctl.getAttribute("maxlenght"))) {
+			return false;
+		}
+	}
+
+	//validate email
+	if (ctl.getAttribute("type") === "email") {
+		if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(val)) {
+			return false;
+		}
+	}
+
+	return true;
+}
 export function validate(container, callback) {
 	var listofctl = container.querySelectorAll("[name]");
 	if (listofctl) {
@@ -436,18 +469,13 @@ export function validate(container, callback) {
 				let ctl = document.getElementById(id);
 
 				if (ctl) {
-					if (ctl.hasAttribute("required")) {
-						let val = getElementValue(ctl);
-						if (val !== null && val !== "") {
-							ctl.classList.add("is-valid");
-							ctl.classList.remove("is-invalid");
-						} else {
-							ctl.classList.add("is-invalid");
-							ctl.classList.remove("is-valid");
-						}
-					} else {
+					//validate required
+					if (validateElem(ctl)) {
 						ctl.classList.add("is-valid");
 						ctl.classList.remove("is-invalid");
+					} else {
+						ctl.classList.add("is-invalid");
+						ctl.classList.remove("is-valid");
 					}
 				}
 			}

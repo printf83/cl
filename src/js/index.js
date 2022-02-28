@@ -8,7 +8,7 @@ import $ from "./component.js";
 
 let def_m1 = "Getting started";
 let def_m2 = "Introduction";
-let def_theme = null;
+let def_theme = "pulse";
 
 const db_menu = [
 	{
