@@ -4,8 +4,15 @@ import $ from "../component.js";
 
 export default [
 	{
-		title: "List",
-		msg: "Provide access to easy access <b>cl generic database</b>.",
+		title: "User",
+		msg: "Provide access to easy access login, logout, register, reset password, and edit.",
 		anchor: false,
+	},
+
+	{
+		title: "Login",
+		code: function () {
+			return new $.user.login();
+		},
 	},
 ];
