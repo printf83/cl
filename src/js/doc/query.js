@@ -39,6 +39,42 @@ export default [
 		sample: {
 			"sample.query_setting": sample.query_setting,
 			"sample.query_data": sample.query_data_view,
+		},
+		viewclass: "cl-modal-preview",
+		code: function () {
+			let dbstate = [
+				{ value: "value1", label: "Label 1" },
+				{ value: "value2", label: "Label 2" },
+				{ value: "value3", label: "Label 3" },
+				{ value: "value4", label: "Label 4" },
+				{ value: "value5", label: "Label 5" },
+			];
+
+			return [
+				new $.query.dialog(
+					{
+						field: sample.query_setting(dbstate).field,
+						limit: sample.query_setting(dbstate).limit,
+						skip: sample.query_setting(dbstate).skip,
+						useopricon: sample.query_setting(dbstate).useopricon,
+						data: sample.query_data,
+					},
+					[
+						function (_event, data) {
+							sample.query_data = data;
+						},
+					],
+					{ debug: true }
+				),
+			];
+		},
+	},
+
+	{
+		title: "Live preview",
+		sample: {
+			"sample.query_setting": sample.query_setting,
+			"sample.query_data": sample.query_data_view,
 			"sample.list_state": sample.list_state,
 		},
 		container: sample.formcontainer,
@@ -115,6 +151,41 @@ export default [
 			`,
 			}),
 		],
+		sample: {
+			"sample.query_setting": sample.query_setting,
+			"sample.query_data": sample.query_data_view,
+		},
+		viewclass: "cl-modal-preview",
+		code: function () {
+			let dbstate = [
+				{ value: "value1", label: "Label 1" },
+				{ value: "value2", label: "Label 2" },
+				{ value: "value3", label: "Label 3" },
+				{ value: "value4", label: "Label 4" },
+				{ value: "value5", label: "Label 5" },
+			];
+
+			return [
+				new $.query.filter(
+					{
+						field: sample.query_setting(dbstate).field,
+						useopricon: sample.query_setting(dbstate).useopricon,
+						data: sample.query_data.filter,
+					},
+					[
+						function (_event, data) {
+							sample.query_data.filter = data;
+						},
+					],
+					{ debug: true }
+				),
+			];
+		},
+	},
+
+	{
+		title: "Live preview",
+
 		sample: {
 			"sample.query_setting": sample.query_setting,
 			"sample.query_data": sample.query_data_view,
@@ -196,6 +267,33 @@ export default [
 			"sample.query_setting": sample.query_setting,
 			"sample.query_data": sample.query_data_view,
 		},
+		viewclass: "cl-modal-preview",
+		code: function () {
+			return [
+				new $.query.sort(
+					{
+						field: sample.query_setting().field,
+						useopricon: sample.query_setting().useopricon,
+						data: sample.query_data.sort,
+					},
+					[
+						function (_event, data) {
+							sample.query_data.sort = data;
+						},
+					],
+					{ debug: true }
+				),
+			];
+		},
+	},
+
+	{
+		title: "Live preview",
+
+		sample: {
+			"sample.query_setting": sample.query_setting,
+			"sample.query_data": sample.query_data_view,
+		},
 		container: sample.formcontainer,
 		code: function () {
 			let resultOutputId = $.core.UUID();
@@ -265,6 +363,32 @@ export default [
 			`,
 			}),
 		],
+		sample: {
+			"sample.query_setting": sample.query_setting,
+			"sample.query_data": sample.query_data_view,
+		},
+		viewclass: "cl-modal-preview",
+		code: function () {
+			return [
+				new $.query.field(
+					{
+						field: sample.query_setting().field,
+						data: sample.query_data.field,
+					},
+					[
+						function (_event, data) {
+							sample.query_data.field = data;
+						},
+					],
+					{ debug: true }
+				),
+			];
+		},
+	},
+
+	{
+		title: "Live preview",
+
 		sample: {
 			"sample.query_setting": sample.query_setting,
 			"sample.query_data": sample.query_data_view,
@@ -343,6 +467,36 @@ export default [
 			"sample.query_setting": sample.query_setting,
 			"sample.query_data": sample.query_data_view,
 		},
+		viewclass: "cl-modal-preview",
+		code: function () {
+			return [
+				new $.query.limit(
+					{
+						min: sample.query_setting().limit.min,
+						max: sample.query_setting().limit.max,
+						step: sample.query_setting().limit.step,
+						data: sample.query_data.limit,
+					},
+					[
+						function (_event, data) {
+							let skip = sample.query_data.skip / sample.query_data.limit;
+							sample.query_data.limit = data;
+							sample.query_data.skip = skip * sample.query_data.limit;
+						},
+					],
+					{ debug: true }
+				),
+			];
+		},
+	},
+
+	{
+		title: "Live preview",
+
+		sample: {
+			"sample.query_setting": sample.query_setting,
+			"sample.query_data": sample.query_data_view,
+		},
 		container: sample.formcontainer,
 		code: function () {
 			let resultOutputId = $.core.UUID();
@@ -394,11 +548,11 @@ export default [
 	{
 		title: "Page dialog",
 		msg: [
-			"Using {{$.query.limit}} to edit query limit only for <b>cl generic database</b>.",
+			"Using {{$.query.page}} to edit query page only for <b>cl generic database</b>.",
 			new $.codepreview({
 				container: "card",
 				code: `
-					new $.query.limit(
+					new $.query.page(
 						{
 							min: setting_page_min,
 							max: setting_page_max,
@@ -418,6 +572,35 @@ export default [
 			`,
 			}),
 		],
+		sample: {
+			"sample.query_setting": sample.query_setting,
+			"sample.query_data": sample.query_data_view,
+		},
+		viewclass: "cl-modal-preview",
+		code: function () {
+			return [
+				new $.query.page(
+					{
+						min: sample.query_setting().skip.min,
+						max: sample.query_setting().skip.max,
+						step: sample.query_setting().skip.step,
+						limit: sample.query_data.limit,
+						data: sample.query_data.skip,
+					},
+					[
+						function (_event, data) {
+							sample.query_data.skip = data;
+						},
+					],
+					{ debug: true }
+				),
+			];
+		},
+	},
+
+	{
+		title: "Live preview",
+
 		sample: {
 			"sample.query_setting": sample.query_setting,
 			"sample.query_data": sample.query_data_view,
