@@ -59,6 +59,7 @@ import toast from "./base/toast.js";
 import toc from "./base/toc.js";
 import tooltip from "./base/tooltip.js";
 import ul from "./base/ul.js";
+import * as user from "./base/user.js";
 
 export default {
 	a,
@@ -120,4 +121,5 @@ export default {
 	toc,
 	tooltip,
 	ul,
+	user,
 };

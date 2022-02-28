@@ -85,6 +85,7 @@ import generic from "./doc/generic.js";
 import file from "./doc/file.js";
 import query from "./doc/query.js";
 import list from "./doc/list.js";
+import user from "./doc/user.js";
 
 export default {
 	intro,
@@ -170,4 +171,5 @@ export default {
 	file,
 	query,
 	list,
+	user,
 };

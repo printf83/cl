@@ -134,6 +134,7 @@ const db_menu = [
 			{ title: "File", source: doc.file },
 			{ title: "Query", source: doc.query },
 			{ title: "List", source: doc.list },
+			{ title: "User", source: doc.user },
 		],
 	},
 	{
