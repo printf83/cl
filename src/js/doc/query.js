@@ -71,8 +71,7 @@ export default [
 	},
 
 	{
-		title: "Live preview",
-		anchor: false,
+		msg: "Live preview",
 		sample: {
 			"sample.query_setting": sample.query_setting,
 			"sample.query_data": sample.query_data_view,
@@ -185,8 +184,7 @@ export default [
 	},
 
 	{
-		title: "Live preview",
-		anchor: false,
+		msg: "Live preview",
 		sample: {
 			"sample.query_setting": sample.query_setting,
 			"sample.query_data": sample.query_data_view,
@@ -289,8 +287,7 @@ export default [
 	},
 
 	{
-		title: "Live preview",
-		anchor: false,
+		msg: "Live preview",
 		sample: {
 			"sample.query_setting": sample.query_setting,
 			"sample.query_data": sample.query_data_view,
@@ -388,8 +385,7 @@ export default [
 	},
 
 	{
-		title: "Live preview",
-		anchor: false,
+		msg: "Live preview",
 		sample: {
 			"sample.query_setting": sample.query_setting,
 			"sample.query_data": sample.query_data_view,
@@ -492,8 +488,7 @@ export default [
 	},
 
 	{
-		title: "Live preview",
-		anchor: false,
+		msg: "Live preview",
 		sample: {
 			"sample.query_setting": sample.query_setting,
 			"sample.query_data": sample.query_data_view,
@@ -600,8 +595,7 @@ export default [
 	},
 
 	{
-		title: "Live preview",
-		anchor: false,
+		msg: "Live preview",
 		sample: {
 			"sample.query_setting": sample.query_setting,
 			"sample.query_data": sample.query_data_view,

@@ -20,7 +20,7 @@ const defaultBuildOption = {
 	limit: {
 		min: 1,
 		max: 100,
-		step: 5,
+		step: 1,
 	},
 	skip: {
 		min: 1,
