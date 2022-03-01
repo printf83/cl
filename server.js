@@ -7,11 +7,14 @@ if (process.env.DBURL) {
 	const express = require("express");
 	const helmet = require("helmet");
 	const compression = require("compression");
+	const cookieparser = require("cookie-parser");
+
 	const app = express();
 
 	app.set("trust proxy", 1);
 	app.use(express.urlencoded({ extended: true }));
 	app.use(express.json());
+	app.use(cookieparser(process.env.SESSIONSECRET));
 	app.use(compression());
 	app.use(
 		helmet.contentSecurityPolicy({

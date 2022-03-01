@@ -1,6 +1,3 @@
-const bcrypt = require("bcrypt");
-const saltround = 50;
-
 module.exports = function (app) {
 	const $ = require(`../models/user.js`);
 
@@ -645,29 +642,91 @@ module.exports = function (app) {
 		},
 	};
 
-	const fn2 = {};
+	const fn2 = {
+		auth: (req, res, next) => {
+			let token = req.cookies.auth;
+			$.db.findByToken(token, (err, result) => {
+				if (err) throw err;
+				if (!result)
+					return res.json({
+						error: true,
+					});
 
-	//validate user
-	app.post(`/api/user-validate`, fn.validate);
+				req.token = token;
+				req.user = result;
+				next();
+			});
+		},
+		signin: function (req, res) {
+			let token = req.cookies.auth;
 
-	// Create a new user
-	app.post(`/api/user`, fn.create);
+			$.db.findByToken(token, function (err, user) {
+				if (err) return res(err);
+				if (user) return res.status(400).json({ success: false, message: "Already login" });
 
-	// Retrieve a single user by Id
-	app.get(`/api/user/:id`, fn.find);
+				let { username, password } = req.body;
 
-	// Update a user with Id and password
-	app.put(`/api/user/:id`, fn.update);
+				$.db.findOne({ username: username }, function (err, user) {
+					if (!user) return res.json({ isAuth: false, message: "User not found" });
 
-	// Delete a user with Id
-	app.delete(`/api/user/:id`, fn.delete);
+					user.validatePassword(password, (err, isMatch) => {
+						if (!isMatch) return res.json({ isAuth: false, message: "User not found" });
 
-	// Get list of user
-	app.post(`/api/user-list`, fn.list);
+						user.generateToken((err, user) => {
+							if (err) return res.status(400).send(err);
+							res.cookie("auth", user.token).json({
+								isAuth: true,
+								id: user._id,
+								username: user.username,
+							});
+						});
+					});
+				});
+			});
+		},
+		signout: function (req, res) {
+			req.user.deleteToken(req.token, (err, user) => {
+				if (err) return res.status(400).send(err);
+				res.sendStatus(200);
+			});
+		},
+		register: function (req, res) {
+			let { username, password, password2 } = req.body;
+			if (password !== password2) return res.status(400).json({ message: "Password not match" });
 
-	// Get list of user in excel
-	app.get(`/api/user-excel`, fn.excel);
+			$.db.findOne({ username: username }, function (err, user) {
+				if (user) return res.status(400).json({ auth: false, message: "email exits" });
 
-	// Get COUNT or SUM of user
-	app.post(`/api/user-aggregate`, fn.aggregate);
+				let newuser = new $.db({
+					username: username,
+					password: password,
+				});
+
+				newuser.save((err) => {
+					if (err) {
+						console.log(err);
+						return res.status(400).json({ success: false });
+					}
+
+					res.status(200).json({
+						succes: true,
+					});
+				});
+			});
+		},
+		resetpass: function (req, res) {},
+		changepass: function (req, res) {},
+		profile: function (req, res) {
+			res.json({
+				isAuth: true,
+				id: req.user._id,
+				username: req.user.username,
+			});
+		},
+	};
+
+	app.get(`/api/user/signout`, fn.auth, fn.signout);
+	app.post(`/api/user/register`, fn.register);
+	app.post(`/api/user/signin`, fn.signin);
+	app.get(`/api/user/profile`, fn.auth, fn.profile);
 };
