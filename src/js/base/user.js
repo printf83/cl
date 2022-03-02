@@ -7,6 +7,7 @@ import icon from "./icon.js";
 import h from "./h.js";
 import button from "./button.js";
 import form from "./form.js";
+import * as db from "./api.js";
 
 let defaultSignInOption = {
 	id: null,
@@ -62,6 +63,20 @@ const fn = {
 				// 		msg: new span({ textcolor: "danger", elem: "Please provide valid email and password" }),
 				// 	})
 				// );
+			} else {
+				let data = core.getValue(container);
+				db.user.signin(
+					{
+						sender: sender,
+						data: {
+							username: data.email,
+							password: data.password,
+						},
+					},
+					function (result) {
+						console.log(result);
+					}
+				);
 			}
 		});
 	},
@@ -76,6 +91,27 @@ const fn = {
 				// 		msg: new span({ textcolor: "danger", elem: "Please provide valid email and password" }),
 				// 	})
 				// );
+			} else {
+				let data = core.getValue(container);
+				db.user.register(
+					{
+						sender: sender,
+						data: { username: data.email, password: data.password, password2: data.password2 },
+					},
+					function (result) {
+						if (result && result.success) {
+							core.replaceWith(
+								container,
+								new signin({
+									msg: new span({
+										textcolor: "success",
+										elem: "Please login using email and password you just registerd",
+									}),
+								})
+							);
+						}
+					}
+				);
 			}
 		});
 	},

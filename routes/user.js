@@ -87,5 +87,7 @@ module.exports = function (app) {
 	app.get(`/api/user/signout`, fn.auth, fn.signout);
 	app.post(`/api/user/register`, fn.register);
 	app.post(`/api/user/signin`, fn.signin);
+	app.post(`/api/user/resetpass`, fn.resetpass);
+	app.post(`/api/user/changepass`, fn.auth, fn.changepass);
 	app.get(`/api/user/profile`, fn.auth, fn.profile);
 };

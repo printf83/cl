@@ -532,3 +532,84 @@ export const file = {
 		}
 	},
 };
+
+export const user = {
+	register: function (opt, callback) {
+		opt = core.extend(
+			{},
+			{
+				data: null,
+				sender: null,
+			},
+			opt
+		);
+
+		if (opt.data) {
+			if (fn.sender.isfree(opt.sender)) {
+				fn.sender.setbusy(opt.sender);
+				fn.post({
+					callback: function (result) {
+						fn.sender.setfree(opt.sender);
+						if (typeof callback === "function") {
+							callback(result);
+						}
+					},
+					url: `api/user/register`,
+					data: opt.data,
+				});
+			}
+		} else {
+			console.error("opt data is required");
+		}
+	},
+	signin: function (opt, callback) {
+		opt = core.extend(
+			{},
+			{
+				data: null,
+				sender: null,
+			},
+			opt
+		);
+
+		if (opt.data) {
+			if (fn.sender.isfree(opt.sender)) {
+				fn.sender.setbusy(opt.sender);
+				fn.post({
+					callback: function (result) {
+						fn.sender.setfree(opt.sender);
+						if (typeof callback === "function") {
+							callback(result);
+						}
+					},
+					url: `api/user/signin`,
+					data: opt.data,
+				});
+			}
+		} else {
+			console.error("opt data is required");
+		}
+	},
+	signout: function (opt, callback) {
+		opt = core.extend(
+			{},
+			{
+				sender: null,
+			},
+			opt
+		);
+
+		if (fn.sender.isfree(opt.sender)) {
+			fn.sender.setbusy(opt.sender);
+			fn.post({
+				callback: function (result) {
+					fn.sender.setfree(opt.sender);
+					if (typeof callback === "function") {
+						callback(result);
+					}
+				},
+				url: `api/user/signout`,
+			});
+		}
+	},
+};
