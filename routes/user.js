@@ -17,31 +17,31 @@ module.exports = function (app) {
 			});
 		},
 		signin: function (req, res) {
-			let token = req.cookies.auth;
+			// $.db.findByToken(token, function (err, user) {
+			// 	if (err) return res.status(400).json({ success: false, message: err });
+			// 	if (user) return res.status(400).json({ success: false, message: "Already login" });
 
-			$.db.findByToken(token, function (err, user) {
-				if (err) return res(err);
-				if (user) return res.status(400).json({ success: false, message: "Already login" });
+			let { username, password } = req.body;
 
-				let { username, password } = req.body;
+			$.db.findOne({ username: username }, function (err, user) {
+				if (err) return res.json({ isAuth: false, message: "User not found" });
 
-				$.db.findOne({ username: username }, function (err, user) {
-					if (!user) return res.json({ isAuth: false, message: "User not found" });
+				user.validatePassword(password, (err, result) => {
+					if (err) return res.json({ isAuth: false, message: "User not found" });
 
-					user.validatePassword(password, (err, isMatch) => {
-						if (!isMatch) return res.json({ isAuth: false, message: "User not found" });
+					user.generateToken((err, user) => {
+						if (err) return res.status(400).send(err);
 
-						user.generateToken((err, user) => {
-							if (err) return res.status(400).send(err);
-							res.cookie("auth", user.token).json({
-								isAuth: true,
-								id: user._id,
-								username: user.username,
-							});
+						res.cookie("auth", user.token).json({
+							isAuth: true,
+							id: user._id,
+							username: user.username,
 						});
 					});
 				});
 			});
+
+			// });
 		},
 		signout: function (req, res) {
 			req.user.deleteToken(req.token, (err, user) => {
