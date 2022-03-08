@@ -15,7 +15,7 @@ schema.pre("save", function (next) {
 	let i = this;
 	if (i.isModified("password")) {
 		bcrypt.hash(i.password, salt, function (err, hash) {
-			if (!err) {
+			if (err) {
 				next(err);
 			} else {
 				i.password = hash;

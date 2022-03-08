@@ -46,6 +46,7 @@ module.exports = function (app) {
 		signout: function (req, res) {
 			req.user.deleteToken((err, user) => {
 				if (err) return res.json({ success: false, message: err.message });
+				res.status(200);
 			});
 		},
 		register: function (req, res) {
