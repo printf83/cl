@@ -29,6 +29,7 @@ const defaultOption = {
 	textcolor: null,
 	bordercolor: null,
 	border: true,
+	bgcolor: null,
 	dark: null,
 
 	bodyclass: null,
@@ -248,7 +249,7 @@ export default class modal extends div {
 					"data-bs-focus": opt.focus ? "true" : null,
 					"aria-hidden": opt.debug ? "false" : "true",
 				}),
-				color: opt.dark ? "dark" : null,
+				color: opt.bgcolor ? opt.bgcolor : null,
 				elem: new div({
 					class: [
 						"modal-dialog",

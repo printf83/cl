@@ -134,7 +134,10 @@ module.exports = function (app) {
 		},
 		profile: function (req, res) {
 			res.json({
-				id: req.user._id,
+				email: req.user.email,
+				picture: req.user.picture,
+				name: req.user.name,
+				role: req.user.role,
 				username: req.user.username,
 			});
 		},

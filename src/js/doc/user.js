@@ -11,39 +11,47 @@ export default [
 
 	{
 		title: "Login",
+		viewclass: "cl-modal-preview",
 		code: function () {
-			return new $.user.signin({
-				email: "example@example.com",
-			});
+			return new $.user.signin(
+				{
+					email: "example@example.com",
+				},
+				{ debug: true }
+			);
 		},
 	},
 
 	{
 		title: "Register",
+		viewclass: "cl-modal-preview",
 		code: function () {
-			return new $.user.signup();
+			return new $.user.signup({}, { debug: true });
 		},
 	},
 
 	{
 		title: "Reset password",
+		viewclass: "cl-modal-preview",
 		code: function () {
-			return new $.user.resetpass();
+			return new $.user.resetpass({}, { debug: true });
 		},
 	},
 
 	{
 		title: "Change password",
+		viewclass: "cl-modal-preview",
 		code: function () {
-			return new $.user.changepass();
+			return new $.user.changepass({}, { debug: true });
 		},
 	},
 
 	{
 		title: "Change password (guest)",
+		viewclass: "cl-modal-preview",
 		code: function () {
 			return new $.user.changepass_guest({
-				token: "eyJhbGciOiJIUzI1NiJ9.NjIyNzM5NmM5MjdkZGNiZWE4NThiZjNm.s3mI2QDP0Mme36mal7WqtMuVcorj9QnBFxi4h7zB_CY",
+				token: "eyJhbGciOiJIUzI1NiJ9.NjIyN2ExMjg4NWZlYjg0NGJhZTcwNzAx.s0o-0jDFa5ABoOaEkyf4BgqHye_isniy5udtilhRLk0",
 			});
 		},
 	},
@@ -56,7 +64,7 @@ export default [
 				color: "primary",
 				onclick: function (event) {
 					$.user.profile(event.currentTarget, function (result) {
-						console.log(result);
+						new $.toast("i", JSON.stringify(result)).show();
 					});
 				},
 			});
@@ -71,7 +79,11 @@ export default [
 				color: "primary",
 				onclick: function (event) {
 					$.user.signout(event.currentTarget, function (result) {
-						console.log(result);
+						if (result) {
+							new $.toast("/", "User successfuly sign out").show();
+						} else {
+							new $.toast("!!", "User failed sign out").show();
+						}
 					});
 				},
 			});

@@ -355,9 +355,8 @@ export const api = {
 				fn.sender.setbusy(opt.sender);
 				fn.post({
 					callback: function (result) {
-						let res = JSON.parse(result);
-						var tmp = res.data
-							? res.data.map((i) => {
+						var tmp = result.data
+							? result.data.map((i) => {
 									return {
 										value: i[opt.fieldkey],
 										label: i[opt.fieldname],

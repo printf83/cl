@@ -8,75 +8,75 @@ import h from "./h.js";
 import button from "./button.js";
 import form from "./form.js";
 import * as db from "./api.js";
-import span from "./span.js";
+import modal from "./modal.js";
+import * as alert from "./alert.js";
+
+const defaultIcon = {
+	icon: "fire",
+	weight: "4x",
+};
+const defaultSize = "sm";
+const defaultTitleSize = 3;
 
 let defaultSignInOption = {
 	id: null,
-	icon: {
-		icon: "fire",
-		weight: "5x",
-	},
+	icon: defaultIcon,
 	msg: null,
-	title: "Welcome",
+	size: defaultSize,
+	title: "Sign in",
 	email: null,
 };
 
-let defaultRegisterOption = {
+let defaultSignUpOption = {
 	id: null,
-	icon: {
-		icon: "fire",
-		weight: "5x",
-	},
+	icon: defaultIcon,
 	msg: null,
-	title: "Register",
+	size: defaultSize,
+	title: "Sign up",
 };
 
 let defaultResetPassOption = {
 	id: null,
-	icon: {
-		icon: "fire",
-		weight: "5x",
-	},
+	icon: defaultIcon,
 	msg: null,
-	title: "Reset Password",
+	size: defaultSize,
+	title: "Reset password",
 };
 
 let defaultChangePassOption = {
 	id: null,
-	icon: {
-		icon: "fire",
-		weight: "5x",
-	},
+	icon: defaultIcon,
 	msg: null,
-	title: "Change Password",
+	size: defaultSize,
+	title: "Change password",
 };
 
 let defaultChangePassGuestOption = {
 	id: null,
-	icon: {
-		icon: "fire",
-		weight: "5x",
-	},
+	icon: defaultIcon,
 	msg: null,
+	size: defaultSize,
 	token: null,
-	title: "Change Password",
+	title: "Change password",
 };
 
 const fn = {
-	msg: function (container, msg, color) {
+	msg: function (msg, icon) {
+		return new alert.container({
+			align: "start",
+			marginbottom: 0,
+			icon: icon,
+			elem: msg,
+		});
+	},
+	showmsg: function (container, msg, icon) {
 		let id = container.getAttribute("id");
 		let msgcontainer = document.getElementById(`${id}-msg`);
 		core.removeChildElement(msgcontainer);
 
 		if (msg) {
 			msgcontainer.classList.remove("d-none");
-			core.appendChild(
-				msgcontainer,
-				new span({
-					textcolor: color,
-					elem: msg,
-				})
-			);
+			core.appendChild(msgcontainer, fn.msg(msg, icon));
 		} else {
 			msgcontainer.classList.add("d-none");
 		}
@@ -88,22 +88,16 @@ const fn = {
 		inputchange: function (event) {
 			let sender = event.currentTarget;
 			let container = sender.closest("form");
-			fn.msg(container, null);
+			fn.showmsg(container, null);
 		},
 		signout: function (sender, callback) {
 			db.user.signout(
 				{
 					sender: sender,
 				},
-				function (result) {}
-			);
-
-			setTimeout(
-				function (callback) {
-					callback(true);
-				},
-				1000,
-				callback
+				function (result) {
+					callback(result);
+				}
 			);
 		},
 		signin: function (event) {
@@ -111,9 +105,11 @@ const fn = {
 			let container = sender.closest("form");
 			core.validate(container, function (result) {
 				if (!result) {
-					fn.msg(container, "Please provide email and password", "danger");
+					fn.showmsg(container, "Please provide email and password", "-");
 				} else {
 					let data = core.getValue(container);
+					container.classList.remove("was-validated");
+
 					db.user.signin(
 						{
 							sender: sender,
@@ -125,9 +121,9 @@ const fn = {
 						function (result) {
 							if (result) {
 								if (result.success) {
-									fn.msg(container, `Sign in success. Welcome ${result.username}`, "success");
+									fn.showmsg(container, "Sign in success", "/");
 								} else {
-									fn.msg(container, result && result.message ? result.message : null, "danger");
+									fn.showmsg(container, result && result.message ? result.message : null, "!!");
 								}
 							}
 						}
@@ -140,13 +136,15 @@ const fn = {
 			let container = sender.closest("form");
 			core.validate(container, function (result) {
 				if (!result) {
-					fn.msg(container, "Please provide email and password", "danger");
+					fn.showmsg(container, "Please provide email and password", "-");
 				} else {
 					let data = core.getValue(container);
 
 					if (data.password !== data.password2) {
-						fn.msg(container, "Password and retry password not match", "danger");
+						fn.showmsg(container, "Password and retry password not match", "-");
 					} else {
+						container.classList.remove("was-validated");
+
 						db.user.register(
 							{
 								sender: sender,
@@ -155,13 +153,9 @@ const fn = {
 							function (result) {
 								if (result) {
 									if (result.success) {
-										fn.msg(
-											container,
-											"Signup success. Please sign in using email and password you just sign up",
-											"success"
-										);
+										fn.showmsg(container, "Sign up success", "/");
 									} else {
-										fn.msg(container, result && result.message ? result.message : null, "danger");
+										fn.showmsg(container, result && result.message ? result.message : null, "!!");
 									}
 								}
 							}
@@ -175,9 +169,11 @@ const fn = {
 			let container = sender.closest("form");
 			core.validate(container, function (result) {
 				if (!result) {
-					fn.msg(container, "Please provide email", "danger");
+					fn.showmsg(container, "Please provide email", "-");
 				} else {
 					let data = core.getValue(container);
+					container.classList.remove("was-validated");
+
 					db.user.resetpass(
 						{
 							sender: sender,
@@ -186,9 +182,9 @@ const fn = {
 						function (result) {
 							if (result) {
 								if (result.success) {
-									fn.msg(container, "Please check your email to continue reset password", "success");
+									fn.showmsg(container, "Please check your email to continue reset password", "/");
 								} else {
-									fn.msg(container, result && result.message ? result.message : null, "danger");
+									fn.showmsg(container, result && result.message ? result.message : null, "!!");
 								}
 							}
 						}
@@ -201,13 +197,15 @@ const fn = {
 			let container = sender.closest("form");
 			core.validate(container, function (result) {
 				if (!result) {
-					fn.msg(container, "Please provide old password, new password and repeat new password", "danger");
+					fn.showmsg(container, "Please provide old password, new password and repeat new password", "-");
 				} else {
 					let data = core.getValue(container);
 
 					if (data.password !== data.password2) {
-						fn.msg(container, "Password and retry password not match", "danger");
+						fn.showmsg(container, "Password and retry password not match", "-");
 					} else {
+						container.classList.remove("was-validated");
+
 						db.user.changepass(
 							{
 								sender: sender,
@@ -216,9 +214,9 @@ const fn = {
 							function (result) {
 								if (result) {
 									if (result.success) {
-										fn.msg(container, "Password changed", "success");
+										fn.showmsg(container, "Password changed", "/");
 									} else {
-										fn.msg(container, result && result.message ? result.message : null, "danger");
+										fn.showmsg(container, result && result.message ? result.message : null, "!!");
 									}
 								}
 							}
@@ -232,13 +230,15 @@ const fn = {
 			let container = sender.closest("form");
 			core.validate(container, function (result) {
 				if (!result) {
-					fn.msg(container, "Please provide new password and repeat new password", "danger");
+					fn.showmsg(container, "Please provide new password and repeat new password", "-");
 				} else {
 					let data = core.getValue(container);
 
 					if (data.password !== data.password2) {
-						fn.msg(container, "Password and retry password not match", "danger");
+						fn.showmsg(container, "Password and retry password not match", "-");
 					} else {
+						container.classList.remove("was-validated");
+
 						db.user.changepass_guest(
 							{
 								sender: sender,
@@ -247,9 +247,9 @@ const fn = {
 							function (result) {
 								if (result) {
 									if (result.success) {
-										fn.msg(container, "Password changed", "success");
+										fn.showmsg(container, "Password changed", "/");
 									} else {
-										fn.msg(container, result && result.message ? result.message : null, "danger");
+										fn.showmsg(container, result && result.message ? result.message : null, "!!");
 									}
 								}
 							}
@@ -271,394 +271,400 @@ const fn = {
 	},
 	form: {
 		container: function (id, elem) {
-			return {
+			return new form({
 				id: id,
-				display: "flex",
-				alignitem: "center",
-				justifycontent: "center",
-				class: ["w-100", "h-100"],
-				elem: new div({
-					style: { "max-width": "320px" },
-					align: "center",
-					elem: elem,
-				}),
-			};
+				align: "center",
+				elem: elem,
+			});
 		},
 		signout: function () {},
 		signin: function (opt) {
-			return new container.form([
-				!opt.img && opt.icon ? new icon(opt.icon) : null,
-				!opt.icon && opt.img ? new img(opt.img) : null,
-				new h(3, opt.title),
+			return new container.form(
+				[
+					!opt.img && opt.icon ? new icon(opt.icon) : null,
+					!opt.icon && opt.img ? new img(opt.img) : null,
+					new h({ level: defaultTitleSize, marginy: 0, elem: opt.title }),
 
-				new div({
-					id: `${opt.id}-msg`,
-					display: opt.msg ? null : "none",
-					elem: opt.msg,
-				}),
-
-				new input({
-					name: "email",
-					type: "email",
-					label: "Email address",
-					floatlabel: true,
-					required: true,
-					attr: {
-						autocomplete: "off",
-					},
-					value: opt.email,
-					onchange: fn.action.inputchange,
-				}),
-				new input({
-					name: "password",
-					type: "password",
-					label: "Password",
-					required: true,
-					minlengh: 8,
-					floatlabel: true,
-					attr: {
-						autocomplete: "off",
-					},
-					onchange: fn.action.inputchange,
-				}),
-				new container.grid([
-					new button({
-						label: "Sign in",
-						color: "primary",
-						weight: "lg",
-						onclick: fn.action.signin,
-					}),
 					new div({
-						display: "flex",
-						justifycontent: "between",
-						elem: [
-							new button({
-								weight: "sm",
-								elem: "Reset password",
-								onclick: function (event) {
-									let sender = event.currentTarget;
-									let container = sender.closest("form");
-									core.replaceChild(container, fn.form.container(opt.id, fn.form.resetpass(opt)));
-								},
-							}),
-							new button({
-								weight: "sm",
-								elem: "Register",
-								onclick: function (event) {
-									let sender = event.currentTarget;
-									let container = sender.closest("form");
-									core.replaceChild(container, fn.form.container(opt.id, fn.form.signup(opt)));
-								},
-							}),
-						],
+						id: `${opt.id}-msg`,
+						display: opt.msg ? null : "none",
+						elem: fn.msg(opt.msg, "info"),
 					}),
-				]),
-			]);
+
+					new input({
+						name: "email",
+						type: "email",
+						label: "Email address",
+						floatlabel: true,
+						required: true,
+						attr: {
+							autocomplete: "off",
+						},
+						value: opt.email,
+						onchange: fn.action.inputchange,
+					}),
+					new input({
+						name: "password",
+						type: "password",
+						label: "Password",
+						required: true,
+						minlengh: 8,
+						floatlabel: true,
+						attr: {
+							autocomplete: "off",
+						},
+						onchange: fn.action.inputchange,
+					}),
+					new container.grid([
+						new button({
+							label: "Sign in",
+							color: "primary",
+							weight: "lg",
+							onclick: fn.action.signin,
+						}),
+						new div({
+							display: "flex",
+							justifycontent: "between",
+							elem: [
+								new button({
+									weight: "sm",
+									elem: "Reset password",
+									onclick: function (event) {
+										let sender = event.currentTarget;
+										let container = sender.closest("form");
+										core.replaceChild(container, fn.form.container(opt.id, fn.form.resetpass(opt)));
+									},
+								}),
+								new button({
+									weight: "sm",
+									elem: "Register",
+									onclick: function (event) {
+										let sender = event.currentTarget;
+										let container = sender.closest("form");
+										core.replaceChild(container, fn.form.container(opt.id, fn.form.signup(opt)));
+									},
+								}),
+							],
+						}),
+					]),
+				].filter(Boolean)
+			);
 		},
 		signup: function (opt) {
-			return new container.form([
-				!opt.img && opt.icon ? new icon(opt.icon) : null,
-				!opt.icon && opt.img ? new img(opt.img) : null,
-				new h(3, opt.title),
+			return new container.form(
+				[
+					!opt.img && opt.icon ? new icon(opt.icon) : null,
+					!opt.icon && opt.img ? new img(opt.img) : null,
+					new h({ level: defaultTitleSize, marginy: 0, elem: opt.title }),
 
-				new div({
-					id: `${opt.id}-msg`,
-					display: opt.msg ? null : "none",
-					elem: opt.msg,
-				}),
-
-				new input({
-					name: "email",
-					type: "email",
-					label: "Email address",
-					required: true,
-					floatlabel: true,
-					attr: {
-						autocomplete: "off",
-					},
-					onchange: fn.action.inputchange,
-				}),
-				new input({
-					name: "password",
-					type: "password",
-					label: "Password",
-					required: true,
-					minlengh: 8,
-					floatlabel: true,
-					attr: {
-						autocomplete: "off",
-					},
-					onchange: fn.action.inputchange,
-				}),
-				new input({
-					name: "password2",
-					type: "password",
-					label: "Repeat password",
-					required: true,
-					minlengh: 8,
-					floatlabel: true,
-					attr: {
-						autocomplete: "off",
-					},
-					onchange: fn.action.inputchange,
-				}),
-				new container.grid([
-					new button({
-						label: "Sign up",
-						color: "primary",
-						weight: "lg",
-						onclick: fn.action.signup,
-					}),
 					new div({
-						display: "flex",
-						justifycontent: "between",
-						elem: [
-							new button({
-								weight: "sm",
-								elem: "Reset password",
-								onclick: function (event) {
-									let sender = event.currentTarget;
-									let container = sender.closest("form");
-									core.replaceChild(container, fn.form.container(opt.id, fn.form.resetpass(opt)));
-								},
-							}),
-							new button({
-								weight: "sm",
-								elem: "Sign in",
-								onclick: function (event) {
-									let sender = event.currentTarget;
-									let container = sender.closest("form");
-									core.replaceChild(container, fn.form.container(opt.id, fn.form.signin(opt)));
-								},
-							}),
-						],
+						id: `${opt.id}-msg`,
+						display: opt.msg ? null : "none",
+						elem: fn.msg(opt.msg, "info"),
 					}),
-				]),
-			]);
+
+					new input({
+						name: "email",
+						type: "email",
+						label: "Email address",
+						required: true,
+						floatlabel: true,
+						attr: {
+							autocomplete: "off",
+						},
+						onchange: fn.action.inputchange,
+					}),
+					new input({
+						name: "password",
+						type: "password",
+						label: "Password",
+						required: true,
+						minlengh: 8,
+						floatlabel: true,
+						attr: {
+							autocomplete: "off",
+						},
+						onchange: fn.action.inputchange,
+					}),
+					new input({
+						name: "password2",
+						type: "password",
+						label: "Repeat password",
+						required: true,
+						minlengh: 8,
+						floatlabel: true,
+						attr: {
+							autocomplete: "off",
+						},
+						onchange: fn.action.inputchange,
+					}),
+					new container.grid([
+						new button({
+							label: "Sign up",
+							color: "primary",
+							weight: "lg",
+							onclick: fn.action.signup,
+						}),
+						new div({
+							display: "flex",
+							justifycontent: "between",
+							elem: [
+								new button({
+									weight: "sm",
+									elem: "Reset password",
+									onclick: function (event) {
+										let sender = event.currentTarget;
+										let container = sender.closest("form");
+										core.replaceChild(container, fn.form.container(opt.id, fn.form.resetpass(opt)));
+									},
+								}),
+								new button({
+									weight: "sm",
+									elem: "Sign in",
+									onclick: function (event) {
+										let sender = event.currentTarget;
+										let container = sender.closest("form");
+										core.replaceChild(container, fn.form.container(opt.id, fn.form.signin(opt)));
+									},
+								}),
+							],
+						}),
+					]),
+				].filter(Boolean)
+			);
 		},
 		resetpass: function (opt) {
-			return new container.form([
-				!opt.img && opt.icon ? new icon(opt.icon) : null,
-				!opt.icon && opt.img ? new img(opt.img) : null,
-				new h(3, opt.title),
-
-				new div({
-					id: `${opt.id}-msg`,
-					display: opt.msg ? null : "none",
-					elem: opt.msg,
-				}),
-
-				new input({
-					name: "email",
-					type: "email",
-					label: "Email address",
-					required: true,
-					floatlabel: true,
-					attr: {
-						autocomplete: "off",
-					},
-					onchange: fn.action.inputchange,
-				}),
-
-				new container.grid([
-					new button({
-						label: "Send email",
-						color: "primary",
-						weight: "lg",
-						onclick: fn.action.resetpass,
-					}),
+			return new container.form(
+				[
+					!opt.img && opt.icon ? new icon(opt.icon) : null,
+					!opt.icon && opt.img ? new img(opt.img) : null,
+					new h({ level: defaultTitleSize, marginy: 0, elem: opt.title }),
 
 					new div({
-						display: "flex",
-						justifycontent: "between",
-						elem: [
-							new button({
-								weight: "sm",
-								elem: "Sign in",
-								onclick: function (event) {
-									let sender = event.currentTarget;
-									let container = sender.closest("form");
-									core.replaceChild(container, fn.form.container(opt.id, fn.form.signin(opt)));
-								},
-							}),
-							new button({
-								weight: "sm",
-								elem: "Register",
-								onclick: function (event) {
-									let sender = event.currentTarget;
-									let container = sender.closest("form");
-									core.replaceChild(container, fn.form.container(opt.id, fn.form.signup(opt)));
-								},
-							}),
-						],
+						id: `${opt.id}-msg`,
+						display: opt.msg ? null : "none",
+						elem: fn.msg(opt.msg, "info"),
 					}),
-				]),
-			]);
+
+					new input({
+						name: "email",
+						type: "email",
+						label: "Email address",
+						required: true,
+						floatlabel: true,
+						attr: {
+							autocomplete: "off",
+						},
+						onchange: fn.action.inputchange,
+					}),
+
+					new container.grid([
+						new button({
+							label: "Send email",
+							color: "primary",
+							weight: "lg",
+							onclick: fn.action.resetpass,
+						}),
+
+						new div({
+							display: "flex",
+							justifycontent: "between",
+							elem: [
+								new button({
+									weight: "sm",
+									elem: "Sign in",
+									onclick: function (event) {
+										let sender = event.currentTarget;
+										let container = sender.closest("form");
+										core.replaceChild(container, fn.form.container(opt.id, fn.form.signin(opt)));
+									},
+								}),
+								new button({
+									weight: "sm",
+									elem: "Register",
+									onclick: function (event) {
+										let sender = event.currentTarget;
+										let container = sender.closest("form");
+										core.replaceChild(container, fn.form.container(opt.id, fn.form.signup(opt)));
+									},
+								}),
+							],
+						}),
+					]),
+				].filter(Boolean)
+			);
 		},
 		changepass: function (opt) {
-			return new container.form([
-				!opt.img && opt.icon ? new icon(opt.icon) : null,
-				!opt.icon && opt.img ? new img(opt.img) : null,
-				new h(3, opt.title),
+			return new container.form(
+				[
+					!opt.img && opt.icon ? new icon(opt.icon) : null,
+					!opt.icon && opt.img ? new img(opt.img) : null,
+					new h({ level: defaultTitleSize, marginy: 0, elem: opt.title }),
 
-				new div({
-					id: `${opt.id}-msg`,
-					display: opt.msg ? null : "none",
-					elem: opt.msg,
-				}),
-
-				new input({
-					name: "oldpassword",
-					type: "password",
-					label: "Old password",
-					required: true,
-					minlengh: 8,
-					floatlabel: true,
-					attr: {
-						autocomplete: "off",
-					},
-					onchange: fn.action.inputchange,
-				}),
-
-				new input({
-					name: "password",
-					type: "password",
-					label: "New password",
-					required: true,
-					minlengh: 8,
-					floatlabel: true,
-					attr: {
-						autocomplete: "off",
-					},
-					onchange: fn.action.inputchange,
-				}),
-
-				new input({
-					name: "password2",
-					type: "password",
-					label: "Repeat new password",
-					required: true,
-					minlengh: 8,
-					floatlabel: true,
-					attr: {
-						autocomplete: "off",
-					},
-					onchange: fn.action.inputchange,
-				}),
-
-				new container.grid([
-					new button({
-						label: "Change password",
-						color: "primary",
-						weight: "lg",
-						onclick: fn.action.changepass,
-					}),
 					new div({
-						display: "flex",
-						justifycontent: "between",
-						elem: [
-							new button({
-								weight: "sm",
-								elem: "Sign out",
-								onclick: function (event) {
-									let sender = event.currentTarget;
-									let container = sender.closest("form");
-									fn.action.signout(sender, function () {
-										core.replaceChild(container, fn.form.container(opt.id, fn.form.signin(opt)));
-									});
-								},
-							}),
-							new button({
-								weight: "sm",
-								elem: "Reset password",
-								onclick: function (event) {
-									let sender = event.currentTarget;
-									let container = sender.closest("form");
-									core.replaceChild(container, fn.form.container(opt.id, fn.form.resetpass(opt)));
-								},
-							}),
-						],
+						id: `${opt.id}-msg`,
+						display: opt.msg ? null : "none",
+						elem: fn.msg(opt.msg, "info"),
 					}),
-				]),
-			]);
+
+					new input({
+						name: "oldpassword",
+						type: "password",
+						label: "Old password",
+						required: true,
+						minlengh: 8,
+						floatlabel: true,
+						attr: {
+							autocomplete: "off",
+						},
+						onchange: fn.action.inputchange,
+					}),
+
+					new input({
+						name: "password",
+						type: "password",
+						label: "New password",
+						required: true,
+						minlengh: 8,
+						floatlabel: true,
+						attr: {
+							autocomplete: "off",
+						},
+						onchange: fn.action.inputchange,
+					}),
+
+					new input({
+						name: "password2",
+						type: "password",
+						label: "Repeat new password",
+						required: true,
+						minlengh: 8,
+						floatlabel: true,
+						attr: {
+							autocomplete: "off",
+						},
+						onchange: fn.action.inputchange,
+					}),
+
+					new container.grid([
+						new button({
+							label: "Change password",
+							color: "primary",
+							weight: "lg",
+							onclick: fn.action.changepass,
+						}),
+						new div({
+							display: "flex",
+							justifycontent: "between",
+							elem: [
+								new button({
+									weight: "sm",
+									elem: "Sign out",
+									onclick: function (event) {
+										let sender = event.currentTarget;
+										let container = sender.closest("form");
+										fn.action.signout(sender, function () {
+											core.replaceChild(
+												container,
+												fn.form.container(opt.id, fn.form.signin(opt))
+											);
+										});
+									},
+								}),
+								new button({
+									weight: "sm",
+									elem: "Reset password",
+									onclick: function (event) {
+										let sender = event.currentTarget;
+										let container = sender.closest("form");
+										core.replaceChild(container, fn.form.container(opt.id, fn.form.resetpass(opt)));
+									},
+								}),
+							],
+						}),
+					]),
+				].filter(Boolean)
+			);
 		},
 		changepass_guest: function (opt) {
-			return new container.form([
-				!opt.img && opt.icon ? new icon(opt.icon) : null,
-				!opt.icon && opt.img ? new img(opt.img) : null,
-				new h(3, opt.title),
+			return new container.form(
+				[
+					!opt.img && opt.icon ? new icon(opt.icon) : null,
+					!opt.icon && opt.img ? new img(opt.img) : null,
+					new h({ level: defaultTitleSize, marginy: 0, elem: opt.title }),
 
-				new div({
-					id: `${opt.id}-msg`,
-					display: opt.msg ? null : "none",
-					elem: opt.msg,
-				}),
-
-				new input({
-					name: "token",
-					type: "hidden",
-					value: opt.token,
-				}),
-
-				new input({
-					name: "password",
-					type: "password",
-					label: "New password",
-					required: true,
-					minlengh: 8,
-					floatlabel: true,
-					attr: {
-						autocomplete: "off",
-					},
-					onchange: fn.action.inputchange,
-				}),
-
-				new input({
-					name: "password2",
-					type: "password",
-					label: "Repeat new password",
-					required: true,
-					minlengh: 8,
-					floatlabel: true,
-					attr: {
-						autocomplete: "off",
-					},
-					onchange: fn.action.inputchange,
-				}),
-
-				new container.grid([
-					new button({
-						label: "Change password",
-						color: "primary",
-						weight: "lg",
-						onclick: fn.action.changepass_guest,
-					}),
 					new div({
-						display: "flex",
-						justifycontent: "between",
-						elem: [
-							new button({
-								weight: "sm",
-								elem: "Sign in",
-								onclick: function (event) {
-									let sender = event.currentTarget;
-									let container = sender.closest("form");
-									core.replaceChild(container, fn.form.container(opt.id, fn.form.signin(opt)));
-								},
-							}),
-							new button({
-								weight: "sm",
-								elem: "Reset password",
-								onclick: function (event) {
-									let sender = event.currentTarget;
-									let container = sender.closest("form");
-									core.replaceChild(container, fn.form.container(opt.id, fn.form.resetpass(opt)));
-								},
-							}),
-						],
+						id: `${opt.id}-msg`,
+						display: opt.msg ? null : "none",
+						elem: fn.msg(opt.msg, "info"),
 					}),
-				]),
-			]);
+
+					new input({
+						name: "token",
+						type: "hidden",
+						value: opt.token,
+					}),
+
+					new input({
+						name: "password",
+						type: "password",
+						label: "New password",
+						required: true,
+						minlengh: 8,
+						floatlabel: true,
+						attr: {
+							autocomplete: "off",
+						},
+						onchange: fn.action.inputchange,
+					}),
+
+					new input({
+						name: "password2",
+						type: "password",
+						label: "Repeat new password",
+						required: true,
+						minlengh: 8,
+						floatlabel: true,
+						attr: {
+							autocomplete: "off",
+						},
+						onchange: fn.action.inputchange,
+					}),
+
+					new container.grid([
+						new button({
+							label: "Change password",
+							color: "primary",
+							weight: "lg",
+							onclick: fn.action.changepass_guest,
+						}),
+						new div({
+							display: "flex",
+							justifycontent: "between",
+							elem: [
+								new button({
+									weight: "sm",
+									elem: "Sign in",
+									onclick: function (event) {
+										let sender = event.currentTarget;
+										let container = sender.closest("form");
+										core.replaceChild(container, fn.form.container(opt.id, fn.form.signin(opt)));
+									},
+								}),
+								new button({
+									weight: "sm",
+									elem: "Reset password",
+									onclick: function (event) {
+										let sender = event.currentTarget;
+										let container = sender.closest("form");
+										core.replaceChild(container, fn.form.container(opt.id, fn.form.resetpass(opt)));
+									},
+								}),
+							],
+						}),
+					]),
+				].filter(Boolean)
+			);
 		},
 		profile: function () {},
 	},
@@ -672,77 +678,132 @@ export function signout(sender, callback) {
 	fn.action.signout(sender, callback);
 }
 
-export class signin extends form {
-	constructor(opt) {
-		super(opt);
-	}
+export class signin extends modal {
+	constructor(...opt) {
+		if (opt && opt.length > 0) {
+			opt[0] = core.extend({}, defaultSignInOption, opt[0]);
+			opt[0].id = opt[0].id || core.UUID();
 
-	get data() {
-		return super.data;
-	}
-	set data(opt) {
-		opt = core.extend({}, defaultSignInOption, opt);
-		opt.id = opt.id || core.UUID();
-		super.data = fn.form.container(opt.id, fn.form.signin(opt));
+			if (opt.length === 2) {
+				super({
+					size: opt[0].size,
+					elem: fn.form.container(opt[0].id, fn.form.signin(opt[0])),
+					debug: opt[1]?.debug === true ? true : false,
+				});
+			} else if (opt.length === 1) {
+				super({
+					size: opt[0].size,
+					elem: fn.form.container(opt[0].id, fn.form.signin(opt[0])),
+				});
+			} else {
+				console.error("Unsupported argument", opt);
+			}
+		} else {
+			super();
+		}
 	}
 }
 
-export class signup extends form {
-	constructor(opt) {
-		super(opt);
-	}
+export class signup extends modal {
+	constructor(...opt) {
+		if (opt && opt.length > 0) {
+			opt[0] = core.extend({}, defaultSignUpOption, opt[0]);
+			opt[0].id = opt[0].id || core.UUID();
 
-	get data() {
-		return super.data;
-	}
-	set data(opt) {
-		opt = core.extend({}, defaultRegisterOption, opt);
-		opt.id = opt.id || core.UUID();
-		super.data = fn.form.container(opt.id, fn.form.signup(opt));
+			if (opt.length === 2) {
+				super({
+					size: opt[0].size,
+					elem: fn.form.container(opt[0].id, fn.form.signup(opt[0])),
+					debug: opt[1]?.debug === true ? true : false,
+				});
+			} else if (opt.length === 1) {
+				super({
+					size: opt[0].size,
+					elem: fn.form.container(opt[0].id, fn.form.signup(opt[0])),
+				});
+			} else {
+				console.error("Unsupported argument", opt);
+			}
+		} else {
+			super();
+		}
 	}
 }
 
-export class resetpass extends form {
-	constructor(opt) {
-		super(opt);
-	}
+export class resetpass extends modal {
+	constructor(...opt) {
+		if (opt && opt.length > 0) {
+			opt[0] = core.extend({}, defaultResetPassOption, opt[0]);
+			opt[0].id = opt[0].id || core.UUID();
 
-	get data() {
-		return super.data;
-	}
-	set data(opt) {
-		opt = core.extend({}, defaultResetPassOption, opt);
-		opt.id = opt.id || core.UUID();
-		super.data = fn.form.container(opt.id, fn.form.resetpass(opt));
+			if (opt.length === 2) {
+				super({
+					size: opt[0].size,
+					elem: fn.form.container(opt[0].id, fn.form.resetpass(opt[0])),
+					debug: opt[1]?.debug === true ? true : false,
+				});
+			} else if (opt.length === 1) {
+				super({
+					size: opt[0].size,
+					elem: fn.form.container(opt[0].id, fn.form.resetpass(opt[0])),
+				});
+			} else {
+				console.error("Unsupported argument", opt);
+			}
+		} else {
+			super();
+		}
 	}
 }
 
-export class changepass extends form {
-	constructor(opt) {
-		super(opt);
-	}
+export class changepass extends modal {
+	constructor(...opt) {
+		if (opt && opt.length > 0) {
+			opt[0] = core.extend({}, defaultChangePassOption, opt[0]);
+			opt[0].id = opt[0].id || core.UUID();
 
-	get data() {
-		return super.data;
-	}
-	set data(opt) {
-		opt = core.extend({}, defaultChangePassOption, opt);
-		opt.id = opt.id || core.UUID();
-		super.data = fn.form.container(opt.id, fn.form.changepass(opt));
+			if (opt.length === 2) {
+				super({
+					size: opt[0].size,
+					elem: fn.form.container(opt[0].id, fn.form.changepass(opt[0])),
+					debug: opt[1]?.debug === true ? true : false,
+				});
+			} else if (opt.length === 1) {
+				super({
+					size: opt[0].size,
+					elem: fn.form.container(opt[0].id, fn.form.changepass(opt[0])),
+				});
+			} else {
+				console.error("Unsupported argument", opt);
+			}
+		} else {
+			super();
+		}
 	}
 }
 
-export class changepass_guest extends form {
-	constructor(opt) {
-		super(opt);
-	}
+export class changepass_guest extends modal {
+	constructor(...opt) {
+		if (opt && opt.length > 0) {
+			opt[0] = core.extend({}, defaultChangePassGuestOption, opt[0]);
+			opt[0].id = opt[0].id || core.UUID();
 
-	get data() {
-		return super.data;
-	}
-	set data(opt) {
-		opt = core.extend({}, defaultChangePassGuestOption, opt);
-		opt.id = opt.id || core.UUID();
-		super.data = fn.form.container(opt.id, fn.form.changepass_guest(opt));
+			if (opt.length === 2) {
+				super({
+					size: opt[0].size,
+					elem: fn.form.container(opt[0].id, fn.form.changepass_guest(opt[0])),
+					debug: opt[1]?.debug === true ? true : false,
+				});
+			} else if (opt.length === 1) {
+				super({
+					size: opt[0].size,
+					elem: fn.form.container(opt[0].id, fn.form.changepass_guest(opt[0])),
+				});
+			} else {
+				console.error("Unsupported argument", opt);
+			}
+		} else {
+			super();
+		}
 	}
 }

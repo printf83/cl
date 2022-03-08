@@ -471,11 +471,11 @@ export function validate(container, callback) {
 				if (ctl) {
 					//validate required
 					if (validateElem(ctl)) {
-						ctl.classList.add("is-valid");
+						//ctl.classList.add("is-valid");
 						ctl.classList.remove("is-invalid");
 					} else {
 						ctl.classList.add("is-invalid");
-						ctl.classList.remove("is-valid");
+						//ctl.classList.remove("is-valid");
 					}
 				}
 			}
