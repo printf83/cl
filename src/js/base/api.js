@@ -28,6 +28,20 @@ const defaultOptionUpload = {
 };
 
 const fn = {
+	str2Object: function (value) {
+		if (value && value !== "") {
+			return JSON.parse(value);
+		}
+
+		return null;
+	},
+	obj2String: function (value) {
+		if (value) {
+			return JSON.stringify(value);
+		}
+
+		return null;
+	},
 	sender: {
 		islist: function (sender) {
 			if (sender) {
@@ -89,35 +103,47 @@ const fn = {
 
 		let req = new XMLHttpRequest();
 		req.onreadystatechange = function () {
-			if (req.readyState == 4 && req.status == 200) {
-				opt.callback(req.responseText);
+			if (req.readyState == 4) {
+				if (req.status == 200) {
+					opt.callback(fn.str2Object(req.responseText));
+				} else if (req.status === 400) {
+					opt.callback(fn.str2Object(req.responseText));
+				}
 			}
 		};
 		req.open(opt.type, opt.url, opt.async);
 		req.setRequestHeader("Content-Type", "application/json");
-		req.send(opt.data ? JSON.stringify(opt.data) : null);
+		req.send(fn.obj2String(opt.data));
 	},
 	post: function (opt) {
 		opt = core.extend({}, defaultOptionPost, opt);
 
 		let req = new XMLHttpRequest();
 		req.onreadystatechange = function () {
-			if (req.readyState == 4 && req.status == 200) {
-				opt.callback(req.responseText);
+			if (req.readyState == 4) {
+				if (req.status == 200) {
+					opt.callback(fn.str2Object(req.responseText));
+				} else if (req.status === 400) {
+					opt.callback(fn.str2Object(req.responseText));
+				}
 			}
 		};
 
 		req.open(opt.type, opt.url, opt.async);
 		req.setRequestHeader("Content-Type", "application/json");
-		req.send(opt.data ? JSON.stringify(opt.data) : null);
+		req.send(fn.obj2String(opt.data));
 	},
 	upload: function (opt) {
 		opt = core.extend({}, defaultOptionUpload, opt);
 
 		let req = new XMLHttpRequest();
 		req.onreadystatechange = function () {
-			if (req.readyState == 4 && req.status == 200) {
-				opt.callback(req.responseText);
+			if (req.readyState == 4) {
+				if (req.status == 200) {
+					opt.callback(fn.str2Object(req.responseText));
+				} else if (req.status === 400) {
+					opt.callback(fn.str2Object(req.responseText));
+				}
 			}
 		};
 
@@ -209,7 +235,7 @@ export const api = {
 					callback: function (result) {
 						fn.sender.setfree(opt.sender);
 						if (typeof callback === "function") {
-							callback(JSON.parse(result));
+							callback(result);
 						}
 					},
 					url: `api/${opt.name}/${Array.isArray(opt.id) ? opt.id.join(",") : opt.id}`,
@@ -297,7 +323,7 @@ export const api = {
 					callback: function (result) {
 						fn.sender.setfree(opt.sender);
 						if (typeof callback === "function") {
-							callback(JSON.parse(result));
+							callback(result);
 						}
 					},
 					url: `api/${opt.name}-list`,
@@ -413,7 +439,7 @@ export const api = {
 					callback: function (result) {
 						fn.sender.setfree(opt.sender);
 						if (typeof callback === "function") {
-							callback(JSON.parse(result));
+							callback(result);
 						}
 					},
 					url: `api/${opt.name}-aggregate`,
@@ -436,7 +462,7 @@ export const file = {
 					callback: function (result) {
 						fn.sender.setfree(sender);
 						if (typeof callback === "function") {
-							callback(JSON.parse(result));
+							callback(result);
 						}
 					},
 					url: `/api/file`,
@@ -482,7 +508,7 @@ export const file = {
 					callback: function (result) {
 						fn.sender.setfree(sender);
 						if (typeof callback === "function") {
-							callback(JSON.parse(result));
+							callback(result);
 						}
 					},
 					url: `/api/file-info/${Array.isArray(id) ? id.join(",") : id}`,
@@ -500,7 +526,7 @@ export const file = {
 					callback: function (result) {
 						fn.sender.setfree(sender);
 						if (typeof callback === "function") {
-							callback(JSON.parse(result));
+							callback(result);
 						}
 					},
 					url: `/api/file/${Array.isArray(id) ? id.join(",") : id}`,
@@ -520,7 +546,7 @@ export const file = {
 					callback: function (result) {
 						fn.sender.setfree(sender);
 						if (typeof callback === "function") {
-							callback(JSON.parse(result));
+							callback(result);
 						}
 					},
 					url: `/api/file/${Array.isArray(id) ? id.join(",") : id}`,
@@ -601,7 +627,7 @@ export const user = {
 
 		if (fn.sender.isfree(opt.sender)) {
 			fn.sender.setbusy(opt.sender);
-			fn.post({
+			fn.get({
 				callback: function (result) {
 					fn.sender.setfree(opt.sender);
 					if (typeof callback === "function") {
@@ -609,6 +635,84 @@ export const user = {
 					}
 				},
 				url: `api/user/signout`,
+			});
+		}
+	},
+	changepass: function (opt, callback) {
+		opt = core.extend(
+			{},
+			{
+				data: null,
+				sender: null,
+			},
+			opt
+		);
+
+		if (opt.data) {
+			if (fn.sender.isfree(opt.sender)) {
+				fn.sender.setbusy(opt.sender);
+				fn.post({
+					callback: function (result) {
+						fn.sender.setfree(opt.sender);
+						if (typeof callback === "function") {
+							callback(result);
+						}
+					},
+					url: `api/user/changepass`,
+					data: opt.data,
+				});
+			}
+		} else {
+			console.error("opt data is required");
+		}
+	},
+	resetpass: function (opt, callback) {
+		opt = core.extend(
+			{},
+			{
+				data: null,
+				sender: null,
+			},
+			opt
+		);
+
+		if (opt.data) {
+			if (fn.sender.isfree(opt.sender)) {
+				fn.sender.setbusy(opt.sender);
+				fn.post({
+					callback: function (result) {
+						fn.sender.setfree(opt.sender);
+						if (typeof callback === "function") {
+							callback(result);
+						}
+					},
+					url: `api/user/resetpass`,
+					data: opt.data,
+				});
+			}
+		} else {
+			console.error("opt data is required");
+		}
+	},
+	profile: function (opt, callback) {
+		opt = core.extend(
+			{},
+			{
+				sender: null,
+			},
+			opt
+		);
+
+		if (fn.sender.isfree(opt.sender)) {
+			fn.sender.setbusy(opt.sender);
+			fn.get({
+				callback: function (result) {
+					fn.sender.setfree(opt.sender);
+					if (typeof callback === "function") {
+						callback(result);
+					}
+				},
+				url: `api/user/profile`,
 			});
 		}
 	},

@@ -29,7 +29,7 @@ schema.pre("save", function (next) {
 
 schema.methods.validatePassword = function (password, callback) {
 	bcrypt.compare(password, this.password, function (err, result) {
-		if (err) return callback(err);
+		if (err) return callback(err, false);
 		callback(null, result);
 	});
 };
@@ -41,14 +41,13 @@ schema.methods.generateToken = function (callback) {
 	i.token = t;
 	i.save(function (err, result) {
 		if (err) return callback(err);
-
 		callback(null, result);
 	});
 };
 
 schema.methods.deleteToken = function (callback) {
 	let i = this;
-	i.update({ $unset: { token: 1 } }, function (err, result) {
+	i.updateOne({ $unset: { token: 1 } }, function (err, result) {
 		if (err) return callback(err);
 		callback(null, result);
 	});

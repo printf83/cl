@@ -8,6 +8,7 @@ import h from "./h.js";
 import button from "./button.js";
 import form from "./form.js";
 import * as db from "./api.js";
+import span from "./span.js";
 
 let defaultSignInOption = {
 	id: null,
@@ -51,7 +52,45 @@ let defaultChangePassOption = {
 };
 
 const fn = {
-	signout: function (event) {},
+	msg: function (container, msg, color) {
+		let id = container.getAttribute("id");
+		let msgcontainer = document.getElementById(`${id}-msg`);
+		core.removeChildElement(msgcontainer);
+
+		if (msg) {
+			msgcontainer.classList.remove("d-none");
+			core.appendChild(
+				msgcontainer,
+				new span({
+					textcolor: color,
+					elem: msg,
+				})
+			);
+		} else {
+			msgcontainer.classList.add("d-none");
+		}
+	},
+	inputchange: function (event) {
+		let sender = event.currentTarget;
+		let container = sender.closest("form");
+		fn.msg(container, null);
+	},
+	signout: function (sender, callback) {
+		db.user.signout(
+			{
+				sender: sender,
+			},
+			function (result) {}
+		);
+
+		setTimeout(
+			function (callback) {
+				callback(true);
+			},
+			1000,
+			callback
+		);
+	},
 	signin: function (event) {
 		let sender = event.currentTarget;
 		let container = sender.closest("form");
@@ -74,7 +113,13 @@ const fn = {
 						},
 					},
 					function (result) {
-						console.log(result);
+						if (result) {
+							if (result.success) {
+								fn.msg(container, `Sign in success. Welcome ${result.username}`, "success");
+							} else {
+								fn.msg(container, result && result.message ? result.message : null, "danger");
+							}
+						}
 					}
 				);
 			}
@@ -99,16 +144,16 @@ const fn = {
 						data: { username: data.email, password: data.password, password2: data.password2 },
 					},
 					function (result) {
-						if (result && result.success) {
-							core.replaceWith(
-								container,
-								new signin({
-									msg: new span({
-										textcolor: "success",
-										elem: "Please login using email and password you just registerd",
-									}),
-								})
-							);
+						if (result) {
+							if (result.success) {
+								fn.msg(
+									container,
+									"Signup success. Please sign in using email and password you just sign up",
+									"success"
+								);
+							} else {
+								fn.msg(container, result && result.message ? result.message : null, "danger");
+							}
 						}
 					}
 				);
@@ -124,6 +169,23 @@ const fn = {
 				// 	container,
 				// 	new resetpass({ msg: new span({ textcolor: "danger", elem: "Please provide valid email" }) })
 				// );
+			} else {
+				let data = core.getValue(container);
+				db.user.resetpass(
+					{
+						sender: sender,
+						data: { username: data.email },
+					},
+					function (result) {
+						if (result) {
+							if (result.success) {
+								fn.msg(container, "Please check your email to continue reset password", "success");
+							} else {
+								fn.msg(container, result && result.message ? result.message : null, "danger");
+							}
+						}
+					}
+				);
 			}
 		});
 	},
@@ -136,13 +198,49 @@ const fn = {
 				// 	container,
 				// 	new changepass({ msg: new span({ textcolor: "danger", elem: "Please provide valid password" }) })
 				// );
+			} else {
+				let data = core.getValue(container);
+				db.user.changepass(
+					{
+						sender: sender,
+						data: { oldpassword: data.oldpassword, password: data.password, password2: data.password2 },
+					},
+					function (result) {
+						if (result) {
+							if (result.success) {
+								fn.msg(container, "Password changed", "success");
+							} else {
+								fn.msg(container, result && result.message ? result.message : null, "danger");
+							}
+						}
+					}
+				);
 			}
 		});
 	},
+	profile: function (sender, callback) {
+		db.user.profile(
+			{
+				sender: sender,
+			},
+			function (result) {
+				callback(result);
+			}
+		);
+	},
+
 	issignin: function () {
 		return false;
 	},
 };
+
+export function profile(sender, callback) {
+	fn.profile(sender, callback);
+}
+
+export function signout(sender, callback) {
+	fn.signout(sender, callback);
+}
 
 export class signin extends form {
 	constructor(opt) {
@@ -169,7 +267,12 @@ export class signin extends form {
 					!opt.img && opt.icon ? new icon(opt.icon) : null,
 					!opt.icon && opt.img ? new img(opt.img) : null,
 					new h(3, opt.title),
-					opt.msg,
+
+					new div({
+						id: `${opt.id}-msg`,
+						display: opt.msg ? null : "none",
+						elem: opt.msg,
+					}),
 
 					new input({
 						name: "email",
@@ -181,6 +284,7 @@ export class signin extends form {
 							autocomplete: "off",
 						},
 						value: opt.email,
+						onchange: fn.inputchange,
 					}),
 					new input({
 						name: "password",
@@ -192,6 +296,7 @@ export class signin extends form {
 						attr: {
 							autocomplete: "off",
 						},
+						onchange: fn.inputchange,
 					}),
 					new div({
 						display: "flex",
@@ -268,7 +373,12 @@ export class signup extends form {
 					!opt.img && opt.icon ? new icon(opt.icon) : null,
 					!opt.icon && opt.img ? new img(opt.img) : null,
 					new h(3, opt.title),
-					opt.msg,
+
+					new div({
+						id: `${opt.id}-msg`,
+						display: opt.msg ? null : "none",
+						elem: opt.msg,
+					}),
 
 					new input({
 						name: "email",
@@ -279,6 +389,7 @@ export class signup extends form {
 						attr: {
 							autocomplete: "off",
 						},
+						onchange: fn.inputchange,
 					}),
 					new input({
 						name: "password",
@@ -290,6 +401,7 @@ export class signup extends form {
 						attr: {
 							autocomplete: "off",
 						},
+						onchange: fn.inputchange,
 					}),
 					new input({
 						name: "password2",
@@ -301,6 +413,7 @@ export class signup extends form {
 						attr: {
 							autocomplete: "off",
 						},
+						onchange: fn.inputchange,
 					}),
 					new container.grid([
 						new button({
@@ -368,7 +481,12 @@ export class resetpass extends form {
 					!opt.img && opt.icon ? new icon(opt.icon) : null,
 					!opt.icon && opt.img ? new img(opt.img) : null,
 					new h(3, opt.title),
-					opt.msg,
+
+					new div({
+						id: `${opt.id}-msg`,
+						display: opt.msg ? null : "none",
+						elem: opt.msg,
+					}),
 
 					new input({
 						name: "email",
@@ -379,6 +497,7 @@ export class resetpass extends form {
 						attr: {
 							autocomplete: "off",
 						},
+						onchange: fn.inputchange,
 					}),
 
 					new container.grid([
@@ -445,7 +564,12 @@ export class changepass extends form {
 					!opt.img && opt.icon ? new icon(opt.icon) : null,
 					!opt.icon && opt.img ? new img(opt.img) : null,
 					new h(3, opt.title),
-					opt.msg,
+
+					new div({
+						id: `${opt.id}-msg`,
+						display: opt.msg ? null : "none",
+						elem: opt.msg,
+					}),
 
 					new input({
 						name: "oldpassword",
@@ -457,6 +581,7 @@ export class changepass extends form {
 						attr: {
 							autocomplete: "off",
 						},
+						onchange: fn.inputchange,
 					}),
 
 					new input({
@@ -469,6 +594,7 @@ export class changepass extends form {
 						attr: {
 							autocomplete: "off",
 						},
+						onchange: fn.inputchange,
 					}),
 
 					new input({
@@ -481,11 +607,12 @@ export class changepass extends form {
 						attr: {
 							autocomplete: "off",
 						},
+						onchange: fn.inputchange,
 					}),
 
 					new container.grid([
 						new button({
-							label: "Send email",
+							label: "Change password",
 							color: "primary",
 							weight: "lg",
 							onclick: fn.changepass,

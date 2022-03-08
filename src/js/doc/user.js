@@ -38,4 +38,34 @@ export default [
 			return new $.user.changepass();
 		},
 	},
+
+	{
+		title: "Get user info",
+		code: function () {
+			return new $.button({
+				label: "Get info",
+				color: "primary",
+				onclick: function (event) {
+					$.user.profile(event.currentTarget, function (result) {
+						console.log(result);
+					});
+				},
+			});
+		},
+	},
+
+	{
+		title: "Sign out",
+		code: function () {
+			return new $.button({
+				label: "Sign out",
+				color: "primary",
+				onclick: function (event) {
+					$.user.signout(event.currentTarget, function (result) {
+						console.log(result);
+					});
+				},
+			});
+		},
+	},
 ];
