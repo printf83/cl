@@ -40,6 +40,15 @@ export default [
 	},
 
 	{
+		title: "Change password (guest)",
+		code: function () {
+			return new $.user.changepass_guest({
+				token: "eyJhbGciOiJIUzI1NiJ9.NjIyNzM5NmM5MjdkZGNiZWE4NThiZjNm.s3mI2QDP0Mme36mal7WqtMuVcorj9QnBFxi4h7zB_CY",
+			});
+		},
+	},
+
+	{
 		title: "Get user info",
 		code: function () {
 			return new $.button({

@@ -245,6 +245,7 @@ export default [
 			return new $.modal({
 				title: "Modal title",
 				elem: "Modal body text goes here.",
+
 				button: ["Save changes", "Close"],
 				debug: true, //this last option is for this documentation preview only
 			});
@@ -260,6 +261,7 @@ export default [
 				onclick: function () {
 					new $.modal({
 						title: "Modal title",
+						dark: true,
 						elem: "Modal body text goes here.",
 						button: [
 							{

@@ -8,7 +8,12 @@ const mongoose = require("mongoose");
 const schema = mongoose.Schema({
 	username: { type: String, require: true },
 	password: { type: String, require: true },
-	token: String,
+	name: String,
+	picture: String,
+
+	authToken: String,
+	emailToken: String,
+	resetToken: String,
 });
 
 schema.pre("save", function (next) {
@@ -34,32 +39,33 @@ schema.methods.validatePassword = function (password, callback) {
 	});
 };
 
-schema.methods.generateToken = function (callback) {
+//signin token
+schema.methods.generateToken = function (prop, callback) {
 	let i = this;
 	let t = jwt.sign(i._id.toHexString(), process.env.SESSIONSECRET);
 
-	i.token = t;
+	i[`${prop}Token`] = t;
 	i.save(function (err, result) {
 		if (err) return callback(err);
 		callback(null, result);
 	});
 };
 
-schema.methods.deleteToken = function (callback) {
+schema.methods.deleteToken = function (prop, callback) {
 	let i = this;
-	i.updateOne({ $unset: { token: 1 } }, function (err, result) {
+	i.updateOne({ $unset: { [`${prop}Token`]: 1 } }, function (err, result) {
 		if (err) return callback(err);
 		callback(null, result);
 	});
 };
 
-schema.statics.findByToken = function (token, callback) {
+schema.statics.findByToken = function (prop, token, callback) {
 	let i = this;
 
 	jwt.verify(token, process.env.SESSIONSECRET, function (err, decode) {
 		if (err) return callback(null, err);
 
-		i.findOne({ _id: decode, token: token }, function (err, result) {
+		i.findOne({ _id: decode, [`${prop}Token`]: token }, function (err, result) {
 			if (err) return callback(err);
 			callback(null, result);
 		});

@@ -4,7 +4,7 @@ module.exports = function (app) {
 	const fn = {
 		auth: (req, res, next) => {
 			let token = req.cookies.auth;
-			$.db.findByToken(token, (err, result) => {
+			$.db.findByToken("auth", token, (err, result) => {
 				if (err) throw err;
 				if (!result)
 					return res.json({
@@ -12,17 +12,14 @@ module.exports = function (app) {
 						message: "Please sign in to continue",
 					});
 
-				req.token = token;
+				req.authToken = token;
 				req.user = result;
 				next();
 			});
 		},
 		signin: function (req, res) {
-			// $.db.findByToken(token, function (err, user) {
-			// 	if (err) return res.json({ success: false, message: err });
-			// 	if (user) return res.json({ success: false, message: "Already login" });
-
 			let { username, password } = req.body;
+			if (!username || !password) return res.json({ success: false, message: "Username and password required" });
 
 			$.db.findOne({ username: username }, function (err, user) {
 				if (err || !user) return res.json({ success: false, message: "User not found" });
@@ -30,10 +27,10 @@ module.exports = function (app) {
 				user.validatePassword(password, (err, result) => {
 					if (err || !result) return res.json({ success: false, message: "User not found" });
 
-					user.generateToken((err, user) => {
+					user.generateToken("auth", (err, user) => {
 						if (err) return res.json({ success: false, message: err.message });
 
-						res.cookie("auth", user.token).json({
+						res.cookie("auth", user.authToken).json({
 							success: true,
 							username: user.username,
 						});
@@ -44,14 +41,14 @@ module.exports = function (app) {
 			// });
 		},
 		signout: function (req, res) {
-			req.user.deleteToken((err, user) => {
+			req.user.deleteToken("auth", (err, user) => {
 				if (err) return res.json({ success: false, message: err.message });
 				res.status(200);
 			});
 		},
 		register: function (req, res) {
-			let { username, password, password2 } = req.body;
-			if (password !== password2) return res.json({ success: false, message: "Password not match" });
+			let { username, password } = req.body;
+			if (!username || !password) return res.json({ success: false, message: "Username and password required" });
 
 			$.db.findOne({ username: username }, function (err, user) {
 				if (user) return res.json({ success: false, message: "User already registered" });
@@ -74,13 +71,26 @@ module.exports = function (app) {
 			});
 		},
 		resetpass: function (req, res) {
-			res.json({
-				success: true,
+			let { username } = req.body;
+			if (!username) return res.json({ success: false, message: "Username required" });
+
+			$.db.findOne({ username: username }, function (err, user) {
+				if (err || !user) return res.json({ success: false, message: "User not found" });
+
+				user.generateToken("reset", (err, user) => {
+					if (err) return res.json({ success: false, message: err.message });
+
+					res.json({
+						success: true,
+						token: user.resetToken,
+					});
+				});
 			});
 		},
 		changepass: function (req, res) {
-			let { oldpassword, password, password2 } = req.body;
-			if (password !== password2) return res.json({ success: false, message: "Password not match" });
+			let { oldpassword, password } = req.body;
+			if (!oldpassword || !password)
+				return res.json({ success: false, message: "Username and password required" });
 
 			req.user.validatePassword(oldpassword, (err, result) => {
 				if (err || !result) return res.json({ success: false, message: "Invalid old password" });
@@ -98,6 +108,30 @@ module.exports = function (app) {
 				});
 			});
 		},
+		changepass_guest: function (req, res) {
+			let { token, password } = req.body;
+			if (!token || !password) return res.json({ success: false, message: "Token and password required" });
+
+			$.db.findByToken("reset", token, (err, user) => {
+				if (err) throw err;
+
+				user.password = password;
+				user.save((err) => {
+					if (err) {
+						console.log(err);
+						return res.json({ success: false, message: err.message });
+					}
+
+					//delete reset token
+					user.deleteToken("reset", (err, user) => {
+						if (err) return res.json({ success: false, message: err.message });
+						res.json({
+							success: true,
+						});
+					});
+				});
+			});
+		},
 		profile: function (req, res) {
 			res.json({
 				id: req.user._id,
@@ -111,5 +145,6 @@ module.exports = function (app) {
 	app.post(`/api/user/signin`, fn.signin);
 	app.post(`/api/user/resetpass`, fn.resetpass);
 	app.post(`/api/user/changepass`, fn.auth, fn.changepass);
+	app.post(`/api/user/changepass_guest`, fn.changepass_guest);
 	app.get(`/api/user/profile`, fn.auth, fn.profile);
 };

@@ -666,6 +666,34 @@ export const user = {
 			console.error("opt data is required");
 		}
 	},
+	changepass_guest: function (opt, callback) {
+		opt = core.extend(
+			{},
+			{
+				data: null,
+				sender: null,
+			},
+			opt
+		);
+
+		if (opt.data) {
+			if (fn.sender.isfree(opt.sender)) {
+				fn.sender.setbusy(opt.sender);
+				fn.post({
+					callback: function (result) {
+						fn.sender.setfree(opt.sender);
+						if (typeof callback === "function") {
+							callback(result);
+						}
+					},
+					url: `api/user/changepass_guest`,
+					data: opt.data,
+				});
+			}
+		} else {
+			console.error("opt data is required");
+		}
+	},
 	resetpass: function (opt, callback) {
 		opt = core.extend(
 			{},
