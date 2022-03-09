@@ -17,16 +17,16 @@ const defaultIcon = {
 	weight: "4x",
 };
 const defaultSize = "sm";
-const defaultTitleSize = 3;
+const defaultTitleSize = 4;
 
 let defaultSignInOption = {
 	id: null,
 	icon: defaultIcon,
 	msg: null,
 	size: defaultSize,
-	title: "Sign in",
+	title: null,
 	email: null,
-	callback: function (result) {},
+	callback: null,
 };
 
 let defaultSignUpOption = {
@@ -344,7 +344,7 @@ const fn = {
 								}),
 								new button({
 									weight: "sm",
-									elem: "Register",
+									elem: "Sign up",
 									onclick: function (event) {
 										let sender = event.currentTarget;
 										let container = sender.closest("form");
@@ -494,7 +494,7 @@ const fn = {
 								}),
 								new button({
 									weight: "sm",
-									elem: "Register",
+									elem: "Sign up",
 									onclick: function (event) {
 										let sender = event.currentTarget;
 										let container = sender.closest("form");

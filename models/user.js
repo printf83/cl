@@ -61,16 +61,19 @@ schema.methods.deleteToken = function (prop, callback) {
 };
 
 schema.statics.findByToken = function (prop, token, callback) {
-	let i = this;
+	if (token) {
+		let i = this;
+		jwt.verify(token, process.env.SESSIONSECRET, function (err, decode) {
+			if (err) return callback(null, err);
 
-	jwt.verify(token, process.env.SESSIONSECRET, function (err, decode) {
-		if (err) return callback(null, err);
-
-		i.findOne({ _id: decode, [`${prop}Token`]: token }, function (err, result) {
-			if (err) return callback(err);
-			callback(null, result);
+			i.findOne({ _id: decode, [`${prop}Token`]: token }, function (err, result) {
+				if (err) return callback(err);
+				callback(null, result);
+			});
 		});
-	});
+	} else {
+		callback(null, false);
+	}
 };
 
 const db = mongoose.model("user", schema);

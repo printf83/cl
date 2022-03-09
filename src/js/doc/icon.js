@@ -130,19 +130,152 @@ export default [
 		container: sample.stackcontainer,
 		code: function () {
 			return [
-				new $.icon({ type: "fab", icon: "node-js", spin: true }),
-				new $.icon({ icon: "spinner", spin: true }),
-				new $.icon({ icon: "circle-notch", spin: true }),
-				new $.icon({ icon: "slash", spin: true }),
-				new $.icon({ icon: "fan", spin: true }),
-				new $.icon({ icon: "crosshairs", spin: true }),
-				new $.icon({ icon: "sync", spin: true }),
-				new $.icon({ icon: "cog", spin: true }),
-				new $.icon({ icon: "compact-disc", spin: true }),
-				new $.icon({ icon: "compass", spin: true }),
-				new $.icon({ icon: "wrench", spin: true }),
-				new $.icon({ icon: "snowflake", spin: true }),
-			];
+				"spinner",
+				"circle-notch",
+				"slash",
+				"fan",
+				"crosshairs",
+				"sync",
+				"cog",
+				"compact-disc",
+				"compass",
+				"wrench",
+				"snowflake",
+			].map(function (i) {
+				return new $.icon({ icon: i, spin: true });
+			});
+		},
+	},
+
+	{
+		title: "Fade",
+		container: sample.stackcontainer,
+		code: function () {
+			return [
+				"spinner",
+				"circle-notch",
+				"slash",
+				"fan",
+				"crosshairs",
+				"sync",
+				"cog",
+				"compact-disc",
+				"compass",
+				"wrench",
+				"snowflake",
+			].map(function (i) {
+				return new $.icon({ icon: i, fade: true });
+			});
+		},
+	},
+
+	{
+		title: "Beat",
+		container: sample.stackcontainer,
+		code: function () {
+			return [
+				"spinner",
+				"circle-notch",
+				"slash",
+				"fan",
+				"crosshairs",
+				"sync",
+				"cog",
+				"compact-disc",
+				"compass",
+				"wrench",
+				"snowflake",
+			].map(function (i) {
+				return new $.icon({ icon: i, beat: true });
+			});
+		},
+	},
+
+	{
+		title: "Fade beat",
+		container: sample.stackcontainer,
+		code: function () {
+			return [
+				"spinner",
+				"circle-notch",
+				"slash",
+				"fan",
+				"crosshairs",
+				"sync",
+				"cog",
+				"compact-disc",
+				"compass",
+				"wrench",
+				"snowflake",
+			].map(function (i) {
+				return new $.icon({ icon: i, beat: true, fade: true });
+			});
+		},
+	},
+
+	{
+		title: "Bounce",
+		container: sample.stackcontainer,
+		code: function () {
+			return [
+				"spinner",
+				"circle-notch",
+				"slash",
+				"fan",
+				"crosshairs",
+				"sync",
+				"cog",
+				"compact-disc",
+				"compass",
+				"wrench",
+				"snowflake",
+			].map(function (i) {
+				return new $.icon({ icon: i, bounce: true });
+			});
+		},
+	},
+
+	{
+		title: "Flip",
+		container: sample.stackcontainer,
+		code: function () {
+			return [
+				"spinner",
+				"circle-notch",
+				"slash",
+				"fan",
+				"crosshairs",
+				"sync",
+				"cog",
+				"compact-disc",
+				"compass",
+				"wrench",
+				"snowflake",
+			].map(function (i) {
+				return new $.icon({ icon: i, flip: true });
+			});
+		},
+	},
+
+	{
+		title: "Shake",
+		container: sample.stackcontainer,
+		code: function () {
+			return [
+				"spinner",
+				"circle-notch",
+				"slash",
+				"fan",
+				"crosshairs",
+				"sync",
+				"cog",
+				"compact-disc",
+				"compass",
+				"wrench",
+				"snowflake",
+			].map(function (i) {
+				return new $.icon({ icon: i, shake: true });
+			});
 		},
 	},
 
