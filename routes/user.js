@@ -1,3 +1,6 @@
+require("dotenv").config();
+const nodemailer = require("nodemailer");
+
 module.exports = function (app) {
 	const $ = require(`../models/user.js`);
 
@@ -13,6 +16,72 @@ module.exports = function (app) {
 				next();
 			});
 		},
+		extend: function (out) {
+			out = out || {};
+
+			for (let i = 1; i < arguments.length; i++) {
+				if (!arguments[i]) continue;
+
+				for (let key in arguments[i]) {
+					if (arguments[i].hasOwnProperty(key)) out[key] = arguments[i][key];
+				}
+			}
+
+			return out;
+		},
+		UUID: function (format) {
+			return (format || "cl-xxxxxxxxxxxx").replace(/[xy]/g, function (c) {
+				var r = (Math.random() * 16) | 0,
+					v = c === "x" ? r : (r & 0x3) | 0x8;
+				return v.toString(16);
+			});
+		},
+		email: function (opt, callback) {
+			let transporter = nodemailer.createTransport({
+				service: "gmail",
+				auth: {
+					user: process.env.EMAILADDRESS,
+					pass: process.env.EMAILPASSWORD,
+				},
+			});
+
+			transporter.sendMail(
+				fn.extend(
+					{},
+					{
+						from: process.env.EMAILADDRESS,
+						to: null,
+						subject: null,
+						html: null,
+						text: null,
+					},
+					opt
+				),
+				function (err, result) {
+					if (err) {
+						callback({ success: false, message: err.message });
+					} else {
+						callback({ success: true, message: result.response });
+					}
+				}
+			);
+		},
+		validate: function (req, res) {
+			let { token } = req.body;
+			if (!token) return res.json({ success: false, message: "Token required" });
+
+			$.db.findByToken("email", token, (err, user) => {
+				if (err) throw err;
+
+				//delete email validation token
+				user.deleteToken("email", (err, user) => {
+					if (err) return res.json({ success: false, message: err.message });
+					res.json({
+						success: true,
+					});
+				});
+			});
+		},
 		signin: function (req, res) {
 			let { username, password } = req.body;
 			if (!username || !password) return res.json({ success: false, message: "Username and password required" });
@@ -23,14 +92,18 @@ module.exports = function (app) {
 				user.validatePassword(password, (err, result) => {
 					if (err || !result) return res.json({ success: false, message: "User not found" });
 
-					user.generateToken("auth", (err, user) => {
-						if (err) return res.json({ success: false, message: err.message });
+					if (!user.emailToken) {
+						user.generateToken("auth", (err, user) => {
+							if (err) return res.json({ success: false, message: err.message });
 
-						res.cookie("auth", user.authToken).json({
-							success: true,
-							username: user.username,
+							res.cookie("auth", user.authToken).json({
+								success: true,
+								username: user.username,
+							});
 						});
-					});
+					} else {
+						return res.json({ success: false, message: "Please validate your email" });
+					}
 				});
 			});
 
@@ -52,6 +125,9 @@ module.exports = function (app) {
 				let newuser = new $.db({
 					username: username,
 					password: password,
+					email: username,
+					name: username,
+					emailToken: fn.UUID(),
 				});
 
 				newuser.save((err) => {
@@ -60,8 +136,27 @@ module.exports = function (app) {
 						return res.json({ success: false });
 					}
 
-					res.json({
-						success: true,
+					newuser.generateToken("email", (err, user) => {
+						if (err) return res.json({ success: false, message: err.message });
+						fn.email(
+							{
+								to: user.email,
+								subject: "CL Confirmation Email",
+								html: `Click here to validate your email <a href="https://bs5-js-builder.herokuapp.com/?validateUser=${user.emailToken}">https://bs5-js-builder.herokuapp.com/?validateUser=${user.emailToken}</a>`,
+							},
+							function (result) {
+								if (result && result.success) {
+									res.json({
+										success: true,
+									});
+								} else {
+									res.json({
+										success: false,
+										token: result.message,
+									});
+								}
+							}
+						);
 					});
 				});
 			});
@@ -75,11 +170,25 @@ module.exports = function (app) {
 
 				user.generateToken("reset", (err, user) => {
 					if (err) return res.json({ success: false, message: err.message });
-
-					res.json({
-						success: true,
-						token: user.resetToken,
-					});
+					fn.email(
+						{
+							to: user.email,
+							subject: "CL Reset Password",
+							html: `Click here to reset password <a href="https://bs5-js-builder.herokuapp.com/?resetPassword=${user.resetToken}">https://bs5-js-builder.herokuapp.com/?resetPassword=${user.resetToken}</a>`,
+						},
+						function (result) {
+							if (result && result.success) {
+								res.json({
+									success: true,
+								});
+							} else {
+								res.json({
+									success: false,
+									token: result.message,
+								});
+							}
+						}
+					);
 				});
 			});
 		},
@@ -143,6 +252,7 @@ module.exports = function (app) {
 		},
 	};
 
+	app.get(`/api/user/validate`, fn.validate);
 	app.get(`/api/user/signout`, fn.auth, fn.signout);
 	app.post(`/api/user/register`, fn.register);
 	app.post(`/api/user/signin`, fn.signin);
