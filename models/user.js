@@ -41,7 +41,6 @@ schema.methods.validatePassword = function (password, callback) {
 	});
 };
 
-//signin token
 schema.methods.generateToken = function (prop, callback) {
 	let i = this;
 	let t = jwt.sign(i._id.toHexString(), process.env.SESSIONSECRET);

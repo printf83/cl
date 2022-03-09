@@ -6,11 +6,7 @@ module.exports = function (app) {
 			let token = req.cookies.auth;
 			$.db.findByToken("auth", token, (err, result) => {
 				if (err) throw err;
-				if (!result)
-					return res.json({
-						success: false,
-						message: "Please sign in to continue",
-					});
+				if (!result) return res.status(400).json({ success: false, message: "Please sign up to continue" });
 
 				req.authToken = token;
 				req.user = result;
@@ -43,7 +39,7 @@ module.exports = function (app) {
 		signout: function (req, res) {
 			req.user.deleteToken("auth", (err, user) => {
 				if (err) return res.json({ success: false, message: err.message });
-				res.status(200);
+				res.status(200).json({ success: true });
 			});
 		},
 		register: function (req, res) {
@@ -133,13 +129,17 @@ module.exports = function (app) {
 			});
 		},
 		profile: function (req, res) {
-			res.json({
-				email: req.user.email,
-				picture: req.user.picture,
-				name: req.user.name,
-				role: req.user.role,
-				username: req.user.username,
-			});
+			if (req.user) {
+				res.json({
+					email: req.user.email,
+					picture: req.user.picture,
+					name: req.user.name,
+					role: req.user.role,
+					username: req.user.username,
+				});
+			} else {
+				res.json(null);
+			}
 		},
 	};
 
@@ -148,6 +148,6 @@ module.exports = function (app) {
 	app.post(`/api/user/signin`, fn.signin);
 	app.post(`/api/user/resetpass`, fn.resetpass);
 	app.post(`/api/user/changepass`, fn.auth, fn.changepass);
-	app.post(`/api/user/changepass_guest`, fn.changepass_guest);
+	app.post(`/api/user/changepass-guest`, fn.changepass_guest);
 	app.get(`/api/user/profile`, fn.auth, fn.profile);
 };

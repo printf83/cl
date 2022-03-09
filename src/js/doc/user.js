@@ -61,6 +61,7 @@ export default [
 		code: function () {
 			return new $.button({
 				label: "Get info",
+				icon: "user",
 				color: "primary",
 				onclick: function (event) {
 					$.user.profile(event.currentTarget, function (result) {
@@ -76,7 +77,8 @@ export default [
 		code: function () {
 			return new $.button({
 				label: "Sign out",
-				color: "primary",
+				icon: "power-off",
+				color: "danger",
 				onclick: function (event) {
 					$.user.signout(event.currentTarget, function (result) {
 						if (result) {

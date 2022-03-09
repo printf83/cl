@@ -9,6 +9,7 @@ import button from "./button.js";
 import form from "./form.js";
 import * as db from "./api.js";
 import modal from "./modal.js";
+import img from "./img.js";
 import * as alert from "./alert.js";
 
 const defaultIcon = {
@@ -25,6 +26,7 @@ let defaultSignInOption = {
 	size: defaultSize,
 	title: "Sign in",
 	email: null,
+	callback: function (result) {},
 };
 
 let defaultSignUpOption = {
@@ -32,7 +34,8 @@ let defaultSignUpOption = {
 	icon: defaultIcon,
 	msg: null,
 	size: defaultSize,
-	title: "Sign up",
+	title: null,
+	callback: null,
 };
 
 let defaultResetPassOption = {
@@ -40,7 +43,8 @@ let defaultResetPassOption = {
 	icon: defaultIcon,
 	msg: null,
 	size: defaultSize,
-	title: "Reset password",
+	title: null,
+	callback: null,
 };
 
 let defaultChangePassOption = {
@@ -48,7 +52,8 @@ let defaultChangePassOption = {
 	icon: defaultIcon,
 	msg: null,
 	size: defaultSize,
-	title: "Change password",
+	title: null,
+	callback: null,
 };
 
 let defaultChangePassGuestOption = {
@@ -57,7 +62,8 @@ let defaultChangePassGuestOption = {
 	msg: null,
 	size: defaultSize,
 	token: null,
-	title: "Change password",
+	title: null,
+	callback: null,
 };
 
 const fn = {
@@ -81,9 +87,6 @@ const fn = {
 			msgcontainer.classList.add("d-none");
 		}
 	},
-	issignin: function () {
-		return false;
-	},
 	action: {
 		inputchange: function (event) {
 			let sender = event.currentTarget;
@@ -100,8 +103,7 @@ const fn = {
 				}
 			);
 		},
-		signin: function (event) {
-			let sender = event.currentTarget;
+		signin: function (sender, opt) {
 			let container = sender.closest("form");
 			core.validate(container, function (result) {
 				if (!result) {
@@ -121,7 +123,13 @@ const fn = {
 						function (result) {
 							if (result) {
 								if (result.success) {
-									fn.showmsg(container, "Sign in success", "/");
+									if (typeof opt.callback === "function") {
+										let dlg = container.closest("div.modal");
+										modal.hide(dlg);
+										opt.callback();
+									} else {
+										fn.showmsg(container, "Sign in success", "/");
+									}
 								} else {
 									fn.showmsg(container, result && result.message ? result.message : null, "!!");
 								}
@@ -131,8 +139,7 @@ const fn = {
 				}
 			});
 		},
-		signup: function (event) {
-			let sender = event.currentTarget;
+		signup: function (sender, opt) {
 			let container = sender.closest("form");
 			core.validate(container, function (result) {
 				if (!result) {
@@ -164,8 +171,7 @@ const fn = {
 				}
 			});
 		},
-		resetpass: function (event) {
-			let sender = event.currentTarget;
+		resetpass: function (sender, opt) {
 			let container = sender.closest("form");
 			core.validate(container, function (result) {
 				if (!result) {
@@ -192,8 +198,7 @@ const fn = {
 				}
 			});
 		},
-		changepass: function (event) {
-			let sender = event.currentTarget;
+		changepass: function (sender, opt) {
 			let container = sender.closest("form");
 			core.validate(container, function (result) {
 				if (!result) {
@@ -225,8 +230,7 @@ const fn = {
 				}
 			});
 		},
-		changepass_guest: function (event) {
-			let sender = event.currentTarget;
+		changepass_guest: function (sender, opt) {
 			let container = sender.closest("form");
 			core.validate(container, function (result) {
 				if (!result) {
@@ -281,9 +285,9 @@ const fn = {
 		signin: function (opt) {
 			return new container.form(
 				[
-					!opt.img && opt.icon ? new icon(opt.icon) : null,
+					!opt.img && opt.icon ? new icon(opt.icon) : opt.img ? null : new icon(defaultIcon),
 					!opt.icon && opt.img ? new img(opt.img) : null,
-					new h({ level: defaultTitleSize, marginy: 0, elem: opt.title }),
+					new h({ level: defaultTitleSize, marginy: 0, elem: opt.title ? opt.title : "Sign in" }),
 
 					new div({
 						id: `${opt.id}-msg`,
@@ -318,9 +322,12 @@ const fn = {
 					new container.grid([
 						new button({
 							label: "Sign in",
+							icon: "arrow-right-to-bracket",
 							color: "primary",
 							weight: "lg",
-							onclick: fn.action.signin,
+							onclick: function (event) {
+								fn.action.signin(event.currentTarget, opt);
+							},
 						}),
 						new div({
 							display: "flex",
@@ -353,9 +360,9 @@ const fn = {
 		signup: function (opt) {
 			return new container.form(
 				[
-					!opt.img && opt.icon ? new icon(opt.icon) : null,
+					!opt.img && opt.icon ? new icon(opt.icon) : opt.img ? null : new icon(defaultIcon),
 					!opt.icon && opt.img ? new img(opt.img) : null,
-					new h({ level: defaultTitleSize, marginy: 0, elem: opt.title }),
+					new h({ level: defaultTitleSize, marginy: 0, elem: opt.title ? opt.title : "Sign up" }),
 
 					new div({
 						id: `${opt.id}-msg`,
@@ -401,9 +408,12 @@ const fn = {
 					new container.grid([
 						new button({
 							label: "Sign up",
+							icon: "envelope",
 							color: "primary",
 							weight: "lg",
-							onclick: fn.action.signup,
+							onclick: function (event) {
+								fn.action.signup(event.currentTarget, opt);
+							},
 						}),
 						new div({
 							display: "flex",
@@ -436,9 +446,9 @@ const fn = {
 		resetpass: function (opt) {
 			return new container.form(
 				[
-					!opt.img && opt.icon ? new icon(opt.icon) : null,
+					!opt.img && opt.icon ? new icon(opt.icon) : opt.img ? null : new icon(defaultIcon),
 					!opt.icon && opt.img ? new img(opt.img) : null,
-					new h({ level: defaultTitleSize, marginy: 0, elem: opt.title }),
+					new h({ level: defaultTitleSize, marginy: 0, elem: opt.title ? opt.title : "Reset password" }),
 
 					new div({
 						id: `${opt.id}-msg`,
@@ -461,9 +471,12 @@ const fn = {
 					new container.grid([
 						new button({
 							label: "Send email",
+							icon: "envelope",
 							color: "primary",
 							weight: "lg",
-							onclick: fn.action.resetpass,
+							onclick: function (event) {
+								fn.action.resetpass(event.currentTarget, opt);
+							},
 						}),
 
 						new div({
@@ -497,9 +510,9 @@ const fn = {
 		changepass: function (opt) {
 			return new container.form(
 				[
-					!opt.img && opt.icon ? new icon(opt.icon) : null,
+					!opt.img && opt.icon ? new icon(opt.icon) : opt.img ? null : new icon(defaultIcon),
 					!opt.icon && opt.img ? new img(opt.img) : null,
-					new h({ level: defaultTitleSize, marginy: 0, elem: opt.title }),
+					new h({ level: defaultTitleSize, marginy: 0, elem: opt.title ? opt.title : "Change password" }),
 
 					new div({
 						id: `${opt.id}-msg`,
@@ -549,9 +562,12 @@ const fn = {
 					new container.grid([
 						new button({
 							label: "Change password",
+							icon: "floppy-disk",
 							color: "primary",
 							weight: "lg",
-							onclick: fn.action.changepass,
+							onclick: function (event) {
+								fn.action.changepass(event.currentTarget, opt);
+							},
 						}),
 						new div({
 							display: "flex",
@@ -589,9 +605,9 @@ const fn = {
 		changepass_guest: function (opt) {
 			return new container.form(
 				[
-					!opt.img && opt.icon ? new icon(opt.icon) : null,
+					!opt.img && opt.icon ? new icon(opt.icon) : opt.img ? null : new icon(defaultIcon),
 					!opt.icon && opt.img ? new img(opt.img) : null,
-					new h({ level: defaultTitleSize, marginy: 0, elem: opt.title }),
+					new h({ level: defaultTitleSize, marginy: 0, elem: opt.title ? opt.title : "Change password" }),
 
 					new div({
 						id: `${opt.id}-msg`,
@@ -634,9 +650,12 @@ const fn = {
 					new container.grid([
 						new button({
 							label: "Change password",
+							icon: "floppy-disk",
 							color: "primary",
 							weight: "lg",
-							onclick: fn.action.changepass_guest,
+							onclick: function (event) {
+								fn.action.changepass_guest(event.currentTarget, opt);
+							},
 						}),
 						new div({
 							display: "flex",

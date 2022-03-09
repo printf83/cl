@@ -1,6 +1,7 @@
 "use strict";
 
 import * as core from "./core.js";
+import { signin as user_signin } from "./user.js";
 
 const defaultOption = {
 	callback: function (data) {},
@@ -30,14 +31,22 @@ const defaultOptionUpload = {
 const fn = {
 	str2Object: function (value) {
 		if (value && value !== "") {
-			return JSON.parse(value);
+			try {
+				return JSON.parse(value);
+			} catch {
+				return value;
+			}
 		}
 
 		return null;
 	},
 	obj2String: function (value) {
 		if (value) {
-			return JSON.stringify(value);
+			try {
+				return JSON.stringify(value);
+			} catch {
+				return value;
+			}
 		}
 
 		return null;
@@ -107,7 +116,13 @@ const fn = {
 				if (req.status == 200) {
 					opt.callback(fn.str2Object(req.responseText));
 				} else if (req.status === 400) {
-					opt.callback(fn.str2Object(req.responseText));
+					new user_signin({
+						callback: function () {
+							fn.get(opt);
+						},
+					}).show();
+				} else {
+					opt.callback(null);
 				}
 			}
 		};
@@ -124,7 +139,13 @@ const fn = {
 				if (req.status == 200) {
 					opt.callback(fn.str2Object(req.responseText));
 				} else if (req.status === 400) {
-					opt.callback(fn.str2Object(req.responseText));
+					new user_signin({
+						callback: function () {
+							fn.get(opt);
+						},
+					}).show();
+				} else {
+					opt.callback(null);
 				}
 			}
 		};
@@ -142,7 +163,13 @@ const fn = {
 				if (req.status == 200) {
 					opt.callback(fn.str2Object(req.responseText));
 				} else if (req.status === 400) {
-					opt.callback(fn.str2Object(req.responseText));
+					new user_signin({
+						callback: function () {
+							fn.get(opt);
+						},
+					}).show();
+				} else {
+					opt.callback(null);
 				}
 			}
 		};
@@ -685,7 +712,7 @@ export const user = {
 							callback(result);
 						}
 					},
-					url: `api/user/changepass_guest`,
+					url: `api/user/changepass-guest`,
 					data: opt.data,
 				});
 			}

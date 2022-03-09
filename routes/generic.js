@@ -1,7 +1,18 @@
 module.exports = function (app, dbname) {
 	const $ = require(`../models/${dbname}.js`);
+	const $user = require(`../models/user.js`);
 
 	const fn = {
+		auth: (req, res, next) => {
+			let token = req.cookies.auth;
+			$user.db.findByToken("auth", token, (err, result) => {
+				if (err) throw err;
+				if (!result) return res.status(400).json({ success: false, message: "Please sign up to continue" });
+				req.authToken = token;
+				req.user = result;
+				next();
+			});
+		},
 		/**
 		 * use to create excel file
 		 */
@@ -148,7 +159,6 @@ module.exports = function (app, dbname) {
 						});
 					})
 					.catch((err) => {
-						//console.error(err);
 						res.status(500).send(err.message);
 					});
 			} catch (err) {
@@ -517,23 +527,23 @@ module.exports = function (app, dbname) {
 	};
 
 	// Create a new record
-	app.post(`/api/${dbname}`, fn.create);
+	app.post(`/api/${dbname}`, fn.auth, fn.create);
 
 	// Retrieve a single record by Id
-	app.get(`/api/${dbname}/:id`, fn.find);
+	app.get(`/api/${dbname}/:id`, fn.auth, fn.find);
 
 	// Update a record with Id
-	app.put(`/api/${dbname}/:id`, fn.update);
+	app.put(`/api/${dbname}/:id`, fn.auth, fn.update);
 
 	// Delete a record with Id
-	app.delete(`/api/${dbname}/:id`, fn.delete);
+	app.delete(`/api/${dbname}/:id`, fn.auth, fn.delete);
 
 	// Get list of record
-	app.post(`/api/${dbname}-list`, fn.list);
+	app.post(`/api/${dbname}-list`, fn.auth, fn.list);
 
 	// Get list of record in excel
-	app.get(`/api/${dbname}-excel`, fn.excel);
+	app.get(`/api/${dbname}-excel`, fn.auth, fn.excel);
 
 	// Get COUNT or SUM of record
-	app.post(`/api/${dbname}-aggregate`, fn.aggregate);
+	app.post(`/api/${dbname}-aggregate`, fn.auth, fn.aggregate);
 };

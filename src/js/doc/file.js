@@ -86,7 +86,7 @@ export default [
 						let sender = event.currentTarget;
 
 						$.file.save(
-							document.getElementById(id),
+							document.getElementById(fileUploadID),
 							function (result) {
 								if (result) {
 									new $.toast(

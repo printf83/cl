@@ -1,10 +1,22 @@
 module.exports = function (app) {
 	const $ = require("../models/file.js");
+	const $user = require("../models/user.js");
 	const fs = require("fs");
 	const multer = require("multer");
 	const uploader = multer({ dest: "tmp/" });
 
 	const fn = {
+		auth: (req, res, next) => {
+			let token = req.cookies.auth;
+			$user.db.findByToken("auth", token, (err, result) => {
+				if (err) throw err;
+				if (!result) return res.status(400).json({ success: false, message: "Please sign up to continue" });
+
+				req.authToken = token;
+				req.user = result;
+				next();
+			});
+		},
 		upload: function (req, res) {
 			if (req.files && req.files.length > 0) {
 				console.log(req.files);
@@ -319,19 +331,19 @@ module.exports = function (app) {
 	};
 
 	//upload file
-	app.post("/api/file", uploader.array("file"), fn.upload);
+	app.post("/api/file", fn.auth, uploader.array("file"), fn.upload);
 
 	//download file
-	app.get("/api/file/:id", fn.download);
+	app.get("/api/file/:id", fn.auth, fn.download);
 
 	//download file info
-	app.get("/api/file-info/:id", fn.info);
+	app.get("/api/file-info/:id", fn.auth, fn.info);
 
 	//save file
 	//move from tmp to upload
-	app.put("/api/file/:id", fn.save);
+	app.put("/api/file/:id", fn.auth, fn.save);
 
 	//delete file
 	//move from tmp or file to deleted
-	app.delete("/api/file/:id", fn.delete);
+	app.delete("/api/file/:id", fn.auth, fn.delete);
 };
