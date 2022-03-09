@@ -6,10 +6,6 @@ import sample from "./doc/sample.js";
 import doc from "./doc.js";
 import $ from "./component.js";
 
-let def_m1 = "Getting started";
-let def_m2 = "Introduction";
-let def_theme = "cerulean";
-
 const db_menu = [
 	{
 		type: "menu",
@@ -205,6 +201,11 @@ const db_menu = [
 		],
 	},
 ];
+
+let def_m1 = "Getting started";
+let def_m2 = "Introduction";
+let db_theme = db_menu[db_menu.length - 1].item;
+let def_theme = db_theme[Math.floor(Math.random() * db_theme.length)].source;
 
 function startmemoryleaktest(sender, limit) {
 	if (memoryleaktestrun === true) {
