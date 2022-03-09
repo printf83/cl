@@ -770,4 +770,15 @@ export const user = {
 			});
 		}
 	},
+	validate: function (token, callback) {
+		fn.get({
+			callback: function (result) {
+				if (typeof callback === "function") {
+					callback(result);
+				}
+			},
+			url: `api/user/validate`,
+			data: { token: token },
+		});
+	},
 };

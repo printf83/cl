@@ -1,4 +1,5 @@
 "use strict";
+
 const DEBUG = false;
 
 export function combineArray(arr, delimeter) {
@@ -262,15 +263,45 @@ export function multiClass(val, format, supported, unsupported) {
 export function documentReady(callback) {
 	if (document.readyState != "loading") {
 		// in case the document is already rendered
-		callback();
+		authCheck(callback);
 	} else if (document.addEventListener) {
 		// modern browsers
-		document.addEventListener("DOMContentLoaded", callback);
+		document.addEventListener("DOMContentLoaded", function () {
+			authCheck(callback);
+		});
 	} else {
 		// IE <= 8
 		document.attachEvent("onreadystatechange", function () {
-			if (document.readyState == "complete") callback();
+			if (document.readyState == "complete") {
+				authCheck(callback);
+			}
 		});
+	}
+}
+
+function authCheck(callback) {
+	let p = new URLSearchParams(window.location.search);
+
+	let validateUser = p.get("validateUser");
+	let resetPassword = p.get("resetPassword");
+
+	if (validateUser || resetPassword) {
+		let usr = require("./user.js");
+
+		if (validateUser) {
+			usr.validate(validateUser, function () {
+				window.location = window.location.origin + window.location.pathname;
+			});
+		} else if (resetPassword) {
+			new usr.resetpass({
+				token: resetPassword,
+				callback: function () {
+					window.location = window.location.origin + window.location.pathname;
+				},
+			}).show();
+		}
+	} else {
+		callback();
 	}
 }
 

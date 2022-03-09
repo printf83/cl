@@ -272,6 +272,11 @@ const fn = {
 				}
 			);
 		},
+		validate: function (token, callback) {
+			db.user.validate(token, function (result) {
+				callback(result);
+			});
+		},
 	},
 	form: {
 		container: function (id, elem) {
@@ -281,7 +286,6 @@ const fn = {
 				elem: elem,
 			});
 		},
-		signout: function () {},
 		signin: function (opt) {
 			return new container.form(
 				[
@@ -685,7 +689,6 @@ const fn = {
 				].filter(Boolean)
 			);
 		},
-		profile: function () {},
 	},
 };
 
@@ -695,6 +698,10 @@ export function profile(sender, callback) {
 
 export function signout(sender, callback) {
 	fn.action.signout(sender, callback);
+}
+
+export function validate(token, callback) {
+	fn.action.validate(token, callback);
 }
 
 export class signin extends modal {
