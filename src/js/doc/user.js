@@ -8,52 +8,50 @@ export default [
 		anchor: false,
 	},
 
-	{
-		title: "Login",
-		viewclass: "cl-modal-preview",
-		code: function () {
-			return new $.user.signin(
-				{
-					email: "example@example.com",
-				},
-				{ debug: true }
-			);
-		},
-	},
+	// {
+	// 	title: "Login",
+	// 	viewclass: "cl-modal-preview",
+	// 	code: function () {
+	// 		return new $.user.signin({
+	// 			debug: true,
+	// 		});
+	// 	},
+	// },
 
-	{
-		title: "Register",
-		viewclass: "cl-modal-preview",
-		code: function () {
-			return new $.user.signup({}, { debug: true });
-		},
-	},
+	// {
+	// 	title: "Register",
+	// 	viewclass: "cl-modal-preview",
+	// 	code: function () {
+	// 		return new $.user.signup({ debug: true });
+	// 	},
+	// },
 
-	{
-		title: "Reset password",
-		viewclass: "cl-modal-preview",
-		code: function () {
-			return new $.user.resetpass({}, { debug: true });
-		},
-	},
+	// {
+	// 	title: "Reset password",
+	// 	viewclass: "cl-modal-preview",
+	// 	code: function () {
+	// 		return new $.user.resetpass({ debug: true });
+	// 	},
+	// },
 
-	{
-		title: "Change password",
-		viewclass: "cl-modal-preview",
-		code: function () {
-			return new $.user.changepass({}, { debug: true });
-		},
-	},
+	// {
+	// 	title: "Change password",
+	// 	viewclass: "cl-modal-preview",
+	// 	code: function () {
+	// 		return new $.user.changepass({ debug: true });
+	// 	},
+	// },
 
-	{
-		title: "Change password (guest)",
-		viewclass: "cl-modal-preview",
-		code: function () {
-			return new $.user.changepass_guest({
-				token: "eyJhbGciOiJIUzI1NiJ9.NjIyN2ExMjg4NWZlYjg0NGJhZTcwNzAx.s0o-0jDFa5ABoOaEkyf4BgqHye_isniy5udtilhRLk0",
-			});
-		},
-	},
+	// {
+	// 	title: "Change password (guest)",
+	// 	viewclass: "cl-modal-preview",
+	// 	code: function () {
+	// 		return new $.user.changepass_guest({
+	// 			token: "token",
+	// 			debug: true,
+	// 		});
+	// 	},
+	// },
 
 	{
 		title: "Get user info",

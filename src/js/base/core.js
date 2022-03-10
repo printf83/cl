@@ -697,18 +697,20 @@ function build(container, arg) {
 }
 
 export function detachEventListener(elem) {
-	let c = elem.childNodes;
-	if (c?.length > 0) {
-		c.forEach(function (item) {
-			detachEventListener(item);
-			if (item.detachEventListener instanceof Function) {
-				item.detachEventListener(item);
-			}
-		});
-	}
+	if (elem) {
+		let c = elem?.childNodes;
+		if (c?.length > 0) {
+			c.forEach(function (item) {
+				detachEventListener(item);
+				if (item.detachEventListener instanceof Function) {
+					item.detachEventListener(item);
+				}
+			});
+		}
 
-	if (elem.detachEventListener instanceof Function) {
-		elem.detachEventListener(elem);
+		if (elem.detachEventListener instanceof Function) {
+			elem.detachEventListener(elem);
+		}
 	}
 }
 

@@ -29,6 +29,7 @@ let defaultSignInOption = {
 	email: null,
 	callback: null,
 	close: true,
+	debug: false,
 };
 
 let defaultSignUpOption = {
@@ -39,6 +40,7 @@ let defaultSignUpOption = {
 	title: null,
 	callback: null,
 	close: true,
+	debug: false,
 };
 
 let defaultResetPassOption = {
@@ -49,6 +51,7 @@ let defaultResetPassOption = {
 	title: null,
 	callback: null,
 	close: true,
+	debug: false,
 };
 
 let defaultChangePassOption = {
@@ -59,6 +62,7 @@ let defaultChangePassOption = {
 	title: null,
 	callback: null,
 	close: true,
+	debug: false,
 };
 
 let defaultChangePassGuestOption = {
@@ -70,6 +74,7 @@ let defaultChangePassGuestOption = {
 	title: null,
 	callback: null,
 	close: true,
+	debug: false,
 };
 
 const fn = {
@@ -94,27 +99,29 @@ const fn = {
 		}
 	},
 	closebtn: function (opt) {
-		return new div({
-			position: "relative",
-			elem: new div({
-				position: "absolute",
-				class: "w-100",
-				elem: new div({
-					display: "flex",
-					justifycontent: "end",
-					elem: new btnclose({
-						onclick: function (event) {
-							let sender = event.currentTarget;
-							let container = sender.closest("div.modal");
-							if (opt.callback instanceof Function) {
-								opt.callback(false);
-							}
-							modal.hide(container);
-						},
+		return !opt.debug
+			? new div({
+					position: "relative",
+					elem: new div({
+						position: "absolute",
+						class: "w-100",
+						elem: new div({
+							display: "flex",
+							justifycontent: "end",
+							elem: new btnclose({
+								onclick: function (event) {
+									let sender = event.currentTarget;
+									let container = sender.closest("div.modal");
+									if (opt.callback instanceof Function) {
+										opt.callback(false);
+									}
+									modal.hide(container);
+								},
+							}),
+						}),
 					}),
-				}),
-			}),
-		});
+			  })
+			: null;
 	},
 	action: {
 		inputchange: function (event) {
@@ -387,9 +394,11 @@ const fn = {
 							icon: "arrow-right-to-bracket",
 							color: "primary",
 							weight: "lg",
-							onclick: function (event) {
-								fn.action.signin(event.currentTarget, opt);
-							},
+							onclick: !opt.debug
+								? function (event) {
+										fn.action.signin(event.currentTarget, opt);
+								  }
+								: null,
 						}),
 						new div({
 							display: "flex",
@@ -474,9 +483,11 @@ const fn = {
 							icon: "envelope",
 							color: "primary",
 							weight: "lg",
-							onclick: function (event) {
-								fn.action.signup(event.currentTarget, opt);
-							},
+							onclick: !opt.debug
+								? function (event) {
+										fn.action.signup(event.currentTarget, opt);
+								  }
+								: null,
 						}),
 						new div({
 							display: "flex",
@@ -538,9 +549,11 @@ const fn = {
 							icon: "envelope",
 							color: "primary",
 							weight: "lg",
-							onclick: function (event) {
-								fn.action.resetpass(event.currentTarget, opt);
-							},
+							onclick: !opt.debug
+								? function (event) {
+										fn.action.resetpass(event.currentTarget, opt);
+								  }
+								: null,
 						}),
 
 						new div({
@@ -630,9 +643,11 @@ const fn = {
 							icon: "floppy-disk",
 							color: "primary",
 							weight: "lg",
-							onclick: function (event) {
-								fn.action.changepass(event.currentTarget, opt);
-							},
+							onclick: !opt.debug
+								? function (event) {
+										fn.action.changepass(event.currentTarget, opt);
+								  }
+								: null,
 						}),
 						new div({
 							display: "flex",
@@ -719,9 +734,11 @@ const fn = {
 							icon: "floppy-disk",
 							color: "primary",
 							weight: "lg",
-							onclick: function (event) {
-								fn.action.changepass_guest(event.currentTarget, opt);
-							},
+							onclick: !opt.debug
+								? function (event) {
+										fn.action.changepass_guest(event.currentTarget, opt);
+								  }
+								: null,
 						}),
 						new div({
 							display: "flex",
@@ -779,10 +796,18 @@ export class signin extends modal {
 					debug: opt[1]?.debug === true ? true : false,
 				});
 			} else if (opt.length === 1) {
-				super({
-					size: opt[0].size,
-					elem: fn.form.container(opt[0].id, fn.form.signin(opt[0])),
-				});
+				if (opt[0].debug) {
+					super({
+						size: opt[0].size,
+						elem: fn.form.container(opt[0].id, fn.form.signin(opt[0])),
+						debug: true,
+					});
+				} else {
+					super({
+						size: opt[0].size,
+						elem: fn.form.container(opt[0].id, fn.form.signin(opt[0])),
+					});
+				}
 			} else {
 				console.error("Unsupported argument", opt);
 			}
@@ -805,10 +830,18 @@ export class signup extends modal {
 					debug: opt[1]?.debug === true ? true : false,
 				});
 			} else if (opt.length === 1) {
-				super({
-					size: opt[0].size,
-					elem: fn.form.container(opt[0].id, fn.form.signup(opt[0])),
-				});
+				if (opt[0].debug) {
+					super({
+						size: opt[0].size,
+						elem: fn.form.container(opt[0].id, fn.form.signup(opt[0])),
+						debug: true,
+					});
+				} else {
+					super({
+						size: opt[0].size,
+						elem: fn.form.container(opt[0].id, fn.form.signup(opt[0])),
+					});
+				}
 			} else {
 				console.error("Unsupported argument", opt);
 			}
@@ -831,10 +864,18 @@ export class resetpass extends modal {
 					debug: opt[1]?.debug === true ? true : false,
 				});
 			} else if (opt.length === 1) {
-				super({
-					size: opt[0].size,
-					elem: fn.form.container(opt[0].id, fn.form.resetpass(opt[0])),
-				});
+				if (opt[0].debug) {
+					super({
+						size: opt[0].size,
+						elem: fn.form.container(opt[0].id, fn.form.resetpass(opt[0])),
+						debug: true,
+					});
+				} else {
+					super({
+						size: opt[0].size,
+						elem: fn.form.container(opt[0].id, fn.form.resetpass(opt[0])),
+					});
+				}
 			} else {
 				console.error("Unsupported argument", opt);
 			}
@@ -857,10 +898,18 @@ export class changepass extends modal {
 					debug: opt[1]?.debug === true ? true : false,
 				});
 			} else if (opt.length === 1) {
-				super({
-					size: opt[0].size,
-					elem: fn.form.container(opt[0].id, fn.form.changepass(opt[0])),
-				});
+				if (opt[0].debug) {
+					super({
+						size: opt[0].size,
+						elem: fn.form.container(opt[0].id, fn.form.changepass(opt[0])),
+						debug: true,
+					});
+				} else {
+					super({
+						size: opt[0].size,
+						elem: fn.form.container(opt[0].id, fn.form.changepass(opt[0])),
+					});
+				}
 			} else {
 				console.error("Unsupported argument", opt);
 			}
@@ -883,10 +932,18 @@ export class changepass_guest extends modal {
 					debug: opt[1]?.debug === true ? true : false,
 				});
 			} else if (opt.length === 1) {
-				super({
-					size: opt[0].size,
-					elem: fn.form.container(opt[0].id, fn.form.changepass_guest(opt[0])),
-				});
+				if (opt[0].debug) {
+					super({
+						size: opt[0].size,
+						elem: fn.form.container(opt[0].id, fn.form.changepass_guest(opt[0])),
+						debug: true,
+					});
+				} else {
+					super({
+						size: opt[0].size,
+						elem: fn.form.container(opt[0].id, fn.form.changepass_guest(opt[0])),
+					});
+				}
 			} else {
 				console.error("Unsupported argument", opt);
 			}

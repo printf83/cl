@@ -24,13 +24,13 @@ export default [
 				container: "card",
 				code: `
 					require("./routes/generic.js")(app, "customer", {
-						create: "auth",
-						find: true,
-						update: "auth",
-						delete: "auth",
-						list: true,
-						excel: "auth",
-						aggregate: false,
+						create: "auth",	 	// require sign in to create new customer
+						find: true,		 	// allow find customer without sign in
+						update: "auth",	 	// require sign in to update customer
+						delete: "auth",	 	// require sign in to delete customer
+						list: true,		 	// allow list customer without sign in
+						excel: "auth",	 	// require sign in to download customer excel file
+						aggregate: false,	// disable aggregate function
 					});
 			`,
 			}),
