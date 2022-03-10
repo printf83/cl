@@ -117,8 +117,12 @@ const fn = {
 					opt.callback(fn.str2Object(req.responseText));
 				} else if (req.status === 400) {
 					new user_signin({
-						callback: function () {
-							fn.get(opt);
+						callback: function (result) {
+							if (result) {
+								fn.get(opt);
+							} else {
+								opt.callback(null);
+							}
 						},
 					}).show();
 				} else {
@@ -140,8 +144,12 @@ const fn = {
 					opt.callback(fn.str2Object(req.responseText));
 				} else if (req.status === 400) {
 					new user_signin({
-						callback: function () {
-							fn.get(opt);
+						callback: function (result) {
+							if (result) {
+								fn.post(opt);
+							} else {
+								opt.callback(null);
+							}
 						},
 					}).show();
 				} else {
@@ -164,8 +172,12 @@ const fn = {
 					opt.callback(fn.str2Object(req.responseText));
 				} else if (req.status === 400) {
 					new user_signin({
-						callback: function () {
-							fn.get(opt);
+						callback: function (result) {
+							if (result) {
+								fn.upload(opt);
+							} else {
+								opt.callback(null);
+							}
 						},
 					}).show();
 				} else {

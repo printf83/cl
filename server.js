@@ -68,7 +68,7 @@ if (process.env.DBURL) {
 
 	//setup router
 	require("./routes/file.js")(app, {
-		upload: true,
+		upload: "auth",
 		download: true,
 		info: true,
 		save: "auth",

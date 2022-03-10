@@ -346,7 +346,7 @@ module.exports = function (app, setting) {
 	setting = fn.extend(
 		{},
 		{
-			upload: true,
+			upload: "auth",
 			download: true,
 			info: true,
 			save: "auth",

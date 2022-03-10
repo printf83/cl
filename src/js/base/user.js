@@ -11,6 +11,7 @@ import * as db from "./api.js";
 import modal from "./modal.js";
 import img from "./img.js";
 import * as alert from "./alert.js";
+import btnclose from "./btnclose.js";
 
 const defaultIcon = {
 	icon: "fire",
@@ -27,6 +28,7 @@ let defaultSignInOption = {
 	title: null,
 	email: null,
 	callback: null,
+	close: true,
 };
 
 let defaultSignUpOption = {
@@ -36,6 +38,7 @@ let defaultSignUpOption = {
 	size: defaultSize,
 	title: null,
 	callback: null,
+	close: true,
 };
 
 let defaultResetPassOption = {
@@ -45,6 +48,7 @@ let defaultResetPassOption = {
 	size: defaultSize,
 	title: null,
 	callback: null,
+	close: true,
 };
 
 let defaultChangePassOption = {
@@ -54,6 +58,7 @@ let defaultChangePassOption = {
 	size: defaultSize,
 	title: null,
 	callback: null,
+	close: true,
 };
 
 let defaultChangePassGuestOption = {
@@ -64,6 +69,7 @@ let defaultChangePassGuestOption = {
 	token: null,
 	title: null,
 	callback: null,
+	close: true,
 };
 
 const fn = {
@@ -86,6 +92,29 @@ const fn = {
 		} else {
 			msgcontainer.classList.add("d-none");
 		}
+	},
+	closebtn: function (opt) {
+		return new div({
+			position: "relative",
+			elem: new div({
+				position: "absolute",
+				class: "w-100",
+				elem: new div({
+					display: "flex",
+					justifycontent: "end",
+					elem: new btnclose({
+						onclick: function (event) {
+							let sender = event.currentTarget;
+							let container = sender.closest("div.modal");
+							if (opt.callback instanceof Function) {
+								opt.callback(false);
+							}
+							modal.hide(container);
+						},
+					}),
+				}),
+			}),
+		});
 	},
 	action: {
 		inputchange: function (event) {
@@ -123,10 +152,10 @@ const fn = {
 						function (result) {
 							if (result) {
 								if (result.success) {
-									if (typeof opt.callback === "function") {
+									if (opt.callback instanceof Function) {
 										let dlg = container.closest("div.modal");
 										modal.hide(dlg);
-										opt.callback();
+										opt.callback(true);
 									} else {
 										fn.showmsg(container, "Sign in success", "/");
 									}
@@ -160,7 +189,13 @@ const fn = {
 							function (result) {
 								if (result) {
 									if (result.success) {
-										fn.showmsg(container, "Sign up success", "/");
+										if (opt.callback instanceof Function) {
+											let dlg = container.closest("div.modal");
+											modal.hide(dlg);
+											opt.callback(true);
+										} else {
+											fn.showmsg(container, "Sign up success", "/");
+										}
 									} else {
 										fn.showmsg(container, result && result.message ? result.message : null, "!!");
 									}
@@ -188,7 +223,17 @@ const fn = {
 						function (result) {
 							if (result) {
 								if (result.success) {
-									fn.showmsg(container, "Please check your email to continue reset password", "/");
+									if (opt.callback instanceof Function) {
+										let dlg = container.closest("div.modal");
+										modal.hide(dlg);
+										opt.callback(true);
+									} else {
+										fn.showmsg(
+											container,
+											"Please check your email to continue reset password",
+											"/"
+										);
+									}
 								} else {
 									fn.showmsg(container, result && result.message ? result.message : null, "!!");
 								}
@@ -219,7 +264,13 @@ const fn = {
 							function (result) {
 								if (result) {
 									if (result.success) {
-										fn.showmsg(container, "Password changed", "/");
+										if (opt.callback instanceof Function) {
+											let dlg = container.closest("div.modal");
+											modal.hide(dlg);
+											opt.callback(true);
+										} else {
+											fn.showmsg(container, "Password changed", "/");
+										}
 									} else {
 										fn.showmsg(container, result && result.message ? result.message : null, "!!");
 									}
@@ -251,10 +302,10 @@ const fn = {
 							function (result) {
 								if (result) {
 									if (result.success) {
-										if (typeof opt.callback === "function") {
+										if (opt.callback instanceof Function) {
 											let dlg = container.closest("div.modal");
 											modal.hide(dlg);
-											opt.callback();
+											opt.callback(true);
 										} else {
 											fn.showmsg(container, "Password changed", "/");
 										}
@@ -295,6 +346,7 @@ const fn = {
 		signin: function (opt) {
 			return new container.form(
 				[
+					opt.close ? fn.closebtn(opt) : null,
 					!opt.img && opt.icon ? new icon(opt.icon) : opt.img ? null : new icon(defaultIcon),
 					!opt.icon && opt.img ? new img(opt.img) : null,
 					new h({ level: defaultTitleSize, marginy: 0, elem: opt.title ? opt.title : "Sign in" }),
@@ -370,6 +422,7 @@ const fn = {
 		signup: function (opt) {
 			return new container.form(
 				[
+					opt.close ? fn.closebtn(opt) : null,
 					!opt.img && opt.icon ? new icon(opt.icon) : opt.img ? null : new icon(defaultIcon),
 					!opt.icon && opt.img ? new img(opt.img) : null,
 					new h({ level: defaultTitleSize, marginy: 0, elem: opt.title ? opt.title : "Sign up" }),
@@ -456,6 +509,7 @@ const fn = {
 		resetpass: function (opt) {
 			return new container.form(
 				[
+					opt.close ? fn.closebtn(opt) : null,
 					!opt.img && opt.icon ? new icon(opt.icon) : opt.img ? null : new icon(defaultIcon),
 					!opt.icon && opt.img ? new img(opt.img) : null,
 					new h({ level: defaultTitleSize, marginy: 0, elem: opt.title ? opt.title : "Reset password" }),
@@ -520,6 +574,7 @@ const fn = {
 		changepass: function (opt) {
 			return new container.form(
 				[
+					opt.close ? fn.closebtn(opt) : null,
 					!opt.img && opt.icon ? new icon(opt.icon) : opt.img ? null : new icon(defaultIcon),
 					!opt.icon && opt.img ? new img(opt.img) : null,
 					new h({ level: defaultTitleSize, marginy: 0, elem: opt.title ? opt.title : "Change password" }),
@@ -615,6 +670,7 @@ const fn = {
 		changepass_guest: function (opt) {
 			return new container.form(
 				[
+					opt.close ? fn.closebtn(opt) : null,
 					!opt.img && opt.icon ? new icon(opt.icon) : opt.img ? null : new icon(defaultIcon),
 					!opt.icon && opt.img ? new img(opt.img) : null,
 					new h({ level: defaultTitleSize, marginy: 0, elem: opt.title ? opt.title : "Change password" }),
