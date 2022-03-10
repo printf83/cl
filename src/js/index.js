@@ -700,7 +700,7 @@ $.core.documentReady(() => {
 						class: "text-decoration-none",
 						elem: new $.pill({
 							icon: "swatchbook",
-							title: "Theme. Click to change",
+							title: "Theme",
 							color: "primary",
 							elem: [new $.small({ id: "pagetheme", elem: "default" })],
 						}),

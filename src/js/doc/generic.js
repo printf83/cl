@@ -13,9 +13,25 @@ export default [
 		msg: [
 			"Please create table using <b>cl generic database</b> in <b>./server.js</b>. For this example, we create <b>customer</b> table with this code :",
 			new $.codepreview({
+				title: "customer db without setting",
 				container: "card",
 				code: `
 					require("./routes/generic.js")(app, "customer");
+			`,
+			}),
+			new $.codepreview({
+				title: "customer db with setting",
+				container: "card",
+				code: `
+					require("./routes/generic.js")(app, "customer", {
+						create: "auth",
+						find: true,
+						update: "auth",
+						delete: "auth",
+						list: true,
+						excel: "auth",
+						aggregate: false,
+					});
 			`,
 			}),
 			"Then we create models for <b>customer</b> table in <b>./models/customer.js</b>",
