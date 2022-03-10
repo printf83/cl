@@ -1,4 +1,4 @@
-module.exports = function (app, dbname) {
+module.exports = function (app, dbname, setting) {
 	const $ = require(`../models/${dbname}.js`);
 	const $user = require(`../models/user.js`);
 
@@ -12,6 +12,19 @@ module.exports = function (app, dbname) {
 				req.user = result;
 				next();
 			});
+		},
+		extend: function (out) {
+			out = out || {};
+
+			for (let i = 1; i < arguments.length; i++) {
+				if (!arguments[i]) continue;
+
+				for (let key in arguments[i]) {
+					if (arguments[i].hasOwnProperty(key)) out[key] = arguments[i][key];
+				}
+			}
+
+			return out;
 		},
 		/**
 		 * use to create excel file
@@ -526,24 +539,80 @@ module.exports = function (app, dbname) {
 		},
 	};
 
+	setting = fn.extend(
+		{},
+		{
+			create: "auth",
+			find: true,
+			update: "auth",
+			delete: "auth",
+			list: true,
+			excel: false,
+			aggregate: false,
+		},
+		setting
+	);
+
 	// Create a new record
-	app.post(`/api/${dbname}`, fn.auth, fn.create);
+	if (setting.create) {
+		if (setting.create === "auth") {
+			app.post(`/api/${dbname}`, fn.auth, fn.create);
+		} else {
+			app.post(`/api/${dbname}`, fn.create);
+		}
+	}
 
 	// Retrieve a single record by Id
-	app.get(`/api/${dbname}/:id`, fn.auth, fn.find);
+	if (setting.find) {
+		if (setting.find === "auth") {
+			app.get(`/api/${dbname}/:id`, fn.auth, fn.find);
+		} else {
+			app.get(`/api/${dbname}/:id`, fn.find);
+		}
+	}
 
 	// Update a record with Id
-	app.put(`/api/${dbname}/:id`, fn.auth, fn.update);
+	if (setting.update) {
+		if (setting.update === "auth") {
+			app.put(`/api/${dbname}/:id`, fn.auth, fn.update);
+		} else {
+			app.put(`/api/${dbname}/:id`, fn.update);
+		}
+	}
 
 	// Delete a record with Id
-	app.delete(`/api/${dbname}/:id`, fn.auth, fn.delete);
+	if (setting.delete) {
+		if (setting.delete === "auth") {
+			app.delete(`/api/${dbname}/:id`, fn.auth, fn.delete);
+		} else {
+			app.delete(`/api/${dbname}/:id`, fn.delete);
+		}
+	}
 
 	// Get list of record
-	app.post(`/api/${dbname}-list`, fn.auth, fn.list);
+	if (setting.list) {
+		if (setting.list === "auth") {
+			app.post(`/api/${dbname}-list`, fn.auth, fn.list);
+		} else {
+			app.post(`/api/${dbname}-list`, fn.list);
+		}
+	}
 
 	// Get list of record in excel
-	app.get(`/api/${dbname}-excel`, fn.auth, fn.excel);
+	if (setting.excel) {
+		if (setting.excel === "auth") {
+			app.get(`/api/${dbname}-excel`, fn.auth, fn.excel);
+		} else {
+			app.get(`/api/${dbname}-excel`, fn.excel);
+		}
+	}
 
 	// Get COUNT or SUM of record
-	app.post(`/api/${dbname}-aggregate`, fn.auth, fn.aggregate);
+	if (setting.aggregate) {
+		if (setting.aggregate === "auth") {
+			app.post(`/api/${dbname}-aggregate`, fn.auth, fn.aggregate);
+		} else {
+			app.post(`/api/${dbname}-aggregate`, fn.aggregate);
+		}
+	}
 };

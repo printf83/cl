@@ -1,4 +1,4 @@
-module.exports = function (app) {
+module.exports = function (app, setting) {
 	const $ = require("../models/file.js");
 	const $user = require("../models/user.js");
 	const fs = require("fs");
@@ -16,6 +16,19 @@ module.exports = function (app) {
 				req.user = result;
 				next();
 			});
+		},
+		extend: function (out) {
+			out = out || {};
+
+			for (let i = 1; i < arguments.length; i++) {
+				if (!arguments[i]) continue;
+
+				for (let key in arguments[i]) {
+					if (arguments[i].hasOwnProperty(key)) out[key] = arguments[i][key];
+				}
+			}
+
+			return out;
 		},
 		upload: function (req, res) {
 			if (req.files && req.files.length > 0) {
@@ -330,20 +343,62 @@ module.exports = function (app) {
 		},
 	};
 
+	setting = fn.extend(
+		{},
+		{
+			upload: true,
+			download: true,
+			info: true,
+			save: "auth",
+			delete: "auth",
+		},
+		setting
+	);
+
 	//upload file
-	app.post("/api/file", fn.auth, uploader.array("file"), fn.upload);
+	if (setting.upload) {
+		if (setting.upload === "auth") {
+			app.post("/api/file", fn.auth, uploader.array("file"), fn.upload);
+		} else {
+			app.post("/api/file", uploader.array("file"), fn.upload);
+		}
+	}
 
 	//download file
-	app.get("/api/file/:id", fn.auth, fn.download);
+	if (setting.download) {
+		if (setting.download === "auth") {
+			app.get("/api/file/:id", fn.auth, fn.download);
+		} else {
+			app.get("/api/file/:id", fn.download);
+		}
+	}
 
 	//download file info
-	app.get("/api/file-info/:id", fn.auth, fn.info);
+	if (setting.info) {
+		if (setting.info === "auth") {
+			app.get("/api/file-info/:id", fn.auth, fn.info);
+		} else {
+			app.get("/api/file-info/:id", fn.info);
+		}
+	}
 
 	//save file
 	//move from tmp to upload
-	app.put("/api/file/:id", fn.auth, fn.save);
+	if (setting.save) {
+		if (setting.save === "auth") {
+			app.put("/api/file/:id", fn.auth, fn.save);
+		} else {
+			app.put("/api/file/:id", fn.save);
+		}
+	}
 
 	//delete file
 	//move from tmp or file to deleted
-	app.delete("/api/file/:id", fn.auth, fn.delete);
+	if (setting.delete) {
+		if (setting.delete === "auth") {
+			app.delete("/api/file/:id", fn.auth, fn.delete);
+		} else {
+			app.delete("/api/file/:id", fn.delete);
+		}
+	}
 };
