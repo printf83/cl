@@ -130,6 +130,7 @@ export default [
 		container: sample.stackcontainer,
 		code: function () {
 			return [
+				{ type: "fab", icon: "node-js" },
 				"spinner",
 				"circle-notch",
 				"slash",
@@ -152,6 +153,7 @@ export default [
 		container: sample.stackcontainer,
 		code: function () {
 			return [
+				{ type: "fab", icon: "node-js" },
 				"spinner",
 				"circle-notch",
 				"slash",
@@ -174,6 +176,7 @@ export default [
 		container: sample.stackcontainer,
 		code: function () {
 			return [
+				{ type: "fab", icon: "node-js" },
 				"spinner",
 				"circle-notch",
 				"slash",
@@ -196,6 +199,7 @@ export default [
 		container: sample.stackcontainer,
 		code: function () {
 			return [
+				{ type: "fab", icon: "node-js" },
 				"spinner",
 				"circle-notch",
 				"slash",
@@ -218,6 +222,7 @@ export default [
 		container: sample.stackcontainer,
 		code: function () {
 			return [
+				{ type: "fab", icon: "node-js" },
 				"spinner",
 				"circle-notch",
 				"slash",
@@ -240,6 +245,7 @@ export default [
 		container: sample.stackcontainer,
 		code: function () {
 			return [
+				{ type: "fab", icon: "node-js" },
 				"spinner",
 				"circle-notch",
 				"slash",
@@ -262,6 +268,7 @@ export default [
 		container: sample.stackcontainer,
 		code: function () {
 			return [
+				{ type: "fab", icon: "node-js" },
 				"spinner",
 				"circle-notch",
 				"slash",
@@ -392,7 +399,7 @@ export default [
 					elem: [
 						new $.navbar.brand({
 							label: "Navbar",
-							icon: { icon: "fire", color: "danger" },
+							icon: { icon: "fire", color: "danger", shake: true },
 							href: "#",
 						}),
 					],
@@ -402,7 +409,7 @@ export default [
 					elem: [
 						new $.navbar.brand({
 							label: "Navbar",
-							icon: { icon: "fire", color: "danger" },
+							icon: { icon: "fire", color: "danger", bounce: true },
 							iconafter: true,
 							showlabel: "md",
 							href: "#",
