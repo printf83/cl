@@ -8,6 +8,7 @@ const defaultOption = {
 	id: null,
 	flush: false,
 	autoclose: true,
+	autoopen: true,
 	item: null,
 };
 
@@ -41,7 +42,7 @@ export default class accordion extends div {
 				return i.active === true;
 			});
 
-			if (opt.item && !activeitem) {
+			if (opt.item && !activeitem && opt.autoopen) {
 				opt.item[0].active = true;
 			}
 

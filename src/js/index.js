@@ -204,8 +204,17 @@ const db_menu = [
 
 let def_m1 = "Getting started";
 let def_m2 = "Introduction";
-let db_theme = db_menu[db_menu.length - 1].item;
-let def_theme = db_theme[Math.floor(Math.random() * db_theme.length)].source;
+let def_theme = null;
+
+function randomtheme() {
+	let db_theme = db_menu[db_menu.length - 1].item;
+	let cur_theme = db_theme[Math.floor(Math.random() * db_theme.length)].source;
+	if (cur_theme === "") {
+		cur_theme = null;
+	}
+
+	set_theme(cur_theme);
+}
 
 function startmemoryleaktest(sender, limit) {
 	if (memoryleaktestrun === true) {
@@ -499,8 +508,10 @@ function set_theme(theme) {
 	if (theme) {
 		cltheme.href = `https://cdn.jsdelivr.net/npm/bootswatch@5.1.3/dist/${theme}/bootstrap.min.css`;
 		cltheme.removeAttribute("disabled");
+		document.getElementById("pagetheme").innerText = `${theme}`;
 	} else {
 		cltheme.setAttribute("disabled", "disabled");
+		document.getElementById("pagetheme").innerText = `default`;
 	}
 }
 
@@ -684,6 +695,17 @@ $.core.documentReady(() => {
 						title: "Page weight",
 						color: "primary",
 						elem: [new $.small({ id: "pageweight", elem: "0 item" })],
+					}),
+					new $.a({
+						class: "text-decoration-none",
+						elem: new $.pill({
+							icon: "swatchbook",
+							title: "Theme. Click to change",
+							color: "primary",
+							elem: [new $.small({ id: "pagetheme", elem: "default" })],
+						}),
+						href: "javascript:void(0)",
+						onclick: randomtheme,
 					}),
 				],
 			}),

@@ -79,13 +79,14 @@ export default [
 			`,
 			}),
 
-			new $.div({
-				align: "center",
-				margintop: 5,
-				elem: "Example : ",
-			}),
+			// new $.div({
+			// 	align: "center",
+			// 	margintop: 5,
+			// 	elem: "Example : ",
+			// }),
 
 			new $.codepreview({
+				title: "Example index.js",
 				container: "card",
 				code: `
 					"use strict";

@@ -17,6 +17,7 @@ const defaultOption = {
 	label: null,
 	anchor: true,
 	code: null,
+	codecollapse: true,
 	dark: false,
 	sample: null,
 	view: true,
@@ -121,7 +122,7 @@ export default class example extends div {
 			item.push({
 				label: "code",
 				icon: "fire",
-				active: true,
+				active: !opt.codecollapse,
 				elem: new codepreview({ type: "js", code: opt.code.toString(), container: null }),
 			});
 		}
@@ -145,6 +146,7 @@ export default class example extends div {
 							// border: opt.view ? ["top-0", "border"] : false,
 							// flush: opt.view ? true : false,
 							autoclose: false,
+							autoopen: false,
 							item: item,
 					  })
 					: null,
