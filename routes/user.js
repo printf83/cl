@@ -38,7 +38,7 @@ module.exports = function (app) {
 		},
 		email: function (opt, callback) {
 			let transporter = nodemailer.createTransport({
-				service: "gmail",
+				service: process.env.EMAILPROVIDER,
 				auth: {
 					user: process.env.EMAILADDRESS,
 					pass: process.env.EMAILPASSWORD,
