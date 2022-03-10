@@ -138,11 +138,13 @@ module.exports = function (app) {
 
 					newuser.generateToken("email", (err, user) => {
 						if (err) return res.json({ success: false, message: err.message });
+						let serverUrl = req.protocol + "://" + req.get("host") + req.originalUrl;
+
 						fn.email(
 							{
 								to: user.email,
 								subject: "CL Confirmation Email",
-								html: `Click here to validate your email <a href="https://bs5-js-builder.herokuapp.com/?validateUser=${user.emailToken}">https://bs5-js-builder.herokuapp.com/?validateUser=${user.emailToken}</a>`,
+								html: `Click here to validate your email <a href="${serverUrl}/?validateUser=${user.emailToken}">${serverUrl}/?validateUser=${user.emailToken}</a>`,
 							},
 							function (result) {
 								if (result && result.success) {
@@ -170,11 +172,13 @@ module.exports = function (app) {
 
 				user.generateToken("reset", (err, user) => {
 					if (err) return res.json({ success: false, message: err.message });
+					let serverUrl = req.protocol + "://" + req.get("host") + req.originalUrl;
+
 					fn.email(
 						{
 							to: user.email,
 							subject: "CL Reset Password",
-							html: `Click here to reset password <a href="https://bs5-js-builder.herokuapp.com/?resetPassword=${user.resetToken}">https://bs5-js-builder.herokuapp.com/?resetPassword=${user.resetToken}</a>`,
+							html: `Click here to reset password <a href="${serverUrl}/?resetPassword=${user.resetToken}">${serverUrl}/?resetPassword=${user.resetToken}</a>`,
 						},
 						function (result) {
 							if (result && result.success) {

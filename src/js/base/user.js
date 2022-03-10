@@ -251,7 +251,13 @@ const fn = {
 							function (result) {
 								if (result) {
 									if (result.success) {
-										fn.showmsg(container, "Password changed", "/");
+										if (typeof opt.callback === "function") {
+											let dlg = container.closest("div.modal");
+											modal.hide(dlg);
+											opt.callback();
+										} else {
+											fn.showmsg(container, "Password changed", "/");
+										}
 									} else {
 										fn.showmsg(container, result && result.message ? result.message : null, "!!");
 									}
