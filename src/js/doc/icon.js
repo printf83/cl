@@ -134,7 +134,6 @@ export default [
 		container: sample.stackcontainer,
 		code: function () {
 			return [
-				{ type: "fab", icon: "node-js" },
 				"spinner",
 				"circle-notch",
 				"slash",
@@ -157,7 +156,6 @@ export default [
 		container: sample.stackcontainer,
 		code: function () {
 			return [
-				{ type: "fab", icon: "node-js" },
 				"spinner",
 				"circle-notch",
 				"slash",
@@ -180,7 +178,6 @@ export default [
 		container: sample.stackcontainer,
 		code: function () {
 			return [
-				{ type: "fab", icon: "node-js" },
 				"spinner",
 				"circle-notch",
 				"slash",
@@ -203,7 +200,6 @@ export default [
 		container: sample.stackcontainer,
 		code: function () {
 			return [
-				{ type: "fab", icon: "node-js" },
 				"spinner",
 				"circle-notch",
 				"slash",
@@ -226,7 +222,6 @@ export default [
 		container: sample.stackcontainer,
 		code: function () {
 			return [
-				{ type: "fab", icon: "node-js" },
 				"spinner",
 				"circle-notch",
 				"slash",
@@ -249,7 +244,6 @@ export default [
 		container: sample.stackcontainer,
 		code: function () {
 			return [
-				{ type: "fab", icon: "node-js" },
 				"spinner",
 				"circle-notch",
 				"slash",
@@ -272,7 +266,6 @@ export default [
 		container: sample.stackcontainer,
 		code: function () {
 			return [
-				{ type: "fab", icon: "node-js" },
 				"spinner",
 				"circle-notch",
 				"slash",
