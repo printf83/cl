@@ -2,7 +2,6 @@ require("dotenv").config();
 
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-const salt = 12;
 
 const mongoose = require("mongoose");
 const schema = mongoose.Schema({
@@ -21,7 +20,7 @@ const schema = mongoose.Schema({
 schema.pre("save", function (next) {
 	let i = this;
 	if (i.isModified("password")) {
-		bcrypt.hash(i.password, salt, function (err, hash) {
+		bcrypt.hash(i.password, process.env.HASHSALT, function (err, hash) {
 			if (err) {
 				next(err);
 			} else {
