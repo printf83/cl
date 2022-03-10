@@ -20,7 +20,7 @@ const schema = mongoose.Schema({
 schema.pre("save", function (next) {
 	let i = this;
 	if (i.isModified("password")) {
-		bcrypt.hash(i.password, process.env.HASHSALT, function (err, hash) {
+		bcrypt.hash(i.password, parseInt(process.env.HASHSALT), function (err, hash) {
 			if (err) {
 				next(err);
 			} else {

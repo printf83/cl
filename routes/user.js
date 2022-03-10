@@ -138,7 +138,7 @@ module.exports = function (app) {
 
 					newuser.generateToken("email", (err, user) => {
 						if (err) return res.json({ success: false, message: err.message });
-						let serverUrl = req.protocol + "://" + req.get("host") + req.originalUrl;
+						let serverUrl = req.protocol + "://" + req.get("host");
 
 						fn.email(
 							{
@@ -172,7 +172,7 @@ module.exports = function (app) {
 
 				user.generateToken("reset", (err, user) => {
 					if (err) return res.json({ success: false, message: err.message });
-					let serverUrl = req.protocol + "://" + req.get("host") + req.originalUrl;
+					let serverUrl = req.protocol + "://" + req.get("host");
 
 					fn.email(
 						{

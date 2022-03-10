@@ -268,6 +268,4 @@ $.core.documentReady(() => {
 			$.list.container.reload("main_list");
 		}
 	);
-
-	$.core.appendChild(document.body, new $.user.signin());
 });

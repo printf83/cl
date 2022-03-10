@@ -289,36 +289,24 @@ function authCheck(callback) {
 		let usr = require("./user.js");
 
 		if (validateUser) {
-			usr.validate(validateUser, function (result) {
-				if (result) {
-					if (result.success) {
-						usr.signin({
-							msg: "Email validated. Please sign in to continue.",
-							callback: function () {
-								window.location = window.location.origin + window.location.pathname;
-							},
-						}).show();
-					} else {
+			usr.validate(validateUser, function () {
+				new usr.signin({
+					msg: "Email validated. Please sign in to continue.",
+					callback: function () {
 						window.location = window.location.origin + window.location.pathname;
-					}
-				} else {
-					window.location = window.location.origin + window.location.pathname;
-				}
+					},
+				}).show();
 			});
 		} else if (resetPassword) {
-			new usr.resetpass({
+			new usr.changepass_guest({
 				token: resetPassword,
-				callback: function (result) {
-					if (result.success) {
-						usr.signin({
-							msg: "Password changed. Please sign in to continue.",
-							callback: function () {
-								window.location = window.location.origin + window.location.pathname;
-							},
-						}).show();
-					} else {
-						window.location = window.location.origin + window.location.pathname;
-					}
+				callback: function () {
+					new usr.signin({
+						msg: "Password changed. Please sign in to continue.",
+						callback: function () {
+							window.location = window.location.origin + window.location.pathname;
+						},
+					}).show();
 				},
 			}).show();
 		}
