@@ -715,15 +715,19 @@ export function detachEventListener(elem) {
 }
 
 export function removeChildElement(elem) {
-	while (elem.firstChild) {
-		detachEventListener(elem.firstChild);
-		elem.firstChild.remove();
+	if (elem) {
+		while (elem.firstChild) {
+			detachEventListener(elem.firstChild);
+			elem.firstChild.remove();
+		}
 	}
 }
 
 export function removeElement(elem) {
-	detachEventListener(elem);
-	elem.remove();
+	if (elem) {
+		detachEventListener(elem);
+		elem.remove();
+	}
 }
 
 export function appendChild(container, data) {
