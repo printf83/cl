@@ -252,7 +252,7 @@ module.exports = function (app) {
 		},
 	};
 
-	app.get(`/api/user/validate`, fn.validate);
+	app.post(`/api/user/validate`, fn.validate);
 	app.get(`/api/user/signout`, fn.auth, fn.signout);
 	app.post(`/api/user/register`, fn.register);
 	app.post(`/api/user/signin`, fn.signin);

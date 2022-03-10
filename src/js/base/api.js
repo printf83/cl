@@ -771,7 +771,7 @@ export const user = {
 		}
 	},
 	validate: function (token, callback) {
-		fn.get({
+		fn.post({
 			callback: function (result) {
 				if (typeof callback === "function") {
 					callback(result);
