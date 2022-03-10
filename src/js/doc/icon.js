@@ -126,6 +126,10 @@ export default [
 	},
 
 	{
+		title: "Animation",
+	},
+
+	{
 		title: "Spin",
 		container: sample.stackcontainer,
 		code: function () {
