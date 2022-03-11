@@ -17,7 +17,8 @@ const defaultIcon = {
 	icon: "fire",
 	weight: "4x",
 };
-const defaultSize = "sm";
+const defaultSize = "md";
+const defaultMaxWidth = "420px";
 const defaultTitleSize = 4;
 
 let defaultSignInOption = {
@@ -792,6 +793,7 @@ export class signin extends modal {
 			if (opt.length === 2) {
 				super({
 					size: opt[0].size,
+					maxwidth: defaultMaxWidth,
 					elem: fn.form.container(opt[0].id, fn.form.signin(opt[0])),
 					debug: opt[1]?.debug === true ? true : false,
 				});
@@ -799,12 +801,14 @@ export class signin extends modal {
 				if (opt[0].debug) {
 					super({
 						size: opt[0].size,
+						maxwidth: defaultMaxWidth,
 						elem: fn.form.container(opt[0].id, fn.form.signin(opt[0])),
 						debug: true,
 					});
 				} else {
 					super({
 						size: opt[0].size,
+						maxwidth: defaultMaxWidth,
 						elem: fn.form.container(opt[0].id, fn.form.signin(opt[0])),
 					});
 				}
@@ -826,6 +830,7 @@ export class signup extends modal {
 			if (opt.length === 2) {
 				super({
 					size: opt[0].size,
+					maxwidth: defaultMaxWidth,
 					elem: fn.form.container(opt[0].id, fn.form.signup(opt[0])),
 					debug: opt[1]?.debug === true ? true : false,
 				});
@@ -833,12 +838,14 @@ export class signup extends modal {
 				if (opt[0].debug) {
 					super({
 						size: opt[0].size,
+						maxwidth: defaultMaxWidth,
 						elem: fn.form.container(opt[0].id, fn.form.signup(opt[0])),
 						debug: true,
 					});
 				} else {
 					super({
 						size: opt[0].size,
+						maxwidth: defaultMaxWidth,
 						elem: fn.form.container(opt[0].id, fn.form.signup(opt[0])),
 					});
 				}
@@ -860,6 +867,7 @@ export class resetpass extends modal {
 			if (opt.length === 2) {
 				super({
 					size: opt[0].size,
+					maxwidth: defaultMaxWidth,
 					elem: fn.form.container(opt[0].id, fn.form.resetpass(opt[0])),
 					debug: opt[1]?.debug === true ? true : false,
 				});
@@ -867,12 +875,14 @@ export class resetpass extends modal {
 				if (opt[0].debug) {
 					super({
 						size: opt[0].size,
+						maxwidth: defaultMaxWidth,
 						elem: fn.form.container(opt[0].id, fn.form.resetpass(opt[0])),
 						debug: true,
 					});
 				} else {
 					super({
 						size: opt[0].size,
+						maxwidth: defaultMaxWidth,
 						elem: fn.form.container(opt[0].id, fn.form.resetpass(opt[0])),
 					});
 				}
@@ -894,6 +904,7 @@ export class changepass extends modal {
 			if (opt.length === 2) {
 				super({
 					size: opt[0].size,
+					maxwidth: defaultMaxWidth,
 					elem: fn.form.container(opt[0].id, fn.form.changepass(opt[0])),
 					debug: opt[1]?.debug === true ? true : false,
 				});
@@ -901,6 +912,7 @@ export class changepass extends modal {
 				if (opt[0].debug) {
 					super({
 						size: opt[0].size,
+						maxwidth: defaultMaxWidth,
 						elem: fn.form.container(opt[0].id, fn.form.changepass(opt[0])),
 						debug: true,
 					});
@@ -928,6 +940,7 @@ export class changepass_guest extends modal {
 			if (opt.length === 2) {
 				super({
 					size: opt[0].size,
+					maxwidth: defaultMaxWidth,
 					elem: fn.form.container(opt[0].id, fn.form.changepass_guest(opt[0])),
 					debug: opt[1]?.debug === true ? true : false,
 				});
@@ -935,12 +948,14 @@ export class changepass_guest extends modal {
 				if (opt[0].debug) {
 					super({
 						size: opt[0].size,
+						maxwidth: defaultMaxWidth,
 						elem: fn.form.container(opt[0].id, fn.form.changepass_guest(opt[0])),
 						debug: true,
 					});
 				} else {
 					super({
 						size: opt[0].size,
+						maxwidth: defaultMaxWidth,
 						elem: fn.form.container(opt[0].id, fn.form.changepass_guest(opt[0])),
 					});
 				}

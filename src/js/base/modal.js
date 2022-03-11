@@ -21,6 +21,7 @@ const defaultOption = {
 	scrollable: true,
 	center: true,
 	size: null,
+	maxwidth: null,
 	fullscreen: false,
 	focus: true,
 
@@ -251,6 +252,7 @@ export default class modal extends div {
 				}),
 				color: opt.bgcolor ? opt.bgcolor : null,
 				elem: new div({
+					style: { "max-width": opt.maxwidth },
 					class: [
 						"modal-dialog",
 						opt.scrollable ? "modal-dialog-scrollable" : null,
