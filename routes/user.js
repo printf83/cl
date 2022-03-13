@@ -15,10 +15,8 @@ module.exports = function (app) {
 					req.user = result;
 					next();
 				} else {
-					if (result.name === "TokenExpiredError") {
-						console.log("TokenExpiredError");
-						console.log(result);
-					}
+					console.log("token problem");
+					console.log(result);
 
 					res.cookie("auth", "expired", {
 						httpOnly: true,

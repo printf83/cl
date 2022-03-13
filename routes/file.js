@@ -16,10 +16,8 @@ module.exports = function (app, setting) {
 					req.user = result;
 					next();
 				} else {
-					if (result.name === "TokenExpiredError") {
-						console.log("TokenExpiredError");
-						console.log(result);
-					}
+					console.log("token problem");
+					console.log(result);
 
 					res.cookie("auth", "expired", { httpOnly: true, sameSite: "strict", maxAge: -1, expired: true });
 					return res.status(400).json({ success: false, message: "Please sign up to continue" });
