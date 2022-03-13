@@ -34,13 +34,53 @@ export default [
 	// 	},
 	// },
 
-	// {
-	// 	title: "Change password",
-	// 	viewclass: "cl-modal-preview",
-	// 	code: function () {
-	// 		return new $.user.changepass({ debug: true });
-	// 	},
-	// },
+	{
+		title: "Change password",
+		viewclass: "cl-modal-preview",
+		code: function () {
+			return new $.user.changepass({ debug: true });
+		},
+	},
+
+	{
+		msg: "Live preview",
+		code: function () {
+			return new $.button({
+				label: "Change password",
+				icon: "key",
+				color: "primary",
+				onclick: function (event) {
+					new $.user.changepass().show();
+				},
+			});
+		},
+	},
+
+	{
+		title: "Update profile",
+		viewclass: "cl-modal-preview",
+		code: function () {
+			return new $.user.updateinfo({ debug: true });
+		},
+	},
+
+	{
+		msg: "Live preview",
+		code: function () {
+			return new $.button({
+				label: "Update profile",
+				icon: "user",
+				color: "primary",
+				onclick: function (event) {
+					$.user.info(event.currentTarget, function (result) {
+						if (result && result.email) {
+							new $.user.updateinfo({ data: result, callback: function () {} }).show();
+						}
+					});
+				},
+			});
+		},
+	},
 
 	// {
 	// 	title: "Change password (guest)",
@@ -61,8 +101,10 @@ export default [
 				icon: "user",
 				color: "primary",
 				onclick: function (event) {
-					$.user.profile(event.currentTarget, function (result) {
-						new $.toast("i", JSON.stringify(result)).show();
+					$.user.info(event.currentTarget, function (result) {
+						if (result) {
+							new $.toast("i", `Hai ${result.name}`).show();
+						}
 					});
 				},
 			});

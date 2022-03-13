@@ -40,10 +40,10 @@ schema.methods.validatePassword = function (password, callback) {
 	});
 };
 
-schema.methods.generateToken = function (prop, callback) {
+schema.methods.generateToken = function (prop, expired, callback) {
 	let i = this;
 	let t = jwt.sign({ id: i._id.toHexString() }, process.env.SESSIONSECRET, {
-		expiresIn: process.env.SESSIONEXPIRED,
+		expiresIn: expired ? expired : process.env.SESSIONEXPIRED,
 	});
 
 	i[`${prop}Token`] = t;

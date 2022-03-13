@@ -171,13 +171,19 @@ export default class modal extends div {
 								event.stopPropagation();
 
 								let mdl = event.currentTarget.closest(".modal");
-								let formdata = core.getValue(mdl);
-								let result =
-									i.onclick instanceof Function ? i.onclick(event.currentTarget, formdata) : true;
-								if (result !== false) {
-									//find parent and close
-									modal.hide(mdl);
-								}
+								core.validate(mdl, function (isvalid) {
+									if (isvalid) {
+										let formdata = core.getValue(mdl);
+										let result =
+											i.onclick instanceof Function
+												? i.onclick(event.currentTarget, formdata)
+												: true;
+										if (result !== false) {
+											//find parent and close
+											modal.hide(mdl);
+										}
+									}
+								});
 							},
 							attr: { "data-bs-dismiss": i.onclick instanceof Function ? null : "modal" },
 						});

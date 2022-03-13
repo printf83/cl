@@ -760,7 +760,7 @@ export const user = {
 			console.error("opt data is required");
 		}
 	},
-	profile: function (opt, callback) {
+	info: function (opt, callback) {
 		opt = core.extend(
 			{},
 			{
@@ -778,8 +778,36 @@ export const user = {
 						callback(result);
 					}
 				},
-				url: `api/user/profile`,
+				url: `api/user/info`,
 			});
+		}
+	},
+	updateinfo: function (opt, callback) {
+		opt = core.extend(
+			{},
+			{
+				data: null,
+				sender: null,
+			},
+			opt
+		);
+
+		if (opt.data) {
+			if (fn.sender.isfree(opt.sender)) {
+				fn.sender.setbusy(opt.sender);
+				fn.post({
+					callback: function (result) {
+						fn.sender.setfree(opt.sender);
+						if (typeof callback === "function") {
+							callback(result);
+						}
+					},
+					url: `api/user/updateinfo`,
+					data: opt.data,
+				});
+			}
+		} else {
+			console.error("opt data is required");
 		}
 	},
 	validate: function (token, callback) {

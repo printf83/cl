@@ -12,6 +12,7 @@ import modal from "./modal.js";
 import img from "./img.js";
 import * as alert from "./alert.js";
 import btnclose from "./btnclose.js";
+import file from "./file.js";
 
 const defaultIcon = {
 	icon: "fire",
@@ -53,6 +54,7 @@ let defaultResetPassOption = {
 	callback: null,
 	close: true,
 	debug: false,
+	isguest: true,
 };
 
 let defaultChangePassOption = {
@@ -76,6 +78,19 @@ let defaultChangePassGuestOption = {
 	callback: null,
 	close: true,
 	debug: false,
+};
+
+let defaultUpdateInfoOption = {
+	id: null,
+	icon: defaultIcon,
+	msg: null,
+	size: defaultSize,
+	token: null,
+	title: null,
+	callback: null,
+	close: true,
+	debug: false,
+	data: null,
 };
 
 const fn = {
@@ -155,6 +170,10 @@ const fn = {
 							data: {
 								username: data.email,
 								password: data.password,
+								remember:
+									data.remember && data.remember.length === 1 && data.remember[0] === "on"
+										? true
+										: false,
 							},
 						},
 						function (result) {
@@ -327,8 +346,8 @@ const fn = {
 				}
 			});
 		},
-		profile: function (sender, callback) {
-			db.user.profile(
+		info: function (sender, callback) {
+			db.user.info(
 				{
 					sender: sender,
 				},
@@ -336,6 +355,46 @@ const fn = {
 					callback(result);
 				}
 			);
+		},
+		updateinfo: function (sender, opt) {
+			let container = sender.closest("form");
+			core.validate(container, function (result) {
+				if (!result) {
+					fn.showmsg(container, "Please provide contact email and name", "-");
+				} else {
+					let data = core.getValue(container);
+
+					container.classList.remove("was-validated");
+
+					db.user.updateinfo(
+						{
+							sender: sender,
+							data: { email: data.email, name: data.name, picture: data.picture },
+						},
+						function (result) {
+							if (result) {
+								if (result.success) {
+									file.save(
+										data.picture,
+										function () {
+											if (opt.callback instanceof Function) {
+												let dlg = container.closest("div.modal");
+												modal.hide(dlg);
+												opt.callback(true);
+											} else {
+												fn.showmsg(container, "Update success", "/");
+											}
+										},
+										sender
+									);
+								} else {
+									fn.showmsg(container, result && result.message ? result.message : null, "!!");
+								}
+							}
+						}
+					);
+				}
+			});
 		},
 		validate: function (token, callback) {
 			db.user.validate(token, function (result) {
@@ -389,6 +448,11 @@ const fn = {
 						},
 						onchange: fn.action.inputchange,
 					}),
+					new div({
+						display: "flex",
+						justifycontent: "center",
+						elem: new input({ type: "switch", name: "remember", label: "Remember me for 14 days" }),
+					}),
 					new container.grid([
 						new button({
 							label: "Sign in",
@@ -411,7 +475,10 @@ const fn = {
 									onclick: function (event) {
 										let sender = event.currentTarget;
 										let container = sender.closest("form");
-										core.replaceChild(container, fn.form.container(opt.id, fn.form.resetpass(opt)));
+										core.replaceChild(
+											container,
+											fn.form.container(opt.id, fn.form.resetpass(opt, true))
+										);
 									},
 								}),
 								new button({
@@ -481,7 +548,7 @@ const fn = {
 					new container.grid([
 						new button({
 							label: "Sign up",
-							icon: "envelope",
+							icon: "arrow-up-from-bracket",
 							color: "primary",
 							weight: "lg",
 							onclick: !opt.debug
@@ -500,7 +567,10 @@ const fn = {
 									onclick: function (event) {
 										let sender = event.currentTarget;
 										let container = sender.closest("form");
-										core.replaceChild(container, fn.form.container(opt.id, fn.form.resetpass(opt)));
+										core.replaceChild(
+											container,
+											fn.form.container(opt.id, fn.form.resetpass(opt, true))
+										);
 									},
 								}),
 								new button({
@@ -518,7 +588,7 @@ const fn = {
 				].filter(Boolean)
 			);
 		},
-		resetpass: function (opt) {
+		resetpass: function (opt, isguest) {
 			return new container.form(
 				[
 					opt.close ? fn.closebtn(opt) : null,
@@ -544,44 +614,54 @@ const fn = {
 						onchange: fn.action.inputchange,
 					}),
 
-					new container.grid([
-						new button({
-							label: "Send email",
-							icon: "envelope",
-							color: "primary",
-							weight: "lg",
-							onclick: !opt.debug
-								? function (event) {
-										fn.action.resetpass(event.currentTarget, opt);
-								  }
-								: null,
-						}),
+					new container.grid(
+						[
+							new button({
+								label: "Send email",
+								icon: "arrow-up-from-bracket",
+								color: "primary",
+								weight: "lg",
+								onclick: !opt.debug
+									? function (event) {
+											fn.action.resetpass(event.currentTarget, opt);
+									  }
+									: null,
+							}),
 
-						new div({
-							display: "flex",
-							justifycontent: "between",
-							elem: [
-								new button({
-									weight: "sm",
-									elem: "Sign in",
-									onclick: function (event) {
-										let sender = event.currentTarget;
-										let container = sender.closest("form");
-										core.replaceChild(container, fn.form.container(opt.id, fn.form.signin(opt)));
-									},
-								}),
-								new button({
-									weight: "sm",
-									elem: "Sign up",
-									onclick: function (event) {
-										let sender = event.currentTarget;
-										let container = sender.closest("form");
-										core.replaceChild(container, fn.form.container(opt.id, fn.form.signup(opt)));
-									},
-								}),
-							],
-						}),
-					]),
+							isguest
+								? new div({
+										display: "flex",
+										justifycontent: "between",
+										elem: [
+											new button({
+												weight: "sm",
+												elem: "Sign in",
+												onclick: function (event) {
+													let sender = event.currentTarget;
+													let container = sender.closest("form");
+													core.replaceChild(
+														container,
+														fn.form.container(opt.id, fn.form.signin(opt))
+													);
+												},
+											}),
+											new button({
+												weight: "sm",
+												elem: "Sign up",
+												onclick: function (event) {
+													let sender = event.currentTarget;
+													let container = sender.closest("form");
+													core.replaceChild(
+														container,
+														fn.form.container(opt.id, fn.form.signup(opt))
+													);
+												},
+											}),
+										],
+								  })
+								: null,
+						].filter(Boolean)
+					),
 				].filter(Boolean)
 			);
 		},
@@ -674,7 +754,10 @@ const fn = {
 									onclick: function (event) {
 										let sender = event.currentTarget;
 										let container = sender.closest("form");
-										core.replaceChild(container, fn.form.container(opt.id, fn.form.resetpass(opt)));
+										core.replaceChild(
+											container,
+											fn.form.container(opt.id, fn.form.resetpass(opt, false))
+										);
 									},
 								}),
 							],
@@ -760,7 +843,10 @@ const fn = {
 									onclick: function (event) {
 										let sender = event.currentTarget;
 										let container = sender.closest("form");
-										core.replaceChild(container, fn.form.container(opt.id, fn.form.resetpass(opt)));
+										core.replaceChild(
+											container,
+											fn.form.container(opt.id, fn.form.resetpass(opt, true))
+										);
 									},
 								}),
 							],
@@ -769,11 +855,77 @@ const fn = {
 				].filter(Boolean)
 			);
 		},
+		updateinfo: function (opt) {
+			return new container.form(
+				[
+					opt.close ? fn.closebtn(opt) : null,
+					!opt.img && opt.icon ? new icon(opt.icon) : opt.img ? null : new icon(defaultIcon),
+					!opt.icon && opt.img ? new img(opt.img) : null,
+					new h({ level: defaultTitleSize, marginy: 0, elem: opt.title ? opt.title : "Update info" }),
+
+					new div({
+						id: `${opt.id}-msg`,
+						display: opt.msg ? null : "none",
+						elem: fn.msg(opt.msg, "info"),
+					}),
+
+					new file({
+						name: "picture",
+						weight: "lg",
+						value: opt && opt.data ? opt.data.picture : null,
+						uploadlabel: "Upload picture",
+						uploadicon: "user",
+						uploadcolor: "secondary",
+						viewlabel: "View picture",
+						viewicon: "user",
+					}),
+
+					new input({
+						name: "email",
+						type: "email",
+						label: "Contact email",
+						required: true,
+						floatlabel: true,
+						attr: {
+							autocomplete: "off",
+						},
+						value: opt.data?.email,
+						onchange: fn.action.inputchange,
+					}),
+					new input({
+						name: "name",
+						type: "text",
+						label: "Name",
+						required: true,
+						floatlabel: true,
+						attr: {
+							autocomplete: "off",
+						},
+						value: opt.data?.name,
+						onchange: fn.action.inputchange,
+					}),
+
+					new container.grid([
+						new button({
+							label: "Update profile",
+							icon: "arrow-up-from-bracket",
+							color: "primary",
+							weight: "lg",
+							onclick: !opt.debug
+								? function (event) {
+										fn.action.updateinfo(event.currentTarget, opt);
+								  }
+								: null,
+						}),
+					]),
+				].filter(Boolean)
+			);
+		},
 	},
 };
 
-export function profile(sender, callback) {
-	fn.action.profile(sender, callback);
+export function info(sender, callback) {
+	fn.action.info(sender, callback);
 }
 
 export function signout(sender, callback) {
@@ -785,185 +937,133 @@ export function validate(token, callback) {
 }
 
 export class signin extends modal {
-	constructor(...opt) {
-		if (opt && opt.length > 0) {
-			opt[0] = core.extend({}, defaultSignInOption, opt[0]);
-			opt[0].id = opt[0].id || core.UUID();
+	constructor(opt) {
+		opt = core.extend({}, defaultSignInOption, opt);
+		opt.id = opt.id || core.UUID();
 
-			if (opt.length === 2) {
-				super({
-					size: opt[0].size,
-					maxwidth: defaultMaxWidth,
-					elem: fn.form.container(opt[0].id, fn.form.signin(opt[0])),
-					debug: opt[1]?.debug === true ? true : false,
-				});
-			} else if (opt.length === 1) {
-				if (opt[0].debug) {
-					super({
-						size: opt[0].size,
-						maxwidth: defaultMaxWidth,
-						elem: fn.form.container(opt[0].id, fn.form.signin(opt[0])),
-						debug: true,
-					});
-				} else {
-					super({
-						size: opt[0].size,
-						maxwidth: defaultMaxWidth,
-						elem: fn.form.container(opt[0].id, fn.form.signin(opt[0])),
-					});
-				}
-			} else {
-				console.error("Unsupported argument", opt);
-			}
+		if (opt.debug) {
+			super({
+				size: opt.size,
+				maxwidth: defaultMaxWidth,
+				elem: fn.form.container(opt.id, fn.form.signin(opt)),
+				debug: true,
+			});
 		} else {
-			super();
+			super({
+				size: opt.size,
+				maxwidth: defaultMaxWidth,
+				elem: fn.form.container(opt.id, fn.form.signin(opt)),
+			});
 		}
 	}
 }
 
 export class signup extends modal {
-	constructor(...opt) {
-		if (opt && opt.length > 0) {
-			opt[0] = core.extend({}, defaultSignUpOption, opt[0]);
-			opt[0].id = opt[0].id || core.UUID();
+	constructor(opt) {
+		opt = core.extend({}, defaultSignUpOption, opt);
+		opt.id = opt.id || core.UUID();
 
-			if (opt.length === 2) {
-				super({
-					size: opt[0].size,
-					maxwidth: defaultMaxWidth,
-					elem: fn.form.container(opt[0].id, fn.form.signup(opt[0])),
-					debug: opt[1]?.debug === true ? true : false,
-				});
-			} else if (opt.length === 1) {
-				if (opt[0].debug) {
-					super({
-						size: opt[0].size,
-						maxwidth: defaultMaxWidth,
-						elem: fn.form.container(opt[0].id, fn.form.signup(opt[0])),
-						debug: true,
-					});
-				} else {
-					super({
-						size: opt[0].size,
-						maxwidth: defaultMaxWidth,
-						elem: fn.form.container(opt[0].id, fn.form.signup(opt[0])),
-					});
-				}
-			} else {
-				console.error("Unsupported argument", opt);
-			}
+		if (opt.debug) {
+			super({
+				size: opt.size,
+				maxwidth: defaultMaxWidth,
+				elem: fn.form.container(opt.id, fn.form.signup(opt)),
+				debug: true,
+			});
 		} else {
-			super();
+			super({
+				size: opt.size,
+				maxwidth: defaultMaxWidth,
+				elem: fn.form.container(opt.id, fn.form.signup(opt)),
+			});
 		}
 	}
 }
 
 export class resetpass extends modal {
-	constructor(...opt) {
-		if (opt && opt.length > 0) {
-			opt[0] = core.extend({}, defaultResetPassOption, opt[0]);
-			opt[0].id = opt[0].id || core.UUID();
+	constructor(opt) {
+		opt = core.extend({}, defaultResetPassOption, opt);
+		opt.id = opt.id || core.UUID();
 
-			if (opt.length === 2) {
-				super({
-					size: opt[0].size,
-					maxwidth: defaultMaxWidth,
-					elem: fn.form.container(opt[0].id, fn.form.resetpass(opt[0])),
-					debug: opt[1]?.debug === true ? true : false,
-				});
-			} else if (opt.length === 1) {
-				if (opt[0].debug) {
-					super({
-						size: opt[0].size,
-						maxwidth: defaultMaxWidth,
-						elem: fn.form.container(opt[0].id, fn.form.resetpass(opt[0])),
-						debug: true,
-					});
-				} else {
-					super({
-						size: opt[0].size,
-						maxwidth: defaultMaxWidth,
-						elem: fn.form.container(opt[0].id, fn.form.resetpass(opt[0])),
-					});
-				}
-			} else {
-				console.error("Unsupported argument", opt);
-			}
+		if (opt.debug) {
+			super({
+				size: opt.size,
+				maxwidth: defaultMaxWidth,
+				elem: fn.form.container(opt.id, fn.form.resetpass(opt, opt.isguest)),
+				debug: true,
+			});
 		} else {
-			super();
+			super({
+				size: opt.size,
+				maxwidth: defaultMaxWidth,
+				elem: fn.form.container(opt.id, fn.form.resetpass(opt, opt.isguest)),
+			});
 		}
 	}
 }
 
 export class changepass extends modal {
-	constructor(...opt) {
-		if (opt && opt.length > 0) {
-			opt[0] = core.extend({}, defaultChangePassOption, opt[0]);
-			opt[0].id = opt[0].id || core.UUID();
+	constructor(opt) {
+		opt = core.extend({}, defaultChangePassOption, opt);
+		opt.id = opt.id || core.UUID();
 
-			if (opt.length === 2) {
-				super({
-					size: opt[0].size,
-					maxwidth: defaultMaxWidth,
-					elem: fn.form.container(opt[0].id, fn.form.changepass(opt[0])),
-					debug: opt[1]?.debug === true ? true : false,
-				});
-			} else if (opt.length === 1) {
-				if (opt[0].debug) {
-					super({
-						size: opt[0].size,
-						maxwidth: defaultMaxWidth,
-						elem: fn.form.container(opt[0].id, fn.form.changepass(opt[0])),
-						debug: true,
-					});
-				} else {
-					super({
-						size: opt[0].size,
-						elem: fn.form.container(opt[0].id, fn.form.changepass(opt[0])),
-					});
-				}
-			} else {
-				console.error("Unsupported argument", opt);
-			}
+		if (opt.debug) {
+			super({
+				size: opt.size,
+				maxwidth: defaultMaxWidth,
+				elem: fn.form.container(opt.id, fn.form.changepass(opt)),
+				debug: true,
+			});
 		} else {
-			super();
+			super({
+				size: opt.size,
+				maxwidth: defaultMaxWidth,
+				elem: fn.form.container(opt.id, fn.form.changepass(opt)),
+			});
 		}
 	}
 }
 
 export class changepass_guest extends modal {
-	constructor(...opt) {
-		if (opt && opt.length > 0) {
-			opt[0] = core.extend({}, defaultChangePassGuestOption, opt[0]);
-			opt[0].id = opt[0].id || core.UUID();
+	constructor(opt) {
+		opt = core.extend({}, defaultChangePassGuestOption, opt);
+		opt.id = opt.id || core.UUID();
 
-			if (opt.length === 2) {
-				super({
-					size: opt[0].size,
-					maxwidth: defaultMaxWidth,
-					elem: fn.form.container(opt[0].id, fn.form.changepass_guest(opt[0])),
-					debug: opt[1]?.debug === true ? true : false,
-				});
-			} else if (opt.length === 1) {
-				if (opt[0].debug) {
-					super({
-						size: opt[0].size,
-						maxwidth: defaultMaxWidth,
-						elem: fn.form.container(opt[0].id, fn.form.changepass_guest(opt[0])),
-						debug: true,
-					});
-				} else {
-					super({
-						size: opt[0].size,
-						maxwidth: defaultMaxWidth,
-						elem: fn.form.container(opt[0].id, fn.form.changepass_guest(opt[0])),
-					});
-				}
-			} else {
-				console.error("Unsupported argument", opt);
-			}
+		if (opt.debug) {
+			super({
+				size: opt.size,
+				maxwidth: defaultMaxWidth,
+				elem: fn.form.container(opt.id, fn.form.changepass_guest(opt)),
+				debug: true,
+			});
 		} else {
-			super();
+			super({
+				size: opt.size,
+				maxwidth: defaultMaxWidth,
+				elem: fn.form.container(opt.id, fn.form.changepass_guest(opt)),
+			});
+		}
+	}
+}
+
+export class updateinfo extends modal {
+	constructor(opt) {
+		opt = core.extend({}, defaultUpdateInfoOption, opt);
+		opt.id = opt.id || core.UUID();
+
+		if (opt.debug) {
+			super({
+				size: opt.size,
+				maxwidth: defaultMaxWidth,
+				elem: fn.form.container(opt.id, fn.form.updateinfo(opt)),
+				debug: true,
+			});
+		} else {
+			super({
+				size: opt.size,
+				maxwidth: defaultMaxWidth,
+				elem: fn.form.container(opt.id, fn.form.updateinfo(opt)),
+			});
 		}
 	}
 }

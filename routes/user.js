@@ -53,7 +53,7 @@ module.exports = function (app) {
 			});
 		},
 		signin: function (req, res) {
-			let { username, password } = req.body;
+			let { username, password, remember } = req.body;
 			if (!username || !password) return res.json({ success: false, message: "Username and password required" });
 
 			$.db.findOne({ username: username }, function (err, user) {
@@ -63,7 +63,7 @@ module.exports = function (app) {
 					if (err || !result) return res.json({ success: false, message: "User not found" });
 
 					if (!user.emailToken) {
-						user.generateToken("auth", (err, user) => {
+						user.generateToken("auth", remember ? "14d" : null, (err, user) => {
 							if (err) return res.json({ success: false, message: err.message });
 
 							res.cookie("auth", user.authToken, { httpOnly: true, sameSite: "strict" }).json({
@@ -106,7 +106,7 @@ module.exports = function (app) {
 						return res.json({ success: false });
 					}
 
-					newuser.generateToken("email", (err, user) => {
+					newuser.generateToken("email", "15m", (err, user) => {
 						if (err) return res.json({ success: false, message: err.message });
 						let serverUrl = process.env.SERVERURL; //req.protocol + "://" + req.get("host");
 
@@ -114,7 +114,7 @@ module.exports = function (app) {
 							{
 								to: user.email,
 								subject: "CL Confirmation Email",
-								html: `Click here to validate your email <a href="${serverUrl}/?validateUser=${user.emailToken}">${serverUrl}/?validateUser=${user.emailToken}</a>`,
+								html: `Click here to validate your email <a href="${serverUrl}/?validateUser=${user.emailToken}">${serverUrl}/?validateUser=${user.emailToken}</a>. This email validation must be made in 15 minutes.`,
 							},
 							function (result) {
 								if (result && result.success) {
@@ -140,7 +140,7 @@ module.exports = function (app) {
 			$.db.findOne({ username: username }, function (err, user) {
 				if (err || !user) return res.json({ success: false, message: "User not found" });
 
-				user.generateToken("reset", (err, user) => {
+				user.generateToken("reset", "15m", (err, user) => {
 					if (err) return res.json({ success: false, message: err.message });
 					let serverUrl = process.env.SERVERURL; //req.protocol + "://" + req.get("host");
 
@@ -148,7 +148,7 @@ module.exports = function (app) {
 						{
 							to: user.email,
 							subject: "CL Reset Password",
-							html: `Click here to reset password <a href="${serverUrl}/?resetPassword=${user.resetToken}">${serverUrl}/?resetPassword=${user.resetToken}</a>`,
+							html: `Click here to reset password <a href="${serverUrl}/?resetPassword=${user.resetToken}">${serverUrl}/?resetPassword=${user.resetToken}</a>. This email validation must be made in 15 minutes.`,
 						},
 						function (result) {
 							if (result && result.success) {
@@ -211,14 +211,34 @@ module.exports = function (app) {
 				});
 			});
 		},
-		profile: function (req, res) {
+		info: function (req, res) {
 			if (req.user) {
 				res.json({
 					email: req.user.email,
 					picture: req.user.picture,
 					name: req.user.name,
 					role: req.user.role,
-					username: req.user.username,
+				});
+			} else {
+				res.json(null);
+			}
+		},
+		updateinfo: function (req, res) {
+			if (req.user) {
+				let { email, name, picture } = req.body;
+				if (!email || !name) return res.json({ success: false, message: "Email and name required" });
+
+				req.user.name = name;
+				req.user.email = email;
+				req.user.picture = picture;
+
+				req.user.save((err) => {
+					if (err) {
+						console.log(err);
+						return res.json({ success: false });
+					}
+
+					res.json({ success: true });
 				});
 			} else {
 				res.json(null);
@@ -233,5 +253,6 @@ module.exports = function (app) {
 	app.post(`/api/user/resetpass`, fn.resetpass);
 	app.post(`/api/user/changepass`, core.auth, fn.changepass);
 	app.post(`/api/user/changepass-guest`, fn.changepass_guest);
-	app.get(`/api/user/profile`, core.auth, fn.profile);
+	app.get(`/api/user/info`, core.auth, fn.info);
+	app.post(`/api/user/updateinfo`, core.auth, fn.updateinfo);
 };

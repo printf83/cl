@@ -22,10 +22,11 @@ const defaultOption = {
 	disabled: false,
 	multiple: false,
 	value: null,
+	weight: null,
 	accept: "image/gif,image/bmp,image/x-windows-bmp,image/jpeg,image/png,application/pdf,application/zip,application/json,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.openxmlformats-officedocument.wordprocessingml.document,text/plain,text/html",
 
 	uploadlabel: "Upload",
-	uploadicon: "upload",
+	uploadicon: "arrow-up-from-bracket",
 	uploadcolor: "primary",
 	viewlabel: "View",
 	viewicon: "eye",
@@ -33,6 +34,7 @@ const defaultOption = {
 	deletelabel: null,
 	deleteicon: "times",
 	deletecolor: "danger",
+	downloadicon: "arrow-down-to-bracket",
 };
 
 let db_opt = {};
@@ -44,6 +46,7 @@ const fn = {
 		let id = container.getAttribute("data-cl-container");
 		let ctl = container.parentNode.querySelectorAll(`#${id}`)[0];
 		let value = ctl.value;
+		let opt = db_opt[id];
 
 		if (value) {
 			db.file.info(
@@ -169,7 +172,7 @@ const fn = {
 													elem: new span({
 														alignself: "center",
 														elem: new icon({
-															icon: "download",
+															icon: opt.downloadicon,
 															color: "muted",
 															weight: "2x",
 														}),
@@ -350,6 +353,19 @@ const fn = {
 			);
 		}
 	},
+	onsavevalue: function (value, callback, sender) {
+		if (value) {
+			db.file.save(
+				value,
+				function (data) {
+					if (typeof callback === "function") {
+						callback(data);
+					}
+				},
+				sender
+			);
+		}
+	},
 };
 
 export default class file extends div {
@@ -400,8 +416,9 @@ export default class file extends div {
 			new div({
 				row: true,
 				attr: { "data-cl-container": id },
-				elem: new btngroup(
-					opt.value
+				elem: new btngroup({
+					weight: opt.weight,
+					elem: opt.value
 						? [
 								new button({
 									id: `${id}-view`,
@@ -431,12 +448,14 @@ export default class file extends div {
 									disabled: opt.disabled ? true : opt.readonly ? true : false,
 									onclick: fn.onupload,
 								}),
-						  ]
-				),
+						  ],
+				}),
 			})
 		);
 
 		db_opt[id] = {
+			weight: opt.weight,
+
 			multiple: opt.multiple,
 			accept: opt.accept,
 
@@ -454,12 +473,18 @@ export default class file extends div {
 			viewlabel: opt.viewlabel,
 			viewicon: opt.viewicon,
 			viewcolor: opt.viewcolor,
+
+			downloadicon: opt.downloadicon,
 		};
 
 		super.data = { elem: ctl };
 	}
 
 	static save(element, callback, sender) {
-		fn.onsave(element, callback, sender);
+		if (typeof element === "string") {
+			fn.onsavevalue(element, callback, sender);
+		} else {
+			fn.onsave(element, callback, sender);
+		}
 	}
 }
