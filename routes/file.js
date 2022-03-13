@@ -9,12 +9,21 @@ module.exports = function (app, setting) {
 		auth: (req, res, next) => {
 			let token = req.cookies.auth;
 			$user.db.findByToken("auth", token, (err, result) => {
-				if (err) throw err;
+				if (err) return res.status(400).json({ success: false, message: err.name });
 				if (!result) return res.status(400).json({ success: false, message: "Please sign up to continue" });
+				if (result instanceof $.db) {
+					req.authToken = token;
+					req.user = result;
+					next();
+				} else {
+					if (result.name === "TokenExpiredError") {
+						console.log("TokenExpiredError");
+						console.log(result);
+					}
 
-				req.authToken = token;
-				req.user = result;
-				next();
+					res.cookie("auth", "expired", { httpOnly: true, sameSite: "strict", maxAge: -1, expired: true });
+					return res.status(400).json({ success: false, message: "Please sign up to continue" });
+				}
 			});
 		},
 		extend: function (out) {
