@@ -1,39 +1,39 @@
+const $ = require("../models/file.js");
+const fs = require("fs");
+const multer = require("multer");
+const uploader = multer({ dest: "tmp/" });
+const core = require(`../core.js`);
+
 module.exports = function (app, setting) {
-	const $ = require("../models/file.js");
-	const $user = require("../models/user.js");
-	const fs = require("fs");
-	const multer = require("multer");
-	const uploader = multer({ dest: "tmp/" });
-
 	const fn = {
-		auth: (req, res, next) => {
-			let token = req.cookies.auth;
-			$user.db.findByToken("auth", token, (err, result) => {
-				if (err) return res.status(400).json({ success: false, message: err.name });
-				if (!result) return res.status(400).json({ success: false, message: "Please sign up to continue" });
-				if (result instanceof $.db) {
-					req.authToken = token;
-					req.user = result;
-					next();
-				} else {
-					res.cookie("auth", "expired", { httpOnly: true, sameSite: "strict", maxAge: -1, expired: true });
-					return res.status(400).json({ success: false, message: "Please sign up to continue" });
-				}
-			});
-		},
-		extend: function (out) {
-			out = out || {};
+		// auth: (req, res, next) => {
+		// 	let token = req.cookies.auth;
+		// 	$user.db.findByToken("auth", token, (err, result) => {
+		// 		if (err) return res.status(400).json({ success: false, message: err.name });
+		// 		if (!result) return res.status(400).json({ success: false, message: "Please sign up to continue" });
+		// 		if (result instanceof $.db) {
+		// 			req.authToken = token;
+		// 			req.user = result;
+		// 			next();
+		// 		} else {
+		// 			res.cookie("auth", "expired", { httpOnly: true, sameSite: "strict", maxAge: -1, expired: true });
+		// 			return res.status(400).json({ success: false, message: "Please sign up to continue" });
+		// 		}
+		// 	});
+		// },
+		// extend: function (out) {
+		// 	out = out || {};
 
-			for (let i = 1; i < arguments.length; i++) {
-				if (!arguments[i]) continue;
+		// 	for (let i = 1; i < arguments.length; i++) {
+		// 		if (!arguments[i]) continue;
 
-				for (let key in arguments[i]) {
-					if (arguments[i].hasOwnProperty(key)) out[key] = arguments[i][key];
-				}
-			}
+		// 		for (let key in arguments[i]) {
+		// 			if (arguments[i].hasOwnProperty(key)) out[key] = arguments[i][key];
+		// 		}
+		// 	}
 
-			return out;
-		},
+		// 	return out;
+		// },
 		upload: function (req, res) {
 			if (req.files && req.files.length > 0) {
 				console.log(req.files);
@@ -347,7 +347,7 @@ module.exports = function (app, setting) {
 		},
 	};
 
-	setting = fn.extend(
+	setting = core.extend(
 		{},
 		{
 			upload: "auth",
@@ -362,7 +362,7 @@ module.exports = function (app, setting) {
 	//upload file
 	if (setting.upload) {
 		if (setting.upload === "auth") {
-			app.post("/api/file", fn.auth, uploader.array("file"), fn.upload);
+			app.post("/api/file", core.auth, uploader.array("file"), fn.upload);
 		} else {
 			app.post("/api/file", uploader.array("file"), fn.upload);
 		}
@@ -371,7 +371,7 @@ module.exports = function (app, setting) {
 	//download file
 	if (setting.download) {
 		if (setting.download === "auth") {
-			app.get("/api/file/:id", fn.auth, fn.download);
+			app.get("/api/file/:id", core.auth, fn.download);
 		} else {
 			app.get("/api/file/:id", fn.download);
 		}
@@ -380,7 +380,7 @@ module.exports = function (app, setting) {
 	//download file info
 	if (setting.info) {
 		if (setting.info === "auth") {
-			app.get("/api/file-info/:id", fn.auth, fn.info);
+			app.get("/api/file-info/:id", core.auth, fn.info);
 		} else {
 			app.get("/api/file-info/:id", fn.info);
 		}
@@ -390,7 +390,7 @@ module.exports = function (app, setting) {
 	//move from tmp to upload
 	if (setting.save) {
 		if (setting.save === "auth") {
-			app.put("/api/file/:id", fn.auth, fn.save);
+			app.put("/api/file/:id", core.auth, fn.save);
 		} else {
 			app.put("/api/file/:id", fn.save);
 		}
@@ -400,7 +400,7 @@ module.exports = function (app, setting) {
 	//move from tmp or file to deleted
 	if (setting.delete) {
 		if (setting.delete === "auth") {
-			app.delete("/api/file/:id", fn.auth, fn.delete);
+			app.delete("/api/file/:id", core.auth, fn.delete);
 		} else {
 			app.delete("/api/file/:id", fn.delete);
 		}

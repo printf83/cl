@@ -1,37 +1,40 @@
+const core = require(`../core.js`);
+
 module.exports = function (app, dbname, setting) {
 	const $ = require(`../models/${dbname}.js`);
-	const $user = require(`../models/user.js`);
 
 	const fn = {
-		auth: (req, res, next) => {
-			let token = req.cookies.auth;
+		// auth: (req, res, next) => {
+		// 	let token = req.cookies.auth;
 
-			$user.db.findByToken("auth", token, (err, result) => {
-				if (err) return res.status(400).json({ success: false, message: err.name });
-				if (!result) return res.status(400).json({ success: false, message: "Please sign up to continue" });
-				if (result instanceof $.db) {
-					req.authToken = token;
-					req.user = result;
-					next();
-				} else {
-					res.cookie("auth", "expired", { httpOnly: true, sameSite: "strict", maxAge: -1, expired: true });
-					return res.status(400).json({ success: false, message: "Please sign up to continue" });
-				}
-			});
-		},
-		extend: function (out) {
-			out = out || {};
+		// 	$user.db.findByToken("auth", token, (err, result) => {
+		// 		if (err || !result || !(result instanceof $user.db)) {
+		// 			res.cookie("auth", "expired", {
+		// 				httpOnly: true,
+		// 				sameSite: "strict",
+		// 				maxAge: -1,
+		// 				expired: true,
+		// 			});
+		// 			return res.status(400).json({ success: false, message: "Please sign up to continue" });
+		// 		}
+		// 		req.authToken = token;
+		// 		req.user = result;
+		// 		next();
+		// 	});
+		// },
+		// extend: function (out) {
+		// 	out = out || {};
 
-			for (let i = 1; i < arguments.length; i++) {
-				if (!arguments[i]) continue;
+		// 	for (let i = 1; i < arguments.length; i++) {
+		// 		if (!arguments[i]) continue;
 
-				for (let key in arguments[i]) {
-					if (arguments[i].hasOwnProperty(key)) out[key] = arguments[i][key];
-				}
-			}
+		// 		for (let key in arguments[i]) {
+		// 			if (arguments[i].hasOwnProperty(key)) out[key] = arguments[i][key];
+		// 		}
+		// 	}
 
-			return out;
-		},
+		// 	return out;
+		// },
 		/**
 		 * use to create excel file
 		 */
@@ -545,7 +548,7 @@ module.exports = function (app, dbname, setting) {
 		},
 	};
 
-	setting = fn.extend(
+	setting = core.extend(
 		{},
 		{
 			create: "auth",
@@ -562,7 +565,7 @@ module.exports = function (app, dbname, setting) {
 	// Create a new record
 	if (setting.create) {
 		if (setting.create === "auth") {
-			app.post(`/api/${dbname}`, fn.auth, fn.create);
+			app.post(`/api/${dbname}`, core.auth, fn.create);
 		} else {
 			app.post(`/api/${dbname}`, fn.create);
 		}
@@ -571,7 +574,7 @@ module.exports = function (app, dbname, setting) {
 	// Retrieve a single record by Id
 	if (setting.find) {
 		if (setting.find === "auth") {
-			app.get(`/api/${dbname}/:id`, fn.auth, fn.find);
+			app.get(`/api/${dbname}/:id`, core.auth, fn.find);
 		} else {
 			app.get(`/api/${dbname}/:id`, fn.find);
 		}
@@ -580,7 +583,7 @@ module.exports = function (app, dbname, setting) {
 	// Update a record with Id
 	if (setting.update) {
 		if (setting.update === "auth") {
-			app.put(`/api/${dbname}/:id`, fn.auth, fn.update);
+			app.put(`/api/${dbname}/:id`, core.auth, fn.update);
 		} else {
 			app.put(`/api/${dbname}/:id`, fn.update);
 		}
@@ -589,7 +592,7 @@ module.exports = function (app, dbname, setting) {
 	// Delete a record with Id
 	if (setting.delete) {
 		if (setting.delete === "auth") {
-			app.delete(`/api/${dbname}/:id`, fn.auth, fn.delete);
+			app.delete(`/api/${dbname}/:id`, core.auth, fn.delete);
 		} else {
 			app.delete(`/api/${dbname}/:id`, fn.delete);
 		}
@@ -598,7 +601,7 @@ module.exports = function (app, dbname, setting) {
 	// Get list of record
 	if (setting.list) {
 		if (setting.list === "auth") {
-			app.post(`/api/${dbname}-list`, fn.auth, fn.list);
+			app.post(`/api/${dbname}-list`, core.auth, fn.list);
 		} else {
 			app.post(`/api/${dbname}-list`, fn.list);
 		}
@@ -607,7 +610,7 @@ module.exports = function (app, dbname, setting) {
 	// Get list of record in excel
 	if (setting.excel) {
 		if (setting.excel === "auth") {
-			app.get(`/api/${dbname}-excel`, fn.auth, fn.excel);
+			app.get(`/api/${dbname}-excel`, core.auth, fn.excel);
 		} else {
 			app.get(`/api/${dbname}-excel`, fn.excel);
 		}
@@ -616,7 +619,7 @@ module.exports = function (app, dbname, setting) {
 	// Get COUNT or SUM of record
 	if (setting.aggregate) {
 		if (setting.aggregate === "auth") {
-			app.post(`/api/${dbname}-aggregate`, fn.auth, fn.aggregate);
+			app.post(`/api/${dbname}-aggregate`, core.auth, fn.aggregate);
 		} else {
 			app.post(`/api/${dbname}-aggregate`, fn.aggregate);
 		}

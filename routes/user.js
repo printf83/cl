@@ -1,50 +1,11 @@
 require("dotenv").config();
+
 const nodemailer = require("nodemailer");
+const $ = require(`../models/user.js`);
+const core = require(`../core.js`);
 
 module.exports = function (app) {
-	const $ = require(`../models/user.js`);
-
 	const fn = {
-		auth: (req, res, next) => {
-			let token = req.cookies.auth;
-			$.db.findByToken("auth", token, (err, result) => {
-				if (err) return res.status(400).json({ success: false, message: err.name });
-				if (!result) return res.status(400).json({ success: false, message: "Please sign up to continue" });
-				if (result instanceof $.db) {
-					req.authToken = token;
-					req.user = result;
-					next();
-				} else {
-					res.cookie("auth", "expired", {
-						httpOnly: true,
-						sameSite: "strict",
-						maxAge: -1,
-						expired: true,
-					});
-					return res.status(400).json({ success: false, message: "Please sign up to continue" });
-				}
-			});
-		},
-		extend: function (out) {
-			out = out || {};
-
-			for (let i = 1; i < arguments.length; i++) {
-				if (!arguments[i]) continue;
-
-				for (let key in arguments[i]) {
-					if (arguments[i].hasOwnProperty(key)) out[key] = arguments[i][key];
-				}
-			}
-
-			return out;
-		},
-		UUID: function (format) {
-			return (format || "cl-xxxxxxxxxxxx").replace(/[xy]/g, function (c) {
-				var r = (Math.random() * 16) | 0,
-					v = c === "x" ? r : (r & 0x3) | 0x8;
-				return v.toString(16);
-			});
-		},
 		email: function (opt, callback) {
 			let transporter = nodemailer.createTransport({
 				service: process.env.EMAILPROVIDER,
@@ -55,7 +16,7 @@ module.exports = function (app) {
 			});
 
 			transporter.sendMail(
-				fn.extend(
+				core.extend(
 					{},
 					{
 						from: process.env.EMAILADDRESS,
@@ -266,11 +227,11 @@ module.exports = function (app) {
 	};
 
 	app.post(`/api/user/validate`, fn.validate);
-	app.get(`/api/user/signout`, fn.auth, fn.signout);
+	app.get(`/api/user/signout`, core.auth, fn.signout);
 	app.post(`/api/user/register`, fn.register);
 	app.post(`/api/user/signin`, fn.signin);
 	app.post(`/api/user/resetpass`, fn.resetpass);
-	app.post(`/api/user/changepass`, fn.auth, fn.changepass);
+	app.post(`/api/user/changepass`, core.auth, fn.changepass);
 	app.post(`/api/user/changepass-guest`, fn.changepass_guest);
-	app.get(`/api/user/profile`, fn.auth, fn.profile);
+	app.get(`/api/user/profile`, core.auth, fn.profile);
 };
