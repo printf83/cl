@@ -750,6 +750,7 @@ fill="#999" stroke="none">
 				type: "text",
 				label: "Name",
 				name: "name",
+				required: true,
 				value: data ? data.name : null,
 			}),
 			new $.input({
@@ -775,6 +776,7 @@ fill="#999" stroke="none">
 				type: "select",
 				label: "State",
 				name: "state",
+				required: true,
 				option: dbstate,
 				value: data ? data.state : null,
 			}),
