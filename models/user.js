@@ -76,7 +76,16 @@ schema.statics.findByToken = function (prop, token, callback) {
 			}
 
 			i.findOne({ _id: decode.id, [`${prop}Token`]: token }, function (err, result) {
-				if (err) return callback(err);
+				if (err) {
+					console.log("JWT.Verify -> findOne Error");
+					console.log("Result : ");
+					console.log(result);
+					console.log("Error : ");
+					console.log(err);
+
+					return callback(err);
+				}
+
 				callback(null, result);
 			});
 		});
