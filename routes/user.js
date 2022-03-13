@@ -15,9 +15,6 @@ module.exports = function (app) {
 					req.user = result;
 					next();
 				} else {
-					console.log("token problem");
-					console.log(result);
-
 					res.cookie("auth", "expired", {
 						httpOnly: true,
 						sameSite: "strict",

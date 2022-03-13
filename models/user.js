@@ -65,7 +65,15 @@ schema.statics.findByToken = function (prop, token, callback) {
 	if (token) {
 		let i = this;
 		jwt.verify(token, process.env.SESSIONSECRET, function (err, decode) {
-			if (err) return callback(null, err);
+			if (err) {
+				console.log("JWT.Verify Error");
+				console.log("Decode : ");
+				console.log(decode);
+				console.log("Error : ");
+				console.log(err);
+
+				return callback(null, err);
+			}
 
 			i.findOne({ _id: decode.id, [`${prop}Token`]: token }, function (err, result) {
 				if (err) return callback(err);
