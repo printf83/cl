@@ -42,7 +42,9 @@ schema.methods.validatePassword = function (password, callback) {
 
 schema.methods.generateToken = function (prop, callback) {
 	let i = this;
-	let t = jwt.sign(i._id.toHexString(), process.env.SESSIONSECRET);
+	let t = jwt.sign(i._id.toHexString(), process.env.SESSIONSECRET, {
+		expiresIn: process.env.SESSIONEXPIRED,
+	});
 
 	i[`${prop}Token`] = t;
 	i.save(function (err, result) {
