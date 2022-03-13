@@ -4,37 +4,6 @@ module.exports = function (app, dbname, setting) {
 	const $ = require(`../models/${dbname}.js`);
 
 	const fn = {
-		// auth: (req, res, next) => {
-		// 	let token = req.cookies.auth;
-
-		// 	$user.db.findByToken("auth", token, (err, result) => {
-		// 		if (err || !result || !(result instanceof $user.db)) {
-		// 			res.cookie("auth", "expired", {
-		// 				httpOnly: true,
-		// 				sameSite: "strict",
-		// 				maxAge: -1,
-		// 				expired: true,
-		// 			});
-		// 			return res.status(400).json({ success: false, message: "Please sign up to continue" });
-		// 		}
-		// 		req.authToken = token;
-		// 		req.user = result;
-		// 		next();
-		// 	});
-		// },
-		// extend: function (out) {
-		// 	out = out || {};
-
-		// 	for (let i = 1; i < arguments.length; i++) {
-		// 		if (!arguments[i]) continue;
-
-		// 		for (let key in arguments[i]) {
-		// 			if (arguments[i].hasOwnProperty(key)) out[key] = arguments[i][key];
-		// 		}
-		// 	}
-
-		// 	return out;
-		// },
 		/**
 		 * use to create excel file
 		 */

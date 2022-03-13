@@ -6,34 +6,6 @@ const core = require(`../core.js`);
 
 module.exports = function (app, setting) {
 	const fn = {
-		// auth: (req, res, next) => {
-		// 	let token = req.cookies.auth;
-		// 	$user.db.findByToken("auth", token, (err, result) => {
-		// 		if (err) return res.status(400).json({ success: false, message: err.name });
-		// 		if (!result) return res.status(400).json({ success: false, message: "Please sign up to continue" });
-		// 		if (result instanceof $.db) {
-		// 			req.authToken = token;
-		// 			req.user = result;
-		// 			next();
-		// 		} else {
-		// 			res.cookie("auth", "expired", { httpOnly: true, sameSite: "strict", maxAge: -1, expired: true });
-		// 			return res.status(400).json({ success: false, message: "Please sign up to continue" });
-		// 		}
-		// 	});
-		// },
-		// extend: function (out) {
-		// 	out = out || {};
-
-		// 	for (let i = 1; i < arguments.length; i++) {
-		// 		if (!arguments[i]) continue;
-
-		// 		for (let key in arguments[i]) {
-		// 			if (arguments[i].hasOwnProperty(key)) out[key] = arguments[i][key];
-		// 		}
-		// 	}
-
-		// 	return out;
-		// },
 		upload: function (req, res) {
 			if (req.files && req.files.length > 0) {
 				console.log(req.files);
