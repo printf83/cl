@@ -671,6 +671,17 @@ $.core.documentReady(() => {
 				marginbottom: 5,
 				gap: 2,
 				elem: [
+					new $.a({
+						class: "text-decoration-none",
+						elem: new $.pill({
+							icon: "swatchbook",
+							title: "Theme",
+							color: "primary",
+							elem: [new $.small({ id: "pagetheme", elem: "default" })],
+						}),
+						href: "javascript:void(0)",
+						onclick: randomtheme,
+					}),
 					new $.pill({
 						icon: "eye",
 						title: "Viewport",
@@ -695,17 +706,6 @@ $.core.documentReady(() => {
 						title: "Page weight",
 						color: "primary",
 						elem: [new $.small({ id: "pageweight", elem: "0 item" })],
-					}),
-					new $.a({
-						class: "text-decoration-none",
-						elem: new $.pill({
-							icon: "swatchbook",
-							title: "Theme",
-							color: "primary",
-							elem: [new $.small({ id: "pagetheme", elem: "default" })],
-						}),
-						href: "javascript:void(0)",
-						onclick: randomtheme,
 					}),
 				],
 			}),
