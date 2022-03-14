@@ -63,13 +63,20 @@ module.exports = function (app) {
 					if (err || !result) return res.json({ success: false, message: "User not found" });
 
 					if (!user.emailToken) {
-						user.generateToken("auth", remember ? "14d" : null, (err, user) => {
+						user.generateToken("auth", remember ? "forever" : null, (err, user) => {
 							if (err) return res.json({ success: false, message: err.message });
 
-							res.cookie("auth", user.authToken, { httpOnly: true, sameSite: "strict" }).json({
-								success: true,
-								username: user.username,
-							});
+							if (remember) {
+								res.cookie("auth", user.authToken).json({
+									success: true,
+									username: user.username,
+								});
+							} else {
+								res.cookie("auth", user.authToken, { httpOnly: true, sameSite: "strict" }).json({
+									success: true,
+									username: user.username,
+								});
+							}
 						});
 					} else {
 						return res.json({ success: false, message: "Please validate your email" });

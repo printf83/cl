@@ -35,6 +35,9 @@ const defaultOption = {
 	deleteicon: "times",
 	deletecolor: "danger",
 	downloadicon: "arrow-down-to-bracket",
+
+	uploadsignin: true,
+	downloadsignin: false,
 };
 
 let db_opt = {};
@@ -83,7 +86,16 @@ const fn = {
 											onclick: function (event) {
 												let sender = event.currentTarget;
 												let fileid = sender.getAttribute("data-cl-file");
-												db.file.download(fileid, sender);
+
+												if (opt.downloadsignin) {
+													db.user.info({ sender: sender }, function (info) {
+														if (info) {
+															db.file.download(fileid, sender);
+														}
+													});
+												} else {
+													db.file.download(fileid, sender);
+												}
 											},
 										}),
 									}).show();
@@ -92,7 +104,16 @@ const fn = {
 
 								default:
 									//if other. do download
-									db.file.download(data[0].id, sender);
+
+									if (opt.downloadsignin) {
+										db.user.info({ sender: sender }, function (info) {
+											if (info) {
+												db.file.download(data[0].id, sender);
+											}
+										});
+									} else {
+										db.file.download(data[0].id, sender);
+									}
 
 									break;
 							}
@@ -137,7 +158,16 @@ const fn = {
 													onclick: function (event) {
 														let sender = event.currentTarget;
 														let fileid = sender.getAttribute("data-cl-file");
-														db.file.download(fileid, sender);
+
+														if (opt.downloadsignin) {
+															db.user.info({ sender: sender }, function (info) {
+																if (info) {
+																	db.file.download(fileid, sender);
+																}
+															});
+														} else {
+															db.file.download(fileid, sender);
+														}
 													},
 													elem: new img({
 														class: "img-fluid mx-auto d-block rounded",
@@ -167,7 +197,16 @@ const fn = {
 													onclick: function (event) {
 														let sender = event.currentTarget;
 														let fileid = sender.getAttribute("data-cl-file");
-														db.file.download(fileid, sender);
+
+														if (opt.downloadsignin) {
+															db.user.info({ sender: sender }, function (info) {
+																if (info) {
+																	db.file.download(fileid, sender);
+																}
+															});
+														} else {
+															db.file.download(fileid, sender);
+														}
 													},
 													elem: new span({
 														alignself: "center",
@@ -446,7 +485,18 @@ export default class file extends div {
 									color: opt.uploadcolor,
 									class: "w-100",
 									disabled: opt.disabled ? true : opt.readonly ? true : false,
-									onclick: fn.onupload,
+									onclick: function (event) {
+										let sender = event.currentTarget;
+										if (opt.uploadsignin) {
+											db.user.info({ sender: sender }, function (info) {
+												if (info) {
+													fn.onupload(event);
+												}
+											});
+										} else {
+											fn.onupload(event);
+										}
+									},
 								}),
 						  ],
 				}),

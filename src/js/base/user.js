@@ -54,7 +54,6 @@ let defaultResetPassOption = {
 	callback: null,
 	close: true,
 	debug: false,
-	isguest: true,
 };
 
 let defaultChangePassOption = {
@@ -451,7 +450,7 @@ const fn = {
 					new div({
 						display: "flex",
 						justifycontent: "center",
-						elem: new input({ type: "switch", name: "remember", label: "Remember me for 14 days" }),
+						elem: new input({ type: "checkbox", name: "remember", label: "Remember me" }),
 					}),
 					new container.grid([
 						new button({
@@ -475,10 +474,7 @@ const fn = {
 									onclick: function (event) {
 										let sender = event.currentTarget;
 										let container = sender.closest("form");
-										core.replaceChild(
-											container,
-											fn.form.container(opt.id, fn.form.resetpass(opt, true))
-										);
+										core.replaceChild(container, fn.form.container(opt.id, fn.form.resetpass(opt)));
 									},
 								}),
 								new button({
@@ -567,10 +563,7 @@ const fn = {
 									onclick: function (event) {
 										let sender = event.currentTarget;
 										let container = sender.closest("form");
-										core.replaceChild(
-											container,
-											fn.form.container(opt.id, fn.form.resetpass(opt, true))
-										);
+										core.replaceChild(container, fn.form.container(opt.id, fn.form.resetpass(opt)));
 									},
 								}),
 								new button({
@@ -588,7 +581,7 @@ const fn = {
 				].filter(Boolean)
 			);
 		},
-		resetpass: function (opt, isguest) {
+		resetpass: function (opt) {
 			return new container.form(
 				[
 					opt.close ? fn.closebtn(opt) : null,
@@ -628,38 +621,36 @@ const fn = {
 									: null,
 							}),
 
-							isguest
-								? new div({
-										display: "flex",
-										justifycontent: "between",
-										elem: [
-											new button({
-												weight: "sm",
-												elem: "Sign in",
-												onclick: function (event) {
-													let sender = event.currentTarget;
-													let container = sender.closest("form");
-													core.replaceChild(
-														container,
-														fn.form.container(opt.id, fn.form.signin(opt))
-													);
-												},
-											}),
-											new button({
-												weight: "sm",
-												elem: "Sign up",
-												onclick: function (event) {
-													let sender = event.currentTarget;
-													let container = sender.closest("form");
-													core.replaceChild(
-														container,
-														fn.form.container(opt.id, fn.form.signup(opt))
-													);
-												},
-											}),
-										],
-								  })
-								: null,
+							new div({
+								display: "flex",
+								justifycontent: "between",
+								elem: [
+									new button({
+										weight: "sm",
+										elem: "Sign in",
+										onclick: function (event) {
+											let sender = event.currentTarget;
+											let container = sender.closest("form");
+											core.replaceChild(
+												container,
+												fn.form.container(opt.id, fn.form.signin(opt))
+											);
+										},
+									}),
+									new button({
+										weight: "sm",
+										elem: "Sign up",
+										onclick: function (event) {
+											let sender = event.currentTarget;
+											let container = sender.closest("form");
+											core.replaceChild(
+												container,
+												fn.form.container(opt.id, fn.form.signup(opt))
+											);
+										},
+									}),
+								],
+							}),
 						].filter(Boolean)
 					),
 				].filter(Boolean)
@@ -736,6 +727,25 @@ const fn = {
 							elem: [
 								new button({
 									weight: "sm",
+									elem: "Update profile",
+									onclick: function (event) {
+										let sender = event.currentTarget;
+										let container = sender.closest("form");
+
+										fn.action.info(sender, function (result) {
+											if (result) {
+												opt.data = result;
+												core.replaceChild(
+													container,
+													fn.form.container(opt.id, fn.form.updateinfo(opt, false))
+												);
+											}
+										});
+									},
+								}),
+
+								new button({
+									weight: "sm",
 									elem: "Sign out",
 									onclick: function (event) {
 										let sender = event.currentTarget;
@@ -746,18 +756,6 @@ const fn = {
 												fn.form.container(opt.id, fn.form.signin(opt))
 											);
 										});
-									},
-								}),
-								new button({
-									weight: "sm",
-									elem: "Reset password",
-									onclick: function (event) {
-										let sender = event.currentTarget;
-										let container = sender.closest("form");
-										core.replaceChild(
-											container,
-											fn.form.container(opt.id, fn.form.resetpass(opt, false))
-										);
 									},
 								}),
 							],
@@ -843,10 +841,7 @@ const fn = {
 									onclick: function (event) {
 										let sender = event.currentTarget;
 										let container = sender.closest("form");
-										core.replaceChild(
-											container,
-											fn.form.container(opt.id, fn.form.resetpass(opt, true))
-										);
+										core.replaceChild(container, fn.form.container(opt.id, fn.form.resetpass(opt)));
 									},
 								}),
 							],
@@ -916,6 +911,40 @@ const fn = {
 										fn.action.updateinfo(event.currentTarget, opt);
 								  }
 								: null,
+						}),
+
+						new div({
+							display: "flex",
+							justifycontent: "between",
+							elem: [
+								new button({
+									weight: "sm",
+									elem: "Change password",
+									onclick: function (event) {
+										let sender = event.currentTarget;
+										let container = sender.closest("form");
+										core.replaceChild(
+											container,
+											fn.form.container(opt.id, fn.form.changepass(opt))
+										);
+									},
+								}),
+
+								new button({
+									weight: "sm",
+									elem: "Sign out",
+									onclick: function (event) {
+										let sender = event.currentTarget;
+										let container = sender.closest("form");
+										fn.action.signout(sender, function () {
+											core.replaceChild(
+												container,
+												fn.form.container(opt.id, fn.form.signin(opt))
+											);
+										});
+									},
+								}),
+							],
 						}),
 					]),
 				].filter(Boolean)
@@ -989,14 +1018,14 @@ export class resetpass extends modal {
 			super({
 				size: opt.size,
 				maxwidth: defaultMaxWidth,
-				elem: fn.form.container(opt.id, fn.form.resetpass(opt, opt.isguest)),
+				elem: fn.form.container(opt.id, fn.form.resetpass(opt)),
 				debug: true,
 			});
 		} else {
 			super({
 				size: opt.size,
 				maxwidth: defaultMaxWidth,
-				elem: fn.form.container(opt.id, fn.form.resetpass(opt, opt.isguest)),
+				elem: fn.form.container(opt.id, fn.form.resetpass(opt)),
 			});
 		}
 	}
