@@ -43,11 +43,11 @@ schema.methods.validatePassword = function (password, callback) {
 schema.methods.generateToken = function (prop, expired, callback) {
 	let i = this;
 	let t = null;
-	if (expired === "forever") {
+	if (expired === 0) {
 		t = jwt.sign({ id: i._id.toHexString() }, process.env.SESSIONSECRET);
 	} else {
 		t = jwt.sign({ id: i._id.toHexString() }, process.env.SESSIONSECRET, {
-			expiresIn: expired ? expired : process.env.SESSIONEXPIRED,
+			expiresIn: expired,
 		});
 	}
 

@@ -63,21 +63,30 @@ module.exports = function (app) {
 					if (err || !result) return res.json({ success: false, message: "User not found" });
 
 					if (!user.emailToken) {
-						user.generateToken("auth", remember ? "forever" : null, (err, user) => {
-							if (err) return res.json({ success: false, message: err.message });
+						user.generateToken(
+							"auth",
+							remember ? 0 : parseInt(process.env.SESSIONEXPIRED, 10),
+							(err, user) => {
+								if (err) return res.json({ success: false, message: err.message });
 
-							if (remember) {
-								res.cookie("auth", user.authToken).json({
-									success: true,
-									username: user.username,
-								});
-							} else {
-								res.cookie("auth", user.authToken, { httpOnly: true, sameSite: "strict" }).json({
-									success: true,
-									username: user.username,
-								});
+								if (remember) {
+									res.cookie("auth", user.authToken, {
+										httpOnly: true,
+										sameSite: "strict",
+										expires: false,
+										maxAge: 315569520000,
+									}).json({
+										success: true,
+										username: user.username,
+									});
+								} else {
+									res.cookie("auth", user.authToken, { httpOnly: true, sameSite: "strict" }).json({
+										success: true,
+										username: user.username,
+									});
+								}
 							}
-						});
+						);
 					} else {
 						return res.json({ success: false, message: "Please validate your email" });
 					}
@@ -113,7 +122,7 @@ module.exports = function (app) {
 						return res.json({ success: false });
 					}
 
-					newuser.generateToken("email", "15m", (err, user) => {
+					newuser.generateToken("email", 900000, (err, user) => {
 						if (err) return res.json({ success: false, message: err.message });
 						let serverUrl = process.env.SERVERURL; //req.protocol + "://" + req.get("host");
 
@@ -121,7 +130,7 @@ module.exports = function (app) {
 							{
 								to: user.email,
 								subject: "CL Confirmation Email",
-								html: `Click here to validate your email <a href="${serverUrl}/?validateUser=${user.emailToken}">${serverUrl}/?validateUser=${user.emailToken}</a>. This email validation must be made in 15 minutes.`,
+								html: `Click here to validate your email <a href="${serverUrl}/?validateUser=${user.emailToken}">${serverUrl}/?validateUser=${user.emailToken}</a>.`,
 							},
 							function (result) {
 								if (result && result.success) {
@@ -147,7 +156,7 @@ module.exports = function (app) {
 			$.db.findOne({ username: username }, function (err, user) {
 				if (err || !user) return res.json({ success: false, message: "User not found" });
 
-				user.generateToken("reset", "15m", (err, user) => {
+				user.generateToken("reset", 900000, (err, user) => {
 					if (err) return res.json({ success: false, message: err.message });
 					let serverUrl = process.env.SERVERURL; //req.protocol + "://" + req.get("host");
 
@@ -155,7 +164,7 @@ module.exports = function (app) {
 						{
 							to: user.email,
 							subject: "CL Reset Password",
-							html: `Click here to reset password <a href="${serverUrl}/?resetPassword=${user.resetToken}">${serverUrl}/?resetPassword=${user.resetToken}</a>. This email validation must be made in 15 minutes.`,
+							html: `Click here to reset password <a href="${serverUrl}/?resetPassword=${user.resetToken}">${serverUrl}/?resetPassword=${user.resetToken}</a>.`,
 						},
 						function (result) {
 							if (result && result.success) {

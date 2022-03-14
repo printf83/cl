@@ -15,7 +15,7 @@
 *   SERVERURL=http://localhost:8888
 *   HASHSALT=10
 *   SESSIONSECRET=super-secret-session
-*   SESSIONEXPIRED=2h
+*   SESSIONEXPIRED=28800000
 *   EMAILPROVIDER=gmail
 *   EMAILADDRESS=example@example.com
 *   EMAILPASSWORD=email-address-password
