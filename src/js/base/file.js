@@ -324,16 +324,7 @@ const fn = {
 			sender
 		);
 	},
-	onupload: function (event) {
-		let sender = event.currentTarget;
-		let btnupload = sender;
-		let container = sender.closest("div[data-cl-container]");
-		let id = container.getAttribute("data-cl-container");
-		let opt = db_opt[id];
-		let ctl = container.parentNode.querySelectorAll(`#${id}`)[0];
-
-		let fu = core.UUID();
-
+	startupload: function (sender, btnupload, ctl, fu, opt) {
 		//append div into button
 		core.appendChild(
 			sender,
@@ -378,18 +369,44 @@ const fn = {
 
 		document.getElementById(fu).click();
 	},
+	onupload: function (event) {
+		let sender = event.currentTarget;
+		let btnupload = sender;
+		let container = sender.closest("div[data-cl-container]");
+		let id = container.getAttribute("data-cl-container");
+		let opt = db_opt[id];
+		let ctl = container.parentNode.querySelectorAll(`#${id}`)[0];
+
+		let fu = core.UUID();
+
+		if (opt.uploadsignin) {
+			db.user.info({ sender: sender }, function (info) {
+				if (info) {
+					fn.startupload(sender, btnupload, ctl, fu, opt);
+				}
+			});
+		} else {
+			fn.startupload(sender, btnupload, ctl, fu, opt);
+		}
+	},
 	onsave: function (element, callback, sender) {
-		let value = element.value;
-		if (value) {
-			db.file.save(
-				value,
-				function (data) {
-					if (typeof callback === "function") {
-						callback(data);
-					}
-				},
-				sender
-			);
+		if (element) {
+			let value = element.value;
+			if (value) {
+				db.file.save(
+					value,
+					function (data) {
+						if (typeof callback === "function") {
+							callback(data);
+						}
+					},
+					sender
+				);
+			}
+		} else {
+			if (typeof callback === "function") {
+				callback(null);
+			}
 		}
 	},
 	onsavevalue: function (value, callback, sender) {
@@ -403,6 +420,10 @@ const fn = {
 				},
 				sender
 			);
+		} else {
+			if (typeof callback === "function") {
+				callback(null);
+			}
 		}
 	},
 };
@@ -485,18 +506,7 @@ export default class file extends div {
 									color: opt.uploadcolor,
 									class: "w-100",
 									disabled: opt.disabled ? true : opt.readonly ? true : false,
-									onclick: function (event) {
-										let sender = event.currentTarget;
-										if (opt.uploadsignin) {
-											db.user.info({ sender: sender }, function (info) {
-												if (info) {
-													fn.onupload(event);
-												}
-											});
-										} else {
-											fn.onupload(event);
-										}
-									},
+									onclick: fn.onupload,
 								}),
 						  ],
 				}),
@@ -525,6 +535,9 @@ export default class file extends div {
 			viewcolor: opt.viewcolor,
 
 			downloadicon: opt.downloadicon,
+
+			uploadsignin: opt.uploadsignin,
+			downloadsignin: opt.downloadsignin,
 		};
 
 		super.data = { elem: ctl };

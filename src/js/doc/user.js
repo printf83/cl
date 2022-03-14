@@ -50,7 +50,13 @@ export default [
 				icon: "key",
 				color: "primary",
 				onclick: function (event) {
-					new $.user.changepass().show();
+					new $.user.changepass({
+						callback: function (result) {
+							if (result) {
+								new $.toast("/", "Password changed").show();
+							}
+						},
+					}).show();
 				},
 			});
 		},
