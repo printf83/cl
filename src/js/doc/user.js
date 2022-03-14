@@ -72,9 +72,18 @@ export default [
 				icon: "user",
 				color: "primary",
 				onclick: function (event) {
-					$.user.info(event.currentTarget, function (result) {
+					let sender = event.currentTarget;
+					$.user.info(sender, function (result) {
 						if (result && result.email) {
-							new $.user.updateinfo({ data: result, callback: function () {} }).show();
+							new $.user.updateinfo({
+								data: result,
+								sender: sender,
+								callback: function (result) {
+									if (result) {
+										new $.toast("/", "Your information updated").show();
+									}
+								},
+							}).show();
 						}
 					});
 				},
