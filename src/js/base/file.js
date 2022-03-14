@@ -34,7 +34,7 @@ const defaultOption = {
 	deletelabel: null,
 	deleteicon: "times",
 	deletecolor: "danger",
-	downloadicon: "arrow-down-to-bracket",
+	downloadicon: "download", //"arrow-down-to-bracket",
 
 	uploadsignin: true,
 	downloadsignin: false,
