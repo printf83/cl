@@ -43,7 +43,7 @@ $.core.documentReady(() => {
 			name: "state",
 		},
 		function (dbstate) {
-			$.core.replaceChild(
+			$.core.replaceWith(
 				document.getElementById("root"),
 				new $.container.form([
 					new $.container.stack([

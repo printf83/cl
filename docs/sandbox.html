@@ -15,44 +15,12 @@
 
 		<title>BS5 JS Sandbox</title>
 	</head>
-	<body>
-		<div id="navbar"></div>
-
-		<div class="container-lg pt-3">
-			<div class="row">
-				<div class="col col-12 col-md-3 col-xl-2">
-					<div
-						id="sidebar"
-						class="sticky-md-top overflow-auto collapse navbar-collapse d-md-block mt-3 cl-vh-menu"
-						style="z-index: 0"
-					></div>
-				</div>
-
-				<div class="col col-12 col-md-9 col-xl-10">
-					<div class="row">
-						<div class="col col-12 col-xl-10 order-2 order-xl-1">
-							<div id="root">
-								<p class="display-3 mt-5">Please wait</p>
-								<p>
-									<span class="me-1"><i class="fas fa-spinner fa-fw fa-spin"></i></span>
-									Downloading application asset...
-								</p>
-								<noscript>
-									<p class="text-danger">Your browser does not support JavaScript!</p>
-								</noscript>
-							</div>
-						</div>
-
-						<div class="col col-12 col-xl-2 order-1 order-xl-2">
-							<div
-								id="nextbar"
-								class="sticky-lg-top overflow-auto mt-3 cl-vh-menu"
-								style="z-index: 0"
-							></div>
-						</div>
-					</div>
-				</div>
-			</div>
+	<body class="position-relative">
+		<div class="position-fixed top-50 start-50 translate-middle" id="root">
+			<i class="fas fa-spinner fa-fw fa-spin fa-5x"></i>
+			<noscript>
+				<p class="text-danger">Your browser does not support JavaScript!</p>
+			</noscript>
 		</div>
 
 		<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
