@@ -46,7 +46,6 @@ if (process.env.DBURL) {
 	};
 
 	const mongoose = require("mongoose");
-	const { fstat } = require("fs");
 	mongoose.Promise = global.Promise;
 
 	mongoose
