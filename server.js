@@ -81,7 +81,7 @@ if (process.env.DBURL) {
 		find: true,
 		update: "auth",
 		delete: "auth",
-		list: "auth",
+		list: true,
 		excel: false,
 		aggregate: false,
 	}); //state handler using generic route
