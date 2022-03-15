@@ -209,10 +209,16 @@ let def_theme = null;
 function randomtheme() {
 	let db_theme = db_menu[db_menu.length - 1].item;
 	let cur_theme = db_theme[Math.floor(Math.random() * db_theme.length)].source;
+
+	while (cur_theme === def_theme) {
+		cur_theme = db_theme[Math.floor(Math.random() * db_theme.length)].source;
+	}
+
 	if (cur_theme === "") {
 		cur_theme = null;
 	}
 
+	def_theme = cur_theme;
 	set_theme(cur_theme);
 }
 
