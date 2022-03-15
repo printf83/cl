@@ -829,8 +829,10 @@ fill="#999" stroke="none">
 					sender: sender,
 				},
 				function (result) {
-					dbstate = result;
-					callback(dbstate);
+					if (result) {
+						dbstate = result;
+						callback(dbstate);
+					}
 				}
 			);
 		} else {

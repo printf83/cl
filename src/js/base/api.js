@@ -123,7 +123,6 @@ const fn = {
 							} else {
 								opt.callback(null);
 							}
-							// fn.get(opt);
 						},
 					}).show();
 				} else {
@@ -151,7 +150,6 @@ const fn = {
 							} else {
 								opt.callback(null);
 							}
-							// fn.post(opt);
 						},
 					}).show();
 				} else {
@@ -180,7 +178,6 @@ const fn = {
 							} else {
 								opt.callback(null);
 							}
-							// fn.upload(opt);
 						},
 					}).show();
 				} else {

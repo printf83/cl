@@ -18,9 +18,9 @@ const defaultIcon = {
 	icon: "fire",
 	weight: "4x",
 };
-const defaultSize = "md";
-const defaultMaxWidth = "420px";
-const defaultTitleSize = 4;
+const defaultSize = "sm";
+const defaultMaxWidth = null; //"420px";
+const defaultTitleSize = 5;
 
 let defaultSignInOption = {
 	id: null,
@@ -424,10 +424,10 @@ const fn = {
 					}),
 
 					new input({
+						before: new icon("at"),
 						name: "email",
 						type: "email",
-						label: "Email address",
-						floatlabel: true,
+						placeholder: "Email address",
 						required: true,
 						attr: {
 							autocomplete: "off",
@@ -436,12 +436,12 @@ const fn = {
 						onchange: fn.action.inputchange,
 					}),
 					new input({
+						before: new icon("key"),
 						name: "password",
 						type: "password",
-						label: "Password",
+						placeholder: "Password",
 						required: true,
 						minlengh: 8,
-						floatlabel: true,
 						attr: {
 							autocomplete: "off",
 						},
@@ -457,7 +457,6 @@ const fn = {
 							label: "Sign in",
 							icon: "arrow-right-to-bracket",
 							color: "primary",
-							weight: "lg",
 							onclick: !opt.debug
 								? function (event) {
 										fn.action.signin(event.currentTarget, opt);
@@ -507,9 +506,10 @@ const fn = {
 					}),
 
 					new input({
+						before: new icon("at"),
 						name: "email",
 						type: "email",
-						label: "Email address",
+						placeholder: "Email address",
 						required: true,
 						floatlabel: true,
 						attr: {
@@ -518,24 +518,24 @@ const fn = {
 						onchange: fn.action.inputchange,
 					}),
 					new input({
+						before: new icon("key"),
 						name: "password",
 						type: "password",
-						label: "Password",
+						placeholder: "Password",
 						required: true,
 						minlengh: 8,
-						floatlabel: true,
 						attr: {
 							autocomplete: "off",
 						},
 						onchange: fn.action.inputchange,
 					}),
 					new input({
+						before: new icon("key"),
 						name: "password2",
 						type: "password",
-						label: "Repeat password",
+						placeholder: "Repeat password",
 						required: true,
 						minlengh: 8,
-						floatlabel: true,
 						attr: {
 							autocomplete: "off",
 						},
@@ -546,7 +546,6 @@ const fn = {
 							label: "Sign up",
 							icon: "arrow-up-from-bracket",
 							color: "primary",
-							weight: "lg",
 							onclick: !opt.debug
 								? function (event) {
 										fn.action.signup(event.currentTarget, opt);
@@ -596,11 +595,11 @@ const fn = {
 					}),
 
 					new input({
+						before: new icon("at"),
 						name: "email",
 						type: "email",
-						label: "Email address",
+						placeholder: "Email address",
 						required: true,
-						floatlabel: true,
 						attr: {
 							autocomplete: "off",
 						},
@@ -613,7 +612,6 @@ const fn = {
 								label: "Send email",
 								icon: "arrow-up-from-bracket",
 								color: "primary",
-								weight: "lg",
 								onclick: !opt.debug
 									? function (event) {
 											fn.action.resetpass(event.currentTarget, opt);
@@ -671,12 +669,12 @@ const fn = {
 					}),
 
 					new input({
+						before: new icon("at"),
 						name: "oldpassword",
 						type: "password",
-						label: "Old password",
+						placeholder: "Old password",
 						required: true,
 						minlengh: 8,
-						floatlabel: true,
 						attr: {
 							autocomplete: "off",
 						},
@@ -684,12 +682,12 @@ const fn = {
 					}),
 
 					new input({
+						before: new icon("key"),
 						name: "password",
 						type: "password",
-						label: "New password",
+						placeholder: "New password",
 						required: true,
 						minlengh: 8,
-						floatlabel: true,
 						attr: {
 							autocomplete: "off",
 						},
@@ -697,12 +695,12 @@ const fn = {
 					}),
 
 					new input({
+						before: new icon("key"),
 						name: "password2",
 						type: "password",
-						label: "Repeat new password",
+						placeholder: "Repeat new password",
 						required: true,
 						minlengh: 8,
-						floatlabel: true,
 						attr: {
 							autocomplete: "off",
 						},
@@ -714,7 +712,6 @@ const fn = {
 							label: "Change password",
 							icon: "floppy-disk",
 							color: "primary",
-							weight: "lg",
 							onclick: !opt.debug
 								? function (event) {
 										fn.action.changepass(event.currentTarget, opt);
@@ -785,12 +782,12 @@ const fn = {
 					}),
 
 					new input({
+						before: new icon("key"),
 						name: "password",
 						type: "password",
-						label: "New password",
+						placeholder: "New password",
 						required: true,
 						minlengh: 8,
-						floatlabel: true,
 						attr: {
 							autocomplete: "off",
 						},
@@ -798,12 +795,12 @@ const fn = {
 					}),
 
 					new input({
+						before: new icon("key"),
 						name: "password2",
 						type: "password",
-						label: "Repeat new password",
+						placeholder: "Repeat new password",
 						required: true,
 						minlengh: 8,
-						floatlabel: true,
 						attr: {
 							autocomplete: "off",
 						},
@@ -815,7 +812,6 @@ const fn = {
 							label: "Change password",
 							icon: "floppy-disk",
 							color: "primary",
-							weight: "lg",
 							onclick: !opt.debug
 								? function (event) {
 										fn.action.changepass_guest(event.currentTarget, opt);
@@ -866,7 +862,6 @@ const fn = {
 
 					new file({
 						name: "picture",
-						weight: "lg",
 						value: opt && opt.data ? opt.data.picture : null,
 						uploadlabel: "Upload picture",
 						uploadicon: "user",
@@ -876,11 +871,11 @@ const fn = {
 					}),
 
 					new input({
+						before: new icon("at"),
 						name: "email",
 						type: "email",
-						label: "Contact email",
+						placeholder: "Contact email",
 						required: true,
-						floatlabel: true,
 						attr: {
 							autocomplete: "off",
 						},
@@ -888,11 +883,11 @@ const fn = {
 						onchange: fn.action.inputchange,
 					}),
 					new input({
+						before: new icon("tag"),
 						name: "name",
 						type: "text",
-						label: "Name",
+						placeholder: "Name",
 						required: true,
-						floatlabel: true,
 						attr: {
 							autocomplete: "off",
 						},
@@ -905,7 +900,6 @@ const fn = {
 							label: "Update profile",
 							icon: "arrow-up-from-bracket",
 							color: "primary",
-							weight: "lg",
 							onclick: !opt.debug
 								? function (event) {
 										fn.action.updateinfo(event.currentTarget, opt);
