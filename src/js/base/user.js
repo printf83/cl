@@ -669,7 +669,7 @@ const fn = {
 					}),
 
 					new input({
-						before: new icon("at"),
+						before: new icon("key"),
 						name: "oldpassword",
 						type: "password",
 						placeholder: "Old password",
@@ -871,7 +871,7 @@ const fn = {
 					}),
 
 					new input({
-						before: new icon("at"),
+						before: new icon("envelope"),
 						name: "email",
 						type: "email",
 						placeholder: "Contact email",
