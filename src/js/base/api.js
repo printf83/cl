@@ -123,6 +123,7 @@ const fn = {
 							} else {
 								opt.callback(null);
 							}
+							// fn.get(opt);
 						},
 					}).show();
 				} else {
@@ -150,6 +151,7 @@ const fn = {
 							} else {
 								opt.callback(null);
 							}
+							// fn.post(opt);
 						},
 					}).show();
 				} else {
@@ -178,6 +180,7 @@ const fn = {
 							} else {
 								opt.callback(null);
 							}
+							// fn.upload(opt);
 						},
 					}).show();
 				} else {
@@ -394,22 +397,29 @@ export const api = {
 				fn.sender.setbusy(opt.sender);
 				fn.post({
 					callback: function (result) {
-						var tmp = result.data
-							? result.data.map((i) => {
-									return {
-										value: i[opt.fieldkey],
-										label: i[opt.fieldname],
-									};
-							  })
-							: [];
+						if (result) {
+							var tmp = result.data
+								? result.data.map((i) => {
+										return {
+											value: i[opt.fieldkey],
+											label: i[opt.fieldname],
+										};
+								  })
+								: [];
 
-						if (opt.emptylabel !== null) {
-							tmp.unshift({ value: "", label: opt.emptylabel });
-						}
+							if (opt.emptylabel !== null) {
+								tmp.unshift({ value: "", label: opt.emptylabel });
+							}
 
-						fn.sender.setfree(opt.sender);
-						if (typeof callback === "function") {
-							callback(tmp);
+							fn.sender.setfree(opt.sender);
+							if (typeof callback === "function") {
+								callback(tmp);
+							}
+						} else {
+							fn.sender.setfree(opt.sender);
+							if (typeof callback === "function") {
+								callback(null);
+							}
 						}
 					},
 					url: `api/${opt.name}-list`,
