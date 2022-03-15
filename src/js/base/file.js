@@ -34,7 +34,7 @@ const defaultOption = {
 	deletelabel: null,
 	deleteicon: "times",
 	deletecolor: "danger",
-	downloadicon: "download", //"arrow-down-to-bracket",
+	downloadicon: { icon: "arrow-right-to-bracket", rotate: 90, size: "2x", color: "muted" },
 
 	uploadsignin: true,
 	downloadsignin: false,
@@ -210,11 +210,14 @@ const fn = {
 													},
 													elem: new span({
 														alignself: "center",
-														elem: new icon({
-															icon: opt.downloadicon,
-															color: "muted",
-															weight: "2x",
-														}),
+														elem:
+															typeof opt.downloadicon === "object"
+																? new icon(downloadicon)
+																: new icon({
+																		icon: opt.downloadicon,
+																		color: "muted",
+																		weight: "2x",
+																  }),
 													}),
 												}),
 											})
