@@ -1,5 +1,5 @@
 "use strict";
-import "../../css/anchor.css";
+// import "../../css/anchor.css";
 
 import * as core from "./core.js";
 import * as card from "./card.js";

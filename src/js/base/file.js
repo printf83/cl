@@ -1,5 +1,5 @@
 "use strict";
-import "../../css/file.css";
+// import "../../css/file.css";
 
 import * as core from "./core.js";
 import * as db from "./api.js";
