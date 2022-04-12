@@ -170,22 +170,38 @@ export default class modal extends div {
 							onclick: function (event) {
 								event.stopPropagation();
 
+								//validate for first button only
 								let mdl = event.currentTarget.closest(".modal");
-								core.validate(mdl, function (isvalid) {
-									if (isvalid) {
-										let formdata = core.getValue(mdl);
-										let result =
-											i.onclick instanceof Function
-												? i.onclick(event.currentTarget, formdata)
-												: true;
-										if (result !== false) {
-											//find parent and close
-											modal.hide(mdl);
+								let sender = event.currentTarget;
+								if (sender.getAttribute("tab-index") === "1") {
+									core.validate(mdl, function (isvalid) {
+										if (isvalid) {
+											let formdata = core.getValue(mdl);
+											let result =
+												i.onclick instanceof Function
+													? i.onclick(event.currentTarget, formdata)
+													: true;
+											if (result !== false) {
+												//find parent and close
+												modal.hide(mdl);
+											}
 										}
+									});
+								} else {
+									//no need to validate for second button
+									let formdata = core.getValue(mdl);
+									let result =
+										i.onclick instanceof Function ? i.onclick(event.currentTarget, formdata) : true;
+									if (result !== false) {
+										//find parent and close
+										modal.hide(mdl);
 									}
-								});
+								}
 							},
-							attr: { "data-bs-dismiss": i.onclick instanceof Function ? null : "modal" },
+							attr: {
+								"data-bs-dismiss": i.onclick instanceof Function ? null : "modal",
+								"tab-index": ix + 1,
+							},
 						});
 					}
 				});

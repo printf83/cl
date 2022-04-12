@@ -194,7 +194,9 @@ function elemBuilder(elem) {
 
 	return new container.form(
 		argElem.map(function (i, ix) {
-			return typeof i === "string" ? new input({ type: i, name: ix === 0 ? "value" : `value_${ix}` }) : i;
+			return typeof i === "string"
+				? new input({ type: i, required: true, name: ix === 0 ? "value" : `value_${ix}` })
+				: i;
 		})
 	);
 }

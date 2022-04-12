@@ -505,20 +505,14 @@ export function validate(container, callback) {
 	if (listofctl) {
 		container.classList.remove("was-validated");
 		listofctl.forEach(function (item) {
-			let id = item.getAttribute("id");
-			if (id) {
-				let ctl = document.getElementById(id);
-
-				if (ctl) {
-					//validate required
-					if (validateElem(ctl)) {
-						//ctl.classList.add("is-valid");
-						ctl.classList.remove("is-invalid");
-					} else {
-						ctl.classList.add("is-invalid");
-						//ctl.classList.remove("is-valid");
-					}
-				}
+			if (validateElem(item)) {
+				item.classList.add("is-valid");
+				item.classList.remove("is-invalid");
+				item.setCustomValidity("invalid");
+			} else {
+				item.classList.add("is-invalid");
+				item.classList.remove("is-valid");
+				item.setCustomValidity(null);
 			}
 		});
 
