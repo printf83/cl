@@ -1,6 +1,8 @@
 const core = require(`../core.js`);
 
 module.exports = function (app, dbname, setting) {
+	console.log(`Setup ${dbname} db`);
+
 	const $ = require(`../models/${dbname}.js`);
 
 	const fn = {

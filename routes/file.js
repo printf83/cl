@@ -5,6 +5,8 @@ const uploader = multer({ dest: "tmp/" });
 const core = require(`../core.js`);
 
 module.exports = function (app, setting) {
+	console.log(`Setup file db`);
+
 	const fn = {
 		upload: function (req, res) {
 			if (req.files && req.files.length > 0) {

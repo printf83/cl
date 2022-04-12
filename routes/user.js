@@ -5,6 +5,8 @@ const $ = require(`../models/user.js`);
 const core = require(`../core.js`);
 
 module.exports = function (app) {
+	console.log(`Setup user db`);
+
 	const fn = {
 		email: function (opt, callback) {
 			let transporter = nodemailer.createTransport({

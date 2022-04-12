@@ -59,7 +59,7 @@ if (process.env.DBURL) {
 		});
 
 	//file management
-	require("./server-file.js");
+	require("./server-file.js")();
 
 	//router manager
 	require("./server-router.js")(app);
