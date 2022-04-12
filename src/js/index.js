@@ -1,6 +1,6 @@
 "use strict";
 
-import "../css/sample.css";
+// import "../css/sample.css";
 
 import sample from "./doc/sample.js";
 import doc from "./doc.js";

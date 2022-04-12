@@ -18,7 +18,7 @@ const defaultIcon = {
 	icon: "fire",
 	weight: "4x",
 };
-const defaultSize = "sm";
+const defaultSize = "md";
 const defaultMaxWidth = null; //"420px";
 const defaultTitleSize = 5;
 

@@ -1,5 +1,5 @@
 "use strict";
-import "../../css/toc.css";
+// import "../../css/toc.css";
 
 import button from "./button.js";
 import * as core from "./core.js";

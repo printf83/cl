@@ -1,6 +1,6 @@
 "use strict";
-import "../../css/animation.css";
-import "../../css/query.css";
+// import "../../css/animation.css";
+// import "../../css/query.css";
 
 import * as core from "./core.js";
 import modal from "./modal.js";

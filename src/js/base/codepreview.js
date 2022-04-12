@@ -1,6 +1,6 @@
 "use strict";
-import "../../css/codepreview.css";
-import "../../css/prettify.css";
+// import "../../css/codepreview.css";
+// import "../../css/prettify.css";
 
 import * as core from "./core.js";
 import * as card from "./card.js";
