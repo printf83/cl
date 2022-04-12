@@ -6,7 +6,6 @@ import * as db from "./api.js";
 import * as query from "./query.js";
 import div from "./div.js";
 import paging from "./paging.js";
-// import listgroup from "./listgroup.js";
 import btngroup from "./btngroup.js";
 import img from "./img.js";
 import button from "./button.js";

@@ -1,5 +1,6 @@
 const $ = require("../models/file.js");
 const fs = require("fs");
+const path = require("path");
 const multer = require("multer");
 const uploader = multer({ dest: "tmp/" });
 const core = require(`../core.js`);
@@ -14,15 +15,19 @@ module.exports = function (app, setting) {
 
 				let files = [];
 				req.files.forEach((file) => {
+					console.log(`../${file.path}`);
+					let data = fs.readFileSync(`../${file.path}`);
+					let encodeData = data.toString("base64");
+
 					files.push({
 						fieldname: file.fieldname,
 						originalname: file.originalname,
 						encoding: file.encoding,
 						mimetype: file.mimetype,
-						destination: file.destination,
+						saved: false,
 						filename: file.filename,
-						path: file.path,
 						size: file.size,
+						data: encodeData,
 					});
 
 					//console.info(file);
@@ -49,22 +54,21 @@ module.exports = function (app, setting) {
 				.findOne({ _id: req.params.id })
 				.then((data) => {
 					if (data) {
-						fs.access(data.path, fs.constants.R_OK, (err) => {
-							if (!err) {
-								res.writeHead(200, {
-									"Content-Disposition": `attachment; filename=${data.originalname}`,
-									"Content-Type": data.mimetype,
-									"Content-Length": data.size,
-									"Cache-Control": "public, max-age=604800, immutable",
-								});
+						if (data.data) {
+							res.writeHead(200, {
+								"Content-Disposition": `attachment; filename=${data.originalname}`,
+								"Content-Type": data.mimetype,
+								"Content-Length": data.size,
+								"Cache-Control": "public, max-age=604800, immutable",
+							});
 
-								let filestream = fs.createReadStream(data.path);
+							let bytes = Convert.FromBase64String(data.data);
+							var filestream = new StreamContent(new MemoryStream(bytes));
 
-								filestream.pipe(res);
-							} else {
-								res.status(404).send("Not found");
-							}
-						});
+							filestream.pipe(res);
+						} else {
+							res.status(404).send("Not found");
+						}
 					} else {
 						res.status(404).send("Not found");
 					}
@@ -193,25 +197,18 @@ module.exports = function (app, setting) {
 					.findOne({ _id: id })
 					.then((data) => {
 						if (data) {
-							//move file to deleted dir
-							fn.fs_unlink(data.path)
-								.then(() => {
-									// Find file and remove it
-									$.db
-										.findByIdAndRemove({ _id: id })
-										.then((data) => {
-											if (data) {
-												res({ id: id, result: true });
-											} else {
-												res({
-													id: id,
-													result: "Operation fail",
-												});
-											}
-										})
-										.catch((err) => {
-											res({ id: id, result: err.message });
+							// Find file and remove it
+							$.db
+								.findByIdAndRemove({ _id: id })
+								.then((data) => {
+									if (data) {
+										res({ id: id, result: true });
+									} else {
+										res({
+											id: id,
+											result: "Operation fail",
 										});
+									}
 								})
 								.catch((err) => {
 									res({ id: id, result: err.message });
@@ -233,35 +230,27 @@ module.exports = function (app, setting) {
 					.findOne({ _id: id })
 					.then((data) => {
 						if (data) {
-							if (data.destination === "tmp/") {
+							if (!data.saved) {
 								//create file dir if not exists
 
-								//move file to file dir
-								fn.fs_move(data.path, `file/${data.filename}`)
-									.then(function () {
-										// Find file and update it
-										$.db
-											.findOneAndUpdate(
-												{ _id: id },
-												{
-													destination: "file/",
-													path: `file/${data.filename}`,
-												},
-												{ new: false }
-											)
-											.then((data) => {
-												if (data) {
-													res({ id: id, result: true });
-												} else {
-													rej({
-														id: id,
-														result: "Operation fail",
-													});
-												}
-											})
-											.catch((err) => {
-												rej({ id: id, result: err.message });
+								// Find file and update it
+								$.db
+									.findOneAndUpdate(
+										{ _id: id },
+										{
+											saved: true,
+										},
+										{ new: false }
+									)
+									.then((data) => {
+										if (data) {
+											res({ id: id, result: true });
+										} else {
+											rej({
+												id: id,
+												result: "Operation fail",
 											});
+										}
 									})
 									.catch((err) => {
 										rej({ id: id, result: err.message });
@@ -276,47 +265,6 @@ module.exports = function (app, setting) {
 					.catch((err) => {
 						rej({ id: id, result: err.message });
 					});
-			});
-		},
-		fs_move: function (oldPath, newPath) {
-			return new Promise((res, rej) => {
-				fs.rename(oldPath, newPath, function (err) {
-					if (err) {
-						if (err.code === "EXDEV") {
-							let readStream = fs.createReadStream(oldPath);
-							let writeStream = fs.createWriteStream(newPath);
-
-							readStream.on("error", rej);
-							writeStream.on("error", rej);
-
-							readStream.on("close", function () {
-								fs.unlink(oldPath, (err) => {
-									if (err) {
-										rej(err);
-									} else {
-										res();
-									}
-								});
-							});
-
-							readStream.pipe(writeStream);
-						} else {
-							rej(err);
-						}
-					}
-					res();
-				});
-			});
-		},
-		fs_unlink: function (path) {
-			return new Promise((res, rej) => {
-				fs.unlink(path, (err) => {
-					if (err) {
-						rej(err);
-					} else {
-						res();
-					}
-				});
 			});
 		},
 	};

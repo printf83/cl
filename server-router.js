@@ -1,4 +1,10 @@
+const express = require("express");
+const path = require("path");
+
 module.exports = function (app) {
+	//static file
+	app.use(express.static(path.join(__dirname, "docs")));
+
 	//setup router
 	require("./routes/file.js")(app, {
 		upload: "auth",
