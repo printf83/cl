@@ -1,5 +1,22 @@
+const $ = require("./models/file.js");
 const fs = require("fs");
 const path = require("path");
+
+//cleanup temp file
+function cleanuptmpfile() {
+	$.db
+		.find({ saved: { $eq: false } })
+		.then((data) => {
+			data.forEach((item) => {
+				$.db.findByIdAndRemove({ _id: item.id }).then((data) => {
+					console.log(`Remove file ${item.id}`);
+				});
+			});
+		})
+		.catch((err) => {
+			console.error(err);
+		});
+}
 
 //function to copy
 function copyFileSync(source, target) {
@@ -42,9 +59,8 @@ module.exports = function () {
 	//delete tmp folder
 	fs.rmSync("./tmp", { recursive: true, force: true });
 
-	//create file folder
-	fs.mkdir("./file", (err) => {});
-	console.info("Remove tmp folder");
+	cleanuptmpfile();
+	console.info("Remove tmp file and folder");
 
 	//delete dist
 	fs.rmSync("./docs/dist", { recursive: true, force: true });
