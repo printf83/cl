@@ -5,17 +5,6 @@ const multer = require("multer");
 const uploader = multer({ dest: "tmp/" });
 const core = require(`../core.js`);
 const { Readable } = require("stream");
-const { response } = require("express");
-
-function _base64ToArrayBuffer(base64) {
-	var binary_string = Buffer.from(base64, "base64").toString("binary");
-	var len = binary_string.length;
-	var bytes = new Uint8Array(len);
-	for (var i = 0; i < len; i++) {
-		bytes[i] = binary_string.charCodeAt(i);
-	}
-	return bytes.buffer;
-}
 
 module.exports = function (app, setting) {
 	console.log(`Setup file db`);
