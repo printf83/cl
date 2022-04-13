@@ -4,6 +4,18 @@ const path = require("path");
 const multer = require("multer");
 const uploader = multer({ dest: "tmp/" });
 const core = require(`../core.js`);
+const stream = require("stream");
+const { response } = require("express");
+
+function _base64ToArrayBuffer(base64) {
+	var binary_string = Buffer.from(base64, "base64").toString("binary");
+	var len = binary_string.length;
+	var bytes = new Uint8Array(len);
+	for (var i = 0; i < len; i++) {
+		bytes[i] = binary_string.charCodeAt(i);
+	}
+	return bytes.buffer;
+}
 
 module.exports = function (app, setting) {
 	console.log(`Setup file db`);
@@ -11,12 +23,9 @@ module.exports = function (app, setting) {
 	const fn = {
 		upload: function (req, res) {
 			if (req.files && req.files.length > 0) {
-				console.log(req.files);
-
 				let files = [];
 				req.files.forEach((file) => {
-					console.log(`../${file.path}`);
-					let data = fs.readFileSync(`../${file.path}`);
+					let data = fs.readFileSync(path.join(setting.rootdir, file.path));
 					let encodeData = data.toString("base64");
 
 					files.push({
@@ -55,17 +64,22 @@ module.exports = function (app, setting) {
 				.then((data) => {
 					if (data) {
 						if (data.data) {
-							res.writeHead(200, {
-								"Content-Disposition": `attachment; filename=${data.originalname}`,
-								"Content-Type": data.mimetype,
-								"Content-Length": data.size,
-								"Cache-Control": "public, max-age=604800, immutable",
-							});
+							res.status(200).send(data.data.toString("base64"));
+							// let buff = Buffer.from(data.data, "base64");
+							// let readStream = new stream.PassThrough();
+							// readStream.end(buff);
 
-							let bytes = Convert.FromBase64String(data.data);
-							var filestream = new StreamContent(new MemoryStream(bytes));
+							// res.setHeader("Content-Disposition", `attachment; filename=${data.originalname}`);
+							// res.setHeader("Content-Type", `${data.mimetype}`);
+							// // res.setHeader("Content-Length", buff.length);
+							// // res.setHeader("Cache-Control", "public, max-age=604800, immutable");
 
-							filestream.pipe(res);
+							// readStream.on("error", function (err) {
+							// 	res.end();
+							// });
+							// readStream.pipe(res);
+
+							// console.log(`Sending file ${data.id}`);
 						} else {
 							res.status(404).send("Not found");
 						}

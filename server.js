@@ -13,7 +13,6 @@ if (process.env.DBURL) {
 	require("./server-db.js")();
 
 	//file
-	//file
 	require("./server-file.js")();
 
 	//router

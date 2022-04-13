@@ -28,6 +28,14 @@ const defaultOptionUpload = {
 	async: false,
 };
 
+const defaultOptionDownload = {
+	callback: function (data) {},
+	type: "GET",
+	url: null,
+	data: null,
+	async: true,
+};
+
 const fn = {
 	str2Object: function (value) {
 		if (value && value !== "") {
@@ -198,8 +206,31 @@ const fn = {
 		req.open(opt.type, opt.url, opt.async);
 		req.send(this.genfileformdata(opt.data));
 	},
-	download: function (url) {
-		window.location = url;
+	download: function (opt) {
+		opt = core.extend({}, defaultOptionDownload, opt);
+
+		let req = new XMLHttpRequest();
+		req.onreadystatechange = function () {
+			if (req.readyState == 4) {
+				if (req.status == 200) {
+					opt.callback(fn.str2Object(req.responseText));
+				} else if (req.status === 400) {
+					new user_signin({
+						callback: function (result) {
+							if (result) {
+								fn.get(opt);
+							} else {
+								opt.callback(null);
+							}
+						},
+					}).show();
+				} else {
+					opt.callback(null);
+				}
+			}
+		};
+		req.open(opt.type, opt.url, opt.async);
+		req.send(fn.obj2String(opt.data));
 	},
 	genformdata: function (obj) {
 		if (obj) {
@@ -522,16 +553,16 @@ export const file = {
 		if (id) {
 			if (fn.sender.isfree(sender)) {
 				fn.sender.setbusy(sender);
-
-				setTimeout(
-					function (sender) {
+				fn.download({
+					callback: function (result) {
 						fn.sender.setfree(sender);
+						console.log(result);
+						// if (typeof callback === "function") {
+						// 	callback(result);
+						// }
 					},
-					3000,
-					sender
-				);
-
-				fn.download(this.url(id));
+					url: this.url(id),
+				});
 			}
 		} else {
 			console.error("opt id is required");
