@@ -4,7 +4,7 @@ const path = require("path");
 const multer = require("multer");
 const uploader = multer({ dest: "tmp/" });
 const core = require(`../core.js`);
-const stream = require("stream");
+const { Readable } = require("stream");
 const { response } = require("express");
 
 function _base64ToArrayBuffer(base64) {
@@ -26,7 +26,7 @@ module.exports = function (app, setting) {
 				let files = [];
 				req.files.forEach((file) => {
 					let data = fs.readFileSync(path.join(setting.rootdir, file.path));
-					let encodeData = data.toString("base64");
+					// let encodeData = data.toString("base64");
 
 					files.push({
 						fieldname: file.fieldname,
@@ -36,7 +36,7 @@ module.exports = function (app, setting) {
 						saved: false,
 						filename: file.filename,
 						size: file.size,
-						data: encodeData,
+						data: data,
 					});
 
 					//console.info(file);
@@ -64,22 +64,16 @@ module.exports = function (app, setting) {
 				.then((data) => {
 					if (data) {
 						if (data.data) {
-							res.status(200).send(data.data.toString("base64"));
-							// let buff = Buffer.from(data.data, "base64");
-							// let readStream = new stream.PassThrough();
-							// readStream.end(buff);
+							const stream = Readable.from(data.data);
 
-							// res.setHeader("Content-Disposition", `attachment; filename=${data.originalname}`);
-							// res.setHeader("Content-Type", `${data.mimetype}`);
-							// // res.setHeader("Content-Length", buff.length);
-							// // res.setHeader("Cache-Control", "public, max-age=604800, immutable");
+							res.setHeader("Content-Disposition", `inline; filename=${data.originalname}`);
+							res.setHeader("Content-Type", `${data.mimetype}`);
+							res.setHeader("Content-Length", data.data.length);
+							res.setHeader("Cache-Control", "public, max-age=604800, immutable");
 
-							// readStream.on("error", function (err) {
-							// 	res.end();
-							// });
-							// readStream.pipe(res);
+							stream.pipe(res);
 
-							// console.log(`Sending file ${data.id}`);
+							console.log(`Sending file ${data.id}`);
 						} else {
 							res.status(404).send("Not found");
 						}

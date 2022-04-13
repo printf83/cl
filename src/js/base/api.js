@@ -550,23 +550,24 @@ export const file = {
 		}
 	},
 	download: function (id, sender) {
-		if (id) {
-			if (fn.sender.isfree(sender)) {
-				fn.sender.setbusy(sender);
-				fn.download({
-					callback: function (result) {
-						fn.sender.setfree(sender);
-						console.log(result);
-						// if (typeof callback === "function") {
-						// 	callback(result);
-						// }
-					},
-					url: this.url(id),
-				});
-			}
-		} else {
-			console.error("opt id is required");
-		}
+		window.location = file.url(id);
+		// if (id) {
+		// 	if (fn.sender.isfree(sender)) {
+		// 		fn.sender.setbusy(sender);
+		// 		fn.download({
+		// 			callback: function (result) {
+		// 				fn.sender.setfree(sender);
+		// 				console.log(result);
+		// 				// if (typeof callback === "function") {
+		// 				// 	callback(result);
+		// 				// }
+		// 			},
+		// 			url: this.url(id),
+		// 		});
+		// 	}
+		// } else {
+		// 	console.error("opt id is required");
+		// }
 	},
 	url: function (id) {
 		if (id) {
