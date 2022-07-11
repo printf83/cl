@@ -1,12 +1,12 @@
 # cl
 
 1. npm install
-2. npm run build
-3. touch .env
-4. echo -e
+ <!-- 2. npm run build-->
+2. touch .env
+3. echo -e
    "PORT=<value>\nDBURL=<value>\nSERVERURL=<value>\nSESSIONSECRET=<value>\nSESSIONEXPIRED=<value>\nHASHSALT=<value>\nEMAILPROVIDER=<value>\nEMAILADDRESS=<value>\nEMAILPASSWORD=<value>" >>
    .env
-5. npm start
+4. npm start
 
 -   # example .env file
 
