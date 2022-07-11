@@ -354,14 +354,14 @@ export default [
 			return [
 				new $.navbar.container({
 					expand: "lg",
+					dark: true,
 					color: "dark",
-					textcolor: "light",
 					elem: sample.navbaritem(id1),
 				}),
 				new $.navbar.container({
 					expand: "lg",
+					dark: true,
 					color: "primary",
-					textcolor: "light",
 					elem: sample.navbaritem(id2),
 				}),
 				new $.navbar.container({
