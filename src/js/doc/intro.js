@@ -79,11 +79,60 @@ export default [
 			`,
 			}),
 
-			// new $.div({
-			// 	align: "center",
-			// 	margintop: 5,
-			// 	elem: "Example : ",
-			// }),
+			new $.codepreview({
+				title: "Example index.html",
+				container: "card",
+				type: "html",
+				code: `
+					<!DOCTYPE html>
+					<html lang="en">
+						<head>
+							<meta charset="utf-8" />
+							<meta name="viewport" content="width=device-width, initial-scale=1" />
+							<meta name="description" content="Testing website" />
+							<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+							<link rel="icon" type="image/png" href="/favicon.png" />
+
+							<!-- cdn css--->
+							<link
+								rel="stylesheet"
+								href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"
+							/>
+							<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" />
+							<link
+								rel="stylesheet"
+								href="https://cdn.jsdelivr.net/npm/bootswatch@5.1.3/dist/cerulean/bootstrap.min.css"
+								id="nstheme"
+								disabled="disabled"
+							/>
+
+							<!-- your css--->
+							<link rel="stylesheet" href="./style.css" />
+
+							<title>Testing website</title>
+						</head>
+						<body class="position-relative">
+							<div class="position-fixed top-50 start-50 translate-middle" id="main">
+								<!-- root --->
+								<i class="fas fa-circle-notch fa-fw fa-spin fa-5x"></i>
+								<noscript>
+									<p class="text-danger">Your browser does not support JavaScript!</p>
+								</noscript>
+							</div>
+
+							<!-- cdn js--->
+							<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"></script>
+							<script src="https://cdn.jsdelivr.net/npm/moment@2.29.4"></script>
+							<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js"></script>
+							<script src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1"></script>
+
+							<!-- your script --->
+							<script type="module" src="/index.js"></script>
+						</body>
+					</html>
+
+				`,
+			}),
 
 			new $.codepreview({
 				title: "Example index.js",
