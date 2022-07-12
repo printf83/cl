@@ -412,8 +412,13 @@ const fn = {
 				).show();
 			}
 		},
+		menu: function (event) {
+			event.stopPropagation();
+			event.currentTarget.closest(".cl-list-ctl").classList.add("show");
+		},
 		edit: function (event) {
 			event.stopPropagation();
+			event.currentTarget.querySelectorAll(".cl-list-ctl")[0].classList.remove("show");
 
 			let sender = event.currentTarget.closest("[data-key]");
 			let key = sender.getAttribute("data-key");
@@ -464,6 +469,7 @@ const fn = {
 		},
 		copy: function (event) {
 			event.stopPropagation();
+			event.currentTarget.closest(".cl-list-ctl").classList.remove("show");
 
 			let sender = event.currentTarget;
 			let item = sender.closest("[data-key]");
@@ -514,6 +520,7 @@ const fn = {
 		},
 		delete: function (event) {
 			event.stopPropagation();
+			event.currentTarget.closest(".cl-list-ctl").classList.remove("show");
 
 			let sender = event.currentTarget;
 			let item = sender.closest("[data-key]");
@@ -551,6 +558,20 @@ const fn = {
 				).show();
 			}
 		},
+		more: function (event) {
+			event.stopPropagation();
+			event.currentTarget.closest(".cl-list-ctl").classList.remove("show");
+
+			let sender = event.currentTarget;
+			let item = sender.closest("[data-key]");
+			let key = item.getAttribute("data-key");
+			let container = item.closest(".cl-list");
+			let id = container.getAttribute("id");
+			let opt = fn.get(id);
+			if (opt && typeof opt.more === "function") {
+				opt.more(sender, key);
+			}
+		},
 	},
 };
 
@@ -561,6 +582,7 @@ const defaultOption = {
 	query: null,
 	name: null,
 	paging: true,
+	more: null, //more function
 	items: function (data, item, group) {
 		return data.map(function (i) {
 			return item(i);
@@ -594,6 +616,7 @@ const defaultItemOption = {
 	allow_action: false,
 	allow_copy: false,
 	allow_delete: false,
+	allow_more: false,
 };
 
 const defaultGroupOption = {
@@ -649,7 +672,10 @@ export class item extends li {
 	set data(opt) {
 		opt = core.extend({}, defaultItemOption, opt);
 
-		opt.class = core.merge.class(opt.class, "list-group-item");
+		opt.class = core.merge.class(
+			opt.class,
+			["list-group-item", opt.allow_action ? "pointer" : null].filter(Boolean)
+		);
 
 		super.data = {
 			class: opt.class,
@@ -691,13 +717,17 @@ export class item extends li {
 					],
 				}),
 
-				opt.allow_copy || opt.allow_delete
+				opt.allow_copy || opt.allow_delete || opt.allow_more
 					? new div({
 							class: "cl-list-ctl",
 							display: "flex",
 							alignself: "center",
+							onclick: fn.item.menu,
 							elem: new btngroup({
 								elem: [
+									opt.allow_more
+										? new button({ icon: "cog", color: "primary", onclick: fn.item.more })
+										: null,
 									opt.allow_copy
 										? new button({ icon: "copy", color: "success", onclick: fn.item.copy })
 										: null,

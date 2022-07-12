@@ -1,7 +1,98 @@
+
+.cl-list-ctl {
+	overflow: hidden;
+	position: absolute;
+	right: 0;
+	background-color: var(--bs-list-group-border-color);
+	height: 100%;
+	width: 0.7rem;
+	animation-name: cl-list-ctl-animation-out;
+	animation-duration: 300ms;
+	animation-iteration-count: 1;
+}
+
+.cl-list-ctl:hover {
+	background-color: var(--bs-list-group-disabled-color);
+	cursor: pointer;
+}
+
+.cl-list-ctl::after{
+	content: "❮";
+	color: var(--bs-list-group-bg);
+	position: relative;
+	top: calc(50% - 1rem);
+	display: flex;
+	padding: 0.1rem;
+}
+
+.cl-list-ctl .btn-group{
+	display: none;
+}
+
+.cl-list-ctl.show {
+	position: absolute;
+	right: 1rem;
+	background-color:unset;
+	height: unset;
+	width: unset;
+	content: unset;
+	cursor: unset;
+	animation-name: cl-list-ctl-animation-in;
+	animation-duration: 300ms;
+	animation-iteration-count: 1;
+}
+
+.cl-list-ctl.show:hover {
+	background-color: unset;
+	cursor: unset;
+}
+
+.cl-list-ctl.show::after {
+	content: unset;
+	color: unset;
+	position: unset;
+	top: unset;
+	display: unset;
+	padding: unset;
+}
+
+.cl-list-ctl.show .btn-group{
+	display: inline-flex;
+}
+
+
+/* cl-list-ctl animation */
+@keyframes cl-list-ctl-animation-in {
+	from {
+		width: 0.7rem;
+		right: 0;
+	}
+
+	to {
+		width: unset;
+		right: 1rem;
+	}
+}
+
+@keyframes cl-list-ctl-animation-out {
+	from {
+		width: unset;
+	}
+
+	to {
+		width: 0.7rem;
+	}
+}
+
+/* item */
+
+
 .cl-list .cl-list-img,
 .cl-list .cl-list-ctl {
 	display: block !important;
 }
+
+
 
 .cl-list .cl-list-check {
 	display: none !important;
@@ -20,6 +111,12 @@
 	color: var(--bs-primary) !important;
 }
 
-.cl-list .list-group-item div[data-key] {
+.cl-list .list-group-item {
+	overflow: hidden;
+}
+
+.cl-list .list-group-item[data-key],
+.cl-list .list-group-item.pointer {
 	cursor: pointer;
 }
+

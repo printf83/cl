@@ -84,8 +84,8 @@ const fn = {
 				sender.disabled = true;
 
 				if (fn.sender.islist(sender)) {
-					let ctl = sender.querySelectorAll("h6");
-					ctl[0].innerHTML = "<i class='fas fa-circle-notch fa-fw fa-spin'></i> Loading...";
+					// let ctl = sender.querySelectorAll("h6");
+					// ctl[0].innerHTML = "<i class='fas fa-circle-notch fa-fw fa-spin'></i> Loading...";
 				} else {
 					//change icon
 					let ico = sender.querySelectorAll("i");
@@ -102,8 +102,8 @@ const fn = {
 				sender.disabled = false;
 
 				if (fn.sender.islist(sender)) {
-					let ctl = sender.querySelectorAll("h6");
-					ctl[0].innerHTML = sender.getAttribute("data-name");
+					// let ctl = sender.querySelectorAll("h6");
+					// ctl[0].innerHTML = sender.getAttribute("data-name");
 				} else {
 					//change icon
 					let ico = sender.querySelectorAll("i");

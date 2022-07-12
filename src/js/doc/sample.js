@@ -811,10 +811,14 @@ fill="#999" stroke="none">
 			allow_delete: true,
 			allow_copy: true,
 			allow_action: true,
+			allow_more: true,
 		});
 	},
 	list_group: function (data) {
 		return new $.list.group({ key: data.key, name: data.name });
+	},
+	list_more: function (sender, id) {
+		new $.toast("i", `Call from id:${id}`).show();
 	},
 	list_state: function (callback, sender) {
 		if (!dbstate) {

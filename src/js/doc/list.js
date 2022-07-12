@@ -287,6 +287,7 @@ export default [
 			"sample.list_item": sample.list_item,
 			"sample.list_group": sample.list_group,
 			"sample.list_state": sample.list_state,
+			"sample.list_more": sample.list_more,
 		},
 		code: function () {
 			let resultOutputId = $.core.UUID();
@@ -312,6 +313,7 @@ export default [
 									items: sample.list_items,
 									item: sample.list_item,
 									group: sample.list_group,
+									more: sample.list_more,
 								})
 							);
 
@@ -341,6 +343,7 @@ export default [
 			"sample.list_item": sample.list_item,
 			"sample.list_group": sample.list_group,
 			"sample.list_state": sample.list_state,
+			"sample.list_more": sample.list_more,
 		},
 		code: function () {
 			let resultOutputId = $.core.UUID();
@@ -367,6 +370,7 @@ export default [
 									items: sample.list_items,
 									item: sample.list_item,
 									group: sample.list_group,
+									more: sample.list_more,
 								})
 							);
 
@@ -418,6 +422,7 @@ export default [
 			"sample.list_item": sample.list_item,
 			"sample.list_group": sample.list_group,
 			"sample.list_state": sample.list_state,
+			"sample.list_more": sample.list_more,
 		},
 		code: function () {
 			let resultOutputId = $.core.UUID();
@@ -444,6 +449,7 @@ export default [
 									items: sample.list_items,
 									item: sample.list_item,
 									group: sample.list_group,
+									more: sample.list_more,
 								})
 							);
 
@@ -559,6 +565,7 @@ export default [
 			"sample.list_item": sample.list_item,
 			"sample.list_group": sample.list_group,
 			"sample.list_state": sample.list_state,
+			"sample.list_more": sample.list_more,
 		},
 		code: function () {
 			let resultOutputId = $.core.UUID();
@@ -585,6 +592,7 @@ export default [
 									items: sample.list_items,
 									item: sample.list_item,
 									group: sample.list_group,
+									more: sample.list_more,
 								})
 							);
 
