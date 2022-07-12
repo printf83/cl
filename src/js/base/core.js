@@ -508,18 +508,18 @@ export function validate(container, callback) {
 			if (validateElem(item)) {
 				item.classList.add("is-valid");
 				item.classList.remove("is-invalid");
-				item.setCustomValidity("invalid");
+				//item.setCustomValidity("invalid");
 			} else {
 				item.classList.add("is-invalid");
 				item.classList.remove("is-valid");
-				item.setCustomValidity(null);
+				//item.setCustomValidity(null);
 			}
 		});
 
 		container.classList.add("was-validated");
 
 		var invalidctl = container.querySelectorAll(".is-invalid");
-		if (callback) {
+		if (typeof callback === "function") {
 			if (invalidctl && invalidctl.length > 0) {
 				callback(false);
 			} else {
