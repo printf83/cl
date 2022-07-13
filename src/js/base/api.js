@@ -488,9 +488,9 @@ export const api = {
 				);
 
 				if (opt.data) {
-					fn.download(`api/${opt.name}-excel/?q=${JSON.stringify(opt.data)}`);
+					fn.download({ url: `api/${opt.name}-excel/?q=${JSON.stringify(opt.data)}`, data: null });
 				} else {
-					fn.download(`api/${opt.name}-excel`);
+					fn.download({ url: `api/${opt.name}-excel`, data: null });
 				}
 			}
 		} else {
