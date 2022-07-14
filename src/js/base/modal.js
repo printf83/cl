@@ -35,7 +35,7 @@ const defaultOption = {
 
 	bodyclass: null,
 	bodyminheight: null,
-
+	backdropcolor: null,
 	defautlbtncolor: "primary",
 	divider: true,
 	centerbutton: false,
@@ -270,6 +270,7 @@ export default class modal extends div {
 					"data-bs-backdrop": opt.static ? "static" : null,
 					"data-bs-keyboard": opt.static ? "false" : "true",
 					"data-bs-focus": opt.focus ? "true" : null,
+					"data-bs-backdropcolor": opt.backdropcolor ? opt.backdropcolor : null,
 					"aria-hidden": opt.debug ? "false" : "true",
 				}),
 				color: opt.bgcolor ? opt.bgcolor : null,
@@ -339,8 +340,18 @@ export default class modal extends div {
 			}
 		}
 
-		//set init
 		this.dom.addEventListener("shown.bs.modal", function (event) {
+			//set background
+			let mdlbackdrop = document.getElementsByClassName("modal-backdrop");
+			if (mdlbackdrop) {
+				let backdropcolor = event.currentTarget.getAttribute("data-bs-backdropcolor");
+				if (backdropcolor) {
+					mdlbackdrop[0].classList.add(`bg-${backdropcolor}`);
+					mdlbackdrop[0].classList.add("opacity-100");
+				}
+			}
+
+			//init
 			core.init(event.currentTarget);
 		});
 

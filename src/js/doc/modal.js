@@ -299,6 +299,45 @@ export default [
 	},
 
 	{
+		title: "Backdrop color",
+		container: sample.stackcontainer,
+		code: function () {
+			return [
+				{ label: "Primary", icon: "i", backdropcolor: "primary" },
+				{ label: "Success", icon: "?", backdropcolor: "success" },
+				{ label: "Warning", icon: "!", backdropcolor: "warning" },
+				{ label: "Danger", icon: "x", backdropcolor: "danger" },
+			].map(function (i) {
+				return new $.button({
+					label: i.label,
+					icon: i.icon,
+					onclick: function (e) {
+						new $.modal({
+							backdropcolor: i.backdropcolor,
+							title: "Modal title",
+							elem: new $.msg({
+								weight: "md",
+								icon: i.icon,
+								elem: `This is example dialog with <b>${i.backdropcolor}</b> backdrop color`,
+							}),
+							button: [
+								{
+									label: "Understand",
+									color: i.backdropcolor,
+									onclick: function (event, data) {
+										new $.toast("i", `Result from dialog is <b>${JSON.stringify(data)}</b>`).show();
+									},
+								},
+								"Close",
+							],
+						}).show();
+					},
+				});
+			});
+		},
+	},
+
+	{
 		title: "Disable static backdrop",
 		code: function () {
 			return new $.button({

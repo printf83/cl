@@ -31,6 +31,7 @@ let defaultSignInOption = {
 	email: null,
 	callback: null,
 	close: true,
+	backdropcolor: "primary",
 	debug: false,
 };
 
@@ -42,6 +43,7 @@ let defaultSignUpOption = {
 	title: null,
 	callback: null,
 	close: true,
+	backdropcolor: "primary",
 	debug: false,
 };
 
@@ -53,6 +55,7 @@ let defaultResetPassOption = {
 	title: null,
 	callback: null,
 	close: true,
+	backdropcolor: "primary",
 	debug: false,
 };
 
@@ -64,6 +67,7 @@ let defaultChangePassOption = {
 	title: null,
 	callback: null,
 	close: true,
+	backdropcolor: "primary",
 	debug: false,
 };
 
@@ -76,6 +80,7 @@ let defaultChangePassGuestOption = {
 	title: null,
 	callback: null,
 	close: true,
+	backdropcolor: "primary",
 	debug: false,
 };
 
@@ -88,6 +93,7 @@ let defaultUpdateInfoOption = {
 	title: null,
 	callback: null,
 	close: true,
+	backdropcolor: "primary",
 	debug: false,
 	data: null,
 };
@@ -968,6 +974,7 @@ export class signin extends modal {
 			super({
 				size: opt.size,
 				maxwidth: defaultMaxWidth,
+				backdropcolor: opt.backdropcolor,
 				elem: fn.form.container(opt.id, fn.form.signin(opt)),
 				debug: true,
 			});
@@ -975,6 +982,7 @@ export class signin extends modal {
 			super({
 				size: opt.size,
 				maxwidth: defaultMaxWidth,
+				backdropcolor: opt.backdropcolor,
 				elem: fn.form.container(opt.id, fn.form.signin(opt)),
 			});
 		}
@@ -990,6 +998,7 @@ export class signup extends modal {
 			super({
 				size: opt.size,
 				maxwidth: defaultMaxWidth,
+				backdropcolor: opt.backdropcolor,
 				elem: fn.form.container(opt.id, fn.form.signup(opt)),
 				debug: true,
 			});
@@ -997,6 +1006,7 @@ export class signup extends modal {
 			super({
 				size: opt.size,
 				maxwidth: defaultMaxWidth,
+				backdropcolor: opt.backdropcolor,
 				elem: fn.form.container(opt.id, fn.form.signup(opt)),
 			});
 		}
@@ -1012,6 +1022,7 @@ export class resetpass extends modal {
 			super({
 				size: opt.size,
 				maxwidth: defaultMaxWidth,
+				backdropcolor: opt.backdropcolor,
 				elem: fn.form.container(opt.id, fn.form.resetpass(opt)),
 				debug: true,
 			});
@@ -1019,6 +1030,7 @@ export class resetpass extends modal {
 			super({
 				size: opt.size,
 				maxwidth: defaultMaxWidth,
+				backdropcolor: opt.backdropcolor,
 				elem: fn.form.container(opt.id, fn.form.resetpass(opt)),
 			});
 		}
@@ -1034,6 +1046,7 @@ export class changepass extends modal {
 			super({
 				size: opt.size,
 				maxwidth: defaultMaxWidth,
+				backdropcolor: opt.backdropcolor,
 				elem: fn.form.container(opt.id, fn.form.changepass(opt)),
 				debug: true,
 			});
@@ -1041,6 +1054,7 @@ export class changepass extends modal {
 			super({
 				size: opt.size,
 				maxwidth: defaultMaxWidth,
+				backdropcolor: opt.backdropcolor,
 				elem: fn.form.container(opt.id, fn.form.changepass(opt)),
 			});
 		}
@@ -1056,6 +1070,7 @@ export class changepass_guest extends modal {
 			super({
 				size: opt.size,
 				maxwidth: defaultMaxWidth,
+				backdropcolor: opt.backdropcolor,
 				elem: fn.form.container(opt.id, fn.form.changepass_guest(opt)),
 				debug: true,
 			});
@@ -1063,6 +1078,7 @@ export class changepass_guest extends modal {
 			super({
 				size: opt.size,
 				maxwidth: defaultMaxWidth,
+				backdropcolor: opt.backdropcolor,
 				elem: fn.form.container(opt.id, fn.form.changepass_guest(opt)),
 			});
 		}
@@ -1078,6 +1094,7 @@ export class updateinfo extends modal {
 			super({
 				size: opt.size,
 				maxwidth: defaultMaxWidth,
+				backdropcolor: opt.backdropcolor,
 				elem: fn.form.container(opt.id, fn.form.updateinfo(opt)),
 				debug: true,
 			});
@@ -1085,6 +1102,7 @@ export class updateinfo extends modal {
 			super({
 				size: opt.size,
 				maxwidth: defaultMaxWidth,
+				backdropcolor: opt.backdropcolor,
 				elem: fn.form.container(opt.id, fn.form.updateinfo(opt)),
 			});
 		}

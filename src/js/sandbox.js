@@ -164,18 +164,21 @@ $.core.documentReady(() => {
 										label: "Name",
 										name: "name",
 										value: data ? data.name : null,
+										required: true,
 									}),
 									new $.input({
 										type: "date",
 										label: "Date of birth",
 										name: "dob",
 										value: data ? data.dob : null,
+										required: true,
 									}),
 									new $.input({
 										type: "text",
 										label: "Phone",
 										name: "phone",
 										value: data ? data.phone : null,
+										required: true,
 									}),
 									new $.file({
 										label: "Picture",
@@ -194,6 +197,7 @@ $.core.documentReady(() => {
 										name: "state",
 										option: dbstate,
 										value: data ? data.state : null,
+										required: true,
 									}),
 								];
 							},
