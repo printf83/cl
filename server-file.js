@@ -64,23 +64,25 @@ module.exports = function () {
 
 	//delete dist
 	fs.rmSync("./docs/dist", { recursive: true, force: true });
+
 	console.info("Remove docs/dist");
 
 	//copy all jsfile into dist
-	fs.mkdir("./docs/dist", (err) => {});
-	fs.mkdir("./docs/dist/js", (err) => {});
+	fs.mkdir("./docs/dist", (err) => {
+		fs.mkdir("./docs/dist/js", (err) => {
+			copyFolderRecursiveSync("./src/js", "./docs/dist");
+			console.info("Copy src/js into docs/dist");
 
-	copyFolderRecursiveSync("./src/js", "./docs/dist");
-	console.info("Copy src/js into docs/dist");
+			// read css
+			fs.readdir("./src/css", (err, files) => {
+				let str = "";
+				files.forEach((file) => {
+					str += fs.readFileSync(`./src/css/${file}`);
+				});
+				fs.writeFileSync("./docs/dist/style.css", str);
 
-	// read css
-	fs.readdir("./src/css", (err, files) => {
-		let str = "";
-		files.forEach((file) => {
-			str += fs.readFileSync(`./src/css/${file}`);
+				console.info("Combine css file");
+			});
 		});
-		fs.writeFileSync("./docs/dist/style.css", str);
-
-		console.info("Combine css file");
 	});
 };

@@ -113,10 +113,24 @@
 
 .cl-list .list-group-item {
 	overflow: hidden;
+	
 }
 
 .cl-list .list-group-item[data-key],
 .cl-list .list-group-item.pointer {
 	cursor: pointer;
 }
+
+.cl-list .list-group-item-header{
+	color: var(--bs-primary);
+	text-align: center;
+}
+
+/* .cl-list .list-group-item-header::before {
+	content: "[ ";
+}
+
+.cl-list .list-group-item-header::after {
+	content: " ]";
+} */
 

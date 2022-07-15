@@ -754,12 +754,10 @@ export class group extends li {
 	set data(opt) {
 		opt = core.extend({}, defaultGroupOption, opt);
 
-		opt.class = core.merge.class(opt.class, "list-group-item");
+		opt.class = core.merge.class(opt.class, ["list-group-item", "list-group-item-header"]);
 
 		super.data = {
 			class: opt.class,
-			color: "light",
-			align: "center",
 			elem: new b(opt.name),
 		};
 	}
