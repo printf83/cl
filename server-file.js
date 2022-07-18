@@ -9,7 +9,7 @@ function cleanuptmpfile() {
 		.then((data) => {
 			data.forEach((item) => {
 				$.db.findByIdAndRemove({ _id: item.id }).then((data) => {
-					console.log(`Remove file ${item.id}`);
+					console.log(`Remove tmp file ${item.id} from db`);
 				});
 			});
 		})
