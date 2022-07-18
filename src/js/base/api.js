@@ -206,32 +206,32 @@ const fn = {
 		req.open(opt.type, opt.url, opt.async);
 		req.send(this.genfileformdata(opt.data));
 	},
-	download: function (opt) {
-		opt = core.extend({}, defaultOptionDownload, opt);
+	// download: function (opt) {
+	// 	opt = core.extend({}, defaultOptionDownload, opt);
 
-		let req = new XMLHttpRequest();
-		req.onreadystatechange = function () {
-			if (req.readyState == 4) {
-				if (req.status == 200) {
-					opt.callback(fn.str2Object(req.responseText));
-				} else if (req.status === 400) {
-					new user_signin({
-						callback: function (result) {
-							if (result) {
-								fn.get(opt);
-							} else {
-								opt.callback(null);
-							}
-						},
-					}).show();
-				} else {
-					opt.callback(null);
-				}
-			}
-		};
-		req.open(opt.type, opt.url, opt.async);
-		req.send(fn.obj2String(opt.data));
-	},
+	// 	let req = new XMLHttpRequest();
+	// 	req.onreadystatechange = function () {
+	// 		if (req.readyState == 4) {
+	// 			if (req.status == 200) {
+	// 				opt.callback(fn.str2Object(req.responseText));
+	// 			} else if (req.status === 400) {
+	// 				new user_signin({
+	// 					callback: function (result) {
+	// 						if (result) {
+	// 							fn.get(opt);
+	// 						} else {
+	// 							opt.callback(null);
+	// 						}
+	// 					},
+	// 				}).show();
+	// 			} else {
+	// 				opt.callback(null);
+	// 			}
+	// 		}
+	// 	};
+	// 	req.open(opt.type, opt.url, opt.async);
+	// 	req.send(fn.obj2String(opt.data));
+	// },
 	genformdata: function (obj) {
 		if (obj) {
 			const res = new FormData();
@@ -487,14 +487,17 @@ export const api = {
 					opt.sender
 				);
 
-				if (opt.data) {
-					fn.download({ url: `api/${opt.name}-excel/?q=${JSON.stringify(opt.data)}`, data: null });
-				} else {
-					fn.download({ url: `api/${opt.name}-excel`, data: null });
-				}
+				window.location = api.url(opt.name, opt.data);
 			}
 		} else {
 			console.error("opt name is required");
+		}
+	},
+	url: function (name, data) {
+		if (data) {
+			return `api/${name}-excel/?q=${JSON.stringify(data)}`;
+		} else {
+			return `api/${name}-excel`;
 		}
 	},
 	aggregate: function (opt, callback) {
@@ -551,23 +554,6 @@ export const file = {
 	},
 	download: function (id, sender) {
 		window.location = file.url(id);
-		// if (id) {
-		// 	if (fn.sender.isfree(sender)) {
-		// 		fn.sender.setbusy(sender);
-		// 		fn.download({
-		// 			callback: function (result) {
-		// 				fn.sender.setfree(sender);
-		// 				console.log(result);
-		// 				// if (typeof callback === "function") {
-		// 				// 	callback(result);
-		// 				// }
-		// 			},
-		// 			url: this.url(id),
-		// 		});
-		// 	}
-		// } else {
-		// 	console.error("opt id is required");
-		// }
 	},
 	url: function (id) {
 		if (id) {

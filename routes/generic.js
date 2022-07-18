@@ -1,4 +1,5 @@
 const core = require(`../core.js`);
+const { Readable } = require("stream");
 
 module.exports = function (app, dbname, setting) {
 	console.log(`Setup ${dbname} db`);
@@ -101,14 +102,20 @@ module.exports = function (app, dbname, setting) {
 					.then((buffer) => {
 						if (buffer) {
 							//send file
-							res.writeHead(200, {
-								"Content-Type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-								"Content-Disposition": `attachment; filename= ${new Date()
-									.toISOString()
-									.replace(/[^0-9]/g, "")}.xlsx`,
-								"Content-Length": buffer.length,
-							});
-							res.end(buffer);
+							let strFileName = `${new Date().toISOString().replace(/[^0-9]/g, "")}`;
+							const stream = Readable.from(buffer);
+
+							res.setHeader("Content-Disposition", `inline; filename=${strFileName}`);
+							res.setHeader(
+								"Content-Type",
+								"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+							);
+							res.setHeader("Content-Length", buffer.length);
+							res.setHeader("Cache-Control", "public, max-age=604800, immutable");
+
+							stream.pipe(res);
+
+							console.log(`Sending file ${strFileName}`);
 						} else {
 							res.status(404).send("Not found");
 						}
