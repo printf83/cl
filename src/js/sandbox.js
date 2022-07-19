@@ -1,4 +1,4 @@
-// "use strict";
+"use strict";
 // import $ from "./component.js";
 
 // let query_setting = {
@@ -281,175 +281,20 @@
 // 	);
 // });
 
-"use strict";
-
 // import "../css/sample.css";
-
-import sample from "./doc/sample.js";
-import doc from "./doc.js";
+import sb_intro from "./sandbox/intro.js";
 import $ from "./component.js";
 
 const db_menu = [
 	{
 		type: "menu",
 		title: "Getting started",
-		item: [{ title: "Introduction", source: doc.intro }],
-	},
-	{
-		type: "menu",
-		title: "Layout",
-		item: [
-			{ title: "Containers", source: doc.container },
-			{ title: "Grid", source: doc.grid },
-			{ title: "Column", source: doc.column },
-			{ title: "Gutter", source: doc.gutter },
-		],
-	},
-	{
-		type: "menu",
-		title: "Forms",
-		item: [
-			{ title: "Form control", source: doc.formcontrol },
-			{ title: "Select", source: doc.select },
-			{ title: "Check & radios", source: doc.checkradio },
-			{ title: "Range", source: doc.range },
-			{ title: "Input group", source: doc.inputgroup },
-			{ title: "Floating label", source: doc.floatinglabel },
-		],
-	},
-	{
-		type: "menu",
-		title: "Components",
-		item: [
-			{ title: "Accordion", source: doc.accordion },
-			{ title: "Alert", source: doc.alert },
-			{ title: "Badge", source: doc.badge },
-			{ title: "Breadcrumb", source: doc.breadcrumb },
-			{ title: "Button", source: doc.button },
-			{ title: "Button group", source: doc.btngroup },
-			{ title: "Card", source: doc.card },
-			{ title: "Carosel", source: doc.carousel },
-			{ title: "Close button", source: doc.btnclose },
-			{ title: "Collapse", source: doc.collapse },
-			{ title: "Dropdown", source: doc.dropdown },
-			{ title: "List group", source: doc.listgroup },
-			{ title: "Modal", source: doc.modal },
-			{ title: "Tab", source: doc.tab },
-			{ title: "Navbar", source: doc.navbar },
-			{ title: "Offcanvas", source: doc.offcanvas },
-			{ title: "Paging", source: doc.paging },
-			{ title: "Popover", source: doc.popover },
-			{ title: "Progress", source: doc.progress },
-			{ title: "Toast", source: doc.toast },
-			{ title: "Tooltips", source: doc.tooltip },
-		],
-	},
-	{
-		type: "menu",
-		title: "Extra",
-		item: [
-			{ title: "Icon", source: doc.icon },
-			{ title: "Menu", source: doc.menu },
-			{ title: "Table of content", source: doc.toc },
-			{ title: "Pill", source: doc.pill },
-			{ title: "Example", source: doc.example },
-			{ title: "Label", source: doc.label },
-			{ title: "Msg", source: doc.msg },
-			{ title: "Table", source: doc.table },
-			{ title: "Layout", source: doc.layout },
-		],
-	},
-	{
-		type: "menu",
-		title: "Tag",
-		item: [
-			{ title: "Base", source: doc.tag_base },
-
-			{ title: "Background", source: doc.tag_background },
-			{ title: "Borders", source: doc.tag_border },
-			{ title: "Colors", source: doc.tag_color },
-			{ title: "Display", source: doc.tag_display },
-			{ title: "Flex", source: doc.tag_flex },
-			{ title: "Float", source: doc.tag_float },
-			{ title: "Interactions", source: doc.tag_interaction },
-			{ title: "Overflow", source: doc.tag_overflow },
-			{ title: "Position", source: doc.tag_position },
-			{ title: "Shadows", source: doc.tag_shadow },
-			{ title: "Sizing", source: doc.tag_size },
-			{ title: "Spacing", source: doc.tag_spacing },
-			{ title: "Text", source: doc.tag_text },
-			{ title: "Vertical align", source: doc.tag_valign },
-			{ title: "Visibility", source: doc.tag_visibility },
-		],
-	},
-	{
-		type: "menu",
-		title: "Extend tag",
-		item: [
-			{ title: "Anchor", source: doc.tag_ex_a },
-			{ title: "Bold", source: doc.tag_ex_b },
-			{ title: "Code", source: doc.tag_ex_code },
-			{ title: "Division", source: doc.tag_ex_div },
-			{ title: "Form", source: doc.tag_ex_form },
-			{ title: "Heading", source: doc.tag_ex_h },
-			{ title: "Horizontal rule", source: doc.tag_ex_hr },
-			{ title: "Image", source: doc.tag_ex_img },
-			{ title: "List item", source: doc.tag_ex_li },
-			{ title: "Navigation", source: doc.tag_ex_nav },
-			{ title: "Ordered list", source: doc.tag_ex_ol },
-			{ title: "Paragraph", source: doc.tag_ex_p },
-			{ title: "Preformatted", source: doc.tag_ex_pre },
-			{ title: "Small", source: doc.tag_ex_small },
-			{ title: "Span", source: doc.tag_ex_span },
-			{ title: "Strong", source: doc.tag_ex_strong },
-			{ title: "Unordered list", source: doc.tag_ex_ul },
-		],
-	},
-	{
-		type: "menu",
-		title: "Database",
-		item: [
-			{ title: "Generic", source: doc.generic },
-			{ title: "File", source: doc.file },
-			{ title: "Query", source: doc.query },
-			{ title: "List", source: doc.list },
-			{ title: "User", source: doc.user },
-		],
+		item: [{ title: "Introduction", source: sb_intro }],
 	},
 	{
 		type: "navigate",
 		title: "Others",
-		item: [{ title: "Sandbox", source: "sandbox.html" }],
-	},
-	{
-		type: "action",
-		title: "Action",
-		item: [
-			{
-				title: "Memory Test 10",
-				source: function (event) {
-					startmemoryleaktest(event.currentTarget, 10);
-				},
-			},
-			{
-				title: "Memory Test 100",
-				source: function (event) {
-					startmemoryleaktest(event.currentTarget, 100);
-				},
-			},
-			{
-				title: "Memory Test 1000",
-				source: function (event) {
-					startmemoryleaktest(event.currentTarget, 1000);
-				},
-			},
-			{
-				title: "Memory Test 5000",
-				source: function (event) {
-					startmemoryleaktest(event.currentTarget, 5000);
-				},
-			},
-		],
+		item: [{ title: "Documentation", source: "index.html" }],
 	},
 	{
 		type: "theme",
@@ -489,146 +334,6 @@ let def_m1 = "Getting started";
 let def_m2 = "Introduction";
 let def_theme = null;
 
-function randomtheme() {
-	let db_theme = db_menu[db_menu.length - 1].item;
-	let cur_theme = db_theme[Math.floor(Math.random() * db_theme.length)].source;
-
-	while (cur_theme === def_theme) {
-		cur_theme = db_theme[Math.floor(Math.random() * db_theme.length)].source;
-	}
-
-	if (cur_theme === "") {
-		cur_theme = null;
-	}
-
-	def_theme = cur_theme;
-	set_theme(cur_theme);
-}
-
-function startmemoryleaktest(sender, limit) {
-	if (memoryleaktestrun === true) {
-		memoryleaktestrun = false;
-	} else {
-		sender.classList.add("active");
-		memoryleaktestrun = true;
-		memoryleaktest(
-			0,
-			limit,
-			function (i, l) {
-				if (i === l || memoryleaktestrun === false) {
-					sender.innerText = `Memory Test ${l}`;
-				} else {
-					sender.innerText = `Memory Test ${parseInt((i / l) * 100, 10)}%`;
-				}
-			},
-			function () {
-				sender.classList.remove("active");
-				$.core.init(document.getElementById("root"));
-				PR.prettyPrint();
-			}
-		);
-	}
-}
-
-let memoryleaktestrun = false;
-let ix1 = 0;
-let ix2 = 0;
-function memoryleaktest(index, limit, progressupdate, callback) {
-	if (index < limit && memoryleaktestrun === true) {
-		progressupdate(index, limit);
-
-		let process = true;
-		if (db_menu[ix1].type === "menu") {
-			if (ix2 >= db_menu[ix1].item.length) {
-				ix1 = ix1 + 1;
-				ix2 = 0;
-				process = false;
-			}
-		} else {
-			ix1 = 0;
-			ix2 = 0;
-			process = false;
-		}
-
-		if (process) {
-			gen_content(db_menu[ix1].title, db_menu[ix1].item[ix2].title, function () {
-				if (index >= limit) {
-					callback();
-				} else {
-					ix2 = ix2 + 1;
-					memoryleaktest(index + 1, limit, progressupdate, callback);
-				}
-			});
-		} else {
-			memoryleaktest(index, limit, progressupdate, callback);
-		}
-	} else {
-		memoryleaktestrun = false;
-		progressupdate(index, limit);
-		callback();
-	}
-}
-
-function gen_example(opt) {
-	opt = $.core.extend(
-		{},
-		{
-			id: null,
-			anchor: true,
-			title: null,
-			msg: null,
-			dark: false,
-			viewclass: null,
-			option: null,
-			code: null,
-			sample: null,
-			container: function (elem) {
-				return elem;
-			},
-		},
-		opt
-	);
-
-	opt.id = opt.id || $.core.UUID();
-
-	opt.msg = opt.msg ? (Array.isArray(opt.msg) ? opt.msg : [opt.msg]) : null;
-
-	let m = null;
-
-	if (opt.msg) {
-		m = [];
-		opt.msg.forEach(function (i) {
-			m.push(i);
-		});
-	}
-
-	if (opt.option) {
-		if (m === null) {
-			m = [];
-		}
-
-		Object.keys(opt.option).forEach(function (optionName) {
-			m.push(
-				new $.table.container({
-					item: opt.option[optionName],
-				})
-			);
-		});
-	}
-
-	return new $.example({
-		id: opt.id,
-		anchor: opt.anchor,
-		title: opt.title,
-		msg: m,
-		dark: opt.dark,
-		viewclass: opt.viewclass,
-		container: opt.container,
-		code: opt.code,
-		sample: opt.sample,
-	});
-}
-
 function find_menu(m1, m2) {
 	let m1_index = db_menu.findIndex((i) => i.title === m1);
 	if (m1_index > -1) {
@@ -659,30 +364,14 @@ function gen_content(m1, m2, callback) {
 								try {
 									let processtimestart = window.performance.now();
 
-									sample.resetindex();
 									$.core.replaceChild(
 										document.getElementById("root"),
 										new $.div({
-											marginbottom: 3,
-											elem: m.source.map(function (i) {
-												return gen_example(i);
-											}),
+											elem: m.source,
 										})
 									);
 
-									let processtimeend = window.performance.now();
-
-									gen_toc();
 									gen_url(m1, m2);
-									//count pagespeed
-									document.getElementById("pagespeed").innerText = `${(
-										processtimeend - processtimestart
-									).toFixed(2)} ms`;
-
-									//count page weight
-									document.getElementById("pageweight").innerText = `${$.core.countElement(
-										document.getElementById("root")
-									)} items`;
 
 									res();
 								} catch (ex) {
@@ -707,78 +396,6 @@ function gen_content(m1, m2, callback) {
 					m,
 					callback
 				);
-
-				//=============
-				//LOADER TYPE 2
-				//=============
-				// setTimeout(
-				// 	function (m, callback) {
-				// 		sample.resetindex();
-				// 		$.core.replaceChild(
-				// 			document.getElementById("root"),
-				// 			new $.div({
-				// 				marginbottom: 3,
-				// 				elem: m.source.map(function (i) {
-				// 					return gen_example(i);
-				// 				}),
-				// 			})
-				// 		);
-
-				// 		gen_toc();
-
-				// 		if (callback instanceof Function) {
-				// 			callback();
-				// 		}
-				// 	},
-				// 	0,
-				// 	m,
-				// 	callback
-				// );
-
-				//=============
-				//LOADER TYPE 3
-				//=============
-				// sample.resetindex();
-				// $.core.replaceChild(
-				// 	document.getElementById("root"),
-				// 	new $.div({
-				// 		marginbottom: 3,
-				// 		elem: m.source.map(function (i) {
-				// 			return gen_example(i);
-				// 		}),
-				// 	})
-				// );
-
-				// gen_toc();
-
-				// if (callback instanceof Function) {
-				// 	callback();
-				// }
-			} else {
-				$.core.replaceChild(
-					document.getElementById("root"),
-					new $.div({
-						marginbottom: 3,
-						elem: new $.msg({
-							weight: "lg",
-							icon: "!",
-							elem: `Documentation for <b>${m1}</b> - <b>${m2}</b> not yet available`,
-						}),
-					})
-				);
-
-				gen_toc();
-				gen_url(m1, m2);
-
-				//count pagespeed
-				document.getElementById("pagespeed").innerText = `0 ms`;
-
-				//count page weight
-				document.getElementById("pageweight").innerText = `0 item`;
-
-				if (callback instanceof Function) {
-					callback();
-				}
 			}
 		} else if (m.type === "navigate") {
 			window.location = m.source;
@@ -797,42 +414,8 @@ function set_theme(theme) {
 	if (theme) {
 		cltheme.href = `https://cdn.jsdelivr.net/npm/bootswatch@5.1.3/dist/${theme}/bootstrap.min.css`;
 		cltheme.removeAttribute("disabled");
-		document.getElementById("pagetheme").innerText = `${theme}`;
 	} else {
 		cltheme.setAttribute("disabled", "disabled");
-		document.getElementById("pagetheme").innerText = `default`;
-	}
-}
-
-function gen_toc() {
-	let li = [];
-	let anchor = [].slice.call(document.getElementById("root").getElementsByClassName("anchorjs-link"));
-	if (anchor && anchor.length > 0) {
-		$.core.replaceChild(
-			document.getElementById("nextbar"),
-			new $.toc({
-				label: "On this page",
-				item: anchor.map(function (i) {
-					//remove debug example
-					if (!i.classList.contains("anchorjs-link-debug")) {
-						let parent = i.parentElement;
-						let id = parent.id;
-						return {
-							label: parent.innerText,
-							attr: { "cl-target-id": id },
-							onclick: function (event) {
-								let sender = event.currentTarget;
-								let id = sender.getAttribute("cl-target-id");
-								$.core.focusElement(document.getElementById(id));
-							},
-							level: parent.nodeName === "H3" ? 1 : 0,
-						};
-					}
-				}),
-			})
-		);
-	} else {
-		$.core.replaceChild(document.getElementById("nextbar"), null);
 	}
 }
 
@@ -897,7 +480,6 @@ function gen_menu(m1, m2, theme) {
 										sender.innerText = "Loading...";
 										gen_content(m1, m2, function () {
 											$.core.init(document.getElementById("root"));
-											PR.prettyPrint();
 											sender.innerText = m2;
 										});
 									} else {
@@ -959,53 +541,15 @@ $.core.documentReady(() => {
 				justifycontent: "center",
 				marginbottom: 5,
 				gap: 2,
-				elem: [
-					new $.a({
-						class: "text-decoration-none",
-						elem: new $.pill({
-							icon: "swatchbook",
-							title: "Theme",
-							color: "primary",
-							elem: [new $.small({ id: "pagetheme", elem: "default" })],
-						}),
-						href: "javascript:void(0)",
-						onclick: randomtheme,
-					}),
-					new $.pill({
-						icon: "eye",
-						title: "Viewport",
-						color: "primary",
-						elem: [
-							new $.small("d-inline d-sm-none", "xs"),
-							new $.small("d-none d-sm-inline d-md-none", "sm"),
-							new $.small("d-none d-md-inline d-lg-none", "md"),
-							new $.small("d-none d-lg-inline d-xl-none", "lg"),
-							new $.small("d-none d-xl-inline d-xxl-none", "xl"),
-							new $.small("d-none d-xxl-inline", "xxl"),
-						],
-					}),
-					new $.pill({
-						icon: "stopwatch",
-						title: "Build speed",
-						color: "primary",
-						elem: [new $.small({ id: "pagespeed", elem: "0 ms" })],
-					}),
-					new $.pill({
-						icon: "balance-scale",
-						title: "Page weight",
-						color: "primary",
-						elem: [new $.small({ id: "pageweight", elem: "0 item" })],
-					}),
-				],
+				elem: null,
 			}),
 
-			backtotop: true,
+			backtotop: false,
 		})
 	);
 
 	gen_content(def_m1, def_m2, function () {
 		$.core.init(document.getElementById("root"));
-		PR.prettyPrint();
 	});
 
 	set_theme(def_theme);
