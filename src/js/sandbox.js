@@ -288,8 +288,8 @@ import $ from "./component.js";
 const db_menu = [
 	{
 		type: "menu",
-		title: "Getting started",
-		item: [{ title: "Introduction", source: sb_intro }],
+		title: "Main",
+		item: [{ title: "Report", source: sb_intro }],
 	},
 	{
 		type: "navigate",
@@ -362,8 +362,6 @@ function gen_content(m1, m2, callback) {
 						let p = function (m) {
 							return new Promise(function (res, rej) {
 								try {
-									let processtimestart = window.performance.now();
-
 									$.core.replaceChild(
 										document.getElementById("root"),
 										new $.div({
