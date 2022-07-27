@@ -282,14 +282,14 @@
 // });
 
 // import "../css/sample.css";
-import sb_intro from "./sandbox/intro.js";
+import sb_report from "./sandbox/report.js";
 import $ from "./component.js";
 
 const db_menu = [
 	{
 		type: "menu",
 		title: "Main",
-		item: [{ title: "Report", source: sb_intro }],
+		item: [{ title: "Report", source: sb_report }],
 	},
 	{
 		type: "navigate",
@@ -330,8 +330,8 @@ const db_menu = [
 	},
 ];
 
-let def_m1 = "Getting started";
-let def_m2 = "Introduction";
+let def_m1 = "source";
+let def_m2 = "Report";
 let def_theme = null;
 
 function find_menu(m1, m2) {
@@ -362,16 +362,33 @@ function gen_content(m1, m2, callback) {
 						let p = function (m) {
 							return new Promise(function (res, rej) {
 								try {
-									$.core.replaceChild(
-										document.getElementById("root"),
-										new $.div({
-											elem: m.source,
-										})
-									);
+									m.source.main(function (elem) {
+										$.core.replaceChild(
+											document.getElementById("root"),
+											new $.div({
+												elem: elem,
+											})
+										);
 
-									gen_url(m1, m2);
+										if (m.source.menu) {
+											$.core.replaceChild(
+												document.getElementById("nextbar"),
+												new $.toc({
+													item: m.source.menu,
+												})
+											);
+										} else {
+											$.core.removeChildElement(document.getElementById("nextbar"));
+										}
 
-									res();
+										if (m.source.load) {
+											m.source.load();
+										}
+
+										gen_url(m1, m2);
+
+										res();
+									});
 								} catch (ex) {
 									rej(ex);
 								}
