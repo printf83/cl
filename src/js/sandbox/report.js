@@ -130,6 +130,50 @@ const editor = function (data) {
 	];
 };
 
+const items = function (data, item, group) {
+	let lastgroup = null;
+	let result = [];
+	data.forEach(function (i) {
+		if (dbstate) {
+			if (i.state && lastgroup !== i.state) {
+				lastgroup = i.state;
+				let state_name = dbstate.filter(function (el) {
+					return el.value === i.state;
+				})[0]?.label;
+				result.push(
+					group({
+						key: i.state,
+						name: state_name,
+					})
+				);
+			}
+		}
+		result.push(item(i));
+	});
+	return result;
+};
+const item = function (data) {
+	return new $.list.item({
+		key: data._id,
+		name: data.name,
+		picture: data.picture,
+		detail: new $.small([data.phone, data.dob, data.email].filter(Boolean).join(" | ")),
+		allow_delete: true,
+		allow_copy: true,
+		allow_action: true,
+		allow_more: true,
+	});
+};
+const group = function (data) {
+	return new $.list.group({
+		key: data.key,
+		name: data.name,
+	});
+};
+const more = function (sender, id) {
+	new $.toast("i", `Call from id:${id}`).show();
+};
+
 export default {
 	load: function () {
 		$.list.container.reload("main_list");
@@ -143,10 +187,10 @@ export default {
 					query: query_data,
 					editor: editor,
 					name: "customer",
-					// items: sample.list_items,
-					// item: sample.list_item,
-					// group: sample.list_group,
-					// more: sample.list_more,
+					items: items,
+					item: item,
+					group: group,
+					more: more,
 				})
 			);
 		});
