@@ -1,6 +1,19 @@
 "use strict";
 import $ from "../component.js";
 
+let query_data = {
+	filter: null,
+	sort: {
+		state: 1,
+		name: 1,
+	},
+	field: {
+		__v: 0,
+	},
+	limit: 10,
+	skip: 0,
+};
+
 let dbstate = null;
 const loadState = function (callback, sender) {
 	if (!dbstate) {
@@ -73,20 +86,6 @@ const query_setting = function (dbstate) {
 		useopricon: false,
 	};
 };
-
-let query_data = {
-	filter: null,
-	sort: {
-		state: 1,
-		name: 1,
-	},
-	field: {
-		__v: 0,
-	},
-	limit: 10,
-	skip: 0,
-};
-
 const editor = function (data) {
 	return [
 		new $.input({
@@ -129,7 +128,6 @@ const editor = function (data) {
 		}),
 	];
 };
-
 const items = function (data, item, group) {
 	let lastgroup = null;
 	let result = [];
@@ -174,9 +172,26 @@ const more = function (sender, id) {
 	new $.toast("i", `Call from id:${id}`).show();
 };
 
+const menuController = function (id, show) {
+	let mnu = document.getElementById(id);
+	if (show) {
+		mnu.parentElement.classList.remove("d-none");
+	} else {
+		mnu.parentElement.classList.add("d-none");
+	}
+};
+
 export default {
+	name: "Customer",
 	load: function () {
 		$.list.container.reload("main_list");
+
+		menuController("menu_add", true);
+		menuController("menu_check_on", true);
+
+		menuController("menu_check_off", false);
+		menuController("menu_check_all", false);
+		menuController("menu_check_delete", false);
 	},
 	main: function (callback) {
 		loadState(function (dbstate) {
@@ -197,33 +212,100 @@ export default {
 	},
 	menu: [
 		{
+			id: "menu_add",
+			icon: "plus",
+			label: "Add New Record",
+			onclick: function (event) {
+				$.list.container.item.add("main_list", event.currentTarget);
+			},
+		},
+		{
+			id: "menu_check_on",
+			icon: "list-check",
+			label: "Check Mode",
+			onclick: function (event) {
+				$.list.container.check.mode("main_list");
+
+				menuController("menu_add", false);
+				menuController("menu_check_on", false);
+
+				menuController("menu_check_off", true);
+				menuController("menu_check_all", true);
+				menuController("menu_check_delete", true);
+			},
+		},
+		{
+			id: "menu_check_off",
+			icon: "arrow-left",
+			label: "Back",
+			onclick: function (event) {
+				$.list.container.check.mode("main_list");
+
+				menuController("menu_add", true);
+				menuController("menu_check_on", true);
+
+				menuController("menu_check_off", false);
+				menuController("menu_check_all", false);
+				menuController("menu_check_delete", false);
+			},
+		},
+		{
+			id: "menu_check_all",
+			icon: "check-double",
+			label: "Check All",
+			onclick: function (event) {
+				$.list.container.check.all("main_list");
+			},
+		},
+		{
+			id: "menu_check_delete",
+			icon: "trash-can",
+			label: "Delete Checked",
+			onclick: function (event) {
+				$.list.container.check.delete("main_list", event.currentTarget);
+			},
+		},
+		{
+			id: "menu_filter",
+			icon: "filter",
 			label: "Filter",
-			onclick: function () {
-				$.list.container.query.filter("main_list");
+			onclick: function (event) {
+				$.list.container.query.filter("main_list", event.currentTarget);
 			},
 		},
 		{
+			id: "menu_sort",
+			icon: "sort",
 			label: "Sort",
-			onclick: function () {
-				$.list.container.query.sort("main_list");
+			onclick: function (event) {
+				$.list.container.query.sort("main_list", event.currentTarget);
 			},
 		},
 		{
+			id: "menu_field",
+			icon: "tasks",
 			label: "Field",
-			onclick: function () {
-				$.list.container.query.field("main_list");
+			onclick: function (event) {
+				$.list.container.query.field("main_list", event.currentTarget);
 			},
 		},
 		{
+			id: "menu_limit",
+			icon: "list-ol",
 			label: "Limit",
-			onclick: function () {
-				$.list.container.query.limit("main_list");
+			onclick: function (event) {
+				$.list.container.query.limit("main_list", event.currentTarget);
 			},
 		},
 		{
 			label: "Page",
-			onclick: function () {
-				$.list.container.query.page("main_list");
+			icon: {
+				icon: "sort",
+				rotate: 90,
+			},
+			id: "menu_page",
+			onclick: function (event) {
+				$.list.container.query.page("main_list", event.currentTarget);
 			},
 		},
 	],

@@ -282,14 +282,18 @@
 // });
 
 // import "../css/sample.css";
-import sb_report from "./sandbox/report.js";
+import sb_customer from "./sandbox/customer.js";
+import sb_state from "./sandbox/state.js";
 import $ from "./component.js";
 
 const db_menu = [
 	{
 		type: "menu",
 		title: "Main",
-		item: [{ title: "Report", source: sb_report }],
+		item: [
+			{ title: "Customer", source: sb_customer },
+			{ title: "State", source: sb_state },
+		],
 	},
 	{
 		type: "navigate",
@@ -330,8 +334,8 @@ const db_menu = [
 	},
 ];
 
-let def_m1 = "source";
-let def_m2 = "Report";
+let def_m1 = "Main";
+let def_m2 = "Customer";
 let def_theme = null;
 
 function find_menu(m1, m2) {
@@ -354,6 +358,19 @@ function gen_content(m1, m2, callback) {
 	if (m) {
 		if (m.type === "menu") {
 			if (m.source) {
+				$.core.replaceChild(
+					document.getElementById("root"),
+					new $.div({
+						elem: "Loading...",
+					})
+				);
+				$.core.replaceChild(
+					document.getElementById("nextbar"),
+					new $.div({
+						elem: "Loading...",
+					})
+				);
+
 				//=============
 				//LOADER TYPE 1
 				//=============
@@ -374,6 +391,7 @@ function gen_content(m1, m2, callback) {
 											$.core.replaceChild(
 												document.getElementById("nextbar"),
 												new $.toc({
+													label: m.source.name,
 													item: m.source.menu,
 												})
 											);
