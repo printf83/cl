@@ -581,6 +581,24 @@ export const file = {
 			console.error("opt id is required");
 		}
 	},
+	duplicate: function (id, callback, sender) {
+		if (id) {
+			if (fn.sender.isfree(sender)) {
+				fn.sender.setbusy(sender);
+				fn.get({
+					callback: function (result) {
+						fn.sender.setfree(sender);
+						if (typeof callback === "function") {
+							callback(result);
+						}
+					},
+					url: `/api/file-duplicate/${Array.isArray(id) ? id.join(",") : id}`,
+				});
+			}
+		} else {
+			console.error("opt id is required");
+		}
+	},
 	save: function (id, callback, sender) {
 		if (id) {
 			if (fn.sender.isfree(sender)) {

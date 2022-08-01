@@ -79,7 +79,7 @@ const menuController = function (id, show) {
 export default {
 	name: "State",
 	load: function () {
-		$.list.container.reload("main_list");
+		$.list.container.reload("state_list");
 
 		menuController("menu_add", true);
 		menuController("menu_check_on", true);
@@ -91,8 +91,8 @@ export default {
 	main: function (callback) {
 		callback(
 			new $.list.container({
-				id: "main_list",
-				setting: query_setting,
+				id: "state_list",
+				setting: query_setting(),
 				query: query_data,
 				editor: editor,
 				name: "state",
@@ -108,7 +108,7 @@ export default {
 			icon: "plus",
 			label: "Add New Record",
 			onclick: function (event) {
-				$.list.container.item.add("main_list", event.currentTarget);
+				$.list.container.item.add("state_list", event.currentTarget);
 			},
 		},
 		{
@@ -116,7 +116,7 @@ export default {
 			icon: "list-check",
 			label: "Check Mode",
 			onclick: function (event) {
-				$.list.container.check.mode("main_list");
+				$.list.container.check.mode("state_list");
 
 				menuController("menu_add", false);
 				menuController("menu_check_on", false);
@@ -131,7 +131,7 @@ export default {
 			icon: "arrow-left",
 			label: "Back",
 			onclick: function (event) {
-				$.list.container.check.mode("main_list");
+				$.list.container.check.mode("state_list");
 
 				menuController("menu_add", true);
 				menuController("menu_check_on", true);
@@ -146,7 +146,7 @@ export default {
 			icon: "check-double",
 			label: "Check All",
 			onclick: function (event) {
-				$.list.container.check.all("main_list");
+				$.list.container.check.all("state_list");
 			},
 		},
 		{
@@ -154,7 +154,7 @@ export default {
 			icon: "trash-can",
 			label: "Delete Checked",
 			onclick: function (event) {
-				$.list.container.check.delete("main_list", event.currentTarget);
+				$.list.container.check.delete("state_list", event.currentTarget);
 			},
 		},
 		{
@@ -162,7 +162,7 @@ export default {
 			icon: "filter",
 			label: "Filter",
 			onclick: function (event) {
-				$.list.container.query.filter("main_list", event.currentTarget);
+				$.list.container.query.filter("state_list", event.currentTarget);
 			},
 		},
 		{
@@ -170,7 +170,7 @@ export default {
 			icon: "sort",
 			label: "Sort",
 			onclick: function (event) {
-				$.list.container.query.sort("main_list", event.currentTarget);
+				$.list.container.query.sort("state_list", event.currentTarget);
 			},
 		},
 		{
@@ -178,7 +178,7 @@ export default {
 			icon: "tasks",
 			label: "Field",
 			onclick: function (event) {
-				$.list.container.query.field("main_list", event.currentTarget);
+				$.list.container.query.field("state_list", event.currentTarget);
 			},
 		},
 		{
@@ -186,7 +186,7 @@ export default {
 			icon: "list-ol",
 			label: "Limit",
 			onclick: function (event) {
-				$.list.container.query.limit("main_list", event.currentTarget);
+				$.list.container.query.limit("state_list", event.currentTarget);
 			},
 		},
 		{
@@ -197,7 +197,7 @@ export default {
 			},
 			id: "menu_page",
 			onclick: function (event) {
-				$.list.container.query.page("main_list", event.currentTarget);
+				$.list.container.query.page("state_list", event.currentTarget);
 			},
 		},
 	],

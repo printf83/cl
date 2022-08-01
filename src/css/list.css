@@ -126,6 +126,20 @@
 	text-align: center;
 }
 
+/* custom */
+.cl-list .list-group-item:not(.list-group-item-header) {
+	min-height: 4rem;
+}
+
+.cl-list .list-group-item h6 {
+	margin-bottom: 0;
+}
+
+.cl-list .list-group-item small {
+	margin-top: 0.5rem;
+	display: inline-block;
+}
+
 /* .cl-list .list-group-item-header::before {
 	content: "[ ";
 }

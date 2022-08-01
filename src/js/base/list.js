@@ -290,8 +290,56 @@ const fn = {
 		},
 		delete: function (id, sender) {
 			let checked = fn.check.get(id);
+
 			if (checked) {
+				let checkedid = checked.map(function (i) {
+					return i.key;
+				});
+
 				let opt = fn.get(id);
+
+				const fndeleterecursive = function (opt, keys, index, callback) {
+					if (index < keys.length) {
+						db.api.load(
+							{
+								name: opt.name,
+								id: keys[index],
+								sender: sender,
+							},
+							function (data) {
+								if (data) {
+									fn.file.delete(
+										opt,
+										data,
+										function () {
+											fndeleterecursive(opt, keys, index + 1, callback);
+										},
+										sender
+									);
+								} else {
+									fndeleterecursive(opt, keys, index + 1, callback);
+								}
+							},
+							sender
+						);
+					} else {
+						callback();
+					}
+				};
+
+				const fndelete = function (id, opt, checkedid, sender) {
+					db.api.delete(
+						{
+							name: opt.name,
+							id: checkedid,
+							sender: sender,
+						},
+						function (data) {
+							fn.reload(id, sender);
+						},
+						sender
+					);
+				};
 
 				new dlg.confirmbox(
 					"!!",
@@ -301,19 +349,14 @@ const fn = {
 							label: "Yes, delete",
 							color: "danger",
 							onclick: function () {
-								db.api.delete(
-									{
-										name: opt.name,
-										id: checked.map(function (i) {
-											return i.key;
-										}),
-										sender: sender,
-									},
-									function (data) {
-										fn.reload(id, sender);
-									},
-									sender
-								);
+								if (opt.file && opt.file.length > 0) {
+									fndeleterecursive(opt, checkedid, 0, function () {
+										fndelete(id, opt, checkedid, sender);
+									});
+								} else {
+									//no file, direct delete
+									fndelete(id, opt, checkedid, sender);
+								}
 							},
 						},
 						{
@@ -366,6 +409,105 @@ const fn = {
 			}
 		},
 	},
+	file: {
+		listoffile: function (fileprop, data) {
+			//create list of id
+			let result = [];
+
+			if (fileprop && fileprop.length > 0) {
+				fileprop.forEach((i) => {
+					if (data[i]) {
+						if (data[i].indexOf(",") > 0) {
+							data[i]
+								.toString()
+								.split(",")
+								.forEach((j) => {
+									result.push(j);
+								});
+						} else {
+							result.push(data[i]);
+						}
+					}
+				});
+			}
+
+			return result && result.length > 0 ? result : null;
+		},
+		listoffileobject: function (fileprop, data) {
+			//create list of id
+			let result = [];
+
+			if (fileprop && fileprop.length > 0) {
+				fileprop.forEach((i) => {
+					if (data[i]) {
+						result.push({
+							key: i,
+							data: data[i],
+						});
+					}
+				});
+			}
+
+			return result && result.length > 0 ? result : null;
+		},
+		save: function (opt, data, callback, sender) {
+			if (opt && data) {
+				if (opt.file && opt.file.length > 0) {
+					let listoffile = fn.file.listoffile(opt.file, data);
+					if (listoffile && listoffile.length > 0) {
+						db.file.save(listoffile, callback, sender);
+					} else {
+						callback();
+					}
+				} else {
+					callback();
+				}
+			}
+		},
+		delete: function (opt, data, callback, sender) {
+			if (opt && data) {
+				if (opt.file) {
+					let listoffile = fn.file.listoffile(opt.file, data);
+					if (listoffile && listoffile.length > 0) {
+						db.file.delete(listoffile, callback, sender);
+					} else {
+						callback();
+					}
+				} else {
+					callback();
+				}
+			}
+		},
+		duplicate: function (opt, data, callback, sender) {
+			const fnduplicaterecursive = function (data, listoffile, index, callback, sender) {
+				if (index < listoffile.length) {
+					db.file.duplicate(
+						listoffile[index].data,
+						function (newfileid) {
+							data[listoffile[index].key] = newfileid;
+							fnduplicaterecursive(data, listoffile, index + 1, callback, sender);
+						},
+						sender
+					);
+				} else {
+					callback(data);
+				}
+			};
+
+			if (opt && data) {
+				if (opt.file && opt.file.length > 0) {
+					let listoffile = fn.file.listoffileobject(opt.file, data);
+					if (listoffile && listoffile.length > 0) {
+						fnduplicaterecursive(data, listoffile, 0, callback, sender);
+					} else {
+						callback(data);
+					}
+				} else {
+					callback(data);
+				}
+			}
+		},
+	},
 	item: {
 		action: function (event) {
 			event.stopPropagation();
@@ -398,7 +540,16 @@ const fn = {
 										sender: sender,
 									},
 									function (data) {
-										fn.reload(id, sender);
+										if (data) {
+											fn.file.save(
+												opt,
+												data,
+												function () {
+													fn.reload(id, sender);
+												},
+												sender
+											);
+										}
 									},
 									sender
 								);
@@ -450,7 +601,16 @@ const fn = {
 													sender: sender,
 												},
 												function (data) {
-													fn.reload(id, sender);
+													if (data) {
+														fn.file.save(
+															opt,
+															data,
+															function () {
+																fn.reload(id, sender);
+															},
+															sender
+														);
+													}
 												}
 											);
 										},
@@ -486,32 +646,51 @@ const fn = {
 					},
 					function (data) {
 						if (data) {
+							//remove id
 							delete data._id;
-							new dlg.inputbox(
-								opt.editor(data),
-								null,
-								[
-									{
-										label: "Save",
-										onclick: function (_event, data) {
-											db.api.create(
-												{
-													name: opt.name,
-													data: data,
-													sender: sender,
+
+							//duplicate file
+							fn.file.duplicate(
+								opt,
+								data,
+								function (data) {
+									new dlg.inputbox(
+										opt.editor(data),
+										null,
+										[
+											{
+												label: "Save",
+												onclick: function (_event, data) {
+													db.api.create(
+														{
+															name: opt.name,
+															data: data,
+															sender: sender,
+														},
+														function (data) {
+															if (data) {
+																fn.file.save(
+																	opt,
+																	data,
+																	function () {
+																		fn.reload(id, sender);
+																	},
+																	sender
+																);
+															}
+														}
+													);
 												},
-												function (data) {
-													fn.reload(id, sender);
-												}
-											);
-										},
-									},
-									{
-										label: "Cancel",
-									},
-								],
-								`Copy ${opt.name}`
-							).show();
+											},
+											{
+												label: "Cancel",
+											},
+										],
+										`Copy ${opt.name}`
+									).show();
+								},
+								sender
+							);
 						}
 					},
 					sender
@@ -530,6 +709,19 @@ const fn = {
 			let id = container.getAttribute("id");
 			let opt = fn.get(id);
 			if (opt) {
+				const fndelete = function (opt, id, key, sender) {
+					db.api.delete(
+						{
+							name: opt.name,
+							id: key,
+							sender: sender,
+						},
+						function (data) {
+							fn.reload(id, sender);
+						}
+					);
+				};
+
 				new dlg.confirmbox(
 					"!!",
 					`Are you sure delete <b>${name ? name : "this"}</b> record?`,
@@ -538,16 +730,37 @@ const fn = {
 							label: "Yes, delete",
 							color: "danger",
 							onclick: function () {
-								db.api.delete(
-									{
-										name: opt.name,
-										id: key,
-										sender: sender,
-									},
-									function (data) {
-										fn.reload(id, sender);
-									}
-								);
+								//check if has picture
+								if (opt.file && opt.file.length > 0) {
+									//need to load data first
+									//then delete file
+									//then delete item
+									db.api.load(
+										{
+											name: opt.name,
+											id: key,
+											sender: sender,
+										},
+										function (data) {
+											if (data) {
+												fn.file.delete(
+													opt,
+													data,
+													function () {
+														fndelete(opt, id, key, sender);
+													},
+													sender
+												);
+											} else {
+												fndelete(opt, id, key, sender);
+											}
+										},
+										sender
+									);
+								} else {
+									//no file, direct delete
+									fndelete(opt, id, key, sender);
+								}
 							},
 						},
 						{

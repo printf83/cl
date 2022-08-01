@@ -432,6 +432,7 @@ export default [
 								new $.list.container({
 									id: resultOutputId,
 									setting: sample.query_setting(dbstate),
+									file: ["picture"],
 									query: sample.query_data,
 									editor: sample.list_editor,
 									name: "customer",
@@ -522,6 +523,7 @@ export default [
 								new $.list.container({
 									id: resultOutputId,
 									setting: sample.query_setting(dbstate),
+									file: ["picture"],
 									query: sample.query_data,
 									editor: sample.list_editor,
 									name: "customer",
@@ -676,6 +678,7 @@ export default [
 								new $.list.container({
 									id: resultOutputId,
 									setting: sample.query_setting(dbstate),
+									file: ["picture"],
 									query: sample.query_data,
 									editor: sample.list_editor,
 									name: "customer",

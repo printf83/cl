@@ -134,6 +134,32 @@ module.exports = function (app, setting) {
 					res.status(500).send(err);
 				});
 		},
+		duplicate: function (req, res) {
+			let i = req.params.id.split(",");
+			let p = [];
+			i.forEach((id) => {
+				p.push(fn.duplicateuploadedfile(id));
+			});
+
+			Promise.all(p)
+				.then((result) => {
+					res.send(
+						result
+							.map((item) => {
+								if (item.result === true) {
+									return item.id;
+								} else {
+									return null;
+								}
+							})
+							.filter(Boolean)
+					);
+				})
+				.catch((err) => {
+					//console.error(err);
+					res.status(500).send(err);
+				});
+		},
 		delete: function (req, res) {
 			let i = req.params.id.split(",");
 			let p = [];
@@ -241,7 +267,52 @@ module.exports = function (app, setting) {
 									)
 									.then((data) => {
 										if (data) {
-											res({ id: id, result: true });
+											res({ id: data.id, result: true });
+										} else {
+											rej({
+												id: id,
+												result: "Operation fail",
+											});
+										}
+									})
+									.catch((err) => {
+										rej({ id: id, result: err.message });
+									});
+							} else {
+								res({ id: id, result: true });
+							}
+						} else {
+							rej({ id: id, result: "Not found" });
+						}
+					})
+					.catch((err) => {
+						rej({ id: id, result: err.message });
+					});
+			});
+		},
+		duplicateuploadedfile: function (id) {
+			// Find file in db then move the original file from tmp to file
+
+			return new Promise((res, rej) => {
+				$.db
+					.findOne({ _id: id })
+					.then((data) => {
+						if (data) {
+							if (!data.saved) {
+								//create file dir if not exists
+
+								// Find file and update it
+								$.db
+									.findOneAndUpdate(
+										{ _id: id },
+										{
+											saved: false,
+										},
+										{ new: true }
+									)
+									.then((data) => {
+										if (data) {
+											res({ id: data.id, result: true });
 										} else {
 											rej({
 												id: id,
@@ -272,6 +343,7 @@ module.exports = function (app, setting) {
 			upload: "auth",
 			download: true,
 			info: true,
+			duplicate: "auth",
 			save: "auth",
 			delete: "auth",
 		},
@@ -302,6 +374,15 @@ module.exports = function (app, setting) {
 			app.get("/api/file-info/:id", core.auth, fn.info);
 		} else {
 			app.get("/api/file-info/:id", fn.info);
+		}
+	}
+
+	//duplicate file
+	if (setting.duplicate) {
+		if (setting.info === "auth") {
+			app.get("/api/file-duplicate/:id", core.auth, fn.duplicate);
+		} else {
+			app.get("/api/file-duplicate/:id", fn.duplicate);
 		}
 	}
 
