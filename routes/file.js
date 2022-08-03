@@ -298,34 +298,23 @@ module.exports = function (app, setting) {
 					.findOne({ _id: id })
 					.then((data) => {
 						if (data) {
-							if (!data.saved) {
-								//create file dir if not exists
-
-								// Find file and update it
-								$.db
-									.findOneAndUpdate(
-										{ _id: id },
-										{
-											saved: false,
-										},
-										{ new: true }
-									)
-									.then((data) => {
-										if (data) {
-											res({ id: data.id, result: true });
-										} else {
-											rej({
-												id: id,
-												result: "Operation fail",
-											});
-										}
-									})
-									.catch((err) => {
-										rej({ id: id, result: err.message });
-									});
-							} else {
-								res({ id: id, result: true });
-							}
+							$.db
+								.create({
+									fieldname: data.fieldname,
+									originalname: data.originalname,
+									encoding: data.encoding,
+									mimetype: data.mimetype,
+									saved: false,
+									filename: data.filename,
+									size: data.size,
+									data: data.data,
+								})
+								.then((data) => {
+									res({ id: data._id, result: true });
+								})
+								.catch((err) => {
+									rej({ id: id, result: err.message });
+								});
 						} else {
 							rej({ id: id, result: "Not found" });
 						}

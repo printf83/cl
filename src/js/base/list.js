@@ -507,6 +507,63 @@ const fn = {
 				}
 			}
 		},
+		manage: function (opt, oldData, newData, callback, sender) {
+			if (opt && oldData && newData) {
+				if (opt.file && opt.file.length > 0) {
+					let listoffile_old = fn.file.listoffile(opt.file, oldData);
+					let listoffile_new = fn.file.listoffile(opt.file, newData);
+
+					let listoffile_delete = [];
+					let listoffile_save = [];
+
+					if (listoffile_new && listoffile_new.length > 0) {
+						listoffile_new.forEach((i) => {
+							if (listoffile_old && listoffile_old.length > 0) {
+								if (!listoffile_old.includes(i)) {
+									listoffile_save.push(i);
+								}
+							} else {
+								listoffile_save.push(i);
+							}
+						});
+					}
+
+					if (listoffile_old && listoffile_old.length > 0) {
+						listoffile_old.forEach((i) => {
+							if (listoffile_new && listoffile_new.length > 0) {
+								if (!listoffile_new.includes(i)) {
+									listoffile_delete.push(i);
+								}
+							} else {
+								listoffile_delete.push(i);
+							}
+						});
+					}
+
+					if (listoffile_save && listoffile_save.length > 0) {
+						db.file.save(
+							listoffile_save,
+							function () {
+								if (listoffile_delete && listoffile_delete.length > 0) {
+									db.file.delete(listoffile_delete, callback, sender);
+								} else {
+									callback();
+								}
+							},
+							sender
+						);
+					} else {
+						if (listoffile_delete && listoffile_delete.length > 0) {
+							db.file.delete(listoffile_delete, callback, sender);
+						} else {
+							callback();
+						}
+					}
+				} else {
+					callback();
+				}
+			}
+		},
 	},
 	item: {
 		action: function (event) {
@@ -539,8 +596,8 @@ const fn = {
 										data: data,
 										sender: sender,
 									},
-									function (data) {
-										if (data) {
+									function (result) {
+										if (result) {
 											fn.file.save(
 												opt,
 												data,
@@ -583,28 +640,29 @@ const fn = {
 						id: key,
 						sender: sender,
 					},
-					function (data) {
-						if (data) {
+					function (oldData) {
+						if (oldData) {
 							new dlg.inputbox(
-								opt.editor(data),
+								opt.editor(oldData),
 								null,
 								[
 									{
 										label: "Save",
-										onclick: function (_event, data) {
-											data._id = key;
+										onclick: function (_event, newData) {
+											newData._id = key;
 											db.api.update(
 												{
 													name: opt.name,
 													id: key,
-													data: data,
+													data: newData,
 													sender: sender,
 												},
-												function (data) {
-													if (data) {
-														fn.file.save(
+												function (result) {
+													if (result) {
+														fn.file.manage(
 															opt,
-															data,
+															oldData,
+															newData,
 															function () {
 																fn.reload(id, sender);
 															},
@@ -667,8 +725,8 @@ const fn = {
 															data: data,
 															sender: sender,
 														},
-														function (data) {
-															if (data) {
+														function (result) {
+															if (result) {
 																fn.file.save(
 																	opt,
 																	data,

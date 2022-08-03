@@ -318,14 +318,22 @@ const fn = {
 		let id = container.getAttribute("data-cl-container");
 		let ctl = container.parentNode.querySelectorAll(`#${id}`)[0];
 
-		db.file.delete(
-			ctl.value,
-			function (data) {
-				ctl.value = null;
-				ctl.dispatchEvent(new Event("change"));
-			},
-			sender
-		);
+		// dont delete temp file or saved file.
+		// it will be deleted later
+		// example : delete file without save
+
+		// db.file.delete(
+		// 	ctl.value,
+		// 	function (data) {
+		// 		ctl.value = null;
+		// 		ctl.dispatchEvent(new Event("change"));
+		// 	},
+		// 	sender
+		// );
+
+		//just make null
+		ctl.value = null;
+		ctl.dispatchEvent(new Event("change"));
 	},
 	startupload: function (sender, btnupload, ctl, fu, opt) {
 		//append div into button
