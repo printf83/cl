@@ -17,7 +17,7 @@
 }
 
 .cl-list-ctl::after{
-	content: "❮";
+	content: "⋮";
 	color: var(--bs-list-group-bg);
 	position: relative;
 	top: calc(50% - 1rem);

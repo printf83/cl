@@ -2,6 +2,7 @@ require("dotenv").config();
 
 const nodemailer = require("nodemailer");
 const $ = require(`../models/user.js`);
+const $file = require(`../models/file.js`);
 const core = require(`../core.js`);
 
 module.exports = function (app) {
@@ -248,19 +249,127 @@ module.exports = function (app) {
 
 				req.user.name = name;
 				req.user.email = email;
-				req.user.picture = picture;
 
-				req.user.save((err) => {
-					if (err) {
-						console.log(err);
-						return res.json({ success: false });
+				const do_save = function (req, res) {
+					req.user.picture = picture;
+					req.user.save((err) => {
+						if (err) {
+							console.log(err);
+							res.json({ success: false });
+						}
+
+						//save picture
+						fn.picture
+							.save(id)
+							.then((id, result) => {
+								res.json({ success: true });
+							})
+							.catch((err) => {
+								console.log(err);
+								res.json({ success: false });
+							});
+					});
+				};
+
+				if (req.user.picture !== null) {
+					if (req.user.picture !== picture) {
+						//delete old picture
+						fn.picture
+							.delete(req.user.picture)
+							.then((id, result) => {
+								if (result) {
+									do_save(req, res);
+								}
+							})
+							.catch((err) => {
+								console.log(err);
+								res.json({ success: false });
+							});
+					} else {
+						do_save(req, res);
 					}
-
-					res.json({ success: true });
-				});
+				} else {
+					do_save(req, res);
+				}
 			} else {
 				res.json(null);
 			}
+		},
+		picture: {
+			save: function (id) {
+				return new Promise((res, rej) => {
+					$file.db
+						.findOne({ _id: id })
+						.then((data) => {
+							if (data) {
+								if (!data.saved) {
+									//create file dir if not exists
+
+									// Find file and update it
+									$file.db
+										.findOneAndUpdate(
+											{ _id: id },
+											{
+												saved: true,
+											},
+											{ new: false }
+										)
+										.then((data) => {
+											if (data) {
+												res({ id: data.id, result: true });
+											} else {
+												rej({
+													id: id,
+													result: "Operation fail",
+												});
+											}
+										})
+										.catch((err) => {
+											rej({ id: id, result: err.message });
+										});
+								} else {
+									res({ id: id, result: true });
+								}
+							} else {
+								rej({ id: id, result: "Not found" });
+							}
+						})
+						.catch((err) => {
+							rej({ id: id, result: err.message });
+						});
+				});
+			},
+			delete: function (id) {
+				return new Promise((res, _rej) => {
+					$file.db
+						.findOne({ _id: id })
+						.then((data) => {
+							if (data) {
+								// Find file and remove it
+								$file.db
+									.findByIdAndRemove({ _id: id })
+									.then((data) => {
+										if (data) {
+											res({ id: id, result: true });
+										} else {
+											res({
+												id: id,
+												result: "Operation fail",
+											});
+										}
+									})
+									.catch((err) => {
+										res({ id: id, result: err.message });
+									});
+							} else {
+								res({ id: id, result: "Not found" });
+							}
+						})
+						.catch((err) => {
+							res({ id: id, result: err.message });
+						});
+				});
+			},
 		},
 	};
 

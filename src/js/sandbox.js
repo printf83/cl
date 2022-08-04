@@ -410,19 +410,16 @@ function gen_content(m1, m2, callback) {
 				$.core.replaceChild(
 					document.getElementById("root"),
 					new $.div({
-						elem: "Loading...",
+						elem: "",
 					})
 				);
 				$.core.replaceChild(
 					document.getElementById("nextbar"),
 					new $.div({
-						elem: "Loading...",
+						elem: "",
 					})
 				);
 
-				//=============
-				//LOADER TYPE 1
-				//=============
 				setTimeout(
 					function (m, callback) {
 						let p = function (m) {
