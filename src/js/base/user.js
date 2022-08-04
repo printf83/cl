@@ -361,27 +361,70 @@ const fn = {
 				}
 			);
 		},
+		managepicture: function (sender, oldData, newData, callback) {
+			let file_delete = null;
+			let file_save = null;
+
+			if (newData) {
+				if (oldData) {
+					if (oldData !== newData) {
+						file_save = newData;
+					}
+				} else {
+					file_save = newData;
+				}
+			}
+
+			if (oldData) {
+				if (newData) {
+					if (oldData !== newData) {
+						file_delete = oldData;
+					}
+				} else {
+					file_delete = oldData;
+				}
+			}
+
+			if (file_save) {
+				db.file.save(
+					file_save,
+					function () {
+						if (file_delete) {
+							db.file.delete(file_delete, callback, sender);
+						} else {
+							callback();
+						}
+					},
+					sender
+				);
+			} else {
+				if (file_delete) {
+					db.file.delete(file_delete, callback, sender);
+				} else {
+					callback();
+				}
+			}
+		},
 		updateinfo: function (sender, opt) {
 			let container = sender.closest("form");
 			core.validate(container, function (result) {
 				if (!result) {
 					fn.showmsg(container, "Please provide contact email and name", "-");
 				} else {
-					let data = core.getValue(container);
-
 					container.classList.remove("was-validated");
 
-					db.user.updateinfo(
-						{
-							sender: sender,
-							data: { email: data.email, name: data.name, picture: data.picture },
-						},
-						function (result) {
-							if (result) {
-								if (result.success) {
-									file.save(
-										data.picture,
-										function () {
+					let newData = core.getValue(container);
+
+					db.user.info(sender, function (oldData) {
+						fn.action.managepicture(sender, oldData.picture, newData.picture, function () {
+							db.user.updateinfo(
+								{
+									sender: sender,
+									data: { email: newData.email, name: newData.name, picture: newData.picture },
+								},
+								function (result) {
+									if (result) {
+										if (result.success) {
 											if (opt.callback instanceof Function) {
 												let dlg = container.closest("div.modal");
 												modal.hide(dlg);
@@ -389,15 +432,18 @@ const fn = {
 											} else {
 												fn.showmsg(container, "Update success", "/");
 											}
-										},
-										sender
-									);
-								} else {
-									fn.showmsg(container, result && result.message ? result.message : null, "!!");
+										} else {
+											fn.showmsg(
+												container,
+												result && result.message ? result.message : null,
+												"!!"
+											);
+										}
+									}
 								}
-							}
-						}
-					);
+							);
+						});
+					});
 				}
 			});
 		},
