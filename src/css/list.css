@@ -17,12 +17,14 @@
 }
 
 .cl-list-ctl::after{
-	content: "⋮";
-	color: var(--bs-list-group-bg);
-	position: relative;
-	top: calc(50% - 1rem);
-	display: flex;
-	padding: 0.1rem;
+		content: "⋮";
+		color: var(--bs-list-group-bg);
+		position: relative;
+		top: calc(50% - 1rem);
+		display: flex;
+		font-weight: bold;
+		font-size: 1.25rem;
+		padding: 0.15rem;
 }
 
 .cl-list-ctl .btn-group{
