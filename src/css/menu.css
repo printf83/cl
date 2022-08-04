@@ -83,6 +83,13 @@
 	color: rgba(var(--bs-light-rgb), 0.9);
 }
 
+.cl-menu-container li div.disabled,
+.cl-menu-container li a.disabled,
+.cl-menu-container li div[disabled],
+.cl-menu-container li a[disabled] {
+	color: var(--bs-secondary);
+}
+
 @media (min-width: 768px) {
 	.cl-vh-menu {
 		max-height: calc(100vh - 5.5rem) !important;
