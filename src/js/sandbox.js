@@ -301,6 +301,55 @@ const db_menu = [
 		item: [{ title: "Documentation", source: "index.html" }],
 	},
 	{
+		type: "action",
+		title: "User",
+		item: [
+			{
+				title: "Update Profile",
+				source: function (event) {
+					let sender = event.currentTarget;
+					$.user.info(sender, function (result) {
+						if (result && result.email) {
+							new $.user.updateinfo({
+								data: result,
+								sender: sender,
+								callback: function (result) {
+									if (result) {
+										new $.toast("/", "Your information updated").show();
+									}
+								},
+							}).show();
+						}
+					});
+				},
+			},
+			{
+				title: "Change Password",
+				source: function (event) {
+					new $.user.changepass({
+						callback: function (result) {
+							if (result) {
+								new $.toast("/", "Password changed").show();
+							}
+						},
+					}).show();
+				},
+			},
+			{
+				title: "Sign Out",
+				source: function (event) {
+					$.user.signout(event.currentTarget, function (result) {
+						if (result) {
+							new $.toast("/", "User successfuly sign out").show();
+						} else {
+							new $.toast("!!", "User failed sign out").show();
+						}
+					});
+				},
+			},
+		],
+	},
+	{
 		type: "theme",
 		title: "Theme",
 		item: [
