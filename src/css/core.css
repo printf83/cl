@@ -1,4 +1,4 @@
 *[disabled],
 *.disabled{
-    cursor: wait;
+    cursor: wait !important;
 }
