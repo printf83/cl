@@ -67,7 +67,7 @@ let defaultChangePassOption = {
 	title: null,
 	callback: null,
 	close: true,
-	backdropcolor: "primary",
+	// backdropcolor: "primary",
 	debug: false,
 };
 
@@ -93,7 +93,7 @@ let defaultUpdateInfoOption = {
 	title: null,
 	callback: null,
 	close: true,
-	backdropcolor: "primary",
+	// backdropcolor: "primary",
 	debug: false,
 	data: null,
 };
