@@ -81,7 +81,7 @@ const fn = {
 		setbusy: function (sender) {
 			if (sender) {
 				sender.classList.add("disabled");
-				sender.disabled = true;
+				sender.setAttribute("disabled", "disabled");
 
 				if (fn.sender.islist(sender)) {
 					// let ctl = sender.querySelectorAll("h6");
@@ -99,7 +99,7 @@ const fn = {
 		setfree: function (sender) {
 			if (sender) {
 				sender.classList.remove("disabled");
-				sender.disabled = false;
+				sender.removeAttribute("disabled");
 
 				if (fn.sender.islist(sender)) {
 					// let ctl = sender.querySelectorAll("h6");
