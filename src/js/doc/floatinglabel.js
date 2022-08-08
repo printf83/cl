@@ -56,7 +56,7 @@ export default [
 					label: "Validate",
 					color: "primary",
 					onclick: function (event) {
-						core.validate(event.currentTarget.parentElement, function (result) {
+						$.core.validate(event.currentTarget.parentElement, function (result) {
 							new $.toast("i", `Result: ${result}`).show();
 						});
 					},
