@@ -93,41 +93,44 @@ export default [
 							<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 							<link rel="icon" type="image/png" href="/favicon.png" />
 
-							<!-- cdn css--->
 							<link
 								rel="stylesheet"
-								href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"
+								href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.2/css/all.min.css"
 							/>
-							<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" />
+							<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" />
 							<link
 								rel="stylesheet"
-								href="https://cdn.jsdelivr.net/npm/bootswatch@5.1.3/dist/cerulean/bootstrap.min.css"
+								href="https://cdn.jsdelivr.net/npm/bootswatch@5.2.0/dist/cerulean/bootstrap.min.css"
 								id="nstheme"
 								disabled="disabled"
 							/>
+							<link rel="stylesheet" href="./dist/style.css" />
 
-							<!-- your css--->
-							<link rel="stylesheet" href="./style.css" />
-
-							<title>Testing website</title>
+							<title>BS5 JS Builder</title>
 						</head>
 						<body class="position-relative">
 							<div class="position-fixed top-50 start-50 translate-middle" id="main">
-								<!-- root --->
-								<i class="fas fa-circle-notch fa-fw fa-spin fa-5x"></i>
-								<noscript>
-									<p class="text-danger">Your browser does not support JavaScript!</p>
-								</noscript>
+								<div class="text-center">
+									<i class="fas fa-circle-notch fa-fw fa-spin fa-5x"></i>
+									<noscript>
+										<p class="text-danger">Your browser does not support JavaScript!</p>
+									</noscript>
+								</div>
 							</div>
 
-							<!-- cdn js--->
 							<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"></script>
-							<script src="https://cdn.jsdelivr.net/npm/moment@2.29.4"></script>
-							<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js"></script>
-							<script src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1"></script>
 
-							<!-- your script --->
-							<script type="module" src="/index.js"></script>
+							<script src="https://cdn.jsdelivr.net/npm/moment@2.29.4"></script>
+							<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+							<script src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.2"></script>
+
+							<script src="https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.14.0/beautify.js"></script>
+							<script src="https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.14.0/beautify-css.js"></script>
+							<script src="https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.14.0/beautify-html.js"></script>
+
+							<script src="https://cdn.jsdelivr.net/npm/code-prettify@0.1.0/src/prettify.min.js?style=default"></script>
+
+							<script type="module" src="/dist/js/index.js"></script>
 						</body>
 					</html>
 
