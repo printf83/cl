@@ -124,12 +124,6 @@ export default [
 							<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
 							<script src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.2"></script>
 
-							<script src="https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.14.0/beautify.js"></script>
-							<script src="https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.14.0/beautify-css.js"></script>
-							<script src="https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.14.0/beautify-html.js"></script>
-
-							<script src="https://cdn.jsdelivr.net/npm/code-prettify@0.1.0/src/prettify.min.js?style=default"></script>
-
 							<script type="module" src="/dist/js/index.js"></script>
 						</body>
 					</html>
