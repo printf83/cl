@@ -134,22 +134,12 @@ export default class codepreview extends tag {
 		} else if (opt.container === "card") {
 			super.data = {
 				elem: [
-					opt.title
-						? new div({
-								border: true,
-								rounded: "top",
-								paddingy: 1,
-								paddingx: 3,
-								color: "light",
-								elem: new small(new b(opt.title)),
-						  })
-						: null,
 					new card.container({
-						marginy: !opt.title ? 3 : null,
-						border: opt.title ? "top-0" : null,
-						rounded: opt.title ? ["0", "bottom"] : null,
-						marginbottom: opt.title ? 3 : null,
-						elem: new card.body({ elem: codecontainer(opt.type, opt.code) }),
+						marginy: 3,
+						elem: [
+							opt.title ? new card.header(new small(new b(opt.title))) : null,
+							new card.body({ elem: codecontainer(opt.type, opt.code) }),
+						].filter(Boolean),
 					}),
 				],
 			};
