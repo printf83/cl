@@ -504,19 +504,20 @@ export function validate(container, callback) {
 	var listofctl = container.querySelectorAll("[name]");
 	if (listofctl) {
 		container.classList.remove("was-validated");
-		listofctl.forEach(function (item) {
+		listofctl.forEach((item) => {
+			item.classList.remove("is-invalid");
+			item.classList.remove("is-valid");
+			item.setCustomValidity(null);
+
 			if (validateElem(item)) {
 				item.classList.add("is-valid");
-				item.classList.remove("is-invalid");
-				//item.setCustomValidity("invalid");
 			} else {
 				item.classList.add("is-invalid");
-				item.classList.remove("is-valid");
-				//item.setCustomValidity(null);
+				item.setCustomValidity("invalid");
 			}
 		});
 
-		container.classList.add("was-validated");
+		// container.classList.add("was-validated");
 
 		var invalidctl = container.querySelectorAll(".is-invalid");
 		if (typeof callback === "function") {

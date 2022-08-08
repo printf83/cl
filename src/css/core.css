@@ -1,4 +1,25 @@
-*[disabled],
-*.disabled{
+li[disabled],
+li.disabled,
+button[disabled],
+button.disabled,
+a[disabled],
+a.disabled,
+div[disabled],
+div.disabled,
+input[disabled],
+input.disabled{
+    cursor: not-allowed !important;
+}
+
+li.wait,
+li.wait.disabled,
+button.wait,
+button.wait.disabled,
+a.wait,
+a.wait.disabled,
+div.wait,
+div.wait.disabled,
+input.wait,
+input.wait.disabled {
     cursor: wait !important;
 }

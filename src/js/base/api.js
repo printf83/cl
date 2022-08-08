@@ -81,6 +81,7 @@ const fn = {
 		setbusy: function (sender) {
 			if (sender) {
 				sender.classList.add("disabled");
+				sender.classList.add("wait");
 				sender.setAttribute("disabled", "disabled");
 
 				if (fn.sender.islist(sender)) {
@@ -99,6 +100,7 @@ const fn = {
 		setfree: function (sender) {
 			if (sender) {
 				sender.classList.remove("disabled");
+				sender.classList.remove("wait");
 				sender.removeAttribute("disabled");
 
 				if (fn.sender.islist(sender)) {
