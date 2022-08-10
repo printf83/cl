@@ -9,6 +9,7 @@ div.disabled,
 input[disabled],
 input.disabled{
     cursor: not-allowed !important;
+    pointer-events: unset;
 }
 
 li.wait,
@@ -22,4 +23,5 @@ div.wait.disabled,
 input.wait,
 input.wait.disabled {
     cursor: wait !important;
+    pointer-events: unset; 
 }
