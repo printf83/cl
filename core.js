@@ -30,7 +30,7 @@ module.exports = {
 			}
 		}
 
-		return t;
+		return out;
 	},
 	UUID: (format) => {
 		return (format || "cl-xxxxxxxxxxxx").replace(/[xy]/g, (c) => {

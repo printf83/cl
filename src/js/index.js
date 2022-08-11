@@ -299,6 +299,7 @@ function gen_example(opt) {
 			option: null,
 			code: null,
 			sample: null,
+			import: null,
 			container: (elem) => {
 				return elem;
 			},
@@ -341,6 +342,7 @@ function gen_example(opt) {
 		dark: opt.dark,
 		viewclass: opt.viewclass,
 		container: opt.container,
+		import: opt.import,
 		code: opt.code,
 		sample: opt.sample,
 	});

@@ -20,6 +20,7 @@ const defaultOption = {
 	codecollapse: true,
 	dark: false,
 	sample: null,
+	import: null,
 	view: true,
 	viewclass: null,
 	container: (elem) => {
@@ -28,6 +29,26 @@ const defaultOption = {
 
 	debug: false,
 };
+
+const fn = {
+	importToCode: (d) => {
+		let item = [`"use strict";`];
+		// Object.keys(d).forEach((importKey) => {
+		// 	if (importKey === "_") {
+		// 		item.push(`import "${d[importKey]}";`);
+		// 	} else {
+		// 		item.push(`import ${importKey} from "${d[importKey]}";`);
+		// 	}
+		// });
+
+		d.forEach((i) => {
+			item.push(i);
+		});
+
+		return item.join(`\n`);
+	},
+};
+
 /**
  * opt : {tagoption,icon,label}
  */
@@ -115,6 +136,14 @@ export default class example extends div {
 					icon: "link",
 					elem: new codepreview({ type: "js", code: opt.sample[sampleKey].toString(), container: null }),
 				});
+			});
+		}
+
+		if (opt.import) {
+			item.push({
+				label: "import",
+				icon: "file-import",
+				elem: new codepreview({ type: "js", code: fn.importToCode(opt.import), container: null }),
 			});
 		}
 
