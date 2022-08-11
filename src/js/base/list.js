@@ -257,8 +257,6 @@ const fn = {
 							name: i.getAttribute("data-name"),
 						};
 					});
-				} else {
-					new dlg.msgbox("-", "No item selected.", function () {}).show();
 				}
 			}
 
@@ -290,13 +288,12 @@ const fn = {
 		},
 		delete: function (id, sender) {
 			let checked = fn.check.get(id);
+			let opt = fn.get(id);
 
 			if (checked) {
 				let checkedid = checked.map(function (i) {
 					return i.key;
 				});
-
-				let opt = fn.get(id);
 
 				const fndeleterecursive = function (opt, keys, index, callback) {
 					if (index < keys.length) {
@@ -365,6 +362,8 @@ const fn = {
 					],
 					`Delete ${opt.name}`
 				).show();
+			} else {
+				new dlg.msgbox("-", "No item selected.", function () {}, `Delete ${opt.name}`).show();
 			}
 		},
 		mode: function (id, check) {
@@ -700,7 +699,7 @@ const fn = {
 					{
 						name: opt.name,
 						id: key,
-						sender: sender,
+						sender: item,
 					},
 					function (data) {
 						if (data) {
@@ -723,7 +722,7 @@ const fn = {
 														{
 															name: opt.name,
 															data: data,
-															sender: sender,
+															sender: item,
 														},
 														function (result) {
 															if (result) {
@@ -731,9 +730,9 @@ const fn = {
 																	opt,
 																	data,
 																	function () {
-																		fn.reload(id, sender);
+																		fn.reload(id, item);
 																	},
-																	sender
+																	item
 																);
 															}
 														}
@@ -747,7 +746,7 @@ const fn = {
 										`Copy ${opt.name}`
 									).show();
 								},
-								sender
+								item
 							);
 						}
 					},
@@ -797,7 +796,7 @@ const fn = {
 										{
 											name: opt.name,
 											id: key,
-											sender: sender,
+											sender: item,
 										},
 										function (data) {
 											if (data) {
@@ -805,19 +804,19 @@ const fn = {
 													opt,
 													data,
 													function () {
-														fndelete(opt, id, key, sender);
+														fndelete(opt, id, key, item);
 													},
 													sender
 												);
 											} else {
-												fndelete(opt, id, key, sender);
+												fndelete(opt, id, key, item);
 											}
 										},
-										sender
+										item
 									);
 								} else {
 									//no file, direct delete
-									fndelete(opt, id, key, sender);
+									fndelete(opt, id, key, item);
 								}
 							},
 						},
@@ -840,7 +839,7 @@ const fn = {
 			let id = container.getAttribute("id");
 			let opt = fn.get(id);
 			if (opt && typeof opt.more === "function") {
-				opt.more(sender, key);
+				opt.more(item, key);
 			}
 		},
 	},
@@ -970,7 +969,11 @@ export class item extends li {
 											class: "cl-list-img",
 											marginend: 3,
 											style: { width: "3rem" },
-											elem: new img({ class: "img-fluid", src: db.file.url(opt.picture) }),
+											elem: new img({
+												class: "img-fluid",
+												rounded: true,
+												src: db.file.url(opt.picture),
+											}),
 									  })
 									: null,
 								new icon({

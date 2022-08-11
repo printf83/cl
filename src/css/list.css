@@ -24,7 +24,7 @@
 		display: flex;
 		font-weight: bold;
 		font-size: 1.25rem;
-		padding: 0.15rem;
+		margin-left: -0.25rem;
 }
 
 .cl-list-ctl .btn-group{

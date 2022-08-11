@@ -20,3 +20,7 @@
 .cl-toc li a[disabled]{
 	color:var(--bs-secondary);
 }
+
+.cl-toc h6{
+	font-weight: calc(var(--bs-body-font-weight) * 1.5);
+}

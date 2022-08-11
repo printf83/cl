@@ -106,7 +106,7 @@ export default {
 		{
 			id: "menu_add",
 			icon: "plus",
-			label: "Add New Record",
+			label: "Add New",
 			onclick: function (event) {
 				$.list.container.item.add("state_list", event.currentTarget);
 			},

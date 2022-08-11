@@ -10,10 +10,10 @@ import li from "./li.js";
 import h from "./h.js";
 import hr from "./hr.js";
 
-const defaultOption = { label: "Table of content", icon: null, item: null };
+const defaultOption = { label: "Table of content", icon: null, type: "link", item: null };
 const defaultItemOption = { level: 1 };
 /**
- * opt : {tagoption,icon,label,item:{itemOption}}
+ * opt : {tagoption,type,icon,label,item:{itemOption}}
  * itemOpt:{tagoption,buttonOption,level}
  */
 export default class toc extends div {
@@ -31,19 +31,27 @@ export default class toc extends div {
 		opt.class = core.merge.class(opt.class, "cl-toc");
 		opt.elem = [
 			new h({ level: 6, elem: new label({ icon: opt.icon, label: opt.label }) }),
-			new hr({ marginx: 1 }),
+			new hr({ marginy: 2 }),
 			new ul({
-				class: ["list-unstyled", "small"],
+				class: ["list-unstyled", opt.type === "menu" ? null : "small"],
 				elem: opt.item.map(function (i) {
 					i = core.extend({}, defaultItemOption, i);
 					let level = i.level;
 
 					delete i.level;
 
-					return new li({
-						class: [level === 1 ? null : "fw-bold", "mx-1", "text-truncate"],
-						elem: new button(i),
-					});
+					if (opt.type === "menu") {
+						return new li({
+							class: [level === 1 ? null : "fw-bold", "mx-1", "text-truncate"],
+							marginy: 1,
+							elem: new button(i),
+						});
+					} else {
+						return new li({
+							class: [level === 1 ? null : "fw-bold", "mx-1", "text-truncate"],
+							elem: new button(i),
+						});
+					}
 				}),
 			}),
 		];
