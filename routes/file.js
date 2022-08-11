@@ -6,11 +6,11 @@ const uploader = multer({ dest: "tmp/" });
 const core = require(`../core.js`);
 const { Readable } = require("stream");
 
-module.exports = function (app, setting) {
+module.exports = (app, setting) => {
 	console.log(`Setup file db`);
 
 	const fn = {
-		upload: function (req, res) {
+		upload: (req, res) => {
 			if (req.files && req.files.length > 0) {
 				let files = [];
 				req.files.forEach((file) => {
@@ -47,7 +47,7 @@ module.exports = function (app, setting) {
 					});
 			}
 		},
-		download: function (req, res) {
+		download: (req, res) => {
 			$.db
 				.findOne({ _id: req.params.id })
 				.then((data) => {
@@ -75,7 +75,7 @@ module.exports = function (app, setting) {
 					res.status(500).send(err);
 				});
 		},
-		info: function (req, res) {
+		info: (req, res) => {
 			let i = req.params.id.split(",");
 			let p = [];
 			i.forEach((id) => {
@@ -134,7 +134,7 @@ module.exports = function (app, setting) {
 					res.status(500).send(err);
 				});
 		},
-		duplicate: function (req, res) {
+		duplicate: (req, res) => {
 			let i = req.params.id.split(",");
 			let p = [];
 			i.forEach((id) => {
@@ -160,7 +160,7 @@ module.exports = function (app, setting) {
 					res.status(500).send(err);
 				});
 		},
-		delete: function (req, res) {
+		delete: (req, res) => {
 			let i = req.params.id.split(",");
 			let p = [];
 			i.forEach((id) => {
@@ -186,7 +186,7 @@ module.exports = function (app, setting) {
 					res.status(500).send(err);
 				});
 		},
-		save: function (req, res) {
+		save: (req, res) => {
 			let i = req.params.id.split(",");
 			let p = [];
 			i.forEach((id) => {
@@ -212,7 +212,7 @@ module.exports = function (app, setting) {
 					res.status(500).send(err);
 				});
 		},
-		deleteuploadedfile: function (id) {
+		deleteuploadedfile: (id) => {
 			// Find file in db then delete the original file from tmp or file
 
 			return new Promise((res, _rej) => {
@@ -245,7 +245,7 @@ module.exports = function (app, setting) {
 					});
 			});
 		},
-		saveuploadedfile: function (id) {
+		saveuploadedfile: (id) => {
 			// Find file in db then move the original file from tmp to file
 
 			return new Promise((res, rej) => {
@@ -290,7 +290,7 @@ module.exports = function (app, setting) {
 					});
 			});
 		},
-		duplicateuploadedfile: function (id) {
+		duplicateuploadedfile: (id) => {
 			// Find file in db then move the original file from tmp to file
 
 			return new Promise((res, rej) => {

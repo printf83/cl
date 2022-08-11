@@ -20,7 +20,7 @@ export default [
 			"Toasts are as flexible as you need and have very little required markup. At a minimum, we require a single element to contain your “toasted” content and strongly encourage a dismiss button.",
 		],
 		viewclass: "cl-modal-preview",
-		code: function () {
+		code: () => {
 			return new $.toast({
 				color: "primary",
 				textcolor: "light",
@@ -35,11 +35,11 @@ export default [
 	{
 		title: "Live",
 		msg: "Click the button below to show a toast (positioned with Bootstrap utilities in the top right corner)",
-		code: function () {
+		code: () => {
 			return new $.button({
 				label: "Show live toast",
 				color: "primary",
-				onclick: function () {
+				onclick: () => {
 					new $.toast({
 						color: "primary",
 						textcolor: "light",
@@ -56,7 +56,7 @@ export default [
 		title: "Translucent",
 		msg: "Toasts are slightly translucent to blend in with what’s below them.",
 		dark: true,
-		code: function () {
+		code: () => {
 			return new $.toast({
 				color: "primary",
 				textcolor: "light",
@@ -71,11 +71,11 @@ export default [
 	{
 		title: "Stacking",
 		msg: "Toast automatically stacking",
-		code: function () {
+		code: () => {
 			return new $.button({
 				label: "Show live toast",
 				color: "primary",
-				onclick: function () {
+				onclick: () => {
 					new $.toast({
 						color: "primary",
 						textcolor: "light",
@@ -85,7 +85,7 @@ export default [
 					}).show();
 
 					//show second toast after 2 second
-					setTimeout(function () {
+					setTimeout(() => {
 						new $.toast({
 							color: "success",
 							textcolor: "light",
@@ -102,8 +102,8 @@ export default [
 	{
 		title: "Base icon",
 		container: sample.formcontainer,
-		code: function () {
-			return ["i", "!!", "!", "?", "-", "x", "/"].map(function (i) {
+		code: () => {
+			return ["i", "!!", "!", "?", "-", "x", "/"].map((i) => {
 				//this last argument is for this documentation preview only
 				return new $.toast(i, `Example <b>${i}</b> icon toast`, { debug: true });
 			});
@@ -112,7 +112,7 @@ export default [
 
 	{
 		title: "Base icon live",
-		code: function () {
+		code: () => {
 			return [
 				new $.input({
 					type: "select",
@@ -122,7 +122,7 @@ export default [
 						label: "Show",
 						color: "primary",
 						textcolor: "light",
-						onclick: function (event) {
+						onclick: (event) => {
 							let sender = event.currentTarget;
 							let icon = sender.previousSibling.value;
 							new $.toast(icon, `Example <b>${icon}</b> icon toast`).show();
@@ -137,7 +137,7 @@ export default [
 	{
 		title: "Color",
 		container: sample.formcontainer,
-		code: function () {
+		code: () => {
 			return [
 				{ color: "primary", textcolor: "light" },
 				{ color: "secondary", textcolor: "light" },
@@ -147,7 +147,7 @@ export default [
 				{ color: "info", textcolor: "dark" },
 				{ color: "light", textcolor: "dark" },
 				{ color: "dark", textcolor: "light" },
-			].map(function (i) {
+			].map((i) => {
 				return new $.toast({
 					color: i.color,
 					textcolor: i.textcolor,
@@ -161,7 +161,7 @@ export default [
 	{
 		title: "Position",
 		container: sample.stackcontainer,
-		code: function () {
+		code: () => {
 			return [
 				{ label: "Top left", position: "top-0 start-0" },
 				{ label: "Top center", position: "top-0 start-50 translate-middle-x" },
@@ -174,11 +174,11 @@ export default [
 				{ label: "Bottom left", position: "bottom-0 start-0" },
 				{ label: "Bottom center", position: "bottom-0 start-50 translate-middle-x" },
 				{ label: "Bottom right", position: "bottom-0 end-0" },
-			].map(function (i) {
+			].map((i) => {
 				return new $.button({
 					color: "primary",
 					label: i.label,
-					onclick: function () {
+					onclick: () => {
 						new $.toast({
 							position: i.position,
 							elem: new $.msg({ weight: "sm", icon: "fire", elem: `${i.label} toast.` }),
@@ -191,11 +191,11 @@ export default [
 
 	{
 		title: "Disable autoclose",
-		code: function () {
+		code: () => {
 			return new $.button({
 				label: "Show live toast",
 				color: "primary",
-				onclick: function () {
+				onclick: () => {
 					new $.toast({
 						autohide: false,
 						color: "warning",
@@ -210,11 +210,11 @@ export default [
 
 	{
 		title: "Delay autoclose",
-		code: function () {
+		code: () => {
 			return new $.button({
 				label: "Show live toast",
 				color: "primary",
-				onclick: function () {
+				onclick: () => {
 					new $.toast({
 						delay: 10000,
 						color: "primary",

@@ -49,7 +49,7 @@ export default class accordion extends div {
 			opt.class = core.merge.class(opt.class, ["accordion", opt.flush ? "accordion-flush" : null]);
 			opt.elem =
 				opt.item && opt.item.length > 0
-					? opt.item.map(function (i) {
+					? opt.item.map((i) => {
 							i = core.extend({}, defaultItemOption, i);
 
 							i.id = i.id || core.UUID();

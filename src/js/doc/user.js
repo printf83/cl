@@ -11,7 +11,7 @@ export default [
 	// {
 	// 	title: "Login",
 	// 	viewclass: "cl-modal-preview",
-	// 	code: function () {
+	// 	code: () => {
 	// 		return new $.user.signin({
 	// 			debug: true,
 	// 		});
@@ -21,7 +21,7 @@ export default [
 	// {
 	// 	title: "Register",
 	// 	viewclass: "cl-modal-preview",
-	// 	code: function () {
+	// 	code: () => {
 	// 		return new $.user.signup({ debug: true });
 	// 	},
 	// },
@@ -29,7 +29,7 @@ export default [
 	// {
 	// 	title: "Reset password",
 	// 	viewclass: "cl-modal-preview",
-	// 	code: function () {
+	// 	code: () => {
 	// 		return new $.user.resetpass({ debug: true });
 	// 	},
 	// },
@@ -37,21 +37,21 @@ export default [
 	{
 		title: "Change password",
 		viewclass: "cl-modal-preview",
-		code: function () {
+		code: () => {
 			return new $.user.changepass({ debug: true });
 		},
 	},
 
 	{
 		msg: "Live preview",
-		code: function () {
+		code: () => {
 			return new $.button({
 				label: "Change password",
 				icon: "key",
 				color: "primary",
-				onclick: function (event) {
+				onclick: (event) => {
 					new $.user.changepass({
-						callback: function (result) {
+						callback: (result) => {
 							if (result) {
 								new $.toast("/", "Password changed").show();
 							}
@@ -65,26 +65,26 @@ export default [
 	{
 		title: "Update profile",
 		viewclass: "cl-modal-preview",
-		code: function () {
+		code: () => {
 			return new $.user.updateinfo({ debug: true });
 		},
 	},
 
 	{
 		msg: "Live preview",
-		code: function () {
+		code: () => {
 			return new $.button({
 				label: "Update profile",
 				icon: "user",
 				color: "primary",
-				onclick: function (event) {
+				onclick: (event) => {
 					let sender = event.currentTarget;
-					$.user.info(sender, function (result) {
+					$.user.info(sender, (result) => {
 						if (result && result.email) {
 							new $.user.updateinfo({
 								data: result,
 								sender: sender,
-								callback: function (result) {
+								callback: (result) => {
 									if (result) {
 										new $.toast("/", "Your information updated").show();
 									}
@@ -100,7 +100,7 @@ export default [
 	// {
 	// 	title: "Change password (guest)",
 	// 	viewclass: "cl-modal-preview",
-	// 	code: function () {
+	// 	code: () => {
 	// 		return new $.user.changepass_guest({
 	// 			token: "token",
 	// 			debug: true,
@@ -110,13 +110,13 @@ export default [
 
 	{
 		title: "Get user info",
-		code: function () {
+		code: () => {
 			return new $.button({
 				label: "Get info",
 				icon: "user",
 				color: "primary",
-				onclick: function (event) {
-					$.user.info(event.currentTarget, function (result) {
+				onclick: (event) => {
+					$.user.info(event.currentTarget, (result) => {
 						if (result) {
 							new $.toast("i", `Hai ${result.name}`).show();
 						}
@@ -128,13 +128,13 @@ export default [
 
 	{
 		title: "Sign out",
-		code: function () {
+		code: () => {
 			return new $.button({
 				label: "Sign out",
 				icon: "power-off",
 				color: "danger",
-				onclick: function (event) {
-					$.user.signout(event.currentTarget, function (result) {
+				onclick: (event) => {
+					$.user.signout(event.currentTarget, (result) => {
 						if (result) {
 							new $.toast("/", "User successfuly sign out").show();
 						} else {

@@ -21,7 +21,7 @@ export default [
 	{
 		title: "Example",
 		container: sample.formcontainer,
-		code: function () {
+		code: () => {
 			return [
 				new $.hr(),
 				new $.hr({

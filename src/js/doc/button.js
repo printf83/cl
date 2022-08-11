@@ -12,9 +12,9 @@ export default [
 	{
 		title: "Examples",
 		container: sample.stackcontainer,
-		code: function () {
+		code: () => {
 			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark", "link"].map(
-				function (i) {
+				(i) => {
 					return new $.button({ label: $.core.capitalize(i), color: i });
 				}
 			);
@@ -24,7 +24,7 @@ export default [
 	{
 		title: "Disable text wrapping",
 		container: sample.stackcontainer,
-		code: function () {
+		code: () => {
 			return new $.button({
 				label: "Disable text wrapping button",
 				color: "primary",
@@ -36,7 +36,7 @@ export default [
 	{
 		title: "Button tags",
 		container: sample.stackcontainer,
-		code: function () {
+		code: () => {
 			return [
 				new $.button({ label: "Link", color: "primary", href: "javascript:void(0);" }),
 				new $.button({ label: "Button", color: "primary" }),
@@ -71,9 +71,9 @@ export default [
 	{
 		title: "Outline button",
 		container: sample.stackcontainer,
-		code: function () {
+		code: () => {
 			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark", "link"].map(
-				function (i) {
+				(i) => {
 					return new $.button({ outline: true, label: $.core.capitalize(i), color: i });
 				}
 			);
@@ -83,7 +83,7 @@ export default [
 	{
 		title: "Large Size",
 		container: sample.stackcontainer,
-		code: function () {
+		code: () => {
 			return [
 				new $.button({ weight: "lg", label: "Large button", color: "primary" }),
 				new $.button({ weight: "lg", label: "Large button", color: "secondary" }),
@@ -94,7 +94,7 @@ export default [
 	{
 		title: "Small Size",
 		container: sample.stackcontainer,
-		code: function () {
+		code: () => {
 			return [
 				new $.button({ weight: "sm", label: "Small button", color: "primary" }),
 				new $.button({ weight: "sm", label: "Small button", color: "secondary" }),
@@ -105,7 +105,7 @@ export default [
 	{
 		title: "Disabled state",
 		container: sample.stackcontainer,
-		code: function () {
+		code: () => {
 			return [
 				new $.button({ disabled: true, weight: "lg", label: "Disabled button", color: "primary" }),
 				new $.button({ disabled: true, weight: "lg", label: "Disabled button", color: "secondary" }),
@@ -116,7 +116,7 @@ export default [
 	{
 		title: "Disabled button link state",
 		container: sample.stackcontainer,
-		code: function () {
+		code: () => {
 			return [
 				new $.button({
 					disabled: true,
@@ -138,7 +138,7 @@ export default [
 
 	{
 		title: "Block buttons",
-		code: function () {
+		code: () => {
 			return new $.container.grid([
 				new $.button({ label: "Button", color: "primary" }),
 				new $.button({ label: "Button", color: "primary" }),
@@ -149,7 +149,7 @@ export default [
 
 	{
 		title: "Centered in horizontal",
-		code: function () {
+		code: () => {
 			return new $.div({
 				display: "grid",
 				gap: "2",
@@ -166,7 +166,7 @@ export default [
 
 	{
 		title: "Right align",
-		code: function () {
+		code: () => {
 			return new $.div({
 				display: ["grid", "md-flex"],
 				justifycontent: "md-end",
@@ -183,7 +183,7 @@ export default [
 	{
 		title: "Toggle state button",
 		container: sample.stackcontainer,
-		code: function () {
+		code: () => {
 			return [
 				new $.button({
 					toggle: true,
@@ -209,7 +209,7 @@ export default [
 	{
 		title: "Toggle state button",
 		container: sample.stackcontainer,
-		code: function () {
+		code: () => {
 			return [
 				new $.button({ toggle: true, label: "Toggle button", color: "primary" }),
 				new $.button({
@@ -233,7 +233,7 @@ export default [
 	{
 		title: "Toggle state link",
 		container: sample.stackcontainer,
-		code: function () {
+		code: () => {
 			return [
 				new $.button({
 					toggle: true,

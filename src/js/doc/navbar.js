@@ -12,7 +12,7 @@ export default [
 	{
 		title: "Supported content",
 		sample: { "sample.navbaritem": sample.navbaritem },
-		code: function () {
+		code: () => {
 			var id = $.core.UUID();
 			return new $.navbar.container({
 				expand: "lg",
@@ -30,7 +30,7 @@ export default [
 		title: "Text",
 		msg: "Add your text within an element with the {{new $.navbar.brand}}.",
 		container: sample.formcontainer,
-		code: function () {
+		code: () => {
 			return [
 				new $.navbar.container({
 					expand: "lg",
@@ -58,7 +58,7 @@ export default [
 
 	{
 		title: "Icon",
-		code: function () {
+		code: () => {
 			return new $.navbar.container({
 				expand: "lg",
 				color: "light",
@@ -74,7 +74,7 @@ export default [
 
 	{
 		title: "Icon and text",
-		code: function () {
+		code: () => {
 			return new $.navbar.container({
 				expand: "lg",
 				color: "light",
@@ -95,7 +95,7 @@ export default [
 
 	{
 		title: "Nav item",
-		code: function () {
+		code: () => {
 			var id = $.core.UUID();
 			return new $.navbar.container({
 				expand: "lg",
@@ -146,7 +146,7 @@ export default [
 	{
 		title: "Nav item dropdown",
 		sample: { "sample.dropdownitem": sample.dropdownitem },
-		code: function () {
+		code: () => {
 			var id = $.core.UUID();
 			return new $.navbar.container({
 				expand: "lg",
@@ -196,7 +196,7 @@ export default [
 
 	{
 		title: "Nav with form",
-		code: function () {
+		code: () => {
 			return new $.navbar.container({
 				expand: "lg",
 				color: "light",
@@ -219,7 +219,7 @@ export default [
 
 	{
 		title: "Nav with form and header",
-		code: function () {
+		code: () => {
 			return new $.navbar.container({
 				expand: "lg",
 				color: "light",
@@ -246,7 +246,7 @@ export default [
 
 	{
 		title: "Nav with input group",
-		code: function () {
+		code: () => {
 			return new $.navbar.container({
 				expand: "lg",
 				color: "light",
@@ -263,7 +263,7 @@ export default [
 
 	{
 		title: "Nav with button",
-		code: function () {
+		code: () => {
 			return new $.navbar.container({
 				expand: "lg",
 				color: "light",
@@ -288,7 +288,7 @@ export default [
 
 	{
 		title: "Nav with text",
-		code: function () {
+		code: () => {
 			return new $.navbar.container({
 				expand: "lg",
 				color: "light",
@@ -299,7 +299,7 @@ export default [
 
 	{
 		title: "Mix and match",
-		code: function () {
+		code: () => {
 			var id = $.core.UUID();
 			return new $.navbar.container({
 				expand: "lg",
@@ -346,7 +346,7 @@ export default [
 	{
 		title: "Color schemes",
 		sample: { "sample.navbaritem": sample.navbaritem },
-		code: function () {
+		code: () => {
 			var id1 = $.core.UUID();
 			var id2 = $.core.UUID();
 			var id3 = $.core.UUID();
@@ -379,7 +379,7 @@ export default [
 
 	{
 		title: "Inside container",
-		code: function () {
+		code: () => {
 			return new $.div({
 				class: "container",
 				elem: new $.navbar.container({
@@ -398,7 +398,7 @@ export default [
 
 	{
 		title: "Change container fluid",
-		code: function () {
+		code: () => {
 			return new $.navbar.container({
 				expand: "lg",
 				color: "light",
@@ -415,7 +415,7 @@ export default [
 
 	{
 		title: "Position",
-		code: function () {
+		code: () => {
 			return new $.navbar.container({
 				expand: "lg",
 				color: "light",
@@ -438,7 +438,7 @@ export default [
 			"Here’s an example navbar using {{scroll:'height'}}, with some extra margin utilities for optimum spacing.",
 		],
 		sample: { "sample.dropdownitem": sample.dropdownitem },
-		code: function () {
+		code: () => {
 			var id = $.core.UUID();
 			return new $.navbar.container({
 				expand: "lg",
@@ -494,7 +494,7 @@ export default [
 			"For {{new $.navbar.container}} that never collapse, add the {{expand:''}} option on the {{new $.navbar.container}}. For {{new $.navbar.container}} that always collapse, don’t add any .navbar-expand class.",
 		],
 		sample: { "sample.navbaritem": sample.navbaritem },
-		code: function () {
+		code: () => {
 			var id1 = $.core.UUID();
 			var id2 = $.core.UUID();
 			var id3 = $.core.UUID();
@@ -524,7 +524,7 @@ export default [
 			"Navbar toggles are left-aligned by default, but should they follow a sibling element like a .navbar-brand, they’ll automatically be aligned to the far right. Reversing your markup will reverse the placement of the toggle. Below are examples of different toggle styles.",
 			"With no .navbar-brand shown at the smallest breakpoint",
 		],
-		code: function () {
+		code: () => {
 			var id1 = $.core.UUID();
 			var id2 = $.core.UUID();
 			var id3 = $.core.UUID();
@@ -654,7 +654,7 @@ export default [
 
 	{
 		title: "External content",
-		code: function () {
+		code: () => {
 			var id = $.core.UUID();
 			return [
 				//collapsecontainer outside container

@@ -43,7 +43,7 @@ const defaultOption = {
 let db_opt = {};
 
 const fn = {
-	onview: function (event) {
+	onview: (event) => {
 		let sender = event.currentTarget;
 		let container = sender.closest("div[data-cl-container]");
 		let id = container.getAttribute("data-cl-container");
@@ -54,7 +54,7 @@ const fn = {
 		if (value) {
 			db.file.info(
 				value,
-				function (data) {
+				(data) => {
 					if (data) {
 						if (data.length === 1) {
 							//if only one file
@@ -83,12 +83,12 @@ const fn = {
 												"data-cl-file": data[0].id,
 											},
 											src: db.file.url(data[0].id),
-											onclick: function (event) {
+											onclick: (event) => {
 												let sender = event.currentTarget;
 												let fileid = sender.getAttribute("data-cl-file");
 
 												if (opt.downloadsignin) {
-													db.user.info({ sender: sender }, function (info) {
+													db.user.info({ sender: sender }, (info) => {
 														if (info) {
 															db.file.download(fileid, sender);
 														}
@@ -106,7 +106,7 @@ const fn = {
 									//if other. do download
 
 									if (opt.downloadsignin) {
-										db.user.info({ sender: sender }, function (info) {
+										db.user.info({ sender: sender }, (info) => {
 											if (info) {
 												db.file.download(data[0].id, sender);
 											}
@@ -155,12 +155,12 @@ const fn = {
 													attr: {
 														"data-cl-file": i.id,
 													},
-													onclick: function (event) {
+													onclick: (event) => {
 														let sender = event.currentTarget;
 														let fileid = sender.getAttribute("data-cl-file");
 
 														if (opt.downloadsignin) {
-															db.user.info({ sender: sender }, function (info) {
+															db.user.info({ sender: sender }, (info) => {
 																if (info) {
 																	db.file.download(fileid, sender);
 																}
@@ -194,12 +194,12 @@ const fn = {
 													attr: {
 														"data-cl-file": i.id,
 													},
-													onclick: function (event) {
+													onclick: (event) => {
 														let sender = event.currentTarget;
 														let fileid = sender.getAttribute("data-cl-file");
 
 														if (opt.downloadsignin) {
-															db.user.info({ sender: sender }, function (info) {
+															db.user.info({ sender: sender }, (info) => {
 																if (info) {
 																	db.file.download(fileid, sender);
 																}
@@ -251,7 +251,7 @@ const fn = {
 			);
 		}
 	},
-	onchange: function (event) {
+	onchange: (event) => {
 		let ctl = event.currentTarget;
 		let container = ctl.parentNode.parentNode;
 		let btngroup = container.querySelectorAll(".btn-group")[0];
@@ -312,30 +312,17 @@ const fn = {
 			);
 		}
 	},
-	ondelete: function (event) {
+	ondelete: (event) => {
 		let sender = event.currentTarget;
 		let container = sender.closest("div[data-cl-container]");
 		let id = container.getAttribute("data-cl-container");
 		let ctl = container.parentNode.querySelectorAll(`#${id}`)[0];
 
-		// dont delete temp file or saved file.
-		// it will be deleted later
-		// example : delete file without save
-
-		// db.file.delete(
-		// 	ctl.value,
-		// 	function (data) {
-		// 		ctl.value = null;
-		// 		ctl.dispatchEvent(new Event("change"));
-		// 	},
-		// 	sender
-		// );
-
 		//just make null
 		ctl.value = null;
 		ctl.dispatchEvent(new Event("change"));
 	},
-	startupload: function (sender, btnupload, ctl, fu, opt) {
+	startupload: (sender, btnupload, ctl, fu, opt) => {
 		//append div into button
 		core.appendChild(
 			sender,
@@ -356,18 +343,18 @@ const fn = {
 					accept: opt.accept ? opt.accept : null,
 				},
 				style: { display: "none" },
-				onchange: function (event) {
+				onchange: (event) => {
 					let sender = event.currentTarget;
 					let id = sender.getAttribute("id");
 					let data = sender.files;
 
 					db.file.upload(
 						data,
-						function (percentComplete) {
+						(percentComplete) => {
 							let fuprg = document.getElementById(`${id}-progress`);
 							fuprg.style.width = `${percentComplete}%`;
 						},
-						function (data) {
+						(data) => {
 							core.removeElement(sender);
 							ctl.value = data;
 							ctl.dispatchEvent(new Event("change"));
@@ -380,7 +367,7 @@ const fn = {
 
 		document.getElementById(fu).click();
 	},
-	onupload: function (event) {
+	onupload: (event) => {
 		let sender = event.currentTarget;
 		let btnupload = sender;
 		let container = sender.closest("div[data-cl-container]");
@@ -391,7 +378,7 @@ const fn = {
 		let fu = core.UUID();
 
 		if (opt.uploadsignin) {
-			db.user.info({ sender: sender }, function (info) {
+			db.user.info({ sender: sender }, (info) => {
 				if (info) {
 					fn.startupload(sender, btnupload, ctl, fu, opt);
 				}
@@ -400,13 +387,13 @@ const fn = {
 			fn.startupload(sender, btnupload, ctl, fu, opt);
 		}
 	},
-	onsave: function (element, callback, sender) {
+	onsave: (element, callback, sender) => {
 		if (element) {
 			let value = element.value;
 			if (value) {
 				db.file.save(
 					value,
-					function (data) {
+					(data) => {
 						if (typeof callback === "function") {
 							callback(data);
 						}
@@ -420,11 +407,11 @@ const fn = {
 			}
 		}
 	},
-	onsavevalue: function (value, callback, sender) {
+	onsavevalue: (value, callback, sender) => {
 		if (value) {
 			db.file.save(
 				value,
-				function (data) {
+				(data) => {
 					if (typeof callback === "function") {
 						callback(data);
 					}

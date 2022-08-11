@@ -10,7 +10,7 @@ export default [
 	{
 		title: "Example",
 		container: sample.stackcontainer,
-		code: function () {
+		code: () => {
 			return [
 				{ title: "Title", label: "Label" },
 				{ title: "Title", label: "Label", color: "secondary" },
@@ -19,7 +19,7 @@ export default [
 				{ title: "Title", label: "Label", color: "warning" },
 				{ title: "Title", label: "Label", color: "info" },
 				{ title: "Title", label: "Label", color: "dark" },
-			].map(function (i) {
+			].map((i) => {
 				return new $.pill(i);
 			});
 		},
@@ -27,7 +27,7 @@ export default [
 	{
 		title: "Icon",
 		container: sample.stackcontainer,
-		code: function () {
+		code: () => {
 			return [
 				{ icon: "fire", label: "Label" },
 				{ icon: "fire", label: "Label", color: "secondary" },
@@ -36,7 +36,7 @@ export default [
 				{ icon: "fire", label: "Label", color: "warning" },
 				{ icon: "fire", label: "Label", color: "info" },
 				{ icon: "fire", label: "Label", color: "dark" },
-			].map(function (i) {
+			].map((i) => {
 				return new $.pill(i);
 			});
 		},
@@ -44,7 +44,7 @@ export default [
 	{
 		title: "Base icon",
 		container: sample.stackcontainer,
-		code: function () {
+		code: () => {
 			return [
 				{ icon: "i", title: "Title", label: "Info" },
 				{ icon: "!", title: "Title", label: "Warning" },
@@ -52,7 +52,7 @@ export default [
 				{ icon: "x", title: "Title", label: "Critical" },
 				{ icon: "-", title: "Title", label: "Stop" },
 				{ icon: "!!", title: "Title", label: "Danger" },
-			].map(function (i) {
+			].map((i) => {
 				return new $.pill(i);
 			});
 		},
@@ -61,7 +61,7 @@ export default [
 	{
 		title: "Icon with title",
 		container: sample.stackcontainer,
-		code: function () {
+		code: () => {
 			return [
 				{ icon: "i", title: "Info", label: "Label" },
 				{ icon: "!", title: "Warning", label: "Label" },
@@ -69,7 +69,7 @@ export default [
 				{ icon: "x", title: "Critical", label: "Label" },
 				{ icon: "fire", title: "Fire", label: "Label" },
 				{ icon: { icon: "star", spin: true }, title: "Star", label: "Spinning icon", color: "warning" },
-			].map(function (i) {
+			].map((i) => {
 				return new $.pill(i);
 			});
 		},

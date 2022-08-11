@@ -15,8 +15,8 @@ export default [
 			"To vertically center non-inline content (like {{div}} and more), use Bootstrap <b>flex box utilities</b>.",
 			"With inline elements:",
 		],
-		code: function () {
-			return ["baseline", "top", "middle", "bottom", "text-top", "text-bottom"].map(function (i) {
+		code: () => {
+			return ["baseline", "top", "middle", "bottom", "text-top", "text-bottom"].map((i) => {
 				return new $.tag({ tag: "span", valign: i, elem: ` ${i} ` });
 			});
 		},
@@ -24,13 +24,13 @@ export default [
 
 	{
 		msg: "With table cell",
-		code: function () {
+		code: () => {
 			return new $.table.container({
 				style: { height: "8rem" },
 				border: false,
 				elem: new $.table.tbody({
 					elem: new $.table.tr({
-						elem: ["baseline", "top", "middle", "bottom", "text-top", "text-bottom"].map(function (i) {
+						elem: ["baseline", "top", "middle", "bottom", "text-top", "text-bottom"].map((i) => {
 							return new $.table.td({ valign: i, elem: i });
 						}),
 					}),

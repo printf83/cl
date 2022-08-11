@@ -20,7 +20,7 @@ export default [
 
 	{
 		title: "Example",
-		code: function () {
+		code: () => {
 			return new $.p({
 				elem: "Example paragraph element",
 			});
@@ -30,7 +30,7 @@ export default [
 	{
 		title: "Easy option",
 		msg: "This component also supported easy option.",
-		code: function () {
+		code: () => {
 			return [
 				new $.p({ class: "classname", elem: "Using elem property" }),
 				new $.p("Direct elem property"),

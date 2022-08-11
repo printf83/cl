@@ -20,7 +20,7 @@ if (process.env.DBURL) {
 
 	//start server
 	const envPORT = process.env.PORT || 3000;
-	const server = app.listen(envPORT, function () {
+	const server = app.listen(envPORT, () => {
 		let host = server.address().address;
 		let port = server.address().port;
 

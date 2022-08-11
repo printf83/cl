@@ -13,7 +13,7 @@ export default [
 		msg: [
 			"Quick {{position}} property are available, though they are not responsive.",
 			new $.ul({
-				item: ["static", "relative", "absolute", "fixed", "sticky"].map(function (i) {
+				item: ["static", "relative", "absolute", "fixed", "sticky"].map((i) => {
 					return `<code>${i}</code>`;
 				}),
 			}),
@@ -48,7 +48,7 @@ export default [
 
 	{
 		viewclass: "cl-highlight-position",
-		code: function () {
+		code: () => {
 			return new $.tag({
 				tag: "div",
 				position: "relative",
@@ -59,7 +59,7 @@ export default [
 					{ tag: "div", position: "absolute", bottom: 50, end: 50 },
 					{ tag: "div", position: "absolute", bottom: 0, start: 0 },
 					{ tag: "div", position: "absolute", bottom: 0, end: 0 },
-				].map(function (i) {
+				].map((i) => {
 					return new $.tag(i);
 				}),
 			});
@@ -73,7 +73,7 @@ export default [
 			"This class applies the transformations {{translateX(-50%)}} and {{translateY(-50%)}} to the element which, in combination with the edge positioning utilities, allows you to absolute center an element.",
 		],
 		viewclass: "cl-highlight-position",
-		code: function () {
+		code: () => {
 			return new $.tag({
 				tag: "div",
 				position: "relative",
@@ -87,7 +87,7 @@ export default [
 					{ tag: "div", position: "absolute", top: 100, start: 0, tmiddle: true },
 					{ tag: "div", position: "absolute", top: 100, start: 50, tmiddle: true },
 					{ tag: "div", position: "absolute", top: 100, start: 100, tmiddle: true },
-				].map(function (i) {
+				].map((i) => {
 					return new $.tag(i);
 				}),
 			});
@@ -99,7 +99,7 @@ export default [
 			"By adding {{.translate-middle-x}} or {{.translate-middle-y}} classes, elements can be positioned only in horizontal or vertical direction.",
 		],
 		viewclass: "cl-highlight-position",
-		code: function () {
+		code: () => {
 			return new $.tag({
 				tag: "div",
 				position: "relative",
@@ -113,7 +113,7 @@ export default [
 					{ tag: "div", position: "absolute", bottom: 0, start: 0 },
 					{ tag: "div", position: "absolute", bottom: 0, start: 50, tmiddle: "x" },
 					{ tag: "div", position: "absolute", bottom: 0, end: 0 },
-				].map(function (i) {
+				].map((i) => {
 					return new $.tag(i);
 				}),
 			});
@@ -123,10 +123,10 @@ export default [
 	{
 		title: "Examples",
 		msg: "Here are some real life examples of these classes:",
-		container: function (elem) {
+		container: (elem) => {
 			return new $.div({ display: "flex", justifycontent: "around", elem: elem });
 		},
-		code: function () {
+		code: () => {
 			return [
 				new $.tag({
 					tag: "button",
@@ -206,7 +206,7 @@ export default [
 
 	{
 		msg: "You can use these classes with existing components to create new $.ones. Remember that you can extend its functionality by adding entries to the $position-values variable.",
-		code: function () {
+		code: () => {
 			return new $.div({
 				position: "relative",
 				margin: 4,

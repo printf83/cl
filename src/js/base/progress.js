@@ -32,7 +32,7 @@ export class container extends div {
 			opt.elem = opt.elem
 				? opt.elem
 				: opt.item
-				? opt.item.map(function (i) {
+				? opt.item.map((i) => {
 						return i.hasOwnProperty("cl") ? i : new bar(i);
 				  })
 				: null;

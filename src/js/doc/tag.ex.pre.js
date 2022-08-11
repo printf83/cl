@@ -20,7 +20,7 @@ export default [
 
 	{
 		title: "Example",
-		code: function () {
+		code: () => {
 			return new $.pre({
 				attr: {
 					"data-test": "test",
@@ -34,7 +34,7 @@ export default [
 		title: "Easy option",
 		msg: "This component also supported easy option.",
 		container: sample.formcontainer,
-		code: function () {
+		code: () => {
 			return [
 				new $.pre({ class: "classname", elem: "<div>Using elem property</div>" }),
 				new $.pre("classname", "<div>Direct class and elem property</div>"),

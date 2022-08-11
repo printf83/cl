@@ -12,7 +12,7 @@ export default [
 	{
 		title: "Example",
 		container: sample.formcontainer,
-		code: function () {
+		code: () => {
 			return [
 				new $.progress.container({ item: { value: 0 } }),
 				new $.progress.container({ item: { value: 25 } }),
@@ -25,14 +25,14 @@ export default [
 
 	{
 		title: "Label",
-		code: function () {
+		code: () => {
 			return new $.progress.container({ item: { label: true, value: 25 } });
 		},
 	},
 
 	{
 		title: "Min & max",
-		code: function () {
+		code: () => {
 			return new $.progress.container({ item: { label: true, value: 154, min: 75, max: 300 } });
 		},
 	},
@@ -40,7 +40,7 @@ export default [
 	{
 		title: "Color",
 		container: sample.formcontainer,
-		code: function () {
+		code: () => {
 			return [
 				new $.progress.container({ item: { color: "success", value: 25 } }),
 				new $.progress.container({ item: { color: "info", value: 35 } }),
@@ -53,7 +53,7 @@ export default [
 	{
 		title: "Height",
 		container: sample.formcontainer,
-		code: function () {
+		code: () => {
 			return [
 				new $.progress.container({ height: 1, item: { value: 25 } }),
 				new $.progress.container({ height: 20, item: { value: 75 } }),
@@ -63,7 +63,7 @@ export default [
 
 	{
 		title: "Multiple bars",
-		code: function () {
+		code: () => {
 			return new $.progress.container({
 				item: [
 					{ color: "primary", value: 15 },
@@ -77,7 +77,7 @@ export default [
 	{
 		title: "Striped",
 		container: sample.formcontainer,
-		code: function () {
+		code: () => {
 			return [
 				new $.progress.container({ item: { stripe: true, color: "primary", value: 10 } }),
 				new $.progress.container({ item: { stripe: true, color: "success", value: 25 } }),
@@ -91,7 +91,7 @@ export default [
 	{
 		title: "Animated",
 		container: sample.formcontainer,
-		code: function () {
+		code: () => {
 			return [
 				new $.progress.container({ item: { stripe: true, animated: true, color: "primary", value: 10 } }),
 				new $.progress.container({ item: { stripe: true, animated: true, color: "success", value: 25 } }),
@@ -104,7 +104,7 @@ export default [
 
 	{
 		title: "Kitchen Sink",
-		code: function () {
+		code: () => {
 			return new $.progress.container({
 				height: 30,
 				item: [

@@ -10,7 +10,7 @@ export default [
 
 	{
 		title: "Title only",
-		code: function () {
+		code: () => {
 			return new $.example({
 				title: "Title only",
 				debug: true, //this last option is for this documentation preview only
@@ -20,7 +20,7 @@ export default [
 
 	{
 		title: "Title and message",
-		code: function () {
+		code: () => {
 			return new $.example({
 				title: "Title",
 				msg: ["Message 1", "Message 2"],
@@ -31,11 +31,11 @@ export default [
 
 	{
 		title: "Code",
-		code: function () {
+		code: () => {
 			return new $.example({
 				title: "Title",
 				msg: "Message",
-				code: function () {
+				code: () => {
 					return new $.button({ label: "Button", color: "primary" });
 				},
 				debug: true, //this last option is for this documentation preview only
@@ -45,12 +45,12 @@ export default [
 
 	{
 		title: "Code without preview",
-		code: function () {
+		code: () => {
 			return new $.example({
 				title: "Title",
 				msg: "Message",
 				view: false,
-				code: function () {
+				code: () => {
 					new $.button({ label: "Button", color: "primary" });
 				},
 				debug: true, //this last option is for this documentation preview only
@@ -60,14 +60,14 @@ export default [
 
 	{
 		title: "Sample code",
-		code: function () {
+		code: () => {
 			return new $.example({
 				title: "Title",
 				msg: "Message",
 				sample: {
 					"sample.optionitem": sample.optionitem,
 				},
-				code: function () {
+				code: () => {
 					return new $.input({ type: "select", option: sample.optionitem() });
 				},
 				debug: true, //this last option is for this documentation preview only
@@ -77,12 +77,12 @@ export default [
 
 	{
 		title: "Dark view",
-		code: function () {
+		code: () => {
 			return new $.example({
 				title: "Title",
 				msg: "Message",
 				dark: true,
-				code: function () {
+				code: () => {
 					return new $.toast({
 						color: "primary",
 						textcolor: "light",
@@ -99,12 +99,12 @@ export default [
 
 	{
 		title: "View class",
-		code: function () {
+		code: () => {
 			return new $.example({
 				title: "Title",
 				msg: "Message",
 				viewclass: "cl-highlight-col",
-				code: function () {
+				code: () => {
 					return new $.div("container", [
 						new $.div("row", [
 							new $.div("col-sm-3", "Level 1: col-sm-3"),
@@ -125,22 +125,22 @@ export default [
 
 	{
 		title: "Item container",
-		code: function () {
+		code: () => {
 			return new $.example({
 				title: "Title",
 				msg: "Message",
-				container: function (items) {
+				container: (items) => {
 					return new $.div(
 						"p-0 container",
 						new $.div(
 							"g-2 row row-cols-auto",
-							items.map(function (i) {
+							items.map((i) => {
 								return new $.div("col", i);
 							})
 						)
 					);
 				},
-				code: function () {
+				code: () => {
 					return [
 						new $.button({ label: "Primary", color: "primary" }),
 						new $.button({ label: "Secondary", color: "secondary" }),

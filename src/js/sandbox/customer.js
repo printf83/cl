@@ -15,7 +15,7 @@ let query_data = {
 };
 
 let dbstate = null;
-const loadState = function (callback, sender) {
+const loadState = (callback, sender) => {
 	if (!dbstate) {
 		console.log("Init state database");
 		//get record
@@ -26,7 +26,7 @@ const loadState = function (callback, sender) {
 				fieldname: "name",
 				sender: sender,
 			},
-			function (result) {
+			(result) => {
 				if (result) {
 					dbstate = result;
 					callback(dbstate);
@@ -37,7 +37,7 @@ const loadState = function (callback, sender) {
 		callback(dbstate);
 	}
 };
-const query_setting = function (dbstate) {
+const query_setting = (dbstate) => {
 	return {
 		field: [
 			{
@@ -86,7 +86,7 @@ const query_setting = function (dbstate) {
 		useopricon: false,
 	};
 };
-const editor = function (data) {
+const editor = (data) => {
 	return [
 		new $.input({
 			type: "text",
@@ -128,14 +128,14 @@ const editor = function (data) {
 		}),
 	];
 };
-const items = function (data, item, group) {
+const items = (data, item, group) => {
 	let lastgroup = null;
 	let result = [];
-	data.forEach(function (i) {
+	data.forEach((i) => {
 		if (dbstate) {
 			if (i.state && lastgroup !== i.state) {
 				lastgroup = i.state;
-				let state_name = dbstate.filter(function (el) {
+				let state_name = dbstate.filter((el) => {
 					return el.value === i.state;
 				})[0]?.label;
 				result.push(
@@ -150,7 +150,7 @@ const items = function (data, item, group) {
 	});
 	return result;
 };
-const item = function (data) {
+const item = (data) => {
 	return new $.list.item({
 		key: data._id,
 		name: data.name,
@@ -162,17 +162,17 @@ const item = function (data) {
 		allow_more: true,
 	});
 };
-const group = function (data) {
+const group = (data) => {
 	return new $.list.group({
 		key: data.key,
 		name: data.name,
 	});
 };
-const more = function (sender, id) {
+const more = (sender, id) => {
 	new $.toast("i", `Call from id:${id}`).show();
 };
 
-const menuController = function (id, show) {
+const menuController = (id, show) => {
 	let mnu = document.getElementById(id);
 	if (show) {
 		mnu.parentElement.classList.remove("d-none");
@@ -183,7 +183,7 @@ const menuController = function (id, show) {
 
 export default {
 	name: "Customer",
-	load: function () {
+	load: () => {
 		$.list.container.reload("customer_list");
 
 		menuController("menu_add", true);
@@ -193,8 +193,8 @@ export default {
 		menuController("menu_check_all", false);
 		menuController("menu_check_delete", false);
 	},
-	main: function (callback) {
-		loadState(function (dbstate) {
+	main: (callback) => {
+		loadState((dbstate) => {
 			callback(
 				new $.list.container({
 					id: "customer_list",
@@ -216,7 +216,7 @@ export default {
 			id: "menu_add",
 			icon: "plus",
 			label: "Add New",
-			onclick: function (event) {
+			onclick: (event) => {
 				$.list.container.item.add("customer_list", event.currentTarget);
 			},
 		},
@@ -224,7 +224,7 @@ export default {
 			id: "menu_check_on",
 			icon: "list-check",
 			label: "Check Mode",
-			onclick: function (event) {
+			onclick: (event) => {
 				$.list.container.check.mode("customer_list");
 
 				menuController("menu_add", false);
@@ -239,7 +239,7 @@ export default {
 			id: "menu_check_off",
 			icon: "arrow-left",
 			label: "Back",
-			onclick: function (event) {
+			onclick: (event) => {
 				$.list.container.check.mode("customer_list");
 
 				menuController("menu_add", true);
@@ -254,7 +254,7 @@ export default {
 			id: "menu_check_all",
 			icon: "check-double",
 			label: "Check All",
-			onclick: function (event) {
+			onclick: (event) => {
 				$.list.container.check.all("customer_list");
 			},
 		},
@@ -262,7 +262,7 @@ export default {
 			id: "menu_check_delete",
 			icon: "trash-can",
 			label: "Delete Checked",
-			onclick: function (event) {
+			onclick: (event) => {
 				$.list.container.check.delete("customer_list", event.currentTarget);
 			},
 		},
@@ -270,7 +270,7 @@ export default {
 			id: "menu_filter",
 			icon: "filter",
 			label: "Filter",
-			onclick: function (event) {
+			onclick: (event) => {
 				$.list.container.query.filter("customer_list", event.currentTarget);
 			},
 		},
@@ -278,7 +278,7 @@ export default {
 			id: "menu_sort",
 			icon: "sort",
 			label: "Sort",
-			onclick: function (event) {
+			onclick: (event) => {
 				$.list.container.query.sort("customer_list", event.currentTarget);
 			},
 		},
@@ -286,7 +286,7 @@ export default {
 			id: "menu_field",
 			icon: "tasks",
 			label: "Field",
-			onclick: function (event) {
+			onclick: (event) => {
 				$.list.container.query.field("customer_list", event.currentTarget);
 			},
 		},
@@ -294,7 +294,7 @@ export default {
 			id: "menu_limit",
 			icon: "list-ol",
 			label: "Limit",
-			onclick: function (event) {
+			onclick: (event) => {
 				$.list.container.query.limit("customer_list", event.currentTarget);
 			},
 		},
@@ -305,7 +305,7 @@ export default {
 				rotate: 90,
 			},
 			id: "menu_page",
-			onclick: function (event) {
+			onclick: (event) => {
 				$.list.container.query.page("customer_list", event.currentTarget);
 			},
 		},

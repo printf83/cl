@@ -17,7 +17,7 @@ import li from "./li.js";
 import ul from "./ul.js";
 
 const fn = {
-	genname: function (names) {
+	genname: (names) => {
 		if (names) {
 			names = Array.isArray(names) ? names : [names];
 
@@ -34,7 +34,7 @@ const fn = {
 
 		return null;
 	},
-	set: function (id, propertyName, value) {
+	set: (id, propertyName, value) => {
 		if (propertyName) {
 			if (!db_opt[id]) {
 				console.warn(`db_opt['${id}'] not found`);
@@ -46,7 +46,7 @@ const fn = {
 			db_opt[id] = core.extend({}, defaultOption, value);
 		}
 	},
-	get: function (id, propertyName) {
+	get: (id, propertyName) => {
 		if (db_opt[id]) {
 			if (propertyName) {
 				return db_opt[id][propertyName];
@@ -57,7 +57,7 @@ const fn = {
 			return null;
 		}
 	},
-	reload: function (id, sender, callback) {
+	reload: (id, sender, callback) => {
 		let opt = fn.get(id);
 		if (opt) {
 			db.api.list(
@@ -66,7 +66,7 @@ const fn = {
 					data: opt.query,
 					sender: sender,
 				},
-				function (result) {
+				(result) => {
 					let container = document.getElementById(id);
 					core.removeChildElement(container);
 					core.appendChild(
@@ -101,7 +101,7 @@ const fn = {
 			);
 		}
 	},
-	pagechange: function (event) {
+	pagechange: (event) => {
 		let sender = event.currentTarget;
 		let container = sender.closest(".pagination");
 		let id = container.getAttribute("data-cl-container");
@@ -114,7 +114,7 @@ const fn = {
 		}
 	},
 	query: {
-		all: function (id, sender) {
+		all: (id, sender) => {
 			let opt = fn.get(id);
 			if (opt) {
 				new query.dialog(
@@ -126,7 +126,7 @@ const fn = {
 						data: opt.query,
 					},
 					[
-						function (_event, data) {
+						(_event, data) => {
 							opt.query = data;
 							fn.set(id, null, opt);
 							fn.reload(id, sender);
@@ -135,7 +135,7 @@ const fn = {
 				).show();
 			}
 		},
-		filter: function (id, sender) {
+		filter: (id, sender) => {
 			let opt = fn.get(id);
 			if (opt) {
 				new query.filter(
@@ -145,7 +145,7 @@ const fn = {
 						data: opt.query?.filter,
 					},
 					[
-						function (_event, data) {
+						(_event, data) => {
 							opt.query.filter = data;
 							fn.set(id, null, opt);
 							fn.reload(id, sender);
@@ -154,7 +154,7 @@ const fn = {
 				).show();
 			}
 		},
-		sort: function (id, sender) {
+		sort: (id, sender) => {
 			let opt = fn.get(id);
 			if (opt) {
 				new query.sort(
@@ -164,7 +164,7 @@ const fn = {
 						data: opt.query?.sort,
 					},
 					[
-						function (_event, data) {
+						(_event, data) => {
 							opt.query.sort = data;
 							fn.set(id, null, opt);
 							fn.reload(id, sender);
@@ -173,7 +173,7 @@ const fn = {
 				).show();
 			}
 		},
-		field: function (id, sender) {
+		field: (id, sender) => {
 			let opt = fn.get(id);
 			if (opt) {
 				new query.field(
@@ -182,7 +182,7 @@ const fn = {
 						data: opt.query?.field,
 					},
 					[
-						function (_event, data) {
+						(_event, data) => {
 							opt.query.field = data;
 							fn.set(id, null, opt);
 							fn.reload(id, sender);
@@ -191,7 +191,7 @@ const fn = {
 				).show();
 			}
 		},
-		limit: function (id, sender) {
+		limit: (id, sender) => {
 			let opt = fn.get(id);
 			if (opt) {
 				new query.limit(
@@ -202,7 +202,7 @@ const fn = {
 						data: opt.query?.limit,
 					},
 					[
-						function (_event, data) {
+						(_event, data) => {
 							let skip = opt.query.skip / opt.query.limit;
 							opt.query.limit = data;
 							opt.query.skip = skip * opt.query.limit;
@@ -213,7 +213,7 @@ const fn = {
 				).show();
 			}
 		},
-		page: function (id, sender) {
+		page: (id, sender) => {
 			let opt = fn.get(id);
 			if (opt) {
 				new query.page(
@@ -225,7 +225,7 @@ const fn = {
 						data: opt.query?.skip,
 					},
 					[
-						function (_event, data) {
+						(_event, data) => {
 							opt.query.skip = data;
 							fn.set(id, null, opt);
 							fn.reload(id, sender);
@@ -235,7 +235,7 @@ const fn = {
 			}
 		},
 	},
-	excel: function (id, sender) {
+	excel: (id, sender) => {
 		let opt = fn.get(id);
 		if (opt) {
 			db.api.excel({
@@ -246,12 +246,12 @@ const fn = {
 		}
 	},
 	check: {
-		get: function (id) {
+		get: (id) => {
 			let container = document.getElementById(id);
 			if (container.classList.contains("check")) {
 				let checked = container.querySelectorAll(".check[data-key]");
 				if (checked && checked.length > 0) {
-					return Array.from(checked).map(function (i) {
+					return Array.from(checked).map((i) => {
 						return {
 							key: i.getAttribute("data-key"),
 							name: i.getAttribute("data-name"),
@@ -262,7 +262,7 @@ const fn = {
 
 			return null;
 		},
-		set: function (id, data) {
+		set: (id, data) => {
 			if (data && data.length > 0) {
 				data = Array.isArray(data) ? data : [data];
 
@@ -271,13 +271,13 @@ const fn = {
 					//remove checked
 					let checked = container.querySelectorAll(".check[data-key]");
 					if (checked && checked.length > 0) {
-						Array.from(checked).forEach(function (i) {
+						Array.from(checked).forEach((i) => {
 							i.classList.remove("check");
 						});
 					}
 
 					//check data
-					data.forEach(function (i) {
+					data.forEach((i) => {
 						let item = container.querySelectorAll(`div[data-key='${i}']`);
 						if (item && item.length > 0) {
 							item[0]?.classList.add("check");
@@ -286,16 +286,16 @@ const fn = {
 				}
 			}
 		},
-		delete: function (id, sender) {
+		delete: (id, sender) => {
 			let checked = fn.check.get(id);
 			let opt = fn.get(id);
 
 			if (checked) {
-				let checkedid = checked.map(function (i) {
+				let checkedid = checked.map((i) => {
 					return i.key;
 				});
 
-				const fndeleterecursive = function (opt, keys, index, callback) {
+				const fndeleterecursive = (opt, keys, index, callback) => {
 					if (index < keys.length) {
 						db.api.load(
 							{
@@ -303,12 +303,12 @@ const fn = {
 								id: keys[index],
 								sender: sender,
 							},
-							function (data) {
+							(data) => {
 								if (data) {
 									fn.file.delete(
 										opt,
 										data,
-										function () {
+										() => {
 											fndeleterecursive(opt, keys, index + 1, callback);
 										},
 										sender
@@ -324,14 +324,14 @@ const fn = {
 					}
 				};
 
-				const fndelete = function (id, opt, checkedid, sender) {
+				const fndelete = (id, opt, checkedid, sender) => {
 					db.api.delete(
 						{
 							name: opt.name,
 							id: checkedid,
 							sender: sender,
 						},
-						function (data) {
+						(data) => {
 							fn.reload(id, sender);
 						},
 						sender
@@ -345,9 +345,9 @@ const fn = {
 						{
 							label: "Yes, delete",
 							color: "danger",
-							onclick: function () {
+							onclick: () => {
 								if (opt.file && opt.file.length > 0) {
-									fndeleterecursive(opt, checkedid, 0, function () {
+									fndeleterecursive(opt, checkedid, 0, () => {
 										fndelete(id, opt, checkedid, sender);
 									});
 								} else {
@@ -363,10 +363,10 @@ const fn = {
 					`Delete ${opt.name}`
 				).show();
 			} else {
-				new dlg.msgbox("-", "No item selected.", function () {}, `Delete ${opt.name}`).show();
+				new dlg.msgbox("-", "No item selected.", () => {}, `Delete ${opt.name}`).show();
 			}
 		},
-		mode: function (id, check) {
+		mode: (id, check) => {
 			if (typeof check === "undefined") {
 				if (document.getElementById(id).classList.contains("check")) {
 					check = false;
@@ -381,23 +381,23 @@ const fn = {
 				document.getElementById(id).classList.remove("check");
 			}
 		},
-		all: function (id) {
+		all: (id) => {
 			let container = document.getElementById(id);
 			if (container.classList.contains("check")) {
 				let checked = container.querySelectorAll(".check[data-key]");
 				let items = container.querySelectorAll("[data-key]");
 				if (items.length === checked.length) {
-					items.forEach(function (item) {
+					items.forEach((item) => {
 						item.classList.remove("check");
 					});
 				} else {
-					items.forEach(function (item) {
+					items.forEach((item) => {
 						item.classList.add("check");
 					});
 				}
 			}
 		},
-		item: function (event) {
+		item: (event) => {
 			event.stopPropagation();
 
 			let sender = event.currentTarget.closest("[data-key]");
@@ -409,7 +409,7 @@ const fn = {
 		},
 	},
 	file: {
-		listoffile: function (fileprop, data) {
+		listoffile: (fileprop, data) => {
 			//create list of id
 			let result = [];
 
@@ -432,7 +432,7 @@ const fn = {
 
 			return result && result.length > 0 ? result : null;
 		},
-		listoffileobject: function (fileprop, data) {
+		listoffileobject: (fileprop, data) => {
 			//create list of id
 			let result = [];
 
@@ -449,7 +449,7 @@ const fn = {
 
 			return result && result.length > 0 ? result : null;
 		},
-		save: function (opt, data, callback, sender) {
+		save: (opt, data, callback, sender) => {
 			if (opt && data) {
 				if (opt.file && opt.file.length > 0) {
 					let listoffile = fn.file.listoffile(opt.file, data);
@@ -463,7 +463,7 @@ const fn = {
 				}
 			}
 		},
-		delete: function (opt, data, callback, sender) {
+		delete: (opt, data, callback, sender) => {
 			if (opt && data) {
 				if (opt.file) {
 					let listoffile = fn.file.listoffile(opt.file, data);
@@ -477,12 +477,12 @@ const fn = {
 				}
 			}
 		},
-		duplicate: function (opt, data, callback, sender) {
-			const fnduplicaterecursive = function (data, listoffile, index, callback, sender) {
+		duplicate: (opt, data, callback, sender) => {
+			const fnduplicaterecursive = (data, listoffile, index, callback, sender) => {
 				if (index < listoffile.length) {
 					db.file.duplicate(
 						listoffile[index].data,
-						function (newfileid) {
+						(newfileid) => {
 							data[listoffile[index].key] = newfileid;
 							fnduplicaterecursive(data, listoffile, index + 1, callback, sender);
 						},
@@ -506,7 +506,7 @@ const fn = {
 				}
 			}
 		},
-		manage: function (opt, oldData, newData, callback, sender) {
+		manage: (opt, oldData, newData, callback, sender) => {
 			if (opt && oldData && newData) {
 				if (opt.file && opt.file.length > 0) {
 					let listoffile_old = fn.file.listoffile(opt.file, oldData);
@@ -542,7 +542,7 @@ const fn = {
 					if (listoffile_save && listoffile_save.length > 0) {
 						db.file.save(
 							listoffile_save,
-							function () {
+							() => {
 								if (listoffile_delete && listoffile_delete.length > 0) {
 									db.file.delete(listoffile_delete, callback, sender);
 								} else {
@@ -565,7 +565,7 @@ const fn = {
 		},
 	},
 	item: {
-		action: function (event) {
+		action: (event) => {
 			event.stopPropagation();
 
 			let sender = event.currentTarget.closest("[data-key]");
@@ -579,7 +579,7 @@ const fn = {
 				}
 			}
 		},
-		add: function (id, sender) {
+		add: (id, sender) => {
 			let opt = fn.get(id);
 			if (opt) {
 				new dlg.inputbox(
@@ -588,19 +588,19 @@ const fn = {
 					[
 						{
 							label: "Save",
-							onclick: function (_event, data) {
+							onclick: (_event, data) => {
 								db.api.create(
 									{
 										name: opt.name,
 										data: data,
 										sender: sender,
 									},
-									function (result) {
+									(result) => {
 										if (result) {
 											fn.file.save(
 												opt,
 												data,
-												function () {
+												() => {
 													fn.reload(id, sender);
 												},
 												sender
@@ -619,11 +619,11 @@ const fn = {
 				).show();
 			}
 		},
-		menu: function (event) {
+		menu: (event) => {
 			event.stopPropagation();
 			event.currentTarget.closest(".cl-list-ctl").classList.add("show");
 		},
-		edit: function (event) {
+		edit: (event) => {
 			event.stopPropagation();
 			event.currentTarget.querySelectorAll(".cl-list-ctl")[0].classList.remove("show");
 
@@ -639,7 +639,7 @@ const fn = {
 						id: key,
 						sender: sender,
 					},
-					function (oldData) {
+					(oldData) => {
 						if (oldData) {
 							new dlg.inputbox(
 								opt.editor(oldData),
@@ -647,7 +647,7 @@ const fn = {
 								[
 									{
 										label: "Save",
-										onclick: function (_event, newData) {
+										onclick: (_event, newData) => {
 											newData._id = key;
 											db.api.update(
 												{
@@ -656,13 +656,13 @@ const fn = {
 													data: newData,
 													sender: sender,
 												},
-												function (result) {
+												(result) => {
 													if (result) {
 														fn.file.manage(
 															opt,
 															oldData,
 															newData,
-															function () {
+															() => {
 																fn.reload(id, sender);
 															},
 															sender
@@ -684,7 +684,7 @@ const fn = {
 				);
 			}
 		},
-		copy: function (event) {
+		copy: (event) => {
 			event.stopPropagation();
 			event.currentTarget.closest(".cl-list-ctl").classList.remove("show");
 
@@ -701,7 +701,7 @@ const fn = {
 						id: key,
 						sender: item,
 					},
-					function (data) {
+					(data) => {
 						if (data) {
 							//remove id
 							delete data._id;
@@ -710,26 +710,26 @@ const fn = {
 							fn.file.duplicate(
 								opt,
 								data,
-								function (data) {
+								(data) => {
 									new dlg.inputbox(
 										opt.editor(data),
 										null,
 										[
 											{
 												label: "Save",
-												onclick: function (_event, data) {
+												onclick: (_event, data) => {
 													db.api.create(
 														{
 															name: opt.name,
 															data: data,
 															sender: item,
 														},
-														function (result) {
+														(result) => {
 															if (result) {
 																fn.file.save(
 																	opt,
 																	data,
-																	function () {
+																	() => {
 																		fn.reload(id, item);
 																	},
 																	item
@@ -754,7 +754,7 @@ const fn = {
 				);
 			}
 		},
-		delete: function (event) {
+		delete: (event) => {
 			event.stopPropagation();
 			event.currentTarget.closest(".cl-list-ctl").classList.remove("show");
 
@@ -766,14 +766,14 @@ const fn = {
 			let id = container.getAttribute("id");
 			let opt = fn.get(id);
 			if (opt) {
-				const fndelete = function (opt, id, key, sender) {
+				const fndelete = (opt, id, key, sender) => {
 					db.api.delete(
 						{
 							name: opt.name,
 							id: key,
 							sender: sender,
 						},
-						function (data) {
+						(data) => {
 							fn.reload(id, sender);
 						}
 					);
@@ -786,7 +786,7 @@ const fn = {
 						{
 							label: "Yes, delete",
 							color: "danger",
-							onclick: function () {
+							onclick: () => {
 								//check if has picture
 								if (opt.file && opt.file.length > 0) {
 									//need to load data first
@@ -798,12 +798,12 @@ const fn = {
 											id: key,
 											sender: item,
 										},
-										function (data) {
+										(data) => {
 											if (data) {
 												fn.file.delete(
 													opt,
 													data,
-													function () {
+													() => {
 														fndelete(opt, id, key, item);
 													},
 													sender
@@ -828,7 +828,7 @@ const fn = {
 				).show();
 			}
 		},
-		more: function (event) {
+		more: (event) => {
 			event.stopPropagation();
 			event.currentTarget.closest(".cl-list-ctl").classList.remove("show");
 
@@ -853,12 +853,12 @@ const defaultOption = {
 	name: null,
 	paging: true,
 	more: null, //more function
-	items: function (data, item, group) {
-		return data.map(function (i) {
+	items: (data, item, group) => {
+		return data.map((i) => {
 			return item(i);
 		});
 	},
-	item: function (data) {
+	item: (data) => {
 		return new item({
 			name: JSON.stringify(data)
 				.replace(/\,/g, ",<br/>")
@@ -867,7 +867,7 @@ const defaultOption = {
 				.replace(/\}/g, "<br/>}"),
 		});
 	},
-	group: function (data) {
+	group: (data) => {
 		return new group({
 			name: JSON.stringify(data)
 				.replace(/\,/g, ",<br/>")

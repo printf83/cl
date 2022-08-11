@@ -92,7 +92,7 @@ export function extend(out) {
 }
 
 export const merge = {
-	class: function (a, b) {
+	class: (a, b) => {
 		if (a && b && a !== undefined && b !== undefined) {
 			let aT = typeof a;
 			let bT = typeof b;
@@ -120,7 +120,7 @@ export const merge = {
 			return null;
 		}
 	},
-	style: function (a, b) {
+	style: (a, b) => {
 		if (a && b && a !== undefined && b !== undefined) {
 			let c = {};
 			Object.keys(a).forEach((i) => {
@@ -153,7 +153,7 @@ export const merge = {
 	 * example :
 	 * merge({},{},{id:function(a,b){return b}})
 	 */
-	attr: function (a, b, rules) {
+	attr: (a, b, rules) => {
 		if ((a || b) && !(a && b)) {
 			return a || b;
 		} else if (a && b) {
@@ -205,8 +205,8 @@ export const merge = {
 };
 
 export function UUID(format) {
-	return (format || "el-xxxxxxxxxxxx").replace(/[xy]/g, function (c) {
-		var r = (Math.random() * 16) | 0,
+	return (format || "el-xxxxxxxxxxxx").replace(/[xy]/g, (c) => {
+		let r = (Math.random() * 16) | 0,
 			v = c === "x" ? r : (r & 0x3) | 0x8;
 		return v.toString(16);
 	});
@@ -247,7 +247,7 @@ export function multiClass(val, format, supported, unsupported) {
 		return val || val === 0
 			? Array.isArray(val)
 				? val
-						.map(function (i) {
+						.map((i) => {
 							return isSupported(i, supported, unsupported) ? format.replace("$1", i) : i;
 						})
 						.join(" ")
@@ -266,12 +266,12 @@ export function documentReady(callback) {
 		authCheck(callback);
 	} else if (document.addEventListener) {
 		// modern browsers
-		document.addEventListener("DOMContentLoaded", function () {
+		document.addEventListener("DOMContentLoaded", () => {
 			authCheck(callback);
 		});
 	} else {
 		// IE <= 8
-		document.attachEvent("onreadystatechange", function () {
+		document.attachEvent("onreadystatechange", () => {
 			if (document.readyState == "complete") {
 				authCheck(callback);
 			}
@@ -289,10 +289,10 @@ function authCheck(callback) {
 		let usr = require("./user.js");
 
 		if (validateUser) {
-			usr.validate(validateUser, function () {
+			usr.validate(validateUser, () => {
 				new usr.signin({
 					msg: "Email validated. Please sign in to continue.",
-					callback: function () {
+					callback: () => {
 						window.location = window.location.origin + window.location.pathname;
 					},
 				}).show();
@@ -300,10 +300,10 @@ function authCheck(callback) {
 		} else if (resetPassword) {
 			new usr.changepass_guest({
 				token: resetPassword,
-				callback: function () {
+				callback: () => {
 					new usr.signin({
 						msg: "Password changed. Please sign in to continue.",
-						callback: function () {
+						callback: () => {
 							window.location = window.location.origin + window.location.pathname;
 						},
 					}).show();
@@ -319,7 +319,7 @@ export function countElement(node) {
 	let child = node.childNodes;
 	let cnt = child.length;
 
-	child.forEach(function (i) {
+	child.forEach((i) => {
 		cnt += countElement(i);
 	});
 
@@ -332,7 +332,7 @@ export function getValue(container) {
 		if (elem && elem.length > 0) {
 			let rtn = {};
 
-			elem.forEach(function (i) {
+			elem.forEach((i) => {
 				let type = i.getAttribute("type");
 				let name = i.getAttribute("name");
 
@@ -389,7 +389,7 @@ export function setValue(container, value) {
 	if (container) {
 		let elem = container.querySelectorAll("[name]");
 		if (elem && elem.length > 0) {
-			elem.forEach(function (i) {
+			elem.forEach((i) => {
 				let val = value[i.getAttribute("name")];
 				if (val) {
 					let type = i.getAttribute("type");
@@ -600,7 +600,7 @@ function attachAttr(elems, arg) {
 						elems.addEventListener(i.startsWith("on") ? i.substring(2) : i, arg[i], false);
 
 						//create function to remove EventListener
-						elems.detachEventListener = function (sender) {
+						elems.detachEventListener = (sender) => {
 							if (DEBUG) console.log(`Remove ${i} from ${elemInfo(sender)}`);
 							sender.removeEventListener(i.startsWith("on") ? i.substring(2) : i, arg[i], false);
 							sender.detachEventListener = null;
@@ -625,7 +625,7 @@ function build(container, arg) {
 			let hasContainer = container ? true : false;
 			container = container || document.createElement("div");
 
-			arg.forEach(function (e) {
+			arg.forEach((e) => {
 				let element = e.data.tag ? document.createElement(e.data.tag) : container;
 				element = attachAttr(element, e.data.attr);
 
@@ -639,7 +639,7 @@ function build(container, arg) {
 						}
 					} else {
 						if (Array.isArray(e.data.elem)) {
-							e.data.elem.forEach(function (i) {
+							e.data.elem.forEach((i) => {
 								if (i) {
 									let iElemType = typeof i;
 									if (iElemType === "string" || iElemType === "number" || iElemType === "boolean") {
@@ -653,7 +653,7 @@ function build(container, arg) {
 											"i is array. This happen when you set elem: [[tag],tag]. It should be elem:[tag,tag]",
 											i
 										);
-										i.forEach(function (j) {
+										i.forEach((j) => {
 											let t = build(element, j);
 											element = t ? t : element;
 										});
@@ -695,7 +695,7 @@ export function detachEventListener(elem) {
 	if (elem) {
 		let c = elem?.childNodes;
 		if (c?.length > 0) {
-			c.forEach(function (item) {
+			c.forEach((item) => {
 				detachEventListener(item);
 				if (item.detachEventListener instanceof Function) {
 					item.detachEventListener(item);
@@ -727,7 +727,7 @@ export function appendChild(container, data) {
 	if (Node.prototype.isPrototypeOf(n)) {
 		container.appendChild(n);
 	} else if (NodeList.prototype.isPrototypeOf(n)) {
-		n.forEach(function (i) {
+		n.forEach((i) => {
 			container.appendChild(i);
 		});
 	}
@@ -741,7 +741,7 @@ export function prependChild(container, data) {
 	if (Node.prototype.isPrototypeOf(n)) {
 		container.insertBefore(n, container.firstChild);
 	} else if (NodeList.prototype.isPrototypeOf(n)) {
-		n.forEach(function (i) {
+		n.forEach((i) => {
 			container.insertBefore(i, container.firstChild);
 		});
 	}
@@ -759,7 +759,7 @@ export function replaceWith(elem, data) {
 	if (Node.prototype.isPrototypeOf(n)) {
 		r = parent.insertBefore(n, elem);
 	} else if (NodeList.prototype.isPrototypeOf(n)) {
-		n.forEach(function (i) {
+		n.forEach((i) => {
 			r = parent.insertBefore(i, elem);
 		});
 	}
@@ -793,10 +793,10 @@ export function html(data) {
 
 export function init(container) {
 	let popoverTriggerList = [].slice.call(container.querySelectorAll('[data-bs-toggle="popover"]'));
-	popoverTriggerList.map(function (popoverTriggerEl) {
+	popoverTriggerList.map((popoverTriggerEl) => {
 		let elem = new bootstrap.Popover(popoverTriggerEl);
 
-		elem.detachEventListener = function (sender) {
+		elem.detachEventListener = (sender) => {
 			if (DEBUG) console.log(`Remove popover from ${elemInfo(sender)}`);
 			bootstrap.Popover.getInstance(sender)?.dispose();
 			sender.detachEventListener = null;
@@ -807,10 +807,10 @@ export function init(container) {
 	});
 
 	let tooltipTriggerList = [].slice.call(container.querySelectorAll('[data-bs-toggle="tooltip"]'));
-	tooltipTriggerList.map(function (tooltipTriggerEl) {
+	tooltipTriggerList.map((tooltipTriggerEl) => {
 		let elem = new bootstrap.Tooltip(tooltipTriggerEl);
 
-		elem.detachEventListener = function (sender) {
+		elem.detachEventListener = (sender) => {
 			if (DEBUG) console.log(`Remove tooltip from ${elemInfo(sender)}`);
 			bootstrap.Tooltip.getInstance(sender)?.dispose();
 			sender.detachEventListener = null;

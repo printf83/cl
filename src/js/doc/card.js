@@ -12,7 +12,7 @@ export default [
 	{
 		title: "Example",
 		sample: { "sample.img": sample.img },
-		code: function () {
+		code: () => {
 			return new $.card.container({
 				style: { width: "18rem" },
 				elem: [
@@ -37,7 +37,7 @@ export default [
 	{
 		title: "Body",
 		msg: "The building block of a card is the {{card.body}}. Use it whenever you need a padded section within a card.",
-		code: function () {
+		code: () => {
 			return new $.card.container(new $.card.body("This is some text within a card body."));
 		},
 	},
@@ -48,7 +48,7 @@ export default [
 			"Card titles are used by adding {{card.title}}. In the same way, links are added and placed next to each other by adding {{card.link}}.",
 			"Subtitles are used by adding a {{card.subtitle}}. If the {{card.title}} and the {{card.subtitle}} items are placed in a {{card.body}} item, the card title and subtitle are aligned nicely.",
 		],
-		code: function () {
+		code: () => {
 			return new $.card.container({
 				style: { width: "18rem" },
 				elem: new $.card.body({
@@ -76,7 +76,7 @@ export default [
 		title: "Images",
 		msg: '{{placement: "top"}} places an {{card.img}} to the top of the card. With {{card.text}}, text can be added to the card. Text within {{card.text}} can also be styled with the standard HTML tags.',
 		sample: { "sample.img": sample.img },
-		code: function () {
+		code: () => {
 			return new $.card.container({
 				style: { width: "18rem" },
 				elem: [
@@ -97,7 +97,7 @@ export default [
 	{
 		title: "List groups",
 		msg: "Create lists of content in a card with a flush list group.",
-		code: function () {
+		code: () => {
 			return new $.card.container({
 				style: { width: "18rem" },
 				elem: new $.listgroup({
@@ -110,7 +110,7 @@ export default [
 
 	{
 		title: "List groups with card header",
-		code: function () {
+		code: () => {
 			return new $.card.container({
 				style: { width: "18rem" },
 				elem: [
@@ -126,7 +126,7 @@ export default [
 
 	{
 		title: "List groups with card footer",
-		code: function () {
+		code: () => {
 			return new $.card.container({
 				style: { width: "18rem" },
 				elem: [
@@ -147,7 +147,7 @@ export default [
 		title: "Kitchen Sink",
 		msg: "Mix and match multiple content types to create the card you need, or throw everything in there. Shown below are image styles, blocks, text styles, and a list group—all wrapped in a fixed-width card.",
 		sample: { "sample.img": sample.img },
-		code: function () {
+		code: () => {
 			return new $.card.container({
 				style: { width: "18rem" },
 				elem: [
@@ -187,7 +187,7 @@ export default [
 	{
 		title: "Header and footer",
 		msg: "Add an optional header and/or footer within a card.",
-		code: function () {
+		code: () => {
 			return new $.card.container({
 				elem: [
 					new $.card.header("Feature"),
@@ -206,7 +206,7 @@ export default [
 	{
 		title: "Header with {{h*}} class",
 		msg: 'Card headers can be styled by adding {{class: "h*"}} elements into {{card.header}}.',
-		code: function () {
+		code: () => {
 			return new $.card.container({
 				elem: [
 					new $.card.header({
@@ -227,7 +227,7 @@ export default [
 
 	{
 		title: "Quote",
-		code: function () {
+		code: () => {
 			return new $.card.container({
 				elem: [
 					new $.card.header("Quote"),
@@ -259,7 +259,7 @@ export default [
 
 	{
 		title: "Align center card text",
-		code: function () {
+		code: () => {
 			return new $.card.container({
 				align: "center",
 				elem: [
@@ -285,7 +285,7 @@ export default [
 	{
 		title: "Using grid markup",
 		msg: "Using the grid, wrap cards in columns and rows as needed.",
-		code: function () {
+		code: () => {
 			return new $.div({
 				row: true,
 				gap: 2,
@@ -330,7 +330,7 @@ export default [
 	{
 		title: "Using utilities",
 		msg: "Use Bootstrap handful of available sizing utilities to quickly set a card’s width.",
-		code: function () {
+		code: () => {
 			return [
 				new $.card.container({
 					class: "w-75 mb-3",
@@ -367,7 +367,7 @@ export default [
 	{
 		title: "Using custom CSS",
 		msg: "Use custom CSS in your stylesheets or as inline styles to set a width.",
-		code: function () {
+		code: () => {
 			return [
 				new $.card.container({
 					style: { width: "18rem" },
@@ -391,7 +391,7 @@ export default [
 		title: "Text alignment",
 		msg: 'You can quickly change the text alignment of any card—in its entirety or specific parts—with {{align:"null|center|end"}}.',
 		container: sample.stackcontainer,
-		code: function () {
+		code: () => {
 			return [
 				new $.card.container({
 					style: { width: "18rem" },
@@ -445,7 +445,7 @@ export default [
 		title: "Tab in card",
 		msg: "{{tab}} is working navbar in card",
 		sample: { "sample.text": sample.text },
-		code: function () {
+		code: () => {
 			return new $.tab({
 				type: "tab",
 				item: [
@@ -470,7 +470,7 @@ export default [
 	{
 		title: "Pill style tab",
 		sample: { "sample.text": sample.text },
-		code: function () {
+		code: () => {
 			return new $.tab({
 				type: "pill",
 				item: [
@@ -496,7 +496,7 @@ export default [
 		title: "Images",
 		container: sample.stackcontainer,
 		sample: { "sample.img": sample.img },
-		code: function () {
+		code: () => {
 			return [
 				new $.card.container({
 					elem: [
@@ -539,7 +539,7 @@ export default [
 	{
 		title: "Image overlays",
 		sample: { "sample.img": sample.img },
-		code: function () {
+		code: () => {
 			return new $.card.container({
 				textcolor: "light",
 				elem: [
@@ -563,7 +563,7 @@ export default [
 	{
 		title: "Horizontal",
 		sample: { "sample.img": sample.img },
-		code: function () {
+		code: () => {
 			return new $.card.container({
 				class: "h-100",
 				elem: [
@@ -613,7 +613,7 @@ export default [
 	{
 		title: "Background and color",
 		container: sample.stackcontainer,
-		code: function () {
+		code: () => {
 			return new $.card.container({
 				color: "primary",
 				textcolor: "light",
@@ -636,7 +636,7 @@ export default [
 	{
 		title: "Example background and color",
 		container: sample.stackcontainer,
-		code: function () {
+		code: () => {
 			return [
 				{ color: "primary", textcolor: "light" },
 				{ color: "secondary", textcolor: "light" },
@@ -646,7 +646,7 @@ export default [
 				{ color: "info" },
 				{ color: "light" },
 				{ color: "dark", textcolor: "light" },
-			].map(function (i) {
+			].map((i) => {
 				return new $.card.container({
 					color: i.color,
 					textcolor: i.textcolor,
@@ -670,7 +670,7 @@ export default [
 	{
 		title: "Border color",
 		container: sample.stackcontainer,
-		code: function () {
+		code: () => {
 			return new $.card.container({
 				bordercolor: "primary",
 				style: { width: "18rem" },
@@ -693,7 +693,7 @@ export default [
 	{
 		title: "Example border color",
 		container: sample.stackcontainer,
-		code: function () {
+		code: () => {
 			return [
 				{ color: "primary", textcolor: "primary" },
 				{ color: "secondary", textcolor: "secondary" },
@@ -703,7 +703,7 @@ export default [
 				{ color: "info" },
 				{ color: "light" },
 				{ color: "dark", textcolor: "light" },
-			].map(function (i) {
+			].map((i) => {
 				return new $.card.container({
 					bordercolor: i.color,
 					style: { width: "18rem" },
@@ -727,7 +727,7 @@ export default [
 	{
 		title: "Mixins utilities",
 		container: sample.stackcontainer,
-		code: function () {
+		code: () => {
 			return new $.card.container({
 				bordercolor: "success",
 				style: { width: "18rem" },
@@ -760,7 +760,7 @@ export default [
 		title: "Card groups",
 		container: sample.stackcontainer,
 		sample: { "sample.img": sample.img, "sample.cardwithimg": sample.cardwithimg },
-		code: function () {
+		code: () => {
 			return new $.card.group({
 				elem: [
 					new $.card.container({
@@ -793,7 +793,7 @@ export default [
 			"sample.img": sample.img,
 			"sample.cardwithfooter": sample.cardwithfooter,
 		},
-		code: function () {
+		code: () => {
 			return new $.card.group({
 				elem: [
 					new $.card.container({
@@ -824,7 +824,7 @@ export default [
 	{
 		title: "Card grid using {{row-cols-md-2}}",
 		sample: { "sample.cardwithimg": sample.cardwithimg },
-		code: function () {
+		code: () => {
 			return new $.div({
 				row: true,
 				rowcol: [1, "md-2"],
@@ -842,7 +842,7 @@ export default [
 	{
 		title: "Card grid using {{row-cols-md-3}}",
 		sample: { "sample.cardwithimg": sample.cardwithimg },
-		code: function () {
+		code: () => {
 			return new $.div({
 				row: true,
 				rowcol: [1, "md-3"],
@@ -860,7 +860,7 @@ export default [
 	{
 		title: "Card grid with {{h-100}} class",
 		sample: { "sample.img": sample.img, "sample.cardh100": sample.cardh100 },
-		code: function () {
+		code: () => {
 			return new $.div({
 				row: true,
 				rowcol: [1, "md-3"],
@@ -900,7 +900,7 @@ export default [
 			"sample.img": sample.img,
 			"sample.cardwithfooterh100": sample.cardwithfooterh100,
 		},
-		code: function () {
+		code: () => {
 			return new $.div({
 				row: true,
 				rowcol: [1, "md-3"],

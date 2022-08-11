@@ -11,7 +11,7 @@ export default [
 	{
 		title: "Text selection",
 		msg: ["Change the way in which the content is selected when the user interacts with it."],
-		code: function () {
+		code: () => {
 			return [
 				new $.tag({
 					tag: "p",
@@ -37,7 +37,7 @@ export default [
 		msg: [
 			"Bootstrap provides {{pointerevent:none}} and {{pointerevent:auto}} property to prevent or add element interactions.",
 		],
-		code: function () {
+		code: () => {
 			return [
 				new $.tag({
 					tag: "p",

@@ -8,7 +8,7 @@ export default [
 	},
 	{
 		title: "Example",
-		code: function () {
+		code: () => {
 			return new $.toc({
 				label: "On this page",
 				item: [
@@ -24,7 +24,7 @@ export default [
 
 	{
 		title: "Level",
-		code: function () {
+		code: () => {
 			return new $.toc({
 				label: "On this page",
 				item: [
@@ -40,7 +40,7 @@ export default [
 
 	{
 		title: "With icon",
-		code: function () {
+		code: () => {
 			return new $.toc({
 				icon: "fire",
 				label: "Example",
@@ -57,7 +57,7 @@ export default [
 
 	{
 		title: "Link",
-		code: function () {
+		code: () => {
 			return new $.toc({
 				label: "Example",
 				item: [
@@ -72,31 +72,31 @@ export default [
 
 	{
 		title: "Function",
-		code: function () {
+		code: () => {
 			return new $.toc({
 				label: "Example",
 				item: [
 					{
 						label: "Show info toast",
-						onclick: function () {
+						onclick: () => {
 							new $.toast("i", "Info toast").show();
 						},
 					},
 					{
 						label: "Show warning toast",
-						onclick: function () {
+						onclick: () => {
 							new $.toast("!", "Warning toast").show();
 						},
 					},
 					{
 						label: "Show success toast",
-						onclick: function () {
+						onclick: () => {
 							new $.toast("/", "Success toast").show();
 						},
 					},
 					{
 						label: "Show critical toast",
-						onclick: function () {
+						onclick: () => {
 							new $.toast("x", "Critical toast").show();
 						},
 					},

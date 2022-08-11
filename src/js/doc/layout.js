@@ -10,7 +10,7 @@ export default [
 	{
 		title: "Layout 1",
 		viewclass: "cl-highlight-divwithid",
-		code: function () {
+		code: () => {
 			return new $.layout.l1({
 				topid: "top",
 				leftid: "left",

@@ -39,7 +39,7 @@ export default [
 					"table-row",
 					"flex",
 					"inline-flex",
-				].map(function (i) {
+				].map((i) => {
 					return `<code>${i}</code>`;
 				}),
 			}),
@@ -49,7 +49,7 @@ export default [
 
 	{
 		title: "Examples",
-		code: function () {
+		code: () => {
 			return [
 				new $.tag({
 					tag: "div",
@@ -72,7 +72,7 @@ export default [
 	},
 
 	{
-		code: function () {
+		code: () => {
 			return [
 				new $.tag({
 					tag: "div",
@@ -117,14 +117,14 @@ export default [
 					{ label: "Visible only on lg", opt: ["none", "lg-block", "xl-none"] },
 					{ label: "Visible only on xl", opt: ["none", "xl-block", "xxl-none"] },
 					{ label: "Visible only on xxl", opt: ["none", "xxl-block"] },
-				].map(function (i, ix) {
+				].map((i, ix) => {
 					return [
 						i.label,
 						ix === 0
 							? i.opt
 							: Array.isArray(i.opt)
 							? i.opt
-									.map(function (j) {
+									.map((j) => {
 										return `<code>${j}</code>`;
 									})
 									.join(", ")
@@ -133,11 +133,11 @@ export default [
 				}),
 			}),
 		],
-		code: function () {
+		code: () => {
 			return [
 				{ label: "hide on lg and wider screens", opt: "lg-none" },
 				{ label: "hide on screens smaller than lg", opt: ["none", "lg-block"] },
-			].map(function (i) {
+			].map((i) => {
 				return new $.tag({ tag: "div", display: i.opt, elem: i.label });
 			});
 		},
@@ -160,12 +160,12 @@ export default [
 					"table-row",
 					"flex",
 					"inline-flex",
-				].map(function (i) {
+				].map((i) => {
 					return `<code>print-${i}</code>`;
 				}),
 			}),
 		],
-		code: function () {
+		code: () => {
 			return [
 				{ label: "Screen only (Hide on print only)", opt: "print-none" },
 				{ label: "Print Only (Hide on screen only)", opt: ["none", "print-block"] },
@@ -173,7 +173,7 @@ export default [
 					label: "Hide up to large on screen, but always show on print",
 					opt: ["none", "lg-block", "print-block"],
 				},
-			].map(function (i) {
+			].map((i) => {
 				return new $.tag({ tag: "div", display: i.opt, elem: i.label });
 			});
 		},

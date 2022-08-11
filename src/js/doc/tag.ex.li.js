@@ -20,7 +20,7 @@ export default [
 
 	{
 		title: "Example",
-		code: function () {
+		code: () => {
 			return new $.ul({
 				elem: [
 					new $.li({ attr: { "data-test": "test" }, elem: "Item 1" }),
@@ -35,7 +35,7 @@ export default [
 	{
 		title: "Easy option",
 		msg: "This component also supported easy option.",
-		code: function () {
+		code: () => {
 			return new $.ul({
 				elem: [
 					new $.li({ class: "classname", elem: "Item 1" }),

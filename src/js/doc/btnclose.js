@@ -11,14 +11,14 @@ export default [
 
 	{
 		title: "Example",
-		code: function () {
+		code: () => {
 			return new $.btnclose();
 		},
 	},
 
 	{
 		title: "Disabled state",
-		code: function () {
+		code: () => {
 			return new $.btnclose({ disabled: true });
 		},
 	},
@@ -27,7 +27,7 @@ export default [
 		title: "White variant",
 		dark: true,
 		container: sample.stackcontainer,
-		code: function () {
+		code: () => {
 			return [new $.btnclose({ dark: false }), new $.btnclose({ dark: false, disabled: true })];
 		},
 	},

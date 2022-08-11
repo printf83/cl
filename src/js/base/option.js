@@ -34,7 +34,7 @@ export class select extends tag {
 
 			opt.selected = Array.isArray(opt.selected) ? opt.selected : [opt.selected];
 			opt.item = Array.isArray(opt.item) ? opt.item : [opt.item];
-			opt.elem = opt.item.map(function (i) {
+			opt.elem = opt.item.map((i) => {
 				if (typeof i === "string") {
 					return new tag({
 						tag: "option",
@@ -99,7 +99,7 @@ export class dropdown extends tag {
 
 			opt.selected = Array.isArray(opt.selected) ? opt.selected : [opt.selected];
 			opt.item = Array.isArray(opt.item) ? opt.item : [opt.item];
-			opt.elem = opt.item.map(function (i) {
+			opt.elem = opt.item.map((i) => {
 				if (typeof i === "string") {
 					return new li({
 						elem: new span({

@@ -11,7 +11,7 @@ export default [
 	{
 		title: "Example",
 		container: sample.stackcontainer,
-		code: function () {
+		code: () => {
 			let id = $.core.UUID();
 
 			return [
@@ -42,7 +42,7 @@ export default [
 	{
 		title: "Multiple targets",
 		container: sample.stackcontainer,
-		code: function () {
+		code: () => {
 			let id1 = $.core.UUID();
 			let id2 = $.core.UUID();
 			let id3 = $.core.UUID();

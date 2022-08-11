@@ -12,14 +12,14 @@ export default [
 	{
 		title: "Basic example",
 		sample: { "sample.listgroupitem": sample.listgroupitem },
-		code: function () {
+		code: () => {
 			return new $.listgroup({ item: sample.listgroupitem() });
 		},
 	},
 
 	{
 		title: "Active items",
-		code: function () {
+		code: () => {
 			return new $.listgroup({
 				item: [
 					{ elem: "An active item", active: true },
@@ -34,7 +34,7 @@ export default [
 
 	{
 		title: "Disabled items",
-		code: function () {
+		code: () => {
 			return new $.listgroup({
 				item: [
 					{ elem: "An disabled item", disabled: true },
@@ -49,7 +49,7 @@ export default [
 
 	{
 		title: "List group of links",
-		code: function () {
+		code: () => {
 			return new $.listgroup({
 				type: "div",
 				item: [
@@ -69,19 +69,19 @@ export default [
 
 	{
 		title: "List group of buttons",
-		code: function () {
+		code: () => {
 			return new $.listgroup({
 				type: "div",
 				item: [
 					{
-						onclick: function () {},
+						onclick: () => {},
 						elem: "A disabled item",
 						disabled: true,
 					},
-					{ onclick: function () {}, elem: "A second item" },
-					{ onclick: function () {}, elem: "A third item" },
-					{ onclick: function () {}, elem: "A fourth item" },
-					{ onclick: function () {}, elem: "And a fifth one" },
+					{ onclick: () => {}, elem: "A second item" },
+					{ onclick: () => {}, elem: "A third item" },
+					{ onclick: () => {}, elem: "A fourth item" },
+					{ onclick: () => {}, elem: "And a fifth one" },
 				],
 			});
 		},
@@ -90,7 +90,7 @@ export default [
 	{
 		title: "Flush",
 		sample: { "sample.listgroupitem": sample.listgroupitem },
-		code: function () {
+		code: () => {
 			return new $.listgroup({
 				flush: true,
 				item: sample.listgroupitem(),
@@ -101,7 +101,7 @@ export default [
 	{
 		title: "Numbered",
 		sample: { "sample.listgroupitem": sample.listgroupitem },
-		code: function () {
+		code: () => {
 			return new $.listgroup({
 				type: "ol",
 				item: sample.listgroupitem(),
@@ -112,7 +112,7 @@ export default [
 	{
 		title: "Numbered custom content",
 		sample: { "sample.listgroupitemcustomcontent": sample.listgroupitemcustomcontent },
-		code: function () {
+		code: () => {
 			return new $.listgroup({
 				type: "ol",
 				item: [
@@ -147,7 +147,7 @@ export default [
 		],
 		container: sample.stackcontainer,
 		sample: { "sample.listgroupitem3": sample.listgroupitem3 },
-		code: function () {
+		code: () => {
 			return [
 				new $.listgroup({
 					horizontal: true,
@@ -189,7 +189,7 @@ export default [
 
 	{
 		title: "Contextual classes",
-		code: function () {
+		code: () => {
 			return new $.listgroup({
 				item: [{ color: "primary", elem: `A simple primary list group item` }],
 			});
@@ -198,11 +198,9 @@ export default [
 
 	{
 		title: "Contextual classes example",
-		code: function () {
+		code: () => {
 			return new $.listgroup({
-				item: ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map(function (
-					i
-				) {
+				item: ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map((i) => {
 					return { color: i, elem: `A simple ${i} list group item` };
 				}),
 			});
@@ -211,12 +209,10 @@ export default [
 
 	{
 		title: "Contextual classes with action example",
-		code: function () {
+		code: () => {
 			return new $.listgroup({
 				type: "div",
-				item: ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map(function (
-					i
-				) {
+				item: ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map((i) => {
 					return {
 						action: true,
 						href: "#",
@@ -230,8 +226,8 @@ export default [
 
 	{
 		title: "With badge",
-		code: function () {
-			let itemfn = function (text, badgeLabel) {
+		code: () => {
+			let itemfn = (text, badgeLabel) => {
 				return {
 					display: "flex",
 					justifycontent: "between",
@@ -255,8 +251,8 @@ export default [
 
 	{
 		title: "Custom content",
-		code: function () {
-			let itemfn = function (title, active, days) {
+		code: () => {
+			let itemfn = (title, active, days) => {
 				return {
 					href: "#",
 					action: true,
@@ -296,7 +292,7 @@ export default [
 
 	{
 		title: "Checkboxes",
-		code: function () {
+		code: () => {
 			return new $.listgroup({
 				type: "div",
 				item: [
@@ -326,7 +322,7 @@ export default [
 
 	{
 		title: "Radio",
-		code: function () {
+		code: () => {
 			return new $.listgroup({
 				type: "div",
 				item: [
@@ -369,7 +365,7 @@ export default [
 
 	{
 		title: "Switch",
-		code: function () {
+		code: () => {
 			return new $.listgroup({
 				type: "div",
 				item: [

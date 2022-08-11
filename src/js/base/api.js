@@ -4,7 +4,7 @@ import * as core from "./core.js";
 import { signin as user_signin } from "./user.js";
 
 const defaultOption = {
-	callback: function (data) {},
+	callback: (data) => {},
 	type: "GET",
 	url: null,
 	data: null,
@@ -12,7 +12,7 @@ const defaultOption = {
 };
 
 const defaultOptionPost = {
-	callback: function (data) {},
+	callback: (data) => {},
 	type: "POST",
 	url: null,
 	data: null,
@@ -20,7 +20,7 @@ const defaultOptionPost = {
 };
 
 const defaultOptionUpload = {
-	callback: function (data) {},
+	callback: (data) => {},
 	progress: null,
 	type: "POST",
 	url: null,
@@ -29,7 +29,7 @@ const defaultOptionUpload = {
 };
 
 const defaultOptionDownload = {
-	callback: function (data) {},
+	callback: (data) => {},
 	type: "GET",
 	url: null,
 	data: null,
@@ -37,7 +37,7 @@ const defaultOptionDownload = {
 };
 
 const fn = {
-	str2Object: function (value) {
+	str2Object: (value) => {
 		if (value && value !== "") {
 			try {
 				return JSON.parse(value);
@@ -48,7 +48,7 @@ const fn = {
 
 		return null;
 	},
-	obj2String: function (value) {
+	obj2String: (value) => {
 		if (value) {
 			try {
 				return JSON.stringify(value);
@@ -60,7 +60,7 @@ const fn = {
 		return null;
 	},
 	sender: {
-		islist: function (sender) {
+		islist: (sender) => {
 			if (sender) {
 				if (sender.getAttribute("data-key") && sender.getAttribute("data-name")) {
 					return true;
@@ -69,7 +69,7 @@ const fn = {
 
 			return false;
 		},
-		isfree: function (sender) {
+		isfree: (sender) => {
 			if (sender) {
 				if (sender.classList.contains("disabled") || sender.disabled === true) {
 					return false;
@@ -78,7 +78,7 @@ const fn = {
 
 			return true;
 		},
-		setbusy: function (sender) {
+		setbusy: (sender) => {
 			if (sender) {
 				sender.classList.add("disabled");
 				sender.classList.add("wait");
@@ -97,7 +97,7 @@ const fn = {
 				}
 			}
 		},
-		setfree: function (sender) {
+		setfree: (sender) => {
 			if (sender) {
 				sender.classList.remove("disabled");
 				sender.classList.remove("wait");
@@ -117,17 +117,17 @@ const fn = {
 			}
 		},
 	},
-	get: function (opt) {
+	get: (opt) => {
 		opt = core.extend({}, defaultOption, opt);
 
 		let req = new XMLHttpRequest();
-		req.onreadystatechange = function () {
+		req.onreadystatechange = () => {
 			if (req.readyState == 4) {
 				if (req.status == 200) {
 					opt.callback(fn.str2Object(req.responseText));
-				} else if (req.status === 400) {
+				} else if (req.status === 401) {
 					new user_signin({
-						callback: function (result) {
+						callback: (result) => {
 							if (result) {
 								fn.get(opt);
 							} else {
@@ -144,17 +144,17 @@ const fn = {
 		req.setRequestHeader("Content-Type", "application/json");
 		req.send(fn.obj2String(opt.data));
 	},
-	post: function (opt) {
+	post: (opt) => {
 		opt = core.extend({}, defaultOptionPost, opt);
 
 		let req = new XMLHttpRequest();
-		req.onreadystatechange = function () {
+		req.onreadystatechange = () => {
 			if (req.readyState == 4) {
 				if (req.status == 200) {
 					opt.callback(fn.str2Object(req.responseText));
-				} else if (req.status === 400) {
+				} else if (req.status === 401) {
 					new user_signin({
-						callback: function (result) {
+						callback: (result) => {
 							if (result) {
 								fn.post(opt);
 							} else {
@@ -172,17 +172,17 @@ const fn = {
 		req.setRequestHeader("Content-Type", "application/json");
 		req.send(fn.obj2String(opt.data));
 	},
-	upload: function (opt) {
+	upload: (opt) => {
 		opt = core.extend({}, defaultOptionUpload, opt);
 
 		let req = new XMLHttpRequest();
-		req.onreadystatechange = function () {
+		req.onreadystatechange = () => {
 			if (req.readyState == 4) {
 				if (req.status == 200) {
 					opt.callback(fn.str2Object(req.responseText));
-				} else if (req.status === 400) {
+				} else if (req.status === 401) {
 					new user_signin({
-						callback: function (result) {
+						callback: (result) => {
 							if (result) {
 								fn.upload(opt);
 							} else {
@@ -197,7 +197,7 @@ const fn = {
 		};
 
 		if (typeof opt.progress === "function") {
-			req.onprogress = function (event) {
+			req.onprogress = (event) => {
 				if (event.lengthComputable) {
 					var percentComplete = parseInt((event.loaded / event.total) * 100, 10);
 					opt.progress(percentComplete);
@@ -206,19 +206,19 @@ const fn = {
 		}
 
 		req.open(opt.type, opt.url, opt.async);
-		req.send(this.genfileformdata(opt.data));
+		req.send(fn.genfileformdata(opt.data));
 	},
-	// download: function (opt) {
+	// download:  (opt)=> {
 	// 	opt = core.extend({}, defaultOptionDownload, opt);
 
 	// 	let req = new XMLHttpRequest();
-	// 	req.onreadystatechange = function () {
+	// 	req.onreadystatechange =  ()=> {
 	// 		if (req.readyState == 4) {
 	// 			if (req.status == 200) {
 	// 				opt.callback(fn.str2Object(req.responseText));
-	// 			} else if (req.status === 400) {
+	// 			} else if (req.status === 401) {
 	// 				new user_signin({
-	// 					callback: function (result) {
+	// 					callback:  (result)=> {
 	// 						if (result) {
 	// 							fn.get(opt);
 	// 						} else {
@@ -234,7 +234,7 @@ const fn = {
 	// 	req.open(opt.type, opt.url, opt.async);
 	// 	req.send(fn.obj2String(opt.data));
 	// },
-	genformdata: function (obj) {
+	genformdata: (obj) => {
 		if (obj) {
 			const res = new FormData();
 			Object.keys(obj).forEach((key) => res.append(key, obj[key]));
@@ -242,14 +242,14 @@ const fn = {
 		}
 		return null;
 	},
-	genfileformdata: function (files) {
+	genfileformdata: (files) => {
 		let data = new FormData();
 		for (let x = 0; x < files.length; x++) {
 			data.append("file", files[x]);
 		}
 		return data;
 	},
-	getfilelength: function (files) {
+	getfilelength: (files) => {
 		let result = 0;
 		for (let x = 0; x < files.length; x++) {
 			result += files[0].length;
@@ -260,7 +260,7 @@ const fn = {
 };
 
 export const api = {
-	create: function (opt, callback) {
+	create: (opt, callback) => {
 		opt = core.extend(
 			{},
 			{
@@ -275,7 +275,7 @@ export const api = {
 			if (fn.sender.isfree(opt.sender)) {
 				fn.sender.setbusy(opt.sender);
 				fn.post({
-					callback: function (result) {
+					callback: (result) => {
 						fn.sender.setfree(opt.sender);
 						if (typeof callback === "function") {
 							callback(result);
@@ -289,7 +289,7 @@ export const api = {
 			console.error("opt name and data is required");
 		}
 	},
-	load: function (opt, callback) {
+	load: (opt, callback) => {
 		opt = core.extend(
 			{},
 			{
@@ -304,7 +304,7 @@ export const api = {
 			if (fn.sender.isfree(opt.sender)) {
 				fn.sender.setbusy(opt.sender);
 				fn.get({
-					callback: function (result) {
+					callback: (result) => {
 						fn.sender.setfree(opt.sender);
 						if (typeof callback === "function") {
 							callback(result);
@@ -317,7 +317,7 @@ export const api = {
 			console.error("opt name and id is required");
 		}
 	},
-	update: function (opt, callback) {
+	update: (opt, callback) => {
 		opt = core.extend(
 			{},
 			{
@@ -333,7 +333,7 @@ export const api = {
 			if (fn.sender.isfree(opt.sender)) {
 				fn.sender.setbusy(opt.sender);
 				fn.get({
-					callback: function (result) {
+					callback: (result) => {
 						fn.sender.setfree(opt.sender);
 						if (typeof callback === "function") {
 							callback(result);
@@ -348,7 +348,7 @@ export const api = {
 			console.error("opt name, id and data is required");
 		}
 	},
-	delete: function (opt, callback) {
+	delete: (opt, callback) => {
 		opt = core.extend(
 			{},
 			{
@@ -363,7 +363,7 @@ export const api = {
 			if (fn.sender.isfree(opt.sender)) {
 				fn.sender.setbusy(opt.sender);
 				fn.get({
-					callback: function (result) {
+					callback: (result) => {
 						fn.sender.setfree(opt.sender);
 						if (typeof callback === "function") {
 							callback(result);
@@ -377,7 +377,7 @@ export const api = {
 			console.error("opt name and id is required");
 		}
 	},
-	list: function (opt, callback) {
+	list: (opt, callback) => {
 		opt = core.extend(
 			{},
 			{
@@ -392,7 +392,7 @@ export const api = {
 			if (fn.sender.isfree(opt.sender)) {
 				fn.sender.setbusy(opt.sender);
 				fn.post({
-					callback: function (result) {
+					callback: (result) => {
 						fn.sender.setfree(opt.sender);
 						if (typeof callback === "function") {
 							callback(result);
@@ -406,7 +406,7 @@ export const api = {
 			console.error("opt name is required");
 		}
 	},
-	option: function (opt, callback) {
+	option: (opt, callback) => {
 		opt = core.extend(
 			{},
 			{
@@ -426,7 +426,7 @@ export const api = {
 			if (fn.sender.isfree(opt.sender)) {
 				fn.sender.setbusy(opt.sender);
 				fn.post({
-					callback: function (result) {
+					callback: (result) => {
 						if (result) {
 							var tmp = result.data
 								? result.data.map((i) => {
@@ -466,7 +466,7 @@ export const api = {
 			console.error("opt name, fieldkey and fieldname is required");
 		}
 	},
-	excel: function (opt) {
+	excel: (opt) => {
 		opt = core.extend(
 			{},
 			{
@@ -482,7 +482,7 @@ export const api = {
 				fn.sender.setbusy(opt.sender);
 
 				setTimeout(
-					function (sender) {
+					(sender) => {
 						fn.sender.setfree(sender);
 					},
 					3000,
@@ -495,14 +495,14 @@ export const api = {
 			console.error("opt name is required");
 		}
 	},
-	url: function (name, data) {
+	url: (name, data) => {
 		if (data) {
 			return `api/${name}-excel/?q=${JSON.stringify(data)}`;
 		} else {
 			return `api/${name}-excel`;
 		}
 	},
-	aggregate: function (opt, callback) {
+	aggregate: (opt, callback) => {
 		opt = core.extend(
 			{},
 			{
@@ -517,7 +517,7 @@ export const api = {
 			if (fn.sender.isfree(opt.sender)) {
 				fn.sender.setbusy(opt.sender);
 				fn.post({
-					callback: function (result) {
+					callback: (result) => {
 						fn.sender.setfree(opt.sender);
 						if (typeof callback === "function") {
 							callback(result);
@@ -534,13 +534,13 @@ export const api = {
 };
 
 export const file = {
-	upload: function (file, progress, callback, sender) {
+	upload: (file, progress, callback, sender) => {
 		if (file) {
 			if (fn.sender.isfree(sender)) {
 				fn.sender.setbusy(sender);
 				fn.upload({
 					progress: progress,
-					callback: function (result) {
+					callback: (result) => {
 						fn.sender.setfree(sender);
 						if (typeof callback === "function") {
 							callback(result);
@@ -554,10 +554,10 @@ export const file = {
 			console.error("opt file is required");
 		}
 	},
-	download: function (id, sender) {
+	download: (id, sender) => {
 		window.location = file.url(id);
 	},
-	url: function (id) {
+	url: (id) => {
 		if (id) {
 			return `api/file/${Array.isArray(id) ? id.join(",") : id}`;
 		} else {
@@ -565,12 +565,12 @@ export const file = {
 			return null;
 		}
 	},
-	info: function (id, callback, sender) {
+	info: (id, callback, sender) => {
 		if (id) {
 			if (fn.sender.isfree(sender)) {
 				fn.sender.setbusy(sender);
 				fn.get({
-					callback: function (result) {
+					callback: (result) => {
 						fn.sender.setfree(sender);
 						if (typeof callback === "function") {
 							callback(result);
@@ -583,12 +583,12 @@ export const file = {
 			console.error("opt id is required");
 		}
 	},
-	duplicate: function (id, callback, sender) {
+	duplicate: (id, callback, sender) => {
 		if (id) {
 			if (fn.sender.isfree(sender)) {
 				fn.sender.setbusy(sender);
 				fn.get({
-					callback: function (result) {
+					callback: (result) => {
 						fn.sender.setfree(sender);
 						if (typeof callback === "function") {
 							callback(result);
@@ -601,12 +601,12 @@ export const file = {
 			console.error("opt id is required");
 		}
 	},
-	save: function (id, callback, sender) {
+	save: (id, callback, sender) => {
 		if (id) {
 			if (fn.sender.isfree(sender)) {
 				fn.sender.setbusy(sender);
 				fn.get({
-					callback: function (result) {
+					callback: (result) => {
 						fn.sender.setfree(sender);
 						if (typeof callback === "function") {
 							callback(result);
@@ -620,13 +620,13 @@ export const file = {
 			console.error("opt id is required");
 		}
 	},
-	delete: function (id, callback, sender) {
+	delete: (id, callback, sender) => {
 		if (id) {
 			if (fn.sender.isfree(sender)) {
 				fn.sender.setbusy(sender);
 
 				fn.get({
-					callback: function (result) {
+					callback: (result) => {
 						fn.sender.setfree(sender);
 						if (typeof callback === "function") {
 							callback(result);
@@ -643,7 +643,7 @@ export const file = {
 };
 
 export const user = {
-	register: function (opt, callback) {
+	register: (opt, callback) => {
 		opt = core.extend(
 			{},
 			{
@@ -657,7 +657,7 @@ export const user = {
 			if (fn.sender.isfree(opt.sender)) {
 				fn.sender.setbusy(opt.sender);
 				fn.post({
-					callback: function (result) {
+					callback: (result) => {
 						fn.sender.setfree(opt.sender);
 						if (typeof callback === "function") {
 							callback(result);
@@ -671,7 +671,7 @@ export const user = {
 			console.error("opt data is required");
 		}
 	},
-	signin: function (opt, callback) {
+	signin: (opt, callback) => {
 		opt = core.extend(
 			{},
 			{
@@ -685,7 +685,7 @@ export const user = {
 			if (fn.sender.isfree(opt.sender)) {
 				fn.sender.setbusy(opt.sender);
 				fn.post({
-					callback: function (result) {
+					callback: (result) => {
 						fn.sender.setfree(opt.sender);
 						if (typeof callback === "function") {
 							callback(result);
@@ -699,7 +699,7 @@ export const user = {
 			console.error("opt data is required");
 		}
 	},
-	signout: function (opt, callback) {
+	signout: (opt, callback) => {
 		opt = core.extend(
 			{},
 			{
@@ -711,7 +711,7 @@ export const user = {
 		if (fn.sender.isfree(opt.sender)) {
 			fn.sender.setbusy(opt.sender);
 			fn.get({
-				callback: function (result) {
+				callback: (result) => {
 					fn.sender.setfree(opt.sender);
 					if (typeof callback === "function") {
 						callback(result);
@@ -721,7 +721,7 @@ export const user = {
 			});
 		}
 	},
-	changepass: function (opt, callback) {
+	changepass: (opt, callback) => {
 		opt = core.extend(
 			{},
 			{
@@ -735,7 +735,7 @@ export const user = {
 			if (fn.sender.isfree(opt.sender)) {
 				fn.sender.setbusy(opt.sender);
 				fn.post({
-					callback: function (result) {
+					callback: (result) => {
 						fn.sender.setfree(opt.sender);
 						if (typeof callback === "function") {
 							callback(result);
@@ -749,7 +749,7 @@ export const user = {
 			console.error("opt data is required");
 		}
 	},
-	changepass_guest: function (opt, callback) {
+	changepass_guest: (opt, callback) => {
 		opt = core.extend(
 			{},
 			{
@@ -763,7 +763,7 @@ export const user = {
 			if (fn.sender.isfree(opt.sender)) {
 				fn.sender.setbusy(opt.sender);
 				fn.post({
-					callback: function (result) {
+					callback: (result) => {
 						fn.sender.setfree(opt.sender);
 						if (typeof callback === "function") {
 							callback(result);
@@ -777,7 +777,7 @@ export const user = {
 			console.error("opt data is required");
 		}
 	},
-	resetpass: function (opt, callback) {
+	resetpass: (opt, callback) => {
 		opt = core.extend(
 			{},
 			{
@@ -791,7 +791,7 @@ export const user = {
 			if (fn.sender.isfree(opt.sender)) {
 				fn.sender.setbusy(opt.sender);
 				fn.post({
-					callback: function (result) {
+					callback: (result) => {
 						fn.sender.setfree(opt.sender);
 						if (typeof callback === "function") {
 							callback(result);
@@ -805,7 +805,7 @@ export const user = {
 			console.error("opt data is required");
 		}
 	},
-	info: function (opt, callback) {
+	info: (opt, callback) => {
 		opt = core.extend(
 			{},
 			{
@@ -817,7 +817,7 @@ export const user = {
 		if (fn.sender.isfree(opt.sender)) {
 			fn.sender.setbusy(opt.sender);
 			fn.get({
-				callback: function (result) {
+				callback: (result) => {
 					fn.sender.setfree(opt.sender);
 					if (typeof callback === "function") {
 						callback(result);
@@ -827,7 +827,7 @@ export const user = {
 			});
 		}
 	},
-	updateinfo: function (opt, callback) {
+	updateinfo: (opt, callback) => {
 		opt = core.extend(
 			{},
 			{
@@ -841,7 +841,7 @@ export const user = {
 			if (fn.sender.isfree(opt.sender)) {
 				fn.sender.setbusy(opt.sender);
 				fn.post({
-					callback: function (result) {
+					callback: (result) => {
 						fn.sender.setfree(opt.sender);
 						if (typeof callback === "function") {
 							callback(result);
@@ -855,9 +855,9 @@ export const user = {
 			console.error("opt data is required");
 		}
 	},
-	validate: function (token, callback) {
+	validate: (token, callback) => {
 		fn.post({
-			callback: function (result) {
+			callback: (result) => {
 				if (typeof callback === "function") {
 					callback(result);
 				}

@@ -16,8 +16,8 @@ export default [
 		],
 		container: sample.formcontainer,
 		viewclass: "cl-highlight-col",
-		code: function () {
-			return [null, "start", "center", "end", ["end", "md-start", "lg-center"]].map(function (i) {
+		code: () => {
+			return [null, "start", "center", "end", ["end", "md-start", "lg-center"]].map((i) => {
 				return new $.tag({
 					tag: "div",
 					align: i,
@@ -37,7 +37,7 @@ export default [
 	{
 		title: "Text wrapping and overflow",
 		msg: ["Wrap text with a {{wrap:true}} property"],
-		code: function () {
+		code: () => {
 			return new $.tag({
 				tag: "div",
 				class: "cl-highlight",
@@ -51,7 +51,7 @@ export default [
 	{
 		title: "Text wrapping and overflow",
 		msg: ["Wrap text with a {{wrap}} property"],
-		code: function () {
+		code: () => {
 			return new $.tag({
 				tag: "div",
 				class: "cl-highlight",
@@ -67,7 +67,7 @@ export default [
 		msg: [
 			"Prevent long strings of text from breaking your components' layout by using .text-break to set word-wrap: break-word and word-break: break-word. We use word-wrap instead of the more common overflow-wrap for wider browser support, and add the deprecated word-break: break-word to avoid issues with flex containers.",
 		],
-		code: function () {
+		code: () => {
 			return new $.tag({
 				tag: "div",
 				class: "cl-highlight",
@@ -88,8 +88,8 @@ export default [
 		title: "Text transform",
 		msg: ["Transform text in components with text {{texttransform}} property."],
 		container: sample.formcontainer,
-		code: function () {
-			return [null, "lowercase", "uppercase", "capitalize"].map(function (i) {
+		code: () => {
+			return [null, "lowercase", "uppercase", "capitalize"].map((i) => {
 				return new $.tag({
 					tag: "div",
 					texttransform: i,
@@ -105,8 +105,8 @@ export default [
 			"Quickly change the font-size of text using {{fontsize}} property. While Bootstrap heading classes (e.g., {{.h1}}–{{.h6}}) apply {{fontsize}}, {{fontweight}}, and {{lineheight}}, these utilities <i>only</i> apply {{font-size}}. Sizing for these utilities matches HTML’s heading elements, so as the number increases, their size decreases.",
 		],
 		container: sample.formcontainer,
-		code: function () {
-			return [null, 1, 2, 3, 4, 5, 6].map(function (i) {
+		code: () => {
+			return [null, 1, 2, 3, 4, 5, 6].map((i) => {
 				return new $.tag({
 					tag: "div",
 					fontsize: i,
@@ -120,8 +120,8 @@ export default [
 		title: "Font weight",
 		msg: ["Quickly change the font-weight of text with these {{fontweight}}."],
 		container: sample.formcontainer,
-		code: function () {
-			return [null, "bold", "bolder", "normal", "light", "lighter"].map(function (i) {
+		code: () => {
+			return [null, "bold", "bolder", "normal", "light", "lighter"].map((i) => {
 				return new $.tag({
 					tag: "div",
 					fontweight: i,
@@ -135,8 +135,8 @@ export default [
 		title: "Font italics",
 		msg: ["Quickly change the font-style of text with these {{fontitalic}}."],
 		container: sample.formcontainer,
-		code: function () {
-			return [null, true, false].map(function (i) {
+		code: () => {
+			return [null, true, false].map((i) => {
 				return new $.tag({
 					tag: "div",
 					fontitalic: i,
@@ -150,8 +150,8 @@ export default [
 		title: "Text decoration",
 		msg: ["Decorate text in components with {{textdecoration}} property."],
 		container: sample.formcontainer,
-		code: function () {
-			return [null, true, false, "underline", "line-through", "none"].map(function (i) {
+		code: () => {
+			return [null, true, false, "underline", "line-through", "none"].map((i) => {
 				return new $.tag({
 					tag: "div",
 					textdecoration: i,
@@ -165,7 +165,7 @@ export default [
 		title: "Monospace",
 		msg: ["Change a selection to Bootstrap monospace font stack with {{monospace}} property."],
 		container: sample.formcontainer,
-		code: function () {
+		code: () => {
 			return new $.tag({
 				tag: "div",
 				monospace: true,
@@ -178,8 +178,8 @@ export default [
 		title: "Line height",
 		msg: ["Change the line height with {{lineheight}} property"],
 		container: sample.formcontainer,
-		code: function () {
-			return [null, 1, "sm", "base", "lg"].map(function (i) {
+		code: () => {
+			return [null, 1, "sm", "base", "lg"].map((i) => {
 				return new $.tag({
 					tag: "div",
 					class: "cl-highlight-element",

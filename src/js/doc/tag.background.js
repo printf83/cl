@@ -15,7 +15,7 @@ export default [
 			"Similar to the contextual text color classes, set the background of an element to any contextual class. Background utilities <b>do not set</b> {{color}}, so in some cases you’ll want to use {{textcolor}} property.",
 		],
 		container: sample.formcontainer,
-		code: function () {
+		code: () => {
 			return [
 				null,
 				"primary",
@@ -29,7 +29,7 @@ export default [
 				"body",
 				"white",
 				"transparent",
-			].map(function (i) {
+			].map((i) => {
 				return new $.tag({
 					tag: "div",
 					color: i,
@@ -47,7 +47,7 @@ export default [
 			"By setting {{gradient:true}} property, a linear gradient is added as background image to the backgrounds. This gradient starts with a semi-transparent white which fades out to the bottom.",
 		],
 		container: sample.formcontainer,
-		code: function () {
+		code: () => {
 			return [
 				null,
 				"primary",
@@ -61,7 +61,7 @@ export default [
 				"body",
 				"white",
 				"transparent",
-			].map(function (i) {
+			].map((i) => {
 				return new $.tag({
 					tag: "div",
 					color: i,

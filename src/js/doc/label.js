@@ -10,7 +10,7 @@ export default [
 
 	{
 		title: "Label only",
-		code: function () {
+		code: () => {
 			return new $.label({
 				label: "Label",
 			});
@@ -19,7 +19,7 @@ export default [
 
 	{
 		title: "With icon",
-		code: function () {
+		code: () => {
 			return new $.label({
 				icon: "fire",
 				label: "Label",
@@ -29,7 +29,7 @@ export default [
 
 	{
 		title: "Icon after",
-		code: function () {
+		code: () => {
 			return new $.label({
 				icon: "fire",
 				label: "Label",
@@ -41,7 +41,7 @@ export default [
 	{
 		title: "Label for",
 		container: sample.formcontainer,
-		code: function () {
+		code: () => {
 			let id = $.core.UUID();
 			return [
 				new $.label({
@@ -58,7 +58,7 @@ export default [
 		title: "Label hide",
 		msg: "Show icon only and label is hidden. Put label inside {{span.visually-hidden}}",
 		container: sample.formcontainer,
-		code: function () {
+		code: () => {
 			return new $.label({
 				icon: "fire",
 				label: "This is .visually-hidden label",
@@ -71,8 +71,8 @@ export default [
 		title: "Label show",
 		msg: "Show icon only until viewport or higher",
 		container: sample.formcontainer,
-		code: function () {
-			return [null, "sm", "md", "lg", "xl", "xxl"].map(function (i) {
+		code: () => {
+			return [null, "sm", "md", "lg", "xl", "xxl"].map((i) => {
 				return new $.label({
 					icon: "fire",
 					showlabel: i,

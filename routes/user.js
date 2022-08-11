@@ -4,11 +4,11 @@ const nodemailer = require("nodemailer");
 const $ = require(`../models/user.js`);
 const core = require(`../core.js`);
 
-module.exports = function (app) {
+module.exports = (app) => {
 	console.log(`Setup user db`);
 
 	const fn = {
-		email: function (opt, callback) {
+		email: (opt, callback) => {
 			let transporter = nodemailer.createTransport({
 				service: process.env.EMAILPROVIDER,
 				auth: {
@@ -29,7 +29,7 @@ module.exports = function (app) {
 					},
 					opt
 				),
-				function (err, result) {
+				(err, result) => {
 					if (err) {
 						callback({ success: false, message: err.message });
 					} else {
@@ -38,7 +38,7 @@ module.exports = function (app) {
 				}
 			);
 		},
-		validate: function (req, res) {
+		validate: (req, res) => {
 			let { token } = req.body;
 			if (!token) return res.json({ success: false, message: "Token required" });
 
@@ -54,11 +54,11 @@ module.exports = function (app) {
 				});
 			});
 		},
-		signin: function (req, res) {
+		signin: (req, res) => {
 			let { username, password, remember } = req.body;
 			if (!username || !password) return res.json({ success: false, message: "Username and password required" });
 
-			$.db.findOne({ username: username }, function (err, user) {
+			$.db.findOne({ username: username }, (err, user) => {
 				if (err || !user) return res.json({ success: false, message: "User not found" });
 
 				user.validatePassword(password, (err, result) => {
@@ -97,17 +97,17 @@ module.exports = function (app) {
 
 			// });
 		},
-		signout: function (req, res) {
+		signout: (req, res) => {
 			req.user.deleteToken("auth", (err, user) => {
 				if (err) return res.json({ success: false, message: err.message });
 				res.status(200).json({ success: true });
 			});
 		},
-		register: function (req, res) {
+		register: (req, res) => {
 			let { username, password } = req.body;
 			if (!username || !password) return res.json({ success: false, message: "Username and password required" });
 
-			$.db.findOne({ username: username }, function (err, user) {
+			$.db.findOne({ username: username }, (err, user) => {
 				if (user) return res.json({ success: false, message: "User already registered" });
 
 				let newuser = new $.db({
@@ -134,7 +134,7 @@ module.exports = function (app) {
 								subject: "CL Confirmation Email",
 								html: `Click here to validate your email <a href="${serverUrl}/?validateUser=${user.emailToken}">${serverUrl}/?validateUser=${user.emailToken}</a>.`,
 							},
-							function (result) {
+							(result) => {
 								if (result && result.success) {
 									res.json({
 										success: true,
@@ -151,11 +151,11 @@ module.exports = function (app) {
 				});
 			});
 		},
-		resetpass: function (req, res) {
+		resetpass: (req, res) => {
 			let { username } = req.body;
 			if (!username) return res.json({ success: false, message: "Username required" });
 
-			$.db.findOne({ username: username }, function (err, user) {
+			$.db.findOne({ username: username }, (err, user) => {
 				if (err || !user) return res.json({ success: false, message: "User not found" });
 
 				user.generateToken("reset", 900000, (err, user) => {
@@ -168,7 +168,7 @@ module.exports = function (app) {
 							subject: "CL Reset Password",
 							html: `Click here to reset password <a href="${serverUrl}/?resetPassword=${user.resetToken}">${serverUrl}/?resetPassword=${user.resetToken}</a>.`,
 						},
-						function (result) {
+						(result) => {
 							if (result && result.success) {
 								res.json({
 									success: true,
@@ -184,7 +184,7 @@ module.exports = function (app) {
 				});
 			});
 		},
-		changepass: function (req, res) {
+		changepass: (req, res) => {
 			let { oldpassword, password } = req.body;
 			if (!oldpassword || !password)
 				return res.json({ success: false, message: "Username and password required" });
@@ -205,7 +205,7 @@ module.exports = function (app) {
 				});
 			});
 		},
-		changepass_guest: function (req, res) {
+		changepass_guest: (req, res) => {
 			let { token, password } = req.body;
 			if (!token || !password) return res.json({ success: false, message: "Token and password required" });
 
@@ -229,7 +229,7 @@ module.exports = function (app) {
 				});
 			});
 		},
-		info: function (req, res) {
+		info: (req, res) => {
 			if (req.user) {
 				res.json({
 					email: req.user.email,
@@ -241,7 +241,7 @@ module.exports = function (app) {
 				res.json(null);
 			}
 		},
-		updateinfo: function (req, res) {
+		updateinfo: (req, res) => {
 			if (req.user) {
 				let { email, name, picture } = req.body;
 				if (!email || !name) return res.json({ success: false, message: "Email and name required" });

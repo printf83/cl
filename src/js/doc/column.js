@@ -41,10 +41,10 @@ export default [
 	{
 		title: "Vertical alignment",
 		viewclass: "cl-highlight-col cl-highlight-row",
-		code: function () {
+		code: () => {
 			return new $.div(
 				"container",
-				["row align-items-start", "row align-items-center", "row align-items-end"].map(function (i) {
+				["row align-items-start", "row align-items-center", "row align-items-end"].map((i) => {
 					return new $.div({
 						class: i,
 						style: { "min-height": "10rem" },
@@ -58,7 +58,7 @@ export default [
 	{
 		title: "Vertical alignment",
 		viewclass: "cl-highlight-col cl-highlight-row",
-		code: function () {
+		code: () => {
 			return new $.div(
 				"container",
 				new $.div({
@@ -77,7 +77,7 @@ export default [
 	{
 		title: "Horizontal alignment",
 		viewclass: "cl-highlight-col",
-		code: function () {
+		code: () => {
 			return new $.div(
 				"container",
 				[
@@ -87,7 +87,7 @@ export default [
 					"row justify-content-around",
 					"row justify-content-between",
 					"row justify-content-evenly",
-				].map(function (i) {
+				].map((i) => {
 					return new $.div(i, Array(2).fill(new $.div("col-4", "One of two columns")));
 				})
 			);
@@ -98,7 +98,7 @@ export default [
 		title: "Column wrapping",
 		msg: "If more than 12 columns are placed within a single row, each group of extra columns will, as one unit, wrap onto a new $.line.",
 		viewclass: "cl-highlight-col",
-		code: function () {
+		code: () => {
 			return new $.div(
 				"container",
 				new $.div("row", [
@@ -117,7 +117,7 @@ export default [
 		title: "Column breaks",
 		msg: "Breaking columns to a new $.line in flexbox requires a small hack: add an element with width: 100% wherever you want to wrap your columns to a new $.line. Normally this is accomplished with multiple .rows, but not every implementation method can account for this.",
 		viewclass: "cl-highlight-col",
-		code: function () {
+		code: () => {
 			return new $.div(
 				"container",
 				new $.div("row", [
@@ -134,7 +134,7 @@ export default [
 	{
 		msg: "You may also apply this break at specific breakpoints with Bootstrap responsive display utilities.",
 		viewclass: "cl-highlight-col",
-		code: function () {
+		code: () => {
 			return new $.div(
 				"container",
 				new $.div("row", [
@@ -156,7 +156,7 @@ export default [
 		title: "Order classes",
 		msg: "Use {{.order-}} classes for controlling the <b>visual order</b> of your content. These classes are responsive, so you can set the {{order}} by breakpoint (e.g., {{.order-1.order-md-2}}). Includes support for 1 through 5 across all six grid tiers.",
 		viewclass: "cl-highlight-col",
-		code: function () {
+		code: () => {
 			return new $.div(
 				"container",
 				new $.div("row", [
@@ -177,7 +177,7 @@ export default [
 		title: "Offset classes",
 		msg: "Move columns to the right using {{.offset-md-*}} classes. These classes increase the left margin of a column by {{*}} column For example, {{.offset-md-4}} moves {{.col-md-4}} over four column",
 		viewclass: "cl-highlight-col",
-		code: function () {
+		code: () => {
 			return new $.div("container", [
 				new $.div("row", [
 					new $.div("col-md-4", ".col-md-4"),
@@ -195,7 +195,7 @@ export default [
 	{
 		msg: "In addition to column clearing at responsive breakpoints, you may need to reset offsets. See this in action in the grid example.",
 		viewclass: "cl-highlight-col",
-		code: function () {
+		code: () => {
 			return new $.div("container", [
 				new $.div("row", [
 					new $.div("col-sm-5 col-md-6", ".col-sm-5 .col-md-6"),
@@ -219,7 +219,7 @@ export default [
 		title: "Margin utilities",
 		msg: "With the move to flexbox in v4, you can use margin utilities like .me-auto to force sibling columns away from one another.",
 		viewclass: "cl-highlight-col",
-		code: function () {
+		code: () => {
 			return new $.div("container", [
 				new $.div("row", [
 					new $.div("col-md-4", ".col-md-4"),
@@ -241,7 +241,7 @@ export default [
 		title: "Standalone column classes",
 		msg: "The .col-* classes can also be used outside a .row to give an element a specific width. Whenever column classes are used as non direct children of a row, the paddings are omitted.",
 		viewclass: "cl-highlight-col",
-		code: function () {
+		code: () => {
 			return [
 				new $.div("col-3 bg-light p-3 border", "  .col-3: width of 25%"),
 				new $.div("col-sm-9 bg-light p-3 border", " .col-sm-9: width of 75% above sm breakpoint"),
@@ -253,7 +253,7 @@ export default [
 		msg: "The classes can be used together with utilities to create responsive floated images. Make sure to wrap the content in a .clearfix wrapper to clear the float if the text is shorter.",
 		sample: { "sample.text": sample.text, "sample.img": sample.img },
 		viewclass: "cl-highlight-col",
-		code: function () {
+		code: () => {
 			return new $.div("clearfix", [
 				new $.img({ src: sample.img(200, 200), class: "col-md-6 float-md-end mb-3 ms-md-3" }),
 				new $.p(sample.text()),

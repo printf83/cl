@@ -12,7 +12,7 @@ export default [
 	{
 		title: "Default",
 		sample: { "sample.optionitem": sample.optionitem },
-		code: function () {
+		code: () => {
 			return new $.input({
 				label: "Default select example",
 				hidelabel: true,
@@ -26,7 +26,7 @@ export default [
 		title: "Sizing",
 		container: sample.formcontainer,
 		sample: { "sample.optionitem": sample.optionitem },
-		code: function () {
+		code: () => {
 			return [
 				new $.input({
 					weight: "lg",
@@ -55,7 +55,7 @@ export default [
 	{
 		title: "Multiple",
 		sample: { "sample.optionitem": sample.optionitem },
-		code: function () {
+		code: () => {
 			return new $.input({
 				multiple: true,
 				label: "Multiple select example",
@@ -69,7 +69,7 @@ export default [
 	{
 		title: "Size",
 		sample: { "sample.optionitem": sample.optionitem },
-		code: function () {
+		code: () => {
 			return new $.input({
 				size: 3,
 				label: "Size 3 select example",
@@ -83,7 +83,7 @@ export default [
 	{
 		title: "Disabled",
 		sample: { "sample.optionitem": sample.optionitem },
-		code: function () {
+		code: () => {
 			return new $.input({
 				disabled: true,
 				label: "Disabled select example",

@@ -10,13 +10,13 @@ export default [
 
 	{
 		title: "Example",
-		code: function () {
+		code: () => {
 			return new $.paging({
 				limit: 10, // limit record in one page
 				skip: 20, // record number to show
 				total: 1260, // total record
 				max: 3, // max number show in control
-				onchange: function (event) {
+				onchange: (event) => {
 					//function called when skip change
 					new $.toast("i", `Skip changed to ${event.detail.skip}`).show();
 				},
@@ -26,13 +26,13 @@ export default [
 
 	{
 		title: "Show 5 button ",
-		code: function () {
+		code: () => {
 			return new $.paging({
 				limit: 10,
 				skip: 60,
 				total: 1260,
 				max: 5,
-				onchange: function (event) {
+				onchange: (event) => {
 					new $.toast("i", `Skip changed to ${event.detail.skip}`).show();
 				},
 			});
@@ -41,7 +41,7 @@ export default [
 
 	{
 		title: "Custom icon",
-		code: function () {
+		code: () => {
 			return new $.paging({
 				limit: 10,
 				skip: 60,
@@ -51,7 +51,7 @@ export default [
 				labellast: "Last",
 				labelnext: new $.icon("arrow-right"),
 				labelprev: new $.icon("arrow-left"),
-				onchange: function (event) {
+				onchange: (event) => {
 					new $.toast("i", `Skip changed to ${event.detail.skip}`).show();
 				},
 			});
@@ -60,14 +60,14 @@ export default [
 
 	{
 		title: "Hide first and last control",
-		code: function () {
+		code: () => {
 			return new $.paging({
 				limit: 10,
 				skip: 60,
 				total: 1260,
 				max: 3,
 				firstlast: false,
-				onchange: function (event) {
+				onchange: (event) => {
 					new $.toast("i", `Skip changed to ${event.detail.skip}`).show();
 				},
 			});
@@ -76,14 +76,14 @@ export default [
 
 	{
 		title: "Hide next and prev control",
-		code: function () {
+		code: () => {
 			return new $.paging({
 				limit: 10,
 				skip: 60,
 				total: 1260,
 				max: 3,
 				nextprev: false,
-				onchange: function (event) {
+				onchange: (event) => {
 					new $.toast("i", `Skip changed to ${event.detail.skip}`).show();
 				},
 			});
@@ -92,14 +92,14 @@ export default [
 
 	{
 		title: "Disable auto update",
-		code: function () {
+		code: () => {
 			return new $.paging({
 				limit: 10,
 				skip: 60,
 				total: 1260,
 				max: 3,
 				autoupdate: false,
-				onchange: function (event) {
+				onchange: (event) => {
 					new $.toast("i", `Skip changed to ${event.detail.skip}`).show();
 				},
 			});
@@ -112,14 +112,14 @@ export default [
 
 	{
 		title: "Large",
-		code: function () {
+		code: () => {
 			return new $.paging({
 				limit: 10,
 				skip: 60,
 				total: 1260,
 				max: 3,
 				weight: "lg",
-				onchange: function (event) {
+				onchange: (event) => {
 					new $.toast("i", `Skip changed to ${event.detail.skip}`).show();
 				},
 			});
@@ -128,14 +128,14 @@ export default [
 
 	{
 		title: "Small",
-		code: function () {
+		code: () => {
 			return new $.paging({
 				limit: 10,
 				skip: 60,
 				total: 1260,
 				max: 3,
 				weight: "sm",
-				onchange: function (event) {
+				onchange: (event) => {
 					new $.toast("i", `Skip changed to ${event.detail.skip}`).show();
 				},
 			});
@@ -148,14 +148,14 @@ export default [
 
 	{
 		title: "Start",
-		code: function () {
+		code: () => {
 			return new $.paging({
 				limit: 10,
 				skip: 60,
 				total: 1260,
 				max: 3,
 				align: "start",
-				onchange: function (event) {
+				onchange: (event) => {
 					new $.toast("i", `Skip changed to ${event.detail.skip}`).show();
 				},
 			});
@@ -164,14 +164,14 @@ export default [
 
 	{
 		title: "End",
-		code: function () {
+		code: () => {
 			return new $.paging({
 				limit: 10,
 				skip: 60,
 				total: 1260,
 				max: 3,
 				align: "end",
-				onchange: function (event) {
+				onchange: (event) => {
 					new $.toast("i", `Skip changed to ${event.detail.skip}`).show();
 				},
 			});

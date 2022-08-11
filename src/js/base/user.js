@@ -99,7 +99,7 @@ let defaultUpdateInfoOption = {
 };
 
 const fn = {
-	msg: function (msg, icon) {
+	msg: (msg, icon) => {
 		return new alert.container({
 			align: "start",
 			marginbottom: 0,
@@ -107,7 +107,7 @@ const fn = {
 			elem: msg,
 		});
 	},
-	showmsg: function (container, msg, icon) {
+	showmsg: (container, msg, icon) => {
 		let id = container.getAttribute("id");
 		let msgcontainer = document.getElementById(`${id}-msg`);
 		core.removeChildElement(msgcontainer);
@@ -119,7 +119,7 @@ const fn = {
 			msgcontainer.classList.add("d-none");
 		}
 	},
-	closebtn: function (opt) {
+	closebtn: (opt) => {
 		return !opt.debug
 			? new div({
 					position: "relative",
@@ -130,7 +130,7 @@ const fn = {
 							display: "flex",
 							justifycontent: "end",
 							elem: new btnclose({
-								onclick: function (event) {
+								onclick: (event) => {
 									let sender = event.currentTarget;
 									let container = sender.closest("div.modal");
 									if (opt.callback instanceof Function) {
@@ -145,24 +145,24 @@ const fn = {
 			: null;
 	},
 	action: {
-		inputchange: function (event) {
+		inputchange: (event) => {
 			let sender = event.currentTarget;
 			let container = sender.closest("form");
 			fn.showmsg(container, null);
 		},
-		signout: function (sender, callback) {
+		signout: (sender, callback) => {
 			db.user.signout(
 				{
 					sender: sender,
 				},
-				function (result) {
+				(result) => {
 					callback(result);
 				}
 			);
 		},
-		signin: function (sender, opt) {
+		signin: (sender, opt) => {
 			let container = sender.closest("form");
-			core.validate(container, function (result) {
+			core.validate(container, (result) => {
 				if (!result) {
 					fn.showmsg(container, "Please provide email and password", "-");
 				} else {
@@ -181,7 +181,7 @@ const fn = {
 										: false,
 							},
 						},
-						function (result) {
+						(result) => {
 							if (result) {
 								if (result.success) {
 									if (opt.callback instanceof Function) {
@@ -200,9 +200,9 @@ const fn = {
 				}
 			});
 		},
-		signup: function (sender, opt) {
+		signup: (sender, opt) => {
 			let container = sender.closest("form");
-			core.validate(container, function (result) {
+			core.validate(container, (result) => {
 				if (!result) {
 					fn.showmsg(container, "Please provide email and password", "-");
 				} else {
@@ -218,7 +218,7 @@ const fn = {
 								sender: sender,
 								data: { username: data.email, password: data.password },
 							},
-							function (result) {
+							(result) => {
 								if (result) {
 									if (result.success) {
 										if (opt.callback instanceof Function) {
@@ -238,9 +238,9 @@ const fn = {
 				}
 			});
 		},
-		resetpass: function (sender, opt) {
+		resetpass: (sender, opt) => {
 			let container = sender.closest("form");
-			core.validate(container, function (result) {
+			core.validate(container, (result) => {
 				if (!result) {
 					fn.showmsg(container, "Please provide email", "-");
 				} else {
@@ -252,7 +252,7 @@ const fn = {
 							sender: sender,
 							data: { username: data.email },
 						},
-						function (result) {
+						(result) => {
 							if (result) {
 								if (result.success) {
 									if (opt.callback instanceof Function) {
@@ -275,9 +275,9 @@ const fn = {
 				}
 			});
 		},
-		changepass: function (sender, opt) {
+		changepass: (sender, opt) => {
 			let container = sender.closest("form");
-			core.validate(container, function (result) {
+			core.validate(container, (result) => {
 				if (!result) {
 					fn.showmsg(container, "Please provide old password, new password and repeat new password", "-");
 				} else {
@@ -293,7 +293,7 @@ const fn = {
 								sender: sender,
 								data: { oldpassword: data.oldpassword, password: data.password },
 							},
-							function (result) {
+							(result) => {
 								if (result) {
 									if (result.success) {
 										if (opt.callback instanceof Function) {
@@ -313,9 +313,9 @@ const fn = {
 				}
 			});
 		},
-		changepass_guest: function (sender, opt) {
+		changepass_guest: (sender, opt) => {
 			let container = sender.closest("form");
-			core.validate(container, function (result) {
+			core.validate(container, (result) => {
 				if (!result) {
 					fn.showmsg(container, "Please provide new password and repeat new password", "-");
 				} else {
@@ -331,7 +331,7 @@ const fn = {
 								sender: sender,
 								data: { token: data.token, password: data.password },
 							},
-							function (result) {
+							(result) => {
 								if (result) {
 									if (result.success) {
 										if (opt.callback instanceof Function) {
@@ -351,17 +351,17 @@ const fn = {
 				}
 			});
 		},
-		info: function (sender, callback) {
+		info: (sender, callback) => {
 			db.user.info(
 				{
 					sender: sender,
 				},
-				function (result) {
+				(result) => {
 					callback(result);
 				}
 			);
 		},
-		managepicture: function (sender, oldData, newData, callback) {
+		managepicture: (sender, oldData, newData, callback) => {
 			let file_delete = null;
 			let file_save = null;
 
@@ -388,7 +388,7 @@ const fn = {
 			if (file_save) {
 				db.file.save(
 					file_save,
-					function () {
+					() => {
 						if (file_delete) {
 							db.file.delete(file_delete, callback, sender);
 						} else {
@@ -405,9 +405,9 @@ const fn = {
 				}
 			}
 		},
-		updateinfo: function (sender, opt) {
+		updateinfo: (sender, opt) => {
 			let container = sender.closest("form");
-			core.validate(container, function (result) {
+			core.validate(container, (result) => {
 				if (!result) {
 					fn.showmsg(container, "Please provide contact email and name", "-");
 				} else {
@@ -415,14 +415,14 @@ const fn = {
 
 					let newData = core.getValue(container);
 
-					db.user.info(sender, function (oldData) {
-						fn.action.managepicture(sender, oldData.picture, newData.picture, function () {
+					db.user.info(sender, (oldData) => {
+						fn.action.managepicture(sender, oldData.picture, newData.picture, () => {
 							db.user.updateinfo(
 								{
 									sender: sender,
 									data: { email: newData.email, name: newData.name, picture: newData.picture },
 								},
-								function (result) {
+								(result) => {
 									if (result) {
 										if (result.success) {
 											if (opt.callback instanceof Function) {
@@ -447,21 +447,21 @@ const fn = {
 				}
 			});
 		},
-		validate: function (token, callback) {
-			db.user.validate(token, function (result) {
+		validate: (token, callback) => {
+			db.user.validate(token, (result) => {
 				callback(result);
 			});
 		},
 	},
 	form: {
-		container: function (id, elem) {
+		container: (id, elem) => {
 			return new form({
 				id: id,
 				align: "center",
 				elem: elem,
 			});
 		},
-		signin: function (opt) {
+		signin: (opt) => {
 			return new container.form(
 				[
 					opt.close ? fn.closebtn(opt) : null,
@@ -510,7 +510,7 @@ const fn = {
 							icon: "arrow-right-to-bracket",
 							color: "primary",
 							onclick: !opt.debug
-								? function (event) {
+								? (event) => {
 										fn.action.signin(event.currentTarget, opt);
 								  }
 								: null,
@@ -522,7 +522,7 @@ const fn = {
 								new button({
 									weight: "sm",
 									elem: "Reset password",
-									onclick: function (event) {
+									onclick: (event) => {
 										let sender = event.currentTarget;
 										let container = sender.closest("form");
 										core.replaceChild(container, fn.form.container(opt.id, fn.form.resetpass(opt)));
@@ -531,7 +531,7 @@ const fn = {
 								new button({
 									weight: "sm",
 									elem: "Sign up",
-									onclick: function (event) {
+									onclick: (event) => {
 										let sender = event.currentTarget;
 										let container = sender.closest("form");
 										core.replaceChild(container, fn.form.container(opt.id, fn.form.signup(opt)));
@@ -543,7 +543,7 @@ const fn = {
 				].filter(Boolean)
 			);
 		},
-		signup: function (opt) {
+		signup: (opt) => {
 			return new container.form(
 				[
 					opt.close ? fn.closebtn(opt) : null,
@@ -599,7 +599,7 @@ const fn = {
 							icon: "arrow-up-from-bracket",
 							color: "primary",
 							onclick: !opt.debug
-								? function (event) {
+								? (event) => {
 										fn.action.signup(event.currentTarget, opt);
 								  }
 								: null,
@@ -611,7 +611,7 @@ const fn = {
 								new button({
 									weight: "sm",
 									elem: "Reset password",
-									onclick: function (event) {
+									onclick: (event) => {
 										let sender = event.currentTarget;
 										let container = sender.closest("form");
 										core.replaceChild(container, fn.form.container(opt.id, fn.form.resetpass(opt)));
@@ -620,7 +620,7 @@ const fn = {
 								new button({
 									weight: "sm",
 									elem: "Sign in",
-									onclick: function (event) {
+									onclick: (event) => {
 										let sender = event.currentTarget;
 										let container = sender.closest("form");
 										core.replaceChild(container, fn.form.container(opt.id, fn.form.signin(opt)));
@@ -632,7 +632,7 @@ const fn = {
 				].filter(Boolean)
 			);
 		},
-		resetpass: function (opt) {
+		resetpass: (opt) => {
 			return new container.form(
 				[
 					opt.close ? fn.closebtn(opt) : null,
@@ -665,7 +665,7 @@ const fn = {
 								icon: "arrow-up-from-bracket",
 								color: "primary",
 								onclick: !opt.debug
-									? function (event) {
+									? (event) => {
 											fn.action.resetpass(event.currentTarget, opt);
 									  }
 									: null,
@@ -678,7 +678,7 @@ const fn = {
 									new button({
 										weight: "sm",
 										elem: "Sign in",
-										onclick: function (event) {
+										onclick: (event) => {
 											let sender = event.currentTarget;
 											let container = sender.closest("form");
 											core.replaceChild(
@@ -690,7 +690,7 @@ const fn = {
 									new button({
 										weight: "sm",
 										elem: "Sign up",
-										onclick: function (event) {
+										onclick: (event) => {
 											let sender = event.currentTarget;
 											let container = sender.closest("form");
 											core.replaceChild(
@@ -706,7 +706,7 @@ const fn = {
 				].filter(Boolean)
 			);
 		},
-		changepass: function (opt) {
+		changepass: (opt) => {
 			return new container.form(
 				[
 					opt.close ? fn.closebtn(opt) : null,
@@ -765,7 +765,7 @@ const fn = {
 							icon: "floppy-disk",
 							color: "primary",
 							onclick: !opt.debug
-								? function (event) {
+								? (event) => {
 										fn.action.changepass(event.currentTarget, opt);
 								  }
 								: null,
@@ -777,11 +777,11 @@ const fn = {
 								new button({
 									weight: "sm",
 									elem: "Update profile",
-									onclick: function (event) {
+									onclick: (event) => {
 										let sender = event.currentTarget;
 										let container = sender.closest("form");
 
-										fn.action.info(sender, function (result) {
+										fn.action.info(sender, (result) => {
 											if (result) {
 												opt.data = result;
 												core.replaceChild(
@@ -796,10 +796,10 @@ const fn = {
 								new button({
 									weight: "sm",
 									elem: "Sign out",
-									onclick: function (event) {
+									onclick: (event) => {
 										let sender = event.currentTarget;
 										let container = sender.closest("form");
-										fn.action.signout(sender, function () {
+										fn.action.signout(sender, () => {
 											core.replaceChild(
 												container,
 												fn.form.container(opt.id, fn.form.signin(opt))
@@ -813,7 +813,7 @@ const fn = {
 				].filter(Boolean)
 			);
 		},
-		changepass_guest: function (opt) {
+		changepass_guest: (opt) => {
 			return new container.form(
 				[
 					opt.close ? fn.closebtn(opt) : null,
@@ -865,7 +865,7 @@ const fn = {
 							icon: "floppy-disk",
 							color: "primary",
 							onclick: !opt.debug
-								? function (event) {
+								? (event) => {
 										fn.action.changepass_guest(event.currentTarget, opt);
 								  }
 								: null,
@@ -877,7 +877,7 @@ const fn = {
 								new button({
 									weight: "sm",
 									elem: "Sign in",
-									onclick: function (event) {
+									onclick: (event) => {
 										let sender = event.currentTarget;
 										let container = sender.closest("form");
 										core.replaceChild(container, fn.form.container(opt.id, fn.form.signin(opt)));
@@ -886,7 +886,7 @@ const fn = {
 								new button({
 									weight: "sm",
 									elem: "Reset password",
-									onclick: function (event) {
+									onclick: (event) => {
 										let sender = event.currentTarget;
 										let container = sender.closest("form");
 										core.replaceChild(container, fn.form.container(opt.id, fn.form.resetpass(opt)));
@@ -898,7 +898,7 @@ const fn = {
 				].filter(Boolean)
 			);
 		},
-		updateinfo: function (opt) {
+		updateinfo: (opt) => {
 			return new container.form(
 				[
 					opt.close ? fn.closebtn(opt) : null,
@@ -953,7 +953,7 @@ const fn = {
 							icon: "arrow-up-from-bracket",
 							color: "primary",
 							onclick: !opt.debug
-								? function (event) {
+								? (event) => {
 										fn.action.updateinfo(event.currentTarget, opt);
 								  }
 								: null,
@@ -966,7 +966,7 @@ const fn = {
 								new button({
 									weight: "sm",
 									elem: "Change password",
-									onclick: function (event) {
+									onclick: (event) => {
 										let sender = event.currentTarget;
 										let container = sender.closest("form");
 										core.replaceChild(
@@ -979,10 +979,10 @@ const fn = {
 								new button({
 									weight: "sm",
 									elem: "Sign out",
-									onclick: function (event) {
+									onclick: (event) => {
 										let sender = event.currentTarget;
 										let container = sender.closest("form");
-										fn.action.signout(sender, function () {
+										fn.action.signout(sender, () => {
 											core.replaceChild(
 												container,
 												fn.form.container(opt.id, fn.form.signin(opt))

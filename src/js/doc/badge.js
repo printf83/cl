@@ -11,8 +11,8 @@ export default [
 
 	{
 		title: "Example",
-		code: function () {
-			return [1, 2, 3, 4, 5, 6].map(function (i) {
+		code: () => {
+			return [1, 2, 3, 4, 5, 6].map((i) => {
 				return new $.h({
 					level: i,
 					elem: [`Example heading #${i}`, new $.badge({ label: "New", marginstart: 3 })],
@@ -23,7 +23,7 @@ export default [
 
 	{
 		title: "Buttons",
-		code: function () {
+		code: () => {
 			return new $.button({
 				label: "Notifications",
 				color: "primary",
@@ -34,7 +34,7 @@ export default [
 
 	{
 		title: "Positioned",
-		code: function () {
+		code: () => {
 			return new $.button({
 				label: "Inbox",
 				color: "primary",
@@ -50,7 +50,7 @@ export default [
 
 	{
 		title: "Notification",
-		code: function () {
+		code: () => {
 			return new $.button({
 				label: "Profile",
 				color: "primary",
@@ -67,8 +67,8 @@ export default [
 	{
 		title: "Background color",
 		container: sample.stackcontainer,
-		code: function () {
-			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map(function (i) {
+		code: () => {
+			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map((i) => {
 				return new $.badge({ label: $.core.capitalize(i), color: i });
 			});
 		},
@@ -77,8 +77,8 @@ export default [
 	{
 		title: "Pill badge",
 		container: sample.stackcontainer,
-		code: function () {
-			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map(function (i) {
+		code: () => {
+			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map((i) => {
 				return new $.badge({ pill: true, label: $.core.capitalize(i), color: i });
 			});
 		},

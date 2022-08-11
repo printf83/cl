@@ -126,7 +126,7 @@ export default class modal extends div {
 				}
 
 				//standby button
-				let btn = opt.button.map(function (j, ix) {
+				let btn = opt.button.map((j, ix) => {
 					if (j.hasOwnProperty("cl")) {
 						return j;
 					} else {
@@ -167,14 +167,14 @@ export default class modal extends div {
 							class: core.merge.class(i.class, "btn-modal"),
 							color:
 								ix === 0 ? (i.color ? i.color : defButtonColor) : i.color ? i.color : "text-secondary", //i.color ? i.color : ix === 0 ? defButtonColor : "text-secondary",
-							onclick: function (event) {
+							onclick: (event) => {
 								event.stopPropagation();
 
 								//validate for first button only
 								let mdl = event.currentTarget.closest(".modal");
 								let sender = event.currentTarget;
 								if (sender.getAttribute("tab-index") === "1") {
-									core.validate(mdl, function (isvalid) {
+									core.validate(mdl, (isvalid) => {
 										if (isvalid) {
 											let formdata = core.getValue(mdl);
 											let result =
@@ -315,7 +315,7 @@ export default class modal extends div {
 		this._m = d;
 	}
 
-	show = function () {
+	show = () => {
 		//add into document
 		this.dom = core.appendChild(document.body, this);
 		this.mdl = new bootstrap.Modal(this.dom);
@@ -325,7 +325,7 @@ export default class modal extends div {
 		if (tmdl && tmdl.length > 0) {
 			//remove d-block modal
 			let amdl = [];
-			tmdl.forEach(function (i) {
+			tmdl.forEach((i) => {
 				if (!i.classList.contains("cl-debug")) amdl.push(i);
 			});
 
@@ -340,7 +340,7 @@ export default class modal extends div {
 			}
 		}
 
-		this.dom.addEventListener("shown.bs.modal", function (event) {
+		this.dom.addEventListener("shown.bs.modal", (event) => {
 			//set background
 			let mdlbackdrop = document.getElementsByClassName("modal-backdrop");
 			if (mdlbackdrop) {
@@ -356,13 +356,13 @@ export default class modal extends div {
 		});
 
 		//set destroy after hide
-		this.dom.addEventListener("hidden.bs.modal", function (event) {
+		this.dom.addEventListener("hidden.bs.modal", (event) => {
 			//show back previous modal
 			let tmdl = [...document.getElementsByClassName("modal")];
 			if (tmdl && tmdl.length > 0) {
 				//remove d-block modal
 				let amdl = [];
-				tmdl.forEach(function (i) {
+				tmdl.forEach((i) => {
 					if (!i.classList.contains("cl-block")) amdl.push(i);
 				});
 
@@ -381,7 +381,7 @@ export default class modal extends div {
 			let mdl = bootstrap.Modal.getInstance(dom);
 
 			setTimeout(
-				function (dom, mdl) {
+				(dom, mdl) => {
 					mdl.dispose();
 					core.removeElement(dom);
 

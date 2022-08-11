@@ -12,7 +12,7 @@ export default [
 	{
 		title: "Basic example",
 		container: sample.formcontainer,
-		code: function () {
+		code: () => {
 			return [
 				new $.input({
 					type: "text",
@@ -69,7 +69,7 @@ export default [
 	{
 		title: "Wrapping",
 		container: sample.formcontainer,
-		code: function () {
+		code: () => {
 			return [
 				new $.input({
 					nowrap: true,
@@ -96,7 +96,7 @@ export default [
 	{
 		title: "Sizing",
 		container: sample.formcontainer,
-		code: function () {
+		code: () => {
 			return [
 				new $.input({
 					type: "text",
@@ -121,7 +121,7 @@ export default [
 	{
 		title: "Checkboxes and radios",
 		container: sample.formcontainer,
-		code: function () {
+		code: () => {
 			return [
 				new $.inputgroup.container({
 					elem: [
@@ -152,7 +152,7 @@ export default [
 	{
 		title: "Multiple inputs",
 		container: sample.formcontainer,
-		code: function () {
+		code: () => {
 			return [
 				new $.inputgroup.container({
 					elem: [
@@ -178,7 +178,7 @@ export default [
 	{
 		title: "Multiple addons",
 		container: sample.formcontainer,
-		code: function () {
+		code: () => {
 			return [
 				new $.inputgroup.container({
 					elem: [
@@ -212,7 +212,7 @@ export default [
 	{
 		title: "Button addons",
 		container: sample.formcontainer,
-		code: function () {
+		code: () => {
 			return [
 				new $.input({
 					label: "Example text with button addon",
@@ -283,7 +283,7 @@ export default [
 		title: "Buttons with dropdowns",
 		container: sample.formcontainer,
 		sample: { "sample.dropdownitem": sample.dropdownitem },
-		code: function () {
+		code: () => {
 			return [
 				new $.input({
 					label: "Text input with dropdown button",
@@ -338,7 +338,7 @@ export default [
 		title: "Segmented buttons",
 		container: sample.formcontainer,
 		sample: { "sample.dropdownitem": sample.dropdownitem },
-		code: function () {
+		code: () => {
 			return [
 				new $.input({
 					label: "Text input with dropdown button",
@@ -375,7 +375,7 @@ export default [
 		title: "Segmented buttons",
 		container: sample.formcontainer,
 		sample: { "sample.optionitem": sample.optionitem },
-		code: function () {
+		code: () => {
 			return [
 				new $.input({
 					type: "select",
@@ -415,7 +415,7 @@ export default [
 	{
 		title: "Custom file input",
 		container: sample.formcontainer,
-		code: function () {
+		code: () => {
 			return [
 				new $.input({
 					type: "file",

@@ -3,7 +3,7 @@ const helmet = require("helmet");
 const compression = require("compression");
 const cookieparser = require("cookie-parser");
 
-module.exports = function (app) {
+module.exports = (app) => {
 	app.set("trust proxy", 1);
 	app.use(express.urlencoded({ extended: true }));
 	app.use(express.json());

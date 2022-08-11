@@ -1,7 +1,7 @@
 const core = require(`../core.js`);
 const { Readable } = require("stream");
 
-module.exports = function (app, dbname, setting) {
+module.exports = (app, dbname, setting) => {
 	console.log(`Setup ${dbname} db`);
 
 	const $ = require(`../models/${dbname}.js`);
@@ -25,7 +25,7 @@ module.exports = function (app, dbname, setting) {
 		/**
 		 * get list of data in excel format (for download)
 		 */
-		excel: function (req, res) {
+		excel: (req, res) => {
 			try {
 				let q = req.query.q ? JSON.parse(req.query.q) : null;
 
@@ -69,10 +69,10 @@ module.exports = function (app, dbname, setting) {
 						//populate data into excel
 						if (data && data.length > 0) {
 							let keys = Object.keys(data[0]);
-							keys.forEach(function (i, colIndex) {
+							keys.forEach((i, colIndex) => {
 								let col = fn.colName(colIndex);
 								ws.getCell(col + "1").value = i;
-								data.forEach(function (j, rowIndex) {
+								data.forEach((j, rowIndex) => {
 									ws.getCell(col + (rowIndex + 2)).value = j[i];
 								});
 							});
@@ -82,9 +82,9 @@ module.exports = function (app, dbname, setting) {
 						ws.getRow(1).font = { bold: true };
 
 						//auto width column
-						ws.columns.forEach(function (column, i) {
+						ws.columns.forEach((column, i) => {
 							let maxLength = 0;
-							column["eachCell"]({ includeEmpty: true }, function (cell) {
+							column["eachCell"]({ includeEmpty: true }, (cell) => {
 								let columnLength = cell.value ? cell.value.toString().length + 2 : 10;
 								if (columnLength > maxLength) {
 									maxLength = columnLength;
@@ -131,7 +131,7 @@ module.exports = function (app, dbname, setting) {
 		/**
 		 * get list of data
 		 */
-		list: function (req, res) {
+		list: (req, res) => {
 			try {
 				let q = req.body;
 				$.db
@@ -168,7 +168,7 @@ module.exports = function (app, dbname, setting) {
 		/**
 		 * get count of data
 		 */
-		aggregate: function (req, res) {
+		aggregate: (req, res) => {
 			try {
 				let d;
 				if (req.body.pipe) {
@@ -214,7 +214,7 @@ module.exports = function (app, dbname, setting) {
 		 * single create return one record id, example : id1
 		 * multiple create return array of record id, example : [id1,id2,id3]
 		 */
-		create: function (req, res) {
+		create: (req, res) => {
 			let i = req.body;
 			if (i) {
 				if (!Array.isArray(i)) {
@@ -263,7 +263,7 @@ module.exports = function (app, dbname, setting) {
 		 * single find return one record, example : record1
 		 * multiple find return array of record, example : [record1,record2,record3]
 		 */
-		find: function (req, res) {
+		find: (req, res) => {
 			let i = req.params.id.split(",");
 			if (i && i.length > 0) {
 				if (i.length === 1) {
@@ -317,7 +317,7 @@ module.exports = function (app, dbname, setting) {
 		 * single update return id updated record, example : id1
 		 * multiple update return array of id updated record, example : [id1,id2,id3]
 		 */
-		update: function (req, res) {
+		update: (req, res) => {
 			let i = req.params.id.split(",");
 			if (i && i.length > 0) {
 				if (i.length === 1) {
@@ -364,7 +364,7 @@ module.exports = function (app, dbname, setting) {
 		 * single delete return id deleted record, example : id1
 		 * multiple delete return array of id deleted record, example : [id1,id2,id3]
 		 */
-		delete: function (req, res) {
+		delete: (req, res) => {
 			let i = req.params.id.split(",");
 			if (i && i.length > 0) {
 				if (i.length === 1) {
@@ -406,7 +406,7 @@ module.exports = function (app, dbname, setting) {
 		 * create, find, update, delete
 		 * all function return PROMISE
 		 */
-		createOne: function (data) {
+		createOne: (data) => {
 			return new Promise((res, rej) => {
 				if (data) {
 					// create a new record
@@ -438,7 +438,7 @@ module.exports = function (app, dbname, setting) {
 		 * if success 	: {id: id, result: object (record)}
 		 * if fail 		: {id: id, result: error message}
 		 */
-		findOne: function (id) {
+		findOne: (id) => {
 			return new Promise((res, rej) => {
 				try {
 					if (id) {
@@ -472,7 +472,7 @@ module.exports = function (app, dbname, setting) {
 		 * if success 	: {id: id, result: true}
 		 * if fail 		: {id: id, result: error message}
 		 */
-		updateOne: function (id, data) {
+		updateOne: (id, data) => {
 			return new Promise((res, rej) => {
 				if (id && data) {
 					$.db
@@ -501,7 +501,7 @@ module.exports = function (app, dbname, setting) {
 		 * if success 	: {id: id, result: true}
 		 * if fail 		: {id: id, result: "error message"}
 		 */
-		deleteOne: function (id) {
+		deleteOne: (id) => {
 			return new Promise((res, rej) => {
 				if (id) {
 					$.db

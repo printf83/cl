@@ -55,7 +55,7 @@ export class thead extends tag {
 		opt = core.extend({}, defaultTHeadOption, opt);
 
 		opt.elem = Array.isArray(opt.elem) ? opt.elem : [opt.elem];
-		opt.elem = opt.elem.map(function (i) {
+		opt.elem = opt.elem.map((i) => {
 			if (i.hasOwnProperty("cl") && i.tag === "td") {
 				i.tag = "th";
 			}
@@ -94,7 +94,7 @@ export class tfoot extends tag {
 		opt = core.extend({}, defaultTFootOption, opt);
 
 		opt.elem = Array.isArray(opt.elem) ? opt.elem : [opt.elem];
-		opt.elem = opt.elem.map(function (i) {
+		opt.elem = opt.elem.map((i) => {
 			if (i.hasOwnProperty("cl") && i.tag === "td") {
 				i.tag = "th";
 			}
@@ -178,7 +178,7 @@ export class container extends tag {
 				//generate header;
 				//================
 				let th = [];
-				th = a[0].map(function (i) {
+				th = a[0].map((i) => {
 					if (typeof i === "object") {
 						if (i.hasOwnProperty("cl")) {
 							return i;
@@ -211,7 +211,7 @@ export class container extends tag {
 			let len = a.length - (opt.footer ? 1 : 0);
 			for (x; x < len; x++) {
 				let tmp = [];
-				tmp = a[x].map(function (i) {
+				tmp = a[x].map((i) => {
 					if (typeof i === "object") {
 						if (i.hasOwnProperty("cl")) {
 							return i;
@@ -240,7 +240,7 @@ export class container extends tag {
 				//================
 
 				let tf = [];
-				tf = a[len].map(function (i) {
+				tf = a[len].map((i) => {
 					if (typeof i === "object") {
 						if (i.hasOwnProperty("cl")) {
 							return i;

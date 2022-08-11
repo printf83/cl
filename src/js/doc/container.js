@@ -55,7 +55,7 @@ export default [
 		title: "Default container",
 		msg: "Bootstrap default .container class is a responsive, fixed-width container, meaning its max-width changes at each breakpoint.",
 		viewclass: "cl-highlight-container",
-		code: function () {
+		code: () => {
 			return new $.div("container", "Content here");
 		},
 	},
@@ -64,7 +64,7 @@ export default [
 		title: "Responsive containers",
 		msg: "Responsive containers allow you to specify a class that is 100% wide until the specified breakpoint is reached, after which we apply max-widths for each of the higher breakpoints. For example, .container-sm is 100% wide to start until the sm breakpoint is reached, where it will scale up with md, lg, xl, and xxl.",
 		viewclass: "cl-highlight-container",
-		code: function () {
+		code: () => {
 			return [
 				new $.div("container-sm", "100% wide until small breakpoint"),
 				new $.div("container-md", "100% wide until medium breakpoint"),
@@ -79,7 +79,7 @@ export default [
 		title: "Fluid containers",
 		msg: "Use .container-fluid for a full width container, spanning the entire width of the viewport.",
 		viewclass: "cl-highlight-container",
-		code: function () {
+		code: () => {
 			return new $.div("container-fluid", "Content here");
 		},
 	},

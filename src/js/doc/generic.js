@@ -80,7 +80,7 @@ export default [
 								phone: "0123456789",
 							},
 						},
-						function (result) {}
+						(result) => {}
 					);
 			`,
 			}),
@@ -90,7 +90,7 @@ export default [
 	{
 		msg: "Live example",
 		container: sample.formcontainer,
-		code: function () {
+		code: () => {
 			let resultOutputId = $.core.UUID();
 
 			return [
@@ -98,7 +98,7 @@ export default [
 					label: "Create record",
 					color: "success",
 					icon: "floppy-disk",
-					onclick: function (event) {
+					onclick: (event) => {
 						let sender = event.currentTarget;
 
 						//create record
@@ -112,7 +112,7 @@ export default [
 								},
 								sender: sender,
 							},
-							function (result) {
+							(result) => {
 								//result
 								document.getElementById(resultOutputId).value = result;
 							}
@@ -147,7 +147,7 @@ export default [
 							},
 							id: "id",
 						},
-						function (result) {
+						(result) => {
 						}
 					);
 			`,
@@ -158,7 +158,7 @@ export default [
 	{
 		msg: "Live example",
 		container: sample.formcontainer,
-		code: function () {
+		code: () => {
 			let resultOutputId = $.core.UUID();
 
 			return [
@@ -166,11 +166,11 @@ export default [
 					label: "Update record",
 					color: "primary",
 					icon: "pen-to-square",
-					onclick: function (event) {
+					onclick: (event) => {
 						let sender = event.currentTarget;
 
 						//get id
-						new $.dlg.inputbox("text", "ID", function (_event, data) {
+						new $.dlg.inputbox("text", "ID", (_event, data) => {
 							//update record
 							$.db.api.update(
 								{
@@ -183,7 +183,7 @@ export default [
 									id: data.value,
 									sender: sender,
 								},
-								function (result) {
+								(result) => {
 									//result
 									document.getElementById(resultOutputId).value = result;
 								}
@@ -216,7 +216,7 @@ export default [
 							name: "customer",
 							id: "id",
 						},
-						function (result) {
+						(result) => {
 						}
 					);
 			`,
@@ -227,7 +227,7 @@ export default [
 	{
 		msg: "Live example",
 		container: sample.formcontainer,
-		code: function () {
+		code: () => {
 			let resultOutputId = $.core.UUID();
 
 			return [
@@ -235,11 +235,11 @@ export default [
 					label: "Load record",
 					color: "primary",
 					icon: "folder-open",
-					onclick: function (event) {
+					onclick: (event) => {
 						let sender = event.currentTarget;
 
 						//get id
-						new $.dlg.inputbox("text", "ID", function (_event, data) {
+						new $.dlg.inputbox("text", "ID", (_event, data) => {
 							//get record
 							$.db.api.load(
 								{
@@ -247,7 +247,7 @@ export default [
 									id: data.value,
 									sender: sender,
 								},
-								function (result) {
+								(result) => {
 									//result
 									document.getElementById(resultOutputId).value = JSON.stringify(result);
 								}
@@ -280,7 +280,7 @@ export default [
 							name: "customer",
 							id: "id",
 						},
-						function (result) {
+						(result) => {
 						}
 					);
 			`,
@@ -291,7 +291,7 @@ export default [
 	{
 		msg: "Live example",
 		container: sample.formcontainer,
-		code: function () {
+		code: () => {
 			let resultOutputId = $.core.UUID();
 
 			return [
@@ -299,11 +299,11 @@ export default [
 					label: "Delete record",
 					color: "danger",
 					icon: "trash-can",
-					onclick: function (event) {
+					onclick: (event) => {
 						let sender = event.currentTarget;
 
 						//get id
-						new $.dlg.inputbox("text", "ID", function (_event, data) {
+						new $.dlg.inputbox("text", "ID", (_event, data) => {
 							//delete record
 							$.db.api.delete(
 								{
@@ -311,7 +311,7 @@ export default [
 									id: data.value,
 									sender: sender,
 								},
-								function (result) {
+								(result) => {
 									//result
 									document.getElementById(resultOutputId).value = result;
 								}
@@ -344,7 +344,7 @@ export default [
 							name: "customer",
 							data: {query}
 						},
-						function (result) {
+						(result) => {
 						}
 					);
 			`,
@@ -355,7 +355,7 @@ export default [
 	{
 		msg: "Live example",
 		container: sample.formcontainer,
-		code: function () {
+		code: () => {
 			let resultOutputId = $.core.UUID();
 
 			return [
@@ -363,7 +363,7 @@ export default [
 					label: "Load list",
 					color: "primary",
 					icon: "folder-open",
-					onclick: function (event) {
+					onclick: (event) => {
 						let sender = event.currentTarget;
 
 						//get record
@@ -372,7 +372,7 @@ export default [
 								name: "customer",
 								sender: sender,
 							},
-							function (result) {
+							(result) => {
 								//result
 								document.getElementById(resultOutputId).value = JSON.stringify(result);
 							}
@@ -387,7 +387,7 @@ export default [
 	{
 		msg: "Live example with query",
 		container: sample.formcontainer,
-		code: function () {
+		code: () => {
 			let resultOutputId = $.core.UUID();
 
 			return [
@@ -395,7 +395,7 @@ export default [
 					label: "Load list",
 					color: "primary",
 					icon: "folder-open",
-					onclick: function (event) {
+					onclick: (event) => {
 						let sender = event.currentTarget;
 
 						//get record
@@ -411,7 +411,7 @@ export default [
 								},
 								sender: sender,
 							},
-							function (result) {
+							(result) => {
 								//result
 								document.getElementById(resultOutputId).value = JSON.stringify(result);
 							}
@@ -444,7 +444,7 @@ export default [
 							fieldkey: "_id",
 							fieldname: "name",
 						},
-						function (result) {
+						(result) => {
 						}
 					);
 			`,
@@ -455,7 +455,7 @@ export default [
 	{
 		msg: "Live example",
 		container: sample.formcontainer,
-		code: function () {
+		code: () => {
 			let resultOutputId = $.core.UUID();
 			let selectInputId = $.core.UUID();
 
@@ -464,7 +464,7 @@ export default [
 					label: "Load list option",
 					color: "primary",
 					icon: "folder-open",
-					onclick: function (event) {
+					onclick: (event) => {
 						let sender = event.currentTarget;
 
 						//get record
@@ -475,7 +475,7 @@ export default [
 								fieldname: "name",
 								sender: sender,
 							},
-							function (result) {
+							(result) => {
 								//result
 								document.getElementById(resultOutputId).value = JSON.stringify(result);
 								$.core.replaceChild(
@@ -495,7 +495,7 @@ export default [
 	{
 		msg: "Live example with filter",
 		container: sample.formcontainer,
-		code: function () {
+		code: () => {
 			let resultOutputId = $.core.UUID();
 			let selectInputId = $.core.UUID();
 
@@ -504,7 +504,7 @@ export default [
 					label: "Load list option",
 					color: "primary",
 					icon: "folder-open",
-					onclick: function (event) {
+					onclick: (event) => {
 						let sender = event.currentTarget;
 
 						//get record
@@ -516,7 +516,7 @@ export default [
 								fieldname: "name",
 								sender: sender,
 							},
-							function (result) {
+							(result) => {
 								//result
 								document.getElementById(resultOutputId).value = JSON.stringify(result);
 								$.core.replaceChild(
@@ -561,12 +561,12 @@ export default [
 
 	{
 		msg: "Live example",
-		code: function () {
+		code: () => {
 			return new $.button({
 				label: "Download XLSX file",
 				color: "primary",
 				icon: "download",
-				onclick: function (event) {
+				onclick: (event) => {
 					let sender = event.currentTarget;
 
 					$.db.api.excel({
@@ -580,12 +580,12 @@ export default [
 
 	{
 		msg: "Live example with query",
-		code: function () {
+		code: () => {
 			return new $.button({
 				label: "Download XLSX file",
 				color: "primary",
 				icon: "download",
-				onclick: function (event) {
+				onclick: (event) => {
 					let sender = event.currentTarget;
 
 					$.db.api.excel({

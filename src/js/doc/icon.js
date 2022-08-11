@@ -18,8 +18,8 @@ export default [
 	{
 		title: "Base icon",
 		container: sample.stackcontainer,
-		code: function () {
-			return ["i", "!!", "!", "?", "-", "x", "/"].map(function (i) {
+		code: () => {
+			return ["i", "!!", "!", "?", "-", "x", "/"].map((i) => {
 				return new $.icon(i);
 			});
 		},
@@ -28,7 +28,7 @@ export default [
 	{
 		title: "Fontawesome icon",
 		container: sample.stackcontainer,
-		code: function () {
+		code: () => {
 			return [
 				"address-book",
 				"arrow-alt-circle-down",
@@ -43,7 +43,7 @@ export default [
 				"hand-peace",
 				"kiss-wink-heart",
 				"star",
-			].map(function (i) {
+			].map((i) => {
 				return new $.icon(i);
 			});
 		},
@@ -52,7 +52,7 @@ export default [
 	{
 		title: "Fontawesome brand icon",
 		container: sample.stackcontainer,
-		code: function () {
+		code: () => {
 			return [
 				"github",
 				"css3",
@@ -64,7 +64,7 @@ export default [
 				"edge",
 				"firefox",
 				"chrome",
-			].map(function (i) {
+			].map((i) => {
 				return new $.icon({ type: "fab", icon: i });
 			});
 		},
@@ -72,7 +72,7 @@ export default [
 
 	{
 		title: "Color",
-		code: function () {
+		code: () => {
 			return new $.icon({ type: "fab", icon: "node-js", color: "success" });
 		},
 	},
@@ -80,7 +80,7 @@ export default [
 	{
 		title: "Fixwidth",
 		container: sample.stackcontainer,
-		code: function () {
+		code: () => {
 			return [
 				new $.icon({
 					type: "fab",
@@ -103,8 +103,8 @@ export default [
 	{
 		title: "Size",
 		container: sample.stackcontainer,
-		code: function () {
-			return ["xs", "sm", null, "lg", "2x", "3x", "4x"].map(function (i) {
+		code: () => {
+			return ["xs", "sm", null, "lg", "2x", "3x", "4x"].map((i) => {
 				return new $.icon({ type: "fab", icon: "node-js", weight: i });
 			});
 		},
@@ -113,7 +113,7 @@ export default [
 	{
 		title: "Rotate",
 		container: sample.stackcontainer,
-		code: function () {
+		code: () => {
 			return [
 				new $.icon({ type: "fab", icon: "node-js", rotate: 90 }),
 				new $.icon({ type: "fab", icon: "node-js", rotate: 180 }),
@@ -132,7 +132,7 @@ export default [
 	{
 		title: "Spin",
 		container: sample.stackcontainer,
-		code: function () {
+		code: () => {
 			return [
 				"spinner",
 				"circle-notch",
@@ -145,7 +145,7 @@ export default [
 				"compass",
 				"wrench",
 				"snowflake",
-			].map(function (i) {
+			].map((i) => {
 				return new $.icon({ icon: i, spin: true });
 			});
 		},
@@ -154,7 +154,7 @@ export default [
 	{
 		title: "Fade",
 		container: sample.stackcontainer,
-		code: function () {
+		code: () => {
 			return [
 				"spinner",
 				"circle-notch",
@@ -167,7 +167,7 @@ export default [
 				"compass",
 				"wrench",
 				"snowflake",
-			].map(function (i) {
+			].map((i) => {
 				return new $.icon({ icon: i, fade: true });
 			});
 		},
@@ -176,7 +176,7 @@ export default [
 	{
 		title: "Beat",
 		container: sample.stackcontainer,
-		code: function () {
+		code: () => {
 			return [
 				"spinner",
 				"circle-notch",
@@ -189,7 +189,7 @@ export default [
 				"compass",
 				"wrench",
 				"snowflake",
-			].map(function (i) {
+			].map((i) => {
 				return new $.icon({ icon: i, beat: true });
 			});
 		},
@@ -198,7 +198,7 @@ export default [
 	{
 		title: "Fade beat",
 		container: sample.stackcontainer,
-		code: function () {
+		code: () => {
 			return [
 				"spinner",
 				"circle-notch",
@@ -211,7 +211,7 @@ export default [
 				"compass",
 				"wrench",
 				"snowflake",
-			].map(function (i) {
+			].map((i) => {
 				return new $.icon({ icon: i, beat: true, fade: true });
 			});
 		},
@@ -220,7 +220,7 @@ export default [
 	{
 		title: "Bounce",
 		container: sample.stackcontainer,
-		code: function () {
+		code: () => {
 			return [
 				"spinner",
 				"circle-notch",
@@ -233,7 +233,7 @@ export default [
 				"compass",
 				"wrench",
 				"snowflake",
-			].map(function (i) {
+			].map((i) => {
 				return new $.icon({ icon: i, bounce: true });
 			});
 		},
@@ -242,7 +242,7 @@ export default [
 	{
 		title: "Flip",
 		container: sample.stackcontainer,
-		code: function () {
+		code: () => {
 			return [
 				"spinner",
 				"circle-notch",
@@ -255,7 +255,7 @@ export default [
 				"compass",
 				"wrench",
 				"snowflake",
-			].map(function (i) {
+			].map((i) => {
 				return new $.icon({ icon: i, flip: true });
 			});
 		},
@@ -264,7 +264,7 @@ export default [
 	{
 		title: "Shake",
 		container: sample.stackcontainer,
-		code: function () {
+		code: () => {
 			return [
 				"spinner",
 				"circle-notch",
@@ -277,7 +277,7 @@ export default [
 				"compass",
 				"wrench",
 				"snowflake",
-			].map(function (i) {
+			].map((i) => {
 				return new $.icon({ icon: i, shake: true });
 			});
 		},
@@ -290,7 +290,7 @@ export default [
 	{
 		title: "Button",
 		container: sample.stackcontainer,
-		code: function () {
+		code: () => {
 			return [
 				new $.button({ label: "Button", color: "primary", icon: "fire" }),
 				new $.button({
@@ -337,7 +337,7 @@ export default [
 	{
 		title: "Textbox",
 		container: sample.stackcontainer,
-		code: function () {
+		code: () => {
 			return [
 				new $.input({ type: "text", before: new $.icon("fire") }),
 				new $.input({
@@ -355,7 +355,7 @@ export default [
 		title: "Dropdown & item",
 		container: sample.formcontainer,
 		sample: { "sample.dropdownitem": sample.dropdownitem },
-		code: function () {
+		code: () => {
 			return [
 				new $.dropdown({
 					label: "Dropdown",
@@ -389,7 +389,7 @@ export default [
 	{
 		title: "Navbar",
 		container: sample.formcontainer,
-		code: function () {
+		code: () => {
 			return [
 				new $.navbar.container({
 					expand: "lg",
@@ -420,7 +420,7 @@ export default [
 	{
 		title: "Nav tab",
 		sample: { "sample.text": sample.text },
-		code: function () {
+		code: () => {
 			return new $.tab({
 				type: "tab",
 				item: [

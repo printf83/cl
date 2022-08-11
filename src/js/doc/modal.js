@@ -17,7 +17,7 @@ export default [
 		title: "Simple msgbox components",
 		msg: "Below is a static modal example (meaning its position and display have been overridden). Included are the modal header, modal body (required for padding), and modal footer (optional). We ask that you include modal headers with dismiss actions whenever possible, or provide another explicit dismiss action.",
 		viewclass: "cl-modal-preview",
-		code: function () {
+		code: () => {
 			return new $.modal({
 				title: "Modal title",
 				elem: new $.msg({
@@ -27,7 +27,7 @@ export default [
 				}),
 				button: {
 					label: "Okay",
-					onclick: function () {
+					onclick: () => {
 						new $.toast("i", "Callback").show();
 					},
 				},
@@ -39,21 +39,21 @@ export default [
 	{
 		title: "Simple msgbox live",
 		container: sample.stackcontainer,
-		code: function () {
+		code: () => {
 			return [
 				{ label: "Info", icon: "i" },
 				{ label: "Question", icon: "?" },
 				{ label: "Warning", icon: "!" },
 				{ label: "Error", icon: "x" },
-			].map(function (i) {
+			].map((i) => {
 				return new $.button({
 					label: i.label,
 					icon: i.icon,
-					onclick: function () {
+					onclick: () => {
 						new $.dlg.msgbox(
 							i.icon,
 							`This is example msgbox with <b>${i.icon}</b> icon`,
-							function () {
+							() => {
 								new $.toast(i.icon, "After user click <b>Okay</b> button").show();
 							},
 							"Modal title"
@@ -68,11 +68,11 @@ export default [
 		title: "Simple inputbox components",
 		msg: "Below is a static modal example (meaning its position and display have been overridden). Included are the modal header, modal body (required for padding), and modal footer (optional). We ask that you include modal headers with dismiss actions whenever possible, or provide another explicit dismiss action.",
 		viewclass: "cl-modal-preview",
-		code: function () {
+		code: () => {
 			return new $.dlg.inputbox(
 				"text",
 				"This is example inputbox text",
-				function (event, data) {
+				(event, data) => {
 					new $.toast("i", `Result from dlg.inputbox is : ${JSON.stringify(data)}`).show();
 				},
 				"Modal title",
@@ -85,11 +85,11 @@ export default [
 		title: "Simple inputbox components with select",
 		msg: "Below is a static modal example (meaning its position and display have been overridden). Included are the modal header, modal body (required for padding), and modal footer (optional). We ask that you include modal headers with dismiss actions whenever possible, or provide another explicit dismiss action.",
 		viewclass: "cl-modal-preview",
-		code: function () {
+		code: () => {
 			return new $.dlg.inputbox(
 				new $.input({ type: "select", option: sample.optionitem(), name: "value" }),
 				"This is example inputbox select",
-				function (event, data) {
+				(event, data) => {
 					new $.toast("i", `Result from dlg.inputbox is : ${JSON.stringify(data)}`).show();
 				},
 				"Modal title",
@@ -101,7 +101,7 @@ export default [
 	{
 		title: "Simple inputbox live",
 		container: sample.stackcontainer,
-		code: function () {
+		code: () => {
 			return [
 				{ label: "Text", type: "text" },
 				{ label: "Number", type: "number" },
@@ -109,21 +109,21 @@ export default [
 				{ label: "Range", type: "range" },
 				{ label: "Textarea", type: "textarea" },
 				{ label: "Select", type: "select", option: sample.optionitem() },
-			].map(function (i) {
+			].map((i) => {
 				return new $.button({
 					label: i.label,
 					color: "primary",
-					onclick: function () {
+					onclick: () => {
 						new $.dlg.inputbox(
 							i.hasOwnProperty("option")
 								? new $.input({ type: "select", option: i.option, name: "value" })
 								: i.type,
 							`This is example inputbox with <b>${i.type}</b> input`,
 							[
-								function (event, data) {
+								(event, data) => {
 									new $.toast("/", `You give <b>${data.value}</b> in inputbox`).show();
 								},
-								function (event) {
+								(event) => {
 									new $.toast("x", `You not give anything in inputbox`).show();
 								},
 							],
@@ -140,11 +140,11 @@ export default [
 		msg: "Below is a static modal example (meaning its position and display have been overridden). Included are the modal header, modal body (required for padding), and modal footer (optional). We ask that you include modal headers with dismiss actions whenever possible, or provide another explicit dismiss action.",
 		viewclass: "cl-modal-preview",
 		sample: { "sample.form": sample.form },
-		code: function () {
+		code: () => {
 			return new $.dlg.inputbox(
 				sample.form(),
 				null,
-				function (event, data) {
+				(event, data) => {
 					new $.toast("/", `You give <b>${JSON.stringify(data)}</b> in inputbox`).show();
 				},
 				"Modal title",
@@ -157,15 +157,15 @@ export default [
 		title: "Inputbox with multiple input live",
 		msg: "First agrument can handle type {{[new $.input()]}}.",
 		sample: { "sample.form": sample.form },
-		code: function () {
+		code: () => {
 			return new $.button({
 				label: "Show inputbox with multiple input",
 				color: "primary",
-				onclick: function () {
+				onclick: () => {
 					new $.dlg.inputbox(
 						sample.form(),
 						null,
-						function (event, data) {
+						(event, data) => {
 							new $.toast({
 								delay: 10000,
 								color: "success",
@@ -185,11 +185,11 @@ export default [
 		title: "Confirmbox",
 		msg: "Below is a static modal example (meaning its position and display have been overridden). Included are the modal header, modal body (required for padding), and modal footer (optional). We ask that you include modal headers with dismiss actions whenever possible, or provide another explicit dismiss action.",
 		viewclass: "cl-modal-preview",
-		code: function () {
+		code: () => {
 			return new $.dlg.confirmbox(
 				"?",
 				"This is example msgbox with <b>Okay and Cancel</b> button",
-				function () {
+				() => {
 					new $.toast("i", "Callback").show();
 				},
 				"Modal title",
@@ -201,30 +201,30 @@ export default [
 	{
 		title: "Simple confirmbox live",
 		container: sample.stackcontainer,
-		code: function () {
+		code: () => {
 			return [
 				{ label: "Info", icon: "i" },
 				{ label: "Question", icon: "?" },
 				{ label: "Warning", icon: "!" },
 				{ label: "Error", icon: "x" },
-			].map(function (i) {
+			].map((i) => {
 				return new $.button({
 					label: i.label,
 					icon: i.icon,
-					onclick: function () {
+					onclick: () => {
 						new $.dlg.confirmbox(
 							i.icon,
 							`This is example confirmbox with <b>${i.icon}</b> icon`,
 							[
 								{
 									label: "Yes",
-									onclick: function () {
+									onclick: () => {
 										new $.toast("/", "After user click <b>Yes</b> button").show();
 									},
 								},
 								{
 									label: "No",
-									onclick: function () {
+									onclick: () => {
 										new $.toast("x", "After user not click <b>No</b> button").show();
 									},
 								},
@@ -241,7 +241,7 @@ export default [
 		title: "Dialog box",
 		msg: "Below is a static modal example (meaning its position and display have been overridden). Included are the modal header, modal body (required for padding), and modal footer (optional). We ask that you include modal headers with dismiss actions whenever possible, or provide another explicit dismiss action.",
 		viewclass: "cl-modal-preview",
-		code: function () {
+		code: () => {
 			return new $.modal({
 				title: "Modal title",
 				elem: "Modal body text goes here.",
@@ -254,11 +254,11 @@ export default [
 
 	{
 		title: "Live example",
-		code: function () {
+		code: () => {
 			return new $.button({
 				label: "Show live modal dialog",
 				color: "primary",
-				onclick: function () {
+				onclick: () => {
 					new $.modal({
 						title: "Modal title",
 						dark: true,
@@ -266,7 +266,7 @@ export default [
 						button: [
 							{
 								label: "Save changes",
-								onclick: function () {},
+								onclick: () => {},
 							},
 							"Cancel",
 						],
@@ -279,14 +279,14 @@ export default [
 	{
 		title: "Checkbox in footer",
 		viewclass: "cl-modal-preview",
-		code: function () {
+		code: () => {
 			return new $.modal({
 				title: "Modal title",
 				elem: "Modal body text goes here.",
 				button: [
 					{
 						label: "Save changes",
-						onclick: function (event, data) {
+						onclick: (event, data) => {
 							new $.toast("i", `Result from dialog is <b>${JSON.stringify(data)}</b>`).show();
 						},
 					},
@@ -301,17 +301,17 @@ export default [
 	{
 		title: "Backdrop color",
 		container: sample.stackcontainer,
-		code: function () {
+		code: () => {
 			return [
 				{ label: "Primary", icon: "i", backdropcolor: "primary" },
 				{ label: "Success", icon: "?", backdropcolor: "success" },
 				{ label: "Warning", icon: "!", backdropcolor: "warning" },
 				{ label: "Danger", icon: "x", backdropcolor: "danger" },
-			].map(function (i) {
+			].map((i) => {
 				return new $.button({
 					label: i.label,
 					icon: i.icon,
-					onclick: function (e) {
+					onclick: (e) => {
 						new $.modal({
 							backdropcolor: i.backdropcolor,
 							title: "Modal title",
@@ -324,7 +324,7 @@ export default [
 								{
 									label: "Understand",
 									color: i.backdropcolor,
-									onclick: function (event, data) {
+									onclick: (event, data) => {
 										new $.toast("i", `Result from dialog is <b>${JSON.stringify(data)}</b>`).show();
 									},
 								},
@@ -339,11 +339,11 @@ export default [
 
 	{
 		title: "Disable static backdrop",
-		code: function () {
+		code: () => {
 			return new $.button({
 				label: "Show live modal dialog",
 				color: "primary",
-				onclick: function () {
+				onclick: () => {
 					new $.modal({
 						static: false,
 						title: "Modal title",
@@ -351,7 +351,7 @@ export default [
 						button: [
 							{
 								label: "Understand",
-								onclick: function (event, data) {
+								onclick: (event, data) => {
 									new $.toast("i", `Result from dialog is <b>${JSON.stringify(data)}</b>`).show();
 								},
 							},
@@ -366,11 +366,11 @@ export default [
 	{
 		title: "Disable scrolling long content",
 		sample: { "sample.text": sample.text },
-		code: function () {
+		code: () => {
 			return new $.button({
 				label: "Show live modal dialog",
 				color: "primary",
-				onclick: function () {
+				onclick: () => {
 					new $.modal({
 						scrollable: false,
 						title: "Modal title",
@@ -388,7 +388,7 @@ export default [
 						button: [
 							{
 								label: "Understand",
-								onclick: function (event, data) {
+								onclick: (event, data) => {
 									new $.toast("i", `Result from dialog is <b>${JSON.stringify(data)}</b>`).show();
 								},
 							},
@@ -402,11 +402,11 @@ export default [
 
 	{
 		title: "Disable vertically centered",
-		code: function () {
+		code: () => {
 			return new $.button({
 				label: "Show live modal dialog",
 				color: "primary",
-				onclick: function () {
+				onclick: () => {
 					new $.modal({
 						center: false,
 						title: "Modal title",
@@ -414,7 +414,7 @@ export default [
 						button: [
 							{
 								label: "Save changes",
-								onclick: function (event, data) {
+								onclick: (event, data) => {
 									new $.toast("i", `Result from dialog is <b>${JSON.stringify(data)}</b>`).show();
 								},
 							},
@@ -429,7 +429,7 @@ export default [
 	{
 		title: "Custom button",
 		viewclass: "cl-modal-preview",
-		code: function () {
+		code: () => {
 			return new $.modal({
 				title: "Modal title",
 				elem: "Custom button dialog",
@@ -438,7 +438,7 @@ export default [
 						label: "Yesss!",
 						color: "primary",
 						icon: "fire",
-						onclick: function (event, data) {
+						onclick: (event, data) => {
 							new $.toast("i", `Result from dialog is <b>${JSON.stringify(data)}</b>`).show();
 						},
 					},
@@ -446,7 +446,7 @@ export default [
 					{ label: "Cancel", color: "info" },
 					{
 						icon: "?",
-						onclick: function () {
+						onclick: () => {
 							new $.toast("?", "Question button pressed").show();
 						},
 					},
@@ -458,11 +458,11 @@ export default [
 
 	{
 		title: "Tooltips and popovers",
-		code: function () {
+		code: () => {
 			return new $.button({
 				label: "Show live modal dialog",
 				color: "primary",
-				onclick: function () {
+				onclick: () => {
 					new $.modal({
 						title: "Modal title",
 						elem: [
@@ -517,11 +517,11 @@ export default [
 
 	{
 		title: "Using the grid",
-		code: function () {
+		code: () => {
 			return new $.button({
 				label: "Show live modal dialog",
 				color: "primary",
-				onclick: function () {
+				onclick: () => {
 					new $.modal({
 						title: "Grids in modal",
 						elem: new $.div("container-fluid cl-highlight-col", [
@@ -553,11 +553,11 @@ export default [
 
 	{
 		title: "Using the grid (Direct HTML)",
-		code: function () {
+		code: () => {
 			return new $.button({
 				label: "Show live modal dialog",
 				color: "primary",
-				onclick: function () {
+				onclick: () => {
 					new $.modal({
 						title: "Grids in modal",
 						elem: `<div class="container-fluid cl-highlight-col"><div class="row"><div class="col-md-4">.col-md-4</div><div class="col-md-4 ms-auto">.col-md-4 .ms-auto</div></div><div class="row"><div class="col-md-3 ms-auto">.col-md-3 .ms-auto</div><div class="col-md-2 ms-auto">.col-md-2 .ms-auto</div></div><div class="row"><div class="col-md-6 ms-auto">.col-md-6 .ms-auto</div></div><div class="row"><div class="col-sm-9">Level 1: .col-md-9<div class="row"><div class="col-8 col-sm-6">Level 2: .col-8 .col-sm-6</div><div class="col-4 col-sm-6">Level 2: .col-4 .col-sm-6</div></div></div></div></div>`,
@@ -572,26 +572,26 @@ export default [
 		title: "Varying modal content",
 		container: sample.stackcontainer,
 		sample: { "sample.dlgFn": sample.dlgFn },
-		code: function () {
+		code: () => {
 			return [
 				new $.button({
 					label: "Message for @mdo",
 					color: "primary",
-					onclick: function () {
+					onclick: () => {
 						sample.dlgFn("@mdo");
 					},
 				}),
 				new $.button({
 					label: "Message for @fat",
 					color: "primary",
-					onclick: function () {
+					onclick: () => {
 						sample.dlgFn("@fat");
 					},
 				}),
 				new $.button({
 					label: "Message for @getbootstrap",
 					color: "primary",
-					onclick: function () {
+					onclick: () => {
 						sample.dlgFn("@getbootstrap");
 					},
 				}),
@@ -601,27 +601,27 @@ export default [
 
 	{
 		title: "Toggle between modals",
-		code: function () {
-			var dlgFirstModal = function () {
+		code: () => {
+			var dlgFirstModal = () => {
 				new $.modal({
 					title: "Modal 1",
 					elem: "Show a second modal and close this one with the button below.",
 					button: {
 						label: "Show second modal",
-						onclick: function () {
+						onclick: () => {
 							dlgSecondModal();
 						},
 					},
 				}).show();
 			};
 
-			var dlgSecondModal = function () {
+			var dlgSecondModal = () => {
 				new $.modal({
 					title: "Modal 2",
 					elem: "Close this modal and show the first with the button below.",
 					button: {
 						label: "Show first modal",
-						onclick: function () {
+						onclick: () => {
 							dlgFirstModal();
 						},
 					},
@@ -631,7 +631,7 @@ export default [
 			return new $.button({
 				label: "Show first modal",
 				color: "primary",
-				onclick: function () {
+				onclick: () => {
 					dlgFirstModal();
 				},
 			});
@@ -640,11 +640,11 @@ export default [
 
 	{
 		title: "Remove animation",
-		code: function () {
+		code: () => {
 			return new $.button({
 				label: "Show live modal dialog",
 				color: "primary",
-				onclick: function () {
+				onclick: () => {
 					new $.modal({
 						animate: false,
 						title: "Modal title",
@@ -660,26 +660,26 @@ export default [
 		title: "Optional sizes",
 		container: sample.stackcontainer,
 		sample: { "sample.dlgSizeFn": sample.dlgSizeFn },
-		code: function () {
+		code: () => {
 			return [
 				new $.button({
 					label: "Extra large modal",
 					color: "primary",
-					onclick: function () {
+					onclick: () => {
 						sample.dlgSizeFn("xl");
 					},
 				}),
 				new $.button({
 					label: "Large modal",
 					color: "primary",
-					onclick: function () {
+					onclick: () => {
 						sample.dlgSizeFn("lg");
 					},
 				}),
 				new $.button({
 					label: "Small modal",
 					color: "primary",
-					onclick: function () {
+					onclick: () => {
 						sample.dlgSizeFn("sm");
 					},
 				}),
@@ -691,47 +691,47 @@ export default [
 		title: "Fullscreen Modal",
 		container: sample.stackcontainer,
 		sample: { "sample.dlgFullscreenFn": sample.dlgFullscreenFn },
-		code: function () {
+		code: () => {
 			return [
 				new $.button({
 					label: "Full screen",
 					color: "primary",
-					onclick: function () {
+					onclick: () => {
 						sample.dlgFullscreenFn(true);
 					},
 				}),
 				new $.button({
 					label: "Full screen below sm",
 					color: "primary",
-					onclick: function () {
+					onclick: () => {
 						sample.dlgFullscreenFn("sm-down");
 					},
 				}),
 				new $.button({
 					label: "Full screen below md",
 					color: "primary",
-					onclick: function () {
+					onclick: () => {
 						sample.dlgFullscreenFn("md-down");
 					},
 				}),
 				new $.button({
 					label: "Full screen below lg",
 					color: "primary",
-					onclick: function () {
+					onclick: () => {
 						sample.dlgFullscreenFn("lg-down");
 					},
 				}),
 				new $.button({
 					label: "Full screen below xl",
 					color: "primary",
-					onclick: function () {
+					onclick: () => {
 						sample.dlgFullscreenFn("xl-down");
 					},
 				}),
 				new $.button({
 					label: "Full screen below xxl",
 					color: "primary",
-					onclick: function () {
+					onclick: () => {
 						sample.dlgFullscreenFn("xxl-down");
 					},
 				}),

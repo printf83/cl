@@ -10,10 +10,10 @@ export default [
 
 	{
 		msg: "Adjust the overflow property on the fly with four default values and classes. These classes are not responsive by default.",
-		container: function (elem) {
+		container: (elem) => {
 			return new $.div({ display: "md-flex", class: "gap-2", elem: elem });
 		},
-		code: function () {
+		code: () => {
 			return [
 				new $.tag({
 					tag: "div",

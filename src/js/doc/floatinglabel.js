@@ -12,7 +12,7 @@ export default [
 	{
 		title: "Example",
 		container: sample.formcontainer,
-		code: function () {
+		code: () => {
 			return [
 				new $.input({
 					type: "email",
@@ -31,7 +31,7 @@ export default [
 
 	{
 		title: "Value already defind",
-		code: function () {
+		code: () => {
 			return new $.input({
 				type: "email",
 				label: "Email address",
@@ -43,7 +43,7 @@ export default [
 
 	{
 		title: "Validation",
-		code: function () {
+		code: () => {
 			return new $.input({
 				type: "email",
 				name: "email",
@@ -55,8 +55,8 @@ export default [
 				after: new $.button({
 					label: "Validate",
 					color: "primary",
-					onclick: function (event) {
-						$.core.validate(event.currentTarget.parentElement, function (result) {
+					onclick: (event) => {
+						$.core.validate(event.currentTarget.parentElement, (result) => {
 							new $.toast("i", `Result: ${result}`).show();
 						});
 					},
@@ -67,7 +67,7 @@ export default [
 
 	{
 		title: "Textareas",
-		code: function () {
+		code: () => {
 			return new $.input({
 				type: "textarea",
 				label: "Comments",
@@ -78,7 +78,7 @@ export default [
 
 	{
 		title: "Textareas With Height Setting",
-		code: function () {
+		code: () => {
 			return new $.input({
 				type: "textarea",
 				label: "Comments",
@@ -91,7 +91,7 @@ export default [
 	{
 		title: "Select",
 		sample: { "sample.optionitem": sample.optionitem },
-		code: function () {
+		code: () => {
 			return new $.input({
 				label: "Works with selects",
 				type: "select",

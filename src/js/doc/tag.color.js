@@ -15,7 +15,7 @@ export default [
 			"Colorize text with {{textcolor}} property. If you want to colorize links, you can use the {{linkcolor}} property which have :hover and :focus states.",
 		],
 		container: sample.formcontainer,
-		code: function () {
+		code: () => {
 			return [
 				null,
 				"primary",
@@ -31,7 +31,7 @@ export default [
 				"white",
 				"black-50",
 				"white-50",
-			].map(function (i) {
+			].map((i) => {
 				return new $.tag({
 					tag: "div",
 					textcolor: i,
@@ -44,7 +44,7 @@ export default [
 	{
 		title: "Reset color",
 		msg: ["Reset a text or link’s color with .text-reset, so that it inherits the color from its parent."],
-		code: function () {
+		code: () => {
 			return new $.tag({
 				tag: "p",
 				textcolor: "muted",
@@ -59,17 +59,15 @@ export default [
 
 	{
 		container: sample.formcontainer,
-		code: function () {
-			return [null, "primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map(
-				function (i) {
-					return new $.tag({
-						tag: "a",
-						linkcolor: i,
-						href: "#",
-						elem: `Example link with <code>linkcolor: ${i}</code>`,
-					});
-				}
-			);
+		code: () => {
+			return [null, "primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map((i) => {
+				return new $.tag({
+					tag: "a",
+					linkcolor: i,
+					href: "#",
+					elem: `Example link with <code>linkcolor: ${i}</code>`,
+				});
+			});
 		},
 	},
 

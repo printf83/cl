@@ -10,7 +10,7 @@ export default [
 
 	{
 		title: "Example Range",
-		code: function () {
+		code: () => {
 			return new $.input({
 				label: "Simple Range",
 				type: "range",
@@ -21,7 +21,7 @@ export default [
 
 	{
 		title: "Disable",
-		code: function () {
+		code: () => {
 			return new $.input({
 				label: "Disable Range",
 				type: "range",
@@ -33,7 +33,7 @@ export default [
 
 	{
 		title: "Min and max",
-		code: function () {
+		code: () => {
 			return new $.input({
 				label: "Example Range",
 				type: "range",
@@ -46,7 +46,7 @@ export default [
 
 	{
 		title: "Step",
-		code: function () {
+		code: () => {
 			return new $.input({
 				label: "Example Range",
 				type: "range",

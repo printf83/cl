@@ -67,7 +67,7 @@ function codecontainer(type, strcode) {
 				textcolor: "primary",
 				align: "end",
 				class: "position-absolute end-0",
-				onclick: function (event) {
+				onclick: (event) => {
 					let str = event.currentTarget.parentElement.nextSibling.firstChild.innerText;
 
 					try {

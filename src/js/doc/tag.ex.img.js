@@ -21,7 +21,7 @@ export default [
 	{
 		title: "Example",
 		sample: { "sample.img": sample.img },
-		code: function () {
+		code: () => {
 			return new $.img({
 				src: sample.img(100, 100),
 				alt: "Sample Image",
@@ -49,7 +49,7 @@ export default [
 		msg: "This component also supported easy option.",
 		sample: { "sample.img": sample.img },
 		container: sample.stackcontainer,
-		code: function () {
+		code: () => {
 			return [
 				new $.img({ src: sample.img(100, 100), class: "img-thumbnail", alt: "Sample Image" }),
 				new $.img("img-thumbnail", sample.img(100, 100)),

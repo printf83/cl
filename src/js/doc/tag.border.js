@@ -18,8 +18,8 @@ export default [
 		title: "Additive",
 		container: sample.stackcontainer,
 		viewclass: "cl-highlight-box",
-		code: function () {
-			return [null, true, "top", "end", "bottom", "start", ["bottom", "start"]].map(function (i) {
+		code: () => {
+			return [null, true, "top", "end", "bottom", "start", ["bottom", "start"]].map((i) => {
 				return new $.tag({
 					tag: "div",
 					border: i,
@@ -32,9 +32,9 @@ export default [
 		title: "Subtractive",
 		container: sample.stackcontainer,
 		viewclass: "cl-highlight-box",
-		code: function () {
+		code: () => {
 			return [null, false, "top-0", "end-0", "bottom-0", "start-0", ["border", "bottom-0", "start-0"]].map(
-				function (i) {
+				(i) => {
 					return new $.tag({
 						tag: "div",
 						border: Array.isArray(i) ? i : ["border", i],
@@ -49,9 +49,9 @@ export default [
 		msg: "Change the border color using {{bordercolor}} property on Bootstrap theme colors.",
 		container: sample.stackcontainer,
 		viewclass: "cl-highlight-box",
-		code: function () {
+		code: () => {
 			return [null, "primary", "secondary", "success", "danger", "warning", "info", "light", "dark", "white"].map(
-				function (i) {
+				(i) => {
 					return new $.tag({
 						tag: "div",
 						bordercolor: i,
@@ -66,8 +66,8 @@ export default [
 		msg: "Change the border width using {{borderweight}} property.",
 		container: sample.stackcontainer,
 		viewclass: "cl-highlight-box",
-		code: function () {
-			return [null, 0, 1, 2, 3, 4, 5].map(function (i) {
+		code: () => {
+			return [null, 0, 1, 2, 3, 4, 5].map((i) => {
 				return new $.tag({
 					tag: "div",
 					borderweight: i,
@@ -81,8 +81,8 @@ export default [
 		msg: "Change the border radius size {{rounded}} property.",
 		container: sample.stackcontainer,
 		viewclass: "cl-highlight-box-dark",
-		code: function () {
-			return [null, 0, 1, 2, 3].map(function (i) {
+		code: () => {
+			return [null, 0, 1, 2, 3].map((i) => {
 				return new $.tag({
 					tag: "div",
 					rounded: i,
@@ -96,8 +96,8 @@ export default [
 		msg: "Change the border radius style {{roundedtype}} property.",
 		container: sample.stackcontainer,
 		viewclass: "cl-highlight-box-dark",
-		code: function () {
-			return [null, "top", "end", "bottom", "start", "pill", "circle"].map(function (i) {
+		code: () => {
+			return [null, "top", "end", "bottom", "start", "pill", "circle"].map((i) => {
 				return new $.tag({
 					tag: "div",
 					roundedtype: i,

@@ -23,7 +23,7 @@ export default class ol extends tag {
 
 		if (opt.item && !opt.elem) {
 			opt.item = Array.isArray(opt.item) ? opt.item : [opt.item];
-			opt.elem = opt.item.map(function (i) {
+			opt.elem = opt.item.map((i) => {
 				return new li(i);
 			});
 		}

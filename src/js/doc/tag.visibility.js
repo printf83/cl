@@ -17,8 +17,8 @@ export default [
 			}),
 			"Apply {{visible:true}} or {{visible:false}} as needed",
 		],
-		code: function () {
-			return [null, false, true].map(function (i) {
+		code: () => {
+			return [null, false, true].map((i) => {
 				return new $.tag({ tag: "div", visible: i, elem: `Example element with <code>visible:${i}</code>.` });
 			});
 		},

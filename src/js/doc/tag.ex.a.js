@@ -20,7 +20,7 @@ export default [
 
 	{
 		title: "Example",
-		code: function () {
+		code: () => {
 			return new $.a({
 				href: "https://getbootstrap.com/docs/5.0",
 				linkcolor: "danger",
@@ -43,7 +43,7 @@ export default [
 			}),
 		],
 		container: sample.formcontainer,
-		code: function () {
+		code: () => {
 			return [
 				new $.a({
 					href: "https://getbootstrap.com/docs/5.0",
@@ -70,7 +70,7 @@ export default [
 		title: "Easy option",
 		msg: "This component also supported easy option.",
 		container: sample.formcontainer,
-		code: function () {
+		code: () => {
 			return [
 				new $.a({ href: "https://getbootstrap.com/docs/5.0", class: "classname", elem: "Bootstrap" }),
 				new $.a("https://getbootstrap.com/docs/5.0", "Bootstrap"),

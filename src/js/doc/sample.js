@@ -23,11 +23,11 @@ function isListed(val, listed) {
 	}
 }
 
-export default {
-	resetindex: function () {
+const fn = {
+	resetindex: () => {
 		textindex = 0;
 	},
-	img: function (width = 300, height = 283) {
+	img: (width = 300, height = 283) => {
 		// style="background-color:rgba(0,0,0,.125);"
 
 		if (!svgdb.hasOwnProperty(`${width}_${height}`)) {
@@ -65,13 +65,13 @@ fill="#999" stroke="none">
 
 		return svgdb[`${width}_${height}`];
 	},
-	text: function () {
+	text: () => {
 		if (textindex >= textdb.length) {
 			textindex = 0;
 		}
 		return textdb[textindex++];
 	},
-	optionitem: function () {
+	optionitem: () => {
 		return [
 			{ value: "", label: "Open this select menu", selected: true },
 			{ value: "1", label: "One" },
@@ -79,7 +79,7 @@ fill="#999" stroke="none">
 			{ value: "3", label: "Three" },
 		];
 	},
-	dropdownitem: function () {
+	dropdownitem: () => {
 		return [
 			{ href: "#", label: "Action" },
 			{
@@ -97,7 +97,7 @@ fill="#999" stroke="none">
 			},
 		];
 	},
-	form: function () {
+	form: () => {
 		return new $.container.form([
 			new $.input({
 				label: "Name",
@@ -186,29 +186,29 @@ fill="#999" stroke="none">
 			}),
 		]);
 	},
-	accordionitem: function () {
+	accordionitem: () => {
 		return [
 			{
 				label: "Accordion Item 1",
-				elem: ["<b>This is the first item's accordion body.</b> ", this.text()],
+				elem: ["<b>This is the first item's accordion body.</b> ", fn.text()],
 			},
 			{
 				label: "Accordion Item 2",
-				elem: ["<b>This is the second item's accordion body.</b> ", this.text()],
+				elem: ["<b>This is the second item's accordion body.</b> ", fn.text()],
 			},
 			{
 				label: "Accordion Item 3",
-				elem: ["<b>This is the third item's accordion body.</b> ", this.text()],
+				elem: ["<b>This is the third item's accordion body.</b> ", fn.text()],
 			},
 		];
 	},
-	cardwithimg: function () {
+	cardwithimg: () => {
 		return [
 			new $.card.container({
 				elem: [
 					new $.card.img({
 						placement: "top",
-						src: this.img(415, 207),
+						src: fn.img(415, 207),
 					}),
 					new $.card.body({
 						elem: [
@@ -224,7 +224,7 @@ fill="#999" stroke="none">
 				elem: [
 					new $.card.img({
 						placement: "top",
-						src: this.img(415, 207),
+						src: fn.img(415, 207),
 					}),
 					new $.card.body({
 						elem: [
@@ -240,7 +240,7 @@ fill="#999" stroke="none">
 				elem: [
 					new $.card.img({
 						placement: "top",
-						src: this.img(415, 207),
+						src: fn.img(415, 207),
 					}),
 					new $.card.body({
 						elem: [
@@ -256,7 +256,7 @@ fill="#999" stroke="none">
 				elem: [
 					new $.card.img({
 						placement: "top",
-						src: this.img(415, 207),
+						src: fn.img(415, 207),
 					}),
 					new $.card.body({
 						elem: [
@@ -270,13 +270,13 @@ fill="#999" stroke="none">
 			}),
 		];
 	},
-	cardwithfooter: function () {
+	cardwithfooter: () => {
 		return [
 			new $.card.container({
 				elem: [
 					new $.card.img({
 						placement: "top",
-						src: this.img(415, 207),
+						src: fn.img(415, 207),
 					}),
 					new $.card.body({
 						elem: [
@@ -293,7 +293,7 @@ fill="#999" stroke="none">
 				elem: [
 					new $.card.img({
 						placement: "top",
-						src: this.img(415, 207),
+						src: fn.img(415, 207),
 					}),
 					new $.card.body({
 						elem: [
@@ -310,7 +310,7 @@ fill="#999" stroke="none">
 				elem: [
 					new $.card.img({
 						placement: "top",
-						src: this.img(415, 207),
+						src: fn.img(415, 207),
 					}),
 					new $.card.body({
 						elem: [
@@ -325,14 +325,14 @@ fill="#999" stroke="none">
 			}),
 		];
 	},
-	cardh100: function () {
+	cardh100: () => {
 		return [
 			new $.card.container({
 				class: "h-100",
 				elem: [
 					new $.card.img({
 						placement: "top",
-						src: this.img(415, 207),
+						src: fn.img(415, 207),
 					}),
 					new $.card.body({
 						elem: [
@@ -349,7 +349,7 @@ fill="#999" stroke="none">
 				elem: [
 					new $.card.img({
 						placement: "top",
-						src: this.img(415, 207),
+						src: fn.img(415, 207),
 					}),
 					new $.card.body({
 						elem: [
@@ -366,7 +366,7 @@ fill="#999" stroke="none">
 				elem: [
 					new $.card.img({
 						placement: "top",
-						src: this.img(415, 207),
+						src: fn.img(415, 207),
 					}),
 					new $.card.body({
 						elem: [
@@ -380,14 +380,14 @@ fill="#999" stroke="none">
 			}),
 		];
 	},
-	cardwithfooterh100: function () {
+	cardwithfooterh100: () => {
 		return [
 			new $.card.container({
 				class: "h-100",
 				elem: [
 					new $.card.img({
 						placement: "top",
-						src: this.img(415, 207),
+						src: fn.img(415, 207),
 					}),
 					new $.card.body({
 						elem: [
@@ -405,7 +405,7 @@ fill="#999" stroke="none">
 				elem: [
 					new $.card.img({
 						placement: "top",
-						src: this.img(415, 207),
+						src: fn.img(415, 207),
 					}),
 					new $.card.body({
 						elem: [
@@ -423,7 +423,7 @@ fill="#999" stroke="none">
 				elem: [
 					new $.card.img({
 						placement: "top",
-						src: this.img(415, 207),
+						src: fn.img(415, 207),
 					}),
 					new $.card.body({
 						elem: [
@@ -438,7 +438,7 @@ fill="#999" stroke="none">
 			}),
 		];
 	},
-	listgroupitem: function () {
+	listgroupitem: () => {
 		return [
 			{ elem: "An item" },
 			{ elem: "A second item" },
@@ -447,7 +447,7 @@ fill="#999" stroke="none">
 			{ elem: "And a fifth one" },
 		];
 	},
-	listgroupitemcustomcontent: function () {
+	listgroupitemcustomcontent: () => {
 		return [
 			new $.div({
 				class: "ms-2 me-auto",
@@ -460,10 +460,10 @@ fill="#999" stroke="none">
 			}),
 		];
 	},
-	listgroupitem3: function () {
+	listgroupitem3: () => {
 		return [{ elem: "An item" }, { elem: "A second item" }, { elem: "A third item" }];
 	},
-	dlgFn: function (recipient) {
+	dlgFn: (recipient) => {
 		new $.modal({
 			title: "Modal title",
 			elem: new $.container.form([
@@ -483,7 +483,7 @@ fill="#999" stroke="none">
 			button: [
 				{
 					label: "Send message",
-					onclick: function (event, data) {
+					onclick: (event, data) => {
 						new $.toast("i", `Result from dialog is <b>${JSON.stringify(data)}</b>`).show();
 					},
 				},
@@ -491,7 +491,7 @@ fill="#999" stroke="none">
 			],
 		}).show();
 	},
-	dlgFullscreenFn: function (fullscreen) {
+	dlgFullscreenFn: (fullscreen) => {
 		new $.modal({
 			fullscreen: fullscreen,
 			title: "Modal title",
@@ -499,7 +499,7 @@ fill="#999" stroke="none">
 			button: ["Okay"],
 		}).show();
 	},
-	dlgSizeFn: function (size) {
+	dlgSizeFn: (size) => {
 		new $.modal({
 			size: size,
 			title: "Modal title",
@@ -507,20 +507,20 @@ fill="#999" stroke="none">
 			button: ["Okay"],
 		}).show();
 	},
-	tab: function () {
+	tab: () => {
 		return [
-			{ label: "First", elem: "This is first tab. " + this.text() },
-			{ label: "Second", elem: "This is second tab. " + this.text() },
-			{ label: "Third", elem: "This is third tab. " + this.text() },
-			{ label: "Disabled", disabled: true, elem: "This is last tab. " + this.text() },
+			{ label: "First", elem: "This is first tab. " + fn.text() },
+			{ label: "Second", elem: "This is second tab. " + fn.text() },
+			{ label: "Third", elem: "This is third tab. " + fn.text() },
+			{ label: "Disabled", disabled: true, elem: "This is last tab. " + fn.text() },
 		];
 	},
-	dropdowntab: function () {
+	dropdowntab: () => {
 		return [
-			{ label: "First", elem: "This is first tab. " + this.text() },
+			{ label: "First", elem: "This is first tab. " + fn.text() },
 			{
 				label: "Second",
-				elem: "This is second tab. " + this.text(),
+				elem: "This is second tab. " + fn.text(),
 				option: [
 					{ href: "#", label: "Action" },
 					{ href: "#", label: "Another action" },
@@ -528,11 +528,11 @@ fill="#999" stroke="none">
 					{ href: "#", label: "Something else here" },
 				],
 			},
-			{ label: "Third", elem: "This is third tab. " + this.text() },
-			{ label: "Disabled", disabled: true, elem: "This is last tab. " + this.text() },
+			{ label: "Third", elem: "This is third tab. " + fn.text() },
+			{ label: "Disabled", disabled: true, elem: "This is last tab. " + fn.text() },
 		];
 	},
-	navbaritem: function (id, title) {
+	navbaritem: (id, title) => {
 		return [
 			new $.navbar.toggle({
 				target: `#${id}`,
@@ -553,7 +553,7 @@ fill="#999" stroke="none">
 							new $.navbar.item({ label: "Link" }),
 							new $.navbar.item({
 								label: "Dropdown",
-								option: this.dropdownitem(),
+								option: fn.dropdownitem(),
 							}),
 							new $.navbar.item({ label: "Disabled", disabled: true }),
 						],
@@ -571,7 +571,7 @@ fill="#999" stroke="none">
 			}),
 		];
 	},
-	offcanvasbody: function () {
+	offcanvasbody: () => {
 		return new $.div({
 			elem: [
 				new $.p({
@@ -580,12 +580,12 @@ fill="#999" stroke="none">
 				new $.dropdown({
 					label: "Drowdown button",
 					color: "secondary",
-					option: this.dropdownitem(),
+					option: fn.dropdownitem(),
 				}),
 			],
 		});
 	},
-	table: function (header, footer) {
+	table: (header, footer) => {
 		let rtn = [
 			["1/6/2020", "East", "Jones", "Pencil", "95", "1.99", "189.05"],
 			["1/23/2020", "Central", "Kivell", "Binder", "50", "19.99", "999.50"],
@@ -605,7 +605,7 @@ fill="#999" stroke="none">
 		}
 		return rtn;
 	},
-	tagprop: function (exclude) {
+	tagprop: (exclude) => {
 		let tprop = [
 			"id",
 			"name",
@@ -681,7 +681,7 @@ fill="#999" stroke="none">
 		];
 
 		let f = tprop
-			.map(function (i) {
+			.map((i) => {
 				if (!isListed(i, exclude)) {
 					return `<code>${i}</code>`;
 				} else {
@@ -693,13 +693,13 @@ fill="#999" stroke="none">
 		let l = f.pop();
 		return f.join(", ") + " and " + l;
 	},
-	formcontainer: function (elem) {
+	formcontainer: (elem) => {
 		return new $.container.form(elem);
 	},
-	stackcontainer: function (elem) {
+	stackcontainer: (elem) => {
 		return new $.container.stack(elem);
 	},
-	query_setting: function (dbstate) {
+	query_setting: (dbstate) => {
 		return {
 			field: [
 				{ value: "name", label: "Name", type: "text" },
@@ -735,7 +735,7 @@ fill="#999" stroke="none">
 		limit: 10,
 		skip: 0,
 	},
-	query_data_view: function () {
+	query_data_view: () => {
 		return {
 			filter: null,
 			sort: { state: 1, name: 1 },
@@ -744,7 +744,7 @@ fill="#999" stroke="none">
 			skip: 0,
 		};
 	},
-	list_editor: function (data) {
+	list_editor: (data) => {
 		return [
 			new $.input({
 				type: "text",
@@ -782,14 +782,14 @@ fill="#999" stroke="none">
 			}),
 		];
 	},
-	list_items: function (data, item, group) {
+	list_items: (data, item, group) => {
 		let lastgroup = null;
 		let result = [];
-		data.forEach(function (i) {
+		data.forEach((i) => {
 			if (dbstate) {
 				if (i.state && lastgroup !== i.state) {
 					lastgroup = i.state;
-					let state_name = dbstate.filter(function (el) {
+					let state_name = dbstate.filter((el) => {
 						return el.value === i.state;
 					})[0]?.label;
 
@@ -802,7 +802,7 @@ fill="#999" stroke="none">
 
 		return result;
 	},
-	list_item: function (data) {
+	list_item: (data) => {
 		return new $.list.item({
 			key: data._id,
 			name: data.name,
@@ -814,13 +814,13 @@ fill="#999" stroke="none">
 			allow_more: true,
 		});
 	},
-	list_group: function (data) {
+	list_group: (data) => {
 		return new $.list.group({ key: data.key, name: data.name });
 	},
-	list_more: function (sender, id) {
+	list_more: (sender, id) => {
 		new $.toast("i", `Call from id:${id}`).show();
 	},
-	list_state: function (callback, sender) {
+	list_state: (callback, sender) => {
 		if (!dbstate) {
 			console.log("Init state database");
 
@@ -832,7 +832,7 @@ fill="#999" stroke="none">
 					fieldname: "name",
 					sender: sender,
 				},
-				function (result) {
+				(result) => {
 					if (result) {
 						dbstate = result;
 						callback(dbstate);
@@ -844,3 +844,5 @@ fill="#999" stroke="none">
 		}
 	},
 };
+
+export default fn;

@@ -15,7 +15,7 @@ export default [
 			"These utility classes float an element to the left or right, or disable floating, based on the current viewport size using the CSS float property. {{!important}} is included to avoid specificity issues. These use the same viewport breakpoints as Bootstrap grid system. Please be aware float utilities have no effect on flex items.",
 		],
 		container: sample.formcontainer,
-		code: function () {
+		code: () => {
 			return [
 				new $.tag({
 					tag: "div",
@@ -40,7 +40,7 @@ export default [
 		title: "Responsive",
 		msg: ["Responsive variations also exist for each {{float}} value."],
 		container: sample.formcontainer,
-		code: function () {
+		code: () => {
 			return [
 				new $.tag({
 					tag: "div",
@@ -71,8 +71,8 @@ export default [
 			"Responsive variations also exist for {{float}} property.",
 			new $.ul({
 				item: ["", "sm-", "md-", "lg-", "xl-", "xxl-"]
-					.map(function (i) {
-						return ["start", "end", "none"].map(function (j) {
+					.map((i) => {
+						return ["start", "end", "none"].map((j) => {
 							return `<code>${i}${j}</code>`;
 						});
 					})

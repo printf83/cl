@@ -18,7 +18,7 @@ export default [
 			}),
 		],
 		viewclass: "cl-highlight-col",
-		code: function () {
+		code: () => {
 			return new $.div(
 				"container",
 				new $.div("row", [new $.div("col", "Column"), new $.div("col", "Column"), new $.div("col", "Column")])
@@ -30,7 +30,7 @@ export default [
 		title: "Equal-width",
 		msg: "For example, here are two grid layouts that apply to every device and viewport, from xs to xxl. Add any number of unit-less classes for each breakpoint you need and every column will be the same width.",
 		viewclass: "cl-highlight-col",
-		code: function () {
+		code: () => {
 			return new $.div("container", [
 				new $.div("row", [new $.div("col", "1 of 2"), new $.div("col", "2 of 2")]),
 				new $.div("row", [new $.div("col", "1 of 3"), new $.div("col", "2 of 3"), new $.div("col", "3 of 3")]),
@@ -42,7 +42,7 @@ export default [
 		title: "Setting one column width",
 		msg: "Auto-layout for flexbox grid columns also means you can set the width of one column and have the sibling columns automatically resize around it. You may use predefined grid classes (as shown below), grid mixins, or inline widths. Note that the other columns will resize no matter the width of the center column.",
 		viewclass: "cl-highlight-col",
-		code: function () {
+		code: () => {
 			return new $.div("container", [
 				new $.div("row", [
 					new $.div("col", "1 of 3"),
@@ -62,7 +62,7 @@ export default [
 		title: "Variable width content",
 		msg: "Use col-{breakpoint}-auto classes to size columns based on the natural width of their content.",
 		viewclass: "cl-highlight-col",
-		code: function () {
+		code: () => {
 			return new $.div("container", [
 				new $.div("row justify-content-md-center", [
 					new $.div("col col-lg-2", "1 of 3"),
@@ -82,7 +82,7 @@ export default [
 		title: "All breakpoints",
 		msg: "For grids that are the same from the smallest of devices to the largest, use the .col and .col-* classes. Specify a numbered class when you need a particularly sized column; otherwise, feel free to stick to .col.",
 		viewclass: "cl-highlight-col",
-		code: function () {
+		code: () => {
 			return new $.div("container", [
 				new $.div("row", [
 					new $.div("col", "col"),
@@ -99,7 +99,7 @@ export default [
 		title: "Stacked to horizontal",
 		msg: "Using a single set of .col-sm-* classes, you can create a basic grid system that starts out stacked and becomes horizontal at the small breakpoint (sm).",
 		viewclass: "cl-highlight-col",
-		code: function () {
+		code: () => {
 			return new $.div("container", [
 				new $.div("row", [new $.div("col-sm-8", "col-sm-8"), new $.div("col-sm-4", "col-sm-4")]),
 				new $.div("row", [
@@ -116,7 +116,7 @@ export default [
 		title: "Mix and match",
 		msg: "Don’t want your columns to simply stack in some grid tiers? Use a combination of different classes for each tier as needed. See the example below for a better idea of how it all works.",
 		viewclass: "cl-highlight-col",
-		code: function () {
+		code: () => {
 			return new $.div("container", [
 				//Stack the columns on mobile by making one full-width and the other half-width
 				new $.div("row", [new $.div("col-md-8", "col-md-8"), new $.div("col-6 col-md-4", "col-6 col-md-4")]),
@@ -139,7 +139,7 @@ export default [
 			"Use these row columns classes to quickly create basic grid layouts or to control your card layouts.",
 		],
 		viewclass: "cl-highlight-col",
-		code: function () {
+		code: () => {
 			return new $.div("container", [
 				new $.div("row row-cols-2", [
 					new $.div("col", "Column"),
@@ -154,7 +154,7 @@ export default [
 	{
 		viewclass: "cl-highlight-col",
 		viewclass: "cl-highlight-col",
-		code: function () {
+		code: () => {
 			return new $.div("container", [
 				new $.div("row row-cols-3", [
 					new $.div("col", "Column"),
@@ -168,7 +168,7 @@ export default [
 
 	{
 		viewclass: "cl-highlight-col",
-		code: function () {
+		code: () => {
 			return new $.div("container", [
 				new $.div("row row-cols-auto", [
 					new $.div("col", "Column"),
@@ -182,7 +182,7 @@ export default [
 
 	{
 		viewclass: "cl-highlight-col",
-		code: function () {
+		code: () => {
 			return new $.div("container", [
 				new $.div("row row-cols-4", [
 					new $.div("col", "Column"),
@@ -196,7 +196,7 @@ export default [
 
 	{
 		viewclass: "cl-highlight-col",
-		code: function () {
+		code: () => {
 			return new $.div("container", [
 				new $.div("row row-cols-4", [
 					new $.div("col", "Column"),
@@ -210,7 +210,7 @@ export default [
 
 	{
 		viewclass: "cl-highlight-col",
-		code: function () {
+		code: () => {
 			return new $.div("container", [
 				new $.div("row row-cols-1 row-cols-sm-2 row-cols-md-4", [
 					new $.div("col", "Column"),
@@ -226,7 +226,7 @@ export default [
 		title: "Nesting",
 		msg: "To nest your content with the default grid, add a new $..row and set of .col-sm-* columns within an existing .col-sm-* column. Nested rows should include a set of columns that add up to 12 or fewer (it is not required that you use all 12 available columns).",
 		viewclass: "cl-highlight-col",
-		code: function () {
+		code: () => {
 			return new $.div("container", [
 				new $.div("row", [
 					new $.div("col-sm-3", "Level 1: col-sm-3"),

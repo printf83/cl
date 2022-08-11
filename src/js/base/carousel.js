@@ -61,7 +61,7 @@ export default class carousel extends div {
 				opt.indicators
 					? new div({
 							class: "carousel-indicators",
-							elem: opt.item.map(function (i, ix) {
+							elem: opt.item.map((i, ix) => {
 								if (typeof i === "string") {
 									i = {
 										src: i,
@@ -84,7 +84,7 @@ export default class carousel extends div {
 					: null,
 				new div({
 					class: "carousel-inner",
-					elem: opt.item.map(function (i, ix) {
+					elem: opt.item.map((i, ix) => {
 						if (typeof i === "string") {
 							i = {
 								src: i,

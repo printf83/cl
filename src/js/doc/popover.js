@@ -11,7 +11,7 @@ export default [
 
 	{
 		title: "Popover",
-		code: function () {
+		code: () => {
 			return new $.tooltip({
 				type: "popover",
 				title: "Popover title",
@@ -29,7 +29,7 @@ export default [
 	{
 		title: "Four direction",
 		container: sample.stackcontainer,
-		code: function () {
+		code: () => {
 			return [
 				new $.tooltip({
 					type: "popover",
@@ -76,7 +76,7 @@ export default [
 
 	{
 		title: "Dismiss on next click",
-		code: function () {
+		code: () => {
 			return new $.tooltip({
 				type: "popover",
 				title: "Popover title",
@@ -97,7 +97,7 @@ export default [
 			"Elements with the disabled attribute aren’t interactive, meaning users cannot hover or click them to trigger a popover (or tooltip). As a workaround, you’ll want to trigger the popover from a wrapper {{div}} or {{span}}, ideally made keyboard-focusable using {{tabindex='0'}}.",
 			"For disabled popover triggers, you may also prefer {{trigger:'hover focus'}} on {{new $.tooltip}} option so that the popover appears as immediate visual feedback to your users as they may not expect to click on a disabled element.",
 		],
-		code: function () {
+		code: () => {
 			return new $.tooltip({
 				type: "popover",
 				title: "Popover title",

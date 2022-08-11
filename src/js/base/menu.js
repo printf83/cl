@@ -54,7 +54,7 @@ export default class menu extends div {
 				show: opt.active,
 				elem: new ul({
 					class: "cl-menu-container",
-					elem: opt.item.map(function (i) {
+					elem: opt.item.map((i) => {
 						if (typeof i === "string") {
 							i = {
 								label: i,

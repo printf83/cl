@@ -20,7 +20,7 @@ export default [
 	{
 		title: "Example",
 		container: sample.stackcontainer,
-		code: function () {
+		code: () => {
 			let fileUploadID = $.core.UUID();
 
 			return new $.file({ id: fileUploadID });
@@ -29,7 +29,7 @@ export default [
 	{
 		title: "Multiple",
 		container: sample.stackcontainer,
-		code: function () {
+		code: () => {
 			let fileUploadID = $.core.UUID();
 
 			return new $.file({ id: fileUploadID, multiple: true });
@@ -38,7 +38,7 @@ export default [
 	{
 		title: "File type",
 		container: sample.stackcontainer,
-		code: function () {
+		code: () => {
 			let fileUploadID = $.core.UUID();
 
 			return new $.file({
@@ -51,7 +51,7 @@ export default [
 	{
 		title: "Label, color & icon",
 		container: sample.stackcontainer,
-		code: function () {
+		code: () => {
 			let fileUploadID = $.core.UUID();
 
 			return new $.file({
@@ -73,7 +73,7 @@ export default [
 	{
 		title: "Save",
 		container: sample.stackcontainer,
-		code: function () {
+		code: () => {
 			let fileUploadID = $.core.UUID();
 
 			return [
@@ -82,12 +82,12 @@ export default [
 					label: "Save file",
 					color: "success",
 					icon: "floppy-disk",
-					onclick: function (event) {
+					onclick: (event) => {
 						let sender = event.currentTarget;
 
 						$.file.save(
 							document.getElementById(fileUploadID),
-							function (result) {
+							(result) => {
 								if (result) {
 									new $.toast(
 										"i",

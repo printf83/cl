@@ -80,7 +80,7 @@ export default class paging extends div {
 									"aria-label": "First Page",
 								},
 								href: "javascript:void(0)",
-								onclick: function (event) {
+								onclick: (event) => {
 									data.skip = 0;
 									pagingonchange(event.currentTarget, data);
 								},
@@ -105,7 +105,7 @@ export default class paging extends div {
 									"aria-label": "Previous Page",
 								},
 								href: "javascript:void(0)",
-								onclick: function (event) {
+								onclick: (event) => {
 									data.skip = (curpage - 2) * data.limit;
 									pagingonchange(event.currentTarget, data);
 								},
@@ -178,7 +178,7 @@ export default class paging extends div {
 									"aria-label": `Page ${x.toString()}`,
 								},
 								href: "javascript:void(0)",
-								onclick: function (event) {
+								onclick: (event) => {
 									let xnum = parseInt(event.currentTarget.innerText, 10);
 									data.skip = (xnum - 1) * data.limit;
 									pagingonchange(event.currentTarget, data);
@@ -202,7 +202,7 @@ export default class paging extends div {
 									"aria-label": "Next Page",
 								},
 								href: "javascript:void(0)",
-								onclick: function (event) {
+								onclick: (event) => {
 									data.skip = curpage * data.limit;
 									pagingonchange(event.currentTarget, data);
 								},
@@ -225,7 +225,7 @@ export default class paging extends div {
 									"aria-label": "Last Page",
 								},
 								href: "javascript:void(0)",
-								onclick: function (event) {
+								onclick: (event) => {
 									data.skip = (btncount - 1) * data.limit;
 									pagingonchange(event.currentTarget, data);
 								},

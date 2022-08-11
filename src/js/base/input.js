@@ -117,7 +117,7 @@ export default class input extends tag {
 				? new button({
 						icon: "minus",
 						color: "primary",
-						onclick: function (e) {
+						onclick: (e) => {
 							let sender = e.currentTarget;
 							let parent = sender.parentElement;
 							let input = parent.getElementsByTagName("input")[0];
@@ -144,7 +144,7 @@ export default class input extends tag {
 				? new button({
 						icon: { icon: "plus" },
 						color: "primary",
-						onclick: function (e) {
+						onclick: (e) => {
 							let sender = e.currentTarget;
 							let parent = sender.parentElement;
 							let input = parent.getElementsByTagName("input")[0];

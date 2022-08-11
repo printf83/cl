@@ -20,7 +20,7 @@ export default [
 
 	{
 		title: "Example",
-		code: function () {
+		code: () => {
 			return new $.div({
 				elem: [
 					"This is ",
@@ -40,7 +40,7 @@ export default [
 		title: "Easy option",
 		msg: "This component also supported easy option.",
 		container: sample.formcontainer,
-		code: function () {
+		code: () => {
 			return [
 				new $.strong({ class: "classname", elem: "Using elem property" }),
 				new $.strong("classname", "Direct class and elem property"),

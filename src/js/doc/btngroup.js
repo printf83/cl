@@ -11,7 +11,7 @@ export default [
 
 	{
 		title: "Basic example",
-		code: function () {
+		code: () => {
 			return new $.btngroup({
 				label: "Basic example",
 				elem: [
@@ -25,7 +25,7 @@ export default [
 
 	{
 		title: "Link example",
-		code: function () {
+		code: () => {
 			return new $.btngroup({
 				label: "Link example",
 				elem: [
@@ -44,7 +44,7 @@ export default [
 
 	{
 		title: "Mixed styles",
-		code: function () {
+		code: () => {
 			return new $.btngroup({
 				label: "Basic mixed styles example",
 				elem: [
@@ -58,7 +58,7 @@ export default [
 
 	{
 		title: "Outlined styles",
-		code: function () {
+		code: () => {
 			return new $.btngroup({
 				label: "Basic outlined styles example",
 				elem: [
@@ -72,7 +72,7 @@ export default [
 
 	{
 		title: "Checkbox button styles",
-		code: function () {
+		code: () => {
 			return new $.btngroup({
 				label: "Checkbox button styles example",
 				elem: [
@@ -96,7 +96,7 @@ export default [
 
 	{
 		title: "Radio button styles",
-		code: function () {
+		code: () => {
 			return new $.btngroup({
 				label: "Radio button styles example",
 				elem: [
@@ -128,7 +128,7 @@ export default [
 
 	{
 		title: "Button toolbar",
-		code: function () {
+		code: () => {
 			return new $.btntoolbar({
 				label: "Toolbar with button groups",
 				gap: 2,
@@ -162,7 +162,7 @@ export default [
 	{
 		title: "Mix toolbar",
 		container: sample.formcontainer,
-		code: function () {
+		code: () => {
 			return [
 				new $.btntoolbar({
 					label: "Toolbar with button groups",
@@ -213,7 +213,7 @@ export default [
 	{
 		title: "Sizing",
 		container: sample.formcontainer,
-		code: function () {
+		code: () => {
 			return [
 				new $.btngroup({
 					weight: "lg",
@@ -244,7 +244,7 @@ export default [
 
 	{
 		title: "Nesting",
-		code: function () {
+		code: () => {
 			return new $.btngroup({
 				label: "Button group with nested dropdown",
 				elem: [
@@ -266,7 +266,7 @@ export default [
 
 	{
 		title: "Vertical variation",
-		code: function () {
+		code: () => {
 			return new $.btngroup({
 				vertical: true,
 				elem: [
@@ -283,7 +283,7 @@ export default [
 
 	{
 		title: "Vertical variation with dropdown",
-		code: function () {
+		code: () => {
 			return new $.btngroup({
 				vertical: true,
 				elem: [
@@ -334,7 +334,7 @@ export default [
 
 	{
 		title: "Vertical variation with radio button",
-		code: function () {
+		code: () => {
 			return new $.btngroup({
 				vertical: true,
 				elem: [

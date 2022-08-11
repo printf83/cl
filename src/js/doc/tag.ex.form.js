@@ -20,7 +20,7 @@ export default [
 
 	{
 		title: "Example",
-		code: function () {
+		code: () => {
 			return new $.form({
 				attr: {
 					"data-test": "test",
@@ -34,7 +34,7 @@ export default [
 		title: "Easy option",
 		msg: "This component also supported easy option.",
 		container: sample.formcontainer,
-		code: function () {
+		code: () => {
 			return [
 				new $.form({ class: "classname", elem: "Using elem property" }),
 				new $.form("Direct elem property"),

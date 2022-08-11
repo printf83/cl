@@ -12,7 +12,7 @@ export default [
 	{
 		title: "Checks",
 		container: sample.formcontainer,
-		code: function () {
+		code: () => {
 			return [
 				new $.input({ label: "Default checkbox", type: "checkbox" }),
 				new $.input({ label: "Checked checkbox", type: "checkbox", checked: true }),
@@ -22,7 +22,7 @@ export default [
 
 	{
 		title: "Indeterminate",
-		code: function () {
+		code: () => {
 			return new $.input({ label: "Indeterminate checkbox", type: "checkbox" });
 		},
 	},
@@ -30,7 +30,7 @@ export default [
 	{
 		title: "Disabled",
 		container: sample.formcontainer,
-		code: function () {
+		code: () => {
 			return [
 				new $.input({ label: "Disabled checkbox", type: "checkbox", disabled: true }),
 				new $.input({
@@ -46,7 +46,7 @@ export default [
 	{
 		title: "Radio",
 		container: sample.formcontainer,
-		code: function () {
+		code: () => {
 			return [
 				new $.input({ name: "g1", label: "Default radio", type: "radio" }),
 				new $.input({ name: "g1", label: "Checked radio", type: "radio", checked: true }),
@@ -57,7 +57,7 @@ export default [
 	{
 		title: "Disabled",
 		container: sample.formcontainer,
-		code: function () {
+		code: () => {
 			return [
 				new $.input({ name: "g2", label: "Disabled radio", type: "radio", disabled: true }),
 				new $.input({
@@ -74,7 +74,7 @@ export default [
 	{
 		title: "Switch",
 		container: sample.formcontainer,
-		code: function () {
+		code: () => {
 			return [
 				new $.input({ label: "Default switch checkbox input", type: "switch" }),
 				new $.input({ label: "Checked switch checkbox input", type: "switch", checked: true }),
@@ -96,7 +96,7 @@ export default [
 	{
 		title: "Default (stacked)",
 		container: sample.formcontainer,
-		code: function () {
+		code: () => {
 			return [
 				new $.input({ label: "Disabled checkbox", type: "checkbox", checked: true }),
 				new $.input({ label: "Disabled checkbox", type: "checkbox", disabled: true }),
@@ -110,7 +110,7 @@ export default [
 	{
 		title: "Disabled",
 		container: sample.formcontainer,
-		code: function () {
+		code: () => {
 			return [
 				new $.input({ name: "g4", label: "Disabled radio", type: "radio", disabled: true }),
 				new $.input({
@@ -127,7 +127,7 @@ export default [
 	{
 		title: "Inline Check",
 		container: sample.stackcontainer,
-		code: function () {
+		code: () => {
 			return [
 				new $.input({ label: "1", type: "checkbox", inline: true }),
 				new $.input({ label: "2", type: "checkbox", inline: true }),
@@ -139,7 +139,7 @@ export default [
 	{
 		title: "Inline Radio",
 		container: sample.stackcontainer,
-		code: function () {
+		code: () => {
 			return [
 				new $.input({ name: "g5", label: "1", type: "radio", inline: true }),
 				new $.input({ name: "g5", label: "2", type: "radio", inline: true }),
@@ -157,21 +157,21 @@ export default [
 	{
 		title: "Without label",
 		container: sample.formcontainer,
-		code: function () {
+		code: () => {
 			return [new $.input({ type: "checkbox" }), new $.input({ name: "g6", type: "radio" })];
 		},
 	},
 
 	{
 		title: "Checkbox toggle button",
-		code: function () {
+		code: () => {
 			return new $.button({ type: "checkbox", label: "Single toggle", color: "primary" });
 		},
 	},
 
 	{
 		title: "Checkbox toggle button checked",
-		code: function () {
+		code: () => {
 			return new $.button({
 				type: "checkbox",
 				checked: true,
@@ -183,7 +183,7 @@ export default [
 
 	{
 		title: "Checkbox toggle button disabled",
-		code: function () {
+		code: () => {
 			return new $.button({
 				type: "checkbox",
 				disabled: true,
@@ -196,7 +196,7 @@ export default [
 	{
 		title: "Radio toggle buttons",
 		container: sample.stackcontainer,
-		code: function () {
+		code: () => {
 			return [
 				new $.button({
 					type: "radio",
@@ -221,7 +221,7 @@ export default [
 	{
 		title: "Outlined styles",
 		container: sample.stackcontainer,
-		code: function () {
+		code: () => {
 			return [
 				new $.button({
 					type: "checkbox",

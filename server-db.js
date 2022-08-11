@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-module.exports = function () {
+module.exports =  () => {
 	mongoose.Promise = global.Promise;
 
 	mongoose

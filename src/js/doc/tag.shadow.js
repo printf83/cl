@@ -14,15 +14,15 @@ export default [
 		msg: [
 			"Supported value for {{shadow}} property.",
 			new $.ul({
-				item: ["none", "sm", "true", "lg"].map(function (i) {
+				item: ["none", "sm", "true", "lg"].map((i) => {
 					return `<code>${i}</code>`;
 				}),
 			}),
 		],
 		container: sample.formcontainer,
 		viewclass: "cl-highlight-shadow",
-		code: function () {
-			return ["none", "sm", true, "lg"].map(function (i) {
+		code: () => {
+			return ["none", "sm", true, "lg"].map((i) => {
 				return new $.tag({
 					tag: "div",
 					shadow: i,

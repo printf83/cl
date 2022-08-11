@@ -10,8 +10,8 @@ export default [
 
 	{
 		title: "Example",
-		code: function () {
-			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map(function (i) {
+		code: () => {
+			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map((i) => {
 				return new $.alert.container({ color: i, elem: `A simple ${i} alert—check it out!` });
 			});
 		},
@@ -19,8 +19,8 @@ export default [
 
 	{
 		title: "Link color",
-		code: function () {
-			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map(function (i) {
+		code: () => {
+			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map((i) => {
 				return new $.alert.container({
 					color: i,
 					elem: [
@@ -35,7 +35,7 @@ export default [
 
 	{
 		title: "Additional content",
-		code: function () {
+		code: () => {
 			return new $.alert.container({
 				color: "success",
 				elem: [
@@ -55,8 +55,8 @@ export default [
 
 	{
 		title: "Icons",
-		code: function () {
-			return ["i", "!!", "!", "?", "-", "x", "/"].map(function (i) {
+		code: () => {
+			return ["i", "!!", "!", "?", "-", "x", "/"].map((i) => {
 				return new $.alert.container({ icon: i, elem: `An example alert with an <b>"${i}"</b> icon code` });
 			});
 		},
@@ -64,7 +64,7 @@ export default [
 
 	{
 		title: "Dismissing",
-		code: function () {
+		code: () => {
 			return new $.alert.container({
 				close: true,
 				color: "warning",

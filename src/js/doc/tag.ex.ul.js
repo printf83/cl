@@ -20,7 +20,7 @@ export default [
 
 	{
 		title: "Example",
-		code: function () {
+		code: () => {
 			return new $.ul({
 				attr: { "data-test": "test" },
 				elem: [new $.li("Item 1"), new $.li("Item 2"), new $.li("Item 3"), new $.li("Item 4")],
@@ -36,7 +36,7 @@ export default [
 				item: ["<code>item</code> - only works if elem not provided. Shorcut for create li item"],
 			}),
 		],
-		code: function () {
+		code: () => {
 			return new $.ul({
 				attr: { "data-test": "test" },
 				item: ["Item 1", "Item 2", "Item 3", "Item 4"],
@@ -47,7 +47,7 @@ export default [
 	{
 		title: "Easy option",
 		msg: "This component also supported easy option.",
-		code: function () {
+		code: () => {
 			return [
 				new $.ul({
 					class: "classname",

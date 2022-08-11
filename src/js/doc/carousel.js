@@ -12,7 +12,7 @@ export default [
 	{
 		title: "Slide only",
 		sample: { "sample.img": sample.img },
-		code: function () {
+		code: () => {
 			return new $.carousel({
 				item: [
 					sample.img(857, 428),
@@ -29,7 +29,7 @@ export default [
 	{
 		title: "With control",
 		sample: { "sample.img": sample.img },
-		code: function () {
+		code: () => {
 			return new $.carousel({
 				control: true,
 				item: [
@@ -47,7 +47,7 @@ export default [
 	{
 		title: "With indicator",
 		sample: { "sample.img": sample.img },
-		code: function () {
+		code: () => {
 			return new $.carousel({
 				control: true,
 				indicators: true,
@@ -66,7 +66,7 @@ export default [
 	{
 		title: "With caption",
 		sample: { "sample.img": sample.img },
-		code: function () {
+		code: () => {
 			return new $.carousel({
 				control: true,
 				indicators: true,
@@ -109,7 +109,7 @@ export default [
 	{
 		title: "Crossfade",
 		sample: { "sample.img": sample.img },
-		code: function () {
+		code: () => {
 			return new $.carousel({
 				control: true,
 				fade: true,
@@ -128,7 +128,7 @@ export default [
 	{
 		title: "Individual interval",
 		sample: { "sample.img": sample.img },
-		code: function () {
+		code: () => {
 			return new $.carousel({
 				control: true,
 				indicators: true,
@@ -147,7 +147,7 @@ export default [
 	{
 		title: "Disable touch swiping",
 		sample: { "sample.img": sample.img },
-		code: function () {
+		code: () => {
 			return new $.carousel({
 				control: true,
 				touch: false,
@@ -166,7 +166,7 @@ export default [
 	{
 		title: "Dark variant",
 		sample: { "sample.img": sample.img },
-		code: function () {
+		code: () => {
 			return new $.carousel({
 				control: true,
 				indicators: true,

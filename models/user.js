@@ -20,7 +20,7 @@ const schema = mongoose.Schema({
 schema.pre("save", function (next) {
 	let i = this;
 	if (i.isModified("password")) {
-		bcrypt.hash(i.password, parseInt(process.env.HASHSALT), function (err, hash) {
+		bcrypt.hash(i.password, parseInt(process.env.HASHSALT), (err, hash) => {
 			if (err) {
 				next(err);
 			} else {
@@ -34,7 +34,7 @@ schema.pre("save", function (next) {
 });
 
 schema.methods.validatePassword = function (password, callback) {
-	bcrypt.compare(password, this.password, function (err, result) {
+	bcrypt.compare(password, this.password, (err, result) => {
 		if (err) return callback(err, false);
 		callback(null, result);
 	});
@@ -52,7 +52,7 @@ schema.methods.generateToken = function (prop, expired, callback) {
 	}
 
 	i[`${prop}Token`] = t;
-	i.save(function (err, result) {
+	i.save((err, result) => {
 		if (err) return callback(err);
 		callback(null, result);
 	});
@@ -60,7 +60,7 @@ schema.methods.generateToken = function (prop, expired, callback) {
 
 schema.methods.deleteToken = function (prop, callback) {
 	let i = this;
-	i.updateOne({ $unset: { [`${prop}Token`]: 1 } }, function (err, result) {
+	i.updateOne({ $unset: { [`${prop}Token`]: 1 } }, (err, result) => {
 		if (err) return callback(err);
 		callback(null, result);
 	});
@@ -69,10 +69,10 @@ schema.methods.deleteToken = function (prop, callback) {
 schema.statics.findByToken = function (prop, token, callback) {
 	if (token) {
 		let i = this;
-		jwt.verify(token, process.env.SESSIONSECRET, function (err, decode) {
+		jwt.verify(token, process.env.SESSIONSECRET, (err, decode) => {
 			if (err) return callback(err);
 
-			i.findOne({ _id: decode.id, [`${prop}Token`]: token }, function (err, result) {
+			i.findOne({ _id: decode.id, [`${prop}Token`]: token }, (err, result) => {
 				if (err) return callback(err);
 				callback(null, result);
 			});

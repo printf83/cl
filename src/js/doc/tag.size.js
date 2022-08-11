@@ -13,8 +13,8 @@ export default [
 		title: "Relative to the parent",
 		container: sample.formcontainer,
 		viewclass: "cl-highlight-size",
-		code: function () {
-			return [25, 50, 75, 100, "auto"].map(function (i) {
+		code: () => {
+			return [25, 50, 75, 100, "auto"].map((i) => {
 				return new $.tag({
 					tag: "div",
 					class: `w-${i}`,
@@ -27,8 +27,8 @@ export default [
 	{
 		container: sample.stackcontainer,
 		viewclass: "cl-highlight-size-height",
-		code: function () {
-			return [25, 50, 75, 100, "auto"].map(function (i) {
+		code: () => {
+			return [25, 50, 75, 100, "auto"].map((i) => {
 				return new $.tag({
 					tag: "div",
 					display: "inline-block",
@@ -42,7 +42,7 @@ export default [
 	{
 		msg: "You can also use {{max-width: 100%;}} and {{max-height: 100%; }}utilities as needed.",
 		viewclass: "cl-highlight-div",
-		code: function () {
+		code: () => {
 			return new $.tag({
 				tag: "div",
 				style: { width: "100%" },
@@ -58,7 +58,7 @@ export default [
 
 	{
 		viewclass: "cl-highlight-div",
-		code: function () {
+		code: () => {
 			return new $.tag({
 				tag: "div",
 				style: { height: "8rem" },
@@ -83,7 +83,7 @@ export default [
 					{ code: "min-vh-100", label: "Min-height 100vh" },
 					{ code: "vw-100", label: "Width 100vw" },
 					{ code: "vh-100", label: "Height 100vh" },
-				].map(function (i) {
+				].map((i) => {
 					return `<code>.${i.code}</code> for ${i.label}`;
 				}),
 			}),

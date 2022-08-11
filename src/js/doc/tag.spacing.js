@@ -57,7 +57,7 @@ export default [
 		title: "Horizontal centering",
 		msg: "Additionally, Bootstrap also includes an {{marginx:auto}} property for horizontally centering fixed-width block level content—that is, content that has {{display:block}} and a {{width}} set—by setting the horizontal margins to {{auto}}.",
 		viewclass: "cl-highlight-div",
-		code: function () {
+		code: () => {
 			return new $.tag({
 				tag: "div",
 				marginx: "auto",
@@ -76,8 +76,8 @@ export default [
 
 		viewclass: "cl-highlight-col-div",
 		container: sample.stackcontainer,
-		code: function () {
-			return [null, 1, "n1"].map(function (i) {
+		code: () => {
+			return [null, 1, "n1"].map((i) => {
 				return new $.tag({
 					tag: "div",
 					margintop: i,
@@ -91,7 +91,7 @@ export default [
 		title: "Gap",
 		msg: "When using {{display:grid}}, you can make use of {{gap}} property on the parent grid container. This can save on having to add margin utilities to individual grid items (children of a {{display:grid}} container). Gap utilities are responsive by default, and are generated via Bootstrap utilities API, based on the {{$spacers}} Sass map.",
 		viewclass: "cl-highlight-grid-div",
-		code: function () {
+		code: () => {
 			return new $.tag({
 				tag: "div",
 				display: "grid",

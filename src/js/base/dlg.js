@@ -10,7 +10,7 @@ function btnBuilder(btn, defButton, defColor, pushCancel) {
 	let argBtn = Array.isArray(btn) ? btn : [btn];
 	if (pushCancel && argBtn.length === 1) argBtn.push("Cancel");
 
-	return argBtn.map(function (i, ix) {
+	return argBtn.map((i, ix) => {
 		if (i instanceof Function) {
 			return {
 				label: ix <= defButton.length ? defButton[ix] : `Button ${ix + 1}`,
@@ -193,7 +193,7 @@ function elemBuilder(elem) {
 	let argElem = Array.isArray(elem) ? elem : [elem];
 
 	return new container.form(
-		argElem.map(function (i, ix) {
+		argElem.map((i, ix) => {
 			return typeof i === "string"
 				? new input({ type: i, required: true, name: ix === 0 ? "value" : `value_${ix}` })
 				: i;

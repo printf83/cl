@@ -20,7 +20,7 @@ export default [
 
 	{
 		title: "Example",
-		code: function () {
+		code: () => {
 			return new $.ol({
 				attr: { "data-test": "test" },
 				elem: [new $.li("Item"), new $.li("Item"), new $.li("Item"), new $.li("Item")],
@@ -36,7 +36,7 @@ export default [
 				item: ["<code>item</code> - only works if elem not provided. Shorcut for create li item"],
 			}),
 		],
-		code: function () {
+		code: () => {
 			return new $.ol({
 				attr: { "data-test": "test" },
 				item: ["Item", "Item", "Item", "Item"],
@@ -47,7 +47,7 @@ export default [
 	{
 		title: "Easy option",
 		msg: "This component also supported easy option.",
-		code: function () {
+		code: () => {
 			return [
 				new $.ol({
 					class: "classname",

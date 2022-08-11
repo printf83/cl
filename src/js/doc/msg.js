@@ -11,7 +11,7 @@ export default [
 	{
 		title: "Label only",
 		container: sample.formcontainer,
-		code: function () {
+		code: () => {
 			return [
 				new $.msg("Message"),
 				new $.msg({
@@ -24,7 +24,7 @@ export default [
 	{
 		title: "With icon",
 		sample: { "sample.text": sample.text },
-		code: function () {
+		code: () => {
 			return new $.msg({
 				icon: "fire",
 				elem: sample.text(),
@@ -37,7 +37,7 @@ export default [
 		container: sample.formcontainer,
 		viewclass: "cl-highlight-col",
 		sample: { "sample.text": sample.text },
-		code: function () {
+		code: () => {
 			let id = $.core.UUID();
 			return [
 				new $.msg({
@@ -64,7 +64,7 @@ export default [
 		container: sample.formcontainer,
 		viewclass: "cl-modal-preview",
 		sample: { "sample.text": sample.text },
-		code: function () {
+		code: () => {
 			let id = $.core.UUID();
 			return [
 				new $.toast({
@@ -87,7 +87,7 @@ export default [
 		title: "Weight : md",
 		viewclass: "cl-modal-preview",
 		sample: { "sample.text": sample.text },
-		code: function () {
+		code: () => {
 			let id = $.core.UUID();
 			return new $.modal({
 				title: "Title",
@@ -106,7 +106,7 @@ export default [
 		title: "Weight : lg",
 		viewclass: "cl-modal-preview",
 		sample: { "sample.text": sample.text },
-		code: function () {
+		code: () => {
 			let id = $.core.UUID();
 			return new $.modal({
 				color: "primary",

@@ -12,7 +12,7 @@ export default [
 	{
 		title: "Example",
 		container: sample.formcontainer,
-		code: function () {
+		code: () => {
 			return [
 				new $.input({
 					label: "Email address",
@@ -30,7 +30,7 @@ export default [
 	{
 		title: "Sizing",
 		container: sample.formcontainer,
-		code: function () {
+		code: () => {
 			return [
 				new $.input({
 					weight: "lg",
@@ -53,7 +53,7 @@ export default [
 	{
 		title: "Disabled",
 		container: sample.formcontainer,
-		code: function () {
+		code: () => {
 			return [
 				new $.input({
 					disabled: true,
@@ -73,7 +73,7 @@ export default [
 	{
 		title: "Readonly",
 		container: sample.formcontainer,
-		code: function () {
+		code: () => {
 			return new $.input({
 				readonly: true,
 				type: "text",
@@ -85,7 +85,7 @@ export default [
 	{
 		title: "Readonly plain text",
 		container: sample.formcontainer,
-		code: function () {
+		code: () => {
 			return [
 				new $.input({
 					label: "Email",
@@ -109,7 +109,7 @@ export default [
 	{
 		title: "Readonly plain text (Stack)",
 		container: sample.stackcontainer,
-		code: function () {
+		code: () => {
 			return [
 				new $.input({
 					label: "Email",
@@ -137,7 +137,7 @@ export default [
 	{
 		title: "File input",
 		container: sample.formcontainer,
-		code: function () {
+		code: () => {
 			return [
 				new $.input({ label: "Default file input example", type: "file" }),
 				new $.input({ label: "Multiple files input example", type: "file", multiple: true }),
@@ -152,7 +152,7 @@ export default [
 	// 	title: "File Input",
 	// 	msg: "This control is {{link}} to backend",
 	// 	container: sample.formcontainer,
-	// 	code: function () {
+	// 	code: () => {
 	// 		return new $.file.ctl({
 	// 			label: "Picture",
 	// 			accepe: "image/gif,image/bmp,image/x-windows-bmp,image/jpeg,image/png",
@@ -165,7 +165,7 @@ export default [
 	{
 		title: "Color",
 		container: sample.formcontainer,
-		code: function () {
+		code: () => {
 			return new $.input({ label: "Color picker", type: "color" });
 		},
 	},
@@ -173,7 +173,7 @@ export default [
 	{
 		title: "Datalist",
 		container: sample.formcontainer,
-		code: function () {
+		code: () => {
 			return new $.input({
 				label: "Datalist example",
 				type: "text",

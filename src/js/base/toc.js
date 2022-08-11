@@ -34,7 +34,7 @@ export default class toc extends div {
 			new hr({ marginy: 2 }),
 			new ul({
 				class: ["list-unstyled", opt.type === "menu" ? null : "small"],
-				elem: opt.item.map(function (i) {
+				elem: opt.item.map((i) => {
 					i = core.extend({}, defaultItemOption, i);
 					let level = i.level;
 

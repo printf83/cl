@@ -28,7 +28,7 @@ export default [
 	{
 		title: "Horizontal gutters",
 		msg: "{{.gx-*}} classes can be used to control the horizontal gutter widths. The {{.container}} or {{.container-fluid}} parent may need to be adjusted if larger gutters are used too to avoid unwanted overflow, using a matching padding utility. For example, in the following example we’ve increased the padding with {{.px-4}}:",
-		code: function () {
+		code: () => {
 			return new $.div(
 				"container px-4",
 				new $.div(
@@ -41,7 +41,7 @@ export default [
 
 	{
 		msg: "An alternative solution is to add a wrapper around the {{.row}} with the {{.overflow-hidden}} class:",
-		code: function () {
+		code: () => {
 			return new $.div(
 				"container overflow-hidden",
 				new $.div(
@@ -58,7 +58,7 @@ export default [
 	{
 		title: "Vertical gutters",
 		msg: "{{.gy-*}} classes can be used to control the vertical gutter widths. Like the horizontal gutters, the vertical gutters can cause some overflow below the {{.row}} at the end of a page. If this occurs, you add a wrapper around {{.row}} with the {{.overflow-hidden}} class:",
-		code: function () {
+		code: () => {
 			return new $.div(
 				"container overflow-hidden",
 				new $.div(
@@ -72,7 +72,7 @@ export default [
 	{
 		title: "Horizontal & vertical gutters",
 		msg: "{{.g-*}} classes can be used to control the horizontal gutter widths, for the following example we use a smaller gutter width, so there won’t be a need to add the {{.overflow-hidden}} wrapper class.",
-		code: function () {
+		code: () => {
 			return new $.div(
 				"container",
 				new $.div(
@@ -86,7 +86,7 @@ export default [
 	{
 		title: "Row columns gutters",
 		msg: "Gutter classes can also be added to <a href='https://getbootstrap.com/docs/5.0/layout/grid/#row-columns'>row columns</a>. In the following example, we use responsive row columns and responsive gutter classes.",
-		code: function () {
+		code: () => {
 			return new $.div(
 				"container",
 				new $.div(
@@ -105,7 +105,7 @@ export default [
 			"In practice, here’s how it looks. Note you can continue to use this with all other predefined grid classes (including column widths, responsive tiers, reorders, and more).",
 		],
 		viewclass: "cl-highlight-col",
-		code: function () {
+		code: () => {
 			return new $.div("row g-0", [
 				new $.div("col-sm-6 col-md-8", ".col-sm-6 .col-md-8"),
 				new $.div("col-6 col-md-4", ".col-6 .col-md-4"),

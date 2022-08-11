@@ -12,7 +12,7 @@ export default [
 	{
 		title: "Four direction",
 		container: sample.stackcontainer,
-		code: function () {
+		code: () => {
 			return [
 				new $.tooltip({
 					type: "tooltip",
@@ -72,7 +72,7 @@ export default [
 		msg: [
 			"Elements with the disabled attribute aren’t interactive, meaning users cannot hover or click them to trigger a tooltip (or popover). As a workaround, you’ll want to trigger the popover from a wrapper {{div}} or {{span}}, ideally made keyboard-focusable using {{tabindex='0'}}.",
 		],
-		code: function () {
+		code: () => {
 			return new $.tooltip({
 				type: "tooltip",
 				msg: "And here's some amazing content. It's very engaging. Right?",

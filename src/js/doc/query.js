@@ -25,10 +25,10 @@ export default [
 							data: query_data,
 						},
 						[
-							function (event, query_result) {
+							(event, query_result) => {
 								//callback if user press okay
 							},
-							function (event){
+							(event) => {
 								//callback if user press cancel
 							}
 						]
@@ -41,7 +41,7 @@ export default [
 			"sample.query_data": sample.query_data_view,
 		},
 		viewclass: "cl-modal-preview",
-		code: function () {
+		code: () => {
 			let dbstate = [
 				{ value: "value1", label: "Label 1" },
 				{ value: "value2", label: "Label 2" },
@@ -60,7 +60,7 @@ export default [
 						data: sample.query_data,
 					},
 					[
-						function (_event, data) {
+						(_event, data) => {
 							sample.query_data = data;
 						},
 					],
@@ -78,7 +78,7 @@ export default [
 			"sample.list_state": sample.list_state,
 		},
 		container: sample.formcontainer,
-		code: function () {
+		code: () => {
 			let resultOutputId = $.core.UUID();
 
 			return [
@@ -86,10 +86,10 @@ export default [
 					label: "Query Dialog",
 					icon: "fire",
 					color: "primary",
-					onclick: function (event) {
+					onclick: (event) => {
 						let sender = event.currentTarget;
 
-						sample.list_state(function (dbstate) {
+						sample.list_state((dbstate) => {
 							//edit query
 							new $.query.dialog(
 								{
@@ -100,7 +100,7 @@ export default [
 									data: sample.query_data,
 								},
 								[
-									function (_event, data) {
+									(_event, data) => {
 										sample.query_data = data;
 
 										//get record
@@ -110,7 +110,7 @@ export default [
 												data: sample.query_data,
 												sender: sender,
 											},
-											function (result) {
+											(result) => {
 												//result
 												document.getElementById(resultOutputId).value = JSON.stringify(result);
 											}
@@ -140,10 +140,10 @@ export default [
 							data: query_filter_data,
 						},
 						[
-							function (event, query_filter_result) {
+							(event, query_filter_result) => {
 								//callback if user press okay
 							},
-							function (event){
+							(event) => {
 								//callback if user press cancel
 							}
 						]
@@ -156,7 +156,7 @@ export default [
 			"sample.query_data": sample.query_data_view,
 		},
 		viewclass: "cl-modal-preview",
-		code: function () {
+		code: () => {
 			let dbstate = [
 				{ value: "value1", label: "Label 1" },
 				{ value: "value2", label: "Label 2" },
@@ -173,7 +173,7 @@ export default [
 						data: sample.query_data.filter,
 					},
 					[
-						function (_event, data) {
+						(_event, data) => {
 							sample.query_data.filter = data;
 						},
 					],
@@ -191,7 +191,7 @@ export default [
 			"sample.list_state": sample.list_state,
 		},
 		container: sample.formcontainer,
-		code: function () {
+		code: () => {
 			let resultOutputId = $.core.UUID();
 
 			return [
@@ -199,10 +199,10 @@ export default [
 					label: "Filter Dialog",
 					icon: "filter",
 					color: "primary",
-					onclick: function (event) {
+					onclick: (event) => {
 						let sender = event.currentTarget;
 
-						sample.list_state(function (dbstate) {
+						sample.list_state((dbstate) => {
 							//edit query
 							new $.query.filter(
 								{
@@ -211,7 +211,7 @@ export default [
 									data: sample.query_data.filter,
 								},
 								[
-									function (_event, data) {
+									(_event, data) => {
 										sample.query_data.filter = data;
 
 										//get record
@@ -221,7 +221,7 @@ export default [
 												data: sample.query_data,
 												sender: sender,
 											},
-											function (result) {
+											(result) => {
 												//result
 												document.getElementById(resultOutputId).value = JSON.stringify(result);
 											}
@@ -251,10 +251,10 @@ export default [
 							data: query_sort_data,
 						},
 						[
-							function (event, query_sort_result) {
+							(event, query_sort_result) => {
 								//callback if user press okay
 							},
-							function (event){
+							(event) => {
 								//callback if user press cancel
 							}
 						]
@@ -267,7 +267,7 @@ export default [
 			"sample.query_data": sample.query_data_view,
 		},
 		viewclass: "cl-modal-preview",
-		code: function () {
+		code: () => {
 			return [
 				new $.query.sort(
 					{
@@ -276,7 +276,7 @@ export default [
 						data: sample.query_data.sort,
 					},
 					[
-						function (_event, data) {
+						(_event, data) => {
 							sample.query_data.sort = data;
 						},
 					],
@@ -293,7 +293,7 @@ export default [
 			"sample.query_data": sample.query_data_view,
 		},
 		container: sample.formcontainer,
-		code: function () {
+		code: () => {
 			let resultOutputId = $.core.UUID();
 
 			return [
@@ -301,7 +301,7 @@ export default [
 					label: "Sort Dialog",
 					icon: "sort",
 					color: "primary",
-					onclick: function (event) {
+					onclick: (event) => {
 						let sender = event.currentTarget;
 
 						//edit query
@@ -312,7 +312,7 @@ export default [
 								data: sample.query_data.sort,
 							},
 							[
-								function (_event, data) {
+								(_event, data) => {
 									sample.query_data.sort = data;
 
 									//get record
@@ -322,7 +322,7 @@ export default [
 											data: sample.query_data,
 											sender: sender,
 										},
-										function (result) {
+										(result) => {
 											//result
 											document.getElementById(resultOutputId).value = JSON.stringify(result);
 										}
@@ -350,10 +350,10 @@ export default [
 							data: query_field_data,
 						},
 						[
-							function (event, query_field_result) {
+							(event, query_field_result) => {
 								//callback if user press okay
 							},
-							function (event){
+							(event) => {
 								//callback if user press cancel
 							}
 						]
@@ -366,7 +366,7 @@ export default [
 			"sample.query_data": sample.query_data_view,
 		},
 		viewclass: "cl-modal-preview",
-		code: function () {
+		code: () => {
 			return [
 				new $.query.field(
 					{
@@ -374,7 +374,7 @@ export default [
 						data: sample.query_data.field,
 					},
 					[
-						function (_event, data) {
+						(_event, data) => {
 							sample.query_data.field = data;
 						},
 					],
@@ -391,7 +391,7 @@ export default [
 			"sample.query_data": sample.query_data_view,
 		},
 		container: sample.formcontainer,
-		code: function () {
+		code: () => {
 			let resultOutputId = $.core.UUID();
 
 			return [
@@ -399,7 +399,7 @@ export default [
 					label: "Field Dialog",
 					icon: "tasks",
 					color: "primary",
-					onclick: function (event) {
+					onclick: (event) => {
 						let sender = event.currentTarget;
 
 						//edit query
@@ -409,7 +409,7 @@ export default [
 								data: sample.query_data.field,
 							},
 							[
-								function (_event, data) {
+								(_event, data) => {
 									sample.query_data.field = data;
 
 									//get record
@@ -419,7 +419,7 @@ export default [
 											data: sample.query_data,
 											sender: sender,
 										},
-										function (result) {
+										(result) => {
 											//result
 											document.getElementById(resultOutputId).value = JSON.stringify(result);
 										}
@@ -449,12 +449,13 @@ export default [
 							data: limit_data,
 						},
 						[
-							function (event, limit_result) {
+							(event, limit_result) => {
 								//callback if user press okay
 							},
-							function (event){
+							(event) => {
 								//callback if user press cancel
 							}
+							
 						]
 					).show();
 			`,
@@ -465,7 +466,7 @@ export default [
 			"sample.query_data": sample.query_data_view,
 		},
 		viewclass: "cl-modal-preview",
-		code: function () {
+		code: () => {
 			return [
 				new $.query.limit(
 					{
@@ -475,7 +476,7 @@ export default [
 						data: sample.query_data.limit,
 					},
 					[
-						function (_event, data) {
+						(_event, data) => {
 							let skip = sample.query_data.skip / sample.query_data.limit;
 							sample.query_data.limit = data;
 							sample.query_data.skip = skip * sample.query_data.limit;
@@ -494,7 +495,7 @@ export default [
 			"sample.query_data": sample.query_data_view,
 		},
 		container: sample.formcontainer,
-		code: function () {
+		code: () => {
 			let resultOutputId = $.core.UUID();
 
 			return [
@@ -502,7 +503,7 @@ export default [
 					label: "Limit Dialog",
 					icon: "list-ol",
 					color: "primary",
-					onclick: function (event) {
+					onclick: (event) => {
 						let sender = event.currentTarget;
 
 						//edit query
@@ -514,7 +515,7 @@ export default [
 								data: sample.query_data.limit,
 							},
 							[
-								function (_event, data) {
+								(_event, data) => {
 									let skip = sample.query_data.skip / sample.query_data.limit;
 									sample.query_data.limit = data;
 									sample.query_data.skip = skip * sample.query_data.limit;
@@ -526,7 +527,7 @@ export default [
 											data: sample.query_data,
 											sender: sender,
 										},
-										function (result) {
+										(result) => {
 											//result
 											document.getElementById(resultOutputId).value = JSON.stringify(result);
 										}
@@ -557,10 +558,10 @@ export default [
 							data: page_data,
 						},
 						[
-							function (event, page_result) {
+							(event, page_result) => {
 								//callback if user press okay
 							},
-							function (event){
+							(event) => {
 								//callback if user press cancel
 							}
 						]
@@ -573,7 +574,7 @@ export default [
 			"sample.query_data": sample.query_data_view,
 		},
 		viewclass: "cl-modal-preview",
-		code: function () {
+		code: () => {
 			return [
 				new $.query.page(
 					{
@@ -584,7 +585,7 @@ export default [
 						data: sample.query_data.skip,
 					},
 					[
-						function (_event, data) {
+						(_event, data) => {
 							sample.query_data.skip = data;
 						},
 					],
@@ -601,7 +602,7 @@ export default [
 			"sample.query_data": sample.query_data_view,
 		},
 		container: sample.formcontainer,
-		code: function () {
+		code: () => {
 			let resultOutputId = $.core.UUID();
 
 			return [
@@ -609,7 +610,7 @@ export default [
 					label: "Page Dialog",
 					icon: { icon: "sort", rotate: 90 },
 					color: "primary",
-					onclick: function (event) {
+					onclick: (event) => {
 						let sender = event.currentTarget;
 
 						//edit query
@@ -622,7 +623,7 @@ export default [
 								data: sample.query_data.skip,
 							},
 							[
-								function (_event, data) {
+								(_event, data) => {
 									sample.query_data.skip = data;
 
 									//get record
@@ -632,7 +633,7 @@ export default [
 											data: sample.query_data,
 											sender: sender,
 										},
-										function (result) {
+										(result) => {
 											//result
 											document.getElementById(resultOutputId).value = JSON.stringify(result);
 										}

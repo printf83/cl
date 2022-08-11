@@ -113,23 +113,23 @@ export default class offcanvas extends div {
 		this._m = d;
 	}
 
-	show = function () {
+	show = () => {
 		//add into document
 		this.dom = core.appendChild(document.body, this);
 		this.ofc = new bootstrap.Offcanvas(this.dom);
 
 		//set init
-		this.dom.addEventListener("shown.bs.offcanvas", function (event) {
+		this.dom.addEventListener("shown.bs.offcanvas", (event) => {
 			core.init(event.currentTarget);
 		});
 
 		//set destroy after hide
-		this.dom.addEventListener("hidden.bs.offcanvas", function (event) {
+		this.dom.addEventListener("hidden.bs.offcanvas", (event) => {
 			let dom = event.currentTarget;
 			let ofc = bootstrap.Offcanvas.getInstance(dom);
 
 			setTimeout(
-				function (dom, ofc) {
+				(dom, ofc) => {
 					ofc.dispose();
 					core.removeChildElement(dom);
 					dom.remove();

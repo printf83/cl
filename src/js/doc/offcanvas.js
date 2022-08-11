@@ -12,11 +12,11 @@ export default [
 	{
 		title: "Offcanvas",
 		sample: { "sample.offcanvasbody": sample.offcanvasbody },
-		code: function () {
+		code: () => {
 			return new $.button({
 				label: "Show offcanvas",
 				color: "primary",
-				onclick: function () {
+				onclick: () => {
 					new $.offcanvas({
 						close: true,
 						backdrop: true,
@@ -36,11 +36,11 @@ export default [
 	{
 		title: "Top",
 		sample: { "sample.offcanvasbody": sample.offcanvasbody },
-		code: function () {
+		code: () => {
 			return new $.button({
 				label: "Show top offcanvas",
 				color: "primary",
-				onclick: function () {
+				onclick: () => {
 					new $.offcanvas({
 						close: true,
 						backdrop: true,
@@ -58,11 +58,11 @@ export default [
 		title: "Bottom",
 		label: "Show bottom offcanvas",
 		sample: { "sample.offcanvasbody": sample.offcanvasbody },
-		code: function () {
+		code: () => {
 			return new $.button({
 				label: "Show bottom offcanvas",
 				color: "primary",
-				onclick: function () {
+				onclick: () => {
 					new $.offcanvas({
 						close: true,
 						backdrop: true,
@@ -80,11 +80,11 @@ export default [
 		title: "End",
 		label: "Show end offcanvas",
 		sample: { "sample.offcanvasbody": sample.offcanvasbody },
-		code: function () {
+		code: () => {
 			return new $.button({
 				label: "Show end offcanvas",
 				color: "primary",
-				onclick: function () {
+				onclick: () => {
 					new $.offcanvas({
 						close: true,
 						backdrop: true,
@@ -102,12 +102,12 @@ export default [
 		title: "Backdrop",
 		container: sample.stackcontainer,
 		sample: { "sample.offcanvasbody": sample.offcanvasbody },
-		code: function () {
+		code: () => {
 			return [
 				new $.button({
 					label: "Enable body scrolling",
 					color: "primary",
-					onclick: function () {
+					onclick: () => {
 						new $.offcanvas({
 							close: true,
 							scroll: true,
@@ -122,7 +122,7 @@ export default [
 				new $.button({
 					label: "Enable backdrop",
 					color: "primary",
-					onclick: function () {
+					onclick: () => {
 						new $.offcanvas({
 							close: true,
 							scroll: false,
@@ -137,7 +137,7 @@ export default [
 				new $.button({
 					label: "Enable both scrolling & backdrop",
 					color: "primary",
-					onclick: function () {
+					onclick: () => {
 						new $.offcanvas({
 							close: true,
 							backdrop: true,

@@ -8,7 +8,7 @@ export default [
 	},
 	{
 		title: "Example",
-		code: function () {
+		code: () => {
 			return [
 				{
 					label: "Menu 1",
@@ -37,7 +37,7 @@ export default [
 						{ label: "Sub menu 3.4" },
 					],
 				},
-			].map(function (i) {
+			].map((i) => {
 				return new $.menu(i);
 			});
 		},
@@ -46,7 +46,7 @@ export default [
 	{
 		title: "Dark background",
 		dark: true,
-		code: function () {
+		code: () => {
 			return [
 				{
 					label: "Menu 1",
@@ -75,7 +75,7 @@ export default [
 						{ label: "Sub menu 3.4" },
 					],
 				},
-			].map(function (i) {
+			].map((i) => {
 				return new $.menu(i);
 			});
 		},
@@ -83,7 +83,7 @@ export default [
 
 	{
 		title: "Auto expand",
-		code: function () {
+		code: () => {
 			return [
 				{
 					label: "Menu 1",
@@ -113,7 +113,7 @@ export default [
 						{ label: "Sub menu 3.4" },
 					],
 				},
-			].map(function (i) {
+			].map((i) => {
 				return new $.menu(i);
 			});
 		},
@@ -121,7 +121,7 @@ export default [
 
 	{
 		title: "With icon",
-		code: function () {
+		code: () => {
 			return [
 				{
 					label: "Menu",
@@ -134,7 +134,7 @@ export default [
 						{ label: "Sub menu 4" },
 					],
 				},
-			].map(function (i) {
+			].map((i) => {
 				return new $.menu(i);
 			});
 		},
@@ -142,7 +142,7 @@ export default [
 
 	{
 		title: "Link",
-		code: function () {
+		code: () => {
 			return [
 				{
 					label: "Menu",
@@ -153,7 +153,7 @@ export default [
 						{ label: "Bootswatch", href: "https://bootswatch.com/" },
 					],
 				},
-			].map(function (i) {
+			].map((i) => {
 				return new $.menu(i);
 			});
 		},
@@ -161,38 +161,38 @@ export default [
 
 	{
 		title: "Function",
-		code: function () {
+		code: () => {
 			return [
 				{
 					label: "Menu",
 					item: [
 						{
 							label: "Show info toast",
-							onclick: function () {
+							onclick: () => {
 								new $.toast("i", "Info toast").show();
 							},
 						},
 						{
 							label: "Show warning toast",
-							onclick: function () {
+							onclick: () => {
 								new $.toast("!", "Warning toast").show();
 							},
 						},
 						{
 							label: "Show success toast",
-							onclick: function () {
+							onclick: () => {
 								new $.toast("/", "Success toast").show();
 							},
 						},
 						{
 							label: "Show critical toast",
-							onclick: function () {
+							onclick: () => {
 								new $.toast("x", "Critical toast").show();
 							},
 						},
 					],
 				},
-			].map(function (i) {
+			].map((i) => {
 				return new $.menu(i);
 			});
 		},

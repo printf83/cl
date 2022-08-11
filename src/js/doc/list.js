@@ -16,7 +16,7 @@ export default [
 			"sample.query_data": sample.query_data_view,
 			"sample.list_state": sample.list_state,
 		},
-		code: function () {
+		code: () => {
 			let resultOutputId = $.core.UUID();
 			let btnGenerate = $.core.UUID();
 
@@ -27,12 +27,12 @@ export default [
 					label: "Run Code",
 					icon: "play",
 					color: "primary",
-					onclick: function (event) {
+					onclick: (event) => {
 						//get button to show loading
 						let sender = event.currentTarget;
 
 						//get list of state
-						sample.list_state(function (dbstate) {
+						sample.list_state((dbstate) => {
 							//generate list container
 							$.core.replaceWith(
 								document.getElementById(resultOutputId),
@@ -47,7 +47,7 @@ export default [
 							);
 
 							//load data into generated list container
-							$.list.container.reload(resultOutputId, sender, function () {
+							$.list.container.reload(resultOutputId, sender, () => {
 								//hide run code button
 								document.getElementById(btnGenerate).classList.add("d-none");
 								document.getElementById(resultOutputId).classList.remove("d-none");
@@ -69,7 +69,7 @@ export default [
 			"sample.query_data": sample.query_data_view,
 			"sample.list_state": sample.list_state,
 		},
-		code: function () {
+		code: () => {
 			let resultOutputId = $.core.UUID();
 			let btnGenerate = $.core.UUID();
 
@@ -80,12 +80,12 @@ export default [
 					label: "Run Code",
 					icon: "play",
 					color: "primary",
-					onclick: function (event) {
+					onclick: (event) => {
 						//get button to show loading
 						let sender = event.currentTarget;
 
 						//get list of state
-						sample.list_state(function (dbstate) {
+						sample.list_state((dbstate) => {
 							//generate list container
 							$.core.replaceWith(
 								document.getElementById(resultOutputId),
@@ -101,7 +101,7 @@ export default [
 							);
 
 							//load data into generated list container
-							$.list.container.reload(resultOutputId, sender, function () {
+							$.list.container.reload(resultOutputId, sender, () => {
 								//hide run code button
 								document.getElementById(btnGenerate).classList.add("d-none");
 								document.getElementById(resultOutputId).classList.remove("d-none");
@@ -123,7 +123,7 @@ export default [
 			"sample.query_data": sample.query_data_view,
 			"sample.list_state": sample.list_state,
 		},
-		code: function () {
+		code: () => {
 			let resultOutputId = $.core.UUID();
 			let btnGenerate = $.core.UUID();
 
@@ -134,12 +134,12 @@ export default [
 					label: "Run Code",
 					icon: "play",
 					color: "primary",
-					onclick: function (event) {
+					onclick: (event) => {
 						//get button to show loading
 						let sender = event.currentTarget;
 
 						//get list of state
-						sample.list_state(function (dbstate) {
+						sample.list_state((dbstate) => {
 							//generate list container
 							$.core.replaceWith(
 								document.getElementById(resultOutputId),
@@ -150,7 +150,7 @@ export default [
 									setting: sample.query_setting(dbstate),
 									query: sample.query_data,
 									name: "customer",
-									item: function (data) {
+									item: (data) => {
 										//custom item template
 										return new $.list.item({
 											key: data._id,
@@ -165,7 +165,7 @@ export default [
 							);
 
 							//load data into generated list container
-							$.list.container.reload(resultOutputId, sender, function () {
+							$.list.container.reload(resultOutputId, sender, () => {
 								//hide run code button
 								document.getElementById(btnGenerate).classList.add("d-none");
 								document.getElementById(resultOutputId).classList.remove("d-none");
@@ -189,7 +189,7 @@ export default [
 			"sample.list_group": sample.list_group,
 			"sample.list_state": sample.list_state,
 		},
-		code: function () {
+		code: () => {
 			let resultOutputId = $.core.UUID();
 			let btnGenerate = $.core.UUID();
 
@@ -199,12 +199,12 @@ export default [
 					label: "Run Code",
 					icon: "play",
 					color: "primary",
-					onclick: function (event) {
+					onclick: (event) => {
 						//run code button
 						let sender = event.currentTarget;
 
 						//get list of state
-						sample.list_state(function (dbstate) {
+						sample.list_state((dbstate) => {
 							//generate list container
 							$.core.replaceWith(
 								document.getElementById(resultOutputId),
@@ -216,7 +216,7 @@ export default [
 									query: sample.query_data,
 									name: "customer",
 									items: sample.list_items,
-									item: function (data) {
+									item: (data) => {
 										//custom list item
 										return new $.list.item({
 											key: data._id,
@@ -232,7 +232,7 @@ export default [
 							);
 
 							//load data into generated list container
-							$.list.container.reload(resultOutputId, sender, function () {
+							$.list.container.reload(resultOutputId, sender, () => {
 								//hide run code button
 								document.getElementById(btnGenerate).classList.add("d-none");
 								document.getElementById(resultOutputId).classList.remove("d-none");
@@ -267,7 +267,7 @@ export default [
 			"sample.list_group": sample.list_group,
 			"sample.list_state": sample.list_state,
 		},
-		code: function () {
+		code: () => {
 			let resultOutputId = $.core.UUID();
 			let btnGenerate = $.core.UUID();
 
@@ -278,12 +278,12 @@ export default [
 					label: "Run Code",
 					icon: "play",
 					color: "primary",
-					onclick: function (event) {
+					onclick: (event) => {
 						//get button to show loading
 						let sender = event.currentTarget;
 
 						//get list of state
-						sample.list_state(function (dbstate) {
+						sample.list_state((dbstate) => {
 							//generate list container
 							$.core.replaceWith(
 								document.getElementById(resultOutputId),
@@ -296,7 +296,7 @@ export default [
 									editor: sample.list_editor,
 									name: "customer",
 									items: sample.list_items,
-									item: function (data) {
+									item: (data) => {
 										return new $.list.item({
 											key: data._id,
 											name: data.name,
@@ -312,7 +312,7 @@ export default [
 							);
 
 							//load data into generated list container
-							$.list.container.reload(resultOutputId, sender, function () {
+							$.list.container.reload(resultOutputId, sender, () => {
 								//hide run code button
 								document.getElementById(btnGenerate).classList.add("d-none");
 								document.getElementById(resultOutputId).classList.remove("d-none");
@@ -340,7 +340,7 @@ export default [
 			"sample.list_state": sample.list_state,
 			"sample.list_more": sample.list_more,
 		},
-		code: function () {
+		code: () => {
 			let resultOutputId = $.core.UUID();
 			let btnGenerate = $.core.UUID();
 
@@ -351,12 +351,12 @@ export default [
 					label: "Run Code",
 					icon: "play",
 					color: "primary",
-					onclick: function (event) {
+					onclick: (event) => {
 						//get button to show loading
 						let sender = event.currentTarget;
 
 						//get list of state
-						sample.list_state(function (dbstate) {
+						sample.list_state((dbstate) => {
 							//generate list container
 							$.core.replaceWith(
 								document.getElementById(resultOutputId),
@@ -376,7 +376,7 @@ export default [
 							);
 
 							//load data into generated list container
-							$.list.container.reload(resultOutputId, sender, function () {
+							$.list.container.reload(resultOutputId, sender, () => {
 								//hide run code button
 								document.getElementById(btnGenerate).classList.add("d-none");
 								document.getElementById(resultOutputId).classList.remove("d-none");
@@ -406,7 +406,7 @@ export default [
 			"sample.list_state": sample.list_state,
 			"sample.list_more": sample.list_more,
 		},
-		code: function () {
+		code: () => {
 			let resultOutputId = $.core.UUID();
 			let btnGenerate = $.core.UUID();
 			let btnAdd = $.core.UUID();
@@ -418,12 +418,12 @@ export default [
 					label: "Run Code",
 					icon: "play",
 					color: "primary",
-					onclick: function (event) {
+					onclick: (event) => {
 						//get button to show loading
 						let sender = event.currentTarget;
 
 						//get list of state
-						sample.list_state(function (dbstate) {
+						sample.list_state((dbstate) => {
 							//generate list container
 							$.core.replaceWith(
 								document.getElementById(resultOutputId),
@@ -444,7 +444,7 @@ export default [
 							);
 
 							//load data into generated list container
-							$.list.container.reload(resultOutputId, sender, function () {
+							$.list.container.reload(resultOutputId, sender, () => {
 								//hide run code button and show add button
 								document.getElementById(btnGenerate).classList.add("d-none");
 								document.getElementById(btnAdd).classList.remove("d-none");
@@ -462,7 +462,7 @@ export default [
 					label: "Add new",
 					icon: "floppy-disk",
 					color: "success",
-					onclick: function (event) {
+					onclick: (event) => {
 						$.list.container.item.add(resultOutputId, event.currentTarget);
 					},
 				}),
@@ -497,7 +497,7 @@ export default [
 			"sample.list_state": sample.list_state,
 			"sample.list_more": sample.list_more,
 		},
-		code: function () {
+		code: () => {
 			let resultOutputId = $.core.UUID();
 			let btnGenerate = $.core.UUID();
 			let btnCheck = $.core.UUID();
@@ -509,12 +509,12 @@ export default [
 					label: "Run Code",
 					icon: "play",
 					color: "primary",
-					onclick: function (event) {
+					onclick: (event) => {
 						//get button to show loading
 						let sender = event.currentTarget;
 
 						//get list of state
-						sample.list_state(function (dbstate) {
+						sample.list_state((dbstate) => {
 							//generate list container
 							$.core.replaceWith(
 								document.getElementById(resultOutputId),
@@ -535,7 +535,7 @@ export default [
 							);
 
 							//load data into generated list container
-							$.list.container.reload(resultOutputId, sender, function () {
+							$.list.container.reload(resultOutputId, sender, () => {
 								//hide run code button and show check control
 								document.getElementById(btnGenerate).classList.add("d-none");
 								document.getElementById(btnCheck).classList.remove("d-none");
@@ -556,7 +556,7 @@ export default [
 							showlabel: "lg",
 							icon: "list-check",
 							color: "warning",
-							onclick: function () {
+							onclick: () => {
 								$.list.container.check.mode(resultOutputId);
 							},
 						}),
@@ -566,7 +566,7 @@ export default [
 							showlabel: "lg",
 							icon: "check-double",
 							color: "warning",
-							onclick: function () {
+							onclick: () => {
 								$.list.container.check.all(resultOutputId);
 							},
 						}),
@@ -576,7 +576,7 @@ export default [
 							showlabel: "lg",
 							icon: "trash-can",
 							color: "danger",
-							onclick: function (event) {
+							onclick: (event) => {
 								$.list.container.check.delete(resultOutputId, event.currentTarget);
 							},
 						}),
@@ -585,7 +585,7 @@ export default [
 							showlabel: "lg",
 							icon: "download",
 							color: "primary",
-							onclick: function () {
+							onclick: () => {
 								let checked = $.list.container.check.get(resultOutputId);
 								//checked : [{key:value,name:value}]
 								if (checked) {
@@ -593,14 +593,14 @@ export default [
 										new $.input({
 											type: "textarea",
 											value: checked
-												.map(function (i) {
+												.map((i) => {
 													return i.key;
 												})
 												.join(","),
 											name: "value",
 										}),
 										"ID",
-										function (_event, data) {}
+										(_event, data) => {}
 									).show();
 								}
 							},
@@ -611,8 +611,8 @@ export default [
 							showlabel: "lg",
 							icon: "upload",
 							color: "primary",
-							onclick: function () {
-								new $.dlg.inputbox("textarea", "ID", function (_event, data) {
+							onclick: () => {
+								new $.dlg.inputbox("textarea", "ID", (_event, data) => {
 									let checked = data.value.split(",");
 									$.list.container.check.set(resultOutputId, checked);
 								}).show();
@@ -652,7 +652,7 @@ export default [
 			"sample.list_state": sample.list_state,
 			"sample.list_more": sample.list_more,
 		},
-		code: function () {
+		code: () => {
 			let resultOutputId = $.core.UUID();
 			let btnGenerate = $.core.UUID();
 			let btnQuery = $.core.UUID();
@@ -664,12 +664,12 @@ export default [
 					label: "Run Code",
 					icon: "play",
 					color: "primary",
-					onclick: function (event) {
+					onclick: (event) => {
 						//get button to show loading
 						let sender = event.currentTarget;
 
 						//get list of state
-						sample.list_state(function (dbstate) {
+						sample.list_state((dbstate) => {
 							//generate list container
 							$.core.replaceWith(
 								document.getElementById(resultOutputId),
@@ -690,7 +690,7 @@ export default [
 							);
 
 							//load data into generated list container
-							$.list.container.reload(resultOutputId, sender, function () {
+							$.list.container.reload(resultOutputId, sender, () => {
 								//hide run code button and show query control
 								document.getElementById(btnGenerate).classList.add("d-none");
 								document.getElementById(btnQuery).classList.remove("d-none");
@@ -711,7 +711,7 @@ export default [
 							showlabel: "lg",
 							icon: "fire",
 							color: "primary",
-							onclick: function (event) {
+							onclick: (event) => {
 								$.list.container.query.all(resultOutputId, event.currentTarget);
 							},
 						}),
@@ -719,7 +719,7 @@ export default [
 						new $.button({
 							icon: "filter",
 							color: "primary",
-							onclick: function (event) {
+							onclick: (event) => {
 								$.list.container.query.filter(resultOutputId, event.currentTarget);
 							},
 						}),
@@ -727,7 +727,7 @@ export default [
 						new $.button({
 							icon: "sort",
 							color: "primary",
-							onclick: function (event) {
+							onclick: (event) => {
 								$.list.container.query.sort(resultOutputId, event.currentTarget);
 							},
 						}),
@@ -735,7 +735,7 @@ export default [
 						new $.button({
 							icon: "tasks",
 							color: "primary",
-							onclick: function (event) {
+							onclick: (event) => {
 								$.list.container.query.field(resultOutputId, event.currentTarget);
 							},
 						}),
@@ -743,7 +743,7 @@ export default [
 						new $.button({
 							icon: "list-ol",
 							color: "primary",
-							onclick: function (event) {
+							onclick: (event) => {
 								$.list.container.query.limit(resultOutputId, event.currentTarget);
 							},
 						}),
@@ -751,7 +751,7 @@ export default [
 						new $.button({
 							icon: { icon: "sort", rotate: 90 },
 							color: "primary",
-							onclick: function (event) {
+							onclick: (event) => {
 								$.list.container.query.page(resultOutputId, event.currentTarget);
 							},
 						}),

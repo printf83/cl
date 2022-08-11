@@ -73,7 +73,7 @@ export default class listgroup extends tag {
 
 		opt.elem = opt.elem
 			? opt.elem
-			: opt.item.map(function (i) {
+			: opt.item.map((i) => {
 					i = core.extend({}, defaultItemOption, i);
 
 					if (i.type === "checkbox" || i.type === "radio" || i.type === "switch") {

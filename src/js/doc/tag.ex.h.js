@@ -21,7 +21,7 @@ export default [
 	{
 		title: "Example",
 		container: sample.formcontainer,
-		code: function () {
+		code: () => {
 			return new $.h({
 				level: 5,
 				attr: {
@@ -41,8 +41,8 @@ export default [
 			}),
 		],
 		container: sample.formcontainer,
-		code: function () {
-			return [null, 1, 2, 3, 4, 5, 6].map(function (i) {
+		code: () => {
+			return [null, 1, 2, 3, 4, 5, 6].map((i) => {
 				return new $.h({ level: i, elem: `Example <code>level:${i}</code> heading` });
 			});
 		},
@@ -52,7 +52,7 @@ export default [
 		title: "Easy option",
 		msg: "This component also supported easy option.",
 		container: sample.formcontainer,
-		code: function () {
+		code: () => {
 			return [
 				new $.h({ level: 5, class: "classname", elem: "Using elem property" }),
 				new $.h(5, "Direct level and elem property"),

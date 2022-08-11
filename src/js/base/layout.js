@@ -113,7 +113,7 @@ export class l1 extends div {
 									hidelabel: true,
 									icon: { icon: "arrow-up", fixwidth: false },
 									attr: { "data-mainid": opt.mainid },
-									onclick: function (event) {
+									onclick: (event) => {
 										let sender = event.currentTarget;
 										document
 											.getElementById(sender.getAttribute("data-mainid"))

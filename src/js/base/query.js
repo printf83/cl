@@ -72,7 +72,7 @@ let db_filter = {};
 let db_sort = {};
 
 let fn = {
-	isPrototypeExists: function (obj, prototypeName) {
+	isPrototypeExists: (obj, prototypeName) => {
 		if (obj) {
 			if (typeof obj === "object") {
 				try {
@@ -88,7 +88,7 @@ let fn = {
 		return false;
 	},
 	filter: {
-		opr: function (useopricon, itemtype) {
+		opr: (useopricon, itemtype) => {
 			let rtn = null;
 			if (itemtype) {
 				//set operator base on frm value
@@ -143,14 +143,14 @@ let fn = {
 
 			return rtn;
 		},
-		item: function (useopricon, field, f, o, v) {
+		item: (useopricon, field, f, o, v) => {
 			//set default value for f
 			if (!f) {
 				f = field[0].value;
 			}
 
 			//generate from opt
-			let from_opt = field.map(function (item) {
+			let from_opt = field.map((item) => {
 				return {
 					value: item.value,
 					label: item.label,
@@ -161,7 +161,7 @@ let fn = {
 			let sel_from = new input({
 				type: "select",
 				name: "from",
-				onchange: function (event) {
+				onchange: (event) => {
 					fn.filter.change(event, useopricon);
 				},
 				option: from_opt,
@@ -233,7 +233,7 @@ let fn = {
 										new button({
 											color: "danger",
 											icon: "trash",
-											onclick: function (event) {
+											onclick: (event) => {
 												fn.filter.remove(event);
 											},
 										}),
@@ -261,7 +261,7 @@ let fn = {
 				}),
 			});
 		},
-		add: function (event, animate) {
+		add: (event, animate) => {
 			let sender = event.currentTarget;
 			let id = sender.getAttribute("data-cl-container");
 			let container = document.getElementById(id);
@@ -276,14 +276,14 @@ let fn = {
 			);
 
 			setTimeout(
-				function (container) {
+				(container) => {
 					container.querySelectorAll(".cl-fadeslidein")[0].classList.remove("cl-fadeslidein");
 				},
 				500,
 				container
 			);
 		},
-		change: function (event, useopricon) {
+		change: (event, useopricon) => {
 			let sender = event.currentTarget;
 			let id = sender.closest(".cl-filter-rule").getAttribute("id");
 			let opt = db_filter[id];
@@ -322,19 +322,19 @@ let fn = {
 				})
 			);
 		},
-		remove: function (event) {
+		remove: (event) => {
 			let sender = event.currentTarget;
 			sender.closest(".item").classList.add("cl-fadeslideout");
 
 			setTimeout(
-				function (sender) {
+				(sender) => {
 					core.removeElement(sender.closest(".item"));
 				},
 				500,
 				sender
 			);
 		},
-		get: function (container) {
+		get: (container) => {
 			let result = null;
 			let item = container.querySelectorAll("select[name='from']");
 
@@ -342,7 +342,7 @@ let fn = {
 				//get filter item and put in array
 				let tmp_result = [];
 
-				item.forEach(function (selfrom) {
+				item.forEach((selfrom) => {
 					let selopr = selfrom.closest(".item").querySelectorAll("select[name='opr']")[0];
 					let oprval = core.getValue(selopr);
 					let inputval = selfrom.closest(".item").querySelectorAll("[name='value']")[0];
@@ -380,7 +380,7 @@ let fn = {
 				let u_filter = [];
 				let l_filter = null;
 
-				tmp_result.forEach(function (i) {
+				tmp_result.forEach((i) => {
 					if (l_filter === null || l_filter != i.f) {
 						//mongodb not support field:{opr:{regex:value}}
 						if (fn.isPrototypeExists(i.v, "$regex") || fn.isPrototypeExists(i.v, "$exists")) {
@@ -421,12 +421,12 @@ let fn = {
 					["$and"]: [],
 				};
 
-				u_filter.forEach(function (i) {
+				u_filter.forEach((i) => {
 					if (i.length === 1) {
 						result["$and"].push(i[0]);
 					} else {
 						let v_filter = [];
-						i.forEach(function (j) {
+						i.forEach((j) => {
 							v_filter.push(j);
 						});
 
@@ -439,7 +439,7 @@ let fn = {
 
 			return result;
 		},
-		btn: function (opt) {
+		btn: (opt) => {
 			opt = core.extend({}, defaultFilterBtnOption, opt);
 
 			return new button({
@@ -450,12 +450,12 @@ let fn = {
 				attr: {
 					"data-cl-container": opt.container,
 				},
-				onclick: function (event) {
+				onclick: (event) => {
 					fn.filter.add(event, true);
 				},
 			});
 		},
-		build: function (opt, data) {
+		build: (opt, data) => {
 			opt = core.extend({}, defaultFilterBuildOption, opt);
 
 			//generate id for dialog
@@ -476,10 +476,10 @@ let fn = {
 				// $and:[] is mandatory
 				if (data["$and"]) {
 					//process each $and item
-					data["$and"].forEach(function (i) {
+					data["$and"].forEach((i) => {
 						//$and item
 						if (i["$or"]) {
-							i["$or"].forEach(function (j) {
+							i["$or"].forEach((j) => {
 								let name = Object.keys(j)[0];
 								let info = j[name];
 								let opr = Object.keys(info)[0];
@@ -527,7 +527,7 @@ let fn = {
 		},
 	},
 	sort: {
-		opr: function (useopricon, itemtype) {
+		opr: (useopricon, itemtype) => {
 			let rtn = null;
 			if (itemtype) {
 				//set operator base on frm value
@@ -568,14 +568,14 @@ let fn = {
 
 			return rtn;
 		},
-		item: function (useopricon, field, f, o) {
+		item: (useopricon, field, f, o) => {
 			//set default value for f
 			if (!f) {
 				f = field[0].value;
 			}
 
 			//generate from opt
-			let from_opt = field.map(function (item) {
+			let from_opt = field.map((item) => {
 				return {
 					value: item.value,
 					label: item.label,
@@ -586,7 +586,7 @@ let fn = {
 			let sel_from = new input({
 				type: "select",
 				name: "from",
-				onchange: function (event) {
+				onchange: (event) => {
 					fn.sort.change(event, useopricon);
 				},
 				option: from_opt,
@@ -632,7 +632,7 @@ let fn = {
 									new button({
 										color: "danger",
 										icon: "trash",
-										onclick: function (event) {
+										onclick: (event) => {
 											fn.sort.remove(event);
 										},
 									}),
@@ -643,7 +643,7 @@ let fn = {
 				}),
 			});
 		},
-		add: function (event, animate) {
+		add: (event, animate) => {
 			let sender = event.currentTarget;
 			let id = sender.getAttribute("data-cl-container");
 			let container = document.getElementById(id);
@@ -658,14 +658,14 @@ let fn = {
 			);
 
 			setTimeout(
-				function (container) {
+				(container) => {
 					container.querySelectorAll(".cl-fadeslidein")[0].classList.remove("cl-fadeslidein");
 				},
 				500,
 				container
 			);
 		},
-		change: function (event, useopricon) {
+		change: (event, useopricon) => {
 			let sender = event.currentTarget;
 			let id = sender.closest(".cl-sort-rule").getAttribute("id");
 			let opt = db_sort[id];
@@ -690,25 +690,25 @@ let fn = {
 				})
 			);
 		},
-		remove: function (event) {
+		remove: (event) => {
 			let sender = event.currentTarget;
 			sender.closest(".item").classList.add("cl-fadeslideout");
 
 			setTimeout(
-				function (sender) {
+				(sender) => {
 					core.removeElement(sender.closest(".item"));
 				},
 				500,
 				sender
 			);
 		},
-		get: function (container) {
+		get: (container) => {
 			let result = null;
 			let item = container.querySelectorAll("select[name='from']");
 
 			if (item && item.length > 0) {
 				result = {};
-				item.forEach(function (selfrom) {
+				item.forEach((selfrom) => {
 					let selopr = selfrom.closest(".item").querySelectorAll("select[name='opr']")[0];
 					result[core.getValue(selfrom)] = parseInt(core.getValue(selopr), 10);
 				});
@@ -716,7 +716,7 @@ let fn = {
 
 			return result;
 		},
-		btn: function (opt) {
+		btn: (opt) => {
 			opt = core.extend({}, defaultSortBtnOption, opt);
 
 			return new button({
@@ -727,12 +727,12 @@ let fn = {
 				attr: {
 					"data-cl-container": opt.container,
 				},
-				onclick: function (event) {
+				onclick: (event) => {
 					fn.sort.add(event, true);
 				},
 			});
 		},
-		build: function (opt, data) {
+		build: (opt, data) => {
 			opt = core.extend({}, defaultSortBuildOption, opt);
 
 			//generate id for dialog
@@ -743,7 +743,7 @@ let fn = {
 
 			//populate opt.data.sort into sort list
 			if (data) {
-				Object.keys(data).forEach(function (i) {
+				Object.keys(data).forEach((i) => {
 					if (data[i]) {
 						list.push(new div("item", fn.sort.item(opt.useopricon, opt.field, i, data[i])));
 					}
@@ -778,13 +778,13 @@ let fn = {
 		},
 	},
 	field: {
-		get: function (container) {
+		get: (container) => {
 			let result = null;
 			let item = container.querySelectorAll("input[name]");
 
 			if (item && item.length > 0) {
 				result = {};
-				item.forEach(function (inputfield) {
+				item.forEach((inputfield) => {
 					if (!core.getValue(inputfield)) {
 						result[inputfield.getAttribute("name")] = 0;
 					}
@@ -793,7 +793,7 @@ let fn = {
 
 			return result;
 		},
-		build: function (opt, data) {
+		build: (opt, data) => {
 			opt = core.extend({}, defaultFieldBuildOption, opt);
 
 			//gen field list
@@ -812,7 +812,7 @@ let fn = {
 
 			//other field
 			if (opt.field) {
-				opt.field.forEach(function (i) {
+				opt.field.forEach((i) => {
 					list.push(
 						new input({
 							type: "checkbox",
@@ -838,11 +838,11 @@ let fn = {
 		},
 	},
 	limit: {
-		get: function (container) {
+		get: (container) => {
 			let item = container.querySelectorAll("input[name='limit']")[0];
 			return core.getValue(item);
 		},
-		build: function (opt, data) {
+		build: (opt, data) => {
 			opt = core.extend({}, defaultLimitBuildOption, opt);
 
 			return new input({
@@ -859,11 +859,11 @@ let fn = {
 		},
 	},
 	skip: {
-		get: function (container) {
+		get: (container) => {
 			let item = container.querySelectorAll("input[name='step']")[0];
 			return core.getValue(item) - 1;
 		},
-		build: function (opt, data) {
+		build: (opt, data) => {
 			opt = core.extend({}, defaultSkipBuildOption, opt);
 
 			return new input({
@@ -879,7 +879,7 @@ let fn = {
 			});
 		},
 	},
-	get: function (container) {
+	get: (container) => {
 		let filter_container = container.getElementsByClassName("cl-filter-rule")[0];
 		let sort_container = container.getElementsByClassName("cl-sort-rule")[0];
 		let field_container = container.getElementsByClassName("cl-field-rule")[0];
@@ -907,14 +907,14 @@ function btnBuilder(btn, defButton, defColor, pushCancel) {
 	let argBtn = Array.isArray(btn) ? btn : [btn];
 	if (pushCancel && argBtn.length === 1) argBtn.push("Cancel");
 
-	return argBtn.map(function (i, ix) {
+	return argBtn.map((i, ix) => {
 		if (i instanceof Function) {
 			return {
 				label: ix <= defButton.length ? defButton[ix] : `Button ${ix + 1}`,
 				color: ix === 0 && defColor ? defColor : null,
 				onclick:
 					ix === 0
-						? function (sender) {
+						? (sender) => {
 								if (core.validate(sender.closest(".modal"))) {
 									i(sender);
 									return true;
@@ -1031,7 +1031,7 @@ export class dialog extends modal {
 				title: "Query",
 				elem: elemBuilder(opt[0]),
 				button: btnBuilder(
-					function (sender) {
+					(sender) => {
 						opt[1][0](sender, fn.get(sender.closest(".modal")));
 					},
 					["Okay", "Cancel", "Retry"],
@@ -1063,7 +1063,7 @@ export class filter extends modal {
 					opt[0].data
 				),
 				button: btnBuilder(
-					function (sender) {
+					(sender) => {
 						opt[1][0](sender, fn.filter.get(sender.closest(".modal")));
 					},
 					["Okay", "Cancel", "Retry"],
@@ -1096,7 +1096,7 @@ export class sort extends modal {
 					opt[0].data
 				),
 				button: btnBuilder(
-					function (sender) {
+					(sender) => {
 						opt[1][0](sender, fn.sort.get(sender.closest(".modal")));
 					},
 					["Okay", "Cancel", "Retry"],
@@ -1124,7 +1124,7 @@ export class field extends modal {
 					opt[0].data
 				),
 				button: btnBuilder(
-					function (sender) {
+					(sender) => {
 						opt[1][0](sender, fn.field.get(sender.closest(".modal")));
 					},
 					["Okay", "Cancel", "Retry"],
@@ -1153,7 +1153,7 @@ export class limit extends modal {
 					opt[0].data
 				),
 				button: btnBuilder(
-					function (sender) {
+					(sender) => {
 						opt[1][0](sender, fn.limit.get(sender.closest(".modal")));
 					},
 					["Okay", "Cancel", "Retry"],
@@ -1183,7 +1183,7 @@ export class page extends modal {
 					opt[0].data
 				),
 				button: btnBuilder(
-					function (sender) {
+					(sender) => {
 						opt[1][0](sender, fn.skip.get(sender.closest(".modal")) * opt[0].limit);
 					},
 					["Okay", "Cancel", "Retry"],

@@ -13,7 +13,7 @@ export default [
 		title: "tag",
 		msg: ["Create tag name for tag"],
 		container: sample.formcontainer,
-		code: function () {
+		code: () => {
 			return new $.button({ label: "AAA" });
 		},
 	},
@@ -26,7 +26,7 @@ export default [
 		title: "tag",
 		msg: ["Create tag name for tag"],
 		container: sample.formcontainer,
-		code: function () {
+		code: () => {
 			return [
 				new $.tag({ tag: "div", elem: "DIV element" }),
 				new $.tag({ tag: "span", elem: "SPAN element" }),
@@ -41,7 +41,7 @@ export default [
 		title: "elem",
 		msg: ["Create element inside tag"],
 		container: sample.formcontainer,
-		code: function () {
+		code: () => {
 			return [
 				new $.tag({ tag: "div", class: "cl-highlight-div cl-highlight-element", elem: "String" }),
 				new $.tag({
@@ -70,7 +70,7 @@ export default [
 	{
 		title: "elem (without tag)",
 		msg: ["Create element inside tag that change parent property"],
-		code: function () {
+		code: () => {
 			return new $.tag({
 				tag: "div",
 				elem: new $.tag({
@@ -84,7 +84,7 @@ export default [
 	{
 		title: "attr",
 		msg: ["Create attribute for element"],
-		code: function () {
+		code: () => {
 			return new $.tag({
 				tag: "div",
 				attr: { id: "elementID", class: "elementClass", style: { color: "#555" } },
@@ -104,7 +104,7 @@ export default [
 	{
 		title: "id",
 		msg: ["Create attribute <code>id</code> for element", "Shortcut for : <code>attr:{id:value}</code>"],
-		code: function () {
+		code: () => {
 			return new $.tag({
 				tag: "div",
 				id: "elementID2",
@@ -115,7 +115,7 @@ export default [
 	{
 		title: "name",
 		msg: ["Create attribute <code>name</code> for element", "Shortcut for : <code>attr:{id:value}</code>"],
-		code: function () {
+		code: () => {
 			return new $.tag({
 				tag: "div",
 				name: "elementName",
@@ -130,7 +130,7 @@ export default [
 			"Create attribute <code>href</code> for <code>a</code> element",
 			"Shortcut for : <code>attr:{href:value}</code>",
 		],
-		code: function () {
+		code: () => {
 			return new $.tag({
 				tag: "a",
 				href: "https://www.getbootstrap.com",
@@ -142,11 +142,11 @@ export default [
 	{
 		title: "onclick",
 		msg: ["Create attribute <code>onclick</code> for  element", "Shortcut for : <code>attr:{onclick:value}</code>"],
-		code: function () {
+		code: () => {
 			return new $.tag({
 				tag: "button",
 				class: "btn btn-primary",
-				onclick: function (event) {
+				onclick: (event) => {
 					event.currentTarget.innerText = "onclick trigged";
 				},
 				elem: "Example button",
@@ -160,7 +160,7 @@ export default [
 			"Create attribute <code>onchange</code> for  element",
 			"Shortcut for : <code>attr:{onchange:value}</code>",
 		],
-		code: function () {
+		code: () => {
 			return new $.tag({
 				tag: "input",
 				attr: {
@@ -168,7 +168,7 @@ export default [
 					type: "text",
 					placeholder: "Type some text here",
 				},
-				onchange: function (event) {
+				onchange: (event) => {
 					event.currentTarget.value = "onchange trigged";
 				},
 			});
@@ -178,7 +178,7 @@ export default [
 	{
 		title: "onfocus",
 		msg: ["Create attribute <code>onfocus</code> for  element", "Shortcut for : <code>attr:{onfocus:value}</code>"],
-		code: function () {
+		code: () => {
 			return new $.tag({
 				tag: "input",
 				attr: {
@@ -186,7 +186,7 @@ export default [
 					type: "text",
 					placeholder: "Example input",
 				},
-				onfocus: function (event) {
+				onfocus: (event) => {
 					event.currentTarget.value = "onfocus trigged";
 				},
 			});
@@ -196,7 +196,7 @@ export default [
 	{
 		title: "onblur",
 		msg: ["Create attribute <code>onblur</code> for  element", "Shortcut for : <code>attr:{onblur:value}</code>"],
-		code: function () {
+		code: () => {
 			return new $.tag({
 				tag: "input",
 				attr: {
@@ -204,7 +204,7 @@ export default [
 					type: "text",
 					value: "Example input",
 				},
-				onblur: function (event) {
+				onblur: (event) => {
 					event.currentTarget.value = "onblur trigged";
 				},
 			});
@@ -214,7 +214,7 @@ export default [
 	{
 		title: "style",
 		msg: ["Create attribute <code>style</code> for  element", "Shortcut for : <code>attr:{style:value}</code>"],
-		code: function () {
+		code: () => {
 			return new $.tag({
 				tag: "div",
 				style: {

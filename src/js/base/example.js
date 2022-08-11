@@ -22,7 +22,7 @@ const defaultOption = {
 	sample: null,
 	view: true,
 	viewclass: null,
-	container: function (elem) {
+	container: (elem) => {
 		return elem;
 	},
 
@@ -69,7 +69,7 @@ export default class example extends div {
 									"data-anchorjs-icon": "#",
 									onclick: opt.debug
 										? null
-										: function (event) {
+										: (event) => {
 												core.focusElement(event.currentTarget.parentNode);
 										  },
 								},
@@ -85,7 +85,7 @@ export default class example extends div {
 
 			opt.msg = Array.isArray(opt.msg) ? opt.msg : [opt.msg];
 
-			ctlmsg = opt.msg.map(function (i) {
+			ctlmsg = opt.msg.map((i) => {
 				if (typeof i === "string") {
 					return new p({
 						class: opt.anchor || opt.msg.length >= 3 ? null : "fw-lighter fs-5",

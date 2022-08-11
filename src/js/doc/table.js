@@ -13,7 +13,7 @@ export default [
 		sample: {
 			"sample.table": sample.table,
 		},
-		code: function () {
+		code: () => {
 			return new $.table.container({
 				item: sample.table(true, false),
 			});
@@ -25,7 +25,7 @@ export default [
 		sample: {
 			"sample.table": sample.table,
 		},
-		code: function () {
+		code: () => {
 			return new $.table.container({
 				rownumber: true,
 				item: sample.table(true, false),
@@ -38,7 +38,7 @@ export default [
 		sample: {
 			"sample.table": sample.table,
 		},
-		code: function () {
+		code: () => {
 			return new $.table.container({
 				rownumber: true,
 				footer: true,
@@ -52,7 +52,7 @@ export default [
 		sample: {
 			"sample.table": sample.table,
 		},
-		code: function () {
+		code: () => {
 			return new $.table.container({
 				rownumber: true,
 				header: false,
@@ -66,7 +66,7 @@ export default [
 		sample: {
 			"sample.table": sample.table,
 		},
-		code: function () {
+		code: () => {
 			return new $.table.container({
 				color: "primary",
 				footer: true,
@@ -80,7 +80,7 @@ export default [
 		sample: {
 			"sample.table": sample.table,
 		},
-		code: function () {
+		code: () => {
 			return new $.table.container({
 				color: "primary",
 				striped: true,
@@ -95,7 +95,7 @@ export default [
 		sample: {
 			"sample.table": sample.table,
 		},
-		code: function () {
+		code: () => {
 			return new $.table.container({
 				color: "primary",
 				striped: true,
@@ -111,7 +111,7 @@ export default [
 		sample: {
 			"sample.table": sample.table,
 		},
-		code: function () {
+		code: () => {
 			return new $.table.container({
 				color: "primary",
 				striped: true,
@@ -128,7 +128,7 @@ export default [
 		sample: {
 			"sample.table": sample.table,
 		},
-		code: function () {
+		code: () => {
 			return new $.table.container({
 				color: "primary",
 				striped: true,
@@ -143,7 +143,7 @@ export default [
 
 	{
 		title: "Kitchen sink",
-		code: function () {
+		code: () => {
 			return new $.table.container({
 				color: "primary",
 				striped: true,

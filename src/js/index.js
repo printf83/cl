@@ -144,25 +144,25 @@ const db_menu = [
 		item: [
 			{
 				title: "Memory Test 10",
-				source: function (event) {
+				source: (event) => {
 					startmemoryleaktest(event.currentTarget, 10);
 				},
 			},
 			{
 				title: "Memory Test 100",
-				source: function (event) {
+				source: (event) => {
 					startmemoryleaktest(event.currentTarget, 100);
 				},
 			},
 			{
 				title: "Memory Test 1000",
-				source: function (event) {
+				source: (event) => {
 					startmemoryleaktest(event.currentTarget, 1000);
 				},
 			},
 			{
 				title: "Memory Test 5000",
-				source: function (event) {
+				source: (event) => {
 					startmemoryleaktest(event.currentTarget, 5000);
 				},
 			},
@@ -231,14 +231,14 @@ function startmemoryleaktest(sender, limit) {
 		memoryleaktest(
 			0,
 			limit,
-			function (i, l) {
+			(i, l) => {
 				if (i === l || memoryleaktestrun === false) {
 					sender.innerText = `Memory Test ${l}`;
 				} else {
 					sender.innerText = `Memory Test ${parseInt((i / l) * 100, 10)}%`;
 				}
 			},
-			function () {
+			() => {
 				sender.classList.remove("active");
 				$.core.init(document.getElementById("root"));
 				PR.prettyPrint();
@@ -268,7 +268,7 @@ function memoryleaktest(index, limit, progressupdate, callback) {
 		}
 
 		if (process) {
-			gen_content(db_menu[ix1].title, db_menu[ix1].item[ix2].title, function () {
+			gen_content(db_menu[ix1].title, db_menu[ix1].item[ix2].title, () => {
 				if (index >= limit) {
 					callback();
 				} else {
@@ -299,7 +299,7 @@ function gen_example(opt) {
 			option: null,
 			code: null,
 			sample: null,
-			container: function (elem) {
+			container: (elem) => {
 				return elem;
 			},
 		},
@@ -314,7 +314,7 @@ function gen_example(opt) {
 
 	if (opt.msg) {
 		m = [];
-		opt.msg.forEach(function (i) {
+		opt.msg.forEach((i) => {
 			m.push(i);
 		});
 	}
@@ -324,7 +324,7 @@ function gen_example(opt) {
 			m = [];
 		}
 
-		Object.keys(opt.option).forEach(function (optionName) {
+		Object.keys(opt.option).forEach((optionName) => {
 			m.push(
 				new $.table.container({
 					item: opt.option[optionName],
@@ -370,9 +370,9 @@ function gen_content(m1, m2, callback) {
 				//LOADER TYPE 1
 				//=============
 				setTimeout(
-					function (m, callback) {
-						let p = function (m) {
-							return new Promise(function (res, rej) {
+					(m, callback) => {
+						let p = (m) => {
+							return new Promise((res, rej) => {
 								try {
 									let processtimestart = window.performance.now();
 
@@ -381,7 +381,7 @@ function gen_content(m1, m2, callback) {
 										document.getElementById("root"),
 										new $.div({
 											marginbottom: 3,
-											elem: m.source.map(function (i) {
+											elem: m.source.map((i) => {
 												return gen_example(i);
 											}),
 										})
@@ -408,12 +408,12 @@ function gen_content(m1, m2, callback) {
 							});
 						};
 						p(m)
-							.then(function () {
+							.then(() => {
 								if (callback instanceof Function) {
 									callback();
 								}
 							})
-							.catch(function (ex) {
+							.catch((ex) => {
 								console.error(ex);
 								if (callback instanceof Function) {
 									callback();
@@ -429,13 +429,13 @@ function gen_content(m1, m2, callback) {
 				//LOADER TYPE 2
 				//=============
 				// setTimeout(
-				// 	function (m, callback) {
+				// 	(m, callback) => {
 				// 		sample.resetindex();
 				// 		$.core.replaceChild(
 				// 			document.getElementById("root"),
 				// 			new $.div({
 				// 				marginbottom: 3,
-				// 				elem: m.source.map(function (i) {
+				// 				elem: m.source.map((i) => {
 				// 					return gen_example(i);
 				// 				}),
 				// 			})
@@ -460,7 +460,7 @@ function gen_content(m1, m2, callback) {
 				// 	document.getElementById("root"),
 				// 	new $.div({
 				// 		marginbottom: 3,
-				// 		elem: m.source.map(function (i) {
+				// 		elem: m.source.map((i) => {
 				// 			return gen_example(i);
 				// 		}),
 				// 	})
@@ -529,7 +529,7 @@ function gen_toc() {
 			document.getElementById("nextbar"),
 			new $.toc({
 				label: "On this page",
-				item: anchor.map(function (i) {
+				item: anchor.map((i) => {
 					//remove debug example
 					if (!i.classList.contains("anchorjs-link-debug")) {
 						let parent = i.parentElement;
@@ -537,7 +537,7 @@ function gen_toc() {
 						return {
 							label: parent.innerText,
 							attr: { "cl-target-id": id },
-							onclick: function (event) {
+							onclick: (event) => {
 								let sender = event.currentTarget;
 								let id = sender.getAttribute("cl-target-id");
 								$.core.focusElement(document.getElementById(id));
@@ -576,11 +576,11 @@ function get_url() {
 }
 
 function gen_menu(m1, m2, theme) {
-	return db_menu.map(function (i) {
+	return db_menu.map((i) => {
 		return new $.menu({
 			label: i.title,
 			active: i.title === m1,
-			item: i.item.map(function (j) {
+			item: i.item.map((j) => {
 				return {
 					label: j.title,
 					active: j.title === m2 || (i.type === "theme" && j.source === theme),
@@ -591,7 +591,7 @@ function gen_menu(m1, m2, theme) {
 					},
 					onclick:
 						i.type !== "action"
-							? function (event) {
+							? (event) => {
 									let sender = event.currentTarget;
 
 									let m1 = sender.getAttribute("cl-m1");
@@ -602,7 +602,7 @@ function gen_menu(m1, m2, theme) {
 										document.getElementById("sidebar").getElementsByClassName("active")
 									);
 
-									activeItem.forEach(function (i) {
+									activeItem.forEach((i) => {
 										if (i.getAttribute("cl-m3") === m3) {
 											i.classList.remove("active");
 										}
@@ -612,7 +612,7 @@ function gen_menu(m1, m2, theme) {
 
 									if (i.type === "menu") {
 										sender.innerText = "Loading...";
-										gen_content(m1, m2, function () {
+										gen_content(m1, m2, () => {
 											$.core.init(document.getElementById("root"));
 											PR.prettyPrint();
 											sender.innerText = m2;
@@ -720,7 +720,7 @@ $.core.documentReady(() => {
 		})
 	);
 
-	gen_content(def_m1, def_m2, function () {
+	gen_content(def_m1, def_m2, () => {
 		$.core.init(document.getElementById("root"));
 		PR.prettyPrint();
 	});

@@ -213,7 +213,7 @@ export default class toast extends div {
 		this._m = d;
 	}
 
-	show = function () {
+	show = () => {
 		//generate container
 		let position = this.data.attr["data-cl-position"];
 		let containerQuery = core.combineArray(["toast-container", position], " ");
@@ -244,12 +244,12 @@ export default class toast extends div {
 		toast.timer(this.dom.getElementsByClassName("timer")[0]);
 
 		//set destroy after hide
-		this.dom.addEventListener("hidden.bs.toast", function (event) {
+		this.dom.addEventListener("hidden.bs.toast", (event) => {
 			let dom = event.currentTarget;
 			let tst = bootstrap.Toast.getInstance(dom);
 
 			setTimeout(
-				function (dom, tst) {
+				(dom, tst) => {
 					tst.dispose();
 					core.removeElement(dom);
 
@@ -314,7 +314,7 @@ export default class toast extends div {
 				elem.innerHTML = tc.msg;
 				if (tc.next > 0) {
 					setTimeout(
-						function (elem) {
+						(elem) => {
 							toast.timer(elem);
 						},
 						tc.next,

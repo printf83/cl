@@ -20,7 +20,7 @@ export default [
 
 	{
 		title: "Example",
-		code: function () {
+		code: () => {
 			return new $.nav({
 				attr: { "data-test": "test" },
 				elem: "Example navigation",
@@ -32,7 +32,7 @@ export default [
 		title: "Easy option",
 		msg: "This component also supported easy option.",
 		container: sample.formcontainer,
-		code: function () {
+		code: () => {
 			return [
 				new $.nav({ class: "classname", elem: "Navigation 1" }),
 				new $.nav("classname", "Navigation 2"),
