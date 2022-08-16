@@ -1,5 +1,4 @@
 "use strict";
-// import $ from "../component.js";
 import * as alert from "../base/alert.js";
 import hr from "../base/hr.js";
 import p from "../base/p.js";
@@ -13,7 +12,7 @@ export default [
 
 	{
 		title: "Example",
-		import: [`import * as alert from "./base/alert.js";`],
+		import: ["alert"],
 		code: () => {
 			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map((i) => {
 				return new alert.container({ color: i, elem: `A simple ${i} alert—check it out!` });
@@ -23,7 +22,7 @@ export default [
 
 	{
 		title: "Link color",
-		import: [`import * as alert from "./base/alert.js";`],
+		import: ["alert"],
 		code: () => {
 			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map((i) => {
 				return new alert.container({
@@ -40,11 +39,7 @@ export default [
 
 	{
 		title: "Additional content",
-		import: [
-			`import * as alert from "./base/alert.js";`,
-			`import p from "../base/p.js";`,
-			`import hr from "../base/hr.js";`,
-		],
+		import: ["alert", "p", "hr"],
 		code: () => {
 			return new alert.container({
 				color: "success",
@@ -75,7 +70,7 @@ export default [
 
 	{
 		title: "Dismissing",
-		import: [`import * as alert from "./base/alert.js"`],
+		import: ["alert"],
 		code: () => {
 			return new alert.container({
 				close: true,

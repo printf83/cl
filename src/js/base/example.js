@@ -32,20 +32,7 @@ const defaultOption = {
 
 const fn = {
 	importToCode: (d) => {
-		let item = [`"use strict";`];
-		// Object.keys(d).forEach((importKey) => {
-		// 	if (importKey === "_") {
-		// 		item.push(`import "${d[importKey]}";`);
-		// 	} else {
-		// 		item.push(`import ${importKey} from "${d[importKey]}";`);
-		// 	}
-		// });
-
-		d.forEach((i) => {
-			item.push(i);
-		});
-
-		return item.join(`\n`);
+		return d.join(`\n`);
 	},
 };
 
@@ -152,7 +139,7 @@ export default class example extends div {
 				label: "code",
 				icon: "fire",
 				active: !opt.codecollapse,
-				elem: new codepreview({ type: "js", code: opt.code.toString(), container: null }),
+				elem: new codepreview({ type: "js", code: `let code = ${opt.code.toString()}`, container: null }),
 			});
 		}
 

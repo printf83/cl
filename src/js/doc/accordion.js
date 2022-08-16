@@ -1,7 +1,6 @@
 "use strict";
 import sample from "./sample.js";
 import accordion from "../base/accordion.js";
-// import $ from "../component.js";
 
 export default [
 	{
@@ -13,7 +12,7 @@ export default [
 		title: "Example",
 		msg: "Click the accordions below to expand/collapse the accordion content.",
 		sample: { "sample.text": sample.text },
-		import: [`import sample from "./sample.js";`, `import accordion from "../base/accordion.js";`],
+		import: ["accordion", "sample"],
 		code: () => {
 			return new accordion({
 				item: [
@@ -38,7 +37,7 @@ export default [
 		title: "Flush",
 		msg: "Set {{flush:true}} to remove the default background-color, some borders, and some rounded corners to render accordions edge-to-edge with their parent container.",
 		sample: { "sample.text": sample.text, "sample.accordionitem": sample.accordionitem },
-		import: [`import sample from "./sample.js";`, `import accordion from "../base/accordion.js";`],
+		import: ["accordion", "sample"],
 		code: () => {
 			return new accordion({
 				flush: true,
@@ -51,7 +50,7 @@ export default [
 		title: "Always open",
 		msg: "Set {{autoclose:false}} to make accordion items stay open when another item is opened.",
 		sample: { "sample.text": sample.text, "sample.accordionitem": sample.accordionitem },
-		import: [`import sample from "./sample.js";`, `import accordion from "../base/accordion.js";`],
+		import: ["accordion", "sample"],
 		code: () => {
 			return new accordion({
 				autoclose: false,

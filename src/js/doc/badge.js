@@ -1,6 +1,10 @@
 "use strict";
 import sample from "./sample.js";
-import $ from "../component.js";
+import * as core from "../base/core.js";
+import h from "../base/h.js";
+import badge from "../base/badge.js";
+import button from "../base/button.js";
+// import $ from "../component.js";
 
 export default [
 	{
@@ -11,11 +15,12 @@ export default [
 
 	{
 		title: "Example",
+		import: ["h", "badge"],
 		code: () => {
 			return [1, 2, 3, 4, 5, 6].map((i) => {
-				return new $.h({
+				return new h({
 					level: i,
-					elem: [`Example heading #${i}`, new $.badge({ label: "New", marginstart: 3 })],
+					elem: [`Example heading #${i}`, new badge({ label: "New", marginstart: 3 })],
 				});
 			});
 		},
@@ -23,8 +28,9 @@ export default [
 
 	{
 		title: "Buttons",
+		import: ["button"],
 		code: () => {
-			return new $.button({
+			return new button({
 				label: "Notifications",
 				color: "primary",
 				badge: { label: "4", marginstart: 3 },
@@ -34,8 +40,9 @@ export default [
 
 	{
 		title: "Positioned",
+		import: ["button"],
 		code: () => {
-			return new $.button({
+			return new button({
 				label: "Inbox",
 				color: "primary",
 				badge: {
@@ -50,15 +57,16 @@ export default [
 
 	{
 		title: "Notification",
+		import: ["button"],
 		code: () => {
-			return new $.button({
+			return new button({
 				label: "Profile",
 				color: "primary",
 				badge: {
 					border: "light",
 					color: "danger",
 					notification: true,
-					asst: "new $.Message",
+					asst: "new message",
 				},
 			});
 		},
@@ -67,9 +75,10 @@ export default [
 	{
 		title: "Background color",
 		container: sample.stackcontainer,
+		import: ["badge"],
 		code: () => {
 			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map((i) => {
-				return new $.badge({ label: $.core.capitalize(i), color: i });
+				return new badge({ label: core.capitalize(i), color: i });
 			});
 		},
 	},
@@ -77,9 +86,10 @@ export default [
 	{
 		title: "Pill badge",
 		container: sample.stackcontainer,
+		import: ["badge"],
 		code: () => {
 			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map((i) => {
-				return new $.badge({ pill: true, label: $.core.capitalize(i), color: i });
+				return new badge({ pill: true, label: core.capitalize(i), color: i });
 			});
 		},
 	},
