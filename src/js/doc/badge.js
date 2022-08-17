@@ -4,7 +4,6 @@ import * as core from "../base/core.js";
 import h from "../base/h.js";
 import badge from "../base/badge.js";
 import button from "../base/button.js";
-// import $ from "../component.js";
 
 export default [
 	{

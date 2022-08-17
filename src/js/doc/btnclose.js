@@ -1,6 +1,6 @@
 "use strict";
 import sample from "./sample.js";
-import $ from "../component.js";
+import btnclose from "../base/btnclose.js";
 
 export default [
 	{
@@ -11,15 +11,17 @@ export default [
 
 	{
 		title: "Example",
+		import: ["btnclose"],
 		code: () => {
-			return new $.btnclose();
+			return new btnclose();
 		},
 	},
 
 	{
 		title: "Disabled state",
+		import: ["btnclose"],
 		code: () => {
-			return new $.btnclose({ disabled: true });
+			return new btnclose({ disabled: true });
 		},
 	},
 
@@ -27,8 +29,9 @@ export default [
 		title: "White variant",
 		dark: true,
 		container: sample.stackcontainer,
+		import: ["btnclose"],
 		code: () => {
-			return [new $.btnclose({ dark: false }), new $.btnclose({ dark: false, disabled: true })];
+			return [new btnclose({ dark: false }), new btnclose({ dark: false, disabled: true })];
 		},
 	},
 ];

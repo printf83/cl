@@ -398,21 +398,33 @@ function gen_example(opt) {
 		});
 	}
 
-	let imp = [];
+	let i = [];
 
-	imp.push('"use strict";');
-	imp.push(` `);
-	imp.push(dblibrary.core);
+	i.push('"use strict";');
+	i.push(`	`);
+	i.push(`\/\/\/library`);
+	i.push(`\/\/\/----------------`);
+	i.push(dblibrary.core);
 	if (opt.import) {
-		opt.import.forEach((i) => {
-			imp.push(dblibrary[i]);
+		opt.import.forEach((item) => {
+			if (dblibrary[item]) {
+				i.push(dblibrary[item]);
+			} else {
+				i.push(`\/\/\/[Error] Unknow library ${item}`);
+			}
 		});
 	}
-	imp.push(` `);
+	i.push(`	`);
+	i.push(`\/\/\/main code`);
+	i.push(`\/\/\/----------------`);
+	i.push(`let code = () = {};`);
+	i.push(`	`);
 
-	imp.push(`core.documentReady(() => {`);
-	imp.push(`	$.core.appendChild(document.body, code());`);
-	imp.push(`});`);
+	i.push(`\/\/\/loader`);
+	i.push(`\/\/\/----------------`);
+	i.push(`core.documentReady(() => {`);
+	i.push(`	core.appendChild(document.body, code());`);
+	i.push(`});`);
 
 	return new $.example({
 		id: opt.id,
@@ -422,7 +434,7 @@ function gen_example(opt) {
 		dark: opt.dark,
 		viewclass: opt.viewclass,
 		container: opt.container,
-		import: imp,
+		import: i,
 		code: opt.code,
 		sample: opt.sample,
 	});

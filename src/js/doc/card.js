@@ -1,5 +1,9 @@
 "use strict";
 import sample from "./sample.js";
+import * as card from "./base/card.js";
+import button from "./base/button.js";
+import listgroup from "./base/listgroup.js";
+
 import $ from "../component.js";
 
 export default [
@@ -12,21 +16,22 @@ export default [
 	{
 		title: "Example",
 		sample: { "sample.img": sample.img },
+		import: ["button", "card", "sample"],
 		code: () => {
-			return new $.card.container({
+			return new card.container({
 				style: { width: "18rem" },
 				elem: [
-					new $.card.img({
+					new card.img({
 						placement: "top",
 						src: sample.img(286, 143),
 					}),
-					new $.card.body({
+					new card.body({
 						elem: [
-							new $.card.title("Card Title"),
-							new $.card.text(
+							new card.title("Card Title"),
+							new card.text(
 								"Some quick example text to build on the card title and make up the bulk of the card's content."
 							),
-							new $.button({ label: "Go somewhere", color: "primary" }),
+							new button({ label: "Go somewhere", color: "primary" }),
 						],
 					}),
 				],
@@ -37,8 +42,9 @@ export default [
 	{
 		title: "Body",
 		msg: "The building block of a card is the {{card.body}}. Use it whenever you need a padded section within a card.",
+		import: ["card"],
 		code: () => {
-			return new $.card.container(new $.card.body("This is some text within a card body."));
+			return new card.container(new card.body("This is some text within a card body."));
 		},
 	},
 
@@ -48,21 +54,22 @@ export default [
 			"Card titles are used by adding {{card.title}}. In the same way, links are added and placed next to each other by adding {{card.link}}.",
 			"Subtitles are used by adding a {{card.subtitle}}. If the {{card.title}} and the {{card.subtitle}} items are placed in a {{card.body}} item, the card title and subtitle are aligned nicely.",
 		],
+		import: ["card"],
 		code: () => {
-			return new $.card.container({
+			return new card.container({
 				style: { width: "18rem" },
-				elem: new $.card.body({
+				elem: new card.body({
 					elem: [
-						new $.card.title("Card Title"),
-						new $.card.subtitle("Card subtitle"),
-						new $.card.text(
+						new card.title("Card Title"),
+						new card.subtitle("Card subtitle"),
+						new card.text(
 							"Some quick example text to build on the card title and make up the bulk of the card's content."
 						),
-						new $.card.link({
+						new card.link({
 							href: "#",
 							elem: "Link 1",
 						}),
-						new $.card.link({
+						new card.link({
 							href: "#",
 							elem: "Link 2",
 						}),
@@ -76,16 +83,17 @@ export default [
 		title: "Images",
 		msg: '{{placement: "top"}} places an {{card.img}} to the top of the card. With {{card.text}}, text can be added to the card. Text within {{card.text}} can also be styled with the standard HTML tags.',
 		sample: { "sample.img": sample.img },
+		import: ["card"],
 		code: () => {
-			return new $.card.container({
+			return new card.container({
 				style: { width: "18rem" },
 				elem: [
-					new $.card.img({
+					new card.img({
 						placement: "top",
 						src: sample.img(286, 143),
 					}),
-					new $.card.body({
-						elem: new $.card.text({
+					new card.body({
+						elem: new card.text({
 							elem: "Some quick example text to build on the card title and make up the bulk of the card's content.",
 						}),
 					}),
@@ -97,10 +105,11 @@ export default [
 	{
 		title: "List groups",
 		msg: "Create lists of content in a card with a flush list group.",
+		import: ["listgroup", "card"],
 		code: () => {
-			return new $.card.container({
+			return new card.container({
 				style: { width: "18rem" },
-				elem: new $.listgroup({
+				elem: new listgroup({
 					flush: true,
 					item: [{ elem: "An item" }, { elem: "A second item" }, { elem: "A third item" }],
 				}),
