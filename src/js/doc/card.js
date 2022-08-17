@@ -1,8 +1,8 @@
 "use strict";
 import sample from "./sample.js";
-import * as card from "./base/card.js";
-import button from "./base/button.js";
-import listgroup from "./base/listgroup.js";
+import * as card from "../base/card.js";
+import button from "../base/button.js";
+import listgroup from "../base/listgroup.js";
 
 import $ from "../component.js";
 
