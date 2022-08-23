@@ -30,12 +30,6 @@ const defaultOption = {
 	debug: false,
 };
 
-const fn = {
-	importToCode: (d) => {
-		return d.join(`\n`);
-	},
-};
-
 /**
  * opt : {tagoption,icon,label}
  */
@@ -119,7 +113,6 @@ export default class example extends div {
 			Object.keys(opt.sample).forEach((sampleKey) => {
 				item.push({
 					label: sampleKey,
-					// label: opt.sample[sampleKey].name(),
 					icon: "link",
 					elem: new codepreview({ type: "js", code: opt.sample[sampleKey].toString(), container: null }),
 				});
@@ -130,7 +123,7 @@ export default class example extends div {
 			item.push({
 				label: "import",
 				icon: "file-import",
-				elem: new codepreview({ type: "js", code: fn.importToCode(opt.import), container: null }),
+				elem: new codepreview({ type: "js", code: opt.import.join(`\n`), container: null }),
 			});
 		}
 

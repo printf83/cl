@@ -20,7 +20,7 @@ const FNNAME = /list_fn./g;
 
 function beautifyjs(str) {
 	let opt = {
-		preserve_newlines: false,
+		preserve_newlines: true,
 		max_preserve_newlines: 50,
 		end_with_newline: true,
 		brace_style: "collapse",
@@ -46,7 +46,7 @@ function beautifyhtml(str) {
 
 	str = str.replace(/\>/g, ">\n");
 	str = str.replace(/\</g, "\n<");
-	str = str.replace(/\n\n/g, "\n");
+	//str = str.replace(/\n\n/g, "\n");
 	return html_beautify(str, opt);
 }
 

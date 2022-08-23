@@ -1,10 +1,14 @@
 "use strict";
 import sample from "./sample.js";
+import * as core from "../base/core.js";
 import * as card from "../base/card.js";
 import button from "../base/button.js";
 import listgroup from "../base/listgroup.js";
-
-import $ from "../component.js";
+import tab from "../base/tab.js";
+import div from "../base/div.js";
+import p from "../base/p.js";
+import small from "../base/small.js";
+import tag from "../base/tag.js";
 
 export default [
 	{
@@ -119,12 +123,13 @@ export default [
 
 	{
 		title: "List groups with card header",
+		import: ["listgroup", "card"],
 		code: () => {
-			return new $.card.container({
+			return new card.container({
 				style: { width: "18rem" },
 				elem: [
-					new $.card.header("Feature"),
-					new $.listgroup({
+					new card.header("Feature"),
+					new listgroup({
 						flush: true,
 						item: [{ elem: "An item" }, { elem: "A second item" }, { elem: "A third item" }],
 					}),
@@ -135,15 +140,16 @@ export default [
 
 	{
 		title: "List groups with card footer",
+		import: ["listgroup", "card"],
 		code: () => {
-			return new $.card.container({
+			return new card.container({
 				style: { width: "18rem" },
 				elem: [
-					new $.listgroup({
+					new listgroup({
 						flush: true,
 						item: [{ elem: "An item" }, { elem: "A second item" }, { elem: "A third item" }],
 					}),
-					new $.card.footer({
+					new card.footer({
 						muted: false,
 						elem: "Card footer",
 					}),
@@ -156,33 +162,34 @@ export default [
 		title: "Kitchen Sink",
 		msg: "Mix and match multiple content types to create the card you need, or throw everything in there. Shown below are image styles, blocks, text styles, and a list group—all wrapped in a fixed-width card.",
 		sample: { "sample.img": sample.img },
+		import: ["listgroup", "card"],
 		code: () => {
-			return new $.card.container({
+			return new card.container({
 				style: { width: "18rem" },
 				elem: [
-					new $.card.img({
+					new card.img({
 						placement: "top",
 						src: sample.img(286, 143),
 					}),
-					new $.card.body({
+					new card.body({
 						elem: [
-							new $.card.title("Card Title"),
-							new $.card.text(
+							new card.title("Card Title"),
+							new card.text(
 								"Some quick example text to build on the card title and make up the bulk of the card's content."
 							),
 						],
 					}),
-					new $.listgroup({
+					new listgroup({
 						flush: true,
 						item: [{ elem: "An item" }, { elem: "A second item" }, { elem: "A third item" }],
 					}),
-					new $.card.body({
+					new card.body({
 						elem: [
-							new $.card.link({
+							new card.link({
 								href: "#",
 								elem: "Link 1",
 							}),
-							new $.card.link({
+							new card.link({
 								href: "#",
 								elem: "Link 2",
 							}),
@@ -196,15 +203,16 @@ export default [
 	{
 		title: "Header and footer",
 		msg: "Add an optional header and/or footer within a card.",
+		import: ["button", "card"],
 		code: () => {
-			return new $.card.container({
+			return new card.container({
 				elem: [
-					new $.card.header("Feature"),
-					new $.card.body({
+					new card.header("Feature"),
+					new card.body({
 						elem: [
-							new $.card.title("Special title treatment"),
-							new $.card.text("With supporting text below as a natural lead-in to additional content."),
-							new $.button({ label: "Go somewhere", color: "primary" }),
+							new card.title("Special title treatment"),
+							new card.text("With supporting text below as a natural lead-in to additional content."),
+							new button({ label: "Go somewhere", color: "primary" }),
 						],
 					}),
 				],
@@ -215,18 +223,19 @@ export default [
 	{
 		title: "Header with {{h*}} class",
 		msg: 'Card headers can be styled by adding {{class: "h*"}} elements into {{card.header}}.',
+		import: ["button", "card"],
 		code: () => {
-			return new $.card.container({
+			return new card.container({
 				elem: [
-					new $.card.header({
+					new card.header({
 						class: "h5",
 						elem: "Feature",
 					}),
-					new $.card.body({
+					new card.body({
 						elem: [
-							new $.card.title("Special title treatment"),
-							new $.card.text("With supporting text below as a natural lead-in to additional content."),
-							new $.button({ label: "Go somewhere", color: "primary" }),
+							new card.title("Special title treatment"),
+							new card.text("With supporting text below as a natural lead-in to additional content."),
+							new button({ label: "Go somewhere", color: "primary" }),
 						],
 					}),
 				],
@@ -236,22 +245,23 @@ export default [
 
 	{
 		title: "Quote",
+		import: ["tag", "p", "card"],
 		code: () => {
-			return new $.card.container({
+			return new card.container({
 				elem: [
-					new $.card.header("Quote"),
-					new $.card.body({
-						elem: new $.tag({
+					new card.header("Quote"),
+					new card.body({
+						elem: new tag({
 							tag: "blockquote",
 							class: "mb-0",
 							elem: [
-								new $.p("A well-known quote, contained in a blockquote element."),
-								new $.tag({
+								new p("A well-known quote, contained in a blockquote element."),
+								new tag({
 									tag: "footer",
 									class: "blockquote-footer",
 									elem: [
 										"Someone famous in",
-										new $.tag({
+										new tag({
 											tag: "cite",
 											attr: { title: "Source Title" },
 											elem: "Source Title",
@@ -268,19 +278,20 @@ export default [
 
 	{
 		title: "Align center card text",
+		import: ["button", "card"],
 		code: () => {
-			return new $.card.container({
+			return new card.container({
 				align: "center",
 				elem: [
-					new $.card.header("Feature"),
-					new $.card.body({
+					new card.header("Feature"),
+					new card.body({
 						elem: [
-							new $.card.title("Special title treatment"),
-							new $.card.text("With supporting text below as a natural lead-in to additional content."),
-							new $.button({ label: "Go somewhere", color: "primary" }),
+							new card.title("Special title treatment"),
+							new card.text("With supporting text below as a natural lead-in to additional content."),
+							new button({ label: "Go somewhere", color: "primary" }),
 						],
 					}),
-					new $.card.footer("2 days ago"),
+					new card.footer("2 days ago"),
 				],
 			});
 		},
@@ -294,38 +305,39 @@ export default [
 	{
 		title: "Using grid markup",
 		msg: "Using the grid, wrap cards in columns and rows as needed.",
+		import: ["div", "button", "card"],
 		code: () => {
-			return new $.div({
+			return new div({
 				row: true,
 				gap: 2,
 				elem: [
-					new $.div({
+					new div({
 						col: "sm-6",
-						elem: new $.card.container({
+						elem: new card.container({
 							elem: [
-								new $.card.body({
+								new card.body({
 									elem: [
-										new $.card.title("Special title treatment"),
-										new $.card.text(
+										new card.title("Special title treatment"),
+										new card.text(
 											"With supporting text below as a natural lead-in to additional content."
 										),
-										new $.button({ label: "Go somewhere", color: "primary" }),
+										new button({ label: "Go somewhere", color: "primary" }),
 									],
 								}),
 							],
 						}),
 					}),
-					new $.div({
+					new div({
 						col: "sm-6",
-						elem: new $.card.container({
+						elem: new card.container({
 							elem: [
-								new $.card.body({
+								new card.body({
 									elem: [
-										new $.card.title("Special title treatment"),
-										new $.card.text(
+										new card.title("Special title treatment"),
+										new card.text(
 											"With supporting text below as a natural lead-in to additional content."
 										),
-										new $.button({ label: "Go somewhere", color: "primary" }),
+										new button({ label: "Go somewhere", color: "primary" }),
 									],
 								}),
 							],
@@ -339,32 +351,29 @@ export default [
 	{
 		title: "Using utilities",
 		msg: "Use Bootstrap handful of available sizing utilities to quickly set a card’s width.",
+		import: ["button", "card"],
 		code: () => {
 			return [
-				new $.card.container({
+				new card.container({
 					class: "w-75 mb-3",
 					elem: [
-						new $.card.body({
+						new card.body({
 							elem: [
-								new $.card.title("Special title treatment"),
-								new $.card.text(
-									"With supporting text below as a natural lead-in to additional content."
-								),
-								new $.button({ label: "Button", color: "primary" }),
+								new card.title("Special title treatment"),
+								new card.text("With supporting text below as a natural lead-in to additional content."),
+								new button({ label: "Button", color: "primary" }),
 							],
 						}),
 					],
 				}),
-				new $.card.container({
+				new card.container({
 					class: "w-50",
 					elem: [
-						new $.card.body({
+						new card.body({
 							elem: [
-								new $.card.title("Special title treatment"),
-								new $.card.text(
-									"With supporting text below as a natural lead-in to additional content."
-								),
-								new $.button({ label: "Button", color: "primary" }),
+								new card.title("Special title treatment"),
+								new card.text("With supporting text below as a natural lead-in to additional content."),
+								new button({ label: "Button", color: "primary" }),
 							],
 						}),
 					],
@@ -376,18 +385,17 @@ export default [
 	{
 		title: "Using custom CSS",
 		msg: "Use custom CSS in your stylesheets or as inline styles to set a width.",
+		import: ["button", "card"],
 		code: () => {
 			return [
-				new $.card.container({
+				new card.container({
 					style: { width: "18rem" },
 					elem: [
-						new $.card.body({
+						new card.body({
 							elem: [
-								new $.card.title("Special title treatment"),
-								new $.card.text(
-									"With supporting text below as a natural lead-in to additional content."
-								),
-								new $.button({ label: "Go somewhere", color: "primary" }),
+								new card.title("Special title treatment"),
+								new card.text("With supporting text below as a natural lead-in to additional content."),
+								new button({ label: "Go somewhere", color: "primary" }),
 							],
 						}),
 					],
@@ -400,48 +408,43 @@ export default [
 		title: "Text alignment",
 		msg: 'You can quickly change the text alignment of any card—in its entirety or specific parts—with {{align:"null|center|end"}}.',
 		container: sample.stackcontainer,
+		import: ["button", "card"],
 		code: () => {
 			return [
-				new $.card.container({
+				new card.container({
 					style: { width: "18rem" },
 					elem: [
-						new $.card.body({
+						new card.body({
 							elem: [
-								new $.card.title("Special title treatment"),
-								new $.card.text(
-									"With supporting text below as a natural lead-in to additional content."
-								),
-								new $.button({ label: "Go somewhere", color: "primary" }),
+								new card.title("Special title treatment"),
+								new card.text("With supporting text below as a natural lead-in to additional content."),
+								new button({ label: "Go somewhere", color: "primary" }),
 							],
 						}),
 					],
 				}),
-				new $.card.container({
+				new card.container({
 					align: "center",
 					style: { width: "18rem" },
 					elem: [
-						new $.card.body({
+						new card.body({
 							elem: [
-								new $.card.title("Special title treatment"),
-								new $.card.text(
-									"With supporting text below as a natural lead-in to additional content."
-								),
-								new $.button({ label: "Go somewhere", color: "primary" }),
+								new card.title("Special title treatment"),
+								new card.text("With supporting text below as a natural lead-in to additional content."),
+								new button({ label: "Go somewhere", color: "primary" }),
 							],
 						}),
 					],
 				}),
-				new $.card.container({
+				new card.container({
 					align: "end",
 					style: { width: "18rem" },
 					elem: [
-						new $.card.body({
+						new card.body({
 							elem: [
-								new $.card.title("Special title treatment"),
-								new $.card.text(
-									"With supporting text below as a natural lead-in to additional content."
-								),
-								new $.button({ label: "Go somewhere", color: "primary" }),
+								new card.title("Special title treatment"),
+								new card.text("With supporting text below as a natural lead-in to additional content."),
+								new button({ label: "Go somewhere", color: "primary" }),
 							],
 						}),
 					],
@@ -454,8 +457,9 @@ export default [
 		title: "Tab in card",
 		msg: "{{tab}} is working navbar in card",
 		sample: { "sample.text": sample.text },
+		import: ["tab", "sample"],
 		code: () => {
-			return new $.tab({
+			return new tab({
 				type: "tab",
 				item: [
 					{
@@ -479,8 +483,9 @@ export default [
 	{
 		title: "Pill style tab",
 		sample: { "sample.text": sample.text },
+		import: ["tab", "sample"],
 		code: () => {
-			return new $.tab({
+			return new tab({
 				type: "pill",
 				item: [
 					{
@@ -505,37 +510,38 @@ export default [
 		title: "Images",
 		container: sample.stackcontainer,
 		sample: { "sample.img": sample.img },
+		import: ["small", "card", "sample"],
 		code: () => {
 			return [
-				new $.card.container({
+				new card.container({
 					elem: [
-						new $.card.img({
+						new card.img({
 							placement: "top",
 							src: sample.img(857, 428),
 						}),
-						new $.card.body({
+						new card.body({
 							elem: [
-								new $.card.title("Card Title"),
-								new $.card.text(
+								new card.title("Card Title"),
+								new card.text(
 									"This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer."
 								),
-								new $.card.text({ color: "muted", elem: new $.small("Last updated 3 mins ago") }),
+								new card.text({ color: "muted", elem: new small("Last updated 3 mins ago") }),
 							],
 						}),
 					],
 				}),
-				new $.card.container({
+				new card.container({
 					elem: [
-						new $.card.body({
+						new card.body({
 							elem: [
-								new $.card.title("Card Title"),
-								new $.card.text(
+								new card.title("Card Title"),
+								new card.text(
 									"This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer."
 								),
-								new $.card.text({ color: "muted", elem: new $.small("Last updated 3 mins ago") }),
+								new card.text({ color: "muted", elem: new small("Last updated 3 mins ago") }),
 							],
 						}),
-						new $.card.img({
+						new card.img({
 							placement: "bottom",
 							src: sample.img(857, 428),
 						}),
@@ -548,20 +554,21 @@ export default [
 	{
 		title: "Image overlays",
 		sample: { "sample.img": sample.img },
+		import: ["small", "card", "sample"],
 		code: () => {
-			return new $.card.container({
+			return new card.container({
 				textcolor: "light",
 				elem: [
-					new $.card.img({
+					new card.img({
 						src: sample.img(857, 428),
 					}),
-					new $.card.imgoverlay({
+					new card.imgoverlay({
 						elem: [
-							new $.card.title("Card Title"),
-							new $.card.text(
+							new card.title("Card Title"),
+							new card.text(
 								"This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer."
 							),
-							new $.card.text({ color: "muted", elem: new $.small("Last updated 3 mins ago") }),
+							new card.text({ color: "muted", elem: new small("Last updated 3 mins ago") }),
 						],
 					}),
 				],
@@ -572,38 +579,39 @@ export default [
 	{
 		title: "Horizontal",
 		sample: { "sample.img": sample.img },
+		import: ["small", "card", "sample"],
 		code: () => {
-			return new $.card.container({
+			return new card.container({
 				class: "h-100",
 				elem: [
-					new $.card.horizontal({
+					new card.horizontal({
 						size: "sm-4",
 						left: [
-							new $.card.img({
+							new card.img({
 								placement: "left",
 								src: sample.img(285, 285),
 							}),
 						],
-						right: new $.card.container({
+						right: new card.container({
 							class: "h-100",
 							flush: true,
 							elem: [
-								new $.card.header({
+								new card.header({
 									elem: "Header",
 								}),
-								new $.card.body({
+								new card.body({
 									elem: [
-										new $.card.title("Card Title"),
-										new $.card.text(
+										new card.title("Card Title"),
+										new card.text(
 											"This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer."
 										),
-										new $.card.text({
+										new card.text({
 											color: "muted",
-											elem: new $.small("Last updated 3 mins ago"),
+											elem: new small("Last updated 3 mins ago"),
 										}),
 									],
 								}),
-								new $.card.footer({
+								new card.footer({
 									elem: "Footer",
 								}),
 							],
@@ -622,17 +630,18 @@ export default [
 	{
 		title: "Background and color",
 		container: sample.stackcontainer,
+		import: ["card"],
 		code: () => {
-			return new $.card.container({
+			return new card.container({
 				color: "primary",
 				textcolor: "light",
 				style: { width: "18rem" },
 				elem: [
-					new $.card.header("Header"),
-					new $.card.body({
+					new card.header("Header"),
+					new card.body({
 						elem: [
-							new $.card.title("Primary card title"),
-							new $.card.text(
+							new card.title("Primary card title"),
+							new card.text(
 								"Some quick example text to build on the card title and make up the bulk of the card's content."
 							),
 						],
@@ -645,6 +654,7 @@ export default [
 	{
 		title: "Example background and color",
 		container: sample.stackcontainer,
+		import: ["card"],
 		code: () => {
 			return [
 				{ color: "primary", textcolor: "light" },
@@ -656,16 +666,16 @@ export default [
 				{ color: "light" },
 				{ color: "dark", textcolor: "light" },
 			].map((i) => {
-				return new $.card.container({
+				return new card.container({
 					color: i.color,
 					textcolor: i.textcolor,
 					style: { width: "18rem" },
 					elem: [
-						new $.card.header("Header"),
-						new $.card.body({
+						new card.header("Header"),
+						new card.body({
 							elem: [
-								new $.card.title(`${$.core.capitalize(i.color)} card title`),
-								new $.card.text(
+								new card.title(`${core.capitalize(i.color)} card title`),
+								new card.text(
 									`Some quick example text to build on the ${i.color} card title and make up the bulk of the card's content.`
 								),
 							],
@@ -679,17 +689,18 @@ export default [
 	{
 		title: "Border color",
 		container: sample.stackcontainer,
+		import: ["card"],
 		code: () => {
-			return new $.card.container({
+			return new card.container({
 				bordercolor: "primary",
 				style: { width: "18rem" },
 				elem: [
-					new $.card.header("Header"),
-					new $.card.body({
+					new card.header("Header"),
+					new card.body({
 						textcolor: "primary",
 						elem: [
-							new $.card.title("Primary card title"),
-							new $.card.text(
+							new card.title("Primary card title"),
+							new card.text(
 								"Some quick example text to build on the card title and make up the bulk of the card's content."
 							),
 						],
@@ -702,6 +713,7 @@ export default [
 	{
 		title: "Example border color",
 		container: sample.stackcontainer,
+		import: ["card"],
 		code: () => {
 			return [
 				{ color: "primary", textcolor: "primary" },
@@ -713,16 +725,16 @@ export default [
 				{ color: "light" },
 				{ color: "dark", textcolor: "light" },
 			].map((i) => {
-				return new $.card.container({
+				return new card.container({
 					bordercolor: i.color,
 					style: { width: "18rem" },
 					elem: [
-						new $.card.header("Header"),
-						new $.card.body({
+						new card.header("Header"),
+						new card.body({
 							textcolor: i.textcolor,
 							elem: [
-								new $.card.title(`${$.core.capitalize(i.color)} card title`),
-								new $.card.text(
+								new card.title(`${core.capitalize(i.color)} card title`),
+								new card.text(
 									"Some quick example text to build on the card title and make up the bulk of the card's content."
 								),
 							],
@@ -736,26 +748,27 @@ export default [
 	{
 		title: "Mixins utilities",
 		container: sample.stackcontainer,
+		import: ["card"],
 		code: () => {
-			return new $.card.container({
+			return new card.container({
 				bordercolor: "success",
 				style: { width: "18rem" },
 				elem: [
-					new $.card.header({
+					new card.header({
 						color: "transparent",
 						class: "border-success",
 						elem: "Header",
 					}),
-					new $.card.body({
+					new card.body({
 						textcolor: "success",
 						elem: [
-							new $.card.title("Success card title"),
-							new $.card.text(
+							new card.title("Success card title"),
+							new card.text(
 								"Some quick example text to build on the card title and make up the bulk of the card's content."
 							),
 						],
 					}),
-					new $.card.footer({
+					new card.footer({
 						class: "border-success",
 						color: "transparent",
 						elem: "Footer",
@@ -769,19 +782,20 @@ export default [
 		title: "Card groups",
 		container: sample.stackcontainer,
 		sample: { "sample.img": sample.img, "sample.cardwithimg": sample.cardwithimg },
+		import: ["card", "sample"],
 		code: () => {
-			return new $.card.group({
+			return new card.group({
 				elem: [
-					new $.card.container({
+					new card.container({
 						elem: [
-							new $.card.img({
+							new card.img({
 								placement: "top",
 								src: sample.img(286, 143),
 							}),
-							new $.card.body({
+							new card.body({
 								elem: [
-									new $.card.title("Card Title"),
-									new $.card.text(
+									new card.title("Card Title"),
+									new card.text(
 										"This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer."
 									),
 								],
@@ -802,24 +816,25 @@ export default [
 			"sample.img": sample.img,
 			"sample.cardwithfooter": sample.cardwithfooter,
 		},
+		import: ["card", "sample"],
 		code: () => {
-			return new $.card.group({
+			return new card.group({
 				elem: [
-					new $.card.container({
+					new card.container({
 						elem: [
-							new $.card.img({
+							new card.img({
 								placement: "top",
 								src: sample.img(286, 143),
 							}),
-							new $.card.body({
+							new card.body({
 								elem: [
-									new $.card.title("Card Title"),
-									new $.card.text(
+									new card.title("Card Title"),
+									new card.text(
 										"This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer."
 									),
 								],
 							}),
-							new $.card.footer("Last updated 3 mins ago"),
+							new card.footer("Last updated 3 mins ago"),
 						],
 					}),
 
@@ -833,16 +848,17 @@ export default [
 	{
 		title: "Card grid using {{row-cols-md-2}}",
 		sample: { "sample.cardwithimg": sample.cardwithimg },
+		import: ["div", "card", "sample"],
 		code: () => {
-			return new $.div({
+			return new div({
 				row: true,
 				rowcol: [1, "md-2"],
 				gap: 4,
 				elem: [
-					new $.div({ col: true, elem: sample.cardwithimg()[0] }),
-					new $.div({ col: true, elem: sample.cardwithimg()[1] }),
-					new $.div({ col: true, elem: sample.cardwithimg()[2] }),
-					new $.div({ col: true, elem: sample.cardwithimg()[3] }),
+					new div({ col: true, elem: sample.cardwithimg()[0] }),
+					new div({ col: true, elem: sample.cardwithimg()[1] }),
+					new div({ col: true, elem: sample.cardwithimg()[2] }),
+					new div({ col: true, elem: sample.cardwithimg()[3] }),
 				],
 			});
 		},
@@ -851,16 +867,17 @@ export default [
 	{
 		title: "Card grid using {{row-cols-md-3}}",
 		sample: { "sample.cardwithimg": sample.cardwithimg },
+		import: ["div", "card", "sample"],
 		code: () => {
-			return new $.div({
+			return new div({
 				row: true,
 				rowcol: [1, "md-3"],
 				gap: 4,
 				elem: [
-					new $.div({ col: true, elem: sample.cardwithimg()[0] }),
-					new $.div({ col: true, elem: sample.cardwithimg()[1] }),
-					new $.div({ col: true, elem: sample.cardwithimg()[2] }),
-					new $.div({ col: true, elem: sample.cardwithimg()[3] }),
+					new div({ col: true, elem: sample.cardwithimg()[0] }),
+					new div({ col: true, elem: sample.cardwithimg()[1] }),
+					new div({ col: true, elem: sample.cardwithimg()[2] }),
+					new div({ col: true, elem: sample.cardwithimg()[3] }),
 				],
 			});
 		},
@@ -869,25 +886,26 @@ export default [
 	{
 		title: "Card grid with {{h-100}} class",
 		sample: { "sample.img": sample.img, "sample.cardh100": sample.cardh100 },
+		import: ["div", "card", "sample"],
 		code: () => {
-			return new $.div({
+			return new div({
 				row: true,
 				rowcol: [1, "md-3"],
 				gap: 4,
 				elem: [
-					new $.div({
+					new div({
 						col: true,
-						elem: new $.card.container({
+						elem: new card.container({
 							class: "h-100",
 							elem: [
-								new $.card.img({
+								new card.img({
 									placement: "top",
 									src: sample.img(286, 143),
 								}),
-								new $.card.body({
+								new card.body({
 									elem: [
-										new $.card.title("Card Title"),
-										new $.card.text(
+										new card.title("Card Title"),
+										new card.text(
 											"This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer."
 										),
 									],
@@ -895,9 +913,9 @@ export default [
 							],
 						}),
 					}),
-					new $.div({ col: true, elem: sample.cardh100()[0] }),
-					new $.div({ col: true, elem: sample.cardh100()[1] }),
-					new $.div({ col: true, elem: sample.cardh100()[2] }),
+					new div({ col: true, elem: sample.cardh100()[0] }),
+					new div({ col: true, elem: sample.cardh100()[1] }),
+					new div({ col: true, elem: sample.cardh100()[2] }),
 				],
 			});
 		},
@@ -909,36 +927,37 @@ export default [
 			"sample.img": sample.img,
 			"sample.cardwithfooterh100": sample.cardwithfooterh100,
 		},
+		import: ["div", "card", "sample"],
 		code: () => {
-			return new $.div({
+			return new div({
 				row: true,
 				rowcol: [1, "md-3"],
 				gap: 4,
 				elem: [
-					new $.div({
+					new div({
 						col: true,
-						elem: new $.card.container({
+						elem: new card.container({
 							class: "h-100",
 							elem: [
-								new $.card.img({
+								new card.img({
 									placement: "top",
 									src: sample.img(286, 143),
 								}),
-								new $.card.body({
+								new card.body({
 									elem: [
-										new $.card.title("Card Title"),
-										new $.card.text(
+										new card.title("Card Title"),
+										new card.text(
 											"This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer."
 										),
 									],
 								}),
-								new $.card.footer("Last updated 3 mins ago"),
+								new card.footer("Last updated 3 mins ago"),
 							],
 						}),
 					}),
-					new $.div({ col: true, elem: sample.cardwithfooterh100()[0] }),
-					new $.div({ col: true, elem: sample.cardwithfooterh100()[1] }),
-					new $.div({ col: true, elem: sample.cardwithfooterh100()[2] }),
+					new div({ col: true, elem: sample.cardwithfooterh100()[0] }),
+					new div({ col: true, elem: sample.cardwithfooterh100()[1] }),
+					new div({ col: true, elem: sample.cardwithfooterh100()[2] }),
 				],
 			});
 		},

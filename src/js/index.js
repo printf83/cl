@@ -403,28 +403,31 @@ function gen_example(opt) {
 	i.push('"use strict";');
 	i.push(`	`);
 	i.push(`\/\/\/library`);
-	i.push(`\/\/\/----------------`);
 	i.push(dblibrary.core);
 	if (opt.import) {
+		let importList = [];
 		opt.import.forEach((item) => {
 			if (dblibrary[item]) {
-				i.push(dblibrary[item]);
+				importList.push(dblibrary[item]);
 			} else {
-				i.push(`\/\/\/[Error] Unknow library ${item}`);
+				importList.push(`\/\/\/[Error] Unknow library ${item}`);
 			}
 		});
+
+		i = i.concat(importList.sort());
 	}
 	i.push(`	`);
-	i.push(`\/\/\/main code`);
-	i.push(`\/\/\/----------------`);
+	i.push(`\/\/\/code`);
+
 	i.push(`let code = () = {};`);
 	i.push(`	`);
 
 	i.push(`\/\/\/loader`);
-	i.push(`\/\/\/----------------`);
 	i.push(`core.documentReady(() => {`);
 	i.push(`	core.appendChild(document.body, code());`);
 	i.push(`});`);
+
+	console.log(i);
 
 	return new $.example({
 		id: opt.id,
