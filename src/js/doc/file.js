@@ -1,6 +1,9 @@
 "use strict";
 import sample from "./sample.js";
-import $ from "../component.js";
+import file from "../base/file.js";
+import button from "../base/button.js";
+import toast from "../base/toast.js";
+import * as core from "../base/core.js";
 
 export default [
 	{
@@ -10,38 +13,41 @@ export default [
 	},
 	{
 		msg: [
-			"All file uploaded into /tmp folder on server using {{$.file}} component.",
-			"File will be move into /file folder after function {{$.file.save()}} called",
+			"All file uploaded into /tmp folder on server using {{file}} component.",
+			"File will be move into /file folder after function {{file.save()}} called",
 			"All file in /tmp folder will be deleted automaticly on server restart",
-			"All file in /file folder only can be deleted using {{$.file.delete()}} function",
+			"All file in /file folder only can be deleted using {{file.delete()}} function",
 			"All file information will be save into table file in database",
 		],
 	},
 	{
 		title: "Example",
 		container: sample.stackcontainer,
+		import: ["file"],
 		code: () => {
-			let fileUploadID = $.core.UUID();
+			let fileUploadID = core.UUID();
 
-			return new $.file({ id: fileUploadID });
+			return new file({ id: fileUploadID });
 		},
 	},
 	{
 		title: "Multiple",
 		container: sample.stackcontainer,
+		import: ["file"],
 		code: () => {
-			let fileUploadID = $.core.UUID();
+			let fileUploadID = core.UUID();
 
-			return new $.file({ id: fileUploadID, multiple: true });
+			return new file({ id: fileUploadID, multiple: true });
 		},
 	},
 	{
 		title: "File type",
 		container: sample.stackcontainer,
+		import: ["file"],
 		code: () => {
-			let fileUploadID = $.core.UUID();
+			let fileUploadID = core.UUID();
 
-			return new $.file({
+			return new file({
 				id: fileUploadID,
 				multiple: true,
 				accept: "image/gif,image/bmp,image/x-windows-bmp,image/jpeg,image/png",
@@ -51,10 +57,11 @@ export default [
 	{
 		title: "Label, color & icon",
 		container: sample.stackcontainer,
+		import: ["file"],
 		code: () => {
-			let fileUploadID = $.core.UUID();
+			let fileUploadID = core.UUID();
 
-			return new $.file({
+			return new file({
 				id: fileUploadID,
 				multiple: true,
 				accept: "application/pdf",
@@ -73,23 +80,24 @@ export default [
 	{
 		title: "Save",
 		container: sample.stackcontainer,
+		import: ["toast", "button", "file"],
 		code: () => {
-			let fileUploadID = $.core.UUID();
+			let fileUploadID = core.UUID();
 
 			return [
-				new $.file({ id: fileUploadID }),
-				new $.button({
+				new file({ id: fileUploadID }),
+				new button({
 					label: "Save file",
 					color: "success",
 					icon: "floppy-disk",
 					onclick: (event) => {
 						let sender = event.currentTarget;
 
-						$.file.save(
+						file.save(
 							document.getElementById(fileUploadID),
 							(result) => {
 								if (result) {
-									new $.toast(
+									new toast(
 										"i",
 										`File ${
 											Array.isArray(result) ? result.join(",") : result
