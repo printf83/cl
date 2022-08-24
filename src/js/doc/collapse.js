@@ -1,4 +1,5 @@
 "use strict";
+import * as core from "../base/core.js";
 import sample from "./sample.js";
 import button from "../base/button.js";
 import * as card from "../base/card.js";

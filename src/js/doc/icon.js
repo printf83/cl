@@ -1,6 +1,11 @@
 "use strict";
 import sample from "./sample.js";
-import $ from "../component.js";
+import icon from "../base/icon.js";
+import * as navbar from "../base/navbar.js";
+import tab from "../base/tab.js";
+import dropdown from "../base/dropdown.js";
+import input from "../base/input.js";
+import button from "../base/button.js";
 
 export default [
 	{
@@ -18,9 +23,10 @@ export default [
 	{
 		title: "Base icon",
 		container: sample.stackcontainer,
+		import: ["icon"],
 		code: () => {
 			return ["i", "!!", "!", "?", "-", "x", "/"].map((i) => {
-				return new $.icon(i);
+				return new icon(i);
 			});
 		},
 	},
@@ -28,6 +34,7 @@ export default [
 	{
 		title: "Fontawesome icon",
 		container: sample.stackcontainer,
+		import: ["icon"],
 		code: () => {
 			return [
 				"address-book",
@@ -44,7 +51,7 @@ export default [
 				"kiss-wink-heart",
 				"star",
 			].map((i) => {
-				return new $.icon(i);
+				return new icon(i);
 			});
 		},
 	},
@@ -52,6 +59,7 @@ export default [
 	{
 		title: "Fontawesome brand icon",
 		container: sample.stackcontainer,
+		import: ["icon"],
 		code: () => {
 			return [
 				"github",
@@ -65,31 +73,33 @@ export default [
 				"firefox",
 				"chrome",
 			].map((i) => {
-				return new $.icon({ type: "fab", icon: i });
+				return new icon({ type: "fab", icon: i });
 			});
 		},
 	},
 
 	{
 		title: "Color",
+		import: ["icon"],
 		code: () => {
-			return new $.icon({ type: "fab", icon: "node-js", color: "success" });
+			return new icon({ type: "fab", icon: "node-js", color: "success" });
 		},
 	},
 
 	{
 		title: "Fixwidth",
 		container: sample.stackcontainer,
+		import: ["icon"],
 		code: () => {
 			return [
-				new $.icon({
+				new icon({
 					type: "fab",
 					icon: "node-js",
 					fixwidth: true,
 					class: "border p-3",
 					size: "lg",
 				}),
-				new $.icon({
+				new icon({
 					type: "fab",
 					icon: "node-js",
 					fixwidth: false,
@@ -103,9 +113,10 @@ export default [
 	{
 		title: "Size",
 		container: sample.stackcontainer,
+		import: ["icon"],
 		code: () => {
 			return ["xs", "sm", null, "lg", "2x", "3x", "4x"].map((i) => {
-				return new $.icon({ type: "fab", icon: "node-js", weight: i });
+				return new icon({ type: "fab", icon: "node-js", weight: i });
 			});
 		},
 	},
@@ -113,14 +124,15 @@ export default [
 	{
 		title: "Rotate",
 		container: sample.stackcontainer,
+		import: ["icon"],
 		code: () => {
 			return [
-				new $.icon({ type: "fab", icon: "node-js", rotate: 90 }),
-				new $.icon({ type: "fab", icon: "node-js", rotate: 180 }),
-				new $.icon({ type: "fab", icon: "node-js", rotate: 270 }),
-				new $.icon({ type: "fab", icon: "node-js", rotate: "horizontal" }),
-				new $.icon({ type: "fab", icon: "node-js", rotate: "vertical" }),
-				new $.icon({ type: "fab", icon: "node-js", rotate: "both" }),
+				new icon({ type: "fab", icon: "node-js", rotate: 90 }),
+				new icon({ type: "fab", icon: "node-js", rotate: 180 }),
+				new icon({ type: "fab", icon: "node-js", rotate: 270 }),
+				new icon({ type: "fab", icon: "node-js", rotate: "horizontal" }),
+				new icon({ type: "fab", icon: "node-js", rotate: "vertical" }),
+				new icon({ type: "fab", icon: "node-js", rotate: "both" }),
 			];
 		},
 	},
@@ -132,6 +144,7 @@ export default [
 	{
 		title: "Spin",
 		container: sample.stackcontainer,
+		import: ["icon"],
 		code: () => {
 			return [
 				"spinner",
@@ -146,7 +159,7 @@ export default [
 				"wrench",
 				"snowflake",
 			].map((i) => {
-				return new $.icon({ icon: i, spin: true });
+				return new icon({ icon: i, spin: true });
 			});
 		},
 	},
@@ -154,6 +167,7 @@ export default [
 	{
 		title: "Fade",
 		container: sample.stackcontainer,
+		import: ["icon"],
 		code: () => {
 			return [
 				"spinner",
@@ -168,7 +182,7 @@ export default [
 				"wrench",
 				"snowflake",
 			].map((i) => {
-				return new $.icon({ icon: i, fade: true });
+				return new icon({ icon: i, fade: true });
 			});
 		},
 	},
@@ -176,6 +190,7 @@ export default [
 	{
 		title: "Beat",
 		container: sample.stackcontainer,
+		import: ["icon"],
 		code: () => {
 			return [
 				"spinner",
@@ -190,7 +205,7 @@ export default [
 				"wrench",
 				"snowflake",
 			].map((i) => {
-				return new $.icon({ icon: i, beat: true });
+				return new icon({ icon: i, beat: true });
 			});
 		},
 	},
@@ -198,6 +213,7 @@ export default [
 	{
 		title: "Fade beat",
 		container: sample.stackcontainer,
+		import: ["icon"],
 		code: () => {
 			return [
 				"spinner",
@@ -212,7 +228,7 @@ export default [
 				"wrench",
 				"snowflake",
 			].map((i) => {
-				return new $.icon({ icon: i, beat: true, fade: true });
+				return new icon({ icon: i, beat: true, fade: true });
 			});
 		},
 	},
@@ -220,6 +236,7 @@ export default [
 	{
 		title: "Bounce",
 		container: sample.stackcontainer,
+		import: ["icon"],
 		code: () => {
 			return [
 				"spinner",
@@ -234,7 +251,7 @@ export default [
 				"wrench",
 				"snowflake",
 			].map((i) => {
-				return new $.icon({ icon: i, bounce: true });
+				return new icon({ icon: i, bounce: true });
 			});
 		},
 	},
@@ -242,6 +259,7 @@ export default [
 	{
 		title: "Flip",
 		container: sample.stackcontainer,
+		import: ["icon"],
 		code: () => {
 			return [
 				"spinner",
@@ -256,7 +274,7 @@ export default [
 				"wrench",
 				"snowflake",
 			].map((i) => {
-				return new $.icon({ icon: i, flip: true });
+				return new icon({ icon: i, flip: true });
 			});
 		},
 	},
@@ -264,6 +282,7 @@ export default [
 	{
 		title: "Shake",
 		container: sample.stackcontainer,
+		import: ["icon"],
 		code: () => {
 			return [
 				"spinner",
@@ -278,7 +297,7 @@ export default [
 				"wrench",
 				"snowflake",
 			].map((i) => {
-				return new $.icon({ icon: i, shake: true });
+				return new icon({ icon: i, shake: true });
 			});
 		},
 	},
@@ -290,10 +309,11 @@ export default [
 	{
 		title: "Button",
 		container: sample.stackcontainer,
+		import: ["button"],
 		code: () => {
 			return [
-				new $.button({ label: "Button", color: "primary", icon: "fire" }),
-				new $.button({
+				new button({ label: "Button", color: "primary", icon: "fire" }),
+				new button({
 					label: "Button",
 					color: "warning",
 					icon: {
@@ -301,7 +321,7 @@ export default [
 						icon: "fire",
 					},
 				}),
-				new $.button({
+				new button({
 					label: "Button",
 					color: "success",
 					icon: {
@@ -309,8 +329,8 @@ export default [
 						icon: "fire",
 					},
 				}),
-				new $.button({ label: "Button", color: "primary", icon: "fire", iconafter: true, showlabel: "md" }),
-				new $.button({
+				new button({ label: "Button", color: "primary", icon: "fire", iconafter: true, showlabel: "md" }),
+				new button({
 					label: "Button",
 					color: "warning",
 					icon: {
@@ -320,7 +340,7 @@ export default [
 					iconafter: true,
 					showlabel: "md",
 				}),
-				new $.button({
+				new button({
 					label: "Button",
 					color: "success",
 					icon: {
@@ -337,12 +357,13 @@ export default [
 	{
 		title: "Textbox",
 		container: sample.stackcontainer,
+		import: ["input", "icon"],
 		code: () => {
 			return [
-				new $.input({ type: "text", before: new $.icon("fire") }),
-				new $.input({
+				new input({ type: "text", before: new icon("fire") }),
+				new input({
 					type: "text",
-					before: new $.icon({
+					before: new icon({
 						color: "danger",
 						icon: "fire",
 					}),
@@ -354,10 +375,10 @@ export default [
 	{
 		title: "Dropdown & item",
 		container: sample.formcontainer,
-		sample: { "sample.dropdownitem": sample.dropdownitem },
+		import: ["dropdown"],
 		code: () => {
 			return [
-				new $.dropdown({
+				new dropdown({
 					label: "Dropdown",
 					color: "primary",
 					icon: "fire",
@@ -369,7 +390,7 @@ export default [
 						{ href: "#", label: "Setting", icon: "sliders-h" },
 					],
 				}),
-				new $.dropdown({
+				new dropdown({
 					label: "Dropdown",
 					color: "primary",
 					icon: "fire",
@@ -389,22 +410,23 @@ export default [
 	{
 		title: "Navbar",
 		container: sample.formcontainer,
+		import: ["navbar"],
 		code: () => {
 			return [
-				new $.navbar.container({
+				new navbar.container({
 					expand: "lg",
 					elem: [
-						new $.navbar.brand({
+						new navbar.brand({
 							label: "Navbar",
 							icon: { icon: "fire", color: "danger", shake: true },
 							href: "#",
 						}),
 					],
 				}),
-				new $.navbar.container({
+				new navbar.container({
 					expand: "lg",
 					elem: [
-						new $.navbar.brand({
+						new navbar.brand({
 							label: "Navbar",
 							icon: { icon: "fire", color: "danger", bounce: true },
 							iconafter: true,
@@ -420,8 +442,9 @@ export default [
 	{
 		title: "Nav tab",
 		sample: { "sample.text": sample.text },
+		import: ["tab", "sample"],
 		code: () => {
-			return new $.tab({
+			return new tab({
 				type: "tab",
 				item: [
 					{ icon: "fire", label: "First", elem: "This is first tab. " + sample.text() },

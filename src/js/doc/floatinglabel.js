@@ -1,6 +1,5 @@
 "use strict";
 import sample from "./sample.js";
-// import $ from "../component.js";
 import * as core from "../base/core.js";
 import toast from "../base/toast.js";
 import input from "../base/input.js";

@@ -399,35 +399,36 @@ function gen_example(opt) {
 	}
 
 	let i = [];
+	if (opt.code) {
+		i.push('"use strict";');
+		i.push(`	`);
+		i.push(`\/\/\/library`);
+		i.push(dblibrary.core);
+		if (opt.import) {
+			let importList = [];
+			opt.import.forEach((item) => {
+				if (dblibrary[item]) {
+					importList.push(dblibrary[item]);
+				} else {
+					importList.push(`\/\/\/[Error] Unknow library ${item}`);
+				}
+			});
 
-	i.push('"use strict";');
-	i.push(`	`);
-	i.push(`\/\/\/library`);
-	i.push(dblibrary.core);
-	if (opt.import) {
-		let importList = [];
-		opt.import.forEach((item) => {
-			if (dblibrary[item]) {
-				importList.push(dblibrary[item]);
-			} else {
-				importList.push(`\/\/\/[Error] Unknow library ${item}`);
-			}
-		});
+			i = i.concat(importList.sort());
+		}
+		i.push(`	`);
 
-		i = i.concat(importList.sort());
+		// i.push(`let code = () = {};`);
+
+		i.push(`\/\/\/code`);
+		i.push(`let code = ${opt.code.toString()};`);
+		i.push(`	`);
+
+		i.push(`\/\/\/loader`);
+		i.push(`core.documentReady(() => {`);
+		i.push(`	core.appendChild(document.body, code());`);
+		i.push(`});`);
 	}
-	i.push(`	`);
-	i.push(`\/\/\/code`);
-
-	i.push(`let code = () = {};`);
-	i.push(`	`);
-
-	i.push(`\/\/\/loader`);
-	i.push(`core.documentReady(() => {`);
-	i.push(`	core.appendChild(document.body, code());`);
-	i.push(`});`);
-
-	console.log(i);
 
 	return new $.example({
 		id: opt.id,
@@ -437,7 +438,7 @@ function gen_example(opt) {
 		dark: opt.dark,
 		viewclass: opt.viewclass,
 		container: opt.container,
-		import: i,
+		import: i && i.length > 0 ? i : null,
 		code: opt.code,
 		sample: opt.sample,
 	});

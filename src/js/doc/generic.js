@@ -1,6 +1,13 @@
 "use strict";
 import sample from "./sample.js";
-import $ from "../component.js";
+import * as core from "../base/core.js";
+import * as db from "../base/api.js";
+import codepreview from "../base/codepreview.js";
+import ul from "../base/ul.js";
+import button from "../base/button.js";
+import input from "../base/input.js";
+import * as option from "../base/option.js";
+import * as dlg from "../base/dlg.js";
 
 export default [
 	{
@@ -12,14 +19,14 @@ export default [
 	{
 		msg: [
 			"Please create table using <b>cl generic database</b> in <b>./server.js</b>. For this example, we create <b>customer</b> table with this code :",
-			new $.codepreview({
+			new codepreview({
 				title: "customer db without setting",
 				container: "card",
 				code: `
 					require("./routes/generic.js")(app, "customer");
 			`,
 			}),
-			new $.codepreview({
+			new codepreview({
 				title: "customer db with setting",
 				container: "card",
 				code: `
@@ -35,7 +42,7 @@ export default [
 			`,
 			}),
 			"Then we create models for <b>customer</b> table in <b>./models/customer.js</b>",
-			new $.codepreview({
+			new codepreview({
 				title: "customer.js",
 				container: "card",
 				code: `
@@ -59,19 +66,19 @@ export default [
 	{
 		title: "Create",
 		msg: [
-			"Create new record from <b>cl generic database</b> using {{$.db.api.create}} function. Example :",
-			new $.ul({
+			"Create new record from <b>cl generic database</b> using {{db.api.create}} function. Example :",
+			new ul({
 				item: [
-					"<code>$.db.api.create(opt,callback)</code>",
-					"<code>$.db.api.create({name:tablename,data:object},callback)</code>",
-					"<code>$.db.api.create({name:tablename,data:[object]},callback)</code>",
+					"<code>db.api.create(opt,callback)</code>",
+					"<code>db.api.create({name:tablename,data:object},callback)</code>",
+					"<code>db.api.create({name:tablename,data:[object]},callback)</code>",
 				],
 			}),
 			"This function will return <b>id</b> or <b>array of id</b> on callback if record successfuly created",
-			new $.codepreview({
+			new codepreview({
 				container: "card",
 				code: `
-					$.db.api.create(
+					db.api.create(
 						{
 							name: "customer",
 							data: {
@@ -90,11 +97,12 @@ export default [
 	{
 		msg: "Live example",
 		container: sample.formcontainer,
+		import: ["button", "input", "db"],
 		code: () => {
-			let resultOutputId = $.core.UUID();
+			let resultOutputId = core.UUID();
 
 			return [
-				new $.button({
+				new button({
 					label: "Create record",
 					color: "success",
 					icon: "floppy-disk",
@@ -102,7 +110,7 @@ export default [
 						let sender = event.currentTarget;
 
 						//create record
-						$.db.api.create(
+						db.api.create(
 							{
 								name: "customer",
 								data: {
@@ -119,7 +127,7 @@ export default [
 						);
 					},
 				}),
-				new $.input({ type: "text", label: "Result", id: resultOutputId }),
+				new input({ type: "text", label: "Result", id: resultOutputId }),
 			];
 		},
 	},
@@ -127,19 +135,19 @@ export default [
 	{
 		title: "Update",
 		msg: [
-			"Update existing record from <b>cl generic database</b> using {{$.db.api.update}} function. Example :",
-			new $.ul({
+			"Update existing record from <b>cl generic database</b> using {{db.api.update}} function. Example :",
+			new ul({
 				item: [
-					"<code>$.db.api.update(opt,callback)</code>",
-					"<code>$.db.api.update({name:tablename,data:object,id:id},callback)</code>",
-					"<code>$.db.api.update({name:tablename,data:object,id:[id]},callback)</code>",
+					"<code>db.api.update(opt,callback)</code>",
+					"<code>db.api.update({name:tablename,data:object,id:id},callback)</code>",
+					"<code>db.api.update({name:tablename,data:object,id:[id]},callback)</code>",
 				],
 			}),
 			"This function will return <b>id</b> or <b>array of id</b> on callback if record successfuly updated",
-			new $.codepreview({
+			new codepreview({
 				container: "card",
 				code: `
-					$.db.api.update(
+					db.api.update(
 						{
 							name: "customer",
 							data: {
@@ -158,11 +166,12 @@ export default [
 	{
 		msg: "Live example",
 		container: sample.formcontainer,
+		import: ["button", "input", "dlg", "db"],
 		code: () => {
-			let resultOutputId = $.core.UUID();
+			let resultOutputId = core.UUID();
 
 			return [
-				new $.button({
+				new button({
 					label: "Update record",
 					color: "primary",
 					icon: "pen-to-square",
@@ -170,9 +179,9 @@ export default [
 						let sender = event.currentTarget;
 
 						//get id
-						new $.dlg.inputbox("text", "ID", (_event, data) => {
+						new dlg.inputbox("text", "ID", (_event, data) => {
 							//update record
-							$.db.api.update(
+							db.api.update(
 								{
 									name: "customer",
 									data: {
@@ -191,7 +200,7 @@ export default [
 						}).show();
 					},
 				}),
-				new $.input({ type: "text", label: "Result", id: resultOutputId }),
+				new input({ type: "text", label: "Result", id: resultOutputId }),
 			];
 		},
 	},
@@ -199,19 +208,19 @@ export default [
 	{
 		title: "Load",
 		msg: [
-			"Load existing record from <b>cl generic database</b> using {{$.db.api.load}} function. Example :",
-			new $.ul({
+			"Load existing record from <b>cl generic database</b> using {{db.api.load}} function. Example :",
+			new ul({
 				item: [
-					"<code>$.db.api.load(opt,callback)</code>",
-					"<code>$.db.api.load({name:tablename,id:id},callback)</code>",
-					"<code>$.db.api.load({name:tablename,id:[id]},callback)</code>",
+					"<code>db.api.load(opt,callback)</code>",
+					"<code>db.api.load({name:tablename,id:id},callback)</code>",
+					"<code>db.api.load({name:tablename,id:[id]},callback)</code>",
 				],
 			}),
 			"This function will return <b>object</b> or <b>array of object</b> on callback if record found",
-			new $.codepreview({
+			new codepreview({
 				container: "card",
 				code: `
-					$.db.api.load(
+					db.api.load(
 						{
 							name: "customer",
 							id: "id",
@@ -227,11 +236,12 @@ export default [
 	{
 		msg: "Live example",
 		container: sample.formcontainer,
+		import: ["button", "input", "dlg", "db"],
 		code: () => {
-			let resultOutputId = $.core.UUID();
+			let resultOutputId = core.UUID();
 
 			return [
-				new $.button({
+				new button({
 					label: "Load record",
 					color: "primary",
 					icon: "folder-open",
@@ -239,9 +249,9 @@ export default [
 						let sender = event.currentTarget;
 
 						//get id
-						new $.dlg.inputbox("text", "ID", (_event, data) => {
+						new dlg.inputbox("text", "ID", (_event, data) => {
 							//get record
-							$.db.api.load(
+							db.api.load(
 								{
 									name: "customer",
 									id: data.value,
@@ -255,7 +265,7 @@ export default [
 						}).show();
 					},
 				}),
-				new $.input({ type: "textarea", label: "Result", id: resultOutputId, rows: 3 }),
+				new input({ type: "textarea", label: "Result", id: resultOutputId, rows: 3 }),
 			];
 		},
 	},
@@ -263,19 +273,19 @@ export default [
 	{
 		title: "Delete",
 		msg: [
-			"Delete existing record from <b>cl generic database</b> using {{$.db.api.delete}} function. Example :",
-			new $.ul({
+			"Delete existing record from <b>cl generic database</b> using {{db.api.delete}} function. Example :",
+			new ul({
 				item: [
-					"<code>$.db.api.delete(opt,callback)</code>",
-					"<code>$.db.api.delete({name:tablename,id:id},callback)</code>",
-					"<code>$.db.api.delete({name:tablename,id:[id]},callback)</code>",
+					"<code>db.api.delete(opt,callback)</code>",
+					"<code>db.api.delete({name:tablename,id:id},callback)</code>",
+					"<code>db.api.delete({name:tablename,id:[id]},callback)</code>",
 				],
 			}),
 			"This function will return <b>id</b> or <b>array of id</b> on callback if record found and deleted",
-			new $.codepreview({
+			new codepreview({
 				container: "card",
 				code: `
-					$.db.api.delete(
+					db.api.delete(
 						{
 							name: "customer",
 							id: "id",
@@ -291,11 +301,12 @@ export default [
 	{
 		msg: "Live example",
 		container: sample.formcontainer,
+		import: ["button", "input", "dlg", "db"],
 		code: () => {
-			let resultOutputId = $.core.UUID();
+			let resultOutputId = core.UUID();
 
 			return [
-				new $.button({
+				new button({
 					label: "Delete record",
 					color: "danger",
 					icon: "trash-can",
@@ -303,9 +314,9 @@ export default [
 						let sender = event.currentTarget;
 
 						//get id
-						new $.dlg.inputbox("text", "ID", (_event, data) => {
+						new dlg.inputbox("text", "ID", (_event, data) => {
 							//delete record
-							$.db.api.delete(
+							db.api.delete(
 								{
 									name: "customer",
 									id: data.value,
@@ -319,7 +330,7 @@ export default [
 						}).show();
 					},
 				}),
-				new $.input({ type: "text", label: "Result", id: resultOutputId }),
+				new input({ type: "text", label: "Result", id: resultOutputId }),
 			];
 		},
 	},
@@ -327,19 +338,19 @@ export default [
 	{
 		title: "List",
 		msg: [
-			"Get list of record from <b>cl generic database</b> using {{$.db.api.list}} function. Example :",
-			new $.ul({
+			"Get list of record from <b>cl generic database</b> using {{db.api.list}} function. Example :",
+			new ul({
 				item: [
-					"<code>$.db.api.list(opt,callback)</code>",
-					"<code>$.db.api.list({name:tablename},callback)</code>",
-					"<code>$.db.api.list({name:tablename,data:query},callback)</code>",
+					"<code>db.api.list(opt,callback)</code>",
+					"<code>db.api.list({name:tablename},callback)</code>",
+					"<code>db.api.list({name:tablename,data:query},callback)</code>",
 				],
 			}),
 			"This function will return <b>array of object</b> on callback if process is successful",
-			new $.codepreview({
+			new codepreview({
 				container: "card",
 				code: `
-					$.db.api.list(
+					db.api.list(
 						{
 							name: "customer",
 							data: {query}
@@ -355,11 +366,12 @@ export default [
 	{
 		msg: "Live example",
 		container: sample.formcontainer,
+		import: ["button", "input", "db"],
 		code: () => {
-			let resultOutputId = $.core.UUID();
+			let resultOutputId = core.UUID();
 
 			return [
-				new $.button({
+				new button({
 					label: "Load list",
 					color: "primary",
 					icon: "folder-open",
@@ -367,7 +379,7 @@ export default [
 						let sender = event.currentTarget;
 
 						//get record
-						$.db.api.list(
+						db.api.list(
 							{
 								name: "customer",
 								sender: sender,
@@ -379,7 +391,7 @@ export default [
 						);
 					},
 				}),
-				new $.input({ type: "textarea", label: "Result", id: resultOutputId, rows: 10 }),
+				new input({ type: "textarea", label: "Result", id: resultOutputId, rows: 10 }),
 			];
 		},
 	},
@@ -387,11 +399,12 @@ export default [
 	{
 		msg: "Live example with query",
 		container: sample.formcontainer,
+		import: ["button", "input", "db"],
 		code: () => {
-			let resultOutputId = $.core.UUID();
+			let resultOutputId = core.UUID();
 
 			return [
-				new $.button({
+				new button({
 					label: "Load list",
 					color: "primary",
 					icon: "folder-open",
@@ -399,7 +412,7 @@ export default [
 						let sender = event.currentTarget;
 
 						//get record
-						$.db.api.list(
+						db.api.list(
 							{
 								name: "customer",
 								data: {
@@ -418,7 +431,7 @@ export default [
 						);
 					},
 				}),
-				new $.input({ type: "textarea", label: "Result", id: resultOutputId, rows: 10 }),
+				new input({ type: "textarea", label: "Result", id: resultOutputId, rows: 10 }),
 			];
 		},
 	},
@@ -426,19 +439,19 @@ export default [
 	{
 		title: "Option",
 		msg: [
-			"Get list of record from <b>cl generic database</b> using {{$.db.api.option}} function for {{select input}}. Example :",
-			new $.ul({
+			"Get list of record from <b>cl generic database</b> using {{db.api.option}} function for {{select input}}. Example :",
+			new ul({
 				item: [
-					"<code>$.db.api.option(opt,callback)</code>",
-					"<code>$.db.api.option({name:tablename},callback)</code>",
-					"<code>$.db.api.option({name:tablename,fieldkey:_id,fieldname:name},callback)</code>",
+					"<code>db.api.option(opt,callback)</code>",
+					"<code>db.api.option({name:tablename},callback)</code>",
+					"<code>db.api.option({name:tablename,fieldkey:_id,fieldname:name},callback)</code>",
 				],
 			}),
 			"This function will return <b>array of object</b> on callback if process is successful",
-			new $.codepreview({
+			new codepreview({
 				container: "card",
 				code: `
-					$.db.api.option(
+					db.api.option(
 						{
 							name: "customer",
 							fieldkey: "_id",
@@ -455,12 +468,13 @@ export default [
 	{
 		msg: "Live example",
 		container: sample.formcontainer,
+		import: ["button", "input", "option", "db"],
 		code: () => {
-			let resultOutputId = $.core.UUID();
-			let selectInputId = $.core.UUID();
+			let resultOutputId = core.UUID();
+			let selectInputId = core.UUID();
 
 			return [
-				new $.button({
+				new button({
 					label: "Load list option",
 					color: "primary",
 					icon: "folder-open",
@@ -468,7 +482,7 @@ export default [
 						let sender = event.currentTarget;
 
 						//get record
-						$.db.api.option(
+						db.api.option(
 							{
 								name: "customer",
 								fieldkey: "_id",
@@ -478,16 +492,16 @@ export default [
 							(result) => {
 								//result
 								document.getElementById(resultOutputId).value = JSON.stringify(result);
-								$.core.replaceChild(
+								core.replaceChild(
 									document.getElementById(selectInputId),
-									new $.option.select({ item: result })
+									new option.select({ item: result })
 								);
 							}
 						);
 					},
 				}),
-				new $.input({ type: "textarea", label: "Result", id: resultOutputId, rows: 10 }),
-				new $.input({ type: "select", label: "Sample", id: selectInputId }),
+				new input({ type: "textarea", label: "Result", id: resultOutputId, rows: 10 }),
+				new input({ type: "select", label: "Sample", id: selectInputId }),
 			];
 		},
 	},
@@ -495,12 +509,13 @@ export default [
 	{
 		msg: "Live example with filter",
 		container: sample.formcontainer,
+		import: ["button", "input", "option", "db"],
 		code: () => {
-			let resultOutputId = $.core.UUID();
-			let selectInputId = $.core.UUID();
+			let resultOutputId = core.UUID();
+			let selectInputId = core.UUID();
 
 			return [
-				new $.button({
+				new button({
 					label: "Load list option",
 					color: "primary",
 					icon: "folder-open",
@@ -508,7 +523,7 @@ export default [
 						let sender = event.currentTarget;
 
 						//get record
-						$.db.api.option(
+						db.api.option(
 							{
 								name: "customer",
 								filter: { $and: [{ name: { $regex: "s", $options: "i" } }] },
@@ -519,16 +534,16 @@ export default [
 							(result) => {
 								//result
 								document.getElementById(resultOutputId).value = JSON.stringify(result);
-								$.core.replaceChild(
+								core.replaceChild(
 									document.getElementById(selectInputId),
-									new $.option.select({ item: result })
+									new option.select({ item: result })
 								);
 							}
 						);
 					},
 				}),
-				new $.input({ type: "textarea", label: "Result", id: resultOutputId, rows: 10 }),
-				new $.input({ type: "select", label: "Sample", id: selectInputId }),
+				new input({ type: "textarea", label: "Result", id: resultOutputId, rows: 10 }),
+				new input({ type: "select", label: "Sample", id: selectInputId }),
 			];
 		},
 	},
@@ -536,19 +551,19 @@ export default [
 	{
 		title: "XLSX file",
 		msg: [
-			"Get list of record from <b>cl generic database</b> in xlsx format using {{$.db.api.excel}} function. Example :",
-			new $.ul({
+			"Get list of record from <b>cl generic database</b> in xlsx format using {{db.api.excel}} function. Example :",
+			new ul({
 				item: [
-					"<code>$.db.api.excel(opt)</code>",
-					"<code>$.db.api.excel({name:tablename})</code>",
-					"<code>$.db.api.excel({name:tablename,data:query})</code>",
+					"<code>db.api.excel(opt)</code>",
+					"<code>db.api.excel({name:tablename})</code>",
+					"<code>db.api.excel({name:tablename,data:query})</code>",
 				],
 			}),
 			"This function will download <b>xlsx file</b> if process is successful",
-			new $.codepreview({
+			new codepreview({
 				container: "card",
 				code: `
-					$.db.api.excel(
+					db.api.excel(
 						{
 							name: "customer",
 							data: {query}
@@ -561,15 +576,16 @@ export default [
 
 	{
 		msg: "Live example",
+		import: ["button", "db"],
 		code: () => {
-			return new $.button({
+			return new button({
 				label: "Download XLSX file",
 				color: "primary",
 				icon: "download",
 				onclick: (event) => {
 					let sender = event.currentTarget;
 
-					$.db.api.excel({
+					db.api.excel({
 						name: "customer",
 						sender: sender,
 					});
@@ -580,15 +596,16 @@ export default [
 
 	{
 		msg: "Live example with query",
+		import: ["button", "db"],
 		code: () => {
-			return new $.button({
+			return new button({
 				label: "Download XLSX file",
 				color: "primary",
 				icon: "download",
 				onclick: (event) => {
 					let sender = event.currentTarget;
 
-					$.db.api.excel({
+					db.api.excel({
 						name: "customer",
 						data: {
 							filter: null,

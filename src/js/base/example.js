@@ -127,14 +127,14 @@ export default class example extends div {
 			});
 		}
 
-		if (opt.code) {
-			item.push({
-				label: "code",
-				icon: "fire",
-				active: !opt.codecollapse,
-				elem: new codepreview({ type: "js", code: `let code = ${opt.code.toString()}`, container: null }),
-			});
-		}
+		// if (opt.code) {
+		// 	item.push({
+		// 		label: "code",
+		// 		icon: "fire",
+		// 		active: !opt.codecollapse,
+		// 		elem: new codepreview({ type: "js", code: `let code = ${opt.code.toString()}`, container: null }),
+		// 	});
+		// }
 
 		super.data = {
 			marginbottom: 5,
