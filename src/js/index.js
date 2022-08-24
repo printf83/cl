@@ -304,7 +304,7 @@ let dblibrary = {
 	collapse: `import * as collapse from "../base/collapse.js";`,
 	container: `import * as container from "../base/container.js";`,
 	core: `import * as core from "../base/core.js";`,
-	db: `import * as db from "../js/base/api.js";`,
+	db: `import * as db from "../base/api.js";`,
 	div: `import div from "../base/div.js";`,
 	dlg: `import * as dlg from "../base/dlg.js";`,
 	dropdown: `import dropdown from "../base/dropdown.js";`,
