@@ -1,5 +1,7 @@
 "use strict";
-import $ from "../component.js";
+import ul from "../base/ul.js";
+import li from "../base/li.js";
+import div from "../base/div.js";
 
 export default [
 	{
@@ -33,15 +35,15 @@ export default [
 		msg: [
 			"Containers are the most basic layout element in Bootstrap and are <b>required when using Bootstrap default grid system</b>. Containers are used to contain, pad, and (sometimes) center the content within them. While containers can be nested, most layouts do not require a nested container.",
 			"Bootstrap comes with three different containers:",
-			new $.ul({
+			new ul({
 				elem: [
-					new $.li({
+					new li({
 						elem: "<code>.container</code>, which sets a <code>max-width</code> at each responsive breakpoint",
 					}),
-					new $.li({
+					new li({
 						elem: "<code>.container-fluid</code>, which is <code>width: 100%</code> at all breakpoints",
 					}),
-					new $.li({
+					new li({
 						elem: "<code>.container-{breakpoint&#125;</code> which is <code>width: 100%</code> until the specified breakpoint",
 					}),
 				],
@@ -55,8 +57,9 @@ export default [
 		title: "Default container",
 		msg: "Bootstrap default .container class is a responsive, fixed-width container, meaning its max-width changes at each breakpoint.",
 		viewclass: "cl-highlight-container",
+		import: ["div"],
 		code: () => {
-			return new $.div("container", "Content here");
+			return new div("container", "Content here");
 		},
 	},
 
@@ -64,13 +67,14 @@ export default [
 		title: "Responsive containers",
 		msg: "Responsive containers allow you to specify a class that is 100% wide until the specified breakpoint is reached, after which we apply max-widths for each of the higher breakpoints. For example, .container-sm is 100% wide to start until the sm breakpoint is reached, where it will scale up with md, lg, xl, and xxl.",
 		viewclass: "cl-highlight-container",
+		import: ["div"],
 		code: () => {
 			return [
-				new $.div("container-sm", "100% wide until small breakpoint"),
-				new $.div("container-md", "100% wide until medium breakpoint"),
-				new $.div("container-lg", "100% wide until large breakpoint"),
-				new $.div("container-xl", "100% wide until extra large breakpoint"),
-				new $.div("container-xxl", "100% wide until extra extra large breakpoint"),
+				new div("container-sm", "100% wide until small breakpoint"),
+				new div("container-md", "100% wide until medium breakpoint"),
+				new div("container-lg", "100% wide until large breakpoint"),
+				new div("container-xl", "100% wide until extra large breakpoint"),
+				new div("container-xxl", "100% wide until extra extra large breakpoint"),
 			];
 		},
 	},
@@ -79,8 +83,9 @@ export default [
 		title: "Fluid containers",
 		msg: "Use .container-fluid for a full width container, spanning the entire width of the viewport.",
 		viewclass: "cl-highlight-container",
+		import: ["div"],
 		code: () => {
-			return new $.div("container-fluid", "Content here");
+			return new div("container-fluid", "Content here");
 		},
 	},
 ];

@@ -1,6 +1,12 @@
 "use strict";
 import sample from "./sample.js";
-import $ from "../component.js";
+import * as core from "../base/core.js";
+import dropdown from "../base/dropdown.js";
+import p from "../base/p.js";
+import div from "../base/div.js";
+import input from "../base/input.js";
+import button from "../base/button.js";
+import * as navbar from "../base/navbar.js";
 
 export default [
 	{
@@ -12,8 +18,9 @@ export default [
 	{
 		title: "Single button",
 		sample: { "sample.dropdownitem": sample.dropdownitem },
+		import: ["dropdown", "sample"],
 		code: () => {
-			return new $.dropdown({
+			return new dropdown({
 				label: "Drowdown button",
 				color: "secondary",
 				option: sample.dropdownitem(),
@@ -24,8 +31,9 @@ export default [
 	{
 		title: "Dropdown link",
 		sample: { "sample.dropdownitem": sample.dropdownitem },
+		import: ["dropdown", "sample"],
 		code: () => {
-			return new $.dropdown({
+			return new dropdown({
 				label: "Drowdown link",
 				color: "secondary",
 				href: "javascript:void(0);",
@@ -37,8 +45,9 @@ export default [
 	{
 		title: "Color",
 		sample: { "sample.dropdownitem": sample.dropdownitem },
+		import: ["dropdown", "sample"],
 		code: () => {
-			return new $.dropdown({
+			return new dropdown({
 				label: "Drowdown",
 				color: "primary",
 				option: sample.dropdownitem(),
@@ -50,10 +59,11 @@ export default [
 		title: "Color varian",
 		container: sample.stackcontainer,
 		sample: { "sample.dropdownitem": sample.dropdownitem },
+		import: ["dropdown", "sample"],
 		code: () => {
 			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map((i) => {
-				return new $.dropdown({
-					label: $.core.capitalize(i),
+				return new dropdown({
+					label: core.capitalize(i),
 					color: i,
 					option: sample.dropdownitem(),
 				});
@@ -64,8 +74,9 @@ export default [
 	{
 		title: "Split button",
 		sample: { "sample.dropdownitem": sample.dropdownitem },
+		import: ["dropdown", "sample"],
 		code: () => {
-			return new $.dropdown({
+			return new dropdown({
 				label: "Drowdown",
 				color: "primary",
 				splittoggle: true,
@@ -78,11 +89,12 @@ export default [
 		title: "Split button color variant",
 		container: sample.stackcontainer,
 		sample: { "sample.dropdownitem": sample.dropdownitem },
+		import: ["dropdown", "sample"],
 		code: () => {
 			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map((i) => {
-				return new $.dropdown({
+				return new dropdown({
 					splittoggle: true,
-					label: $.core.capitalize(i),
+					label: core.capitalize(i),
 					color: i,
 					option: sample.dropdownitem(),
 				});
@@ -94,15 +106,16 @@ export default [
 		title: "Large size",
 		container: sample.stackcontainer,
 		sample: { "sample.dropdownitem": sample.dropdownitem },
+		import: ["dropdown", "sample"],
 		code: () => {
 			return [
-				new $.dropdown({
+				new dropdown({
 					label: "Large dropdown",
 					color: "secondary",
 					weight: "lg",
 					option: sample.dropdownitem(),
 				}),
-				new $.dropdown({
+				new dropdown({
 					label: "Large split dropdown",
 					color: "secondary",
 					weight: "lg",
@@ -117,15 +130,16 @@ export default [
 		title: "Small size",
 		container: sample.stackcontainer,
 		sample: { "sample.dropdownitem": sample.dropdownitem },
+		import: ["dropdown", "sample"],
 		code: () => {
 			return [
-				new $.dropdown({
+				new dropdown({
 					label: "Small dropdown",
 					color: "secondary",
 					weight: "sm",
 					option: sample.dropdownitem(),
 				}),
-				new $.dropdown({
+				new dropdown({
 					label: "Small split dropdown",
 					color: "secondary",
 					weight: "sm",
@@ -140,8 +154,9 @@ export default [
 		title: "Dark dropdown",
 		container: sample.stackcontainer,
 		sample: { "sample.dropdownitem": sample.dropdownitem },
+		import: ["dropdown", "sample"],
 		code: () => {
-			return new $.dropdown({
+			return new dropdown({
 				label: "Dark dropdown",
 				color: "secondary",
 				dark: true,
@@ -154,29 +169,30 @@ export default [
 		title: "Dropdown in navbar",
 		dark: true,
 		sample: { "sample.dropdownitem": sample.dropdownitem },
+		import: ["navbar", "dropdown", "sample"],
 		code: () => {
-			var id = new $.core.UUID();
-			return new $.navbar.container({
+			var id = new core.UUID();
+			return new navbar.container({
 				expand: "lg",
 				color: "dark",
 				textcolor: "light",
 				elem: [
-					new $.navbar.toggle({
+					new navbar.toggle({
 						id,
 						toggle: "collapse",
 					}),
 
-					new $.navbar.brand({
+					new navbar.brand({
 						label: "Navbar",
 					}),
 
-					new $.navbar.collapsecontainer({
+					new navbar.collapsecontainer({
 						id,
 						elem: [
-							new $.navbar.itemcontainer({
+							new navbar.itemcontainer({
 								parenttype: "collapse",
 								elem: [
-									new $.dropdown({
+									new dropdown({
 										label: "Dropdown",
 										navlink: true,
 										dark: true,
@@ -195,15 +211,16 @@ export default [
 		title: "Dropup",
 		container: sample.stackcontainer,
 		sample: { "sample.dropdownitem": sample.dropdownitem },
+		import: ["dropdown", "sample"],
 		code: () => {
 			return [
-				new $.dropdown({
+				new dropdown({
 					label: "Dropup",
 					color: "secondary",
 					arrow: "up",
 					option: sample.dropdownitem(),
 				}),
-				new $.dropdown({
+				new dropdown({
 					label: "Split dropup",
 					color: "secondary",
 					arrow: "up",
@@ -218,15 +235,16 @@ export default [
 		title: "Dropend",
 		container: sample.stackcontainer,
 		sample: { "sample.dropdownitem": sample.dropdownitem },
+		import: ["dropdown", "sample"],
 		code: () => {
 			return [
-				new $.dropdown({
+				new dropdown({
 					label: "Dropend",
 					color: "secondary",
 					arrow: "end",
 					option: sample.dropdownitem(),
 				}),
-				new $.dropdown({
+				new dropdown({
 					label: "Split dropend",
 					color: "secondary",
 					arrow: "end",
@@ -241,15 +259,16 @@ export default [
 		title: "Dropstart",
 		container: sample.stackcontainer,
 		sample: { "sample.dropdownitem": sample.dropdownitem },
+		import: ["dropdown", "sample"],
 		code: () => {
 			return [
-				new $.dropdown({
+				new dropdown({
 					label: "Dropstart",
 					color: "secondary",
 					arrow: "start",
 					option: sample.dropdownitem(),
 				}),
-				new $.dropdown({
+				new dropdown({
 					label: "Split dropstart",
 					color: "secondary",
 					arrow: "start",
@@ -262,8 +281,9 @@ export default [
 
 	{
 		title: "Menu item",
+		import: ["dropdown"],
 		code: () => {
-			return new $.dropdown({
+			return new dropdown({
 				label: "Drowdown",
 				color: "secondary",
 				option: [
@@ -279,8 +299,9 @@ export default [
 
 	{
 		title: "Non-interactive dropdown item",
+		import: ["dropdown"],
 		code: () => {
-			return new $.dropdown({
+			return new dropdown({
 				label: "Drowdown",
 				color: "secondary",
 				option: [
@@ -295,8 +316,9 @@ export default [
 
 	{
 		title: "Active dropdown item",
+		import: ["dropdown"],
 		code: () => {
-			return new $.dropdown({
+			return new dropdown({
 				label: "Drowdown",
 				color: "secondary",
 				option: [
@@ -310,8 +332,9 @@ export default [
 
 	{
 		title: "Disabled dropdown item",
+		import: ["dropdown"],
 		code: () => {
-			return new $.dropdown({
+			return new dropdown({
 				label: "Drowdown",
 				color: "secondary",
 				option: [
@@ -326,8 +349,9 @@ export default [
 	{
 		title: "Menu Aligment",
 		sample: { "sample.dropdownitem": sample.dropdownitem },
+		import: ["dropdown", "sample"],
 		code: () => {
-			return new $.dropdown({
+			return new dropdown({
 				label: "Right-aligned menu example",
 				color: "secondary",
 				aligment: "end",
@@ -339,8 +363,9 @@ export default [
 	{
 		title: "Responsive alignment",
 		sample: { "sample.dropdownitem": sample.dropdownitem },
+		import: ["dropdown", "sample"],
 		code: () => {
-			return new $.dropdown({
+			return new dropdown({
 				label: "Right-aligned, left-aligned lg",
 				color: "secondary",
 				aligment: ["end", "lg-start"],
@@ -353,44 +378,45 @@ export default [
 		title: "Alignment options",
 		container: sample.stackcontainer,
 		sample: { "sample.dropdownitem": sample.dropdownitem },
+		import: ["dropdown", "sample"],
 		code: () => {
 			return [
-				new $.dropdown({
+				new dropdown({
 					label: "Dropdown",
 					color: "secondary",
 					option: sample.dropdownitem(),
 				}),
-				new $.dropdown({
+				new dropdown({
 					label: "Right-aligned menu",
 					color: "secondary",
 					aligment: "end",
 					option: sample.dropdownitem(),
 				}),
-				new $.dropdown({
+				new dropdown({
 					label: "Left-aligned, right-aligned lg",
 					color: "secondary",
 					aligment: ["start", "lg-end"],
 					option: sample.dropdownitem(),
 				}),
-				new $.dropdown({
+				new dropdown({
 					label: "Right-aligned, left-aligned lg",
 					color: "secondary",
 					aligment: ["end", "lg-start"],
 					option: sample.dropdownitem(),
 				}),
-				new $.dropdown({
+				new dropdown({
 					label: "Dropstart",
 					color: "secondary",
 					arrow: "start",
 					option: sample.dropdownitem(),
 				}),
-				new $.dropdown({
+				new dropdown({
 					label: "Dropend",
 					color: "secondary",
 					arrow: "end",
 					option: sample.dropdownitem(),
 				}),
-				new $.dropdown({
+				new dropdown({
 					label: "Dropup",
 					color: "secondary",
 					arrow: "up",
@@ -402,9 +428,10 @@ export default [
 
 	{
 		title: "Headers",
+		import: ["dropdown"],
 		code: () => {
 			return [
-				new $.dropdown({
+				new dropdown({
 					label: "Dropdown",
 					color: "secondary",
 					option: [
@@ -419,9 +446,10 @@ export default [
 
 	{
 		title: "Divider",
+		import: ["dropdown"],
 		code: () => {
 			return [
-				new $.dropdown({
+				new dropdown({
 					label: "Dropdown",
 					color: "secondary",
 					option: [
@@ -438,19 +466,20 @@ export default [
 
 	{
 		title: "Text",
+		import: ["div", "p", "dropdown"],
 		code: () => {
 			return [
-				new $.dropdown({
+				new dropdown({
 					label: "Dropdown",
 					color: "secondary",
 					option: [
 						{
-							elem: new $.div({
+							elem: new div({
 								class: "text-muted p-4",
 								style: { width: "200px" },
 								elem: [
-									new $.p("Some example text that's free-flowing within the dropdown menu."),
-									new $.p({ marginbottom: 0, elem: "And this is more example text." }),
+									new p("Some example text that's free-flowing within the dropdown menu."),
+									new p({ marginbottom: 0, elem: "And this is more example text." }),
 								],
 							}),
 						},
@@ -462,36 +491,37 @@ export default [
 
 	{
 		title: "Form",
+		import: ["div", "button", "input", "dropdown"],
 		code: () => {
 			return [
-				new $.dropdown({
+				new dropdown({
 					label: "Dropdown",
 					color: "secondary",
 					autoclose: "outside",
 					option: [
 						{
-							elem: new $.div({
+							elem: new div({
 								padding: 3,
 								gap: 3,
 								row: true,
 								rowcol: 1,
 								elem: [
-									new $.input({
+									new input({
 										size: "col",
 										type: "email",
 										label: "Email address",
 										placeholder: "email@example.com",
 									}),
-									new $.input({
+									new input({
 										size: "col",
 										type: "password",
 										label: "Password",
 										placeholder: "Password",
 									}),
-									new $.input({ size: "col", type: "checkbox", label: "Remember me" }),
-									new $.div({
+									new input({ size: "col", type: "checkbox", label: "Remember me" }),
+									new div({
 										col: true,
-										elem: new $.button({
+										elem: new button({
 											type: "submit",
 											color: "primary",
 											label: "Sign in",
@@ -501,7 +531,7 @@ export default [
 							}),
 						},
 						{ value: "-" },
-						{ href: "javascript:void(0)", label: "new $.around here? Sign up" },
+						{ href: "javascript:void(0)", label: "new around here? Sign up" },
 						{ href: "javascript:void(0)", label: "Forgot password?" },
 					],
 				}),
@@ -513,15 +543,16 @@ export default [
 		title: "Dropdown options",
 		container: sample.stackcontainer,
 		sample: { "sample.dropdownitem": sample.dropdownitem },
+		import: ["dropdown", "sample"],
 		code: () => {
 			return [
-				new $.dropdown({
+				new dropdown({
 					label: "Offset",
 					color: "secondary",
 					offset: "20,30",
 					option: sample.dropdownitem(),
 				}),
-				new $.dropdown({
+				new dropdown({
 					label: "Reference",
 					color: "secondary",
 					reference: "parent",
@@ -536,26 +567,27 @@ export default [
 		title: "Auto close behavior",
 		container: sample.stackcontainer,
 		sample: { "sample.dropdownitem": sample.dropdownitem },
+		import: ["dropdown", "sample"],
 		code: () => {
 			return [
-				new $.dropdown({
+				new dropdown({
 					label: "Default dropdown",
 					color: "secondary",
 					option: sample.dropdownitem(),
 				}),
-				new $.dropdown({
+				new dropdown({
 					label: "Clickable outside",
 					color: "secondary",
 					autoclose: "outside",
 					option: sample.dropdownitem(),
 				}),
-				new $.dropdown({
+				new dropdown({
 					label: "Clickable inside",
 					color: "secondary",
 					autoclose: "inside",
 					option: sample.dropdownitem(),
 				}),
-				new $.dropdown({
+				new dropdown({
 					label: "Manual close",
 					color: "secondary",
 					autoclose: "false",

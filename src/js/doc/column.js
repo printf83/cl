@@ -1,6 +1,12 @@
 "use strict";
 import sample from "./sample.js";
-import $ from "../component.js";
+import * as alert from "../base/alert.js";
+import ul from "../base/ul.js";
+import li from "../base/li.js";
+import div from "../base/div.js";
+import img from "../base/img.js";
+import span from "../base/span.js";
+import p from "../base/p.js";
 
 export default [
 	{
@@ -10,7 +16,7 @@ export default [
 	},
 
 	{
-		msg: new $.alert.container({
+		msg: new alert.container({
 			color: "primary",
 			elem: "<b>Heads up!</b> Be sure to <a href='https://getbootstrap.com/docs/5.1/layout/grid/'>read the Grid page</a> first before diving into how to modify and customize your grid column",
 		}),
@@ -18,15 +24,15 @@ export default [
 
 	{
 		title: "How they work",
-		msg: new $.ul({
+		msg: new ul({
 			elem: [
-				new $.li({
+				new li({
 					elem: "<b>Columns build on the grid’s flexbox architecture.</b> Flexbox means we have options for changing individual columns and modifying groups of columns at the row level. You choose how columns grow, shrink, or otherwise change.",
 				}),
-				new $.li({
+				new li({
 					elem: "<b>When building grid layouts, all content goes in column</b> The hierarchy of Bootstrap’s grid goes from container to row to column to your content. On rare occasions, you may combine content and column, but be aware there can be unintended consequences.",
 				}),
-				new $.li({
+				new li({
 					elem: "<b>Bootstrap includes predefined classes for creating fast, responsive layouts.</b> With six breakpoints and a dozen columns at each grid tier, we have dozens of classes already built for you to create your desired layouts. This can be disabled via Sass if you wish.",
 				}),
 			],
@@ -41,14 +47,15 @@ export default [
 	{
 		title: "Vertical alignment",
 		viewclass: "cl-highlight-col cl-highlight-row",
+		import: ["div"],
 		code: () => {
-			return new $.div(
+			return new div(
 				"container",
 				["row align-items-start", "row align-items-center", "row align-items-end"].map((i) => {
-					return new $.div({
+					return new div({
 						class: i,
 						style: { "min-height": "10rem" },
-						elem: Array(3).fill(new $.div("col", "One of three columns")),
+						elem: Array(3).fill(new div("col", "One of three columns")),
 					});
 				})
 			);
@@ -58,16 +65,17 @@ export default [
 	{
 		title: "Vertical alignment",
 		viewclass: "cl-highlight-col cl-highlight-row",
+		import: ["div"],
 		code: () => {
-			return new $.div(
+			return new div(
 				"container",
-				new $.div({
+				new div({
 					class: "row",
 					style: { "min-height": "10rem" },
 					elem: [
-						new $.div("col align-self-start", "One of three columns"),
-						new $.div("col align-self-center", "One of three columns"),
-						new $.div("col align-self-end", "One of three columns"),
+						new div("col align-self-start", "One of three columns"),
+						new div("col align-self-center", "One of three columns"),
+						new div("col align-self-end", "One of three columns"),
 					],
 				})
 			);
@@ -77,8 +85,9 @@ export default [
 	{
 		title: "Horizontal alignment",
 		viewclass: "cl-highlight-col",
+		import: ["div"],
 		code: () => {
-			return new $.div(
+			return new div(
 				"container",
 				[
 					"row justify-content-start",
@@ -88,7 +97,7 @@ export default [
 					"row justify-content-between",
 					"row justify-content-evenly",
 				].map((i) => {
-					return new $.div(i, Array(2).fill(new $.div("col-4", "One of two columns")));
+					return new div(i, Array(2).fill(new div("col-4", "One of two columns")));
 				})
 			);
 		},
@@ -96,18 +105,19 @@ export default [
 
 	{
 		title: "Column wrapping",
-		msg: "If more than 12 columns are placed within a single row, each group of extra columns will, as one unit, wrap onto a new $.line.",
+		msg: "If more than 12 columns are placed within a single row, each group of extra columns will, as one unit, wrap onto a new line.",
 		viewclass: "cl-highlight-col",
+		import: ["div"],
 		code: () => {
-			return new $.div(
+			return new div(
 				"container",
-				new $.div("row", [
-					new $.div("col-9", ".col-9"),
-					new $.div(
+				new div("row", [
+					new div("col-9", ".col-9"),
+					new div(
 						"col-4",
-						".col-4 : Since 9 + 4 = 13 > 12, this 4-column-wide div gets wrapped onto a new $.line as one contiguous unit."
+						".col-4 : Since 9 + 4 = 13 > 12, this 4-column-wide div gets wrapped onto a new line as one contiguous unit."
 					),
-					new $.div("col-6", ".col-6 : Subsequent columns continue along the new $.line."),
+					new div("col-6", ".col-6 : Subsequent columns continue along the new line."),
 				])
 			);
 		},
@@ -115,17 +125,18 @@ export default [
 
 	{
 		title: "Column breaks",
-		msg: "Breaking columns to a new $.line in flexbox requires a small hack: add an element with width: 100% wherever you want to wrap your columns to a new $.line. Normally this is accomplished with multiple .rows, but not every implementation method can account for this.",
+		msg: "Breaking columns to a new line in flexbox requires a small hack: add an element with width: 100% wherever you want to wrap your columns to a new line. Normally this is accomplished with multiple .rows, but not every implementation method can account for this.",
 		viewclass: "cl-highlight-col",
+		import: ["span", "div"],
 		code: () => {
-			return new $.div(
+			return new div(
 				"container",
-				new $.div("row", [
-					new $.div("col-6 col-sm-3", ".col-6 .col-sm-3"),
-					new $.div("col-6 col-sm-3", ".col-6 .col-sm-3"),
-					new $.span({ class: "w-100" }),
-					new $.div("col-6 col-sm-3", ".col-6 .col-sm-3"),
-					new $.div("col-6 col-sm-3", ".col-6 .col-sm-3"),
+				new div("row", [
+					new div("col-6 col-sm-3", ".col-6 .col-sm-3"),
+					new div("col-6 col-sm-3", ".col-6 .col-sm-3"),
+					new span({ class: "w-100" }),
+					new div("col-6 col-sm-3", ".col-6 .col-sm-3"),
+					new div("col-6 col-sm-3", ".col-6 .col-sm-3"),
 				])
 			);
 		},
@@ -134,15 +145,16 @@ export default [
 	{
 		msg: "You may also apply this break at specific breakpoints with Bootstrap responsive display utilities.",
 		viewclass: "cl-highlight-col",
+		import: ["span", "div"],
 		code: () => {
-			return new $.div(
+			return new div(
 				"container",
-				new $.div("row", [
-					new $.div("col-6 col-sm-3", ".col-6 .col-sm-3"),
-					new $.div("col-6 col-sm-3", ".col-6 .col-sm-3"),
-					new $.span({ class: "w-100", display: ["none", "md-block"] }),
-					new $.div("col-6 col-sm-3", ".col-6 .col-sm-3"),
-					new $.div("col-6 col-sm-3", ".col-6 .col-sm-3"),
+				new div("row", [
+					new div("col-6 col-sm-3", ".col-6 .col-sm-3"),
+					new div("col-6 col-sm-3", ".col-6 .col-sm-3"),
+					new span({ class: "w-100", display: ["none", "md-block"] }),
+					new div("col-6 col-sm-3", ".col-6 .col-sm-3"),
+					new div("col-6 col-sm-3", ".col-6 .col-sm-3"),
 				])
 			);
 		},
@@ -156,13 +168,14 @@ export default [
 		title: "Order classes",
 		msg: "Use {{.order-}} classes for controlling the <b>visual order</b> of your content. These classes are responsive, so you can set the {{order}} by breakpoint (e.g., {{.order-1.order-md-2}}). Includes support for 1 through 5 across all six grid tiers.",
 		viewclass: "cl-highlight-col",
+		import: ["div"],
 		code: () => {
-			return new $.div(
+			return new div(
 				"container",
-				new $.div("row", [
-					new $.div("col", "First in DOM, no order applied"),
-					new $.div("col order-5", "Second in DOM, with a larger order"),
-					new $.div("col order-1", "Third in DOM, with an order of 1"),
+				new div("row", [
+					new div("col", "First in DOM, no order applied"),
+					new div("col order-5", "Second in DOM, with a larger order"),
+					new div("col order-1", "Third in DOM, with an order of 1"),
 				])
 			);
 		},
@@ -177,17 +190,18 @@ export default [
 		title: "Offset classes",
 		msg: "Move columns to the right using {{.offset-md-*}} classes. These classes increase the left margin of a column by {{*}} column For example, {{.offset-md-4}} moves {{.col-md-4}} over four column",
 		viewclass: "cl-highlight-col",
+		import: ["div"],
 		code: () => {
-			return new $.div("container", [
-				new $.div("row", [
-					new $.div("col-md-4", ".col-md-4"),
-					new $.div("col-md-4 offset-md-4", ".col-md-4 .offset-md-4"),
+			return new div("container", [
+				new div("row", [
+					new div("col-md-4", ".col-md-4"),
+					new div("col-md-4 offset-md-4", ".col-md-4 .offset-md-4"),
 				]),
-				new $.div("row", [
-					new $.div("col-md-3 offset-md-3", ".col-md-3 .offset-md-3"),
-					new $.div("col-md-3 offset-md-3", ".col-md-3 .offset-md-3"),
+				new div("row", [
+					new div("col-md-3 offset-md-3", ".col-md-3 .offset-md-3"),
+					new div("col-md-3 offset-md-3", ".col-md-3 .offset-md-3"),
 				]),
-				new $.div("row", new $.div("col-md-6 offset-md-3", ".col-md-6 .offset-md-3")),
+				new div("row", new div("col-md-6 offset-md-3", ".col-md-6 .offset-md-3")),
 			]);
 		},
 	},
@@ -195,18 +209,19 @@ export default [
 	{
 		msg: "In addition to column clearing at responsive breakpoints, you may need to reset offsets. See this in action in the grid example.",
 		viewclass: "cl-highlight-col",
+		import: ["div"],
 		code: () => {
-			return new $.div("container", [
-				new $.div("row", [
-					new $.div("col-sm-5 col-md-6", ".col-sm-5 .col-md-6"),
-					new $.div(
+			return new div("container", [
+				new div("row", [
+					new div("col-sm-5 col-md-6", ".col-sm-5 .col-md-6"),
+					new div(
 						"col-sm-5 offset-sm-2 col-md-6 offset-md-0",
 						".col-sm-5 .offset-sm-2 .col-md-6 .offset-md-0"
 					),
 				]),
-				new $.div("row", [
-					new $.div("col-sm-6 col-md-5 col-lg-6", ".col-sm-6 .col-md-5 .col-lg-6"),
-					new $.div(
+				new div("row", [
+					new div("col-sm-6 col-md-5 col-lg-6", ".col-sm-6 .col-md-5 .col-lg-6"),
+					new div(
 						"col-sm-6 col-md-5 offset-md-2 col-lg-6 offset-lg-0",
 						".col-sm-6 .col-md-5 .offset-md-2 .col-lg-6 .offset-lg-0"
 					),
@@ -219,20 +234,15 @@ export default [
 		title: "Margin utilities",
 		msg: "With the move to flexbox in v4, you can use margin utilities like .me-auto to force sibling columns away from one another.",
 		viewclass: "cl-highlight-col",
+		import: ["div"],
 		code: () => {
-			return new $.div("container", [
-				new $.div("row", [
-					new $.div("col-md-4", ".col-md-4"),
-					new $.div("col-md-4 ms-auto", ".col-md-4 .ms-auto"),
+			return new div("container", [
+				new div("row", [new div("col-md-4", ".col-md-4"), new div("col-md-4 ms-auto", ".col-md-4 .ms-auto")]),
+				new div("row", [
+					new div("col-md-4 ms-auto", ".col-md-4 .ms-auto"),
+					new div("col-md-4 ms-auto", ".col-md-4 .ms-auto"),
 				]),
-				new $.div("row", [
-					new $.div("col-md-4 ms-auto", ".col-md-4 .ms-auto"),
-					new $.div("col-md-4 ms-auto", ".col-md-4 .ms-auto"),
-				]),
-				new $.div("row", [
-					new $.div("col-auto ms-auto", ".col-auto .ms-auto"),
-					new $.div("col-auto", ".col-auto"),
-				]),
+				new div("row", [new div("col-auto ms-auto", ".col-auto .ms-auto"), new div("col-auto", ".col-auto")]),
 			]);
 		},
 	},
@@ -241,10 +251,11 @@ export default [
 		title: "Standalone column classes",
 		msg: "The .col-* classes can also be used outside a .row to give an element a specific width. Whenever column classes are used as non direct children of a row, the paddings are omitted.",
 		viewclass: "cl-highlight-col",
+		import: ["div"],
 		code: () => {
 			return [
-				new $.div("col-3 bg-light p-3 border", "  .col-3: width of 25%"),
-				new $.div("col-sm-9 bg-light p-3 border", " .col-sm-9: width of 75% above sm breakpoint"),
+				new div("col-3 bg-light p-3 border", "  .col-3: width of 25%"),
+				new div("col-sm-9 bg-light p-3 border", " .col-sm-9: width of 75% above sm breakpoint"),
 			];
 		},
 	},
@@ -253,12 +264,13 @@ export default [
 		msg: "The classes can be used together with utilities to create responsive floated images. Make sure to wrap the content in a .clearfix wrapper to clear the float if the text is shorter.",
 		sample: { "sample.text": sample.text, "sample.img": sample.img },
 		viewclass: "cl-highlight-col",
+		import: ["img", "p", "div"],
 		code: () => {
-			return new $.div("clearfix", [
-				new $.img({ src: sample.img(200, 200), class: "col-md-6 float-md-end mb-3 ms-md-3" }),
-				new $.p(sample.text()),
-				new $.p(sample.text()),
-				new $.p(sample.text()),
+			return new div("clearfix", [
+				new img({ src: sample.img(200, 200), class: "col-md-6 float-md-end mb-3 ms-md-3" }),
+				new p(sample.text()),
+				new p(sample.text()),
+				new p(sample.text()),
 			]);
 		},
 	},
