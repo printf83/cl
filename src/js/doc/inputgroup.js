@@ -1,6 +1,9 @@
 "use strict";
 import sample from "./sample.js";
-import $ from "../component.js";
+import input from "../base/input.js";
+import * as inputgroup from "../base/inputgroup.js";
+import button from "../base/button.js";
+import dropdown from "../base/dropdown.js";
 
 export default [
 	{
@@ -12,27 +15,28 @@ export default [
 	{
 		title: "Basic example",
 		container: sample.formcontainer,
+		import: ["input", "inputgroup"],
 		code: () => {
 			return [
-				new $.input({
+				new input({
 					type: "text",
 					placeholder: "Username",
 					before: "@",
 				}),
 
-				new $.input({
+				new input({
 					type: "text",
 					placeholder: "Recipient's username",
 					after: "@example.com",
 				}),
 
-				new $.input({
+				new input({
 					label: "Your vanity URL",
 					type: "text",
 					before: "https://example.com/users/",
 				}),
 
-				new $.input({
+				new input({
 					label: "Amount (to the nearest dollar)",
 					hidelabel: true,
 					type: "number",
@@ -40,15 +44,15 @@ export default [
 					after: ".00",
 				}),
 
-				new $.inputgroup.container([
-					new $.input({
+				new inputgroup.container([
+					new input({
 						label: "Username",
 						hidelabel: true,
 						type: "text",
 						placeholder: "Username",
 					}),
-					new $.inputgroup.text("@"),
-					new $.input({
+					new inputgroup.text("@"),
+					new input({
 						label: "Server",
 						hidelabel: true,
 						type: "text",
@@ -56,7 +60,7 @@ export default [
 					}),
 				]),
 
-				new $.input({
+				new input({
 					label: "With textarea",
 					hidelabel: true,
 					type: "textarea",
@@ -69,20 +73,21 @@ export default [
 	{
 		title: "Wrapping",
 		container: sample.formcontainer,
+		import: ["input", "inputgroup"],
 		code: () => {
 			return [
-				new $.input({
+				new input({
 					nowrap: true,
 					placeholder: "Username",
 					type: "text",
 					before: "@",
 				}),
 
-				new $.inputgroup.container({
+				new inputgroup.container({
 					class: "flex-nowrap",
 					elem: [
-						new $.inputgroup.text("@"),
-						new $.input({
+						new inputgroup.text("@"),
+						new input({
 							placeholder: "Username",
 							type: "text",
 							container: false,
@@ -96,20 +101,21 @@ export default [
 	{
 		title: "Sizing",
 		container: sample.formcontainer,
+		import: ["input"],
 		code: () => {
 			return [
-				new $.input({
+				new input({
 					type: "text",
 					before: "Small",
 					weight: "sm",
 				}),
 
-				new $.input({
+				new input({
 					type: "text",
 					before: "Default",
 				}),
 
-				new $.input({
+				new input({
 					type: "text",
 					before: "Large",
 					weight: "lg",
@@ -121,25 +127,26 @@ export default [
 	{
 		title: "Checkboxes and radios",
 		container: sample.formcontainer,
+		import: ["input", "inputgroup"],
 		code: () => {
 			return [
-				new $.inputgroup.container({
+				new inputgroup.container({
 					elem: [
-						new $.inputgroup.text({
-							elem: new $.input({ type: "checkbox", flex: true, class: "mt-0" }),
+						new inputgroup.text({
+							elem: new input({ type: "checkbox", flex: true, class: "mt-0" }),
 						}),
-						new $.input({
+						new input({
 							type: "text",
 							container: false,
 						}),
 					],
 				}),
-				new $.inputgroup.container({
+				new inputgroup.container({
 					elem: [
-						new $.inputgroup.text({
-							elem: new $.input({ type: "radio", flex: true, class: "mt-0" }),
+						new inputgroup.text({
+							elem: new input({ type: "radio", flex: true, class: "mt-0" }),
 						}),
-						new $.input({
+						new input({
 							type: "text",
 							container: false,
 						}),
@@ -152,18 +159,19 @@ export default [
 	{
 		title: "Multiple inputs",
 		container: sample.formcontainer,
+		import: ["input", "inputgroup"],
 		code: () => {
 			return [
-				new $.inputgroup.container({
+				new inputgroup.container({
 					elem: [
-						new $.inputgroup.text("First and last name"),
-						new $.input({
+						new inputgroup.text("First and last name"),
+						new input({
 							label: "First name",
 							hidelabel: true,
 							type: "text",
 							container: false,
 						}),
-						new $.input({
+						new input({
 							label: "Last name",
 							hidelabel: true,
 							type: "text",
@@ -178,13 +186,14 @@ export default [
 	{
 		title: "Multiple addons",
 		container: sample.formcontainer,
+		import: ["input", "inputgroup"],
 		code: () => {
 			return [
-				new $.inputgroup.container({
+				new inputgroup.container({
 					elem: [
-						new $.inputgroup.text("$"),
-						new $.inputgroup.text("0.00"),
-						new $.input({
+						new inputgroup.text("$"),
+						new inputgroup.text("0.00"),
+						new input({
 							label: "Dollar amount (with dot and two decimal places)",
 							hidelabel: true,
 							type: "number",
@@ -193,16 +202,16 @@ export default [
 					],
 				}),
 
-				new $.inputgroup.container({
+				new inputgroup.container({
 					elem: [
-						new $.input({
+						new input({
 							label: "Dollar amount (with dot and two decimal places)",
 							hidelabel: true,
 							type: "number",
 							container: false,
 						}),
-						new $.inputgroup.text("$"),
-						new $.inputgroup.text("0.00"),
+						new inputgroup.text("$"),
+						new inputgroup.text("0.00"),
 					],
 				}),
 			];
@@ -212,42 +221,43 @@ export default [
 	{
 		title: "Button addons",
 		container: sample.formcontainer,
+		import: ["input", "button", "inputgroup"],
 		code: () => {
 			return [
-				new $.input({
+				new input({
 					label: "Example text with button addon",
 					hidelabel: true,
 					type: "text",
-					before: new $.button({
+					before: new button({
 						outline: true,
 						color: "secondary",
 						label: "Button",
 					}),
 				}),
 
-				new $.input({
+				new input({
 					placeholder: "Recipient's username",
 					type: "text",
-					after: new $.button({
+					after: new button({
 						outline: true,
 						color: "secondary",
 						label: "Button",
 					}),
 				}),
 
-				new $.inputgroup.container({
+				new inputgroup.container({
 					elem: [
-						new $.button({
+						new button({
 							outline: true,
 							color: "secondary",
 							label: "Button",
 						}),
-						new $.button({
+						new button({
 							outline: true,
 							color: "secondary",
 							label: "Button",
 						}),
-						new $.input({
+						new input({
 							label: "Example text with button addon",
 							hidelabel: true,
 							type: "text",
@@ -256,19 +266,19 @@ export default [
 					],
 				}),
 
-				new $.inputgroup.container({
+				new inputgroup.container({
 					elem: [
-						new $.input({
+						new input({
 							placeholder: "Recipient's username",
 							type: "text",
 							container: false,
 						}),
-						new $.button({
+						new button({
 							outline: true,
 							color: "secondary",
 							label: "Button",
 						}),
-						new $.button({
+						new button({
 							outline: true,
 							color: "secondary",
 							label: "Button",
@@ -283,13 +293,14 @@ export default [
 		title: "Buttons with dropdowns",
 		container: sample.formcontainer,
 		sample: { "sample.dropdownitem": sample.dropdownitem },
+		import: ["input", "dropdown", "sample"],
 		code: () => {
 			return [
-				new $.input({
+				new input({
 					label: "Text input with dropdown button",
 					hidelabel: true,
 					type: "text",
-					before: new $.dropdown({
+					before: new dropdown({
 						outline: true,
 						color: "secondary",
 						label: "Dropdown",
@@ -298,11 +309,11 @@ export default [
 					}),
 				}),
 
-				new $.input({
+				new input({
 					label: "Text input with dropdown button",
 					hidelabel: true,
 					type: "text",
-					after: new $.dropdown({
+					after: new dropdown({
 						outline: true,
 						color: "secondary",
 						label: "Dropdown",
@@ -311,18 +322,18 @@ export default [
 					}),
 				}),
 
-				new $.input({
+				new input({
 					label: "Text input with dropdown button",
 					hidelabel: true,
 					type: "text",
-					before: new $.dropdown({
+					before: new dropdown({
 						outline: true,
 						color: "secondary",
 						label: "Dropdown",
 						option: sample.dropdownitem(),
 						container: null,
 					}),
-					after: new $.dropdown({
+					after: new dropdown({
 						outline: true,
 						color: "secondary",
 						label: "Dropdown",
@@ -338,13 +349,14 @@ export default [
 		title: "Segmented buttons",
 		container: sample.formcontainer,
 		sample: { "sample.dropdownitem": sample.dropdownitem },
+		import: ["input", "dropdown", "sample"],
 		code: () => {
 			return [
-				new $.input({
+				new input({
 					label: "Text input with dropdown button",
 					hidelabel: true,
 					type: "text",
-					before: new $.dropdown({
+					before: new dropdown({
 						outline: true,
 						color: "secondary",
 						label: "Action",
@@ -354,11 +366,11 @@ export default [
 					}),
 				}),
 
-				new $.input({
+				new input({
 					label: "Text input with dropdown button",
 					hidelabel: true,
 					type: "text",
-					after: new $.dropdown({
+					after: new dropdown({
 						outline: true,
 						color: "secondary",
 						label: "Action",
@@ -375,23 +387,24 @@ export default [
 		title: "Segmented buttons",
 		container: sample.formcontainer,
 		sample: { "sample.optionitem": sample.optionitem },
+		import: ["input", "button", "sample"],
 		code: () => {
 			return [
-				new $.input({
+				new input({
 					type: "select",
 					before: "Options",
 					option: sample.optionitem(),
 				}),
 
-				new $.input({
+				new input({
 					type: "select",
 					after: "Options",
 					option: sample.optionitem(),
 				}),
 
-				new $.input({
+				new input({
 					type: "select",
-					before: new $.button({
+					before: new button({
 						outline: true,
 						color: "secondary",
 						label: "Button",
@@ -399,9 +412,9 @@ export default [
 					option: sample.optionitem(),
 				}),
 
-				new $.input({
+				new input({
 					type: "select",
-					after: new $.button({
+					after: new button({
 						outline: true,
 						color: "secondary",
 						label: "Button",
@@ -415,30 +428,31 @@ export default [
 	{
 		title: "Custom file input",
 		container: sample.formcontainer,
+		import: ["input", "button"],
 		code: () => {
 			return [
-				new $.input({
+				new input({
 					type: "file",
 					before: "Upload",
 				}),
 
-				new $.input({
+				new input({
 					type: "file",
 					after: "Upload",
 				}),
 
-				new $.input({
+				new input({
 					type: "file",
-					before: new $.button({
+					before: new button({
 						outline: true,
 						color: "secondary",
 						label: "Button",
 					}),
 				}),
 
-				new $.input({
+				new input({
 					type: "file",
-					after: new $.button({
+					after: new button({
 						outline: true,
 						color: "secondary",
 						label: "Button",

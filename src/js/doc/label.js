@@ -1,6 +1,9 @@
 "use strict";
 import sample from "./sample.js";
-import $ from "../component.js";
+
+import * as core from "../base/core.js";
+import label from "../base/label.js";
+import input from "../base/input.js";
 
 export default [
 	{
@@ -10,8 +13,9 @@ export default [
 
 	{
 		title: "Label only",
+		import: ["label"],
 		code: () => {
-			return new $.label({
+			return new label({
 				label: "Label",
 			});
 		},
@@ -19,8 +23,9 @@ export default [
 
 	{
 		title: "With icon",
+		import: ["label"],
 		code: () => {
-			return new $.label({
+			return new label({
 				icon: "fire",
 				label: "Label",
 			});
@@ -29,8 +34,9 @@ export default [
 
 	{
 		title: "Icon after",
+		import: ["label"],
 		code: () => {
-			return new $.label({
+			return new label({
 				icon: "fire",
 				label: "Label",
 				iconafter: true,
@@ -41,15 +47,16 @@ export default [
 	{
 		title: "Label for",
 		container: sample.formcontainer,
+		import: ["input", "label"],
 		code: () => {
-			let id = $.core.UUID();
+			let id = core.UUID();
 			return [
-				new $.label({
+				new label({
 					for: id,
 					icon: "fire",
 					label: "Label",
 				}),
-				new $.input({ type: "text", id: id }),
+				new input({ type: "text", id: id }),
 			];
 		},
 	},
@@ -58,8 +65,9 @@ export default [
 		title: "Label hide",
 		msg: "Show icon only and label is hidden. Put label inside {{span.visually-hidden}}",
 		container: sample.formcontainer,
+		import: ["label"],
 		code: () => {
-			return new $.label({
+			return new label({
 				icon: "fire",
 				label: "This is .visually-hidden label",
 				hidelabel: true,
@@ -71,9 +79,10 @@ export default [
 		title: "Label show",
 		msg: "Show icon only until viewport or higher",
 		container: sample.formcontainer,
+		import: ["label"],
 		code: () => {
 			return [null, "sm", "md", "lg", "xl", "xxl"].map((i) => {
-				return new $.label({
+				return new label({
 					icon: "fire",
 					showlabel: i,
 					label: i ? `Show on ${i}` : "Always show label",

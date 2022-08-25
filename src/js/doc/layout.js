@@ -1,6 +1,5 @@
 "use strict";
-import sample from "./sample.js";
-import $ from "../component.js";
+import * as layout from "../base/layout.js";
 
 export default [
 	{
@@ -10,8 +9,9 @@ export default [
 	{
 		title: "Layout 1",
 		viewclass: "cl-highlight-divwithid",
+		import: ["layout"],
 		code: () => {
-			return new $.layout.l1({
+			return new layout.l1({
 				topid: "top",
 				leftid: "left",
 				rightid: "right",
