@@ -1,6 +1,11 @@
 "use strict";
 import sample from "./sample.js";
-import $ from "../component.js";
+import listgroup from "../base/listgroup.js";
+import div from "../base/div.js";
+import h from "../base/h.js";
+import small from "../base/small.js";
+import p from "../base/p.js";
+import badge from "../base/badge.js";
 
 export default [
 	{
@@ -12,15 +17,17 @@ export default [
 	{
 		title: "Basic example",
 		sample: { "sample.listgroupitem": sample.listgroupitem },
+		import: ["listgroup", "sample"],
 		code: () => {
-			return new $.listgroup({ item: sample.listgroupitem() });
+			return new listgroup({ item: sample.listgroupitem() });
 		},
 	},
 
 	{
 		title: "Active items",
+		import: ["listgroup"],
 		code: () => {
-			return new $.listgroup({
+			return new listgroup({
 				item: [
 					{ elem: "An active item", active: true },
 					{ elem: "A second item" },
@@ -34,8 +41,9 @@ export default [
 
 	{
 		title: "Disabled items",
+		import: ["listgroup"],
 		code: () => {
-			return new $.listgroup({
+			return new listgroup({
 				item: [
 					{ elem: "An disabled item", disabled: true },
 					{ elem: "A second item" },
@@ -49,8 +57,9 @@ export default [
 
 	{
 		title: "List group of links",
+		import: ["listgroup"],
 		code: () => {
-			return new $.listgroup({
+			return new listgroup({
 				type: "div",
 				item: [
 					{
@@ -69,8 +78,9 @@ export default [
 
 	{
 		title: "List group of buttons",
+		import: ["listgroup"],
 		code: () => {
-			return new $.listgroup({
+			return new listgroup({
 				type: "div",
 				item: [
 					{
@@ -90,8 +100,9 @@ export default [
 	{
 		title: "Flush",
 		sample: { "sample.listgroupitem": sample.listgroupitem },
+		import: ["listgroup", "sample"],
 		code: () => {
-			return new $.listgroup({
+			return new listgroup({
 				flush: true,
 				item: sample.listgroupitem(),
 			});
@@ -101,8 +112,9 @@ export default [
 	{
 		title: "Numbered",
 		sample: { "sample.listgroupitem": sample.listgroupitem },
+		import: ["listgroup", "sample"],
 		code: () => {
-			return new $.listgroup({
+			return new listgroup({
 				type: "ol",
 				item: sample.listgroupitem(),
 			});
@@ -112,8 +124,9 @@ export default [
 	{
 		title: "Numbered custom content",
 		sample: { "sample.listgroupitemcustomcontent": sample.listgroupitemcustomcontent },
+		import: ["listgroup", "sample"],
 		code: () => {
-			return new $.listgroup({
+			return new listgroup({
 				type: "ol",
 				item: [
 					{
@@ -147,39 +160,40 @@ export default [
 		],
 		container: sample.stackcontainer,
 		sample: { "sample.listgroupitem3": sample.listgroupitem3 },
+		import: ["listgroup", "sample"],
 		code: () => {
 			return [
-				new $.listgroup({
+				new listgroup({
 					horizontal: true,
 					item: sample.listgroupitem3(),
 				}),
 
-				new $.listgroup({
+				new listgroup({
 					horizontal: "sm",
 					item: sample.listgroupitem3(),
 				}),
 
-				new $.listgroup({
+				new listgroup({
 					horizontal: "md",
 					item: sample.listgroupitem3(),
 				}),
 
-				new $.listgroup({
+				new listgroup({
 					horizontal: "lg",
 					item: sample.listgroupitem3(),
 				}),
 
-				new $.listgroup({
+				new listgroup({
 					horizontal: "xl",
 					item: sample.listgroupitem3(),
 				}),
 
-				new $.listgroup({
+				new listgroup({
 					horizontal: "xxl",
 					item: sample.listgroupitem3(),
 				}),
 
-				new $.listgroup({
+				new listgroup({
 					horizontal: ["md", "xxl"],
 					item: sample.listgroupitem3(),
 				}),
@@ -189,8 +203,9 @@ export default [
 
 	{
 		title: "Contextual classes",
+		import: ["listgroup"],
 		code: () => {
-			return new $.listgroup({
+			return new listgroup({
 				item: [{ color: "primary", elem: `A simple primary list group item` }],
 			});
 		},
@@ -198,8 +213,9 @@ export default [
 
 	{
 		title: "Contextual classes example",
+		import: ["listgroup"],
 		code: () => {
-			return new $.listgroup({
+			return new listgroup({
 				item: ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map((i) => {
 					return { color: i, elem: `A simple ${i} list group item` };
 				}),
@@ -209,8 +225,9 @@ export default [
 
 	{
 		title: "Contextual classes with action example",
+		import: ["listgroup"],
 		code: () => {
-			return new $.listgroup({
+			return new listgroup({
 				type: "div",
 				item: ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map((i) => {
 					return {
@@ -226,6 +243,7 @@ export default [
 
 	{
 		title: "With badge",
+		import: ["badge", "listgroup"],
 		code: () => {
 			let itemfn = (text, badgeLabel) => {
 				return {
@@ -234,7 +252,7 @@ export default [
 					alignitem: "start",
 					elem: [
 						text,
-						new $.badge({
+						new badge({
 							pill: true,
 							color: "primary",
 							label: badgeLabel,
@@ -243,7 +261,7 @@ export default [
 				};
 			};
 
-			return new $.listgroup({
+			return new listgroup({
 				item: [itemfn("A list item", 14), itemfn("A second list item", 2), itemfn("A third list item", 1)],
 			});
 		},
@@ -251,6 +269,7 @@ export default [
 
 	{
 		title: "Custom content",
+		import: ["div", "h", "small", "p", "listgroup"],
 		code: () => {
 			let itemfn = (title, active, days) => {
 				return {
@@ -258,20 +277,20 @@ export default [
 					action: true,
 					active: active,
 					elem: [
-						new $.div({
+						new div({
 							class: "w-100",
 							display: "flex",
 							justifycontent: "between",
 							elem: [
-								new $.h({ level: 5, marginbottom: 1, elem: title }),
-								new $.small({
+								new h({ level: 5, marginbottom: 1, elem: title }),
+								new small({
 									textcolor: !active ? "muted" : null,
 									elem: `${days} days ago`,
 								}),
 							],
 						}),
-						new $.p({ marginbottom: 1, elem: "Some placeholder content in a paragraph." }),
-						new $.small({
+						new p({ marginbottom: 1, elem: "Some placeholder content in a paragraph." }),
+						new small({
 							textcolor: !active ? "muted" : null,
 							elem: `And some${!active ? " muted" : ""} small print.`,
 						}),
@@ -279,7 +298,7 @@ export default [
 				};
 			};
 
-			return new $.listgroup({
+			return new listgroup({
 				type: "div",
 				item: [
 					itemfn("List group item heading 1", true, 1),
@@ -292,8 +311,9 @@ export default [
 
 	{
 		title: "Checkboxes",
+		import: ["listgroup"],
 		code: () => {
-			return new $.listgroup({
+			return new listgroup({
 				type: "div",
 				item: [
 					{ type: "checkbox", value: "1", label: "First checkbox" },
@@ -322,8 +342,9 @@ export default [
 
 	{
 		title: "Radio",
+		import: ["listgroup"],
 		code: () => {
-			return new $.listgroup({
+			return new listgroup({
 				type: "div",
 				item: [
 					{
@@ -365,8 +386,9 @@ export default [
 
 	{
 		title: "Switch",
+		import: ["listgroup"],
 		code: () => {
-			return new $.listgroup({
+			return new listgroup({
 				type: "div",
 				item: [
 					{ type: "switch", value: "1", label: "First switch" },

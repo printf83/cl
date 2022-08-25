@@ -1,6 +1,9 @@
 "use strict";
 import sample from "./sample.js";
-import $ from "../component.js";
+import msg from "../base/msg.js";
+import toast from "../base/toast.js";
+import * as alert from "../base/alert.js";
+import modal from "../base/modal.js";
 
 export default [
 	{
@@ -11,10 +14,11 @@ export default [
 	{
 		title: "Label only",
 		container: sample.formcontainer,
+		import: ["msg"],
 		code: () => {
 			return [
-				new $.msg("Message"),
-				new $.msg({
+				new msg("Message"),
+				new msg({
 					elem: "Message",
 				}),
 			];
@@ -24,8 +28,9 @@ export default [
 	{
 		title: "With icon",
 		sample: { "sample.text": sample.text },
+		import: ["msg"],
 		code: () => {
-			return new $.msg({
+			return new msg({
 				icon: "fire",
 				elem: sample.text(),
 			});
@@ -37,20 +42,20 @@ export default [
 		container: sample.formcontainer,
 		viewclass: "cl-highlight-col",
 		sample: { "sample.text": sample.text },
+		import: ["msg"],
 		code: () => {
-			let id = $.core.UUID();
 			return [
-				new $.msg({
+				new msg({
 					weight: "sm",
 					icon: "fire",
 					elem: `<b>Weight: sm</b>. ${sample.text()}`,
 				}),
-				new $.msg({
+				new msg({
 					weight: "md",
 					icon: "fire",
 					elem: `<b>Weight: md</b>. ${sample.text()}`,
 				}),
-				new $.msg({
+				new msg({
 					weight: "lg",
 					icon: "fire",
 					elem: `<b>Weight: lg</b>. ${sample.text()}`,
@@ -64,19 +69,19 @@ export default [
 		container: sample.formcontainer,
 		viewclass: "cl-modal-preview",
 		sample: { "sample.text": sample.text },
+		import: ["toast", "alert", "msg"],
 		code: () => {
-			let id = $.core.UUID();
 			return [
-				new $.toast({
+				new toast({
 					title: "Title",
 					color: "primary",
 					textcolor: "light",
-					elem: new $.msg({ weight: "sm", icon: "fire", elem: `<b>In toast</b>. ${sample.text()}` }),
+					elem: new msg({ weight: "sm", icon: "fire", elem: `<b>In toast</b>. ${sample.text()}` }),
 					debug: true,
 				}),
-				new $.alert.container({
+				new alert.container({
 					color: "primary",
-					elem: new $.msg({ weight: "sm", icon: "fire", elem: `<b>In alert</b>. ${sample.text()}` }),
+					elem: new msg({ weight: "sm", icon: "fire", elem: `<b>In alert</b>. ${sample.text()}` }),
 					debug: true,
 				}),
 			];
@@ -87,11 +92,11 @@ export default [
 		title: "Weight : md",
 		viewclass: "cl-modal-preview",
 		sample: { "sample.text": sample.text },
+		import: ["modal", "msg"],
 		code: () => {
-			let id = $.core.UUID();
-			return new $.modal({
+			return new modal({
 				title: "Title",
-				elem: new $.msg({
+				elem: new msg({
 					weight: "md",
 					icon: { icon: "fire", color: "danger" },
 					elem: `<b>In modal</b>. ${sample.text()}`,
@@ -106,14 +111,14 @@ export default [
 		title: "Weight : lg",
 		viewclass: "cl-modal-preview",
 		sample: { "sample.text": sample.text },
+		import: ["modal", "msg"],
 		code: () => {
-			let id = $.core.UUID();
-			return new $.modal({
+			return new modal({
 				color: "primary",
 				textcolor: "light",
 				divider: false,
 				centerbutton: true,
-				elem: new $.msg({ weight: "lg", icon: "fire", elem: `<h3>In modal</h3> <p>${sample.text()}</p>` }),
+				elem: new msg({ weight: "lg", icon: "fire", elem: `<h3>In modal</h3> <p>${sample.text()}</p>` }),
 				button: [
 					{
 						color: "light",

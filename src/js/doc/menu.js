@@ -1,5 +1,6 @@
 "use strict";
-import $ from "../component.js";
+import menu from "../base/menu.js";
+import toast from "../base/toast.js";
 
 export default [
 	{
@@ -8,6 +9,7 @@ export default [
 	},
 	{
 		title: "Example",
+		import: ["menu"],
 		code: () => {
 			return [
 				{
@@ -38,7 +40,7 @@ export default [
 					],
 				},
 			].map((i) => {
-				return new $.menu(i);
+				return new menu(i);
 			});
 		},
 	},
@@ -46,6 +48,7 @@ export default [
 	{
 		title: "Dark background",
 		dark: true,
+		import: ["menu"],
 		code: () => {
 			return [
 				{
@@ -76,13 +79,14 @@ export default [
 					],
 				},
 			].map((i) => {
-				return new $.menu(i);
+				return new menu(i);
 			});
 		},
 	},
 
 	{
 		title: "Auto expand",
+		import: ["menu"],
 		code: () => {
 			return [
 				{
@@ -114,13 +118,14 @@ export default [
 					],
 				},
 			].map((i) => {
-				return new $.menu(i);
+				return new menu(i);
 			});
 		},
 	},
 
 	{
 		title: "With icon",
+		import: ["menu"],
 		code: () => {
 			return [
 				{
@@ -135,13 +140,14 @@ export default [
 					],
 				},
 			].map((i) => {
-				return new $.menu(i);
+				return new menu(i);
 			});
 		},
 	},
 
 	{
 		title: "Link",
+		import: ["menu"],
 		code: () => {
 			return [
 				{
@@ -154,13 +160,14 @@ export default [
 					],
 				},
 			].map((i) => {
-				return new $.menu(i);
+				return new menu(i);
 			});
 		},
 	},
 
 	{
 		title: "Function",
+		import: ["toast", "menu"],
 		code: () => {
 			return [
 				{
@@ -169,31 +176,31 @@ export default [
 						{
 							label: "Show info toast",
 							onclick: () => {
-								new $.toast("i", "Info toast").show();
+								new toast("i", "Info toast").show();
 							},
 						},
 						{
 							label: "Show warning toast",
 							onclick: () => {
-								new $.toast("!", "Warning toast").show();
+								new toast("!", "Warning toast").show();
 							},
 						},
 						{
 							label: "Show success toast",
 							onclick: () => {
-								new $.toast("/", "Success toast").show();
+								new toast("/", "Success toast").show();
 							},
 						},
 						{
 							label: "Show critical toast",
 							onclick: () => {
-								new $.toast("x", "Critical toast").show();
+								new toast("x", "Critical toast").show();
 							},
 						},
 					],
 				},
 			].map((i) => {
-				return new $.menu(i);
+				return new menu(i);
 			});
 		},
 	},

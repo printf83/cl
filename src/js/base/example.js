@@ -103,7 +103,7 @@ export default class example extends div {
 
 		if (opt.code && opt.view) {
 			item.push({
-				label: "html",
+				label: "Generated HTML",
 				icon: "code",
 				elem: new codepreview({ type: "html", code: core.html(opt.code()), container: null }),
 			});
@@ -121,8 +121,11 @@ export default class example extends div {
 
 		if (opt.import) {
 			item.push({
-				label: "import",
-				icon: "file-import",
+				// label: "import",
+				// icon: "file-import",
+				label: "Source Code",
+				icon: "fire",
+				active: !opt.codecollapse,
 				elem: new codepreview({ type: "js", code: opt.import.join(`\n`), container: null }),
 			});
 		}
