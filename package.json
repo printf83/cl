@@ -7,6 +7,9 @@
 	"repository": "https://github.com/printf83/cl",
 	"private": false,
 	"main": "server.js",
+	"scripts": {
+		"test": "npm start"
+	},
 	"dependencies": {
 		"bcrypt": "^5.0.1",
 		"compression": "^1.7.4",
