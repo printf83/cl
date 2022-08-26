@@ -17,14 +17,56 @@ export default [
 
 	{
 		title: "Supported content",
-		sample: { "sample.navbaritem": sample.navbaritem },
-		import: ["navbar"],
+		import: ["navbar", "button", "input"],
 		code: () => {
-			var id = core.UUID();
+			let id = core.UUID();
+
 			return new navbar.container({
 				expand: "lg",
 				color: "light",
-				elem: sample.navbaritem(id),
+				elem: [
+					new navbar.toggle({
+						target: `#${id}`,
+						toggle: "collapse",
+					}),
+
+					new navbar.brand({
+						label: "Navbar",
+					}),
+
+					new navbar.collapsecontainer({
+						id: id,
+						elem: [
+							new navbar.itemcontainer({
+								parenttype: "collapse",
+								elem: [
+									new navbar.item({ label: "Home", active: true }),
+									new navbar.item({ label: "Link" }),
+									new navbar.item({
+										label: "Dropdown",
+										option: [
+											{ href: "#", label: "Action" },
+											{ href: "#", label: "Another action" },
+											{ href: "#", label: "Something else here" },
+											{ value: "-" },
+											{ href: "#", label: "Separated link" },
+										],
+									}),
+									new navbar.item({ label: "Disabled", disabled: true }),
+								],
+							}),
+							new navbar.formcontainer([
+								new input({
+									type: "search",
+									placeholder: "Search",
+									hiddenlabel: "Search",
+									class: "me-2",
+								}),
+								new button({ label: "Search", color: "success", outline: true }),
+							]),
+						],
+					}),
+				],
 			});
 		},
 	},
@@ -156,7 +198,6 @@ export default [
 
 	{
 		title: "Nav item dropdown",
-		sample: { "sample.dropdownitem": sample.dropdownitem },
 		import: ["navbar"],
 		code: () => {
 			var id = core.UUID();
@@ -190,7 +231,13 @@ export default [
 									}),
 									new navbar.item({
 										label: "Pricing",
-										option: sample.dropdownitem(),
+										option: [
+											{ href: "#", label: "Action" },
+											{ href: "#", label: "Another action" },
+											{ href: "#", label: "Something else here" },
+											{ value: "-" },
+											{ href: "#", label: "Separated link" },
+										],
 									}),
 									new navbar.item({
 										label: "Disabled",
@@ -363,30 +410,75 @@ export default [
 
 	{
 		title: "Color schemes",
-		sample: { "sample.navbaritem": sample.navbaritem },
-		import: ["navbar"],
+		import: ["navbar", "button", "input"],
 		code: () => {
-			var id1 = core.UUID();
-			var id2 = core.UUID();
-			var id3 = core.UUID();
+			let id1 = core.UUID();
+			let id2 = core.UUID();
+			let id3 = core.UUID();
+
+			let fn = (id) => {
+				return [
+					new navbar.toggle({
+						target: `#${id}`,
+						toggle: "collapse",
+					}),
+
+					new navbar.brand({
+						label: "Navbar",
+					}),
+
+					new navbar.collapsecontainer({
+						id: id,
+						elem: [
+							new navbar.itemcontainer({
+								parenttype: "collapse",
+								elem: [
+									new navbar.item({ label: "Home", active: true }),
+									new navbar.item({ label: "Link" }),
+									new navbar.item({
+										label: "Dropdown",
+										option: [
+											{ href: "#", label: "Action" },
+											{ href: "#", label: "Another action" },
+											{ href: "#", label: "Something else here" },
+											{ value: "-" },
+											{ href: "#", label: "Separated link" },
+										],
+									}),
+									new navbar.item({ label: "Disabled", disabled: true }),
+								],
+							}),
+							new navbar.formcontainer([
+								new input({
+									type: "search",
+									placeholder: "Search",
+									hiddenlabel: "Search",
+									class: "me-2",
+								}),
+								new button({ label: "Search", color: "success", outline: true }),
+							]),
+						],
+					}),
+				];
+			};
 
 			return [
 				new navbar.container({
 					expand: "lg",
 					dark: true,
 					color: "dark",
-					elem: sample.navbaritem(id1),
+					elem: fn(id1),
 				}),
 				new navbar.container({
 					expand: "lg",
 					dark: true,
 					color: "primary",
-					elem: sample.navbaritem(id2),
+					elem: fn(id2),
 				}),
 				new navbar.container({
 					expand: "lg",
 					style: { backgroundColor: "#e3f2fd" },
-					elem: sample.navbaritem(id3),
+					elem: fn(id3),
 				}),
 			];
 		},
@@ -459,7 +551,6 @@ export default [
 			"Please note that this behavior comes with a potential drawback of overflow—when setting overflow-y: auto (required to scroll the content here), overflow-x is the equivalent of auto, which will crop some horizontal content.",
 			"Here’s an example navbar using {{scroll:'height'}}, with some extra margin utilities for optimum spacing.",
 		],
-		sample: { "sample.dropdownitem": sample.dropdownitem },
 		import: ["input", "button", "navbar"],
 		code: () => {
 			var id = core.UUID();
@@ -487,7 +578,13 @@ export default [
 									new navbar.item("Link"),
 									new navbar.item({
 										label: "Dropdown",
-										option: sample.dropdownitem(),
+										option: [
+											{ href: "#", label: "Action" },
+											{ href: "#", label: "Another action" },
+											{ href: "#", label: "Something else here" },
+											{ value: "-" },
+											{ href: "#", label: "Separated link" },
+										],
 									}),
 									new navbar.item({ label: "Disabled", disabled: true }),
 								],
@@ -516,27 +613,73 @@ export default [
 			"{{new navbar.container}} can use {{new navbar.toggle}}, {{new navbar.collapsecontainer}}, and add {{expand:'sm|md|lg|xl|xxl'}} option into {{new navbar.container}} to determine when their content collapses behind a button. In combination with other option, you can easily choose when to show or hide particular elements.",
 			"For {{new navbar.container}} that never collapse, add the {{expand:''}} option on the {{new navbar.container}}. For {{new navbar.container}} that always collapse, don’t add any .navbar-expand class.",
 		],
-		sample: { "sample.navbaritem": sample.navbaritem },
-		import: ["navbar"],
+		import: ["navbar", "button", "input"],
 		code: () => {
-			var id1 = core.UUID();
-			var id2 = core.UUID();
-			var id3 = core.UUID();
+			let id1 = core.UUID();
+			let id2 = core.UUID();
+			let id3 = core.UUID();
+
+			let fn = (id, title) => {
+				return [
+					new navbar.toggle({
+						target: `#${id}`,
+						toggle: "collapse",
+					}),
+
+					new navbar.brand({
+						label: title,
+					}),
+
+					new navbar.collapsecontainer({
+						id: id,
+						elem: [
+							new navbar.itemcontainer({
+								parenttype: "collapse",
+								elem: [
+									new navbar.item({ label: "Home", active: true }),
+									new navbar.item({ label: "Link" }),
+									new navbar.item({
+										label: "Dropdown",
+										option: [
+											{ href: "#", label: "Action" },
+											{ href: "#", label: "Another action" },
+											{ href: "#", label: "Something else here" },
+											{ value: "-" },
+											{ href: "#", label: "Separated link" },
+										],
+									}),
+									new navbar.item({ label: "Disabled", disabled: true }),
+								],
+							}),
+							new navbar.formcontainer([
+								new input({
+									type: "search",
+									placeholder: "Search",
+									hiddenlabel: "Search",
+									class: "me-2",
+								}),
+								new button({ label: "Search", color: "success", outline: true }),
+							]),
+						],
+					}),
+				];
+			};
+
 			return [
 				new navbar.container({
 					expand: "lg",
 					color: "light",
-					elem: sample.navbaritem(id1, "lg"),
+					elem: fn(id1, "lg"),
 				}),
 				new navbar.container({
 					expand: "",
 					color: "light",
-					elem: sample.navbaritem(id2, '""'),
+					elem: fn(id2, '""'),
 				}),
 				new navbar.container({
 					expand: null,
 					color: "light",
-					elem: sample.navbaritem(id3, "null"),
+					elem: fn(id3, "null"),
 				}),
 			];
 		},
