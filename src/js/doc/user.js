@@ -1,8 +1,7 @@
 "use strict";
-import $ from "../component.js";
-import * as user from "./base/user.js";
-import toast from "./base/toast.js";
-import button from "./base/button.js";
+import * as user from "../base/user.js";
+import toast from "../base/toast.js";
+import button from "../base/button.js";
 
 export default [
 	{
