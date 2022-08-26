@@ -1,6 +1,6 @@
 "use strict";
 import sample from "./sample.js";
-import $ from "../component.js";
+import pill from "../base/pill.js";
 
 export default [
 	{
@@ -10,6 +10,7 @@ export default [
 	{
 		title: "Example",
 		container: sample.stackcontainer,
+		import: ["pill"],
 		code: () => {
 			return [
 				{ title: "Title", label: "Label" },
@@ -20,13 +21,14 @@ export default [
 				{ title: "Title", label: "Label", color: "info" },
 				{ title: "Title", label: "Label", color: "dark" },
 			].map((i) => {
-				return new $.pill(i);
+				return new pill(i);
 			});
 		},
 	},
 	{
 		title: "Icon",
 		container: sample.stackcontainer,
+		import: ["pill"],
 		code: () => {
 			return [
 				{ icon: "fire", label: "Label" },
@@ -37,13 +39,14 @@ export default [
 				{ icon: "fire", label: "Label", color: "info" },
 				{ icon: "fire", label: "Label", color: "dark" },
 			].map((i) => {
-				return new $.pill(i);
+				return new pill(i);
 			});
 		},
 	},
 	{
 		title: "Base icon",
 		container: sample.stackcontainer,
+		import: ["pill"],
 		code: () => {
 			return [
 				{ icon: "i", title: "Title", label: "Info" },
@@ -53,7 +56,7 @@ export default [
 				{ icon: "-", title: "Title", label: "Stop" },
 				{ icon: "!!", title: "Title", label: "Danger" },
 			].map((i) => {
-				return new $.pill(i);
+				return new pill(i);
 			});
 		},
 	},
@@ -61,6 +64,7 @@ export default [
 	{
 		title: "Icon with title",
 		container: sample.stackcontainer,
+		import: ["pill"],
 		code: () => {
 			return [
 				{ icon: "i", title: "Info", label: "Label" },
@@ -70,7 +74,7 @@ export default [
 				{ icon: "fire", title: "Fire", label: "Label" },
 				{ icon: { icon: "star", spin: true }, title: "Star", label: "Spinning icon", color: "warning" },
 			].map((i) => {
-				return new $.pill(i);
+				return new pill(i);
 			});
 		},
 	},
