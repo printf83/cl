@@ -75,12 +75,17 @@ export default [
 			return new example({
 				title: "Title",
 				msg: "Message",
-				sample: {
-					"sample.optionitem": sample.optionitem,
-				},
-				import: [`import input from "./base/input.js";`, `import sample from "./sample.js";`],
+				import: [`import input from "./base/input.js";`],
 				code: () => {
-					return new input({ type: "select", option: sample.optionitem() });
+					return new input({
+						type: "select",
+						option: [
+							{ value: "", label: "Open this select menu", selected: true },
+							{ value: "1", label: "One" },
+							{ value: "2", label: "Two" },
+							{ value: "3", label: "Three" },
+						],
+					});
 				},
 				debug: true, //this last option is for this documentation preview only
 			});
