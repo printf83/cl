@@ -347,7 +347,7 @@ let dblibrary = {
 	tooltip: `import tooltip from "../base/tooltip.js";`,
 	ul: `import ul from "../base/ul.js";`,
 	user: `import * as user from "../base/user.js";`,
-	sample: `import sample from "./sample.js";`,
+	sample: `import sample from "./sample.js";	//for documentation purpose only`,
 };
 
 function gen_example(opt) {

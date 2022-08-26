@@ -1,5 +1,6 @@
 "use strict";
 import sample from "./sample.js";
+import * as core from "../base/core.js";
 import accordion from "../base/accordion.js";
 
 export default [
@@ -11,7 +12,6 @@ export default [
 	{
 		title: "Example",
 		msg: "Click the accordions below to expand/collapse the accordion content.",
-		sample: { "sample.text": sample.text },
 		import: ["accordion", "sample"],
 		code: () => {
 			return new accordion({
@@ -36,12 +36,18 @@ export default [
 	{
 		title: "Flush",
 		msg: "Set {{flush:true}} to remove the default background-color, some borders, and some rounded corners to render accordions edge-to-edge with their parent container.",
-		sample: { "sample.text": sample.text, "sample.accordionitem": sample.accordionitem },
 		import: ["accordion", "sample"],
 		code: () => {
+			let fn = (i) => {
+				return {
+					label: `Accordion Item ${i}`,
+					elem: `<b>This is the ${core.num2EnT(i)} item's accordion body.</b> ${sample.text()}`,
+				};
+			};
+
 			return new accordion({
 				flush: true,
-				item: sample.accordionitem(),
+				item: [fn(1), fn(2), fn(3)],
 			});
 		},
 	},
@@ -49,12 +55,18 @@ export default [
 	{
 		title: "Always open",
 		msg: "Set {{autoclose:false}} to make accordion items stay open when another item is opened.",
-		sample: { "sample.text": sample.text, "sample.accordionitem": sample.accordionitem },
 		import: ["accordion", "sample"],
 		code: () => {
+			let fn = (i) => {
+				return {
+					label: `Accordion Item ${i}`,
+					elem: `<b>This is the ${core.num2EnT(i)} item's accordion body.</b> ${sample.text()}`,
+				};
+			};
+
 			return new accordion({
 				autoclose: false,
-				item: sample.accordionitem(),
+				item: [fn(1), fn(2), fn(3)],
 			});
 		},
 	},
