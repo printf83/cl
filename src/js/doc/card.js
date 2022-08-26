@@ -978,7 +978,12 @@ export default [
 				row: true,
 				rowcol: [1, "md-3"],
 				gap: 4,
-				elem: [fn(str[0]), fn(str[1]), fn(str[1]), fn(str[2])],
+				elem: [
+					new div({ col: true, elem: fn(str[0]) }),
+					new div({ col: true, elem: fn(str[1]) }),
+					new div({ col: true, elem: fn(str[1]) }),
+					new div({ col: true, elem: fn(str[2]) }),
+				],
 			});
 		},
 	},
