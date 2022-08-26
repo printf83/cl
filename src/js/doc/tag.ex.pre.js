@@ -1,6 +1,6 @@
 "use strict";
 import sample from "./sample.js";
-import $ from "../component.js";
+import pre from "../base/pre.js";
 
 export default [
 	{
@@ -11,7 +11,7 @@ export default [
 
 	{
 		msg: [
-			"Shortcut for {{new $.tag({tag:'pre'})}}",
+			"Shortcut for {{new tag({tag:'pre'})}}",
 			"This component is extended from {{tag}} component, so any property on tag component, will also work on this component.",
 			"Property inherits from tag component:",
 			sample.tagprop(),
@@ -20,8 +20,9 @@ export default [
 
 	{
 		title: "Example",
+		import: ["pre"],
 		code: () => {
-			return new $.pre({
+			return new pre({
 				attr: {
 					"data-test": "test",
 				},
@@ -34,11 +35,12 @@ export default [
 		title: "Easy option",
 		msg: "This component also supported easy option.",
 		container: sample.formcontainer,
+		import: ["pre"],
 		code: () => {
 			return [
-				new $.pre({ class: "classname", elem: "<div>Using elem property</div>" }),
-				new $.pre("classname", "<div>Direct class and elem property</div>"),
-				new $.pre("<div>Direct elem property</div>"),
+				new pre({ class: "classname", elem: "<div>Using elem property</div>" }),
+				new pre("classname", "<div>Direct class and elem property</div>"),
+				new pre("<div>Direct elem property</div>"),
 			];
 		},
 	},

@@ -1,6 +1,7 @@
 "use strict";
 import sample from "./sample.js";
-import $ from "../component.js";
+import ul from "../base/ul.js";
+import li from "../base/li.js";
 
 export default [
 	{
@@ -11,7 +12,7 @@ export default [
 
 	{
 		msg: [
-			"Shortcut for {{new $.tag({tag:'li'})}}",
+			"Shortcut for {{new tag({tag:'li'})}}",
 			"This component is extended from {{tag}} component, so any property on tag component, will also work on this component.",
 			"Property inherits from tag component:",
 			sample.tagprop(),
@@ -20,13 +21,14 @@ export default [
 
 	{
 		title: "Example",
+		import: ["ul", "li"],
 		code: () => {
-			return new $.ul({
+			return new ul({
 				elem: [
-					new $.li({ attr: { "data-test": "test" }, elem: "Item 1" }),
-					new $.li({ attr: { "data-test": "test" }, elem: "Item 2" }),
-					new $.li({ attr: { "data-test": "test" }, elem: "Item 3" }),
-					new $.li({ attr: { "data-test": "test" }, elem: "Item 4" }),
+					new li({ attr: { "data-test": "test" }, elem: "Item 1" }),
+					new li({ attr: { "data-test": "test" }, elem: "Item 2" }),
+					new li({ attr: { "data-test": "test" }, elem: "Item 3" }),
+					new li({ attr: { "data-test": "test" }, elem: "Item 4" }),
 				],
 			});
 		},
@@ -35,13 +37,14 @@ export default [
 	{
 		title: "Easy option",
 		msg: "This component also supported easy option.",
+		import: ["ul", "li"],
 		code: () => {
-			return new $.ul({
+			return new ul({
 				elem: [
-					new $.li({ class: "classname", elem: "Item 1" }),
-					new $.li("classname", "Item 2"),
-					new $.li("Item 3"),
-					new $.li("Item 4"),
+					new li({ class: "classname", elem: "Item 1" }),
+					new li("classname", "Item 2"),
+					new li("Item 3"),
+					new li("Item 4"),
 				],
 			});
 		},
