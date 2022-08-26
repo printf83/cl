@@ -1,5 +1,7 @@
 "use strict";
-import $ from "../component.js";
+import tag from "../base/tag.js";
+import ul from "../base/ul.js";
+import * as table from "../base/table.js";
 
 export default [
 	{
@@ -20,14 +22,14 @@ export default [
 		msg: [
 			"Display utility classes that apply to all breakpoints, from {{xs}} to {{xxl}}, have no breakpoint abbreviation in them. This is because those classes are applied from {{min-width: 0;}} and up, and thus are not bound by a media query. The remaining breakpoints, however, do include a breakpoint abbreviation.",
 			"As such, the classes are named using the format:",
-			new $.ul({
+			new ul({
 				item: [
 					"<code>{value}</code> for <code>xs</code>",
 					"<code>{breakpoint}-{value}</code> for <code>sm</code>, <code>md</code>, <code>lg</code>, <code>xl</code> and <code>xxl</code>",
 				],
 			}),
 			"Where <i>value</i> is one of:",
-			new $.ul({
+			new ul({
 				item: [
 					"none",
 					"inline",
@@ -49,9 +51,10 @@ export default [
 
 	{
 		title: "Examples",
+		import: ["tag"],
 		code: () => {
 			return [
-				new $.tag({
+				new tag({
 					tag: "div",
 					display: "inline",
 					padding: 2,
@@ -59,7 +62,7 @@ export default [
 					textcolor: "white",
 					elem: "d-inline",
 				}),
-				new $.tag({
+				new tag({
 					tag: "div",
 					display: "inline",
 					padding: 2,
@@ -72,9 +75,10 @@ export default [
 	},
 
 	{
+		import: ["tag"],
 		code: () => {
 			return [
-				new $.tag({
+				new tag({
 					tag: "div",
 					display: "block",
 					padding: 2,
@@ -82,7 +86,7 @@ export default [
 					textcolor: "white",
 					elem: "d-inline",
 				}),
-				new $.tag({
+				new tag({
 					tag: "div",
 					display: "block",
 					padding: 2,
@@ -100,7 +104,7 @@ export default [
 			"For faster mobile-friendly development, use responsive display classes for showing and hiding elements by device. Avoid creating entirely different versions of the same site, instead hide elements responsively for each screen size.",
 			"To hide elements simply use the <code>none</code> class or one of the <code>{sm,md,lg,xl,xxl}-none</code> classes for any responsive screen variation.",
 			"To show an element only on a given interval of screen sizes you can combine one <code>*-none</code> class with a <code>-*-*</code> class, for example </code>['none', 'md-block', 'xl-none', 'xxl-none']</code> will hide the element for all screen sizes except on medium and large devices.",
-			new $.table.container({
+			new table.container({
 				item: [
 					{ label: "Scree size", opt: "display:" },
 					{ label: "Hidden on all", opt: "none" },
@@ -133,12 +137,13 @@ export default [
 				}),
 			}),
 		],
+		import: ["tag"],
 		code: () => {
 			return [
 				{ label: "hide on lg and wider screens", opt: "lg-none" },
 				{ label: "hide on screens smaller than lg", opt: ["none", "lg-block"] },
 			].map((i) => {
-				return new $.tag({ tag: "div", display: i.opt, elem: i.label });
+				return new tag({ tag: "div", display: i.opt, elem: i.label });
 			});
 		},
 	},
@@ -148,7 +153,7 @@ export default [
 		msg: [
 			"Change the {{display}} value of elements when printing with Bootstrap print display utility classes. Includes support for the same display values as Bootstrap responsive display utilities.",
 			"Includes support for the same {{display}} values as Bootstrap responsive {{viewport}} utilities.",
-			new $.ul({
+			new ul({
 				item: [
 					"none",
 					"inline",
@@ -165,6 +170,7 @@ export default [
 				}),
 			}),
 		],
+		import: ["tag"],
 		code: () => {
 			return [
 				{ label: "Screen only (Hide on print only)", opt: "print-none" },
@@ -174,7 +180,7 @@ export default [
 					opt: ["none", "lg-block", "print-block"],
 				},
 			].map((i) => {
-				return new $.tag({ tag: "div", display: i.opt, elem: i.label });
+				return new tag({ tag: "div", display: i.opt, elem: i.label });
 			});
 		},
 	},

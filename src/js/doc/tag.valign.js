@@ -1,5 +1,6 @@
 "use strict";
-import $ from "../component.js";
+import tag from "../base/tag.js";
+import * as table from "../base/table.js";
 
 export default [
 	{
@@ -15,23 +16,25 @@ export default [
 			"To vertically center non-inline content (like {{div}} and more), use Bootstrap <b>flex box utilities</b>.",
 			"With inline elements:",
 		],
+		import: ["tag"],
 		code: () => {
 			return ["baseline", "top", "middle", "bottom", "text-top", "text-bottom"].map((i) => {
-				return new $.tag({ tag: "span", valign: i, elem: ` ${i} ` });
+				return new tag({ tag: "span", valign: i, elem: ` ${i} ` });
 			});
 		},
 	},
 
 	{
 		msg: "With table cell",
+		import: ["table"],
 		code: () => {
-			return new $.table.container({
+			return new table.container({
 				style: { height: "8rem" },
 				border: false,
-				elem: new $.table.tbody({
-					elem: new $.table.tr({
+				elem: new table.tbody({
+					elem: new table.tr({
 						elem: ["baseline", "top", "middle", "bottom", "text-top", "text-bottom"].map((i) => {
-							return new $.table.td({ valign: i, elem: i });
+							return new table.td({ valign: i, elem: i });
 						}),
 					}),
 				}),
