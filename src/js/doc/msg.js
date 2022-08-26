@@ -27,7 +27,6 @@ export default [
 
 	{
 		title: "With icon",
-		sample: { "sample.text": sample.text },
 		import: ["msg"],
 		code: () => {
 			return new msg({
@@ -41,7 +40,6 @@ export default [
 		title: "Weight",
 		container: sample.formcontainer,
 		viewclass: "cl-highlight-col",
-		sample: { "sample.text": sample.text },
 		import: ["msg"],
 		code: () => {
 			return [
@@ -68,7 +66,6 @@ export default [
 		title: "Weight : sm",
 		container: sample.formcontainer,
 		viewclass: "cl-modal-preview",
-		sample: { "sample.text": sample.text },
 		import: ["toast", "alert", "msg"],
 		code: () => {
 			return [
@@ -91,7 +88,6 @@ export default [
 	{
 		title: "Weight : md",
 		viewclass: "cl-modal-preview",
-		sample: { "sample.text": sample.text },
 		import: ["modal", "msg"],
 		code: () => {
 			return new modal({
@@ -110,7 +106,6 @@ export default [
 	{
 		title: "Weight : lg",
 		viewclass: "cl-modal-preview",
-		sample: { "sample.text": sample.text },
 		import: ["modal", "msg"],
 		code: () => {
 			return new modal({

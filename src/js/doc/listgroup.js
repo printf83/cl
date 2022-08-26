@@ -16,10 +16,17 @@ export default [
 
 	{
 		title: "Basic example",
-		sample: { "sample.listgroupitem": sample.listgroupitem },
 		import: ["listgroup", "sample"],
 		code: () => {
-			return new listgroup({ item: sample.listgroupitem() });
+			return new listgroup({
+				item: [
+					{ elem: "An item" },
+					{ elem: "A second item" },
+					{ elem: "A third item" },
+					{ elem: "A fourth item" },
+					{ elem: "And a fifth one" },
+				],
+			});
 		},
 	},
 
@@ -99,33 +106,54 @@ export default [
 
 	{
 		title: "Flush",
-		sample: { "sample.listgroupitem": sample.listgroupitem },
 		import: ["listgroup", "sample"],
 		code: () => {
 			return new listgroup({
 				flush: true,
-				item: sample.listgroupitem(),
+				item: [
+					{ elem: "An item" },
+					{ elem: "A second item" },
+					{ elem: "A third item" },
+					{ elem: "A fourth item" },
+					{ elem: "And a fifth one" },
+				],
 			});
 		},
 	},
 
 	{
 		title: "Numbered",
-		sample: { "sample.listgroupitem": sample.listgroupitem },
 		import: ["listgroup", "sample"],
 		code: () => {
 			return new listgroup({
 				type: "ol",
-				item: sample.listgroupitem(),
+				item: [
+					{ elem: "An item" },
+					{ elem: "A second item" },
+					{ elem: "A third item" },
+					{ elem: "A fourth item" },
+					{ elem: "And a fifth one" },
+				],
 			});
 		},
 	},
 
 	{
 		title: "Numbered custom content",
-		sample: { "sample.listgroupitemcustomcontent": sample.listgroupitemcustomcontent },
-		import: ["listgroup", "sample"],
+		import: ["listgroup", "div", "badge"],
 		code: () => {
+			let el = [
+				new div({
+					class: "ms-2 me-auto",
+					elem: [new div("fw-bold", "Subheading"), "Cras justo odio"],
+				}),
+				new badge({
+					pill: true,
+					color: "primary",
+					label: "14",
+				}),
+			];
+
 			return new listgroup({
 				type: "ol",
 				item: [
@@ -133,19 +161,19 @@ export default [
 						display: "flex",
 						justifycontent: "between",
 						alignitem: "start",
-						elem: sample.listgroupitemcustomcontent(),
+						elem: el,
 					},
 					{
 						display: "flex",
 						justifycontent: "between",
 						alignitem: "start",
-						elem: sample.listgroupitemcustomcontent(),
+						elem: el,
 					},
 					{
 						display: "flex",
 						justifycontent: "between",
 						alignitem: "start",
-						elem: sample.listgroupitemcustomcontent(),
+						elem: el,
 					},
 				],
 			});
@@ -159,43 +187,44 @@ export default [
 			"<b>ProTip:</b> Want equal-width list group items when horizontal? Add {{.flex-fill}} to each list group item.",
 		],
 		container: sample.stackcontainer,
-		sample: { "sample.listgroupitem3": sample.listgroupitem3 },
 		import: ["listgroup", "sample"],
 		code: () => {
+			let el = [{ elem: "An item" }, { elem: "A second item" }, { elem: "A third item" }];
+
 			return [
 				new listgroup({
 					horizontal: true,
-					item: sample.listgroupitem3(),
+					item: el,
 				}),
 
 				new listgroup({
 					horizontal: "sm",
-					item: sample.listgroupitem3(),
+					item: el,
 				}),
 
 				new listgroup({
 					horizontal: "md",
-					item: sample.listgroupitem3(),
+					item: el,
 				}),
 
 				new listgroup({
 					horizontal: "lg",
-					item: sample.listgroupitem3(),
+					item: el,
 				}),
 
 				new listgroup({
 					horizontal: "xl",
-					item: sample.listgroupitem3(),
+					item: el,
 				}),
 
 				new listgroup({
 					horizontal: "xxl",
-					item: sample.listgroupitem3(),
+					item: el,
 				}),
 
 				new listgroup({
 					horizontal: ["md", "xxl"],
-					item: sample.listgroupitem3(),
+					item: el,
 				}),
 			];
 		},

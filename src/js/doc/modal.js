@@ -12,6 +12,8 @@ import msg from "../base/msg.js";
 import p from "../base/p.js";
 import toast from "../base/toast.js";
 import tooltip from "../base/tooltip.js";
+import listgroup from "../base/listgroup.js";
+import * as container from "../base/container.js";
 
 export default [
 	{
@@ -155,11 +157,98 @@ export default [
 		title: "Inputbox with multiple input",
 		msg: "Below is a static modal example (meaning its position and display have been overridden). Included are the modal header, modal body (required for padding), and modal footer (optional). We ask that you include modal headers with dismiss actions whenever possible, or provide another explicit dismiss action.",
 		viewclass: "cl-modal-preview",
-		sample: { "sample.form": sample.form },
-		import: ["toast", "dlg"],
+		import: ["toast", "dlg", "container", "input", "listgroup"],
 		code: () => {
+			let el = new container.form([
+				new input({
+					label: "Name",
+					required: true,
+					invalid: "Please provide name",
+					name: "name",
+					type: "text",
+				}),
+				new input({
+					label: "Age",
+					required: true,
+					invalid: "Please provide age",
+					name: "age",
+					type: "number",
+					min: 13,
+					max: 100,
+					after: "Years old",
+				}),
+				new listgroup({
+					label: "Sex",
+					type: "div",
+					item: [
+						{
+							type: "radio",
+							name: "sex",
+							value: "s",
+							label: "Secret",
+							checked: true,
+						},
+						{
+							type: "radio",
+							name: "sex",
+							value: "m",
+							label: "Male",
+						},
+						{
+							type: "radio",
+							name: "sex",
+							value: "f",
+							label: "Female",
+						},
+					],
+				}),
+				new listgroup({
+					label: "Interest",
+					type: "div",
+					item: [
+						{
+							type: "checkbox",
+							name: "interest",
+							value: "sports",
+							label: "Sports",
+						},
+						{
+							type: "checkbox",
+							name: "interest",
+							value: "business",
+							label: "Business",
+						},
+						{
+							type: "checkbox",
+							name: "interest",
+							value: "social",
+							label: "Social",
+						},
+						{
+							type: "checkbox",
+							name: "interest",
+							value: "internet",
+							label: "Internet",
+						},
+					],
+				}),
+				new input({
+					label: "Country",
+					required: true,
+					invalid: "Please choose country",
+					name: "country",
+					type: "select",
+					option: [
+						{ value: "", label: "" },
+						{ value: "my", label: "Malaysia" },
+						{ value: "in", label: "Indonesia" },
+						{ value: "sg", label: "Singapore" },
+					],
+				}),
+			]);
+
 			return new dlg.inputbox(
-				sample.form(),
+				el,
 				null,
 				(event, data) => {
 					new toast("/", `You give <b>${JSON.stringify(data)}</b> in inputbox`).show();
@@ -173,15 +262,102 @@ export default [
 	{
 		title: "Inputbox with multiple input live",
 		msg: "First agrument can handle type {{[new input()]}}.",
-		sample: { "sample.form": sample.form },
 		import: ["toast", "button", "dlg", "sample"],
 		code: () => {
+			let el = new container.form([
+				new input({
+					label: "Name",
+					required: true,
+					invalid: "Please provide name",
+					name: "name",
+					type: "text",
+				}),
+				new input({
+					label: "Age",
+					required: true,
+					invalid: "Please provide age",
+					name: "age",
+					type: "number",
+					min: 13,
+					max: 100,
+					after: "Years old",
+				}),
+				new listgroup({
+					label: "Sex",
+					type: "div",
+					item: [
+						{
+							type: "radio",
+							name: "sex",
+							value: "s",
+							label: "Secret",
+							checked: true,
+						},
+						{
+							type: "radio",
+							name: "sex",
+							value: "m",
+							label: "Male",
+						},
+						{
+							type: "radio",
+							name: "sex",
+							value: "f",
+							label: "Female",
+						},
+					],
+				}),
+				new listgroup({
+					label: "Interest",
+					type: "div",
+					item: [
+						{
+							type: "checkbox",
+							name: "interest",
+							value: "sports",
+							label: "Sports",
+						},
+						{
+							type: "checkbox",
+							name: "interest",
+							value: "business",
+							label: "Business",
+						},
+						{
+							type: "checkbox",
+							name: "interest",
+							value: "social",
+							label: "Social",
+						},
+						{
+							type: "checkbox",
+							name: "interest",
+							value: "internet",
+							label: "Internet",
+						},
+					],
+				}),
+				new input({
+					label: "Country",
+					required: true,
+					invalid: "Please choose country",
+					name: "country",
+					type: "select",
+					option: [
+						{ value: "", label: "" },
+						{ value: "my", label: "Malaysia" },
+						{ value: "in", label: "Indonesia" },
+						{ value: "sg", label: "Singapore" },
+					],
+				}),
+			]);
+
 			return new button({
 				label: "Show inputbox with multiple input",
 				color: "primary",
 				onclick: () => {
 					new dlg.inputbox(
-						sample.form(),
+						el,
 						null,
 						(event, data) => {
 							new toast({
@@ -390,7 +566,6 @@ export default [
 
 	{
 		title: "Disable scrolling long content",
-		sample: { "sample.text": sample.text },
 		import: ["toast", "p", "button", "modal"],
 		code: () => {
 			return new button({
@@ -602,29 +777,57 @@ export default [
 	{
 		title: "Varying modal content",
 		container: sample.stackcontainer,
-		sample: { "sample.dlgFn": sample.dlgFn },
-		import: ["button", "modal"],
+		import: ["button", "modal", "input", "toast", "container"],
 		code: () => {
+			let fn = (recipient) => {
+				new modal({
+					title: "Modal title",
+					elem: new container.form([
+						new input({
+							type: "text",
+							name: "recipient",
+							label: "Recipient:",
+							value: recipient,
+						}),
+						new input({
+							type: "textarea",
+							name: "message",
+							label: "Message:",
+							value: "",
+						}),
+					]),
+					button: [
+						{
+							label: "Send message",
+							onclick: (event, data) => {
+								new toast("i", `Result from dialog is <b>${JSON.stringify(data)}</b>`).show();
+							},
+						},
+						"Close",
+					],
+				}).show();
+			};
+
 			return [
 				new button({
 					label: "Message for @mdo",
 					color: "primary",
 					onclick: () => {
-						sample.dlgFn("@mdo");
+						fn("@mdo");
 					},
 				}),
 				new button({
 					label: "Message for @fat",
 					color: "primary",
 					onclick: () => {
-						sample.dlgFn("@fat");
+						fn("@fat");
 					},
 				}),
 				new button({
 					label: "Message for @getbootstrap",
 					color: "primary",
 					onclick: () => {
-						sample.dlgFn("@getbootstrap");
+						fn("@getbootstrap");
 					},
 				}),
 			];
@@ -693,29 +896,37 @@ export default [
 	{
 		title: "Optional sizes",
 		container: sample.stackcontainer,
-		sample: { "sample.dlgSizeFn": sample.dlgSizeFn },
-		import: ["button"],
+		import: ["button", "modal"],
 		code: () => {
+			let fn = (size) => {
+				new modal({
+					size: size,
+					title: "Modal title",
+					elem: `Dialog with <code>size : <b>${size}</b></code> option`,
+					button: ["Okay"],
+				}).show();
+			};
+
 			return [
 				new button({
 					label: "Extra large modal",
 					color: "primary",
 					onclick: () => {
-						sample.dlgSizeFn("xl");
+						fn("xl");
 					},
 				}),
 				new button({
 					label: "Large modal",
 					color: "primary",
 					onclick: () => {
-						sample.dlgSizeFn("lg");
+						fn("lg");
 					},
 				}),
 				new button({
 					label: "Small modal",
 					color: "primary",
 					onclick: () => {
-						sample.dlgSizeFn("sm");
+						fn("sm");
 					},
 				}),
 			];
@@ -725,50 +936,58 @@ export default [
 	{
 		title: "Fullscreen Modal",
 		container: sample.stackcontainer,
-		sample: { "sample.dlgFullscreenFn": sample.dlgFullscreenFn },
-		import: ["button"],
+		import: ["button", "modal"],
 		code: () => {
+			let fn = (fullscreen) => {
+				new $.modal({
+					fullscreen: fullscreen,
+					title: "Modal title",
+					elem: `Dialog with <code>fullscreen : <b>${fullscreen}</b></code> option`,
+					button: ["Okay"],
+				}).show();
+			};
+
 			return [
 				new button({
 					label: "Full screen",
 					color: "primary",
 					onclick: () => {
-						sample.dlgFullscreenFn(true);
+						fn(true);
 					},
 				}),
 				new button({
 					label: "Full screen below sm",
 					color: "primary",
 					onclick: () => {
-						sample.dlgFullscreenFn("sm-down");
+						fn("sm-down");
 					},
 				}),
 				new button({
 					label: "Full screen below md",
 					color: "primary",
 					onclick: () => {
-						sample.dlgFullscreenFn("md-down");
+						fn("md-down");
 					},
 				}),
 				new button({
 					label: "Full screen below lg",
 					color: "primary",
 					onclick: () => {
-						sample.dlgFullscreenFn("lg-down");
+						fn("lg-down");
 					},
 				}),
 				new button({
 					label: "Full screen below xl",
 					color: "primary",
 					onclick: () => {
-						sample.dlgFullscreenFn("xl-down");
+						fn("xl-down");
 					},
 				}),
 				new button({
 					label: "Full screen below xxl",
 					color: "primary",
 					onclick: () => {
-						sample.dlgFullscreenFn("xxl-down");
+						fn("xxl-down");
 					},
 				}),
 			];

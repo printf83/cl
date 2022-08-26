@@ -21,7 +21,6 @@ export default [
 
 	{
 		title: "Example",
-		sample: { "sample.img": sample.img },
 		import: ["img"],
 		code: () => {
 			return new img({
@@ -49,7 +48,6 @@ export default [
 	{
 		title: "Easy option",
 		msg: "This component also supported easy option.",
-		sample: { "sample.img": sample.img },
 		container: sample.stackcontainer,
 		import: ["img"],
 		code: () => {

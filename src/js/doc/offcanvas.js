@@ -2,6 +2,9 @@
 import sample from "./sample.js";
 import offcanvas from "../base/offcanvas.js";
 import button from "../base/button.js";
+import div from "../base/div.js";
+import dropdown from "../base/dropdown.js";
+import p from "../base/p.js";
 
 export default [
 	{
@@ -12,8 +15,7 @@ export default [
 
 	{
 		title: "Offcanvas",
-		sample: { "sample.offcanvasbody": sample.offcanvasbody },
-		import: ["button", "offcanvas"],
+		import: ["button", "offcanvas", "div", "p", "dropdown"],
 		code: () => {
 			return new button({
 				label: "Show offcanvas",
@@ -24,7 +26,24 @@ export default [
 						backdrop: true,
 						color: "light",
 						title: "Offcanvas",
-						elem: sample.offcanvasbody(),
+						elem: new div({
+							elem: [
+								new p({
+									elem: "Some text as placeholder. In real life you can have the elements you have chosen. Like, text, images, lists, etc.",
+								}),
+								new dropdown({
+									label: "Drowdown button",
+									color: "secondary",
+									option: [
+										{ href: "#", label: "Action" },
+										{ href: "#", label: "Another action" },
+										{ href: "#", label: "Something else here" },
+										{ value: "-" },
+										{ href: "#", label: "Separated link" },
+									],
+								}),
+							],
+						}),
 					}).show();
 				},
 			});
@@ -37,8 +56,7 @@ export default [
 
 	{
 		title: "Top",
-		sample: { "sample.offcanvasbody": sample.offcanvasbody },
-		import: ["button", "offcanvas"],
+		import: ["button", "offcanvas", "div", "p", "dropdown"],
 		code: () => {
 			return new button({
 				label: "Show top offcanvas",
@@ -50,7 +68,24 @@ export default [
 						placement: "top",
 						color: "light",
 						title: "Top Offcanvas",
-						elem: sample.offcanvasbody(),
+						elem: new div({
+							elem: [
+								new p({
+									elem: "Some text as placeholder. In real life you can have the elements you have chosen. Like, text, images, lists, etc.",
+								}),
+								new dropdown({
+									label: "Drowdown button",
+									color: "secondary",
+									option: [
+										{ href: "#", label: "Action" },
+										{ href: "#", label: "Another action" },
+										{ href: "#", label: "Something else here" },
+										{ value: "-" },
+										{ href: "#", label: "Separated link" },
+									],
+								}),
+							],
+						}),
 					}).show();
 				},
 			});
@@ -60,8 +95,7 @@ export default [
 	{
 		title: "Bottom",
 		label: "Show bottom offcanvas",
-		sample: { "sample.offcanvasbody": sample.offcanvasbody },
-		import: ["button", "offcanvas"],
+		import: ["button", "offcanvas", "div", "p", "dropdown"],
 		code: () => {
 			return new button({
 				label: "Show bottom offcanvas",
@@ -73,7 +107,24 @@ export default [
 						placement: "bottom",
 						color: "light",
 						title: "Bottom Offcanvas",
-						elem: sample.offcanvasbody(),
+						elem: new div({
+							elem: [
+								new p({
+									elem: "Some text as placeholder. In real life you can have the elements you have chosen. Like, text, images, lists, etc.",
+								}),
+								new dropdown({
+									label: "Drowdown button",
+									color: "secondary",
+									option: [
+										{ href: "#", label: "Action" },
+										{ href: "#", label: "Another action" },
+										{ href: "#", label: "Something else here" },
+										{ value: "-" },
+										{ href: "#", label: "Separated link" },
+									],
+								}),
+							],
+						}),
 					}).show();
 				},
 			});
@@ -83,8 +134,7 @@ export default [
 	{
 		title: "End",
 		label: "Show end offcanvas",
-		sample: { "sample.offcanvasbody": sample.offcanvasbody },
-		import: ["button", "offcanvas"],
+		import: ["button", "offcanvas", "div", "p", "dropdown"],
 		code: () => {
 			return new button({
 				label: "Show end offcanvas",
@@ -96,7 +146,24 @@ export default [
 						placement: "end",
 						color: "light",
 						title: "End Offcanvas",
-						elem: sample.offcanvasbody(),
+						elem: new div({
+							elem: [
+								new p({
+									elem: "Some text as placeholder. In real life you can have the elements you have chosen. Like, text, images, lists, etc.",
+								}),
+								new dropdown({
+									label: "Drowdown button",
+									color: "secondary",
+									option: [
+										{ href: "#", label: "Action" },
+										{ href: "#", label: "Another action" },
+										{ href: "#", label: "Something else here" },
+										{ value: "-" },
+										{ href: "#", label: "Separated link" },
+									],
+								}),
+							],
+						}),
 					}).show();
 				},
 			});
@@ -106,9 +173,27 @@ export default [
 	{
 		title: "Backdrop",
 		container: sample.stackcontainer,
-		sample: { "sample.offcanvasbody": sample.offcanvasbody },
-		import: ["button", "offcanvas"],
+		import: ["button", "offcanvas", "div", "p", "dropdown"],
 		code: () => {
+			let fn = new div({
+				elem: [
+					new p({
+						elem: "Some text as placeholder. In real life you can have the elements you have chosen. Like, text, images, lists, etc.",
+					}),
+					new dropdown({
+						label: "Drowdown button",
+						color: "secondary",
+						option: [
+							{ href: "#", label: "Action" },
+							{ href: "#", label: "Another action" },
+							{ href: "#", label: "Something else here" },
+							{ value: "-" },
+							{ href: "#", label: "Separated link" },
+						],
+					}),
+				],
+			});
+
 			return [
 				new button({
 					label: "Enable body scrolling",
@@ -120,7 +205,7 @@ export default [
 							backdrop: false,
 							color: "light",
 							title: "Offcanvas",
-							elem: sample.offcanvasbody(),
+							elem: fn,
 						}).show();
 					},
 				}),
@@ -135,7 +220,7 @@ export default [
 							backdrop: true,
 							color: "light",
 							title: "Offcanvas",
-							elem: sample.offcanvasbody(),
+							elem: fn,
 						}).show();
 					},
 				}),
@@ -150,7 +235,7 @@ export default [
 							scroll: true,
 							color: "light",
 							title: "Offcanvas",
-							elem: sample.offcanvasbody(),
+							elem: fn,
 						}).show();
 					},
 				}),

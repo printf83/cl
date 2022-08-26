@@ -11,14 +11,18 @@ export default [
 
 	{
 		title: "Default",
-		sample: { "sample.optionitem": sample.optionitem },
 		import: ["input"],
 		code: () => {
 			return new input({
 				label: "Default select example",
 				hidelabel: true,
 				type: "select",
-				option: sample.optionitem(),
+				option: [
+					{ value: "", label: "Open this select menu", selected: true },
+					{ value: "1", label: "One" },
+					{ value: "2", label: "Two" },
+					{ value: "3", label: "Three" },
+				],
 			});
 		},
 	},
@@ -26,29 +30,35 @@ export default [
 	{
 		title: "Sizing",
 		container: sample.formcontainer,
-		sample: { "sample.optionitem": sample.optionitem },
 		import: ["input"],
 		code: () => {
+			let optitem = [
+				{ value: "", label: "Open this select menu", selected: true },
+				{ value: "1", label: "One" },
+				{ value: "2", label: "Two" },
+				{ value: "3", label: "Three" },
+			];
+
 			return [
 				new input({
 					weight: "lg",
 					label: "Large select example",
 					hidelabel: true,
 					type: "select",
-					option: sample.optionitem(),
+					option: optitem,
 				}),
 				new input({
 					label: "Small select example",
 					hidelabel: true,
 					type: "select",
-					option: sample.optionitem(),
+					option: optitem,
 				}),
 				new input({
 					weight: "sm",
 					label: "Small select example",
 					hidelabel: true,
 					type: "select",
-					option: sample.optionitem(),
+					option: optitem,
 				}),
 			];
 		},
@@ -56,7 +66,6 @@ export default [
 
 	{
 		title: "Multiple",
-		sample: { "sample.optionitem": sample.optionitem },
 		import: ["input"],
 		code: () => {
 			return new input({
@@ -64,14 +73,18 @@ export default [
 				label: "Multiple select example",
 				hidelabel: true,
 				type: "select",
-				option: sample.optionitem(),
+				option: [
+					{ value: "", label: "Open this select menu", selected: true },
+					{ value: "1", label: "One" },
+					{ value: "2", label: "Two" },
+					{ value: "3", label: "Three" },
+				],
 			});
 		},
 	},
 
 	{
 		title: "Size",
-		sample: { "sample.optionitem": sample.optionitem },
 		import: ["input"],
 		code: () => {
 			return new input({
@@ -79,14 +92,18 @@ export default [
 				label: "Size 3 select example",
 				hidelabel: true,
 				type: "select",
-				option: sample.optionitem(),
+				option: [
+					{ value: "", label: "Open this select menu", selected: true },
+					{ value: "1", label: "One" },
+					{ value: "2", label: "Two" },
+					{ value: "3", label: "Three" },
+				],
 			});
 		},
 	},
 
 	{
 		title: "Disabled",
-		sample: { "sample.optionitem": sample.optionitem },
 		import: ["input"],
 		code: () => {
 			return new input({
@@ -94,7 +111,12 @@ export default [
 				label: "Disabled select example",
 				hidelabel: true,
 				type: "select",
-				option: sample.optionitem(),
+				option: [
+					{ value: "", label: "Open this select menu", selected: true },
+					{ value: "1", label: "One" },
+					{ value: "2", label: "Two" },
+					{ value: "3", label: "Three" },
+				],
 			});
 		},
 	},

@@ -12,137 +12,199 @@ export default [
 
 	{
 		title: "Base nav",
-		sample: { "sample.tab": sample.tab },
 		import: ["tab"],
 		code: () => {
 			return new tab({
-				item: sample.tab(),
+				item: [
+					{ label: "First", elem: "This is first tab. " + sample.text() },
+					{ label: "Second", elem: "This is second tab. " + sample.text() },
+					{ label: "Third", elem: "This is third tab. " + sample.text() },
+					{ label: "Disabled", disabled: true, elem: "This is last tab. " + sample.text() },
+				],
 			});
 		},
 	},
 
 	{
 		title: "Nav tab",
-		sample: { "sample.tab": sample.tab },
 		import: ["tab"],
 		code: () => {
 			return new tab({
 				type: "tab",
-				item: sample.tab(),
+				item: [
+					{ label: "First", elem: "This is first tab. " + sample.text() },
+					{ label: "Second", elem: "This is second tab. " + sample.text() },
+					{ label: "Third", elem: "This is third tab. " + sample.text() },
+					{ label: "Disabled", disabled: true, elem: "This is last tab. " + sample.text() },
+				],
 			});
 		},
 	},
 
 	{
 		title: "Nav pill",
-		sample: { "sample.tab": sample.tab },
 		import: ["tab"],
 		code: () => {
 			return new tab({
 				type: "pill",
-				item: sample.tab(),
+				item: [
+					{ label: "First", elem: "This is first tab. " + sample.text() },
+					{ label: "Second", elem: "This is second tab. " + sample.text() },
+					{ label: "Third", elem: "This is third tab. " + sample.text() },
+					{ label: "Disabled", disabled: true, elem: "This is last tab. " + sample.text() },
+				],
 			});
 		},
 	},
 
 	{
 		title: "Horizontal center alignment",
-		sample: { "sample.tab": sample.tab },
 		import: ["tab"],
 		code: () => {
 			return new tab({
 				type: "pill",
 				headAlign: "center",
-				item: sample.tab(),
+				item: [
+					{ label: "First", elem: "This is first tab. " + sample.text() },
+					{ label: "Second", elem: "This is second tab. " + sample.text() },
+					{ label: "Third", elem: "This is third tab. " + sample.text() },
+					{ label: "Disabled", disabled: true, elem: "This is last tab. " + sample.text() },
+				],
 			});
 		},
 	},
 
 	{
 		title: "Horizontal right alignment",
-		sample: { "sample.tab": sample.tab },
 		import: ["tab"],
 		code: () => {
 			return new tab({
 				type: "pill",
 				headAlign: "right",
-				item: sample.tab(),
+				item: [
+					{ label: "First", elem: "This is first tab. " + sample.text() },
+					{ label: "Second", elem: "This is second tab. " + sample.text() },
+					{ label: "Third", elem: "This is third tab. " + sample.text() },
+					{ label: "Disabled", disabled: true, elem: "This is last tab. " + sample.text() },
+				],
 			});
 		},
 	},
 
 	{
 		title: "Vertical left",
-		sample: { "sample.tab": sample.tab },
 		import: ["tab"],
 		code: () => {
 			return new tab({
 				type: "pill",
 				headAlign: "vertical",
-				item: sample.tab(),
+				item: [
+					{ label: "First", elem: "This is first tab. " + sample.text() },
+					{ label: "Second", elem: "This is second tab. " + sample.text() },
+					{ label: "Third", elem: "This is third tab. " + sample.text() },
+					{ label: "Disabled", disabled: true, elem: "This is last tab. " + sample.text() },
+				],
 			});
 		},
 	},
 
 	{
 		title: "Vertical right",
-		sample: { "sample.tab": sample.tab },
 		import: ["tab"],
 		code: () => {
 			return new tab({
 				type: "pill",
 				headAlign: "vertical-right",
-				item: sample.tab(),
+				item: [
+					{ label: "First", elem: "This is first tab. " + sample.text() },
+					{ label: "Second", elem: "This is second tab. " + sample.text() },
+					{ label: "Third", elem: "This is third tab. " + sample.text() },
+					{ label: "Disabled", disabled: true, elem: "This is last tab. " + sample.text() },
+				],
 			});
 		},
 	},
 
 	{
 		title: "Fill",
-		sample: { "sample.tab": sample.tab },
 		import: ["tab"],
 		code: () => {
 			return new tab({
 				type: "pill",
 				headAlign: "fill",
-				item: sample.tab(),
+				item: [
+					{ label: "First", elem: "This is first tab. " + sample.text() },
+					{ label: "Second", elem: "This is second tab. " + sample.text() },
+					{ label: "Third", elem: "This is third tab. " + sample.text() },
+					{ label: "Disabled", disabled: true, elem: "This is last tab. " + sample.text() },
+				],
 			});
 		},
 	},
 
 	{
 		title: "Flush",
-		sample: { "sample.tab": sample.tab },
 		import: ["tab"],
 		code: () => {
 			return new tab({
 				type: "tab",
 				flush: true,
-				item: sample.tab(),
+				item: [
+					{ label: "First", elem: "This is first tab. " + sample.text() },
+					{ label: "Second", elem: "This is second tab. " + sample.text() },
+					{ label: "Third", elem: "This is third tab. " + sample.text() },
+					{ label: "Disabled", disabled: true, elem: "This is last tab. " + sample.text() },
+				],
 			});
 		},
 	},
 
 	{
 		title: "Dropdown tab",
-		sample: { "sample.dropdowntab": sample.dropdowntab },
 		import: ["tab"],
 		code: () => {
 			return new tab({
 				type: "tab",
-				item: sample.dropdowntab(),
+				item: [
+					{ label: "First", elem: "This is first tab. " + sample.text() },
+					{
+						label: "Second",
+						elem: "This is second tab. " + sample.text(),
+						option: [
+							{ href: "#", label: "Action" },
+							{ href: "#", label: "Another action" },
+							{ value: "-", label: "" },
+							{ href: "#", label: "Something else here" },
+						],
+					},
+					{ label: "Third", elem: "This is third tab. " + sample.text() },
+					{ label: "Disabled", disabled: true, elem: "This is last tab. " + sample.text() },
+				],
 			});
 		},
 	},
 
 	{
 		title: "Dropdown pill",
-		sample: { "sample.dropdowntab": sample.dropdowntab },
 		import: ["tab"],
 		code: () => {
 			return new tab({
 				type: "pill",
-				item: sample.dropdowntab(),
+				item: [
+					{ label: "First", elem: "This is first tab. " + sample.text() },
+					{
+						label: "Second",
+						elem: "This is second tab. " + sample.text(),
+						option: [
+							{ href: "#", label: "Action" },
+							{ href: "#", label: "Another action" },
+							{ value: "-", label: "" },
+							{ href: "#", label: "Something else here" },
+						],
+					},
+					{ label: "Third", elem: "This is third tab. " + sample.text() },
+					{ label: "Disabled", disabled: true, elem: "This is last tab. " + sample.text() },
+				],
 			});
 		},
 	},
@@ -150,7 +212,6 @@ export default [
 	{
 		title: "Nav tab in dialog",
 		viewclass: "cl-modal-preview",
-		sample: { "sample.dropdowntab": sample.dropdowntab },
 		import: ["modal", "tab"],
 		code: () => {
 			return new modal({
@@ -158,7 +219,21 @@ export default [
 				elem: new tab({
 					type: "tab",
 					flush: true, //!important
-					item: sample.dropdowntab(),
+					item: [
+						{ label: "First", elem: "This is first tab. " + sample.text() },
+						{
+							label: "Second",
+							elem: "This is second tab. " + sample.text(),
+							option: [
+								{ href: "#", label: "Action" },
+								{ href: "#", label: "Another action" },
+								{ value: "-", label: "" },
+								{ href: "#", label: "Something else here" },
+							],
+						},
+						{ label: "Third", elem: "This is third tab. " + sample.text() },
+						{ label: "Disabled", disabled: true, elem: "This is last tab. " + sample.text() },
+					],
 				}),
 				button: ["Understand", "Close"],
 				debug: true, //this last option is for this documentation preview only
@@ -169,7 +244,6 @@ export default [
 	{
 		title: "Tab nav pill in dialog",
 		viewclass: "cl-modal-preview",
-		sample: { "sample.dropdowntab": sample.dropdowntab },
 		import: ["modal", "tab"],
 		code: () => {
 			return new modal({
@@ -177,7 +251,21 @@ export default [
 				elem: new tab({
 					type: "pill",
 					flush: true, //!important
-					item: sample.dropdowntab(),
+					item: [
+						{ label: "First", elem: "This is first tab. " + sample.text() },
+						{
+							label: "Second",
+							elem: "This is second tab. " + sample.text(),
+							option: [
+								{ href: "#", label: "Action" },
+								{ href: "#", label: "Another action" },
+								{ value: "-", label: "" },
+								{ href: "#", label: "Something else here" },
+							],
+						},
+						{ label: "Third", elem: "This is third tab. " + sample.text() },
+						{ label: "Disabled", disabled: true, elem: "This is last tab. " + sample.text() },
+					],
 				}),
 				button: ["Understand", "Close"],
 				debug: true, //this last option is for this documentation preview only
