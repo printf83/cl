@@ -262,7 +262,6 @@ export default [
 
 	{
 		msg: "The classes can be used together with utilities to create responsive floated images. Make sure to wrap the content in a .clearfix wrapper to clear the float if the text is shorter.",
-		sample: { "sample.text": sample.text, "sample.img": sample.img },
 		viewclass: "cl-highlight-col",
 		import: ["img", "p", "div"],
 		code: () => {

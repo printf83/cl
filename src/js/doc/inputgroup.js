@@ -292,9 +292,16 @@ export default [
 	{
 		title: "Buttons with dropdowns",
 		container: sample.formcontainer,
-		sample: { "sample.dropdownitem": sample.dropdownitem },
 		import: ["input", "dropdown", "sample"],
 		code: () => {
+			const dditem = [
+				{ href: "#", label: "Action" },
+				{ href: "#", label: "Another action" },
+				{ href: "#", label: "Something else here" },
+				{ value: "-" },
+				{ href: "#", label: "Separated link" },
+			];
+
 			return [
 				new input({
 					label: "Text input with dropdown button",
@@ -304,7 +311,7 @@ export default [
 						outline: true,
 						color: "secondary",
 						label: "Dropdown",
-						option: sample.dropdownitem(),
+						option: dditem,
 						container: null,
 					}),
 				}),
@@ -317,7 +324,7 @@ export default [
 						outline: true,
 						color: "secondary",
 						label: "Dropdown",
-						option: sample.dropdownitem(),
+						option: dditem,
 						container: null,
 					}),
 				}),
@@ -330,14 +337,14 @@ export default [
 						outline: true,
 						color: "secondary",
 						label: "Dropdown",
-						option: sample.dropdownitem(),
+						option: dditem,
 						container: null,
 					}),
 					after: new dropdown({
 						outline: true,
 						color: "secondary",
 						label: "Dropdown",
-						option: sample.dropdownitem(),
+						option: dditem,
 						container: null,
 					}),
 				}),
@@ -348,9 +355,16 @@ export default [
 	{
 		title: "Segmented buttons",
 		container: sample.formcontainer,
-		sample: { "sample.dropdownitem": sample.dropdownitem },
 		import: ["input", "dropdown", "sample"],
 		code: () => {
+			const dditem = [
+				{ href: "#", label: "Action" },
+				{ href: "#", label: "Another action" },
+				{ href: "#", label: "Something else here" },
+				{ value: "-" },
+				{ href: "#", label: "Separated link" },
+			];
+
 			return [
 				new input({
 					label: "Text input with dropdown button",
@@ -361,7 +375,7 @@ export default [
 						color: "secondary",
 						label: "Action",
 						splittoggle: true,
-						option: sample.dropdownitem(),
+						option: dditem,
 						container: null,
 					}),
 				}),
@@ -375,7 +389,7 @@ export default [
 						color: "secondary",
 						label: "Action",
 						splittoggle: true,
-						option: sample.dropdownitem(),
+						option: dditem,
 						container: null,
 					}),
 				}),
@@ -386,20 +400,26 @@ export default [
 	{
 		title: "Segmented buttons",
 		container: sample.formcontainer,
-		sample: { "sample.optionitem": sample.optionitem },
 		import: ["input", "button", "sample"],
 		code: () => {
+			const optitem = [
+				{ value: "", label: "Open this select menu", selected: true },
+				{ value: "1", label: "One" },
+				{ value: "2", label: "Two" },
+				{ value: "3", label: "Three" },
+			];
+
 			return [
 				new input({
 					type: "select",
 					before: "Options",
-					option: sample.optionitem(),
+					option: optitem,
 				}),
 
 				new input({
 					type: "select",
 					after: "Options",
-					option: sample.optionitem(),
+					option: optitem,
 				}),
 
 				new input({
@@ -409,7 +429,7 @@ export default [
 						color: "secondary",
 						label: "Button",
 					}),
-					option: sample.optionitem(),
+					option: optitem,
 				}),
 
 				new input({
@@ -419,7 +439,7 @@ export default [
 						color: "secondary",
 						label: "Button",
 					}),
-					option: sample.optionitem(),
+					option: optitem,
 				}),
 			];
 		},

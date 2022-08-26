@@ -17,40 +17,55 @@ export default [
 
 	{
 		title: "Single button",
-		sample: { "sample.dropdownitem": sample.dropdownitem },
 		import: ["dropdown", "sample"],
 		code: () => {
 			return new dropdown({
 				label: "Drowdown button",
 				color: "secondary",
-				option: sample.dropdownitem(),
+				option: [
+					{ href: "#", label: "Action" },
+					{ href: "#", label: "Another action" },
+					{ href: "#", label: "Something else here" },
+					{ value: "-" },
+					{ href: "#", label: "Separated link" },
+				],
 			});
 		},
 	},
 
 	{
 		title: "Dropdown link",
-		sample: { "sample.dropdownitem": sample.dropdownitem },
 		import: ["dropdown", "sample"],
 		code: () => {
 			return new dropdown({
 				label: "Drowdown link",
 				color: "secondary",
 				href: "javascript:void(0);",
-				option: sample.dropdownitem(),
+				option: [
+					{ href: "#", label: "Action" },
+					{ href: "#", label: "Another action" },
+					{ href: "#", label: "Something else here" },
+					{ value: "-" },
+					{ href: "#", label: "Separated link" },
+				],
 			});
 		},
 	},
 
 	{
 		title: "Color",
-		sample: { "sample.dropdownitem": sample.dropdownitem },
 		import: ["dropdown", "sample"],
 		code: () => {
 			return new dropdown({
 				label: "Drowdown",
 				color: "primary",
-				option: sample.dropdownitem(),
+				option: [
+					{ href: "#", label: "Action" },
+					{ href: "#", label: "Another action" },
+					{ href: "#", label: "Something else here" },
+					{ value: "-" },
+					{ href: "#", label: "Separated link" },
+				],
 			});
 		},
 	},
@@ -58,14 +73,19 @@ export default [
 	{
 		title: "Color varian",
 		container: sample.stackcontainer,
-		sample: { "sample.dropdownitem": sample.dropdownitem },
 		import: ["dropdown", "sample"],
 		code: () => {
 			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map((i) => {
 				return new dropdown({
 					label: core.capitalize(i),
 					color: i,
-					option: sample.dropdownitem(),
+					option: [
+						{ href: "#", label: "Action" },
+						{ href: "#", label: "Another action" },
+						{ href: "#", label: "Something else here" },
+						{ value: "-" },
+						{ href: "#", label: "Separated link" },
+					],
 				});
 			});
 		},
@@ -73,14 +93,19 @@ export default [
 
 	{
 		title: "Split button",
-		sample: { "sample.dropdownitem": sample.dropdownitem },
 		import: ["dropdown", "sample"],
 		code: () => {
 			return new dropdown({
 				label: "Drowdown",
 				color: "primary",
 				splittoggle: true,
-				option: sample.dropdownitem(),
+				option: [
+					{ href: "#", label: "Action" },
+					{ href: "#", label: "Another action" },
+					{ href: "#", label: "Something else here" },
+					{ value: "-" },
+					{ href: "#", label: "Separated link" },
+				],
 			});
 		},
 	},
@@ -88,7 +113,6 @@ export default [
 	{
 		title: "Split button color variant",
 		container: sample.stackcontainer,
-		sample: { "sample.dropdownitem": sample.dropdownitem },
 		import: ["dropdown", "sample"],
 		code: () => {
 			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map((i) => {
@@ -96,7 +120,13 @@ export default [
 					splittoggle: true,
 					label: core.capitalize(i),
 					color: i,
-					option: sample.dropdownitem(),
+					option: [
+						{ href: "#", label: "Action" },
+						{ href: "#", label: "Another action" },
+						{ href: "#", label: "Something else here" },
+						{ value: "-" },
+						{ href: "#", label: "Separated link" },
+					],
 				});
 			});
 		},
@@ -105,22 +135,29 @@ export default [
 	{
 		title: "Large size",
 		container: sample.stackcontainer,
-		sample: { "sample.dropdownitem": sample.dropdownitem },
 		import: ["dropdown", "sample"],
 		code: () => {
+			const dditem = [
+				{ href: "#", label: "Action" },
+				{ href: "#", label: "Another action" },
+				{ href: "#", label: "Something else here" },
+				{ value: "-" },
+				{ href: "#", label: "Separated link" },
+			];
+
 			return [
 				new dropdown({
 					label: "Large dropdown",
 					color: "secondary",
 					weight: "lg",
-					option: sample.dropdownitem(),
+					option: dditem,
 				}),
 				new dropdown({
 					label: "Large split dropdown",
 					color: "secondary",
 					weight: "lg",
 					splittoggle: true,
-					option: sample.dropdownitem(),
+					option: dditem,
 				}),
 			];
 		},
@@ -129,22 +166,29 @@ export default [
 	{
 		title: "Small size",
 		container: sample.stackcontainer,
-		sample: { "sample.dropdownitem": sample.dropdownitem },
 		import: ["dropdown", "sample"],
 		code: () => {
+			const dditem = [
+				{ href: "#", label: "Action" },
+				{ href: "#", label: "Another action" },
+				{ href: "#", label: "Something else here" },
+				{ value: "-" },
+				{ href: "#", label: "Separated link" },
+			];
+
 			return [
 				new dropdown({
 					label: "Small dropdown",
 					color: "secondary",
 					weight: "sm",
-					option: sample.dropdownitem(),
+					option: dditem,
 				}),
 				new dropdown({
 					label: "Small split dropdown",
 					color: "secondary",
 					weight: "sm",
 					splittoggle: true,
-					option: sample.dropdownitem(),
+					option: dditem,
 				}),
 			];
 		},
@@ -153,14 +197,19 @@ export default [
 	{
 		title: "Dark dropdown",
 		container: sample.stackcontainer,
-		sample: { "sample.dropdownitem": sample.dropdownitem },
 		import: ["dropdown", "sample"],
 		code: () => {
 			return new dropdown({
 				label: "Dark dropdown",
 				color: "secondary",
 				dark: true,
-				option: sample.dropdownitem(),
+				option: [
+					{ href: "#", label: "Action" },
+					{ href: "#", label: "Another action" },
+					{ href: "#", label: "Something else here" },
+					{ value: "-" },
+					{ href: "#", label: "Separated link" },
+				],
 			});
 		},
 	},
@@ -168,7 +217,6 @@ export default [
 	{
 		title: "Dropdown in navbar",
 		dark: true,
-		sample: { "sample.dropdownitem": sample.dropdownitem },
 		import: ["navbar", "dropdown", "sample"],
 		code: () => {
 			var id = new core.UUID();
@@ -196,7 +244,13 @@ export default [
 										label: "Dropdown",
 										navlink: true,
 										dark: true,
-										option: sample.dropdownitem(),
+										option: [
+											{ href: "#", label: "Action" },
+											{ href: "#", label: "Another action" },
+											{ href: "#", label: "Something else here" },
+											{ value: "-" },
+											{ href: "#", label: "Separated link" },
+										],
 									}),
 								],
 							}),
@@ -210,22 +264,29 @@ export default [
 	{
 		title: "Dropup",
 		container: sample.stackcontainer,
-		sample: { "sample.dropdownitem": sample.dropdownitem },
 		import: ["dropdown", "sample"],
 		code: () => {
+			const dditem = [
+				{ href: "#", label: "Action" },
+				{ href: "#", label: "Another action" },
+				{ href: "#", label: "Something else here" },
+				{ value: "-" },
+				{ href: "#", label: "Separated link" },
+			];
+
 			return [
 				new dropdown({
 					label: "Dropup",
 					color: "secondary",
 					arrow: "up",
-					option: sample.dropdownitem(),
+					option: dditem,
 				}),
 				new dropdown({
 					label: "Split dropup",
 					color: "secondary",
 					arrow: "up",
 					splittoggle: true,
-					option: sample.dropdownitem(),
+					option: dditem,
 				}),
 			];
 		},
@@ -234,22 +295,29 @@ export default [
 	{
 		title: "Dropend",
 		container: sample.stackcontainer,
-		sample: { "sample.dropdownitem": sample.dropdownitem },
 		import: ["dropdown", "sample"],
 		code: () => {
+			const dditem = [
+				{ href: "#", label: "Action" },
+				{ href: "#", label: "Another action" },
+				{ href: "#", label: "Something else here" },
+				{ value: "-" },
+				{ href: "#", label: "Separated link" },
+			];
+
 			return [
 				new dropdown({
 					label: "Dropend",
 					color: "secondary",
 					arrow: "end",
-					option: sample.dropdownitem(),
+					option: dditem,
 				}),
 				new dropdown({
 					label: "Split dropend",
 					color: "secondary",
 					arrow: "end",
 					splittoggle: true,
-					option: sample.dropdownitem(),
+					option: dditem,
 				}),
 			];
 		},
@@ -258,22 +326,29 @@ export default [
 	{
 		title: "Dropstart",
 		container: sample.stackcontainer,
-		sample: { "sample.dropdownitem": sample.dropdownitem },
 		import: ["dropdown", "sample"],
 		code: () => {
+			const dditem = [
+				{ href: "#", label: "Action" },
+				{ href: "#", label: "Another action" },
+				{ href: "#", label: "Something else here" },
+				{ value: "-" },
+				{ href: "#", label: "Separated link" },
+			];
+
 			return [
 				new dropdown({
 					label: "Dropstart",
 					color: "secondary",
 					arrow: "start",
-					option: sample.dropdownitem(),
+					option: dditem,
 				}),
 				new dropdown({
 					label: "Split dropstart",
 					color: "secondary",
 					arrow: "start",
 					splittoggle: true,
-					option: sample.dropdownitem(),
+					option: dditem,
 				}),
 			];
 		},
@@ -348,28 +423,38 @@ export default [
 
 	{
 		title: "Menu Aligment",
-		sample: { "sample.dropdownitem": sample.dropdownitem },
 		import: ["dropdown", "sample"],
 		code: () => {
 			return new dropdown({
 				label: "Right-aligned menu example",
 				color: "secondary",
 				aligment: "end",
-				option: sample.dropdownitem(),
+				option: [
+					{ href: "#", label: "Action" },
+					{ href: "#", label: "Another action" },
+					{ href: "#", label: "Something else here" },
+					{ value: "-" },
+					{ href: "#", label: "Separated link" },
+				],
 			});
 		},
 	},
 
 	{
 		title: "Responsive alignment",
-		sample: { "sample.dropdownitem": sample.dropdownitem },
 		import: ["dropdown", "sample"],
 		code: () => {
 			return new dropdown({
 				label: "Right-aligned, left-aligned lg",
 				color: "secondary",
 				aligment: ["end", "lg-start"],
-				option: sample.dropdownitem(),
+				option: [
+					{ href: "#", label: "Action" },
+					{ href: "#", label: "Another action" },
+					{ href: "#", label: "Something else here" },
+					{ value: "-" },
+					{ href: "#", label: "Separated link" },
+				],
 			});
 		},
 	},
@@ -377,50 +462,57 @@ export default [
 	{
 		title: "Alignment options",
 		container: sample.stackcontainer,
-		sample: { "sample.dropdownitem": sample.dropdownitem },
 		import: ["dropdown", "sample"],
 		code: () => {
+			const dditem = [
+				{ href: "#", label: "Action" },
+				{ href: "#", label: "Another action" },
+				{ href: "#", label: "Something else here" },
+				{ value: "-" },
+				{ href: "#", label: "Separated link" },
+			];
+
 			return [
 				new dropdown({
 					label: "Dropdown",
 					color: "secondary",
-					option: sample.dropdownitem(),
+					option: dditem,
 				}),
 				new dropdown({
 					label: "Right-aligned menu",
 					color: "secondary",
 					aligment: "end",
-					option: sample.dropdownitem(),
+					option: dditem,
 				}),
 				new dropdown({
 					label: "Left-aligned, right-aligned lg",
 					color: "secondary",
 					aligment: ["start", "lg-end"],
-					option: sample.dropdownitem(),
+					option: dditem,
 				}),
 				new dropdown({
 					label: "Right-aligned, left-aligned lg",
 					color: "secondary",
 					aligment: ["end", "lg-start"],
-					option: sample.dropdownitem(),
+					option: dditem,
 				}),
 				new dropdown({
 					label: "Dropstart",
 					color: "secondary",
 					arrow: "start",
-					option: sample.dropdownitem(),
+					option: dditem,
 				}),
 				new dropdown({
 					label: "Dropend",
 					color: "secondary",
 					arrow: "end",
-					option: sample.dropdownitem(),
+					option: dditem,
 				}),
 				new dropdown({
 					label: "Dropup",
 					color: "secondary",
 					arrow: "up",
-					option: sample.dropdownitem(),
+					option: dditem,
 				}),
 			];
 		},
@@ -542,22 +634,29 @@ export default [
 	{
 		title: "Dropdown options",
 		container: sample.stackcontainer,
-		sample: { "sample.dropdownitem": sample.dropdownitem },
 		import: ["dropdown", "sample"],
 		code: () => {
+			const dditem = [
+				{ href: "#", label: "Action" },
+				{ href: "#", label: "Another action" },
+				{ href: "#", label: "Something else here" },
+				{ value: "-" },
+				{ href: "#", label: "Separated link" },
+			];
+
 			return [
 				new dropdown({
 					label: "Offset",
 					color: "secondary",
 					offset: "20,30",
-					option: sample.dropdownitem(),
+					option: dditem,
 				}),
 				new dropdown({
 					label: "Reference",
 					color: "secondary",
 					reference: "parent",
 					splittoggle: true,
-					option: sample.dropdownitem(),
+					option: dditem,
 				}),
 			];
 		},
@@ -566,32 +665,39 @@ export default [
 	{
 		title: "Auto close behavior",
 		container: sample.stackcontainer,
-		sample: { "sample.dropdownitem": sample.dropdownitem },
 		import: ["dropdown", "sample"],
 		code: () => {
+			const dditem = [
+				{ href: "#", label: "Action" },
+				{ href: "#", label: "Another action" },
+				{ href: "#", label: "Something else here" },
+				{ value: "-" },
+				{ href: "#", label: "Separated link" },
+			];
+
 			return [
 				new dropdown({
 					label: "Default dropdown",
 					color: "secondary",
-					option: sample.dropdownitem(),
+					option: dditem,
 				}),
 				new dropdown({
 					label: "Clickable outside",
 					color: "secondary",
 					autoclose: "outside",
-					option: sample.dropdownitem(),
+					option: dditem,
 				}),
 				new dropdown({
 					label: "Clickable inside",
 					color: "secondary",
 					autoclose: "inside",
-					option: sample.dropdownitem(),
+					option: dditem,
 				}),
 				new dropdown({
 					label: "Manual close",
 					color: "secondary",
 					autoclose: "false",
-					option: sample.dropdownitem(),
+					option: dditem,
 				}),
 			];
 		},

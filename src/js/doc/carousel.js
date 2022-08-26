@@ -11,7 +11,6 @@ export default [
 
 	{
 		title: "Slide only",
-		sample: { "sample.img": sample.img },
 		import: ["carousel", "sample"],
 		code: () => {
 			return new carousel({
@@ -29,7 +28,6 @@ export default [
 
 	{
 		title: "With control",
-		sample: { "sample.img": sample.img },
 		import: ["carousel", "sample"],
 		code: () => {
 			return new carousel({
@@ -48,7 +46,6 @@ export default [
 
 	{
 		title: "With indicator",
-		sample: { "sample.img": sample.img },
 		import: ["carousel", "sample"],
 		code: () => {
 			return new carousel({
@@ -68,7 +65,6 @@ export default [
 
 	{
 		title: "With caption",
-		sample: { "sample.img": sample.img },
 		import: ["carousel", "sample"],
 		code: () => {
 			return new carousel({
@@ -112,7 +108,6 @@ export default [
 
 	{
 		title: "Crossfade",
-		sample: { "sample.img": sample.img },
 		import: ["carousel", "sample"],
 		code: () => {
 			return new carousel({
@@ -132,7 +127,6 @@ export default [
 
 	{
 		title: "Individual interval",
-		sample: { "sample.img": sample.img },
 		import: ["carousel", "sample"],
 		code: () => {
 			return new carousel({
@@ -152,7 +146,6 @@ export default [
 
 	{
 		title: "Disable touch swiping",
-		sample: { "sample.img": sample.img },
 		import: ["carousel", "sample"],
 		code: () => {
 			return new carousel({
@@ -172,7 +165,6 @@ export default [
 
 	{
 		title: "Dark variant",
-		sample: { "sample.img": sample.img },
 		import: ["carousel", "sample"],
 		code: () => {
 			return new carousel({

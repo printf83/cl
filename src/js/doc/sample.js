@@ -82,19 +82,10 @@ fill="#999" stroke="none">
 	dropdownitem: () => {
 		return [
 			{ href: "#", label: "Action" },
-			{
-				href: "#",
-				label: "Another action",
-			},
-			{
-				href: "#",
-				label: "Something else here",
-			},
+			{ href: "#", label: "Another action" },
+			{ href: "#", label: "Something else here" },
 			{ value: "-" },
-			{
-				href: "#",
-				label: "Separated link",
-			},
+			{ href: "#", label: "Separated link" },
 		];
 	},
 	form: () => {

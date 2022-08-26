@@ -98,14 +98,18 @@ export default [
 
 	{
 		title: "Select",
-		sample: { "sample.optionitem": sample.optionitem },
 		import: ["input", "sample"],
 		code: () => {
 			return new input({
 				label: "Works with selects",
 				type: "select",
 				floatlabel: true,
-				option: sample.optionitem(),
+				option: [
+					{ value: "", label: "Open this select menu", selected: true },
+					{ value: "1", label: "One" },
+					{ value: "2", label: "Two" },
+					{ value: "3", label: "Three" },
+				],
 			});
 		},
 	},

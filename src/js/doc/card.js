@@ -19,7 +19,6 @@ export default [
 
 	{
 		title: "Example",
-		sample: { "sample.img": sample.img },
 		import: ["button", "card", "sample"],
 		code: () => {
 			return new card.container({
@@ -86,7 +85,6 @@ export default [
 	{
 		title: "Images",
 		msg: '{{placement: "top"}} places an {{card.img}} to the top of the card. With {{card.text}}, text can be added to the card. Text within {{card.text}} can also be styled with the standard HTML tags.',
-		sample: { "sample.img": sample.img },
 		import: ["card"],
 		code: () => {
 			return new card.container({
@@ -161,7 +159,6 @@ export default [
 	{
 		title: "Kitchen Sink",
 		msg: "Mix and match multiple content types to create the card you need, or throw everything in there. Shown below are image styles, blocks, text styles, and a list group—all wrapped in a fixed-width card.",
-		sample: { "sample.img": sample.img },
 		import: ["listgroup", "card"],
 		code: () => {
 			return new card.container({
@@ -456,7 +453,6 @@ export default [
 	{
 		title: "Tab in card",
 		msg: "{{tab}} is working navbar in card",
-		sample: { "sample.text": sample.text },
 		import: ["tab", "sample"],
 		code: () => {
 			return new tab({
@@ -465,15 +461,15 @@ export default [
 					{
 						label: "First",
 						active: true,
-						elem: ["<b>This is the first item's tab body.</b> ", sample.text()].join(""),
+						elem: `<b>This is the first item's tab body.</b> ${sample.text()}`,
 					},
 					{
 						label: "Second",
-						elem: ["<b>This is the second item's tab body.</b> ", sample.text()].join(""),
+						elem: `<b>This is the second item's tab body.</b> ${sample.text()}`,
 					},
 					{
 						label: "Third",
-						elem: ["<b>This is the third item's tab body.</b> ", sample.text()].join(""),
+						elem: `<b>This is the third item's tab body.</b> ${sample.text()}`,
 					},
 				],
 			});
@@ -482,7 +478,6 @@ export default [
 
 	{
 		title: "Pill style tab",
-		sample: { "sample.text": sample.text },
 		import: ["tab", "sample"],
 		code: () => {
 			return new tab({
@@ -491,15 +486,15 @@ export default [
 					{
 						label: "First",
 						active: true,
-						elem: ["<b>This is the first item's tab body.</b> ", sample.text()].join(""),
+						elem: `<b>This is the first item's tab body.</b> ${sample.text()}`,
 					},
 					{
 						label: "Second",
-						elem: ["<b>This is the second item's tab body.</b> ", sample.text()].join(""),
+						elem: `<b>This is the second item's tab body.</b> ${sample.text()}`,
 					},
 					{
 						label: "Third",
-						elem: ["<b>This is the third item's tab body.</b> ", sample.text()].join(""),
+						elem: `<b>This is the third item's tab body.</b> ${sample.text()}`,
 					},
 				],
 			});
@@ -509,7 +504,6 @@ export default [
 	{
 		title: "Images",
 		container: sample.stackcontainer,
-		sample: { "sample.img": sample.img },
 		import: ["small", "card", "sample"],
 		code: () => {
 			return [
@@ -553,7 +547,6 @@ export default [
 
 	{
 		title: "Image overlays",
-		sample: { "sample.img": sample.img },
 		import: ["small", "card", "sample"],
 		code: () => {
 			return new card.container({
@@ -578,7 +571,6 @@ export default [
 
 	{
 		title: "Horizontal",
-		sample: { "sample.img": sample.img },
 		import: ["small", "card", "sample"],
 		code: () => {
 			return new card.container({
@@ -781,30 +773,30 @@ export default [
 	{
 		title: "Card groups",
 		container: sample.stackcontainer,
-		sample: { "sample.img": sample.img, "sample.cardwithimg": sample.cardwithimg },
 		import: ["card", "sample"],
 		code: () => {
+			const str = [
+				"This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.",
+				"This card has supporting text below as a natural lead-in to additional content.",
+				"This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.",
+			];
+
+			let fn = (str) => {
+				return new card.container({
+					elem: [
+						new card.img({
+							placement: "top",
+							src: sample.img(415, 207),
+						}),
+						new card.body({
+							elem: [new card.title("Card Title"), new card.text(str)],
+						}),
+					],
+				});
+			};
+
 			return new card.group({
-				elem: [
-					new card.container({
-						elem: [
-							new card.img({
-								placement: "top",
-								src: sample.img(286, 143),
-							}),
-							new card.body({
-								elem: [
-									new card.title("Card Title"),
-									new card.text(
-										"This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer."
-									),
-								],
-							}),
-						],
-					}),
-					sample.cardwithimg()[1],
-					sample.cardwithimg()[2],
-				],
+				elem: [fn(str[0]), fn(str[1]), fn(str[2])],
 			});
 		},
 	},
@@ -812,53 +804,68 @@ export default [
 	{
 		title: "Card groups with footer",
 		container: sample.stackcontainer,
-		sample: {
-			"sample.img": sample.img,
-			"sample.cardwithfooter": sample.cardwithfooter,
-		},
 		import: ["card", "sample"],
 		code: () => {
-			return new card.group({
-				elem: [
-					new card.container({
-						elem: [
-							new card.img({
-								placement: "top",
-								src: sample.img(286, 143),
-							}),
-							new card.body({
-								elem: [
-									new card.title("Card Title"),
-									new card.text(
-										"This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer."
-									),
-								],
-							}),
-							new card.footer("Last updated 3 mins ago"),
-						],
-					}),
+			const str = [
+				"This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.",
+				"This card has supporting text below as a natural lead-in to additional content.",
+				"This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.",
+			];
 
-					sample.cardwithfooter()[1],
-					sample.cardwithfooter()[2],
-				],
+			let fn = (str) => {
+				return new card.container({
+					elem: [
+						new card.img({
+							placement: "top",
+							src: sample.img(415, 207),
+						}),
+						new card.body({
+							elem: [new card.title("Card Title"), new card.text(str)],
+						}),
+						new card.footer("Last updated 3 mins ago"),
+					],
+				});
+			};
+
+			return new card.group({
+				elem: [fn(str[0]), fn(str[1]), fn(str[2])],
 			});
 		},
 	},
 
 	{
 		title: "Card grid using {{row-cols-md-2}}",
-		sample: { "sample.cardwithimg": sample.cardwithimg },
 		import: ["div", "card", "sample"],
 		code: () => {
+			const str = [
+				"This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.",
+				"This card has supporting text below as a natural lead-in to additional content.",
+				"This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.",
+			];
+
+			let fn = (str) => {
+				return new card.container({
+					elem: [
+						new card.img({
+							placement: "top",
+							src: sample.img(415, 207),
+						}),
+						new card.body({
+							elem: [new card.title("Card Title"), new card.text(str)],
+						}),
+					],
+				});
+			};
+
 			return new div({
 				row: true,
 				rowcol: [1, "md-2"],
 				gap: 4,
 				elem: [
-					new div({ col: true, elem: sample.cardwithimg()[0] }),
-					new div({ col: true, elem: sample.cardwithimg()[1] }),
-					new div({ col: true, elem: sample.cardwithimg()[2] }),
-					new div({ col: true, elem: sample.cardwithimg()[3] }),
+					new div({ col: true, elem: fn(str[0]) }),
+					new div({ col: true, elem: fn(str[1]) }),
+					new div({ col: true, elem: fn(str[1]) }),
+					new div({ col: true, elem: fn(str[2]) }),
 				],
 			});
 		},
@@ -866,18 +873,37 @@ export default [
 
 	{
 		title: "Card grid using {{row-cols-md-3}}",
-		sample: { "sample.cardwithimg": sample.cardwithimg },
 		import: ["div", "card", "sample"],
 		code: () => {
+			const str = [
+				"This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.",
+				"This card has supporting text below as a natural lead-in to additional content.",
+				"This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.",
+			];
+
+			let fn = (str) => {
+				return new card.container({
+					elem: [
+						new card.img({
+							placement: "top",
+							src: sample.img(415, 207),
+						}),
+						new card.body({
+							elem: [new card.title("Card Title"), new card.text(str)],
+						}),
+					],
+				});
+			};
+
 			return new div({
 				row: true,
 				rowcol: [1, "md-3"],
 				gap: 4,
 				elem: [
-					new div({ col: true, elem: sample.cardwithimg()[0] }),
-					new div({ col: true, elem: sample.cardwithimg()[1] }),
-					new div({ col: true, elem: sample.cardwithimg()[2] }),
-					new div({ col: true, elem: sample.cardwithimg()[3] }),
+					new div({ col: true, elem: fn(str[0]) }),
+					new div({ col: true, elem: fn(str[1]) }),
+					new div({ col: true, elem: fn(str[1]) }),
+					new div({ col: true, elem: fn(str[2]) }),
 				],
 			});
 		},
@@ -885,37 +911,38 @@ export default [
 
 	{
 		title: "Card grid with {{h-100}} class",
-		sample: { "sample.img": sample.img, "sample.cardh100": sample.cardh100 },
 		import: ["div", "card", "sample"],
 		code: () => {
+			const str = [
+				"This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.",
+				"This card has supporting text below as a natural lead-in to additional content.",
+				"This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.",
+			];
+
+			let fn = (str) => {
+				return new card.container({
+					class: "h-100",
+					elem: [
+						new card.img({
+							placement: "top",
+							src: sample.img(286, 143),
+						}),
+						new card.body({
+							elem: [new card.title("Card Title"), new card.text(str)],
+						}),
+					],
+				});
+			};
+
 			return new div({
 				row: true,
 				rowcol: [1, "md-3"],
 				gap: 4,
 				elem: [
-					new div({
-						col: true,
-						elem: new card.container({
-							class: "h-100",
-							elem: [
-								new card.img({
-									placement: "top",
-									src: sample.img(286, 143),
-								}),
-								new card.body({
-									elem: [
-										new card.title("Card Title"),
-										new card.text(
-											"This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer."
-										),
-									],
-								}),
-							],
-						}),
-					}),
-					new div({ col: true, elem: sample.cardh100()[0] }),
-					new div({ col: true, elem: sample.cardh100()[1] }),
-					new div({ col: true, elem: sample.cardh100()[2] }),
+					new div({ col: true, elem: fn(str[0]) }),
+					new div({ col: true, elem: fn(str[1]) }),
+					new div({ col: true, elem: fn(str[1]) }),
+					new div({ col: true, elem: fn(str[2]) }),
 				],
 			});
 		},
@@ -923,42 +950,35 @@ export default [
 
 	{
 		title: "Card grid with {{h-100}} class",
-		sample: {
-			"sample.img": sample.img,
-			"sample.cardwithfooterh100": sample.cardwithfooterh100,
-		},
 		import: ["div", "card", "sample"],
 		code: () => {
+			const str = [
+				"This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.",
+				"This card has supporting text below as a natural lead-in to additional content.",
+				"This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.",
+			];
+
+			let fn = (str) => {
+				return new card.container({
+					class: "h-100",
+					elem: [
+						new card.img({
+							placement: "top",
+							src: sample.img(286, 143),
+						}),
+						new card.body({
+							elem: [new card.title("Card Title"), new card.text(str)],
+						}),
+						new card.footer("Last updated 3 mins ago"),
+					],
+				});
+			};
+
 			return new div({
 				row: true,
 				rowcol: [1, "md-3"],
 				gap: 4,
-				elem: [
-					new div({
-						col: true,
-						elem: new card.container({
-							class: "h-100",
-							elem: [
-								new card.img({
-									placement: "top",
-									src: sample.img(286, 143),
-								}),
-								new card.body({
-									elem: [
-										new card.title("Card Title"),
-										new card.text(
-											"This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer."
-										),
-									],
-								}),
-								new card.footer("Last updated 3 mins ago"),
-							],
-						}),
-					}),
-					new div({ col: true, elem: sample.cardwithfooterh100()[0] }),
-					new div({ col: true, elem: sample.cardwithfooterh100()[1] }),
-					new div({ col: true, elem: sample.cardwithfooterh100()[2] }),
-				],
+				elem: [fn(str[0]), fn(str[1]), fn(str[1]), fn(str[2])],
 			});
 		},
 	},

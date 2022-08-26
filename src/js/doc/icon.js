@@ -441,7 +441,6 @@ export default [
 
 	{
 		title: "Nav tab",
-		sample: { "sample.text": sample.text },
 		import: ["tab", "sample"],
 		code: () => {
 			return new tab({
