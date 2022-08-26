@@ -1,5 +1,8 @@
 "use strict";
 import $ from "../component.js";
+import * as user from "./base/user.js";
+import toast from "./base/toast.js";
+import button from "./base/button.js";
 
 export default [
 	{
@@ -11,8 +14,9 @@ export default [
 	// {
 	// 	title: "Login",
 	// 	viewclass: "cl-modal-preview",
+	//	import: ["user"],
 	// 	code: () => {
-	// 		return new $.user.signin({
+	// 		return new user.signin({
 	// 			debug: true,
 	// 		});
 	// 	},
@@ -21,39 +25,43 @@ export default [
 	// {
 	// 	title: "Register",
 	// 	viewclass: "cl-modal-preview",
+	//	import: ["user"],
 	// 	code: () => {
-	// 		return new $.user.signup({ debug: true });
+	// 		return new user.signup({ debug: true });
 	// 	},
 	// },
 
 	// {
 	// 	title: "Reset password",
 	// 	viewclass: "cl-modal-preview",
+	//	import: ["user"],
 	// 	code: () => {
-	// 		return new $.user.resetpass({ debug: true });
+	// 		return new user.resetpass({ debug: true });
 	// 	},
 	// },
 
 	{
 		title: "Change password",
 		viewclass: "cl-modal-preview",
+		import: ["user"],
 		code: () => {
-			return new $.user.changepass({ debug: true });
+			return new user.changepass({ debug: true });
 		},
 	},
 
 	{
 		msg: "Live preview",
+		import: ["button", "toast", "user"],
 		code: () => {
-			return new $.button({
+			return new button({
 				label: "Change password",
 				icon: "key",
 				color: "primary",
 				onclick: (event) => {
-					new $.user.changepass({
+					new user.changepass({
 						callback: (result) => {
 							if (result) {
-								new $.toast("/", "Password changed").show();
+								new toast("/", "Password changed").show();
 							}
 						},
 					}).show();
@@ -65,28 +73,30 @@ export default [
 	{
 		title: "Update profile",
 		viewclass: "cl-modal-preview",
+		import: ["user"],
 		code: () => {
-			return new $.user.updateinfo({ debug: true });
+			return new user.updateinfo({ debug: true });
 		},
 	},
 
 	{
 		msg: "Live preview",
+		import: ["button", "toast", "user"],
 		code: () => {
-			return new $.button({
+			return new button({
 				label: "Update profile",
 				icon: "user",
 				color: "primary",
 				onclick: (event) => {
 					let sender = event.currentTarget;
-					$.user.info(sender, (result) => {
+					user.info(sender, (result) => {
 						if (result && result.email) {
-							new $.user.updateinfo({
+							new user.updateinfo({
 								data: result,
 								sender: sender,
 								callback: (result) => {
 									if (result) {
-										new $.toast("/", "Your information updated").show();
+										new toast("/", "Your information updated").show();
 									}
 								},
 							}).show();
@@ -100,8 +110,9 @@ export default [
 	// {
 	// 	title: "Change password (guest)",
 	// 	viewclass: "cl-modal-preview",
+	//	import: ["user"],
 	// 	code: () => {
-	// 		return new $.user.changepass_guest({
+	// 		return new user.changepass_guest({
 	// 			token: "token",
 	// 			debug: true,
 	// 		});
@@ -110,15 +121,16 @@ export default [
 
 	{
 		title: "Get user info",
+		import: ["button", "toast", "user"],
 		code: () => {
-			return new $.button({
+			return new button({
 				label: "Get info",
 				icon: "user",
 				color: "primary",
 				onclick: (event) => {
-					$.user.info(event.currentTarget, (result) => {
+					user.info(event.currentTarget, (result) => {
 						if (result) {
-							new $.toast("i", `Hai ${result.name}`).show();
+							new toast("i", `Hai ${result.name}`).show();
 						}
 					});
 				},
@@ -128,17 +140,18 @@ export default [
 
 	{
 		title: "Sign out",
+		import: ["button", "toast", "user"],
 		code: () => {
-			return new $.button({
+			return new button({
 				label: "Sign out",
 				icon: "power-off",
 				color: "danger",
 				onclick: (event) => {
-					$.user.signout(event.currentTarget, (result) => {
+					user.signout(event.currentTarget, (result) => {
 						if (result) {
-							new $.toast("/", "User successfuly sign out").show();
+							new toast("/", "User successfuly sign out").show();
 						} else {
-							new $.toast("!!", "User failed sign out").show();
+							new toast("!!", "User failed sign out").show();
 						}
 					});
 				},

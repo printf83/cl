@@ -1,6 +1,7 @@
 "use strict";
 import sample from "./sample.js";
-import $ from "../component.js";
+import tab from "../base/tab.js";
+import modal from "../base/modal.js";
 
 export default [
 	{
@@ -12,8 +13,9 @@ export default [
 	{
 		title: "Base nav",
 		sample: { "sample.tab": sample.tab },
+		import: ["tab"],
 		code: () => {
-			return new $.tab({
+			return new tab({
 				item: sample.tab(),
 			});
 		},
@@ -22,8 +24,9 @@ export default [
 	{
 		title: "Nav tab",
 		sample: { "sample.tab": sample.tab },
+		import: ["tab"],
 		code: () => {
-			return new $.tab({
+			return new tab({
 				type: "tab",
 				item: sample.tab(),
 			});
@@ -33,8 +36,9 @@ export default [
 	{
 		title: "Nav pill",
 		sample: { "sample.tab": sample.tab },
+		import: ["tab"],
 		code: () => {
-			return new $.tab({
+			return new tab({
 				type: "pill",
 				item: sample.tab(),
 			});
@@ -44,8 +48,9 @@ export default [
 	{
 		title: "Horizontal center alignment",
 		sample: { "sample.tab": sample.tab },
+		import: ["tab"],
 		code: () => {
-			return new $.tab({
+			return new tab({
 				type: "pill",
 				headAlign: "center",
 				item: sample.tab(),
@@ -56,8 +61,9 @@ export default [
 	{
 		title: "Horizontal right alignment",
 		sample: { "sample.tab": sample.tab },
+		import: ["tab"],
 		code: () => {
-			return new $.tab({
+			return new tab({
 				type: "pill",
 				headAlign: "right",
 				item: sample.tab(),
@@ -68,8 +74,9 @@ export default [
 	{
 		title: "Vertical left",
 		sample: { "sample.tab": sample.tab },
+		import: ["tab"],
 		code: () => {
-			return new $.tab({
+			return new tab({
 				type: "pill",
 				headAlign: "vertical",
 				item: sample.tab(),
@@ -80,8 +87,9 @@ export default [
 	{
 		title: "Vertical right",
 		sample: { "sample.tab": sample.tab },
+		import: ["tab"],
 		code: () => {
-			return new $.tab({
+			return new tab({
 				type: "pill",
 				headAlign: "vertical-right",
 				item: sample.tab(),
@@ -92,8 +100,9 @@ export default [
 	{
 		title: "Fill",
 		sample: { "sample.tab": sample.tab },
+		import: ["tab"],
 		code: () => {
-			return new $.tab({
+			return new tab({
 				type: "pill",
 				headAlign: "fill",
 				item: sample.tab(),
@@ -104,8 +113,9 @@ export default [
 	{
 		title: "Flush",
 		sample: { "sample.tab": sample.tab },
+		import: ["tab"],
 		code: () => {
-			return new $.tab({
+			return new tab({
 				type: "tab",
 				flush: true,
 				item: sample.tab(),
@@ -116,8 +126,9 @@ export default [
 	{
 		title: "Dropdown tab",
 		sample: { "sample.dropdowntab": sample.dropdowntab },
+		import: ["tab"],
 		code: () => {
-			return new $.tab({
+			return new tab({
 				type: "tab",
 				item: sample.dropdowntab(),
 			});
@@ -127,8 +138,9 @@ export default [
 	{
 		title: "Dropdown pill",
 		sample: { "sample.dropdowntab": sample.dropdowntab },
+		import: ["tab"],
 		code: () => {
-			return new $.tab({
+			return new tab({
 				type: "pill",
 				item: sample.dropdowntab(),
 			});
@@ -139,10 +151,11 @@ export default [
 		title: "Nav tab in dialog",
 		viewclass: "cl-modal-preview",
 		sample: { "sample.dropdowntab": sample.dropdowntab },
+		import: ["modal", "tab"],
 		code: () => {
-			return new $.modal({
+			return new modal({
 				title: "Modal title",
-				elem: new $.tab({
+				elem: new tab({
 					type: "tab",
 					flush: true, //!important
 					item: sample.dropdowntab(),
@@ -157,10 +170,11 @@ export default [
 		title: "Tab nav pill in dialog",
 		viewclass: "cl-modal-preview",
 		sample: { "sample.dropdowntab": sample.dropdowntab },
+		import: ["modal", "tab"],
 		code: () => {
-			return new $.modal({
+			return new modal({
 				title: "Modal title",
-				elem: new $.tab({
+				elem: new tab({
 					type: "pill",
 					flush: true, //!important
 					item: sample.dropdowntab(),

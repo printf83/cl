@@ -1,6 +1,6 @@
 "use strict";
 import sample from "./sample.js";
-import $ from "../component.js";
+import * as table from "../base/table.js";
 
 export default [
 	{
@@ -13,8 +13,9 @@ export default [
 		sample: {
 			"sample.table": sample.table,
 		},
+		import: ["table"],
 		code: () => {
-			return new $.table.container({
+			return new table.container({
 				item: sample.table(true, false),
 			});
 		},
@@ -25,8 +26,9 @@ export default [
 		sample: {
 			"sample.table": sample.table,
 		},
+		import: ["table"],
 		code: () => {
-			return new $.table.container({
+			return new table.container({
 				rownumber: true,
 				item: sample.table(true, false),
 			});
@@ -38,8 +40,9 @@ export default [
 		sample: {
 			"sample.table": sample.table,
 		},
+		import: ["table"],
 		code: () => {
-			return new $.table.container({
+			return new table.container({
 				rownumber: true,
 				footer: true,
 				item: sample.table(true, true),
@@ -52,8 +55,9 @@ export default [
 		sample: {
 			"sample.table": sample.table,
 		},
+		import: ["table"],
 		code: () => {
-			return new $.table.container({
+			return new table.container({
 				rownumber: true,
 				header: false,
 				item: sample.table(false, false),
@@ -66,8 +70,9 @@ export default [
 		sample: {
 			"sample.table": sample.table,
 		},
+		import: ["table"],
 		code: () => {
-			return new $.table.container({
+			return new table.container({
 				color: "primary",
 				footer: true,
 				item: sample.table(true, true),
@@ -80,8 +85,9 @@ export default [
 		sample: {
 			"sample.table": sample.table,
 		},
+		import: ["table"],
 		code: () => {
-			return new $.table.container({
+			return new table.container({
 				color: "primary",
 				striped: true,
 				footer: true,
@@ -95,8 +101,9 @@ export default [
 		sample: {
 			"sample.table": sample.table,
 		},
+		import: ["table"],
 		code: () => {
-			return new $.table.container({
+			return new table.container({
 				color: "primary",
 				striped: true,
 				hover: true,
@@ -111,8 +118,9 @@ export default [
 		sample: {
 			"sample.table": sample.table,
 		},
+		import: ["table"],
 		code: () => {
-			return new $.table.container({
+			return new table.container({
 				color: "primary",
 				striped: true,
 				hover: true,
@@ -128,8 +136,9 @@ export default [
 		sample: {
 			"sample.table": sample.table,
 		},
+		import: ["table"],
 		code: () => {
-			return new $.table.container({
+			return new table.container({
 				color: "primary",
 				striped: true,
 				hover: true,
@@ -143,8 +152,9 @@ export default [
 
 	{
 		title: "Kitchen sink",
+		import: ["table"],
 		code: () => {
-			return new $.table.container({
+			return new table.container({
 				color: "primary",
 				striped: true,
 				hover: true,
@@ -160,9 +170,9 @@ export default [
 					["4/1/2020", "East", "Jones", "Binder", "60", "4.99", "299.40"],
 					["4/18/2020", "Central", "Andrews", "Pencil", "75", "1.99", "149.25"],
 					[
-						new $.table.td({ colspan: 5, elem: "" }),
-						new $.table.td({ align: "end", elem: "Total" }),
-						new $.table.td({
+						new table.td({ colspan: 5, elem: "" }),
+						new table.td({ align: "end", elem: "Total" }),
+						new table.td({
 							color: "danger",
 							textcolor: "light",
 							elem: "2,524.01",
