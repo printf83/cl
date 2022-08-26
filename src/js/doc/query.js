@@ -1,6 +1,11 @@
 "use strict";
 import sample from "./sample.js";
-import $ from "../component.js";
+import codepreview from "../base/codepreview.js";
+import button from "../base/button.js";
+import * as query from "../base/query.js";
+import input from "../base/input.js";
+import * as core from "../base/core.js";
+import * as db from "../base/api.js";
 
 export default [
 	{
@@ -12,11 +17,11 @@ export default [
 	{
 		title: "Query dialog",
 		msg: [
-			"Using {{$.query.dialog}} to edit query for <b>cl generic database</b>.",
-			new $.codepreview({
+			"Using {{query.dialog}} to edit query for <b>cl generic database</b>.",
+			new codepreview({
 				container: "card",
 				code: `
-					new $.query.dialog(
+					new query.dialog(
 						{
 							field: setting_fileld,
 							limit: setting_limit,
@@ -41,6 +46,7 @@ export default [
 			"sample.query_data": sample.query_data_view,
 		},
 		viewclass: "cl-modal-preview",
+		import: ["query"],
 		code: () => {
 			let dbstate = [
 				{ value: "value1", label: "Label 1" },
@@ -51,7 +57,7 @@ export default [
 			];
 
 			return [
-				new $.query.dialog(
+				new query.dialog(
 					{
 						field: sample.query_setting(dbstate).field,
 						limit: sample.query_setting(dbstate).limit,
@@ -78,11 +84,12 @@ export default [
 			"sample.list_state": sample.list_state,
 		},
 		container: sample.formcontainer,
+		import: ["input", "button", "db", "query"],
 		code: () => {
-			let resultOutputId = $.core.UUID();
+			let resultOutputId = core.UUID();
 
 			return [
-				new $.button({
+				new button({
 					label: "Query Dialog",
 					icon: "fire",
 					color: "primary",
@@ -91,7 +98,7 @@ export default [
 
 						sample.list_state((dbstate) => {
 							//edit query
-							new $.query.dialog(
+							new query.dialog(
 								{
 									field: sample.query_setting(dbstate).field,
 									limit: sample.query_setting(dbstate).limit,
@@ -104,7 +111,7 @@ export default [
 										sample.query_data = data;
 
 										//get record
-										$.db.api.list(
+										db.api.list(
 											{
 												name: "customer",
 												data: sample.query_data,
@@ -121,7 +128,7 @@ export default [
 						}, sender);
 					},
 				}),
-				new $.input({ type: "textarea", label: "Result", id: resultOutputId, rows: 10 }),
+				new input({ type: "textarea", label: "Result", id: resultOutputId, rows: 10 }),
 			];
 		},
 	},
@@ -129,11 +136,11 @@ export default [
 	{
 		title: "Filter dialog",
 		msg: [
-			"Using {{$.query.filter}} to edit query filter only for <b>cl generic database</b>.",
-			new $.codepreview({
+			"Using {{query.filter}} to edit query filter only for <b>cl generic database</b>.",
+			new codepreview({
 				container: "card",
 				code: `
-					new $.query.filter(
+					new query.filter(
 						{
 							field: setting_fileld,
 							useopricon: setting_use_operation_icon,
@@ -156,6 +163,7 @@ export default [
 			"sample.query_data": sample.query_data_view,
 		},
 		viewclass: "cl-modal-preview",
+		import: ["query"],
 		code: () => {
 			let dbstate = [
 				{ value: "value1", label: "Label 1" },
@@ -166,7 +174,7 @@ export default [
 			];
 
 			return [
-				new $.query.filter(
+				new query.filter(
 					{
 						field: sample.query_setting(dbstate).field,
 						useopricon: sample.query_setting(dbstate).useopricon,
@@ -191,11 +199,12 @@ export default [
 			"sample.list_state": sample.list_state,
 		},
 		container: sample.formcontainer,
+		import: ["input", "button", "db", "query"],
 		code: () => {
-			let resultOutputId = $.core.UUID();
+			let resultOutputId = core.UUID();
 
 			return [
-				new $.button({
+				new button({
 					label: "Filter Dialog",
 					icon: "filter",
 					color: "primary",
@@ -204,7 +213,7 @@ export default [
 
 						sample.list_state((dbstate) => {
 							//edit query
-							new $.query.filter(
+							new query.filter(
 								{
 									field: sample.query_setting(dbstate).field,
 									useopricon: sample.query_setting(dbstate).useopricon,
@@ -215,7 +224,7 @@ export default [
 										sample.query_data.filter = data;
 
 										//get record
-										$.db.api.list(
+										db.api.list(
 											{
 												name: "customer",
 												data: sample.query_data,
@@ -232,7 +241,7 @@ export default [
 						}, sender);
 					},
 				}),
-				new $.input({ type: "textarea", label: "Result", id: resultOutputId, rows: 10 }),
+				new input({ type: "textarea", label: "Result", id: resultOutputId, rows: 10 }),
 			];
 		},
 	},
@@ -240,11 +249,11 @@ export default [
 	{
 		title: "Sort dialog",
 		msg: [
-			"Using {{$.query.sort}} to edit query sort only for <b>cl generic database</b>.",
-			new $.codepreview({
+			"Using {{query.sort}} to edit query sort only for <b>cl generic database</b>.",
+			new codepreview({
 				container: "card",
 				code: `
-					new $.query.sort(
+					new query.sort(
 						{
 							field: setting_fileld,
 							useopricon: setting_use_operation_icon,
@@ -267,9 +276,10 @@ export default [
 			"sample.query_data": sample.query_data_view,
 		},
 		viewclass: "cl-modal-preview",
+		import: ["query"],
 		code: () => {
 			return [
-				new $.query.sort(
+				new query.sort(
 					{
 						field: sample.query_setting().field,
 						useopricon: sample.query_setting().useopricon,
@@ -293,11 +303,12 @@ export default [
 			"sample.query_data": sample.query_data_view,
 		},
 		container: sample.formcontainer,
+		import: ["input", "button", "db", "query"],
 		code: () => {
-			let resultOutputId = $.core.UUID();
+			let resultOutputId = core.UUID();
 
 			return [
-				new $.button({
+				new button({
 					label: "Sort Dialog",
 					icon: "sort",
 					color: "primary",
@@ -305,7 +316,7 @@ export default [
 						let sender = event.currentTarget;
 
 						//edit query
-						new $.query.sort(
+						new query.sort(
 							{
 								field: sample.query_setting().field,
 								useopricon: sample.query_setting().useopricon,
@@ -316,7 +327,7 @@ export default [
 									sample.query_data.sort = data;
 
 									//get record
-									$.db.api.list(
+									db.api.list(
 										{
 											name: "customer",
 											data: sample.query_data,
@@ -332,7 +343,7 @@ export default [
 						).show();
 					},
 				}),
-				new $.input({ type: "textarea", label: "Result", id: resultOutputId, rows: 10 }),
+				new input({ type: "textarea", label: "Result", id: resultOutputId, rows: 10 }),
 			];
 		},
 	},
@@ -340,11 +351,11 @@ export default [
 	{
 		title: "Field dialog",
 		msg: [
-			"Using {{$.query.field}} to edit query field only for <b>cl generic database</b>.",
-			new $.codepreview({
+			"Using {{query.field}} to edit query field only for <b>cl generic database</b>.",
+			new codepreview({
 				container: "card",
 				code: `
-					new $.query.field(
+					new query.field(
 						{
 							field: setting_fileld,
 							data: query_field_data,
@@ -366,9 +377,10 @@ export default [
 			"sample.query_data": sample.query_data_view,
 		},
 		viewclass: "cl-modal-preview",
+		import: ["query"],
 		code: () => {
 			return [
-				new $.query.field(
+				new query.field(
 					{
 						field: sample.query_setting().field,
 						data: sample.query_data.field,
@@ -391,11 +403,12 @@ export default [
 			"sample.query_data": sample.query_data_view,
 		},
 		container: sample.formcontainer,
+		import: ["input", "button", "db", "query"],
 		code: () => {
-			let resultOutputId = $.core.UUID();
+			let resultOutputId = core.UUID();
 
 			return [
-				new $.button({
+				new button({
 					label: "Field Dialog",
 					icon: "tasks",
 					color: "primary",
@@ -403,7 +416,7 @@ export default [
 						let sender = event.currentTarget;
 
 						//edit query
-						new $.query.field(
+						new query.field(
 							{
 								field: sample.query_setting().field,
 								data: sample.query_data.field,
@@ -413,7 +426,7 @@ export default [
 									sample.query_data.field = data;
 
 									//get record
-									$.db.api.list(
+									db.api.list(
 										{
 											name: "customer",
 											data: sample.query_data,
@@ -429,7 +442,7 @@ export default [
 						).show();
 					},
 				}),
-				new $.input({ type: "textarea", label: "Result", id: resultOutputId, rows: 10 }),
+				new input({ type: "textarea", label: "Result", id: resultOutputId, rows: 10 }),
 			];
 		},
 	},
@@ -437,11 +450,11 @@ export default [
 	{
 		title: "Limit dialog",
 		msg: [
-			"Using {{$.query.limit}} to edit query limit only for <b>cl generic database</b>.",
-			new $.codepreview({
+			"Using {{query.limit}} to edit query limit only for <b>cl generic database</b>.",
+			new codepreview({
 				container: "card",
 				code: `
-					new $.query.limit(
+					new query.limit(
 						{
 							min: setting_limit_min,
 							max: setting_limit_max,
@@ -466,9 +479,10 @@ export default [
 			"sample.query_data": sample.query_data_view,
 		},
 		viewclass: "cl-modal-preview",
+		import: ["query"],
 		code: () => {
 			return [
-				new $.query.limit(
+				new query.limit(
 					{
 						min: sample.query_setting().limit.min,
 						max: sample.query_setting().limit.max,
@@ -495,11 +509,12 @@ export default [
 			"sample.query_data": sample.query_data_view,
 		},
 		container: sample.formcontainer,
+		import: ["input", "button", "db", "query"],
 		code: () => {
-			let resultOutputId = $.core.UUID();
+			let resultOutputId = core.UUID();
 
 			return [
-				new $.button({
+				new button({
 					label: "Limit Dialog",
 					icon: "list-ol",
 					color: "primary",
@@ -507,7 +522,7 @@ export default [
 						let sender = event.currentTarget;
 
 						//edit query
-						new $.query.limit(
+						new query.limit(
 							{
 								min: sample.query_setting().limit.min,
 								max: sample.query_setting().limit.max,
@@ -521,7 +536,7 @@ export default [
 									sample.query_data.skip = skip * sample.query_data.limit;
 
 									//get record
-									$.db.api.list(
+									db.api.list(
 										{
 											name: "customer",
 											data: sample.query_data,
@@ -537,7 +552,7 @@ export default [
 						).show();
 					},
 				}),
-				new $.input({ type: "textarea", label: "Result", id: resultOutputId, rows: 10 }),
+				new input({ type: "textarea", label: "Result", id: resultOutputId, rows: 10 }),
 			];
 		},
 	},
@@ -545,11 +560,11 @@ export default [
 	{
 		title: "Page dialog",
 		msg: [
-			"Using {{$.query.page}} to edit query page only for <b>cl generic database</b>.",
-			new $.codepreview({
+			"Using {{query.page}} to edit query page only for <b>cl generic database</b>.",
+			new codepreview({
 				container: "card",
 				code: `
-					new $.query.page(
+					new query.page(
 						{
 							min: setting_page_min,
 							max: setting_page_max,
@@ -574,9 +589,10 @@ export default [
 			"sample.query_data": sample.query_data_view,
 		},
 		viewclass: "cl-modal-preview",
+		import: ["query"],
 		code: () => {
 			return [
-				new $.query.page(
+				new query.page(
 					{
 						min: sample.query_setting().skip.min,
 						max: sample.query_setting().skip.max,
@@ -602,11 +618,12 @@ export default [
 			"sample.query_data": sample.query_data_view,
 		},
 		container: sample.formcontainer,
+		import: ["input", "button", "db", "query"],
 		code: () => {
-			let resultOutputId = $.core.UUID();
+			let resultOutputId = core.UUID();
 
 			return [
-				new $.button({
+				new button({
 					label: "Page Dialog",
 					icon: { icon: "sort", rotate: 90 },
 					color: "primary",
@@ -614,7 +631,7 @@ export default [
 						let sender = event.currentTarget;
 
 						//edit query
-						new $.query.page(
+						new query.page(
 							{
 								min: sample.query_setting().skip.min,
 								max: sample.query_setting().skip.max,
@@ -627,7 +644,7 @@ export default [
 									sample.query_data.skip = data;
 
 									//get record
-									$.db.api.list(
+									db.api.list(
 										{
 											name: "customer",
 											data: sample.query_data,
@@ -643,7 +660,7 @@ export default [
 						).show();
 					},
 				}),
-				new $.input({ type: "textarea", label: "Result", id: resultOutputId, rows: 10 }),
+				new input({ type: "textarea", label: "Result", id: resultOutputId, rows: 10 }),
 			];
 		},
 	},
