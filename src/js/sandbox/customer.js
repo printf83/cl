@@ -1,5 +1,10 @@
 "use strict";
-import $ from "../component.js";
+import * as db from "../base/api.js";
+import file from "../base/file.js";
+import input from "../base/input.js";
+import * as list from "../base/list.js";
+import small from "../base/small.js";
+import toast from "../base/toast.js";
 
 let query_data = {
 	filter: null,
@@ -19,7 +24,7 @@ const loadState = (callback, sender) => {
 	if (!dbstate) {
 		console.log("Init state database");
 		//get record
-		$.db.api.option(
+		db.api.option(
 			{
 				name: "state",
 				fieldkey: "_id",
@@ -88,37 +93,37 @@ const query_setting = (dbstate) => {
 };
 const editor = (data) => {
 	return [
-		new $.input({
+		new input({
 			type: "text",
 			label: "Name",
 			name: "name",
 			required: true,
 			value: data ? data.name : null,
 		}),
-		new $.input({
+		new input({
 			type: "date",
 			label: "Date of birth",
 			name: "dob",
 			value: data ? data.dob : null,
 		}),
-		new $.input({
+		new input({
 			type: "text",
 			label: "Phone",
 			name: "phone",
 			value: data ? data.phone : null,
 		}),
-		new $.file({
+		new file({
 			label: "Picture",
 			name: "picture",
 			value: data ? data.picture : null,
 		}),
-		new $.input({
+		new input({
 			type: "email",
 			label: "Email",
 			name: "email",
 			value: data ? data.email : null,
 		}),
-		new $.input({
+		new input({
 			type: "select",
 			label: "State",
 			name: "state",
@@ -151,11 +156,11 @@ const items = (data, item, group) => {
 	return result;
 };
 const item = (data) => {
-	return new $.list.item({
+	return new list.item({
 		key: data._id,
 		name: data.name,
 		picture: data.picture,
-		detail: new $.small([data.phone, data.dob, data.email].filter(Boolean).join(" | ")),
+		detail: new small([data.phone, data.dob, data.email].filter(Boolean).join(" | ")),
 		allow_delete: true,
 		allow_copy: true,
 		allow_action: true,
@@ -163,13 +168,13 @@ const item = (data) => {
 	});
 };
 const group = (data) => {
-	return new $.list.group({
+	return new list.group({
 		key: data.key,
 		name: data.name,
 	});
 };
 const more = (sender, id) => {
-	new $.toast("i", `Call from id:${id}`).show();
+	new toast("i", `Call from id:${id}`).show();
 };
 
 const menuController = (id, show) => {
@@ -184,7 +189,7 @@ const menuController = (id, show) => {
 export default {
 	name: "Customer",
 	load: () => {
-		$.list.container.reload("customer_list");
+		list.container.reload("customer_list");
 
 		menuController("menu_add", true);
 		menuController("menu_check_on", true);
@@ -196,7 +201,7 @@ export default {
 	main: (callback) => {
 		loadState((dbstate) => {
 			callback(
-				new $.list.container({
+				new list.container({
 					id: "customer_list",
 					setting: query_setting(dbstate),
 					query: query_data,
@@ -217,7 +222,7 @@ export default {
 			icon: "plus",
 			label: "Add New",
 			onclick: (event) => {
-				$.list.container.item.add("customer_list", event.currentTarget);
+				list.container.item.add("customer_list", event.currentTarget);
 			},
 		},
 		{
@@ -225,7 +230,7 @@ export default {
 			icon: "list-check",
 			label: "Check Mode",
 			onclick: (event) => {
-				$.list.container.check.mode("customer_list");
+				list.container.check.mode("customer_list");
 
 				menuController("menu_add", false);
 				menuController("menu_check_on", false);
@@ -240,7 +245,7 @@ export default {
 			icon: "arrow-left",
 			label: "Back",
 			onclick: (event) => {
-				$.list.container.check.mode("customer_list");
+				list.container.check.mode("customer_list");
 
 				menuController("menu_add", true);
 				menuController("menu_check_on", true);
@@ -255,7 +260,7 @@ export default {
 			icon: "check-double",
 			label: "Check All",
 			onclick: (event) => {
-				$.list.container.check.all("customer_list");
+				list.container.check.all("customer_list");
 			},
 		},
 		{
@@ -263,7 +268,7 @@ export default {
 			icon: "trash-can",
 			label: "Delete Checked",
 			onclick: (event) => {
-				$.list.container.check.delete("customer_list", event.currentTarget);
+				list.container.check.delete("customer_list", event.currentTarget);
 			},
 		},
 		{
@@ -271,7 +276,7 @@ export default {
 			icon: "filter",
 			label: "Filter",
 			onclick: (event) => {
-				$.list.container.query.filter("customer_list", event.currentTarget);
+				list.container.query.filter("customer_list", event.currentTarget);
 			},
 		},
 		{
@@ -279,7 +284,7 @@ export default {
 			icon: "sort",
 			label: "Sort",
 			onclick: (event) => {
-				$.list.container.query.sort("customer_list", event.currentTarget);
+				list.container.query.sort("customer_list", event.currentTarget);
 			},
 		},
 		{
@@ -287,7 +292,7 @@ export default {
 			icon: "tasks",
 			label: "Field",
 			onclick: (event) => {
-				$.list.container.query.field("customer_list", event.currentTarget);
+				list.container.query.field("customer_list", event.currentTarget);
 			},
 		},
 		{
@@ -295,7 +300,7 @@ export default {
 			icon: "list-ol",
 			label: "Limit",
 			onclick: (event) => {
-				$.list.container.query.limit("customer_list", event.currentTarget);
+				list.container.query.limit("customer_list", event.currentTarget);
 			},
 		},
 		{
@@ -306,7 +311,7 @@ export default {
 			},
 			id: "menu_page",
 			onclick: (event) => {
-				$.list.container.query.page("customer_list", event.currentTarget);
+				list.container.query.page("customer_list", event.currentTarget);
 			},
 		},
 	],

@@ -1,7 +1,5 @@
 "use strict";
 
-import sb_customer from "./sandbox/customer.js";
-import sb_state from "./sandbox/state.js";
 import * as core from "./base/core.js";
 import div from "./base/div.js";
 import * as layout from "./base/layout.js";
@@ -11,6 +9,9 @@ import tag from "./base/tag.js";
 import toast from "./base/toast.js";
 import toc from "./base/toc.js";
 import * as user from "./base/user.js";
+
+import sb_customer from  "./sandbox/customer.js";
+import sb_state from "./sandbox/state.js";
 
 const db_menu = [
 	{

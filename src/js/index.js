@@ -2,8 +2,6 @@
 
 // import "../css/sample.css";
 
-import sample from "./doc/sample.js";
-import doc from "./doc.js";
 import a from "./base/a.js";
 import * as core from "./base/core.js";
 import div from "./base/div.js";
@@ -17,6 +15,8 @@ import small from "./base/small.js";
 import * as table from "./base/table.js";
 import tag from "./base/tag.js";
 import toc from "./base/toc.js";
+import doc from "./doc.js";
+import sample from "./doc/sample.js";
 
 const db_menu = [
 	{
