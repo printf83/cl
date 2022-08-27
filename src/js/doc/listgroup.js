@@ -16,7 +16,7 @@ export default [
 
 	{
 		title: "Basic example",
-		import: ["listgroup", "sample"],
+		import: ["listgroup"],
 		code: () => {
 			return new listgroup({
 				item: [
@@ -106,7 +106,7 @@ export default [
 
 	{
 		title: "Flush",
-		import: ["listgroup", "sample"],
+		import: ["listgroup"],
 		code: () => {
 			return new listgroup({
 				flush: true,
@@ -123,7 +123,7 @@ export default [
 
 	{
 		title: "Numbered",
-		import: ["listgroup", "sample"],
+		import: ["listgroup"],
 		code: () => {
 			return new listgroup({
 				type: "ol",
@@ -187,7 +187,7 @@ export default [
 			"<b>ProTip:</b> Want equal-width list group items when horizontal? Add {{.flex-fill}} to each list group item.",
 		],
 		container: sample.stackcontainer,
-		import: ["listgroup", "sample"],
+		import: ["listgroup"],
 		code: () => {
 			let el = [{ elem: "An item" }, { elem: "A second item" }, { elem: "A third item" }];
 

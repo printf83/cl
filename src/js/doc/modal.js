@@ -101,10 +101,19 @@ export default [
 		title: "Simple inputbox components with select",
 		msg: "Below is a static modal example (meaning its position and display have been overridden). Included are the modal header, modal body (required for padding), and modal footer (optional). We ask that you include modal headers with dismiss actions whenever possible, or provide another explicit dismiss action.",
 		viewclass: "cl-modal-preview",
-		import: ["toast", "input", "dlg", "sample"],
+		import: ["toast", "input", "dlg"],
 		code: () => {
 			return new dlg.inputbox(
-				new input({ type: "select", option: sample.optionitem(), name: "value" }),
+				new input({
+					type: "select",
+					option: [
+						{ value: "", label: "Open this select menu", selected: true },
+						{ value: "1", label: "One" },
+						{ value: "2", label: "Two" },
+						{ value: "3", label: "Three" },
+					],
+					name: "value",
+				}),
 				"This is example inputbox select",
 				(event, data) => {
 					new toast("i", `Result from dlg.inputbox is : ${JSON.stringify(data)}`).show();
@@ -118,7 +127,7 @@ export default [
 	{
 		title: "Simple inputbox live",
 		container: sample.stackcontainer,
-		import: ["toast", "button", "input", "dlg", "sample"],
+		import: ["toast", "button", "input", "dlg"],
 		code: () => {
 			return [
 				{ label: "Text", type: "text" },
@@ -126,7 +135,16 @@ export default [
 				{ label: "Date", type: "date" },
 				{ label: "Range", type: "range" },
 				{ label: "Textarea", type: "textarea" },
-				{ label: "Select", type: "select", option: sample.optionitem() },
+				{
+					label: "Select",
+					type: "select",
+					option: [
+						{ value: "", label: "Open this select menu", selected: true },
+						{ value: "1", label: "One" },
+						{ value: "2", label: "Two" },
+						{ value: "3", label: "Three" },
+					],
+				},
 			].map((i) => {
 				return new button({
 					label: i.label,
@@ -262,7 +280,7 @@ export default [
 	{
 		title: "Inputbox with multiple input live",
 		msg: "First agrument can handle type {{[new input()]}}.",
-		import: ["toast", "button", "dlg", "sample"],
+		import: ["toast", "button", "dlg"],
 		code: () => {
 			let el = new container.form([
 				new input({

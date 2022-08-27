@@ -19,7 +19,7 @@ export default [
 
 	{
 		title: "Example",
-		import: ["button", "card", "sample"],
+		import: ["button", "card"],
 		code: () => {
 			return new card.container({
 				style: { width: "18rem" },
@@ -453,7 +453,7 @@ export default [
 	{
 		title: "Tab in card",
 		msg: "{{tab}} is working navbar in card",
-		import: ["tab", "sample"],
+		import: ["tab"],
 		code: () => {
 			return new tab({
 				type: "tab",
@@ -478,7 +478,7 @@ export default [
 
 	{
 		title: "Pill style tab",
-		import: ["tab", "sample"],
+		import: ["tab"],
 		code: () => {
 			return new tab({
 				type: "pill",
@@ -504,7 +504,7 @@ export default [
 	{
 		title: "Images",
 		container: sample.stackcontainer,
-		import: ["small", "card", "sample"],
+		import: ["small", "card"],
 		code: () => {
 			return [
 				new card.container({
@@ -547,7 +547,7 @@ export default [
 
 	{
 		title: "Image overlays",
-		import: ["small", "card", "sample"],
+		import: ["small", "card"],
 		code: () => {
 			return new card.container({
 				textcolor: "light",
@@ -571,7 +571,7 @@ export default [
 
 	{
 		title: "Horizontal",
-		import: ["small", "card", "sample"],
+		import: ["small", "card"],
 		code: () => {
 			return new card.container({
 				class: "h-100",
@@ -773,7 +773,7 @@ export default [
 	{
 		title: "Card groups",
 		container: sample.stackcontainer,
-		import: ["card", "sample"],
+		import: ["card"],
 		code: () => {
 			const str = [
 				"This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.",
@@ -804,7 +804,7 @@ export default [
 	{
 		title: "Card groups with footer",
 		container: sample.stackcontainer,
-		import: ["card", "sample"],
+		import: ["card"],
 		code: () => {
 			const str = [
 				"This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.",
@@ -835,7 +835,7 @@ export default [
 
 	{
 		title: "Card grid using {{row-cols-md-2}}",
-		import: ["div", "card", "sample"],
+		import: ["div", "card"],
 		code: () => {
 			const str = [
 				"This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.",
@@ -873,7 +873,7 @@ export default [
 
 	{
 		title: "Card grid using {{row-cols-md-3}}",
-		import: ["div", "card", "sample"],
+		import: ["div", "card"],
 		code: () => {
 			const str = [
 				"This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.",
@@ -911,7 +911,7 @@ export default [
 
 	{
 		title: "Card grid with {{h-100}} class",
-		import: ["div", "card", "sample"],
+		import: ["div", "card"],
 		code: () => {
 			const str = [
 				"This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.",
@@ -950,7 +950,7 @@ export default [
 
 	{
 		title: "Card grid with {{h-100}} class",
-		import: ["div", "card", "sample"],
+		import: ["div", "card"],
 		code: () => {
 			const str = [
 				"This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.",

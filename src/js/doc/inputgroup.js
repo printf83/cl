@@ -292,7 +292,7 @@ export default [
 	{
 		title: "Buttons with dropdowns",
 		container: sample.formcontainer,
-		import: ["input", "dropdown", "sample"],
+		import: ["input", "dropdown"],
 		code: () => {
 			const dditem = [
 				{ href: "#", label: "Action" },
@@ -355,7 +355,7 @@ export default [
 	{
 		title: "Segmented buttons",
 		container: sample.formcontainer,
-		import: ["input", "dropdown", "sample"],
+		import: ["input", "dropdown"],
 		code: () => {
 			const dditem = [
 				{ href: "#", label: "Action" },
@@ -400,7 +400,7 @@ export default [
 	{
 		title: "Segmented buttons",
 		container: sample.formcontainer,
-		import: ["input", "button", "sample"],
+		import: ["input", "button"],
 		code: () => {
 			const optitem = [
 				{ value: "", label: "Open this select menu", selected: true },

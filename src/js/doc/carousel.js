@@ -11,7 +11,7 @@ export default [
 
 	{
 		title: "Slide only",
-		import: ["carousel", "sample"],
+		import: ["carousel"],
 		code: () => {
 			return new carousel({
 				item: [
@@ -28,7 +28,7 @@ export default [
 
 	{
 		title: "With control",
-		import: ["carousel", "sample"],
+		import: ["carousel"],
 		code: () => {
 			return new carousel({
 				control: true,
@@ -46,7 +46,7 @@ export default [
 
 	{
 		title: "With indicator",
-		import: ["carousel", "sample"],
+		import: ["carousel"],
 		code: () => {
 			return new carousel({
 				control: true,
@@ -65,7 +65,7 @@ export default [
 
 	{
 		title: "With caption",
-		import: ["carousel", "sample"],
+		import: ["carousel"],
 		code: () => {
 			return new carousel({
 				control: true,
@@ -108,7 +108,7 @@ export default [
 
 	{
 		title: "Crossfade",
-		import: ["carousel", "sample"],
+		import: ["carousel"],
 		code: () => {
 			return new carousel({
 				control: true,
@@ -127,7 +127,7 @@ export default [
 
 	{
 		title: "Individual interval",
-		import: ["carousel", "sample"],
+		import: ["carousel"],
 		code: () => {
 			return new carousel({
 				control: true,
@@ -146,7 +146,7 @@ export default [
 
 	{
 		title: "Disable touch swiping",
-		import: ["carousel", "sample"],
+		import: ["carousel"],
 		code: () => {
 			return new carousel({
 				control: true,
@@ -165,7 +165,7 @@ export default [
 
 	{
 		title: "Dark variant",
-		import: ["carousel", "sample"],
+		import: ["carousel"],
 		code: () => {
 			return new carousel({
 				control: true,

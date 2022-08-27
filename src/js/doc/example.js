@@ -70,7 +70,7 @@ export default [
 
 	{
 		title: "Sample code",
-		import: ["example", "sample"],
+		import: ["example"],
 		code: () => {
 			return new example({
 				title: "Title",

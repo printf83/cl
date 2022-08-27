@@ -17,7 +17,7 @@ export default [
 
 	{
 		title: "Single button",
-		import: ["dropdown", "sample"],
+		import: ["dropdown"],
 		code: () => {
 			return new dropdown({
 				label: "Drowdown button",
@@ -35,7 +35,7 @@ export default [
 
 	{
 		title: "Dropdown link",
-		import: ["dropdown", "sample"],
+		import: ["dropdown"],
 		code: () => {
 			return new dropdown({
 				label: "Drowdown link",
@@ -54,7 +54,7 @@ export default [
 
 	{
 		title: "Color",
-		import: ["dropdown", "sample"],
+		import: ["dropdown"],
 		code: () => {
 			return new dropdown({
 				label: "Drowdown",
@@ -73,7 +73,7 @@ export default [
 	{
 		title: "Color varian",
 		container: sample.stackcontainer,
-		import: ["dropdown", "sample"],
+		import: ["dropdown"],
 		code: () => {
 			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map((i) => {
 				return new dropdown({
@@ -93,7 +93,7 @@ export default [
 
 	{
 		title: "Split button",
-		import: ["dropdown", "sample"],
+		import: ["dropdown"],
 		code: () => {
 			return new dropdown({
 				label: "Drowdown",
@@ -113,7 +113,7 @@ export default [
 	{
 		title: "Split button color variant",
 		container: sample.stackcontainer,
-		import: ["dropdown", "sample"],
+		import: ["dropdown"],
 		code: () => {
 			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map((i) => {
 				return new dropdown({
@@ -135,7 +135,7 @@ export default [
 	{
 		title: "Large size",
 		container: sample.stackcontainer,
-		import: ["dropdown", "sample"],
+		import: ["dropdown"],
 		code: () => {
 			const dditem = [
 				{ href: "#", label: "Action" },
@@ -166,7 +166,7 @@ export default [
 	{
 		title: "Small size",
 		container: sample.stackcontainer,
-		import: ["dropdown", "sample"],
+		import: ["dropdown"],
 		code: () => {
 			const dditem = [
 				{ href: "#", label: "Action" },
@@ -197,7 +197,7 @@ export default [
 	{
 		title: "Dark dropdown",
 		container: sample.stackcontainer,
-		import: ["dropdown", "sample"],
+		import: ["dropdown"],
 		code: () => {
 			return new dropdown({
 				label: "Dark dropdown",
@@ -217,7 +217,7 @@ export default [
 	{
 		title: "Dropdown in navbar",
 		dark: true,
-		import: ["navbar", "dropdown", "sample"],
+		import: ["navbar", "dropdown"],
 		code: () => {
 			var id = new core.UUID();
 			return new navbar.container({
@@ -264,7 +264,7 @@ export default [
 	{
 		title: "Dropup",
 		container: sample.stackcontainer,
-		import: ["dropdown", "sample"],
+		import: ["dropdown"],
 		code: () => {
 			const dditem = [
 				{ href: "#", label: "Action" },
@@ -295,7 +295,7 @@ export default [
 	{
 		title: "Dropend",
 		container: sample.stackcontainer,
-		import: ["dropdown", "sample"],
+		import: ["dropdown"],
 		code: () => {
 			const dditem = [
 				{ href: "#", label: "Action" },
@@ -326,7 +326,7 @@ export default [
 	{
 		title: "Dropstart",
 		container: sample.stackcontainer,
-		import: ["dropdown", "sample"],
+		import: ["dropdown"],
 		code: () => {
 			const dditem = [
 				{ href: "#", label: "Action" },
@@ -423,7 +423,7 @@ export default [
 
 	{
 		title: "Menu Aligment",
-		import: ["dropdown", "sample"],
+		import: ["dropdown"],
 		code: () => {
 			return new dropdown({
 				label: "Right-aligned menu example",
@@ -442,7 +442,7 @@ export default [
 
 	{
 		title: "Responsive alignment",
-		import: ["dropdown", "sample"],
+		import: ["dropdown"],
 		code: () => {
 			return new dropdown({
 				label: "Right-aligned, left-aligned lg",
@@ -462,7 +462,7 @@ export default [
 	{
 		title: "Alignment options",
 		container: sample.stackcontainer,
-		import: ["dropdown", "sample"],
+		import: ["dropdown"],
 		code: () => {
 			const dditem = [
 				{ href: "#", label: "Action" },
@@ -634,7 +634,7 @@ export default [
 	{
 		title: "Dropdown options",
 		container: sample.stackcontainer,
-		import: ["dropdown", "sample"],
+		import: ["dropdown"],
 		code: () => {
 			const dditem = [
 				{ href: "#", label: "Action" },
@@ -665,7 +665,7 @@ export default [
 	{
 		title: "Auto close behavior",
 		container: sample.stackcontainer,
-		import: ["dropdown", "sample"],
+		import: ["dropdown"],
 		code: () => {
 			const dditem = [
 				{ href: "#", label: "Action" },

@@ -24,7 +24,7 @@ export default [
 			"sample.query_data": sample.query_data_view,
 			"sample.list_state": sample.list_state,
 		},
-		import: ["button", "list", "div", "sample"],
+		import: ["button", "list", "div"],
 		code: () => {
 			let resultOutputId = core.UUID();
 			let btnGenerate = core.UUID();
@@ -80,7 +80,7 @@ export default [
 			"sample.query_data": sample.query_data_view,
 			"sample.list_state": sample.list_state,
 		},
-		import: ["button", "list", "div", "sample"],
+		import: ["button", "list", "div"],
 		code: () => {
 			let resultOutputId = core.UUID();
 			let btnGenerate = core.UUID();
@@ -137,7 +137,7 @@ export default [
 			"sample.query_data": sample.query_data_view,
 			"sample.list_state": sample.list_state,
 		},
-		import: ["button", "list", "div", "small", "sample"],
+		import: ["button", "list", "div", "small"],
 		code: () => {
 			let resultOutputId = core.UUID();
 			let btnGenerate = core.UUID();
@@ -206,7 +206,7 @@ export default [
 			"sample.list_group": sample.list_group,
 			"sample.list_state": sample.list_state,
 		},
-		import: ["button", "list", "div", "small", "sample"],
+		import: ["button", "list", "div", "small"],
 		code: () => {
 			let resultOutputId = core.UUID();
 			let btnGenerate = core.UUID();
@@ -287,7 +287,7 @@ export default [
 			"sample.list_group": sample.list_group,
 			"sample.list_state": sample.list_state,
 		},
-		import: ["button", "list", "div", "small", "sample"],
+		import: ["button", "list", "div", "small"],
 		code: () => {
 			let resultOutputId = core.UUID();
 			let btnGenerate = core.UUID();
@@ -363,7 +363,7 @@ export default [
 			"sample.list_state": sample.list_state,
 			"sample.list_more": sample.list_more,
 		},
-		import: ["button", "list", "div", "sample"],
+		import: ["button", "list", "div"],
 		code: () => {
 			let resultOutputId = core.UUID();
 			let btnGenerate = core.UUID();
@@ -432,7 +432,7 @@ export default [
 			"sample.list_state": sample.list_state,
 			"sample.list_more": sample.list_more,
 		},
-		import: ["button", "list", "div", "sample"],
+		import: ["button", "list", "div"],
 		code: () => {
 			let resultOutputId = core.UUID();
 			let btnGenerate = core.UUID();
@@ -526,7 +526,7 @@ export default [
 			"sample.list_state": sample.list_state,
 			"sample.list_more": sample.list_more,
 		},
-		import: ["button", "list", "div", "btngroup", "sample", "dlg", "input"],
+		import: ["button", "list", "div", "btngroup", "dlg", "input"],
 		code: () => {
 			let resultOutputId = core.UUID();
 			let btnGenerate = core.UUID();
@@ -684,7 +684,7 @@ export default [
 			"sample.list_state": sample.list_state,
 			"sample.list_more": sample.list_more,
 		},
-		import: ["button", "list", "div", "btngroup", "sample", "dlg", "input"],
+		import: ["button", "list", "div", "btngroup", "dlg", "input"],
 		code: () => {
 			let resultOutputId = core.UUID();
 			let btnGenerate = core.UUID();

@@ -98,7 +98,7 @@ export default [
 
 	{
 		title: "Select",
-		import: ["input", "sample"],
+		import: ["input"],
 		code: () => {
 			return new input({
 				label: "Works with selects",

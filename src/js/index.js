@@ -4,7 +4,19 @@
 
 import sample from "./doc/sample.js";
 import doc from "./doc.js";
-import $ from "./component.js";
+import a from "./base/a.js";
+import * as core from "./base/core.js";
+import div from "./base/div.js";
+import example from "./base/example.js";
+import * as layout from "./base/layout.js";
+import menu from "./base/menu.js";
+import msg from "./base/msg.js";
+import * as navbar from "./base/navbar.js";
+import pill from "./base/pill.js";
+import small from "./base/small.js";
+import * as table from "./base/table.js";
+import tag from "./base/tag.js";
+import toc from "./base/toc.js";
 
 const db_menu = [
 	{
@@ -240,7 +252,7 @@ function startmemoryleaktest(sender, limit) {
 			},
 			() => {
 				sender.classList.remove("active");
-				$.core.init(document.getElementById("root"));
+				core.init(document.getElementById("root"));
 				PR.prettyPrint();
 			}
 		);
@@ -351,7 +363,7 @@ let dblibrary = {
 };
 
 function gen_example(opt) {
-	opt = $.core.extend(
+	opt = core.extend(
 		{},
 		{
 			id: null,
@@ -371,7 +383,7 @@ function gen_example(opt) {
 		opt
 	);
 
-	opt.id = opt.id || $.core.UUID();
+	opt.id = opt.id || core.UUID();
 
 	opt.msg = opt.msg ? (Array.isArray(opt.msg) ? opt.msg : [opt.msg]) : null;
 
@@ -391,7 +403,7 @@ function gen_example(opt) {
 
 		Object.keys(opt.option).forEach((optionName) => {
 			m.push(
-				new $.table.container({
+				new table.container({
 					item: opt.option[optionName],
 				})
 			);
@@ -430,7 +442,7 @@ function gen_example(opt) {
 		i.push(`});`);
 	}
 
-	return new $.example({
+	return new example({
 		id: opt.id,
 		anchor: opt.anchor,
 		title: opt.title,
@@ -475,9 +487,9 @@ function gen_content(m1, m2, callback) {
 									let processtimestart = window.performance.now();
 
 									sample.resetindex();
-									$.core.replaceChild(
+									core.replaceChild(
 										document.getElementById("root"),
-										new $.div({
+										new div({
 											marginbottom: 3,
 											elem: m.source.map((i) => {
 												return gen_example(i);
@@ -495,7 +507,7 @@ function gen_content(m1, m2, callback) {
 									).toFixed(2)} ms`;
 
 									//count page weight
-									document.getElementById("pageweight").innerText = `${$.core.countElement(
+									document.getElementById("pageweight").innerText = `${core.countElement(
 										document.getElementById("root")
 									)} items`;
 
@@ -529,9 +541,9 @@ function gen_content(m1, m2, callback) {
 				// setTimeout(
 				// 	(m, callback) => {
 				// 		sample.resetindex();
-				// 		$.core.replaceChild(
+				// 		core.replaceChild(
 				// 			document.getElementById("root"),
-				// 			new $.div({
+				// 			new div({
 				// 				marginbottom: 3,
 				// 				elem: m.source.map((i) => {
 				// 					return gen_example(i);
@@ -554,9 +566,9 @@ function gen_content(m1, m2, callback) {
 				//LOADER TYPE 3
 				//=============
 				// sample.resetindex();
-				// $.core.replaceChild(
+				// core.replaceChild(
 				// 	document.getElementById("root"),
-				// 	new $.div({
+				// 	new div({
 				// 		marginbottom: 3,
 				// 		elem: m.source.map((i) => {
 				// 			return gen_example(i);
@@ -570,11 +582,11 @@ function gen_content(m1, m2, callback) {
 				// 	callback();
 				// }
 			} else {
-				$.core.replaceChild(
+				core.replaceChild(
 					document.getElementById("root"),
-					new $.div({
+					new div({
 						marginbottom: 3,
-						elem: new $.msg({
+						elem: new msg({
 							weight: "lg",
 							icon: "!",
 							elem: `Documentation for <b>${m1}</b> - <b>${m2}</b> not yet available`,
@@ -623,9 +635,9 @@ function gen_toc() {
 	let li = [];
 	let anchor = [].slice.call(document.getElementById("root").getElementsByClassName("anchorjs-link"));
 	if (anchor && anchor.length > 0) {
-		$.core.replaceChild(
+		core.replaceChild(
 			document.getElementById("nextbar"),
-			new $.toc({
+			new toc({
 				label: "On this page",
 				item: anchor.map((i) => {
 					//remove debug example
@@ -638,7 +650,7 @@ function gen_toc() {
 							onclick: (event) => {
 								let sender = event.currentTarget;
 								let id = sender.getAttribute("cl-target-id");
-								$.core.focusElement(document.getElementById(id));
+								core.focusElement(document.getElementById(id));
 							},
 							level: parent.nodeName === "H3" ? 1 : 0,
 						};
@@ -647,7 +659,7 @@ function gen_toc() {
 			})
 		);
 	} else {
-		$.core.replaceChild(document.getElementById("nextbar"), null);
+		core.replaceChild(document.getElementById("nextbar"), null);
 	}
 }
 
@@ -675,7 +687,7 @@ function get_url() {
 
 function gen_menu(m1, m2, theme) {
 	return db_menu.map((i) => {
-		return new $.menu({
+		return new menu({
 			label: i.title,
 			active: i.title === m1,
 			item: i.item.map((j) => {
@@ -711,7 +723,7 @@ function gen_menu(m1, m2, theme) {
 									if (i.type === "menu") {
 										sender.innerText = "Loading...";
 										gen_content(m1, m2, () => {
-											$.core.init(document.getElementById("root"));
+											core.init(document.getElementById("root"));
 											PR.prettyPrint();
 											sender.innerText = m2;
 										});
@@ -726,7 +738,7 @@ function gen_menu(m1, m2, theme) {
 	});
 }
 
-$.core.documentReady(() => {
+core.documentReady(() => {
 	//set def_m1 and m2
 	let m = get_url();
 	if (m && m.m1 !== "undefined" && m.m2 !== "undefined") {
@@ -734,82 +746,82 @@ $.core.documentReady(() => {
 		def_m2 = m.m2;
 	}
 
-	$.core.replaceWith(
+	core.replaceWith(
 		document.getElementById("main"),
-		new $.layout.l1({
+		new layout.l1({
 			topid: "navbar",
 			leftid: "sidebar",
 			rightid: "nextbar",
 			mainid: "root",
 
-			topelem: new $.navbar.container({
+			topelem: new navbar.container({
 				dark: true,
 				color: "primary",
 				expand: "lg",
 				body: { fluid: "lg" },
 				elem: [
-					new $.navbar.toggle({
+					new navbar.toggle({
 						target: `#sidebar`,
 						toggle: "collapse",
 					}),
-					new $.navbar.brand({ label: "cl", icon: "fire" }),
+					new navbar.brand({ label: "cl", icon: "fire" }),
 				],
 			}),
-			leftelem: new $.tag({
+			leftelem: new tag({
 				class: ["sticky-md-top", "collapse", "navbar-collapse", "cl-vh-menu"],
 				overflow: "auto",
 				display: "md-block",
 				margintop: 3,
 				elem: gen_menu(def_m1, def_m2, def_theme),
 			}),
-			rightelem: new $.tag({
+			rightelem: new tag({
 				class: ["sticky-lg-top", "cl-vh-menu"],
 				overflow: "auto",
 				margintop: 3,
 				elem: "",
 			}),
-			footerelem: new $.div({
+			footerelem: new div({
 				display: "flex",
 				flex: "wrap",
 				justifycontent: "center",
 				marginbottom: 5,
 				gap: 2,
 				elem: [
-					new $.a({
+					new a({
 						class: "text-decoration-none",
-						elem: new $.pill({
+						elem: new pill({
 							icon: "swatchbook",
 							title: "Theme",
 							color: "primary",
-							elem: [new $.small({ id: "pagetheme", elem: "default" })],
+							elem: [new small({ id: "pagetheme", elem: "default" })],
 						}),
 						href: "javascript:void(0)",
 						onclick: randomtheme,
 					}),
-					new $.pill({
+					new pill({
 						icon: "eye",
 						title: "Viewport",
 						color: "primary",
 						elem: [
-							new $.small("d-inline d-sm-none", "xs"),
-							new $.small("d-none d-sm-inline d-md-none", "sm"),
-							new $.small("d-none d-md-inline d-lg-none", "md"),
-							new $.small("d-none d-lg-inline d-xl-none", "lg"),
-							new $.small("d-none d-xl-inline d-xxl-none", "xl"),
-							new $.small("d-none d-xxl-inline", "xxl"),
+							new small("d-inline d-sm-none", "xs"),
+							new small("d-none d-sm-inline d-md-none", "sm"),
+							new small("d-none d-md-inline d-lg-none", "md"),
+							new small("d-none d-lg-inline d-xl-none", "lg"),
+							new small("d-none d-xl-inline d-xxl-none", "xl"),
+							new small("d-none d-xxl-inline", "xxl"),
 						],
 					}),
-					new $.pill({
+					new pill({
 						icon: "stopwatch",
 						title: "Build speed",
 						color: "primary",
-						elem: [new $.small({ id: "pagespeed", elem: "0 ms" })],
+						elem: [new small({ id: "pagespeed", elem: "0 ms" })],
 					}),
-					new $.pill({
+					new pill({
 						icon: "balance-scale",
 						title: "Page weight",
 						color: "primary",
-						elem: [new $.small({ id: "pageweight", elem: "0 item" })],
+						elem: [new small({ id: "pageweight", elem: "0 item" })],
 					}),
 				],
 			}),
@@ -819,11 +831,11 @@ $.core.documentReady(() => {
 	);
 
 	gen_content(def_m1, def_m2, () => {
-		$.core.init(document.getElementById("root"));
+		core.init(document.getElementById("root"));
 		PR.prettyPrint();
 	});
 
 	set_theme(def_theme);
 
-	$.core.init(document.body);
+	core.init(document.body);
 });

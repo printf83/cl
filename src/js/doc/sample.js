@@ -1,5 +1,12 @@
 "use strict";
-import $ from "../component.js";
+import * as container from "../base/container.js";
+import * as db from "../base/api.js";
+import file from "../base/file.js";
+import input from "../base/input.js";
+import * as list from "../base/list.js";
+import small from "../base/small.js";
+import toast from "../base/toast.js";
+
 let dbstate = null;
 let textindex = 0;
 let textdb = [
@@ -71,531 +78,7 @@ fill="#999" stroke="none">
 		}
 		return textdb[textindex++];
 	},
-	optionitem: () => {
-		return [
-			{ value: "", label: "Open this select menu", selected: true },
-			{ value: "1", label: "One" },
-			{ value: "2", label: "Two" },
-			{ value: "3", label: "Three" },
-		];
-	},
-	dropdownitem: () => {
-		return [
-			{ href: "#", label: "Action" },
-			{ href: "#", label: "Another action" },
-			{ href: "#", label: "Something else here" },
-			{ value: "-" },
-			{ href: "#", label: "Separated link" },
-		];
-	},
-	form: () => {
-		return new $.container.form([
-			new $.input({
-				label: "Name",
-				required: true,
-				invalid: "Please provide name",
-				name: "name",
-				type: "text",
-			}),
-			new $.input({
-				label: "Age",
-				required: true,
-				invalid: "Please provide age",
-				name: "age",
-				type: "number",
-				min: 13,
-				max: 100,
-				after: "Years old",
-			}),
-			new $.listgroup({
-				label: "Sex",
-				type: "div",
-				item: [
-					{
-						type: "radio",
-						name: "sex",
-						value: "s",
-						label: "Secret",
-						checked: true,
-					},
-					{
-						type: "radio",
-						name: "sex",
-						value: "m",
-						label: "Male",
-					},
-					{
-						type: "radio",
-						name: "sex",
-						value: "f",
-						label: "Female",
-					},
-				],
-			}),
-			new $.listgroup({
-				label: "Interest",
-				type: "div",
-				item: [
-					{
-						type: "checkbox",
-						name: "interest",
-						value: "sports",
-						label: "Sports",
-					},
-					{
-						type: "checkbox",
-						name: "interest",
-						value: "business",
-						label: "Business",
-					},
-					{
-						type: "checkbox",
-						name: "interest",
-						value: "social",
-						label: "Social",
-					},
-					{
-						type: "checkbox",
-						name: "interest",
-						value: "internet",
-						label: "Internet",
-					},
-				],
-			}),
-			new $.input({
-				label: "Country",
-				required: true,
-				invalid: "Please choose country",
-				name: "country",
-				type: "select",
-				option: [
-					{ value: "", label: "" },
-					{ value: "my", label: "Malaysia" },
-					{ value: "in", label: "Indonesia" },
-					{ value: "sg", label: "Singapore" },
-				],
-			}),
-		]);
-	},
-	accordionitem: () => {
-		return [
-			{
-				label: "Accordion Item 1",
-				elem: ["<b>This is the first item's accordion body.</b> ", fn.text()],
-			},
-			{
-				label: "Accordion Item 2",
-				elem: ["<b>This is the second item's accordion body.</b> ", fn.text()],
-			},
-			{
-				label: "Accordion Item 3",
-				elem: ["<b>This is the third item's accordion body.</b> ", fn.text()],
-			},
-		];
-	},
-	cardwithimg: () => {
-		return [
-			new $.card.container({
-				elem: [
-					new $.card.img({
-						placement: "top",
-						src: fn.img(415, 207),
-					}),
-					new $.card.body({
-						elem: [
-							new $.card.title("Card Title"),
-							new $.card.text(
-								"This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer."
-							),
-						],
-					}),
-				],
-			}),
-			new $.card.container({
-				elem: [
-					new $.card.img({
-						placement: "top",
-						src: fn.img(415, 207),
-					}),
-					new $.card.body({
-						elem: [
-							new $.card.title("Card Title"),
-							new $.card.text(
-								"This card has supporting text below as a natural lead-in to additional content."
-							),
-						],
-					}),
-				],
-			}),
-			new $.card.container({
-				elem: [
-					new $.card.img({
-						placement: "top",
-						src: fn.img(415, 207),
-					}),
-					new $.card.body({
-						elem: [
-							new $.card.title("Card Title"),
-							new $.card.text(
-								"This card has supporting text below as a natural lead-in to additional content."
-							),
-						],
-					}),
-				],
-			}),
-			new $.card.container({
-				elem: [
-					new $.card.img({
-						placement: "top",
-						src: fn.img(415, 207),
-					}),
-					new $.card.body({
-						elem: [
-							new $.card.title("Card Title"),
-							new $.card.text(
-								"This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action."
-							),
-						],
-					}),
-				],
-			}),
-		];
-	},
-	cardwithfooter: () => {
-		return [
-			new $.card.container({
-				elem: [
-					new $.card.img({
-						placement: "top",
-						src: fn.img(415, 207),
-					}),
-					new $.card.body({
-						elem: [
-							new $.card.title("Card Title"),
-							new $.card.text(
-								"This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action."
-							),
-						],
-					}),
-					new $.card.footer("Last updated 3 mins ago"),
-				],
-			}),
-			new $.card.container({
-				elem: [
-					new $.card.img({
-						placement: "top",
-						src: fn.img(415, 207),
-					}),
-					new $.card.body({
-						elem: [
-							new $.card.title("Card Title"),
-							new $.card.text(
-								"This card has supporting text below as a natural lead-in to additional content."
-							),
-						],
-					}),
-					new $.card.footer("Last updated 3 mins ago"),
-				],
-			}),
-			new $.card.container({
-				elem: [
-					new $.card.img({
-						placement: "top",
-						src: fn.img(415, 207),
-					}),
-					new $.card.body({
-						elem: [
-							new $.card.title("Card Title"),
-							new $.card.text(
-								"This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer."
-							),
-						],
-					}),
-					new $.card.footer("Last updated 3 mins ago"),
-				],
-			}),
-		];
-	},
-	cardh100: () => {
-		return [
-			new $.card.container({
-				class: "h-100",
-				elem: [
-					new $.card.img({
-						placement: "top",
-						src: fn.img(415, 207),
-					}),
-					new $.card.body({
-						elem: [
-							new $.card.title("Card Title"),
-							new $.card.text(
-								"This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action."
-							),
-						],
-					}),
-				],
-			}),
-			new $.card.container({
-				class: "h-100",
-				elem: [
-					new $.card.img({
-						placement: "top",
-						src: fn.img(415, 207),
-					}),
-					new $.card.body({
-						elem: [
-							new $.card.title("Card Title"),
-							new $.card.text(
-								"This card has supporting text below as a natural lead-in to additional content."
-							),
-						],
-					}),
-				],
-			}),
-			new $.card.container({
-				class: "h-100",
-				elem: [
-					new $.card.img({
-						placement: "top",
-						src: fn.img(415, 207),
-					}),
-					new $.card.body({
-						elem: [
-							new $.card.title("Card Title"),
-							new $.card.text(
-								"This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer."
-							),
-						],
-					}),
-				],
-			}),
-		];
-	},
-	cardwithfooterh100: () => {
-		return [
-			new $.card.container({
-				class: "h-100",
-				elem: [
-					new $.card.img({
-						placement: "top",
-						src: fn.img(415, 207),
-					}),
-					new $.card.body({
-						elem: [
-							new $.card.title("Card Title"),
-							new $.card.text(
-								"This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action."
-							),
-						],
-					}),
-					new $.card.footer("Last updated 3 mins ago"),
-				],
-			}),
-			new $.card.container({
-				class: "h-100",
-				elem: [
-					new $.card.img({
-						placement: "top",
-						src: fn.img(415, 207),
-					}),
-					new $.card.body({
-						elem: [
-							new $.card.title("Card Title"),
-							new $.card.text(
-								"This card has supporting text below as a natural lead-in to additional content."
-							),
-						],
-					}),
-					new $.card.footer("Last updated 3 mins ago"),
-				],
-			}),
-			new $.card.container({
-				class: "h-100",
-				elem: [
-					new $.card.img({
-						placement: "top",
-						src: fn.img(415, 207),
-					}),
-					new $.card.body({
-						elem: [
-							new $.card.title("Card Title"),
-							new $.card.text(
-								"This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer."
-							),
-						],
-					}),
-					new $.card.footer("Last updated 3 mins ago"),
-				],
-			}),
-		];
-	},
-	listgroupitem: () => {
-		return [
-			{ elem: "An item" },
-			{ elem: "A second item" },
-			{ elem: "A third item" },
-			{ elem: "A fourth item" },
-			{ elem: "And a fifth one" },
-		];
-	},
-	listgroupitemcustomcontent: () => {
-		return [
-			new $.div({
-				class: "ms-2 me-auto",
-				elem: [new $.div("fw-bold", "Subheading"), "Cras justo odio"],
-			}),
-			new $.badge({
-				pill: true,
-				color: "primary",
-				label: "14",
-			}),
-		];
-	},
-	listgroupitem3: () => {
-		return [{ elem: "An item" }, { elem: "A second item" }, { elem: "A third item" }];
-	},
-	dlgFn: (recipient) => {
-		new $.modal({
-			title: "Modal title",
-			elem: new $.container.form([
-				new $.input({
-					type: "text",
-					name: "recipient",
-					label: "Recipient:",
-					value: recipient,
-				}),
-				new $.input({
-					type: "textarea",
-					name: "message",
-					label: "Message:",
-					value: "",
-				}),
-			]),
-			button: [
-				{
-					label: "Send message",
-					onclick: (event, data) => {
-						new $.toast("i", `Result from dialog is <b>${JSON.stringify(data)}</b>`).show();
-					},
-				},
-				"Close",
-			],
-		}).show();
-	},
-	dlgFullscreenFn: (fullscreen) => {
-		new $.modal({
-			fullscreen: fullscreen,
-			title: "Modal title",
-			elem: `Dialog with <code>fullscreen : <b>${fullscreen}</b></code> option`,
-			button: ["Okay"],
-		}).show();
-	},
-	dlgSizeFn: (size) => {
-		new $.modal({
-			size: size,
-			title: "Modal title",
-			elem: `Dialog with <code>size : <b>${size}</b></code> option`,
-			button: ["Okay"],
-		}).show();
-	},
-	tab: () => {
-		return [
-			{ label: "First", elem: "This is first tab. " + fn.text() },
-			{ label: "Second", elem: "This is second tab. " + fn.text() },
-			{ label: "Third", elem: "This is third tab. " + fn.text() },
-			{ label: "Disabled", disabled: true, elem: "This is last tab. " + fn.text() },
-		];
-	},
-	dropdowntab: () => {
-		return [
-			{ label: "First", elem: "This is first tab. " + fn.text() },
-			{
-				label: "Second",
-				elem: "This is second tab. " + fn.text(),
-				option: [
-					{ href: "#", label: "Action" },
-					{ href: "#", label: "Another action" },
-					{ value: "-", label: "" },
-					{ href: "#", label: "Something else here" },
-				],
-			},
-			{ label: "Third", elem: "This is third tab. " + fn.text() },
-			{ label: "Disabled", disabled: true, elem: "This is last tab. " + fn.text() },
-		];
-	},
-	navbaritem: (id, title) => {
-		return [
-			new $.navbar.toggle({
-				target: `#${id}`,
-				toggle: "collapse",
-			}),
 
-			new $.navbar.brand({
-				label: title ? title : "Navbar",
-			}),
-
-			new $.navbar.collapsecontainer({
-				id: id,
-				elem: [
-					new $.navbar.itemcontainer({
-						parenttype: "collapse",
-						elem: [
-							new $.navbar.item({ label: "Home", active: true }),
-							new $.navbar.item({ label: "Link" }),
-							new $.navbar.item({
-								label: "Dropdown",
-								option: fn.dropdownitem(),
-							}),
-							new $.navbar.item({ label: "Disabled", disabled: true }),
-						],
-					}),
-					new $.navbar.formcontainer([
-						new $.input({
-							type: "search",
-							placeholder: "Search",
-							hiddenlabel: "Search",
-							class: "me-2",
-						}),
-						new $.button({ label: "Search", color: "success", outline: true }),
-					]),
-				],
-			}),
-		];
-	},
-	offcanvasbody: () => {
-		return new $.div({
-			elem: [
-				new $.p({
-					elem: "Some text as placeholder. In real life you can have the elements you have chosen. Like, text, images, lists, etc.",
-				}),
-				new $.dropdown({
-					label: "Drowdown button",
-					color: "secondary",
-					option: fn.dropdownitem(),
-				}),
-			],
-		});
-	},
-	table: (header, footer) => {
-		let rtn = [
-			["1/6/2020", "East", "Jones", "Pencil", "95", "1.99", "189.05"],
-			["1/23/2020", "Central", "Kivell", "Binder", "50", "19.99", "999.50"],
-			["2/9/2020", "Central", "Jardine", "Pencil", "36", "4.99", "179.64"],
-			["2/26/2020", "Central", "Gill", "Pen", "27", "19.99", "539.73"],
-			["3/15/2020", "West", "Sorvino", "Pencil", "56", "2.99", "167.44"],
-			["4/1/2020", "East", "Jones", "Binder", "60", "4.99", "299.40"],
-			["4/18/2020", "Central", "Andrews", "Pencil", "75", "1.99", "149.25"],
-		];
-
-		if (header) {
-			rtn.unshift(["OrderDate", "Region", "Rep", "Item", "Units", "UnitCost", "Total"]);
-		}
-
-		if (footer) {
-			rtn.push(["", "", "", "", "", "Total", "2,524.01"]);
-		}
-		return rtn;
-	},
 	tagprop: (exclude) => {
 		let tprop = [
 			"id",
@@ -685,10 +168,10 @@ fill="#999" stroke="none">
 		return f.join(", ") + " and " + l;
 	},
 	formcontainer: (elem) => {
-		return new $.container.form(elem);
+		return new container.form(elem);
 	},
 	stackcontainer: (elem) => {
-		return new $.container.stack(elem);
+		return new container.stack(elem);
 	},
 	query_setting: (dbstate) => {
 		return {
@@ -737,33 +220,33 @@ fill="#999" stroke="none">
 	},
 	list_editor: (data) => {
 		return [
-			new $.input({
+			new input({
 				type: "text",
 				label: "Name",
 				name: "name",
 				required: true,
 				value: data ? data.name : null,
 			}),
-			new $.input({
+			new input({
 				type: "date",
 				label: "Date of birth",
 				name: "dob",
 				value: data ? data.dob : null,
 			}),
-			new $.input({
+			new input({
 				type: "text",
 				label: "Phone",
 				name: "phone",
 				value: data ? data.phone : null,
 			}),
-			new $.file({ label: "Picture", name: "picture", value: data ? data.picture : null }),
-			new $.input({
+			new file({ label: "Picture", name: "picture", value: data ? data.picture : null }),
+			new input({
 				type: "email",
 				label: "Email",
 				name: "email",
 				value: data ? data.email : null,
 			}),
-			new $.input({
+			new input({
 				type: "select",
 				label: "State",
 				name: "state",
@@ -794,11 +277,11 @@ fill="#999" stroke="none">
 		return result;
 	},
 	list_item: (data) => {
-		return new $.list.item({
+		return new list.item({
 			key: data._id,
 			name: data.name,
 			picture: data.picture,
-			detail: new $.small([data.phone, data.dob, data.email].filter(Boolean).join(" | ")),
+			detail: new small([data.phone, data.dob, data.email].filter(Boolean).join(" | ")),
 			allow_delete: true,
 			allow_copy: true,
 			allow_action: true,
@@ -806,17 +289,17 @@ fill="#999" stroke="none">
 		});
 	},
 	list_group: (data) => {
-		return new $.list.group({ key: data.key, name: data.name });
+		return new list.group({ key: data.key, name: data.name });
 	},
 	list_more: (sender, id) => {
-		new $.toast("i", `Call from id:${id}`).show();
+		new toast("i", `Call from id:${id}`).show();
 	},
 	list_state: (callback, sender) => {
 		if (!dbstate) {
 			console.log("Init state database");
 
 			//get record
-			$.db.api.option(
+			db.api.option(
 				{
 					name: "state",
 					fieldkey: "_id",

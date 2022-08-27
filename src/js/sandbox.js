@@ -1,9 +1,16 @@
 "use strict";
 
-// import "../css/sample.css";
 import sb_customer from "./sandbox/customer.js";
 import sb_state from "./sandbox/state.js";
-import $ from "./component.js";
+import * as core from "./base/core.js";
+import div from "./base/div.js";
+import * as layout from "./base/layout.js";
+import menu from "./base/menu.js";
+import * as navbar from "./base/navbar.js";
+import tag from "./base/tag.js";
+import toast from "./base/toast.js";
+import toc from "./base/toc.js";
+import * as user from "./base/user.js";
 
 const db_menu = [
 	{
@@ -27,14 +34,14 @@ const db_menu = [
 				title: "Update Profile",
 				source: (event) => {
 					let sender = event.currentTarget;
-					$.user.info(sender, (result) => {
+					user.info(sender, (result) => {
 						if (result && result.email) {
-							new $.user.updateinfo({
+							new user.updateinfo({
 								data: result,
 								sender: sender,
 								callback: (result) => {
 									if (result) {
-										new $.toast("/", "Your information updated").show();
+										new toast("/", "Your information updated").show();
 									}
 								},
 							}).show();
@@ -45,10 +52,10 @@ const db_menu = [
 			{
 				title: "Change Password",
 				source: (event) => {
-					new $.user.changepass({
+					new user.changepass({
 						callback: (result) => {
 							if (result) {
-								new $.toast("/", "Password changed").show();
+								new toast("/", "Password changed").show();
 							}
 						},
 					}).show();
@@ -57,11 +64,11 @@ const db_menu = [
 			{
 				title: "Sign Out",
 				source: (event) => {
-					$.user.signout(event.currentTarget, (result) => {
+					user.signout(event.currentTarget, (result) => {
 						if (result) {
-							new $.toast("/", "User successfuly sign out").show();
+							new toast("/", "User successfuly sign out").show();
 						} else {
-							new $.toast("!!", "User failed sign out").show();
+							new toast("!!", "User failed sign out").show();
 						}
 					});
 				},
@@ -126,15 +133,15 @@ function gen_content(m1, m2, callback) {
 	if (m) {
 		if (m.type === "menu") {
 			if (m.source) {
-				$.core.replaceChild(
+				core.replaceChild(
 					document.getElementById("root"),
-					new $.div({
+					new div({
 						elem: "",
 					})
 				);
-				$.core.replaceChild(
+				core.replaceChild(
 					document.getElementById("nextbar"),
-					new $.div({
+					new div({
 						elem: "",
 					})
 				);
@@ -145,24 +152,24 @@ function gen_content(m1, m2, callback) {
 							return new Promise((res, rej) => {
 								try {
 									m.source.main((elem) => {
-										$.core.replaceChild(
+										core.replaceChild(
 											document.getElementById("root"),
-											new $.div({
+											new div({
 												elem: elem,
 											})
 										);
 
 										if (m.source.menu) {
-											$.core.replaceChild(
+											core.replaceChild(
 												document.getElementById("nextbar"),
-												new $.toc({
+												new toc({
 													label: m.source.name,
 													item: m.source.menu,
 													type: "menu",
 												})
 											);
 										} else {
-											$.core.removeChildElement(document.getElementById("nextbar"));
+											core.removeChildElement(document.getElementById("nextbar"));
 										}
 
 										if (m.source.load) {
@@ -242,7 +249,7 @@ function get_url() {
 
 function gen_menu(m1, m2, theme) {
 	return db_menu.map((i) => {
-		return new $.menu({
+		return new menu({
 			label: i.title,
 			active: i.title === m1,
 			item: i.item.map((j) => {
@@ -278,7 +285,7 @@ function gen_menu(m1, m2, theme) {
 									if (i.type === "menu") {
 										sender.innerText = "Loading...";
 										gen_content(m1, m2, () => {
-											$.core.init(document.getElementById("root"));
+											core.init(document.getElementById("root"));
 											sender.innerText = m2;
 										});
 									} else {
@@ -292,7 +299,7 @@ function gen_menu(m1, m2, theme) {
 	});
 }
 
-$.core.documentReady(() => {
+core.documentReady(() => {
 	//set def_m1 and m2
 	let m = get_url();
 	if (m && m.m1 !== "undefined" && m.m2 !== "undefined") {
@@ -300,41 +307,41 @@ $.core.documentReady(() => {
 		def_m2 = m.m2;
 	}
 
-	$.core.replaceWith(
+	core.replaceWith(
 		document.getElementById("main"),
-		new $.layout.l1({
+		new layout.l1({
 			topid: "navbar",
 			leftid: "sidebar",
 			rightid: "nextbar",
 			mainid: "root",
 
-			topelem: new $.navbar.container({
+			topelem: new navbar.container({
 				dark: true,
 				color: "primary",
 				expand: "lg",
 				body: { fluid: "lg" },
 				elem: [
-					new $.navbar.toggle({
+					new navbar.toggle({
 						target: `#sidebar`,
 						toggle: "collapse",
 					}),
-					new $.navbar.brand({ label: "cl", icon: "fire" }),
+					new navbar.brand({ label: "cl", icon: "fire" }),
 				],
 			}),
-			leftelem: new $.tag({
+			leftelem: new tag({
 				class: ["sticky-md-top", "collapse", "navbar-collapse", "cl-vh-menu"],
 				overflow: "auto",
 				display: "md-block",
 				margintop: 3,
 				elem: gen_menu(def_m1, def_m2, def_theme),
 			}),
-			rightelem: new $.tag({
+			rightelem: new tag({
 				class: ["sticky-lg-top", "cl-vh-menu"],
 				overflow: "auto",
 				margintop: 3,
 				elem: "",
 			}),
-			footerelem: new $.div({
+			footerelem: new div({
 				display: "flex",
 				flex: "wrap",
 				justifycontent: "center",
@@ -348,10 +355,10 @@ $.core.documentReady(() => {
 	);
 
 	gen_content(def_m1, def_m2, () => {
-		$.core.init(document.getElementById("root"));
+		core.init(document.getElementById("root"));
 	});
 
 	set_theme(def_theme);
 
-	$.core.init(document.body);
+	core.init(document.body);
 });

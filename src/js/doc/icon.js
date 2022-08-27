@@ -441,7 +441,7 @@ export default [
 
 	{
 		title: "Nav tab",
-		import: ["tab", "sample"],
+		import: ["tab"],
 		code: () => {
 			return new tab({
 				type: "tab",
