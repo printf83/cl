@@ -485,7 +485,7 @@ function gen_content(m1, m2, callback) {
 
 										let processtimestart = window.performance.now();
 
-										sample.resetindex();
+										// sample.resetindex();
 										core.replaceChild(
 											document.getElementById("root"),
 											new div({
