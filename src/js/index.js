@@ -484,34 +484,38 @@ function gen_content(m1, m2, callback) {
 						let p = (m) => {
 							return new Promise((res, rej) => {
 								try {
-									let processtimestart = window.performance.now();
+									import(m.source).then((o) => {
+										let p = o.default;
 
-									sample.resetindex();
-									core.replaceChild(
-										document.getElementById("root"),
-										new div({
-											marginbottom: 3,
-											elem: m.source.map((i) => {
-												return gen_example(i);
-											}),
-										})
-									);
+										let processtimestart = window.performance.now();
 
-									let processtimeend = window.performance.now();
+										sample.resetindex();
+										core.replaceChild(
+											document.getElementById("root"),
+											new div({
+												marginbottom: 3,
+												elem: p.map((i) => {
+													return gen_example(i);
+												}),
+											})
+										);
 
-									gen_toc();
-									gen_url(m1, m2);
-									//count pagespeed
-									document.getElementById("pagespeed").innerText = `${(
-										processtimeend - processtimestart
-									).toFixed(2)} ms`;
+										let processtimeend = window.performance.now();
 
-									//count page weight
-									document.getElementById("pageweight").innerText = `${core.countElement(
-										document.getElementById("root")
-									)} items`;
+										gen_toc();
+										gen_url(m1, m2);
+										//count pagespeed
+										document.getElementById("pagespeed").innerText = `${(
+											processtimeend - processtimestart
+										).toFixed(2)} ms`;
 
-									res();
+										//count page weight
+										document.getElementById("pageweight").innerText = `${core.countElement(
+											document.getElementById("root")
+										)} items`;
+
+										res();
+									});
 								} catch (ex) {
 									rej(ex);
 								}
