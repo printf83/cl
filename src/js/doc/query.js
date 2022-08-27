@@ -46,7 +46,7 @@ export default [
 			"sample.query_data": sample.query_data_view,
 		},
 		viewclass: "cl-modal-preview",
-		import: ["query"],
+		import: ["query", "sample"],
 		code: () => {
 			let dbstate = [
 				{ value: "value1", label: "Label 1" },
@@ -84,7 +84,7 @@ export default [
 			"sample.list_state": sample.list_state,
 		},
 		container: sample.formcontainer,
-		import: ["input", "button", "db", "query"],
+		import: ["input", "button", "db", "query", "sample"],
 		code: () => {
 			let resultOutputId = core.UUID();
 
@@ -163,7 +163,7 @@ export default [
 			"sample.query_data": sample.query_data_view,
 		},
 		viewclass: "cl-modal-preview",
-		import: ["query"],
+		import: ["query", "sample"],
 		code: () => {
 			let dbstate = [
 				{ value: "value1", label: "Label 1" },
@@ -199,7 +199,7 @@ export default [
 			"sample.list_state": sample.list_state,
 		},
 		container: sample.formcontainer,
-		import: ["input", "button", "db", "query"],
+		import: ["input", "button", "db", "query", "sample"],
 		code: () => {
 			let resultOutputId = core.UUID();
 
@@ -276,7 +276,7 @@ export default [
 			"sample.query_data": sample.query_data_view,
 		},
 		viewclass: "cl-modal-preview",
-		import: ["query"],
+		import: ["query", "sample"],
 		code: () => {
 			return [
 				new query.sort(
@@ -303,7 +303,7 @@ export default [
 			"sample.query_data": sample.query_data_view,
 		},
 		container: sample.formcontainer,
-		import: ["input", "button", "db", "query"],
+		import: ["input", "button", "db", "query", "sample"],
 		code: () => {
 			let resultOutputId = core.UUID();
 
@@ -377,7 +377,7 @@ export default [
 			"sample.query_data": sample.query_data_view,
 		},
 		viewclass: "cl-modal-preview",
-		import: ["query"],
+		import: ["query", "sample"],
 		code: () => {
 			return [
 				new query.field(
@@ -403,7 +403,7 @@ export default [
 			"sample.query_data": sample.query_data_view,
 		},
 		container: sample.formcontainer,
-		import: ["input", "button", "db", "query"],
+		import: ["input", "button", "db", "query", "sample"],
 		code: () => {
 			let resultOutputId = core.UUID();
 
@@ -479,7 +479,7 @@ export default [
 			"sample.query_data": sample.query_data_view,
 		},
 		viewclass: "cl-modal-preview",
-		import: ["query"],
+		import: ["query", "sample"],
 		code: () => {
 			return [
 				new query.limit(
@@ -509,7 +509,7 @@ export default [
 			"sample.query_data": sample.query_data_view,
 		},
 		container: sample.formcontainer,
-		import: ["input", "button", "db", "query"],
+		import: ["input", "button", "db", "query", "sample"],
 		code: () => {
 			let resultOutputId = core.UUID();
 
@@ -589,7 +589,7 @@ export default [
 			"sample.query_data": sample.query_data_view,
 		},
 		viewclass: "cl-modal-preview",
-		import: ["query"],
+		import: ["query", "sample"],
 		code: () => {
 			return [
 				new query.page(
@@ -618,7 +618,7 @@ export default [
 			"sample.query_data": sample.query_data_view,
 		},
 		container: sample.formcontainer,
-		import: ["input", "button", "db", "query"],
+		import: ["input", "button", "db", "query", "sample"],
 		code: () => {
 			let resultOutputId = core.UUID();
 

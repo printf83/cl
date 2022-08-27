@@ -525,7 +525,7 @@ export default [
 	{
 		title: "Media object",
 		msg: "Looking to replicate the media object component from Bootstrap 4? Recreate it in no time with a few flex utilities that allow even more flexibility and customization than before.",
-		import: ["tag"],
+		import: ["tag", "sample"],
 		code: () => {
 			return new tag({
 				tag: "div",
@@ -553,7 +553,7 @@ export default [
 
 	{
 		msg: "And say you want to vertically center the content next to the image:",
-		import: ["tag"],
+		import: ["tag", "sample"],
 		code: () => {
 			return new tag({
 				tag: "div",

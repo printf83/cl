@@ -584,7 +584,7 @@ export default [
 
 	{
 		title: "Disable scrolling long content",
-		import: ["toast", "p", "button", "modal"],
+		import: ["toast", "p", "button", "modal", "sample"],
 		code: () => {
 			return new button({
 				label: "Show live modal dialog",

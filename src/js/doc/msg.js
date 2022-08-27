@@ -27,7 +27,7 @@ export default [
 
 	{
 		title: "With icon",
-		import: ["msg"],
+		import: ["msg", "sample"],
 		code: () => {
 			return new msg({
 				icon: "fire",
@@ -40,7 +40,7 @@ export default [
 		title: "Weight",
 		container: sample.formcontainer,
 		viewclass: "cl-highlight-col",
-		import: ["msg"],
+		import: ["msg", "sample"],
 		code: () => {
 			return [
 				new msg({
@@ -66,7 +66,7 @@ export default [
 		title: "Weight : sm",
 		container: sample.formcontainer,
 		viewclass: "cl-modal-preview",
-		import: ["toast", "alert", "msg"],
+		import: ["toast", "alert", "msg", "sample"],
 		code: () => {
 			return [
 				new toast({
@@ -88,7 +88,7 @@ export default [
 	{
 		title: "Weight : md",
 		viewclass: "cl-modal-preview",
-		import: ["modal", "msg"],
+		import: ["modal", "msg", "sample"],
 		code: () => {
 			return new modal({
 				title: "Title",
@@ -106,7 +106,7 @@ export default [
 	{
 		title: "Weight : lg",
 		viewclass: "cl-modal-preview",
-		import: ["modal", "msg"],
+		import: ["modal", "msg", "sample"],
 		code: () => {
 			return new modal({
 				color: "primary",

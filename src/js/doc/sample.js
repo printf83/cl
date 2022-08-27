@@ -30,15 +30,8 @@ function isListed(val, listed) {
 	}
 }
 
-const fn = {
-	resetindex: () => {
-		textindex = 0;
-	},
-	img: (width = 300, height = 283) => {
-		// style="background-color:rgba(0,0,0,.125);"
-
-		if (!svgdb.hasOwnProperty(`${width}_${height}`)) {
-			let svgdata = `<svg version="1.0" xmlns="http://www.w3.org/2000/svg"
+const svgdata = (width, height) => `
+<svg version="1.0" xmlns="http://www.w3.org/2000/svg"
  width="${width}pt" height="${height}pt" viewBox="0 0 300 283"
  style="background-color:rgba(0,0,0,.125);"
  preserveAspectRatio="xMidYMid meet">
@@ -67,7 +60,16 @@ fill="#999" stroke="none">
 </g>
 </svg>`;
 
-			svgdb[`${width}_${height}`] = "data:image/svg+xml;charset=UTF-8," + encodeURIComponent(svgdata);
+const fn = {
+	resetindex: () => {
+		textindex = 0;
+	},
+	img: (width = 300, height = 283) => {
+		// style="background-color:rgba(0,0,0,.125);"
+
+		if (!svgdb.hasOwnProperty(`${width}_${height}`)) {
+			svgdb[`${width}_${height}`] =
+				"data:image/svg+xml;charset=UTF-8," + encodeURIComponent(svgdata(width, height));
 		}
 
 		return svgdb[`${width}_${height}`];
@@ -296,8 +298,6 @@ fill="#999" stroke="none">
 	},
 	list_state: (callback, sender) => {
 		if (!dbstate) {
-			console.log("Init state database");
-
 			//get record
 			db.api.option(
 				{

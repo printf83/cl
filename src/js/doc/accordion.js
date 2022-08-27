@@ -12,7 +12,7 @@ export default [
 	{
 		title: "Example",
 		msg: "Click the accordions below to expand/collapse the accordion content.",
-		import: ["accordion"],
+		import: ["accordion", "sample"],
 		code: () => {
 			return new accordion({
 				item: [
@@ -36,7 +36,7 @@ export default [
 	{
 		title: "Flush",
 		msg: "Set {{flush:true}} to remove the default background-color, some borders, and some rounded corners to render accordions edge-to-edge with their parent container.",
-		import: ["accordion"],
+		import: ["accordion", "sample"],
 		code: () => {
 			let fn = (i) => {
 				return {
@@ -55,7 +55,7 @@ export default [
 	{
 		title: "Always open",
 		msg: "Set {{autoclose:false}} to make accordion items stay open when another item is opened.",
-		import: ["accordion"],
+		import: ["accordion", "sample"],
 		code: () => {
 			let fn = (i) => {
 				return {

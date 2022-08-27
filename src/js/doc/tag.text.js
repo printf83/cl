@@ -189,7 +189,7 @@ export default [
 		title: "Line height",
 		msg: ["Change the line height with {{lineheight}} property"],
 		container: sample.formcontainer,
-		import: ["tag"],
+		import: ["tag", "sample"],
 		code: () => {
 			return [null, 1, "sm", "base", "lg"].map((i) => {
 				return new tag({

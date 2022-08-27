@@ -430,8 +430,6 @@ function gen_example(opt) {
 		}
 		i.push(`	`);
 
-		// i.push(`let code = () = {};`);
-
 		i.push(`\/\/\/code`);
 		i.push(`let code = ${opt.code.toString()};`);
 		i.push(`	`);
@@ -476,14 +474,12 @@ function gen_content(m1, m2, callback) {
 	if (m) {
 		if (m.type === "menu") {
 			if (m.source) {
-				//=============
-				//LOADER TYPE 1
-				//=============
 				setTimeout(
 					(m, callback) => {
 						let p = (m) => {
 							return new Promise((res, rej) => {
 								try {
+									//async import doc source
 									import(m.source).then((o) => {
 										let p = o.default;
 
@@ -538,53 +534,6 @@ function gen_content(m1, m2, callback) {
 					m,
 					callback
 				);
-
-				//=============
-				//LOADER TYPE 2
-				//=============
-				// setTimeout(
-				// 	(m, callback) => {
-				// 		sample.resetindex();
-				// 		core.replaceChild(
-				// 			document.getElementById("root"),
-				// 			new div({
-				// 				marginbottom: 3,
-				// 				elem: m.source.map((i) => {
-				// 					return gen_example(i);
-				// 				}),
-				// 			})
-				// 		);
-
-				// 		gen_toc();
-
-				// 		if (callback instanceof Function) {
-				// 			callback();
-				// 		}
-				// 	},
-				// 	0,
-				// 	m,
-				// 	callback
-				// );
-
-				//=============
-				//LOADER TYPE 3
-				//=============
-				// sample.resetindex();
-				// core.replaceChild(
-				// 	document.getElementById("root"),
-				// 	new div({
-				// 		marginbottom: 3,
-				// 		elem: m.source.map((i) => {
-				// 			return gen_example(i);
-				// 		}),
-				// 	})
-				// );
-
-				// gen_toc();
-
-				// if (callback instanceof Function) {
-				// 	callback();
-				// }
 			} else {
 				core.replaceChild(
 					document.getElementById("root"),

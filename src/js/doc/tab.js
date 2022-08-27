@@ -12,7 +12,7 @@ export default [
 
 	{
 		title: "Base nav",
-		import: ["tab"],
+		import: ["tab", "sample"],
 		code: () => {
 			return new tab({
 				item: [
@@ -27,7 +27,7 @@ export default [
 
 	{
 		title: "Nav tab",
-		import: ["tab"],
+		import: ["tab", "sample"],
 		code: () => {
 			return new tab({
 				type: "tab",
@@ -43,7 +43,7 @@ export default [
 
 	{
 		title: "Nav pill",
-		import: ["tab"],
+		import: ["tab", "sample"],
 		code: () => {
 			return new tab({
 				type: "pill",
@@ -59,7 +59,7 @@ export default [
 
 	{
 		title: "Horizontal center alignment",
-		import: ["tab"],
+		import: ["tab", "sample"],
 		code: () => {
 			return new tab({
 				type: "pill",
@@ -76,7 +76,7 @@ export default [
 
 	{
 		title: "Horizontal right alignment",
-		import: ["tab"],
+		import: ["tab", "sample"],
 		code: () => {
 			return new tab({
 				type: "pill",
@@ -93,7 +93,7 @@ export default [
 
 	{
 		title: "Vertical left",
-		import: ["tab"],
+		import: ["tab", "sample"],
 		code: () => {
 			return new tab({
 				type: "pill",
@@ -110,7 +110,7 @@ export default [
 
 	{
 		title: "Vertical right",
-		import: ["tab"],
+		import: ["tab", "sample"],
 		code: () => {
 			return new tab({
 				type: "pill",
@@ -127,7 +127,7 @@ export default [
 
 	{
 		title: "Fill",
-		import: ["tab"],
+		import: ["tab", "sample"],
 		code: () => {
 			return new tab({
 				type: "pill",
@@ -144,7 +144,7 @@ export default [
 
 	{
 		title: "Flush",
-		import: ["tab"],
+		import: ["tab", "sample"],
 		code: () => {
 			return new tab({
 				type: "tab",
@@ -161,7 +161,7 @@ export default [
 
 	{
 		title: "Dropdown tab",
-		import: ["tab"],
+		import: ["tab", "sample"],
 		code: () => {
 			return new tab({
 				type: "tab",
@@ -186,7 +186,7 @@ export default [
 
 	{
 		title: "Dropdown pill",
-		import: ["tab"],
+		import: ["tab", "sample"],
 		code: () => {
 			return new tab({
 				type: "pill",
@@ -212,7 +212,7 @@ export default [
 	{
 		title: "Nav tab in dialog",
 		viewclass: "cl-modal-preview",
-		import: ["modal", "tab"],
+		import: ["modal", "tab", "sample"],
 		code: () => {
 			return new modal({
 				title: "Modal title",
@@ -244,7 +244,7 @@ export default [
 	{
 		title: "Tab nav pill in dialog",
 		viewclass: "cl-modal-preview",
-		import: ["modal", "tab"],
+		import: ["modal", "tab", "sample"],
 		code: () => {
 			return new modal({
 				title: "Modal title",
