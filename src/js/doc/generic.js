@@ -18,7 +18,7 @@ export default [
 
 	{
 		msg: [
-			"Please create table using <b>cl generic database</b> in <b>./server.js</b>. For this example, we create <b>customer</b> table with this code :",
+			"Please create table using <b>cl generic database</b> in <b>./server-db.js</b>. For this example, we create <b>customer</b> table with this code :",
 			new codepreview({
 				title: "customer db without setting",
 				container: "card",
