@@ -9,14 +9,14 @@ import msg from "../base/msg.js";
 export default [
 	{
 		msg: [
-			new div("text-center display-1", document.title),
+			new div("text-center display-1", "BS5 Js Builder"),
 
 			new alert.container({
 				color: "warning",
 				elem: new msg({
 					icon: "exclamation-triangle",
 					weight: "md",
-					elem: "<b>Warning!</b> This framework create by <b>one developer</b> for research only!<br/>", //<b>Help!</b> I lost my job 😢. Anyone can help me? Please drop me <a class='alert-link' href='mailto:printf83@gmail.com?subject=bs5-js-builder-job-offer'>an email</a> if you think I am usefull in your company especially company in <b>Kota Kinabalu, Malaysia</b> - 21/02/2022
+					elem: "<b>Warning!</b> This framework create by <b>one developer</b> for research only!<br/>", //<b>Help!</b> I lost my job 😢. Anyone can help me? Please drop me <a class='alert-link' href='mailto:printf83@gmail.com?subject=bs5-js-builder-job-offer'>an email</a> if you think I am usefull in your company especially company in <b>Kota Kinabalu, Malaysia</b> - 28/08/2022
 				}),
 				margintop: 5,
 			}),
@@ -150,6 +150,23 @@ export default [
 					core.documentReady(() => {
 						core.appendChild(document.body,new button({label:'Hello World!', color:'primary'}));
 						core.appendChild(document.body,new p('Hello World!'));
+					});
+			`,
+			}),
+
+			"Or if you prefer to use easy way, use our {{component}} to import all component",
+
+			new codepreview({
+				title: "Example index.js using one component only",
+				container: "card",
+				code: `
+					"use strict";
+					
+					import $ from "./all.js";
+
+					$.core.documentReady(() => {
+						$.core.appendChild(document.body,new $.button({label:'Hello World!', color:'primary'}));
+						$.core.appendChild(document.body,new $.p('Hello World!'));
 					});
 			`,
 			}),
