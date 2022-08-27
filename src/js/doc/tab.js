@@ -17,7 +17,7 @@ export default [
 			return new tab({
 				item: [
 					{ label: "First", elem: `<b>This is first tab. </b>${sample.text()}` },
-					{ label: "Second", elem: `<b>This is first tab. </b>${sample.text()}` },
+					{ label: "Second", elem: `<b>This is second tab. </b>${sample.text()}` },
 					{ label: "Third", elem: `<b>This is third tab. </b>${sample.text()}` },
 					{ label: "Disabled", disabled: true, elem: "This is last tab." },
 				],
@@ -33,7 +33,7 @@ export default [
 				type: "tab",
 				item: [
 					{ label: "First", elem: `<b>This is first tab. </b>${sample.text()}` },
-					{ label: "Second", elem: `<b>This is first tab. </b>${sample.text()}` },
+					{ label: "Second", elem: `<b>This is second tab. </b>${sample.text()}` },
 					{ label: "Third", elem: `<b>This is third tab. </b>${sample.text()}` },
 					{ label: "Disabled", disabled: true, elem: "This is last tab." },
 				],
@@ -49,7 +49,7 @@ export default [
 				type: "pill",
 				item: [
 					{ label: "First", elem: `<b>This is first tab. </b>${sample.text()}` },
-					{ label: "Second", elem: `<b>This is first tab. </b>${sample.text()}` },
+					{ label: "Second", elem: `<b>This is second tab. </b>${sample.text()}` },
 					{ label: "Third", elem: `<b>This is third tab. </b>${sample.text()}` },
 					{ label: "Disabled", disabled: true, elem: "This is last tab." },
 				],
@@ -66,7 +66,7 @@ export default [
 				headAlign: "center",
 				item: [
 					{ label: "First", elem: `<b>This is first tab. </b>${sample.text()}` },
-					{ label: "Second", elem: `<b>This is first tab. </b>${sample.text()}` },
+					{ label: "Second", elem: `<b>This is second tab. </b>${sample.text()}` },
 					{ label: "Third", elem: `<b>This is third tab. </b>${sample.text()}` },
 					{ label: "Disabled", disabled: true, elem: "This is last tab." },
 				],
@@ -83,7 +83,7 @@ export default [
 				headAlign: "right",
 				item: [
 					{ label: "First", elem: `<b>This is first tab. </b>${sample.text()}` },
-					{ label: "Second", elem: `<b>This is first tab. </b>${sample.text()}` },
+					{ label: "Second", elem: `<b>This is second tab. </b>${sample.text()}` },
 					{ label: "Third", elem: `<b>This is third tab. </b>${sample.text()}` },
 					{ label: "Disabled", disabled: true, elem: "This is last tab." },
 				],
@@ -100,7 +100,7 @@ export default [
 				headAlign: "vertical",
 				item: [
 					{ label: "First", elem: `<b>This is first tab. </b>${sample.text()}` },
-					{ label: "Second", elem: `<b>This is first tab. </b>${sample.text()}` },
+					{ label: "Second", elem: `<b>This is second tab. </b>${sample.text()}` },
 					{ label: "Third", elem: `<b>This is third tab. </b>${sample.text()}` },
 					{ label: "Disabled", disabled: true, elem: "This is last tab." },
 				],
@@ -117,7 +117,7 @@ export default [
 				headAlign: "vertical-right",
 				item: [
 					{ label: "First", elem: `<b>This is first tab. </b>${sample.text()}` },
-					{ label: "Second", elem: `<b>This is first tab. </b>${sample.text()}` },
+					{ label: "Second", elem: `<b>This is second tab. </b>${sample.text()}` },
 					{ label: "Third", elem: `<b>This is third tab. </b>${sample.text()}` },
 					{ label: "Disabled", disabled: true, elem: "This is last tab." },
 				],
@@ -134,7 +134,7 @@ export default [
 				headAlign: "fill",
 				item: [
 					{ label: "First", elem: `<b>This is first tab. </b>${sample.text()}` },
-					{ label: "Second", elem: `<b>This is first tab. </b>${sample.text()}` },
+					{ label: "Second", elem: `<b>This is second tab. </b>${sample.text()}` },
 					{ label: "Third", elem: `<b>This is third tab. </b>${sample.text()}` },
 					{ label: "Disabled", disabled: true, elem: "This is last tab." },
 				],
@@ -151,7 +151,7 @@ export default [
 				flush: true,
 				item: [
 					{ label: "First", elem: `<b>This is first tab. </b>${sample.text()}` },
-					{ label: "Second", elem: `<b>This is first tab. </b>${sample.text()}` },
+					{ label: "Second", elem: `<b>This is second tab. </b>${sample.text()}` },
 					{ label: "Third", elem: `<b>This is third tab. </b>${sample.text()}` },
 					{ label: "Disabled", disabled: true, elem: "This is last tab." },
 				],
@@ -169,7 +169,7 @@ export default [
 					{ label: "First", elem: `<b>This is first tab. </b>${sample.text()}` },
 					{
 						label: "Second",
-						elem: `<b>This is first tab. </b>${sample.text()}`,
+						elem: "This is second tab",
 						option: [
 							{ href: "#", label: "Action" },
 							{ href: "#", label: "Another action" },
@@ -194,7 +194,7 @@ export default [
 					{ label: "First", elem: `<b>This is first tab. </b>${sample.text()}` },
 					{
 						label: "Second",
-						elem: `<b>This is second tab. </b>${sample.text()}`,
+						elem: "This is second tab",
 						option: [
 							{ href: "#", label: "Action" },
 							{ href: "#", label: "Another action" },
@@ -223,7 +223,7 @@ export default [
 						{ label: "First", elem: `<b>This is first tab. </b>${sample.text()}` },
 						{
 							label: "Second",
-							elem: `<b>This is second tab. </b>${sample.text()}`,
+							elem: "This is second tab",
 							option: [
 								{ href: "#", label: "Action" },
 								{ href: "#", label: "Another action" },
@@ -255,7 +255,7 @@ export default [
 						{ label: "First", elem: `<b>This is first tab. </b>${sample.text()}` },
 						{
 							label: "Second",
-							elem: `<b>This is second tab. </b>${sample.text()}`,
+							elem: "This is second tab",
 							option: [
 								{ href: "#", label: "Action" },
 								{ href: "#", label: "Another action" },
