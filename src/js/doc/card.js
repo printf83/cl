@@ -9,6 +9,9 @@ import div from "../base/div.js";
 import p from "../base/p.js";
 import small from "../base/small.js";
 import tag from "../base/tag.js";
+import footer from "../base/footer.js";
+import cite from "../base/cite.js";
+import blockquote from "../base/blockquote.js";
 
 export default [
 	{
@@ -242,24 +245,21 @@ export default [
 
 	{
 		title: "Quote",
-		import: ["tag", "p", "card"],
+		import: ["tag", "p", "blockquote", "footer", "cite", "card"],
 		code: () => {
 			return new card.container({
 				elem: [
 					new card.header("Quote"),
 					new card.body({
-						elem: new tag({
-							tag: "blockquote",
+						elem: new blockquote({
 							class: "mb-0",
 							elem: [
 								new p("A well-known quote, contained in a blockquote element."),
-								new tag({
-									tag: "footer",
+								new footer({
 									class: "blockquote-footer",
 									elem: [
 										"Someone famous in",
-										new tag({
-											tag: "cite",
+										new cite({
 											attr: { title: "Source Title" },
 											elem: "Source Title",
 										}),

@@ -5,6 +5,7 @@ import accordion from "./base/accordion.js";
 import * as alert from "./base/alert.js";
 import b from "./base/b.js";
 import badge from "./base/badge.js";
+import blockquote from "./base/blockquote.js";
 import breadcrumb from "./base/breadcrumb.js";
 import btnclose from "./base/btnclose.js";
 import btngroup from "./base/btngroup.js";
@@ -12,6 +13,7 @@ import btntoolbar from "./base/btntoolbar.js";
 import button from "./base/button.js";
 import * as card from "./base/card.js";
 import carousel from "./base/carousel.js";
+import cite from "./base/cite.js";
 import code from "./base/code.js";
 import codepreview from "./base/codepreview.js";
 import * as collapse from "./base/collapse.js";
@@ -24,6 +26,7 @@ import dropdown from "./base/dropdown.js";
 import example from "./base/example.js";
 import file from "./base/file.js";
 import form from "./base/form.js";
+import footer from "./base/footer.js";
 import h from "./base/h.js";
 import hr from "./base/hr.js";
 import icon from "./base/icon.js";
@@ -67,6 +70,7 @@ export default {
 	alert,
 	b,
 	badge,
+	blockquote,
 	breadcrumb,
 	btnclose,
 	btngroup,
@@ -74,6 +78,7 @@ export default {
 	button,
 	card,
 	carousel,
+	cite,
 	code,
 	codepreview,
 	collapse,
@@ -85,6 +90,7 @@ export default {
 	dropdown,
 	example,
 	file,
+	footer,
 	form,
 	h,
 	hr,

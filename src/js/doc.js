@@ -66,9 +66,12 @@ export default {
 
 	tag_ex_a: "../doc/tag.ex.a.js",
 	tag_ex_b: "../doc/tag.ex.b.js",
+	tag_ex_blockquote: "../doc/tag.ex.blockquote.js",
+	tag_ex_cite: "../doc/tag.ex.cite.js",
 	tag_ex_code: "../doc/tag.ex.code.js",
 	tag_ex_div: "../doc/tag.ex.div.js",
 	tag_ex_form: "../doc/tag.ex.form.js",
+	tag_ex_footer: "../doc/tag.ex.footer.js",
 	tag_ex_h: "../doc/tag.ex.h.js",
 	tag_ex_hr: "../doc/tag.ex.hr.js",
 	tag_ex_img: "../doc/tag.ex.img.js",

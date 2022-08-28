@@ -16,7 +16,6 @@ import * as table from "./base/table.js";
 import tag from "./base/tag.js";
 import toc from "./base/toc.js";
 import doc from "./doc.js";
-import sample from "./doc/sample.js";
 
 const db_menu = [
 	{
@@ -117,9 +116,12 @@ const db_menu = [
 		item: [
 			{ title: "Anchor", source: doc.tag_ex_a },
 			{ title: "Bold", source: doc.tag_ex_b },
+			{ title: "Blockquote", source: doc.tag_ex_blockquote },
+			{ title: "Cite", source: doc.tag_ex_cite },
 			{ title: "Code", source: doc.tag_ex_code },
 			{ title: "Division", source: doc.tag_ex_div },
 			{ title: "Form", source: doc.tag_ex_form },
+			{ title: "Footer", source: doc.tag_ex_footer },
 			{ title: "Heading", source: doc.tag_ex_h },
 			{ title: "Horizontal rule", source: doc.tag_ex_hr },
 			{ title: "Image", source: doc.tag_ex_img },
@@ -307,6 +309,7 @@ let dblibrary = {
 	alert: `import * as alert from "../base/alert.js";`,
 	b: `import b from "../base/b.js";`,
 	badge: `import badge from "../base/badge.js";`,
+	blockquote: `import blockquote from "../base/blockquote.js";`,
 	breadcrumb: `import breadcrumb from "../base/breadcrumb.js";`,
 	btnclose: `import btnclose from "../base/btnclose.js";`,
 	btngroup: `import btngroup from "../base/btngroup.js";`,
@@ -314,6 +317,7 @@ let dblibrary = {
 	button: `import button from "../base/button.js";`,
 	card: `import * as card from "../base/card.js";`,
 	carousel: `import carousel from "../base/carousel.js";`,
+	cite: `import cite from "../base/cite.js";`,
 	code: `import code from "../base/code.js";`,
 	codepreview: `import codepreview from "../base/codepreview.js";`,
 	collapse: `import * as collapse from "../base/collapse.js";`,
@@ -326,6 +330,7 @@ let dblibrary = {
 	example: `import example from "../base/example.js";`,
 	file: `import file from "../base/file.js";`,
 	form: `import form from "../base/form.js";`,
+	footer: `import footer from "../base/footer.js";`,
 	h: `import h from "../base/h.js";`,
 	hr: `import hr from "../base/hr.js";`,
 	icon: `import icon from "../base/icon.js";`,
@@ -483,8 +488,7 @@ function gen_content(m1, m2, callback) {
 							return new Promise((res, rej) => {
 								try {
 									//async import doc source
-									core.importJS(m.source, (m_source)=>{
-
+									core.importJS(m.source, (m_source) => {
 										let processtimestart = window.performance.now();
 
 										// sample.resetindex();
@@ -513,7 +517,7 @@ function gen_content(m1, m2, callback) {
 										)} items`;
 
 										res();
-									})
+									});
 								} catch (ex) {
 									rej(ex);
 								}
