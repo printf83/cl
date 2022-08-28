@@ -161,9 +161,7 @@ function gen_content(m1, m2, callback) {
 							return new Promise((res, rej) => {
 								try {
 									//async import doc source
-									import(m.source).then((o) => {
-										let m_source = o.default;
-
+									core.importJS(m.source, (m_source) => {
 										m_source.main((elem) => {
 											core.replaceChild(
 												document.getElementById("root"),

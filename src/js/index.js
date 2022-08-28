@@ -483,8 +483,7 @@ function gen_content(m1, m2, callback) {
 							return new Promise((res, rej) => {
 								try {
 									//async import doc source
-									import(m.source).then((o) => {
-										let p = o.default;
+									core.importJS(m.source, (m_source)=>{
 
 										let processtimestart = window.performance.now();
 
@@ -493,7 +492,7 @@ function gen_content(m1, m2, callback) {
 											document.getElementById("root"),
 											new div({
 												marginbottom: 3,
-												elem: p.map((i) => {
+												elem: m_source.map((i) => {
 													return gen_example(i);
 												}),
 											})
@@ -514,7 +513,7 @@ function gen_content(m1, m2, callback) {
 										)} items`;
 
 										res();
-									});
+									})
 								} catch (ex) {
 									rej(ex);
 								}

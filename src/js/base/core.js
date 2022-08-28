@@ -141,6 +141,12 @@ export function getTextColorBaseOnColor(color, baseColor) {
 	return null;
 }
 
+export function importJS(path, callback) {
+	import(path).then((obj) => {
+		callback(obj.default);
+	});
+}
+
 export function extend(out) {
 	out = out || {};
 
