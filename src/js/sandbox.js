@@ -10,12 +10,9 @@ import toast from "./base/toast.js";
 import toc from "./base/toc.js";
 import * as user from "./base/user.js";
 
-// import sb_customer from "./sandbox/customer.js";
-// import sb_state from "./sandbox/state.js";
-
 const sb = {
-	customer: "./sandbox/customer.js",
-	state: "./sandbox/state.js",
+	customer: "../sandbox/customer.js",
+	state: "../sandbox/state.js",
 };
 
 const db_menu = [

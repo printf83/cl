@@ -12,7 +12,7 @@ import * as dlg from "../base/dlg.js";
 export default [
 	{
 		title: "Generic database",
-		msg: "Provide access to <b>cl genaric database</b> to make easy <b>CRUD</b> operation and others.",
+		msg: "Provide access to the <b>cl generic database</b> to make easy <b>CRUD operations</b> and other tasks easy",
 		anchor: false,
 	},
 

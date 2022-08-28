@@ -16,7 +16,7 @@ export default [
 				elem: new msg({
 					icon: "exclamation-triangle",
 					weight: "md",
-					elem: "<b>Warning!</b> This framework create by <b>one developer</b> for research only!<br/>", //<b>Help!</b> I lost my job 😢. Anyone can help me? Please drop me <a class='alert-link' href='mailto:printf83@gmail.com?subject=bs5-js-builder-job-offer'>an email</a> if you think I am usefull in your company especially company in <b>Kota Kinabalu, Malaysia</b> - 28/08/2022
+					elem: "<b>Warning!</b> This framework created by <b>one developer</b> for research only!<br/>", //<b>Help!</b> I lost my job 😢. Anyone can help me? Please drop me <a class='alert-link' href='mailto:printf83@gmail.com?subject=bs5-js-builder-job-offer'>an email</a> if you think I am usefull in your company especially company in <b>Kota Kinabalu, Malaysia</b> - 28/08/2022
 				}),
 				margintop: 5,
 			}),
@@ -24,7 +24,7 @@ export default [
 			new div({
 				align: "center",
 				marginbottom: 3,
-				elem: "Build Full Stack Web Application using ",
+				elem: "Build a Full Stack Web Application using ",
 			}),
 
 			new div({
@@ -154,10 +154,10 @@ export default [
 			`,
 			}),
 
-			`Or if you prefer to use easy way, use {{import $ from "./all.js";}} to import all component`,
+			`Alternatively, if you prefer the simpler method, use {{import $ from "./all.js";}} to import all components.`,
 
 			new codepreview({
-				title: "Example index.js using one component only",
+				title: "Example index.js using only one component",
 				container: "card",
 				code: `
 					"use strict";
@@ -171,7 +171,7 @@ export default [
 			`,
 			}),
 
-			"If you like to test the code, you can copy the code into {{./src/js/test.js}} and go to <a href='test.html'>test.html</a> to check the output. Please run {{npm start}} to rebuild the js file",
+			`If you want to test the code, you can copy the code into <b>./src/js/test.js</b> and go to <a href="test.html">test.html</a> to check the output. Please run {{npm start}} to rebuild the js file.`,
 
 			new div({
 				display: "flex",
