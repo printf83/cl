@@ -10,7 +10,7 @@ import toast from "./base/toast.js";
 import toc from "./base/toc.js";
 import * as user from "./base/user.js";
 
-import sb_customer from  "./sandbox/customer.js";
+import sb_customer from "./sandbox/customer.js";
 import sb_state from "./sandbox/state.js";
 
 const db_menu = [
@@ -217,13 +217,14 @@ function gen_content(m1, m2, callback) {
 }
 
 function set_theme(theme) {
-	let cltheme = document.getElementById("nstheme");
-	if (theme) {
-		cltheme.href = `https://cdn.jsdelivr.net/npm/bootswatch@5.1.3/dist/${theme}/bootstrap.min.css`;
-		cltheme.removeAttribute("disabled");
-	} else {
-		cltheme.setAttribute("disabled", "disabled");
-	}
+	// let cltheme = document.getElementById("nstheme");
+	// if (theme) {
+	// 	cltheme.href = `https://cdn.jsdelivr.net/npm/bootswatch@5.1.3/dist/${theme}/bootstrap.min.css`;
+	// 	cltheme.removeAttribute("disabled");
+	// } else {
+	// 	cltheme.setAttribute("disabled", "disabled");
+	// }
+	core.theme.set(theme);
 }
 
 function gen_url(m1, m2) {
@@ -359,7 +360,7 @@ core.documentReady(() => {
 		core.init(document.getElementById("root"));
 	});
 
-	set_theme(def_theme);
+	// set_theme(def_theme);
 
 	core.init(document.body);
 });

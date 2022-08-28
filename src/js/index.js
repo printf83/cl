@@ -573,15 +573,17 @@ function gen_content(m1, m2, callback) {
 }
 
 function set_theme(theme) {
-	let cltheme = document.getElementById("nstheme");
-	if (theme) {
-		cltheme.href = `https://cdn.jsdelivr.net/npm/bootswatch@5.1.3/dist/${theme}/bootstrap.min.css`;
-		cltheme.removeAttribute("disabled");
-		document.getElementById("pagetheme").innerText = `${theme}`;
-	} else {
-		cltheme.setAttribute("disabled", "disabled");
-		document.getElementById("pagetheme").innerText = `default`;
-	}
+	// let cltheme = document.getElementById("nstheme");
+	// if (theme) {
+	// 	cltheme.href = `https://cdn.jsdelivr.net/npm/bootswatch@5.1.3/dist/${theme}/bootstrap.min.css`;
+	// 	cltheme.removeAttribute("disabled");
+	// 	document.getElementById("pagetheme").innerText = `${theme}`;
+	// } else {
+	// 	cltheme.setAttribute("disabled", "disabled");
+	// 	document.getElementById("pagetheme").innerText = `default`;
+	// }
+
+	core.theme.set(theme);
 }
 
 function gen_toc() {
@@ -691,6 +693,17 @@ function gen_menu(m1, m2, theme) {
 	});
 }
 
+core.theme.change = (theme) => {
+	let el = document.getElementById("pagetheme");
+	if (el) {
+		if (theme) {
+			el.innerText = `${theme}`;
+		} else {
+			el.innerText = `default`;
+		}
+	}
+};
+
 core.documentReady(() => {
 	//set def_m1 and m2
 	let m = get_url();
@@ -788,7 +801,7 @@ core.documentReady(() => {
 		PR.prettyPrint();
 	});
 
-	set_theme(def_theme);
+	// set_theme(def_theme);
 
 	core.init(document.body);
 });

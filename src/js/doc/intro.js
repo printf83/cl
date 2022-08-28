@@ -107,7 +107,7 @@ export default [
 							<link
 								rel="stylesheet"
 								href="https://cdn.jsdelivr.net/npm/bootswatch@5.2.0/dist/cerulean/bootstrap.min.css"
-								id="nstheme"
+								id="cltheme"
 								disabled="disabled"
 							/>
 							<link rel="stylesheet" href="./dist/style.css" />

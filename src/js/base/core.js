@@ -14,6 +14,64 @@ export function capitalize(str) {
 	return str.toLowerCase().replace(/(^\w{1})|(\s+\w{1})/g, (match) => match.toUpperCase());
 }
 
+const fnCookie = {
+	set: (cname, cvalue, exdays) => {
+		const d = new Date();
+		exdays = exdays || 7;
+		d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
+		let expires = "expires=" + d.toUTCString();
+		document.cookie = cname + "=" + cvalue + ";" + expires + ";samesite=strict;path=/";
+	},
+	get: (cname) => {
+		let name = cname + "=";
+		let decodedCookie = decodeURIComponent(document.cookie);
+		let ca = decodedCookie.split(";");
+		for (let i = 0; i < ca.length; i++) {
+			let c = ca[i];
+			while (c.charAt(0) == " ") {
+				c = c.substring(1);
+			}
+			if (c.indexOf(name) == 0) {
+				return c.substring(name.length, c.length);
+			}
+		}
+		return null;
+	},
+};
+
+export const cookie = fnCookie;
+
+const fnTheme = {
+	init: () => {
+		fnTheme.set(fnTheme.get("cltheme"));
+	},
+	set: (theme) => {
+		fnCookie.set("cltheme", theme);
+
+		let cltheme = document.getElementById("cltheme");
+		if (cltheme && cltheme !== "null") {
+			if (theme) {
+				cltheme.href = `https://cdn.jsdelivr.net/npm/bootswatch@5.1.3/dist/${theme}/bootstrap.min.css`;
+				cltheme.removeAttribute("disabled");
+			} else {
+				cltheme.setAttribute("disabled", "disabled");
+			}
+		} else {
+			console.error("#cltheme not found");
+		}
+
+		fnTheme.change(theme);
+	},
+	get: () => {
+		return fnCookie.get("cltheme");
+	},
+	change: (theme) => {
+		console.log("default theme change callback");
+	},
+};
+
+export const theme = fnTheme;
+
 const _baseIcon = {
 	i: { icon: "info-circle", type: "fas", color: "primary" },
 	"!": { icon: "exclamation-triangle", type: "fas", color: "warning" },
@@ -387,16 +445,19 @@ export function multiClass(val, format, supported, unsupported) {
 export function documentReady(callback) {
 	if (document.readyState != "loading") {
 		// in case the document is already rendered
+		fnTheme.init();
 		authCheck(callback);
 	} else if (document.addEventListener) {
 		// modern browsers
 		document.addEventListener("DOMContentLoaded", () => {
+			fnTheme.init();
 			authCheck(callback);
 		});
 	} else {
 		// IE <= 8
 		document.attachEvent("onreadystatechange", () => {
 			if (document.readyState == "complete") {
+				fnTheme.init();
 				authCheck(callback);
 			}
 		});
