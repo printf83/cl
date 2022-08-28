@@ -148,7 +148,10 @@ const db_menu = [
 	{
 		type: "navigate",
 		title: "Others",
-		item: [{ title: "Sandbox", source: "sandbox.html" }],
+		item: [
+			{ title: "Sandbox", source: "sandbox.html" },
+			{ title: "Test", source: "test.html" },
+		],
 	},
 	{
 		type: "action",
@@ -573,16 +576,6 @@ function gen_content(m1, m2, callback) {
 }
 
 function set_theme(theme) {
-	// let cltheme = document.getElementById("nstheme");
-	// if (theme) {
-	// 	cltheme.href = `https://cdn.jsdelivr.net/npm/bootswatch@5.1.3/dist/${theme}/bootstrap.min.css`;
-	// 	cltheme.removeAttribute("disabled");
-	// 	document.getElementById("pagetheme").innerText = `${theme}`;
-	// } else {
-	// 	cltheme.setAttribute("disabled", "disabled");
-	// 	document.getElementById("pagetheme").innerText = `default`;
-	// }
-
 	core.theme.set(theme);
 }
 
@@ -712,6 +705,8 @@ core.documentReady(() => {
 		def_m2 = m.m2;
 	}
 
+	def_theme = core.theme.get();
+
 	core.replaceWith(
 		document.getElementById("main"),
 		new layout.l1({
@@ -801,7 +796,7 @@ core.documentReady(() => {
 		PR.prettyPrint();
 	});
 
-	// set_theme(def_theme);
+	core.theme.init();
 
 	core.init(document.body);
 });

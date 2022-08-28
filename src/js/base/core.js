@@ -17,7 +17,13 @@ export function capitalize(str) {
 const fnCookie = {
 	set: (cname, cvalue, exdays) => {
 		const d = new Date();
-		exdays = exdays || 7;
+
+		if (cvalue) {
+			exdays = exdays || 7;
+		} else {
+			exdays = -1;
+		}
+
 		d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
 		let expires = "expires=" + d.toUTCString();
 		document.cookie = cname + "=" + cvalue + ";" + expires + ";samesite=strict;path=/";
@@ -49,7 +55,7 @@ const fnTheme = {
 		fnCookie.set("cltheme", theme);
 
 		let cltheme = document.getElementById("cltheme");
-		if (cltheme && cltheme !== "null") {
+		if (cltheme) {
 			if (theme) {
 				cltheme.href = `https://cdn.jsdelivr.net/npm/bootswatch@5.1.3/dist/${theme}/bootstrap.min.css`;
 				cltheme.removeAttribute("disabled");

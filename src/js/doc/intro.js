@@ -9,7 +9,7 @@ import msg from "../base/msg.js";
 export default [
 	{
 		msg: [
-			new div("text-center display-1", "BS5 Js Builder"),
+			new div("text-center display-1", "BS5 JS Builder"),
 
 			new alert.container({
 				color: "warning",
@@ -154,7 +154,7 @@ export default [
 			`,
 			}),
 
-			"Or if you prefer to use easy way, use our {{component}} to import all component",
+			`Or if you prefer to use easy way, use {{import $ from "./all.js";}} to import all component`,
 
 			new codepreview({
 				title: "Example index.js using one component only",
@@ -170,6 +170,8 @@ export default [
 					});
 			`,
 			}),
+
+			"If you like to test the code, you can copy the code into {{./src/js/test.js}} and go to <a href='test.html'>test.html</a> to check the output. Please run {{npm start}} to rebuild the js file",
 
 			new div({
 				display: "flex",

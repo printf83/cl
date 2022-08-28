@@ -10,22 +10,30 @@ import toast from "./base/toast.js";
 import toc from "./base/toc.js";
 import * as user from "./base/user.js";
 
-import sb_customer from "./sandbox/customer.js";
-import sb_state from "./sandbox/state.js";
+// import sb_customer from "./sandbox/customer.js";
+// import sb_state from "./sandbox/state.js";
+
+const sb = {
+	customer: "./sandbox/customer.js",
+	state: "./sandbox/state.js",
+};
 
 const db_menu = [
 	{
 		type: "menu",
 		title: "Main",
 		item: [
-			{ title: "Customer", source: sb_customer },
-			{ title: "State", source: sb_state },
+			{ title: "Customer", source: sb.customer },
+			{ title: "State", source: sb.state },
 		],
 	},
 	{
 		type: "navigate",
 		title: "Others",
-		item: [{ title: "Documentation", source: "index.html" }],
+		item: [
+			{ title: "Documentation", source: "index.html" },
+			{ title: "Test", source: "test.html" },
+		],
 	},
 	{
 		type: "action",
@@ -137,13 +145,13 @@ function gen_content(m1, m2, callback) {
 				core.replaceChild(
 					document.getElementById("root"),
 					new div({
-						elem: "",
+						elem: "Loading...",
 					})
 				);
 				core.replaceChild(
 					document.getElementById("nextbar"),
 					new div({
-						elem: "",
+						elem: "Loading...",
 					})
 				);
 
@@ -152,34 +160,39 @@ function gen_content(m1, m2, callback) {
 						let p = (m) => {
 							return new Promise((res, rej) => {
 								try {
-									m.source.main((elem) => {
-										core.replaceChild(
-											document.getElementById("root"),
-											new div({
-												elem: elem,
-											})
-										);
+									//async import doc source
+									import(m.source).then((o) => {
+										let m_source = o.default;
 
-										if (m.source.menu) {
+										m_source.main((elem) => {
 											core.replaceChild(
-												document.getElementById("nextbar"),
-												new toc({
-													label: m.source.name,
-													item: m.source.menu,
-													type: "menu",
+												document.getElementById("root"),
+												new div({
+													elem: elem,
 												})
 											);
-										} else {
-											core.removeChildElement(document.getElementById("nextbar"));
-										}
 
-										if (m.source.load) {
-											m.source.load();
-										}
+											if (m_source.menu) {
+												core.replaceChild(
+													document.getElementById("nextbar"),
+													new toc({
+														label: m_source.name,
+														item: m_source.menu,
+														type: "menu",
+													})
+												);
+											} else {
+												core.removeChildElement(document.getElementById("nextbar"));
+											}
 
-										gen_url(m1, m2);
+											if (m_source.load) {
+												m_source.load();
+											}
 
-										res();
+											gen_url(m1, m2);
+
+											res();
+										});
 									});
 								} catch (ex) {
 									rej(ex);
@@ -217,13 +230,6 @@ function gen_content(m1, m2, callback) {
 }
 
 function set_theme(theme) {
-	// let cltheme = document.getElementById("nstheme");
-	// if (theme) {
-	// 	cltheme.href = `https://cdn.jsdelivr.net/npm/bootswatch@5.1.3/dist/${theme}/bootstrap.min.css`;
-	// 	cltheme.removeAttribute("disabled");
-	// } else {
-	// 	cltheme.setAttribute("disabled", "disabled");
-	// }
 	core.theme.set(theme);
 }
 
@@ -309,6 +315,8 @@ core.documentReady(() => {
 		def_m2 = m.m2;
 	}
 
+	def_theme = core.theme.get();
+
 	core.replaceWith(
 		document.getElementById("main"),
 		new layout.l1({
@@ -360,7 +368,7 @@ core.documentReady(() => {
 		core.init(document.getElementById("root"));
 	});
 
-	// set_theme(def_theme);
+	core.theme.init();
 
 	core.init(document.body);
 });
