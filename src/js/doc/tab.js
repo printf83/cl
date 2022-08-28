@@ -16,10 +16,10 @@ export default [
 		code: () => {
 			return new tab({
 				item: [
-					{ label: "First", elem: `<b>This is first tab. </b>${sample.text()}` },
-					{ label: "Second", elem: `<b>This is second tab. </b>${sample.text()}` },
-					{ label: "Third", elem: `<b>This is third tab. </b>${sample.text()}` },
-					{ label: "Disabled", disabled: true, elem: "This is last tab." },
+					{ label: "First", elem: `<b>This is the first item's tab body.</b> ${sample.text()}` },
+					{ label: "Second", elem: `<b>This is the second item's tab body.</b> ${sample.text()}` },
+					{ label: "Third", elem: `<b>This is the third item's tab body.</b> ${sample.text()}` },
+					{ label: "Disabled", disabled: true, elem: "This is the last item's tab body." },
 				],
 			});
 		},
@@ -32,10 +32,10 @@ export default [
 			return new tab({
 				type: "tab",
 				item: [
-					{ label: "First", elem: `<b>This is first tab. </b>${sample.text()}` },
-					{ label: "Second", elem: `<b>This is second tab. </b>${sample.text()}` },
-					{ label: "Third", elem: `<b>This is third tab. </b>${sample.text()}` },
-					{ label: "Disabled", disabled: true, elem: "This is last tab." },
+					{ label: "First", elem: `<b>This is the first item's tab body.</b> ${sample.text()}` },
+					{ label: "Second", elem: `<b>This is the second item's tab body.</b> ${sample.text()}` },
+					{ label: "Third", elem: `<b>This is the third item's tab body.</b> ${sample.text()}` },
+					{ label: "Disabled", disabled: true, elem: "This is the last item's tab body." },
 				],
 			});
 		},
@@ -48,10 +48,10 @@ export default [
 			return new tab({
 				type: "pill",
 				item: [
-					{ label: "First", elem: `<b>This is first tab. </b>${sample.text()}` },
-					{ label: "Second", elem: `<b>This is second tab. </b>${sample.text()}` },
-					{ label: "Third", elem: `<b>This is third tab. </b>${sample.text()}` },
-					{ label: "Disabled", disabled: true, elem: "This is last tab." },
+					{ label: "First", elem: `<b>This is the first item's tab body.</b> ${sample.text()}` },
+					{ label: "Second", elem: `<b>This is the second item's tab body.</b> ${sample.text()}` },
+					{ label: "Third", elem: `<b>This is the third item's tab body.</b> ${sample.text()}` },
+					{ label: "Disabled", disabled: true, elem: "This is the last item's tab body." },
 				],
 			});
 		},
@@ -65,10 +65,10 @@ export default [
 				type: "pill",
 				headAlign: "center",
 				item: [
-					{ label: "First", elem: `<b>This is first tab. </b>${sample.text()}` },
-					{ label: "Second", elem: `<b>This is second tab. </b>${sample.text()}` },
-					{ label: "Third", elem: `<b>This is third tab. </b>${sample.text()}` },
-					{ label: "Disabled", disabled: true, elem: "This is last tab." },
+					{ label: "First", elem: `<b>This is the first item's tab body.</b> ${sample.text()}` },
+					{ label: "Second", elem: `<b>This is the second item's tab body.</b> ${sample.text()}` },
+					{ label: "Third", elem: `<b>This is the third item's tab body.</b> ${sample.text()}` },
+					{ label: "Disabled", disabled: true, elem: "This is the last item's tab body." },
 				],
 			});
 		},
@@ -82,10 +82,10 @@ export default [
 				type: "pill",
 				headAlign: "right",
 				item: [
-					{ label: "First", elem: `<b>This is first tab. </b>${sample.text()}` },
-					{ label: "Second", elem: `<b>This is second tab. </b>${sample.text()}` },
-					{ label: "Third", elem: `<b>This is third tab. </b>${sample.text()}` },
-					{ label: "Disabled", disabled: true, elem: "This is last tab." },
+					{ label: "First", elem: `<b>This is the first item's tab body.</b> ${sample.text()}` },
+					{ label: "Second", elem: `<b>This is the second item's tab body.</b> ${sample.text()}` },
+					{ label: "Third", elem: `<b>This is the third item's tab body.</b> ${sample.text()}` },
+					{ label: "Disabled", disabled: true, elem: "This is the last item's tab body." },
 				],
 			});
 		},
@@ -99,10 +99,10 @@ export default [
 				type: "pill",
 				headAlign: "vertical",
 				item: [
-					{ label: "First", elem: `<b>This is first tab. </b>${sample.text()}` },
-					{ label: "Second", elem: `<b>This is second tab. </b>${sample.text()}` },
-					{ label: "Third", elem: `<b>This is third tab. </b>${sample.text()}` },
-					{ label: "Disabled", disabled: true, elem: "This is last tab." },
+					{ label: "First", elem: `<b>This is the first item's tab body.</b> ${sample.text()}` },
+					{ label: "Second", elem: `<b>This is the second item's tab body.</b> ${sample.text()}` },
+					{ label: "Third", elem: `<b>This is the third item's tab body.</b> ${sample.text()}` },
+					{ label: "Disabled", disabled: true, elem: "This is the last item's tab body." },
 				],
 			});
 		},
@@ -116,10 +116,10 @@ export default [
 				type: "pill",
 				headAlign: "vertical-right",
 				item: [
-					{ label: "First", elem: `<b>This is first tab. </b>${sample.text()}` },
-					{ label: "Second", elem: `<b>This is second tab. </b>${sample.text()}` },
-					{ label: "Third", elem: `<b>This is third tab. </b>${sample.text()}` },
-					{ label: "Disabled", disabled: true, elem: "This is last tab." },
+					{ label: "First", elem: `<b>This is the first item's tab body.</b> ${sample.text()}` },
+					{ label: "Second", elem: `<b>This is the second item's tab body.</b> ${sample.text()}` },
+					{ label: "Third", elem: `<b>This is the third item's tab body.</b> ${sample.text()}` },
+					{ label: "Disabled", disabled: true, elem: "This is the last item's tab body." },
 				],
 			});
 		},
@@ -133,10 +133,10 @@ export default [
 				type: "pill",
 				headAlign: "fill",
 				item: [
-					{ label: "First", elem: `<b>This is first tab. </b>${sample.text()}` },
-					{ label: "Second", elem: `<b>This is second tab. </b>${sample.text()}` },
-					{ label: "Third", elem: `<b>This is third tab. </b>${sample.text()}` },
-					{ label: "Disabled", disabled: true, elem: "This is last tab." },
+					{ label: "First", elem: `<b>This is the first item's tab body.</b> ${sample.text()}` },
+					{ label: "Second", elem: `<b>This is the second item's tab body.</b> ${sample.text()}` },
+					{ label: "Third", elem: `<b>This is the third item's tab body.</b> ${sample.text()}` },
+					{ label: "Disabled", disabled: true, elem: "This is the last item's tab body." },
 				],
 			});
 		},
@@ -150,10 +150,10 @@ export default [
 				type: "tab",
 				flush: true,
 				item: [
-					{ label: "First", elem: `<b>This is first tab. </b>${sample.text()}` },
-					{ label: "Second", elem: `<b>This is second tab. </b>${sample.text()}` },
-					{ label: "Third", elem: `<b>This is third tab. </b>${sample.text()}` },
-					{ label: "Disabled", disabled: true, elem: "This is last tab." },
+					{ label: "First", elem: `<b>This is the first item's tab body.</b> ${sample.text()}` },
+					{ label: "Second", elem: `<b>This is the second item's tab body.</b> ${sample.text()}` },
+					{ label: "Third", elem: `<b>This is the third item's tab body.</b> ${sample.text()}` },
+					{ label: "Disabled", disabled: true, elem: "This is the last item's tab body." },
 				],
 			});
 		},
@@ -166,7 +166,7 @@ export default [
 			return new tab({
 				type: "tab",
 				item: [
-					{ label: "First", elem: `<b>This is first tab. </b>${sample.text()}` },
+					{ label: "First", elem: `<b>This is the first item's tab body.</b> ${sample.text()}` },
 					{
 						label: "Second",
 						elem: "This is second tab",
@@ -177,8 +177,8 @@ export default [
 							{ href: "#", label: "Something else here" },
 						],
 					},
-					{ label: "Third", elem: `<b>This is third tab. </b>${sample.text()}` },
-					{ label: "Disabled", disabled: true, elem: "This is last tab." },
+					{ label: "Third", elem: `<b>This is the third item's tab body.</b> ${sample.text()}` },
+					{ label: "Disabled", disabled: true, elem: "This is the last item's tab body." },
 				],
 			});
 		},
@@ -191,7 +191,7 @@ export default [
 			return new tab({
 				type: "pill",
 				item: [
-					{ label: "First", elem: `<b>This is first tab. </b>${sample.text()}` },
+					{ label: "First", elem: `<b>This is the first item's tab body.</b> ${sample.text()}` },
 					{
 						label: "Second",
 						elem: "This is second tab",
@@ -202,8 +202,8 @@ export default [
 							{ href: "#", label: "Something else here" },
 						],
 					},
-					{ label: "Third", elem: `<b>This is third tab. </b>${sample.text()}` },
-					{ label: "Disabled", disabled: true, elem: "This is last tab." },
+					{ label: "Third", elem: `<b>This is the third item's tab body.</b> ${sample.text()}` },
+					{ label: "Disabled", disabled: true, elem: "This is the last item's tab body." },
 				],
 			});
 		},
@@ -220,7 +220,7 @@ export default [
 					type: "tab",
 					flush: true, //!important
 					item: [
-						{ label: "First", elem: `<b>This is first tab. </b>${sample.text()}` },
+						{ label: "First", elem: `<b>This is the first item's tab body.</b> ${sample.text()}` },
 						{
 							label: "Second",
 							elem: "This is second tab",
@@ -231,8 +231,8 @@ export default [
 								{ href: "#", label: "Something else here" },
 							],
 						},
-						{ label: "Third", elem: `<b>This is third tab. </b>${sample.text()}` },
-						{ label: "Disabled", disabled: true, elem: "This is last tab." },
+						{ label: "Third", elem: `<b>This is the third item's tab body.</b> ${sample.text()}` },
+						{ label: "Disabled", disabled: true, elem: "This is the last item's tab body." },
 					],
 				}),
 				button: ["Understand", "Close"],
@@ -252,7 +252,7 @@ export default [
 					type: "pill",
 					flush: true, //!important
 					item: [
-						{ label: "First", elem: `<b>This is first tab. </b>${sample.text()}` },
+						{ label: "First", elem: `<b>This is the first item's tab body.</b> ${sample.text()}` },
 						{
 							label: "Second",
 							elem: "This is second tab",
@@ -263,8 +263,8 @@ export default [
 								{ href: "#", label: "Something else here" },
 							],
 						},
-						{ label: "Third", elem: `<b>This is third tab. </b>${sample.text()}` },
-						{ label: "Disabled", disabled: true, elem: "This is last tab." },
+						{ label: "Third", elem: `<b>This is the third item's tab body.</b> ${sample.text()}` },
+						{ label: "Disabled", disabled: true, elem: "This is the last item's tab body." },
 					],
 				}),
 				button: ["Understand", "Close"],
