@@ -6,7 +6,15 @@ import msg from "./msg.js";
 import div from "./div.js";
 import btnclose from "./btnclose.js";
 
-const defaultOption = { icon: null, color: null, elem: null, close: false };
+const defaultOption = {
+	icon: null,
+	color: null,
+	elem: null,
+	close: false,
+
+	onclose: null,
+	onclosed: null,
+};
 /**
  * opt : {tagoption,icon,color,elem,close}
  */
@@ -43,6 +51,8 @@ export class container extends div {
 
 			opt.attr = core.merge.attr(opt.attr, {
 				role: "alert",
+				"close.bs.alert": opt.onclose,
+				"closed.bs.alert": opt.onclosed,
 			});
 
 			opt.elem = new div({
@@ -62,6 +72,8 @@ export class container extends div {
 			delete opt.color;
 			delete opt.close;
 			delete opt.msg;
+			delete opt.onclose;
+			delete opt.onclosed;
 
 			super.data = opt;
 		}

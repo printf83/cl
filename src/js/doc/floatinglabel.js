@@ -21,6 +21,7 @@ export default [
 				new input({
 					type: "email",
 					label: "Email address",
+					helper: "We'll never share your email with anyone else.",
 					floatlabel: true,
 				}),
 

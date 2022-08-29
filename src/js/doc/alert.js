@@ -2,6 +2,8 @@
 import * as alert from "../base/alert.js";
 import hr from "../base/hr.js";
 import p from "../base/p.js";
+import * as core from "../base/core.js";
+import toast from "../base/toast.js";
 
 export default [
 	{
@@ -75,6 +77,26 @@ export default [
 			return new alert.container({
 				close: true,
 				color: "warning",
+				elem: "<strong>Holy guacamole!</strong> You should check in on some of those fields below.",
+			});
+		},
+	},
+
+	{
+		title: "Event",
+		import: ["alert", "toast"],
+		code: () => {
+			let fn = (sender, event) => `Alert <b>${core.elemInfo(sender)}</b> event <b>${event}</b> trigged`;
+
+			return new alert.container({
+				close: true,
+				color: "danger",
+				onclose: (event) => {
+					new toast("!", fn(event.currentTarget, "onclose")).show();
+				},
+				onclosed: (event) => {
+					new toast("x", fn(event.currentTarget, "onclosed")).show();
+				},
 				elem: "<strong>Holy guacamole!</strong> You should check in on some of those fields below.",
 			});
 		},
