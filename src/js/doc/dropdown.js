@@ -7,6 +7,7 @@ import div from "../base/div.js";
 import input from "../base/input.js";
 import button from "../base/button.js";
 import * as navbar from "../base/navbar.js";
+import toast from "../base/toast.js";
 
 export default [
 	{
@@ -700,6 +701,38 @@ export default [
 					option: dditem,
 				}),
 			];
+		},
+	},
+
+	{
+		title: "Event",
+		import: ["dropdown", "toast"],
+		code: () => {
+			let fn = (sender, event) => `Dropdown <b>${core.elemInfo(sender)}</b> event <b>${event}</b> trigged`;
+
+			return new dropdown({
+				label: "Drowdown button",
+				color: "secondary",
+				onshow: (event) => {
+					new toast("i", fn(event.currentTarget, "onshow")).show();
+				},
+				onshown: (event) => {
+					new toast("/", fn(event.currentTarget, "onshown")).show();
+				},
+				onhide: (event) => {
+					new toast("!", fn(event.currentTarget, "onhide")).show();
+				},
+				onhidden: (event) => {
+					new toast("x", fn(event.currentTarget, "onhidden")).show();
+				},
+				option: [
+					{ href: "#", label: "Action" },
+					{ href: "#", label: "Another action" },
+					{ href: "#", label: "Something else here" },
+					{ value: "-" },
+					{ href: "#", label: "Separated link" },
+				],
+			});
 		},
 	},
 ];

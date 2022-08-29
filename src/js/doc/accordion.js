@@ -76,56 +76,56 @@ export default [
 		title: "Event",
 		import: ["accordion", "toast", "sample"],
 		code: () => {
-			let fn = {
-				show: (event) => {
-					new toast(
-						"i",
-						`Accordion <b>${core.elemInfo(event.currentTarget)}</b> event <b>onshow</b> trigged`
-					).show();
-				},
-				shown: (event) => {
-					new toast(
-						"/",
-						`Accordion <b>${core.elemInfo(event.currentTarget)}</b> event <b>onshown</b> trigged`
-					).show();
-				},
-				hide: (event) => {
-					new toast(
-						"!",
-						`Accordion <b>${core.elemInfo(event.currentTarget)}</b> event <b>onhide</b> trigged`
-					).show();
-				},
-				hidden: (event) => {
-					new toast(
-						"x",
-						`Accordion <b>${core.elemInfo(event.currentTarget)}</b> event <b>onhidden</b> trigged`
-					).show();
-				},
-			};
+			let fn = (sender, event) => `Accordion <b>${core.elemInfo(sender)}</b> event <b>${event}</b> trigged`;
+
 			return new accordion({
 				item: [
 					{
 						label: "Accordion Item 1",
-						onshow: fn.show,
-						onshown: fn.shown,
-						onhide: fn.hide,
-						onhidden: fn.hidden,
+						onshow: (event) => {
+							new toast("i", fn(event.currentTarget, "onshow")).show();
+						},
+						onshown: (event) => {
+							new toast("/", fn(event.currentTarget, "onshown")).show();
+						},
+						onhide: (event) => {
+							new toast("!", fn(event.currentTarget, "onhide")).show();
+						},
+						onhidden: (event) => {
+							new toast("x", fn(event.currentTarget, "onhidden")).show();
+						},
 						elem: ["<b>This is the first item's accordion body.</b> ", sample.text()],
 					},
 					{
 						label: "Accordion Item 2",
-						onshow: fn.show,
-						onshown: fn.shown,
-						onhide: fn.hide,
-						onhidden: fn.hidden,
+						onshow: (event) => {
+							new toast("i", fn(event.currentTarget, "onshow")).show();
+						},
+						onshown: (event) => {
+							new toast("/", fn(event.currentTarget, "onshown")).show();
+						},
+						onhide: (event) => {
+							new toast("!", fn(event.currentTarget, "onhide")).show();
+						},
+						onhidden: (event) => {
+							new toast("x", fn(event.currentTarget, "onhidden")).show();
+						},
 						elem: ["<b>This is the second item's accordion body.</b> ", sample.text()],
 					},
 					{
 						label: "Accordion Item 3",
-						onshow: fn.show,
-						onshown: fn.shown,
-						onhide: fn.hide,
-						onhidden: fn.hidden,
+						onshow: (event) => {
+							new toast("i", fn(event.currentTarget, "onshow")).show();
+						},
+						onshown: (event) => {
+							new toast("/", fn(event.currentTarget, "onshown")).show();
+						},
+						onhide: (event) => {
+							new toast("!", fn(event.currentTarget, "onhide")).show();
+						},
+						onhidden: (event) => {
+							new toast("x", fn(event.currentTarget, "onhidden")).show();
+						},
 						elem: ["<b>This is the third item's accordion body.</b> ", sample.text()],
 					},
 				],

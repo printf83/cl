@@ -1017,6 +1017,8 @@ export default [
 		title: "Event",
 		import: ["button", "toast", "modal"],
 		code: () => {
+			let fn = (sender, event) => `Modal <b>${core.elemInfo(sender)}</b> event <b>${event}</b> trigged`;
+
 			return new button({
 				label: "Show live modal dialog",
 				color: "primary",
@@ -1026,28 +1028,16 @@ export default [
 						elem: "Modal event example",
 						button: "Okay",
 						onshow: (event) => {
-							new toast(
-								"i",
-								`Modal <b>${core.elemInfo(event.currentTarget)}</b> event onshow trigged`
-							).show();
+							new toast("i", fn(event.currentTarget, "onshow")).show();
 						},
 						onshown: (event) => {
-							new toast(
-								"/",
-								`Modal <b>${core.elemInfo(event.currentTarget)}</b> event onshown trigged`
-							).show();
+							new toast("/", fn(event.currentTarget, "onshown")).show();
 						},
 						onhide: (event) => {
-							new toast(
-								"!",
-								`Modal <b>${core.elemInfo(event.currentTarget)}</b> event onhide trigged`
-							).show();
+							new toast("!", fn(event.currentTarget, "onhide")).show();
 						},
 						onhidden: (event) => {
-							new toast(
-								"x",
-								`Modal <b>${core.elemInfo(event.currentTarget)}</b> event onhidden trigged`
-							).show();
+							new toast("x", fn(event.currentTarget, "onhidden")).show();
 						},
 					}).show();
 				},

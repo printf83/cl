@@ -100,6 +100,8 @@ export default [
 		import: ["button", "card", "collapse", "toast"],
 		code: () => {
 			let id = core.UUID();
+			let fn = (sender, event) =>
+				`Collapse container <b>${core.elemInfo(sender)}</b> event <b>${event}</b> trigged`;
 
 			return [
 				new collapse.toggle({
@@ -117,34 +119,16 @@ export default [
 				new collapse.container({
 					id: id,
 					onshow: (event) => {
-						new toast(
-							"i",
-							`Collapse container <b>${core.elemInfo(
-								event.currentTarget
-							)}</b> event <b>onshow</b> trigged`
-						).show();
+						new toast("i", fn(event.currentTarget, "onshow")).show();
 					},
 					onshown: (event) => {
-						new toast(
-							"/",
-							`Collapse container <b>${core.elemInfo(
-								event.currentTarget
-							)}</b> event <b>onshown</b> trigged`
-						).show();
+						new toast("/", fn(event.currentTarget, "onshown")).show();
 					},
 					onhide: (event) => {
-						new toast(
-							"!",
-							`Collapse container <b>${core.elemInfo(
-								event.currentTarget
-							)}</b> event <b>onhide</b> trigged`
-						).show();
+						new toast("!", fn(event.currentTarget, "onhide")).show();
 					},
 					onhidden: (event) => {
-						new toast(
-							"x",
-							`Collapse container <b>${core.elemInfo(event.currentTarget)}</b> event <b>onhidden</b> trigged`
-						).show();
+						new toast("x", fn(event.currentTarget, "onhidden")).show();
 					},
 					elem: new card.container({
 						elem: new card.body({

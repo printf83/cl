@@ -18,6 +18,11 @@ const defaultOption = {
 	dark: false,
 	vertical: false,
 	weight: null,
+
+	onshow: null,
+	onshown: null,
+	onhide: null,
+	onhidden: null,
 };
 
 /**
@@ -42,7 +47,6 @@ export default class dropdown extends tag {
 
 			let menuctl = new ul({
 				class: ["dropdown-menu", opt.dark ? "dropdown-menu-dark" : null],
-				attr: { "aria-labelledby": opt.id },
 				elem: new option.dropdown({ item: opt.option, selected: opt.value }),
 			});
 
@@ -58,6 +62,11 @@ export default class dropdown extends tag {
 			delete m.autoclose;
 			delete m.dark;
 
+			delete m.onshow;
+			delete m.onshown;
+			delete m.onhide;
+			delete m.onhidden;
+
 			let s = core.extend({}, m);
 
 			delete m.id;
@@ -69,6 +78,12 @@ export default class dropdown extends tag {
 				"data-bs-reference": opt.reference,
 				"data-bs-offset": opt.offset,
 				"data-bs-toggle": "dropdown",
+
+				"aria-labelledby": opt.id,
+				"show.bs.dropdown": opt.onshow,
+				"shown.bs.dropdown": opt.onshown,
+				"hide.bs.dropdown": opt.onhide,
+				"hidden.bs.dropdown": opt.onhidden,
 			});
 
 			let btnctl = opt.splittoggle ? new button(m) : new button(s);
