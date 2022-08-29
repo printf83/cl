@@ -100,11 +100,8 @@ export default class example extends div {
 		}
 
 		let item = [];
-		let html = null;
 
 		if (opt.code && opt.view) {
-			html = core.html(opt.code());
-
 			item.push({
 				label: "Generated HTML",
 				icon: "code",
@@ -113,7 +110,7 @@ export default class example extends div {
 					if (!sender.getAttribute("data-loaded")) {
 						core.replaceChild(
 							sender.firstChild,
-							new codepreview({ type: "html", code: html, container: null })
+							new codepreview({ type: "html", code: core.html(opt.code()), container: null })
 						);
 						PR.prettyPrint();
 						sender.setAttribute("data-loaded", "true");
@@ -184,7 +181,7 @@ export default class example extends div {
 							marginbottom: 3,
 							color: opt.dark ? "dark" : null,
 							class: opt.viewclass,
-							elem: new card.body({ elem: html }),
+							elem: new card.body({ elem: opt.container(opt.code()) }),
 					  })
 					: null,
 				opt.code
