@@ -148,7 +148,7 @@ function gen_content(m1, m2, callback) {
 				core.replaceChild(
 					document.getElementById("nextbar"),
 					new div({
-						elem: "Loading...",
+						elem: "",
 					})
 				);
 
