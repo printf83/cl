@@ -52,7 +52,7 @@ export default [
 						hidelabel: true,
 						type: "text",
 						placeholder: "Username",
-						container: false, //<-- set container null
+						container: false, //<-- set container false
 					}),
 					new inputgroup.text("@"),
 					new input({
@@ -60,7 +60,7 @@ export default [
 						hidelabel: true,
 						type: "text",
 						placeholder: "Server",
-						container: false, //<-- set container null
+						container: false, //<-- set container false
 					}),
 				]),
 
