@@ -87,6 +87,7 @@ export default [
 		import: ["input", "button", "db", "query", "sample"],
 		code: () => {
 			let resultOutputId = core.UUID();
+			let queryOutputId = core.UUID();
 
 			return [
 				new button({
@@ -108,6 +109,7 @@ export default [
 								},
 								[
 									(_event, data) => {
+										document.getElementById(queryOutputId).value = JSON.stringify(data);
 										sample.query_data = data;
 
 										//get record
@@ -128,7 +130,19 @@ export default [
 						}, sender);
 					},
 				}),
-				new input({ type: "textarea", label: "Result", id: resultOutputId, rows: 10 }),
+				new input({
+					type: "text",
+					label: "query.dialog result",
+					id: queryOutputId,
+					readonly: true,
+				}),
+				new input({
+					type: "textarea",
+					label: "db.api.list result",
+					id: resultOutputId,
+					readonly: true,
+					rows: 10,
+				}),
 			];
 		},
 	},
@@ -202,6 +216,7 @@ export default [
 		import: ["input", "button", "db", "query", "sample"],
 		code: () => {
 			let resultOutputId = core.UUID();
+			let queryOutputId = core.UUID();
 
 			return [
 				new button({
@@ -221,6 +236,7 @@ export default [
 								},
 								[
 									(_event, data) => {
+										document.getElementById(queryOutputId).value = JSON.stringify(data);
 										sample.query_data.filter = data;
 
 										//get record
@@ -241,7 +257,19 @@ export default [
 						}, sender);
 					},
 				}),
-				new input({ type: "textarea", label: "Result", id: resultOutputId, rows: 10 }),
+				new input({
+					type: "text",
+					label: "query.filter result",
+					id: queryOutputId,
+					readonly: true,
+				}),
+				new input({
+					type: "textarea",
+					label: "db.api.list result",
+					id: resultOutputId,
+					readonly: true,
+					rows: 10,
+				}),
 			];
 		},
 	},
@@ -306,6 +334,7 @@ export default [
 		import: ["input", "button", "db", "query", "sample"],
 		code: () => {
 			let resultOutputId = core.UUID();
+			let queryOutputId = core.UUID();
 
 			return [
 				new button({
@@ -324,6 +353,7 @@ export default [
 							},
 							[
 								(_event, data) => {
+									document.getElementById(queryOutputId).value = JSON.stringify(data);
 									sample.query_data.sort = data;
 
 									//get record
@@ -343,7 +373,19 @@ export default [
 						).show();
 					},
 				}),
-				new input({ type: "textarea", label: "Result", id: resultOutputId, rows: 10 }),
+				new input({
+					type: "text",
+					label: "query.sort result",
+					id: queryOutputId,
+					readonly: true,
+				}),
+				new input({
+					type: "textarea",
+					label: "db.api.list result",
+					id: resultOutputId,
+					readonly: true,
+					rows: 10,
+				}),
 			];
 		},
 	},
@@ -406,6 +448,7 @@ export default [
 		import: ["input", "button", "db", "query", "sample"],
 		code: () => {
 			let resultOutputId = core.UUID();
+			let queryOutputId = core.UUID();
 
 			return [
 				new button({
@@ -423,6 +466,7 @@ export default [
 							},
 							[
 								(_event, data) => {
+									document.getElementById(queryOutputId).value = JSON.stringify(data);
 									sample.query_data.field = data;
 
 									//get record
@@ -442,7 +486,19 @@ export default [
 						).show();
 					},
 				}),
-				new input({ type: "textarea", label: "Result", id: resultOutputId, rows: 10 }),
+				new input({
+					type: "text",
+					label: "query.field result",
+					id: queryOutputId,
+					readonly: true,
+				}),
+				new input({
+					type: "textarea",
+					label: "db.api.list result",
+					id: resultOutputId,
+					readonly: true,
+					rows: 10,
+				}),
 			];
 		},
 	},
@@ -512,6 +568,7 @@ export default [
 		import: ["input", "button", "db", "query", "sample"],
 		code: () => {
 			let resultOutputId = core.UUID();
+			let queryOutputId = core.UUID();
 
 			return [
 				new button({
@@ -531,6 +588,9 @@ export default [
 							},
 							[
 								(_event, data) => {
+									document.getElementById(queryOutputId).value = JSON.stringify(data);
+
+									//need to recalculate "skip" base on limit
 									let skip = sample.query_data.skip / sample.query_data.limit;
 									sample.query_data.limit = data;
 									sample.query_data.skip = skip * sample.query_data.limit;
@@ -552,7 +612,19 @@ export default [
 						).show();
 					},
 				}),
-				new input({ type: "textarea", label: "Result", id: resultOutputId, rows: 10 }),
+				new input({
+					type: "text",
+					label: "query.limit result",
+					id: queryOutputId,
+					readonly: true,
+				}),
+				new input({
+					type: "textarea",
+					label: "db.api.list result",
+					id: resultOutputId,
+					readonly: true,
+					rows: 10,
+				}),
 			];
 		},
 	},
@@ -621,6 +693,7 @@ export default [
 		import: ["input", "button", "db", "query", "sample"],
 		code: () => {
 			let resultOutputId = core.UUID();
+			let queryOutputId = core.UUID();
 
 			return [
 				new button({
@@ -641,6 +714,7 @@ export default [
 							},
 							[
 								(_event, data) => {
+									document.getElementById(queryOutputId).value = JSON.stringify(data);
 									sample.query_data.skip = data;
 
 									//get record
@@ -660,7 +734,19 @@ export default [
 						).show();
 					},
 				}),
-				new input({ type: "textarea", label: "Result", id: resultOutputId, rows: 10 }),
+				new input({
+					type: "text",
+					label: "query.page result",
+					id: queryOutputId,
+					readonly: true,
+				}),
+				new input({
+					type: "textarea",
+					label: "db.api.list result",
+					id: resultOutputId,
+					readonly: true,
+					rows: 10,
+				}),
 			];
 		},
 	},
