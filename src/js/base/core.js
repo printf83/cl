@@ -793,6 +793,7 @@ function attachAttr(elems, arg) {
 					elems[i] = true;
 				} else {
 					if (arg[i] instanceof Function && arg[i] !== undefined) {
+						if (DEBUG) console.log(`Attach ${i} to ${elemInfo(elems)}`);
 						//console.warn(`Element ${elemInfo(elems)} has ${i} function`);
 						elems.addEventListener(i.startsWith("on") ? i.substring(2) : i, arg[i], false);
 

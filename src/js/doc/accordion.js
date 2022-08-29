@@ -2,6 +2,7 @@
 import sample from "./sample.js";
 import * as core from "../base/core.js";
 import accordion from "../base/accordion.js";
+import toast from "../base/toast.js";
 
 export default [
 	{
@@ -67,6 +68,47 @@ export default [
 			return new accordion({
 				autoclose: false,
 				item: [fn(1), fn(2), fn(3)],
+			});
+		},
+	},
+
+	{
+		title: "Event",
+		import: ["accordion", "toast", "sample"],
+		code: () => {
+			return new accordion({
+				item: [
+					{
+						label: "Accordion Item 1",
+						onshow: () => {
+							new toast("/", "Accordion 1 show").show();
+						},
+						onhide: () => {
+							new toast("!", "Accordion 1 hide").show();
+						},
+						elem: ["<b>This is the first item's accordion body.</b> ", sample.text()],
+					},
+					{
+						label: "Accordion Item 2",
+						onshow: () => {
+							new toast("/", "Accordion 2 show").show();
+						},
+						onhide: () => {
+							new toast("!", "Accordion 2 hide").show();
+						},
+						elem: ["<b>This is the second item's accordion body.</b> ", sample.text()],
+					},
+					{
+						label: "Accordion Item 3",
+						onshow: () => {
+							new toast("/", "Accordion 3 show").show();
+						},
+						onhide: () => {
+							new toast("!", "Accordion 3 hide").show();
+						},
+						elem: ["<b>This is the third item's accordion body.</b> ", sample.text()],
+					},
+				],
 			});
 		},
 	},

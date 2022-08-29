@@ -383,7 +383,7 @@ function gen_example(opt) {
 			option: null,
 			code: null,
 			sample: null,
-			import: null,
+			source: null,
 			container: (elem) => {
 				return elem;
 			},
@@ -418,12 +418,12 @@ function gen_example(opt) {
 		});
 	}
 
-	let i = [];
+	let sourcecode = [];
 	if (opt.code) {
-		i.push('"use strict";');
-		i.push(`	`);
-		i.push(`\/\/\/library`);
-		i.push(dblibrary.core);
+		sourcecode.push('"use strict";');
+		sourcecode.push(`	`);
+		sourcecode.push(`\/\/\/library`);
+		sourcecode.push(dblibrary.core);
 		if (opt.import) {
 			let importList = [];
 			opt.import.forEach((item) => {
@@ -434,18 +434,18 @@ function gen_example(opt) {
 				}
 			});
 
-			i = i.concat(importList.sort());
+			sourcecode = sourcecode.concat(importList.sort());
 		}
-		i.push(`	`);
+		sourcecode.push(`	`);
 
-		i.push(`\/\/\/code`);
-		i.push(`let code = ${opt.code.toString()};`);
-		i.push(`	`);
+		sourcecode.push(`\/\/\/code`);
+		sourcecode.push(`let code = ${opt.code.toString()};`);
+		sourcecode.push(`	`);
 
-		i.push(`\/\/\/loader`);
-		i.push(`core.documentReady(() => {`);
-		i.push(`	core.appendChild(document.body, code());`);
-		i.push(`});`);
+		sourcecode.push(`\/\/\/loader`);
+		sourcecode.push(`core.documentReady(() => {`);
+		sourcecode.push(`	core.appendChild(document.body, code());`);
+		sourcecode.push(`});`);
 	}
 
 	return new example({
@@ -456,7 +456,7 @@ function gen_example(opt) {
 		dark: opt.dark,
 		viewclass: opt.viewclass,
 		container: opt.container,
-		import: i && i.length > 0 ? i : null,
+		source: sourcecode && sourcecode.length > 0 ? sourcecode : null,
 		code: opt.code,
 		sample: opt.sample,
 	});

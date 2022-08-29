@@ -20,7 +20,7 @@ const defaultOption = {
 	codecollapse: true,
 	dark: false,
 	sample: null,
-	import: null,
+	source: null,
 	view: true,
 	viewclass: null,
 	container: (elem) => {
@@ -100,12 +100,25 @@ export default class example extends div {
 		}
 
 		let item = [];
+		let html = null;
 
 		if (opt.code && opt.view) {
+			html = core.html(opt.code());
+
 			item.push({
 				label: "Generated HTML",
 				icon: "code",
-				elem: new codepreview({ type: "html", code: core.html(opt.code()), container: null }),
+				// elem: new codepreview({ type: "html", code: html, container: null }),
+				onshow: (sender) => {
+					if (!sender.getAttribute("data-loaded")) {
+						core.replaceChild(
+							sender.firstChild,
+							new codepreview({ type: "html", code: html, container: null })
+						);
+						PR.prettyPrint();
+						sender.setAttribute("data-loaded", "true");
+					}
+				},
 			});
 		}
 
@@ -114,19 +127,41 @@ export default class example extends div {
 				item.push({
 					label: sampleKey,
 					icon: "link",
-					elem: new codepreview({ type: "js", code: opt.sample[sampleKey].toString(), container: null }),
+					//elem: new codepreview({ type: "js", code: opt.sample[sampleKey].toString(), container: null }),
+					onshow: (sender) => {
+						if (!sender.getAttribute("data-loaded")) {
+							core.replaceChild(
+								sender.firstChild,
+								new codepreview({
+									type: "js",
+									code: opt.sample[sampleKey].toString(),
+									container: null,
+								})
+							);
+							PR.prettyPrint();
+							sender.setAttribute("data-loaded", "true");
+						}
+					},
 				});
 			});
 		}
 
-		if (opt.import) {
+		if (opt.source) {
 			item.push({
-				// label: "import",
-				// icon: "file-import",
 				label: "Source Code",
 				icon: "fire",
 				active: !opt.codecollapse,
-				elem: new codepreview({ type: "js", code: opt.import.join(`\n`), container: null }),
+				// elem: new codepreview({ type: "js", code: opt.source.join(`\n`), container: null }),
+				onshow: (sender) => {
+					if (!sender.getAttribute("data-loaded")) {
+						core.replaceChild(
+							sender.firstChild,
+							new codepreview({ type: "js", code: opt.source.join(`\n`), container: null })
+						);
+						PR.prettyPrint();
+						sender.setAttribute("data-loaded", "true");
+					}
+				},
 			});
 		}
 
@@ -146,17 +181,14 @@ export default class example extends div {
 				ctlmsg ? new div({ elem: ctlmsg }) : null,
 				opt.code && opt.view
 					? new card.container({
-							// rounded: ["top", "0"],
 							marginbottom: 3,
 							color: opt.dark ? "dark" : null,
 							class: opt.viewclass,
-							elem: new card.body({ elem: opt.container(opt.code()) }),
+							elem: new card.body({ elem: html }),
 					  })
 					: null,
 				opt.code
 					? new accordion({
-							// border: opt.view ? ["top-0", "border"] : false,
-							// flush: opt.view ? true : false,
 							autoclose: false,
 							autoopen: false,
 							item: item,
