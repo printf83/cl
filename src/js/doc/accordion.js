@@ -79,7 +79,7 @@ export default [
 			let fn = {
 				show: (event) => {
 					new toast(
-						"!",
+						"i",
 						`Accordion <b>${core.elemInfo(event.currentTarget)}</b> event <b>onshow</b> trigged`
 					).show();
 				},
