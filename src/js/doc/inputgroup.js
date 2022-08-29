@@ -45,14 +45,14 @@ export default [
 				}),
 
 				//important if you create inputgroup manually,
-				//please set container to null
+				//please set container to false
 				new inputgroup.container([
 					new input({
 						label: "Username",
 						hidelabel: true,
 						type: "text",
 						placeholder: "Username",
-						container: null, //<-- set container null
+						container: false, //<-- set container null
 					}),
 					new inputgroup.text("@"),
 					new input({
@@ -60,7 +60,7 @@ export default [
 						hidelabel: true,
 						type: "text",
 						placeholder: "Server",
-						container: null, //<-- set container null
+						container: false, //<-- set container null
 					}),
 				]),
 
