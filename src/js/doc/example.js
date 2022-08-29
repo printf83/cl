@@ -42,7 +42,7 @@ export default [
 			return new example({
 				title: "Title",
 				msg: "Message",
-				import: [`import button from "./base/button.js";`],
+				source: [`import button from "./base/button.js";`, `\/\/\/another code`],
 				code: () => {
 					return new button({ label: "Button", color: "primary" });
 				},
@@ -59,7 +59,7 @@ export default [
 				title: "Title",
 				msg: "Message",
 				view: false,
-				import: [`import button from "./base/button.js";`],
+				source: [`import button from "./base/button.js";`, `\/\/\/another code`],
 				code: () => {
 					new button({ label: "Button", color: "primary" });
 				},
@@ -75,7 +75,7 @@ export default [
 			return new example({
 				title: "Title",
 				msg: "Message",
-				import: [`import input from "./base/input.js";`],
+				source: [`import input from "./base/input.js";`, `\/\/\/another code`],
 				code: () => {
 					return new input({
 						type: "select",
@@ -100,7 +100,7 @@ export default [
 				title: "Title",
 				msg: "Message",
 				dark: true,
-				import: [`import toast from "./base/toast.js"`],
+				source: [`import toast from "./base/toast.js"`, `\/\/\/another code`],
 				code: () => {
 					return new toast({
 						color: "primary",
@@ -124,7 +124,7 @@ export default [
 				title: "Title",
 				msg: "Message",
 				viewclass: "cl-highlight-col",
-				import: [`import div from "./base/div.js";`],
+				source: [`import div from "./base/div.js";`, `\/\/\/another code`],
 				code: () => {
 					return new div("container", [
 						new div("row", [
@@ -162,7 +162,7 @@ export default [
 						)
 					);
 				},
-				import: [`import button from "./base/button.js";`],
+				source: [`import button from "./base/button.js";`, `\/\/\/another code`],
 				code: () => {
 					return [
 						new button({ label: "Primary", color: "primary" }),
