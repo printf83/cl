@@ -6,6 +6,7 @@ import button from "./button.js";
 import * as inputgroup from "./inputgroup.js";
 import div from "./div.js";
 import * as option from "./option.js";
+import toast from "./toast.js";
 
 const defaultOption = {
 	type: "text", //checkbox,radio,text,number,textarea
@@ -27,6 +28,7 @@ const defaultOption = {
 
 	numctl: false,
 	addctl: null,
+	copyctl: null,
 
 	min: null,
 	max: null,
@@ -55,7 +57,7 @@ const defaultOption = {
 };
 
 /**
- * opt : {tagoption,id,name,type,label,hidelabel,floatlabel,inline,labelsize,ctlsize,size,weight,value,checked,placeholder,option,numctl,addctl,min,max,step,row,multiple,required,minlengh,maxlenght,inputmode,pattern,valid,invalid,before,after,plaintext,readonly,disabled,container,flex,nowrap,onclick,onchange,onclick,onfocus,onblur}
+ * opt : {tagoption,id,name,type,label,hidelabel,floatlabel,inline,labelsize,ctlsize,size,weight,value,checked,placeholder,option,numctl,addctl,copyctl,min,max,step,row,multiple,required,minlengh,maxlenght,inputmode,pattern,valid,invalid,before,after,plaintext,readonly,disabled,container,flex,nowrap,onclick,onchange,onclick,onfocus,onblur}
  */
 export default class input extends tag {
 	constructor(...opt) {
@@ -117,7 +119,7 @@ export default class input extends tag {
 				: opt.type === "number" && opt.numctl
 				? new button({
 						icon: "minus",
-						// color: "primary",
+						color: "secondary",
 						onclick: (e) => {
 							let sender = e.currentTarget;
 							let parent = sender.parentElement;
@@ -144,7 +146,7 @@ export default class input extends tag {
 				: opt.type === "number" && opt.numctl
 				? new button({
 						icon: { icon: "plus" },
-						color: "primary",
+						color: "secondary",
 						onclick: (e) => {
 							let sender = e.currentTarget;
 							let parent = sender.parentElement;
@@ -163,8 +165,24 @@ export default class input extends tag {
 				: opt.addctl
 				? new button({
 						icon: { icon: "plus" },
-						// color: "primary",
+						color: "secondary",
 						onclick: opt.addctl,
+				  })
+				: null;
+
+			let copyctl = opt.copyctl
+				? new button({
+						icon: "clipboard",
+						color: "secondary",
+						onclick: (event) => {
+							try {
+								let str = document.getElementById(opt.id).value;
+								navigator.clipboard.writeText(str);
+								new toast("/", "Copied to clipboard").show();
+							} catch (ex) {
+								new toast("!!", `Error when copy code to clipboard. ${ex}`).show();
+							}
+						},
 				  })
 				: null;
 
@@ -412,8 +430,8 @@ export default class input extends tag {
 			//add after element
 			ctl.push(afterctl);
 
-			// //add helper
-			// ctl.push(helper);
+			//add copyctl
+			ctl.push(copyctl);
 
 			//add validation feedback
 			ctl.push(validmsg);

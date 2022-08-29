@@ -127,7 +127,7 @@ export default [
 						);
 					},
 				}),
-				new input({ type: "text", label: "Result", id: resultOutputId }),
+				new input({ type: "text", label: "Result", id: resultOutputId, copyctl: true }),
 			];
 		},
 	},
@@ -200,7 +200,7 @@ export default [
 						}).show();
 					},
 				}),
-				new input({ type: "text", label: "Result", id: resultOutputId }),
+				new input({ type: "text", label: "Result", id: resultOutputId, copyctl: true }),
 			];
 		},
 	},
@@ -330,7 +330,7 @@ export default [
 						}).show();
 					},
 				}),
-				new input({ type: "text", label: "Result", id: resultOutputId }),
+				new input({ type: "text", label: "Result", id: resultOutputId, copyctl: true }),
 			];
 		},
 	},
