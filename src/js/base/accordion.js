@@ -20,7 +20,9 @@ const defaultItemOption = {
 	active: false,
 	item: null,
 	onshow: null,
+	onshown: null,
 	onhide: null,
+	onhidden: null,
 };
 
 /**
@@ -74,7 +76,9 @@ export default class accordion extends div {
 							delete t.iconafter;
 							delete t.showlabel;
 							delete t.onshow;
+							delete t.onshown;
 							delete t.onhide;
+							delete t.onhidden;
 
 							return new div({
 								class: "accordion-item",
@@ -103,16 +107,10 @@ export default class accordion extends div {
 										attr: {
 											"aria-labelledby": `${i.id}-head`,
 											"data-bs-parent": opt.autoclose ? `#${opt.id}` : null,
-											"show.bs.collapse": i.onshow
-												? (event) => {
-														i.onshow(event.currentTarget);
-												  }
-												: null,
-											"hide.bs.collapse": i.onhide
-												? (event) => {
-														i.onhide(event.currentTarget);
-												  }
-												: null,
+											"show.bs.collapse": i.onshow,
+											"shown.bs.collapse": i.onshown,
+											"hide.bs.collapse": i.onhide,
+											"hidden.bs.collapse": i.onhidden,
 										},
 										elem: new div(t),
 									}),

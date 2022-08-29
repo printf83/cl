@@ -77,11 +77,29 @@ export default [
 		import: ["accordion", "toast", "sample"],
 		code: () => {
 			let fn = {
-				show: (sender) => {
-					new toast("/", `Accordion <b>${core.elemInfo(sender)}</b> event <b>onshow</b> trigged`).show();
+				show: (event) => {
+					new toast(
+						"!",
+						`Accordion <b>${core.elemInfo(event.currentTarget)}</b> event <b>onshow</b> trigged`
+					).show();
 				},
-				hide: (sender) => {
-					new toast("x", `Accordion <b>${core.elemInfo(sender)}</b> event <b>onhide</b> trigged`).show();
+				shown: (event) => {
+					new toast(
+						"/",
+						`Accordion <b>${core.elemInfo(event.currentTarget)}</b> event <b>onshown</b> trigged`
+					).show();
+				},
+				hide: (event) => {
+					new toast(
+						"!",
+						`Accordion <b>${core.elemInfo(event.currentTarget)}</b> event <b>onhide</b> trigged`
+					).show();
+				},
+				hidden: (event) => {
+					new toast(
+						"x",
+						`Accordion <b>${core.elemInfo(event.currentTarget)}</b> event <b>onhidden</b> trigged`
+					).show();
 				},
 			};
 			return new accordion({
@@ -89,19 +107,25 @@ export default [
 					{
 						label: "Accordion Item 1",
 						onshow: fn.show,
+						onshown: fn.shown,
 						onhide: fn.hide,
+						onhidden: fn.hidden,
 						elem: ["<b>This is the first item's accordion body.</b> ", sample.text()],
 					},
 					{
 						label: "Accordion Item 2",
 						onshow: fn.show,
+						onshown: fn.shown,
 						onhide: fn.hide,
+						onhidden: fn.hidden,
 						elem: ["<b>This is the second item's accordion body.</b> ", sample.text()],
 					},
 					{
 						label: "Accordion Item 3",
 						onshow: fn.show,
+						onshown: fn.shown,
 						onhide: fn.hide,
+						onhidden: fn.hidden,
 						elem: ["<b>This is the third item's accordion body.</b> ", sample.text()],
 					},
 				],
