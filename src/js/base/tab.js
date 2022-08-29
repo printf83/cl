@@ -28,6 +28,11 @@ const defaultItemOption = {
 	active: false,
 	option: null,
 	elem: null,
+
+	onshow: null,
+	onshown: null,
+	onhide: null,
+	onhidden: null,
 };
 
 /**
@@ -116,6 +121,11 @@ export default class tab extends div {
 										: "tab",
 									"aria-controls": `${i.id}-body`,
 									role: i.option ? "button" : null,
+
+									"show.bs.tab": i.onshow,
+									"shown.bs.tab": i.onshown,
+									"hide.bs.tab": i.onhide,
+									"hidden.bs.tab": i.onhidden,
 								},
 								elem: new label({
 									label: i.label,

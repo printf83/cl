@@ -80,6 +80,7 @@ export default class dropdown extends tag {
 				"data-bs-toggle": "dropdown",
 
 				"aria-labelledby": opt.id,
+
 				"show.bs.dropdown": opt.onshow,
 				"shown.bs.dropdown": opt.onshown,
 				"hide.bs.dropdown": opt.onhide,

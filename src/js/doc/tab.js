@@ -1,7 +1,9 @@
 "use strict";
+import * as core from "../base/core.js";
 import sample from "./sample.js";
 import tab from "../base/tab.js";
 import modal from "../base/modal.js";
+import toast from "../base/toast.js";
 
 export default [
 	{
@@ -269,6 +271,68 @@ export default [
 				}),
 				button: ["Understand", "Close"],
 				debug: true, //this last option is for this documentation preview only
+			});
+		},
+	},
+
+	{
+		title: "Event",
+		import: ["tab", "toast", "sample"],
+		code: () => {
+			let fn = (sender, event) => `Tab <b>${core.elemInfo(sender)}</b> event <b>${event}</b> trigged`;
+
+			return new tab({
+				item: [
+					{
+						label: "First",
+						onshow: (event) => {
+							new toast("i", fn(event.currentTarget, "onshow")).show();
+						},
+						onshown: (event) => {
+							new toast("/", fn(event.currentTarget, "onshown")).show();
+						},
+						onhide: (event) => {
+							new toast("!", fn(event.currentTarget, "onhide")).show();
+						},
+						onhidden: (event) => {
+							new toast("x", fn(event.currentTarget, "onhidden")).show();
+						},
+						elem: `<b>This is the first item's tab body.</b> ${sample.text()}`,
+					},
+					{
+						label: "Second",
+						onshow: (event) => {
+							new toast("i", fn(event.currentTarget, "onshow")).show();
+						},
+						onshown: (event) => {
+							new toast("/", fn(event.currentTarget, "onshown")).show();
+						},
+						onhide: (event) => {
+							new toast("!", fn(event.currentTarget, "onhide")).show();
+						},
+						onhidden: (event) => {
+							new toast("x", fn(event.currentTarget, "onhidden")).show();
+						},
+						elem: `<b>This is the second item's tab body.</b> ${sample.text()}`,
+					},
+					{
+						label: "Third",
+						onshow: (event) => {
+							new toast("i", fn(event.currentTarget, "onshow")).show();
+						},
+						onshown: (event) => {
+							new toast("/", fn(event.currentTarget, "onshown")).show();
+						},
+						onhide: (event) => {
+							new toast("!", fn(event.currentTarget, "onhide")).show();
+						},
+						onhidden: (event) => {
+							new toast("x", fn(event.currentTarget, "onhidden")).show();
+						},
+						elem: `<b>This is the third item's tab body.</b> ${sample.text()}`,
+					},
+					{ label: "Disabled", disabled: true, elem: "This is the last item's tab body." },
+				],
 			});
 		},
 	},
