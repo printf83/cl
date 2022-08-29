@@ -80,31 +80,49 @@ export default [
 				item: [
 					{
 						label: "Accordion Item 1",
-						onshow: () => {
-							new toast("/", "Accordion 1 show").show();
+						onshow: (sender) => {
+							new toast(
+								"/",
+								`Accordion <b>${core.elemInfo(sender)}</b> event <b>onshow</b> trigged`
+							).show();
 						},
-						onhide: () => {
-							new toast("!", "Accordion 1 hide").show();
+						onhide: (sender) => {
+							new toast(
+								"x",
+								`Accordion <b>${core.elemInfo(sender)}</b> event <b>onhide</b> trigged`
+							).show();
 						},
 						elem: ["<b>This is the first item's accordion body.</b> ", sample.text()],
 					},
 					{
 						label: "Accordion Item 2",
-						onshow: () => {
-							new toast("/", "Accordion 2 show").show();
+						onshow: (sender) => {
+							new toast(
+								"/",
+								`Accordion <b>${core.elemInfo(sender)}</b> event <b>onshow</b> trigged`
+							).show();
 						},
-						onhide: () => {
-							new toast("!", "Accordion 2 hide").show();
+						onhide: (sender) => {
+							new toast(
+								"x",
+								`Accordion <b>${core.elemInfo(sender)}</b> event <b>onhide</b> trigged`
+							).show();
 						},
 						elem: ["<b>This is the second item's accordion body.</b> ", sample.text()],
 					},
 					{
 						label: "Accordion Item 3",
-						onshow: () => {
-							new toast("/", "Accordion 3 show").show();
+						onshow: (sender) => {
+							new toast(
+								"/",
+								`Accordion <b>${core.elemInfo(sender)}</b> event <b>onshow</b> trigged`
+							).show();
 						},
-						onhide: () => {
-							new toast("!", "Accordion 3 hide").show();
+						onhide: (sender) => {
+							new toast(
+								"x",
+								`Accordion <b>${core.elemInfo(sender)}</b> event <b>onhide</b> trigged`
+							).show();
 						},
 						elem: ["<b>This is the third item's accordion body.</b> ", sample.text()],
 					},
