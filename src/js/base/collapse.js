@@ -85,18 +85,13 @@ export class container extends div {
 			let t = opt.elem.data;
 
 			t.class = core.merge.class(opt.class, core.merge.class(t.class, ["collapse", opt.show ? "show" : null]));
-			t.attr = core.merge.attr(opt.attr, {
+			t.attr = core.merge.attr(t.attr, {
 				"show.bs.collapse": opt.onshow,
 				"shown.bs.collapse": opt.onshown,
 				"hide.bs.collapse": opt.onhide,
 				"hidden.bs.collapse": opt.onhidden,
 			});
 			t.id = t.id || opt.id;
-
-			delete t.onshow;
-			delete t.onshown;
-			delete t.onhide;
-			delete t.onhidden;
 
 			super.data = t;
 		}

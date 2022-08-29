@@ -106,7 +106,9 @@ export default class example extends div {
 				label: "Generated HTML",
 				icon: "code",
 				// elem: new codepreview({ type: "html", code: html, container: null }),
-				onshow: (sender) => {
+				onshow: (event) => {
+					let sender = event.currentTarget;
+
 					if (!sender.getAttribute("data-loaded")) {
 						core.replaceChild(
 							sender.firstChild,
@@ -125,7 +127,9 @@ export default class example extends div {
 					label: sampleKey,
 					icon: "link",
 					//elem: new codepreview({ type: "js", code: opt.sample[sampleKey].toString(), container: null }),
-					onshow: (sender) => {
+					onshow: (event) => {
+						let sender = event.currentTarget;
+
 						if (!sender.getAttribute("data-loaded")) {
 							core.replaceChild(
 								sender.firstChild,
@@ -149,7 +153,9 @@ export default class example extends div {
 				icon: "fire",
 				active: !opt.codecollapse,
 				// elem: new codepreview({ type: "js", code: opt.source.join(`\n`), container: null }),
-				onshow: (sender) => {
+				onshow: (event) => {
+					let sender = event.currentTarget;
+
 					if (!sender.getAttribute("data-loaded")) {
 						core.replaceChild(
 							sender.firstChild,
@@ -161,15 +167,6 @@ export default class example extends div {
 				},
 			});
 		}
-
-		// if (opt.code) {
-		// 	item.push({
-		// 		label: "code",
-		// 		icon: "fire",
-		// 		active: !opt.codecollapse,
-		// 		elem: new codepreview({ type: "js", code: `let code = ${opt.code.toString()}`, container: null }),
-		// 	});
-		// }
 
 		super.data = {
 			marginbottom: 5,

@@ -116,28 +116,34 @@ export default [
 				}),
 				new collapse.container({
 					id: id,
-					onshow: (sender) => {
+					onshow: (event) => {
 						new toast(
 							"i",
-							`Collapse container <b>${core.elemInfo(sender)}</b> event <b>onshow</b> trigged`
+							`Collapse container <b>${core.elemInfo(
+								event.currentTarget
+							)}</b> event <b>onshow</b> trigged`
 						).show();
 					},
-					onshown: (sender) => {
+					onshown: (event) => {
 						new toast(
 							"/",
-							`Collapse container <b>${core.elemInfo(sender)}</b> event <b>onshown</b> trigged`
+							`Collapse container <b>${core.elemInfo(
+								event.currentTarget
+							)}</b> event <b>onshown</b> trigged`
 						).show();
 					},
-					onhide: (sender) => {
+					onhide: (event) => {
 						new toast(
 							"!",
-							`Collapse container <b>${core.elemInfo(sender)}</b> event <b>onhide</b> trigged`
+							`Collapse container <b>${core.elemInfo(
+								event.currentTarget
+							)}</b> event <b>onhide</b> trigged`
 						).show();
 					},
-					onhidden: (sender) => {
+					onhidden: (event) => {
 						new toast(
 							"x",
-							`Collapse container <b>${core.elemInfo(sender)}</b> event <b>onhidden</b> trigged`
+							`Collapse container <b>${core.elemInfo(event.currentTarget)}</b> event <b>onhidden</b> trigged`
 						).show();
 					},
 					elem: new card.container({
