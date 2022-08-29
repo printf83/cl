@@ -7,6 +7,7 @@ import tag from "./tag.js";
  */
 const defaultOption = {
 	tag: "blockquote",
+	cite: null,
 };
 
 export default class div extends tag {
@@ -18,6 +19,14 @@ export default class div extends tag {
 		return super.data;
 	}
 	set data(opt) {
-		super.data = core.extend({}, defaultOption, opt);
+		opt = core.extend({}, defaultOption, opt);
+
+		opt.attr = core.merge.attr(opt.attr, {
+			cite: opt.cite,
+		});
+
+		delete opt.cite;
+
+		super.data = opt;
 	}
 }

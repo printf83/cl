@@ -13,6 +13,7 @@ export default [
 	{
 		msg: [
 			"Shortcut for {{new tag({tag:'blockquote'})}}",
+			"This component has support for {{cite}} attribute that can be set using option {{cite}}",
 			"This component is extended from {{tag}} component, so any property on tag component, will also work on this component.",
 			"Property inherits from tag component:",
 			sample.tagprop(),
@@ -25,10 +26,8 @@ export default [
 		code: () => {
 			return new div({
 				elem: new blockquote({
-					attr: {
-						"data-test": "test",
-					},
-					elem: "Example",
+					cite: "https://getbootstrap.com/",
+					elem: "Bootstrap · The most popular HTML, CSS, and JS library in the world.",
 				}),
 			});
 		},

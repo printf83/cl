@@ -44,6 +44,16 @@ const defaultOption = {
 	style: null,
 	attr: null,
 
+	accesskey: null, //ascii
+	contenteditable: null, //"true|false
+	dir: null, //"ltr|rtl|auto"
+	draggable: null, //"true|false|auto"
+	hidden: null, //one attr
+	lang: null, //string
+	spellcheck: null, //textarea, input "true|false"
+	tabindex: null, //number
+	title: null, //text
+
 	href: null,
 	onclick: null,
 	onchange: null,
@@ -171,6 +181,16 @@ export default class tag {
 				onchange: opt.onchange,
 				onfocus: opt.onfocus,
 				onblur: opt.onblur,
+
+				accesskey: opt.accesskey,
+				contenteditable: opt.contenteditable,
+				dir: opt.dir,
+				draggable: opt.draggable,
+				hidden: opt.hidden,
+				lang: opt.lang,
+				spellcheck: opt.spellcheck,
+				tabindex: opt.tabindex,
+				title: opt.title,
 
 				style: opt.style,
 
