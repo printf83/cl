@@ -42,19 +42,19 @@ export default [
 					new a({
 						textdecoration: "none",
 						href: "https://getbootstrap.com/",
-						elem: new pill({ icon: { icon: "bootstrap", type: "fab" }, label: "Bootstrap" }),
+						elem: new pill({ icon: { icon: "bootstrap", type: "fab" }, label: "Bootstrap V5.2.0" }),
 					}),
 					new a({
 						textdecoration: "none",
 						href: "https://bootswatch.com/",
-						elem: new pill({ icon: { icon: "swatchbook" }, label: "Bootswatch" }),
+						elem: new pill({ icon: { icon: "swatchbook" }, label: "Bootswatch V5.2.0" }),
 					}),
 					new a({
 						textdecoration: "none",
 						href: "https://fontawesome.com/",
 						elem: new pill({
 							icon: { icon: "font-awesome-flag", type: "fab" },
-							label: "Fontawesome",
+							label: "Fontawesome V6.1.2",
 						}),
 					}),
 					new a({
@@ -103,12 +103,16 @@ export default [
 								rel="stylesheet"
 								href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.2/css/all.min.css"
 							/>
-							<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" />
+							<link
+								rel="stylesheet"
+								href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+								id="css_bootstrap"
+							/>
 							<link
 								rel="stylesheet"
 								href="https://cdn.jsdelivr.net/npm/bootswatch@5.2.0/dist/cerulean/bootstrap.min.css"
-								id="cltheme"
 								disabled="disabled"
+								id="css_bootswatch"
 							/>
 							<link rel="stylesheet" href="./dist/style.css" />
 

@@ -54,16 +54,24 @@ const fnTheme = {
 	set: (theme) => {
 		fnCookie.set("cltheme", theme);
 
-		let cltheme = document.getElementById("cltheme");
-		if (cltheme) {
+		let css_bootstrap = document.getElementById("css_bootstrap");
+		let css_bootswatch = document.getElementById("css_bootswatch");
+
+		if (css_bootstrap && css_bootswatch) {
 			if (theme) {
-				cltheme.href = `https://cdn.jsdelivr.net/npm/bootswatch@5.1.3/dist/${theme}/bootstrap.min.css`;
-				cltheme.removeAttribute("disabled");
+				css_bootswatch.href = `https://cdn.jsdelivr.net/npm/bootswatch@5.1.3/dist/${theme}/bootstrap.min.css`;
+				css_bootswatch.removeAttribute("disabled");
+				setTimeout(() => {
+					css_bootstrap.setAttribute("disabled", "disabled");
+				}, 300);
 			} else {
-				cltheme.setAttribute("disabled", "disabled");
+				css_bootstrap.removeAttribute("disabled");
+				setTimeout(() => {
+					css_bootswatch.setAttribute("disabled", "disabled");
+				}, 300);
 			}
 		} else {
-			console.error("#cltheme not found");
+			console.error("#css_bootstrap and #css_bootswatch not found");
 		}
 
 		fnTheme.change(theme);
