@@ -1,5 +1,6 @@
 "use strict";
 import sample from "./sample.js";
+import * as core from "../base/core.js";
 import a from "../base/a.js";
 import button from "../base/button.js";
 import div from "../base/div.js";
@@ -1009,6 +1010,48 @@ export default [
 					},
 				}),
 			];
+		},
+	},
+
+	{
+		title: "Event",
+		import: ["button", "toast", "modal"],
+		code: () => {
+			return new button({
+				label: "Show live modal dialog",
+				color: "primary",
+				onclick: () => {
+					new modal({
+						title: "Modal title",
+						elem: "Modal event example",
+						button: "Okay",
+						onshow: (event) => {
+							new toast(
+								"i",
+								`Modal <b>${core.elemInfo(event.currentTarget)}</b> event onshow trigged`
+							).show();
+						},
+						onshown: (event) => {
+							new toast(
+								"/",
+								`Modal <b>${core.elemInfo(event.currentTarget)}</b> event onshown trigged`
+							).show();
+						},
+						onhide: (event) => {
+							new toast(
+								"!",
+								`Modal <b>${core.elemInfo(event.currentTarget)}</b> event onhide trigged`
+							).show();
+						},
+						onhidden: (event) => {
+							new toast(
+								"x",
+								`Modal <b>${core.elemInfo(event.currentTarget)}</b> event onhidden trigged`
+							).show();
+						},
+					}).show();
+				},
+			});
 		},
 	},
 ];

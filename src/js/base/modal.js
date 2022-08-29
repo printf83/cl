@@ -42,6 +42,11 @@ const defaultOption = {
 
 	elem: null,
 
+	onshow: null,
+	onshown: null,
+	onhide: null,
+	onhidden: null,
+
 	debug: false,
 };
 
@@ -272,6 +277,11 @@ export default class modal extends div {
 					"data-bs-focus": opt.focus ? "true" : null,
 					"data-bs-backdropcolor": opt.backdropcolor ? opt.backdropcolor : null,
 					"aria-hidden": opt.debug ? "false" : "true",
+
+					"show.bs.modal": opt.onshow,
+					"shown.bs.modal": opt.onshown,
+					"hide.bs.modal": opt.onhide,
+					"hidden.bs.modal": opt.onhidden,
 				}),
 				color: opt.bgcolor ? opt.bgcolor : null,
 				elem: new div({
