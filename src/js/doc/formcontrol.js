@@ -20,6 +20,7 @@ export default [
 					label: "Email address",
 					type: "email",
 					placeholder: "name@example.com",
+					helper: "We'll never share your email with anyone else.",
 				}),
 				new input({
 					label: "Example textarea",

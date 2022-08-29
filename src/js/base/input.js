@@ -22,6 +22,7 @@ const defaultOption = {
 	value: null,
 	checked: false,
 	placeholder: null,
+	helper: null,
 	option: null,
 
 	numctl: false,
@@ -91,7 +92,7 @@ export default class input extends tag {
 			}
 
 			//if has label need id is mandatori
-			if ((opt.label && !opt.id) || (opt.option && opt.type !== "select")) {
+			if ((opt.label && !opt.id) || opt.helper || (opt.option && opt.type !== "select")) {
 				opt.id = core.UUID();
 			}
 
@@ -116,7 +117,7 @@ export default class input extends tag {
 				: opt.type === "number" && opt.numctl
 				? new button({
 						icon: "minus",
-						color: "primary",
+						// color: "primary",
 						onclick: (e) => {
 							let sender = e.currentTarget;
 							let parent = sender.parentElement;
@@ -162,10 +163,13 @@ export default class input extends tag {
 				: opt.addctl
 				? new button({
 						icon: { icon: "plus" },
-						color: "primary",
+						// color: "primary",
 						onclick: opt.addctl,
 				  })
 				: null;
+
+			//helper
+			let helper = opt.helper ? new div({ id: `${opt.id}-helper`, class: "form-text", elem: opt.helper }) : null;
 
 			//valid msg
 			let validmsg = opt.valid ? new div({ class: "valid-feedback", elem: opt.valid }) : null;
@@ -408,6 +412,9 @@ export default class input extends tag {
 			//add after element
 			ctl.push(afterctl);
 
+			// //add helper
+			// ctl.push(helper);
+
 			//add validation feedback
 			ctl.push(validmsg);
 			ctl.push(invalidmsg);
@@ -430,6 +437,7 @@ export default class input extends tag {
 								],
 								elem: ctl,
 							}),
+							helper,
 						];
 					} else {
 						if (opt.container) {
@@ -443,7 +451,10 @@ export default class input extends tag {
 									],
 									elem: ctl,
 								}),
+								helper,
 							];
+						} else {
+							ctl.push(helper);
 						}
 
 						//put ctl in div.col-auto if labelsize is set
