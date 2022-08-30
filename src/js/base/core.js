@@ -59,16 +59,16 @@ const fnTheme = {
 
 		if (css_bootstrap && css_bootswatch) {
 			if (theme) {
-				css_bootswatch.href = `https://cdn.jsdelivr.net/npm/bootswatch@5.1.3/dist/${theme}/bootstrap.min.css`;
+				css_bootswatch.href = `https://cdn.jsdelivr.net/npm/bootswatch@5.2.0/dist/${theme}/bootstrap.min.css`;
 				css_bootswatch.removeAttribute("disabled");
-				// setTimeout(() => {
-				// 	css_bootstrap.setAttribute("disabled", "disabled");
-				// }, 300);
+				setTimeout(() => {
+					css_bootstrap.setAttribute("disabled", "disabled");
+				}, 300);
 			} else {
-				// css_bootstrap.removeAttribute("disabled");
-				// setTimeout(() => {
-				css_bootswatch.setAttribute("disabled", "disabled");
-				// }, 300);
+				css_bootstrap.removeAttribute("disabled");
+				setTimeout(() => {
+					css_bootswatch.setAttribute("disabled", "disabled");
+				}, 300);
 			}
 		} else {
 			console.error("#css_bootstrap and #css_bootswatch not found");
