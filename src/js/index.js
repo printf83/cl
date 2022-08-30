@@ -21,7 +21,10 @@ const db_menu = [
 	{
 		type: "menu",
 		title: "Getting started",
-		item: [{ title: "Introduction", source: doc.intro }],
+		item: [
+			{ title: "Introduction", source: doc.intro },
+			{ title: "Kitchen Sink", source: doc.kitchensink },
+		],
 	},
 	{
 		type: "menu",

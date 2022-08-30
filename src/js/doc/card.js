@@ -8,7 +8,6 @@ import tab from "../base/tab.js";
 import div from "../base/div.js";
 import p from "../base/p.js";
 import small from "../base/small.js";
-import tag from "../base/tag.js";
 import footer from "../base/footer.js";
 import cite from "../base/cite.js";
 import blockquote from "../base/blockquote.js";

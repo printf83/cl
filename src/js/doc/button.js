@@ -228,7 +228,10 @@ export default [
 		import: ["button"],
 		code: () => {
 			return [
-				new button({ toggle: true, label: "Toggle button", color: "primary" }),
+				new button({ 
+					toggle: true, 
+					label: "Toggle button", 
+					color: "primary" }),
 				new button({
 					toggle: true,
 					active: true,
