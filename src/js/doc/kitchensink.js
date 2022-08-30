@@ -1461,7 +1461,7 @@ export default [
 					elem: new button({
 						label: core.capitalize(placement),
 						outline: true,
-						color: "secondary",
+						color: "primary",
 					}),
 				});
 
@@ -1482,7 +1482,7 @@ export default [
 					elem: new button({
 						label: core.capitalize(placement),
 						outline: true,
-						color: "secondary",
+						color: "primary",
 					}),
 				});
 
