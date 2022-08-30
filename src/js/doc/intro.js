@@ -118,14 +118,11 @@ export default [
 
 							<title>BS5 JS Builder</title>
 						</head>
-						<body class="position-relative">
-							<div class="position-fixed top-50 start-50 translate-middle" id="main">
-								<div class="text-center">
-									<i class="fas fa-circle-notch fa-fw fa-spin fa-5x"></i>
-									<noscript>
-										<p class="text-danger">Your browser does not support JavaScript!</p>
-									</noscript>
-								</div>
+						<body>
+							<div id="root">
+								<noscript>
+									<p class="text-danger">Your browser does not support JavaScript!</p>
+								</noscript>
 							</div>
 
 							<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"></script>
