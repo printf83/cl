@@ -2,6 +2,7 @@
 import sample from "../doc/sample.js";
 
 import a from "../base/a.js";
+import abbr from "../base/abbr.js";
 import accordion from "../base/accordion.js";
 import * as alert from "../base/alert.js";
 import b from "../base/b.js";
@@ -24,12 +25,14 @@ import * as db from "../base/api.js";
 import div from "../base/div.js";
 import * as dlg from "../base/dlg.js";
 import dropdown from "../base/dropdown.js";
+import em from "../base/em.js";
 import example from "../base/example.js";
 import file from "../base/file.js";
 import form from "../base/form.js";
 import footer from "../base/footer.js";
 import h from "../base/h.js";
 import hr from "../base/hr.js";
+import i from "../base/i.js";
 import icon from "../base/icon.js";
 import img from "../base/img.js";
 import input from "../base/input.js";
@@ -442,11 +445,133 @@ export default [
 	},
 
 	{
-		import: ["h", "small"],
+		import: ["h", "small", "p"],
 		code: () => {
-			return [1, 2, 3, 4, 5, 6].map((i) => {
-				return new h(i, `Heading ${i}`);
-			});
+			return [
+				new h({ level: 3, elem: ["Heading ", new small({ textcolor: "muted", elem: "with muted text" })] }),
+				new p("lead", "Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor."),
+			];
 		},
 	},
+
+	{
+		title: "Example body text",
+		import: ["small", "a", "p", "strong", "em"],
+		code: () => {
+			return [
+				new p({
+					elem: [
+						"Nullam quis risus eget ",
+						new a("#", "urna mollis ornare"),
+						" vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id nibh ultricies vehicula.",
+					],
+				}),
+				new p({ elem: new small("This line of text is meant to be treated as fine print.") }),
+				new p({ elem: ["The following is ", new strong("rendered as bold text"), "."] }),
+				new p({ elem: ["The following is ", new em("rendered as italicized text"), "."] }),
+				new p({
+					elem: [
+						"An abbreviation of the word attribute is ",
+						new abbr({ title: "attribute", elem: "attr" }),
+						".",
+					],
+				}),
+			];
+		},
+	},
+
+	{
+		title: "Emphasis classes",
+		import: ["p"],
+		code: () => {
+			return [
+				new p({
+					textcolor: "muted",
+					elem: "Fusce dapibus, tellus ac cursus commodo, tortor mauris nibh.",
+				}),
+				new p({
+					textcolor: "primary",
+					elem: "Nullam id dolor id nibh ultricies vehicula ut id elit.",
+				}),
+				new p({
+					textcolor: "secondary",
+					elem: "Pellentesque ornare sem lacinia quam venenatis vestibulum.",
+				}),
+				new p({
+					textcolor: "warning",
+					elem: "Etiam porta sem malesuada magna mollis euismod.",
+				}),
+				new p({
+					textcolor: "danger",
+					elem: "Donec ullamcorper nulla non metus auctor fringilla.",
+				}),
+				new p({
+					textcolor: "success",
+					elem: "Duis mollis, est non commodo luctus, nisi erat porttitor ligula.",
+				}),
+				new p({
+					textcolor: "info",
+					elem: "Maecenas sed diam eget risus varius blandit sit amet non magna.",
+				}),
+			];
+		},
+	},
+
+	{
+		title: "Blockquotes",
+		import: ["tag", "blockquote", "p", "cite"],
+		code: () => {
+			let fn = (align) => {
+				return new tag({
+					tag: "figure",
+					align: align,
+					elem: [
+						new blockquote({
+							class: "blockquote",
+							elem: new p({
+								class: "mb-0",
+								elem: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.",
+							}),
+						}),
+						new tag({
+							tag: "figcaption",
+							class: "blockquote-footer",
+							elem: ["Someone famous in ", new cite({ title: "Source Title", elem: "Source Title" })],
+						}),
+					],
+				});
+			};
+
+			return [fn(null), fn("center"), fn("end")];
+		},
+	},
+
+	// {
+	// 	title: "Tables",
+	// 	import: ["table"],
+	// 	code: () => {
+	// 		let fn = (align) => {
+	// 			return new tag({
+	// 				tag: "figure",
+	// 				align: align,
+	// 				elem: [
+	// 					new blockquote({
+	// 						class: "blockquote",
+	// 						elem: new p({
+	// 							class: "mb-0",
+	// 							elem: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.",
+	// 						}),
+	// 					}),
+	// 					new tag({
+	// 						tag: "figcaption",
+	// 						class: "blockquote-footer",
+	// 						elem: ["Someone famous in ", new cite({ title: "Source Title", elem: "Source Title" })],
+	// 					}),
+	// 				],
+	// 			});
+	// 		};
+
+	// 		return [fn(null), fn("center"), fn("end")];
+	// 	},
+	// },
 ];

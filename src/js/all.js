@@ -1,6 +1,7 @@
 "use strict";
 
 import a from "./base/a.js";
+import abbr from "./base/abbr.js";
 import accordion from "./base/accordion.js";
 import * as alert from "./base/alert.js";
 import b from "./base/b.js";
@@ -23,12 +24,14 @@ import * as db from "./base/api.js";
 import div from "./base/div.js";
 import * as dlg from "./base/dlg.js";
 import dropdown from "./base/dropdown.js";
+import em from "./base/em.js";
 import example from "./base/example.js";
 import file from "./base/file.js";
 import form from "./base/form.js";
 import footer from "./base/footer.js";
 import h from "./base/h.js";
 import hr from "./base/hr.js";
+import i from "./base/i.js";
 import icon from "./base/icon.js";
 import img from "./base/img.js";
 import input from "./base/input.js";
@@ -66,6 +69,7 @@ import * as user from "./base/user.js";
 
 export default {
 	a,
+	abbr,
 	accordion,
 	alert,
 	b,
@@ -88,12 +92,14 @@ export default {
 	div,
 	dlg,
 	dropdown,
+	em,
 	example,
 	file,
 	footer,
 	form,
 	h,
 	hr,
+	i,
 	icon,
 	img,
 	input,
