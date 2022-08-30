@@ -172,7 +172,10 @@ export default class input extends tag {
 
 			let copyctl = opt.copyctl
 				? new button({
-						icon: "clipboard",
+						icon: {
+							type: "far",
+							icon: "clipboard",
+						},
 						color: "secondary",
 						onclick: (event) => {
 							try {
