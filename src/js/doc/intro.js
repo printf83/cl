@@ -149,8 +149,8 @@ export default [
 					import p from "./base/p.js";
 
 					core.documentReady(() => {
-						core.appendChild(document.body,new button({label:'Hello World!', color:'primary'}));
-						core.appendChild(document.body,new p('Hello World!'));
+						core.appendChild(document.getElementById("root"), new button({label:'Hello World!', color:'primary'}));
+						core.appendChild(document.getElementById("root"), new p('Hello World!'));
 					});
 			`,
 			}),
@@ -166,8 +166,8 @@ export default [
 					import $ from "./all.js";
 
 					$.core.documentReady(() => {
-						$.core.appendChild(document.body,new $.button({label:'Hello World!', color:'primary'}));
-						$.core.appendChild(document.body,new $.p('Hello World!'));
+						$.core.appendChild(document.getElementById("root"), new $.button({label:'Hello World!', color:'primary'}));
+						$.core.appendChild(document.getElementById("root"), new $.p('Hello World!'));
 					});
 			`,
 			}),
