@@ -365,7 +365,10 @@ export default [
 	},
 
 	{
-		title: "Typography",
+		title: "Indicators",
+	},
+
+	{
 		import: ["h"],
 		code: () => {
 			return [1, 2, 3, 4, 5, 6].map((i) => {
@@ -478,11 +481,14 @@ export default [
 
 	{
 		title: "Forms",
-		import: ["input", "tag", "file", "div"],
+	},
+
+	{
+		title: "Legend",
+		import: ["input", "file"],
 		container: sample.formcontainer,
 		code: () => {
 			return [
-				new tag({ tag: "legend", elem: "Legend" }),
 				new input({
 					label: "Email",
 					labelsize: "sm-2",
@@ -522,7 +528,16 @@ export default [
 				new file({
 					label: "Default file input example",
 				}),
-				new tag({ tag: "legend", class: "mt-3", elem: "Radio buttons" }),
+			];
+		},
+	},
+
+	{
+		title: "Radio buttons",
+		import: ["input"],
+		container: sample.formcontainer,
+		code: () => {
+			return [
 				new input({
 					name: "g11",
 					label: "Option one is this and that—be sure to include why it's great",
@@ -540,7 +555,16 @@ export default [
 					type: "radio",
 					disabled: true,
 				}),
-				new tag({ tag: "legend", class: "mt-3", elem: "Checkboxes" }),
+			];
+		},
+	},
+
+	{
+		title: "Checkboxes",
+		import: ["input"],
+		container: sample.formcontainer,
+		code: () => {
+			return [
 				new input({
 					label: "Default checkbox",
 					type: "checkbox",
@@ -550,7 +574,16 @@ export default [
 					type: "checkbox",
 					checked: true,
 				}),
-				new tag({ tag: "legend", class: "mt-3", elem: "Switches" }),
+			];
+		},
+	},
+
+	{
+		title: "Switches",
+		import: ["input"],
+		container: sample.formcontainer,
+		code: () => {
+			return [
 				new input({
 					label: "Default switch checkbox input",
 					type: "switch",
@@ -560,7 +593,16 @@ export default [
 					type: "switch",
 					checked: true,
 				}),
-				new tag({ tag: "legend", class: "mt-3", elem: "Ranges" }),
+			];
+		},
+	},
+
+	{
+		title: "Ranges",
+		import: ["input"],
+		container: sample.formcontainer,
+		code: () => {
+			return [
 				new input({
 					label: "Example range",
 					type: "range",
@@ -580,13 +622,19 @@ export default [
 					max: 10,
 					value: 5,
 				}),
-				new div({
-					marginy: 3,
-					elem: new button({
-						type: "submit",
-						color: "primary",
-						elem: "Submit",
-					}),
+			];
+		},
+	},
+
+	{
+		import: ["input", "button"],
+		container: sample.formcontainer,
+		code: () => {
+			return [
+				new button({
+					type: "submit",
+					color: "primary",
+					elem: "Submit",
 				}),
 				new input({
 					label: "Disabled input",
@@ -645,8 +693,16 @@ export default [
 						label: "Button",
 					}),
 				}),
+			];
+		},
+	},
 
-				new tag({ tag: "legend", class: "mt-3", elem: "Floating labels" }),
+	{
+		title: "Floating labels",
+		import: ["input"],
+		container: sample.formcontainer,
+		code: () => {
+			return [
 				new input({
 					type: "email",
 					label: "Email address",
@@ -956,7 +1012,7 @@ export default [
 					},
 				});
 
-			return [fn(null, 15), fn("success", 25), fn("info", 50), fn("warning", 75), fn("danger", 100)];
+			return [fn(null, 10), fn("success", 25), fn("info", 50), fn("warning", 75), fn("danger", 100)];
 		},
 	},
 
@@ -970,6 +1026,103 @@ export default [
 					stripe: true,
 					animated: true,
 				},
+			});
+		},
+	},
+
+	{
+		title: "Containers",
+	},
+
+	{
+		title: "List groups",
+		import: ["listgroup", "badge"],
+		code: () => {
+			let itemfn = (text, badgeLabel) => {
+				return {
+					display: "flex",
+					justifycontent: "between",
+					alignitem: "start",
+					elem: [
+						text,
+						new badge({
+							pill: true,
+							color: "primary",
+							label: badgeLabel,
+						}),
+					],
+				};
+			};
+
+			return new listgroup({
+				item: [itemfn(sample.shorttext(), 14), itemfn(sample.shorttext(), 2), itemfn(sample.shorttext(), 1)],
+			});
+		},
+	},
+
+	{
+		import: ["listgroup"],
+		code: () => {
+			let itemfn = (text, active, disabled) => {
+				return {
+					display: "flex",
+					justifycontent: "between",
+					alignitem: "start",
+					active: active,
+					disabled: disabled,
+					elem: text,
+				};
+			};
+
+			return new listgroup({
+				item: [
+					itemfn(sample.shorttext(), true, false),
+					itemfn(sample.shorttext(), false, false),
+					itemfn(sample.shorttext(), false, true),
+				],
+			});
+		},
+	},
+
+	{
+		import: ["listgroup"],
+		code: () => {
+			let itemfn = (title, active, days) => {
+				return {
+					href: "#",
+					action: true,
+					active: active,
+					elem: [
+						new div({
+							class: "w-100",
+							display: "flex",
+							justifycontent: "between",
+							elem: [
+								new h({
+									level: 5,
+									marginbottom: 1,
+									elem: title,
+								}),
+								new small({
+									textcolor: !active ? "muted" : null,
+									elem: `${days} days ago`,
+								}),
+							],
+						}),
+						new p({
+							marginbottom: 1,
+							elem: sample.shorttext(),
+						}),
+						new small({
+							textcolor: !active ? "muted" : null,
+							elem: `And some${!active ? " muted" : ""} small print.`,
+						}),
+					],
+				};
+			};
+
+			return new listgroup({
+				item: [itemfn("List group item heading", true, 14), itemfn("List group item heading", false, 2)],
 			});
 		},
 	},
