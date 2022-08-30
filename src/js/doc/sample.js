@@ -10,16 +10,30 @@ import toast from "../base/toast.js";
 let dbstate = null;
 let textindex = 0;
 let textdb = [
-	"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur elit massa, elementum vel metus id, congue sollicitudin lectus. Praesent ultricies felis eget nisl volutpat gravida. In eleifend iaculis viverra. Proin ut gravida elit, id posuere velit. Nulla congue enim at odio eleifend accumsan. Curabitur felis quam, feugiat in tincidunt ac, pulvinar eu diam. Nullam non erat orci. Sed gravida, ante sed vestibulum accumsan, elit metus feugiat ex, in gravida dolor nunc fermentum magna.",
-	"Nam tempor maximus ante vel malesuada. Vivamus nibh neque, cursus finibus risus vel, porttitor accumsan lacus. Nulla facilisi. Sed sit amet sagittis magna, id cursus est. Quisque convallis vel magna quis vestibulum. Curabitur placerat diam odio, in tincidunt felis viverra ac. Aenean quis ante diam. Sed sit amet lectus rutrum tortor feugiat auctor. Fusce euismod est nec posuere accumsan. Donec sodales cursus maximus. Nulla tincidunt quam quis lacus suscipit, ut lobortis erat fringilla. Praesent id diam nec metus mollis maximus. Nam vestibulum lectus quis velit dictum ornare. Phasellus vitae accumsan nisl, sed aliquet nisl. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.",
+	"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur elit massa, elementum vel metus id, congue sollicitudin lectus. Praesent ultricies felis eget nisl volutpat gravida. In eleifend iaculis viverra. Proin ut gravida elit, id posuere velit. Nulla congue enim at odio eleifend accumsan. Curabitur felis quam, feugiat in tincidunt ac, pulvinar eu diam.",
+	"Nam tempor maximus ante vel malesuada. Vivamus nibh neque, cursus finibus risus vel, porttitor accumsan lacus. Nulla facilisi. Sed sit amet sagittis magna, id cursus est. Quisque convallis vel magna quis vestibulum. Curabitur placerat diam odio, in tincidunt felis viverra ac. Aenean quis ante diam. Sed sit amet lectus rutrum tortor feugiat auctor.",
 	"Donec vehicula elit vel purus euismod, et aliquet nisl molestie. Phasellus at porttitor neque. Donec et orci mi. Nulla a laoreet tortor. Cras ac massa ipsum. Suspendisse mi diam, sodales nec felis sit amet, ullamcorper aliquet tellus. In vitae urna ipsum. Donec cursus rutrum magna. Quisque sed nisi a lacus accumsan mollis.",
-	"Cras felis orci, feugiat ac volutpat non, porttitor at leo. Mauris sit amet eros tincidunt, cursus felis sit amet, molestie erat. Cras rutrum mi sed nunc tempor, id viverra metus aliquet. Sed aliquet scelerisque rutrum. Donec blandit ante et mauris scelerisque, congue venenatis tortor vehicula. Sed ornare ipsum sed cursus euismod. Aenean placerat nibh nisi, ac pretium nulla aliquet vitae. Mauris vel mauris urna. Morbi ultrices enim tellus, quis volutpat velit feugiat vitae. Vivamus hendrerit consequat rhoncus. In at efficitur lectus, vel volutpat massa. Donec consectetur scelerisque lacinia. Sed tristique risus ac mi efficitur consequat.",
-	"Phasellus quis feugiat magna. Fusce placerat, metus eget tempor placerat, velit neque aliquam turpis, vel gravida ex leo sit amet diam. Aenean facilisis vulputate metus, ac dapibus felis vulputate non. Sed vehicula ante nec odio dapibus, id convallis libero auctor. Vivamus facilisis sed tellus a mattis. Donec bibendum imperdiet dui eget porttitor. Nam aliquam mi a nunc luctus rutrum.",
-	"Etiam faucibus orci id dui tempor volutpat sit amet id sem. Nam efficitur vestibulum lectus, vitae finibus dolor eleifend ac. Curabitur lacinia hendrerit dui et ultricies. In hac habitasse platea dictumst. Quisque massa arcu, venenatis at elementum non, sodales eu mi. Sed sit amet metus sem. In hac habitasse platea dictumst. Nam egestas aliquam ligula ut efficitur. Proin bibendum suscipit erat in rhoncus. Aenean dolor neque, viverra sit amet condimentum vitae, auctor at metus. ",
-	"Donec felis sapien, venenatis a facilisis at, porta scelerisque ligula. Mauris pretium condimentum orci non auctor. Cras malesuada eros eu ultricies convallis. In in ligula ac dui porta ullamcorper sit amet eu nibh. Vestibulum gravida, odio at auctor sodales, ipsum leo varius libero, in ultricies magna libero et libero. Aenean tincidunt, lorem at dignissim gravida, mauris eros pretium elit, quis scelerisque dolor urna nec mi. Duis facilisis odio a magna feugiat, ac congue mauris porta. Donec quis purus pellentesque, sodales nibh quis, consectetur erat. Fusce varius feugiat lectus. Integer maximus dolor elit, sed porta dolor bibendum non. Vivamus turpis nunc, elementum ac commodo eget, finibus sed nunc. Nunc facilisis, sem suscipit accumsan tempus, ex arcu pharetra ipsum, ut aliquam nisl magna et turpis. Mauris ac tellus massa. In bibendum mollis urna, quis sagittis purus mattis vel. Sed congue et lectus eget vestibulum. Nulla a mauris non orci elementum pellentesque. ",
-	"Integer urna felis, porttitor et nulla eu, fermentum vestibulum est. Nunc imperdiet magna nec lobortis aliquam. Curabitur risus dui, auctor vitae quam sed, iaculis interdum velit. Nullam augue odio, auctor eget porttitor at, convallis at diam. Mauris posuere nisl id interdum luctus. Suspendisse iaculis ipsum tristique nisi laoreet mattis. Donec id tempor magna. Donec lacinia faucibus lacinia. Ut laoreet, nibh vitae egestas condimentum, eros ipsum bibendum est, eu vestibulum nunc justo nec ligula. Donec malesuada in arcu a bibendum. ",
-	"Suspendisse posuere nunc interdum tortor porttitor ultrices. Phasellus quis eleifend est, eget sodales dolor. Suspendisse congue lobortis sem, at iaculis eros elementum eu. Quisque tellus nunc, fringilla in est in, congue pharetra metus. Sed eros ligula, pretium eget orci vel, porttitor tincidunt nibh. Etiam bibendum fermentum lorem vel mollis. Fusce ullamcorper volutpat turpis, eu dictum ipsum ultrices vel. Maecenas congue at justo nec facilisis. Nulla facilisi. Sed convallis pulvinar mollis. Fusce molestie finibus purus eu pellentesque. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. In vel ullamcorper massa. Phasellus sit amet auctor nunc. Praesent rutrum molestie lectus. Sed eu eros et diam tincidunt dignissim. ",
-	"Morbi pulvinar tortor a arcu accumsan, at aliquam augue eleifend. Aenean ut blandit erat. Nullam lorem ante, fermentum ultrices velit dictum, auctor aliquet ex. Integer bibendum augue gravida congue efficitur. Nam eu feugiat quam. Ut ex urna, consectetur sed tincidunt nec, volutpat a lorem. Mauris molestie efficitur metus, id feugiat nisl suscipit non. Vestibulum commodo sapien eget lorem malesuada dapibus. Curabitur scelerisque sapien in laoreet consequat. Fusce semper justo commodo, pulvinar est quis, vulputate nisi. Morbi efficitur, mi vitae congue venenatis, ipsum leo tempor sem, pretium interdum massa augue non libero. ",
+	"Cras felis orci, feugiat ac volutpat non, porttitor at leo. Mauris sit amet eros tincidunt, cursus felis sit amet, molestie erat. Cras rutrum mi sed nunc tempor, id viverra metus aliquet. Sed aliquet scelerisque rutrum. Donec blandit ante et mauris scelerisque, congue venenatis tortor vehicula. Sed ornare ipsum sed cursus euismod. Aenean placerat nibh nisi, ac pretium nulla aliquet vitae.",
+	"Phasellus quis feugiat magna. Fusce placerat, metus eget tempor placerat, velit neque aliquam turpis, vel gravida ex leo sit amet diam. Aenean facilisis vulputate metus, ac dapibus felis vulputate non. Sed vehicula ante nec odio dapibus, id convallis libero auctor. Vivamus facilisis sed tellus a mattis. ",
+	"Etiam faucibus orci id dui tempor volutpat sit amet id sem. Nam efficitur vestibulum lectus, vitae finibus dolor eleifend ac. Curabitur lacinia hendrerit dui et ultricies. In hac habitasse platea dictumst. Quisque massa arcu, venenatis at elementum non, sodales eu mi. Sed sit amet metus sem. In hac habitasse platea dictumst. Nam egestas aliquam ligula ut efficitur. Proin bibendum suscipit erat in rhoncus.",
+	"Donec felis sapien, venenatis a facilisis at, porta scelerisque ligula. Mauris pretium condimentum orci non auctor. Cras malesuada eros eu ultricies convallis. In in ligula ac dui porta ullamcorper sit amet eu nibh. Vestibulum gravida, odio at auctor sodales, ipsum leo varius libero, in ultricies magna libero et libero. Aenean tincidunt, lorem at dignissim gravida, mauris eros pretium elit, quis scelerisque dolor urna nec mi.",
+	"Integer urna felis, porttitor et nulla eu, fermentum vestibulum est. Nunc imperdiet magna nec lobortis aliquam. Curabitur risus dui, auctor vitae quam sed, iaculis interdum velit. Nullam augue odio, auctor eget porttitor at, convallis at diam. Mauris posuere nisl id interdum luctus.",
+	"Suspendisse posuere nunc interdum tortor porttitor ultrices. Phasellus quis eleifend est, eget sodales dolor. Suspendisse congue lobortis sem, at iaculis eros elementum eu. Quisque tellus nunc, fringilla in est in, congue pharetra metus. Sed eros ligula, pretium eget orci vel, porttitor tincidunt nibh. Etiam bibendum fermentum lorem vel mollis. Fusce ullamcorper volutpat turpis, eu dictum ipsum ultrices vel.",
+	"Morbi pulvinar tortor a arcu accumsan, at aliquam augue eleifend. Aenean ut blandit erat. Nullam lorem ante, fermentum ultrices velit dictum, auctor aliquet ex. Integer bibendum augue gravida congue efficitur. Nam eu feugiat quam. Ut ex urna, consectetur sed tincidunt nec, volutpat a lorem.",
+];
+
+let shorttextindex = 0;
+let shorttextdb = [
+	"Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+	"Nam tempor maximus ante vel malesuada.",
+	"Donec vehicula elit vel purus euismod, et aliquet nisl molestie.",
+	"Cras felis orci, feugiat ac volutpat non, porttitor at leo.",
+	"Phasellus quis feugiat magna.",
+	"Etiam faucibus orci id dui tempor volutpat sit amet id sem.",
+	"Donec felis sapien, venenatis a facilisis at, porta scelerisque ligula.",
+	"Integer urna felis, porttitor et nulla eu, fermentum vestibulum est.",
+	"Suspendisse posuere nunc interdum tortor porttitor ultrices.",
+	"Morbi pulvinar tortor a arcu accumsan, at aliquam augue eleifend.",
 ];
 
 let svgdb = {};
@@ -85,6 +99,12 @@ const fn = {
 			textindex = 0;
 		}
 		return textdb[textindex++];
+	},
+	shorttext: () => {
+		if (shorttextindex >= shorttextdb.length) {
+			shorttextindex = 0;
+		}
+		return shorttextdb[shorttextindex++];
 	},
 
 	tagprop: (exclude) => {

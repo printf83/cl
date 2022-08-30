@@ -267,27 +267,17 @@ export default [
 	{
 		import: ["button", "btngroup"],
 		code: () => {
+			let fn = (label, checked) => {
+				return new button({
+					type: "checkbox",
+					label: label,
+					checked: checked,
+					color: "primary",
+				});
+			};
+
 			return new btngroup({
-				elem: [
-					new button({
-						type: "checkbox",
-						checked: true,
-						label: "Checkbox 1",
-						color: "primary",
-					}),
-					new button({
-						type: "checkbox",
-						checked: true,
-						label: "Checkbox 2",
-						color: "primary",
-					}),
-					new button({
-						type: "checkbox",
-						checked: true,
-						label: "Checkbox 3",
-						color: "primary",
-					}),
-				],
+				elem: [fn("Checkbox 1", false), fn("Checkbox 2", false), fn("Checkbox 3", true)],
 			});
 		},
 	},
@@ -295,29 +285,18 @@ export default [
 	{
 		import: ["button", "btngroup"],
 		code: () => {
-			return new btngroup({
-				elem: [
-					new button({
-						type: "radio",
-						name: "g7",
-						label: "Radio 1",
+			let fn = (label, checked) => {
+				return new button({
+					type: "radio",
+					name: "g7",
+					label: label,
+					checked: checked,
+					color: "primary",
+				});
+			};
 
-						color: "primary",
-					}),
-					new button({
-						type: "radio",
-						name: "g7",
-						label: "Radio 2",
-						color: "primary",
-					}),
-					new button({
-						type: "radio",
-						name: "g7",
-						label: "Radio 3",
-						checked: true,
-						color: "primary",
-					}),
-				],
+			return new btngroup({
+				elem: [fn("Radio 1", false), fn("Radio 2", false), fn("Radio 3", true)],
 			});
 		},
 	},
@@ -327,32 +306,12 @@ export default [
 		code: () => {
 			return new btngroup({
 				vertical: true,
-				elem: [
+				elem: Array(6).fill(
 					new button({
 						label: "Button",
 						color: "primary",
-					}),
-					new button({
-						label: "Button",
-						color: "primary",
-					}),
-					new button({
-						label: "Button",
-						color: "primary",
-					}),
-					new button({
-						label: "Button",
-						color: "primary",
-					}),
-					new button({
-						label: "Button",
-						color: "primary",
-					}),
-					new button({
-						label: "Button",
-						color: "primary",
-					}),
-				],
+					})
+				),
 			});
 		},
 	},
@@ -382,52 +341,23 @@ export default [
 	{
 		import: ["button", "btngroup", "btntoolbar"],
 		code: () => {
+			let fn = (label) => {
+				return new button({
+					label: label,
+					color: "secondary",
+				});
+			};
 			return new btntoolbar({
 				gap: 2,
 				elem: [
 					new btngroup({
-						elem: [
-							new button({
-								label: "1",
-								color: "secondary",
-							}),
-							new button({
-								label: "2",
-								color: "secondary",
-							}),
-							new button({
-								label: "3",
-								color: "secondary",
-							}),
-							new button({
-								label: "4",
-								color: "secondary",
-							}),
-						],
+						elem: [fn(1), fn(2), fn(3), fn(4)],
 					}),
 					new btngroup({
-						elem: [
-							new button({
-								label: "5",
-								color: "secondary",
-							}),
-							new button({
-								label: "6",
-								color: "secondary",
-							}),
-							new button({
-								label: "7",
-								color: "secondary",
-							}),
-						],
+						elem: [fn(5), fn(6), fn(7)],
 					}),
 					new btngroup({
-						elem: [
-							new button({
-								label: "8",
-								color: "secondary",
-							}),
-						],
+						elem: fn(8),
 					}),
 				],
 			});
@@ -445,133 +375,110 @@ export default [
 	},
 
 	{
-		import: ["h", "small", "p"],
+		import: ["h", "small", "p", "sample"],
 		code: () => {
 			return [
 				new h({ level: 3, elem: ["Heading ", new small({ textcolor: "muted", elem: "with muted text" })] }),
-				new p("lead", "Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor."),
+				new p("lead", sample.shorttext()),
 			];
 		},
 	},
 
 	{
 		title: "Example body text",
-		import: ["small", "a", "p", "strong", "em"],
+		import: ["p"],
 		code: () => {
 			return [
-				new p({
-					elem: [
-						"Nullam quis risus eget ",
-						new a("#", "urna mollis ornare"),
-						" vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id nibh ultricies vehicula.",
-					],
-				}),
-				new p({ elem: new small("This line of text is meant to be treated as fine print.") }),
-				new p({ elem: ["The following is ", new strong("rendered as bold text"), "."] }),
-				new p({ elem: ["The following is ", new em("rendered as italicized text"), "."] }),
-				new p({
-					elem: [
-						"An abbreviation of the word attribute is ",
-						new abbr({ title: "attribute", elem: "attr" }),
-						".",
-					],
-				}),
+				new p(
+					`Nullam quis risus eget <a href="#">urna mollis ornare</a> vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id nibh ultricies vehicula.`
+				),
+				new p(`<small>This line of text is meant to be treated as fine print.</small>`),
+				new p(`The following is <strong>rendered as bold text</strong>.`),
+				new p(`The following is <em>rendered as italicized text</em>.`),
+				new p(`An abbreviation of the word attribute is <abbr title="attribute">attr</abbr>.`),
 			];
 		},
 	},
 
 	{
 		title: "Emphasis classes",
-		import: ["p"],
+		import: ["p", "sample"],
 		code: () => {
-			return [
-				new p({
-					textcolor: "muted",
-					elem: "Fusce dapibus, tellus ac cursus commodo, tortor mauris nibh.",
-				}),
-				new p({
-					textcolor: "primary",
-					elem: "Nullam id dolor id nibh ultricies vehicula ut id elit.",
-				}),
-				new p({
-					textcolor: "secondary",
-					elem: "Pellentesque ornare sem lacinia quam venenatis vestibulum.",
-				}),
-				new p({
-					textcolor: "warning",
-					elem: "Etiam porta sem malesuada magna mollis euismod.",
-				}),
-				new p({
-					textcolor: "danger",
-					elem: "Donec ullamcorper nulla non metus auctor fringilla.",
-				}),
-				new p({
-					textcolor: "success",
-					elem: "Duis mollis, est non commodo luctus, nisi erat porttitor ligula.",
-				}),
-				new p({
-					textcolor: "info",
-					elem: "Maecenas sed diam eget risus varius blandit sit amet non magna.",
-				}),
-			];
+			return ["muted", "primary", "secondary", "warning", "danger", "success", "info", "dark", "light"].map(
+				(i) => new p({ textcolor: i, elem: sample.shorttext() })
+			);
 		},
 	},
 
 	{
 		title: "Blockquotes",
-		import: ["tag", "blockquote", "p", "cite"],
+		import: ["sample"],
 		code: () => {
 			let fn = (align) => {
-				return new tag({
-					tag: "figure",
-					align: align,
-					elem: [
-						new blockquote({
-							class: "blockquote",
-							elem: new p({
-								class: "mb-0",
-								elem: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.",
-							}),
-						}),
-						new tag({
-							tag: "figcaption",
-							class: "blockquote-footer",
-							elem: ["Someone famous in ", new cite({ title: "Source Title", elem: "Source Title" })],
-						}),
-					],
-				});
+				return `
+				<figure${align ? ` class="text-${align}"` : ``}>
+					<blockquote class="blockquote">
+						<p class="mb-0">${sample.shorttext()}</p>
+					</blockquote>
+					<figcaption class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></figcaption>
+				</figure$>`;
 			};
 
 			return [fn(null), fn("center"), fn("end")];
 		},
 	},
 
-	// {
-	// 	title: "Tables",
-	// 	import: ["table"],
-	// 	code: () => {
-	// 		let fn = (align) => {
-	// 			return new tag({
-	// 				tag: "figure",
-	// 				align: align,
-	// 				elem: [
-	// 					new blockquote({
-	// 						class: "blockquote",
-	// 						elem: new p({
-	// 							class: "mb-0",
-	// 							elem: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.",
-	// 						}),
-	// 					}),
-	// 					new tag({
-	// 						tag: "figcaption",
-	// 						class: "blockquote-footer",
-	// 						elem: ["Someone famous in ", new cite({ title: "Source Title", elem: "Source Title" })],
-	// 					}),
-	// 				],
-	// 			});
-	// 		};
+	{
+		title: "Tables",
+		import: ["table"],
+		code: () => {
+			let fn = (d) => {
+				return new table.tr({
+					class: `table-${d}`,
+					elem: [
+						new table.td({
+							elem: new b(d ? core.capitalize(d) : "Default"),
+						}),
+						new table.td({ elem: "Column content" }),
+						new table.td({ elem: "Column content" }),
+						new table.td({ elem: "Column content" }),
+					],
+				});
+			};
 
-	// 		return [fn(null), fn("center"), fn("end")];
-	// 	},
-	// },
+			return new table.container({
+				hover: true,
+				elem: [
+					new table.thead({
+						elem: new table.tr({
+							elem: [
+								new table.td({ elem: "Type" }),
+								new table.td({ elem: "Column heading" }),
+								new table.td({ elem: "Column heading" }),
+								new table.td({ elem: "Column heading" }),
+							],
+						}),
+					}),
+					new table.tbody({
+						elem: [
+							fn("active"),
+							fn(null),
+							fn("primary"),
+							fn("secondary"),
+							fn("success"),
+							fn("danger"),
+							fn("warning"),
+							fn("info"),
+							fn("light"),
+							fn("dark"),
+						],
+					}),
+				],
+			});
+		},
+	},
+
+	{
+		title: "Forms",
+	},
 ];
