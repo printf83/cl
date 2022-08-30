@@ -288,7 +288,7 @@ export default [
 			let fn = (label, checked) => {
 				return new button({
 					type: "radio",
-					name: "g7",
+					name: "g10",
 					label: label,
 					checked: checked,
 					color: "primary",
@@ -416,7 +416,7 @@ export default [
 		code: () => {
 			let fn = (align) => {
 				return `
-				<figure${align ? ` class="text-${align}"` : ``}>
+				<figure${align ? ' class="text-' + align + '"' : ``}>
 					<blockquote class="blockquote">
 						<p class="mb-0">${sample.shorttext()}</p>
 					</blockquote>
@@ -430,15 +430,13 @@ export default [
 
 	{
 		title: "Tables",
-		import: ["table"],
+		import: ["table", "b"],
 		code: () => {
 			let fn = (d) => {
 				return new table.tr({
 					class: `table-${d}`,
 					elem: [
-						new table.td({
-							elem: new b(d ? core.capitalize(d) : "Default"),
-						}),
+						new table.td({ elem: new b({ elem: d ? core.capitalize(d) : "Default" }) }),
 						new table.td({ elem: "Column content" }),
 						new table.td({ elem: "Column content" }),
 						new table.td({ elem: "Column content" }),
@@ -480,5 +478,385 @@ export default [
 
 	{
 		title: "Forms",
+		import: ["input", "tag", "file", "div"],
+		container: sample.formcontainer,
+		code: () => {
+			return [
+				new tag({ tag: "legend", elem: "Legend" }),
+				new input({
+					label: "Email",
+					labelsize: "sm-2",
+					ctlsize: "sm-10",
+					type: "email",
+					readonly: true,
+					plaintext: true,
+					value: "email@example.com",
+				}),
+				new input({
+					label: "Email address",
+					type: "email",
+					placeholder: "Enter email",
+					helper: "We'll never share your email with anyone else.",
+				}),
+				new input({
+					label: "Password",
+					type: "password",
+					placeholder: "Password",
+				}),
+				new input({
+					label: "Example select",
+					type: "select",
+					option: ["1", "2", "3", "4", "5"],
+				}),
+				new input({
+					label: "Example select",
+					type: "select",
+					multiple: true,
+					row: 4,
+					option: ["1", "2", "3", "4", "5"],
+				}),
+				new input({
+					label: "Example textarea",
+					type: "textarea",
+				}),
+				new file({
+					label: "Default file input example",
+				}),
+				new tag({ tag: "legend", class: "mt-3", elem: "Radio buttons" }),
+				new input({
+					name: "g11",
+					label: "Option one is this and that—be sure to include why it's great",
+					type: "radio",
+					checked: true,
+				}),
+				new input({
+					name: "g11",
+					label: "Option two can be something else and selecting it will deselect option one",
+					type: "radio",
+				}),
+				new input({
+					name: "g11",
+					label: "Option three is disabled",
+					type: "radio",
+					disabled: true,
+				}),
+				new tag({ tag: "legend", class: "mt-3", elem: "Checkboxes" }),
+				new input({
+					label: "Default checkbox",
+					type: "checkbox",
+				}),
+				new input({
+					label: "Checked checkbox",
+					type: "checkbox",
+					checked: true,
+				}),
+				new tag({ tag: "legend", class: "mt-3", elem: "Switches" }),
+				new input({
+					label: "Default switch checkbox input",
+					type: "switch",
+				}),
+				new input({
+					label: "Checked switch checkbox input",
+					type: "switch",
+					checked: true,
+				}),
+				new tag({ tag: "legend", class: "mt-3", elem: "Ranges" }),
+				new input({
+					label: "Example range",
+					type: "range",
+				}),
+				new input({
+					label: "Disabled range",
+					type: "range",
+					min: 0,
+					max: 10,
+					value: 5,
+					disabled: true,
+				}),
+				new input({
+					label: "Example range",
+					type: "range",
+					min: 0,
+					max: 10,
+					value: 5,
+				}),
+				new div({
+					marginy: 3,
+					elem: new button({
+						type: "submit",
+						color: "primary",
+						elem: "Submit",
+					}),
+				}),
+				new input({
+					label: "Disabled input",
+					type: "text",
+					disabled: true,
+					placeholder: "Disabled inpute here...",
+				}),
+				new input({
+					label: "Readonly input",
+					type: "text",
+					readonly: true,
+					placeholder: "Readonly inpute here...",
+				}),
+				new input({
+					label: "Valid input",
+					type: "text",
+					value: "correct value",
+					valid: "Success! You've done it.",
+				}),
+				new input({
+					label: "Invalid input",
+					type: "text",
+					value: "wrong value",
+					invalid: "Sorry, that username's taken. Try another?",
+				}),
+				new input({
+					label: "Large input",
+					type: "text",
+					weight: "lg",
+					placeholder: ".form-control-lg",
+				}),
+				new input({
+					label: "Default input",
+					type: "text",
+					placeholder: "Default input",
+				}),
+				new input({
+					label: "Large input",
+					type: "text",
+					weight: "sm",
+					placeholder: ".form-control-sm",
+				}),
+				new input({
+					label: "Input addon",
+					type: "number",
+					before: "$",
+					after: ".00",
+				}),
+
+				new input({
+					placeholder: "Recipient's username",
+					type: "text",
+					after: new button({
+						outline: true,
+						color: "primary",
+						label: "Button",
+					}),
+				}),
+
+				new tag({ tag: "legend", class: "mt-3", elem: "Floating labels" }),
+				new input({
+					type: "email",
+					label: "Email address",
+					floatlabel: true,
+				}),
+
+				new input({
+					type: "password",
+					label: "Password",
+					floatlabel: true,
+				}),
+			];
+		},
+	},
+
+	{
+		title: "Navs",
+		anchor: false,
+	},
+	{
+		title: "Tabs",
+		import: ["nav", "sample"],
+		container: sample.formcontainer,
+		code: () => {
+			return new tab({
+				item: [
+					{
+						label: "First",
+						elem: `<b>This is the first item's tab body.</b> ${sample.text()}`,
+					},
+					{
+						label: "Second",
+						elem: `<b>This is the second item's tab body.</b> ${sample.text()}`,
+					},
+					{
+						label: "Third",
+						elem: `<b>This is the third item's tab body.</b> ${sample.text()}`,
+					},
+					{
+						label: "Disabled",
+						disabled: true,
+						elem: "This is the last item's tab body.",
+					},
+				],
+			});
+		},
+	},
+
+	{
+		title: "Pills",
+		import: ["nav", "sample"],
+		container: sample.formcontainer,
+		code: () => {
+			let fn = (headAlign) =>
+				new tab({
+					type: "pill",
+					headAlign: headAlign,
+					item: [
+						{
+							label: "First",
+							elem: `<b>This is the first item's tab body.</b> ${sample.text()}`,
+						},
+						{
+							label: "Second",
+							elem: `<b>This is the second item's tab body.</b> ${sample.text()}`,
+						},
+						{
+							label: "Third",
+							elem: `<b>This is the third item's tab body.</b> ${sample.text()}`,
+						},
+						{
+							label: "Disabled",
+							disabled: true,
+							elem: "This is the last item's tab body.",
+						},
+					],
+				});
+
+			return [fn(null), fn("fill"), fn("vertical")];
+		},
+	},
+
+	{
+		title: "Breadcrumbs",
+		import: ["breadcrumb"],
+		container: sample.formcontainer,
+		code: () => {
+			return [
+				new breadcrumb({
+					item: [
+						{
+							label: "Home",
+							href: "#",
+							active: true,
+						},
+					],
+				}),
+				new breadcrumb({
+					item: [
+						{
+							label: "Home",
+							href: "#",
+						},
+						{
+							label: "Library",
+							href: "#",
+							active: true,
+						},
+					],
+				}),
+				new breadcrumb({
+					item: [
+						{
+							label: "Home",
+							href: "#",
+						},
+						{
+							label: "Library",
+							href: "#",
+						},
+						{
+							label: "Data",
+							active: true,
+							href: "#",
+						},
+					],
+				}),
+			];
+		},
+	},
+
+	{
+		title: "Pagination",
+		import: ["paging"],
+		container: sample.formcontainer,
+		code: () => {
+			let fn = (weight) =>
+				new paging({
+					limit: 10,
+					skip: 60,
+					total: 1260,
+					max: 3,
+					weight: weight,
+					onchange: (event) => {
+						new toast("i", `Skip changed to ${event.detail.skip}`).show();
+					},
+				});
+
+			return [fn("sm"), fn(), fn("lg")];
+		},
+	},
+
+	{
+		title: "Indicators",
+		anchor: false,
+	},
+
+	{
+		title: "Alerts",
+		import: ["alert"],
+		code: () => {
+			let fn = (color, elem) => {
+				return new div({
+					col: ["lg-4", "md-6", "sm-12"],
+					elem: new alert.container({
+						close: true,
+						color: color,
+						elem: elem,
+					}),
+				});
+			};
+
+			return [
+				new alert.container({
+					color: "warning",
+					close: true,
+					elem: [
+						new alert.heading("Warning!"),
+						new p({
+							elem: [
+								"Best check yo self, you're not looking too good. Nulla vitae elit libero, a pharetra augue. Praesent commodo cursus magna, ",
+								new alert.link("#", "vel scelerisque nisl consectetur et"),
+								".",
+							],
+						}),
+					],
+				}),
+
+				new div({
+					container: true,
+					padding: 0,
+					elem: new div({
+						row: true,
+						elem: [
+							fn("danger", "<b>Oh snap!</b> Change a few things up and try submitting again."),
+							fn("success", "<b>Well done!</b> You successfully read this important alert message."),
+							fn(
+								"info",
+								"<b>Heads up!</b> This alert needs your attention, but it's not super important."
+							),
+							fn("primary", "<b>Oh snap!</b> Change a few things up and try submitting again."),
+							fn("secondary", "<b>Well done!</b> You successfully read this important alert message."),
+							fn(
+								"light",
+								"<b>Heads up!</b> This alert needs your attention, but it's not super important."
+							),
+						],
+					}),
+				}),
+			];
+		},
 	},
 ];
