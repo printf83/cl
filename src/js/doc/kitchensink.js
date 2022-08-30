@@ -664,7 +664,6 @@ export default [
 
 	{
 		title: "Navs",
-		anchor: false,
 	},
 	{
 		title: "Tabs",
@@ -801,7 +800,6 @@ export default [
 
 	{
 		title: "Indicators",
-		anchor: false,
 	},
 
 	{
@@ -857,6 +855,168 @@ export default [
 					}),
 				}),
 			];
+		},
+	},
+
+	{
+		title: "Badge",
+		import: ["badge"],
+		container: sample.stackcontainer,
+		code: () => {
+			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map((i) => {
+				return new badge({
+					label: core.capitalize(i),
+					color: i,
+				});
+			});
+		},
+	},
+	{
+		import: ["badge"],
+		container: sample.stackcontainer,
+		code: () => {
+			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map((i) => {
+				return new badge({
+					label: core.capitalize(i),
+					color: i,
+					pill: true,
+				});
+			});
+		},
+	},
+
+	{
+		title: "Progress",
+	},
+
+	{
+		title: "Basic",
+		import: ["progress"],
+		container: sample.formcontainer,
+		code: () => {
+			return new progress.container({
+				item: {
+					value: 25,
+				},
+			});
+		},
+	},
+
+	{
+		title: "Contextual alternatives",
+		import: ["progress"],
+		container: sample.formcontainer,
+		code: () => {
+			return [
+				new progress.container({
+					item: {
+						color: "success",
+						value: 25,
+					},
+				}),
+				new progress.container({
+					item: {
+						color: "info",
+						value: 35,
+					},
+				}),
+				new progress.container({
+					item: {
+						color: "warning",
+						value: 55,
+					},
+				}),
+				new progress.container({
+					item: {
+						color: "danger",
+						value: 75,
+					},
+				}),
+			];
+		},
+	},
+
+	{
+		title: "Multiple bars",
+		import: ["progress"],
+		container: sample.formcontainer,
+		code: () => {
+			return new progress.container({
+				item: [
+					{
+						color: "primary",
+						value: 15,
+					},
+					{
+						color: "secondary",
+						value: 30,
+					},
+					{
+						color: "info",
+						value: 20,
+					},
+				],
+			});
+		},
+	},
+
+	{
+		title: "Striped",
+		import: ["progress"],
+		container: sample.formcontainer,
+		code: () => {
+			return [
+				new progress.container({
+					item: {
+						color: "primary",
+						value: 15,
+						stripe: true,
+					},
+				}),
+				new progress.container({
+					item: {
+						color: "success",
+						value: 25,
+						stripe: true,
+					},
+				}),
+				new progress.container({
+					item: {
+						color: "info",
+						value: 35,
+						stripe: true,
+					},
+				}),
+				new progress.container({
+					item: {
+						color: "warning",
+						value: 55,
+						stripe: true,
+					},
+				}),
+				new progress.container({
+					item: {
+						color: "danger",
+						value: 75,
+						stripe: true,
+					},
+				}),
+			];
+		},
+	},
+
+	{
+		title: "Animated",
+		import: ["progress"],
+		code: () => {
+			return new progress.container({
+				item: {
+					color: "danger",
+					value: 75,
+					stripe: true,
+					animated: true,
+				},
+			});
 		},
 	},
 ];
