@@ -512,7 +512,7 @@ export default [
 					label: "Example select",
 					type: "select",
 					multiple: true,
-					row: 4,
+					rows: 4,
 					option: ["1", "2", "3", "4", "5"],
 				}),
 				new input({
@@ -907,32 +907,15 @@ export default [
 		import: ["progress"],
 		container: sample.formcontainer,
 		code: () => {
-			return [
+			let fn = (color, value) =>
 				new progress.container({
 					item: {
-						color: "success",
-						value: 25,
+						color: color,
+						value: value,
 					},
-				}),
-				new progress.container({
-					item: {
-						color: "info",
-						value: 35,
-					},
-				}),
-				new progress.container({
-					item: {
-						color: "warning",
-						value: 55,
-					},
-				}),
-				new progress.container({
-					item: {
-						color: "danger",
-						value: 75,
-					},
-				}),
-			];
+				});
+
+			return [fn("success", 25), fn("info", 50), fn("warning", 75), fn("danger", 100)];
 		},
 	},
 
@@ -944,11 +927,10 @@ export default [
 			return new progress.container({
 				item: [
 					{
-						color: "primary",
 						value: 15,
 					},
 					{
-						color: "secondary",
+						color: "success",
 						value: 30,
 					},
 					{
@@ -965,43 +947,16 @@ export default [
 		import: ["progress"],
 		container: sample.formcontainer,
 		code: () => {
-			return [
+			let fn = (color, value) =>
 				new progress.container({
 					item: {
-						color: "primary",
-						value: 15,
+						color: color,
+						value: value,
 						stripe: true,
 					},
-				}),
-				new progress.container({
-					item: {
-						color: "success",
-						value: 25,
-						stripe: true,
-					},
-				}),
-				new progress.container({
-					item: {
-						color: "info",
-						value: 35,
-						stripe: true,
-					},
-				}),
-				new progress.container({
-					item: {
-						color: "warning",
-						value: 55,
-						stripe: true,
-					},
-				}),
-				new progress.container({
-					item: {
-						color: "danger",
-						value: 75,
-						stripe: true,
-					},
-				}),
-			];
+				});
+
+			return [fn(null, 15), fn("success", 25), fn("info", 50), fn("warning", 75), fn("danger", 100)];
 		},
 	},
 
@@ -1011,7 +966,6 @@ export default [
 		code: () => {
 			return new progress.container({
 				item: {
-					color: "danger",
 					value: 75,
 					stripe: true,
 					animated: true,
