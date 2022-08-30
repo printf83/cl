@@ -1218,9 +1218,6 @@ export default [
 		import: ["card", "listgroup"],
 		code: () => {
 			return new card.container({
-				style: {
-					width: "18rem",
-				},
 				elem: [
 					new card.header("Header"),
 					new card.body({
@@ -1272,9 +1269,6 @@ export default [
 		import: ["card"],
 		code: () => {
 			return new card.container({
-				style: {
-					width: "18rem",
-				},
 				elem: new card.body({
 					elem: [
 						new card.title("Card Title"),
@@ -1292,6 +1286,225 @@ export default [
 						}),
 					],
 				}),
+			});
+		},
+	},
+
+	{
+		title: "Accordions",
+	},
+
+	{
+		import: ["accordion"],
+		code: () => {
+			return new accordion({
+				item: [
+					{
+						label: "Accordion Item 1",
+						elem: ["<b>This is the first item's accordion body.</b> ", sample.text()],
+					},
+					{
+						label: "Accordion Item 2",
+						elem: ["<b>This is the second item's accordion body.</b> ", sample.text()],
+					},
+					{
+						label: "Accordion Item 3",
+						elem: ["<b>This is the third item's accordion body.</b> ", sample.text()],
+					},
+				],
+			});
+		},
+	},
+
+	{
+		title: "Dialogs",
+	},
+
+	{
+		title: "Modals",
+		viewclass: "cl-modal-preview",
+		import: ["modal"],
+		code: () => {
+			return new modal({
+				title: "Modal title",
+				elem: "Modal body text goes here.",
+
+				button: ["Save changes", "Close"],
+				debug: true, //this last option is for this documentation preview only
+			});
+		},
+	},
+
+	{
+		title: "Offcanvas",
+		container: sample.stackcontainer,
+		import: ["offcanvas", "dropdown", "p", "button"],
+		code: () => {
+			let fnContent = new div({
+				elem: [
+					new p({
+						elem: "Some text as placeholder. In real life you can have the elements you have chosen. Like, text, images, lists, etc.",
+					}),
+					new dropdown({
+						label: "Drowdown button",
+						color: "secondary",
+						option: [
+							{
+								href: "#",
+								label: "Action",
+							},
+							{
+								href: "#",
+								label: "Another action",
+							},
+							{
+								href: "#",
+								label: "Something else here",
+							},
+							{
+								value: "-",
+							},
+							{
+								href: "#",
+								label: "Separated link",
+							},
+						],
+					}),
+				],
+			});
+
+			let fnButton = (title, opt) =>
+				new button({
+					label: title,
+					color: "primary",
+					onclick: () => {
+						new offcanvas(opt).show();
+					},
+				});
+
+			return [
+				fnButton("Show offcanvas", {
+					close: true,
+					backdrop: true,
+					color: "light",
+					title: "Offcanvas",
+					elem: fnContent,
+				}),
+
+				fnButton("Show top offcanvas", {
+					placement: "top",
+					close: true,
+					backdrop: true,
+					color: "light",
+					title: "Offcanvas",
+					elem: fnContent,
+				}),
+
+				fnButton("Show bottom offcanvas", {
+					placement: "bottom",
+					close: true,
+					backdrop: true,
+					color: "light",
+					title: "Offcanvas",
+					elem: fnContent,
+				}),
+
+				fnButton("Show end offcanvas", {
+					placement: "end",
+					close: true,
+					backdrop: true,
+					color: "light",
+					title: "Offcanvas",
+					elem: fnContent,
+				}),
+
+				fnButton("Enable body scrolling", {
+					close: true,
+					scroll: true,
+					backdrop: false,
+					color: "light",
+					title: "Offcanvas",
+					elem: fnContent,
+				}),
+
+				fnButton("Enable backdrop", {
+					close: true,
+					scroll: false,
+					backdrop: true,
+					color: "light",
+					title: "Offcanvas",
+					elem: fnContent,
+				}),
+
+				fnButton("Enable both scrolling & backdrop", {
+					close: true,
+					backdrop: true,
+					scroll: true,
+					color: "light",
+					title: "Offcanvas",
+					elem: fnContent,
+				}),
+			];
+		},
+	},
+
+	{
+		title: "Popover",
+		container: sample.stackcontainer,
+		import: ["tooltip", "button"],
+		code: () => {
+			let fn = (placement) =>
+				new tooltip({
+					type: "popover",
+					msg: `${core.capitalize(placement)} popover`,
+					placement: placement,
+					elem: new button({
+						label: core.capitalize(placement),
+						outline: true,
+						color: "secondary",
+					}),
+				});
+
+			return [fn("top"), fn("left"), fn("right"), fn("bottom")];
+		},
+	},
+
+	{
+		title: "Tooltip",
+		container: sample.stackcontainer,
+		import: ["tooltip", "button"],
+		code: () => {
+			let fn = (placement) =>
+				new tooltip({
+					type: "tooltip",
+					msg: `${core.capitalize(placement)} tooltip`,
+					placement: placement,
+					elem: new button({
+						label: core.capitalize(placement),
+						outline: true,
+						color: "secondary",
+					}),
+				});
+
+			return [fn("top"), fn("left"), fn("right"), fn("bottom")];
+		},
+	},
+
+	{
+		title: "Toast",
+		viewclass: "cl-modal-preview",
+		import: ["toast"],
+		code: () => {
+			return new toast({
+				color: "primary",
+				textcolor: "light",
+				icon: {
+					icon: "fire",
+					color: "primary",
+				},
+				title: "Bootstrap",
+				elem: "Hello, world! This is a toast message.",
+				debug: true, //this last option is for this documentation preview only
 			});
 		},
 	},
