@@ -58,6 +58,7 @@ export default [
 				floatlabel: true,
 				required: true,
 				invalid: "Please provide email",
+				valid: "It's looks good",
 				aftertype: "button",
 				after: new button({
 					label: "Validate",
