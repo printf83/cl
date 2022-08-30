@@ -1036,7 +1036,7 @@ export default [
 
 	{
 		title: "List groups",
-		import: ["listgroup", "badge"],
+		import: ["listgroup", "badge", "sample"],
 		code: () => {
 			let itemfn = (text, badgeLabel) => {
 				return {
@@ -1061,7 +1061,7 @@ export default [
 	},
 
 	{
-		import: ["listgroup"],
+		import: ["listgroup", "sample"],
 		code: () => {
 			let itemfn = (text, active, disabled) => {
 				return {
@@ -1085,7 +1085,7 @@ export default [
 	},
 
 	{
-		import: ["listgroup"],
+		import: ["listgroup", "sample", "div", "h", "small", "p"],
 		code: () => {
 			let itemfn = (title, active, days) => {
 				return {
@@ -1123,6 +1123,175 @@ export default [
 
 			return new listgroup({
 				item: [itemfn("List group item heading", true, 14), itemfn("List group item heading", false, 2)],
+			});
+		},
+	},
+
+	{
+		title: "Cards",
+	},
+
+	{
+		container: sample.stackcontainer,
+		import: ["card"],
+		code: () => {
+			return [
+				{
+					color: "primary",
+					textcolor: "light",
+				},
+				{
+					color: "secondary",
+					textcolor: "light",
+				},
+				{
+					color: "success",
+					textcolor: "light",
+				},
+				{
+					color: "danger",
+					textcolor: "light",
+				},
+				{
+					color: "warning",
+				},
+				{
+					color: "info",
+				},
+				{
+					color: "light",
+				},
+				{
+					color: "dark",
+					textcolor: "light",
+				},
+			].map((i) => {
+				return new card.container({
+					color: i.color,
+					textcolor: i.textcolor,
+					style: {
+						width: "18rem",
+					},
+					elem: [
+						new card.header("Header"),
+						new card.body({
+							elem: [
+								new card.title(`${core.capitalize(i.color)} card title`),
+								new card.text(
+									`Some quick example text to build on the ${i.color} card title and make up the bulk of the card's content.`
+								),
+							],
+						}),
+					],
+				});
+			});
+		},
+	},
+
+	{
+		container: sample.stackcontainer,
+		import: ["card"],
+		code: () => {
+			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map((i) => {
+				return new card.container({
+					bordercolor: i,
+					style: {
+						width: "18rem",
+					},
+					elem: [
+						new card.header("Header"),
+						new card.body({
+							elem: [
+								new card.title(`${core.capitalize(i)} card title`),
+								new card.text(
+									`Some quick example text to build on the ${i} card title and make up the bulk of the card's content.`
+								),
+							],
+						}),
+					],
+				});
+			});
+		},
+	},
+
+	{
+		import: ["card", "listgroup"],
+		code: () => {
+			return new card.container({
+				style: {
+					width: "18rem",
+				},
+				elem: [
+					new card.header("Header"),
+					new card.body({
+						elem: [new card.title("Card Title"), new card.subtitle("Card sub title")],
+					}),
+					new card.img({
+						src: sample.img(286, 143),
+					}),
+					new card.body({
+						elem: [
+							new card.text(
+								"Some quick example text to build on the card title and make up the bulk of the card's content."
+							),
+						],
+					}),
+					new listgroup({
+						flush: true,
+						item: [
+							{
+								elem: "An item",
+							},
+							{
+								elem: "A second item",
+							},
+							{
+								elem: "A third item",
+							},
+						],
+					}),
+					new card.body({
+						elem: [
+							new card.link({
+								href: "#",
+								elem: "Link 1",
+							}),
+							new card.link({
+								href: "#",
+								elem: "Link 2",
+							}),
+						],
+					}),
+					new card.footer("Last updated 3 mins ago"),
+				],
+			});
+		},
+	},
+
+	{
+		import: ["card"],
+		code: () => {
+			return new card.container({
+				style: {
+					width: "18rem",
+				},
+				elem: new card.body({
+					elem: [
+						new card.title("Card Title"),
+						new card.subtitle("Card subtitle"),
+						new card.text(
+							"Some quick example text to build on the card title and make up the bulk of the card's content."
+						),
+						new card.link({
+							href: "#",
+							elem: "Link 1",
+						}),
+						new card.link({
+							href: "#",
+							elem: "Link 2",
+						}),
+					],
+				}),
 			});
 		},
 	},
