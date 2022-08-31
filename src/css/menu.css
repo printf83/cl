@@ -40,12 +40,12 @@
 	transform: rotate(90deg);
 }
 .cl-menu-container {
-	padding-left: 1.25rem;
+	padding-left: 0.25rem;
 	list-style: none;
 	margin: 0;
 }
 .cl-menu-container.no-arrow{
-	padding-left: 1.25rem;
+	padding-left: 0.75rem;
 }
 
 .cl-menu-container li div,
