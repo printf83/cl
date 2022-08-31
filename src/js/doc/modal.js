@@ -1039,6 +1039,9 @@ export default [
 						onhidden: (event) => {
 							new toast("x", fn(event.currentTarget, "onhidden")).show();
 						},
+						onhideprevented: (event) => {
+							new toast("-", fn(event.currentTarget, "onhideprevented")).show();
+						},
 					}).show();
 				},
 			});

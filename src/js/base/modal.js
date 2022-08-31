@@ -46,6 +46,7 @@ const defaultOption = {
 	onshown: null,
 	onhide: null,
 	onhidden: null,
+	onhideprevented: null,
 
 	debug: false,
 };
@@ -282,6 +283,7 @@ export default class modal extends div {
 					"shown.bs.modal": opt.onshown,
 					"hide.bs.modal": opt.onhide,
 					"hidden.bs.modal": opt.onhidden,
+					"hidePrevented.bs.modal": opt.onhideprevented,
 				}),
 				color: opt.bgcolor ? opt.bgcolor : null,
 				elem: new div({
