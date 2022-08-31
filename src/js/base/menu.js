@@ -54,7 +54,7 @@ export default class menu extends div {
 				id: opt.id,
 				show: opt.active,
 				elem: new ul({
-					class: "cl-menu-container",
+					class: ["cl-menu-container", !opt.arrow ? "no-arrow" : null],
 					elem: opt.item.map((i) => {
 						if (typeof i === "string") {
 							i = {
@@ -81,6 +81,7 @@ export default class menu extends div {
 		delete opt.label;
 		delete opt.active;
 		delete opt.item;
+		delete opt.arrow;
 
 		super.data = opt;
 	}

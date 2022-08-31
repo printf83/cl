@@ -21,6 +21,7 @@ const db_menu = [
 	{
 		type: "menu",
 		title: "Getting started",
+		icon: { icon: "book-open", color: "primary" },
 		item: [
 			{ title: "Introduction", source: doc.intro },
 			{ title: "Kitchen Sink", source: doc.kitchensink },
@@ -29,6 +30,7 @@ const db_menu = [
 	{
 		type: "menu",
 		title: "Layout",
+		icon: { icon: "grip", color: "info" },
 		item: [
 			{ title: "Containers", source: doc.container },
 			{ title: "Grid", source: doc.grid },
@@ -39,6 +41,7 @@ const db_menu = [
 	{
 		type: "menu",
 		title: "Forms",
+		icon: { icon: "list-check", color: "secondary" },
 		item: [
 			{ title: "Form control", source: doc.formcontrol },
 			{ title: "Select", source: doc.select },
@@ -51,6 +54,7 @@ const db_menu = [
 	{
 		type: "menu",
 		title: "Components",
+		icon: { icon: "server", color: "warning" },
 		item: [
 			{ title: "Accordion", source: doc.accordion },
 			{ title: "Alert", source: doc.alert },
@@ -78,6 +82,7 @@ const db_menu = [
 	{
 		type: "menu",
 		title: "Extra",
+		icon: { icon: "heart", color: "danger" },
 		item: [
 			{ title: "Icon", source: doc.icon },
 			{ title: "Menu", source: doc.menu },
@@ -93,6 +98,7 @@ const db_menu = [
 	{
 		type: "menu",
 		title: "Tag",
+		icon: { icon: "tag", color: "success" },
 		item: [
 			{ title: "Base", source: doc.tag_base },
 
@@ -116,6 +122,7 @@ const db_menu = [
 	{
 		type: "menu",
 		title: "Extend tag",
+		icon: { icon: "screwdriver-wrench", color: "primary" },
 		item: [
 			{ title: "Anchor", source: doc.tag_ex_a },
 			{ title: "Abbreviation", source: doc.tag_ex_abbr },
@@ -145,6 +152,7 @@ const db_menu = [
 	{
 		type: "menu",
 		title: "Database",
+		icon: { icon: "database", color: "info" },
 		item: [
 			{ title: "Generic", source: doc.generic },
 			{ title: "File", source: doc.file },
@@ -156,6 +164,7 @@ const db_menu = [
 	{
 		type: "navigate",
 		title: "Others",
+		icon: { icon: "link", color: "secondary" },
 		item: [
 			{ title: "Sandbox", source: "sandbox.html" },
 			{ title: "Test", source: "test.html" },
@@ -164,6 +173,7 @@ const db_menu = [
 	{
 		type: "action",
 		title: "Action",
+		icon: { icon: "bolt-lightning", color: "danger" },
 		item: [
 			{
 				title: "Memory Test 10",
@@ -194,6 +204,7 @@ const db_menu = [
 	{
 		type: "theme",
 		title: "Theme",
+		icon: { icon: "swatchbook", color: "success" },
 		item: [
 			{ title: "Default", source: null },
 			{ title: "Cerulean (L|G)", source: "cerulean" },
@@ -649,6 +660,8 @@ function gen_menu(m1, m2, theme) {
 	return db_menu.map((i) => {
 		return new menu({
 			label: i.title,
+			icon: i.icon,
+			arrow: !i.icon,
 			active: i.title === m1,
 			item: i.item.map((j) => {
 				return {

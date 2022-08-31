@@ -44,6 +44,10 @@
 	list-style: none;
 	margin: 0;
 }
+.cl-menu-container.no-arrow{
+	padding-left: 1.75rem;
+}
+
 .cl-menu-container li div,
 .cl-menu-container li a {
 	color: rgba(var(--bs-gray), 0.7);
