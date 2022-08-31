@@ -56,9 +56,9 @@ const defaultOption = {
 
 	href: null,
 	onclick: null,
-	onchange: null,
-	onfocus: null,
-	onblur: null,
+	// onchange: null,
+	// onfocus: null,
+	// onblur: null,
 
 	userselect: null,
 	pointerevent: null,
