@@ -10,7 +10,11 @@ const defaultTBodyOption = { tag: "tbody" };
 const defaultTFootOption = { tag: "tfoot" };
 const defaultContainerOption = {
 	tag: "table",
+	color: null,
+
 	striped: false,
+	stripedcolumn: false, //BS5.2
+
 	responsive: true,
 	hover: false,
 	border: null, //null|"bordered"|"none"
@@ -155,6 +159,7 @@ export class container extends tag {
 			"table",
 			opt.color ? `table-${opt.color}` : null,
 			opt.striped ? "table-striped" : null,
+			opt.stripedcolumn ? "table-striped-columns" : null,
 			opt.hover ? "table-hover" : null,
 			opt.captiontop ? "caption-top" : null,
 			opt.size ? `table-${opt.size}` : null,
@@ -279,6 +284,8 @@ export class container extends tag {
 
 		delete opt.color;
 		delete opt.striped;
+		delete opt.stripedcolumn;
+
 		delete opt.hover;
 		delete opt.captiontop;
 		delete opt.size;
