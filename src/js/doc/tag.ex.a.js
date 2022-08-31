@@ -24,7 +24,7 @@ export default [
 		import: ["a"],
 		code: () => {
 			return new a({
-				href: "https://getbootstrap.com/docs/5.0",
+				href: "https://getbootstrap.com/docs/5.2",
 				linkcolor: "danger",
 				textdecoration: "none",
 				elem: "Bootstrap",
@@ -49,14 +49,14 @@ export default [
 		code: () => {
 			return [
 				new a({
-					href: "https://getbootstrap.com/docs/5.0",
+					href: "https://getbootstrap.com/docs/5.2",
 					color: "success",
 					textdecoration: "none",
 					label: "Bootstrap",
 					icon: { type: "fab", icon: "bootstrap" },
 				}),
 				new a({
-					href: "https://getbootstrap.com/docs/5.0",
+					href: "https://getbootstrap.com/docs/5.2",
 					color: "light",
 					class: "bg-primary",
 					padding: 2,
@@ -76,9 +76,9 @@ export default [
 		import: ["a"],
 		code: () => {
 			return [
-				new a({ href: "https://getbootstrap.com/docs/5.0", class: "classname", elem: "Bootstrap" }),
-				new a("https://getbootstrap.com/docs/5.0", "Bootstrap"),
-				new a("https://getbootstrap.com/docs/5.0"),
+				new a({ href: "https://getbootstrap.com/docs/5.2", class: "classname", elem: "Bootstrap" }),
+				new a("https://getbootstrap.com/docs/5.2", "Bootstrap"),
+				new a("https://getbootstrap.com/docs/5.2"),
 			];
 		},
 	},

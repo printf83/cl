@@ -18,7 +18,7 @@ export default [
 					elem: "<b>Gutters are the gaps between column content, created by horizontal <code>padding</code>.</b> We set <code>padding-right</code> and <code>padding-left</code> on each column, and use negative margin to offset that at the start and end of each row to align content.",
 				}),
 				new li({
-					elem: "<b>Gutters start at <code>1.5rem </code>(<code>24px</code>) wide.</b> This allows us to match Bootstrap grid to the <a href='https://getbootstrap.com/docs/5.0/utilities/spacing/'>padding and margin spacers</a> scale.",
+					elem: "<b>Gutters start at <code>1.5rem </code>(<code>24px</code>) wide.</b> This allows us to match Bootstrap grid to the <a href='https://getbootstrap.com/docs/5.2/utilities/spacing/'>padding and margin spacers</a> scale.",
 				}),
 				new li({
 					elem: "<b>Gutters can be responsively adjusted.</b> Use breakpoint-specific gutter classes to modify horizontal gutters, vertical gutters, and all gutters.",
@@ -91,7 +91,7 @@ export default [
 
 	{
 		title: "Row columns gutters",
-		msg: "Gutter classes can also be added to <a href='https://getbootstrap.com/docs/5.0/layout/grid/#row-columns'>row columns</a>. In the following example, we use responsive row columns and responsive gutter classes.",
+		msg: "Gutter classes can also be added to <a href='https://getbootstrap.com/docs/5.2/layout/grid/#row-columns'>row columns</a>. In the following example, we use responsive row columns and responsive gutter classes.",
 		import: ["div"],
 		code: () => {
 			return new div(

@@ -187,8 +187,8 @@ export default [
 					label: "Menu",
 					item: [
 						{ label: "BS5 JS Builder", active: true, href: "#" },
-						{ label: "Bootstrap 5", href: "https://getbootstrap.com/docs/5.0/" },
-						{ label: "Font Awesome", href: "https://fontawesome.com/v5.15/icons" },
+						{ label: "Bootstrap 5", href: "https://getbootstrap.com/docs/5.2/" },
+						{ label: "Font Awesome", href: "https://fontawesome.com/v6.1.2/icons" },
 						{ label: "Bootswatch", href: "https://bootswatch.com/" },
 					],
 				},
