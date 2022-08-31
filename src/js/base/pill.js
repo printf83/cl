@@ -44,7 +44,7 @@ export default class pill extends div {
 				new inputgroup.text({
 					border: false,
 					color: opt.color,
-					// textcolor: opt.color,
+					textcolor: opt.color,
 					coloropacity: 25,
 					paddingx: 2,
 					paddingy: 1,

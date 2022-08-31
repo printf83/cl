@@ -80,7 +80,10 @@ export default class offcanvas extends div {
 				body = new div({ class: "offcanvas-body", elem: opt.elem });
 			}
 
-			opt.class = core.merge.class(opt.class, ["offcanvas", opt.placement ? `offcanvas-${opt.placement}` : null]);
+			opt.class = core.merge.class(opt.class, [
+				"offcanvas",
+				opt.placement ? `offcanvas-${opt.placement}` : "offcanvas-start",
+			]);
 
 			opt.attr = core.merge.attr(opt.attr, {
 				"aria-labelledby": `${opt.id}-label`,

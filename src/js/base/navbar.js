@@ -245,7 +245,10 @@ export class offcanvascontainer extends div {
 			"hidden.bs.offcanvas": opt.onhidden,
 		});
 
-		opt.class = core.merge.class(opt.class, ["offcanvas", "offcanvas-end"]);
+		opt.class = core.merge.class(opt.class, [
+			"offcanvas",
+			opt.placement ? `offcanvas-${opt.placement}` : "offcanvas-start",
+		]);
 
 		opt.elem = [
 			new div({
@@ -265,6 +268,7 @@ export class offcanvascontainer extends div {
 
 		delete opt.icon;
 		delete opt.title;
+		delete opt.placement;
 
 		delete opt.onshow;
 		delete opt.onshown;
