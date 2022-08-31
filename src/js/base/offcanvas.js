@@ -15,6 +15,11 @@ const defaultOption = {
 	scroll: true,
 	backdrop: false,
 	elem: null,
+
+	onshow: null,
+	onshown: null,
+	onhide: null,
+	onhidden: null,
 };
 /**
  * option : {attr,id,class,static,title,icon,footer,button,animated,debug,scrollable,center,size,fullscreen,focus,align,color,textcolor,bordercolor,border,divider,centerbutton,elem}
@@ -82,6 +87,11 @@ export default class offcanvas extends div {
 				"data-bs-scroll": opt.scroll ? "true" : "false",
 				"data-bs-backdrop": opt.backdrop ? "true" : "false",
 				tabindex: "-1",
+
+				"show.bs.offcanvas": opt.onshow,
+				"shown.bs.offcanvas": opt.onshown,
+				"hide.bs.offcanvas": opt.onhide,
+				"hidden.bs.offcanvas": opt.onhidden,
 			});
 
 			opt.elem = [header, body];
@@ -94,6 +104,11 @@ export default class offcanvas extends div {
 			delete opt.backdrop;
 			delete opt.showtitle;
 			delete opt.iconafter;
+
+			delete opt.onshow;
+			delete opt.onshown;
+			delete opt.onhide;
+			delete opt.onhidden;
 
 			super.data = opt;
 		}
