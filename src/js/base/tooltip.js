@@ -10,6 +10,7 @@ const defaultOption = {
 	trigger: "focus",
 
 	// unsupported. will check later - 20220831
+	// need to add this into core.init
 	// onshow: null,
 	// onshown: null,
 	// onhide: null,
@@ -43,6 +44,7 @@ export default class tooltip extends tag {
 					"data-bs-html": opt.type && core.isHTML(opt.msg) ? "true" : null,
 
 					// unsupported. will check later - 20220831
+					// need to add this into core.init
 					// "show.bs.tooltip": opt.onshow,
 					// "shown.bs.tooltip": opt.onshown,
 					// "hide.bs.tooltip": opt.onhide,

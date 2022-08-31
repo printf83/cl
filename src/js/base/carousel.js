@@ -15,6 +15,9 @@ const defaultOption = {
 	indicators: false,
 	dark: false,
 	item: null,
+
+	onslide: null,
+	onslid: null,
 };
 
 const defaultItemOption = {
@@ -55,6 +58,9 @@ export default class carousel extends div {
 				"data-bs-ride": "carousel",
 				"data-bs-touch": !opt.touch ? "false" : null,
 				"data-bs-interval": !opt.touch ? "false" : null,
+
+				"slide.bs.carousel": opt.onslide,
+				"slid.bs.carousel": opt.onslid,
 			});
 
 			opt.elem = [

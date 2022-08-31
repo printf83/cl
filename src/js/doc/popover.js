@@ -125,6 +125,7 @@ export default [
 	},
 
 	// unsupported. will check later - 20220831
+	// need to add this into core.init
 	// {
 	// 	title: "Event",
 	// 	msg: [

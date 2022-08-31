@@ -1,6 +1,13 @@
 "use strict";
+import * as core from "../base/core.js";
 import sample from "./sample.js";
 import carousel from "../base/carousel.js";
+import toast from "../base/toast.js";
+import * as table from "../base/table.js";
+import button from "../base/button.js";
+import div from "../base/div.js";
+import ul from "../base/ul.js";
+import li from "../base/li.js";
 
 export default [
 	{
@@ -204,6 +211,89 @@ export default [
 					},
 				],
 			});
+		},
+	},
+
+	{
+		title: "Event",
+		msg: [
+			"Carousel exposes two events for hooking into carousel functionality. Both events have the following additional properties:",
+			new ul({
+				elem: [
+					new li({
+						elem: "<code>direction</code>: The direction in which the carousel is sliding (either <code>left</code> or <code>right</code>)",
+					}),
+					new li({
+						elem: "<code>relatedTarget</code>: The DOM element that is being slid into place as the active item.",
+					}),
+					new li({
+						elem: "<code>from</code>: The index of the current item",
+					}),
+					new li({
+						elem: "<code>to</code>: The index of the next item",
+					}),
+				],
+			}),
+			new table.container({
+				item: [
+					["Option", "Description"],
+					[
+						"<code>onslide</code>",
+						"This event fires immediately when the <code>slide</code> instance method is invoked.",
+					],
+					[
+						"<code>onslid</code>",
+						"This event is fired when the carousel has completed its slide transition.",
+					],
+				],
+			}),
+		],
+		import: ["carousel", "sample", "toast"],
+		code: () => {
+			let fn = (sender, event) => `Tab <b>${core.elemInfo(sender)}</b> event <b>${event}</b> trigged`;
+			let divOutput = core.UUID();
+			let btnGenerate = core.UUID();
+
+			return [
+				new button({
+					id: btnGenerate,
+					label: "Run Code",
+					icon: "play",
+					color: "primary",
+					onclick: () => {
+						document.getElementById(btnGenerate).classList.add("d-none");
+						document.getElementById(divOutput).classList.remove("d-none");
+
+						core.replaceChild(
+							document.getElementById(divOutput),
+							new carousel({
+								control: true,
+								indicators: true,
+								onslide: (event) => {
+									console.info("relatedTarget", event.relatedTarget);
+									console.info("direction", event.direction);
+									console.info("from", event.from);
+									console.info("to", event.to);
+
+									new toast("i", fn(event.currentTarget, "onslide")).show();
+								},
+								onslid: (event) => {
+									new toast("/", fn(event.currentTarget, "onslid")).show();
+								},
+								item: [
+									sample.img(857, 428),
+									sample.img(857, 428),
+									sample.img(857, 428),
+									sample.img(857, 428),
+									sample.img(857, 428),
+									sample.img(857, 428),
+								],
+							})
+						);
+					},
+				}),
+				new div({ id: divOutput, class: "d-none" }),
+			];
 		},
 	},
 ];
