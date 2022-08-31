@@ -106,60 +106,60 @@ const _baseIcon = {
 
 export function getBaseIcon(icon, baseIcon, baseColor) {
 	baseIcon = baseIcon || _baseIcon;
-	baseColor = baseColor || _baseColor;
+	// baseColor = baseColor || _baseColor;
 	if (icon && typeof icon === "string") {
 		if (baseIcon.hasOwnProperty(icon)) {
 			let bI = baseIcon[icon];
-			let bC = baseColor.hasOwnProperty(bI.color) ? baseColor[bI.color] : null;
+			// let bC = baseColor.hasOwnProperty(bI.color) ? baseColor[bI.color] : null;
 
 			return {
 				icon: bI.icon,
 				type: bI.type,
 				color: bI.color,
-				textcolor: bC?.textcolor,
+				// textcolor: bC?.textcolor,
 			};
 		}
 	}
 	return null;
 }
 
-const _baseColor = {
-	primary: { textcolor: "light" },
-	secondary: { textcolor: "light" },
-	warning: { textcolor: "dark" },
-	success: { textcolor: "light" },
-	danger: { textcolor: "light" },
-	info: { textcolor: "dark" },
-	dark: { textcolor: "light" },
-	light: { textcolor: "dark" },
-	body: { textcolor: "light" },
-	white: { textcolor: "dark" },
-	transparent: { textcolor: "dark" },
-};
+// const _baseColor = {
+// 	primary: { textcolor: "light" },
+// 	secondary: { textcolor: "light" },
+// 	warning: { textcolor: "dark" },
+// 	success: { textcolor: "light" },
+// 	danger: { textcolor: "light" },
+// 	info: { textcolor: "dark" },
+// 	dark: { textcolor: "light" },
+// 	light: { textcolor: "dark" },
+// 	body: { textcolor: "light" },
+// 	white: { textcolor: "dark" },
+// 	transparent: { textcolor: "dark" },
+// };
 
-export function setBaseColor(baseColor) {
-	_baseColor = baseColor;
-}
+// export function setBaseColor(baseColor) {
+// 	_baseColor = baseColor;
+// }
 
-export function getBaseColor(color, baseColor) {
-	baseColor = baseColor || _baseColor;
-	if (color && typeof color === "string") {
-		if (baseColor.hasOwnProperty(color)) {
-			return baseColor[color];
-		}
-	}
-	return null;
-}
+// export function getBaseColor(color, baseColor) {
+// 	baseColor = baseColor || _baseColor;
+// 	if (color && typeof color === "string") {
+// 		if (baseColor.hasOwnProperty(color)) {
+// 			return baseColor[color];
+// 		}
+// 	}
+// 	return null;
+// }
 
-export function getTextColorBaseOnColor(color, baseColor) {
-	baseColor = baseColor || _baseColor;
-	if (color && typeof color === "string") {
-		if (baseColor.hasOwnProperty(color)) {
-			return baseColor[color].textcolor;
-		}
-	}
-	return null;
-}
+// export function getTextColorBaseOnColor(color, baseColor) {
+// 	baseColor = baseColor || _baseColor;
+// 	if (color && typeof color === "string") {
+// 		if (baseColor.hasOwnProperty(color)) {
+// 			return baseColor[color].textcolor;
+// 		}
+// 	}
+// 	return null;
+// }
 
 export function importJS(path, callback) {
 	import(path).then((obj) => {
