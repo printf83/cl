@@ -67,7 +67,6 @@ let defaultChangePassOption = {
 	title: null,
 	callback: null,
 	close: true,
-	// backdropcolor: "primary",
 	debug: false,
 };
 
@@ -93,10 +92,25 @@ let defaultUpdateInfoOption = {
 	title: null,
 	callback: null,
 	close: true,
-	// backdropcolor: "primary",
 	debug: false,
 	data: null,
 };
+
+let _ONSIGNIN = null;
+let _ONSIGNOUT = null;
+let _ONCHANGE = null;
+
+export function onsignin(fn) {
+	_ONSIGNIN = fn;
+}
+
+export function onsignout(fn) {
+	_ONSIGNOUT = fn;
+}
+
+export function onchange(fn) {
+	_ONCHANGE = fn;
+}
 
 const fn = {
 	msg: (msg, icon) => {
@@ -157,6 +171,11 @@ const fn = {
 				},
 				(result) => {
 					callback(result);
+
+					//event signout
+					if (_ONSIGNOUT && typeof _ONSIGNOUT === "function") {
+						_ONSIGNOUT();
+					}
 				}
 			);
 		},
@@ -188,8 +207,14 @@ const fn = {
 										let dlg = container.closest("div.modal");
 										modal.hide(dlg);
 										opt.callback(true);
-									} else {
-										fn.showmsg(container, "Sign in success", "/");
+									}
+									// else {
+									// 	fn.showmsg(container, "Sign in success", "/");
+									// }
+
+									//event signin
+									if (_ONSIGNIN && typeof _ONSIGNIN === "function") {
+										_ONSIGNIN();
 									}
 								} else {
 									fn.showmsg(container, result && result.message ? result.message : null, "!!");
@@ -429,8 +454,14 @@ const fn = {
 												let dlg = container.closest("div.modal");
 												modal.hide(dlg);
 												opt.callback(true);
-											} else {
-												fn.showmsg(container, "Update success", "/");
+											}
+											// else {
+											// 	fn.showmsg(container, "Update success", "/");
+											// }
+
+											//event onchange
+											if (_ONCHANGE && typeof _ONCHANGE === "function") {
+												_ONCHANGE();
 											}
 										} else {
 											fn.showmsg(
