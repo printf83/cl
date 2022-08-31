@@ -208,32 +208,6 @@ const fn = {
 		req.open(opt.type, opt.url, opt.async);
 		req.send(fn.genfileformdata(opt.data));
 	},
-	// download:  (opt)=> {
-	// 	opt = core.extend({}, defaultOptionDownload, opt);
-
-	// 	let req = new XMLHttpRequest();
-	// 	req.onreadystatechange =  ()=> {
-	// 		if (req.readyState == 4) {
-	// 			if (req.status == 200) {
-	// 				opt.callback(fn.str2Object(req.responseText));
-	// 			} else if (req.status === 401) {
-	// 				new user_signin({
-	// 					callback:  (result)=> {
-	// 						if (result) {
-	// 							fn.get(opt);
-	// 						} else {
-	// 							opt.callback(null);
-	// 						}
-	// 					},
-	// 				}).show();
-	// 			} else {
-	// 				opt.callback(null);
-	// 			}
-	// 		}
-	// 	};
-	// 	req.open(opt.type, opt.url, opt.async);
-	// 	req.send(fn.obj2String(opt.data));
-	// },
 	genformdata: (obj) => {
 		if (obj) {
 			const res = new FormData();

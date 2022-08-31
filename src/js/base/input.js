@@ -115,7 +115,7 @@ export default class input extends tag {
 
 			//before control
 			let beforectl = opt.before
-				? typeof opt.before === "string" || opt.before.hasOwnProperty("clicon") //d.beforetype === "text"
+				? typeof opt.before === "string" || opt.before.hasOwnProperty("clicon")
 					? new inputgroup.text({ elem: opt.before })
 					: new tag({
 							elem: opt.before,
@@ -142,7 +142,7 @@ export default class input extends tag {
 
 			//after control
 			let afterctl = opt.after
-				? typeof opt.after === "string" || opt.after.hasOwnProperty("clicon") //d.aftertype === "text"
+				? typeof opt.after === "string" || opt.after.hasOwnProperty("clicon")
 					? new inputgroup.text({ elem: opt.after })
 					: new tag({
 							elem: opt.after,
@@ -242,11 +242,6 @@ export default class input extends tag {
 				}
 			}
 
-			// m.value =
-			// 	["date", "datetime", "month", "datetime-local", "time", "week"].indexOf(m.type) > -1
-			// 		? moment(m.value).format()
-			// 		: m.value;
-
 			m.attr = core.merge.attr(m.attr, {
 				min: m.min,
 				max: m.max,
@@ -272,7 +267,6 @@ export default class input extends tag {
 
 			delete m.type;
 
-			// delete m.value;
 			delete m.checked;
 			delete m.placeholder;
 

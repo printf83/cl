@@ -852,7 +852,7 @@ const defaultOption = {
 	query: null,
 	name: null,
 	paging: true,
-	more: null, //more function
+	more: null,
 	items: (data, item, group) => {
 		return data.map((i) => {
 			return item(i);

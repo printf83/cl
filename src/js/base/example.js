@@ -105,7 +105,6 @@ export default class example extends div {
 			item.push({
 				label: "Generated HTML",
 				icon: "code",
-				// elem: new codepreview({ type: "html", code: html, container: null }),
 				onshow: (event) => {
 					let sender = event.currentTarget;
 
@@ -126,7 +125,6 @@ export default class example extends div {
 				item.push({
 					label: sampleKey,
 					icon: "link",
-					//elem: new codepreview({ type: "js", code: opt.sample[sampleKey].toString(), container: null }),
 					onshow: (event) => {
 						let sender = event.currentTarget;
 
@@ -152,7 +150,6 @@ export default class example extends div {
 				label: "Source Code",
 				icon: "fire",
 				active: !opt.codecollapse,
-				// elem: new codepreview({ type: "js", code: opt.source.join(`\n`), container: null }),
 				onshow: (event) => {
 					let sender = event.currentTarget;
 

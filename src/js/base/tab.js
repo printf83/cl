@@ -176,7 +176,6 @@ export default class tab extends div {
 							: "card-" + (opt.headAlign === "vertical-right" ? "footer" : "header") + "-tabs"
 						: null,
 					opt.column ? "flex-column mb-auto" : null,
-					// opt.flush ? "nav-flush" : null,
 					opt.type === "tab" ? "nav-tabs" : opt.type === "pill" ? "nav-pills" : null,
 					opt.headAlign === "right"
 						? "justify-content-end"

@@ -215,9 +215,6 @@ const fn = {
 										modal.hide(dlg);
 										opt.callback(true);
 									}
-									// else {
-									// 	fn.showmsg(container, "Sign in success", "/");
-									// }
 
 									//event signin
 									if (_ONSIGNIN && typeof _ONSIGNIN === "function") {
@@ -462,9 +459,6 @@ const fn = {
 												modal.hide(dlg);
 												opt.callback(true);
 											}
-											// else {
-											// 	fn.showmsg(container, "Update success", "/");
-											// }
 
 											//event onchange
 											if (_ONCHANGE && typeof _ONCHANGE === "function") {

@@ -31,8 +31,6 @@ export default class offcanvas extends div {
 
 	constructor(...opt) {
 		super(...opt);
-
-		// this.data = core.extend({}, defaultOption, opt);
 	}
 
 	get data() {

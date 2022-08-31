@@ -211,7 +211,6 @@ let fn = {
 				name: "opr",
 				option: opr_opt,
 				value: o,
-				//size: useopricon ? "col-4 col-lg-3 px-2" : "col-sm-5 col-md-4 col-lg-3 px-2",
 			});
 
 			return new div({
@@ -315,7 +314,6 @@ let fn = {
 				new input({
 					type: item && item.type ? item.type : "text",
 					name: "value",
-					// size: "",
 					placeholder: item.placeholder ? item.placeholder : null,
 					value: core.getValue(val),
 					option: item && item.option ? item.option : null,
@@ -610,7 +608,6 @@ let fn = {
 				name: "opr",
 				option: opr_opt,
 				value: o ? o : opr_opt ? opr_opt[0].value : null,
-				// size: useopricon ? "col-4 col-lg-3 px-2" : "col-sm-5 col-md-4 col-lg-3 px-2",
 			});
 
 			return new div({
@@ -805,7 +802,6 @@ let fn = {
 					type: "checkbox",
 					label: "Version",
 					name: "__v",
-					// size: 6,
 					checked: data && fn.isPrototypeExists(data, "__v") && data["__v"] === 0 ? false : true,
 				})
 			);
@@ -818,7 +814,6 @@ let fn = {
 							type: "checkbox",
 							label: i.label,
 							name: i.value,
-							// size: 6,
 							checked: data && fn.isPrototypeExists(data, i.value) && data[i.value] === 0 ? false : true,
 						})
 					);
@@ -935,7 +930,7 @@ function btnBuilder(btn, defButton, defColor, pushCancel) {
 function elemBuilder(opt) {
 	opt = core.extend({}, defaultBuildOption, opt);
 
-	// //generate id for dialog
+	//generate id for dialog
 	let id = core.UUID();
 
 	//put in tab and return

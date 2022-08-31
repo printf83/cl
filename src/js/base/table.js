@@ -179,9 +179,7 @@ export class container extends tag {
 		if (opt.item) {
 			let a = Array.isArray(opt.item) ? opt.item : [opt.item];
 			if (opt.header) {
-				//================
 				//generate header;
-				//================
 				let th = [];
 				th = a[0].map((i) => {
 					if (typeof i === "object") {
@@ -208,9 +206,7 @@ export class container extends tag {
 				});
 			}
 
-			//==============
 			//generate body;
-			//==============
 			let tb = [];
 			let x = opt.header ? 1 : 0;
 			let len = a.length - (opt.footer ? 1 : 0);
@@ -240,10 +236,7 @@ export class container extends tag {
 			tmp_body = new tbody({ elem: tb });
 
 			if (opt.footer) {
-				//================
 				//generate footer;
-				//================
-
 				let tf = [];
 				tf = a[len].map((i) => {
 					if (typeof i === "object") {

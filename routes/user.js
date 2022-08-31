@@ -94,8 +94,6 @@ module.exports = (app) => {
 					}
 				});
 			});
-
-			// });
 		},
 		signout: (req, res) => {
 			req.user.deleteToken("auth", (err, user) => {

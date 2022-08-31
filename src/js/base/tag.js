@@ -56,9 +56,6 @@ const defaultOption = {
 
 	href: null,
 	onclick: null,
-	// onchange: null,
-	// onfocus: null,
-	// onblur: null,
 
 	userselect: null,
 	pointerevent: null,
@@ -271,9 +268,6 @@ export default class tag {
 					opt.display === "grid" || opt.display === "flex" || opt?.attr?.role === "toolbar"
 						? c2(opt.gap, "gap-$1")
 						: null,
-
-					// opt.gap ? c2(opt.gap, "g-$1") : null,
-					// opt.gap ? c2(opt.gap, "gap-$1") : null,
 
 					opt.row ? "row" : null,
 

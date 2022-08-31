@@ -169,7 +169,7 @@ export default class modal extends div {
 							icon: i.icon,
 							class: core.merge.class(i.class, "btn-modal"),
 							color:
-								ix === 0 ? (i.color ? i.color : defButtonColor) : i.color ? i.color : "text-secondary", //i.color ? i.color : ix === 0 ? defButtonColor : "text-secondary",
+								ix === 0 ? (i.color ? i.color : defButtonColor) : i.color ? i.color : "text-secondary",
 							onclick: (event) => {
 								event.stopPropagation();
 

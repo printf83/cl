@@ -1,7 +1,6 @@
 "use strict";
 import sample from "./sample.js";
 import tag from "../base/tag.js";
-// import * as core from "../base/core.js";
 
 export default [
 	{
