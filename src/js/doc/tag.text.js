@@ -129,7 +129,7 @@ export default [
 		container: sample.formcontainer,
 		import: ["tag"],
 		code: () => {
-			return [null, "bold", "bolder", "normal", "light", "lighter"].map((i) => {
+			return [null, "bold", "bolder", "semibold", "normal", "light", "lighter"].map((i) => {
 				return new tag({
 					tag: "div",
 					fontweight: i,

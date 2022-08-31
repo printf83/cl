@@ -14,6 +14,7 @@ const defaultOption = {
 	iconafter: false,
 	scroll: true,
 	backdrop: false,
+	weight: null, // BS5.2
 	elem: null,
 
 	onshow: null,
@@ -78,8 +79,8 @@ export default class offcanvas extends div {
 			}
 
 			opt.class = core.merge.class(opt.class, [
-				"offcanvas",
 				opt.placement ? `offcanvas-${opt.placement}` : "offcanvas-start",
+				opt.weight ? `offcanvas-${opt.weight}` : "offcanvas",
 			]);
 
 			opt.attr = core.merge.attr(opt.attr, {

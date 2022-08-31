@@ -55,121 +55,85 @@ export default [
 
 	{
 		title: "Placement",
-	},
-
-	{
-		title: "Top",
+		container: sample.stackcontainer,
 		import: ["button", "offcanvas", "div", "p", "dropdown"],
 		code: () => {
-			return new button({
-				label: "Show top offcanvas",
-				color: "primary",
-				onclick: () => {
-					new offcanvas({
-						close: true,
-						backdrop: true,
-						placement: "top",
-						color: "light",
-						title: "Top Offcanvas",
-						elem: new div({
-							elem: [
-								new p({
-									elem: "Some text as placeholder. In real life you can have the elements you have chosen. Like, text, images, lists, etc.",
-								}),
-								new dropdown({
-									label: "Drowdown button",
-									color: "secondary",
-									option: [
-										{ href: "#", label: "Action" },
-										{ href: "#", label: "Another action" },
-										{ href: "#", label: "Something else here" },
-										{ value: "-" },
-										{ href: "#", label: "Separated link" },
+			return ["start", "top", "end", "bottom"].map(
+				(i) =>
+					new button({
+						label: `Show ${i} offcanvas`,
+						color: "primary",
+						onclick: () => {
+							new offcanvas({
+								close: true,
+								backdrop: true,
+								placement: i,
+								color: "light",
+								title: "Top Offcanvas",
+								elem: new div({
+									elem: [
+										new p({
+											elem: "Some text as placeholder. In real life you can have the elements you have chosen. Like, text, images, lists, etc.",
+										}),
+										new dropdown({
+											label: "Drowdown button",
+											color: "secondary",
+											option: [
+												{ href: "#", label: "Action" },
+												{ href: "#", label: "Another action" },
+												{ href: "#", label: "Something else here" },
+												{ value: "-" },
+												{ href: "#", label: "Separated link" },
+											],
+										}),
 									],
 								}),
-							],
-						}),
-					}).show();
-				},
-			});
+							}).show();
+						},
+					})
+			);
 		},
 	},
 
 	{
-		title: "Bottom",
-		label: "Show bottom offcanvas",
+		title: "Weight",
+		container: sample.stackcontainer,
 		import: ["button", "offcanvas", "div", "p", "dropdown"],
 		code: () => {
-			return new button({
-				label: "Show bottom offcanvas",
-				color: "primary",
-				onclick: () => {
-					new offcanvas({
-						close: true,
-						backdrop: true,
-						placement: "bottom",
-						color: "light",
-						title: "Bottom Offcanvas",
-						elem: new div({
-							elem: [
-								new p({
-									elem: "Some text as placeholder. In real life you can have the elements you have chosen. Like, text, images, lists, etc.",
-								}),
-								new dropdown({
-									label: "Drowdown button",
-									color: "secondary",
-									option: [
-										{ href: "#", label: "Action" },
-										{ href: "#", label: "Another action" },
-										{ href: "#", label: "Something else here" },
-										{ value: "-" },
-										{ href: "#", label: "Separated link" },
+			return [null, "sm", "md", "lg", "xl", "xxl"].map(
+				(i) =>
+					new button({
+						label: `Show${i ? " " + i : ""} offcanvas`,
+						color: "primary",
+						onclick: () => {
+							new offcanvas({
+								close: true,
+								backdrop: true,
+								weight: i,
+								color: "light",
+								title: "Top Offcanvas",
+								elem: new div({
+									elem: [
+										new p({
+											elem: "Some text as placeholder. In real life you can have the elements you have chosen. Like, text, images, lists, etc.",
+										}),
+										new dropdown({
+											label: "Drowdown button",
+											color: "secondary",
+											option: [
+												{ href: "#", label: "Action" },
+												{ href: "#", label: "Another action" },
+												{ href: "#", label: "Something else here" },
+												{ value: "-" },
+												{ href: "#", label: "Separated link" },
+											],
+										}),
 									],
 								}),
-							],
-						}),
-					}).show();
-				},
-			});
-		},
-	},
-
-	{
-		title: "End",
-		label: "Show end offcanvas",
-		import: ["button", "offcanvas", "div", "p", "dropdown"],
-		code: () => {
-			return new button({
-				label: "Show end offcanvas",
-				color: "primary",
-				onclick: () => {
-					new offcanvas({
-						close: true,
-						backdrop: true,
-						placement: "end",
-						color: "light",
-						title: "End Offcanvas",
-						elem: new div({
-							elem: [
-								new p({
-									elem: "Some text as placeholder. In real life you can have the elements you have chosen. Like, text, images, lists, etc.",
-								}),
-								new dropdown({
-									label: "Drowdown button",
-									color: "secondary",
-									option: [
-										{ href: "#", label: "Action" },
-										{ href: "#", label: "Another action" },
-										{ href: "#", label: "Something else here" },
-										{ value: "-" },
-										{ href: "#", label: "Separated link" },
-									],
-								}),
-							],
-						}),
-					}).show();
-				},
-			});
+							}).show();
+						},
+					})
+			);
 		},
 	},
 

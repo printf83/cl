@@ -215,6 +215,7 @@ const defaultOffcanvasContainerOption = {
 	icon: null,
 	title: null,
 	placement: "start",
+	weight: null,
 
 	onshow: null,
 	onshown: null,
@@ -246,7 +247,7 @@ export class offcanvascontainer extends div {
 		});
 
 		opt.class = core.merge.class(opt.class, [
-			"offcanvas",
+			opt.weight ? `offcanvas-${opt.weight}` : "offcanvas",
 			opt.placement ? `offcanvas-${opt.placement}` : "offcanvas-start",
 		]);
 
@@ -269,6 +270,7 @@ export class offcanvascontainer extends div {
 		delete opt.icon;
 		delete opt.title;
 		delete opt.placement;
+		delete opt.weight;
 
 		delete opt.onshow;
 		delete opt.onshown;
