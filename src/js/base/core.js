@@ -1,6 +1,6 @@
 "use strict";
 
-const DEBUG = false;
+const DEBUG = true;
 
 export function combineArray(arr, delimeter) {
 	return removeEmptyArray(arr)?.join(delimeter);
@@ -1006,7 +1006,7 @@ export function init(container) {
 	popoverTriggerList.map((popoverTriggerEl) => {
 		let elem = new bootstrap.Popover(popoverTriggerEl);
 
-		elem.detachEventListener = (sender) => {
+		popoverTriggerEl.detachEventListener = (sender) => {
 			if (DEBUG) console.log(`Remove popover from ${elemInfo(sender)}`);
 			bootstrap.Popover.getInstance(sender)?.dispose();
 			sender.detachEventListener = null;
@@ -1020,7 +1020,7 @@ export function init(container) {
 	tooltipTriggerList.map((tooltipTriggerEl) => {
 		let elem = new bootstrap.Tooltip(tooltipTriggerEl);
 
-		elem.detachEventListener = (sender) => {
+		tooltipTriggerEl.detachEventListener = (sender) => {
 			if (DEBUG) console.log(`Remove tooltip from ${elemInfo(sender)}`);
 			bootstrap.Tooltip.getInstance(sender)?.dispose();
 			sender.detachEventListener = null;
