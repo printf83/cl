@@ -65,9 +65,6 @@ export default class offcanvas extends div {
 							? new btnclose({
 									class: "text-reset",
 									dismiss: "offcanvas",
-									dark: opt.textcolor
-										? !(opt.textcolor === "light" || opt.textcolor === "white")
-										: true,
 							  })
 							: null,
 					],

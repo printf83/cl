@@ -52,7 +52,6 @@ export default class button extends tag {
 				};
 
 				opt.color = opt.color || bI.color;
-				opt.textcolor = opt.textcolor || bI.textcolor;
 			}
 
 			if (opt.type === "checkbox" || opt.type === "radio") {

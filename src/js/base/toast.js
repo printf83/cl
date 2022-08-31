@@ -46,7 +46,6 @@ export default class toast extends div {
 
 				if (bI) {
 					t.color = bI.color;
-					t.textcolor = bI.textcolor;
 					t.elem = new msg({
 						weight: "sm",
 						icon: {
@@ -70,7 +69,6 @@ export default class toast extends div {
 
 				if (bI) {
 					t.color = bI.color;
-					t.textcolor = bI.textcolor;
 					t.elem = new msg({
 						weight: "sm",
 						icon: {
@@ -116,7 +114,6 @@ export default class toast extends div {
 			if (bI) {
 				opt.icon = bI.icon;
 				opt.color = opt.color || bI.color;
-				opt.textcolor = opt.textcolor || bI.textcolor;
 			}
 
 			//generate date
@@ -163,9 +160,6 @@ export default class toast extends div {
 									marginstart: 2,
 									elem: new btnclose({
 										dismiss: "toast",
-										dark: opt.textcolor
-											? !(opt.textcolor === "light" || opt.textcolor === "white")
-											: true,
 										marginy: 1,
 									}),
 							  })

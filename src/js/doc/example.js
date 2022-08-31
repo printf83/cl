@@ -104,7 +104,6 @@ export default [
 				code: () => {
 					return new toast({
 						color: "primary",
-						textcolor: "light",
 						icon: { icon: "fire", color: "primary" },
 						title: "Bootstrap",
 						elem: "Hello, world! This is a toast message.",

@@ -72,7 +72,6 @@ export default [
 				new toast({
 					title: "Title",
 					color: "primary",
-					textcolor: "light",
 					elem: new msg({ weight: "sm", icon: "fire", elem: `<b>In toast</b>. ${sample.text()}` }),
 					debug: true,
 				}),
@@ -110,7 +109,6 @@ export default [
 		code: () => {
 			return new modal({
 				color: "primary",
-				textcolor: "light",
 				divider: false,
 				centerbutton: true,
 				elem: new msg({ weight: "lg", icon: "fire", elem: `<h3>In modal</h3> <p>${sample.text()}</p>` }),

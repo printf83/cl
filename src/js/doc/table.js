@@ -233,7 +233,6 @@ export default [
 						new table.td({ align: "end", elem: "Total" }),
 						new table.td({
 							color: "danger",
-							textcolor: "light",
 							elem: "2,524.01",
 						}),
 					],

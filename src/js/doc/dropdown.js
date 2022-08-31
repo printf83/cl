@@ -225,7 +225,6 @@ export default [
 			return new navbar.container({
 				expand: "lg",
 				color: "dark",
-				textcolor: "light",
 				elem: [
 					new navbar.toggle({
 						id,

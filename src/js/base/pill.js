@@ -25,18 +25,10 @@ export default class pill extends div {
 
 		if (bI) {
 			opt.color = opt.color || bI.color;
-			// opt.textcolor = opt.textcolor || bI.textcolor;
 			opt.icon = { icon: bI.icon, type: bI.type };
 		}
 
 		opt.color = opt.color || "primary";
-
-		// if (!opt.textcolor) {
-		// 	let bC = core.getBaseColor(opt.color);
-		// 	if (bC) {
-		// 		opt.textcolor = bC.textcolor;
-		// 	}
-		// }
 
 		let elem = new inputgroup.container({
 			weight: "sm",
@@ -54,7 +46,7 @@ export default class pill extends div {
 				new inputgroup.text({
 					border: false,
 					color: opt.color,
-					// textcolor: opt.textcolor,
+					textcolor: opt.textcolor,
 					paddingx: 2,
 					paddingy: 1,
 					rounded: "end",
@@ -70,9 +62,7 @@ export default class pill extends div {
 
 		delete opt.icon;
 		delete opt.label;
-		// delete opt.title;
 		delete opt.color;
-		// delete opt.textcolor;
 
 		super.data = opt;
 	}

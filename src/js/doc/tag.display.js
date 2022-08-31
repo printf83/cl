@@ -59,7 +59,6 @@ export default [
 					display: "inline",
 					padding: 2,
 					color: "primary",
-					textcolor: "white",
 					elem: "d-inline",
 				}),
 				new tag({
@@ -67,7 +66,6 @@ export default [
 					display: "inline",
 					padding: 2,
 					color: "dark",
-					textcolor: "white",
 					elem: "d-inline",
 				}),
 			];
@@ -83,7 +81,6 @@ export default [
 					display: "block",
 					padding: 2,
 					color: "primary",
-					textcolor: "white",
 					elem: "d-inline",
 				}),
 				new tag({
@@ -91,7 +88,6 @@ export default [
 					display: "block",
 					padding: 2,
 					color: "dark",
-					textcolor: "white",
 					elem: "d-inline",
 				}),
 			];

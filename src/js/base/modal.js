@@ -98,9 +98,6 @@ export default class modal extends div {
 								}),
 								new btnclose({
 									dismiss: "modal",
-									dark: opt.textcolor
-										? !(opt.textcolor === "light" || opt.textcolor === "white")
-										: true,
 								}),
 							],
 					  })

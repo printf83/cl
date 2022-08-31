@@ -54,21 +54,18 @@ export default [
 				new input({
 					class: "btn",
 					color: "primary",
-					textcolor: "light",
 					type: "button",
 					value: "Input button",
 				}),
 				new input({
 					class: "btn",
 					color: "primary",
-					textcolor: "light",
 					type: "submit",
 					value: "Input submit",
 				}),
 				new input({
 					class: "btn",
 					color: "primary",
-					textcolor: "light",
 					type: "reset",
 					value: "Input reset",
 				}),
@@ -301,7 +298,6 @@ export default [
 									color: "primary",
 								},
 								color: "primary",
-								textcolor: "light",
 								title: "Button Event",
 								elem: `Button <b>${core.elemInfo(sender)}</b> event <b>onclick</b> trigged`,
 							}).show();

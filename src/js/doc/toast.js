@@ -27,7 +27,6 @@ export default [
 		code: () => {
 			return new toast({
 				color: "primary",
-				textcolor: "light",
 				icon: { icon: "fire", color: "primary" },
 				title: "Bootstrap",
 				elem: "Hello, world! This is a toast message.",
@@ -47,7 +46,6 @@ export default [
 				onclick: () => {
 					new toast({
 						color: "primary",
-						textcolor: "light",
 						icon: { icon: "fire", color: "primary" },
 						title: "Bootstrap",
 						elem: "Hello, world! This is a toast message.",
@@ -65,7 +63,6 @@ export default [
 		code: () => {
 			return new toast({
 				color: "primary",
-				textcolor: "light",
 				icon: { icon: "fire", color: "primary" },
 				title: "Bootstrap",
 				elem: "Hello, world! This is a toast message.",
@@ -85,7 +82,6 @@ export default [
 				onclick: () => {
 					new toast({
 						color: "primary",
-						textcolor: "light",
 						icon: { icon: "fire", color: "primary" },
 						title: "Bootstrap",
 						elem: "Heads up, toasts will stack automatically. Second toast will appear in 2 second.",
@@ -95,7 +91,6 @@ export default [
 					setTimeout(() => {
 						new toast({
 							color: "success",
-							textcolor: "light",
 							icon: { icon: "fire", color: "success" },
 							title: "Bootstrap",
 							elem: "See? Just like this.",
@@ -130,7 +125,6 @@ export default [
 					after: new button({
 						label: "Show",
 						color: "primary",
-						textcolor: "light",
 						onclick: (event) => {
 							let sender = event.currentTarget;
 							let icon = sender.previousSibling.value;
@@ -148,20 +142,10 @@ export default [
 		container: sample.formcontainer,
 		import: ["toast", "msg"],
 		code: () => {
-			return [
-				{ color: "primary", textcolor: "light" },
-				{ color: "secondary", textcolor: "light" },
-				{ color: "success", textcolor: "light" },
-				{ color: "danger", textcolor: "light" },
-				{ color: "warning", textcolor: "dark" },
-				{ color: "info", textcolor: "dark" },
-				{ color: "light", textcolor: "dark" },
-				{ color: "dark", textcolor: "light" },
-			].map((i) => {
+			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map((i) => {
 				return new toast({
-					color: i.color,
-					textcolor: i.textcolor,
-					elem: new msg({ weight: "sm", icon: "fire", elem: `Example <b>${i.color}</b> toast` }),
+					color: i,
+					elem: new msg({ weight: "sm", icon: "fire", elem: `Example <b>${i}</b> toast` }),
 					debug: true, //this last argument is for this documentation preview only
 				});
 			});
@@ -171,7 +155,7 @@ export default [
 	{
 		title: "Position",
 		container: sample.stackcontainer,
-		import: ["toast","msg", "button"],
+		import: ["toast", "msg", "button"],
 		code: () => {
 			return [
 				{ label: "Top left", position: "top-0 start-0" },
