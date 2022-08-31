@@ -177,6 +177,12 @@ export class formcontainer extends form {
 	}
 }
 
+const defaultCollapseContainerOption = {
+	onshow: null,
+	onshown: null,
+	onhide: null,
+	onhidden: null,
+};
 export class collapsecontainer extends div {
 	constructor(...opt) {
 		super(...opt);
@@ -186,7 +192,21 @@ export class collapsecontainer extends div {
 		return super.data;
 	}
 	set data(opt) {
+		opt = core.extend({}, defaultCollapseContainerOption, opt);
+
 		opt.class = core.merge.class(opt.class, ["collapse", "navbar-collapse"]);
+		opt.attr = core.merge.attr(opt.attr, {
+			"show.bs.collapse": opt.onshow,
+			"shown.bs.collapse": opt.onshown,
+			"hide.bs.collapse": opt.onhide,
+			"hidden.bs.collapse": opt.onhidden,
+		});
+
+		delete opt.onshow;
+		delete opt.onshown;
+		delete opt.onhide;
+		delete opt.onhidden;
+
 		super.data = opt;
 	}
 }
@@ -194,6 +214,12 @@ export class collapsecontainer extends div {
 const defaultOffcanvasContainerOption = {
 	icon: null,
 	title: null,
+	placement: "start",
+
+	onshow: null,
+	onshown: null,
+	onhide: null,
+	onhidden: null,
 };
 
 export class offcanvascontainer extends div {
@@ -212,6 +238,11 @@ export class offcanvascontainer extends div {
 		opt.attr = core.merge.attr(opt.attr, {
 			tabindex: "-1",
 			"aria-labelledby": opt.id ? `${opt.id}-label` : null,
+
+			"show.bs.offcanvas": opt.onshow,
+			"shown.bs.offcanvas": opt.onshown,
+			"hide.bs.offcanvas": opt.onhide,
+			"hidden.bs.offcanvas": opt.onhidden,
 		});
 
 		opt.class = core.merge.class(opt.class, ["offcanvas", "offcanvas-end"]);
@@ -234,6 +265,11 @@ export class offcanvascontainer extends div {
 
 		delete opt.icon;
 		delete opt.title;
+
+		delete opt.onshow;
+		delete opt.onshown;
+		delete opt.onhide;
+		delete opt.onhidden;
 
 		super.data = opt;
 	}

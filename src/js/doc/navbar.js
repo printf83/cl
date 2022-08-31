@@ -7,6 +7,10 @@ import h from "../base/h.js";
 import input from "../base/input.js";
 import * as navbar from "../base/navbar.js";
 import span from "../base/span.js";
+import toast from "../base/toast.js";
+import * as table from "../base/table.js";
+import dropdown from "../base/dropdown.js";
+import p from "../base/p.js";
 
 export default [
 	{
@@ -853,6 +857,185 @@ export default [
 					],
 				}),
 			];
+		},
+	},
+
+	{
+		title: "Collapse container event",
+		msg: [
+			new table.container({
+				item: [
+					["Option", "Description"],
+					[
+						"<code>onshow</code>",
+						"This event fires immediately when the <code>show</code> instance method is called.",
+					],
+					[
+						"<code>onshown</code>",
+						"This event is fired when the collapse container has been made visible to the user (will wait for CSS transitions to complete).",
+					],
+					[
+						"<code>onhide</code>",
+						"This event is fired immediately when the <code>hide</code> instance method has been called.",
+					],
+					[
+						"<code>onhidden</code>",
+						"This event is fired when the collapse container has finished being hidden from the user (will wait for CSS transitions to complete).",
+					],
+				],
+			}),
+		],
+		import: ["navbar", "button", "input", "toast"],
+		code: () => {
+			let id = core.UUID();
+			let fn = (sender, event) =>
+				`Collapse container <b>${core.elemInfo(sender)}</b> event <b>${event}</b> trigged`;
+
+			return new navbar.container({
+				expand: null,
+				color: "light",
+				elem: [
+					new navbar.toggle({
+						target: `#${id}`,
+						toggle: "collapse",
+					}),
+
+					new navbar.brand({
+						label: "Navbar",
+					}),
+
+					new navbar.collapsecontainer({
+						id: id,
+						onshow: (event) => {
+							new toast("i", fn(event.currentTarget, "onshow")).show();
+						},
+						onshown: (event) => {
+							new toast("/", fn(event.currentTarget, "onshown")).show();
+						},
+						onhide: (event) => {
+							new toast("!", fn(event.currentTarget, "onhide")).show();
+						},
+						onhidden: (event) => {
+							new toast("x", fn(event.currentTarget, "onhidden")).show();
+						},
+						elem: [
+							new navbar.itemcontainer({
+								parenttype: "collapse",
+								elem: [
+									new navbar.item({ label: "Home", active: true }),
+									new navbar.item({ label: "Link" }),
+									new navbar.item({
+										label: "Dropdown",
+										option: [
+											{ href: "#", label: "Action" },
+											{ href: "#", label: "Another action" },
+											{ href: "#", label: "Something else here" },
+											{ value: "-" },
+											{ href: "#", label: "Separated link" },
+										],
+									}),
+									new navbar.item({ label: "Disabled", disabled: true }),
+								],
+							}),
+							new navbar.formcontainer([
+								new input({
+									type: "search",
+									placeholder: "Search",
+									hiddenlabel: "Search",
+									class: "me-2",
+								}),
+								new button({ label: "Search", color: "success", outline: true }),
+							]),
+						],
+					}),
+				],
+			});
+		},
+	},
+
+	{
+		title: "Offcanvas container event",
+		msg: [
+			new table.container({
+				item: [
+					["Option", "Description"],
+					[
+						"<code>onshow</code>",
+						"This event fires immediately when the <code>show</code> instance method is called.",
+					],
+					[
+						"<code>onshown</code>",
+						"This event is fired when the collapse container has been made visible to the user (will wait for CSS transitions to complete).",
+					],
+					[
+						"<code>onhide</code>",
+						"This event is fired immediately when the <code>hide</code> instance method has been called.",
+					],
+					[
+						"<code>onhidden</code>",
+						"This event is fired when the collapse container has finished being hidden from the user (will wait for CSS transitions to complete).",
+					],
+				],
+			}),
+		],
+		import: ["navbar", "toast"],
+		code: () => {
+			let id = core.UUID();
+			let fn = (sender, event) => `Offcanvas <b>${core.elemInfo(sender)}</b> event <b>${event}</b> trigged`;
+
+			return new navbar.container({
+				expand: null,
+				color: "light",
+				elem: [
+					new navbar.toggle({
+						target: `#${id}`,
+						toggle: "offcanvas",
+					}),
+
+					new navbar.brand({
+						label: "Navbar",
+					}),
+
+					new navbar.offcanvascontainer({
+						id: id,
+						placement: "start",
+						onshow: (event) => {
+							new toast("i", fn(event.currentTarget, "onshow")).show();
+						},
+						onshown: (event) => {
+							new toast("/", fn(event.currentTarget, "onshown")).show();
+						},
+						onhide: (event) => {
+							new toast("!", fn(event.currentTarget, "onhide")).show();
+						},
+						onhidden: (event) => {
+							new toast("x", fn(event.currentTarget, "onhidden")).show();
+						},
+						elem: new div({
+							elem: [
+								new navbar.itemcontainer({
+									parenttype: "offcanvas",
+									elem: [
+										new navbar.item({ label: "Home", active: true }),
+										new navbar.item({ label: "Link" }),
+										new navbar.item({
+											label: "Dropdown",
+											option: [
+												{ href: "#", label: "Action" },
+												{ href: "#", label: "Another action" },
+												{ href: "#", label: "Something else here" },
+												{ value: "-" },
+												{ href: "#", label: "Separated link" },
+											],
+										}),
+										new navbar.item({ label: "Disabled", disabled: true }),
+									],
+								}),
+							],
+						}),
+					}),
+				],
+			});
 		},
 	},
 ];
