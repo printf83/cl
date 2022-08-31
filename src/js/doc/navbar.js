@@ -411,6 +411,7 @@ export default [
 	{
 		title: "Color schemes",
 		import: ["navbar", "button", "input"],
+		container: sample.formcontainer,
 		code: () => {
 			let id1 = core.UUID();
 			let id2 = core.UUID();
@@ -613,6 +614,7 @@ export default [
 			"{{new navbar.container}} can use {{new navbar.toggle}}, {{new navbar.collapsecontainer}}, and add {{expand:'sm|md|lg|xl|xxl'}} option into {{new navbar.container}} to determine when their content collapses behind a button. In combination with other option, you can easily choose when to show or hide particular elements.",
 			"For {{new navbar.container}} that never collapse, add the {{expand:''}} option on the {{new navbar.container}}. For {{new navbar.container}} that always collapse, don’t add any .navbar-expand class.",
 		],
+		container: sample.formcontainer,
 		import: ["navbar", "button", "input"],
 		code: () => {
 			let id1 = core.UUID();
@@ -691,6 +693,7 @@ export default [
 			"Navbar toggles are left-aligned by default, but should they follow a sibling element like a .navbar-brand, they’ll automatically be aligned to the far right. Reversing your markup will reverse the placement of the toggle. Below are examples of different toggle styles.",
 			"With no .navbar-brand shown at the smallest breakpoint",
 		],
+		container: sample.formcontainer,
 		import: ["input", "button", "navbar"],
 		code: () => {
 			var id1 = core.UUID();
