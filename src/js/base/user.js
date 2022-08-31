@@ -18,7 +18,7 @@ import small from "./small.js";
 
 const defaultIcon = {
 	icon: "fire",
-	weight: "4x",
+	weight: "5x",
 };
 const defaultSize = "md";
 const defaultMaxWidth = null; //"420px";

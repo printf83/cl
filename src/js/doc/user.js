@@ -4,7 +4,6 @@ import toast from "../base/toast.js";
 import button from "../base/button.js";
 import sample from "./sample.js";
 import modal from "../base/modal.js";
-import small from "../base/small.js";
 
 export default [
 	{
