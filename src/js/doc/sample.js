@@ -154,6 +154,7 @@ const fn = {
 			"shadow",
 			"gradient",
 			"coloropacity",
+			"textbg",
 			"color",
 			"linkcolor",
 			"textcolor",

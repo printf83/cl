@@ -88,6 +88,8 @@ const defaultOption = {
 	justifycontent: null,
 	shadow: null,
 
+	textbg: null, //BS5.2
+
 	color: null,
 	gradient: false,
 	coloropacity: null,
@@ -170,6 +172,11 @@ export default class tag {
 	set data(opt) {
 		opt = core.extend({}, defaultOption, opt);
 
+		//BS5.2
+		if (!opt.textcolor && !opt.textbg && opt.color) {
+			opt.textbg = opt.color;
+		}
+
 		this._d = {
 			tag: opt.tag,
 			attr: core.merge.attr(opt.attr, {
@@ -207,6 +214,7 @@ export default class tag {
 					opt.overflow ? `overflow-${opt.overflow}` : null,
 					opt.opacity ? `opacity-${opt.opacity}` : null,
 
+					opt.textbg ? `text-bg-${opt.textbg}` : null,
 					opt.color ? `bg-${opt.color}` : null,
 					opt.gradient ? "bg-gradient" : null,
 					opt.coloropacity ? `bg-opacity-${opt.coloropacity}` : null,

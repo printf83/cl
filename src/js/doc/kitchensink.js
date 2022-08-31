@@ -1109,40 +1109,9 @@ export default [
 		container: sample.stackcontainer,
 		import: ["card"],
 		code: () => {
-			return [
-				{
-					color: "primary",
-					textcolor: "light",
-				},
-				{
-					color: "secondary",
-					textcolor: "light",
-				},
-				{
-					color: "success",
-					textcolor: "light",
-				},
-				{
-					color: "danger",
-					textcolor: "light",
-				},
-				{
-					color: "warning",
-				},
-				{
-					color: "info",
-				},
-				{
-					color: "light",
-				},
-				{
-					color: "dark",
-					textcolor: "light",
-				},
-			].map((i) => {
+			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map((i) => {
 				return new card.container({
-					color: i.color,
-					textcolor: i.textcolor,
+					color: i,
 					style: {
 						width: "18rem",
 					},
@@ -1150,9 +1119,9 @@ export default [
 						new card.header("Header"),
 						new card.body({
 							elem: [
-								new card.title(`${core.capitalize(i.color)} card title`),
+								new card.title(`${core.capitalize(i)} card title`),
 								new card.text(
-									`Some quick example text to build on the ${i.color} card title and make up the bulk of the card's content.`
+									`Some quick example text to build on the ${i} card title and make up the bulk of the card's content.`
 								),
 							],
 						}),
@@ -1169,6 +1138,7 @@ export default [
 			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map((i) => {
 				return new card.container({
 					bordercolor: i,
+					textcolor: i,
 					style: {
 						width: "18rem",
 					},
