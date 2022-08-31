@@ -13,6 +13,8 @@ import img from "./img.js";
 import * as alert from "./alert.js";
 import btnclose from "./btnclose.js";
 import file from "./file.js";
+import a from "./a.js";
+import small from "./small.js";
 
 const defaultIcon = {
 	icon: "fire",
@@ -99,6 +101,7 @@ let defaultUpdateInfoOption = {
 let _ONSIGNIN = null;
 let _ONSIGNOUT = null;
 let _ONCHANGE = null;
+let _ONTERM = null;
 
 export function onsignin(fn) {
 	_ONSIGNIN = fn;
@@ -110,6 +113,10 @@ export function onsignout(fn) {
 
 export function onchange(fn) {
 	_ONCHANGE = fn;
+}
+
+export function onterm(fn) {
+	_ONTERM = fn;
 }
 
 const fn = {
@@ -624,6 +631,23 @@ const fn = {
 						},
 						onchange: fn.action.inputchange,
 					}),
+					_ONTERM && typeof onterm === "function"
+						? new div({
+								marginy: 3,
+								elem: new small({
+									textcolor: "muted",
+									elem: [
+										"By clicking the sign up button below, I hereby agree to and accept the following ",
+										new a({
+											href: "javascript:void(0);",
+											onclick: _ONTERM,
+											elem: "terms and conditions",
+										}),
+										" governing my use of this website",
+									],
+								}),
+						  })
+						: null,
 					new container.grid([
 						new button({
 							label: "Sign up",

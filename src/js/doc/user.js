@@ -3,6 +3,8 @@ import * as user from "../base/user.js";
 import toast from "../base/toast.js";
 import button from "../base/button.js";
 import sample from "./sample.js";
+import modal from "../base/modal.js";
+import small from "../base/small.js";
 
 export default [
 	{
@@ -160,6 +162,50 @@ export default [
 					});
 				},
 			});
+		},
+	},
+
+	{
+		title: "Sign up terms",
+		container: sample.stackcontainer,
+		import: ["user", "toast", "sample", "modal"],
+		code: () => {
+			return [
+				new button({
+					label: "Attach sign up term",
+					icon: "play",
+					color: "success",
+					onclick: () => {
+						user.onterm(() => {
+							new modal({
+								weight: "lg",
+								title: "Term and conditions",
+								elem: sample.text(),
+								button: [
+									{
+										label: "Okay",
+										onclick: () => {},
+									},
+									"Close",
+								],
+							}).show();
+						});
+
+						new toast("/", "User sign up term attached").show();
+					},
+				}),
+
+				new button({
+					label: "Detached sign up term",
+					icon: "stop",
+					color: "warning",
+					onclick: () => {
+						user.onterm(null);
+
+						new toast("/", "User sign up term detached").show();
+					},
+				}),
+			];
 		},
 	},
 
