@@ -19,7 +19,7 @@
 .bg-dark .cl-menu-toggle:hover {
 	background-color: rgba(var(--bs-primary-rgb), 0.1);
 }
-.cl-menu-toggle::before {
+.cl-menu-toggle:not(.no-arrow)::before {
 	text-align: center;
 	width: 1.25em;
 	line-height: 0;
@@ -36,7 +36,7 @@
 .bg-dark .cl-menu-toggle[aria-expanded="true"] {
 	color: rgba(var(--bs-light-rgb), 0.9);
 }
-.cl-menu-toggle[aria-expanded="true"]::before {
+.cl-menu-toggle[aria-expanded="true"]:not(.no-arrow)::before {
 	transform: rotate(90deg);
 }
 .cl-menu-container {

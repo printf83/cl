@@ -17,6 +17,7 @@ const defaultOption = {
 	label: null,
 	active: false,
 	item: null,
+	arrow: true,
 };
 
 const defaultItemOption = {
@@ -44,7 +45,7 @@ export default class menu extends div {
 				toggle: "collapse",
 				show: opt.active,
 				elem: new button({
-					class: "cl-menu-toggle",
+					class: ["cl-menu-toggle", !opt.arrow ? "no-arrow" : null],
 					label: opt.label,
 					icon: opt.icon,
 				}),

@@ -146,6 +146,39 @@ export default [
 	},
 
 	{
+		title: "No arrow",
+		import: ["menu"],
+		code: () => {
+			return [
+				{
+					label: "Menu",
+					icon: {
+						icon: "fire",
+						color: "danger",
+					},
+					active: true,
+					arrow: false,
+					item: [
+						{
+							label: "Sub menu 1",
+							icon: {
+								icon: "info",
+								color: "primary",
+							},
+							active: true,
+						},
+						{ label: "Sub menu 2" },
+						{ label: "Sub menu 3" },
+						{ label: "Sub menu 4" },
+					],
+				},
+			].map((i) => {
+				return new menu(i);
+			});
+		},
+	},
+
+	{
 		title: "Link",
 		import: ["menu"],
 		code: () => {
