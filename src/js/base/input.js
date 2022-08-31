@@ -54,6 +54,10 @@ const defaultOption = {
 	container: true,
 	flex: false,
 	nowrap: false,
+
+	onchange: null,
+	onfocus: null,
+	onblur: null,
 };
 
 /**
@@ -260,6 +264,10 @@ export default class input extends tag {
 
 				disabled: m.disabled,
 				readOnly: m.readonly,
+
+				onchange: m.onchange,
+				onblur: m.onblur,
+				onfocus: m.onfocus,
 			});
 
 			delete m.type;
@@ -289,6 +297,10 @@ export default class input extends tag {
 			delete m.nowrap;
 
 			delete m.option;
+
+			delete m.onchange;
+			delete m.onblur;
+			delete m.onfocus;
 
 			//main control
 			let mainctl = null;

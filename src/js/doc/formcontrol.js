@@ -1,7 +1,10 @@
 "use strict";
+import * as core from "../base/core.js";
 import sample from "./sample.js";
 import input from "../base/input.js";
 import button from "../base/button.js";
+import toast from "../base/toast.js";
+import * as table from "../base/table.js";
 
 export default [
 	{
@@ -176,6 +179,64 @@ export default [
 				type: "text",
 				option: ["San Francisco", "New York", "Seattle", "Los Angeles", "Chicago"],
 			});
+		},
+	},
+
+	{
+		title: "Event",
+		msg: [
+			new table.container({
+				item: [
+					["Option", "Description"],
+					["<code>onclick</code>", "This event is fired when the control is clicked."],
+					["<code>onfocus</code>", "This event is fired when the control is focused."],
+					["<code>onblur</code>", "This event is fired when the control is leaved."],
+					["<code>onchange</code>", "This event is fired when the control value is changed after leaved"],
+				],
+			}),
+		],
+		container: sample.formcontainer,
+		import: ["input", "toast"],
+		code: () => {
+			let fn = (sender, event) => `Input <b>${core.elemInfo(sender)}</b> event <b>${event}</b> trigged`;
+
+			return [
+				new input({
+					label: "Email address",
+					type: "email",
+					placeholder: "name@example.com",
+					helper: "We'll never share your email with anyone else.",
+
+					onclick: (event) => {
+						new toast("i", fn(event.currentTarget, "onclick")).show();
+					},
+					onfocus: (event) => {
+						new toast("!", fn(event.currentTarget, "onfocus")).show();
+					},
+					onblur: (event) => {
+						new toast("-", fn(event.currentTarget, "onblur")).show();
+					},
+					onchange: (event) => {
+						new toast("/", fn(event.currentTarget, "onchange")).show();
+					},
+				}),
+				new input({
+					label: "Example textarea",
+					type: "textarea",
+					onclick: (event) => {
+						new toast("i", fn(event.currentTarget, "onclick")).show();
+					},
+					onfocus: (event) => {
+						new toast("!", fn(event.currentTarget, "onfocus")).show();
+					},
+					onblur: (event) => {
+						new toast("-", fn(event.currentTarget, "onblur")).show();
+					},
+					onchange: (event) => {
+						new toast("/", fn(event.currentTarget, "onchange")).show();
+					},
+				}),
+			];
 		},
 	},
 ];

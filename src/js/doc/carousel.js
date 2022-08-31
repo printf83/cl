@@ -250,7 +250,7 @@ export default [
 		],
 		import: ["carousel", "sample", "toast"],
 		code: () => {
-			let fn = (sender, event) => `Tab <b>${core.elemInfo(sender)}</b> event <b>${event}</b> trigged`;
+			let fn = (sender, event) => `Carousel <b>${core.elemInfo(sender)}</b> event <b>${event}</b> trigged`;
 			let divOutput = core.UUID();
 			let btnGenerate = core.UUID();
 
