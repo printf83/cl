@@ -2,6 +2,7 @@
 import * as user from "../base/user.js";
 import toast from "../base/toast.js";
 import button from "../base/button.js";
+import sample from "./sample.js";
 
 export default [
 	{
@@ -10,34 +11,36 @@ export default [
 		anchor: false,
 	},
 
-	// {
-	// 	title: "Login",
-	// 	viewclass: "cl-modal-preview",
-	//	import: ["user"],
-	// 	code: () => {
-	// 		return new user.signin({
-	// 			debug: true,
-	// 		});
-	// 	},
-	// },
+	//==============================
+	{
+		title: "Login",
+		viewclass: "cl-modal-preview",
+		import: ["user"],
+		code: () => {
+			return new user.signin({
+				debug: true,
+			});
+		},
+	},
 
-	// {
-	// 	title: "Register",
-	// 	viewclass: "cl-modal-preview",
-	//	import: ["user"],
-	// 	code: () => {
-	// 		return new user.signup({ debug: true });
-	// 	},
-	// },
+	{
+		title: "Register",
+		viewclass: "cl-modal-preview",
+		import: ["user"],
+		code: () => {
+			return new user.signup({ debug: true });
+		},
+	},
 
-	// {
-	// 	title: "Reset password",
-	// 	viewclass: "cl-modal-preview",
-	//	import: ["user"],
-	// 	code: () => {
-	// 		return new user.resetpass({ debug: true });
-	// 	},
-	// },
+	{
+		title: "Reset password",
+		viewclass: "cl-modal-preview",
+		import: ["user"],
+		code: () => {
+			return new user.resetpass({ debug: true });
+		},
+	},
+	//==============================
 
 	{
 		title: "Change password",
@@ -106,17 +109,19 @@ export default [
 		},
 	},
 
-	// {
-	// 	title: "Change password (guest)",
-	// 	viewclass: "cl-modal-preview",
-	//	import: ["user"],
-	// 	code: () => {
-	// 		return new user.changepass_guest({
-	// 			token: "token",
-	// 			debug: true,
-	// 		});
-	// 	},
-	// },
+	//==============================
+	{
+		title: "Change password (guest)",
+		viewclass: "cl-modal-preview",
+		import: ["user"],
+		code: () => {
+			return new user.changepass_guest({
+				token: "token",
+				debug: true,
+			});
+		},
+	},
+	//==============================
 
 	{
 		title: "Get user info",
@@ -155,6 +160,47 @@ export default [
 					});
 				},
 			});
+		},
+	},
+
+	{
+		title: "Event",
+		container: sample.stackcontainer,
+		import: ["user", "toast"],
+		code: () => {
+			return [
+				new button({
+					label: "Attach user event",
+					icon: "play",
+					color: "success",
+					onclick: () => {
+						user.onsignin(() => {
+							new toast("i", "User sign in event trigged").show();
+						});
+						user.onsignout(() => {
+							new toast("-", "User sign out event trigged").show();
+						});
+						user.onchange(() => {
+							new toast("!", "User profile changed event trigged").show();
+						});
+
+						new toast("/", "User event attached").show();
+					},
+				}),
+
+				new button({
+					label: "Detached user event",
+					icon: "stop",
+					color: "warning",
+					onclick: () => {
+						user.onsignin(null);
+						user.onsignout(null);
+						user.onchange(null);
+
+						new toast("/", "User event detached").show();
+					},
+				}),
+			];
 		},
 	},
 ];

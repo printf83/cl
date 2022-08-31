@@ -722,8 +722,6 @@ core.theme.change = (theme) => {
 	}
 };
 
-// new user.onsignin(() => {});
-
 core.documentReady(() => {
 	//set def_m1 and m2
 	let m = get_url();

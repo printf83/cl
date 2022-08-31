@@ -1,6 +1,6 @@
 "use strict";
 
-const DEBUG = true;
+const DEBUG = false;
 
 export function combineArray(arr, delimeter) {
 	return removeEmptyArray(arr)?.join(delimeter);
@@ -86,6 +86,14 @@ const fnTheme = {
 
 export const theme = fnTheme;
 
+// const fnUser = {
+// 	onchange: user_onchange,
+// 	onsignout: user_onsignout,
+// 	onsignin: user_onsignin,
+// };
+
+// export const user = fnUser;
+
 const _baseIcon = {
 	i: { icon: "info-circle", type: "fas", color: "primary" },
 	"!": { icon: "exclamation-triangle", type: "fas", color: "warning" },
@@ -128,6 +136,10 @@ const _baseColor = {
 	white: { textcolor: "dark" },
 	transparent: { textcolor: "dark" },
 };
+
+export function setBaseColor(baseColor) {
+	_baseColor = baseColor;
+}
 
 export function getBaseColor(color, baseColor) {
 	baseColor = baseColor || _baseColor;
