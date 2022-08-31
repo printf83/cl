@@ -3,6 +3,7 @@ import sample from "./sample.js";
 import * as core from "../base/core.js";
 import accordion from "../base/accordion.js";
 import toast from "../base/toast.js";
+import * as table from "../base/table.js";
 
 export default [
 	{
@@ -74,6 +75,29 @@ export default [
 
 	{
 		title: "Event",
+		msg: [
+			new table.container({
+				item: [
+					["Option", "Description"],
+					[
+						"<code>onshow</code>",
+						"This event fires immediately when the <code>show</code> instance method is called.",
+					],
+					[
+						"<code>onshown</code>",
+						"This event is fired when the tab body has been made visible to the user (will wait for CSS transitions to complete).",
+					],
+					[
+						"<code>onhide</code>",
+						"This event is fired immediately when the <code>hide</code> instance method has been called.",
+					],
+					[
+						"<code>onhidden</code>",
+						"This event is fired when the tab body has finished being hidden from the user (will wait for CSS transitions to complete).",
+					],
+				],
+			}),
+		],
 		import: ["accordion", "toast", "sample"],
 		code: () => {
 			let fn = (sender, event) => `Accordion <b>${core.elemInfo(sender)}</b> event <b>${event}</b> trigged`;

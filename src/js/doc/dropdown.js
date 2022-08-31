@@ -8,6 +8,7 @@ import input from "../base/input.js";
 import button from "../base/button.js";
 import * as navbar from "../base/navbar.js";
 import toast from "../base/toast.js";
+import * as table from "../base/table.js";
 
 export default [
 	{
@@ -706,6 +707,29 @@ export default [
 
 	{
 		title: "Event",
+		msg: [
+			new table.container({
+				item: [
+					["Option", "Description"],
+					[
+						"<code>onshow</code>",
+						"This event fires immediately when the <code>show</code> instance method is called.",
+					],
+					[
+						"<code>onshown</code>",
+						"This event is fired when the dropdown has been made visible to the user (will wait for CSS transitions to complete).",
+					],
+					[
+						"<code>onhide</code>",
+						"This event is fired immediately when the <code>hide</code> instance method has been called.",
+					],
+					[
+						"<code>onhidden</code>",
+						"This event is fired when the dropdown has finished being hidden from the user (will wait for CSS transitions to complete).",
+					],
+				],
+			}),
+		],
 		import: ["dropdown", "toast"],
 		code: () => {
 			let fn = (sender, event) => `Dropdown <b>${core.elemInfo(sender)}</b> event <b>${event}</b> trigged`;

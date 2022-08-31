@@ -15,6 +15,7 @@ import toast from "../base/toast.js";
 import tooltip from "../base/tooltip.js";
 import listgroup from "../base/listgroup.js";
 import * as container from "../base/container.js";
+import * as table from "../base/table.js";
 
 export default [
 	{
@@ -1015,6 +1016,33 @@ export default [
 
 	{
 		title: "Event",
+		msg: [
+			new table.container({
+				item: [
+					["Option", "Description"],
+					[
+						"<code>onshow</code>",
+						"This event fires immediately when the <code>show</code> instance method is called. If caused by a click, the clicked element is available as the <code>relatedTarget</code> property of the event.",
+					],
+					[
+						"<code>onshown</code>",
+						"This event is fired when the modal has been made visible to the user (will wait for CSS transitions to complete). If caused by a click, the clicked element is available as the <code>relatedTarget</code> property of the event.",
+					],
+					[
+						"<code>onhide</code>",
+						"This event is fired immediately when the <code>hide</code> instance method has been called.",
+					],
+					[
+						"<code>onhidden</code>",
+						"This event is fired when the modal has finished being hidden from the user (will wait for CSS transitions to complete).",
+					],
+					[
+						"<code>onhideprevented</code>",
+						"This event is fired when the modal is shown, its backdrop is <code>static</code> and a click outside the modal or an escape key press is performed with the keyboard option or <code>data-keyboard</code> set to <code>false</code>.",
+					],
+				],
+			}),
+		],
 		import: ["button", "toast", "modal"],
 		code: () => {
 			let fn = (sender, event) => `Modal <b>${core.elemInfo(sender)}</b> event <b>${event}</b> trigged`;

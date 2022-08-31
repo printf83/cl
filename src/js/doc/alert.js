@@ -4,6 +4,7 @@ import hr from "../base/hr.js";
 import p from "../base/p.js";
 import * as core from "../base/core.js";
 import toast from "../base/toast.js";
+import * as table from "../base/table.js";
 
 export default [
 	{
@@ -84,6 +85,21 @@ export default [
 
 	{
 		title: "Event",
+		msg: [
+			new table.container({
+				item: [
+					["Option", "Description"],
+					[
+						"<code>onclose</code>",
+						"This event is fired immediately when the <code>close</code> instance method has been called.",
+					],
+					[
+						"<code>onclosed</code>",
+						"This event is fired when the alert has been closed (will wait for CSS transitions to complete).",
+					],
+				],
+			}),
+		],
 		import: ["alert", "toast"],
 		code: () => {
 			let fn = (sender, event) => `Alert <b>${core.elemInfo(sender)}</b> event <b>${event}</b> trigged`;

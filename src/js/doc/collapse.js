@@ -5,6 +5,7 @@ import button from "../base/button.js";
 import * as card from "../base/card.js";
 import * as collapse from "../base/collapse.js";
 import toast from "../base/toast.js";
+import * as table from "../base/table.js";
 
 export default [
 	{
@@ -96,6 +97,29 @@ export default [
 
 	{
 		title: "Event",
+		msg: [
+			new table.container({
+				item: [
+					["Option", "Description"],
+					[
+						"<code>onshow</code>",
+						"This event fires immediately when the <code>show</code> instance method is called.",
+					],
+					[
+						"<code>onshown</code>",
+						"This event is fired when the collapse container has been made visible to the user (will wait for CSS transitions to complete).",
+					],
+					[
+						"<code>onhide</code>",
+						"This event is fired immediately when the <code>hide</code> instance method has been called.",
+					],
+					[
+						"<code>onhidden</code>",
+						"This event is fired when the collapse container has finished being hidden from the user (will wait for CSS transitions to complete).",
+					],
+				],
+			}),
+		],
 		container: sample.stackcontainer,
 		import: ["button", "card", "collapse", "toast"],
 		code: () => {
