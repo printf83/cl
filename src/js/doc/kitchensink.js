@@ -1430,6 +1430,7 @@ export default [
 			let fn = (placement) =>
 				new tooltip({
 					type: "popover",
+					title: "Popover title",
 					msg: `${core.capitalize(placement)} popover`,
 					placement: placement,
 					elem: new button({

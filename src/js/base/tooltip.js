@@ -8,6 +8,13 @@ const defaultOption = {
 	type: null,
 	placement: "top",
 	trigger: "focus",
+
+	// unsupported. will check later - 20220831
+	// onshow: null,
+	// onshown: null,
+	// onhide: null,
+	// onhidden: null,
+	// oninserted: null,
 };
 /**
  * elem, msg
@@ -34,6 +41,13 @@ export default class tooltip extends tag {
 					"data-bs-trigger": opt.type === "popover" ? opt.trigger : null,
 					"data-bs-placement": opt.placement ? opt.placement : null,
 					"data-bs-html": opt.type && core.isHTML(opt.msg) ? "true" : null,
+
+					// unsupported. will check later - 20220831
+					// "show.bs.tooltip": opt.onshow,
+					// "shown.bs.tooltip": opt.onshown,
+					// "hide.bs.tooltip": opt.onhide,
+					// "hidden.bs.tooltip": opt.onhidden,
+					// "inserted.bs.tooltip": opt.oninserted,
 				});
 
 				super.data = tmp;
