@@ -5,6 +5,7 @@ import button from "../base/button.js";
 import * as container from "../base/container.js";
 import div from "../base/div.js";
 import input from "../base/input.js";
+import toast from "../base/toast.js";
 
 export default [
 	{
@@ -228,10 +229,11 @@ export default [
 		import: ["button"],
 		code: () => {
 			return [
-				new button({ 
-					toggle: true, 
-					label: "Toggle button", 
-					color: "primary" }),
+				new button({
+					toggle: true,
+					label: "Toggle button",
+					color: "primary",
+				}),
 				new button({
 					toggle: true,
 					active: true,
@@ -277,6 +279,36 @@ export default [
 					disabled: true,
 				}),
 			];
+		},
+	},
+
+	{
+		title: "Event",
+		msg: ["Button support {{onclick}} event."],
+		container: sample.stackcontainer,
+		import: ["button", "toast"],
+		code: () => {
+			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark", "link"].map(
+				(i) => {
+					return new button({
+						label: core.capitalize(i),
+						color: i,
+						onclick: (event) => {
+							let sender = event.currentTarget;
+							new toast({
+								icon: {
+									icon: "fire",
+									color: "primary",
+								},
+								color: "primary",
+								textcolor: "light",
+								title: "Button Event",
+								elem: `Button <b>${core.elemInfo(sender)}</b> event <b>onclick</b> trigged`,
+							}).show();
+						},
+					});
+				}
+			);
 		},
 	},
 ];
