@@ -87,7 +87,7 @@ export default [
 		viewclass: "cl-highlight-box-dark",
 		import: ["tag"],
 		code: () => {
-			return [null, 0, 1, 2, 3].map((i) => {
+			return [null, 0, 1, 2, 3, 4, 5].map((i) => {
 				return new tag({
 					tag: "div",
 					rounded: i,
