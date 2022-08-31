@@ -9,7 +9,7 @@ import div from "./div.js";
  * opt : {modal option}
  */
 export class form extends div {
-	constructor(elem, gap = 2, col = 1) {
+	constructor(elem, gap = 3, col = 1) {
 		super({
 			padding: 0,
 			class: "container",
@@ -57,22 +57,3 @@ export class grid extends div {
 		});
 	}
 }
-
-// export class grid extends div {
-// 	constructor(elem, gap = 2, col = null) {
-// 		super({
-// 			paddingx: gap,
-// 			display: "grid",
-// 			elem: new div({
-// 				row: true,
-// 				gap: gap,
-// 				rowcol: col,
-// 				elem: Array.isArray(elem)
-// 					? elem.map((i) => {
-// 							return new div({ col: true, elem: i });
-// 					  })
-// 					: new div({ col: true, elem: elem }),
-// 			}),
-// 		});
-// 	}
-// }
