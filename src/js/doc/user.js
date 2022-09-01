@@ -9,6 +9,31 @@ import img from "../base/img.js";
 import btngroup from "../base/btngroup.js";
 import p from "../base/p.js";
 
+const reloadUserDoc = () => {
+	let activeElem = document.getElementsByClassName("active");
+	if (activeElem && activeElem.length > 0) {
+		let menuItem = null;
+		for (let i = 0; i < activeElem.length; i++) {
+			if (
+				activeElem[i].getAttribute("cl-m1") === "Database" &&
+				activeElem[i].getAttribute("cl-m2") === "User" &&
+				activeElem[i].getAttribute("cl-m3") === "menu"
+			) {
+				menuItem = activeElem[i];
+				i = activeElem.length;
+			}
+		}
+
+		if (menuItem) {
+			// if (typeof menuItem.onclick == "function") {
+			// 	menuItem.onclick.apply(menuItem);
+			// }
+
+			menuItem.dispatchEvent(new Event("click"));
+		}
+	}
+};
+
 export default [
 	{
 		title: "User",
@@ -227,6 +252,7 @@ export default [
 							};
 
 							new toast("/", "User banner attached").show();
+							reloadUserDoc();
 						},
 					}),
 
@@ -236,29 +262,30 @@ export default [
 						onclick: () => {
 							core.user.banner = null;
 							new toast("-", "User banner detached").show();
+							reloadUserDoc();
 						},
 					}),
 
-					new button({
-						icon: "eye",
-						color: "primary",
-						onclick: (event) => {
-							let sender = event.currentTarget;
-							user.info(sender, (result) => {
-								if (result && result.email) {
-									new user.updateinfo({
-										data: result,
-										sender: sender,
-										callback: (result) => {
-											if (result) {
-												new toast("/", "Your information updated").show();
-											}
-										},
-									}).show();
-								}
-							});
-						},
-					}),
+					// new button({
+					// 	icon: "eye",
+					// 	color: "primary",
+					// 	onclick: (event) => {
+					// 		let sender = event.currentTarget;
+					// 		user.info(sender, (result) => {
+					// 			if (result && result.email) {
+					// 				new user.updateinfo({
+					// 					data: result,
+					// 					sender: sender,
+					// 					callback: (result) => {
+					// 						if (result) {
+					// 							new toast("/", "Your information updated").show();
+					// 						}
+					// 					},
+					// 				}).show();
+					// 			}
+					// 		});
+					// 	},
+					// }),
 				],
 			});
 		},
@@ -306,6 +333,7 @@ export default [
 							};
 
 							new toast("/", "User sign up term attached").show();
+							reloadUserDoc();
 						},
 					}),
 
@@ -316,29 +344,30 @@ export default [
 							core.user.onterm = null;
 
 							new toast("-", "User sign up term detached").show();
+							reloadUserDoc();
 						},
 					}),
 
-					new button({
-						icon: "eye",
-						color: "primary",
-						onclick: (event) => {
-							let sender = event.currentTarget;
-							user.info(sender, (result) => {
-								if (result && result.email) {
-									new user.updateinfo({
-										data: result,
-										sender: sender,
-										callback: (result) => {
-											if (result) {
-												new toast("/", "Your information updated").show();
-											}
-										},
-									}).show();
-								}
-							});
-						},
-					}),
+					// new button({
+					// 	icon: "eye",
+					// 	color: "primary",
+					// 	onclick: (event) => {
+					// 		let sender = event.currentTarget;
+					// 		user.info(sender, (result) => {
+					// 			if (result && result.email) {
+					// 				new user.updateinfo({
+					// 					data: result,
+					// 					sender: sender,
+					// 					callback: (result) => {
+					// 						if (result) {
+					// 							new toast("/", "Your information updated").show();
+					// 						}
+					// 					},
+					// 				}).show();
+					// 			}
+					// 		});
+					// 	},
+					// }),
 				],
 			});
 		},
@@ -370,6 +399,7 @@ export default [
 							};
 
 							new toast("/", "User event attached").show();
+							reloadUserDoc();
 						},
 					}),
 
@@ -382,29 +412,30 @@ export default [
 							core.user.onchange = null;
 
 							new toast("-", "User event detached").show();
+							reloadUserDoc();
 						},
 					}),
 
-					new button({
-						icon: "eye",
-						color: "primary",
-						onclick: (event) => {
-							let sender = event.currentTarget;
-							user.info(sender, (result) => {
-								if (result && result.email) {
-									new user.updateinfo({
-										data: result,
-										sender: sender,
-										callback: (result) => {
-											if (result) {
-												new toast("/", "Your information updated").show();
-											}
-										},
-									}).show();
-								}
-							});
-						},
-					}),
+					// new button({
+					// 	icon: "eye",
+					// 	color: "primary",
+					// 	onclick: (event) => {
+					// 		let sender = event.currentTarget;
+					// 		user.info(sender, (result) => {
+					// 			if (result && result.email) {
+					// 				new user.updateinfo({
+					// 					data: result,
+					// 					sender: sender,
+					// 					callback: (result) => {
+					// 						if (result) {
+					// 							new toast("/", "Your information updated").show();
+					// 						}
+					// 					},
+					// 				}).show();
+					// 			}
+					// 		});
+					// 	},
+					// }),
 				],
 			});
 		},
