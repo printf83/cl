@@ -17,7 +17,7 @@ export function capitalize(str) {
 const __setting = {
 	icon: null,
 	title: null,
-}
+};
 
 export const setting = {
 	get icon() {
@@ -132,7 +132,9 @@ export const theme = {
 			console.error("#css_bootstrap and #css_bootswatch not found");
 		}
 
-		theme.change(value);
+		if (theme.change && typeof theme.change === "function") {
+			theme.change(value);
+		}
 	},
 	get: () => {
 		return cookie.get("theme");
