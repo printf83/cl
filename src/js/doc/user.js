@@ -130,16 +130,39 @@ export default [
 
 	{
 		title: "Get user info",
+		msg: ["Auto show login form if user not sign in"],
 		import: ["button", "toast", "user"],
 		code: () => {
 			return new button({
-				label: "Get info",
+				label: "Get user info",
 				icon: "user",
 				color: "primary",
 				onclick: (event) => {
 					user.info(event.currentTarget, (result) => {
 						if (result) {
-							new toast("i", `Hai ${result.name}`).show();
+							new toast("/", `Hai ${result.name}`).show();
+						}
+					});
+				},
+			});
+		},
+	},
+
+	{
+		title: "Get guest info",
+		msg: ["Return {{user info}} if it is sign in user, or {{null}} if guest"],
+		import: ["button", "toast", "user"],
+		code: () => {
+			return new button({
+				label: "Get guest info",
+				icon: "user",
+				color: "primary",
+				onclick: (event) => {
+					user.info_guest(event.currentTarget, (result) => {
+						if (result) {
+							new toast("/", `Hai ${result.name}`).show();
+						} else {
+							new toast("!", `Hai guest`).show();
 						}
 					});
 				},

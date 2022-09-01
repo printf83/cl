@@ -779,6 +779,28 @@ export const user = {
 			console.error("opt data is required");
 		}
 	},
+	info_guest: (opt, callback) => {
+		opt = core.extend(
+			{},
+			{
+				sender: null,
+			},
+			opt
+		);
+
+		if (fn.sender.isfree(opt.sender)) {
+			fn.sender.setbusy(opt.sender);
+			fn.get({
+				callback: (result) => {
+					fn.sender.setfree(opt.sender);
+					if (typeof callback === "function") {
+						callback(result);
+					}
+				},
+				url: `api/user/info-guest`,
+			});
+		}
+	},
 	info: (opt, callback) => {
 		opt = core.extend(
 			{},
