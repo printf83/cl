@@ -215,7 +215,7 @@ export default [
 	{
 		title: "Banner",
 		msg: [
-			"Setup banner that appear on user dialog like sign up, sign in, profile editor and others using {{core.user.banner}}. You can use this function before {{core.documentReady}}",
+			"Setup banner that appear on user dialog like sign up, sign in, profile editor and others using {{core.user.banner}}. You can use this function before {{core.documentReady}}. Banner only visible on the large screen (desktop)",
 		],
 		container: sample.stackcontainer,
 		import: ["user", "toast", "sample", "btngroup"],
