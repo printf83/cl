@@ -536,7 +536,7 @@ const fn = {
 		signin: (opt) => {
 			return new container.form(
 				[
-					opt.close ? fn.closebtn(opt) : null,
+					// opt.close ? fn.closebtn(opt) : null,
 					!opt.img && opt.icon ? new icon(opt.icon) : opt.img ? null : new icon(defaultIcon),
 					!opt.icon && opt.img ? new img(opt.img) : null,
 					new h({ level: defaultTitleSize, marginy: 0, elem: opt.title ? opt.title : "Sign in" }),
@@ -597,7 +597,7 @@ const fn = {
 									onclick: (event) => {
 										let sender = event.currentTarget;
 										let container = sender.closest("form");
-										core.replaceChild(container, fn.form.container(opt.id, fn.form.resetpass(opt)));
+										core.replaceWith(container, fn.form.container(opt.id, fn.form.resetpass(opt)));
 									},
 								}),
 								new button({
@@ -606,7 +606,7 @@ const fn = {
 									onclick: (event) => {
 										let sender = event.currentTarget;
 										let container = sender.closest("form");
-										core.replaceChild(container, fn.form.container(opt.id, fn.form.signup(opt)));
+										core.replaceWith(container, fn.form.container(opt.id, fn.form.signup(opt)));
 									},
 								}),
 							],
@@ -618,7 +618,7 @@ const fn = {
 		signup: (opt) => {
 			return new container.form(
 				[
-					opt.close ? fn.closebtn(opt) : null,
+					// opt.close ? fn.closebtn(opt) : null,
 					!opt.img && opt.icon ? new icon(opt.icon) : opt.img ? null : new icon(defaultIcon),
 					!opt.icon && opt.img ? new img(opt.img) : null,
 					new h({ level: defaultTitleSize, marginy: 0, elem: opt.title ? opt.title : "Sign up" }),
@@ -702,7 +702,7 @@ const fn = {
 									onclick: (event) => {
 										let sender = event.currentTarget;
 										let container = sender.closest("form");
-										core.replaceChild(container, fn.form.container(opt.id, fn.form.resetpass(opt)));
+										core.replaceWith(container, fn.form.container(opt.id, fn.form.resetpass(opt)));
 									},
 								}),
 								new button({
@@ -711,7 +711,7 @@ const fn = {
 									onclick: (event) => {
 										let sender = event.currentTarget;
 										let container = sender.closest("form");
-										core.replaceChild(container, fn.form.container(opt.id, fn.form.signin(opt)));
+										core.replaceWith(container, fn.form.container(opt.id, fn.form.signin(opt)));
 									},
 								}),
 							],
@@ -723,7 +723,7 @@ const fn = {
 		resetpass: (opt) => {
 			return new container.form(
 				[
-					opt.close ? fn.closebtn(opt) : null,
+					// opt.close ? fn.closebtn(opt) : null,
 					!opt.img && opt.icon ? new icon(opt.icon) : opt.img ? null : new icon(defaultIcon),
 					!opt.icon && opt.img ? new img(opt.img) : null,
 					new h({ level: defaultTitleSize, marginy: 0, elem: opt.title ? opt.title : "Reset password" }),
@@ -769,10 +769,7 @@ const fn = {
 										onclick: (event) => {
 											let sender = event.currentTarget;
 											let container = sender.closest("form");
-											core.replaceChild(
-												container,
-												fn.form.container(opt.id, fn.form.signin(opt))
-											);
+											core.replaceWith(container, fn.form.container(opt.id, fn.form.signin(opt)));
 										},
 									}),
 									new button({
@@ -781,10 +778,7 @@ const fn = {
 										onclick: (event) => {
 											let sender = event.currentTarget;
 											let container = sender.closest("form");
-											core.replaceChild(
-												container,
-												fn.form.container(opt.id, fn.form.signup(opt))
-											);
+											core.replaceWith(container, fn.form.container(opt.id, fn.form.signup(opt)));
 										},
 									}),
 								],
@@ -797,7 +791,7 @@ const fn = {
 		changepass: (opt) => {
 			return new container.form(
 				[
-					opt.close ? fn.closebtn(opt) : null,
+					// opt.close ? fn.closebtn(opt) : null,
 					!opt.img && opt.icon ? new icon(opt.icon) : opt.img ? null : new icon(defaultIcon),
 					!opt.icon && opt.img ? new img(opt.img) : null,
 					new h({ level: defaultTitleSize, marginy: 0, elem: opt.title ? opt.title : "Change password" }),
@@ -872,7 +866,7 @@ const fn = {
 										fn.action.info(sender, (result) => {
 											if (result) {
 												opt.data = result;
-												core.replaceChild(
+												core.replaceWith(
 													container,
 													fn.form.container(opt.id, fn.form.updateinfo(opt, false))
 												);
@@ -888,10 +882,7 @@ const fn = {
 										let sender = event.currentTarget;
 										let container = sender.closest("form");
 										fn.action.signout(sender, () => {
-											core.replaceChild(
-												container,
-												fn.form.container(opt.id, fn.form.signin(opt))
-											);
+											core.replaceWith(container, fn.form.container(opt.id, fn.form.signin(opt)));
 										});
 									},
 								}),
@@ -904,7 +895,7 @@ const fn = {
 		changepass_guest: (opt) => {
 			return new container.form(
 				[
-					opt.close ? fn.closebtn(opt) : null,
+					// opt.close ? fn.closebtn(opt) : null,
 					!opt.img && opt.icon ? new icon(opt.icon) : opt.img ? null : new icon(defaultIcon),
 					!opt.icon && opt.img ? new img(opt.img) : null,
 					new h({ level: defaultTitleSize, marginy: 0, elem: opt.title ? opt.title : "Change password" }),
@@ -968,7 +959,7 @@ const fn = {
 									onclick: (event) => {
 										let sender = event.currentTarget;
 										let container = sender.closest("form");
-										core.replaceChild(container, fn.form.container(opt.id, fn.form.signin(opt)));
+										core.replaceWith(container, fn.form.container(opt.id, fn.form.signin(opt)));
 									},
 								}),
 								new button({
@@ -977,7 +968,7 @@ const fn = {
 									onclick: (event) => {
 										let sender = event.currentTarget;
 										let container = sender.closest("form");
-										core.replaceChild(container, fn.form.container(opt.id, fn.form.resetpass(opt)));
+										core.replaceWith(container, fn.form.container(opt.id, fn.form.resetpass(opt)));
 									},
 								}),
 							],
@@ -989,7 +980,7 @@ const fn = {
 		updateinfo: (opt) => {
 			return new container.form(
 				[
-					opt.close ? fn.closebtn(opt) : null,
+					// opt.close ? fn.closebtn(opt) : null,
 					!opt.img && opt.icon ? new icon(opt.icon) : opt.img ? null : new icon(defaultIcon),
 					!opt.icon && opt.img ? new img(opt.img) : null,
 					new h({ level: defaultTitleSize, marginy: 0, elem: opt.title ? opt.title : "Update info" }),
@@ -1057,10 +1048,7 @@ const fn = {
 									onclick: (event) => {
 										let sender = event.currentTarget;
 										let container = sender.closest("form");
-										core.replaceChild(
-											container,
-											fn.form.container(opt.id, fn.form.changepass(opt))
-										);
+										core.replaceWith(container, fn.form.container(opt.id, fn.form.changepass(opt)));
 									},
 								}),
 
@@ -1071,10 +1059,7 @@ const fn = {
 										let sender = event.currentTarget;
 										let container = sender.closest("form");
 										fn.action.signout(sender, () => {
-											core.replaceChild(
-												container,
-												fn.form.container(opt.id, fn.form.signin(opt))
-											);
+											core.replaceWith(container, fn.form.container(opt.id, fn.form.signin(opt)));
 										});
 									},
 								}),
@@ -1109,7 +1094,10 @@ export class signin extends modal {
 				size: opt.size ? opt.size : _BANNER ? defaultSizeBanner : defaultSize,
 				maxwidth: _BANNER ? defaultMaxWidth : defaultMaxWidthBanner,
 				backdropcolor: opt.backdropcolor,
-				elem: fn.banner(fn.form.container(opt.id, fn.form.signin(opt))),
+				elem: [
+					opt.close ? fn.closebtn(opt) : null,
+					fn.banner(fn.form.container(opt.id, fn.form.signin(opt))),
+				].filter(Boolean),
 				debug: true,
 			});
 		} else {
@@ -1117,7 +1105,10 @@ export class signin extends modal {
 				size: opt.size ? opt.size : _BANNER ? defaultSizeBanner : defaultSize,
 				maxwidth: _BANNER ? defaultMaxWidth : defaultMaxWidthBanner,
 				backdropcolor: opt.backdropcolor,
-				elem: fn.banner(fn.form.container(opt.id, fn.form.signin(opt))),
+				elem: [
+					opt.close ? fn.closebtn(opt) : null,
+					fn.banner(fn.form.container(opt.id, fn.form.signin(opt))),
+				].filter(Boolean),
 			});
 		}
 	}
@@ -1133,7 +1124,10 @@ export class signup extends modal {
 				size: opt.size ? opt.size : _BANNER ? defaultSizeBanner : defaultSize,
 				maxwidth: _BANNER ? defaultMaxWidth : defaultMaxWidthBanner,
 				backdropcolor: opt.backdropcolor,
-				elem: fn.banner(fn.form.container(opt.id, fn.form.signup(opt))),
+				elem: [
+					opt.close ? fn.closebtn(opt) : null,
+					fn.banner(fn.form.container(opt.id, fn.form.signup(opt))),
+				].filter(Boolean),
 				debug: true,
 			});
 		} else {
@@ -1141,7 +1135,10 @@ export class signup extends modal {
 				size: opt.size ? opt.size : _BANNER ? defaultSizeBanner : defaultSize,
 				maxwidth: _BANNER ? defaultMaxWidth : defaultMaxWidthBanner,
 				backdropcolor: opt.backdropcolor,
-				elem: fn.banner(fn.form.container(opt.id, fn.form.signup(opt))),
+				elem: [
+					opt.close ? fn.closebtn(opt) : null,
+					fn.banner(fn.form.container(opt.id, fn.form.signup(opt))),
+				].filter(Boolean),
 			});
 		}
 	}
@@ -1157,7 +1154,10 @@ export class resetpass extends modal {
 				size: opt.size ? opt.size : _BANNER ? defaultSizeBanner : defaultSize,
 				maxwidth: _BANNER ? defaultMaxWidth : defaultMaxWidthBanner,
 				backdropcolor: opt.backdropcolor,
-				elem: fn.banner(fn.form.container(opt.id, fn.form.resetpass(opt))),
+				elem: [
+					opt.close ? fn.closebtn(opt) : null,
+					fn.banner(fn.form.container(opt.id, fn.form.resetpass(opt))),
+				].filter(Boolean),
 				debug: true,
 			});
 		} else {
@@ -1165,7 +1165,10 @@ export class resetpass extends modal {
 				size: opt.size ? opt.size : _BANNER ? defaultSizeBanner : defaultSize,
 				maxwidth: _BANNER ? defaultMaxWidth : defaultMaxWidthBanner,
 				backdropcolor: opt.backdropcolor,
-				elem: fn.banner(fn.form.container(opt.id, fn.form.resetpass(opt))),
+				elem: [
+					opt.close ? fn.closebtn(opt) : null,
+					fn.banner(fn.form.container(opt.id, fn.form.resetpass(opt))),
+				].filter(Boolean),
 			});
 		}
 	}
@@ -1181,7 +1184,10 @@ export class changepass extends modal {
 				size: opt.size ? opt.size : _BANNER ? defaultSizeBanner : defaultSize,
 				maxwidth: _BANNER ? defaultMaxWidth : defaultMaxWidthBanner,
 				backdropcolor: opt.backdropcolor,
-				elem: fn.banner(fn.form.container(opt.id, fn.form.changepass(opt))),
+				elem: [
+					opt.close ? fn.closebtn(opt) : null,
+					fn.banner(fn.form.container(opt.id, fn.form.changepass(opt))),
+				].filter(Boolean),
 				debug: true,
 			});
 		} else {
@@ -1189,7 +1195,10 @@ export class changepass extends modal {
 				size: opt.size ? opt.size : _BANNER ? defaultSizeBanner : defaultSize,
 				maxwidth: _BANNER ? defaultMaxWidth : defaultMaxWidthBanner,
 				backdropcolor: opt.backdropcolor,
-				elem: fn.banner(fn.form.container(opt.id, fn.form.changepass(opt))),
+				elem: [
+					opt.close ? fn.closebtn(opt) : null,
+					fn.banner(fn.form.container(opt.id, fn.form.changepass(opt))),
+				].filter(Boolean),
 			});
 		}
 	}
@@ -1205,7 +1214,10 @@ export class changepass_guest extends modal {
 				size: opt.size ? opt.size : _BANNER ? defaultSizeBanner : defaultSize,
 				maxwidth: _BANNER ? defaultMaxWidth : defaultMaxWidthBanner,
 				backdropcolor: opt.backdropcolor,
-				elem: fn.banner(fn.form.container(opt.id, fn.form.changepass_guest(opt))),
+				elem: [
+					opt.close ? fn.closebtn(opt) : null,
+					fn.banner(fn.form.container(opt.id, fn.form.changepass_guest(opt))),
+				].filter(Boolean),
 				debug: true,
 			});
 		} else {
@@ -1213,7 +1225,10 @@ export class changepass_guest extends modal {
 				size: opt.size ? opt.size : _BANNER ? defaultSizeBanner : defaultSize,
 				maxwidth: _BANNER ? defaultMaxWidth : defaultMaxWidthBanner,
 				backdropcolor: opt.backdropcolor,
-				elem: fn.banner(fn.form.container(opt.id, fn.form.changepass_guest(opt))),
+				elem: [
+					opt.close ? fn.closebtn(opt) : null,
+					fn.banner(fn.form.container(opt.id, fn.form.changepass_guest(opt))),
+				].filter(Boolean),
 			});
 		}
 	}
@@ -1229,7 +1244,10 @@ export class updateinfo extends modal {
 				size: opt.size ? opt.size : _BANNER ? defaultSizeBanner : defaultSize,
 				maxwidth: _BANNER ? defaultMaxWidth : defaultMaxWidthBanner,
 				backdropcolor: opt.backdropcolor,
-				elem: fn.banner(fn.form.container(opt.id, fn.form.updateinfo(opt))),
+				elem: [
+					opt.close ? fn.closebtn(opt) : null,
+					fn.banner(fn.form.container(opt.id, fn.form.updateinfo(opt))),
+				].filter(Boolean),
 				debug: true,
 			});
 		} else {
@@ -1237,7 +1255,10 @@ export class updateinfo extends modal {
 				size: opt.size ? opt.size : _BANNER ? defaultSizeBanner : defaultSize,
 				maxwidth: _BANNER ? defaultMaxWidth : defaultMaxWidthBanner,
 				backdropcolor: opt.backdropcolor,
-				elem: fn.banner(fn.form.container(opt.id, fn.form.updateinfo(opt))),
+				elem: [
+					opt.close ? fn.closebtn(opt) : null,
+					fn.banner(fn.form.container(opt.id, fn.form.updateinfo(opt))),
+				].filter(Boolean),
 			});
 		}
 	}

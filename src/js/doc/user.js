@@ -4,8 +4,8 @@ import toast from "../base/toast.js";
 import button from "../base/button.js";
 import sample from "./sample.js";
 import modal from "../base/modal.js";
-// import img from "../base/img.js";
-import carousel from "../base/carousel.js";
+import img from "../base/img.js";
+import btngroup from "../base/btngroup.js";
 
 export default [
 	{
@@ -169,133 +169,205 @@ export default [
 	{
 		title: "Banner",
 		container: sample.stackcontainer,
-		import: ["user", "toast", "sample"],
+		import: ["user", "toast", "sample", "btngroup"],
 		code: () => {
-			return [
-				new button({
-					label: "Attach banner",
-					icon: "play",
-					color: "success",
-					onclick: () => {
-						user.banner(() => {
-							// return new img({
-							// 	class: "img-fluid",
-							// 	src: sample.img(510, 510),
-							// });
+			return new btngroup({
+				elem: [
+					new button({
+						label: "Attach banner",
+						icon: "play",
+						color: "success",
+						onclick: () => {
+							user.banner(() => {
+								return new img({
+									class: "img-fluid",
+									src: sample.img(510, 510),
+								});
 
-							return new carousel({
-								control: true,
-								indicators: true,
-								item: [
-									sample.img(510, 510),
-									sample.img(510, 510),
-									sample.img(510, 510),
-									sample.img(510, 510),
-									sample.img(510, 510),
-									sample.img(510, 510),
-								],
+								// return new carousel({
+								// 	control: true,
+								// 	indicators: true,
+								// 	item: [
+								// 		sample.img(510, 510),
+								// 		sample.img(510, 510),
+								// 		sample.img(510, 510),
+								// 		sample.img(510, 510),
+								// 		sample.img(510, 510),
+								// 		sample.img(510, 510),
+								// 	],
+								// });
 							});
-						});
 
-						new toast("/", "User banner attached").show();
-					},
-				}),
+							new toast("/", "User banner attached").show();
+						},
+					}),
 
-				new button({
-					label: "Detached banner",
-					icon: "stop",
-					color: "danger",
-					onclick: () => {
-						user.banner(null);
-						new toast("/", "User banner detached").show();
-					},
-				}),
-			];
+					new button({
+						label: "Detached",
+						icon: "stop",
+						color: "danger",
+						onclick: () => {
+							user.banner(null);
+							new toast("-", "User banner detached").show();
+						},
+					}),
+
+					new button({
+						label: "Preview",
+						icon: "eye",
+						color: "primary",
+						onclick: (event) => {
+							let sender = event.currentTarget;
+							user.info(sender, (result) => {
+								if (result && result.email) {
+									new user.updateinfo({
+										data: result,
+										sender: sender,
+										callback: (result) => {
+											if (result) {
+												new toast("/", "Your information updated").show();
+											}
+										},
+									}).show();
+								}
+							});
+						},
+					}),
+				],
+			});
 		},
 	},
 
 	{
 		title: "Sign up terms",
 		container: sample.stackcontainer,
-		import: ["user", "toast", "sample", "modal"],
+		import: ["user", "toast", "sample", "modal", "btngroup"],
 		code: () => {
-			return [
-				new button({
-					label: "Attach sign up term",
-					icon: "play",
-					color: "success",
-					onclick: () => {
-						user.onterm(() => {
-							new modal({
-								weight: "lg",
-								title: "Term and conditions",
-								elem: sample.text(),
-								button: [
-									{
-										label: "Okay",
-										onclick: () => {},
-									},
-									"Close",
-								],
-							}).show();
-						});
+			return new btngroup({
+				elem: [
+					new button({
+						label: "Attach term",
+						icon: "play",
+						color: "success",
+						onclick: () => {
+							user.onterm(() => {
+								new modal({
+									weight: "lg",
+									title: "Term and conditions",
+									elem: sample.text(),
+									button: [
+										{
+											label: "Okay",
+											onclick: () => {},
+										},
+										"Close",
+									],
+								}).show();
+							});
 
-						new toast("/", "User sign up term attached").show();
-					},
-				}),
+							new toast("/", "User sign up term attached").show();
+						},
+					}),
 
-				new button({
-					label: "Detached sign up term",
-					icon: "stop",
-					color: "danger",
-					onclick: () => {
-						user.onterm(null);
+					new button({
+						label: "Detached",
+						icon: "stop",
+						color: "danger",
+						onclick: () => {
+							user.onterm(null);
 
-						new toast("/", "User sign up term detached").show();
-					},
-				}),
-			];
+							new toast("-", "User sign up term detached").show();
+						},
+					}),
+
+					new button({
+						label: "Preview",
+						icon: "eye",
+						color: "primary",
+						onclick: (event) => {
+							let sender = event.currentTarget;
+							user.info(sender, (result) => {
+								if (result && result.email) {
+									new user.updateinfo({
+										data: result,
+										sender: sender,
+										callback: (result) => {
+											if (result) {
+												new toast("/", "Your information updated").show();
+											}
+										},
+									}).show();
+								}
+							});
+						},
+					}),
+				],
+			});
 		},
 	},
 
 	{
 		title: "Event",
 		container: sample.stackcontainer,
-		import: ["user", "toast"],
+		import: ["user", "toast", "btngroup"],
 		code: () => {
-			return [
-				new button({
-					label: "Attach user event",
-					icon: "play",
-					color: "success",
-					onclick: () => {
-						user.onsignin(() => {
-							new toast("i", "User sign in event trigged").show();
-						});
-						user.onsignout(() => {
-							new toast("-", "User sign out event trigged").show();
-						});
-						user.onchange(() => {
-							new toast("!", "User profile changed event trigged").show();
-						});
+			return new btngroup({
+				elem: [
+					new button({
+						label: "Attach event",
+						icon: "play",
+						color: "success",
+						onclick: () => {
+							user.onsignin(() => {
+								new toast("i", "User sign in event trigged").show();
+							});
+							user.onsignout(() => {
+								new toast("-", "User sign out event trigged").show();
+							});
+							user.onchange(() => {
+								new toast("!", "User profile changed event trigged").show();
+							});
 
-						new toast("/", "User event attached").show();
-					},
-				}),
+							new toast("/", "User event attached").show();
+						},
+					}),
 
-				new button({
-					label: "Detached user event",
-					icon: "stop",
-					color: "danger",
-					onclick: () => {
-						user.onsignin(null);
-						user.onsignout(null);
-						user.onchange(null);
+					new button({
+						label: "Detached",
+						icon: "stop",
+						color: "danger",
+						onclick: () => {
+							user.onsignin(null);
+							user.onsignout(null);
+							user.onchange(null);
 
-						new toast("/", "User event detached").show();
-					},
-				}),
-			];
+							new toast("-", "User event detached").show();
+						},
+					}),
+
+					new button({
+						label: "Preview",
+						icon: "eye",
+						color: "primary",
+						onclick: (event) => {
+							let sender = event.currentTarget;
+							user.info(sender, (result) => {
+								if (result && result.email) {
+									new user.updateinfo({
+										data: result,
+										sender: sender,
+										callback: (result) => {
+											if (result) {
+												new toast("/", "Your information updated").show();
+											}
+										},
+									}).show();
+								}
+							});
+						},
+					}),
+				],
+			});
 		},
 	},
 ];
