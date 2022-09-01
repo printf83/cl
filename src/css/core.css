@@ -42,3 +42,19 @@ input.wait.disabled {
     /* Non-prefixed version, currently
     supported by Chrome, Edge, Opera and Firefox */
 }
+
+.noselect pre {
+    -webkit-touch-callout: unset;
+    /* iOS Safari */
+    -webkit-user-select: unset;
+    /* Safari */
+    -khtml-user-select: unset;
+    /* Konqueror HTML */
+    -moz-user-select: unset;
+    /* Old versions of Firefox */
+    -ms-user-select: unset;
+    /* Internet Explorer/Edge */
+    user-select: unset;
+    /* Non-prefixed version, currently
+    supported by Chrome, Edge, Opera and Firefox */
+}
