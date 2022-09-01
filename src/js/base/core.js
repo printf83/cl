@@ -14,6 +14,26 @@ export function capitalize(str) {
 	return str.toLowerCase().replace(/(^\w{1})|(\s+\w{1})/g, (match) => match.toUpperCase());
 }
 
+const __setting = {
+	icon: null,
+	title: null,
+}
+
+export const setting = {
+	get icon() {
+		return __setting.icon;
+	},
+	set icon(fn) {
+		__setting.icon = fn;
+	},
+	get title() {
+		return __setting.title;
+	},
+	set title(fn) {
+		__setting.title = fn;
+	},
+};
+
 const __user = {
 	onsignin: null,
 	onsignout: null,

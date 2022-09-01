@@ -148,7 +148,10 @@ export default class example extends div {
 		if (opt.source) {
 			item.push({
 				label: "Source Code",
-				icon: "fire",
+				icon: {
+					type: "fab",
+					icon: "square-js",
+				},
 				active: !opt.codecollapse,
 				onshow: (event) => {
 					let sender = event.currentTarget;

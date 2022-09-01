@@ -41,8 +41,8 @@ function beautifyhtml(str) {
 		indent_size: 4,
 	};
 
-	// str = str.replace(/\>/g, ">\n");
-	// str = str.replace(/\</g, "\n<");
+	str = str.replace(/\>/g, ">\n");
+	str = str.replace(/\</g, "\n<");
 	return html_beautify(str, opt);
 }
 

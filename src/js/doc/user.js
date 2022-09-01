@@ -7,6 +7,7 @@ import sample from "./sample.js";
 import modal from "../base/modal.js";
 import img from "../base/img.js";
 import btngroup from "../base/btngroup.js";
+import p from "../base/p.js";
 
 export default [
 	{
@@ -240,7 +241,7 @@ export default [
 	{
 		title: "Sign up terms",
 		container: sample.stackcontainer,
-		import: ["user", "toast", "sample", "modal", "btngroup"],
+		import: ["user", "toast", "sample", "modal", "btngroup", "p"],
 		code: () => {
 			return new btngroup({
 				elem: [
@@ -251,9 +252,20 @@ export default [
 						onclick: () => {
 							core.user.onterm = () => {
 								new modal({
-									weight: "lg",
+									size: "lg",
 									title: "Term and conditions",
-									elem: sample.text(),
+									elem: [
+										new p(sample.text()),
+										new p(sample.text()),
+										new p(sample.text()),
+										new p(sample.text()),
+										new p(sample.text()),
+										new p(sample.text()),
+										new p(sample.text()),
+										new p(sample.text()),
+										new p(sample.text()),
+										new p(sample.text()),
+									],
 									button: [
 										{
 											label: "Okay",
