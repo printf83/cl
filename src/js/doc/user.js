@@ -182,7 +182,7 @@ export default [
 							core.user.banner = () => {
 								return new img({
 									class: "img-fluid",
-									src: sample.img(510, 510),
+									src: sample.img(510, 610),
 								});
 
 								// return new carousel({

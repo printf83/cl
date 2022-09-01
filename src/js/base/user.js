@@ -644,13 +644,13 @@ const fn = {
 								elem: new small({
 									textcolor: "muted",
 									elem: [
-										"By clicking the sign up button below, I hereby agree to and accept the following ",
+										"By clicking sign up you are agreeing to the ",
 										new a({
 											href: "javascript:void(0);",
 											onclick: core.user.onterm,
-											elem: "terms and conditions",
+											elem: "Terms and Conditions",
 										}),
-										" governing my use of this website",
+										".",
 									],
 								}),
 						  })
