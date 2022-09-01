@@ -344,7 +344,7 @@ export default [
 					}),
 					new button({
 						label: "Small button",
-						color: "secondary",
+						color: "danger",
 						outline: true,
 						weight: "sm",
 					}),
@@ -644,17 +644,6 @@ export default [
 								elem: [
 									new navbar.item({ label: "Home", active: true }),
 									new navbar.item({ label: "Link" }),
-									new navbar.item({
-										label: "Dropdown",
-										option: [
-											{ href: "#", label: "Action" },
-											{ href: "#", label: "Another action" },
-											{ href: "#", label: "Something else here" },
-											{ value: "-" },
-											{ href: "#", label: "Separated link" },
-										],
-									}),
-									new navbar.item({ label: "Disabled", disabled: true }),
 								],
 							}),
 							new navbar.formcontainer([
