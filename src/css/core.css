@@ -44,17 +44,17 @@ input.wait.disabled {
 }
 
 .noselect pre {
-    -webkit-touch-callout: unset;
+    -webkit-touch-callout: text;
     /* iOS Safari */
-    -webkit-user-select: unset;
+    -webkit-user-select: text;
     /* Safari */
-    -khtml-user-select: unset;
+    -khtml-user-select: text;
     /* Konqueror HTML */
-    -moz-user-select: unset;
+    -moz-user-select: text;
     /* Old versions of Firefox */
-    -ms-user-select: unset;
+    -ms-user-select: text;
     /* Internet Explorer/Edge */
-    user-select: unset;
+    user-select: text;
     /* Non-prefixed version, currently
     supported by Chrome, Edge, Opera and Firefox */
 }
