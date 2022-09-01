@@ -248,7 +248,7 @@ export default [
 							};
 
 							new toast("/", "User banner attached").show();
-							reloadUserDoc();
+							reloadUserDoc(); // documentation perpose only
 						},
 					}),
 
@@ -258,7 +258,7 @@ export default [
 						onclick: () => {
 							core.user.banner = null;
 							new toast("-", "User banner detached").show();
-							reloadUserDoc();
+							reloadUserDoc(); // documentation perpose only
 						},
 					}),
 				],
@@ -308,7 +308,7 @@ export default [
 							};
 
 							new toast("/", "User sign up term attached").show();
-							reloadUserDoc();
+							reloadUserDoc(); // documentation perpose only
 						},
 					}),
 
@@ -319,7 +319,7 @@ export default [
 							core.user.onterm = null;
 
 							new toast("-", "User sign up term detached").show();
-							reloadUserDoc();
+							reloadUserDoc(); // documentation perpose only
 						},
 					}),
 				],
@@ -353,7 +353,7 @@ export default [
 							};
 
 							new toast("/", "User event attached").show();
-							reloadUserDoc();
+							reloadUserDoc(); // documentation perpose only
 						},
 					}),
 
@@ -366,7 +366,7 @@ export default [
 							core.user.onchange = null;
 
 							new toast("-", "User event detached").show();
-							reloadUserDoc();
+							reloadUserDoc(); // documentation perpose only
 						},
 					}),
 				],
