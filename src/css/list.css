@@ -12,13 +12,13 @@
 }
 
 .cl-list-ctl:hover {
-	background-color: var(--bs-list-group-disabled-color);
+	background-color: var(--bs-list-group-action-hover-bg);
 	cursor: pointer;
 }
 
 .cl-list-ctl::after{
 	content: "⋮";
-	color: var(--bs-list-group-bg);
+	color: var(--bs-primary);
 	position: relative;
 	top: calc(50% - 1rem);
 	display: flex;
