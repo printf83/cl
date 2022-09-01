@@ -9,6 +9,7 @@ const defaultOption = {
 	url: null,
 	data: null,
 	async: true,
+	auth: true,
 };
 
 const defaultOptionPost = {
@@ -17,6 +18,7 @@ const defaultOptionPost = {
 	url: null,
 	data: null,
 	async: true,
+	auth: true,
 };
 
 const defaultOptionUpload = {
@@ -26,6 +28,7 @@ const defaultOptionUpload = {
 	url: null,
 	data: null,
 	async: false,
+	auth: true,
 };
 
 const defaultOptionDownload = {
@@ -34,6 +37,7 @@ const defaultOptionDownload = {
 	url: null,
 	data: null,
 	async: true,
+	auth: true,
 };
 
 const fn = {
@@ -126,15 +130,19 @@ const fn = {
 				if (req.status == 200) {
 					opt.callback(fn.str2Object(req.responseText));
 				} else if (req.status === 401) {
-					new user_signin({
-						callback: (result) => {
-							if (result) {
-								fn.get(opt);
-							} else {
-								opt.callback(null);
-							}
-						},
-					}).show();
+					if (opt.auth) {
+						new user_signin({
+							callback: (result) => {
+								if (result) {
+									fn.get(opt);
+								} else {
+									opt.callback(null);
+								}
+							},
+						}).show();
+					} else {
+						opt.callback(null);
+					}
 				} else {
 					opt.callback(null);
 				}
@@ -153,15 +161,19 @@ const fn = {
 				if (req.status == 200) {
 					opt.callback(fn.str2Object(req.responseText));
 				} else if (req.status === 401) {
-					new user_signin({
-						callback: (result) => {
-							if (result) {
-								fn.post(opt);
-							} else {
-								opt.callback(null);
-							}
-						},
-					}).show();
+					if (opt.auth) {
+						new user_signin({
+							callback: (result) => {
+								if (result) {
+									fn.post(opt);
+								} else {
+									opt.callback(null);
+								}
+							},
+						}).show();
+					} else {
+						opt.callback(null);
+					}
 				} else {
 					opt.callback(null);
 				}
@@ -181,15 +193,19 @@ const fn = {
 				if (req.status == 200) {
 					opt.callback(fn.str2Object(req.responseText));
 				} else if (req.status === 401) {
-					new user_signin({
-						callback: (result) => {
-							if (result) {
-								fn.upload(opt);
-							} else {
-								opt.callback(null);
-							}
-						},
-					}).show();
+					if (opt.auth) {
+						new user_signin({
+							callback: (result) => {
+								if (result) {
+									fn.upload(opt);
+								} else {
+									opt.callback(null);
+								}
+							},
+						}).show();
+					} else {
+						opt.callback(null);
+					}
 				} else {
 					opt.callback(null);
 				}
@@ -791,13 +807,14 @@ export const user = {
 		if (fn.sender.isfree(opt.sender)) {
 			fn.sender.setbusy(opt.sender);
 			fn.get({
+				auth: false,
 				callback: (result) => {
 					fn.sender.setfree(opt.sender);
 					if (typeof callback === "function") {
 						callback(result);
 					}
 				},
-				url: `api/user/info-guest`,
+				url: `api/user/info`,
 			});
 		}
 	},

@@ -269,6 +269,5 @@ module.exports = (app) => {
 	app.post(`/api/user/changepass`, core.auth, fn.changepass);
 	app.post(`/api/user/changepass-guest`, fn.changepass_guest);
 	app.get(`/api/user/info`, core.auth, fn.info);
-	app.get(`/api/user/info-guest`, fn.info);
 	app.post(`/api/user/updateinfo`, core.auth, fn.updateinfo);
 };
