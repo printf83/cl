@@ -14,6 +14,46 @@ export function capitalize(str) {
 	return str.toLowerCase().replace(/(^\w{1})|(\s+\w{1})/g, (match) => match.toUpperCase());
 }
 
+const __user = {
+	onsignin: null,
+	onsignout: null,
+	onchange: null,
+	onterm: null,
+	banner: null,
+};
+export const user = {
+	get onsignin() {
+		return __user.onsignin;
+	},
+	set onsignin(fn) {
+		__user.onsignin = fn;
+	},
+	get onsignout() {
+		return __user.onsignout;
+	},
+	set onsignout(fn) {
+		__user.onsignout = fn;
+	},
+	get onchange() {
+		return __user.onchange;
+	},
+	set onchange(fn) {
+		__user.onchange = fn;
+	},
+	get onterm() {
+		return __user.onterm;
+	},
+	set onterm(fn) {
+		__user.onterm = fn;
+	},
+	get banner() {
+		return __user.banner;
+	},
+	set banner(fn) {
+		__user.banner = fn;
+	},
+};
+
 export const cookie = {
 	set: (cname, cvalue, exdays) => {
 		const d = new Date();

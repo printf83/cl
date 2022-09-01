@@ -1,4 +1,5 @@
 "use strict";
+import * as core from "../base/core.js";
 import * as user from "../base/user.js";
 import toast from "../base/toast.js";
 import button from "../base/button.js";
@@ -174,11 +175,11 @@ export default [
 			return new btngroup({
 				elem: [
 					new button({
-						label: "Attach banner",
+						label: "Attach",
 						icon: "play",
 						color: "success",
 						onclick: () => {
-							user.banner(() => {
+							core.user.banner = () => {
 								return new img({
 									class: "img-fluid",
 									src: sample.img(510, 510),
@@ -196,24 +197,22 @@ export default [
 								// 		sample.img(510, 510),
 								// 	],
 								// });
-							});
+							};
 
 							new toast("/", "User banner attached").show();
 						},
 					}),
 
 					new button({
-						label: "Detached",
 						icon: "stop",
 						color: "danger",
 						onclick: () => {
-							user.banner(null);
+							core.user.banner = null;
 							new toast("-", "User banner detached").show();
 						},
 					}),
 
 					new button({
-						label: "Preview",
 						icon: "eye",
 						color: "primary",
 						onclick: (event) => {
@@ -246,11 +245,11 @@ export default [
 			return new btngroup({
 				elem: [
 					new button({
-						label: "Attach term",
+						label: "Attach",
 						icon: "play",
 						color: "success",
 						onclick: () => {
-							user.onterm(() => {
+							core.user.onterm = () => {
 								new modal({
 									weight: "lg",
 									title: "Term and conditions",
@@ -263,25 +262,23 @@ export default [
 										"Close",
 									],
 								}).show();
-							});
+							};
 
 							new toast("/", "User sign up term attached").show();
 						},
 					}),
 
 					new button({
-						label: "Detached",
 						icon: "stop",
 						color: "danger",
 						onclick: () => {
-							user.onterm(null);
+							core.user.onterm = null;
 
 							new toast("-", "User sign up term detached").show();
 						},
 					}),
 
 					new button({
-						label: "Preview",
 						icon: "eye",
 						color: "primary",
 						onclick: (event) => {
@@ -314,39 +311,37 @@ export default [
 			return new btngroup({
 				elem: [
 					new button({
-						label: "Attach event",
+						label: "Attach",
 						icon: "play",
 						color: "success",
 						onclick: () => {
-							user.onsignin(() => {
+							core.user.onsignin = () => {
 								new toast("i", "User sign in event trigged").show();
-							});
-							user.onsignout(() => {
+							};
+							core.user.onsignout = () => {
 								new toast("-", "User sign out event trigged").show();
-							});
-							user.onchange(() => {
+							};
+							core.user.onchange = () => {
 								new toast("!", "User profile changed event trigged").show();
-							});
+							};
 
 							new toast("/", "User event attached").show();
 						},
 					}),
 
 					new button({
-						label: "Detached",
 						icon: "stop",
 						color: "danger",
 						onclick: () => {
-							user.onsignin(null);
-							user.onsignout(null);
-							user.onchange(null);
+							core.user.onsignin = null;
+							core.user.onsignout = null;
+							core.user.onchange = null;
 
 							new toast("-", "User event detached").show();
 						},
 					}),
 
 					new button({
-						label: "Preview",
 						icon: "eye",
 						color: "primary",
 						onclick: (event) => {

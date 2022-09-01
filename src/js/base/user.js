@@ -100,35 +100,9 @@ let defaultUpdateInfoOption = {
 	data: null,
 };
 
-let _ONSIGNIN = null;
-let _ONSIGNOUT = null;
-let _ONCHANGE = null;
-let _ONTERM = null;
-let _BANNER = null;
-
-export function onsignin(fn) {
-	_ONSIGNIN = fn;
-}
-
-export function onsignout(fn) {
-	_ONSIGNOUT = fn;
-}
-
-export function onchange(fn) {
-	_ONCHANGE = fn;
-}
-
-export function onterm(fn) {
-	_ONTERM = fn;
-}
-
-export function banner(fn) {
-	_BANNER = fn;
-}
-
 const fn = {
 	banner: (elem) => {
-		if (_BANNER && typeof _BANNER === "function") {
+		if (core.user.banner && typeof core.user.banner === "function") {
 			return new div({
 				container: true,
 				elem: new div({
@@ -141,7 +115,7 @@ const fn = {
 								display: "flex",
 								alignitem: "center",
 								style: { height: "100%" },
-								elem: _BANNER(),
+								elem: core.user.banner(),
 							}),
 						}),
 						new div({
@@ -220,8 +194,8 @@ const fn = {
 					callback(result);
 
 					//event signout
-					if (_ONSIGNOUT && typeof _ONSIGNOUT === "function") {
-						_ONSIGNOUT();
+					if (core.user.onsignout && typeof core.user.onsignout === "function") {
+						core.user.onsignout();
 					}
 				}
 			);
@@ -257,8 +231,8 @@ const fn = {
 									}
 
 									//event signin
-									if (_ONSIGNIN && typeof _ONSIGNIN === "function") {
-										_ONSIGNIN();
+									if (core.user.onsignin && typeof core.user.onsignin === "function") {
+										core.user.onsignin();
 									}
 								} else {
 									fn.showmsg(container, result && result.message ? result.message : null, "!!");
@@ -501,8 +475,8 @@ const fn = {
 											}
 
 											//event onchange
-											if (_ONCHANGE && typeof _ONCHANGE === "function") {
-												_ONCHANGE();
+											if (core.user.onchange && typeof core.user.onchange === "function") {
+												core.user.onchange();
 											}
 										} else {
 											fn.showmsg(
@@ -665,7 +639,7 @@ const fn = {
 						},
 						onchange: fn.action.inputchange,
 					}),
-					_ONTERM && typeof onterm === "function"
+					core.user.onterm && typeof core.user.onterm === "function"
 						? new div({
 								elem: new small({
 									textcolor: "muted",
@@ -673,7 +647,7 @@ const fn = {
 										"By clicking the sign up button below, I hereby agree to and accept the following ",
 										new a({
 											href: "javascript:void(0);",
-											onclick: _ONTERM,
+											onclick: core.user.onterm,
 											elem: "terms and conditions",
 										}),
 										" governing my use of this website",
@@ -1089,28 +1063,21 @@ export class signin extends modal {
 		opt = core.extend({}, defaultSignInOption, opt);
 		opt.id = opt.id || core.UUID();
 
+		let d = {
+			size: opt.size ? opt.size : core.user.banner ? defaultSizeBanner : defaultSize,
+			maxwidth: core.user.banner ? defaultMaxWidth : defaultMaxWidthBanner,
+			backdropcolor: opt.backdropcolor,
+			elem: [
+				opt.close ? fn.closebtn(opt) : null,
+				fn.banner(fn.form.container(opt.id, fn.form.signin(opt))),
+			].filter(Boolean),
+		};
+
 		if (opt.debug) {
-			super({
-				size: opt.size ? opt.size : _BANNER ? defaultSizeBanner : defaultSize,
-				maxwidth: _BANNER ? defaultMaxWidth : defaultMaxWidthBanner,
-				backdropcolor: opt.backdropcolor,
-				elem: [
-					opt.close ? fn.closebtn(opt) : null,
-					fn.banner(fn.form.container(opt.id, fn.form.signin(opt))),
-				].filter(Boolean),
-				debug: true,
-			});
-		} else {
-			super({
-				size: opt.size ? opt.size : _BANNER ? defaultSizeBanner : defaultSize,
-				maxwidth: _BANNER ? defaultMaxWidth : defaultMaxWidthBanner,
-				backdropcolor: opt.backdropcolor,
-				elem: [
-					opt.close ? fn.closebtn(opt) : null,
-					fn.banner(fn.form.container(opt.id, fn.form.signin(opt))),
-				].filter(Boolean),
-			});
+			d.debug = true;
 		}
+
+		super(d);
 	}
 }
 
@@ -1119,28 +1086,21 @@ export class signup extends modal {
 		opt = core.extend({}, defaultSignUpOption, opt);
 		opt.id = opt.id || core.UUID();
 
+		let d = {
+			size: opt.size ? opt.size : core.user.banner ? defaultSizeBanner : defaultSize,
+			maxwidth: core.user.banner ? defaultMaxWidth : defaultMaxWidthBanner,
+			backdropcolor: opt.backdropcolor,
+			elem: [
+				opt.close ? fn.closebtn(opt) : null,
+				fn.banner(fn.form.container(opt.id, fn.form.signup(opt))),
+			].filter(Boolean),
+		};
+
 		if (opt.debug) {
-			super({
-				size: opt.size ? opt.size : _BANNER ? defaultSizeBanner : defaultSize,
-				maxwidth: _BANNER ? defaultMaxWidth : defaultMaxWidthBanner,
-				backdropcolor: opt.backdropcolor,
-				elem: [
-					opt.close ? fn.closebtn(opt) : null,
-					fn.banner(fn.form.container(opt.id, fn.form.signup(opt))),
-				].filter(Boolean),
-				debug: true,
-			});
-		} else {
-			super({
-				size: opt.size ? opt.size : _BANNER ? defaultSizeBanner : defaultSize,
-				maxwidth: _BANNER ? defaultMaxWidth : defaultMaxWidthBanner,
-				backdropcolor: opt.backdropcolor,
-				elem: [
-					opt.close ? fn.closebtn(opt) : null,
-					fn.banner(fn.form.container(opt.id, fn.form.signup(opt))),
-				].filter(Boolean),
-			});
+			d.debug = true;
 		}
+
+		super(d);
 	}
 }
 
@@ -1149,28 +1109,21 @@ export class resetpass extends modal {
 		opt = core.extend({}, defaultResetPassOption, opt);
 		opt.id = opt.id || core.UUID();
 
+		let d = {
+			size: opt.size ? opt.size : core.user.banner ? defaultSizeBanner : defaultSize,
+			maxwidth: core.user.banner ? defaultMaxWidth : defaultMaxWidthBanner,
+			backdropcolor: opt.backdropcolor,
+			elem: [
+				opt.close ? fn.closebtn(opt) : null,
+				fn.banner(fn.form.container(opt.id, fn.form.resetpass(opt))),
+			].filter(Boolean),
+		};
+
 		if (opt.debug) {
-			super({
-				size: opt.size ? opt.size : _BANNER ? defaultSizeBanner : defaultSize,
-				maxwidth: _BANNER ? defaultMaxWidth : defaultMaxWidthBanner,
-				backdropcolor: opt.backdropcolor,
-				elem: [
-					opt.close ? fn.closebtn(opt) : null,
-					fn.banner(fn.form.container(opt.id, fn.form.resetpass(opt))),
-				].filter(Boolean),
-				debug: true,
-			});
-		} else {
-			super({
-				size: opt.size ? opt.size : _BANNER ? defaultSizeBanner : defaultSize,
-				maxwidth: _BANNER ? defaultMaxWidth : defaultMaxWidthBanner,
-				backdropcolor: opt.backdropcolor,
-				elem: [
-					opt.close ? fn.closebtn(opt) : null,
-					fn.banner(fn.form.container(opt.id, fn.form.resetpass(opt))),
-				].filter(Boolean),
-			});
+			d.debug = true;
 		}
+
+		super(d);
 	}
 }
 
@@ -1179,28 +1132,21 @@ export class changepass extends modal {
 		opt = core.extend({}, defaultChangePassOption, opt);
 		opt.id = opt.id || core.UUID();
 
+		let d = {
+			size: opt.size ? opt.size : core.user.banner ? defaultSizeBanner : defaultSize,
+			maxwidth: core.user.banner ? defaultMaxWidth : defaultMaxWidthBanner,
+			backdropcolor: opt.backdropcolor,
+			elem: [
+				opt.close ? fn.closebtn(opt) : null,
+				fn.banner(fn.form.container(opt.id, fn.form.changepass(opt))),
+			].filter(Boolean),
+		};
+
 		if (opt.debug) {
-			super({
-				size: opt.size ? opt.size : _BANNER ? defaultSizeBanner : defaultSize,
-				maxwidth: _BANNER ? defaultMaxWidth : defaultMaxWidthBanner,
-				backdropcolor: opt.backdropcolor,
-				elem: [
-					opt.close ? fn.closebtn(opt) : null,
-					fn.banner(fn.form.container(opt.id, fn.form.changepass(opt))),
-				].filter(Boolean),
-				debug: true,
-			});
-		} else {
-			super({
-				size: opt.size ? opt.size : _BANNER ? defaultSizeBanner : defaultSize,
-				maxwidth: _BANNER ? defaultMaxWidth : defaultMaxWidthBanner,
-				backdropcolor: opt.backdropcolor,
-				elem: [
-					opt.close ? fn.closebtn(opt) : null,
-					fn.banner(fn.form.container(opt.id, fn.form.changepass(opt))),
-				].filter(Boolean),
-			});
+			d.debug = true;
 		}
+
+		super(d);
 	}
 }
 
@@ -1209,28 +1155,21 @@ export class changepass_guest extends modal {
 		opt = core.extend({}, defaultChangePassGuestOption, opt);
 		opt.id = opt.id || core.UUID();
 
+		let d = {
+			size: opt.size ? opt.size : core.user.banner ? defaultSizeBanner : defaultSize,
+			maxwidth: core.user.banner ? defaultMaxWidth : defaultMaxWidthBanner,
+			backdropcolor: opt.backdropcolor,
+			elem: [
+				opt.close ? fn.closebtn(opt) : null,
+				fn.banner(fn.form.container(opt.id, fn.form.changepass_guest(opt))),
+			].filter(Boolean),
+		};
+
 		if (opt.debug) {
-			super({
-				size: opt.size ? opt.size : _BANNER ? defaultSizeBanner : defaultSize,
-				maxwidth: _BANNER ? defaultMaxWidth : defaultMaxWidthBanner,
-				backdropcolor: opt.backdropcolor,
-				elem: [
-					opt.close ? fn.closebtn(opt) : null,
-					fn.banner(fn.form.container(opt.id, fn.form.changepass_guest(opt))),
-				].filter(Boolean),
-				debug: true,
-			});
-		} else {
-			super({
-				size: opt.size ? opt.size : _BANNER ? defaultSizeBanner : defaultSize,
-				maxwidth: _BANNER ? defaultMaxWidth : defaultMaxWidthBanner,
-				backdropcolor: opt.backdropcolor,
-				elem: [
-					opt.close ? fn.closebtn(opt) : null,
-					fn.banner(fn.form.container(opt.id, fn.form.changepass_guest(opt))),
-				].filter(Boolean),
-			});
+			d.debug = true;
 		}
+
+		super(d);
 	}
 }
 
@@ -1239,27 +1178,20 @@ export class updateinfo extends modal {
 		opt = core.extend({}, defaultUpdateInfoOption, opt);
 		opt.id = opt.id || core.UUID();
 
+		let d = {
+			size: opt.size ? opt.size : core.user.banner ? defaultSizeBanner : defaultSize,
+			maxwidth: core.user.banner ? defaultMaxWidth : defaultMaxWidthBanner,
+			backdropcolor: opt.backdropcolor,
+			elem: [
+				opt.close ? fn.closebtn(opt) : null,
+				fn.banner(fn.form.container(opt.id, fn.form.updateinfo(opt))),
+			].filter(Boolean),
+		};
+
 		if (opt.debug) {
-			super({
-				size: opt.size ? opt.size : _BANNER ? defaultSizeBanner : defaultSize,
-				maxwidth: _BANNER ? defaultMaxWidth : defaultMaxWidthBanner,
-				backdropcolor: opt.backdropcolor,
-				elem: [
-					opt.close ? fn.closebtn(opt) : null,
-					fn.banner(fn.form.container(opt.id, fn.form.updateinfo(opt))),
-				].filter(Boolean),
-				debug: true,
-			});
-		} else {
-			super({
-				size: opt.size ? opt.size : _BANNER ? defaultSizeBanner : defaultSize,
-				maxwidth: _BANNER ? defaultMaxWidth : defaultMaxWidthBanner,
-				backdropcolor: opt.backdropcolor,
-				elem: [
-					opt.close ? fn.closebtn(opt) : null,
-					fn.banner(fn.form.container(opt.id, fn.form.updateinfo(opt))),
-				].filter(Boolean),
-			});
+			d.debug = true;
 		}
+
+		super(d);
 	}
 }
