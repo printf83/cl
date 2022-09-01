@@ -4,6 +4,8 @@ import toast from "../base/toast.js";
 import button from "../base/button.js";
 import sample from "./sample.js";
 import modal from "../base/modal.js";
+// import img from "../base/img.js";
+import carousel from "../base/carousel.js";
 
 export default [
 	{
@@ -165,6 +167,54 @@ export default [
 	},
 
 	{
+		title: "Banner",
+		container: sample.stackcontainer,
+		import: ["user", "toast", "sample"],
+		code: () => {
+			return [
+				new button({
+					label: "Attach banner",
+					icon: "play",
+					color: "success",
+					onclick: () => {
+						user.banner(() => {
+							// return new img({
+							// 	class: "img-fluid",
+							// 	src: sample.img(510, 510),
+							// });
+
+							return new carousel({
+								control: true,
+								indicators: true,
+								item: [
+									sample.img(510, 510),
+									sample.img(510, 510),
+									sample.img(510, 510),
+									sample.img(510, 510),
+									sample.img(510, 510),
+									sample.img(510, 510),
+								],
+							});
+						});
+
+						new toast("/", "User banner attached").show();
+					},
+				}),
+
+				new button({
+					label: "Detached banner",
+					icon: "stop",
+					color: "danger",
+					onclick: () => {
+						user.banner(null);
+						new toast("/", "User banner detached").show();
+					},
+				}),
+			];
+		},
+	},
+
+	{
 		title: "Sign up terms",
 		container: sample.stackcontainer,
 		import: ["user", "toast", "sample", "modal"],
@@ -197,7 +247,7 @@ export default [
 				new button({
 					label: "Detached sign up term",
 					icon: "stop",
-					color: "warning",
+					color: "danger",
 					onclick: () => {
 						user.onterm(null);
 
@@ -236,7 +286,7 @@ export default [
 				new button({
 					label: "Detached user event",
 					icon: "stop",
-					color: "warning",
+					color: "danger",
 					onclick: () => {
 						user.onsignin(null);
 						user.onsignout(null);

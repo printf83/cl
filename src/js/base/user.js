@@ -18,17 +18,19 @@ import small from "./small.js";
 
 const defaultIcon = {
 	icon: "fire",
-	weight: "5x",
+	weight: "4x",
 };
-const defaultSize = "md";
+const defaultSize = "sm";
+const defaultSizeBanner = "lg";
 const defaultMaxWidth = null; //"420px";
-const defaultTitleSize = 5;
+const defaultMaxWidthBanner = null; //"720px";
+const defaultTitleSize = 4;
 
 let defaultSignInOption = {
 	id: null,
 	icon: defaultIcon,
 	msg: null,
-	size: defaultSize,
+	size: null,
 	title: null,
 	email: null,
 	callback: null,
@@ -41,7 +43,7 @@ let defaultSignUpOption = {
 	id: null,
 	icon: defaultIcon,
 	msg: null,
-	size: defaultSize,
+	size: null,
 	title: null,
 	callback: null,
 	close: true,
@@ -53,7 +55,7 @@ let defaultResetPassOption = {
 	id: null,
 	icon: defaultIcon,
 	msg: null,
-	size: defaultSize,
+	size: null,
 	title: null,
 	callback: null,
 	close: true,
@@ -65,7 +67,7 @@ let defaultChangePassOption = {
 	id: null,
 	icon: defaultIcon,
 	msg: null,
-	size: defaultSize,
+	size: null,
 	title: null,
 	callback: null,
 	close: true,
@@ -76,7 +78,7 @@ let defaultChangePassGuestOption = {
 	id: null,
 	icon: defaultIcon,
 	msg: null,
-	size: defaultSize,
+	size: null,
 	token: null,
 	title: null,
 	callback: null,
@@ -89,7 +91,7 @@ let defaultUpdateInfoOption = {
 	id: null,
 	icon: defaultIcon,
 	msg: null,
-	size: defaultSize,
+	size: null,
 	token: null,
 	title: null,
 	callback: null,
@@ -102,6 +104,7 @@ let _ONSIGNIN = null;
 let _ONSIGNOUT = null;
 let _ONCHANGE = null;
 let _ONTERM = null;
+let _BANNER = null;
 
 export function onsignin(fn) {
 	_ONSIGNIN = fn;
@@ -119,7 +122,43 @@ export function onterm(fn) {
 	_ONTERM = fn;
 }
 
+export function banner(fn) {
+	_BANNER = fn;
+}
+
 const fn = {
+	banner: (elem) => {
+		if (_BANNER && typeof _BANNER === "function") {
+			return new div({
+				container: true,
+				elem: new div({
+					row: true,
+					elem: [
+						new div({
+							col: 8,
+							elem: new div({
+								display: "flex",
+								alignitem: "center",
+								style: { height: "100%" },
+								elem: _BANNER(),
+							}),
+						}),
+						new div({
+							col: 4,
+							elem: new div({
+								display: "flex",
+								alignitem: "center",
+								style: { height: "100%" },
+								elem: elem,
+							}),
+						}),
+					],
+				}),
+			});
+		} else {
+			return elem;
+		}
+	},
 	msg: (msg, icon) => {
 		return new alert.container({
 			align: "start",
@@ -627,7 +666,6 @@ const fn = {
 					}),
 					_ONTERM && typeof onterm === "function"
 						? new div({
-								marginy: 3,
 								elem: new small({
 									textcolor: "muted",
 									elem: [
@@ -1067,18 +1105,18 @@ export class signin extends modal {
 
 		if (opt.debug) {
 			super({
-				size: opt.size,
-				maxwidth: defaultMaxWidth,
+				size: opt.size ? opt.size : _BANNER ? defaultSizeBanner : defaultSize,
+				maxwidth: _BANNER ? defaultMaxWidth : defaultMaxWidthBanner,
 				backdropcolor: opt.backdropcolor,
-				elem: fn.form.container(opt.id, fn.form.signin(opt)),
+				elem: fn.banner(fn.form.container(opt.id, fn.form.signin(opt))),
 				debug: true,
 			});
 		} else {
 			super({
-				size: opt.size,
-				maxwidth: defaultMaxWidth,
+				size: opt.size ? opt.size : _BANNER ? defaultSizeBanner : defaultSize,
+				maxwidth: _BANNER ? defaultMaxWidth : defaultMaxWidthBanner,
 				backdropcolor: opt.backdropcolor,
-				elem: fn.form.container(opt.id, fn.form.signin(opt)),
+				elem: fn.banner(fn.form.container(opt.id, fn.form.signin(opt))),
 			});
 		}
 	}
@@ -1091,18 +1129,18 @@ export class signup extends modal {
 
 		if (opt.debug) {
 			super({
-				size: opt.size,
-				maxwidth: defaultMaxWidth,
+				size: opt.size ? opt.size : _BANNER ? defaultSizeBanner : defaultSize,
+				maxwidth: _BANNER ? defaultMaxWidth : defaultMaxWidthBanner,
 				backdropcolor: opt.backdropcolor,
-				elem: fn.form.container(opt.id, fn.form.signup(opt)),
+				elem: fn.banner(fn.form.container(opt.id, fn.form.signup(opt))),
 				debug: true,
 			});
 		} else {
 			super({
-				size: opt.size,
-				maxwidth: defaultMaxWidth,
+				size: opt.size ? opt.size : _BANNER ? defaultSizeBanner : defaultSize,
+				maxwidth: _BANNER ? defaultMaxWidth : defaultMaxWidthBanner,
 				backdropcolor: opt.backdropcolor,
-				elem: fn.form.container(opt.id, fn.form.signup(opt)),
+				elem: fn.banner(fn.form.container(opt.id, fn.form.signup(opt))),
 			});
 		}
 	}
@@ -1115,18 +1153,18 @@ export class resetpass extends modal {
 
 		if (opt.debug) {
 			super({
-				size: opt.size,
-				maxwidth: defaultMaxWidth,
+				size: opt.size ? opt.size : _BANNER ? defaultSizeBanner : defaultSize,
+				maxwidth: _BANNER ? defaultMaxWidth : defaultMaxWidthBanner,
 				backdropcolor: opt.backdropcolor,
-				elem: fn.form.container(opt.id, fn.form.resetpass(opt)),
+				elem: fn.banner(fn.form.container(opt.id, fn.form.resetpass(opt))),
 				debug: true,
 			});
 		} else {
 			super({
-				size: opt.size,
-				maxwidth: defaultMaxWidth,
+				size: opt.size ? opt.size : _BANNER ? defaultSizeBanner : defaultSize,
+				maxwidth: _BANNER ? defaultMaxWidth : defaultMaxWidthBanner,
 				backdropcolor: opt.backdropcolor,
-				elem: fn.form.container(opt.id, fn.form.resetpass(opt)),
+				elem: fn.banner(fn.form.container(opt.id, fn.form.resetpass(opt))),
 			});
 		}
 	}
@@ -1139,18 +1177,18 @@ export class changepass extends modal {
 
 		if (opt.debug) {
 			super({
-				size: opt.size,
-				maxwidth: defaultMaxWidth,
+				size: opt.size ? opt.size : _BANNER ? defaultSizeBanner : defaultSize,
+				maxwidth: _BANNER ? defaultMaxWidth : defaultMaxWidthBanner,
 				backdropcolor: opt.backdropcolor,
-				elem: fn.form.container(opt.id, fn.form.changepass(opt)),
+				elem: fn.banner(fn.form.container(opt.id, fn.form.changepass(opt))),
 				debug: true,
 			});
 		} else {
 			super({
-				size: opt.size,
-				maxwidth: defaultMaxWidth,
+				size: opt.size ? opt.size : _BANNER ? defaultSizeBanner : defaultSize,
+				maxwidth: _BANNER ? defaultMaxWidth : defaultMaxWidthBanner,
 				backdropcolor: opt.backdropcolor,
-				elem: fn.form.container(opt.id, fn.form.changepass(opt)),
+				elem: fn.banner(fn.form.container(opt.id, fn.form.changepass(opt))),
 			});
 		}
 	}
@@ -1163,18 +1201,18 @@ export class changepass_guest extends modal {
 
 		if (opt.debug) {
 			super({
-				size: opt.size,
-				maxwidth: defaultMaxWidth,
+				size: opt.size ? opt.size : _BANNER ? defaultSizeBanner : defaultSize,
+				maxwidth: _BANNER ? defaultMaxWidth : defaultMaxWidthBanner,
 				backdropcolor: opt.backdropcolor,
-				elem: fn.form.container(opt.id, fn.form.changepass_guest(opt)),
+				elem: fn.banner(fn.form.container(opt.id, fn.form.changepass_guest(opt))),
 				debug: true,
 			});
 		} else {
 			super({
-				size: opt.size,
-				maxwidth: defaultMaxWidth,
+				size: opt.size ? opt.size : _BANNER ? defaultSizeBanner : defaultSize,
+				maxwidth: _BANNER ? defaultMaxWidth : defaultMaxWidthBanner,
 				backdropcolor: opt.backdropcolor,
-				elem: fn.form.container(opt.id, fn.form.changepass_guest(opt)),
+				elem: fn.banner(fn.form.container(opt.id, fn.form.changepass_guest(opt))),
 			});
 		}
 	}
@@ -1187,18 +1225,18 @@ export class updateinfo extends modal {
 
 		if (opt.debug) {
 			super({
-				size: opt.size,
-				maxwidth: defaultMaxWidth,
+				size: opt.size ? opt.size : _BANNER ? defaultSizeBanner : defaultSize,
+				maxwidth: _BANNER ? defaultMaxWidth : defaultMaxWidthBanner,
 				backdropcolor: opt.backdropcolor,
-				elem: fn.form.container(opt.id, fn.form.updateinfo(opt)),
+				elem: fn.banner(fn.form.container(opt.id, fn.form.updateinfo(opt))),
 				debug: true,
 			});
 		} else {
 			super({
-				size: opt.size,
-				maxwidth: defaultMaxWidth,
+				size: opt.size ? opt.size : _BANNER ? defaultSizeBanner : defaultSize,
+				maxwidth: _BANNER ? defaultMaxWidth : defaultMaxWidthBanner,
 				backdropcolor: opt.backdropcolor,
-				elem: fn.form.container(opt.id, fn.form.updateinfo(opt)),
+				elem: fn.banner(fn.form.container(opt.id, fn.form.updateinfo(opt))),
 			});
 		}
 	}

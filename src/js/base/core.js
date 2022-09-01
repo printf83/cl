@@ -14,7 +14,7 @@ export function capitalize(str) {
 	return str.toLowerCase().replace(/(^\w{1})|(\s+\w{1})/g, (match) => match.toUpperCase());
 }
 
-const fnCookie = {
+export const cookie = {
 	set: (cname, cvalue, exdays) => {
 		const d = new Date();
 
@@ -45,21 +45,19 @@ const fnCookie = {
 	},
 };
 
-export const cookie = fnCookie;
-
-const fnTheme = {
+export const theme = {
 	init: () => {
-		fnTheme.set(fnTheme.get("cltheme"));
+		theme.set(theme.get("theme"));
 	},
-	set: (theme) => {
-		fnCookie.set("cltheme", theme);
+	set: (value) => {
+		cookie.set("theme", value);
 
 		let css_bootstrap = document.getElementById("css_bootstrap");
 		let css_bootswatch = document.getElementById("css_bootswatch");
 
 		if (css_bootstrap && css_bootswatch) {
-			if (theme) {
-				css_bootswatch.href = `https://cdn.jsdelivr.net/npm/bootswatch@5.2.0/dist/${theme}/bootstrap.min.css`;
+			if (value) {
+				css_bootswatch.href = `https://cdn.jsdelivr.net/npm/bootswatch@5.2.0/dist/${value}/bootstrap.min.css`;
 				css_bootswatch.removeAttribute("disabled");
 				setTimeout(() => {
 					css_bootstrap.setAttribute("disabled", "disabled");
@@ -74,17 +72,13 @@ const fnTheme = {
 			console.error("#css_bootstrap and #css_bootswatch not found");
 		}
 
-		fnTheme.change(theme);
+		theme.change(value);
 	},
 	get: () => {
-		return fnCookie.get("cltheme");
+		return cookie.get("theme");
 	},
-	change: (theme) => {
-		console.log("default theme change callback");
-	},
+	change: null,
 };
-
-export const theme = fnTheme;
 
 const _baseIcon = {
 	i: { icon: "info-circle", type: "fas", color: "primary" },
@@ -428,19 +422,19 @@ export function multiClass(val, format, supported, unsupported) {
 export function documentReady(callback) {
 	if (document.readyState != "loading") {
 		// in case the document is already rendered
-		fnTheme.init();
+		theme.init();
 		authCheck(callback);
 	} else if (document.addEventListener) {
 		// modern browsers
 		document.addEventListener("DOMContentLoaded", () => {
-			fnTheme.init();
+			theme.init();
 			authCheck(callback);
 		});
 	} else {
 		// IE <= 8
 		document.attachEvent("onreadystatechange", () => {
 			if (document.readyState == "complete") {
-				fnTheme.init();
+				theme.init();
 				authCheck(callback);
 			}
 		});
