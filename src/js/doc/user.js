@@ -230,19 +230,19 @@ export default [
 							core.user.banner = () => {
 								return new img({
 									class: "img-fluid",
-									src: sample.img(730, 550),
+									src: sample.img(730, 580),
 								});
 
 								// return new carousel({
 								// 	control: true,
 								// 	indicators: true,
 								// 	item: [
-								// 		sample.img(730, 550),
-								// 		sample.img(730, 550),
-								// 		sample.img(730, 550),
-								// 		sample.img(730, 550),
-								// 		sample.img(730, 550),
-								// 		sample.img(730, 550),
+								// 		sample.img(730, 580),
+								// 		sample.img(730, 580),
+								// 		sample.img(730, 580),
+								// 		sample.img(730, 580),
+								// 		sample.img(730, 580),
+								// 		sample.img(730, 580),
 								// 	],
 								// });
 							};
