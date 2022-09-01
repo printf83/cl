@@ -24,7 +24,7 @@ const defaultSize = "sm";
 const defaultSizeBanner = "lg";
 const defaultMaxWidth = null; //"420px";
 const defaultMaxWidthBanner = null; //"720px";
-const defaultTitleSize = 4;
+const defaultTitleSize = 5;
 
 let defaultSignInOption = {
 	id: null,
@@ -136,6 +136,7 @@ const fn = {
 					elem: [
 						new div({
 							col: 8,
+							display: ["none", "lg-block"],
 							elem: new div({
 								display: "flex",
 								alignitem: "center",
@@ -144,7 +145,7 @@ const fn = {
 							}),
 						}),
 						new div({
-							col: 4,
+							col: [12, "lg-4"],
 							elem: new div({
 								display: "flex",
 								alignitem: "center",
