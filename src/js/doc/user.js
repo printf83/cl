@@ -25,10 +25,6 @@ const reloadUserDoc = () => {
 		}
 
 		if (menuItem) {
-			// if (typeof menuItem.onclick == "function") {
-			// 	menuItem.onclick.apply(menuItem);
-			// }
-
 			menuItem.dispatchEvent(new Event("click"));
 		}
 	}
@@ -241,12 +237,12 @@ export default [
 								// 	control: true,
 								// 	indicators: true,
 								// 	item: [
-								// 		sample.img(510, 510),
-								// 		sample.img(510, 510),
-								// 		sample.img(510, 510),
-								// 		sample.img(510, 510),
-								// 		sample.img(510, 510),
-								// 		sample.img(510, 510),
+								// 		sample.img(730, 550),
+								// 		sample.img(730, 550),
+								// 		sample.img(730, 550),
+								// 		sample.img(730, 550),
+								// 		sample.img(730, 550),
+								// 		sample.img(730, 550),
 								// 	],
 								// });
 							};
@@ -265,27 +261,6 @@ export default [
 							reloadUserDoc();
 						},
 					}),
-
-					// new button({
-					// 	icon: "eye",
-					// 	color: "primary",
-					// 	onclick: (event) => {
-					// 		let sender = event.currentTarget;
-					// 		user.info(sender, (result) => {
-					// 			if (result && result.email) {
-					// 				new user.updateinfo({
-					// 					data: result,
-					// 					sender: sender,
-					// 					callback: (result) => {
-					// 						if (result) {
-					// 							new toast("/", "Your information updated").show();
-					// 						}
-					// 					},
-					// 				}).show();
-					// 			}
-					// 		});
-					// 	},
-					// }),
 				],
 			});
 		},
@@ -347,27 +322,6 @@ export default [
 							reloadUserDoc();
 						},
 					}),
-
-					// new button({
-					// 	icon: "eye",
-					// 	color: "primary",
-					// 	onclick: (event) => {
-					// 		let sender = event.currentTarget;
-					// 		user.info(sender, (result) => {
-					// 			if (result && result.email) {
-					// 				new user.updateinfo({
-					// 					data: result,
-					// 					sender: sender,
-					// 					callback: (result) => {
-					// 						if (result) {
-					// 							new toast("/", "Your information updated").show();
-					// 						}
-					// 					},
-					// 				}).show();
-					// 			}
-					// 		});
-					// 	},
-					// }),
 				],
 			});
 		},
@@ -415,27 +369,6 @@ export default [
 							reloadUserDoc();
 						},
 					}),
-
-					// new button({
-					// 	icon: "eye",
-					// 	color: "primary",
-					// 	onclick: (event) => {
-					// 		let sender = event.currentTarget;
-					// 		user.info(sender, (result) => {
-					// 			if (result && result.email) {
-					// 				new user.updateinfo({
-					// 					data: result,
-					// 					sender: sender,
-					// 					callback: (result) => {
-					// 						if (result) {
-					// 							new toast("/", "Your information updated").show();
-					// 						}
-					// 					},
-					// 				}).show();
-					// 			}
-					// 		});
-					// 	},
-					// }),
 				],
 			});
 		},
