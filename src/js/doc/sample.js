@@ -19,7 +19,7 @@ let textdb = [
 	"Donec felis sapien, venenatis a facilisis at, porta scelerisque ligula. Mauris pretium condimentum orci non auctor. Cras malesuada eros eu ultricies convallis. In in ligula ac dui porta ullamcorper sit amet eu nibh. Vestibulum gravida, odio at auctor sodales, ipsum leo varius libero, in ultricies magna libero et libero. Aenean tincidunt, lorem at dignissim gravida, mauris eros pretium elit, quis scelerisque dolor urna nec mi.",
 	"Integer urna felis, porttitor et nulla eu, fermentum vestibulum est. Nunc imperdiet magna nec lobortis aliquam. Curabitur risus dui, auctor vitae quam sed, iaculis interdum velit. Nullam augue odio, auctor eget porttitor at, convallis at diam. Mauris posuere nisl id interdum luctus.",
 	"Suspendisse posuere nunc interdum tortor porttitor ultrices. Phasellus quis eleifend est, eget sodales dolor. Suspendisse congue lobortis sem, at iaculis eros elementum eu. Quisque tellus nunc, fringilla in est in, congue pharetra metus. Sed eros ligula, pretium eget orci vel, porttitor tincidunt nibh. Etiam bibendum fermentum lorem vel mollis. Fusce ullamcorper volutpat turpis, eu dictum ipsum ultrices vel.",
-	"Morbi pulvinar tortor a arcu accumsan, at aliquam augue eleifend. Aenean ut blandit erat. Nullam lorem ante, fermentum ultrices velit dictum, auctor aliquet ex. Integer bibendum augue gravida congue efficitur. Nam eu feugiat quam. Ut ex urna, consectetur sed tincidunt nec, volutpat a lorem.",
+	"Morbi pulvinar tortor a arcu accumsan, at aliquam augue eleifend. Aenean ut blandit erat. Nullam lorem ante, fermentum ultrices velit dictum, auctor aliquet ex. Integer bibendum augue gravida congue efficitur.",
 ];
 
 let shorttextindex = 0;
@@ -85,8 +85,6 @@ const fn = {
 		textindex = 0;
 	},
 	img: (width = 300, height = 283) => {
-		// style="background-color:rgba(0,0,0,.125);"
-
 		if (!svgdb.hasOwnProperty(`${width}_${height}`)) {
 			svgdb[`${width}_${height}`] =
 				"data:image/svg+xml;charset=UTF-8," + encodeURIComponent(svgdata(width, height));
