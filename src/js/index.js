@@ -24,7 +24,7 @@ const db_menu = [
 		icon: { icon: "book-open", color: "primary" },
 		item: [
 			{ title: "Introduction", source: doc.intro },
-			{ title: "Kitchen Sink", source: doc.kitchensink },
+			{ title: "Bootswatch", source: doc.bootswatch },
 		],
 	},
 	{

@@ -1,5 +1,5 @@
 "use strict";
-import sample from "../doc/sample.js";
+import sample from "./sample.js";
 
 import accordion from "../base/accordion.js";
 import * as alert from "../base/alert.js";
@@ -29,14 +29,53 @@ import tab from "../base/tab.js";
 import * as table from "../base/table.js";
 import toast from "../base/toast.js";
 import tooltip from "../base/tooltip.js";
+import ul from "../base/ul.js";
 
 export default [
 	{
-		title: "Kitchen Sink",
+		title: "Bootswatch",
 		msg: "Themes from bootswatch",
 		anchor: false,
 	},
 
+	{
+		msg: [
+			"Use {{core.theme.set(themename)}} function to set themes. This theme will be saved in browser cookies and will be reloaded when you revisit.",
+			"Use {{core.theme.change()}} function to detect when user change the theme using {{core.theme.set}} function",
+			"Use {{core.theme.get()}} function to get current active themes",
+			"Bootswatch theme currently available is :",
+			new ul({
+				item: [
+					"cerulean",
+					"cosmo",
+					"cyborg",
+					"darkly",
+					"flatly",
+					"journal",
+					"litera",
+					"lumen",
+					"lux",
+					"materia",
+					"minty",
+					"morph",
+					"pulse",
+					"quartz",
+					"sandstone",
+					"simplex",
+					"sketchy",
+					"slate",
+					"solar",
+					"spacelab",
+					"superhero",
+					"united",
+					"vapor",
+					"yeti",
+					"zephyr",
+				],
+			}),
+			"Set {{core.theme.set(null)}} if you like to used bootstrap default themes",
+		],
+	},
 	{
 		title: "Navbars",
 		container: sample.formcontainer,

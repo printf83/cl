@@ -2,7 +2,7 @@
 
 export default {
 	intro: "../doc/intro.js",
-	kitchensink: "../doc/kitchensink.js",
+	bootswatch: "../doc/bootswatch.js",
 
 	container: "../doc/container.js",
 	grid: "../doc/grid.js",

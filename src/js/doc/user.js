@@ -193,6 +193,9 @@ export default [
 
 	{
 		title: "Banner",
+		msg: [
+			"Setup banner that appear on user dialog like sign up, sign in, profile editor and others using {{core.user.banner}}. You can use this function before {{core.documentReady}}",
+		],
 		container: sample.stackcontainer,
 		import: ["user", "toast", "sample", "btngroup"],
 		code: () => {
@@ -206,7 +209,7 @@ export default [
 							core.user.banner = () => {
 								return new img({
 									class: "img-fluid",
-									src: sample.img(510, 610),
+									src: sample.img(730, 550),
 								});
 
 								// return new carousel({
@@ -263,6 +266,9 @@ export default [
 
 	{
 		title: "Sign up terms",
+		msg: [
+			"Setup terms dialog that appear on user sign up dialog using {{core.user.onterm}}. You can use this function before {{core.documentReady}}",
+		],
 		container: sample.stackcontainer,
 		import: ["user", "toast", "sample", "modal", "btngroup", "p"],
 		code: () => {
@@ -275,7 +281,7 @@ export default [
 						onclick: () => {
 							core.user.onterm = () => {
 								new modal({
-									size: "lg",
+									size: "xl",
 									title: "Term and conditions",
 									elem: [
 										new p(sample.text()),
@@ -340,6 +346,9 @@ export default [
 
 	{
 		title: "Event",
+		msg: [
+			"Setup function to detect user sign in, sign out or update profile. You can use this function before {{core.documentReady}}",
+		],
 		container: sample.stackcontainer,
 		import: ["user", "toast", "btngroup"],
 		code: () => {
