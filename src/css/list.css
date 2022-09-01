@@ -17,14 +17,15 @@
 }
 
 .cl-list-ctl::after{
-		content: "⋮";
-		color: var(--bs-list-group-bg);
-		position: relative;
-		top: calc(50% - 1rem);
-		display: flex;
-		font-weight: bold;
-		font-size: 1.25rem;
-		margin-left: -0.25rem;
+	content: "⋮";
+	color: var(--bs-list-group-bg);
+	position: relative;
+	top: calc(50% - 1rem);
+	display: flex;
+	font-weight: bold;
+	font-size: 1.25rem;
+	margin-left: calc(50% - 0.2rem);
+	margin-right: calc(50% - 0.2rem);
 }
 
 .cl-list-ctl .btn-group{
