@@ -94,7 +94,7 @@ export default [
 					<html lang="en">
 						<head>
 							<meta charset="utf-8" />
-							<meta name="viewport" content="width=device-width, initial-scale=1" />
+							<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1" />
 							<meta name="description" content="Testing website" />
 							<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 							<link rel="icon" type="image/png" href="/favicon.png" />

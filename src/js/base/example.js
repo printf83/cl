@@ -175,7 +175,7 @@ export default class example extends div {
 							marginbottom: 3,
 							color: opt.dark ? "dark" : null,
 							class: opt.viewclass,
-							elem: new card.body({ elem: opt.container(opt.code()) }),
+							elem: new card.body({ overflow: "auto", elem: opt.container(opt.code()) }),
 					  })
 					: null,
 				opt.code
