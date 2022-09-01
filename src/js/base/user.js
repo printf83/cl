@@ -404,6 +404,16 @@ const fn = {
 				}
 			);
 		},
+		info_guest: (sender, callback) => {
+			db.user.info_guest(
+				{
+					sender: sender,
+				},
+				(result) => {
+					callback(result);
+				}
+			);
+		},
 		managepicture: (sender, oldData, newData, callback) => {
 			let file_delete = null;
 			let file_save = null;
@@ -1048,6 +1058,10 @@ const fn = {
 
 export function info(sender, callback) {
 	fn.action.info(sender, callback);
+}
+
+export function info_guest(sender, callback) {
+	fn.action.info_guest(sender, callback);
 }
 
 export function signout(sender, callback) {
