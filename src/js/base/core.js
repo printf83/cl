@@ -15,8 +15,16 @@ export function capitalize(str) {
 }
 
 const __setting = {
-	icon: null,
-	title: null,
+	icon: (color, weight) => {
+		return {
+			color: color ? color : null,
+			weight: weight ? weight : null,
+			icon: "fire",
+		};
+	},
+	title: () => {
+		return "BS5.2 JS Builder";
+	},
 };
 
 export const setting = {

@@ -750,7 +750,7 @@ core.documentReady(() => {
 						target: `#sidebar`,
 						toggle: "collapse",
 					}),
-					new navbar.brand({ label: "cl", icon: "fire" }),
+					new navbar.brand({ label: core.setting.title(), icon: core.setting.icon() }),
 				],
 			}),
 			leftelem: new tag({

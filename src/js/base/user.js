@@ -16,10 +16,8 @@ import file from "./file.js";
 import a from "./a.js";
 import small from "./small.js";
 
-const defaultIcon = {
-	icon: "fire",
-	weight: "4x",
-};
+const defaultIconWeight = "4x";
+const defaultIconColor = "primary";
 const defaultSize = "md";
 const defaultSizeBanner = "xl";
 const defaultMaxWidth = null; //"420px";
@@ -28,7 +26,7 @@ const defaultTitleSize = 5;
 
 let defaultSignInOption = {
 	id: null,
-	icon: defaultIcon,
+	icon: null,
 	msg: null,
 	size: null,
 	title: null,
@@ -41,7 +39,7 @@ let defaultSignInOption = {
 
 let defaultSignUpOption = {
 	id: null,
-	icon: defaultIcon,
+	icon: null,
 	msg: null,
 	size: null,
 	title: null,
@@ -53,7 +51,7 @@ let defaultSignUpOption = {
 
 let defaultResetPassOption = {
 	id: null,
-	icon: defaultIcon,
+	icon: null,
 	msg: null,
 	size: null,
 	title: null,
@@ -65,7 +63,7 @@ let defaultResetPassOption = {
 
 let defaultChangePassOption = {
 	id: null,
-	icon: defaultIcon,
+	icon: null,
 	msg: null,
 	size: null,
 	title: null,
@@ -76,7 +74,7 @@ let defaultChangePassOption = {
 
 let defaultChangePassGuestOption = {
 	id: null,
-	icon: defaultIcon,
+	icon: null,
 	msg: null,
 	size: null,
 	token: null,
@@ -89,7 +87,7 @@ let defaultChangePassGuestOption = {
 
 let defaultUpdateInfoOption = {
 	id: null,
-	icon: defaultIcon,
+	icon: null,
 	msg: null,
 	size: null,
 	token: null,
@@ -521,7 +519,11 @@ const fn = {
 			return new container.form(
 				[
 					// opt.close ? fn.closebtn(opt) : null,
-					!opt.img && opt.icon ? new icon(opt.icon) : opt.img ? null : new icon(defaultIcon),
+					!opt.img && opt.icon
+						? new icon(opt.icon)
+						: opt.img
+						? null
+						: new icon(core.setting.icon(defaultIconColor, defaultIconWeight)),
 					!opt.icon && opt.img ? new img(opt.img) : null,
 					new h({ level: defaultTitleSize, marginy: 0, elem: opt.title ? opt.title : "Sign in" }),
 
@@ -603,7 +605,11 @@ const fn = {
 			return new container.form(
 				[
 					// opt.close ? fn.closebtn(opt) : null,
-					!opt.img && opt.icon ? new icon(opt.icon) : opt.img ? null : new icon(defaultIcon),
+					!opt.img && opt.icon
+						? new icon(opt.icon)
+						: opt.img
+						? null
+						: new icon(core.setting.icon(defaultIconColor, defaultIconWeight)),
 					!opt.icon && opt.img ? new img(opt.img) : null,
 					new h({ level: defaultTitleSize, marginy: 0, elem: opt.title ? opt.title : "Sign up" }),
 
@@ -708,7 +714,11 @@ const fn = {
 			return new container.form(
 				[
 					// opt.close ? fn.closebtn(opt) : null,
-					!opt.img && opt.icon ? new icon(opt.icon) : opt.img ? null : new icon(defaultIcon),
+					!opt.img && opt.icon
+						? new icon(opt.icon)
+						: opt.img
+						? null
+						: new icon(core.setting.icon(defaultIconColor, defaultIconWeight)),
 					!opt.icon && opt.img ? new img(opt.img) : null,
 					new h({ level: defaultTitleSize, marginy: 0, elem: opt.title ? opt.title : "Reset password" }),
 
@@ -776,7 +786,11 @@ const fn = {
 			return new container.form(
 				[
 					// opt.close ? fn.closebtn(opt) : null,
-					!opt.img && opt.icon ? new icon(opt.icon) : opt.img ? null : new icon(defaultIcon),
+					!opt.img && opt.icon
+						? new icon(opt.icon)
+						: opt.img
+						? null
+						: new icon(core.setting.icon(defaultIconColor, defaultIconWeight)),
 					!opt.icon && opt.img ? new img(opt.img) : null,
 					new h({ level: defaultTitleSize, marginy: 0, elem: opt.title ? opt.title : "Change password" }),
 
@@ -880,7 +894,11 @@ const fn = {
 			return new container.form(
 				[
 					// opt.close ? fn.closebtn(opt) : null,
-					!opt.img && opt.icon ? new icon(opt.icon) : opt.img ? null : new icon(defaultIcon),
+					!opt.img && opt.icon
+						? new icon(opt.icon)
+						: opt.img
+						? null
+						: new icon(core.setting.icon(defaultIconColor, defaultIconWeight)),
 					!opt.icon && opt.img ? new img(opt.img) : null,
 					new h({ level: defaultTitleSize, marginy: 0, elem: opt.title ? opt.title : "Change password" }),
 
@@ -965,7 +983,11 @@ const fn = {
 			return new container.form(
 				[
 					// opt.close ? fn.closebtn(opt) : null,
-					!opt.img && opt.icon ? new icon(opt.icon) : opt.img ? null : new icon(defaultIcon),
+					!opt.img && opt.icon
+						? new icon(opt.icon)
+						: opt.img
+						? null
+						: new icon(core.setting.icon(defaultIconColor, defaultIconWeight)),
 					!opt.icon && opt.img ? new img(opt.img) : null,
 					new h({ level: defaultTitleSize, marginy: 0, elem: opt.title ? opt.title : "Update info" }),
 
