@@ -37,8 +37,8 @@
 
 .cl-toc li div.active,
 .cl-toc li a.active {
-	text-decoration: underline;
 	color: var(--bs-primary);
+	font-weight: bold;
 }
 
 .cl-toc h6{
