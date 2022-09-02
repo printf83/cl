@@ -699,6 +699,7 @@ export default [
 										placement: "right",
 										title: "Popover title",
 										msg: "Popover body content is set in this attribute.",
+										trigger: null,
 										elem: new button({
 											color: "secondary",
 											label: "button",

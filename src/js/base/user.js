@@ -926,10 +926,14 @@ const fn = {
 						}),
 					}),
 
-					new input({
-						name: "token",
-						type: "hidden",
-						value: opt.token,
+					new tag({
+						col: true,
+						display: "none",
+						elem: new input({
+							name: "token",
+							type: "hidden",
+							value: opt.token,
+						}),
 					}),
 
 					new input({
