@@ -13,8 +13,10 @@ const defaultOption = {
 	id: null,
 	class: null,
 	static: true,
+
 	title: null,
 	icon: null,
+
 	footer: null,
 	button: null,
 	animate: true,

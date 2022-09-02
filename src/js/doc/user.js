@@ -229,7 +229,7 @@ export default [
 						onclick: () => {
 							core.user.banner = () => {
 								return new img({
-									class: "img-fluid",
+									class: ["img-fluid", "rounded"],
 									src: sample.img(730, 580),
 								});
 

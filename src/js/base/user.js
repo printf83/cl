@@ -15,6 +15,7 @@ import btnclose from "./btnclose.js";
 import file from "./file.js";
 import a from "./a.js";
 import small from "./small.js";
+import tag from "./tag.js";
 
 const defaultIconWeight = "4x";
 const defaultIconColor = "primary";
@@ -142,12 +143,14 @@ const fn = {
 	},
 	showmsg: (container, msg, icon) => {
 		let id = container.getAttribute("id");
-		let msgcontainer = document.getElementById(`${id}-msg`);
-		core.removeChildElement(msgcontainer);
+		let msglabel = document.getElementById(`${id}-msg`);
+		let msgcontainer = msglabel.parentElement;
+
+		core.removeChildElement(msglabel);
 
 		if (msg) {
 			msgcontainer.classList.remove("d-none");
-			core.appendChild(msgcontainer, fn.msg(msg, icon));
+			core.appendChild(msglabel, fn.msg(msg, icon));
 		} else {
 			msgcontainer.classList.add("d-none");
 		}
@@ -527,10 +530,13 @@ const fn = {
 					!opt.icon && opt.img ? new img(opt.img) : null,
 					new h({ level: defaultTitleSize, marginy: 0, elem: opt.title ? opt.title : "Sign in" }),
 
-					new div({
-						id: `${opt.id}-msg`,
+					new tag({
+						col: true,
 						display: opt.msg ? null : "none",
-						elem: fn.msg(opt.msg, "info"),
+						elem: new div({
+							id: `${opt.id}-msg`,
+							elem: fn.msg(opt.msg, "info"),
+						}),
 					}),
 
 					new input({
@@ -613,10 +619,13 @@ const fn = {
 					!opt.icon && opt.img ? new img(opt.img) : null,
 					new h({ level: defaultTitleSize, marginy: 0, elem: opt.title ? opt.title : "Sign up" }),
 
-					new div({
-						id: `${opt.id}-msg`,
+					new tag({
+						col: true,
 						display: opt.msg ? null : "none",
-						elem: fn.msg(opt.msg, "info"),
+						elem: new div({
+							id: `${opt.id}-msg`,
+							elem: fn.msg(opt.msg, "info"),
+						}),
 					}),
 
 					new input({
@@ -722,10 +731,13 @@ const fn = {
 					!opt.icon && opt.img ? new img(opt.img) : null,
 					new h({ level: defaultTitleSize, marginy: 0, elem: opt.title ? opt.title : "Reset password" }),
 
-					new div({
-						id: `${opt.id}-msg`,
+					new tag({
+						col: true,
 						display: opt.msg ? null : "none",
-						elem: fn.msg(opt.msg, "info"),
+						elem: new div({
+							id: `${opt.id}-msg`,
+							elem: fn.msg(opt.msg, "info"),
+						}),
 					}),
 
 					new input({
@@ -794,10 +806,13 @@ const fn = {
 					!opt.icon && opt.img ? new img(opt.img) : null,
 					new h({ level: defaultTitleSize, marginy: 0, elem: opt.title ? opt.title : "Change password" }),
 
-					new div({
-						id: `${opt.id}-msg`,
+					new tag({
+						col: true,
 						display: opt.msg ? null : "none",
-						elem: fn.msg(opt.msg, "info"),
+						elem: new div({
+							id: `${opt.id}-msg`,
+							elem: fn.msg(opt.msg, "info"),
+						}),
 					}),
 
 					new input({
@@ -902,10 +917,13 @@ const fn = {
 					!opt.icon && opt.img ? new img(opt.img) : null,
 					new h({ level: defaultTitleSize, marginy: 0, elem: opt.title ? opt.title : "Change password" }),
 
-					new div({
-						id: `${opt.id}-msg`,
+					new tag({
+						col: true,
 						display: opt.msg ? null : "none",
-						elem: fn.msg(opt.msg, "info"),
+						elem: new div({
+							id: `${opt.id}-msg`,
+							elem: fn.msg(opt.msg, "info"),
+						}),
 					}),
 
 					new input({
@@ -991,10 +1009,13 @@ const fn = {
 					!opt.icon && opt.img ? new img(opt.img) : null,
 					new h({ level: defaultTitleSize, marginy: 0, elem: opt.title ? opt.title : "Update info" }),
 
-					new div({
-						id: `${opt.id}-msg`,
-						display: opt.msg ? null : "none",
-						elem: fn.msg(opt.msg, "info"),
+					new tag({
+						col: true,
+						display: opt.msg ? "null" : "none",
+						elem: new div({
+							id: `${opt.id}-msg`,
+							elem: fn.msg(opt.msg, "info"),
+						}),
 					}),
 
 					new file({
