@@ -5,11 +5,12 @@ import pill from "../base/pill.js";
 import codepreview from "../base/codepreview.js";
 import a from "../base/a.js";
 import msg from "../base/msg.js";
+import * as core from "../base/core.js";
 
 export default [
 	{
 		msg: [
-			new div("text-center display-1", "BS5 JS Builder"),
+			new div("text-center display-1", core.setting.title()),
 
 			new alert.container({
 				color: "warning",
@@ -116,7 +117,7 @@ export default [
 							/>
 							<link rel="stylesheet" href="./dist/style.css" />
 
-							<title>BS5 JS Builder</title>
+							<title>${core.setting.title()}</title>
 						</head>
 						<body>
 							<div id="root">

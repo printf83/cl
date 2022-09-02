@@ -666,7 +666,7 @@ const fn = {
 							},
 							onchange: fn.action.inputchange,
 						}),
-						core.user.onterm && typeof core.user.onterm === "function"
+						core.user.term && typeof core.user.term === "function"
 							? new div({
 									elem: new small({
 										textcolor: "muted",
@@ -674,7 +674,7 @@ const fn = {
 											"By clicking sign up you are agreeing to the ",
 											new a({
 												href: "javascript:void(0);",
-												onclick: core.user.onterm,
+												onclick: core.user.term,
 												elem: "Terms and Conditions",
 											}),
 											".",

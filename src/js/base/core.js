@@ -61,7 +61,7 @@ const __user = {
 	onsignin: null,
 	onsignout: null,
 	onchange: null,
-	onterm: null,
+	term: null,
 	banner: null,
 };
 export const user = {
@@ -83,11 +83,11 @@ export const user = {
 	set onchange(fn) {
 		__user.onchange = fn;
 	},
-	get onterm() {
-		return __user.onterm;
+	get term() {
+		return __user.term;
 	},
-	set onterm(fn) {
-		__user.onterm = fn;
+	set term(fn) {
+		__user.term = fn;
 	},
 	get banner() {
 		return __user.banner;

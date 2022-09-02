@@ -215,7 +215,7 @@ export default [
 	{
 		title: "Icon and title",
 		msg: [
-			"Change application icon and title that appear on the user dialog using {{core.setting.icon}} and {{core.setting.title}}.",
+			"Change application icon and title that appear on the user dialog using {{core.setting.icon}} and {{core.setting.title}}. You can use this function before {{core.documentReady}}",
 		],
 		container: sample.stackcontainer,
 		import: ["user", "toast", "sample", "btngroup"],
@@ -223,7 +223,7 @@ export default [
 			return new btngroup({
 				elem: [
 					new button({
-						label: "Attach",
+						label: "Run",
 						icon: "play",
 						color: "success",
 						onclick: () => {
@@ -270,7 +270,7 @@ export default [
 			return new btngroup({
 				elem: [
 					new button({
-						label: "Attach",
+						label: "Run",
 						icon: "play",
 						color: "success",
 						onclick: () => {
@@ -294,7 +294,7 @@ export default [
 								// });
 							};
 
-							new toast("/", "User banner attached").show();
+							new toast("/", "User banner change").show();
 							reloadUserDoc(); // documentation perpose only
 						},
 					}),
@@ -304,7 +304,7 @@ export default [
 						color: "danger",
 						onclick: () => {
 							core.user.banner = null;
-							new toast("-", "User banner detached").show();
+							new toast("-", "User banner reset").show();
 							reloadUserDoc(); // documentation perpose only
 						},
 					}),
@@ -316,7 +316,7 @@ export default [
 	{
 		title: "Sign up terms",
 		msg: [
-			"Setup terms dialog that appear on user sign up dialog using {{core.user.onterm}}. You can use this function before {{core.documentReady}}",
+			"Setup terms dialog that appear on user sign up dialog using {{core.user.term}}. You can use this function before {{core.documentReady}}",
 		],
 		container: sample.stackcontainer,
 		import: ["user", "toast", "sample", "modal", "btngroup", "p"],
@@ -324,11 +324,11 @@ export default [
 			return new btngroup({
 				elem: [
 					new button({
-						label: "Attach",
+						label: "Run",
 						icon: "play",
 						color: "success",
 						onclick: () => {
-							core.user.onterm = () => {
+							core.user.term = () => {
 								new modal({
 									size: "xl",
 									title: "Term and conditions",
@@ -354,7 +354,7 @@ export default [
 								}).show();
 							};
 
-							new toast("/", "User sign up term attached").show();
+							new toast("/", "User sign up term change").show();
 							reloadUserDoc(); // documentation perpose only
 						},
 					}),
@@ -363,9 +363,9 @@ export default [
 						icon: "stop",
 						color: "danger",
 						onclick: () => {
-							core.user.onterm = null;
+							core.user.term = null;
 
-							new toast("-", "User sign up term detached").show();
+							new toast("-", "User sign up term reset").show();
 							reloadUserDoc(); // documentation perpose only
 						},
 					}),
