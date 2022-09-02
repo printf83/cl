@@ -213,6 +213,53 @@ export default [
 	},
 
 	{
+		title: "Icon and title",
+		msg: [
+			"Change application icon and title that appear on the user dialog using {{core.setting.icon}} and {{core.setting.title}}.",
+		],
+		container: sample.stackcontainer,
+		import: ["user", "toast", "sample", "btngroup"],
+		code: () => {
+			return new btngroup({
+				elem: [
+					new button({
+						label: "Attach",
+						icon: "play",
+						color: "success",
+						onclick: () => {
+							core.setting.icon = (color, weight) => {
+								return {
+									color: color,
+									weight: weight,
+									type: "fab",
+									icon: "bootstrap",
+								};
+							};
+
+							core.setting.title = () => "Bootstrap";
+
+							new toast("/", "Application icon and title changed").show();
+							reloadUserDoc(); // documentation perpose only
+						},
+					}),
+
+					new button({
+						icon: "stop",
+						color: "danger",
+						onclick: () => {
+							core.setting.icon = null;
+							core.setting.title = null;
+
+							new toast("-", "Application icon and title reset").show();
+							reloadUserDoc(); // documentation perpose only
+						},
+					}),
+				],
+			});
+		},
+	},
+
+	{
 		title: "Banner",
 		msg: [
 			"Setup banner that appear on user dialog like sign up, sign in, profile editor and others using {{core.user.banner}}. You can use this function before {{core.documentReady}}. Banner only visible on the large screen (desktop)",

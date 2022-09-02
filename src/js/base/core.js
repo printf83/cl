@@ -15,30 +15,45 @@ export function capitalize(str) {
 }
 
 const __setting = {
-	icon: (color, weight) => {
-		return {
-			color: color ? color : null,
-			weight: weight ? weight : null,
-			icon: "fire",
-		};
-	},
-	title: () => {
-		return "BS5.2 JS Builder";
-	},
+	icon: null,
+	title: null,
 };
 
 export const setting = {
 	get icon() {
-		return __setting.icon;
+		if (__setting.icon) {
+			return __setting.icon;
+		} else {
+			//default setting icon
+			return (color, weight) => {
+				return {
+					color: color ? color : null,
+					weight: weight ? weight : null,
+					icon: "fire",
+				};
+			};
+		}
 	},
 	set icon(fn) {
-		__setting.icon = fn;
+		if (fn && typeof fn === "function") {
+			__setting.icon = fn;
+		} else {
+			__setting.icon = null;
+		}
 	},
 	get title() {
-		return __setting.title;
+		if (__setting.title) {
+			return __setting.title;
+		} else {
+			return () => "BS5.2 JS Builder";
+		}
 	},
 	set title(fn) {
-		__setting.title = fn;
+		if (fn && typeof fn === "function") {
+			__setting.title = fn;
+		} else {
+			__setting.title = null;
+		}
 	},
 };
 
