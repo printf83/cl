@@ -1,9 +1,22 @@
+.cl-toc li{
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
 .cl-toc li div,
 .cl-toc li div label,
 .cl-toc li a,
 .cl-toc li a label {
 	text-decoration: none;
 	color: var(--bs-body-color);
+
+	/* color: rgba(var(--bs-gray), 0.7);
+	font-weight: calc(var(--bs-body-font-weight) * 0.75);
+	padding: 0.25rem 0.5rem;
+	border-radius: var(--bs-btn-border-radius);
+	display: inline-block; */
+	
 }
 
 .cl-toc li div:hover,
@@ -12,6 +25,7 @@
 .cl-toc li a:hover label {
 	text-decoration: underline;
 	cursor: pointer;
+	
 }
 
 .cl-toc li div.disabled,
@@ -19,6 +33,12 @@
 .cl-toc li div[disabled],
 .cl-toc li a[disabled]{
 	color:var(--bs-secondary);
+}
+
+.cl-toc li div.active,
+.cl-toc li a.active {
+	text-decoration: underline;
+	color: var(--bs-primary);
 }
 
 .cl-toc h6{

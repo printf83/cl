@@ -511,11 +511,24 @@ function gen_content(m1, m2, callback) {
 									core.importJS(m.source, (m_source) => {
 										let processtimestart = window.performance.now();
 
+										let tocId = core.UUID();
+
 										// sample.resetindex();
 										core.replaceChild(
 											document.getElementById("root"),
 											new div({
 												marginbottom: 3,
+												tabindex: 0,
+												// attr: {
+												// 	"data-bs-spy": "scroll",
+												// 	"data-bs-target": `#${tocId}`,
+												// 	"data-bs-root-margin": "0px 0px -40%",
+												// 	"data-bs-smooth-scroll": "true",
+												// },
+												// style: {
+												// 	height: "500px",
+												// 	"overflow-y": "scroll",
+												// },
 												elem: m_source.map((i) => {
 													return gen_example(i);
 												}),
@@ -526,6 +539,13 @@ function gen_content(m1, m2, callback) {
 
 										gen_toc();
 										gen_url(m1, m2);
+
+										//update scroll-spy
+										const dataSpyList = document.querySelectorAll('[data-bs-spy="scroll"]');
+										dataSpyList.forEach((dataSpyEl) => {
+											bootstrap.ScrollSpy.getInstance(dataSpyEl).refresh();
+										});
+
 										//count pagespeed
 										document.getElementById("pagespeed").innerText = `${(
 											processtimeend - processtimestart
@@ -617,12 +637,13 @@ function gen_toc() {
 						let id = parent.id;
 						return {
 							label: parent.innerText,
-							attr: { "cl-target-id": id },
-							onclick: (event) => {
-								let sender = event.currentTarget;
-								let id = sender.getAttribute("cl-target-id");
-								core.focusElement(document.getElementById(id));
-							},
+							href: `#${id}`,
+							// attr: { "cl-target-id": id },
+							// onclick: (event) => {
+							// 	let sender = event.currentTarget;
+							// 	let id = sender.getAttribute("cl-target-id");
+							// 	core.focusElement(document.getElementById(id));
+							// },
 							level: parent.nodeName === "H3" ? 1 : 0,
 						};
 					}
