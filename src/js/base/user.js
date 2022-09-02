@@ -100,7 +100,7 @@ let defaultUpdateInfoOption = {
 };
 
 const fn = {
-	banner: (elem) => {
+	banner: (type, elem) => {
 		if (core.user.banner && typeof core.user.banner === "function") {
 			return new div({
 				container: true,
@@ -114,7 +114,7 @@ const fn = {
 								display: "flex",
 								alignitem: "center",
 								style: { height: "100%" },
-								elem: core.user.banner(),
+								elem: core.user.banner(type),
 							}),
 						}),
 						new div({
@@ -603,10 +603,25 @@ const fn = {
 										elem: "Reset password",
 										onclick: (event) => {
 											let sender = event.currentTarget;
-											let container = sender.closest("form");
+											// let container = sender.closest("form");
+											// core.replaceWith(
+											// 	container,
+											// 	fn.form.container(opt.id, fn.form.resetpass(opt))
+											// );
+
+											let container = sender.closest("div.modal-body");
 											core.replaceWith(
 												container,
-												fn.form.container(opt.id, fn.form.resetpass(opt))
+												new div({
+													class: "modal-body",
+													elem: [
+														opt.close ? fn.closebtn(opt) : null,
+														fn.banner(
+															"resetpass",
+															fn.form.container(opt.id, fn.form.resetpass(opt))
+														),
+													],
+												})
 											);
 										},
 									}),
@@ -615,8 +630,23 @@ const fn = {
 										elem: "Sign up",
 										onclick: (event) => {
 											let sender = event.currentTarget;
-											let container = sender.closest("form");
-											core.replaceWith(container, fn.form.container(opt.id, fn.form.signup(opt)));
+											// let container = sender.closest("form");
+											// core.replaceWith(container, fn.form.container(opt.id, fn.form.signup(opt)));
+
+											let container = sender.closest("div.modal-body");
+											core.replaceWith(
+												container,
+												new div({
+													class: "modal-body",
+													elem: [
+														opt.close ? fn.closebtn(opt) : null,
+														fn.banner(
+															"signup",
+															fn.form.container(opt.id, fn.form.signup(opt))
+														),
+													],
+												})
+											);
 										},
 									}),
 								],
@@ -702,10 +732,25 @@ const fn = {
 										elem: "Reset password",
 										onclick: (event) => {
 											let sender = event.currentTarget;
-											let container = sender.closest("form");
+											// let container = sender.closest("form");
+											// core.replaceWith(
+											// 	container,
+											// 	fn.form.container(opt.id, fn.form.resetpass(opt))
+											// );
+
+											let container = sender.closest("div.modal-body");
 											core.replaceWith(
 												container,
-												fn.form.container(opt.id, fn.form.resetpass(opt))
+												new div({
+													class: "modal-body",
+													elem: [
+														opt.close ? fn.closebtn(opt) : null,
+														fn.banner(
+															"resetpass",
+															fn.form.container(opt.id, fn.form.resetpass(opt))
+														),
+													],
+												})
 											);
 										},
 									}),
@@ -714,8 +759,23 @@ const fn = {
 										elem: "Sign in",
 										onclick: (event) => {
 											let sender = event.currentTarget;
-											let container = sender.closest("form");
-											core.replaceWith(container, fn.form.container(opt.id, fn.form.signin(opt)));
+											// let container = sender.closest("form");
+											// core.replaceWith(container, fn.form.container(opt.id, fn.form.signin(opt)));
+
+											let container = sender.closest("div.modal-body");
+											core.replaceWith(
+												container,
+												new div({
+													class: "modal-body",
+													elem: [
+														opt.close ? fn.closebtn(opt) : null,
+														fn.banner(
+															"signin",
+															fn.form.container(opt.id, fn.form.signin(opt))
+														),
+													],
+												})
+											);
 										},
 									}),
 								],
@@ -763,10 +823,25 @@ const fn = {
 											elem: "Sign in",
 											onclick: (event) => {
 												let sender = event.currentTarget;
-												let container = sender.closest("form");
+												// let container = sender.closest("form");
+												// core.replaceWith(
+												// 	container,
+												// 	fn.form.container(opt.id, fn.form.signin(opt))
+												// );
+
+												let container = sender.closest("div.modal-body");
 												core.replaceWith(
 													container,
-													fn.form.container(opt.id, fn.form.signin(opt))
+													new div({
+														class: "modal-body",
+														elem: [
+															opt.close ? fn.closebtn(opt) : null,
+															fn.banner(
+																"signin",
+																fn.form.container(opt.id, fn.form.signin(opt))
+															),
+														],
+													})
 												);
 											},
 										}),
@@ -775,10 +850,25 @@ const fn = {
 											elem: "Sign up",
 											onclick: (event) => {
 												let sender = event.currentTarget;
-												let container = sender.closest("form");
+												// let container = sender.closest("form");
+												// core.replaceWith(
+												// 	container,
+												// 	fn.form.container(opt.id, fn.form.signup(opt))
+												// );
+
+												let container = sender.closest("div.modal-body");
 												core.replaceWith(
 													container,
-													fn.form.container(opt.id, fn.form.signup(opt))
+													new div({
+														class: "modal-body",
+														elem: [
+															opt.close ? fn.closebtn(opt) : null,
+															fn.banner(
+																"signup",
+																fn.form.container(opt.id, fn.form.signup(opt))
+															),
+														],
+													})
 												);
 											},
 										}),
@@ -853,14 +943,30 @@ const fn = {
 										elem: "Update profile",
 										onclick: (event) => {
 											let sender = event.currentTarget;
-											let container = sender.closest("form");
 
 											fn.action.info(sender, (result) => {
 												if (result) {
 													opt.data = result;
+
+													// let container = sender.closest("form");
+													// core.replaceWith(
+													// 	container,
+													// 	fn.form.container(opt.id, fn.form.updateinfo(opt))
+													// );
+
+													let container = sender.closest("div.modal-body");
 													core.replaceWith(
 														container,
-														fn.form.container(opt.id, fn.form.updateinfo(opt, false))
+														new div({
+															class: "modal-body",
+															elem: [
+																opt.close ? fn.closebtn(opt) : null,
+																fn.banner(
+																	"updateinfo",
+																	fn.form.container(opt.id, fn.form.updateinfo(opt))
+																),
+															],
+														})
 													);
 												}
 											});
@@ -872,11 +978,27 @@ const fn = {
 										elem: "Sign out",
 										onclick: (event) => {
 											let sender = event.currentTarget;
-											let container = sender.closest("form");
+
 											fn.action.signout(sender, () => {
+												// let container = sender.closest("form");
+												// core.replaceWith(
+												// 	container,
+												// 	fn.form.container(opt.id, fn.form.signin(opt))
+												// );
+
+												let container = sender.closest("div.modal-body");
 												core.replaceWith(
 													container,
-													fn.form.container(opt.id, fn.form.signin(opt))
+													new div({
+														class: "modal-body",
+														elem: [
+															opt.close ? fn.closebtn(opt) : null,
+															fn.banner(
+																"signin",
+																fn.form.container(opt.id, fn.form.signin(opt))
+															),
+														],
+													})
 												);
 											});
 										},
@@ -948,8 +1070,23 @@ const fn = {
 										elem: "Sign in",
 										onclick: (event) => {
 											let sender = event.currentTarget;
-											let container = sender.closest("form");
-											core.replaceWith(container, fn.form.container(opt.id, fn.form.signin(opt)));
+											// let container = sender.closest("form");
+											// core.replaceWith(container, fn.form.container(opt.id, fn.form.signin(opt)));
+
+											let container = sender.closest("div.modal-body");
+											core.replaceWith(
+												container,
+												new div({
+													class: "modal-body",
+													elem: [
+														opt.close ? fn.closebtn(opt) : null,
+														fn.banner(
+															"signin",
+															fn.form.container(opt.id, fn.form.signin(opt))
+														),
+													],
+												})
+											);
 										},
 									}),
 									new button({
@@ -957,10 +1094,25 @@ const fn = {
 										elem: "Reset password",
 										onclick: (event) => {
 											let sender = event.currentTarget;
-											let container = sender.closest("form");
+											// let container = sender.closest("form");
+											// core.replaceWith(
+											// 	container,
+											// 	fn.form.container(opt.id, fn.form.resetpass(opt))
+											// );
+
+											let container = sender.closest("div.modal-body");
 											core.replaceWith(
 												container,
-												fn.form.container(opt.id, fn.form.resetpass(opt))
+												new div({
+													class: "modal-body",
+													elem: [
+														opt.close ? fn.closebtn(opt) : null,
+														fn.banner(
+															"resetpass",
+															fn.form.container(opt.id, fn.form.resetpass(opt))
+														),
+													],
+												})
 											);
 										},
 									}),
@@ -1031,10 +1183,25 @@ const fn = {
 										elem: "Change password",
 										onclick: (event) => {
 											let sender = event.currentTarget;
-											let container = sender.closest("form");
+											// let container = sender.closest("form");
+											// core.replaceWith(
+											// 	container,
+											// 	fn.form.container(opt.id, fn.form.changepass(opt))
+											// );
+
+											let container = sender.closest("div.modal-body");
 											core.replaceWith(
 												container,
-												fn.form.container(opt.id, fn.form.changepass(opt))
+												new div({
+													class: "modal-body",
+													elem: [
+														opt.close ? fn.closebtn(opt) : null,
+														fn.banner(
+															"changepass",
+															fn.form.container(opt.id, fn.form.changepass(opt))
+														),
+													],
+												})
 											);
 										},
 									}),
@@ -1044,13 +1211,28 @@ const fn = {
 										elem: "Sign out",
 										onclick: (event) => {
 											let sender = event.currentTarget;
-											let container = sender.closest("form");
-											fn.action.signout(sender, () => {
-												core.replaceWith(
-													container,
-													fn.form.container(opt.id, fn.form.signin(opt))
-												);
-											});
+											// let container = sender.closest("form");
+											// fn.action.signout(sender, () => {
+											// 	core.replaceWith(
+											// 		container,
+											// 		fn.form.container(opt.id, fn.form.signout(opt))
+											// 	);
+											// });
+
+											let container = sender.closest("div.modal-body");
+											core.replaceWith(
+												container,
+												new div({
+													class: "modal-body",
+													elem: [
+														opt.close ? fn.closebtn(opt) : null,
+														fn.banner(
+															"signout",
+															fn.form.container(opt.id, fn.form.signout(opt))
+														),
+													],
+												})
+											);
 										},
 									}),
 								],
@@ -1090,7 +1272,7 @@ export class signin extends modal {
 			backdropcolor: opt.backdropcolor,
 			elem: [
 				opt.close ? fn.closebtn(opt) : null,
-				fn.banner(fn.form.container(opt.id, fn.form.signin(opt))),
+				fn.banner("signin", fn.form.container(opt.id, fn.form.signin(opt))),
 			].filter(Boolean),
 		};
 
@@ -1113,7 +1295,7 @@ export class signup extends modal {
 			backdropcolor: opt.backdropcolor,
 			elem: [
 				opt.close ? fn.closebtn(opt) : null,
-				fn.banner(fn.form.container(opt.id, fn.form.signup(opt))),
+				fn.banner("signup", fn.form.container(opt.id, fn.form.signup(opt))),
 			].filter(Boolean),
 		};
 
@@ -1136,7 +1318,7 @@ export class resetpass extends modal {
 			backdropcolor: opt.backdropcolor,
 			elem: [
 				opt.close ? fn.closebtn(opt) : null,
-				fn.banner(fn.form.container(opt.id, fn.form.resetpass(opt))),
+				fn.banner("resetpass", fn.form.container(opt.id, fn.form.resetpass(opt))),
 			].filter(Boolean),
 		};
 
@@ -1159,7 +1341,7 @@ export class changepass extends modal {
 			backdropcolor: opt.backdropcolor,
 			elem: [
 				opt.close ? fn.closebtn(opt) : null,
-				fn.banner(fn.form.container(opt.id, fn.form.changepass(opt))),
+				fn.banner("changepass", fn.form.container(opt.id, fn.form.changepass(opt))),
 			].filter(Boolean),
 		};
 
@@ -1182,7 +1364,7 @@ export class changepass_guest extends modal {
 			backdropcolor: opt.backdropcolor,
 			elem: [
 				opt.close ? fn.closebtn(opt) : null,
-				fn.banner(fn.form.container(opt.id, fn.form.changepass_guest(opt))),
+				fn.banner("changepass_guest", fn.form.container(opt.id, fn.form.changepass_guest(opt))),
 			].filter(Boolean),
 		};
 
@@ -1205,7 +1387,7 @@ export class updateinfo extends modal {
 			backdropcolor: opt.backdropcolor,
 			elem: [
 				opt.close ? fn.closebtn(opt) : null,
-				fn.banner(fn.form.container(opt.id, fn.form.updateinfo(opt))),
+				fn.banner("updateinfo", fn.form.container(opt.id, fn.form.updateinfo(opt))),
 			].filter(Boolean),
 		};
 

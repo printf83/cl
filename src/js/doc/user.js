@@ -274,9 +274,10 @@ export default [
 						icon: "play",
 						color: "success",
 						onclick: () => {
-							core.user.banner = () => {
+							core.user.banner = (type) => {
 								return new img({
 									class: ["img-fluid", "rounded"],
+									title: type,
 									src: sample.img(730, 580),
 								});
 
