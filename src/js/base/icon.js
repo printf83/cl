@@ -42,6 +42,37 @@ const isImage = (str) => {
 
 	return false;
 };
+
+const isSVG = (str) => {
+	try {
+		if (str) {
+			if (str.startsWith("<svg")) {
+				return true;
+			}
+		}
+
+		return false;
+	} catch (ex) {
+		console.error(ex.message);
+		console.log("str", str);
+		return false;
+	}
+};
+
+const editSVG = (color, str) => {
+	//default color
+	color = color || `body-color`;
+
+	//find color
+	let varcolor = getComputedStyle(document.body).getPropertyValue(`--bs-${color}`);
+
+	//find fill in path
+	//then replace it
+	str = str.replace(/fill\=\"\S+\"/g, `fill="${varcolor.trim()}"`);
+
+	return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(str)}`;
+};
+
 export default class icon extends tag {
 	clicon = 1;
 
@@ -110,7 +141,6 @@ export default class icon extends tag {
 					break;
 			}
 
-			opt.textcolor = opt.color;
 			opt.class = core.merge.class(opt.class, [
 				opt.weight ? `fa-${opt.weight}` : null,
 				opt.fixwidth ? "fa-fw" : null,
@@ -127,7 +157,14 @@ export default class icon extends tag {
 				rotate,
 			]);
 
-			if (isImage(opt.icon)) {
+			if (isSVG(opt.icon)) {
+				opt.tag = "img";
+				opt.attr = core.merge.attr(opt.attr, {
+					src: editSVG(opt.color, opt.icon),
+					alt: opt.alt,
+				});
+				opt.class = core.merge.class(opt.class, "fa-cl-svg");
+			} else if (isImage(opt.icon)) {
 				opt.tag = "img";
 				opt.attr = core.merge.attr(opt.attr, {
 					src: opt.icon,
@@ -135,6 +172,7 @@ export default class icon extends tag {
 				});
 				opt.class = core.merge.class(opt.class, "fa-cl-image");
 			} else {
+				opt.textcolor = opt.color;
 				opt.class = core.merge.class(opt.class, [
 					opt.type ? opt.type : null,
 					opt.icon ? `fa-${opt.icon}` : null,

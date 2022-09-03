@@ -34,7 +34,7 @@ export default [
 	{
 		title: "Image icon",
 		msg: [
-			"Any icon that start with  {{/}}, {{./}}, {{../}}, {{http://}} or {{https://}} will be threat as <b>Image icon</b>",
+			"Any icon that start with  {{/}}, {{./}}, {{../}}, {{http://}} or {{https://}} will be threat as <b>Image icon</b>. Image icon {{not support}} colouring.",
 		],
 		import: ["icon"],
 		code: () => {
@@ -43,6 +43,45 @@ export default [
 				weight: "lg",
 				shake: true,
 			});
+		},
+	},
+
+	{
+		title: "SVG icon",
+		msg: [
+			"Any icon that start with  {{&lt;svg}} will be threat as <b>SVG icon</b>. SVG icon {{support}} colouring",
+		],
+		import: ["icon"],
+		code: () => {
+			return new icon({
+				icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" fill="#999"><path d="M159.3 5.4c7.8-7.3 19.9-7.2 27.7 .1c27.6 25.9 53.5 53.8 77.7 84c11-14.4 23.5-30.1 37-42.9c7.9-7.4 20.1-7.4 28 .1c34.6 33 63.9 76.6 84.5 118c20.3 40.8 33.8 82.5 33.8 111.9C448 404.2 348.2 512 224 512C98.4 512 0 404.1 0 276.5c0-38.4 17.8-85.3 45.4-131.7C73.3 97.7 112.7 48.6 159.3 5.4zM225.7 416c25.3 0 47.7-7 68.8-21c42.1-29.4 53.4-88.2 28.1-134.4c-2.8-5.6-5.6-11.2-9.8-16.8l-50.6 58.8s-81.4-103.6-87.1-110.6C133.1 243.8 112 273.2 112 306.8C112 375.4 162.6 416 225.7 416z"/></svg>`,
+				color: "danger",
+				weight: "lg",
+				shake: true,
+			});
+		},
+	},
+
+	{
+		import: ["icon"],
+		container: sample.stackcontainer,
+		code: () => {
+			return [
+				new icon({
+					icon: "fire",
+					color: "danger",
+					weight: "lg",
+				}),
+				new icon({
+					icon: "./favicon.png",
+					weight: "lg",
+				}),
+				new icon({
+					icon: sample.svgicon(),
+					color: "danger",
+					weight: "lg",
+				}),
+			];
 		},
 	},
 
@@ -114,11 +153,29 @@ export default [
 	},
 
 	{
+		title: "SVG Color",
+		container: sample.stackcontainer,
+		import: ["icon", "sample"],
+		code: () => {
+			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark", "muted"].map(
+				(i) => {
+					return new icon({
+						icon: sample.svgicon(),
+						color: i,
+					});
+				}
+			);
+		},
+	},
+
+	{
 		title: "Fixwidth",
 		container: sample.stackcontainer,
 		import: ["icon", "sample"],
 		code: () => {
 			let d = sample.icon();
+			let e = sample.svgicon();
+
 			return [
 				new icon({
 					icon: d,
@@ -140,6 +197,19 @@ export default [
 				}),
 				new icon({
 					icon: "./favicon.png",
+					fixwidth: false,
+					border: true,
+					weight: "lg",
+				}),
+
+				new icon({
+					icon: e,
+					fixwidth: true,
+					border: true,
+					weight: "lg",
+				}),
+				new icon({
+					icon: e,
 					fixwidth: false,
 					border: true,
 					weight: "lg",
@@ -172,6 +242,21 @@ export default [
 	},
 
 	{
+		title: "SVG Size",
+		container: sample.stackcontainer,
+		import: ["icon"],
+		code: () => {
+			let d = sample.svgicon();
+			return ["xs", "sm", null, "lg", "2x", "3x", "4x"].map((i) => {
+				return new icon({
+					icon: d,
+					weight: i,
+				});
+			});
+		},
+	},
+
+	{
 		title: "Rotate",
 		container: sample.stackcontainer,
 		import: ["icon", "sample"],
@@ -195,6 +280,21 @@ export default [
 	},
 
 	{
+		title: "SVG Rotate",
+		container: sample.stackcontainer,
+		import: ["icon"],
+		code: () => {
+			let d = sample.svgicon();
+			return [90, 180, 270, "horizontal", "vertical", "both"].map((i) => {
+				return new icon({
+					icon: d,
+					rotate: i,
+				});
+			});
+		},
+	},
+
+	{
 		title: "Animation",
 	},
 
@@ -205,6 +305,7 @@ export default [
 		code: () => {
 			return [
 				"./favicon.png",
+				sample.svgicon(),
 				sample.icon(),
 				sample.icon(),
 				sample.icon(),
@@ -229,6 +330,7 @@ export default [
 		code: () => {
 			return [
 				"./favicon.png",
+				sample.svgicon(),
 				sample.icon(),
 				sample.icon(),
 				sample.icon(),
@@ -253,6 +355,7 @@ export default [
 		code: () => {
 			return [
 				"./favicon.png",
+				sample.svgicon(),
 				sample.icon(),
 				sample.icon(),
 				sample.icon(),
@@ -277,6 +380,7 @@ export default [
 		code: () => {
 			return [
 				"./favicon.png",
+				sample.svgicon(),
 				sample.icon(),
 				sample.icon(),
 				sample.icon(),
@@ -301,6 +405,7 @@ export default [
 		code: () => {
 			return [
 				"./favicon.png",
+				sample.svgicon(),
 				sample.icon(),
 				sample.icon(),
 				sample.icon(),
@@ -325,6 +430,7 @@ export default [
 		code: () => {
 			return [
 				"./favicon.png",
+				sample.svgicon(),
 				sample.icon(),
 				sample.icon(),
 				sample.icon(),
@@ -349,6 +455,7 @@ export default [
 		code: () => {
 			return [
 				"./favicon.png",
+				sample.svgicon(),
 				sample.icon(),
 				sample.icon(),
 				sample.icon(),
@@ -380,6 +487,11 @@ export default [
 					label: "Button",
 					color: "primary",
 					icon: "./favicon.png",
+				}),
+				new button({
+					label: "Button",
+					color: "primary",
+					icon: sample.svgicon(),
 				}),
 				new button({
 					label: "Button",
@@ -431,6 +543,7 @@ export default [
 		code: () => {
 			return [
 				new input({ type: "text", before: new icon("./favicon.png") }),
+				new input({ type: "text", before: new icon(sample.svgicon()) }),
 				new input({ type: "text", before: new icon(sample.icon()) }),
 				new input({
 					type: "text",
@@ -452,6 +565,7 @@ export default [
 					icon: sample.icon(),
 					option: [
 						{ href: "#", label: "Image icon", icon: "./favicon.png" },
+						{ href: "#", label: "Image icon", icon: sample.svgicon() },
 						{ value: "-" },
 						{ href: "#", label: "Copy", icon: "copy" },
 						{ href: "#", label: "Cut", icon: "cut" },
@@ -467,6 +581,7 @@ export default [
 					iconafter: true,
 					option: [
 						{ href: "#", label: "Image icon", icon: "./favicon.png", iconafter: true },
+						{ href: "#", label: "Image icon", icon: sample.svgicon(), iconafter: true },
 						{ value: "-" },
 						{ href: "#", label: "Copy", icon: "copy", iconafter: true },
 						{ href: "#", label: "Cut", icon: "cut", iconafter: true },
@@ -521,6 +636,19 @@ export default [
 						}),
 					],
 				}),
+
+				new navbar.container({
+					expand: "lg",
+					elem: [
+						new navbar.brand({
+							label: "Navbar",
+							icon: { icon: sample.svgicon(), color: "danger", fade: true },
+							iconafter: true,
+							showlabel: "md",
+							href: "#",
+						}),
+					],
+				}),
 			];
 		},
 	},
@@ -538,7 +666,7 @@ export default [
 						label: "Second",
 						elem: "This is second tab. " + sample.text(),
 					},
-					{ label: "Third", icon: sample.icon(), elem: "This is third tab. " + sample.text() },
+					{ label: "Third", icon: sample.svgicon(), elem: "This is third tab. " + sample.text() },
 					{ label: "Disabled", disabled: true, elem: "This is last tab. " + sample.text() },
 				],
 			});
