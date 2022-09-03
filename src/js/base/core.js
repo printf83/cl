@@ -29,7 +29,9 @@ export const setting = {
 				return {
 					color: color ? color : null,
 					weight: weight ? weight : null,
-					icon: "fire",
+					//icon: "fire",
+					icon: "digital-ocean",
+					type: "fab",
 				};
 			};
 		}

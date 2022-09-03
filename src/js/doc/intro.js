@@ -55,7 +55,7 @@ export default [
 						href: "https://fontawesome.com/",
 						elem: new pill({
 							icon: { icon: "font-awesome-flag", type: "fab" },
-							label: "Fontawesome V6.1.2",
+							label: "Fontawesome V6.2.0",
 						}),
 					}),
 					new a({
@@ -102,7 +102,7 @@ export default [
 
 							<link
 								rel="stylesheet"
-								href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.2/css/all.min.css"
+								href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"
 							/>
 							<link
 								rel="stylesheet"
@@ -129,7 +129,7 @@ export default [
 							<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"></script>
 							<script src="https://cdn.jsdelivr.net/npm/moment@2.29.4"></script>
 							<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
-							<script src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.2"></script>
+							<script src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0"></script>
 
 							<script type="module" src="/dist/js/index.js"></script>
 						</body>

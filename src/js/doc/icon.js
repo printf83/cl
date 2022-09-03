@@ -32,6 +32,18 @@ export default [
 	},
 
 	{
+		title: "Image icon",
+		import: ["icon"],
+		code: () => {
+			return new icon({
+				icon: "./favicon.png",
+				weight: "lg",
+				shake: true,
+			});
+		},
+	},
+
+	{
 		title: "Fontawesome icon",
 		container: sample.stackcontainer,
 		import: ["icon"],
@@ -106,6 +118,18 @@ export default [
 					class: "border p-3",
 					size: "lg",
 				}),
+				new icon({
+					icon: "./favicon.png",
+					fixwidth: true,
+					class: "border",
+					size: "lg",
+				}),
+				new icon({
+					icon: "./favicon.png",
+					fixwidth: false,
+					class: "border",
+					size: "lg",
+				}),
 			];
 		},
 	},
@@ -122,18 +146,35 @@ export default [
 	},
 
 	{
+		title: "Image Size",
+		container: sample.stackcontainer,
+		import: ["icon"],
+		code: () => {
+			return ["xs", "sm", null, "lg", "2x", "3x", "4x"].map((i) => {
+				return new icon({ icon: "./favicon.png", weight: i });
+			});
+		},
+	},
+
+	{
 		title: "Rotate",
 		container: sample.stackcontainer,
 		import: ["icon"],
 		code: () => {
-			return [
-				new icon({ type: "fab", icon: "node-js", rotate: 90 }),
-				new icon({ type: "fab", icon: "node-js", rotate: 180 }),
-				new icon({ type: "fab", icon: "node-js", rotate: 270 }),
-				new icon({ type: "fab", icon: "node-js", rotate: "horizontal" }),
-				new icon({ type: "fab", icon: "node-js", rotate: "vertical" }),
-				new icon({ type: "fab", icon: "node-js", rotate: "both" }),
-			];
+			return [90, 180, 270, "horizontal", "vertical", "both"].map((i) => {
+				return new icon({ type: "fab", icon: "node-js", rotate: i });
+			});
+		},
+	},
+
+	{
+		title: "Image Rotate",
+		container: sample.stackcontainer,
+		import: ["icon"],
+		code: () => {
+			return [90, 180, 270, "horizontal", "vertical", "both"].map((i) => {
+				return new icon({ icon: "./favicon.png", rotate: i });
+			});
 		},
 	},
 
@@ -147,6 +188,7 @@ export default [
 		import: ["icon"],
 		code: () => {
 			return [
+				"./favicon.png",
 				"spinner",
 				"circle-notch",
 				"slash",
@@ -170,6 +212,7 @@ export default [
 		import: ["icon"],
 		code: () => {
 			return [
+				"./favicon.png",
 				"spinner",
 				"circle-notch",
 				"slash",
@@ -193,6 +236,7 @@ export default [
 		import: ["icon"],
 		code: () => {
 			return [
+				"./favicon.png",
 				"spinner",
 				"circle-notch",
 				"slash",
@@ -216,6 +260,7 @@ export default [
 		import: ["icon"],
 		code: () => {
 			return [
+				"./favicon.png",
 				"spinner",
 				"circle-notch",
 				"slash",
@@ -239,6 +284,7 @@ export default [
 		import: ["icon"],
 		code: () => {
 			return [
+				"./favicon.png",
 				"spinner",
 				"circle-notch",
 				"slash",
@@ -262,6 +308,7 @@ export default [
 		import: ["icon"],
 		code: () => {
 			return [
+				"./favicon.png",
 				"spinner",
 				"circle-notch",
 				"slash",
@@ -285,6 +332,7 @@ export default [
 		import: ["icon"],
 		code: () => {
 			return [
+				"./favicon.png",
 				"spinner",
 				"circle-notch",
 				"slash",
@@ -312,6 +360,7 @@ export default [
 		import: ["button"],
 		code: () => {
 			return [
+				new button({ label: "Button", color: "primary", icon: "./favicon.png" }),
 				new button({ label: "Button", color: "primary", icon: "fire" }),
 				new button({
 					label: "Button",
@@ -360,6 +409,7 @@ export default [
 		import: ["input", "icon"],
 		code: () => {
 			return [
+				new input({ type: "text", before: new icon("./favicon.png") }),
 				new input({ type: "text", before: new icon("fire") }),
 				new input({
 					type: "text",
@@ -383,6 +433,8 @@ export default [
 					color: "primary",
 					icon: "fire",
 					option: [
+						{ href: "#", label: "Image icon", icon: "./favicon.png" },
+						{ value: "-" },
 						{ href: "#", label: "Copy", icon: "copy" },
 						{ href: "#", label: "Cut", icon: "cut" },
 						{ href: "#", label: "Paste", icon: "paste" },
@@ -396,6 +448,8 @@ export default [
 					icon: "fire",
 					iconafter: true,
 					option: [
+						{ href: "#", label: "Image icon", icon: "./favicon.png" },
+						{ value: "-" },
 						{ href: "#", label: "Copy", icon: "copy", iconafter: true },
 						{ href: "#", label: "Cut", icon: "cut", iconafter: true },
 						{ href: "#", label: "Paste", icon: "paste", iconafter: true },
@@ -423,12 +477,26 @@ export default [
 						}),
 					],
 				}),
+
 				new navbar.container({
 					expand: "lg",
 					elem: [
 						new navbar.brand({
 							label: "Navbar",
 							icon: { icon: "fire", color: "danger", bounce: true },
+							iconafter: true,
+							showlabel: "md",
+							href: "#",
+						}),
+					],
+				}),
+
+				new navbar.container({
+					expand: "lg",
+					elem: [
+						new navbar.brand({
+							label: "Navbar",
+							icon: { icon: "./favicon.png", fade: true },
 							iconafter: true,
 							showlabel: "md",
 							href: "#",
@@ -447,7 +515,11 @@ export default [
 				type: "tab",
 				item: [
 					{ icon: "fire", label: "First", elem: "This is first tab. " + sample.text() },
-					{ label: "Second", elem: "This is second tab. " + sample.text() },
+					{
+						icon: { icon: "./favicon.png", shake: true },
+						label: "Second",
+						elem: "This is second tab. " + sample.text(),
+					},
 					{ label: "Third", elem: "This is third tab. " + sample.text() },
 					{ label: "Disabled", disabled: true, elem: "This is last tab. " + sample.text() },
 				],

@@ -9,7 +9,6 @@ import button from "./button.js";
 import form from "./form.js";
 import * as db from "./api.js";
 import modal from "./modal.js";
-import img from "./img.js";
 import * as alert from "./alert.js";
 import btnclose from "./btnclose.js";
 import file from "./file.js";
@@ -135,12 +134,7 @@ const fn = {
 	},
 	header: (defaultTitle, opt) => {
 		return [
-			!opt.img && opt.icon
-				? new icon(opt.icon)
-				: opt.img
-				? null
-				: new icon(core.setting.icon(defaultIconColor, defaultIconWeight)),
-			!opt.icon && opt.img ? new img(opt.img) : null,
+			opt.icon ? new icon(opt.icon) : new icon(core.setting.icon(defaultIconColor, defaultIconWeight)),
 			new tag({
 				col: true,
 				marginy: 0,

@@ -1,4 +1,7 @@
 "use strict";
+
+// import "../../css/icon.css";
+
 import * as core from "./core.js";
 import tag from "./tag.js";
 
@@ -24,6 +27,15 @@ const defaultOption = {
  * opt : {tagoption,type,icon,weight,fixwidth,spin,rotate,color,inverse,elem,stack}
  */
 
+const isImage = (str) => {
+	if (str) {
+		if (str.startsWith("./") || str.startsWith("http://") || str.startsWith("https://")) {
+			return true;
+		}
+	}
+
+	return false;
+};
 export default class icon extends tag {
 	clicon = 1;
 
@@ -94,8 +106,6 @@ export default class icon extends tag {
 
 			opt.textcolor = opt.color;
 			opt.class = core.merge.class(opt.class, [
-				opt.type ? opt.type : null,
-				opt.icon ? `fa-${opt.icon}` : null,
 				opt.weight ? `fa-${opt.weight}` : null,
 				opt.fixwidth ? "fa-fw" : null,
 				opt.spin ? "fa-spin" : null,
@@ -110,6 +120,20 @@ export default class icon extends tag {
 				opt.inverse ? "fa-inverse" : null,
 				rotate,
 			]);
+
+			if (isImage(opt.icon)) {
+				opt.tag = "img";
+				opt.attr = core.merge.attr(opt.attr, {
+					src: opt.icon,
+					alt: opt.alt,
+				});
+				opt.class = core.merge.class(opt.class, "fa-cl-image");
+			} else {
+				opt.class = core.merge.class(opt.class, [
+					opt.type ? opt.type : null,
+					opt.icon ? `fa-${opt.icon}` : null,
+				]);
+			}
 
 			delete opt.type;
 			delete opt.icon;

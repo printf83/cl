@@ -68,7 +68,7 @@ export default [
 				item: [
 					{ label: "BS5 JS Builder", href: "#" },
 					{ label: "Bootstrap 5", href: "https://getbootstrap.com/docs/5.2/" },
-					{ label: "Font Awesome", href: "https://fontawesome.com/v6.1.2/icons" },
+					{ label: "Font Awesome", href: "https://fontawesome.com/v6.2.0/icons" },
 					{ label: "Bootswatch", href: "https://bootswatch.com/" },
 				],
 			});
