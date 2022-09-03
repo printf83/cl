@@ -182,10 +182,14 @@ export default class example extends div {
 					  })
 					: null,
 				opt.code
-					? new accordion({
-							autoclose: false,
-							autoopen: false,
-							item: item,
+					? new card.container({
+							elem: new card.body({
+								elem: new accordion({
+									autoclose: false,
+									autoopen: false,
+									item: item,
+								}),
+							}),
 					  })
 					: null,
 			],
