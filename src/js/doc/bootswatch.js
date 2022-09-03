@@ -1309,7 +1309,6 @@ export default [
 		import: ["modal"],
 		code: () => {
 			return new modal({
-				title: "Modal title",
 				elem: "Modal body text goes here.",
 
 				button: ["Save changes", "Close"],
@@ -1481,11 +1480,6 @@ export default [
 		code: () => {
 			return new toast({
 				color: "primary",
-				icon: {
-					icon: "fire",
-					color: "primary",
-				},
-				title: "Bootstrap",
 				elem: "Hello, world! This is a toast message.",
 				debug: true, //this last option is for this documentation preview only
 			});
