@@ -421,7 +421,6 @@ export default [
 						new toast({
 							delay: 10000,
 							color: "success",
-							icon: "fire",
 							title: "Result",
 							elem: `${JSON.stringify(data)}`,
 						}).show();
@@ -682,7 +681,6 @@ export default [
 					{
 						label: "Yesss!",
 						color: "primary",
-						icon: "fire",
 						onclick: (event, data) => {
 							new toast("i", `Result from dialog is <b>${JSON.stringify(data)}</b>`).show();
 						},
@@ -978,7 +976,7 @@ export default [
 		import: ["button", "modal"],
 		code: () => {
 			let fn = (fullscreen) => {
-				new $.modal({
+				new modal({
 					fullscreen: fullscreen,
 					elem: `Dialog with <code>fullscreen : <b>${fullscreen}</b></code> option`,
 					button: ["Okay"],

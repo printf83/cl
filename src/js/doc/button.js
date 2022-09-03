@@ -293,10 +293,6 @@ export default [
 						onclick: (event) => {
 							let sender = event.currentTarget;
 							new toast({
-								icon: {
-									icon: "fire",
-									color: "primary",
-								},
 								color: "primary",
 								title: "Button Event",
 								elem: `Button <b>${core.elemInfo(sender)}</b> event <b>onclick</b> trigged`,

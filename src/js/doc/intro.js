@@ -71,7 +71,7 @@ export default [
 					new a({
 						textdecoration: "none",
 						href: "http://bs5-js-builder.herokuapp.com/",
-						elem: new pill({ icon: { icon: "fire" }, label: "CL" }),
+						elem: new pill({ icon: core.setting.icon(), label: "CL" }),
 					}),
 				],
 			}),

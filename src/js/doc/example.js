@@ -94,7 +94,7 @@ export default [
 
 	{
 		title: "Dark view",
-		import: ["example"],
+		import: ["example", "sample"],
 		code: () => {
 			return new example({
 				title: "Title",
@@ -104,7 +104,7 @@ export default [
 				code: () => {
 					return new toast({
 						color: "primary",
-						icon: { icon: "fire", color: "primary" },
+						icon: { icon: sample.icon(), color: "primary" },
 						title: "Bootstrap",
 						elem: "Hello, world! This is a toast message.",
 						debug: true, //this last option is for this documentation preview only

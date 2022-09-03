@@ -30,7 +30,7 @@ export default [
 		import: ["msg", "sample"],
 		code: () => {
 			return new msg({
-				icon: "fire",
+				icon: sample.icon(),
 				elem: sample.text(),
 			});
 		},
@@ -45,17 +45,17 @@ export default [
 			return [
 				new msg({
 					weight: "sm",
-					icon: "fire",
+					icon: sample.icon(),
 					elem: `<b>Weight: sm</b>. ${sample.text()}`,
 				}),
 				new msg({
 					weight: "md",
-					icon: "fire",
+					icon: sample.icon(),
 					elem: `<b>Weight: md</b>. ${sample.text()}`,
 				}),
 				new msg({
 					weight: "lg",
-					icon: "fire",
+					icon: sample.icon(),
 					elem: `<b>Weight: lg</b>. ${sample.text()}`,
 				}),
 			];
@@ -71,12 +71,12 @@ export default [
 			return [
 				new toast({
 					color: "primary",
-					elem: new msg({ weight: "sm", icon: "fire", elem: `<b>In toast</b>. ${sample.text()}` }),
+					elem: new msg({ weight: "sm", icon: sample.icon(), elem: `<b>In toast</b>. ${sample.text()}` }),
 					debug: true,
 				}),
 				new alert.container({
 					color: "primary",
-					elem: new msg({ weight: "sm", icon: "fire", elem: `<b>In alert</b>. ${sample.text()}` }),
+					elem: new msg({ weight: "sm", icon: sample.icon(), elem: `<b>In alert</b>. ${sample.text()}` }),
 					debug: true,
 				}),
 			];
@@ -91,7 +91,7 @@ export default [
 			return new modal({
 				elem: new msg({
 					weight: "md",
-					icon: { icon: "fire", color: "danger" },
+					icon: { icon: sample.icon(), color: "danger" },
 					elem: `<b>In modal</b>. ${sample.text()}`,
 				}),
 				button: ["Okay", "Cancel"],
@@ -111,7 +111,7 @@ export default [
 				color: "primary",
 				divider: false,
 				centerbutton: true,
-				elem: new msg({ weight: "lg", icon: "fire", elem: `<h3>In modal</h3> <p>${sample.text()}</p>` }),
+				elem: new msg({ weight: "lg", icon: sample.icon(), elem: `<h3>In modal</h3> <p>${sample.text()}</p>` }),
 				button: [
 					{
 						color: "light",

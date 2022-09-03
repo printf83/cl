@@ -125,15 +125,15 @@ export default [
 
 	{
 		title: "With icon",
-		import: ["menu"],
+		import: ["menu", "sample"],
 		code: () => {
 			return [
 				{
 					label: "Menu",
-					icon: "fire",
+					icon: sample.icon(),
 					active: true,
 					item: [
-						{ label: "Sub menu 1", icon: "info", active: true },
+						{ label: "Sub menu 1", icon: sample.icon(), active: true },
 						{ label: "Sub menu 2" },
 						{ label: "Sub menu 3" },
 						{ label: "Sub menu 4" },
@@ -147,13 +147,13 @@ export default [
 
 	{
 		title: "No arrow",
-		import: ["menu"],
+		import: ["menu", "sample"],
 		code: () => {
 			return [
 				{
 					label: "Menu",
 					icon: {
-						icon: "fire",
+						icon: sample.icon(),
 						color: "danger",
 					},
 					active: true,
@@ -162,7 +162,7 @@ export default [
 						{
 							label: "Sub menu 1",
 							icon: {
-								icon: "info",
+								icon: sample.icon(),
 								color: "primary",
 							},
 							active: true,

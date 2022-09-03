@@ -112,14 +112,14 @@ export default [
 
 	{
 		title: "Icon",
-		import: ["navbar"],
+		import: ["navbar", "sample"],
 		code: () => {
 			return new navbar.container({
 				expand: "lg",
 				color: "light",
 				elem: [
 					new navbar.brand({
-						icon: { icon: "fire", color: "danger" },
+						icon: { icon: sample.icon(), color: "danger" },
 						href: "#",
 					}),
 				],
@@ -129,14 +129,14 @@ export default [
 
 	{
 		title: "Icon and text",
-		import: ["navbar"],
+		import: ["navbar", "sample"],
 		code: () => {
 			return new navbar.container({
 				expand: "lg",
 				color: "light",
 				elem: [
 					new navbar.brand({
-						icon: { icon: "fire", color: "danger" },
+						icon: { icon: sample.icon(), color: "danger" },
 						label: "Navbar",
 						href: "#",
 					}),

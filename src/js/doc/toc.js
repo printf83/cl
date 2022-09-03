@@ -43,13 +43,13 @@ export default [
 
 	{
 		title: "With icon",
-		import: ["toc"],
+		import: ["toc", "sample"],
 		code: () => {
 			return new toc({
-				icon: "fire",
+				icon: sample.icon(),
 				label: "Example",
 				item: [
-					{ icon: "fire", label: "Item 1" },
+					{ icon: sample.icon(), label: "Item 1" },
 					{ label: "Item 2" },
 					{ label: "Item 3" },
 					{ label: "Item 4" },

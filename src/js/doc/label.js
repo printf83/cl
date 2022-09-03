@@ -23,10 +23,10 @@ export default [
 
 	{
 		title: "With icon",
-		import: ["label"],
+		import: ["label", "sample"],
 		code: () => {
 			return new label({
-				icon: "fire",
+				icon: sample.icon(),
 				label: "Label",
 			});
 		},
@@ -34,10 +34,10 @@ export default [
 
 	{
 		title: "Icon after",
-		import: ["label"],
+		import: ["label", "sample"],
 		code: () => {
 			return new label({
-				icon: "fire",
+				icon: sample.icon(),
 				label: "Label",
 				iconafter: true,
 			});
@@ -47,13 +47,13 @@ export default [
 	{
 		title: "Label for",
 		container: sample.formcontainer,
-		import: ["input", "label"],
+		import: ["input", "label", "sample"],
 		code: () => {
 			let id = core.UUID();
 			return [
 				new label({
 					for: id,
-					icon: "fire",
+					icon: sample.icon(),
 					label: "Label",
 				}),
 				new input({ type: "text", id: id }),
@@ -65,10 +65,10 @@ export default [
 		title: "Label hide",
 		msg: "Show icon only and label is hidden. Put label inside {{span.visually-hidden}}",
 		container: sample.formcontainer,
-		import: ["label"],
+		import: ["label", "sample"],
 		code: () => {
 			return new label({
-				icon: "fire",
+				icon: sample.icon(),
 				label: "This is .visually-hidden label",
 				hidelabel: true,
 			});
@@ -79,11 +79,11 @@ export default [
 		title: "Label show",
 		msg: "Show icon only until viewport or higher",
 		container: sample.formcontainer,
-		import: ["label"],
+		import: ["label", "sample"],
 		code: () => {
 			return [null, "sm", "md", "lg", "xl", "xxl"].map((i) => {
 				return new label({
-					icon: "fire",
+					icon: sample.icon(),
 					showlabel: i,
 					label: i ? `Show on ${i}` : "Always show label",
 				});

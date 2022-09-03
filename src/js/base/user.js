@@ -9,6 +9,7 @@ import button from "./button.js";
 import form from "./form.js";
 import * as db from "./api.js";
 import modal from "./modal.js";
+import * as dlg from "./dlg.js";
 import * as alert from "./alert.js";
 import btnclose from "./btnclose.js";
 import file from "./file.js";
@@ -236,19 +237,29 @@ const fn = {
 			fn.showmsg(container, null);
 		},
 		signout: (sender, callback) => {
-			db.user.signout(
+			new dlg.confirmbox("?", `Are you sure to <b>Sign out</b> now?`, [
 				{
-					sender: sender,
-				},
-				(result) => {
-					callback(result);
+					label: "Yes",
+					onclick: () => {
+						db.user.signout(
+							{
+								sender: sender,
+							},
+							(result) => {
+								callback(result);
 
-					//event signout
-					if (core.user.onsignout && typeof core.user.onsignout === "function") {
-						core.user.onsignout();
-					}
-				}
-			);
+								//event signout
+								if (core.user.onsignout && typeof core.user.onsignout === "function") {
+									core.user.onsignout();
+								}
+							}
+						);
+					},
+				},
+				{
+					label: "No",
+				},
+			]).show();
 		},
 		signin: (sender, opt) => {
 			let container = sender.closest("form");

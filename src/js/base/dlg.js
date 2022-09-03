@@ -51,7 +51,7 @@ export class msgbox extends modal {
 					}),
 					defautlbtncolor: bI ? bI.color : null,
 					button: btnBuilder(opt[2], ["Okay"], bI?.color, false),
-					title: opt[3],
+					title: opt[4]?.debug === true ? (opt[3] === null ? undefined : opt[3]) : opt[3],
 					debug: opt[4]?.debug === true ? true : false,
 				});
 			} else if (opt.length === 4) {
@@ -135,7 +135,7 @@ export class confirmbox extends modal {
 					}),
 					defautlbtncolor: bI ? bI.color : null,
 					button: btnBuilder(opt[2], ["Okay", "Cancel", "Retry"], bI?.color, true),
-					title: opt[3],
+					title: opt[4]?.debug === true ? (opt[3] === null ? undefined : opt[3]) : opt[3],
 					debug: opt[4]?.debug === true ? true : false,
 				});
 			} else if (opt.length === 4) {

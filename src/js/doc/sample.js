@@ -9,7 +9,7 @@ import toast from "../base/toast.js";
 
 let dbstate = null;
 let textindex = 0;
-let textdb = [
+const textdb = [
 	"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur elit massa, elementum vel metus id, congue sollicitudin lectus. Praesent ultricies felis eget nisl volutpat gravida. In eleifend iaculis viverra. Proin ut gravida elit, id posuere velit. Nulla congue enim at odio eleifend accumsan. Curabitur felis quam, feugiat in tincidunt ac, pulvinar eu diam.",
 	"Nam tempor maximus ante vel malesuada. Vivamus nibh neque, cursus finibus risus vel, porttitor accumsan lacus. Nulla facilisi. Sed sit amet sagittis magna, id cursus est. Quisque convallis vel magna quis vestibulum. Curabitur placerat diam odio, in tincidunt felis viverra ac. Aenean quis ante diam. Sed sit amet lectus rutrum tortor feugiat auctor.",
 	"Donec vehicula elit vel purus euismod, et aliquet nisl molestie. Phasellus at porttitor neque. Donec et orci mi. Nulla a laoreet tortor. Cras ac massa ipsum. Suspendisse mi diam, sodales nec felis sit amet, ullamcorper aliquet tellus. In vitae urna ipsum. Donec cursus rutrum magna. Quisque sed nisi a lacus accumsan mollis.",
@@ -23,7 +23,7 @@ let textdb = [
 ];
 
 let shorttextindex = 0;
-let shorttextdb = [
+const shorttextdb = [
 	"Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
 	"Nam tempor maximus ante vel malesuada.",
 	"Donec vehicula elit vel purus euismod, et aliquet nisl molestie.",
@@ -36,7 +36,7 @@ let shorttextdb = [
 	"Morbi pulvinar tortor a arcu accumsan, at aliquam augue eleifend.",
 ];
 
-let svgdb = {};
+const svgdb = {};
 
 function isListed(val, listed) {
 	if (listed) {
@@ -80,9 +80,42 @@ fill="#999" stroke="none">
 </g>
 </svg>`;
 
+let iconindex = 0;
+const dbicon = [
+	"address-book",
+	"arrow-alt-circle-down",
+	"bell",
+	"calendar-alt",
+	"chart-bar",
+	"check-circle",
+	"clipboard",
+	"clock",
+	"credit-card",
+	"file-image",
+	"hand-peace",
+	"kiss-wink-heart",
+	"star",
+];
+
+// let brandiconindex = 0;
+// const dbbrandicon = [
+// 	"github",
+// 	"css3",
+// 	"html5",
+// 	"js-square",
+// 	"node-js",
+// 	"font-awesome",
+// 	"bootstrap",
+// 	"edge",
+// 	"firefox",
+// 	"chrome",
+// ];
+
 const fn = {
 	resetindex: () => {
 		textindex = 0;
+		shorttextindex = 0;
+		iconindex = 0;
 	},
 	img: (width = 300, height = 283) => {
 		if (!svgdb.hasOwnProperty(`${width}_${height}`)) {
@@ -104,7 +137,18 @@ const fn = {
 		}
 		return shorttextdb[shorttextindex++];
 	},
-
+	icon: () => {
+		if (iconindex >= dbicon.length) {
+			iconindex = 0;
+		}
+		return dbicon[iconindex++];
+	},
+	// brandicon: () => {
+	// 	if (brandiconindex >= dbbrandicon.length) {
+	// 		dbbrandicon = 0;
+	// 	}
+	// 	return dbicon[brandiconindex++];
+	// },
 	tagprop: (exclude) => {
 		let tprop = [
 			"id",

@@ -160,12 +160,12 @@ export default [
 	{
 		title: "Color",
 		container: sample.formcontainer,
-		import: ["toast", "msg"],
+		import: ["toast", "msg", "sample"],
 		code: () => {
 			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map((i) => {
 				return new toast({
 					color: i,
-					elem: new msg({ weight: "sm", icon: "fire", elem: `Example <b>${i}</b> toast` }),
+					elem: new msg({ weight: "sm", icon: sample.icon(), elem: `Example <b>${i}</b> toast` }),
 					debug: true, //this last argument is for this documentation preview only
 				});
 			});
@@ -175,7 +175,7 @@ export default [
 	{
 		title: "Position",
 		container: sample.stackcontainer,
-		import: ["toast", "msg", "button"],
+		import: ["toast", "msg", "button", "sample"],
 		code: () => {
 			return [
 				{ label: "Top left", position: "top-0 start-0" },
@@ -196,7 +196,7 @@ export default [
 					onclick: () => {
 						new toast({
 							position: i.position,
-							elem: new msg({ weight: "sm", icon: "fire", elem: `${i.label} toast.` }),
+							elem: new msg({ weight: "sm", icon: sample.icon(), elem: `${i.label} toast.` }),
 						}).show();
 					},
 				});

@@ -366,45 +366,50 @@ export default [
 	{
 		title: "Button",
 		container: sample.stackcontainer,
-		import: ["button"],
+		import: ["button", "sample"],
 		code: () => {
 			return [
-				new button({ label: "Button", color: "primary", icon: "./favicon.png" }),
-				new button({ label: "Button", color: "primary", icon: "fire" }),
+				new button({
+					label: "Button",
+					color: "primary",
+					icon: "./favicon.png",
+				}),
+				new button({
+					label: "Button",
+					color: "primary",
+					icon: sample.icon(),
+				}),
 				new button({
 					label: "Button",
 					color: "warning",
 					icon: {
 						color: "danger",
-						icon: "fire",
+						icon: sample.icon(),
 					},
 				}),
 				new button({
 					label: "Button",
 					color: "success",
-					icon: {
-						color: "warning",
-						icon: "fire",
-					},
+					icon: sample.icon(),
 				}),
-				new button({ label: "Button", color: "primary", icon: "fire", iconafter: true, showlabel: "md" }),
+				new button({
+					label: "Button",
+					color: "primary",
+					icon: sample.icon(),
+					iconafter: true,
+					showlabel: "md",
+				}),
 				new button({
 					label: "Button",
 					color: "warning",
-					icon: {
-						color: "danger",
-						icon: "fire",
-					},
+					icon: sample.icon(),
 					iconafter: true,
 					showlabel: "md",
 				}),
 				new button({
 					label: "Button",
 					color: "success",
-					icon: {
-						color: "warning",
-						icon: "fire",
-					},
+					icon: sample.icon(),
 					iconafter: true,
 					showlabel: "md",
 				}),
@@ -415,17 +420,14 @@ export default [
 	{
 		title: "Textbox",
 		container: sample.stackcontainer,
-		import: ["input", "icon"],
+		import: ["input", "icon", "sample"],
 		code: () => {
 			return [
 				new input({ type: "text", before: new icon("./favicon.png") }),
-				new input({ type: "text", before: new icon("fire") }),
+				new input({ type: "text", before: new icon(sample.icon()) }),
 				new input({
 					type: "text",
-					before: new icon({
-						color: "danger",
-						icon: "fire",
-					}),
+					before: new icon(sample.icon()),
 				}),
 			];
 		},
@@ -434,13 +436,13 @@ export default [
 	{
 		title: "Dropdown & item",
 		container: sample.formcontainer,
-		import: ["dropdown"],
+		import: ["dropdown", "sample"],
 		code: () => {
 			return [
 				new dropdown({
 					label: "Dropdown",
 					color: "primary",
-					icon: "fire",
+					icon: sample.icon(),
 					option: [
 						{ href: "#", label: "Image icon", icon: "./favicon.png" },
 						{ value: "-" },
@@ -454,7 +456,7 @@ export default [
 				new dropdown({
 					label: "Dropdown",
 					color: "primary",
-					icon: "fire",
+					icon: sample.icon(),
 					iconafter: true,
 					option: [
 						{ href: "#", label: "Image icon", icon: "./favicon.png", iconafter: true },
@@ -473,7 +475,7 @@ export default [
 	{
 		title: "Navbar",
 		container: sample.formcontainer,
-		import: ["navbar"],
+		import: ["navbar", "sample"],
 		code: () => {
 			return [
 				new navbar.container({
@@ -481,7 +483,7 @@ export default [
 					elem: [
 						new navbar.brand({
 							label: "Navbar",
-							icon: { icon: "fire", color: "danger", shake: true },
+							icon: { icon: sample.icon(), shake: true },
 							href: "#",
 						}),
 					],
@@ -492,7 +494,7 @@ export default [
 					elem: [
 						new navbar.brand({
 							label: "Navbar",
-							icon: { icon: "fire", color: "danger", bounce: true },
+							icon: { icon: sample.icon(), color: "danger", bounce: true },
 							iconafter: true,
 							showlabel: "md",
 							href: "#",
@@ -523,13 +525,13 @@ export default [
 			return new tab({
 				type: "tab",
 				item: [
-					{ icon: "fire", label: "First", elem: "This is first tab. " + sample.text() },
+					{ icon: sample.icon(), label: "First", elem: "This is first tab. " + sample.text() },
 					{
 						icon: { icon: "./favicon.png", shake: true },
 						label: "Second",
 						elem: "This is second tab. " + sample.text(),
 					},
-					{ label: "Third", elem: "This is third tab. " + sample.text() },
+					{ label: "Third", icon: sample.icon(), elem: "This is third tab. " + sample.text() },
 					{ label: "Disabled", disabled: true, elem: "This is last tab. " + sample.text() },
 				],
 			});
