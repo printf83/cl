@@ -218,7 +218,6 @@ export default [
 		import: ["modal", "tab", "sample"],
 		code: () => {
 			return new modal({
-				title: "Modal title",
 				elem: new tab({
 					type: "tab",
 					flush: true, //!important
@@ -250,7 +249,6 @@ export default [
 		import: ["modal", "tab", "sample"],
 		code: () => {
 			return new modal({
-				title: "Modal title",
 				elem: new tab({
 					type: "pill",
 					flush: true, //!important

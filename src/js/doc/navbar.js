@@ -119,7 +119,7 @@ export default [
 				color: "light",
 				elem: [
 					new navbar.brand({
-						icon: { icon: sample.icon(), color: "danger" },
+						icon: sample.icon(),
 						href: "#",
 					}),
 				],
@@ -136,7 +136,7 @@ export default [
 				color: "light",
 				elem: [
 					new navbar.brand({
-						icon: { icon: sample.icon(), color: "danger" },
+						icon: sample.icon(),
 						label: "Navbar",
 						href: "#",
 					}),

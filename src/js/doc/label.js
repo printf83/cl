@@ -1,6 +1,5 @@
 "use strict";
 import sample from "./sample.js";
-
 import * as core from "../base/core.js";
 import label from "../base/label.js";
 import input from "../base/input.js";

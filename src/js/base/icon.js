@@ -29,7 +29,13 @@ const defaultOption = {
 
 const isImage = (str) => {
 	if (str) {
-		if (str.startsWith("./") || str.startsWith("http://") || str.startsWith("https://")) {
+		if (
+			str.startsWith("/") ||
+			str.startsWith("./") ||
+			str.startsWith("../") ||
+			str.startsWith("http://") ||
+			str.startsWith("https://")
+		) {
 			return true;
 		}
 	}

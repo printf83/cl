@@ -82,19 +82,35 @@ fill="#999" stroke="none">
 
 let iconindex = 0;
 const dbicon = [
+	"image",
+	"compass",
+	"hand-peace",
+	"chess-queen",
+	"face-grin-squint",
+	"id-badge",
+	"lightbulb",
+	"snowflake",
+	"circle-user",
+	"star",
+	"envelope",
+	"paper-plane",
+
+	"cable-car",
+	"wand-magic-sparkles",
+	"rocket",
+	"gamepad",
+	"earth-americas",
+	"bug",
+	"radio",
+
 	"address-book",
-	"arrow-alt-circle-down",
 	"bell",
 	"calendar-alt",
 	"chart-bar",
 	"check-circle",
 	"clipboard",
 	"clock",
-	"credit-card",
-	"file-image",
-	"hand-peace",
 	"kiss-wink-heart",
-	"star",
 ];
 
 // let brandiconindex = 0;

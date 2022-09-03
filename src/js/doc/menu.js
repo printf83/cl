@@ -1,4 +1,5 @@
 "use strict";
+import sample from "./sample.js";
 import menu from "../base/menu.js";
 import toast from "../base/toast.js";
 

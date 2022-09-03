@@ -33,6 +33,9 @@ export default [
 
 	{
 		title: "Image icon",
+		msg: [
+			"Any icon that start with  {{/}}, {{./}}, {{../}}, {{http://}} or {{https://}} will be threat as <b>Image icon</b>",
+		],
 		import: ["icon"],
 		code: () => {
 			return new icon({
@@ -49,19 +52,17 @@ export default [
 		import: ["icon"],
 		code: () => {
 			return [
-				"address-book",
-				"arrow-alt-circle-down",
-				"bell",
-				"calendar-alt",
-				"chart-bar",
-				"check-circle",
-				"clipboard",
-				"clock",
-				"credit-card",
-				"file-image",
-				"hand-peace",
-				"kiss-wink-heart",
-				"star",
+				sample.icon(),
+				sample.icon(),
+				sample.icon(),
+				sample.icon(),
+				sample.icon(),
+				sample.icon(),
+				sample.icon(),
+				sample.icon(),
+				sample.icon(),
+				sample.icon(),
+				sample.icon(),
 			].map((i) => {
 				return new icon(i);
 			});
@@ -92,9 +93,14 @@ export default [
 
 	{
 		title: "Color",
-		import: ["icon"],
+		container: sample.stackcontainer,
+		import: ["icon", "sample"],
 		code: () => {
-			return new icon({ type: "fab", icon: "node-js", color: "success" });
+			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark", "muted"].map(
+				(i) => {
+					return new icon({ icon: sample.icon(), color: i });
+				}
+			);
 		},
 	},
 
@@ -110,34 +116,33 @@ export default [
 	{
 		title: "Fixwidth",
 		container: sample.stackcontainer,
-		import: ["icon"],
+		import: ["icon", "sample"],
 		code: () => {
+			let d = sample.icon();
 			return [
 				new icon({
-					type: "fab",
-					icon: "node-js",
+					icon: d,
 					fixwidth: true,
-					class: "border p-3",
-					size: "lg",
+					border: true,
+					weight: "lg",
 				}),
 				new icon({
-					type: "fab",
-					icon: "node-js",
+					icon: d,
 					fixwidth: false,
-					class: "border p-3",
-					size: "lg",
+					border: true,
+					weight: "lg",
 				}),
 				new icon({
 					icon: "./favicon.png",
 					fixwidth: true,
-					class: "border",
-					size: "lg",
+					border: true,
+					weight: "lg",
 				}),
 				new icon({
 					icon: "./favicon.png",
 					fixwidth: false,
-					class: "border",
-					size: "lg",
+					border: true,
+					weight: "lg",
 				}),
 			];
 		},
@@ -146,10 +151,11 @@ export default [
 	{
 		title: "Size",
 		container: sample.stackcontainer,
-		import: ["icon"],
+		import: ["icon", "sample"],
 		code: () => {
+			let d = sample.icon();
 			return ["xs", "sm", null, "lg", "2x", "3x", "4x"].map((i) => {
-				return new icon({ type: "fab", icon: "node-js", weight: i });
+				return new icon({ icon: d, weight: i });
 			});
 		},
 	},
@@ -168,10 +174,11 @@ export default [
 	{
 		title: "Rotate",
 		container: sample.stackcontainer,
-		import: ["icon"],
+		import: ["icon", "sample"],
 		code: () => {
+			let d = sample.icon();
 			return [90, 180, 270, "horizontal", "vertical", "both"].map((i) => {
-				return new icon({ type: "fab", icon: "node-js", rotate: i });
+				return new icon({ icon: d, rotate: i });
 			});
 		},
 	},
@@ -194,21 +201,21 @@ export default [
 	{
 		title: "Spin",
 		container: sample.stackcontainer,
-		import: ["icon"],
+		import: ["icon", "sample"],
 		code: () => {
 			return [
 				"./favicon.png",
-				"spinner",
-				"circle-notch",
-				"slash",
-				"fan",
-				"crosshairs",
-				"sync",
-				"cog",
-				"compact-disc",
-				"compass",
-				"wrench",
-				"snowflake",
+				sample.icon(),
+				sample.icon(),
+				sample.icon(),
+				sample.icon(),
+				sample.icon(),
+				sample.icon(),
+				sample.icon(),
+				sample.icon(),
+				sample.icon(),
+				sample.icon(),
+				sample.icon(),
 			].map((i) => {
 				return new icon({ icon: i, spin: true });
 			});
@@ -218,21 +225,21 @@ export default [
 	{
 		title: "Fade",
 		container: sample.stackcontainer,
-		import: ["icon"],
+		import: ["icon", "sample"],
 		code: () => {
 			return [
 				"./favicon.png",
-				"spinner",
-				"circle-notch",
-				"slash",
-				"fan",
-				"crosshairs",
-				"sync",
-				"cog",
-				"compact-disc",
-				"compass",
-				"wrench",
-				"snowflake",
+				sample.icon(),
+				sample.icon(),
+				sample.icon(),
+				sample.icon(),
+				sample.icon(),
+				sample.icon(),
+				sample.icon(),
+				sample.icon(),
+				sample.icon(),
+				sample.icon(),
+				sample.icon(),
 			].map((i) => {
 				return new icon({ icon: i, fade: true });
 			});
@@ -242,21 +249,21 @@ export default [
 	{
 		title: "Beat",
 		container: sample.stackcontainer,
-		import: ["icon"],
+		import: ["icon", "sample"],
 		code: () => {
 			return [
 				"./favicon.png",
-				"spinner",
-				"circle-notch",
-				"slash",
-				"fan",
-				"crosshairs",
-				"sync",
-				"cog",
-				"compact-disc",
-				"compass",
-				"wrench",
-				"snowflake",
+				sample.icon(),
+				sample.icon(),
+				sample.icon(),
+				sample.icon(),
+				sample.icon(),
+				sample.icon(),
+				sample.icon(),
+				sample.icon(),
+				sample.icon(),
+				sample.icon(),
+				sample.icon(),
 			].map((i) => {
 				return new icon({ icon: i, beat: true });
 			});
@@ -266,21 +273,21 @@ export default [
 	{
 		title: "Fade beat",
 		container: sample.stackcontainer,
-		import: ["icon"],
+		import: ["icon", "sample"],
 		code: () => {
 			return [
 				"./favicon.png",
-				"spinner",
-				"circle-notch",
-				"slash",
-				"fan",
-				"crosshairs",
-				"sync",
-				"cog",
-				"compact-disc",
-				"compass",
-				"wrench",
-				"snowflake",
+				sample.icon(),
+				sample.icon(),
+				sample.icon(),
+				sample.icon(),
+				sample.icon(),
+				sample.icon(),
+				sample.icon(),
+				sample.icon(),
+				sample.icon(),
+				sample.icon(),
+				sample.icon(),
 			].map((i) => {
 				return new icon({ icon: i, beat: true, fade: true });
 			});
@@ -290,21 +297,21 @@ export default [
 	{
 		title: "Bounce",
 		container: sample.stackcontainer,
-		import: ["icon"],
+		import: ["icon", "sample"],
 		code: () => {
 			return [
 				"./favicon.png",
-				"spinner",
-				"circle-notch",
-				"slash",
-				"fan",
-				"crosshairs",
-				"sync",
-				"cog",
-				"compact-disc",
-				"compass",
-				"wrench",
-				"snowflake",
+				sample.icon(),
+				sample.icon(),
+				sample.icon(),
+				sample.icon(),
+				sample.icon(),
+				sample.icon(),
+				sample.icon(),
+				sample.icon(),
+				sample.icon(),
+				sample.icon(),
+				sample.icon(),
 			].map((i) => {
 				return new icon({ icon: i, bounce: true });
 			});
@@ -314,21 +321,21 @@ export default [
 	{
 		title: "Flip",
 		container: sample.stackcontainer,
-		import: ["icon"],
+		import: ["icon", "sample"],
 		code: () => {
 			return [
 				"./favicon.png",
-				"spinner",
-				"circle-notch",
-				"slash",
-				"fan",
-				"crosshairs",
-				"sync",
-				"cog",
-				"compact-disc",
-				"compass",
-				"wrench",
-				"snowflake",
+				sample.icon(),
+				sample.icon(),
+				sample.icon(),
+				sample.icon(),
+				sample.icon(),
+				sample.icon(),
+				sample.icon(),
+				sample.icon(),
+				sample.icon(),
+				sample.icon(),
+				sample.icon(),
 			].map((i) => {
 				return new icon({ icon: i, flip: true });
 			});
@@ -338,21 +345,21 @@ export default [
 	{
 		title: "Shake",
 		container: sample.stackcontainer,
-		import: ["icon"],
+		import: ["icon", "sample"],
 		code: () => {
 			return [
 				"./favicon.png",
-				"spinner",
-				"circle-notch",
-				"slash",
-				"fan",
-				"crosshairs",
-				"sync",
-				"cog",
-				"compact-disc",
-				"compass",
-				"wrench",
-				"snowflake",
+				sample.icon(),
+				sample.icon(),
+				sample.icon(),
+				sample.icon(),
+				sample.icon(),
+				sample.icon(),
+				sample.icon(),
+				sample.icon(),
+				sample.icon(),
+				sample.icon(),
+				sample.icon(),
 			].map((i) => {
 				return new icon({ icon: i, shake: true });
 			});

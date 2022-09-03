@@ -542,9 +542,14 @@ function gen_content(m1, m2, callback) {
 
 										//update scroll-spy
 										const dataSpyList = document.querySelectorAll('[data-bs-spy="scroll"]');
-										dataSpyList.forEach((dataSpyEl) => {
-											bootstrap.ScrollSpy.getInstance(dataSpyEl).refresh();
-										});
+										if (dataSpyList && dataSpyList.length > 0) {
+											dataSpyList.forEach((dataSpyEl) => {
+												let inst = bootstrap.ScrollSpy.getInstance(dataSpyEl);
+												if (inst) {
+													inst.refresh();
+												}
+											});
+										}
 
 										//count pagespeed
 										document.getElementById("pagespeed").innerText = `${(

@@ -16,7 +16,7 @@ export default [
 	{
 		title: "Example",
 		container: sample.stackcontainer,
-		import: ["button", "card", "collapse","sample"],
+		import: ["button", "card", "collapse", "sample"],
 		code: () => {
 			let id = core.UUID();
 
@@ -28,7 +28,7 @@ export default [
 				new collapse.toggle({
 					target: `#${id}`,
 					elem: new button({
-						icon: { icon: sample.icon(), color: "danger" },
+						icon: sample.icon(),
 						label: "Toggle with icon",
 						color: "warning",
 					}),
@@ -135,7 +135,7 @@ export default [
 				new collapse.toggle({
 					target: `#${id}`,
 					elem: new button({
-						icon: { icon: sample.icon(), color: "danger" },
+						icon: sample.icon(),
 						label: "Toggle with icon",
 						color: "warning",
 					}),
