@@ -99,6 +99,15 @@ export default [
 	},
 
 	{
+		title: "Image color",
+		msg: ["Warning! Unsupported image color. Please use css to change image color"],
+		import: ["icon"],
+		code: () => {
+			return new icon({ icon: "./favicon.png", color: "success" });
+		},
+	},
+
+	{
 		title: "Fixwidth",
 		container: sample.stackcontainer,
 		import: ["icon"],
@@ -448,7 +457,7 @@ export default [
 					icon: "fire",
 					iconafter: true,
 					option: [
-						{ href: "#", label: "Image icon", icon: "./favicon.png" },
+						{ href: "#", label: "Image icon", icon: "./favicon.png", iconafter: true },
 						{ value: "-" },
 						{ href: "#", label: "Copy", icon: "copy", iconafter: true },
 						{ href: "#", label: "Cut", icon: "cut", iconafter: true },
