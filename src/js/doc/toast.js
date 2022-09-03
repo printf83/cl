@@ -27,8 +27,36 @@ export default [
 		code: () => {
 			return new toast({
 				color: "primary",
-				icon: { icon: "fire", color: "primary" },
-				title: "Bootstrap",
+				elem: "Hello, world! This is a toast message.",
+				debug: true, //this last option is for this documentation preview only
+			});
+		},
+	},
+
+	{
+		title: "Without title & icon",
+		viewclass: "cl-modal-preview",
+		import: ["toast"],
+		code: () => {
+			return new toast({
+				color: "primary",
+				icon: null,
+				title: null,
+				elem: "Hello, world! This is a toast message.",
+				debug: true, //this last option is for this documentation preview only
+			});
+		},
+	},
+
+	{
+		title: "Custom title & icon",
+		viewclass: "cl-modal-preview",
+		import: ["toast"],
+		code: () => {
+			return new toast({
+				color: "primary",
+				icon: { icon: "heart", color: "primary" },
+				title: "Love",
 				elem: "Hello, world! This is a toast message.",
 				debug: true, //this last option is for this documentation preview only
 			});
@@ -46,8 +74,6 @@ export default [
 				onclick: () => {
 					new toast({
 						color: "primary",
-						icon: { icon: "fire", color: "primary" },
-						title: "Bootstrap",
 						elem: "Hello, world! This is a toast message.",
 					}).show();
 				},
@@ -63,8 +89,6 @@ export default [
 		code: () => {
 			return new toast({
 				color: "primary",
-				icon: { icon: "fire", color: "primary" },
-				title: "Bootstrap",
 				elem: "Hello, world! This is a toast message.",
 				debug: true, //this last option is for this documentation preview only
 			});
@@ -82,8 +106,6 @@ export default [
 				onclick: () => {
 					new toast({
 						color: "primary",
-						icon: { icon: "fire", color: "primary" },
-						title: "Bootstrap",
 						elem: "Heads up, toasts will stack automatically. Second toast will appear in 2 second.",
 					}).show();
 
@@ -91,8 +113,6 @@ export default [
 					setTimeout(() => {
 						new toast({
 							color: "success",
-							icon: { icon: "fire", color: "success" },
-							title: "Bootstrap",
 							elem: "See? Just like this.",
 						}).show();
 					}, 2000);
@@ -195,8 +215,6 @@ export default [
 					new toast({
 						autohide: false,
 						color: "warning",
-						icon: { icon: "fire", color: "danger" },
-						title: "Toast header",
 						elem: "Hello, world! This is a toast message.",
 					}).show();
 				},
@@ -215,8 +233,6 @@ export default [
 					new toast({
 						delay: 10000,
 						color: "primary",
-						icon: { icon: "fire", color: "info" },
-						title: "Toast header",
 						elem: "This toast will close in 10 seconds.",
 					}).show();
 				},

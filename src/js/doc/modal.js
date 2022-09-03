@@ -35,7 +35,54 @@ export default [
 		import: ["toast", "msg", "modal"],
 		code: () => {
 			return new modal({
-				title: "Modal title",
+				elem: new msg({
+					weight: "md",
+					icon: "i",
+					elem: "This is example msgbox",
+				}),
+				button: {
+					label: "Okay",
+					onclick: () => {
+						new toast("i", "Callback").show();
+					},
+				},
+				debug: true, //this last option is for this documentation preview only
+			});
+		},
+	},
+
+	{
+		title: "Without icon and title header",
+		viewclass: "cl-modal-preview",
+		import: ["toast", "msg", "modal"],
+		code: () => {
+			return new modal({
+				title: null,
+				icon: null,
+				elem: new msg({
+					weight: "md",
+					icon: "i",
+					elem: "This is example msgbox",
+				}),
+				button: {
+					label: "Okay",
+					onclick: () => {
+						new toast("i", "Callback").show();
+					},
+				},
+				debug: true, //this last option is for this documentation preview only
+			});
+		},
+	},
+
+	{
+		title: "Custom title & icon header",
+		viewclass: "cl-modal-preview",
+		import: ["toast", "msg", "modal"],
+		code: () => {
+			return new modal({
+				title: "Love",
+				icon: "heart",
 				elem: new msg({
 					weight: "md",
 					icon: "i",
@@ -67,14 +114,9 @@ export default [
 					label: i.label,
 					icon: i.icon,
 					onclick: () => {
-						new dlg.msgbox(
-							i.icon,
-							`This is example msgbox with <b>${i.icon}</b> icon`,
-							() => {
-								new toast(i.icon, "After user click <b>Okay</b> button").show();
-							},
-							"Modal title"
-						).show();
+						new dlg.msgbox(i.icon, `This is example msgbox with <b>${i.icon}</b> icon`, () => {
+							new toast(i.icon, "After user click <b>Okay</b> button").show();
+						}).show();
 					},
 				});
 			});
@@ -93,7 +135,7 @@ export default [
 				(event, data) => {
 					new toast("i", `Result from dlg.inputbox is : ${JSON.stringify(data)}`).show();
 				},
-				"Modal title",
+				"Custom Modal Title",
 				{ debug: true } //this last argument is for this documentation preview only
 			);
 		},
@@ -120,7 +162,7 @@ export default [
 				(event, data) => {
 					new toast("i", `Result from dlg.inputbox is : ${JSON.stringify(data)}`).show();
 				},
-				"Modal title",
+				null,
 				{ debug: true } //this last argument is for this documentation preview only
 			);
 		},
@@ -164,8 +206,7 @@ export default [
 								(event) => {
 									new toast("x", `You not give anything in inputbox`).show();
 								},
-							],
-							"Modal title"
+							]
 						).show();
 					},
 				});
@@ -273,7 +314,7 @@ export default [
 				(event, data) => {
 					new toast("/", `You give <b>${JSON.stringify(data)}</b> in inputbox`).show();
 				},
-				"Modal title",
+				null,
 				{ debug: true } //this last argument is for this documentation preview only
 			);
 		},
@@ -376,20 +417,15 @@ export default [
 				label: "Show inputbox with multiple input",
 				color: "primary",
 				onclick: () => {
-					new dlg.inputbox(
-						el,
-						null,
-						(event, data) => {
-							new toast({
-								delay: 10000,
-								color: "success",
-								icon: "fire",
-								title: "Result",
-								elem: `${JSON.stringify(data)}`,
-							}).show();
-						},
-						"Modal title"
-					).show();
+					new dlg.inputbox(el, null, (event, data) => {
+						new toast({
+							delay: 10000,
+							color: "success",
+							icon: "fire",
+							title: "Result",
+							elem: `${JSON.stringify(data)}`,
+						}).show();
+					}).show();
 				},
 			});
 		},
@@ -407,7 +443,7 @@ export default [
 				() => {
 					new toast("i", "Callback").show();
 				},
-				"Modal title",
+				null,
 				{ debug: true } //this last argument is for this documentation preview only
 			);
 		},
@@ -428,25 +464,20 @@ export default [
 					label: i.label,
 					icon: i.icon,
 					onclick: () => {
-						new dlg.confirmbox(
-							i.icon,
-							`This is example confirmbox with <b>${i.icon}</b> icon`,
-							[
-								{
-									label: "Yes",
-									onclick: () => {
-										new toast("/", "After user click <b>Yes</b> button").show();
-									},
+						new dlg.confirmbox(i.icon, `This is example confirmbox with <b>${i.icon}</b> icon`, [
+							{
+								label: "Yes",
+								onclick: () => {
+									new toast("/", "After user click <b>Yes</b> button").show();
 								},
-								{
-									label: "No",
-									onclick: () => {
-										new toast("x", "After user not click <b>No</b> button").show();
-									},
+							},
+							{
+								label: "No",
+								onclick: () => {
+									new toast("x", "After user not click <b>No</b> button").show();
 								},
-							],
-							"Modal title"
-						).show();
+							},
+						]).show();
 					},
 				});
 			});
@@ -460,9 +491,7 @@ export default [
 		import: ["modal"],
 		code: () => {
 			return new modal({
-				title: "Modal title",
 				elem: "Modal body text goes here.",
-
 				button: ["Save changes", "Close"],
 				debug: true, //this last option is for this documentation preview only
 			});
@@ -478,7 +507,6 @@ export default [
 				color: "primary",
 				onclick: () => {
 					new modal({
-						title: "Modal title",
 						dark: true,
 						elem: "Modal body text goes here.",
 						button: [
@@ -500,7 +528,6 @@ export default [
 		import: ["toast", "input", "modal"],
 		code: () => {
 			return new modal({
-				title: "Modal title",
 				elem: "Modal body text goes here.",
 				button: [
 					{
@@ -534,7 +561,6 @@ export default [
 					onclick: (e) => {
 						new modal({
 							backdropcolor: i.backdropcolor,
-							title: "Modal title",
 							elem: new msg({
 								weight: "md",
 								icon: i.icon,
@@ -567,7 +593,6 @@ export default [
 				onclick: () => {
 					new modal({
 						static: false,
-						title: "Modal title",
 						elem: "By default, modal dialog will not close if you click outside or press escape key. To allow modal dialog to close when click outside or press escape key, set <code>static: false</code> option",
 						button: [
 							{
@@ -594,7 +619,6 @@ export default [
 				onclick: () => {
 					new modal({
 						scrollable: false,
-						title: "Modal title",
 						elem: [
 							new p({
 								elem: "By default, modal dialog will activate scrolling inside modal dialog. To disabled it, set <code>scrollable: false</code> option.",
@@ -631,7 +655,6 @@ export default [
 				onclick: () => {
 					new modal({
 						center: false,
-						title: "Modal title",
 						elem: "By default, modal dialog will vertically centered when shown. To disabled it, set <code>center: false</code> option.",
 						button: [
 							{
@@ -654,7 +677,6 @@ export default [
 		import: ["toast", "modal"],
 		code: () => {
 			return new modal({
-				title: "Modal title",
 				elem: "Custom button dialog",
 				button: [
 					{
@@ -688,7 +710,6 @@ export default [
 				color: "primary",
 				onclick: () => {
 					new modal({
-						title: "Modal title",
 						elem: [
 							new h({ level: 5, elem: "Popover in a modal" }),
 							new p({
@@ -802,7 +823,6 @@ export default [
 		code: () => {
 			let fn = (recipient) => {
 				new modal({
-					title: "Modal title",
 					elem: new container.form([
 						new input({
 							type: "text",
@@ -905,7 +925,6 @@ export default [
 				onclick: () => {
 					new modal({
 						animate: false,
-						title: "Modal title",
 						elem: "Dialog without fade effect",
 						button: "Okay",
 					}).show();
@@ -922,7 +941,6 @@ export default [
 			let fn = (size) => {
 				new modal({
 					size: size,
-					title: "Modal title",
 					elem: `Dialog with <code>size : <b>${size}</b></code> option`,
 					button: ["Okay"],
 				}).show();
@@ -962,7 +980,6 @@ export default [
 			let fn = (fullscreen) => {
 				new $.modal({
 					fullscreen: fullscreen,
-					title: "Modal title",
 					elem: `Dialog with <code>fullscreen : <b>${fullscreen}</b></code> option`,
 					button: ["Okay"],
 				}).show();
@@ -1053,7 +1070,6 @@ export default [
 				color: "primary",
 				onclick: () => {
 					new modal({
-						title: "Modal title",
 						elem: "Modal event example",
 						button: "Okay",
 						onshow: (event) => {

@@ -14,8 +14,8 @@ const defaultOption = {
 	class: null,
 	static: true,
 
-	title: null,
-	icon: null,
+	title: undefined,
+	icon: undefined,
 
 	footer: null,
 	button: null,
@@ -85,6 +85,16 @@ export default class modal extends div {
 
 			//generate id
 			opt.id = opt.id || core.UUID();
+
+			//set default icon if not provided
+			if (opt.icon === undefined) {
+				opt.icon = core.setting.icon()
+			}
+
+			//set default title if not provided
+			if (opt.title === undefined) {
+				opt.title = core.setting.title();
+			}
 
 			//generate header
 			let ctlHeader =

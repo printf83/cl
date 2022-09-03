@@ -9,8 +9,9 @@ import btnclose from "./btnclose.js";
 
 const defaultOption = {
 	animate: true,
-	title: null,
-	icon: null,
+
+	title: undefined,
+	icon: undefined,
 
 	close: true,
 	autohide: true,
@@ -125,6 +126,16 @@ export default class toast extends div {
 			//gen timer
 			let tc = toast.timercounter(new Date(opt.date));
 
+			//set default icon if not provided
+			if (opt.icon === undefined) {
+				opt.icon = core.setting.icon();
+			}
+
+			//set default title if not provided
+			if (opt.title === undefined) {
+				opt.title = core.setting.title();
+			}
+
 			//generate header
 			let ctlHeader =
 				opt.icon || opt.title
@@ -154,7 +165,12 @@ export default class toast extends div {
 					display: "flex",
 					alignitem: "stretch",
 					elem: [
-						new div({ marginend: "auto", elem: opt.elem }),
+						new div({
+							marginend: "auto",
+							display: "flex",
+							alignitem: "center",
+							elem: opt.elem,
+						}),
 						!(opt.icon || opt.title) && opt.close
 							? new div({
 									marginstart: 2,

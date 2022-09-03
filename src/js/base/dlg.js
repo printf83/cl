@@ -223,7 +223,7 @@ export class inputbox extends modal {
 				super({
 					elem: [opt[1] ? new p({ elem: opt[1] }) : null, elemBuilder(opt[0])].filter(Boolean),
 					button: btnBuilder(opt[2], ["Okay", "Cancel", "Retry"], null, true),
-					title: opt[3],
+					title: opt[4]?.debug === true ? (opt[3] === null ? undefined : opt[3]) : opt[3],
 					debug: opt[4]?.debug === true ? true : false,
 				});
 			} else if (opt.length === 4) {
