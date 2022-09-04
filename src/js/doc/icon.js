@@ -40,7 +40,6 @@ export default [
 		code: () => {
 			return new icon({
 				icon: "./favicon.png",
-				weight: "lg",
 				shake: true,
 			});
 		},
