@@ -55,8 +55,8 @@ export default [
 		code: () => {
 			return new toast({
 				color: "primary",
-				icon: { icon: "heart", color: "primary" },
-				title: "Love",
+				icon: { type: "fab", icon: "bootstrap" },
+				title: "Bootstrap",
 				elem: sample.text(),
 				debug: true, //this last option is for this documentation preview only
 			});

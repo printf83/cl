@@ -81,8 +81,11 @@ export default [
 		import: ["toast", "msg", "modal"],
 		code: () => {
 			return new modal({
-				title: "Love",
-				icon: "heart",
+				title: "Bootstrap",
+				icon: {
+					type: "fab",
+					icon: "bootstrap",
+				},
 				elem: new msg({
 					weight: "md",
 					icon: "i",
