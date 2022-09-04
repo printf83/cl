@@ -23,11 +23,11 @@ export default [
 			"Toasts are as flexible as you need and have very little required markup. At a minimum, we require a single element to contain your “toasted” content and strongly encourage a dismiss button.",
 		],
 		viewclass: "cl-modal-preview",
-		import: ["toast"],
+		import: ["toast", "sample"],
 		code: () => {
 			return new toast({
 				color: "primary",
-				elem: "Hello, world! This is a toast message.",
+				elem: sample.text(),
 				debug: true, //this last option is for this documentation preview only
 			});
 		},
@@ -36,13 +36,13 @@ export default [
 	{
 		title: "Without title & icon",
 		viewclass: "cl-modal-preview",
-		import: ["toast"],
+		import: ["toast", "sample"],
 		code: () => {
 			return new toast({
 				color: "primary",
 				icon: null,
 				title: null,
-				elem: "Hello, world! This is a toast message.",
+				elem: sample.text(),
 				debug: true, //this last option is for this documentation preview only
 			});
 		},
@@ -51,13 +51,13 @@ export default [
 	{
 		title: "Custom title & icon",
 		viewclass: "cl-modal-preview",
-		import: ["toast"],
+		import: ["toast", "sample"],
 		code: () => {
 			return new toast({
 				color: "primary",
 				icon: { icon: "heart", color: "primary" },
 				title: "Love",
-				elem: "Hello, world! This is a toast message.",
+				elem: sample.text(),
 				debug: true, //this last option is for this documentation preview only
 			});
 		},
@@ -66,7 +66,7 @@ export default [
 	{
 		title: "Live",
 		msg: "Click the button below to show a toast (positioned with Bootstrap utilities in the top right corner)",
-		import: ["toast", "button"],
+		import: ["toast", "button", "sample"],
 		code: () => {
 			return new button({
 				label: "Show live toast",
@@ -74,7 +74,7 @@ export default [
 				onclick: () => {
 					new toast({
 						color: "primary",
-						elem: "Hello, world! This is a toast message.",
+						elem: sample.text(),
 					}).show();
 				},
 			});
