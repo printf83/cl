@@ -1,5 +1,5 @@
 "use strict";
-import sample from "./sample.js";
+import b from "./b.js";
 import * as table from "../base/table.js";
 
 export default [
@@ -259,6 +259,54 @@ export default [
 							elem: "2,524.01",
 						}),
 					],
+				],
+			});
+		},
+	},
+
+	{
+		title: "Using table component",
+		import: ["table", "b"],
+		code: () => {
+			let fn = (d) => {
+				return new table.tr({
+					class: `table-${d}`,
+					elem: [
+						new table.td({ elem: new b({ elem: d ? core.capitalize(d) : "Default" }) }),
+						new table.td({ elem: "Column content" }),
+						new table.td({ elem: "Column content" }),
+						new table.td({ elem: "Column content" }),
+					],
+				});
+			};
+
+			return new table.container({
+				hover: true,
+				elem: [
+					new table.thead({
+						elem: new table.tr({
+							elem: [
+								new table.td({ elem: "Type" }),
+								new table.td({ elem: "Column heading" }),
+								new table.td({ elem: "Column heading" }),
+								new table.td({ elem: "Column heading" }),
+							],
+						}),
+					}),
+					new table.tbody({
+						elem: [
+							fn("active"),
+							fn(null),
+							fn("primary"),
+							fn("secondary"),
+							fn("success"),
+							fn("danger"),
+							fn("warning"),
+							fn("info"),
+							fn("light"),
+							fn("dark"),
+						],
+					}),
 				],
 			});
 		},
