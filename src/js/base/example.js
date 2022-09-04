@@ -175,7 +175,6 @@ export default class example extends div {
 				ctlmsg ? new div({ elem: ctlmsg }) : null,
 				opt.code && opt.view
 					? new card.container({
-							// overflow: "hidden",
 							marginbottom: 3,
 							color: opt.dark ? "dark" : null,
 							class: opt.viewclass,

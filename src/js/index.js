@@ -519,16 +519,6 @@ function gen_content(m1, m2, callback) {
 											new div({
 												marginbottom: 3,
 												tabindex: 0,
-												// attr: {
-												// 	"data-bs-spy": "scroll",
-												// 	"data-bs-target": `#${tocId}`,
-												// 	"data-bs-root-margin": "0px 0px -40%",
-												// 	"data-bs-smooth-scroll": "true",
-												// },
-												// style: {
-												// 	height: "500px",
-												// 	"overflow-y": "scroll",
-												// },
 												elem: m_source.map((i) => {
 													return gen_example(i);
 												}),
@@ -643,12 +633,6 @@ function gen_toc() {
 						return {
 							label: parent.innerText,
 							href: `#${id}`,
-							// attr: { "cl-target-id": id },
-							// onclick: (event) => {
-							// 	let sender = event.currentTarget;
-							// 	let id = sender.getAttribute("cl-target-id");
-							// 	core.focusElement(document.getElementById(id));
-							// },
 							level: parent.nodeName === "H3" ? 1 : 0,
 						};
 					}

@@ -766,8 +766,6 @@ export function validate(container, callback) {
 			}
 		});
 
-		// container.classList.add("was-validated");
-
 		var invalidctl = container.querySelectorAll(".is-invalid");
 		if (typeof callback === "function") {
 			if (invalidctl && invalidctl.length > 0) {
