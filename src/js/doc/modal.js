@@ -138,7 +138,7 @@ export default [
 				(event, data) => {
 					new toast("i", `Result from dlg.inputbox is : ${JSON.stringify(data)}`).show();
 				},
-				"Custom Modal Title",
+				"Custom Dialog Title",
 				{ debug: true } //this last argument is for this documentation preview only
 			);
 		},
