@@ -1,5 +1,6 @@
 "use strict";
-import b from "./b.js";
+import * as core from "../base/core.js";
+import b from "../base/b.js";
 import * as table from "../base/table.js";
 
 export default [
@@ -265,7 +266,7 @@ export default [
 	},
 
 	{
-		title: "Using table component",
+		title: "Using component",
 		import: ["table", "b"],
 		code: () => {
 			let fn = (d) => {
@@ -275,7 +276,7 @@ export default [
 						new table.td({ elem: new b({ elem: d ? core.capitalize(d) : "Default" }) }),
 						new table.td({ elem: "Column content" }),
 						new table.td({ elem: "Column content" }),
-						new table.td({ elem: "Column content" }),
+						new table.td({ elem: "Column content", color: d, bgtextcolor: d }),
 					],
 				});
 			};
@@ -286,10 +287,10 @@ export default [
 					new table.thead({
 						elem: new table.tr({
 							elem: [
-								new table.td({ elem: "Type" }),
-								new table.td({ elem: "Column heading" }),
-								new table.td({ elem: "Column heading" }),
-								new table.td({ elem: "Column heading" }),
+								new table.th({ elem: "Type" }),
+								new table.th({ elem: "Column heading" }),
+								new table.th({ elem: "Column heading" }),
+								new table.th({ elem: "Column heading" }),
 							],
 						}),
 					}),

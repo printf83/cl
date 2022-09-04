@@ -225,7 +225,7 @@ function gen_content(m1, m2, callback) {
 }
 
 function set_theme(theme) {
-	core.theme.set(theme);
+	core.setting.theme = theme;
 }
 
 function gen_url(m1, m2) {
@@ -310,7 +310,7 @@ core.documentReady(() => {
 		def_m2 = m.m2;
 	}
 
-	def_theme = core.theme.get();
+	def_theme = core.setting.theme;
 
 	core.replaceWith(
 		document.getElementById("main"),
@@ -363,7 +363,7 @@ core.documentReady(() => {
 		core.init(document.getElementById("root"));
 	});
 
-	core.theme.init();
+	core.setting.theme = core.setting.theme;
 
 	core.init(document.body);
 });

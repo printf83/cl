@@ -262,7 +262,7 @@ export default [
 	{
 		title: "Banner",
 		msg: [
-			"Setup banner that appear on user dialog like sign up, sign in, profile editor and others using {{core.user.banner}}. You can use this function before {{core.documentReady}}. Banner only visible on the large screen (desktop)",
+			"Setup banner that appear on user dialog like sign up, sign in, profile editor and others using {{core.setting.banner}}. You can use this function before {{core.documentReady}}. Banner only visible on the large screen (desktop)",
 		],
 		container: sample.stackcontainer,
 		import: ["user", "toast", "sample", "btngroup"],
@@ -274,7 +274,7 @@ export default [
 						icon: "play",
 						color: "success",
 						onclick: () => {
-							core.user.banner = (type) => {
+							core.setting.banner = (type) => {
 								return new img({
 									class: ["img-fluid", "rounded"],
 									title: type,
@@ -304,7 +304,7 @@ export default [
 						icon: "stop",
 						color: "danger",
 						onclick: () => {
-							core.user.banner = null;
+							core.setting.banner = null;
 							new toast("-", "User banner reset").show();
 							reloadUserDoc(); // documentation perpose only
 						},
@@ -317,7 +317,7 @@ export default [
 	{
 		title: "Sign up terms",
 		msg: [
-			"Setup terms dialog that appear on user sign up dialog using {{core.user.term}}. You can use this function before {{core.documentReady}}",
+			"Setup terms dialog that appear on user sign up dialog using {{core.setting.term}}. You can use this function before {{core.documentReady}}",
 		],
 		container: sample.stackcontainer,
 		import: ["user", "toast", "sample", "modal", "btngroup", "p"],
@@ -329,7 +329,7 @@ export default [
 						icon: "play",
 						color: "success",
 						onclick: () => {
-							core.user.term = () => {
+							core.setting.term = () => {
 								new modal({
 									size: "xl",
 									title: "Term and conditions",
@@ -364,7 +364,7 @@ export default [
 						icon: "stop",
 						color: "danger",
 						onclick: () => {
-							core.user.term = null;
+							core.setting.term = null;
 
 							new toast("-", "User sign up term reset").show();
 							reloadUserDoc(); // documentation perpose only
@@ -378,7 +378,7 @@ export default [
 	{
 		title: "Event",
 		msg: [
-			"Setup function to detect user sign in, sign out or update profile. You can use this function before {{core.documentReady}}",
+			"Setup function to detect user sign in, sign out or update profile using {{core.setting.userchange}} function. You can use this function before {{core.documentReady}}",
 		],
 		container: sample.stackcontainer,
 		import: ["user", "toast", "btngroup"],
@@ -390,14 +390,15 @@ export default [
 						icon: "play",
 						color: "success",
 						onclick: () => {
-							core.user.onsignin = () => {
-								new toast("i", "User sign in event trigged").show();
-							};
-							core.user.onsignout = () => {
-								new toast("-", "User sign out event trigged").show();
-							};
-							core.user.onchange = () => {
-								new toast("!", "User profile changed event trigged").show();
+							core.setting.userchange = () => {
+								//get current user
+								user.info_guest(null, (result) => {
+									if (result) {
+										new toast("/", `Hai ${result.name}`).show();
+									} else {
+										new toast("!", `Hai guest`).show();
+									}
+								});
 							};
 
 							new toast("/", "User event attached").show();
@@ -409,10 +410,7 @@ export default [
 						icon: "stop",
 						color: "danger",
 						onclick: () => {
-							core.user.onsignin = null;
-							core.user.onsignout = null;
-							core.user.onchange = null;
-
+							core.setting.userchange = null;
 							new toast("-", "User event detached").show();
 							reloadUserDoc(); // documentation perpose only
 						},

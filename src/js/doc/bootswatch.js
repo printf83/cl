@@ -40,9 +40,9 @@ export default [
 
 	{
 		msg: [
-			"Use {{core.theme.set(themename)}} function to set themes. This theme will be saved in browser cookies and will be reloaded when you revisit.",
-			"Use {{core.theme.change()}} function to detect when user change the theme using {{core.theme.set}} function",
-			"Use {{core.theme.get()}} function to get current active themes",
+			"Use {{core.setting.theme='theme'}} function to set themes. This theme will be saved in browser cookies and will be reloaded when you revisit.",
+			"Use {{core.setting.theme}} to get current active themes",
+			"Use {{core.setting.themechange()}} function to detect when user change the theme using {{core.setting.theme='theme'}}.",
 			"Bootswatch theme currently available is :",
 			new ul({
 				item: [
@@ -73,7 +73,7 @@ export default [
 					"zephyr",
 				],
 			}),
-			"Set {{core.theme.set(null)}} if you like to used bootstrap default themes",
+			"Set {{core.setting.theme = null}} if you like to used bootstrap default themes",
 		],
 	},
 	{
@@ -440,10 +440,10 @@ export default [
 				return new table.tr({
 					class: `table-${d}`,
 					elem: [
-						new table.td({ elem: new b({ elem: d ? core.capitalize(d) : "Default" }) }),
-						new table.td({ elem: "Column content" }),
-						new table.td({ elem: "Column content" }),
-						new table.td({ elem: "Column content" }),
+						new table.th({ elem: new b({ elem: d ? core.capitalize(d) : "Default" }) }),
+						new table.th({ elem: "Column content" }),
+						new table.th({ elem: "Column content" }),
+						new table.th({ elem: "Column content" }),
 					],
 				});
 			};

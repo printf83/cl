@@ -4,7 +4,8 @@ import tag from "./tag.js";
 import div from "./div.js";
 
 const defaultTrOption = { tag: "tr" };
-const defaultTdOption = { tag: "td", scope: null, colspan: null, rowspan: null, head: false };
+const defaultTdOption = { tag: "td", scope: null, colspan: null, rowspan: null };
+const defaultThOption = { tag: "th", scope: "col", colspan: null, rowspan: null };
 const defaultTHeadOption = { tag: "thead" };
 const defaultTBodyOption = { tag: "tbody" };
 const defaultTFootOption = { tag: "tfoot" };
@@ -110,7 +111,7 @@ export class tfoot extends tag {
 }
 
 /**
- * opt : {tagoption,scope,colspan,rowspan,head}
+ * opt : {tagoption,scope,colspan,rowspan}
  */
 export class td extends tag {
 	constructor(...opt) {
@@ -122,10 +123,6 @@ export class td extends tag {
 	}
 	set data(opt) {
 		opt = core.extend({}, defaultTdOption, opt);
-
-		if (opt.head) {
-			opt.tag = "th";
-		}
 
 		opt.attr = core.merge.attr(opt.attr, {
 			colspan: opt.colspan,
@@ -142,7 +139,35 @@ export class td extends tag {
 }
 
 /**
- * opt : {tagoption,scope,colspan,rowspan,head}
+ * opt : {tagoption,scope,colspan,rowspan}
+ */
+export class th extends tag {
+	constructor(...opt) {
+		super(...opt);
+	}
+
+	get data() {
+		return super.data;
+	}
+	set data(opt) {
+		opt = core.extend({}, defaultThOption, opt);
+
+		opt.attr = core.merge.attr(opt.attr, {
+			colspan: opt.colspan,
+			rowspan: opt.rowspan,
+			scope: opt.scope,
+		});
+
+		delete opt.colspan;
+		delete opt.rowspan;
+		delete opt.scope;
+
+		super.data = opt;
+	}
+}
+
+/**
+ * opt : {tagoption,scope,colspan,rowspan}
  */
 export class container extends tag {
 	constructor(...opt) {
@@ -180,8 +205,8 @@ export class container extends tag {
 			let a = Array.isArray(opt.item) ? opt.item : [opt.item];
 			if (opt.header) {
 				//generate header;
-				let th = [];
-				th = a[0].map((i) => {
+				let th_item = [];
+				th_item = a[0].map((i) => {
 					if (typeof i === "object") {
 						if (i.hasOwnProperty("cl")) {
 							return i;
@@ -189,8 +214,7 @@ export class container extends tag {
 							return new td(i);
 						}
 					} else {
-						return new td({
-							head: true,
+						return new th({
 							scope: "col",
 							elem: i,
 						});
@@ -198,11 +222,11 @@ export class container extends tag {
 				});
 				//put row number
 				if (opt.rownumber) {
-					th.unshift(new td({ head: true, scope: "col", elem: "#" }));
+					th_item.unshift(new th({ scope: "col", elem: "#" }));
 				}
 				//put in th
 				tmp_head = new thead({
-					elem: new tr({ elem: th }),
+					elem: new tr({ elem: th_item }),
 				});
 			}
 
@@ -227,7 +251,7 @@ export class container extends tag {
 				});
 
 				if (opt.rownumber) {
-					tmp.unshift(new td({ head: true, scope: "row", elem: x.toString() }));
+					tmp.unshift(new th({ scope: "row", elem: x.toString() }));
 				}
 
 				tb.push(new tr({ elem: tmp }));
@@ -246,8 +270,7 @@ export class container extends tag {
 							return new td(i);
 						}
 					} else {
-						return new td({
-							head: true,
+						return new th({
 							scope: "col",
 							elem: i,
 						});
@@ -255,7 +278,7 @@ export class container extends tag {
 				});
 				//put row number
 				if (opt.rownumber) {
-					tf.unshift(new td({ head: true, scope: "row" }));
+					tf.unshift(new th({ scope: "row" }));
 				}
 				//put in th
 				tmp_foot = new tfoot({

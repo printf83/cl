@@ -614,7 +614,7 @@ function gen_content(m1, m2, callback) {
 }
 
 function set_theme(theme) {
-	core.theme.set(theme);
+	core.setting.theme = theme;
 }
 
 function gen_toc() {
@@ -721,7 +721,7 @@ function gen_menu(m1, m2, theme) {
 	});
 }
 
-core.theme.change = (theme) => {
+core.setting.themechange = (theme) => {
 	let el = document.getElementById("pagetheme");
 	if (el) {
 		if (theme) {
@@ -740,7 +740,7 @@ core.documentReady(() => {
 		def_m2 = m.m2;
 	}
 
-	def_theme = core.theme.get();
+	def_theme = core.setting.theme;
 
 	core.replaceWith(
 		document.getElementById("main"),
@@ -831,7 +831,7 @@ core.documentReady(() => {
 		PR.prettyPrint();
 	});
 
-	core.theme.init();
+	core.setting.theme = core.setting.theme;
 
 	core.init(document.body);
 });

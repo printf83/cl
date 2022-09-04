@@ -101,7 +101,7 @@ let defaultUpdateInfoOption = {
 
 const fn = {
 	banner: (type, elem) => {
-		if (core.user.banner && typeof core.user.banner === "function") {
+		if (core.setting.banner && typeof core.setting.banner === "function") {
 			return new div({
 				container: true,
 				elem: new div({
@@ -114,7 +114,7 @@ const fn = {
 								display: "flex",
 								alignitem: "center",
 								style: { height: "100%" },
-								elem: core.user.banner(type),
+								elem: core.setting.banner(type),
 							}),
 						}),
 						new div({
@@ -212,8 +212,8 @@ const fn = {
 			title: null,
 			icon: null,
 
-			size: opt.size ? opt.size : core.user.banner ? defaultSizeBanner : defaultSize,
-			maxwidth: core.user.banner ? defaultMaxWidth : defaultMaxWidthBanner,
+			size: opt.size ? opt.size : core.setting.banner ? defaultSizeBanner : defaultSize,
+			maxwidth: core.setting.banner ? defaultMaxWidth : defaultMaxWidthBanner,
 			backdropcolor: opt.backdropcolor,
 			elem: [opt.close ? fn.closebtn(opt) : null, fn.banner(type, fn.form.container(opt.id, form(opt)))].filter(
 				Boolean
@@ -248,9 +248,9 @@ const fn = {
 							(result) => {
 								callback(result);
 
-								//event signout
-								if (core.user.onsignout && typeof core.user.onsignout === "function") {
-									core.user.onsignout();
+								//event
+								if (core.setting.userchange && typeof core.setting.userchange === "function") {
+									core.setting.userchange();
 								}
 							}
 						);
@@ -291,9 +291,9 @@ const fn = {
 										opt.callback(true);
 									}
 
-									//event signin
-									if (core.user.onsignin && typeof core.user.onsignin === "function") {
-										core.user.onsignin();
+									//event
+									if (core.setting.userchange && typeof core.setting.userchange === "function") {
+										core.setting.userchange();
 									}
 								} else {
 									fn.showmsg(container, result && result.message ? result.message : null, "!!");
@@ -545,9 +545,12 @@ const fn = {
 												opt.callback(true);
 											}
 
-											//event onchange
-											if (core.user.onchange && typeof core.user.onchange === "function") {
-												core.user.onchange();
+											//event
+											if (
+												core.setting.userchange &&
+												typeof core.setting.userchange === "function"
+											) {
+												core.setting.userchange();
 											}
 										} else {
 											fn.showmsg(
@@ -689,7 +692,7 @@ const fn = {
 							},
 							onchange: fn.action.inputchange,
 						}),
-						core.user.term && typeof core.user.term === "function"
+						core.setting.term && typeof core.setting.term === "function"
 							? new div({
 									elem: new small({
 										textcolor: "muted",
@@ -697,7 +700,7 @@ const fn = {
 											"By clicking sign up you are agreeing to the ",
 											new a({
 												href: "javascript:void(0);",
-												onclick: core.user.term,
+												onclick: core.setting.term,
 												elem: "Terms and Conditions",
 											}),
 											".",
@@ -733,7 +736,7 @@ const fn = {
 										elem: "Sign in",
 										onclick: (event) => {
 											let sender = event.currentTarget;
-																		fn.modalbodybuilder(sender, "signin", fn.form.signin, opt);
+											fn.modalbodybuilder(sender, "signin", fn.form.signin, opt);
 										},
 									}),
 								],
@@ -781,7 +784,7 @@ const fn = {
 											elem: "Sign in",
 											onclick: (event) => {
 												let sender = event.currentTarget;
-																						fn.modalbodybuilder(sender, "signin", fn.form.signin, opt);
+												fn.modalbodybuilder(sender, "signin", fn.form.signin, opt);
 											},
 										}),
 										new button({
@@ -789,7 +792,7 @@ const fn = {
 											elem: "Sign up",
 											onclick: (event) => {
 												let sender = event.currentTarget;
-																					fn.modalbodybuilder(sender, "signup", fn.form.signup, opt);
+												fn.modalbodybuilder(sender, "signup", fn.form.signup, opt);
 											},
 										}),
 									],

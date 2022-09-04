@@ -14,9 +14,44 @@ export function capitalize(str) {
 	return str.toLowerCase().replace(/(^\w{1})|(\s+\w{1})/g, (match) => match.toUpperCase());
 }
 
+export const cookie = {
+	set: (cname, cvalue, exdays) => {
+		const d = new Date();
+
+		if (cvalue) {
+			exdays = exdays || 7;
+		} else {
+			exdays = -1;
+		}
+
+		d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
+		let expires = "expires=" + d.toUTCString();
+		document.cookie = cname + "=" + cvalue + ";" + expires + ";samesite=strict;path=/";
+	},
+	get: (cname) => {
+		let name = cname + "=";
+		let decodedCookie = decodeURIComponent(document.cookie);
+		let ca = decodedCookie.split(";");
+		for (let i = 0; i < ca.length; i++) {
+			let c = ca[i];
+			while (c.charAt(0) == " ") {
+				c = c.substring(1);
+			}
+			if (c.indexOf(name) == 0) {
+				return c.substring(name.length, c.length);
+			}
+		}
+		return null;
+	},
+};
+
 const __setting = {
 	icon: null,
 	title: null,
+	userchange: null,
+	term: null,
+	banner: null,
+	themechange: null,
 };
 
 export const setting = {
@@ -57,84 +92,28 @@ export const setting = {
 			__setting.title = null;
 		}
 	},
-};
-
-const __user = {
-	onsignin: null,
-	onsignout: null,
-	onchange: null,
-	term: null,
-	banner: null,
-};
-export const user = {
-	get onsignin() {
-		return __user.onsignin;
+	get userchange() {
+		return __setting.userchange;
 	},
-	set onsignin(fn) {
-		__user.onsignin = fn;
-	},
-	get onsignout() {
-		return __user.onsignout;
-	},
-	set onsignout(fn) {
-		__user.onsignout = fn;
-	},
-	get onchange() {
-		return __user.onchange;
-	},
-	set onchange(fn) {
-		__user.onchange = fn;
+	set userchange(fn) {
+		__setting.userchange = fn;
 	},
 	get term() {
-		return __user.term;
+		return __setting.term;
 	},
 	set term(fn) {
-		__user.term = fn;
+		__setting.term = fn;
 	},
 	get banner() {
-		return __user.banner;
+		return __setting.banner;
 	},
 	set banner(fn) {
-		__user.banner = fn;
+		__setting.banner = fn;
 	},
-};
-
-export const cookie = {
-	set: (cname, cvalue, exdays) => {
-		const d = new Date();
-
-		if (cvalue) {
-			exdays = exdays || 7;
-		} else {
-			exdays = -1;
-		}
-
-		d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
-		let expires = "expires=" + d.toUTCString();
-		document.cookie = cname + "=" + cvalue + ";" + expires + ";samesite=strict;path=/";
+	get theme() {
+		return cookie.get("theme");
 	},
-	get: (cname) => {
-		let name = cname + "=";
-		let decodedCookie = decodeURIComponent(document.cookie);
-		let ca = decodedCookie.split(";");
-		for (let i = 0; i < ca.length; i++) {
-			let c = ca[i];
-			while (c.charAt(0) == " ") {
-				c = c.substring(1);
-			}
-			if (c.indexOf(name) == 0) {
-				return c.substring(name.length, c.length);
-			}
-		}
-		return null;
-	},
-};
-
-export const theme = {
-	init: () => {
-		theme.set(theme.get("theme"));
-	},
-	set: (value) => {
+	set theme(value) {
 		cookie.set("theme", value);
 
 		let css_bootstrap = document.getElementById("css_bootstrap");
@@ -157,14 +136,16 @@ export const theme = {
 			console.error("#css_bootstrap and #css_bootswatch not found");
 		}
 
-		if (theme.change && typeof theme.change === "function") {
-			theme.change(value);
+		if (__setting.themechange && typeof __setting.themechange === "function") {
+			__setting.themechange(value);
 		}
 	},
-	get: () => {
-		return cookie.get("theme");
+	get themechange() {
+		return __setting.themechange;
 	},
-	change: null,
+	set themechange(fn) {
+		__setting.themechange = fn;
+	},
 };
 
 const _baseIcon = {
@@ -509,19 +490,19 @@ export function multiClass(val, format, supported, unsupported) {
 export function documentReady(callback) {
 	if (document.readyState != "loading") {
 		// in case the document is already rendered
-		theme.init();
+		setting.theme = setting.theme;
 		authCheck(callback);
 	} else if (document.addEventListener) {
 		// modern browsers
 		document.addEventListener("DOMContentLoaded", () => {
-			theme.init();
+			setting.theme = setting.theme;
 			authCheck(callback);
 		});
 	} else {
 		// IE <= 8
 		document.attachEvent("onreadystatechange", () => {
 			if (document.readyState == "complete") {
-				theme.init();
+				setting.theme = setting.theme;
 				authCheck(callback);
 			}
 		});
