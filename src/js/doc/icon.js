@@ -49,7 +49,7 @@ export default [
 	{
 		title: "SVG icon",
 		msg: [
-			"Any icon that start with  {{&lt;svg}} will be threat as <b>SVG icon</b>. SVG icon {{support}} colouring",
+			"Any icon that start with  {{&lt;svg}} will be threat as <b>SVG icon</b>. SVG icon {{support}} colouring if your svg has {{fill}} tag in it.",
 		],
 		import: ["icon"],
 		code: () => {
