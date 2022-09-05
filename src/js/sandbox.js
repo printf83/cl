@@ -229,7 +229,7 @@ function set_theme(theme) {
 }
 
 function gen_url(m1, m2) {
-	let title = `BS5 JS Builder - ${m1} | ${m2}`;
+	let title = `${core.setting.title()} - ${m1} | ${m2}`;
 	let path = `?m1=${encodeURIComponent(m1)}&m2=${encodeURIComponent(m2)}`;
 	let data = `${m1}.${m2}`;
 

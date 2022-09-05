@@ -13,6 +13,7 @@ import icon from "./icon.js";
 import span from "./span.js";
 import img from "./img.js";
 import input from "./input.js";
+import tag from "./tag.js";
 
 const defaultOption = {
 	label: null,
@@ -74,9 +75,9 @@ const fn = {
 										title: null,
 										button: null,
 										static: false,
-										size: "sm",
+										size: "md",
 										elem: new img({
-											class: "img-fluid mx-auto btn",
+											class: "img-fluid mx-auto w-100",
 											display: "block",
 											rounded: true,
 											padding: 0,
