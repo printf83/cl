@@ -194,6 +194,60 @@ export function extend(out) {
 	return out;
 }
 
+const defaultRule = {
+	rule: null,
+	fn: null,
+};
+
+const itsRule = (a, b) => {
+	if (a.length === b.length) {
+		for (var i = 0; i < a.length; i++) {
+			if (a[i] === b[i] || a[i] === "any") {
+				return true;
+				break;
+			}
+		}
+	}
+
+	return false;
+};
+
+const findFn = (rules, rule) => {
+	if (rules && rules.length > 0) {
+		for (var i = 0; i < rules.length; i++) {
+			if (itsRule(rules[i].rule, rule)) {
+				return rules[i].fn;
+				break;
+			}
+		}
+	}
+
+	return null;
+};
+
+const translateArgs = (obj) => {
+	let result = [];
+
+	if (obj && obj.length > 0) {
+		obj.forEach((i) => {
+			result.push(typeof i);
+		});
+	}
+
+	return result;
+};
+
+export function args(rules, ...obj) {
+	let arg = translateArgs(...obj);
+	let fn = findFn(rules, arg);
+	if (fn) {
+		return fn(...obj);
+	} else {
+		console.error(`Args <b>${arg.join("|")}</b> not supported `);
+		return null;
+	}
+}
+
 export const merge = {
 	class: (a, b) => {
 		if (a && b && a !== undefined && b !== undefined) {

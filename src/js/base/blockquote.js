@@ -12,7 +12,47 @@ const defaultOption = {
 
 export default class div extends tag {
 	constructor(...opt) {
-		super(...opt);
+		super();
+
+		this.data = core.args(
+			[
+				{
+					rule: ["any", "string", "any"],
+					fn: (opt) => {
+						return {
+							class: opt[0],
+							cite: opt[1],
+							elem: opt[2],
+						};
+					},
+				},
+				{
+					rule: ["string", "any"],
+					fn: (opt) => {
+						return {
+							cite: opt[0],
+							elem: opt[1],
+						};
+					},
+				},
+				{
+					rule: ["object"],
+					fn: (opt) => {
+						return opt[0];
+					},
+				},
+				{
+					rule: ["object"],
+					fn(opt) {
+						return {
+							cite: opt[0],
+							elem: opt[0],
+						};
+					},
+				},
+			],
+			opt
+		);
 	}
 
 	get data() {

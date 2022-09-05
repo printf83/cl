@@ -9,38 +9,82 @@ const defaultOption = { level: 1 };
 export default class h extends tag {
 	constructor(...opt) {
 		super();
-		if (opt && opt.length > 0) {
-			if (opt.length === 3) {
-				this.data = {
-					level: opt[0],
-					class: opt[1],
-					elem: opt[2],
-				};
-			} else if (opt.length === 2) {
-				if (typeof opt[0] === "number") {
-					this.data = {
-						level: opt[0],
-						elem: opt[1],
-					};
-				} else {
-					this.data = {
-						level: 5,
-						class: opt[0],
-						elem: opt[1],
-					};
-				}
-			} else if (opt.length === 1) {
-				if (typeof opt[0] === "object") {
-					if (opt[0].hasOwnProperty("cl")) {
-						this.data = { elem: opt[0] };
-					} else {
-						this.data = opt[0];
-					}
-				} else {
-					this.data = { elem: opt[0] };
-				}
-			}
-		}
+
+		this.data = core.args(
+			[
+				{
+					rule: ["number", "string", "any"],
+					fn: (opt) => {
+						return {
+							level: opt[0],
+							class: opt[1],
+							elem: opt[2],
+						};
+					},
+				},
+				{
+					rule: ["number", "any"],
+					fn: (opt) => {
+						return {
+							level: opt[0],
+							elem: opt[1],
+						};
+					},
+				},
+				{
+					rule: ["string", "any"],
+					fn: (opt) => {
+						return {
+							level: 5,
+							class: opt[0],
+							elem: opt[1],
+						};
+					},
+				},
+				{
+					rule: ["object"],
+					fn: (opt) => opt[0],
+				},
+				{
+					rule: ["any"],
+					fn: (opt) => opt[0],
+				},
+			],
+			opt
+		);
+
+		// if (opt && opt.length > 0) {
+		// 	if (opt.length === 3) {
+		// 		this.data = {
+		// 			level: opt[0],
+		// 			class: opt[1],
+		// 			elem: opt[2],
+		// 		};
+		// 	} else if (opt.length === 2) {
+		// 		if (typeof opt[0] === "number") {
+		// 			this.data = {
+		// 				level: opt[0],
+		// 				elem: opt[1],
+		// 			};
+		// 		} else {
+		// 			this.data = {
+		// 				level: 5,
+		// 				class: opt[0],
+		// 				elem: opt[1],
+		// 			};
+		// 		}
+		// 	} else if (opt.length === 1) {
+		// 		if (typeof opt[0] === "object") {
+		// 			if (opt[0].hasOwnProperty("cl")) {
+		// 				this.data = { elem: opt[0] };
+		// 			} else {
+		// 				this.data = opt[0];
+		// 			}
+		// 		} else {
+		// 			this.data = { elem: opt[0] };
+		// 		}
+		// 	}
+		// }
 	}
 
 	get data() {

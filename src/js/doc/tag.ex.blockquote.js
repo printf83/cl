@@ -40,8 +40,9 @@ export default [
 		import: ["blockquote"],
 		code: () => {
 			return [
-				new blockquote({ class: "classname", elem: "Using elem property" }),
-				new blockquote("classname", "Direct class and elem property"),
+				new blockquote({ class: "classname", cite: "cite", elem: "Using elem property" }),
+				new blockquote("classname", "cite", "Direct class and elem property"),
+				new blockquote("cite", "Direct class and elem property"),
 				new blockquote("Direct elem property"),
 			];
 		},
