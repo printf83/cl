@@ -16,6 +16,7 @@ import * as table from "./base/table.js";
 import tag from "./base/tag.js";
 import toc from "./base/toc.js";
 import doc from "./doc.js";
+import * as dlg from "./base/dlg.js";
 
 const db_menu = [
 	{
@@ -260,24 +261,33 @@ function startmemoryleaktest(sender, limit) {
 	if (memoryleaktestrun === true) {
 		memoryleaktestrun = false;
 	} else {
-		sender.classList.add("active");
-		memoryleaktestrun = true;
-		memoryleaktest(
-			0,
-			limit,
-			(i, l) => {
-				if (i === l || memoryleaktestrun === false) {
-					sender.innerText = `Memory Test ${l}`;
-				} else {
-					sender.innerText = `Memory Test ${parseInt((i / l) * 100, 10)}%`;
-				}
-			},
-			() => {
-				sender.classList.remove("active");
-				core.init(document.getElementById("root"));
-				PR.prettyPrint();
+		new dlg.confirmbox(
+			"!!",
+			`Are you sure to start <b>Memory Leak Test</b>? This test will open every page one by one for <b>${limit}</b> times and may make your device laggy. If you like to stop it, please click on <b>Memory Leak Test Progress</b> again anytime and the test will be end soon.`,
+			{
+				label: "Understand",
+				onclick: () => {
+					sender.classList.add("active");
+					memoryleaktestrun = true;
+					memoryleaktest(
+						0,
+						limit,
+						(i, l) => {
+							if (i === l || memoryleaktestrun === false) {
+								sender.innerText = `Memory Test ${l}`;
+							} else {
+								sender.innerText = `Memory Test ${parseInt((i / l) * 100, 10)}%`;
+							}
+						},
+						() => {
+							sender.classList.remove("active");
+							core.init(document.getElementById("root"));
+							PR.prettyPrint();
+						}
+					);
+				},
 			}
-		);
+		).show();
 	}
 }
 
@@ -645,7 +655,7 @@ function gen_toc() {
 }
 
 function gen_url(m1, m2) {
-	let title = `BS5 JS Builder - ${m1} | ${m2}`;
+	let title = `${core.setting.title} - ${m1} | ${m2}`;
 	let path = `?m1=${encodeURIComponent(m1)}&m2=${encodeURIComponent(m2)}`;
 	let data = `${m1}.${m2}`;
 

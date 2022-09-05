@@ -17,7 +17,7 @@ export default class div extends tag {
 		this.data = core.args(
 			[
 				{
-					rule: ["any", "string", "any"],
+					rule: ["string|string[]", "string", "cl|cl[]|string|string[]"],
 					fn: (opt) => {
 						return {
 							class: opt[0],
@@ -27,7 +27,7 @@ export default class div extends tag {
 					},
 				},
 				{
-					rule: ["string", "any"],
+					rule: ["string", "cl|cl[]|string|string[]"],
 					fn: (opt) => {
 						return {
 							cite: opt[0],
@@ -36,21 +36,28 @@ export default class div extends tag {
 					},
 				},
 				{
-					rule: ["object"],
+					rule: ["string"],
 					fn: (opt) => {
-						return opt[0];
-					},
-				},
-				{
-					rule: ["object"],
-					fn(opt) {
 						return {
 							cite: opt[0],
 							elem: opt[0],
 						};
 					},
 				},
+				{
+					rule: ["cl|cl[]|string|string[]"],
+					fn: (opt) => {
+						return { elem: opt[0] };
+					},
+				},
+				{
+					rule: ["object"],
+					fn: (opt) => {
+						return opt[0];
+					},
+				},
 			],
+			"blockquote",
 			opt
 		);
 	}

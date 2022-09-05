@@ -15,20 +15,36 @@ const defaultOption = {
 export default class img extends tag {
 	constructor(...opt) {
 		super();
-		if (opt && opt.length > 0) {
-			if (opt.length === 2) {
-				this.data = {
-					class: opt[0],
-					src: opt[1],
-				};
-			} else if (opt.length === 1) {
-				if (typeof opt[0] === "object") {
-					this.data = opt[0];
-				} else {
-					this.data = { src: opt[0] };
-				}
-			}
-		}
+
+		this.data = core.args(
+			[
+				{
+					rule: ["string|string[]", "string|string[]"],
+					fn: () => {
+						return {
+							class: opt[0],
+							src: opt[1],
+						};
+					},
+				},
+				{
+					rule: ["string|string[]"],
+					fn: () => {
+						return {
+							src: opt[0],
+						};
+					},
+				},
+				{
+					rule: ["object"],
+					fn: () => {
+						return opt[0];
+					},
+				},
+			],
+			"img",
+			opt
+		);
 	}
 
 	get data() {

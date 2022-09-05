@@ -88,7 +88,7 @@ export default class modal extends div {
 
 			//set default icon if not provided
 			if (opt.icon === undefined) {
-				opt.icon = core.setting.icon()
+				opt.icon = core.setting.icon();
 			}
 
 			//set default title if not provided

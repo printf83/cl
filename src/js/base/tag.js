@@ -143,24 +143,43 @@ export default class tag {
 	cl = 1; //name tag "cl" so we can check hasOwnProperty("cl")
 
 	constructor(...opt) {
-		if (opt && opt.length > 0) {
-			if (opt.length === 2) {
-				this.data = {
-					class: opt[0],
-					elem: opt[1],
-				};
-			} else if (opt.length === 1) {
-				if (typeof opt[0] === "object" && !Array.isArray(opt[0])) {
-					if (opt[0].hasOwnProperty("cl")) {
-						this.data = { elem: opt[0] };
-					} else {
-						this.data = opt[0];
-					}
-				} else {
-					this.data = { elem: opt[0] };
-				}
-			}
-		}
+		this.data = core.args(
+			[
+				{
+					rule: ["string|string[]", "cl|cl[]|string|string[]"],
+					fn: () => {
+						return {
+							class: opt[0],
+							elem: opt[1],
+						};
+					},
+				},
+				{
+					rule: ["cl|cl[]|string|string[]|object[]"],
+					fn: () => {
+						return {
+							elem: opt[0],
+						};
+					},
+				},
+
+				{
+					rule: ["object"],
+					fn: () => {
+						return opt[0];
+					},
+				},
+
+				{
+					rule: null,
+					fn: () => {
+						return null;
+					},
+				},
+			],
+			"tag",
+			opt
+		);
 	}
 
 	get data() {

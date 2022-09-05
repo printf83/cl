@@ -70,10 +70,11 @@ const fn = {
 									//if picture. do preview
 
 									new modal({
+										icon: null,
 										title: null,
 										button: null,
 										static: false,
-										size: "lg",
+										size: "sm",
 										elem: new img({
 											class: "img-fluid mx-auto btn",
 											display: "block",
@@ -228,6 +229,7 @@ const fn = {
 							});
 
 							new modal({
+								icon: null,
 								title: null,
 								button: null,
 								static: false,

@@ -13,7 +13,7 @@ export default class a extends tag {
 		this.data = core.args(
 			[
 				{
-					rule: ["string", "any"],
+					rule: ["string", "cl|cl[]|string|string[]"],
 					fn: (opt) => {
 						return {
 							href: opt[0],
@@ -22,16 +22,17 @@ export default class a extends tag {
 					},
 				},
 				{
+					rule: ["cl|cl[]|string|string[]"],
+					fn: (opt) => {
+						return { href: "javascript:void(0);", elem: opt[0] };
+					},
+				},
+				{
 					rule: ["object"],
 					fn: (opt) => opt[0],
 				},
-				{
-					rule: ["any"],
-					fn: (opt) => {
-						return { href: opt[0], elem: opt[0] };
-					},
-				},
 			],
+			"a",
 			opt
 		);
 	}

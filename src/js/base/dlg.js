@@ -34,74 +34,110 @@ function btnBuilder(btn, defButton, defColor, pushCancel) {
  */
 export class msgbox extends modal {
 	constructor(...opt) {
-		if (opt && opt.length > 0) {
-			if (opt.length === 5) {
-				let bI = core.getBaseIcon(opt[0]);
+		super(
+			core.args(
+				[
+					{
+						rule: [
+							"string",
+							"string|string[]|cl|cl[]",
+							"string|string[]|object|object[]|function|function[]",
+							"string|null",
+							"debug",
+						],
+						fn: () => {
+							let bI = core.getBaseIcon(opt[0]);
 
-				super({
-					elem: new msg({
-						weight: "md",
-						icon: bI
-							? {
-									icon: bI.icon,
-									color: bI.color,
-							  }
-							: opt[0],
-						elem: opt[1],
-					}),
-					defautlbtncolor: bI ? bI.color : null,
-					button: btnBuilder(opt[2], ["Okay"], bI?.color, false),
-					title: opt[4]?.debug === true ? (opt[3] === null ? undefined : opt[3]) : opt[3],
-					debug: opt[4]?.debug === true ? true : false,
-				});
-			} else if (opt.length === 4) {
-				let bI = core.getBaseIcon(opt[0]);
+							return {
+								elem: new msg({
+									weight: "md",
+									icon: bI
+										? {
+												icon: bI.icon,
+												color: bI.color,
+										  }
+										: opt[0],
+									elem: opt[1],
+								}),
+								defautlbtncolor: bI ? bI.color : null,
+								button: btnBuilder(opt[2], ["Okay"], bI?.color, false),
+								title: opt[3] === null ? undefined : opt[3],
+								debug: true,
+							};
+						},
+					},
+					{
+						rule: [
+							"string",
+							"string|string[]|cl|cl[]",
+							"string|string[]|object|object[]|function|function[]",
+							"string|null",
+						],
+						fn: () => {
+							let bI = core.getBaseIcon(opt[0]);
 
-				super({
-					elem: new msg({
-						weight: "md",
-						icon: bI
-							? {
-									icon: bI.icon,
-									color: bI.color,
-							  }
-							: opt[0],
-						elem: opt[1],
-					}),
-					defautlbtncolor: bI ? bI.color : null,
-					button: btnBuilder(opt[2], ["Okay"], bI?.color, false),
-					title: opt[3],
-				});
-			} else if (opt.length === 3) {
-				let bI = core.getBaseIcon(opt[0]);
+							super({
+								elem: new msg({
+									weight: "md",
+									icon: bI
+										? {
+												icon: bI.icon,
+												color: bI.color,
+										  }
+										: opt[0],
+									elem: opt[1],
+								}),
+								defautlbtncolor: bI ? bI.color : null,
+								button: btnBuilder(opt[2], ["Okay"], bI?.color, false),
+								title: opt[3] === null ? undefined : opt[3],
+							});
+						},
+					},
+					{
+						rule: [
+							"string",
+							"string|string[]|cl|cl[]",
+							"string|string[]|object|object[]|function|function[]",
+						],
+						fn: () => {
+							let bI = core.getBaseIcon(opt[0]);
 
-				super({
-					elem: new msg({
-						weight: "md",
-						icon: bI
-							? {
-									icon: bI.icon,
-									color: bI.color,
-							  }
-							: opt[0],
-						elem: opt[1],
-					}),
-					defautlbtncolor: bI ? bI.color : null,
-					button: btnBuilder(opt[2], ["Okay"], bI?.color, false),
-				});
-			} else if (opt.length === 2) {
-				super({
-					elem: new msg({ weight: "md", elem: opt[0] }),
-					button: btnBuilder(opt[1], ["Okay"], null, false),
-				});
-			} else if (opt.length === 1) {
-				super(opt[0]);
-			} else {
-				console.error("Unsupported argument", opt);
-			}
-		} else {
-			super();
-		}
+							return {
+								elem: new msg({
+									weight: "md",
+									icon: bI
+										? {
+												icon: bI.icon,
+												color: bI.color,
+										  }
+										: opt[0],
+									elem: opt[1],
+								}),
+								defautlbtncolor: bI ? bI.color : null,
+								button: btnBuilder(opt[2], ["Okay"], bI?.color, false),
+							};
+						},
+					},
+					{
+						rule: ["string|string[]|cl|cl[]", "string|string[]|object|object[]|function|function[]"],
+						fn: () => {
+							return {
+								elem: new msg({ weight: "md", elem: opt[0] }),
+								button: btnBuilder(opt[1], ["Okay"], null, false),
+							};
+						},
+					},
+					{
+						rule: ["object"],
+						fn: () => {
+							return opt[0];
+						},
+					},
+				],
+				"dlg.msgbox",
+				opt
+			)
+		);
 	}
 }
 
@@ -118,74 +154,106 @@ export class msgbox extends modal {
  */
 export class confirmbox extends modal {
 	constructor(...opt) {
-		if (opt && opt.length > 0) {
-			if (opt.length === 5) {
-				let bI = core.getBaseIcon(opt[0]);
+		super();
 
-				super({
-					elem: new msg({
-						weight: "md",
-						icon: bI
-							? {
-									icon: bI.icon,
-									color: bI.color,
-							  }
-							: opt[0],
-						elem: opt[1],
-					}),
-					defautlbtncolor: bI ? bI.color : null,
-					button: btnBuilder(opt[2], ["Okay", "Cancel", "Retry"], bI?.color, true),
-					title: opt[4]?.debug === true ? (opt[3] === null ? undefined : opt[3]) : opt[3],
-					debug: opt[4]?.debug === true ? true : false,
-				});
-			} else if (opt.length === 4) {
-				let bI = core.getBaseIcon(opt[0]);
+		this.data = core.args(
+			[
+				{
+					rule: [
+						"string",
+						"string|string[]|cl|cl[]",
+						"string|string[]|object|object[]|function|function[]",
+						"string|null",
+						"debug",
+					],
+					fn: () => {
+						let bI = core.getBaseIcon(opt[0]);
 
-				super({
-					elem: new msg({
-						weight: "md",
-						icon: bI
-							? {
-									icon: bI.icon,
-									color: bI.color,
-							  }
-							: opt[0],
-						elem: opt[1],
-					}),
-					defautlbtncolor: bI ? bI.color : null,
-					button: btnBuilder(opt[2], ["Okay", "Cancel", "Retry"], bI?.color, true),
-					title: opt[3],
-				});
-			} else if (opt.length === 3) {
-				let bI = core.getBaseIcon(opt[0]);
+						return {
+							elem: new msg({
+								weight: "md",
+								icon: bI
+									? {
+											icon: bI.icon,
+											color: bI.color,
+									  }
+									: opt[0],
+								elem: opt[1],
+							}),
+							defautlbtncolor: bI ? bI.color : null,
+							button: btnBuilder(opt[2], ["Okay", "Cancel", "Retry"], bI?.color, true),
+							title: opt[3] === null ? undefined : opt[3],
+							debug: true,
+						};
+					},
+				},
+				{
+					rule: [
+						"string",
+						"string|string[]|cl|cl[]",
+						"string|string[]|object|object[]|function|function[]",
+						"string|null",
+					],
+					fn: () => {
+						let bI = core.getBaseIcon(opt[0]);
 
-				super({
-					elem: new msg({
-						weight: "md",
-						icon: bI
-							? {
-									icon: bI.icon,
-									color: bI.color,
-							  }
-							: opt[0],
-						elem: opt[1],
-					}),
-					defautlbtncolor: bI ? bI.color : null,
-					button: btnBuilder(opt[2], ["Okay", "Cancel", "Retry"], bI?.color, true),
-				});
-			} else if (opt.length === 2) {
-				super({
-					elem: new msg({ weight: "md", elem: opt[0] }),
-					button: btnBuilder(opt[1], ["Okay", "Cancel", "Retry"], null, true),
-				});
-			} else if (opt.length === 1) {
-				super(opt[0]);
-			} else {
-				console.error("Unsupported argument", opt);
-			}
-		} else {
-			super();
-		}
+						return {
+							elem: new msg({
+								weight: "md",
+								icon: bI
+									? {
+											icon: bI.icon,
+											color: bI.color,
+									  }
+									: opt[0],
+								elem: opt[1],
+							}),
+							defautlbtncolor: bI ? bI.color : null,
+							button: btnBuilder(opt[2], ["Okay", "Cancel", "Retry"], bI?.color, true),
+							title: opt[3] === null ? undefined : opt[3],
+						};
+					},
+				},
+				{
+					rule: ["string", "string|string[]|cl|cl[]", "string|string[]|object|object[]|function|function[]"],
+					fn: () => {
+						let bI = core.getBaseIcon(opt[0]);
+
+						return {
+							elem: new msg({
+								weight: "md",
+								icon: bI
+									? {
+											icon: bI.icon,
+											color: bI.color,
+									  }
+									: opt[0],
+								elem: opt[1],
+							}),
+							defautlbtncolor: bI ? bI.color : null,
+							button: btnBuilder(opt[2], ["Okay", "Cancel", "Retry"], bI?.color, true),
+						};
+					},
+				},
+				{
+					rule: ["string|string[]|cl|cl[]", "string|string[]|object|object[]|function|function[]"],
+					fn: () => {
+						return {
+							elem: new msg({ weight: "md", elem: opt[0] }),
+							button: btnBuilder(opt[1], ["Okay", "Cancel", "Retry"], null, true),
+						};
+					},
+				},
+				{
+					rule: ["object"],
+					fn: () => {
+						return opt[0];
+					},
+				},
+			],
+			"dlg.msgbox",
+			opt
+		);
 	}
 }
 
@@ -218,37 +286,73 @@ function elemBuilder(elem) {
  */
 export class inputbox extends modal {
 	constructor(...opt) {
-		if (opt && opt.length > 0) {
-			if (opt.length === 5) {
-				super({
-					elem: [opt[1] ? new p({ elem: opt[1] }) : null, elemBuilder(opt[0])].filter(Boolean),
-					button: btnBuilder(opt[2], ["Okay", "Cancel", "Retry"], null, true),
-					title: opt[4]?.debug === true ? (opt[3] === null ? undefined : opt[3]) : opt[3],
-					debug: opt[4]?.debug === true ? true : false,
-				});
-			} else if (opt.length === 4) {
-				super({
-					elem: [opt[1] ? new p({ elem: opt[1] }) : null, elemBuilder(opt[0])].filter(Boolean),
-					button: btnBuilder(opt[2], ["Okay", "Cancel", "Retry"], null, true),
-					title: opt[3],
-				});
-			} else if (opt.length === 3) {
-				super({
-					elem: [opt[1] ? new p({ elem: opt[1] }) : null, elemBuilder(opt[0])].filter(Boolean),
-					button: btnBuilder(opt[2], ["Okay", "Cancel", "Retry"], null, true),
-				});
-			} else if (opt.length === 2) {
-				super({
-					elem: elemBuilder(opt[0]),
-					button: btnBuilder(opt[1], ["Okay", "Cancel", "Retry"], null, true),
-				});
-			} else if (opt.length === 1) {
-				super(opt[0]);
-			} else {
-				console.error("Unsupported argument", opt);
-			}
-		} else {
-			super();
-		}
+		super();
+
+		this.data = core.args(
+			[
+				{
+					rule: [
+						"string|string[]|cl|cl[]",
+						"string|null",
+						"string|string[]|object|object[]|function|function[]",
+						"string|null",
+						"debug",
+					],
+					fn: () => {
+						return {
+							elem: [opt[1] ? new p({ elem: opt[1] }) : null, elemBuilder(opt[0])].filter(Boolean),
+							button: btnBuilder(opt[2], ["Okay", "Cancel", "Retry"], null, true),
+							title: opt[3] === null ? undefined : opt[3],
+							debug: true,
+						};
+					},
+				},
+				{
+					rule: [
+						"string|string[]|cl|cl[]",
+						"string|null",
+						"string|string[]|object|object[]|function|function[]",
+						"string|null",
+					],
+					fn: () => {
+						return {
+							elem: [opt[1] ? new p({ elem: opt[1] }) : null, elemBuilder(opt[0])].filter(Boolean),
+							button: btnBuilder(opt[2], ["Okay", "Cancel", "Retry"], null, true),
+							title: opt[3] === null ? undefined : opt[3],
+						};
+					},
+				},
+				{
+					rule: [
+						"string|string[]|cl|cl[]",
+						"string|null",
+						"string|string[]|object|object[]|function|function[]",
+					],
+					fn: () => {
+						return {
+							elem: [opt[1] ? new p({ elem: opt[1] }) : null, elemBuilder(opt[0])].filter(Boolean),
+							button: btnBuilder(opt[2], ["Okay", "Cancel", "Retry"], null, true),
+						};
+					},
+				},
+				{
+					rule: ["string|string[]|cl|cl[]", "string|string[]|object|object[]|function|function[]"],
+					fn: () => {
+						return {
+							elem: elemBuilder(opt[0]),
+							button: btnBuilder(opt[1], ["Okay", "Cancel", "Retry"], null, true),
+						};
+					},
+				},
+				{
+					rule: ["object"],
+					fn: () => {
+						return opt[0];
+					},
+				},
+			],
+			"dlg.inputbox",
+			opt
+		);
 	}
 }

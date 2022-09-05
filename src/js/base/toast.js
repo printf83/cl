@@ -36,72 +36,152 @@ export default class toast extends div {
 	constructor(...opt) {
 		super();
 
-		if (opt && opt.length > 0) {
-			let t = {
-				elem: null,
-				debug: null,
-			};
+		this.data = core.args(
+			[
+				{
+					rule: ["string", "string|string[]|cl|cl[]", "debug"],
+					fn: () => {
+						let bI = core.getBaseIcon(opt[0]);
 
-			if (opt.length === 3) {
-				let bI = core.getBaseIcon(opt[0]);
+						if (bI) {
+							return {
+								color: bI.color,
+								elem: new msg({
+									weight: "sm",
+									icon: {
+										icon: bI.icon,
+										type: bI.type,
+									},
+									elem: opt[1],
+								}),
+								debug: true,
+							};
+						} else {
+							return {
+								color: opt[0],
+								elem: typeof opt[1] === "string" ? new msg({ weight: "sm", elem: opt[1] }) : opt[1],
+								debug: true,
+							};
+						}
+					},
+				},
+				{
+					rule: ["string", "string|string[]|cl|cl[]"],
+					fn: () => {
+						let bI = core.getBaseIcon(opt[0]);
 
-				if (bI) {
-					t.color = bI.color;
-					t.elem = new msg({
-						weight: "sm",
-						icon: {
-							icon: bI.icon,
-							type: bI.type,
-						},
-						elem: opt[1],
-					});
-				} else {
-					t.color = opt[0];
-					if (typeof opt[1] === "string") {
-						t.elem = new msg({ weight: "sm", elem: opt[1] });
-					} else {
-						t.elem = opt[1];
-					}
-				}
+						if (bI) {
+							return {
+								color: bI.color,
+								elem: new msg({
+									weight: "sm",
+									icon: {
+										icon: bI.icon,
+										type: bI.type,
+									},
+									elem: opt[1],
+								}),
+							};
+						} else {
+							return {
+								color: opt[0],
+								elem: typeof opt[1] === "string" ? new msg({ weight: "sm", elem: opt[1] }) : opt[1],
+							};
+						}
+					},
+				},
+				{
+					rule: ["string|string[]"],
+					fn: () => {
+						return {
+							elem: new msg({ weight: "sm", elem: opt[0] }),
+						};
+					},
+				},
+				{
+					rule: ["cl|cl[]"],
+					fn: () => {
+						return {
+							elem: opt[0],
+						};
+					},
+				},
+				{
+					rule: ["object"],
+					fn: () => {
+						return opt[0];
+					},
+				},
+			],
+			"toast",
+			opt
+		);
+		// if (opt && opt.length > 0) {
+		// 	let t = {
+		// 		elem: null,
+		// 		debug: null,
+		// 	};
 
-				t.debug = opt[2]?.debug === true ? true : false;
-			} else if (opt.length === 2) {
-				let bI = core.getBaseIcon(opt[0]);
+		// 	if (opt.length === 3) {
+		// 		let bI = core.getBaseIcon(opt[0]);
 
-				if (bI) {
-					t.color = bI.color;
-					t.elem = new msg({
-						weight: "sm",
-						icon: {
-							icon: bI.icon,
-							type: bI.type,
-						},
-						elem: opt[1],
-					});
-				} else {
-					t.color = opt[0];
-					if (typeof opt[1] === "string") {
-						t.elem = new msg({ weight: "sm", elem: opt[1] });
-					} else {
-						t.elem = opt[1];
-					}
-				}
-			} else if (opt.length === 1) {
-				if (typeof opt[0] === "string") {
-					t.elem = new msg({ weight: "sm", elem: opt[0] });
-				} else if (Array.isArray(opt[0]) || opt[0].hasOwnProperty("cl")) {
-					t.elem = opt[0];
-				} else {
-					t = opt[0];
-				}
-			} else {
-				console.error("Unsupported argument", opt);
-			}
+		// 		if (bI) {
+		// 			t.color = bI.color;
+		// 			t.elem = new msg({
+		// 				weight: "sm",
+		// 				icon: {
+		// 					icon: bI.icon,
+		// 					type: bI.type,
+		// 				},
+		// 				elem: opt[1],
+		// 			});
+		// 		} else {
+		// 			t.color = opt[0];
+		// 			if (typeof opt[1] === "string") {
+		// 				t.elem = new msg({ weight: "sm", elem: opt[1] });
+		// 			} else {
+		// 				t.elem = opt[1];
+		// 			}
+		// 		}
 
-			this.data = core.extend({}, defaultOption, t);
-		} else {
-			this.data = null;
-		}
+		// 		t.debug = opt[2]?.debug === true ? true : false;
+		// 	} else if (opt.length === 2) {
+		// 		let bI = core.getBaseIcon(opt[0]);
+
+		// 		if (bI) {
+		// 			t.color = bI.color;
+		// 			t.elem = new msg({
+		// 				weight: "sm",
+		// 				icon: {
+		// 					icon: bI.icon,
+		// 					type: bI.type,
+		// 				},
+		// 				elem: opt[1],
+		// 			});
+		// 		} else {
+		// 			t.color = opt[0];
+		// 			if (typeof opt[1] === "string") {
+		// 				t.elem = new msg({ weight: "sm", elem: opt[1] });
+		// 			} else {
+		// 				t.elem = opt[1];
+		// 			}
+		// 		}
+		// 	} else if (opt.length === 1) {
+		// 		if (typeof opt[0] === "string") {
+		// 			t.elem = new msg({ weight: "sm", elem: opt[0] });
+		// 		} else if (Array.isArray(opt[0]) || opt[0].hasOwnProperty("cl")) {
+		// 			t.elem = opt[0];
+		// 		} else {
+		// 			t = opt[0];
+		// 		}
+		// 	} else {
+		// 		console.error("Unsupported argument", opt);
+		// 	}
+
+		// 	this.data = core.extend({}, defaultOption, t);
+		// } else {
+		// 	this.data = null;
+		// }
 	}
 
 	get data() {

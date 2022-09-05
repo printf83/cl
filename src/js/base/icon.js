@@ -83,28 +83,37 @@ export default class icon extends tag {
 				type: null,
 				icon: null,
 			};
-			if (opt.length === 1) {
-				if (typeof opt[0] === "string") {
-					t = {
-						type: "fas",
-						icon: opt[0],
-					};
-				} else if (Array.isArray(opt[0]) && opt[0].length === 2) {
-					t = {
-						type: opt[0][0],
-						icon: opt[0][1],
-					};
-				} else {
-					t = opt[0];
-				}
-			} else if (opt.length === 2) {
-				t = {
-					type: opt[0],
-					icon: opt[1],
-				};
-			} else {
-				console.error("Unsupported argument", opt);
-			}
+
+			t = core.args(
+				[
+					{
+						rule: ["string", "string"],
+						fn: () => {
+							return {
+								type: opt[0],
+								icon: opt[1],
+							};
+						},
+					},
+					{
+						rule: ["string"],
+						fn: () => {
+							return {
+								type: "fas",
+								icon: opt[0],
+							};
+						},
+					},
+					{
+						rule: ["object"],
+						fn: () => {
+							return opt[0];
+						},
+					},
+				],
+				"icon",
+				opt
+			);
 
 			this.data = core.extend({}, defaultOption, t);
 		} else {

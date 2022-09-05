@@ -13,7 +13,7 @@ export default class h extends tag {
 		this.data = core.args(
 			[
 				{
-					rule: ["number", "string", "any"],
+					rule: ["number", "string|string[]", "cl|cl[]|string|string[]"],
 					fn: (opt) => {
 						return {
 							level: opt[0],
@@ -23,7 +23,7 @@ export default class h extends tag {
 					},
 				},
 				{
-					rule: ["number", "any"],
+					rule: ["number", "cl|cl[]|string|string[]"],
 					fn: (opt) => {
 						return {
 							level: opt[0],
@@ -32,7 +32,7 @@ export default class h extends tag {
 					},
 				},
 				{
-					rule: ["string", "any"],
+					rule: ["string|string[]", "cl|cl[]|string|string[]"],
 					fn: (opt) => {
 						return {
 							level: 5,
@@ -50,41 +50,9 @@ export default class h extends tag {
 					fn: (opt) => opt[0],
 				},
 			],
+			"h",
 			opt
 		);
-
-		// if (opt && opt.length > 0) {
-		// 	if (opt.length === 3) {
-		// 		this.data = {
-		// 			level: opt[0],
-		// 			class: opt[1],
-		// 			elem: opt[2],
-		// 		};
-		// 	} else if (opt.length === 2) {
-		// 		if (typeof opt[0] === "number") {
-		// 			this.data = {
-		// 				level: opt[0],
-		// 				elem: opt[1],
-		// 			};
-		// 		} else {
-		// 			this.data = {
-		// 				level: 5,
-		// 				class: opt[0],
-		// 				elem: opt[1],
-		// 			};
-		// 		}
-		// 	} else if (opt.length === 1) {
-		// 		if (typeof opt[0] === "object") {
-		// 			if (opt[0].hasOwnProperty("cl")) {
-		// 				this.data = { elem: opt[0] };
-		// 			} else {
-		// 				this.data = opt[0];
-		// 			}
-		// 		} else {
-		// 			this.data = { elem: opt[0] };
-		// 		}
-		// 	}
-		// }
 	}
 
 	get data() {

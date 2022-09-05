@@ -194,59 +194,126 @@ export function extend(out) {
 	return out;
 }
 
-const defaultRule = {
-	rule: null,
-	fn: null,
-};
-
-const itsRule = (a, b) => {
-	if (a.length === b.length) {
-		for (var i = 0; i < a.length; i++) {
-			if (a[i] === b[i] || a[i] === "any") {
+const fnA = {
+	defaultRule: {
+		rule: null,
+		fn: null,
+	},
+	compareRulesAndArg: (a, b) => {
+		if (b === null) {
+			if (a === null) {
 				return true;
-				break;
+			}
+		} else {
+			if (a) {
+				if (a.length === b.length) {
+					for (let i = 0; i < a.length; i++) {
+						if (typeof a[i] === "function") {
+							if (a[i](b[i]) === true) {
+								return true;
+							}
+						} else {
+							if (a[i].indexOf("|") >= 0) {
+								//multiple
+								let c = a[i].split("|");
+
+								for (let j = 0; j < c.length; j++) {
+									if (c[j] === b[i] || c[j] === "any") {
+										return true;
+										break;
+									}
+								}
+							} else {
+								//single
+								if (a[i] === b[i] || a[i] === "any") {
+									return true;
+									break;
+								}
+							}
+						}
+					}
+				}
+			} else {
+				console.warn("a is null");
 			}
 		}
-	}
 
-	return false;
-};
-
-const findFn = (rules, rule) => {
-	if (rules && rules.length > 0) {
-		for (var i = 0; i < rules.length; i++) {
-			if (itsRule(rules[i].rule, rule)) {
-				return rules[i].fn;
-				break;
+		return false;
+	},
+	getFunction: (ruleSetting, argType) => {
+		if (ruleSetting && ruleSetting.length > 0) {
+			for (var i = 0; i < ruleSetting.length; i++) {
+				if (fnA.compareRulesAndArg(ruleSetting[i].rule, argType)) {
+					return ruleSetting[i].fn;
+					break;
+				}
 			}
 		}
-	}
 
-	return null;
-};
-
-const translateArgs = (obj) => {
-	let result = [];
-
-	if (obj && obj.length > 0) {
-		obj.forEach((i) => {
-			result.push(typeof i);
-		});
-	}
-
-	return result;
-};
-
-export function args(rules, ...obj) {
-	let arg = translateArgs(...obj);
-	let fn = findFn(rules, arg);
-	if (fn) {
-		return fn(...obj);
-	} else {
-		console.error(`Args <b>${arg.join("|")}</b> not supported `);
 		return null;
-	}
-}
+	},
+	checkArgType: (obj) => {
+		if (obj === undefined) {
+			return "undefined";
+		}
+
+		if (obj === null) {
+			return "null";
+		}
+
+		if (Array.isArray(obj)) {
+			if (obj.length > 0) {
+				return `${fnA.checkArgType(obj[0])}[]`;
+			} else {
+				return "any[]";
+			}
+		} else {
+			let t = typeof obj;
+			if (t === "object") {
+				if (obj.hasOwnProperty("cl") && obj.cl === 1) {
+					return "cl";
+				} else if (obj === { debug: true }) {
+					return "debug";
+				} else {
+					return t;
+				}
+			} else {
+				return t;
+			}
+		}
+	},
+	getArgType: (obj) => {
+		if (obj && obj.length > 0) {
+			let result = [];
+			obj.forEach((i) => {
+				result.push(fnA.checkArgType(i));
+			});
+			return result;
+		} else {
+			return null;
+		}
+	},
+	main: (rules, caller, ...obj) => {
+		let a = fnA.getArgType(...obj);
+		let f = fnA.getFunction(rules, a);
+		if (f) {
+			return f(...obj);
+		} else {
+			const bold = "font-weight: bold;";
+			console.error(`${caller} argument ${a.join(", ")} not supported by any rules`, {
+				obj: a,
+				rule: rules
+					? rules.map((i) => {
+							return i?.rule?.join(", ");
+					  })
+					: null,
+			});
+			return null;
+		}
+	},
+};
+
+export const args = fnA.main;
 
 export const merge = {
 	class: (a, b) => {
@@ -541,16 +608,25 @@ export function multiClass(val, format, supported, unsupported) {
 	}
 }
 
+const welcomeLog = () => {
+	console.log(
+		`%c${setting.title()}`,
+		"font-weight: bold; font-size: 50px;color: white; text-shadow: 3px 3px 0 rgb(217,31,38) , 6px 6px 0 rgb(226,91,14) , 9px 9px 0 rgb(245,221,8) , 12px 12px 0 rgb(5,148,68) , 15px 15px 0 rgb(2,135,206) , 18px 18px 0 rgb(4,77,145) , 21px 21px 0 rgb(42,21,113); margin-bottom: 12px; padding: 5%"
+	);
+};
+
 export function documentReady(callback) {
 	if (document.readyState != "loading") {
 		// in case the document is already rendered
 		setting.theme = setting.theme;
 		authCheck(callback);
+		welcomeLog();
 	} else if (document.addEventListener) {
 		// modern browsers
 		document.addEventListener("DOMContentLoaded", () => {
 			setting.theme = setting.theme;
 			authCheck(callback);
+			welcomeLog();
 		});
 	} else {
 		// IE <= 8
@@ -558,6 +634,7 @@ export function documentReady(callback) {
 			if (document.readyState == "complete") {
 				setting.theme = setting.theme;
 				authCheck(callback);
+				welcomeLog();
 			}
 		});
 	}
@@ -948,7 +1025,7 @@ function build(container, arg) {
 										let t = build(element, i);
 										element = t ? t : element;
 									} else {
-										console.info("i is not elem or [elem] or string or number or boolean", i);
+										console.error("i is not elem or [elem] or string or number or boolean", i);
 									}
 								}
 							});
