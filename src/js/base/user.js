@@ -134,6 +134,7 @@ const fn = {
 		}
 	},
 	header: (defaultTitle, opt) => {
+		console.log(opt);
 		return [
 			opt.icon ? new icon(opt.icon) : new icon(core.setting.icon(defaultIconColor, defaultIconWeight)),
 			new tag({
