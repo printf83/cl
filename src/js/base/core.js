@@ -702,7 +702,7 @@ function authCheck(callback) {
 					token: resetPassword,
 					callback: () => {
 						new usr.signin({
-							msg: "Password changed. Please sign in to continue.",
+							msg: "Password changed. Please use your new password to sign in.",
 							callback: () => {
 								window.location = window.location.origin + window.location.pathname;
 							},

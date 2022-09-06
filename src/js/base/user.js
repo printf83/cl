@@ -16,6 +16,7 @@ import file from "./file.js";
 import a from "./a.js";
 import small from "./small.js";
 import tag from "./tag.js";
+import toast from "./toast.js";
 
 const defaultIconWeight = "4x";
 const defaultIconColor = "primary";
@@ -327,11 +328,24 @@ const fn = {
 								if (result) {
 									if (result.success) {
 										if (opt.callback instanceof Function) {
+											// new dlg.msgbox(
+											// 	"/",
+											// 	"Sign up success. Please check your email for validation.",
+											// 	() => {
+											// 		let dlg = container.closest("div.modal");
+											// 		modal.hide(dlg);
+											// 		opt.callback(true);
+											// 	}
+											// ).show();
 											let dlg = container.closest("div.modal");
 											modal.hide(dlg);
 											opt.callback(true);
 										} else {
-											fn.showmsg(container, "Sign up success", "/");
+											fn.showmsg(
+												container,
+												"Sign up success. Please check your email for validation.",
+												"/"
+											);
 										}
 									} else {
 										fn.showmsg(container, result && result.message ? result.message : null, "!!");
@@ -361,6 +375,15 @@ const fn = {
 							if (result) {
 								if (result.success) {
 									if (opt.callback instanceof Function) {
+										// new dlg.msgbox(
+										// 	"/",
+										// 	"Please check your email to continue reset password",
+										// 	() => {
+										// 		let dlg = container.closest("div.modal");
+										// 		modal.hide(dlg);
+										// 		opt.callback(true);
+										// 	}
+										// ).show();
 										let dlg = container.closest("div.modal");
 										modal.hide(dlg);
 										opt.callback(true);
@@ -402,11 +425,24 @@ const fn = {
 								if (result) {
 									if (result.success) {
 										if (opt.callback instanceof Function) {
+											// new dlg.msgbox(
+											// 	"/",
+											// 	"Password changed. Please use your new password next time you sign in.",
+											// 	() => {
+											// 		let dlg = container.closest("div.modal");
+											// 		modal.hide(dlg);
+											// 		opt.callback(true);
+											// 	}
+											// ).show();
 											let dlg = container.closest("div.modal");
 											modal.hide(dlg);
 											opt.callback(true);
 										} else {
-											fn.showmsg(container, "Password changed", "/");
+											fn.showmsg(
+												container,
+												"Password changed. Please use your new password next time you sign in.",
+												"/"
+											);
 										}
 									} else {
 										fn.showmsg(container, result && result.message ? result.message : null, "!!");
@@ -440,11 +476,24 @@ const fn = {
 								if (result) {
 									if (result.success) {
 										if (opt.callback instanceof Function) {
+											// new dlg.msgbox(
+											// 	"/",
+											// 	"Password change. Please use your new password to sign in.",
+											// 	() => {
+											// 		let dlg = container.closest("div.modal");
+											// 		modal.hide(dlg);
+											// 		opt.callback(true);
+											// 	}
+											// ).show();
 											let dlg = container.closest("div.modal");
 											modal.hide(dlg);
 											opt.callback(true);
 										} else {
-											fn.showmsg(container, "Password changed", "/");
+											fn.showmsg(
+												container,
+												"Password changed. Please use your new password to sign in.",
+												"/"
+											);
 										}
 									} else {
 										fn.showmsg(container, result && result.message ? result.message : null, "!!");
