@@ -268,10 +268,13 @@ export default [
 											elem: new codepreview({
 												title: "Result",
 												container: "card",
+												marginy: 0,
+												maxheight: "10rem",
 												code: JSON.stringify(result),
 											}),
 										})
 									);
+									PR.prettyPrint();
 								}
 							);
 						}).show();
@@ -283,6 +286,7 @@ export default [
 					elem: new codepreview({
 						title: "Result",
 						container: "card",
+						marginy: 0,
 						code: `//result`,
 					}),
 				}),
@@ -414,10 +418,13 @@ export default [
 										elem: new codepreview({
 											title: "Result",
 											container: "card",
+											marginy: 0,
+											maxheight: "10rem",
 											code: JSON.stringify(result),
 										}),
 									})
 								);
+								PR.prettyPrint();
 							}
 						);
 					},
@@ -428,6 +435,7 @@ export default [
 					elem: new codepreview({
 						title: "Result",
 						container: "card",
+						marginy: 0,
 						code: `//result`,
 					}),
 				}),
@@ -473,10 +481,13 @@ export default [
 										elem: new codepreview({
 											title: "Result",
 											container: "card",
+											marginy: 0,
+											maxheight: "10rem",
 											code: JSON.stringify(result),
 										}),
 									})
 								);
+								PR.prettyPrint();
 							}
 						);
 					},
@@ -487,6 +498,7 @@ export default [
 					elem: new codepreview({
 						title: "Result",
 						container: "card",
+						marginy: 0,
 						code: `//result`,
 					}),
 				}),
@@ -557,10 +569,13 @@ export default [
 										elem: new codepreview({
 											title: "Result",
 											container: "card",
+											marginy: 0,
+											maxheight: "10rem",
 											code: JSON.stringify(result),
 										}),
 									})
 								);
+								PR.prettyPrint();
 
 								core.replaceChild(
 									document.getElementById(selectInputId),
@@ -576,6 +591,7 @@ export default [
 					elem: new codepreview({
 						title: "Result",
 						container: "card",
+						marginy: 0,
 						code: `//result`,
 					}),
 				}),
@@ -611,7 +627,6 @@ export default [
 							},
 							(result) => {
 								//result
-								// document.getElementById(resultOutputId).value = JSON.stringify(result);
 								core.replaceWith(
 									document.getElementById(resultOutputId),
 									new div({
@@ -619,10 +634,13 @@ export default [
 										elem: new codepreview({
 											title: "Result",
 											container: "card",
+											marginy: 0,
+											maxheight: "10rem",
 											code: JSON.stringify(result),
 										}),
 									})
 								);
+								PR.prettyPrint();
 
 								core.replaceChild(
 									document.getElementById(selectInputId),
@@ -632,12 +650,12 @@ export default [
 						);
 					},
 				}),
-				// new input({ type: "textarea", label: "Result", id: resultOutputId, rows: 10 }),
 				new div({
 					id: resultOutputId,
 					elem: new codepreview({
 						title: "Result",
 						container: "card",
+						marginy: 0,
 						code: `//result`,
 					}),
 				}),
