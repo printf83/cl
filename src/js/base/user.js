@@ -237,7 +237,7 @@ const fn = {
 			fn.showmsg(container, null);
 		},
 		signout: (sender, callback) => {
-			new dlg.confirmbox("?", `Are you sure to <b>Sign out</b> now?`, [
+			new dlg.confirmbox("!!", `Are you sure to <b>Sign out</b> now?`, [
 				{
 					label: "Yes",
 					onclick: () => {
