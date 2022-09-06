@@ -49,7 +49,7 @@ const loadcss = (url, callback) => {
 	// load me some stylesheet
 	let body = document.getElementsByTagName("body")[0];
 
-	body.classList.add("d-none");
+	// body.style.display = "none";
 
 	let head = document.getElementsByTagName("head")[0];
 	let link = document.createElement("link");
@@ -58,20 +58,21 @@ const loadcss = (url, callback) => {
 	link.id = id;
 	link.type = "text/css";
 	link.rel = "stylesheet";
-	link.href = url;
 
-	head.appendChild(link);
-
-	elemReady(link, () => {
+	link.onload = () => {
 		let elem = document.getElementById(id);
 		if (elem) {
 			detachEventListener(elem);
 			elem.remove();
 		}
 
-		body.classList.remove("d-none");
+		// body.style.display = null;
 		callback();
-	});
+	};
+
+	link.href = url;
+
+	head.appendChild(link);
 };
 
 const __setting = {
