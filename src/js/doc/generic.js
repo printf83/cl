@@ -236,7 +236,7 @@ export default [
 
 	{
 		msg: "Live example",
-		container: sample.formcontainer,
+
 		import: ["button", "input", "dlg", "db"],
 		code: () => {
 			let resultOutputId = core.UUID();
@@ -260,7 +260,6 @@ export default [
 								},
 								(result) => {
 									//result
-									// document.getElementById(resultOutputId).value = JSON.stringify(result);
 									core.replaceWith(
 										document.getElementById(resultOutputId),
 										new div({
@@ -268,7 +267,7 @@ export default [
 											elem: new codepreview({
 												title: "Result",
 												container: "card",
-												marginy: 0,
+
 												maxheight: "10rem",
 												code: JSON.stringify(result),
 											}),
@@ -280,13 +279,12 @@ export default [
 						}).show();
 					},
 				}),
-				// new input({ type: "textarea", label: "Result", id: resultOutputId, rows: 3 }),
 				new div({
 					id: resultOutputId,
 					elem: new codepreview({
 						title: "Result",
 						container: "card",
-						marginy: 0,
+
 						code: `//result`,
 					}),
 				}),
@@ -389,7 +387,7 @@ export default [
 
 	{
 		msg: "Live example",
-		container: sample.formcontainer,
+
 		import: ["button", "input", "db"],
 		code: () => {
 			let resultOutputId = core.UUID();
@@ -410,7 +408,6 @@ export default [
 							},
 							(result) => {
 								//result
-								// document.getElementById(resultOutputId).value = JSON.stringify(result);
 								core.replaceWith(
 									document.getElementById(resultOutputId),
 									new div({
@@ -418,7 +415,7 @@ export default [
 										elem: new codepreview({
 											title: "Result",
 											container: "card",
-											marginy: 0,
+
 											maxheight: "10rem",
 											code: JSON.stringify(result),
 										}),
@@ -429,13 +426,12 @@ export default [
 						);
 					},
 				}),
-				// new input({ type: "textarea", label: "Result", id: resultOutputId, rows: 10 }),
 				new div({
 					id: resultOutputId,
 					elem: new codepreview({
 						title: "Result",
 						container: "card",
-						marginy: 0,
+
 						code: `//result`,
 					}),
 				}),
@@ -445,7 +441,7 @@ export default [
 
 	{
 		msg: "Live example with query",
-		container: sample.formcontainer,
+
 		import: ["button", "input", "db"],
 		code: () => {
 			let resultOutputId = core.UUID();
@@ -473,7 +469,6 @@ export default [
 							},
 							(result) => {
 								//result
-								// document.getElementById(resultOutputId).value = JSON.stringify(result);
 								core.replaceWith(
 									document.getElementById(resultOutputId),
 									new div({
@@ -481,7 +476,7 @@ export default [
 										elem: new codepreview({
 											title: "Result",
 											container: "card",
-											marginy: 0,
+
 											maxheight: "10rem",
 											code: JSON.stringify(result),
 										}),
@@ -492,13 +487,12 @@ export default [
 						);
 					},
 				}),
-				// new input({ type: "textarea", label: "Result", id: resultOutputId, rows: 10 }),
 				new div({
 					id: resultOutputId,
 					elem: new codepreview({
 						title: "Result",
 						container: "card",
-						marginy: 0,
+
 						code: `//result`,
 					}),
 				}),
@@ -537,7 +531,7 @@ export default [
 
 	{
 		msg: "Live example",
-		container: sample.formcontainer,
+
 		import: ["button", "input", "option", "db"],
 		code: () => {
 			let resultOutputId = core.UUID();
@@ -561,7 +555,6 @@ export default [
 							},
 							(result) => {
 								//result
-								// document.getElementById(resultOutputId).value = JSON.stringify(result);
 								core.replaceWith(
 									document.getElementById(resultOutputId),
 									new div({
@@ -569,7 +562,7 @@ export default [
 										elem: new codepreview({
 											title: "Result",
 											container: "card",
-											marginy: 0,
+
 											maxheight: "10rem",
 											code: JSON.stringify(result),
 										}),
@@ -585,13 +578,11 @@ export default [
 						);
 					},
 				}),
-				// new input({ type: "textarea", label: "Result", id: resultOutputId, rows: 10 }),
 				new div({
 					id: resultOutputId,
 					elem: new codepreview({
 						title: "Result",
 						container: "card",
-						marginy: 0,
 						code: `//result`,
 					}),
 				}),
@@ -602,7 +593,7 @@ export default [
 
 	{
 		msg: "Live example with filter",
-		container: sample.formcontainer,
+
 		import: ["button", "input", "option", "db"],
 		code: () => {
 			let resultOutputId = core.UUID();
@@ -634,7 +625,7 @@ export default [
 										elem: new codepreview({
 											title: "Result",
 											container: "card",
-											marginy: 0,
+
 											maxheight: "10rem",
 											code: JSON.stringify(result),
 										}),
@@ -655,7 +646,7 @@ export default [
 					elem: new codepreview({
 						title: "Result",
 						container: "card",
-						marginy: 0,
+
 						code: `//result`,
 					}),
 				}),

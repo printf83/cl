@@ -83,7 +83,7 @@ export default [
 			"sample.query_data": sample.query_data_view,
 			"sample.list_state": sample.list_state,
 		},
-		container: sample.formcontainer,
+
 		import: ["input", "button", "db", "query", "sample"],
 		code: () => {
 			let resultOutputId = core.UUID();
@@ -116,7 +116,7 @@ export default [
 												elem: new codepreview({
 													title: "query.dialog result",
 													container: "card",
-													marginy: 0,
+
 													maxheight: "10rem",
 													code: JSON.stringify(data),
 												}),
@@ -142,7 +142,7 @@ export default [
 														elem: new codepreview({
 															title: "db.api.list result",
 															container: "card",
-															marginy: 0,
+
 															maxheight: "10rem",
 															code: JSON.stringify(result),
 														}),
@@ -163,7 +163,7 @@ export default [
 					elem: new codepreview({
 						title: "query.dialog result",
 						container: "card",
-						marginy: 0,
+
 						code: `//result`,
 					}),
 				}),
@@ -172,7 +172,7 @@ export default [
 					elem: new codepreview({
 						title: "db.api.list result",
 						container: "card",
-						marginy: 0,
+
 						code: `//result`,
 					}),
 				}),
@@ -245,7 +245,7 @@ export default [
 			"sample.query_data": sample.query_data_view,
 			"sample.list_state": sample.list_state,
 		},
-		container: sample.formcontainer,
+
 		import: ["input", "button", "db", "query", "sample"],
 		code: () => {
 			let resultOutputId = core.UUID();
@@ -276,7 +276,7 @@ export default [
 												elem: new codepreview({
 													title: "query.filter result",
 													container: "card",
-													marginy: 0,
+
 													maxheight: "10rem",
 													code: JSON.stringify(data),
 												}),
@@ -302,7 +302,7 @@ export default [
 														elem: new codepreview({
 															title: "db.api.list result",
 															container: "card",
-															marginy: 0,
+
 															maxheight: "10rem",
 															code: JSON.stringify(result),
 														}),
@@ -323,7 +323,7 @@ export default [
 					elem: new codepreview({
 						title: "query.filter result",
 						container: "card",
-						marginy: 0,
+
 						code: `//result`,
 					}),
 				}),
@@ -332,7 +332,7 @@ export default [
 					elem: new codepreview({
 						title: "db.api.list result",
 						container: "card",
-						marginy: 0,
+
 						code: `//result`,
 					}),
 				}),
@@ -396,7 +396,7 @@ export default [
 			"sample.query_setting": sample.query_setting,
 			"sample.query_data": sample.query_data_view,
 		},
-		container: sample.formcontainer,
+
 		import: ["input", "button", "db", "query", "sample"],
 		code: () => {
 			let resultOutputId = core.UUID();
@@ -426,7 +426,7 @@ export default [
 											elem: new codepreview({
 												title: "query.sort result",
 												container: "card",
-												marginy: 0,
+
 												maxheight: "10rem",
 												code: JSON.stringify(data),
 											}),
@@ -452,7 +452,7 @@ export default [
 													elem: new codepreview({
 														title: "db.api.list result",
 														container: "card",
-														marginy: 0,
+
 														maxheight: "10rem",
 														code: JSON.stringify(result),
 													}),
@@ -472,7 +472,7 @@ export default [
 					elem: new codepreview({
 						title: "query.sort result",
 						container: "card",
-						marginy: 0,
+
 						code: `//result`,
 					}),
 				}),
@@ -481,7 +481,7 @@ export default [
 					elem: new codepreview({
 						title: "db.api.list result",
 						container: "card",
-						marginy: 0,
+
 						code: `//result`,
 					}),
 				}),
@@ -543,7 +543,7 @@ export default [
 			"sample.query_setting": sample.query_setting,
 			"sample.query_data": sample.query_data_view,
 		},
-		container: sample.formcontainer,
+
 		import: ["input", "button", "db", "query", "sample"],
 		code: () => {
 			let resultOutputId = core.UUID();
@@ -572,7 +572,7 @@ export default [
 											elem: new codepreview({
 												title: "query.field result",
 												container: "card",
-												marginy: 0,
+
 												maxheight: "10rem",
 												code: JSON.stringify(data),
 											}),
@@ -598,7 +598,7 @@ export default [
 													elem: new codepreview({
 														title: "db.api.list result",
 														container: "card",
-														marginy: 0,
+
 														maxheight: "10rem",
 														code: JSON.stringify(result),
 													}),
@@ -618,7 +618,7 @@ export default [
 					elem: new codepreview({
 						title: "query.field result",
 						container: "card",
-						marginy: 0,
+
 						code: `//result`,
 					}),
 				}),
@@ -627,7 +627,7 @@ export default [
 					elem: new codepreview({
 						title: "db.api.list result",
 						container: "card",
-						marginy: 0,
+
 						code: `//result`,
 					}),
 				}),
@@ -696,7 +696,7 @@ export default [
 			"sample.query_setting": sample.query_setting,
 			"sample.query_data": sample.query_data_view,
 		},
-		container: sample.formcontainer,
+
 		import: ["input", "button", "db", "query", "sample"],
 		code: () => {
 			let resultOutputId = core.UUID();
@@ -727,7 +727,7 @@ export default [
 											elem: new codepreview({
 												title: "query.limit result",
 												container: "card",
-												marginy: 0,
+
 												maxheight: "10rem",
 												code: JSON.stringify(data),
 											}),
@@ -756,7 +756,6 @@ export default [
 													elem: new codepreview({
 														title: "db.api.list result",
 														container: "card",
-														marginy: 0,
 														maxheight: "10rem",
 														code: JSON.stringify(result),
 													}),
@@ -776,7 +775,7 @@ export default [
 					elem: new codepreview({
 						title: "query.limit result",
 						container: "card",
-						marginy: 0,
+
 						code: `//result`,
 					}),
 				}),
@@ -785,7 +784,7 @@ export default [
 					elem: new codepreview({
 						title: "db.api.list result",
 						container: "card",
-						marginy: 0,
+
 						code: `//result`,
 					}),
 				}),
@@ -853,7 +852,7 @@ export default [
 			"sample.query_setting": sample.query_setting,
 			"sample.query_data": sample.query_data_view,
 		},
-		container: sample.formcontainer,
+
 		import: ["input", "button", "db", "query", "sample"],
 		code: () => {
 			let resultOutputId = core.UUID();
@@ -885,7 +884,7 @@ export default [
 											elem: new codepreview({
 												title: "query.page result",
 												container: "card",
-												marginy: 0,
+
 												maxheight: "10rem",
 												code: JSON.stringify(data),
 											}),
@@ -911,7 +910,7 @@ export default [
 													elem: new codepreview({
 														title: "db.api.list result",
 														container: "card",
-														marginy: 0,
+
 														maxheight: "10rem",
 														code: JSON.stringify(result),
 													}),
@@ -931,7 +930,7 @@ export default [
 					elem: new codepreview({
 						title: "query.page result",
 						container: "card",
-						marginy: 0,
+
 						code: `//result`,
 					}),
 				}),
@@ -940,7 +939,7 @@ export default [
 					elem: new codepreview({
 						title: "db.api.list result",
 						container: "card",
-						marginy: 0,
+
 						code: `//result`,
 					}),
 				}),

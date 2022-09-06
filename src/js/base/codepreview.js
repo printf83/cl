@@ -63,9 +63,9 @@ function codecontainer(type, strcode, maxheight) {
 				textcolor: "primary",
 				align: "end",
 				class: "position-absolute end-0",
-				style: {
-					"margin-right": maxheight ? "1.5rem" : null,
-				},
+				// style: {
+				// 	"margin-right": maxheight ? "1.5rem" : null,
+				// },
 				onclick: (event) => {
 					let str = event.currentTarget.parentElement.nextSibling.firstChild.innerText;
 
