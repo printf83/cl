@@ -18,7 +18,7 @@ export default [
 		code: () => {
 			return new example({
 				title: "Title only",
-				debug: true, //this last option is for this documentation preview only
+				debug: true, // documentation purpose only
 			});
 		},
 	},
@@ -30,7 +30,7 @@ export default [
 			return new example({
 				title: "Title",
 				msg: ["Message 1", "Message 2"],
-				debug: true, //this last option is for this documentation preview only
+				debug: true, // documentation purpose only
 			});
 		},
 	},
@@ -46,7 +46,7 @@ export default [
 				code: () => {
 					return new button({ label: "Button", color: "primary" });
 				},
-				debug: true, //this last option is for this documentation preview only
+				debug: true, // documentation purpose only
 			});
 		},
 	},
@@ -63,7 +63,7 @@ export default [
 				code: () => {
 					new button({ label: "Button", color: "primary" });
 				},
-				debug: true, //this last option is for this documentation preview only
+				debug: true, // documentation purpose only
 			});
 		},
 	},
@@ -87,7 +87,7 @@ export default [
 						],
 					});
 				},
-				debug: true, //this last option is for this documentation preview only
+				debug: true, // documentation purpose only
 			});
 		},
 	},
@@ -107,10 +107,10 @@ export default [
 						icon: { icon: sample.icon(), color: "primary" },
 						title: "Bootstrap",
 						elem: "Hello, world! This is a toast message.",
-						debug: true, //this last option is for this documentation preview only
+						debug: true, // documentation purpose only
 					});
 				},
-				debug: true, //this last option is for this documentation preview only
+				debug: true, // documentation purpose only
 			});
 		},
 	},
@@ -138,7 +138,7 @@ export default [
 						]),
 					]);
 				},
-				debug: true, //this last option is for this documentation preview only
+				debug: true, // documentation purpose only
 			});
 		},
 	},
@@ -174,7 +174,7 @@ export default [
 						new button({ label: "Dark", color: "dark" }),
 					];
 				},
-				debug: true, //this last option is for this documentation preview only
+				debug: true, // documentation purpose only
 			});
 		},
 	},

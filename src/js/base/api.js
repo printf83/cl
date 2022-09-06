@@ -88,10 +88,7 @@ const fn = {
 				sender.classList.add("wait");
 				sender.setAttribute("disabled", "disabled");
 
-				if (fn.sender.islist(sender)) {
-					// let ctl = sender.querySelectorAll("h6");
-					// ctl[0].innerHTML = "<i class='fas fa-circle-notch fa-fw fa-spin'></i> Loading...";
-				} else {
+				if (!fn.sender.islist(sender)) {
 					//change icon
 					let ico = sender.querySelectorAll("i");
 					if (ico && ico.length > 0) {
@@ -107,10 +104,7 @@ const fn = {
 				sender.classList.remove("wait");
 				sender.removeAttribute("disabled");
 
-				if (fn.sender.islist(sender)) {
-					// let ctl = sender.querySelectorAll("h6");
-					// ctl[0].innerHTML = sender.getAttribute("data-name");
-				} else {
+				if (!fn.sender.islist(sender)) {
 					//change icon
 					let ico = sender.querySelectorAll("i");
 					if (ico && ico.length > 0) {

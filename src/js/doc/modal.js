@@ -46,7 +46,7 @@ export default [
 						new toast("i", "Callback").show();
 					},
 				},
-				debug: true, //this last option is for this documentation preview only
+				debug: true, // documentation purpose only
 			});
 		},
 	},
@@ -70,7 +70,7 @@ export default [
 						new toast("i", "Callback").show();
 					},
 				},
-				debug: true, //this last option is for this documentation preview only
+				debug: true, // documentation purpose only
 			});
 		},
 	},
@@ -97,7 +97,7 @@ export default [
 						new toast("i", "Callback").show();
 					},
 				},
-				debug: true, //this last option is for this documentation preview only
+				debug: true, // documentation purpose only
 			});
 		},
 	},
@@ -495,7 +495,7 @@ export default [
 			return new modal({
 				elem: "Modal body text goes here.",
 				button: ["Save changes", "Close"],
-				debug: true, //this last option is for this documentation preview only
+				debug: true, // documentation purpose only
 			});
 		},
 	},
@@ -541,7 +541,7 @@ export default [
 					"Close",
 				],
 				footer: new input({ type: "switch", name: "showagain", label: "Show again" }),
-				debug: true, //this last option is for this documentation preview only
+				debug: true, // documentation purpose only
 			});
 		},
 	},
@@ -697,7 +697,7 @@ export default [
 						},
 					},
 				],
-				debug: true, //this last option is for this documentation preview only
+				debug: true, // documentation purpose only
 			});
 		},
 	},

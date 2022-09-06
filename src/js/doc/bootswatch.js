@@ -1312,7 +1312,7 @@ export default [
 				elem: "Modal body text goes here.",
 
 				button: ["Save changes", "Close"],
-				debug: true, //this last option is for this documentation preview only
+				debug: true, // documentation purpose only
 			});
 		},
 	},
@@ -1481,7 +1481,7 @@ export default [
 			return new toast({
 				color: "primary",
 				elem: "Hello, world! This is a toast message.",
-				debug: true, //this last option is for this documentation preview only
+				debug: true, // documentation purpose only
 			});
 		},
 	},

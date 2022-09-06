@@ -135,7 +135,6 @@ const fn = {
 		}
 	},
 	header: (defaultTitle, opt) => {
-		console.log(opt);
 		return [
 			opt.icon ? new icon(opt.icon) : new icon(core.setting.icon(defaultIconColor, defaultIconWeight)),
 			new tag({
@@ -328,15 +327,6 @@ const fn = {
 								if (result) {
 									if (result.success) {
 										if (opt.callback instanceof Function) {
-											// new dlg.msgbox(
-											// 	"/",
-											// 	"Sign up success. Please check your email for validation.",
-											// 	() => {
-											// 		let dlg = container.closest("div.modal");
-											// 		modal.hide(dlg);
-											// 		opt.callback(true);
-											// 	}
-											// ).show();
 											let dlg = container.closest("div.modal");
 											modal.hide(dlg);
 											opt.callback(true);
@@ -375,15 +365,6 @@ const fn = {
 							if (result) {
 								if (result.success) {
 									if (opt.callback instanceof Function) {
-										// new dlg.msgbox(
-										// 	"/",
-										// 	"Please check your email to continue reset password",
-										// 	() => {
-										// 		let dlg = container.closest("div.modal");
-										// 		modal.hide(dlg);
-										// 		opt.callback(true);
-										// 	}
-										// ).show();
 										let dlg = container.closest("div.modal");
 										modal.hide(dlg);
 										opt.callback(true);
@@ -425,15 +406,6 @@ const fn = {
 								if (result) {
 									if (result.success) {
 										if (opt.callback instanceof Function) {
-											// new dlg.msgbox(
-											// 	"/",
-											// 	"Password changed. Please use your new password next time you sign in.",
-											// 	() => {
-											// 		let dlg = container.closest("div.modal");
-											// 		modal.hide(dlg);
-											// 		opt.callback(true);
-											// 	}
-											// ).show();
 											let dlg = container.closest("div.modal");
 											modal.hide(dlg);
 											opt.callback(true);
@@ -476,15 +448,6 @@ const fn = {
 								if (result) {
 									if (result.success) {
 										if (opt.callback instanceof Function) {
-											// new dlg.msgbox(
-											// 	"/",
-											// 	"Password change. Please use your new password to sign in.",
-											// 	() => {
-											// 		let dlg = container.closest("div.modal");
-											// 		modal.hide(dlg);
-											// 		opt.callback(true);
-											// 	}
-											// ).show();
 											let dlg = container.closest("div.modal");
 											modal.hide(dlg);
 											opt.callback(true);

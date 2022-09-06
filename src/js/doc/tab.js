@@ -238,7 +238,7 @@ export default [
 					],
 				}),
 				button: ["Understand", "Close"],
-				debug: true, //this last option is for this documentation preview only
+				debug: true, // documentation purpose only
 			});
 		},
 	},
@@ -269,7 +269,7 @@ export default [
 					],
 				}),
 				button: ["Understand", "Close"],
-				debug: true, //this last option is for this documentation preview only
+				debug: true, // documentation purpose only
 			});
 		},
 	},

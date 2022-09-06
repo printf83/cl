@@ -94,8 +94,6 @@ export const setting = {
 					color: color ? color : null,
 					weight: weight ? weight : null,
 					icon: "fire",
-					// icon: "digital-ocean",
-					// type: "fab",
 				};
 			};
 		}

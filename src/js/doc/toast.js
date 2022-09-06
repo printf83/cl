@@ -28,7 +28,7 @@ export default [
 			return new toast({
 				color: "primary",
 				elem: sample.text(),
-				debug: true, //this last option is for this documentation preview only
+				debug: true, // documentation purpose only
 			});
 		},
 	},
@@ -43,7 +43,7 @@ export default [
 				icon: null,
 				title: null,
 				elem: sample.text(),
-				debug: true, //this last option is for this documentation preview only
+				debug: true, // documentation purpose only
 			});
 		},
 	},
@@ -58,7 +58,7 @@ export default [
 				icon: { type: "fab", icon: "bootstrap" },
 				title: "Bootstrap",
 				elem: sample.text(),
-				debug: true, //this last option is for this documentation preview only
+				debug: true, // documentation purpose only
 			});
 		},
 	},
@@ -90,7 +90,7 @@ export default [
 			return new toast({
 				color: "primary",
 				elem: "Hello, world! This is a toast message.",
-				debug: true, //this last option is for this documentation preview only
+				debug: true, // documentation purpose only
 			});
 		},
 	},
@@ -213,6 +213,8 @@ export default [
 				color: "primary",
 				onclick: () => {
 					new toast({
+						icon: undefined,
+						title: undefined,
 						autohide: false,
 						color: "warning",
 						elem: "Hello, world! This is a toast message.",

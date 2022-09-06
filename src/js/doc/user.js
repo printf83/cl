@@ -239,7 +239,7 @@ export default [
 							core.setting.title = () => "Bootstrap";
 
 							new toast("/", "Application icon and title changed").show();
-							reloadUserDoc(); // documentation perpose only
+							reloadUserDoc(); // documentation purpose only
 						},
 					}),
 
@@ -251,7 +251,7 @@ export default [
 							core.setting.title = null;
 
 							new toast("-", "Application icon and title reset").show();
-							reloadUserDoc(); // documentation perpose only
+							reloadUserDoc(); // documentation purpose only
 						},
 					}),
 				],
@@ -277,26 +277,13 @@ export default [
 							core.setting.banner = (type) => {
 								return new img({
 									class: ["img-fluid", "rounded"],
-									title: type,
+									alt: `Image for ${type}`,
 									src: sample.img(730, 580),
 								});
-
-								// return new carousel({
-								// 	control: true,
-								// 	indicators: true,
-								// 	item: [
-								// 		sample.img(730, 580),
-								// 		sample.img(730, 580),
-								// 		sample.img(730, 580),
-								// 		sample.img(730, 580),
-								// 		sample.img(730, 580),
-								// 		sample.img(730, 580),
-								// 	],
-								// });
 							};
 
 							new toast("/", "User banner change").show();
-							reloadUserDoc(); // documentation perpose only
+							reloadUserDoc(); // documentation purpose only
 						},
 					}),
 
@@ -306,7 +293,7 @@ export default [
 						onclick: () => {
 							core.setting.banner = null;
 							new toast("-", "User banner reset").show();
-							reloadUserDoc(); // documentation perpose only
+							reloadUserDoc(); // documentation purpose only
 						},
 					}),
 				],
@@ -356,7 +343,7 @@ export default [
 							};
 
 							new toast("/", "User sign up term change").show();
-							reloadUserDoc(); // documentation perpose only
+							reloadUserDoc(); // documentation purpose only
 						},
 					}),
 
@@ -367,7 +354,7 @@ export default [
 							core.setting.term = null;
 
 							new toast("-", "User sign up term reset").show();
-							reloadUserDoc(); // documentation perpose only
+							reloadUserDoc(); // documentation purpose only
 						},
 					}),
 				],
@@ -402,7 +389,7 @@ export default [
 							};
 
 							new toast("/", "User event attached").show();
-							reloadUserDoc(); // documentation perpose only
+							reloadUserDoc(); // documentation purpose only
 						},
 					}),
 
@@ -412,7 +399,7 @@ export default [
 						onclick: () => {
 							core.setting.userchange = null;
 							new toast("-", "User event detached").show();
-							reloadUserDoc(); // documentation perpose only
+							reloadUserDoc(); // documentation purpose only
 						},
 					}),
 				],

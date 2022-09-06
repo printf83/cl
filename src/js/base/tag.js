@@ -122,6 +122,8 @@ const defaultOption = {
 	col: null,
 	rowcol: null,
 	gap: null,
+	gapx: null,
+	gapy: null,
 
 	rounded: null,
 	roundedtype: null,
@@ -281,12 +283,18 @@ export default class tag {
 
 					c2(opt.display, "d-$1"),
 
-					opt.display !== "grid" && opt.display !== "flex" && opt?.attr?.role !== "toolbar"
-						? c2(opt.gap, "g-$1")
-						: null,
-					opt.display === "grid" || opt.display === "flex" || opt?.attr?.role === "toolbar"
-						? c2(opt.gap, "gap-$1")
-						: null,
+					// opt.display !== "grid" && opt.display !== "flex" && opt?.attr?.role !== "toolbar"
+					// 	? c2(opt.gap, "g-$1")
+					// 	: null,
+					// opt.display === "grid" || opt.display === "flex" || opt?.attr?.role === "toolbar"
+					// 	? c2(opt.gap, "gap-$1")
+					// 	: null,
+
+					c2(opt.gap, "g-$1"),
+
+					// should i check again?
+					c2(opt.gapx, "gx-$1"),
+					c2(opt.gapy, "gy-$1"),
 
 					opt.row ? "row" : null,
 
