@@ -155,7 +155,7 @@ const fn = {
 				display: opt.msg ? "null" : "none",
 				elem: new div({
 					id: `${opt.id}-msg`,
-					elem: fn.msg(opt.msg, "info"),
+					elem: fn.msg(opt.msg, "i"),
 				}),
 			}),
 		].filter(Boolean);
