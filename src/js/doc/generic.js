@@ -8,6 +8,7 @@ import button from "../base/button.js";
 import input from "../base/input.js";
 import * as option from "../base/option.js";
 import * as dlg from "../base/dlg.js";
+import div from "../base/div.js";
 
 export default [
 	{
@@ -259,13 +260,25 @@ export default [
 								},
 								(result) => {
 									//result
-									document.getElementById(resultOutputId).value = JSON.stringify(result);
+									// document.getElementById(resultOutputId).value = JSON.stringify(result);
+									core.replaceWith(
+										getElementById(resultOutputId),
+										new div({
+											id: resultOutputId,
+											elem: new codepreview({
+												title: "Result",
+												container: "card",
+												code: JSON.stringify(result),
+											}),
+										})
+									);
 								}
 							);
 						}).show();
 					},
 				}),
-				new input({ type: "textarea", label: "Result", id: resultOutputId, rows: 3 }),
+				// new input({ type: "textarea", label: "Result", id: resultOutputId, rows: 3 }),
+				new div({ id: resultOutputId, display: "none" }),
 			];
 		},
 	},
@@ -386,12 +399,24 @@ export default [
 							},
 							(result) => {
 								//result
-								document.getElementById(resultOutputId).value = JSON.stringify(result);
+								// document.getElementById(resultOutputId).value = JSON.stringify(result);
+								core.replaceWith(
+									getElementById(resultOutputId),
+									new div({
+										id: resultOutputId,
+										elem: new codepreview({
+											title: "Result",
+											container: "card",
+											code: JSON.stringify(result),
+										}),
+									})
+								);
 							}
 						);
 					},
 				}),
-				new input({ type: "textarea", label: "Result", id: resultOutputId, rows: 10 }),
+				// new input({ type: "textarea", label: "Result", id: resultOutputId, rows: 10 }),
+				new div({ id: resultOutputId, display: "none" }),
 			];
 		},
 	},
@@ -426,12 +451,24 @@ export default [
 							},
 							(result) => {
 								//result
-								document.getElementById(resultOutputId).value = JSON.stringify(result);
+								// document.getElementById(resultOutputId).value = JSON.stringify(result);
+								core.replaceWith(
+									getElementById(resultOutputId),
+									new div({
+										id: resultOutputId,
+										elem: new codepreview({
+											title: "Result",
+											container: "card",
+											code: JSON.stringify(result),
+										}),
+									})
+								);
 							}
 						);
 					},
 				}),
-				new input({ type: "textarea", label: "Result", id: resultOutputId, rows: 10 }),
+				// new input({ type: "textarea", label: "Result", id: resultOutputId, rows: 10 }),
+				new div({ id: resultOutputId, display: "none" }),
 			];
 		},
 	},
@@ -491,7 +528,19 @@ export default [
 							},
 							(result) => {
 								//result
-								document.getElementById(resultOutputId).value = JSON.stringify(result);
+								// document.getElementById(resultOutputId).value = JSON.stringify(result);
+								core.replaceWith(
+									getElementById(resultOutputId),
+									new div({
+										id: resultOutputId,
+										elem: new codepreview({
+											title: "Result",
+											container: "card",
+											code: JSON.stringify(result),
+										}),
+									})
+								);
+
 								core.replaceChild(
 									document.getElementById(selectInputId),
 									new option.select({ item: result })
@@ -500,7 +549,8 @@ export default [
 						);
 					},
 				}),
-				new input({ type: "textarea", label: "Result", id: resultOutputId, rows: 10 }),
+				// new input({ type: "textarea", label: "Result", id: resultOutputId, rows: 10 }),
+				new div({ id: resultOutputId, display: "none" }),
 				new input({ type: "select", label: "Sample", id: selectInputId }),
 			];
 		},
@@ -533,7 +583,19 @@ export default [
 							},
 							(result) => {
 								//result
-								document.getElementById(resultOutputId).value = JSON.stringify(result);
+								// document.getElementById(resultOutputId).value = JSON.stringify(result);
+								core.replaceWith(
+									getElementById(resultOutputId),
+									new div({
+										id: resultOutputId,
+										elem: new codepreview({
+											title: "Result",
+											container: "card",
+											code: JSON.stringify(result),
+										}),
+									})
+								);
+
 								core.replaceChild(
 									document.getElementById(selectInputId),
 									new option.select({ item: result })
@@ -542,7 +604,8 @@ export default [
 						);
 					},
 				}),
-				new input({ type: "textarea", label: "Result", id: resultOutputId, rows: 10 }),
+				// new input({ type: "textarea", label: "Result", id: resultOutputId, rows: 10 }),
+				new div({ id: resultOutputId, display: "none" }),
 				new input({ type: "select", label: "Sample", id: selectInputId }),
 			];
 		},
