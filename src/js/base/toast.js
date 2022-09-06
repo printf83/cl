@@ -170,7 +170,7 @@ export default class toast extends div {
 								opt.close
 									? new btnclose({
 											dismiss: "toast",
-											dark: opt.color ? opt.color : "body-bg",
+											dark: true,
 									  })
 									: null,
 							],
@@ -195,7 +195,7 @@ export default class toast extends div {
 									marginstart: 2,
 									elem: new btnclose({
 										dismiss: "toast",
-										dark: `--bs-${opt.color ? opt.color : "body-bg"}`,
+										dark: opt.color ? opt.color : "body-bg",
 										marginy: 1,
 									}),
 							  })

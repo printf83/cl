@@ -86,10 +86,12 @@ export const isdarkcolor = (color) => {
 		var luma = 0.2126 * r + 0.7152 * g + 0.0722 * b; // per ITU-R BT.709
 
 		if (luma < 128) {
-			if (DEBUG) console.log(`Color ${scolor} is dark`);
+			// if (DEBUG) console.log(`Color ${scolor} is dark`);
+			console.log(`Color ${scolor} is dark`);
 			return true;
 		} else {
-			if (DEBUG) console.log(`Color ${scolor} is light`);
+			// if (DEBUG) console.log(`Color ${scolor} is light`);
+			console.log(`Color ${scolor} is light`);
 			return false;
 		}
 	} else {
@@ -102,12 +104,13 @@ export const getcssvar = (name) => {
 	let style = getComputedStyle(document.body);
 	let result_1 = style.getPropertyValue(`--bs-${name}-rgb`);
 	if (result_1) {
-		return result_1;
+		return `rgb(${result_1})`;
 	} else {
 		let result_2 = style.getPropertyValue(`--bs-${name}`);
 		if (result_2) {
 			return result_2;
 		} else {
+			console.error(`Css var --bs-${name} or --bs-${name}-rgb not found`);
 			return null;
 		}
 	}
@@ -232,14 +235,14 @@ export const setting = {
 							css_bootswatch.setAttribute("disabled", "disabled");
 						}, 300);
 					}
+
+					if (__setting.themechange && typeof __setting.themechange === "function") {
+						__setting.themechange(value);
+					}
 				}
 			);
 		} else {
 			console.error("#css_bootstrap and #css_bootswatch not found");
-		}
-
-		if (__setting.themechange && typeof __setting.themechange === "function") {
-			__setting.themechange(value);
 		}
 	},
 	get themechange() {
@@ -506,7 +509,7 @@ export const merge = {
 								if (rules && rules.hasOwnProperty(i)) {
 									c[i] = rules[i](a[i], b[i]);
 								} else {
-									console.warn(
+									console.error(
 										`Fail to merge attr:${i}. No rules provided for merging this attribute. Using attr from 'a' insted.`,
 										[a[i], b[i]]
 									);
@@ -1045,6 +1048,18 @@ const booleanAttr = [
 	"truespeed",
 ];
 
+// function toCamelCase(str) {
+// 	try {
+// 		return str
+// 			.split("-")
+// 			.map(function (x, i) {
+// 				return (i ? x[0].toUpperCase() : x[0]) + x.slice(1).toLowerCase();
+// 			})
+// 			.join("");
+// 	} catch {
+// 		return null;
+// 	}
+// }
 function attachAttr(elems, arg) {
 	if (elems && arg) {
 		Object.keys(arg).forEach((i) => {
@@ -1058,7 +1073,14 @@ function attachAttr(elems, arg) {
 					}
 				} else if (i === "style") {
 					Object.keys(arg[i]).forEach((j) => {
-						if (arg[i][j] && arg[i][j] !== null && arg[i][j] !== undefined) {
+						if (arg[i][j] !== null && arg[i][j] !== undefined) {
+							// let jCC = toCamelCase(j);
+							// if (jCC) {
+							// 	elems.style[jCC] = arg[i][j];
+							// } else {
+							// 	elems.style.setProperty(j, arg[i][j]);
+							// }
+
 							elems.style.setProperty(j, arg[i][j]);
 						}
 					});

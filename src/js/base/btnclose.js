@@ -20,7 +20,7 @@ export default class btnclose extends button {
 
 			//auto dark
 			if (!(opt.dark === true || opt.dark === false)) {
-				opt.dark = core.isdarkcolor(core.getcssvar(opt.dark));
+				opt.dark = !core.isdarkcolor(core.getcssvar(opt.dark));
 			}
 
 			opt.class = core.merge.class(opt.class, [
