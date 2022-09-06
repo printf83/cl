@@ -50,7 +50,7 @@ function beautifycss(str) {
 	return beautifyhtml(str);
 }
 
-function codecontainer(type, strcode) {
+function codecontainer(type, strcode, maxheight) {
 	return [
 		new div({
 			position: "relative",
@@ -63,6 +63,9 @@ function codecontainer(type, strcode) {
 				textcolor: "primary",
 				align: "end",
 				class: "position-absolute end-0",
+				// style: {
+				// 	"margin-right": maxheight ? "1.5rem" : null,
+				// },
 				onclick: (event) => {
 					let str = event.currentTarget.parentElement.nextSibling.firstChild.innerText;
 
@@ -78,6 +81,9 @@ function codecontainer(type, strcode) {
 		new code({
 			overflow: "auto",
 			display: "block",
+			style: {
+				"max-height": maxheight,
+			},
 			elem: new pre({
 				class: `prettyprint lang-${type}`,
 				margin: 0,
@@ -100,6 +106,8 @@ const defaultOption = {
 	type: "js",
 	container: "div",
 	title: null,
+	maxheight: null,
+	marginy: 3,
 };
 /**
  * opt : {tagoption,icon,label}
@@ -123,7 +131,8 @@ export default class codepreview extends tag {
 			super.data = {
 				elem: [
 					new div({
-						elem: new card.body({ elem: codecontainer(opt.type, opt.code) }),
+						marginy: opt.marginy,
+						elem: new card.body({ elem: codecontainer(opt.type, opt.code, opt.maxheight) }),
 					}),
 				],
 			};
@@ -131,17 +140,17 @@ export default class codepreview extends tag {
 			super.data = {
 				elem: [
 					new card.container({
-						marginy: 3,
+						marginy: opt.marginy,
 						elem: [
 							opt.title ? new card.header(new small(new b(opt.title))) : null,
-							new card.body({ elem: codecontainer(opt.type, opt.code) }),
+							new card.body({ elem: codecontainer(opt.type, opt.code, opt.maxheight) }),
 						].filter(Boolean),
 					}),
 				],
 			};
 		} else {
 			super.data = {
-				elem: codecontainer(opt.type, opt.code),
+				elem: codecontainer(opt.type, opt.code, opt.maxheight),
 			};
 		}
 	}

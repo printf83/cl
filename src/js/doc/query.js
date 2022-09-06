@@ -3,7 +3,7 @@ import sample from "./sample.js";
 import codepreview from "../base/codepreview.js";
 import button from "../base/button.js";
 import * as query from "../base/query.js";
-import input from "../base/input.js";
+import div from "../base/div.js";
 import * as core from "../base/core.js";
 import * as db from "../base/api.js";
 
@@ -83,7 +83,7 @@ export default [
 			"sample.query_data": sample.query_data_view,
 			"sample.list_state": sample.list_state,
 		},
-		container: sample.formcontainer,
+
 		import: ["input", "button", "db", "query", "sample"],
 		code: () => {
 			let resultOutputId = core.UUID();
@@ -109,7 +109,21 @@ export default [
 								},
 								[
 									(_event, data) => {
-										document.getElementById(queryOutputId).value = JSON.stringify(data);
+										core.replaceWith(
+											document.getElementById(queryOutputId),
+											new div({
+												id: queryOutputId,
+												elem: new codepreview({
+													title: "query.dialog result",
+													container: "card",
+
+													maxheight: "10rem",
+													code: JSON.stringify(data),
+												}),
+											})
+										);
+										PR.prettyPrint();
+
 										sample.query_data = data;
 
 										//get record
@@ -121,7 +135,20 @@ export default [
 											},
 											(result) => {
 												//result
-												document.getElementById(resultOutputId).value = JSON.stringify(result);
+												core.replaceWith(
+													document.getElementById(resultOutputId),
+													new div({
+														id: resultOutputId,
+														elem: new codepreview({
+															title: "db.api.list result",
+															container: "card",
+
+															maxheight: "10rem",
+															code: JSON.stringify(result),
+														}),
+													})
+												);
+												PR.prettyPrint();
 											}
 										);
 									},
@@ -130,18 +157,24 @@ export default [
 						}, sender);
 					},
 				}),
-				new input({
-					type: "text",
-					label: "query.dialog result",
+
+				new div({
 					id: queryOutputId,
-					readonly: true,
+					elem: new codepreview({
+						title: "query.dialog result",
+						container: "card",
+
+						code: `//result`,
+					}),
 				}),
-				new input({
-					type: "textarea",
-					label: "db.api.list result",
+				new div({
 					id: resultOutputId,
-					readonly: true,
-					rows: 10,
+					elem: new codepreview({
+						title: "db.api.list result",
+						container: "card",
+
+						code: `//result`,
+					}),
 				}),
 			];
 		},
@@ -212,7 +245,7 @@ export default [
 			"sample.query_data": sample.query_data_view,
 			"sample.list_state": sample.list_state,
 		},
-		container: sample.formcontainer,
+
 		import: ["input", "button", "db", "query", "sample"],
 		code: () => {
 			let resultOutputId = core.UUID();
@@ -236,7 +269,21 @@ export default [
 								},
 								[
 									(_event, data) => {
-										document.getElementById(queryOutputId).value = JSON.stringify(data);
+										core.replaceWith(
+											document.getElementById(queryOutputId),
+											new div({
+												id: queryOutputId,
+												elem: new codepreview({
+													title: "query.filter result",
+													container: "card",
+
+													maxheight: "10rem",
+													code: JSON.stringify(data),
+												}),
+											})
+										);
+										PR.prettyPrint();
+
 										sample.query_data.filter = data;
 
 										//get record
@@ -248,7 +295,20 @@ export default [
 											},
 											(result) => {
 												//result
-												document.getElementById(resultOutputId).value = JSON.stringify(result);
+												core.replaceWith(
+													document.getElementById(resultOutputId),
+													new div({
+														id: resultOutputId,
+														elem: new codepreview({
+															title: "db.api.list result",
+															container: "card",
+
+															maxheight: "10rem",
+															code: JSON.stringify(result),
+														}),
+													})
+												);
+												PR.prettyPrint();
 											}
 										);
 									},
@@ -257,18 +317,24 @@ export default [
 						}, sender);
 					},
 				}),
-				new input({
-					type: "text",
-					label: "query.filter result",
+
+				new div({
 					id: queryOutputId,
-					readonly: true,
+					elem: new codepreview({
+						title: "query.filter result",
+						container: "card",
+
+						code: `//result`,
+					}),
 				}),
-				new input({
-					type: "textarea",
-					label: "db.api.list result",
+				new div({
 					id: resultOutputId,
-					readonly: true,
-					rows: 10,
+					elem: new codepreview({
+						title: "db.api.list result",
+						container: "card",
+
+						code: `//result`,
+					}),
 				}),
 			];
 		},
@@ -330,7 +396,7 @@ export default [
 			"sample.query_setting": sample.query_setting,
 			"sample.query_data": sample.query_data_view,
 		},
-		container: sample.formcontainer,
+
 		import: ["input", "button", "db", "query", "sample"],
 		code: () => {
 			let resultOutputId = core.UUID();
@@ -353,7 +419,21 @@ export default [
 							},
 							[
 								(_event, data) => {
-									document.getElementById(queryOutputId).value = JSON.stringify(data);
+									core.replaceWith(
+										document.getElementById(queryOutputId),
+										new div({
+											id: queryOutputId,
+											elem: new codepreview({
+												title: "query.sort result",
+												container: "card",
+
+												maxheight: "10rem",
+												code: JSON.stringify(data),
+											}),
+										})
+									);
+									PR.prettyPrint();
+
 									sample.query_data.sort = data;
 
 									//get record
@@ -365,7 +445,20 @@ export default [
 										},
 										(result) => {
 											//result
-											document.getElementById(resultOutputId).value = JSON.stringify(result);
+											core.replaceWith(
+												document.getElementById(resultOutputId),
+												new div({
+													id: resultOutputId,
+													elem: new codepreview({
+														title: "db.api.list result",
+														container: "card",
+
+														maxheight: "10rem",
+														code: JSON.stringify(result),
+													}),
+												})
+											);
+											PR.prettyPrint();
 										}
 									);
 								},
@@ -373,18 +466,24 @@ export default [
 						).show();
 					},
 				}),
-				new input({
-					type: "text",
-					label: "query.sort result",
+
+				new div({
 					id: queryOutputId,
-					readonly: true,
+					elem: new codepreview({
+						title: "query.sort result",
+						container: "card",
+
+						code: `//result`,
+					}),
 				}),
-				new input({
-					type: "textarea",
-					label: "db.api.list result",
+				new div({
 					id: resultOutputId,
-					readonly: true,
-					rows: 10,
+					elem: new codepreview({
+						title: "db.api.list result",
+						container: "card",
+
+						code: `//result`,
+					}),
 				}),
 			];
 		},
@@ -444,7 +543,7 @@ export default [
 			"sample.query_setting": sample.query_setting,
 			"sample.query_data": sample.query_data_view,
 		},
-		container: sample.formcontainer,
+
 		import: ["input", "button", "db", "query", "sample"],
 		code: () => {
 			let resultOutputId = core.UUID();
@@ -466,7 +565,21 @@ export default [
 							},
 							[
 								(_event, data) => {
-									document.getElementById(queryOutputId).value = JSON.stringify(data);
+									core.replaceWith(
+										document.getElementById(queryOutputId),
+										new div({
+											id: queryOutputId,
+											elem: new codepreview({
+												title: "query.field result",
+												container: "card",
+
+												maxheight: "10rem",
+												code: JSON.stringify(data),
+											}),
+										})
+									);
+									PR.prettyPrint();
+
 									sample.query_data.field = data;
 
 									//get record
@@ -478,7 +591,20 @@ export default [
 										},
 										(result) => {
 											//result
-											document.getElementById(resultOutputId).value = JSON.stringify(result);
+											core.replaceWith(
+												document.getElementById(resultOutputId),
+												new div({
+													id: resultOutputId,
+													elem: new codepreview({
+														title: "db.api.list result",
+														container: "card",
+
+														maxheight: "10rem",
+														code: JSON.stringify(result),
+													}),
+												})
+											);
+											PR.prettyPrint();
 										}
 									);
 								},
@@ -486,18 +612,24 @@ export default [
 						).show();
 					},
 				}),
-				new input({
-					type: "text",
-					label: "query.field result",
+
+				new div({
 					id: queryOutputId,
-					readonly: true,
+					elem: new codepreview({
+						title: "query.field result",
+						container: "card",
+
+						code: `//result`,
+					}),
 				}),
-				new input({
-					type: "textarea",
-					label: "db.api.list result",
+				new div({
 					id: resultOutputId,
-					readonly: true,
-					rows: 10,
+					elem: new codepreview({
+						title: "db.api.list result",
+						container: "card",
+
+						code: `//result`,
+					}),
 				}),
 			];
 		},
@@ -564,7 +696,7 @@ export default [
 			"sample.query_setting": sample.query_setting,
 			"sample.query_data": sample.query_data_view,
 		},
-		container: sample.formcontainer,
+
 		import: ["input", "button", "db", "query", "sample"],
 		code: () => {
 			let resultOutputId = core.UUID();
@@ -588,7 +720,20 @@ export default [
 							},
 							[
 								(_event, data) => {
-									document.getElementById(queryOutputId).value = JSON.stringify(data);
+									core.replaceWith(
+										document.getElementById(queryOutputId),
+										new div({
+											id: queryOutputId,
+											elem: new codepreview({
+												title: "query.limit result",
+												container: "card",
+
+												maxheight: "10rem",
+												code: JSON.stringify(data),
+											}),
+										})
+									);
+									PR.prettyPrint();
 
 									//need to recalculate "skip" base on limit
 									let skip = sample.query_data.skip / sample.query_data.limit;
@@ -604,7 +749,19 @@ export default [
 										},
 										(result) => {
 											//result
-											document.getElementById(resultOutputId).value = JSON.stringify(result);
+											core.replaceWith(
+												document.getElementById(resultOutputId),
+												new div({
+													id: resultOutputId,
+													elem: new codepreview({
+														title: "db.api.list result",
+														container: "card",
+														maxheight: "10rem",
+														code: JSON.stringify(result),
+													}),
+												})
+											);
+											PR.prettyPrint();
 										}
 									);
 								},
@@ -612,18 +769,24 @@ export default [
 						).show();
 					},
 				}),
-				new input({
-					type: "text",
-					label: "query.limit result",
+
+				new div({
 					id: queryOutputId,
-					readonly: true,
+					elem: new codepreview({
+						title: "query.limit result",
+						container: "card",
+
+						code: `//result`,
+					}),
 				}),
-				new input({
-					type: "textarea",
-					label: "db.api.list result",
+				new div({
 					id: resultOutputId,
-					readonly: true,
-					rows: 10,
+					elem: new codepreview({
+						title: "db.api.list result",
+						container: "card",
+
+						code: `//result`,
+					}),
 				}),
 			];
 		},
@@ -689,7 +852,7 @@ export default [
 			"sample.query_setting": sample.query_setting,
 			"sample.query_data": sample.query_data_view,
 		},
-		container: sample.formcontainer,
+
 		import: ["input", "button", "db", "query", "sample"],
 		code: () => {
 			let resultOutputId = core.UUID();
@@ -714,7 +877,21 @@ export default [
 							},
 							[
 								(_event, data) => {
-									document.getElementById(queryOutputId).value = JSON.stringify(data);
+									core.replaceWith(
+										document.getElementById(queryOutputId),
+										new div({
+											id: queryOutputId,
+											elem: new codepreview({
+												title: "query.page result",
+												container: "card",
+
+												maxheight: "10rem",
+												code: JSON.stringify(data),
+											}),
+										})
+									);
+									PR.prettyPrint();
+
 									sample.query_data.skip = data;
 
 									//get record
@@ -726,7 +903,20 @@ export default [
 										},
 										(result) => {
 											//result
-											document.getElementById(resultOutputId).value = JSON.stringify(result);
+											core.replaceWith(
+												document.getElementById(resultOutputId),
+												new div({
+													id: resultOutputId,
+													elem: new codepreview({
+														title: "db.api.list result",
+														container: "card",
+
+														maxheight: "10rem",
+														code: JSON.stringify(result),
+													}),
+												})
+											);
+											PR.prettyPrint();
 										}
 									);
 								},
@@ -734,18 +924,24 @@ export default [
 						).show();
 					},
 				}),
-				new input({
-					type: "text",
-					label: "query.page result",
+
+				new div({
 					id: queryOutputId,
-					readonly: true,
+					elem: new codepreview({
+						title: "query.page result",
+						container: "card",
+
+						code: `//result`,
+					}),
 				}),
-				new input({
-					type: "textarea",
-					label: "db.api.list result",
+				new div({
 					id: resultOutputId,
-					readonly: true,
-					rows: 10,
+					elem: new codepreview({
+						title: "db.api.list result",
+						container: "card",
+
+						code: `//result`,
+					}),
 				}),
 			];
 		},

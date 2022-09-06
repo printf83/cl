@@ -45,6 +45,35 @@ export const cookie = {
 	},
 };
 
+const loadcss = (url, callback) => {
+	// load me some stylesheet
+	let body = document.getElementsByTagName("body")[0];
+
+	body.classList.add("d-none");
+
+	let head = document.getElementsByTagName("head")[0];
+	let link = document.createElement("link");
+	let id = UUID();
+
+	link.id = id;
+	link.type = "text/css";
+	link.rel = "stylesheet";
+	link.href = url;
+
+	head.appendChild(link);
+
+	elemReady(link, () => {
+		let elem = document.getElementById(id);
+		if (elem) {
+			detachEventListener(elem);
+			elem.remove();
+		}
+
+		body.classList.remove("d-none");
+		callback();
+	});
+};
+
 const __setting = {
 	icon: null,
 	title: null,
@@ -115,23 +144,29 @@ export const setting = {
 	},
 	set theme(value) {
 		cookie.set("theme", value);
-
 		let css_bootstrap = document.getElementById("css_bootstrap");
 		let css_bootswatch = document.getElementById("css_bootswatch");
 
 		if (css_bootstrap && css_bootswatch) {
-			if (value) {
-				css_bootswatch.href = `https://cdn.jsdelivr.net/npm/bootswatch@5.2.0/dist/${value}/bootstrap.min.css`;
-				css_bootswatch.removeAttribute("disabled");
-				setTimeout(() => {
-					css_bootstrap.setAttribute("disabled", "disabled");
-				}, 300);
-			} else {
-				css_bootstrap.removeAttribute("disabled");
-				setTimeout(() => {
-					css_bootswatch.setAttribute("disabled", "disabled");
-				}, 300);
-			}
+			loadcss(
+				value
+					? `https://cdn.jsdelivr.net/npm/bootswatch@5.2.0/dist/${value}/bootstrap.min.css`
+					: `https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css`,
+				() => {
+					if (value) {
+						css_bootswatch.href = `https://cdn.jsdelivr.net/npm/bootswatch@5.2.0/dist/${value}/bootstrap.min.css`;
+						css_bootswatch.removeAttribute("disabled");
+						setTimeout(() => {
+							css_bootstrap.setAttribute("disabled", "disabled");
+						}, 300);
+					} else {
+						css_bootstrap.removeAttribute("disabled");
+						setTimeout(() => {
+							css_bootswatch.setAttribute("disabled", "disabled");
+						}, 300);
+					}
+				}
+			);
 		} else {
 			console.error("#css_bootstrap and #css_bootswatch not found");
 		}
@@ -176,7 +211,11 @@ export function getBaseIcon(icon, baseIcon, baseColor) {
 
 export function importJS(path, callback) {
 	import(path).then((obj) => {
-		callback(obj.default);
+		if (typeof obj.default === "undefined") {
+			callback(obj);
+		} else {
+			callback(obj.default);
+		}
 	});
 }
 
@@ -616,25 +655,26 @@ const welcomeLog = () => {
 };
 
 export function documentReady(callback) {
-	if (document.readyState != "loading") {
-		// in case the document is already rendered
+	elemReady(document, () => {
 		setting.theme = setting.theme;
 		authCheck(callback);
 		welcomeLog();
+	});
+}
+
+export function elemReady(elem, callback) {
+	if (elem.readyState != "loading") {
+		callback();
 	} else if (document.addEventListener) {
 		// modern browsers
-		document.addEventListener("DOMContentLoaded", () => {
-			setting.theme = setting.theme;
-			authCheck(callback);
-			welcomeLog();
+		elem.addEventListener("DOMContentLoaded", () => {
+			callback();
 		});
 	} else {
 		// IE <= 8
 		document.attachEvent("onreadystatechange", () => {
 			if (document.readyState == "complete") {
-				setting.theme = setting.theme;
-				authCheck(callback);
-				welcomeLog();
+				callback();
 			}
 		});
 	}
@@ -647,30 +687,30 @@ function authCheck(callback) {
 	let resetPassword = p.get("resetPassword");
 
 	if (validateUser || resetPassword) {
-		let usr = require("./user.js");
-
-		if (validateUser) {
-			usr.validate(validateUser, () => {
-				new usr.signin({
-					msg: "Email validated. Please sign in to continue.",
-					callback: () => {
-						window.location = window.location.origin + window.location.pathname;
-					},
-				}).show();
-			});
-		} else if (resetPassword) {
-			new usr.changepass_guest({
-				token: resetPassword,
-				callback: () => {
+		importJS("./user.js", (usr) => {
+			if (validateUser) {
+				usr.validate(validateUser, () => {
 					new usr.signin({
-						msg: "Password changed. Please sign in to continue.",
+						msg: "Email validated. Please sign in to continue.",
 						callback: () => {
 							window.location = window.location.origin + window.location.pathname;
 						},
 					}).show();
-				},
-			}).show();
-		}
+				});
+			} else if (resetPassword) {
+				new usr.changepass_guest({
+					token: resetPassword,
+					callback: () => {
+						new usr.signin({
+							msg: "Password changed. Please sign in to continue.",
+							callback: () => {
+								window.location = window.location.origin + window.location.pathname;
+							},
+						}).show();
+					},
+				}).show();
+			}
+		});
 	} else {
 		callback();
 	}

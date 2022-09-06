@@ -113,7 +113,7 @@ module.exports = (app) => {
 					password: password,
 					email: username,
 					name: username,
-					emailToken: fn.UUID(),
+					emailToken: null,
 				});
 
 				newuser.save((err) => {
