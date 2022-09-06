@@ -62,6 +62,7 @@ export class container extends div {
 					new div({ class: "w-100", elem: opt.elem }),
 					opt.close
 						? new btnclose({
+								dark: opt.color ? opt.color : "body-bg",
 								dismiss: "alert",
 						  })
 						: null,

@@ -167,7 +167,12 @@ export default class toast extends div {
 											elem: tc ? tc.msg : "Just now", //need to add timer here
 									  })
 									: null,
-								opt.close ? new btnclose({ dismiss: "toast" }) : null,
+								opt.close
+									? new btnclose({
+											dismiss: "toast",
+											dark: opt.color ? opt.color : "body-bg",
+									  })
+									: null,
 							],
 					  })
 					: null;
@@ -190,6 +195,7 @@ export default class toast extends div {
 									marginstart: 2,
 									elem: new btnclose({
 										dismiss: "toast",
+										dark: `--bs-${opt.color ? opt.color : "body-bg"}`,
 										marginy: 1,
 									}),
 							  })

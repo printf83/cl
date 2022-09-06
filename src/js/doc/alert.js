@@ -66,7 +66,11 @@ export default [
 		import: [`import * as alert from "./base/alert.js";`],
 		code: () => {
 			return ["i", "!!", "!", "?", "-", "x", "/"].map((i) => {
-				return new alert.container({ icon: i, elem: `An example alert with an <b>"${i}"</b> icon code` });
+				return new alert.container({
+					icon: i,
+					close: true,
+					elem: `An example alert with an <b>"${i}"</b> icon code`,
+				});
 			});
 		},
 	},
@@ -75,10 +79,12 @@ export default [
 		title: "Dismissing",
 		import: ["alert"],
 		code: () => {
-			return new alert.container({
-				close: true,
-				color: "warning",
-				elem: "<strong>Holy guacamole!</strong> You should check in on some of those fields below.",
+			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map((i) => {
+				return new alert.container({
+					color: i,
+					close: true,
+					elem: `<strong>Holy guacamole!</strong> You should check in on some of those fields below.`,
+				});
 			});
 		},
 	},

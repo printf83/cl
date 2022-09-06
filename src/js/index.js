@@ -241,6 +241,19 @@ let def_m1 = "Getting started";
 let def_m2 = "Introduction";
 let def_theme = null;
 
+let cur_m1 = null;
+let cur_m2 = null;
+function reloadactivedoc() {
+	if (cur_m1 && cur_m2) {
+		console.info("Document reloaded");
+
+		gen_content(cur_m1, cur_m2, () => {
+			core.init(document.getElementById("root"));
+			PR.prettyPrint();
+		});
+	}
+}
+
 function randomtheme() {
 	let db_theme = db_menu[db_menu.length - 1].item;
 	let cur_theme = db_theme[Math.floor(Math.random() * db_theme.length)].source;
@@ -511,6 +524,9 @@ function gen_content(m1, m2, callback) {
 	let m = find_menu(m1, m2);
 	if (m) {
 		if (m.type === "menu") {
+			cur_m1 = m1;
+			cur_m2 = m2;
+
 			if (m.source) {
 				setTimeout(
 					(m, callback) => {
@@ -740,6 +756,8 @@ core.setting.themechange = (theme) => {
 			el.innerText = `default`;
 		}
 	}
+
+	reloadactivedoc();
 };
 
 core.documentReady(() => {
@@ -836,12 +854,12 @@ core.documentReady(() => {
 		})
 	);
 
+	core.setting.theme = core.setting.theme;
+
 	gen_content(def_m1, def_m2, () => {
 		core.init(document.getElementById("root"));
 		PR.prettyPrint();
 	});
-
-	core.setting.theme = core.setting.theme;
 
 	core.init(document.body);
 });
