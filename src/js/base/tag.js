@@ -287,13 +287,18 @@ export default class tag {
 					opt.display !== "grid" && opt.display !== "flex" && opt?.attr?.role !== "toolbar"
 						? c2(opt.gap, "g-$1")
 						: null,
+
+					opt.display !== "grid" && opt.display !== "flex" && opt?.attr?.role !== "toolbar"
+						? c2(opt.gapx, "gx-$1")
+						: null,
+
+					opt.display !== "grid" && opt.display !== "flex" && opt?.attr?.role !== "toolbar"
+						? c2(opt.gapy, "gy-$1")
+						: null,
+
 					opt.display === "grid" || opt.display === "flex" || opt?.attr?.role === "toolbar"
 						? c2(opt.gap, "gap-$1")
 						: null,
-
-					// should i check again?
-					c2(opt.gapx, "gx-$1"),
-					c2(opt.gapy, "gy-$1"),
 
 					opt.row ? "row" : null,
 

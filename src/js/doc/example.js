@@ -105,7 +105,7 @@ export default [
 					return new toast({
 						color: "primary",
 						icon: { icon: sample.icon(), color: "primary" },
-						title: "Bootstrap",
+						title: core.setting.title(),
 						elem: "Hello, world! This is a toast message.",
 						debug: true, // documentation purpose only
 					});

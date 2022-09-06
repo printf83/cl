@@ -1048,18 +1048,6 @@ const booleanAttr = [
 	"truespeed",
 ];
 
-// function toCamelCase(str) {
-// 	try {
-// 		return str
-// 			.split("-")
-// 			.map(function (x, i) {
-// 				return (i ? x[0].toUpperCase() : x[0]) + x.slice(1).toLowerCase();
-// 			})
-// 			.join("");
-// 	} catch {
-// 		return null;
-// 	}
-// }
 function attachAttr(elems, arg) {
 	if (elems && arg) {
 		Object.keys(arg).forEach((i) => {
@@ -1074,13 +1062,6 @@ function attachAttr(elems, arg) {
 				} else if (i === "style") {
 					Object.keys(arg[i]).forEach((j) => {
 						if (arg[i][j] !== null && arg[i][j] !== undefined) {
-							// let jCC = toCamelCase(j);
-							// if (jCC) {
-							// 	elems.style[jCC] = arg[i][j];
-							// } else {
-							// 	elems.style.setProperty(j, arg[i][j]);
-							// }
-
 							elems.style.setProperty(j, arg[i][j]);
 						}
 					});
