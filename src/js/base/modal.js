@@ -110,7 +110,7 @@ export default class modal extends div {
 								}),
 								new btnclose({
 									dismiss: "modal",
-									dark: opt.bgcolor ? opt.bgcolor : "body-bg",
+									// dark: opt.bgcolor ? opt.bgcolor : "body-bg",
 								}),
 							],
 					  })

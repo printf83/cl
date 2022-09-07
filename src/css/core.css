@@ -58,3 +58,38 @@ input.wait.disabled {
     /* Non-prefixed version, currently
     supported by Chrome, Edge, Opera and Firefox */
 }
+
+
+.accordion-button::after{
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    content:"\f078";
+    background-image:none !important;
+    text-align: center;
+    width: 1.25em;
+}
+
+.btn-close-white{
+    filter:unset !important;
+}
+.btn-close{
+    color: unset !important;
+    background: none !important;
+}
+
+.btn-close::before{
+    position: unset;
+    top: unset;
+    right: unset;
+    content: unset;
+}
+.btn-close::after{
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    content: "\f00d";
+    text-align: center;
+    width: 1.25em;
+    display: inline-block;
+    top: -0.25em;
+    position: relative;
+}

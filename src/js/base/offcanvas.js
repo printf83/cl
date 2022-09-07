@@ -16,7 +16,7 @@ const defaultOption = {
 	backdrop: false,
 	weight: null, // BS5.2
 	elem: null,
-	color:null,
+	color: null,
 
 	onshow: null,
 	onshown: null,
@@ -65,7 +65,7 @@ export default class offcanvas extends div {
 							? new btnclose({
 									class: "text-reset",
 									dismiss: "offcanvas",
-									dark: opt.color ? opt.color : "body-bg",
+									// dark: opt.color ? opt.color : "body-bg",
 							  })
 							: null,
 					],
