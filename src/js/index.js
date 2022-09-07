@@ -854,12 +854,8 @@ core.documentReady(() => {
 		})
 	);
 
-	core.setting.theme = core.setting.theme;
-
 	gen_content(def_m1, def_m2, () => {
-		core.init(document.getElementById("root"));
+		core.init(document.body);
 		PR.prettyPrint();
 	});
-
-	core.init(document.body);
 });
