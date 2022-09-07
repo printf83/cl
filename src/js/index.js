@@ -695,13 +695,13 @@ function gen_menu(m1, m2, theme) {
 	return db_menu.map((i) => {
 		return [
 			new menu({
-				// class: "clearfix",
 				// col: true,
+				// col: [6, "md-12"],
 				label: i.title,
 				icon: i.icon,
 				arrow: !i.icon,
-				// active: i.title === m1,
-				active: true,
+				active: i.title === m1,
+				// active: true,
 				item: i.item.map((j) => {
 					return {
 						label: j.title,
@@ -800,15 +800,16 @@ core.documentReady(() => {
 				overflow: "auto",
 				display: "md-block",
 				margintop: 3,
-				elem: new div({
-					container: true,
-					elem: new div({
-						row: true,
-						rowcol: [2, "md-1"],
-						gap: 0,
-						elem: [gen_menu(def_m1, def_m2, def_theme)],
-					}),
-				}),
+				// elem: new div({
+				// 	class: "container-fluid",
+				// 	padding: 0,
+				// 	elem: new div({
+				// 		row: true,
+				// 		gap: 0,
+				// 		elem: [gen_menu(def_m1, def_m2, def_theme)],
+				// 	}),
+				// }),
+				elem: gen_menu(def_m1, def_m2, def_theme),
 			}),
 			rightelem: new tag({
 				class: ["sticky-lg-top", "cl-vh-menu"],
