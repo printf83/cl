@@ -693,56 +693,61 @@ function get_url() {
 
 function gen_menu(m1, m2, theme) {
 	return db_menu.map((i) => {
-		return new menu({
-			label: i.title,
-			icon: i.icon,
-			arrow: !i.icon,
-			active: i.title === m1,
-			item: i.item.map((j) => {
-				return {
-					label: j.title,
-					active: j.title === m2 || (i.type === "theme" && j.source === theme),
-					attr: {
-						"cl-m1": i.title,
-						"cl-m2": j.title,
-						"cl-m3": i.type,
-					},
-					onclick:
-						i.type !== "action"
-							? (event) => {
-									let sender = event.currentTarget;
+		return [
+			new menu({
+				// class: "clearfix",
+				// col: true,
+				label: i.title,
+				icon: i.icon,
+				arrow: !i.icon,
+				// active: i.title === m1,
+				active: true,
+				item: i.item.map((j) => {
+					return {
+						label: j.title,
+						active: j.title === m2 || (i.type === "theme" && j.source === theme),
+						attr: {
+							"cl-m1": i.title,
+							"cl-m2": j.title,
+							"cl-m3": i.type,
+						},
+						onclick:
+							i.type !== "action"
+								? (event) => {
+										let sender = event.currentTarget;
 
-									let m1 = sender.getAttribute("cl-m1");
-									let m2 = sender.getAttribute("cl-m2");
-									let m3 = sender.getAttribute("cl-m3");
+										let m1 = sender.getAttribute("cl-m1");
+										let m2 = sender.getAttribute("cl-m2");
+										let m3 = sender.getAttribute("cl-m3");
 
-									let activeItem = [].slice.call(
-										document.getElementById("sidebar").getElementsByClassName("active")
-									);
+										let activeItem = [].slice.call(
+											document.getElementById("sidebar").getElementsByClassName("active")
+										);
 
-									activeItem.forEach((i) => {
-										if (i.getAttribute("cl-m3") === m3) {
-											i.classList.remove("active");
-										}
-									});
-
-									sender.classList.add("active");
-
-									if (i.type === "menu") {
-										sender.innerText = "Loading...";
-										gen_content(m1, m2, () => {
-											core.init(document.getElementById("root"));
-											PR.prettyPrint();
-											sender.innerText = m2;
+										activeItem.forEach((i) => {
+											if (i.getAttribute("cl-m3") === m3) {
+												i.classList.remove("active");
+											}
 										});
-									} else {
-										gen_content(m1, m2);
-									}
-							  }
-							: j.source,
-				};
+
+										sender.classList.add("active");
+
+										if (i.type === "menu") {
+											sender.innerText = "Loading...";
+											gen_content(m1, m2, () => {
+												core.init(document.getElementById("root"));
+												PR.prettyPrint();
+												sender.innerText = m2;
+											});
+										} else {
+											gen_content(m1, m2);
+										}
+								  }
+								: j.source,
+					};
+				}),
 			}),
-		});
+		];
 	});
 }
 
@@ -795,7 +800,15 @@ core.documentReady(() => {
 				overflow: "auto",
 				display: "md-block",
 				margintop: 3,
-				elem: gen_menu(def_m1, def_m2, def_theme),
+				elem: new div({
+					container: true,
+					elem: new div({
+						row: true,
+						rowcol: [2, "md-1"],
+						gap: 0,
+						elem: [gen_menu(def_m1, def_m2, def_theme)],
+					}),
+				}),
 			}),
 			rightelem: new tag({
 				class: ["sticky-lg-top", "cl-vh-menu"],
