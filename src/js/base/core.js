@@ -48,10 +48,8 @@ export const cookie = {
 export const isdarkcolor = (color) => {
 	let scolor = color;
 	if (color) {
-		// from : https://awik.io/determine-color-bright-dark-using-javascript/
-
 		// Variables for red, green, blue values
-		var r, g, b; //, hsp;
+		var r, g, b;
 
 		// Check the format of the color, HEX or RGB?
 		if (color.match(/^rgb/)) {
@@ -62,7 +60,6 @@ export const isdarkcolor = (color) => {
 			g = color[2];
 			b = color[3];
 		} else {
-			// If hex --> Convert it to RGB: http://gist.github.com/983661
 			color = +("0x" + color.slice(1).replace(color.length < 5 && /./g, "$&$&"));
 
 			r = color >> 16;
@@ -70,29 +67,15 @@ export const isdarkcolor = (color) => {
 			b = color & 255;
 		}
 
-		// // HSP (Highly Sensitive Poo) equation from http://alienryderflex.com/hsp.html
-		// hsp = Math.sqrt(0.299 * (r * r) + 0.587 * (g * g) + 0.114 * (b * b));
-
-		// // Using the HSP value, determine whether the color is light or dark
-		// if (hsp > 127.5) {
-		// 	if (DEBUG) console.log(`Color ${scolor} is light`);
-		// 	return false;
-		// } else {
-		// 	if (DEBUG) console.log(`Color ${scolor} is dark`);
-		// 	return true;
-		// }
-
 		// from : https://stackoverflow.com/questions/12043187/how-to-check-if-hex-color-is-too-black
-		var luma = 0.2126 * r + 0.7152 * g + 0.0722 * b; // per ITU-R BT.709
-
-		console.log(`Color ${scolor} luma is ${luma}`);
+		var luma = 0.2126 * r + 0.7152 * g + 0.0722 * b;
+		if (DEBUG) console.log(`Color ${scolor} luma is ${luma}`);
 
 		if (luma < 48) {
-			console.log(`Color ${scolor} is dark`);
+			if (DEBUG) console.log(`Color ${scolor} is dark`);
 			return true;
 		} else {
-			// if (DEBUG) console.log(`Color ${scolor} is light`);
-			console.log(`Color ${scolor} is light`);
+			if (DEBUG) console.log(`Color ${scolor} is light`);
 			return false;
 		}
 	} else {
