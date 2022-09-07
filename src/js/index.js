@@ -246,7 +246,6 @@ let cur_m2 = null;
 function reloadactivedoc() {
 	if (cur_m1 && cur_m2) {
 		console.info("Document reloaded");
-
 		gen_content(cur_m1, cur_m2, () => {
 			core.init(document.getElementById("root"));
 			PR.prettyPrint();
