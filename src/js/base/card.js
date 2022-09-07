@@ -263,6 +263,7 @@ export class img extends imgtag {
 						opt.placement === "bottom" ? "card-img-bottom" : null,
 						opt.placement === "left" ? "img-fluid rounded-start" : null,
 						opt.placement === "right" ? "img-fluid rounded-end" : null,
+						opt.placement === "middle" ? "card-img rounded-0" : null,
 				  ])
 				: opt.class;
 

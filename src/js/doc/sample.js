@@ -6,6 +6,7 @@ import input from "../base/input.js";
 import * as list from "../base/list.js";
 import small from "../base/small.js";
 import toast from "../base/toast.js";
+import * as core from "../base/core.js";
 
 let dbstate = null;
 let textindex = 0;
@@ -50,13 +51,17 @@ function isListed(val, listed) {
 	}
 }
 
-const svgdata = (width, height) => `
+const svgdata = (width, height, color) => {
+	color = core.getcssvar(color);
+	color = color || "#999";
+
+	return `
 <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
  width="${width}pt" height="${height}pt" viewBox="0 0 300 283"
- style="background-color:rgba(0,0,0,.125);"
+ style="background-color:rgba(0,0,0,.03);"
  preserveAspectRatio="xMidYMid meet">
 <g transform="translate(0.000000,283.000000) scale(0.100000,-0.100000)"
-fill="#999" stroke="none">
+fill="${color}" stroke="none">
 <path d="M606 2161 c-15 -10 -37 -32 -47 -47 -18 -28 -19 -59 -19 -685 l0
 -656 23 -34 c49 -74 -12 -70 982 -67 l890 3 33 23 c65 47 62 16 62 727 0 717
 2 694 -65 735 -32 20 -47 20 -931 20 -864 0 -900 -1 -928 -19z m1832 -15 c15
@@ -79,6 +84,7 @@ fill="#999" stroke="none">
 169z"/>
 </g>
 </svg>`;
+};
 
 let iconindex = 0;
 const dbicon = [
@@ -119,13 +125,13 @@ const fn = {
 		shorttextindex = 0;
 		iconindex = 0;
 	},
-	img: (width = 300, height = 283) => {
+	img: (width = 300, height = 283, color = "primary") => {
 		if (!svgdb.hasOwnProperty(`${width}_${height}`)) {
-			svgdb[`${width}_${height}`] =
-				"data:image/svg+xml;charset=UTF-8," + encodeURIComponent(svgdata(width, height));
+			svgdb[`${width}_${height}_${color}`] =
+				"data:image/svg+xml;charset=UTF-8," + encodeURIComponent(svgdata(width, height, color));
 		}
 
-		return svgdb[`${width}_${height}`];
+		return svgdb[`${width}_${height}_${color}`];
 	},
 	text: () => {
 		if (textindex >= textdb.length) {

@@ -1207,6 +1207,7 @@ export default [
 						elem: [new card.title("Card Title"), new card.subtitle("Card sub title")],
 					}),
 					new card.img({
+						placement: "middle",
 						src: sample.img(286, 143),
 					}),
 					new card.body({

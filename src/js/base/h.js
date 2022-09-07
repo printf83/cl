@@ -42,13 +42,19 @@ export default class h extends tag {
 					},
 				},
 				{
+					rule: ["string"],
+					fn: (opt) => {
+						return { elem: opt[0] };
+					},
+				},
+				{
 					rule: ["object"],
 					fn: (opt) => opt[0],
 				},
-				{
-					rule: ["any"],
-					fn: (opt) => opt[0],
-				},
+				// {
+				// 	rule: null,
+				// 	fn: (opt) => null,
+				// },
 			],
 			"h",
 			opt
