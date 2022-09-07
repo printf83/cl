@@ -85,8 +85,9 @@ export const isdarkcolor = (color) => {
 		// from : https://stackoverflow.com/questions/12043187/how-to-check-if-hex-color-is-too-black
 		var luma = 0.2126 * r + 0.7152 * g + 0.0722 * b; // per ITU-R BT.709
 
-		if (luma < 128) {
-			// if (DEBUG) console.log(`Color ${scolor} is dark`);
+		console.log(`Color ${scolor} luma is ${luma}`);
+
+		if (luma < 48) {
 			console.log(`Color ${scolor} is dark`);
 			return true;
 		} else {
