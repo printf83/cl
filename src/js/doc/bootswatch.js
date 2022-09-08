@@ -440,10 +440,10 @@ export default [
 				return new table.tr({
 					class: `table-${d}`,
 					elem: [
-						new table.th({ elem: new b({ elem: d ? core.capitalize(d) : "Default" }) }),
-						new table.th({ elem: "Column content" }),
-						new table.th({ elem: "Column content" }),
-						new table.th({ elem: "Column content" }),
+						new table.td({ scope: "row", elem: new b({ elem: d ? core.capitalize(d) : "Default" }) }),
+						new table.td({ elem: "Column content" }),
+						new table.td({ elem: "Column content" }),
+						new table.td({ elem: "Column content" }),
 					],
 				});
 			};
@@ -454,10 +454,10 @@ export default [
 					new table.thead({
 						elem: new table.tr({
 							elem: [
-								new table.td({ elem: "Type" }),
-								new table.td({ elem: "Column heading" }),
-								new table.td({ elem: "Column heading" }),
-								new table.td({ elem: "Column heading" }),
+								new table.th({ elem: "Type" }),
+								new table.th({ elem: "Column heading" }),
+								new table.th({ elem: "Column heading" }),
+								new table.th({ elem: "Column heading" }),
 							],
 						}),
 					}),

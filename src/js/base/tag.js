@@ -118,6 +118,8 @@ const defaultOption = {
 	flex: null,
 	order: null,
 
+	container: null,
+
 	row: null,
 	col: null,
 	rowcol: null,
@@ -137,6 +139,22 @@ const defaultOption = {
 	elem: null,
 };
 
+let gapManager = (opt) => {
+	// if (opt.display !== "grid" && opt.display !== "flex" && opt?.attr?.role !== "toolbar") {
+	// 	return "g";
+	// } else if (opt.display === "grid" || opt.display === "flex" || opt?.attr?.role === "toolbar") {
+	// 	return "gap"
+	// } else {
+	// 	console.warn("Option not handle by gapManager", opt);
+	// 	return "g";
+	// }
+
+	if (opt.row === true) {
+		return "g";
+	} else {
+		return "gap";
+	}
+};
 /**
  * opt : {tag,id,name,class,style,attr,href,onclick,onchange,onfocus,onblur,align,color,textcolor,bordercolor,border,elem}
  */
@@ -283,22 +301,11 @@ export default class tag {
 
 					c2(opt.display, "d-$1"),
 
-					// c2(opt.gap, "g-$1"),
-					opt.display !== "grid" && opt.display !== "flex" && opt?.attr?.role !== "toolbar"
-						? c2(opt.gap, "g-$1")
-						: null,
+					c2(opt.gap, `${gapManager(opt)}-$1`),
+					c2(opt.gapx, `gx-$1`),
+					c2(opt.gapy, `gy-$1`),
 
-					opt.display !== "grid" && opt.display !== "flex" && opt?.attr?.role !== "toolbar"
-						? c2(opt.gapx, "gx-$1")
-						: null,
-
-					opt.display !== "grid" && opt.display !== "flex" && opt?.attr?.role !== "toolbar"
-						? c2(opt.gapy, "gy-$1")
-						: null,
-
-					opt.display === "grid" || opt.display === "flex" || opt?.attr?.role === "toolbar"
-						? c2(opt.gap, "gap-$1")
-						: null,
+					c3(opt.container, "container", null, "container-$1", null, null),
 
 					opt.row ? "row" : null,
 

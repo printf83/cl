@@ -29,6 +29,25 @@ export default [
 	},
 
 	{
+		msg: "Using cl object",
+		viewclass: "cl-highlight-col",
+		import: ["div"],
+		code: () => {
+			return new div({
+				container: true,
+				elem: new div({
+					row: true,
+					elem: [
+						new div({ col: true, elem: "Column" }),
+						new div({ col: true, elem: "Column" }),
+						new div({ col: true, elem: "Column" }),
+					],
+				}),
+			});
+		},
+	},
+
+	{
 		title: "Equal-width",
 		msg: "For example, here are two grid layouts that apply to every device and viewport, from xs to xxl. Add any number of unit-less classes for each breakpoint you need and every column will be the same width.",
 		viewclass: "cl-highlight-col",
@@ -38,6 +57,31 @@ export default [
 				new div("row", [new div("col", "1 of 2"), new div("col", "2 of 2")]),
 				new div("row", [new div("col", "1 of 3"), new div("col", "2 of 3"), new div("col", "3 of 3")]),
 			]);
+		},
+	},
+
+	{
+		msg: "Using cl object",
+		viewclass: "cl-highlight-col",
+		import: ["div"],
+		code: () => {
+			return new div({
+				container: true,
+				elem: [
+					new div({
+						row: true,
+						elem: [new div({ col: true, elem: "1 of 2" }), new div({ col: true, elem: "2 of 2" })],
+					}),
+					new div({
+						row: true,
+						elem: [
+							new div({ col: true, elem: "1 of 3" }),
+							new div({ col: true, elem: "2 of 3" }),
+							new div({ col: true, elem: "3 of 3" }),
+						],
+					}),
+				],
+			});
 		},
 	},
 
@@ -63,6 +107,35 @@ export default [
 	},
 
 	{
+		msg: "Using cl object",
+		viewclass: "cl-highlight-col",
+		import: ["div"],
+		code: () => {
+			return new div({
+				container: true,
+				elem: [
+					new div({
+						row: true,
+						elem: [
+							new div({ col: true, elem: "1 of 3" }),
+							new div({ col: 6, elem: "2 of 3 (wider)" }),
+							new div({ col: true, elem: "3 of 3" }),
+						],
+					}),
+					new div({
+						row: true,
+						elem: [
+							new div({ col: true, elem: "1 of 3" }),
+							new div({ col: 5, elem: "2 of 3 (wider)" }),
+							new div({ col: true, elem: "3 of 3" }),
+						],
+					}),
+				],
+			});
+		},
+	},
+
+	{
 		title: "Variable width content",
 		msg: "Use col-{breakpoint}-auto classes to size columns based on the natural width of their content.",
 		viewclass: "cl-highlight-col",
@@ -80,6 +153,36 @@ export default [
 					new div("col col-lg-2", "3 of 3"),
 				]),
 			]);
+		},
+	},
+
+	{
+		msg: "Using cl object",
+		viewclass: "cl-highlight-col",
+		import: ["div"],
+		code: () => {
+			return new div({
+				container: true,
+				elem: [
+					new div({
+						row: true,
+						justifycontent: "md-center",
+						elem: [
+							new div({ col: [true, "lg-2"], elem: "1 of 3" }),
+							new div({ col: "md-auto", elem: "Variable width content" }),
+							new div({ col: [true, "lg-2"], elem: "3 of 3" }),
+						],
+					}),
+					new div({
+						row: true,
+						elem: [
+							new div({ col: true, elem: "1 of 3" }),
+							new div({ col: "md-auto", elem: "Variable width content" }),
+							new div({ col: [true, "lg-2"], elem: "3 of 3" }),
+						],
+					}),
+				],
+			});
 		},
 	},
 
@@ -102,6 +205,32 @@ export default [
 	},
 
 	{
+		msg: "Using cl object",
+		viewclass: "cl-highlight-col",
+		import: ["div"],
+		code: () => {
+			return new div({
+				container: true,
+				elem: [
+					new div({
+						row: true,
+						elem: [
+							new div({ col: true, elem: "col" }),
+							new div({ col: true, elem: "col" }),
+							new div({ col: true, elem: "col" }),
+							new div({ col: true, elem: "col" }),
+						],
+					}),
+					new div({
+						row: true,
+						elem: [new div({ col: 8, elem: "col-8" }), new div({ col: 4, elem: "col-4" })],
+					}),
+				],
+			});
+		},
+	},
+
+	{
 		title: "Stacked to horizontal",
 		msg: "Using a single set of .col-sm-* classes, you can create a basic grid system that starts out stacked and becomes horizontal at the small breakpoint (sm).",
 		viewclass: "cl-highlight-col",
@@ -116,6 +245,32 @@ export default [
 					new div("col-sm", "col-sm"),
 				]),
 			]);
+		},
+	},
+
+	{
+		msg: "Using cl object",
+		viewclass: "cl-highlight-col",
+		import: ["div"],
+		code: () => {
+			return new div({
+				container: true,
+				elem: [
+					new div({
+						row: true,
+						elem: [new div({ col: 8, elem: "col-8" }), new div({ col: 4, elem: "col-4" })],
+					}),
+					new div({
+						row: true,
+						elem: [
+							new div({ col: "sm", elem: "col-sm" }),
+							new div({ col: "sm", elem: "col-sm" }),
+							new div({ col: "sm", elem: "col-sm" }),
+							new div({ col: "sm", elem: "col-sm" }),
+						],
+					}),
+				],
+			});
 		},
 	},
 
@@ -137,6 +292,41 @@ export default [
 				//Columns are always 50% wide, on mobile and desktop
 				new div("row", [new div("col-6", "col-6"), new div("col-6", "col-6")]),
 			]);
+		},
+	},
+
+	{
+		msg: "Using cl object",
+		viewclass: "cl-highlight-col",
+		import: ["div"],
+		code: () => {
+			return new div({
+				container: true,
+				elem: [
+					//Stack the columns on mobile by making one full-width and the other half-width
+					new div({
+						row: true,
+						elem: [
+							new div({ col: "md-8", elem: "col-md-8" }),
+							new div({ col: [6, "md-4"], elem: "col-6 col-md-4" }),
+						],
+					}),
+					//Columns start at 50% wide on mobile and bump up to 33.3% wide on desktop
+					new div({
+						row: true,
+						elem: [
+							new div({ col: [6, "md-4"], elem: "col-6 col-md-4" }),
+							new div({ col: [6, "md-4"], elem: "col-6 col-md-4" }),
+							new div({ col: [6, "md-4"], elem: "col-6 col-md-4" }),
+						],
+					}),
+					//Columns are always 50% wide, on mobile and desktop
+					new div({
+						row: true,
+						elem: [new div({ col: 6, elem: "col-6" }), new div({ col: 6, elem: "col-6" })],
+					}),
+				],
+			});
 		},
 	},
 
@@ -236,6 +426,127 @@ export default [
 	},
 
 	{
+		msg: "Using cl object",
+		viewclass: "cl-highlight-col",
+		import: ["div"],
+		code: () => {
+			return new div({
+				container: true,
+				elem: new div({
+					row: true,
+					rowcol: 2,
+					elem: [
+						new div({ col: true, elem: "Column" }),
+						new div({ col: true, elem: "Column" }),
+						new div({ col: true, elem: "Column" }),
+						new div({ col: true, elem: "Column" }),
+					],
+				}),
+			});
+		},
+	},
+
+	{
+		viewclass: "cl-highlight-col",
+		import: ["div"],
+		code: () => {
+			return new div({
+				container: true,
+				elem: new div({
+					row: true,
+					rowcol: 3,
+					elem: [
+						new div({ col: true, elem: "Column" }),
+						new div({ col: true, elem: "Column" }),
+						new div({ col: true, elem: "Column" }),
+						new div({ col: true, elem: "Column" }),
+					],
+				}),
+			});
+		},
+	},
+
+	{
+		viewclass: "cl-highlight-col",
+		import: ["div"],
+		code: () => {
+			return new div({
+				container: true,
+				elem: new div({
+					row: true,
+					rowcol: "auto",
+					elem: [
+						new div({ col: true, elem: "Column" }),
+						new div({ col: true, elem: "Column" }),
+						new div({ col: true, elem: "Column" }),
+						new div({ col: true, elem: "Column" }),
+					],
+				}),
+			});
+		},
+	},
+
+	{
+		viewclass: "cl-highlight-col",
+		import: ["div"],
+		code: () => {
+			return new div({
+				container: true,
+				elem: new div({
+					row: true,
+					rowcol: 4,
+					elem: [
+						new div({ col: true, elem: "Column" }),
+						new div({ col: true, elem: "Column" }),
+						new div({ col: true, elem: "Column" }),
+						new div({ col: true, elem: "Column" }),
+					],
+				}),
+			});
+		},
+	},
+
+	{
+		viewclass: "cl-highlight-col",
+		import: ["div"],
+		code: () => {
+			return new div({
+				container: true,
+				elem: new div({
+					row: true,
+					rowcol: 4,
+					elem: [
+						new div({ col: true, elem: "Column" }),
+						new div({ col: true, elem: "Column" }),
+						new div({ col: 6, elem: "Column" }),
+						new div({ col: true, elem: "Column" }),
+					],
+				}),
+			});
+		},
+	},
+
+	{
+		viewclass: "cl-highlight-col",
+		import: ["div"],
+		code: () => {
+			return new div({
+				container: true,
+				elem: new div({
+					row: true,
+					rowcol: [1, "sm-2", "md-4"],
+					elem: [
+						new div({ col: true, elem: "Column" }),
+						new div({ col: true, elem: "Column" }),
+						new div({ col: true, elem: "Column" }),
+						new div({ col: true, elem: "Column" }),
+					],
+				}),
+			});
+		},
+	},
+
+	{
 		title: "Nesting",
 		msg: "To nest your content with the default grid, add a new .row and set of .col-sm-* columns within an existing .col-sm-* column. Nested rows should include a set of columns that add up to 12 or fewer (it is not required that you use all 12 available columns).",
 		viewclass: "cl-highlight-col",
@@ -253,6 +564,33 @@ export default [
 					),
 				]),
 			]);
+		},
+	},
+
+	{
+		msg: "Using cl object",
+		viewclass: "cl-highlight-col",
+		import: ["div"],
+		code: () => {
+			return new div({
+				container: true,
+				elem: new div({
+					row: true,
+					elem: [
+						new div({ col: "sm-3", elem: "Level 1: col-sm-3" }),
+						new div({
+							col: "sm-9",
+							elem: new div({
+								row: true,
+								elem: [
+									new div({ col: [8, "sm-6"], elem: "Level 2: col-8 col-sm-6" }),
+									new div({ col: [8, "sm-6"], elem: "Level 2: col-8 col-sm-6" }),
+								],
+							}),
+						}),
+					],
+				}),
+			});
 		},
 	},
 ];

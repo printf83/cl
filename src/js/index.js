@@ -693,61 +693,59 @@ function get_url() {
 
 function gen_menu(m1, m2, theme) {
 	return db_menu.map((i) => {
-		return [
-			new menu({
-				// col: true,
-				// col: [6, "md-12"],
-				label: i.title,
-				icon: i.icon,
-				arrow: !i.icon,
-				active: i.title === m1,
-				// active: true,
-				item: i.item.map((j) => {
-					return {
-						label: j.title,
-						active: j.title === m2 || (i.type === "theme" && j.source === theme),
-						attr: {
-							"cl-m1": i.title,
-							"cl-m2": j.title,
-							"cl-m3": i.type,
-						},
-						onclick:
-							i.type !== "action"
-								? (event) => {
-										let sender = event.currentTarget;
+		return new menu({
+			// col: true,
+			// col: [6, "md-12"],
+			label: i.title,
+			icon: i.icon,
+			arrow: !i.icon,
+			active: i.title === m1,
+			// active: true,
+			item: i.item.map((j) => {
+				return {
+					label: j.title,
+					active: j.title === m2 || (i.type === "theme" && j.source === theme),
+					attr: {
+						"cl-m1": i.title,
+						"cl-m2": j.title,
+						"cl-m3": i.type,
+					},
+					onclick:
+						i.type !== "action"
+							? (event) => {
+									let sender = event.currentTarget;
 
-										let m1 = sender.getAttribute("cl-m1");
-										let m2 = sender.getAttribute("cl-m2");
-										let m3 = sender.getAttribute("cl-m3");
+									let m1 = sender.getAttribute("cl-m1");
+									let m2 = sender.getAttribute("cl-m2");
+									let m3 = sender.getAttribute("cl-m3");
 
-										let activeItem = [].slice.call(
-											document.getElementById("sidebar").getElementsByClassName("active")
-										);
+									let activeItem = [].slice.call(
+										document.getElementById("sidebar").getElementsByClassName("active")
+									);
 
-										activeItem.forEach((i) => {
-											if (i.getAttribute("cl-m3") === m3) {
-												i.classList.remove("active");
-											}
-										});
-
-										sender.classList.add("active");
-
-										if (i.type === "menu") {
-											sender.innerText = "Loading...";
-											gen_content(m1, m2, () => {
-												core.init(document.getElementById("root"));
-												PR.prettyPrint();
-												sender.innerText = m2;
-											});
-										} else {
-											gen_content(m1, m2);
+									activeItem.forEach((i) => {
+										if (i.getAttribute("cl-m3") === m3) {
+											i.classList.remove("active");
 										}
-								  }
-								: j.source,
-					};
-				}),
+									});
+
+									sender.classList.add("active");
+
+									if (i.type === "menu") {
+										sender.innerText = "Loading...";
+										gen_content(m1, m2, () => {
+											core.init(document.getElementById("root"));
+											PR.prettyPrint();
+											sender.innerText = m2;
+										});
+									} else {
+										gen_content(m1, m2);
+									}
+							  }
+							: j.source,
+				};
 			}),
-		];
+		});
 	});
 }
 

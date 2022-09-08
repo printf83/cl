@@ -59,7 +59,16 @@ export default [
 		viewclass: "cl-highlight-container",
 		import: ["div"],
 		code: () => {
-			return new div("container", "Content here");
+			return [
+				//direct class and elem
+				new div("container", "Content here"),
+
+				//object
+				new div({
+					container: true,
+					elem: "Content here",
+				}),
+			];
 		},
 	},
 
@@ -80,12 +89,39 @@ export default [
 	},
 
 	{
+		msg: "Using cl object",
+		viewclass: "cl-highlight-container",
+		import: ["div"],
+		code: () => {
+			return Object.entries({
+				sm: "small",
+				md: "medium",
+				lg: "large",
+				xl: "extra large",
+				xxl: "extra extra large",
+			}).map((i) => {
+				let [key, value] = i;
+				return new div({
+					container: key,
+					elem: `100% wide until ${value} breakpoint`,
+				});
+			});
+		},
+	},
+
+	{
 		title: "Fluid containers",
 		msg: "Use .container-fluid for a full width container, spanning the entire width of the viewport.",
 		viewclass: "cl-highlight-container",
 		import: ["div"],
 		code: () => {
-			return new div("container-fluid", "Content here");
+			return [
+				//easy option
+				new div("container-fluid", "Content here"),
+
+				//option
+				new div({ container: "fluid", elem: "Content here" }),
+			];
 		},
 	},
 ];
