@@ -481,7 +481,7 @@ export default [
 						row: true,
 						elem: [
 							new div({ col: "auto", marginstart: "auto", elem: ".col-auto .ms-auto" }),
-							new div({ col: "auto", marginstart: "auto", elem: ".col-auto .ms-auto" }),
+							new div({ col: "auto", elem: ".col-auto" }),
 						],
 					}),
 				],
