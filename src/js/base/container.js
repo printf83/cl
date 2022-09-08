@@ -12,8 +12,8 @@ import cl_form from "./form.js";
 export class form extends cl_form {
 	constructor(elem, gap = 3, col = 1) {
 		super({
+			container: "fluid",
 			padding: 0,
-			class: "container",
 			elem: new div({
 				gap: gap,
 				row: true,
@@ -31,8 +31,8 @@ export class form extends cl_form {
 export class stackform extends cl_form {
 	constructor(elem, gap = 2, col = "auto") {
 		super({
+			container: "fluid",
 			padding: 0,
-			class: "container",
 			elem: new div({
 				row: true,
 				gap: gap,
@@ -50,8 +50,8 @@ export class stackform extends cl_form {
 export class vstack extends div {
 	constructor(elem, gap = 3, col = 1) {
 		super({
+			container: "fluid",
 			padding: 0,
-			class: "container",
 			elem: new div({
 				gap: gap,
 				row: true,
@@ -69,8 +69,8 @@ export class vstack extends div {
 export class stack extends div {
 	constructor(elem, gap = 2, col = "auto") {
 		super({
+			container: "fluid",
 			padding: 0,
-			class: "container",
 			elem: new div({
 				row: true,
 				gap: gap,

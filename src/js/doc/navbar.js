@@ -498,7 +498,7 @@ export default [
 		import: ["div", "navbar"],
 		code: () => {
 			return new div({
-				class: "container",
+				container: true,
 				elem: new navbar.container({
 					expand: "lg",
 					color: "light",
@@ -517,16 +517,18 @@ export default [
 		title: "Change container fluid",
 		import: ["navbar"],
 		code: () => {
-			return new navbar.container({
-				expand: "lg",
-				color: "light",
-				containerfluid: "md",
-				elem: [
-					new navbar.brand({
-						label: "Navbar",
-						href: "#",
-					}),
-				],
+			return new div({
+				container: "fluid",
+				elem: new navbar.container({
+					expand: "lg",
+					color: "light",
+					elem: [
+						new navbar.brand({
+							label: "Navbar",
+							href: "#",
+						}),
+					],
+				}),
 			});
 		},
 	},

@@ -800,15 +800,6 @@ core.documentReady(() => {
 				overflow: "auto",
 				display: "md-block",
 				margintop: 3,
-				// elem: new div({
-				// 	class: "container-fluid",
-				// 	padding: 0,
-				// 	elem: new div({
-				// 		row: true,
-				// 		gap: 0,
-				// 		elem: [gen_menu(def_m1, def_m2, def_theme)],
-				// 	}),
-				// }),
 				elem: gen_menu(def_m1, def_m2, def_theme),
 			}),
 			rightelem: new tag({

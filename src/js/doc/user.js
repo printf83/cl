@@ -377,15 +377,12 @@ export default [
 						icon: "play",
 						color: "success",
 						onclick: () => {
-							core.setting.userchange = () => {
-								//get current user
-								user.info_guest(null, (result) => {
-									if (result) {
-										new toast("/", `Hai ${result.name}`).show();
-									} else {
-										new toast("!", `Hai guest`).show();
-									}
-								});
+							core.setting.userchange = (result) => {
+								if (result) {
+									new toast("/", `Hai ${result.name}`).show();
+								} else {
+									new toast("!", `Hai guest`).show();
+								}
 							};
 
 							new toast("/", "User event attached").show();

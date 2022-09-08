@@ -104,7 +104,8 @@ const fn = {
 	banner: (type, elem) => {
 		if (core.setting.banner && typeof core.setting.banner === "function") {
 			return new div({
-				container: true,
+				container: "fluid",
+				padding: 0,
 				elem: new div({
 					row: true,
 					elem: [
@@ -251,7 +252,9 @@ const fn = {
 
 								//event
 								if (core.setting.userchange && typeof core.setting.userchange === "function") {
-									core.setting.userchange();
+									fn.action.info_guest(sender, function (current_guest_info) {
+										core.setting.userchange(current_guest_info);
+									});
 								}
 							}
 						);
@@ -294,7 +297,9 @@ const fn = {
 
 									//event
 									if (core.setting.userchange && typeof core.setting.userchange === "function") {
-										core.setting.userchange();
+										fn.action.info_guest(sender, function (current_guest_info) {
+											core.setting.userchange(current_guest_info);	
+										});
 									}
 								} else {
 									fn.showmsg(container, result && result.message ? result.message : null, "!!");
@@ -563,7 +568,9 @@ const fn = {
 												core.setting.userchange &&
 												typeof core.setting.userchange === "function"
 											) {
-												core.setting.userchange();
+												fn.action.info_guest(sender, function (current_guest_info) {
+													core.setting.userchange(current_guest_info);
+												});
 											}
 										} else {
 											fn.showmsg(

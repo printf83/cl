@@ -216,7 +216,7 @@ let fn = {
 			return new div({
 				display: "flex",
 				elem: new div({
-					class: "container",
+					container: "fluid",
 					padding: 0,
 					elem: [
 						new div({
@@ -505,7 +505,7 @@ let fn = {
 			//generate control
 			let result = new div({
 				padding: 0,
-				class: "container",
+				container: "fluid",
 				elem: new div({
 					gap: 2,
 					row: true,
@@ -613,7 +613,7 @@ let fn = {
 			return new div({
 				display: "flex",
 				elem: new div({
-					class: "container",
+					container: "fluid",
 					padding: 0,
 					elem: new div({
 						row: true,
@@ -755,7 +755,7 @@ let fn = {
 			//build control
 			let result = new div({
 				padding: 0,
-				class: "container",
+				container: "fluid",
 				elem: new div({
 					gap: 2,
 					row: true,
@@ -822,7 +822,7 @@ let fn = {
 
 			return new div({
 				padding: 0,
-				class: "container",
+				container: "fluid",
 				elem: new div({
 					gap: 2,
 					row: true,
