@@ -8,6 +8,7 @@ import small from "../base/small.js";
 import toast from "../base/toast.js";
 import * as core from "../base/core.js";
 import ul from "../base/ul.js";
+import pill from "../base/pill.js";
 
 let dbstate = null;
 let textindex = 0;
@@ -121,6 +122,14 @@ const dbicon = [
 ];
 
 const fn = {
+	usingclobject: () => {
+		return new pill({
+			icon: core.setting.icon("primary", "sm"),
+			color: "primary",
+			label: "Using CL Object",
+			marginbottom: 3,
+		});
+	},
 	resetindex: () => {
 		textindex = 0;
 		shorttextindex = 0;
@@ -221,6 +230,7 @@ const fn = {
 			"borderweight",
 			"flex",
 			"order",
+			"offset",
 			"row",
 			"col",
 			"rowcol",

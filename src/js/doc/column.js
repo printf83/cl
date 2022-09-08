@@ -63,7 +63,26 @@ export default [
 	},
 
 	{
-		title: "Vertical alignment",
+		msg: sample.usingclobject(),
+		viewclass: "cl-highlight-col cl-highlight-row",
+		import: ["div"],
+		code: () => {
+			return new div({
+				container: true,
+				elem: ["start", "center", "end"].map((i) => {
+					return new div({
+						alignitem: i,
+						row: true,
+						style: { "min-height": "10rem" },
+						elem: Array(3).fill(new div({ col: true, elem: "One of three columns" })),
+					});
+				}),
+			});
+		},
+	},
+
+	{
+		title: "Self alignment",
 		viewclass: "cl-highlight-col cl-highlight-row",
 		import: ["div"],
 		code: () => {
@@ -79,6 +98,28 @@ export default [
 					],
 				})
 			);
+		},
+	},
+
+	{
+		msg: sample.usingclobject(),
+		viewclass: "cl-highlight-col cl-highlight-row",
+		import: ["div"],
+		code: () => {
+			return new div({
+				container: true,
+				elem: new div({
+					row: true,
+					style: { "min-height": "10rem" },
+					elem: ["start", "center", "end"].map((i) => {
+						return new div({
+							alignself: i,
+							col: true,
+							elem: "One of three columns",
+						});
+					}),
+				}),
+			});
 		},
 	},
 
@@ -104,6 +145,24 @@ export default [
 	},
 
 	{
+		msg: sample.usingclobject(),
+		viewclass: "cl-highlight-col",
+		import: ["div"],
+		code: () => {
+			return new div({
+				container: true,
+				elem: ["start", "center", "end", "around", "between", "evenly"].map((i) => {
+					return new div({
+						justifycontent: i,
+						row: true,
+						elem: Array(2).fill(new div({ col: 4, elem: "One of two columns" })),
+					});
+				}),
+			});
+		},
+	},
+
+	{
 		title: "Column wrapping",
 		msg: "If more than 12 columns are placed within a single row, each group of extra columns will, as one unit, wrap onto a new line.",
 		viewclass: "cl-highlight-col",
@@ -120,6 +179,28 @@ export default [
 					new div("col-6", ".col-6 : Subsequent columns continue along the new line."),
 				])
 			);
+		},
+	},
+
+	{
+		msg: sample.usingclobject(),
+		viewclass: "cl-highlight-col",
+		import: ["div"],
+		code: () => {
+			return new div({
+				container: true,
+				elem: new div({
+					row: true,
+					elem: [
+						new div({ col: 9, elem: ".col-9" }),
+						new div({
+							col: 4,
+							elem: ".col-4 : Since 9 + 4 = 13 > 12, this 4-column-wide div gets wrapped onto a new line as one contiguous unit.",
+						}),
+						new div({ col: 6, elem: ".col-6 : Subsequent columns continue along the new line." }),
+					],
+				}),
+			});
 		},
 	},
 
@@ -143,6 +224,27 @@ export default [
 	},
 
 	{
+		msg: sample.usingclobject(),
+		viewclass: "cl-highlight-col",
+		import: ["span", "div"],
+		code: () => {
+			return new div({
+				container: true,
+				elem: new div({
+					row: true,
+					elem: [
+						new div({ col: [6, "sm-3"], elem: ".col-6 .col-sm-3" }),
+						new div({ col: [6, "sm-3"], elem: ".col-6 .col-sm-3" }),
+						new span({ class: "w-100" }),
+						new div({ col: [6, "sm-3"], elem: ".col-6 .col-sm-3" }),
+						new div({ col: [6, "sm-3"], elem: ".col-6 .col-sm-3" }),
+					],
+				}),
+			});
+		},
+	},
+
+	{
 		msg: "You may also apply this break at specific breakpoints with Bootstrap responsive display utilities.",
 		viewclass: "cl-highlight-col",
 		import: ["span", "div"],
@@ -157,6 +259,27 @@ export default [
 					new div("col-6 col-sm-3", ".col-6 .col-sm-3"),
 				])
 			);
+		},
+	},
+
+	{
+		msg: sample.usingclobject(),
+		viewclass: "cl-highlight-col",
+		import: ["span", "div"],
+		code: () => {
+			return new div({
+				container: true,
+				elem: new div({
+					row: true,
+					elem: [
+						new div({ col: [6, "sm-3"], elem: ".col-6 .col-sm-3" }),
+						new div({ col: [6, "sm-3"], elem: ".col-6 .col-sm-3" }),
+						new span({ class: "w-100", display: ["none", "md-block"] }),
+						new div({ col: [6, "sm-3"], elem: ".col-6 .col-sm-3" }),
+						new div({ col: [6, "sm-3"], elem: ".col-6 .col-sm-3" }),
+					],
+				}),
+			});
 		},
 	},
 
@@ -178,6 +301,25 @@ export default [
 					new div("col order-1", "Third in DOM, with an order of 1"),
 				])
 			);
+		},
+	},
+
+	{
+		msg: sample.usingclobject(),
+		viewclass: "cl-highlight-col",
+		import: ["div"],
+		code: () => {
+			return new div({
+				container: true,
+				elem: new div({
+					row: true,
+					elem: [
+						new div({ col: true, elem: "First in DOM, no order applied" }),
+						new div({ col: true, order: 5, elem: "Second in DOM, with a larger order" }),
+						new div({ col: true, order: 1, elem: "Third in DOM, with an order of 1" }),
+					],
+				}),
+			});
 		},
 	},
 
@@ -207,6 +349,37 @@ export default [
 	},
 
 	{
+		msg: sample.usingclobject(),
+		viewclass: "cl-highlight-col",
+		import: ["div"],
+		code: () => {
+			return new div({
+				container: true,
+				elem: [
+					new div({
+						row: true,
+						elem: [
+							new div({ col: "md-4", elem: ".col-md-4" }),
+							new div({ col: "md-4", offset: "md-4", elem: ".col-md-4 .offset-md-4" }),
+						],
+					}),
+					new div({
+						row: true,
+						elem: [
+							new div({ col: "md-3", offset: "md-3", elem: ".col-md-3 .offset-md-3" }),
+							new div({ col: "md-3", offset: "md-3", elem: ".col-md-3 .offset-md-3" }),
+						],
+					}),
+					new div({
+						row: true,
+						elem: [new div({ col: "md-6", offset: "md-3", elem: ".col-md-6 .offset-md-3" })],
+					}),
+				],
+			});
+		},
+	},
+
+	{
 		msg: "In addition to column clearing at responsive breakpoints, you may need to reset offsets. See this in action in the grid example.",
 		viewclass: "cl-highlight-col",
 		import: ["div"],
@@ -231,6 +404,41 @@ export default [
 	},
 
 	{
+		msg: sample.usingclobject(),
+		viewclass: "cl-highlight-col",
+		import: ["div"],
+		code: () => {
+			return new div({
+				container: true,
+				elem: [
+					new div({
+						row: true,
+						elem: [
+							new div({ col: ["sm-5", "md-6"], elem: ".col-sm-5 .col-md-6" }),
+							new div({
+								col: ["sm-5", "md-6"],
+								offset: ["sm-2", "md-0"],
+								elem: ".col-sm-5 .offset-sm-2 .col-md-6 .offset-md-0",
+							}),
+						],
+					}),
+					new div({
+						row: true,
+						elem: [
+							new div({ col: ["sm-6", "md-5", "lg-6"], elem: ".col-sm-6 .col-md-5 .col-lg-6" }),
+							new div({
+								col: ["sm-6", "md-5", "lg-6"],
+								offset: ["md-2", "lg-0"],
+								elem: ".col-sm-6 .col-md-5 .offset-md-2 .col-lg-6 .offset-lg-0",
+							}),
+						],
+					}),
+				],
+			});
+		},
+	},
+
+	{
 		title: "Margin utilities",
 		msg: "With the move to flexbox in v4, you can use margin utilities like .me-auto to force sibling columns away from one another.",
 		viewclass: "cl-highlight-col",
@@ -248,6 +456,40 @@ export default [
 	},
 
 	{
+		msg: sample.usingclobject(),
+		viewclass: "cl-highlight-col",
+		import: ["div"],
+		code: () => {
+			return new div({
+				container: true,
+				elem: [
+					new div({
+						row: true,
+						elem: [
+							new div({ col: "md-4", elem: ".col-md-4" }),
+							new div({ col: "md-4", marginstart: "auto", elem: ".col-md-4 .ms-auto" }),
+						],
+					}),
+					new div({
+						row: true,
+						elem: [
+							new div({ col: "md-4", marginstart: "auto", elem: ".col-md-4 .ms-auto" }),
+							new div({ col: "md-4", marginstart: "auto", elem: ".col-md-4 .ms-auto" }),
+						],
+					}),
+					new div({
+						row: true,
+						elem: [
+							new div({ col: "auto", marginstart: "auto", elem: ".col-auto .ms-auto" }),
+							new div({ col: "auto", marginstart: "auto", elem: ".col-auto .ms-auto" }),
+						],
+					}),
+				],
+			});
+		},
+	},
+
+	{
 		title: "Standalone column classes",
 		msg: "The .col-* classes can also be used outside a .row to give an element a specific width. Whenever column classes are used as non direct children of a row, the paddings are omitted.",
 		viewclass: "cl-highlight-col",
@@ -256,6 +498,30 @@ export default [
 			return [
 				new div("col-3 bg-light p-3 border", "  .col-3: width of 25%"),
 				new div("col-sm-9 bg-light p-3 border", " .col-sm-9: width of 75% above sm breakpoint"),
+			];
+		},
+	},
+
+	{
+		msg: sample.usingclobject(),
+		viewclass: "cl-highlight-col",
+		import: ["div"],
+		code: () => {
+			return [
+				new div({
+					col: 3,
+					color: "light",
+					padding: 3,
+					border: true,
+					elem: ".col-3: width of 25%",
+				}),
+				new div({
+					col: "sm-9",
+					color: "light",
+					padding: 3,
+					border: true,
+					elem: ".col-sm-9: width of 75% above sm breakpoint",
+				}),
 			];
 		},
 	},
@@ -270,7 +536,32 @@ export default [
 				new p(sample.text()),
 				new p(sample.text()),
 				new p(sample.text()),
+				new p({ elem: sample.text() }),
 			]);
+		},
+	},
+
+	{
+		msg: sample.usingclobject(),
+		viewclass: "cl-highlight-col",
+		import: ["img", "p", "div", "sample"],
+		code: () => {
+			return new div({
+				class: "clearfix",
+				elem: [
+					new img({
+						src: sample.img(200, 200),
+						col: "md-6",
+						float: "md-end",
+						marginbottom: 3,
+						marginstart: "md-3",
+					}),
+					new p({ elem: sample.text() }),
+					new p({ elem: sample.text() }),
+					new p({ elem: sample.text() }),
+					new p({ elem: sample.text() }),
+				],
+			});
 		},
 	},
 ];

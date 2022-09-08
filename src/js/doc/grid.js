@@ -1,6 +1,7 @@
 "use strict";
 import * as alert from "../base/alert.js";
 import div from "../base/div.js";
+import sample from "./sample.js";
 
 export default [
 	{
@@ -29,7 +30,7 @@ export default [
 	},
 
 	{
-		msg: "Using cl object",
+		msg: sample.usingclobject(),
 		viewclass: "cl-highlight-col",
 		import: ["div"],
 		code: () => {
@@ -61,7 +62,7 @@ export default [
 	},
 
 	{
-		msg: "Using cl object",
+		msg: sample.usingclobject(),
 		viewclass: "cl-highlight-col",
 		import: ["div"],
 		code: () => {
@@ -107,7 +108,7 @@ export default [
 	},
 
 	{
-		msg: "Using cl object",
+		msg: sample.usingclobject(),
 		viewclass: "cl-highlight-col",
 		import: ["div"],
 		code: () => {
@@ -157,7 +158,7 @@ export default [
 	},
 
 	{
-		msg: "Using cl object",
+		msg: sample.usingclobject(),
 		viewclass: "cl-highlight-col",
 		import: ["div"],
 		code: () => {
@@ -205,7 +206,7 @@ export default [
 	},
 
 	{
-		msg: "Using cl object",
+		msg: sample.usingclobject(),
 		viewclass: "cl-highlight-col",
 		import: ["div"],
 		code: () => {
@@ -249,7 +250,7 @@ export default [
 	},
 
 	{
-		msg: "Using cl object",
+		msg: sample.usingclobject(),
 		viewclass: "cl-highlight-col",
 		import: ["div"],
 		code: () => {
@@ -296,7 +297,7 @@ export default [
 	},
 
 	{
-		msg: "Using cl object",
+		msg: sample.usingclobject(),
 		viewclass: "cl-highlight-col",
 		import: ["div"],
 		code: () => {
@@ -426,7 +427,7 @@ export default [
 	},
 
 	{
-		msg: "Using cl object",
+		msg: sample.usingclobject(),
 		viewclass: "cl-highlight-col",
 		import: ["div"],
 		code: () => {
@@ -568,7 +569,7 @@ export default [
 	},
 
 	{
-		msg: "Using cl object",
+		msg: sample.usingclobject(),
 		viewclass: "cl-highlight-col",
 		import: ["div"],
 		code: () => {

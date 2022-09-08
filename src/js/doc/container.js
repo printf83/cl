@@ -2,6 +2,7 @@
 import ul from "../base/ul.js";
 import li from "../base/li.js";
 import div from "../base/div.js";
+import sample from "./sample.js";
 
 export default [
 	{
@@ -89,7 +90,7 @@ export default [
 	},
 
 	{
-		msg: "Using cl object",
+		msg: sample.usingclobject(),
 		viewclass: "cl-highlight-container",
 		import: ["div"],
 		code: () => {

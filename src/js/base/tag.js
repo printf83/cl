@@ -117,6 +117,7 @@ const defaultOption = {
 
 	flex: null,
 	order: null,
+	offset: null,
 
 	container: null,
 
@@ -311,6 +312,7 @@ export default class tag {
 
 					c2(opt.flex, "flex-$1"),
 					c2(opt.order, "order-$1"),
+					c2(opt.offset, "offset-$1"),
 
 					c2(opt.rowcol, "row-cols-$1"),
 					c3(opt.col, "col", null, "col-$1", null, "col"),
