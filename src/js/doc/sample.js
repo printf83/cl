@@ -7,6 +7,7 @@ import * as list from "../base/list.js";
 import small from "../base/small.js";
 import toast from "../base/toast.js";
 import * as core from "../base/core.js";
+import ul from "../base/ul.js";
 
 let dbstate = null;
 let textindex = 0;
@@ -345,7 +346,10 @@ const fn = {
 			}),
 		];
 	},
-	list_items: (data, item, group) => {
+	list_container: (data, view, row, item, group) => {
+		return new ul({ class: "list-group", elem: row(data, view, item, group) });
+	},
+	list_row: (data, view, item, group) => {
 		let lastgroup = null;
 		let result = [];
 		data.forEach((i) => {
@@ -356,17 +360,24 @@ const fn = {
 						return el.value === i.state;
 					})[0]?.label;
 
-					result.push(group({ key: i.state, name: state_name }));
+					result.push(
+						group({
+							view: view,
+							key: i.state,
+							name: state_name,
+						})
+					);
 				}
 			}
 
-			result.push(item(i));
+			result.push(item(i, view));
 		});
 
 		return result;
 	},
-	list_item: (data) => {
+	list_item: (data, view) => {
 		return new list.item({
+			view: view,
 			key: data._id,
 			name: data.name,
 			picture: data.picture,
@@ -377,8 +388,8 @@ const fn = {
 			allow_more: true,
 		});
 	},
-	list_group: (data) => {
-		return new list.group({ key: data.key, name: data.name });
+	list_group: (data, view) => {
+		return new list.group({ view: view, key: data.key, name: data.name });
 	},
 	list_more: (sender, id) => {
 		new toast("i", `Call from id:${id}`).show();

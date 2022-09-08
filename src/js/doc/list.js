@@ -131,7 +131,7 @@ export default [
 	},
 
 	{
-		title: "Item",
+		title: "Container",
 		sample: {
 			"sample.query_setting": sample.query_setting,
 			"sample.query_data": sample.query_data_view,
@@ -167,16 +167,92 @@ export default [
 									setting: sample.query_setting(dbstate),
 									query: sample.query_data,
 									name: "customer",
-									item: (data) => {
-										//custom item template
-										return new list.item({
-											key: data._id,
-											name: data.name,
-											picture: data.picture,
-											detail: new small(
-												[data.phone, data.dob, data.email].filter(Boolean).join(" | ")
-											),
+									container: (data, view, row, item, group) => {
+										//custom container template
+										return new ul({ class: "list-group", elem: row(data, view, item, group) });
+									},
+								})
+							);
+
+							//load data into generated list container
+							list.container.reload(resultOutputId, sender, () => {
+								//hide run code button
+								document.getElementById(btnGenerate).classList.add("d-none");
+								document.getElementById(resultOutputId).classList.remove("d-none");
+							});
+						}, sender);
+					},
+				}),
+
+				//output list container
+				new div({ id: resultOutputId, display: "none" }),
+			];
+		},
+	},
+
+	{
+		title: "Row",
+		sample: {
+			"sample.query_setting": sample.query_setting,
+			"sample.query_data": sample.query_data_view,
+			"sample.list_container": sample.list_container,
+			"sample.list_state": sample.list_state,
+		},
+		import: ["button", "list", "div", "small", "sample"],
+		code: () => {
+			let resultOutputId = core.UUID();
+			let btnGenerate = core.UUID();
+
+			let d = {};
+
+			return [
+				new button({
+					id: btnGenerate,
+					label: "Run Code",
+					icon: "play",
+					color: "primary",
+					onclick: (event) => {
+						//run code button
+						let sender = event.currentTarget;
+
+						//get list of state
+						sample.list_state((dbstate) => {
+							//generate list container
+							core.replaceWith(
+								document.getElementById(resultOutputId),
+
+								//list container option
+								new list.container({
+									id: resultOutputId,
+									setting: sample.query_setting(dbstate),
+									query: sample.query_data,
+									name: "customer",
+									container: sample.list_container,
+									row: (data, view, item, group) => {
+										let lastgroup = null;
+										let result = [];
+										data.forEach((i) => {
+											if (dbstate) {
+												if (i.state && lastgroup !== i.state) {
+													lastgroup = i.state;
+													let state_name = dbstate.filter((el) => {
+														return el.value === i.state;
+													})[0]?.label;
+
+													result.push(
+														group({
+															view: view,
+															key: i.state,
+															name: state_name,
+														})
+													);
+												}
+											}
+
+											result.push(item(i, view));
 										});
+
+										return result;
 									},
 								})
 							);
@@ -202,7 +278,8 @@ export default [
 		sample: {
 			"sample.query_setting": sample.query_setting,
 			"sample.query_data": sample.query_data_view,
-			"sample.list_items": sample.list_items,
+			"sample.list_container": sample.list_container,
+			"sample.list_row": sample.list_row,
 			"sample.list_group": sample.list_group,
 			"sample.list_state": sample.list_state,
 		},
@@ -235,10 +312,78 @@ export default [
 									setting: sample.query_setting(dbstate),
 									query: sample.query_data,
 									name: "customer",
-									items: sample.list_items,
-									item: (data) => {
-										//custom list item
+									container: sample.list_container,
+									row: sample.list_row,
+									group: (data, view) => {
+										//custom group setup
+										return new list.group({ view: view, key: data.key, name: data.name });
+									},
+								})
+							);
+
+							//load data into generated list container
+							list.container.reload(resultOutputId, sender, () => {
+								//hide run code button
+								document.getElementById(btnGenerate).classList.add("d-none");
+								document.getElementById(resultOutputId).classList.remove("d-none");
+							});
+						}, sender);
+					},
+				}),
+
+				//output list container
+				new div({ id: resultOutputId, display: "none" }),
+			];
+		},
+	},
+
+	{
+		title: "Item",
+		sample: {
+			"sample.query_setting": sample.query_setting,
+			"sample.query_data": sample.query_data_view,
+			"sample.list_container": sample.list_container,
+			"sample.list_row": sample.list_row,
+			"sample.list_group": sample.list_group,
+			"sample.list_state": sample.list_state,
+		},
+		import: ["button", "list", "div", "small", "sample"],
+		code: () => {
+			let resultOutputId = core.UUID();
+			let btnGenerate = core.UUID();
+
+			let d = {};
+
+			return [
+				//run code button
+				new button({
+					id: btnGenerate,
+					label: "Run Code",
+					icon: "play",
+					color: "primary",
+					onclick: (event) => {
+						//get button to show loading
+						let sender = event.currentTarget;
+
+						//get list of state
+						sample.list_state((dbstate) => {
+							//generate list container
+							core.replaceWith(
+								document.getElementById(resultOutputId),
+
+								//list container option
+								new list.container({
+									id: resultOutputId,
+									setting: sample.query_setting(dbstate),
+									query: sample.query_data,
+									name: "customer",
+									container: sample.list_container,
+									row: sample.list_row,
+									group: sample.list_group,
+									item: (data, view) => {
+										//custom item template
 										return new list.item({
+											view: view,
 											key: data._id,
 											name: data.name,
 											picture: data.picture,
@@ -247,7 +392,6 @@ export default [
 											),
 										});
 									},
-									group: sample.list_group, //list item group setup
 								})
 							);
 
@@ -283,7 +427,8 @@ export default [
 			"sample.query_setting": sample.query_setting,
 			"sample.query_data": sample.query_data_view,
 			"sample.list_editor": sample.list_editor,
-			"sample.list_items": sample.list_items,
+			"sample.list_container": sample.list_container,
+			"sample.list_row": sample.list_row,
 			"sample.list_group": sample.list_group,
 			"sample.list_state": sample.list_state,
 		},
@@ -313,13 +458,15 @@ export default [
 
 								//list container option
 								new list.container({
+									name: "customer",
 									id: resultOutputId,
 									setting: sample.query_setting(dbstate),
 									query: sample.query_data,
 									editor: sample.list_editor,
-									name: "customer",
-									items: sample.list_items,
-									item: (data) => {
+									container: sample.list_container,
+									row: sample.list_row,
+									group: sample.list_group,
+									item: (data, view) => {
 										return new list.item({
 											key: data._id,
 											name: data.name,
@@ -330,7 +477,78 @@ export default [
 											allow_delete: true, //set allow delete
 										});
 									},
+								})
+							);
+
+							//load data into generated list container
+							list.container.reload(resultOutputId, sender, () => {
+								//hide run code button
+								document.getElementById(btnGenerate).classList.add("d-none");
+								document.getElementById(resultOutputId).classList.remove("d-none");
+							});
+						}, sender);
+					},
+				}),
+
+				//output list container
+				new div({ id: resultOutputId, display: "none" }),
+			];
+		},
+	},
+
+	{
+		title: "Allow more button",
+		msg: ["You can set allowed more action on {{list.more}}"],
+		sample: {
+			"sample.query_setting": sample.query_setting,
+			"sample.query_data": sample.query_data_view,
+			"sample.list_editor": sample.list_editor,
+			"sample.list_container": sample.list_container,
+			"sample.list_row": sample.list_row,
+			"sample.list_item": sample.list_item,
+			"sample.list_group": sample.list_group,
+			"sample.list_state": sample.list_state,
+			"sample.list_more": sample.list_more,
+		},
+		import: ["button", "list", "div", "small", "sample"],
+		code: () => {
+			let resultOutputId = core.UUID();
+			let btnGenerate = core.UUID();
+
+			let d = {};
+
+			return [
+				//run code button
+				new button({
+					id: btnGenerate,
+					label: "Run Code",
+					icon: "play",
+					color: "primary",
+					onclick: (event) => {
+						//get button to show loading
+						let sender = event.currentTarget;
+
+						//get list of state
+						sample.list_state((dbstate) => {
+							//generate list container
+							core.replaceWith(
+								document.getElementById(resultOutputId),
+
+								//list container option
+								new list.container({
+									name: "customer",
+									id: resultOutputId,
+									setting: sample.query_setting(dbstate),
+									query: sample.query_data,
+									editor: sample.list_editor,
+									container: sample.list_container,
+									row: sample.list_row,
 									group: sample.list_group,
+									item: sample.list_item,
+									more: (sender, id) => {
+										//custom action when more button is clicked
+										new toast("i", `Call from id:${id}`).show();
+									},
 								})
 							);
 
@@ -356,8 +574,8 @@ export default [
 		sample: {
 			"sample.query_setting": sample.query_setting,
 			"sample.query_data": sample.query_data_view,
-			"sample.list_editor": sample.list_editor,
-			"sample.list_items": sample.list_items,
+			"sample.list_container": sample.list_container,
+			"sample.list_row": sample.list_row,
 			"sample.list_item": sample.list_item,
 			"sample.list_group": sample.list_group,
 			"sample.list_state": sample.list_state,
@@ -389,14 +607,58 @@ export default [
 
 								//list container option
 								new list.container({
+									name: "customer",
+									file: ["picture"], // file will be saved automaticly
 									id: resultOutputId,
 									setting: sample.query_setting(dbstate),
 									query: sample.query_data,
-									editor: sample.list_editor, //editor setting
-									name: "customer",
-									items: sample.list_items,
-									item: sample.list_item,
+									editor: (data) => {
+										//custom editor setting
+										return [
+											new input({
+												type: "text",
+												label: "Name",
+												name: "name",
+												required: true,
+												value: data ? data.name : null,
+											}),
+											new input({
+												type: "date",
+												label: "Date of birth",
+												name: "dob",
+												value: data ? data.dob : null,
+											}),
+											new input({
+												type: "text",
+												label: "Phone",
+												name: "phone",
+												value: data ? data.phone : null,
+											}),
+											new file({
+												label: "Picture",
+												name: "picture",
+												value: data ? data.picture : null,
+											}),
+											new input({
+												type: "email",
+												label: "Email",
+												name: "email",
+												value: data ? data.email : null,
+											}),
+											new input({
+												type: "select",
+												label: "State",
+												name: "state",
+												required: true,
+												option: dbstate,
+												value: data ? data.state : null,
+											}),
+										];
+									},
+									container: sample.list_container,
+									row: sample.list_row,
 									group: sample.list_group,
+									item: sample.list_item,
 									more: sample.list_more,
 								})
 							);
@@ -426,7 +688,8 @@ export default [
 			"sample.query_setting": sample.query_setting,
 			"sample.query_data": sample.query_data_view,
 			"sample.list_editor": sample.list_editor,
-			"sample.list_items": sample.list_items,
+			"sample.list_container": sample.list_container,
+			"sample.list_row": sample.list_row,
 			"sample.list_item": sample.list_item,
 			"sample.list_group": sample.list_group,
 			"sample.list_state": sample.list_state,
@@ -459,13 +722,14 @@ export default [
 
 								//list container option
 								new list.container({
+									name: "customer",
+									file: ["picture"], // file will be saved automaticly
 									id: resultOutputId,
 									setting: sample.query_setting(dbstate),
-									file: ["picture"],
 									query: sample.query_data,
 									editor: sample.list_editor,
-									name: "customer",
-									items: sample.list_items,
+									container: sample.list_container,
+									row: sample.list_row,
 									item: sample.list_item,
 									group: sample.list_group,
 									more: sample.list_more,
@@ -520,7 +784,8 @@ export default [
 			"sample.query_setting": sample.query_setting,
 			"sample.query_data": sample.query_data_view,
 			"sample.list_editor": sample.list_editor,
-			"sample.list_items": sample.list_items,
+			"sample.list_container": sample.list_container,
+			"sample.list_row": sample.list_row,
 			"sample.list_item": sample.list_item,
 			"sample.list_group": sample.list_group,
 			"sample.list_state": sample.list_state,
@@ -553,13 +818,14 @@ export default [
 
 								//list container option
 								new list.container({
+									name: "customer",
+									file: ["picture"], // file will be saved automaticly
+									query: sample.query_data,
 									id: resultOutputId,
 									setting: sample.query_setting(dbstate),
-									file: ["picture"],
-									query: sample.query_data,
 									editor: sample.list_editor,
-									name: "customer",
-									items: sample.list_items,
+									container: sample.list_container,
+									row: sample.list_row,
 									item: sample.list_item,
 									group: sample.list_group,
 									more: sample.list_more,
@@ -678,7 +944,8 @@ export default [
 			"sample.query_setting": sample.query_setting,
 			"sample.query_data": sample.query_data_view,
 			"sample.list_editor": sample.list_editor,
-			"sample.list_items": sample.list_items,
+			"sample.list_container": sample.list_container,
+			"sample.list_row": sample.list_row,
 			"sample.list_item": sample.list_item,
 			"sample.list_group": sample.list_group,
 			"sample.list_state": sample.list_state,
@@ -709,13 +976,14 @@ export default [
 
 								//list container option
 								new list.container({
+									name: "customer",
+									file: ["picture"],
 									id: resultOutputId,
 									setting: sample.query_setting(dbstate),
-									file: ["picture"],
 									query: sample.query_data,
 									editor: sample.list_editor,
-									name: "customer",
-									items: sample.list_items,
+									container: sample.list_container,
+									row: sample.list_row,
 									item: sample.list_item,
 									group: sample.list_group,
 									more: sample.list_more,

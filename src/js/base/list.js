@@ -69,10 +69,7 @@ const fn = {
 				(result) => {
 					let container = document.getElementById(id);
 					core.removeChildElement(container);
-					core.appendChild(
-						container,
-						new ul({ class: "list-group", elem: opt.items(result.data, opt.item, opt.group) })
-					);
+					core.appendChild(container, opt.container(result.data, opt.view, opt.row, opt.item, opt.group));
 
 					if (opt.paging) {
 						if (result.total > opt.query.limit) {
@@ -385,13 +382,13 @@ const fn = {
 			let container = document.getElementById(id);
 			if (container.classList.contains("check")) {
 				let checked = container.querySelectorAll(".check[data-key]");
-				let items = container.querySelectorAll("[data-key]");
-				if (items.length === checked.length) {
-					items.forEach((item) => {
+				let aitem = container.querySelectorAll("[data-key]");
+				if (aitem.length === checked.length) {
+					aitem.forEach((item) => {
 						item.classList.remove("check");
 					});
 				} else {
-					items.forEach((item) => {
+					aitem.forEach((item) => {
 						item.classList.add("check");
 					});
 				}
@@ -848,17 +845,21 @@ const fn = {
 const db_opt = {};
 
 const defaultOption = {
+	view: "list",
 	setting: null,
 	query: null,
 	name: null,
 	paging: true,
 	more: null,
-	items: (data, item, group) => {
+	container: (data, view, row, item, group) => {
+		return new ul({ class: "list-group", elem: row(data, view, item, group) });
+	},
+	row: (data, view, item, group) => {
 		return data.map((i) => {
-			return item(i);
+			return item(i, view);
 		});
 	},
-	item: (data) => {
+	item: (data, view) => {
 		return new item({
 			name: JSON.stringify(data)
 				.replace(/\,/g, ",<br/>")
@@ -867,7 +868,7 @@ const defaultOption = {
 				.replace(/\}/g, "<br/>}"),
 		});
 	},
-	group: (data) => {
+	group: (data, view) => {
 		return new group({
 			name: JSON.stringify(data)
 				.replace(/\,/g, ",<br/>")
@@ -916,7 +917,11 @@ export class container extends div {
 			delete opt.query;
 			delete opt.name;
 			delete opt.paging;
-			delete opt.items;
+
+			delete opt.container;
+			delete opt.row;
+			delete opt.item;
+			delete opt.group;
 
 			super.data = opt;
 		}
