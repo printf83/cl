@@ -15,7 +15,7 @@ export default [
 		msg: [
 			"Apply {{display}} utilities to create a flexbox container and transform <b>direct children elements</b> into flex items. Flex containers and items are able to be modified further with additional flex properties.",
 		],
-		container: sample.formcontainer,
+		container: sample.vstackcontainer,
 		import: ["tag"],
 		code: () => {
 			return new tag({
@@ -28,7 +28,7 @@ export default [
 	},
 
 	{
-		container: sample.formcontainer,
+		container: sample.vstackcontainer,
 		import: ["tag"],
 		code: () => {
 			return new tag({
@@ -61,7 +61,7 @@ export default [
 			"Set the direction of flex items in a flex container with direction utilities. In most cases you can omit the horizontal class here as the browser default is row. However, you may encounter situations where you needed to explicitly set this value (like responsive layouts).",
 			"Use {{flex:row}} to set a horizontal direction (the browser default), or {{flex:row-reverse}} to start the horizontal direction from the opposite side.",
 		],
-		container: sample.formcontainer,
+		container: sample.vstackcontainer,
 		viewclass: "cl-highlight-flex",
 		import: ["tag"],
 		code: () => {
@@ -83,7 +83,7 @@ export default [
 	{
 		title: "Column direction",
 		msg: "Use {{flex:column}} to set a vertical direction, or {{flex:column-reverse}} to start the vertical direction from the opposite side.",
-		container: sample.formcontainer,
+		container: sample.vstackcontainer,
 		viewclass: "cl-highlight-flex",
 		import: ["tag"],
 		code: () => {
@@ -120,7 +120,7 @@ export default [
 	{
 		title: "Justify content",
 		msg: "Use {{justifycontent}} property on {{display:flex|flex-inline}} containers to change the alignment of flex items on the main axis (the x-axis to start, y-axis if {{flex:column}}). Choose from {{start}} (browser default), {{end}}, {{center}}, {{between}}, {{around}}, or {{evenly}}.",
-		container: sample.formcontainer,
+		container: sample.vstackcontainer,
 		viewclass: "cl-highlight-flex",
 		import: ["tag"],
 		code: () => {
@@ -153,7 +153,7 @@ export default [
 	{
 		title: "Align items",
 		msg: "Use {{alignitem}} property on {{display:flex|flex-inline}} containers to change the alignment of flex items on the cross axis (the y-axis to start, x-axis if {{flex:column}}). Choose from {{start}}, {{end}}, {{center}}, {{baseline}}, or {{stretch}} (browser default).",
-		container: sample.formcontainer,
+		container: sample.vstackcontainer,
 		viewclass: "cl-highlight-flex",
 		import: ["tag"],
 		code: () => {
@@ -187,7 +187,7 @@ export default [
 	{
 		title: "Align self",
 		msg: "Use {{alignself}} property on {{display:flex|flex-inline}} containers to change the alignment of flex items on the cross axis (the y-axis to start, x-axis if {{flex:column}}). Choose from {{start}}, {{end}}, {{center}}, {{baseline}}, or {{stretch}} (browser default).",
-		container: sample.formcontainer,
+		container: sample.vstackcontainer,
 		viewclass: "cl-highlight-flex",
 		import: ["tag"],
 		code: () => {
@@ -224,7 +224,7 @@ export default [
 	{
 		title: "Fill",
 		msg: "Use the {{flex:fill}} property on a series of sibling elements to force them into widths equal to their content (or equal widths if their content does not surpass their border-boxes) while taking up all available horizontal space.",
-		container: sample.formcontainer,
+		container: sample.vstackcontainer,
 		viewclass: "cl-highlight-flex",
 		import: ["tag"],
 		code: () => {
@@ -256,7 +256,7 @@ export default [
 	{
 		title: "Grow and shrink",
 		msg: "Use {{flex:grow-*}} property to toggle a flex item’s ability to grow to fill available space. In the example below, the {{flex:grow-1}} elements uses all available space it can, while allowing the remaining two flex items their necessary space.",
-		container: sample.formcontainer,
+		container: sample.vstackcontainer,
 		viewclass: "cl-highlight-flex",
 		import: ["tag"],
 		code: () => {
@@ -274,7 +274,7 @@ export default [
 
 	{
 		msg: "Use {{flex:shrink-*}} property to toggle a flex item’s ability to shrink to fill available space. In the example below, the second flex item with {{flex:shrink-1}} is forced to wrap its contents to a new line, “shrinking” to allow more space for the previous flex item with {{.w-100}}",
-		container: sample.formcontainer,
+		container: sample.vstackcontainer,
 		viewclass: "cl-highlight-flex",
 		import: ["tag"],
 		code: () => {
@@ -307,7 +307,7 @@ export default [
 	{
 		title: "Auto margins",
 		msg: "Flexbox can do some pretty awesome things when you mix flex alignments with auto margins. Shown below are three examples of controlling flex items via auto margins: default (no auto margin), pushing two items to the right ({{marginend:auto}}), and pushing two items to the left ({{marginstart:auto}}).",
-		container: sample.formcontainer,
+		container: sample.vstackcontainer,
 		viewclass: "cl-highlight-flex",
 		import: ["tag"],
 		code: () => {
@@ -342,7 +342,7 @@ export default [
 	{
 		title: "With alignitem property",
 		msg: "Vertically move one flex item to the top or bottom of a container by mixing {{alignitem}}, {{flex:column}}, and {{margintop:auto}} or {{marginbottom:auto}}.",
-		container: sample.formcontainer,
+		container: sample.vstackcontainer,
 		viewclass: "cl-highlight-flex",
 		import: ["tag"],
 		code: () => {
@@ -378,7 +378,7 @@ export default [
 	{
 		title: "Warp",
 		msg: "Change how flex items wrap in a {{display:flex}} container. Choose from no wrapping at all (the browser default) with {{flex:nowrap}}, wrapping with {{flex:wrap}}, or reverse wrapping with {{flex:wrap-reverse}}",
-		container: sample.formcontainer,
+		container: sample.vstackcontainer,
 		viewclass: "cl-highlight-flex",
 		import: ["tag"],
 		code: () => {
@@ -392,7 +392,7 @@ export default [
 	},
 
 	{
-		container: sample.formcontainer,
+		container: sample.vstackcontainer,
 		viewclass: "cl-highlight-flex",
 		import: ["tag"],
 		code: () => {
@@ -406,7 +406,7 @@ export default [
 	},
 
 	{
-		container: sample.formcontainer,
+		container: sample.vstackcontainer,
 		viewclass: "cl-highlight-flex",
 		import: ["tag"],
 		code: () => {
@@ -437,7 +437,7 @@ export default [
 	{
 		title: "Order",
 		msg: "Change the <i>visual</i> order of specific flex items with a handful of {{order}} property. We only provide options for making an item first or last, as well as a reset to use the DOM order. As {{order}} takes any integer value from 0 to 5, add custom CSS for any additional values needed.",
-		container: sample.formcontainer,
+		container: sample.vstackcontainer,
 		viewclass: "cl-highlight-flex",
 		import: ["tag"],
 		code: () => {
@@ -490,7 +490,7 @@ export default [
 			"Use {{aligncontent}} property on {{display:flex}} containers to align flex items together on the cross axis. Choose from {{start}} (browser default), {{end}}, {{center}}, {{between}}, {{around}}, or {{stretch}}. To demonstrate these utilities, we’ve enforced {{flex:wrap}} and increased the number of flex items.",
 			"<b>Heads up!</b> This property has no effect on single rows of flex items.",
 		],
-		container: sample.formcontainer,
+		container: sample.vstackcontainer,
 		viewclass: "cl-highlight-flex",
 		import: ["tag"],
 		code: () => {

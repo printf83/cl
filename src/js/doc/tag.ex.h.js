@@ -21,7 +21,7 @@ export default [
 
 	{
 		title: "Example",
-		container: sample.formcontainer,
+		container: sample.vstackcontainer,
 		import: ["h"],
 		code: () => {
 			return new h({
@@ -42,7 +42,7 @@ export default [
 				item: ["<code>level</code> - to set heading level. The value should 1 to 6. Default is 5"],
 			}),
 		],
-		container: sample.formcontainer,
+		container: sample.vstackcontainer,
 		import: ["h"],
 		code: () => {
 			return [null, 1, 2, 3, 4, 5, 6].map((i) => {
@@ -54,7 +54,7 @@ export default [
 	{
 		title: "Easy option",
 		msg: "This component also supported easy option.",
-		container: sample.formcontainer,
+		container: sample.vstackcontainer,
 		import: ["h"],
 		code: () => {
 			return [

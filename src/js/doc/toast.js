@@ -123,7 +123,7 @@ export default [
 
 	{
 		title: "Base icon",
-		container: sample.formcontainer,
+		container: sample.vstackcontainer,
 		import: ["toast"],
 		code: () => {
 			return ["i", "!!", "!", "?", "-", "x", "/"].map((i) => {
@@ -159,7 +159,7 @@ export default [
 
 	{
 		title: "Color",
-		container: sample.formcontainer,
+		container: sample.vstackcontainer,
 		import: ["toast", "msg", "sample"],
 		code: () => {
 			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map((i) => {

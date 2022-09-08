@@ -253,6 +253,12 @@ const fn = {
 	formcontainer: (elem) => {
 		return new container.form(elem);
 	},
+	stackformcontainer: (elem) => {
+		return new container.stackform(elem);
+	},
+	vstackcontainer: (elem) => {
+		return new container.vstack(elem);
+	},
 	stackcontainer: (elem) => {
 		return new container.stack(elem);
 	},

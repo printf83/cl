@@ -13,7 +13,7 @@ export default [
 
 	{
 		title: "Label only",
-		container: sample.formcontainer,
+		container: sample.vstackcontainer,
 		import: ["msg"],
 		code: () => {
 			return [
@@ -38,7 +38,7 @@ export default [
 
 	{
 		title: "Weight",
-		container: sample.formcontainer,
+		container: sample.vstackcontainer,
 		viewclass: "cl-highlight-col",
 		import: ["msg", "sample"],
 		code: () => {
@@ -64,7 +64,7 @@ export default [
 
 	{
 		title: "Weight : sm",
-		container: sample.formcontainer,
+		container: sample.vstackcontainer,
 		viewclass: "cl-modal-preview",
 		import: ["toast", "alert", "msg", "sample"],
 		code: () => {

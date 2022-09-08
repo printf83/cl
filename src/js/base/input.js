@@ -40,6 +40,7 @@ const defaultOption = {
 	maxlength: null,
 	inputmode: null,
 	pattern: null,
+	autocomplete: null,
 
 	valid: null,
 	invalid: null,
@@ -256,6 +257,7 @@ export default class input extends tag {
 				value: m.value,
 				checked: m.checked,
 				placeholder: m.placeholder,
+				autocomplete: m.autocomplete,
 
 				disabled: m.disabled,
 				readOnly: m.readonly,
@@ -280,6 +282,7 @@ export default class input extends tag {
 			delete m.maxlength;
 			delete m.inputmode;
 			delete m.pattern;
+			delete m.autocomplete;
 
 			delete m.plaintext;
 

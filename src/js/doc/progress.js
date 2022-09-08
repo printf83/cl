@@ -12,7 +12,7 @@ export default [
 
 	{
 		title: "Example",
-		container: sample.formcontainer,
+		container: sample.vstackcontainer,
 		import: ["progress"],
 		code: () => {
 			return [
@@ -43,7 +43,7 @@ export default [
 
 	{
 		title: "Color",
-		container: sample.formcontainer,
+		container: sample.vstackcontainer,
 		import: ["progress"],
 		code: () => {
 			return [
@@ -57,7 +57,7 @@ export default [
 
 	{
 		title: "Height",
-		container: sample.formcontainer,
+		container: sample.vstackcontainer,
 		import: ["progress"],
 		code: () => {
 			return [
@@ -83,7 +83,7 @@ export default [
 
 	{
 		title: "Striped",
-		container: sample.formcontainer,
+		container: sample.vstackcontainer,
 		import: ["progress"],
 		code: () => {
 			return [
@@ -98,7 +98,7 @@ export default [
 
 	{
 		title: "Animated",
-		container: sample.formcontainer,
+		container: sample.vstackcontainer,
 		import: ["progress"],
 		code: () => {
 			return [

@@ -172,7 +172,7 @@ export default [
 
 	{
 		title: "Mix toolbar",
-		container: sample.formcontainer,
+		container: sample.vstackcontainer,
 		import: ["input", "btntoolbar", "btngroup", "button"],
 		code: () => {
 			return [
@@ -224,7 +224,7 @@ export default [
 
 	{
 		title: "Sizing",
-		container: sample.formcontainer,
+		container: sample.vstackcontainer,
 		import: ["btngroup", "button"],
 		code: () => {
 			return [

@@ -15,7 +15,7 @@ export default [
 		msg: [
 			"Easily realign text to components with text alignment classes. For start, end, and center alignment, responsive classes are available that use the same viewport width breakpoints as the grid system.",
 		],
-		container: sample.formcontainer,
+		container: sample.vstackcontainer,
 		viewclass: "cl-highlight-col",
 		import: ["tag"],
 		code: () => {
@@ -92,7 +92,7 @@ export default [
 	{
 		title: "Text transform",
 		msg: ["Transform text in components with text {{texttransform}} property."],
-		container: sample.formcontainer,
+		container: sample.vstackcontainer,
 		import: ["tag"],
 		code: () => {
 			return [null, "lowercase", "uppercase", "capitalize"].map((i) => {
@@ -110,7 +110,7 @@ export default [
 		msg: [
 			"Quickly change the font-size of text using {{fontsize}} property. While Bootstrap heading classes (e.g., {{.h1}}–{{.h6}}) apply {{fontsize}}, {{fontweight}}, and {{lineheight}}, these utilities <i>only</i> apply {{font-size}}. Sizing for these utilities matches HTML’s heading elements, so as the number increases, their size decreases.",
 		],
-		container: sample.formcontainer,
+		container: sample.vstackcontainer,
 		import: ["tag"],
 		code: () => {
 			return [null, 1, 2, 3, 4, 5, 6].map((i) => {
@@ -126,7 +126,7 @@ export default [
 	{
 		title: "Font weight",
 		msg: ["Quickly change the font-weight of text with these {{fontweight}}."],
-		container: sample.formcontainer,
+		container: sample.vstackcontainer,
 		import: ["tag"],
 		code: () => {
 			return [null, "bold", "bolder", "semibold", "normal", "light", "lighter"].map((i) => {
@@ -142,7 +142,7 @@ export default [
 	{
 		title: "Font italics",
 		msg: ["Quickly change the font-style of text with these {{fontitalic}}."],
-		container: sample.formcontainer,
+		container: sample.vstackcontainer,
 		import: ["tag"],
 		code: () => {
 			return [null, true, false].map((i) => {
@@ -158,7 +158,7 @@ export default [
 	{
 		title: "Text decoration",
 		msg: ["Decorate text in components with {{textdecoration}} property."],
-		container: sample.formcontainer,
+		container: sample.vstackcontainer,
 		import: ["tag"],
 		code: () => {
 			return [null, true, false, "underline", "line-through", "none"].map((i) => {
@@ -174,7 +174,7 @@ export default [
 	{
 		title: "Monospace",
 		msg: ["Change a selection to Bootstrap monospace font stack with {{monospace}} property."],
-		container: sample.formcontainer,
+		container: sample.vstackcontainer,
 		import: ["tag"],
 		code: () => {
 			return new tag({
@@ -188,7 +188,7 @@ export default [
 	{
 		title: "Line height",
 		msg: ["Change the line height with {{lineheight}} property"],
-		container: sample.formcontainer,
+		container: sample.vstackcontainer,
 		import: ["tag", "sample"],
 		code: () => {
 			return [null, 1, "sm", "base", "lg"].map((i) => {

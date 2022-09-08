@@ -97,7 +97,7 @@ export default [
 
 	{
 		msg: "Live example",
-		container: sample.formcontainer,
+		container: sample.vstackcontainer,
 		import: ["button", "input", "db"],
 		code: () => {
 			let resultOutputId = core.UUID();
@@ -166,7 +166,7 @@ export default [
 
 	{
 		msg: "Live example",
-		container: sample.formcontainer,
+		container: sample.vstackcontainer,
 		import: ["button", "input", "dlg", "db"],
 		code: () => {
 			let resultOutputId = core.UUID();
@@ -322,7 +322,7 @@ export default [
 
 	{
 		msg: "Live example",
-		container: sample.formcontainer,
+		container: sample.vstackcontainer,
 		import: ["button", "input", "dlg", "db"],
 		code: () => {
 			let resultOutputId = core.UUID();

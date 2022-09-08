@@ -78,7 +78,7 @@ export default [
 	},
 	{
 		title: "Navbars",
-		container: sample.formcontainer,
+		container: sample.vstackcontainer,
 		import: ["input", "button", "navbar"],
 		code: () => {
 			let id1 = core.UUID();
@@ -504,11 +504,13 @@ export default [
 					type: "email",
 					placeholder: "Enter email",
 					helper: "We'll never share your email with anyone else.",
+					autocomplete: "email",
 				}),
 				new input({
 					label: "Password",
 					type: "password",
 					placeholder: "Password",
+					autocomplete: "current-password",
 				}),
 				new input({
 					label: "Example select",
@@ -536,7 +538,7 @@ export default [
 	{
 		title: "Radio buttons",
 		import: ["input"],
-		container: sample.formcontainer,
+		container: sample.vstackcontainer,
 		code: () => {
 			return [
 				new input({
@@ -563,7 +565,7 @@ export default [
 	{
 		title: "Checkboxes",
 		import: ["input"],
-		container: sample.formcontainer,
+		container: sample.vstackcontainer,
 		code: () => {
 			return [
 				new input({
@@ -582,7 +584,7 @@ export default [
 	{
 		title: "Switches",
 		import: ["input"],
-		container: sample.formcontainer,
+		container: sample.vstackcontainer,
 		code: () => {
 			return [
 				new input({
@@ -601,7 +603,7 @@ export default [
 	{
 		title: "Ranges",
 		import: ["input"],
-		container: sample.formcontainer,
+		container: sample.vstackcontainer,
 		code: () => {
 			return [
 				new input({
@@ -708,12 +710,14 @@ export default [
 					type: "email",
 					label: "Email address",
 					floatlabel: true,
+					autocomplete: "email",
 				}),
 
 				new input({
 					type: "password",
 					label: "Password",
 					floatlabel: true,
+					autocomplete: "current-password",
 				}),
 			];
 		},
@@ -725,7 +729,7 @@ export default [
 	{
 		title: "Tabs",
 		import: ["nav", "sample"],
-		container: sample.formcontainer,
+		container: sample.vstackcontainer,
 		code: () => {
 			return new tab({
 				item: [
@@ -754,7 +758,7 @@ export default [
 	{
 		title: "Pills",
 		import: ["nav", "sample"],
-		container: sample.formcontainer,
+		container: sample.vstackcontainer,
 		code: () => {
 			let fn = (headAlign) =>
 				new tab({
@@ -788,7 +792,7 @@ export default [
 	{
 		title: "Breadcrumbs",
 		import: ["breadcrumb"],
-		container: sample.formcontainer,
+		container: sample.vstackcontainer,
 		code: () => {
 			return [
 				new breadcrumb({
@@ -837,7 +841,7 @@ export default [
 	{
 		title: "Pagination",
 		import: ["paging"],
-		container: sample.formcontainer,
+		container: sample.vstackcontainer,
 		code: () => {
 			let fn = (weight) =>
 				new paging({
@@ -961,7 +965,7 @@ export default [
 	{
 		title: "Basic",
 		import: ["progress"],
-		container: sample.formcontainer,
+		container: sample.vstackcontainer,
 		code: () => {
 			return new progress.container({
 				item: {
@@ -974,7 +978,7 @@ export default [
 	{
 		title: "Contextual alternatives",
 		import: ["progress"],
-		container: sample.formcontainer,
+		container: sample.vstackcontainer,
 		code: () => {
 			let fn = (color, value) =>
 				new progress.container({
@@ -991,7 +995,7 @@ export default [
 	{
 		title: "Multiple bars",
 		import: ["progress"],
-		container: sample.formcontainer,
+		container: sample.vstackcontainer,
 		code: () => {
 			return new progress.container({
 				item: [
@@ -1014,7 +1018,7 @@ export default [
 	{
 		title: "Striped",
 		import: ["progress"],
-		container: sample.formcontainer,
+		container: sample.vstackcontainer,
 		code: () => {
 			let fn = (color, value) =>
 				new progress.container({

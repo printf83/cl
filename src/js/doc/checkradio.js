@@ -12,7 +12,7 @@ export default [
 
 	{
 		title: "Checks",
-		container: sample.formcontainer,
+		container: sample.vstackcontainer,
 		import: ["input"],
 		code: () => {
 			return [
@@ -32,7 +32,7 @@ export default [
 
 	{
 		title: "Disabled",
-		container: sample.formcontainer,
+		container: sample.vstackcontainer,
 		import: ["input"],
 		code: () => {
 			return [
@@ -49,7 +49,7 @@ export default [
 
 	{
 		title: "Radio",
-		container: sample.formcontainer,
+		container: sample.vstackcontainer,
 		import: ["input"],
 		code: () => {
 			return [
@@ -61,7 +61,7 @@ export default [
 
 	{
 		title: "Disabled",
-		container: sample.formcontainer,
+		container: sample.vstackcontainer,
 		import: ["input"],
 		code: () => {
 			return [
@@ -79,7 +79,7 @@ export default [
 
 	{
 		title: "Switch",
-		container: sample.formcontainer,
+		container: sample.vstackcontainer,
 		import: ["input"],
 		code: () => {
 			return [
@@ -102,7 +102,7 @@ export default [
 
 	{
 		title: "Default (stacked)",
-		container: sample.formcontainer,
+		container: sample.vstackcontainer,
 		import: ["input"],
 		code: () => {
 			return [
@@ -117,7 +117,7 @@ export default [
 
 	{
 		title: "Disabled",
-		container: sample.formcontainer,
+		container: sample.vstackcontainer,
 		import: ["input"],
 		code: () => {
 			return [
@@ -167,7 +167,7 @@ export default [
 
 	{
 		title: "Without label",
-		container: sample.formcontainer,
+		container: sample.vstackcontainer,
 		import: ["input"],
 		code: () => {
 			return [new input({ type: "checkbox" }), new input({ name: "g6", type: "radio" })];

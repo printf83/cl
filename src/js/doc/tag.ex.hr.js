@@ -20,7 +20,7 @@ export default [
 
 	{
 		title: "Example",
-		container: sample.formcontainer,
+		container: sample.vstackcontainer,
 		import: ["hr"],
 		code: () => {
 			return [

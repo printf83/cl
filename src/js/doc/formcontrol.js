@@ -105,12 +105,14 @@ export default [
 					readonly: true,
 					plaintext: true,
 					value: "name@example.com",
+					autocomplete: "email",
 				}),
 				new input({
 					label: "Password",
 					labelsize: "sm-2",
 					ctlsize: "sm-10",
 					type: "password",
+					autocomplete: "current-password",
 				}),
 			];
 		},
@@ -118,7 +120,7 @@ export default [
 
 	{
 		title: "Readonly plain text (Stack)",
-		container: sample.stackcontainer,
+		container: sample.stackformcontainer,
 		import: ["button", "input"],
 		code: () => {
 			return [
@@ -129,12 +131,14 @@ export default [
 					readonly: true,
 					plaintext: true,
 					value: "name@example.com",
+					autocomplete: "email",
 				}),
 				new input({
 					label: "Password",
 					hidelabel: true,
 					placeholder: "Password",
 					type: "password",
+					autocomplete: "current-password",
 				}),
 				new button({
 					type: "submit",

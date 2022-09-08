@@ -34,7 +34,7 @@ export default [
 	{
 		title: "Easy option",
 		msg: "This component also supported easy option.",
-		container: sample.formcontainer,
+		container: sample.vstackcontainer,
 		import: ["pre"],
 		code: () => {
 			return [

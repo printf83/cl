@@ -1,5 +1,6 @@
 "use strict";
 import div from "./div.js";
+import cl_form from "./form.js";
 
 /**
  * icon, msg, callback
@@ -8,7 +9,45 @@ import div from "./div.js";
  * msg, button : {label,color,onclick}
  * opt : {modal option}
  */
-export class form extends div {
+export class form extends cl_form {
+	constructor(elem, gap = 3, col = 1) {
+		super({
+			padding: 0,
+			class: "container",
+			elem: new div({
+				gap: gap,
+				row: true,
+				rowcol: col,
+				elem: Array.isArray(elem)
+					? elem.map((i) => {
+							return new div({ col: true, elem: i });
+					  })
+					: new div({ col: true, elem: elem }),
+			}),
+		});
+	}
+}
+
+export class stackform extends cl_form {
+	constructor(elem, gap = 2, col = "auto") {
+		super({
+			padding: 0,
+			class: "container",
+			elem: new div({
+				row: true,
+				gap: gap,
+				rowcol: col,
+				elem: Array.isArray(elem)
+					? elem.map((i) => {
+							return new div({ col: true, elem: i });
+					  })
+					: new div({ col: true, elem: elem }),
+			}),
+		});
+	}
+}
+
+export class vstack extends div {
 	constructor(elem, gap = 3, col = 1) {
 		super({
 			padding: 0,

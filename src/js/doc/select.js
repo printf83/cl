@@ -29,7 +29,7 @@ export default [
 
 	{
 		title: "Sizing",
-		container: sample.formcontainer,
+		container: sample.vstackcontainer,
 		import: ["input"],
 		code: () => {
 			let optitem = [

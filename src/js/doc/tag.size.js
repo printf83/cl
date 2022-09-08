@@ -12,7 +12,7 @@ export default [
 
 	{
 		title: "Relative to the parent",
-		container: sample.formcontainer,
+		container: sample.vstackcontainer,
 		viewclass: "cl-highlight-size",
 		import: ["tag"],
 		code: () => {

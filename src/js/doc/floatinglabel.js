@@ -14,7 +14,7 @@ export default [
 
 	{
 		title: "Example",
-		container: sample.formcontainer,
+		container: sample.vstackcontainer,
 		import: ["input"],
 		code: () => {
 			return [
@@ -23,12 +23,14 @@ export default [
 					label: "Email address",
 					helper: "We'll never share your email with anyone else.",
 					floatlabel: true,
+					autocomplete: "email",
 				}),
 
 				new input({
 					type: "password",
 					label: "Password",
 					floatlabel: true,
+					autocomplete: "current-password",
 				}),
 			];
 		},

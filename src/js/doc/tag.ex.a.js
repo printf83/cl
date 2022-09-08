@@ -44,7 +44,7 @@ export default [
 				],
 			}),
 		],
-		container: sample.formcontainer,
+		container: sample.vstackcontainer,
 		import: ["a"],
 		code: () => {
 			return [
@@ -72,7 +72,7 @@ export default [
 	{
 		title: "Easy option",
 		msg: "This component also supported easy option.",
-		container: sample.formcontainer,
+		container: sample.vstackcontainer,
 		import: ["a"],
 		code: () => {
 			return [

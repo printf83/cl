@@ -130,7 +130,7 @@ export default [
 
 	{
 		title: "Checkboxes and radios",
-		container: sample.formcontainer,
+		container: sample.vstackcontainer,
 		import: ["input", "inputgroup"],
 		code: () => {
 			return [

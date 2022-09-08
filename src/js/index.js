@@ -245,7 +245,6 @@ let cur_m1 = null;
 let cur_m2 = null;
 function reloadactivedoc() {
 	if (cur_m1 && cur_m2) {
-		console.info("Document reloaded");
 		gen_content(cur_m1, cur_m2, () => {
 			core.init(document.getElementById("root"));
 			PR.prettyPrint();
@@ -275,7 +274,10 @@ function startmemoryleaktest(sender, limit) {
 	} else {
 		new dlg.confirmbox(
 			"!!",
-			`Are you sure to start <b>Memory Leak Test</b>? This test will open every page one by one for <b>${limit}</b> times and may make your device laggy. If you like to stop it, please click on <b>Memory Leak Test Progress</b> again anytime and the test will be end soon.`,
+			`
+			Are you sure to start <b>Memory Leak Test</b>?<br/><br/>
+			This test use by developer to check memory leak on this framework by open every page one by one for <b>${limit}</b> times. This test may make your device laggy.<br/><br/>
+			If you want to stop the test, please click on this <b>Memory Leak Test</b> again to stop the test.`,
 			{
 				label: "Understand",
 				onclick: () => {
@@ -865,8 +867,6 @@ core.documentReady(() => {
 		})
 	);
 
-	gen_content(def_m1, def_m2, () => {
-		core.init(document.body);
-		PR.prettyPrint();
-	});
+	cur_m1 = def_m1;
+	cur_m2 = def_m2;
 });

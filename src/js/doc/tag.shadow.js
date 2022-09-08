@@ -20,7 +20,7 @@ export default [
 				}),
 			}),
 		],
-		container: sample.formcontainer,
+		container: sample.vstackcontainer,
 		viewclass: "cl-highlight-shadow",
 		import: ["tag"],
 		code: () => {

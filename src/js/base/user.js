@@ -604,9 +604,7 @@ const fn = {
 							type: "email",
 							placeholder: "Email address",
 							required: true,
-							attr: {
-								autocomplete: "off",
-							},
+							autocomplete: "email",
 							value: opt.email,
 							onchange: fn.action.inputchange,
 						}),
@@ -617,9 +615,7 @@ const fn = {
 							placeholder: "Password",
 							required: true,
 							minlengh: 8,
-							attr: {
-								autocomplete: "off",
-							},
+							autocomplete: "current-password",
 							onchange: fn.action.inputchange,
 						}),
 						new div({
@@ -676,9 +672,7 @@ const fn = {
 							placeholder: "Email address",
 							required: true,
 							floatlabel: true,
-							attr: {
-								autocomplete: "off",
-							},
+							autocomplete: "email",
 							onchange: fn.action.inputchange,
 						}),
 						new input({
@@ -688,9 +682,7 @@ const fn = {
 							placeholder: "Password",
 							required: true,
 							minlengh: 8,
-							attr: {
-								autocomplete: "off",
-							},
+							autocomplete: "new-password",
 							onchange: fn.action.inputchange,
 						}),
 						new input({
@@ -700,9 +692,7 @@ const fn = {
 							placeholder: "Repeat password",
 							required: true,
 							minlengh: 8,
-							attr: {
-								autocomplete: "off",
-							},
+							autocomplete: "new-password",
 							onchange: fn.action.inputchange,
 						}),
 						core.setting.term && typeof core.setting.term === "function"
@@ -769,9 +759,7 @@ const fn = {
 							type: "email",
 							placeholder: "Email address",
 							required: true,
-							attr: {
-								autocomplete: "off",
-							},
+							autocomplete: "email",
 							onchange: fn.action.inputchange,
 						}),
 
@@ -827,9 +815,7 @@ const fn = {
 							placeholder: "Old password",
 							required: true,
 							minlengh: 8,
-							attr: {
-								autocomplete: "off",
-							},
+							autocomplete: "current-password",
 							onchange: fn.action.inputchange,
 						}),
 
@@ -840,9 +826,7 @@ const fn = {
 							placeholder: "New password",
 							required: true,
 							minlengh: 8,
-							attr: {
-								autocomplete: "off",
-							},
+							autocomplete: "new-password",
 							onchange: fn.action.inputchange,
 						}),
 
@@ -853,9 +837,7 @@ const fn = {
 							placeholder: "Repeat new password",
 							required: true,
 							minlengh: 8,
-							attr: {
-								autocomplete: "off",
-							},
+							autocomplete: "new-password",
 							onchange: fn.action.inputchange,
 						}),
 
@@ -928,9 +910,7 @@ const fn = {
 							placeholder: "New password",
 							required: true,
 							minlengh: 8,
-							attr: {
-								autocomplete: "off",
-							},
+							autocomplete: "new-password",
 							onchange: fn.action.inputchange,
 						}),
 
@@ -941,9 +921,7 @@ const fn = {
 							placeholder: "Repeat new password",
 							required: true,
 							minlengh: 8,
-							attr: {
-								autocomplete: "off",
-							},
+							autocomplete: "new-password",
 							onchange: fn.action.inputchange,
 						}),
 
@@ -1005,9 +983,7 @@ const fn = {
 							type: "email",
 							placeholder: "Contact email",
 							required: true,
-							attr: {
-								autocomplete: "off",
-							},
+							autocomplete: "email",
 							value: opt.data?.email,
 							onchange: fn.action.inputchange,
 						}),
@@ -1017,9 +993,7 @@ const fn = {
 							type: "text",
 							placeholder: "Name",
 							required: true,
-							attr: {
-								autocomplete: "off",
-							},
+							autocomplete: "username",
 							value: opt.data?.name,
 							onchange: fn.action.inputchange,
 						}),

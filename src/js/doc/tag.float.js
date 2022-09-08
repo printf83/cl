@@ -15,7 +15,7 @@ export default [
 		msg: [
 			"These utility classes float an element to the left or right, or disable floating, based on the current viewport size using the CSS float property. {{!important}} is included to avoid specificity issues. These use the same viewport breakpoints as Bootstrap grid system. Please be aware float utilities have no effect on flex items.",
 		],
-		container: sample.formcontainer,
+		container: sample.vstackcontainer,
 		import: ["tag"],
 		code: () => {
 			return [
@@ -41,7 +41,7 @@ export default [
 	{
 		title: "Responsive",
 		msg: ["Responsive variations also exist for each {{float}} value."],
-		container: sample.formcontainer,
+		container: sample.vstackcontainer,
 		import: ["tag"],
 		code: () => {
 			return [

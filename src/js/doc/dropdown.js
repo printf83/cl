@@ -9,6 +9,7 @@ import button from "../base/button.js";
 import * as navbar from "../base/navbar.js";
 import toast from "../base/toast.js";
 import * as table from "../base/table.js";
+import * as container from "../base/container.js";
 
 export default [
 	{
@@ -584,9 +585,9 @@ export default [
 
 	{
 		title: "Form",
-		import: ["div", "button", "input", "dropdown"],
+		import: ["div", "button", "input", "dropdown", "container"],
 		code: () => {
-			return [
+			return new container.form([
 				new dropdown({
 					label: "Dropdown",
 					color: "secondary",
@@ -604,12 +605,14 @@ export default [
 										type: "email",
 										label: "Email address",
 										placeholder: "email@example.com",
+										autocomplete: "email",
 									}),
 									new input({
 										size: "col",
 										type: "password",
 										label: "Password",
 										placeholder: "Password",
+										autocomplete: "current-password",
 									}),
 									new input({ size: "col", type: "checkbox", label: "Remember me" }),
 									new div({
@@ -628,7 +631,7 @@ export default [
 						{ href: "javascript:void(0)", label: "Forgot password?" },
 					],
 				}),
-			];
+			]);
 		},
 	},
 

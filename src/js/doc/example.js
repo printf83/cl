@@ -5,6 +5,7 @@ import toast from "../base/toast.js";
 import div from "../base/div.js";
 import button from "../base/button.js";
 import input from "../base/input.js";
+import * as core from "../base/core.js";
 
 export default [
 	{

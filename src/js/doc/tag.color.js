@@ -15,7 +15,7 @@ export default [
 		msg: [
 			"Colorize text with {{textcolor}} property. If you want to colorize links, you can use the {{linkcolor}} property which have :hover and :focus states.",
 		],
-		container: sample.formcontainer,
+		container: sample.vstackcontainer,
 		import: ["tag"],
 		code: () => {
 			return [
@@ -61,7 +61,7 @@ export default [
 	},
 
 	{
-		container: sample.formcontainer,
+		container: sample.vstackcontainer,
 		import: ["tag"],
 		code: () => {
 			return [null, "primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map((i) => {

@@ -404,7 +404,7 @@ export default [
 
 	{
 		title: "Dropdown & item",
-		container: sample.formcontainer,
+		container: sample.vstackcontainer,
 		import: ["dropdown", "sample"],
 		code: () => {
 			return [
@@ -439,7 +439,7 @@ export default [
 
 	{
 		title: "Navbar",
-		container: sample.formcontainer,
+		container: sample.vstackcontainer,
 		import: ["navbar", "sample"],
 		code: () => {
 			return [

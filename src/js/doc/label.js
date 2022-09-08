@@ -45,7 +45,7 @@ export default [
 
 	{
 		title: "Label for",
-		container: sample.formcontainer,
+		container: sample.vstackcontainer,
 		import: ["input", "label", "sample"],
 		code: () => {
 			let id = core.UUID();
@@ -63,7 +63,7 @@ export default [
 	{
 		title: "Label hide",
 		msg: "Show icon only and label is hidden. Put label inside {{span.visually-hidden}}",
-		container: sample.formcontainer,
+		container: sample.vstackcontainer,
 		import: ["label", "sample"],
 		code: () => {
 			return new label({
@@ -77,7 +77,7 @@ export default [
 	{
 		title: "Label show",
 		msg: "Show icon only until viewport or higher",
-		container: sample.formcontainer,
+		container: sample.vstackcontainer,
 		import: ["label", "sample"],
 		code: () => {
 			return [null, "sm", "md", "lg", "xl", "xxl"].map((i) => {

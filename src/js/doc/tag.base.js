@@ -16,7 +16,7 @@ export default [
 	{
 		title: "tag",
 		msg: ["Create tag name for tag"],
-		container: sample.formcontainer,
+		container: sample.vstackcontainer,
 		import: ["tag"],
 		code: () => {
 			return [
@@ -32,7 +32,7 @@ export default [
 	{
 		title: "elem",
 		msg: ["Create element inside tag"],
-		container: sample.formcontainer,
+		container: sample.vstackcontainer,
 		import: ["tag"],
 		code: () => {
 			return [
