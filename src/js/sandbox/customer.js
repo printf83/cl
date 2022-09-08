@@ -5,6 +5,7 @@ import input from "../base/input.js";
 import * as list from "../base/list.js";
 import small from "../base/small.js";
 import toast from "../base/toast.js";
+import ul from "../base/ul.js";
 
 let query_data = {
 	filter: null,
@@ -133,7 +134,11 @@ const editor = (data) => {
 		}),
 	];
 };
-const items = (data, item, group) => {
+const container = (data, opt) => {
+	return new ul({ class: "list-group", elem: opt.row(data, opt) });
+};
+
+const row = (data, opt) => {
 	let lastgroup = null;
 	let result = [];
 	data.forEach((i) => {
@@ -143,35 +148,39 @@ const items = (data, item, group) => {
 				let state_name = dbstate.filter((el) => {
 					return el.value === i.state;
 				})[0]?.label;
+
 				result.push(
-					group({
-						key: i.state,
-						name: state_name,
-					})
+					opt.group(
+						{
+							key: i.state,
+							name: state_name,
+						},
+						opt
+					)
 				);
 			}
 		}
-		result.push(item(i));
+
+		result.push(opt.item(i, opt));
 	});
+
 	return result;
 };
-const item = (data) => {
+const item = (data, opt) => {
 	return new list.item({
+		view: opt.view,
 		key: data._id,
 		name: data.name,
 		picture: data.picture,
 		detail: new small([data.phone, data.dob, data.email].filter(Boolean).join(" | ")),
-		allow_delete: true,
-		allow_copy: true,
-		allow_action: true,
-		allow_more: true,
+		allow_delete: opt.allow_delete,
+		allow_copy: opt.allow_copy,
+		allow_action: opt.allow_action,
+		allow_more: opt.allow_more,
 	});
 };
-const group = (data) => {
-	return new list.group({
-		key: data.key,
-		name: data.name,
-	});
+const group = (data, opt) => {
+	return new list.group({ view: opt.view, key: data.key, name: data.name });
 };
 const more = (sender, id) => {
 	new toast("i", `Call from id:${id}`).show();
@@ -202,16 +211,21 @@ export default {
 		loadState((dbstate) => {
 			callback(
 				new list.container({
+					name: "customer",
+					file: ["picture"],
 					id: "customer_list",
 					setting: query_setting(dbstate),
 					query: query_data,
-					file: ["picture"],
 					editor: editor,
-					name: "customer",
-					items: items,
+					container: container,
+					row: row,
 					item: item,
 					group: group,
-					more: more,
+					list_more: more,
+					allow_action: true,
+					allow_copy: true,
+					allow_delete: true,
+					allow_more: true,
 				})
 			);
 		});

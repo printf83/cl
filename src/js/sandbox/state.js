@@ -2,6 +2,7 @@
 import input from "../base/input.js";
 import * as list from "../base/list.js";
 import toast from "../base/toast.js";
+import ul from "../base/ul.js";
 
 let query_data = {
 	filter: null,
@@ -48,21 +49,27 @@ const editor = (data) => {
 		}),
 	];
 };
-const items = (data, item) => {
+
+const container = (data, opt) => {
+	return new ul({ class: "list-group", elem: opt.row(data, opt) });
+};
+
+const row = (data, opt) => {
 	let result = [];
 	data.forEach((i) => {
-		result.push(item(i));
+		result.push(opt.item(i, opt));
 	});
 	return result;
 };
-const item = (data) => {
+const item = (data, opt) => {
 	return new list.item({
+		view: opt.view,
 		key: data._id,
 		name: data.name,
-		allow_delete: true,
-		allow_copy: true,
-		allow_action: true,
-		allow_more: true,
+		allow_delete: opt.allow_delete,
+		allow_copy: opt.allow_copy,
+		allow_action: opt.allow_action,
+		allow_more: opt.allow_more,
 	});
 };
 const more = (sender, id) => {
@@ -93,14 +100,19 @@ export default {
 	main: (callback) => {
 		callback(
 			new list.container({
+				name: "state",
 				id: "state_list",
 				setting: query_setting(),
 				query: query_data,
 				editor: editor,
-				name: "state",
-				items: items,
+				container: container,
+				row: row,
 				item: item,
-				more: more,
+				list_more: more,
+				allow_action: true,
+				allow_copy: true,
+				allow_delete: true,
+				allow_more: true,
 			})
 		);
 	},

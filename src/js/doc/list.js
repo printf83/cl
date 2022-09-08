@@ -9,6 +9,8 @@ import * as dlg from "../base/dlg.js";
 import small from "../base/small.js";
 import div from "../base/div.js";
 import ul from "../base/ul.js";
+import file from "../base/file.js";
+import toast from "../base/toast.js";
 
 export default [
 	{
@@ -137,7 +139,7 @@ export default [
 			"sample.query_data": sample.query_data_view,
 			"sample.list_state": sample.list_state,
 		},
-		import: ["button", "list", "div", "small", "sample"],
+		import: ["button", "list", "div", "small", "ul", "sample"],
 		code: () => {
 			let resultOutputId = core.UUID();
 			let btnGenerate = core.UUID();
@@ -167,9 +169,9 @@ export default [
 									setting: sample.query_setting(dbstate),
 									query: sample.query_data,
 									name: "customer",
-									container: (data, view, row, item, group) => {
+									container: (data, opt) => {
 										//custom container template
-										return new ul({ class: "list-group", elem: row(data, view, item, group) });
+										return new ul({ class: "list-group", elem: opt.row(data, opt) });
 									},
 								})
 							);
@@ -228,7 +230,7 @@ export default [
 									query: sample.query_data,
 									name: "customer",
 									container: sample.list_container,
-									row: (data, view, item, group) => {
+									row: (data, opt) => {
 										let lastgroup = null;
 										let result = [];
 										data.forEach((i) => {
@@ -240,16 +242,18 @@ export default [
 													})[0]?.label;
 
 													result.push(
-														group({
-															view: view,
-															key: i.state,
-															name: state_name,
-														})
+														opt.group(
+															{
+																key: i.state,
+																name: state_name,
+															},
+															opt
+														)
 													);
 												}
 											}
 
-											result.push(item(i, view));
+											result.push(opt.item(i, opt));
 										});
 
 										return result;
@@ -314,9 +318,9 @@ export default [
 									name: "customer",
 									container: sample.list_container,
 									row: sample.list_row,
-									group: (data, view) => {
+									group: (data, opt) => {
 										//custom group setup
-										return new list.group({ view: view, key: data.key, name: data.name });
+										return new list.group({ view: opt.view, key: data.key, name: data.name });
 									},
 								})
 							);
@@ -380,16 +384,20 @@ export default [
 									container: sample.list_container,
 									row: sample.list_row,
 									group: sample.list_group,
-									item: (data, view) => {
+									item: (data, opt) => {
 										//custom item template
 										return new list.item({
-											view: view,
+											view: opt.view,
 											key: data._id,
 											name: data.name,
 											picture: data.picture,
 											detail: new small(
 												[data.phone, data.dob, data.email].filter(Boolean).join(" | ")
 											),
+											allow_delete: opt.allow_delete,
+											allow_copy: opt.allow_copy,
+											allow_action: opt.allow_action,
+											allow_more: opt.allow_more,
 										});
 									},
 								})
@@ -412,14 +420,15 @@ export default [
 	},
 
 	{
-		title: "Allow delete",
+		title: "Allow action",
 		msg: [
-			"You can set allowed action on {{list.item}}",
+			"You can set allowed action on {{list.item}} or {{list.container}}",
 			new ul({
 				item: [
 					"<code>allow_delete: true</code> to add delete button on item.",
 					"<code>allow_copy: true</code> to add copy button on item.",
 					"<code>allow_action: true</code> to allow edit and check on item.",
+					"<code>allow_more true</code> to add more button on item.",
 				],
 			}),
 		],
@@ -466,17 +475,10 @@ export default [
 									container: sample.list_container,
 									row: sample.list_row,
 									group: sample.list_group,
-									item: (data, view) => {
-										return new list.item({
-											key: data._id,
-											name: data.name,
-											picture: data.picture,
-											detail: new small(
-												[data.phone, data.dob, data.email].filter(Boolean).join(" | ")
-											),
-											allow_delete: true, //set allow delete
-										});
-									},
+									item: sample.list_item,
+									allow_delete: true,
+									allow_action: true,
+									allow_copy: true,
 								})
 							);
 
@@ -545,7 +547,11 @@ export default [
 									row: sample.list_row,
 									group: sample.list_group,
 									item: sample.list_item,
-									more: (sender, id) => {
+									allow_delete: true,
+									allow_action: true,
+									allow_copy: true,
+									allow_more: true,
+									item_more: (sender, id) => {
 										//custom action when more button is clicked
 										new toast("i", `Call from id:${id}`).show();
 									},
@@ -581,7 +587,7 @@ export default [
 			"sample.list_state": sample.list_state,
 			"sample.list_more": sample.list_more,
 		},
-		import: ["button", "list", "div", "sample"],
+		import: ["button", "list", "div", "sample", "file", "input"],
 		code: () => {
 			let resultOutputId = core.UUID();
 			let btnGenerate = core.UUID();
@@ -660,6 +666,10 @@ export default [
 									group: sample.list_group,
 									item: sample.list_item,
 									more: sample.list_more,
+									allow_delete: true,
+									allow_action: true,
+									allow_copy: true,
+									allow_more: true,
 								})
 							);
 
@@ -733,6 +743,10 @@ export default [
 									item: sample.list_item,
 									group: sample.list_group,
 									more: sample.list_more,
+									allow_delete: true,
+									allow_action: true,
+									allow_copy: true,
+									allow_more: true,
 								})
 							);
 
@@ -829,6 +843,10 @@ export default [
 									item: sample.list_item,
 									group: sample.list_group,
 									more: sample.list_more,
+									allow_delete: true,
+									allow_action: true,
+									allow_copy: true,
+									allow_more: true,
 								})
 							);
 
@@ -987,6 +1005,10 @@ export default [
 									item: sample.list_item,
 									group: sample.list_group,
 									more: sample.list_more,
+									allow_delete: true,
+									allow_action: true,
+									allow_copy: true,
+									allow_more: true,
 								})
 							);
 

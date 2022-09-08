@@ -346,10 +346,10 @@ const fn = {
 			}),
 		];
 	},
-	list_container: (data, view, row, item, group) => {
-		return new ul({ class: "list-group", elem: row(data, view, item, group) });
+	list_container: (data, opt) => {
+		return new ul({ class: "list-group", elem: opt.row(data, opt) });
 	},
-	list_row: (data, view, item, group) => {
+	list_row: (data, opt) => {
 		let lastgroup = null;
 		let result = [];
 		data.forEach((i) => {
@@ -361,35 +361,37 @@ const fn = {
 					})[0]?.label;
 
 					result.push(
-						group({
-							view: view,
-							key: i.state,
-							name: state_name,
-						})
+						opt.group(
+							{
+								key: i.state,
+								name: state_name,
+							},
+							opt
+						)
 					);
 				}
 			}
 
-			result.push(item(i, view));
+			result.push(opt.item(i, opt));
 		});
 
 		return result;
 	},
-	list_item: (data, view) => {
+	list_item: (data, opt) => {
 		return new list.item({
-			view: view,
+			view: opt.view,
 			key: data._id,
 			name: data.name,
 			picture: data.picture,
 			detail: new small([data.phone, data.dob, data.email].filter(Boolean).join(" | ")),
-			allow_delete: true,
-			allow_copy: true,
-			allow_action: true,
-			allow_more: true,
+			allow_delete: opt.allow_delete,
+			allow_copy: opt.allow_copy,
+			allow_action: opt.allow_action,
+			allow_more: opt.allow_more,
 		});
 	},
-	list_group: (data, view) => {
-		return new list.group({ view: view, key: data.key, name: data.name });
+	list_group: (data, opt) => {
+		return new list.group({ view: opt.view, key: data.key, name: data.name });
 	},
 	list_more: (sender, id) => {
 		new toast("i", `Call from id:${id}`).show();

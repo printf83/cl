@@ -69,7 +69,7 @@ const fn = {
 				(result) => {
 					let container = document.getElementById(id);
 					core.removeChildElement(container);
-					core.appendChild(container, opt.container(result.data, opt.view, opt.row, opt.item, opt.group));
+					core.appendChild(container, opt.container(result.data, opt));
 
 					if (opt.paging) {
 						if (result.total > opt.query.limit) {
@@ -284,83 +284,90 @@ const fn = {
 			}
 		},
 		delete: (id, sender) => {
-			let checked = fn.check.get(id);
 			let opt = fn.get(id);
 
-			if (checked) {
-				let checkedid = checked.map((i) => {
-					return i.key;
-				});
+			if (opt) {
+				let checked = fn.check.get(id);
 
-				const fndeleterecursive = (opt, keys, index, callback) => {
-					if (index < keys.length) {
-						db.api.load(
-							{
-								name: opt.name,
-								id: keys[index],
-								sender: sender,
-							},
-							(data) => {
-								if (data) {
-									fn.file.delete(
-										opt,
-										data,
-										() => {
-											fndeleterecursive(opt, keys, index + 1, callback);
-										},
-										sender
-									);
-								} else {
-									fndeleterecursive(opt, keys, index + 1, callback);
-								}
-							},
-							sender
-						);
+				if (checked) {
+					let checkedid = checked.map((i) => {
+						return i.key;
+					});
+
+					if (typeof opt.check_delete === "function") {
+						opt.check_delete(checkedid, sender);
 					} else {
-						callback();
+						const fndeleterecursive = (opt, keys, index, callback) => {
+							if (index < keys.length) {
+								db.api.load(
+									{
+										name: opt.name,
+										id: keys[index],
+										sender: sender,
+									},
+									(data) => {
+										if (data) {
+											fn.file.delete(
+												opt,
+												data,
+												() => {
+													fndeleterecursive(opt, keys, index + 1, callback);
+												},
+												sender
+											);
+										} else {
+											fndeleterecursive(opt, keys, index + 1, callback);
+										}
+									},
+									sender
+								);
+							} else {
+								callback();
+							}
+						};
+
+						const fndelete = (id, opt, checkedid, sender) => {
+							db.api.delete(
+								{
+									name: opt.name,
+									id: checkedid,
+									sender: sender,
+								},
+								(data) => {
+									fn.reload(id, sender);
+								},
+								sender
+							);
+						};
+
+						new dlg.confirmbox(
+							"!!",
+							`Are you sure delete ${fn.genname(checked.map((i) => i.name))} record?`,
+							[
+								{
+									label: "Yes, delete",
+									color: "danger",
+									onclick: () => {
+										if (opt.file && opt.file.length > 0) {
+											fndeleterecursive(opt, checkedid, 0, () => {
+												fndelete(id, opt, checkedid, sender);
+											});
+										} else {
+											//no file, direct delete
+											fndelete(id, opt, checkedid, sender);
+										}
+									},
+								},
+								{
+									label: "Cancel",
+								},
+							],
+							`Delete ${opt.name}`
+						).show();
 					}
-				};
-
-				const fndelete = (id, opt, checkedid, sender) => {
-					db.api.delete(
-						{
-							name: opt.name,
-							id: checkedid,
-							sender: sender,
-						},
-						(data) => {
-							fn.reload(id, sender);
-						},
-						sender
-					);
-				};
-
-				new dlg.confirmbox(
-					"!!",
-					`Are you sure delete ${fn.genname(checked.map((i) => i.name))} record?`,
-					[
-						{
-							label: "Yes, delete",
-							color: "danger",
-							onclick: () => {
-								if (opt.file && opt.file.length > 0) {
-									fndeleterecursive(opt, checkedid, 0, () => {
-										fndelete(id, opt, checkedid, sender);
-									});
-								} else {
-									//no file, direct delete
-									fndelete(id, opt, checkedid, sender);
-								}
-							},
-						},
-						{
-							label: "Cancel",
-						},
-					],
-					`Delete ${opt.name}`
-				).show();
-			} else {
-				new dlg.msgbox("-", "No item selected.", () => {}, `Delete ${opt.name}`).show();
+				} else {
+					new dlg.msgbox("-", "No item selected.", () => {}, `Delete ${opt.name}`).show();
+				}
 			}
 		},
 		mode: (id, check) => {
@@ -579,46 +586,59 @@ const fn = {
 		add: (id, sender) => {
 			let opt = fn.get(id);
 			if (opt) {
-				new dlg.inputbox(
-					opt.editor(null),
-					null,
-					[
-						{
-							label: "Save",
-							onclick: (_event, data) => {
-								db.api.create(
-									{
-										name: opt.name,
-										data: data,
-										sender: sender,
-									},
-									(result) => {
-										if (result) {
-											fn.file.save(
-												opt,
-												data,
-												() => {
-													fn.reload(id, sender);
-												},
-												sender
-											);
-										}
-									},
-									sender
-								);
+				if (typeof opt.item_add === "function") {
+					opt.item_add(sender);
+				} else {
+					new dlg.inputbox(
+						opt.editor(null),
+						null,
+						[
+							{
+								label: "Save",
+								onclick: (_event, data) => {
+									db.api.create(
+										{
+											name: opt.name,
+											data: data,
+											sender: sender,
+										},
+										(result) => {
+											if (result) {
+												fn.file.save(
+													opt,
+													data,
+													() => {
+														fn.reload(id, sender);
+													},
+													sender
+												);
+											}
+										},
+										sender
+									);
+								},
 							},
-						},
-						{
-							label: "Cancel",
-						},
-					],
-					`Add ${opt.name}`
-				).show();
+							{
+								label: "Cancel",
+							},
+						],
+						`Add ${opt.name}`
+					).show();
+				}
 			}
 		},
 		menu: (event) => {
 			event.stopPropagation();
 			event.currentTarget.closest(".cl-list-ctl").classList.add("show");
+
+			let sender = event.currentTarget.closest("[data-key]");
+			let key = sender.getAttribute("data-key");
+			let container = sender.closest(".cl-list");
+			let id = container.getAttribute("id");
+			let opt = fn.get(id);
+			if (opt && typeof opt.item_menu === "function") {
+				opt.item_menu(sender, key);
+			}
 		},
 		edit: (event) => {
 			event.stopPropagation();
@@ -630,55 +650,59 @@ const fn = {
 			let id = container.getAttribute("id");
 			let opt = fn.get(id);
 			if (opt) {
-				db.api.load(
-					{
-						name: opt.name,
-						id: key,
-						sender: sender,
-					},
-					(oldData) => {
-						if (oldData) {
-							new dlg.inputbox(
-								opt.editor(oldData),
-								null,
-								[
-									{
-										label: "Save",
-										onclick: (_event, newData) => {
-											newData._id = key;
-											db.api.update(
-												{
-													name: opt.name,
-													id: key,
-													data: newData,
-													sender: sender,
-												},
-												(result) => {
-													if (result) {
-														fn.file.manage(
-															opt,
-															oldData,
-															newData,
-															() => {
-																fn.reload(id, sender);
-															},
-															sender
-														);
+				if (typeof opt.item_edit === "function") {
+					opt.item_edit(sender, key);
+				} else {
+					db.api.load(
+						{
+							name: opt.name,
+							id: key,
+							sender: sender,
+						},
+						(oldData) => {
+							if (oldData) {
+								new dlg.inputbox(
+									opt.editor(oldData),
+									null,
+									[
+										{
+											label: "Save",
+											onclick: (_event, newData) => {
+												newData._id = key;
+												db.api.update(
+													{
+														name: opt.name,
+														id: key,
+														data: newData,
+														sender: sender,
+													},
+													(result) => {
+														if (result) {
+															fn.file.manage(
+																opt,
+																oldData,
+																newData,
+																() => {
+																	fn.reload(id, sender);
+																},
+																sender
+															);
+														}
 													}
-												}
-											);
+												);
+											},
 										},
-									},
-									{
-										label: "Cancel",
-									},
-								],
-								`Edit ${opt.name}`
-							).show();
-						}
-					},
-					sender
-				);
+										{
+											label: "Cancel",
+										},
+									],
+									`Edit ${opt.name}`
+								).show();
+							}
+						},
+						sender
+					);
+				}
 			}
 		},
 		copy: (event) => {
@@ -692,63 +716,67 @@ const fn = {
 			let id = container.getAttribute("id");
 			let opt = fn.get(id);
 			if (opt) {
-				db.api.load(
-					{
-						name: opt.name,
-						id: key,
-						sender: item,
-					},
-					(data) => {
-						if (data) {
-							//remove id
-							delete data._id;
+				if (typeof opt.item_copy === "function") {
+					opt.item_copy(item, key);
+				} else {
+					db.api.load(
+						{
+							name: opt.name,
+							id: key,
+							sender: item,
+						},
+						(data) => {
+							if (data) {
+								//remove id
+								delete data._id;
 
-							//duplicate file
-							fn.file.duplicate(
-								opt,
-								data,
-								(data) => {
-									new dlg.inputbox(
-										opt.editor(data),
-										null,
-										[
-											{
-												label: "Save",
-												onclick: (_event, data) => {
-													db.api.create(
-														{
-															name: opt.name,
-															data: data,
-															sender: item,
-														},
-														(result) => {
-															if (result) {
-																fn.file.save(
-																	opt,
-																	data,
-																	() => {
-																		fn.reload(id, item);
-																	},
-																	item
-																);
+								//duplicate file
+								fn.file.duplicate(
+									opt,
+									data,
+									(data) => {
+										new dlg.inputbox(
+											opt.editor(data),
+											null,
+											[
+												{
+													label: "Save",
+													onclick: (_event, data) => {
+														db.api.create(
+															{
+																name: opt.name,
+																data: data,
+																sender: item,
+															},
+															(result) => {
+																if (result) {
+																	fn.file.save(
+																		opt,
+																		data,
+																		() => {
+																			fn.reload(id, item);
+																		},
+																		item
+																	);
+																}
 															}
-														}
-													);
+														);
+													},
 												},
-											},
-											{
-												label: "Cancel",
-											},
-										],
-										`Copy ${opt.name}`
-									).show();
-								},
-								item
-							);
-						}
-					},
-					sender
-				);
+												{
+													label: "Cancel",
+												},
+											],
+											`Copy ${opt.name}`
+										).show();
+									},
+									item
+								);
+							}
+						},
+						sender
+					);
+				}
 			}
 		},
 		delete: (event) => {
@@ -763,66 +791,70 @@ const fn = {
 			let id = container.getAttribute("id");
 			let opt = fn.get(id);
 			if (opt) {
-				const fndelete = (opt, id, key, sender) => {
-					db.api.delete(
-						{
-							name: opt.name,
-							id: key,
-							sender: sender,
-						},
-						(data) => {
-							fn.reload(id, sender);
-						}
-					);
-				};
-
-				new dlg.confirmbox(
-					"!!",
-					`Are you sure delete <b>${name ? name : "this"}</b> record?`,
-					[
-						{
-							label: "Yes, delete",
-							color: "danger",
-							onclick: () => {
-								//check if has picture
-								if (opt.file && opt.file.length > 0) {
-									//need to load data first
-									//then delete file
-									//then delete item
-									db.api.load(
-										{
-											name: opt.name,
-											id: key,
-											sender: item,
-										},
-										(data) => {
-											if (data) {
-												fn.file.delete(
-													opt,
-													data,
-													() => {
-														fndelete(opt, id, key, item);
-													},
-													sender
-												);
-											} else {
-												fndelete(opt, id, key, item);
-											}
-										},
-										item
-									);
-								} else {
-									//no file, direct delete
-									fndelete(opt, id, key, item);
-								}
+				if (typeof opt.item_delete === "function") {
+					opt.item_delete(item, key);
+				} else {
+					const fndelete = (opt, id, key, sender) => {
+						db.api.delete(
+							{
+								name: opt.name,
+								id: key,
+								sender: sender,
 							},
-						},
-						{
-							label: "Cancel",
-						},
-					],
-					`Delete ${opt.name}`
-				).show();
+							(data) => {
+								fn.reload(id, sender);
+							}
+						);
+					};
+
+					new dlg.confirmbox(
+						"!!",
+						`Are you sure delete <b>${name ? name : "this"}</b> record?`,
+						[
+							{
+								label: "Yes, delete",
+								color: "danger",
+								onclick: () => {
+									//check if has picture
+									if (opt.file && opt.file.length > 0) {
+										//need to load data first
+										//then delete file
+										//then delete item
+										db.api.load(
+											{
+												name: opt.name,
+												id: key,
+												sender: item,
+											},
+											(data) => {
+												if (data) {
+													fn.file.delete(
+														opt,
+														data,
+														() => {
+															fndelete(opt, id, key, item);
+														},
+														sender
+													);
+												} else {
+													fndelete(opt, id, key, item);
+												}
+											},
+											item
+										);
+									} else {
+										//no file, direct delete
+										fndelete(opt, id, key, item);
+									}
+								},
+							},
+							{
+								label: "Cancel",
+							},
+						],
+						`Delete ${opt.name}`
+					).show();
+				}
 			}
 		},
 		more: (event) => {
@@ -835,8 +867,8 @@ const fn = {
 			let container = item.closest(".cl-list");
 			let id = container.getAttribute("id");
 			let opt = fn.get(id);
-			if (opt && typeof opt.more === "function") {
-				opt.more(item, key);
+			if (opt && typeof opt.item_more === "function") {
+				opt.item_more(item, key);
 			}
 		},
 	},
@@ -850,16 +882,29 @@ const defaultOption = {
 	query: null,
 	name: null,
 	paging: true,
-	more: null,
-	container: (data, view, row, item, group) => {
-		return new ul({ class: "list-group", elem: row(data, view, item, group) });
+
+	item_add: null,
+	item_menu: null,
+	item_edit: null,
+	item_copy: null,
+	item_delete: null,
+	item_more: null,
+	check_delete: null,
+
+	allow_action: false,
+	allow_copy: false,
+	allow_delete: false,
+	allow_more: false,
+
+	container: (data, opt) => {
+		return new ul({ class: "list-group", elem: opt.row(data, opt) });
 	},
-	row: (data, view, item, group) => {
+	row: (data, opt) => {
 		return data.map((i) => {
-			return item(i, view);
+			return opt.item(i, opt);
 		});
 	},
-	item: (data, view) => {
+	item: (data, opt) => {
 		return new item({
 			name: JSON.stringify(data)
 				.replace(/\,/g, ",<br/>")
@@ -868,7 +913,7 @@ const defaultOption = {
 				.replace(/\}/g, "<br/>}"),
 		});
 	},
-	group: (data, view) => {
+	group: (data, opt) => {
 		return new group({
 			name: JSON.stringify(data)
 				.replace(/\,/g, ",<br/>")
@@ -880,20 +925,18 @@ const defaultOption = {
 };
 
 const defaultItemOption = {
+	view: "list",
 	key: null,
 	picture: null,
 	name: null,
 	detail: null,
-	allow_action: false,
-	allow_copy: false,
-	allow_delete: false,
-	allow_more: false,
+	allow_action: undefined,
+	allow_copy: undefined,
+	allow_delete: undefined,
+	allow_more: undefined,
 };
 
-const defaultGroupOption = {
-	key: null,
-	name: null,
-};
+const defaultGroupOption = { view: "list", key: null, name: null };
 
 export class container extends div {
 	constructor(...opt) {
@@ -922,6 +965,21 @@ export class container extends div {
 			delete opt.row;
 			delete opt.item;
 			delete opt.group;
+
+			delete opt.item_add;
+			delete opt.item_copy;
+			delete opt.item_delete;
+			delete opt.item_edit;
+			delete opt.item_menu;
+			delete opt.item_more;
+			delete opt.check_delete;
+
+			delete opt.allow_action;
+			delete opt.allow_copy;
+			delete opt.allow_delete;
+			delete opt.allow_more;
+
+			delete opt.view;
 
 			super.data = opt;
 		}
