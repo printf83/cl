@@ -50,7 +50,7 @@ function beautifycss(str) {
 	return beautifyhtml(str);
 }
 
-function codecontainer(type, strcode, maxheight) {
+function codecontainer(type, strcode, maxheight, linenums) {
 	return [
 		new div({
 			position: "relative",
@@ -82,7 +82,11 @@ function codecontainer(type, strcode, maxheight) {
 				"max-height": maxheight,
 			},
 			elem: new pre({
-				class: `prettyprint lang-${type}`,
+				class: [
+					"prettyprint",
+					`lang-${type}`,
+					linenums ? `${"linenums:" + (linenums === true ? 1 : linenums)}` : null,
+				],
 				margin: 0,
 				attr: { lang: type },
 				elem:
@@ -101,6 +105,7 @@ function codecontainer(type, strcode, maxheight) {
 const defaultOption = {
 	code: null,
 	type: "js",
+	linenums: null,
 	container: "div",
 	title: null,
 	maxheight: null,
@@ -129,7 +134,7 @@ export default class codepreview extends tag {
 				elem: [
 					new div({
 						marginy: opt.marginy,
-						elem: new card.body({ elem: codecontainer(opt.type, opt.code, opt.maxheight) }),
+						elem: new card.body({ elem: codecontainer(opt.type, opt.code, opt.maxheight, opt.linenums) }),
 					}),
 				],
 			};
@@ -140,14 +145,14 @@ export default class codepreview extends tag {
 						marginy: opt.marginy,
 						elem: [
 							opt.title ? new card.header(new small(new b(opt.title))) : null,
-							new card.body({ elem: codecontainer(opt.type, opt.code, opt.maxheight) }),
+							new card.body({ elem: codecontainer(opt.type, opt.code, opt.maxheight, opt.linenums) }),
 						].filter(Boolean),
 					}),
 				],
 			};
 		} else {
 			super.data = {
-				elem: codecontainer(opt.type, opt.code, opt.maxheight),
+				elem: codecontainer(opt.type, opt.code, opt.maxheight, opt.linenums),
 			};
 		}
 	}
