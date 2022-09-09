@@ -241,8 +241,10 @@ function markcode() {
 	let com = document.getElementsByClassName("com");
 	if (com && com.length > 0) {
 		Array.prototype.forEach.call(com, (i) => {
-			if (i.innerText === "/*marker*/" || i.innerText === "//marker") {
-				i.innerHTML = `<span class="nocode marker"></span>`;
+			if (i.innerText === "/*marker*/") {
+				i.innerHTML = `<span class="nocode marker inline"></span>`;
+			} else if (i.innerText === "//marker") {
+				i.innerHTML = `<span class="nocode marker downline"></span>`;
 			}
 		});
 	}

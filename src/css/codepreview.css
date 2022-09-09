@@ -2,8 +2,6 @@
 	margin-top: -0.25rem;
 }
 
-
-
 .nocode.marker::before{
 	color:var(--bs-danger);
 	content: "\f08d";
@@ -12,6 +10,12 @@
 	-webkit-animation: fadeOut 2s;
 	animation: fadeOut 2s;
 	animation-iteration-count: infinite;
+}
+
+.nocode.marker.downline::before{
+	position: absolute;
+	margin-top: 1rem;
+	margin-left:-1rem;
 }
 
 @-webkit-keyframes fadeOut {
