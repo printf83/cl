@@ -36,8 +36,8 @@ const fn = {
 		if (com && com.length > 0) {
 			console.log(`Found ${com.length} com`);
 			Array.prototype.forEach.call(com, (i) => {
-				if (i.innerText === "/*marker*/") {
-					i.innerHTML = `<span class="nocode marker">Marker</span>`;
+				if (i.innerText === "/*marker*/" || i.innerText === "//marker") {
+					i.innerHTML = `<span class="nocode marker"></span>`;
 				}
 			});
 		}

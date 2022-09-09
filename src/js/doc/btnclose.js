@@ -21,7 +21,9 @@ export default [
 		title: "Disabled state",
 		import: ["btnclose"],
 		code: () => {
-			return new btnclose({ disabled: true });
+			return new btnclose({
+				disabled: true, //marker
+			});
 		},
 	},
 
@@ -31,7 +33,15 @@ export default [
 		container: sample.stackcontainer,
 		import: ["btnclose"],
 		code: () => {
-			return [new btnclose({ dark: false }), new btnclose({ dark: false, disabled: true })];
+			return [
+				new btnclose({
+					dark: false, //marker
+				}),
+				new btnclose({
+					dark: false, //marker
+					disabled: true,
+				}),
+			];
 		},
 	},
 ];

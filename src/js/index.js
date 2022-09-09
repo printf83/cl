@@ -241,8 +241,8 @@ function markcode() {
 	let com = document.getElementsByClassName("com");
 	if (com && com.length > 0) {
 		Array.prototype.forEach.call(com, (i) => {
-			if (i.innerText === "/*marker*/") {
-				i.innerHTML = `<span class="nocode marker">Marker</span>`;
+			if (i.innerText === "/*marker*/" || i.innerText === "//marker") {
+				i.innerHTML = `<span class="nocode marker"></span>`;
 			}
 		});
 	}

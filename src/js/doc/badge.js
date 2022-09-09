@@ -19,7 +19,10 @@ export default [
 			return [1, 2, 3, 4, 5, 6].map((i) => {
 				return new h({
 					level: i,
-					elem: [`Example heading #${i}`, new badge({ label: "New", marginstart: 3 })],
+					elem: [
+						`Example heading #${i}`,
+						new badge({ label: "New", marginstart: 3 }), //marker
+					],
 				});
 			});
 		},
@@ -32,6 +35,8 @@ export default [
 			return new button({
 				label: "Notifications",
 				color: "primary",
+
+				//marker
 				badge: { label: "4", marginstart: 3 },
 			});
 		},
@@ -44,6 +49,8 @@ export default [
 			return new button({
 				label: "Inbox",
 				color: "primary",
+
+				//marker
 				badge: {
 					label: "99+",
 					color: "danger",
@@ -61,6 +68,8 @@ export default [
 			return new button({
 				label: "Profile",
 				color: "primary",
+
+				//marker
 				badge: {
 					border: "light",
 					color: "danger",
@@ -77,7 +86,10 @@ export default [
 		import: ["badge"],
 		code: () => {
 			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map((i) => {
-				return new badge({ label: core.capitalize(i), color: i });
+				return new badge({
+					label: core.capitalize(i),
+					color: i, //marker
+				});
 			});
 		},
 	},
@@ -88,7 +100,11 @@ export default [
 		import: ["badge"],
 		code: () => {
 			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map((i) => {
-				return new badge({ pill: true, label: core.capitalize(i), color: i });
+				return new badge({
+					pill: true, //marker
+					label: core.capitalize(i),
+					color: i,
+				});
 			});
 		},
 	},

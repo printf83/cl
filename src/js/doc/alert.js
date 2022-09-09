@@ -29,7 +29,7 @@ export default [
 		code: () => {
 			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map((i) => {
 				return new alert.container({
-					color: i,
+					color: i, //marker
 					elem: [
 						`A simple ${i} alert with `,
 						new alert.link({ label: "an example link", href: "javascript:void(0);" }),
@@ -47,6 +47,7 @@ export default [
 			return new alert.container({
 				color: "success",
 				elem: [
+					//marker
 					new alert.heading("Well done!"),
 					new p(
 						"Aww yeah, you successfully read this important alert message. This example text is going to run a bit longer so that you can see how spacing within an alert works with this kind of content."
@@ -67,8 +68,7 @@ export default [
 		code: () => {
 			return ["i", "!!", "!", "?", "-", "x", "/"].map((i) => {
 				return new alert.container({
-					icon: i,
-					close: true,
+					icon: i, //marker
 					elem: `An example alert with an <b>"${i}"</b> icon code`,
 				});
 			});
@@ -82,7 +82,7 @@ export default [
 			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map((i) => {
 				return new alert.container({
 					color: i,
-					close: true,
+					close: true, //marker
 					elem: `<strong>Holy guacamole!</strong> You should check in on some of those fields below.`,
 				});
 			});
@@ -113,13 +113,15 @@ export default [
 			return new alert.container({
 				close: true,
 				color: "danger",
+				elem: "<strong>Holy guacamole!</strong> You should check in on some of those fields below.",
+				//marker
 				onclose: (event) => {
 					new toast("!", fn(event.currentTarget, "onclose")).show();
 				},
+				//marker
 				onclosed: (event) => {
 					new toast("x", fn(event.currentTarget, "onclosed")).show();
 				},
-				elem: "<strong>Holy guacamole!</strong> You should check in on some of those fields below.",
 			});
 		},
 	},

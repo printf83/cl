@@ -3,16 +3,41 @@
 }
 
 
-.nocode.marker{
-	padding-left: 1rem;
-	color: var(--bs-danger);
-}
 
 .nocode.marker::before{
+	color:var(--bs-danger);
 	content: "\f08d";
 	font-family: "Font Awesome 6 Free";
 	font-weight: 900;
-	position: absolute;
-	margin-left: -1rem;
-	margin-top: 0.05rem;
+	-webkit-animation: fadeOut 2s;
+	animation: fadeOut 2s;
+	animation-iteration-count: infinite;
+}
+
+@-webkit-keyframes fadeOut {
+	0% {
+		opacity: 1;
+	}
+
+	50% {
+		opacity: 0;
+	}
+
+	100% {
+		opacity: 1;
+	}
+}
+
+@keyframes fadeOut {
+	0% {
+		opacity: 1;
+	}
+
+	50% {
+		opacity: 0;
+	}
+
+	100% {
+		opacity: 1;
+	}
 }
