@@ -110,6 +110,7 @@ export default [
 					onclick: (event) => {
 						let sender = event.currentTarget;
 
+						//marker
 						//create record
 						db.api.create(
 							{
@@ -181,6 +182,7 @@ export default [
 
 						//get id
 						new dlg.inputbox("text", "ID", (_event, data) => {
+							//marker
 							//update record
 							db.api.update(
 								{
@@ -251,6 +253,7 @@ export default [
 
 						//get id
 						new dlg.inputbox("text", "ID", (_event, data) => {
+							//marker
 							//get record
 							db.api.load(
 								{
@@ -337,6 +340,7 @@ export default [
 
 						//get id
 						new dlg.inputbox("text", "ID", (_event, data) => {
+							//marker
 							//delete record
 							db.api.delete(
 								{
@@ -400,6 +404,7 @@ export default [
 					onclick: (event) => {
 						let sender = event.currentTarget;
 
+						//marker
 						//get record
 						db.api.list(
 							{
@@ -458,6 +463,9 @@ export default [
 						db.api.list(
 							{
 								name: "customer",
+								sender: sender,
+
+								//marker
 								data: {
 									filter: null,
 									sort: { state: 1, name: 1 },
@@ -465,7 +473,6 @@ export default [
 									limit: 10,
 									skip: 0,
 								},
-								sender: sender,
 							},
 							(result) => {
 								//result
@@ -545,13 +552,14 @@ export default [
 					onclick: (event) => {
 						let sender = event.currentTarget;
 
+						//marker
 						//get record
 						db.api.option(
 							{
 								name: "customer",
-								fieldkey: "_id",
-								fieldname: "name",
 								sender: sender,
+								fieldkey: "_id", //marker
+								fieldname: "name", //marker
 							},
 							(result) => {
 								//result
@@ -611,10 +619,10 @@ export default [
 						db.api.option(
 							{
 								name: "customer",
-								filter: { $and: [{ name: { $regex: "s", $options: "i" } }] },
+								sender: sender,
 								fieldkey: "_id",
 								fieldname: "name",
-								sender: sender,
+								filter: { $and: [{ name: { $regex: "s", $options: "i" } }] }, //marker
 							},
 							(result) => {
 								//result
@@ -712,6 +720,7 @@ export default [
 				onclick: (event) => {
 					let sender = event.currentTarget;
 
+					//marker
 					db.api.excel({
 						name: "customer",
 						data: {

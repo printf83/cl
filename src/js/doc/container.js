@@ -80,11 +80,11 @@ export default [
 		import: ["div"],
 		code: () => {
 			return [
-				new div("container-sm", "100% wide until small breakpoint"),
-				new div("container-md", "100% wide until medium breakpoint"),
-				new div("container-lg", "100% wide until large breakpoint"),
-				new div("container-xl", "100% wide until extra large breakpoint"),
-				new div("container-xxl", "100% wide until extra extra large breakpoint"),
+				new div("container-sm" /*marker*/, "100% wide until small breakpoint"),
+				new div("container-md" /*marker*/, "100% wide until medium breakpoint"),
+				new div("container-lg" /*marker*/, "100% wide until large breakpoint"),
+				new div("container-xl" /*marker*/, "100% wide until extra large breakpoint"),
+				new div("container-xxl" /*marker*/, "100% wide until extra extra large breakpoint"),
 			];
 		},
 	},
@@ -103,7 +103,7 @@ export default [
 			}).map((i) => {
 				let [key, value] = i;
 				return new div({
-					container: key,
+					container: key, //marker
 					elem: `100% wide until ${value} breakpoint`,
 				});
 			});
@@ -118,10 +118,13 @@ export default [
 		code: () => {
 			return [
 				//easy option
-				new div("container-fluid", "Content here"),
+				new div("container-fluid" /*marker*/, "Content here"),
 
 				//option
-				new div({ container: "fluid", elem: "Content here" }),
+				new div({
+					container: "fluid", //marker
+					elem: "Content here",
+				}),
 			];
 		},
 	},

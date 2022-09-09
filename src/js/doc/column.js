@@ -51,6 +51,8 @@ export default [
 		code: () => {
 			return new div(
 				"container",
+
+				//marker
 				["row align-items-start", "row align-items-center", "row align-items-end"].map((i) => {
 					return new div({
 						class: i,
@@ -71,7 +73,7 @@ export default [
 				container: true,
 				elem: ["start", "center", "end"].map((i) => {
 					return new div({
-						alignitem: i,
+						alignitem: i, //marker
 						row: true,
 						style: { "min-height": "10rem" },
 						elem: Array(3).fill(new div({ col: true, elem: "One of three columns" })),
@@ -92,9 +94,9 @@ export default [
 					class: "row",
 					style: { "min-height": "10rem" },
 					elem: [
-						new div("col align-self-start", "One of three columns"),
-						new div("col align-self-center", "One of three columns"),
-						new div("col align-self-end", "One of three columns"),
+						new div("col align-self-start" /*marker*/, "One of three columns"),
+						new div("col align-self-center" /*marker*/, "One of three columns"),
+						new div("col align-self-end" /*marker*/, "One of three columns"),
 					],
 				})
 			);
@@ -113,7 +115,7 @@ export default [
 					style: { "min-height": "10rem" },
 					elem: ["start", "center", "end"].map((i) => {
 						return new div({
-							alignself: i,
+							alignself: i, //marker
 							col: true,
 							elem: "One of three columns",
 						});
@@ -130,6 +132,7 @@ export default [
 		code: () => {
 			return new div(
 				"container",
+				//marker
 				[
 					"row justify-content-start",
 					"row justify-content-center",
@@ -153,7 +156,7 @@ export default [
 				container: true,
 				elem: ["start", "center", "end", "around", "between", "evenly"].map((i) => {
 					return new div({
-						justifycontent: i,
+						justifycontent: i, //marker
 						row: true,
 						elem: Array(2).fill(new div({ col: 4, elem: "One of two columns" })),
 					});
@@ -171,12 +174,13 @@ export default [
 			return new div(
 				"container",
 				new div("row", [
-					new div("col-9", ".col-9"),
+					new div("col-9" /*marker*/, ".col-9"),
+
 					new div(
-						"col-4",
+						"col-4", //marker
 						".col-4 : Since 9 + 4 = 13 > 12, this 4-column-wide div gets wrapped onto a new line as one contiguous unit."
 					),
-					new div("col-6", ".col-6 : Subsequent columns continue along the new line."),
+					new div("col-6" /*marker*/, ".col-6 : Subsequent columns continue along the new line."),
 				])
 			);
 		},
@@ -192,12 +196,18 @@ export default [
 				elem: new div({
 					row: true,
 					elem: [
-						new div({ col: 9, elem: ".col-9" }),
 						new div({
-							col: 4,
+							col: 9, //marker
+							elem: ".col-9",
+						}),
+						new div({
+							col: 4, //marker
 							elem: ".col-4 : Since 9 + 4 = 13 > 12, this 4-column-wide div gets wrapped onto a new line as one contiguous unit.",
 						}),
-						new div({ col: 6, elem: ".col-6 : Subsequent columns continue along the new line." }),
+						new div({
+							col: 6, //marker
+							elem: ".col-6 : Subsequent columns continue along the new line.",
+						}),
 					],
 				}),
 			});
@@ -215,7 +225,7 @@ export default [
 				new div("row", [
 					new div("col-6 col-sm-3", ".col-6 .col-sm-3"),
 					new div("col-6 col-sm-3", ".col-6 .col-sm-3"),
-					new span({ class: "w-100" }),
+					new span({ class: "w-100" }), //marker
 					new div("col-6 col-sm-3", ".col-6 .col-sm-3"),
 					new div("col-6 col-sm-3", ".col-6 .col-sm-3"),
 				])
@@ -235,7 +245,7 @@ export default [
 					elem: [
 						new div({ col: [6, "sm-3"], elem: ".col-6 .col-sm-3" }),
 						new div({ col: [6, "sm-3"], elem: ".col-6 .col-sm-3" }),
-						new span({ class: "w-100" }),
+						new span({ class: "w-100" }), //marker
 						new div({ col: [6, "sm-3"], elem: ".col-6 .col-sm-3" }),
 						new div({ col: [6, "sm-3"], elem: ".col-6 .col-sm-3" }),
 					],
@@ -254,7 +264,7 @@ export default [
 				new div("row", [
 					new div("col-6 col-sm-3", ".col-6 .col-sm-3"),
 					new div("col-6 col-sm-3", ".col-6 .col-sm-3"),
-					new span({ class: "w-100", display: ["none", "md-block"] }),
+					new span({ class: "w-100", display: ["none", "md-block"] }), //marker
 					new div("col-6 col-sm-3", ".col-6 .col-sm-3"),
 					new div("col-6 col-sm-3", ".col-6 .col-sm-3"),
 				])
@@ -274,7 +284,7 @@ export default [
 					elem: [
 						new div({ col: [6, "sm-3"], elem: ".col-6 .col-sm-3" }),
 						new div({ col: [6, "sm-3"], elem: ".col-6 .col-sm-3" }),
-						new span({ class: "w-100", display: ["none", "md-block"] }),
+						new span({ class: "w-100", display: ["none", "md-block"] }), //marker
 						new div({ col: [6, "sm-3"], elem: ".col-6 .col-sm-3" }),
 						new div({ col: [6, "sm-3"], elem: ".col-6 .col-sm-3" }),
 					],
@@ -297,8 +307,8 @@ export default [
 				"container",
 				new div("row", [
 					new div("col", "First in DOM, no order applied"),
-					new div("col order-5", "Second in DOM, with a larger order"),
-					new div("col order-1", "Third in DOM, with an order of 1"),
+					new div("col order-5" /*marker*/, "Second in DOM, with a larger order"),
+					new div("col order-1" /*marker*/, "Third in DOM, with an order of 1"),
 				])
 			);
 		},
@@ -315,8 +325,16 @@ export default [
 					row: true,
 					elem: [
 						new div({ col: true, elem: "First in DOM, no order applied" }),
-						new div({ col: true, order: 5, elem: "Second in DOM, with a larger order" }),
-						new div({ col: true, order: 1, elem: "Third in DOM, with an order of 1" }),
+						new div({
+							col: true,
+							order: 5, //marker
+							elem: "Second in DOM, with a larger order",
+						}),
+						new div({
+							col: true,
+							order: 1, //marker
+							elem: "Third in DOM, with an order of 1",
+						}),
 					],
 				}),
 			});
@@ -337,13 +355,13 @@ export default [
 			return new div("container", [
 				new div("row", [
 					new div("col-md-4", ".col-md-4"),
-					new div("col-md-4 offset-md-4", ".col-md-4 .offset-md-4"),
+					new div("col-md-4 offset-md-4" /*marker*/, ".col-md-4 .offset-md-4"),
 				]),
 				new div("row", [
-					new div("col-md-3 offset-md-3", ".col-md-3 .offset-md-3"),
-					new div("col-md-3 offset-md-3", ".col-md-3 .offset-md-3"),
+					new div("col-md-3 offset-md-3" /*marker*/, ".col-md-3 .offset-md-3"),
+					new div("col-md-3 offset-md-3" /*marker*/, ".col-md-3 .offset-md-3"),
 				]),
-				new div("row", new div("col-md-6 offset-md-3", ".col-md-6 .offset-md-3")),
+				new div("row", new div("col-md-6 offset-md-3" /*marker*/, ".col-md-6 .offset-md-3")),
 			]);
 		},
 	},
@@ -360,19 +378,37 @@ export default [
 						row: true,
 						elem: [
 							new div({ col: "md-4", elem: ".col-md-4" }),
-							new div({ col: "md-4", offset: "md-4", elem: ".col-md-4 .offset-md-4" }),
+							new div({
+								col: "md-4",
+								offset: "md-4", //marker
+								elem: ".col-md-4 .offset-md-4",
+							}),
 						],
 					}),
 					new div({
 						row: true,
 						elem: [
-							new div({ col: "md-3", offset: "md-3", elem: ".col-md-3 .offset-md-3" }),
-							new div({ col: "md-3", offset: "md-3", elem: ".col-md-3 .offset-md-3" }),
+							new div({
+								col: "md-3",
+								offset: "md-3", //marker
+								elem: ".col-md-3 .offset-md-3",
+							}),
+							new div({
+								col: "md-3",
+								offset: "md-3", //marker
+								elem: ".col-md-3 .offset-md-3",
+							}),
 						],
 					}),
 					new div({
 						row: true,
-						elem: [new div({ col: "md-6", offset: "md-3", elem: ".col-md-6 .offset-md-3" })],
+						elem: [
+							new div({
+								col: "md-6",
+								offset: "md-3", //marker
+								elem: ".col-md-6 .offset-md-3",
+							}),
+						],
 					}),
 				],
 			});
@@ -388,14 +424,14 @@ export default [
 				new div("row", [
 					new div("col-sm-5 col-md-6", ".col-sm-5 .col-md-6"),
 					new div(
-						"col-sm-5 offset-sm-2 col-md-6 offset-md-0",
+						"col-sm-5 offset-sm-2 col-md-6 offset-md-0" /*marker*/,
 						".col-sm-5 .offset-sm-2 .col-md-6 .offset-md-0"
 					),
 				]),
 				new div("row", [
 					new div("col-sm-6 col-md-5 col-lg-6", ".col-sm-6 .col-md-5 .col-lg-6"),
 					new div(
-						"col-sm-6 col-md-5 offset-md-2 col-lg-6 offset-lg-0",
+						"col-sm-6 col-md-5 offset-md-2 col-lg-6 offset-lg-0" /*marker*/,
 						".col-sm-6 .col-md-5 .offset-md-2 .col-lg-6 .offset-lg-0"
 					),
 				]),
@@ -417,7 +453,7 @@ export default [
 							new div({ col: ["sm-5", "md-6"], elem: ".col-sm-5 .col-md-6" }),
 							new div({
 								col: ["sm-5", "md-6"],
-								offset: ["sm-2", "md-0"],
+								offset: ["sm-2", "md-0"], //marker
 								elem: ".col-sm-5 .offset-sm-2 .col-md-6 .offset-md-0",
 							}),
 						],
@@ -428,7 +464,7 @@ export default [
 							new div({ col: ["sm-6", "md-5", "lg-6"], elem: ".col-sm-6 .col-md-5 .col-lg-6" }),
 							new div({
 								col: ["sm-6", "md-5", "lg-6"],
-								offset: ["md-2", "lg-0"],
+								offset: ["md-2", "lg-0"], //marker
 								elem: ".col-sm-6 .col-md-5 .offset-md-2 .col-lg-6 .offset-lg-0",
 							}),
 						],
@@ -445,12 +481,18 @@ export default [
 		import: ["div"],
 		code: () => {
 			return new div("container", [
-				new div("row", [new div("col-md-4", ".col-md-4"), new div("col-md-4 ms-auto", ".col-md-4 .ms-auto")]),
 				new div("row", [
-					new div("col-md-4 ms-auto", ".col-md-4 .ms-auto"),
-					new div("col-md-4 ms-auto", ".col-md-4 .ms-auto"),
+					new div("col-md-4", ".col-md-4"),
+					new div("col-md-4 ms-auto" /*marker*/, ".col-md-4 .ms-auto"),
 				]),
-				new div("row", [new div("col-auto ms-auto", ".col-auto .ms-auto"), new div("col-auto", ".col-auto")]),
+				new div("row", [
+					new div("col-md-4 ms-auto" /*marker*/, ".col-md-4 .ms-auto"),
+					new div("col-md-4 ms-auto" /*marker*/, ".col-md-4 .ms-auto"),
+				]),
+				new div("row", [
+					new div("col-auto ms-auto" /*marker*/, ".col-auto .ms-auto"),
+					new div("col-auto", ".col-auto"),
+				]),
 			]);
 		},
 	},
@@ -467,20 +509,36 @@ export default [
 						row: true,
 						elem: [
 							new div({ col: "md-4", elem: ".col-md-4" }),
-							new div({ col: "md-4", marginstart: "auto", elem: ".col-md-4 .ms-auto" }),
+							new div({
+								col: "md-4",
+								marginstart: "auto", //marker
+								elem: ".col-md-4 .ms-auto",
+							}),
 						],
 					}),
 					new div({
 						row: true,
 						elem: [
-							new div({ col: "md-4", marginstart: "auto", elem: ".col-md-4 .ms-auto" }),
-							new div({ col: "md-4", marginstart: "auto", elem: ".col-md-4 .ms-auto" }),
+							new div({
+								col: "md-4",
+								marginstart: "auto", //marker
+								elem: ".col-md-4 .ms-auto",
+							}),
+							new div({
+								col: "md-4",
+								marginstart: "auto", //marker
+								elem: ".col-md-4 .ms-auto",
+							}),
 						],
 					}),
 					new div({
 						row: true,
 						elem: [
-							new div({ col: "auto", marginstart: "auto", elem: ".col-auto .ms-auto" }),
+							new div({
+								col: "auto",
+								marginstart: "auto", //marker
+								elem: ".col-auto .ms-auto",
+							}),
 							new div({ col: "auto", elem: ".col-auto" }),
 						],
 					}),
@@ -496,8 +554,8 @@ export default [
 		import: ["div"],
 		code: () => {
 			return [
-				new div("col-3 bg-light p-3 border", "  .col-3: width of 25%"),
-				new div("col-sm-9 bg-light p-3 border", " .col-sm-9: width of 75% above sm breakpoint"),
+				new div("col-3 bg-light p-3 border" /*marker*/, "  .col-3: width of 25%"),
+				new div("col-sm-9 bg-light p-3 border" /*marker*/, " .col-sm-9: width of 75% above sm breakpoint"),
 			];
 		},
 	},
@@ -509,14 +567,14 @@ export default [
 		code: () => {
 			return [
 				new div({
-					col: 3,
+					col: 3, //marker
 					color: "light",
 					padding: 3,
 					border: true,
 					elem: ".col-3: width of 25%",
 				}),
 				new div({
-					col: "sm-9",
+					col: "sm-9", //marker
 					color: "light",
 					padding: 3,
 					border: true,
@@ -531,7 +589,7 @@ export default [
 		viewclass: "cl-highlight-col",
 		import: ["img", "p", "div", "sample"],
 		code: () => {
-			return new div("clearfix", [
+			return new div("clearfix" /*marker*/, [
 				new img({ src: sample.img(200, 200), class: "col-md-6 float-md-end mb-3 ms-md-3" }),
 				new p(sample.text()),
 				new p(sample.text()),
@@ -547,7 +605,7 @@ export default [
 		import: ["img", "p", "div", "sample"],
 		code: () => {
 			return new div({
-				class: "clearfix",
+				class: "clearfix", //marker
 				elem: [
 					new img({
 						src: sample.img(200, 200),

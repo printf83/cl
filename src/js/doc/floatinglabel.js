@@ -22,14 +22,14 @@ export default [
 					type: "email",
 					label: "Email address",
 					helper: "We'll never share your email with anyone else.",
-					floatlabel: true,
+					floatlabel: true, //marker
 					autocomplete: "email",
 				}),
 
 				new input({
 					type: "password",
 					label: "Password",
-					floatlabel: true,
+					floatlabel: true, //marker
 					autocomplete: "current-password",
 				}),
 			];
@@ -43,8 +43,8 @@ export default [
 			return new input({
 				type: "email",
 				label: "Email address",
-				floatlabel: true,
-				value: "user@example.com",
+				floatlabel: true, //marker
+				value: "user@example.com", //marker
 			});
 		},
 	},
@@ -59,13 +59,14 @@ export default [
 				label: "Email address",
 				floatlabel: true,
 				required: true,
-				invalid: "Please provide email",
-				valid: "It's looks good",
+				invalid: "Please provide email", //marker
+				valid: "It's looks good", //marker
 				aftertype: "button",
 				after: new button({
 					label: "Validate",
 					color: "primary",
 					onclick: (event) => {
+						//marker
 						core.validate(event.currentTarget.parentElement, (result) => {
 							new toast("i", `Result: ${result}`).show();
 						});
@@ -80,7 +81,7 @@ export default [
 		import: ["input"],
 		code: () => {
 			return new input({
-				type: "textarea",
+				type: "textarea", //marker
 				label: "Comments",
 				floatlabel: true,
 			});
@@ -94,7 +95,7 @@ export default [
 			return new input({
 				type: "textarea",
 				label: "Comments",
-				style: { height: "100px" },
+				style: { height: "100px" }, //marker
 				floatlabel: true,
 			});
 		},
@@ -106,7 +107,7 @@ export default [
 		code: () => {
 			return new input({
 				label: "Works with selects",
-				type: "select",
+				type: "select", //marker
 				floatlabel: true,
 				option: [
 					{ value: "", label: "Open this select menu", selected: true },

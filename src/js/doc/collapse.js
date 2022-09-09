@@ -22,11 +22,11 @@ export default [
 
 			return [
 				new collapse.toggle({
-					target: `#${id}`,
+					target: `#${id}`, //marker
 					elem: new button({ label: "Toggle button", color: "primary" }),
 				}),
 				new collapse.toggle({
-					target: `#${id}`,
+					target: `#${id}`, //marker
 					elem: new button({
 						icon: sample.icon(),
 						label: "Toggle with icon",
@@ -34,7 +34,7 @@ export default [
 					}),
 				}),
 				new collapse.container({
-					id: id,
+					id: id, //marker
 					elem: new card.container({
 						elem: new card.body({
 							elem: "Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.",
@@ -56,20 +56,20 @@ export default [
 
 			return [
 				new collapse.toggle({
-					target: `#${id1}`,
+					target: `#${id1}`, //marker
 					elem: new button({ label: "Toggle first element", color: "primary" }),
 				}),
 				new collapse.toggle({
-					target: `#${id2}`,
+					target: `#${id2}`, //marker
 					elem: new button({ label: "Toggle second element", color: "primary" }),
 				}),
 				new collapse.toggle({
-					target: `.${id3}`,
+					target: `.${id3}`, //marker
 					elem: new button({ label: "Toggle both element", color: "primary" }),
 				}),
 				new collapse.container({
-					id: id1,
-					class: id3,
+					id: id1, //marker
+					class: id3, //marker
 					elem: new card.container({
 						elem: [
 							new card.header("Card 1"),
@@ -80,8 +80,8 @@ export default [
 					}),
 				}),
 				new collapse.container({
-					id: id2,
-					class: id3,
+					id: id2, //marker
+					class: id3, //marker
 					elem: new card.container({
 						elem: [
 							new card.header("Card 2"),
@@ -142,23 +142,28 @@ export default [
 				}),
 				new collapse.container({
 					id: id,
-					onshow: (event) => {
-						new toast("i", fn(event.currentTarget, "onshow")).show();
-					},
-					onshown: (event) => {
-						new toast("/", fn(event.currentTarget, "onshown")).show();
-					},
-					onhide: (event) => {
-						new toast("!", fn(event.currentTarget, "onhide")).show();
-					},
-					onhidden: (event) => {
-						new toast("x", fn(event.currentTarget, "onhidden")).show();
-					},
 					elem: new card.container({
 						elem: new card.body({
 							elem: "Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.",
 						}),
 					}),
+
+					//marker
+					onshow: (event) => {
+						new toast("i", fn(event.currentTarget, "onshow")).show();
+					},
+					//marker
+					onshown: (event) => {
+						new toast("/", fn(event.currentTarget, "onshown")).show();
+					},
+					//marker
+					onhide: (event) => {
+						new toast("!", fn(event.currentTarget, "onhide")).show();
+					},
+					//marker
+					onhidden: (event) => {
+						new toast("x", fn(event.currentTarget, "onhidden")).show();
+					},
 				}),
 			];
 		},
