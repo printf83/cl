@@ -109,9 +109,9 @@ export default [
 					icon: "floppy-disk",
 					onclick: (event) => {
 						let sender = event.currentTarget;
+						//create record
 
 						//marker
-						//create record
 						db.api.create(
 							{
 								name: "customer",
@@ -182,8 +182,9 @@ export default [
 
 						//get id
 						new dlg.inputbox("text", "ID", (_event, data) => {
-							//marker
 							//update record
+
+							//marker
 							db.api.update(
 								{
 									name: "customer",
@@ -253,8 +254,9 @@ export default [
 
 						//get id
 						new dlg.inputbox("text", "ID", (_event, data) => {
-							//marker
 							//get record
+
+							//marker
 							db.api.load(
 								{
 									name: "customer",
@@ -340,8 +342,9 @@ export default [
 
 						//get id
 						new dlg.inputbox("text", "ID", (_event, data) => {
-							//marker
 							//delete record
+
+							//marker
 							db.api.delete(
 								{
 									name: "customer",
@@ -404,8 +407,9 @@ export default [
 					onclick: (event) => {
 						let sender = event.currentTarget;
 
-						//marker
 						//get record
+
+						//marker
 						db.api.list(
 							{
 								name: "customer",
@@ -552,8 +556,8 @@ export default [
 					onclick: (event) => {
 						let sender = event.currentTarget;
 
-						//marker
 						//get record
+						//marker
 						db.api.option(
 							{
 								name: "customer",

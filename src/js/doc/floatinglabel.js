@@ -19,17 +19,21 @@ export default [
 		code: () => {
 			return [
 				new input({
-					type: "email",
 					label: "Email address",
 					helper: "We'll never share your email with anyone else.",
-					floatlabel: true, //marker
+
+					//marker
+					floatlabel: true,
+					type: "email",
 					autocomplete: "email",
 				}),
 
 				new input({
-					type: "password",
 					label: "Password",
-					floatlabel: true, //marker
+
+					//marker
+					floatlabel: true,
+					type: "password",
 					autocomplete: "current-password",
 				}),
 			];
@@ -43,8 +47,10 @@ export default [
 			return new input({
 				type: "email",
 				label: "Email address",
-				floatlabel: true, //marker
-				value: "user@example.com", //marker
+
+				//marker
+				floatlabel: true,
+				value: "user@example.com",
 			});
 		},
 	},
@@ -54,13 +60,8 @@ export default [
 		import: ["toast", "button", "input"],
 		code: () => {
 			return new input({
-				type: "email",
 				name: "email",
 				label: "Email address",
-				floatlabel: true,
-				required: true,
-				invalid: "Please provide email", //marker
-				valid: "It's looks good", //marker
 				aftertype: "button",
 				after: new button({
 					label: "Validate",
@@ -72,6 +73,13 @@ export default [
 						});
 					},
 				}),
+
+				//marker
+				floatlabel: true,
+				type: "email",
+				required: true,
+				invalid: "Please provide email",
+				valid: "It's looks good",
 			});
 		},
 	},
@@ -81,9 +89,11 @@ export default [
 		import: ["input"],
 		code: () => {
 			return new input({
-				type: "textarea", //marker
 				label: "Comments",
+
+				//marker
 				floatlabel: true,
+				type: "textarea",
 			});
 		},
 	},
@@ -95,8 +105,10 @@ export default [
 			return new input({
 				type: "textarea",
 				label: "Comments",
-				style: { height: "100px" }, //marker
+
+				//marker
 				floatlabel: true,
+				style: { height: "100px" },
 			});
 		},
 	},
@@ -107,14 +119,16 @@ export default [
 		code: () => {
 			return new input({
 				label: "Works with selects",
-				type: "select", //marker
-				floatlabel: true,
 				option: [
 					{ value: "", label: "Open this select menu", selected: true },
 					{ value: "1", label: "One" },
 					{ value: "2", label: "Two" },
 					{ value: "3", label: "Three" },
 				],
+
+				//marker
+				floatlabel: true,
+				type: "select",
 			});
 		},
 	},

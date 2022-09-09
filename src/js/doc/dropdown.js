@@ -43,7 +43,6 @@ export default [
 			return new dropdown({
 				label: "Drowdown link",
 				color: "secondary",
-				href: "javascript:void(0);", //marker
 				option: [
 					{ href: "#", label: "Action" },
 					{ href: "#", label: "Another action" },
@@ -51,6 +50,9 @@ export default [
 					{ value: "-" },
 					{ href: "#", label: "Separated link" },
 				],
+
+				//marker
+				href: "javascript:void(0);",
 			});
 		},
 	},
@@ -61,7 +63,6 @@ export default [
 		code: () => {
 			return new dropdown({
 				label: "Drowdown",
-				color: "primary", //marker
 				option: [
 					{ href: "#", label: "Action" },
 					{ href: "#", label: "Another action" },
@@ -69,6 +70,9 @@ export default [
 					{ value: "-" },
 					{ href: "#", label: "Separated link" },
 				],
+
+				//marker
+				color: "primary",
 			});
 		},
 	},
@@ -81,7 +85,6 @@ export default [
 			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map((i) => {
 				return new dropdown({
 					label: core.capitalize(i),
-					color: i, //marker
 					option: [
 						{ href: "#", label: "Action" },
 						{ href: "#", label: "Another action" },
@@ -89,6 +92,9 @@ export default [
 						{ value: "-" },
 						{ href: "#", label: "Separated link" },
 					],
+
+					//marker
+					color: i,
 				});
 			});
 		},
@@ -101,7 +107,6 @@ export default [
 			return new dropdown({
 				label: "Drowdown",
 				color: "primary",
-				splittoggle: true, //marker
 				option: [
 					{ href: "#", label: "Action" },
 					{ href: "#", label: "Another action" },
@@ -109,6 +114,9 @@ export default [
 					{ value: "-" },
 					{ href: "#", label: "Separated link" },
 				],
+
+				//marker
+				splittoggle: true,
 			});
 		},
 	},
@@ -121,8 +129,6 @@ export default [
 			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map((i) => {
 				return new dropdown({
 					label: core.capitalize(i),
-					splittoggle: true, //marker
-					color: i, //marker
 					option: [
 						{ href: "#", label: "Action" },
 						{ href: "#", label: "Another action" },
@@ -130,6 +136,10 @@ export default [
 						{ value: "-" },
 						{ href: "#", label: "Separated link" },
 					],
+
+					//marker
+					splittoggle: true,
+					color: i,
 				});
 			});
 		},
@@ -152,15 +162,19 @@ export default [
 				new dropdown({
 					label: "Large dropdown",
 					color: "secondary",
-					weight: "lg", //marker
 					option: dditem,
+
+					//marker
+					weight: "lg",
 				}),
 				new dropdown({
 					label: "Large split dropdown",
 					color: "secondary",
-					weight: "lg", //marker
 					splittoggle: true,
 					option: dditem,
+
+					//marker
+					weight: "lg",
 				}),
 			];
 		},
@@ -183,15 +197,20 @@ export default [
 				new dropdown({
 					label: "Small dropdown",
 					color: "secondary",
-					weight: "sm", //marker
+					weight: "sm",
 					option: dditem,
+
+					//marker
+					weight: "sm",
 				}),
 				new dropdown({
 					label: "Small split dropdown",
 					color: "secondary",
-					weight: "sm", //marker
 					splittoggle: true,
 					option: dditem,
+
+					//marker
+					weight: "sm",
 				}),
 			];
 		},
@@ -205,7 +224,6 @@ export default [
 			return new dropdown({
 				label: "Dark dropdown",
 				color: "secondary",
-				dark: true, //marker
 				option: [
 					{ href: "#", label: "Action" },
 					{ href: "#", label: "Another action" },
@@ -213,6 +231,9 @@ export default [
 					{ value: "-" },
 					{ href: "#", label: "Separated link" },
 				],
+
+				//marker
+				dark: true,
 			});
 		},
 	},
@@ -245,7 +266,6 @@ export default [
 									//marker
 									new dropdown({
 										label: "Dropdown",
-										navlink: true,
 										dark: true,
 										option: [
 											{ href: "#", label: "Action" },
@@ -254,6 +274,9 @@ export default [
 											{ value: "-" },
 											{ href: "#", label: "Separated link" },
 										],
+
+										//marker
+										navlink: true,
 									}),
 								],
 							}),
@@ -281,15 +304,19 @@ export default [
 				new dropdown({
 					label: "Dropup",
 					color: "secondary",
-					arrow: "up", //marker
 					option: dditem,
+
+					//marker
+					arrow: "up",
 				}),
 				new dropdown({
 					label: "Split dropup",
 					color: "secondary",
-					arrow: "up", //marker
 					splittoggle: true,
 					option: dditem,
+
+					//marker
+					arrow: "up",
 				}),
 			];
 		},
@@ -312,15 +339,19 @@ export default [
 				new dropdown({
 					label: "Dropend",
 					color: "secondary",
-					arrow: "end", //marker
 					option: dditem,
+
+					//marker
+					arrow: "end",
 				}),
 				new dropdown({
 					label: "Split dropend",
 					color: "secondary",
-					arrow: "end", //marker
 					splittoggle: true,
 					option: dditem,
+
+					//marker
+					arrow: "end",
 				}),
 			];
 		},
@@ -343,15 +374,19 @@ export default [
 				new dropdown({
 					label: "Dropstart",
 					color: "secondary",
-					arrow: "start", //marker
 					option: dditem,
+
+					//marker
+					arrow: "start",
 				}),
 				new dropdown({
 					label: "Split dropstart",
 					color: "secondary",
-					arrow: "start", //marker
 					splittoggle: true,
 					option: dditem,
+
+					//marker
+					arrow: "start",
 				}),
 			];
 		},
@@ -440,7 +475,6 @@ export default [
 			return new dropdown({
 				label: "Right-aligned menu example",
 				color: "secondary",
-				aligment: "end", //marker
 				option: [
 					{ href: "#", label: "Action" },
 					{ href: "#", label: "Another action" },
@@ -448,6 +482,9 @@ export default [
 					{ value: "-" },
 					{ href: "#", label: "Separated link" },
 				],
+
+				//marker
+				aligment: "end",
 			});
 		},
 	},
@@ -459,7 +496,6 @@ export default [
 			return new dropdown({
 				label: "Right-aligned, left-aligned lg",
 				color: "secondary",
-				aligment: ["end", "lg-start"], //marker
 				option: [
 					{ href: "#", label: "Action" },
 					{ href: "#", label: "Another action" },
@@ -467,6 +503,9 @@ export default [
 					{ value: "-" },
 					{ href: "#", label: "Separated link" },
 				],
+
+				//marker
+				aligment: ["end", "lg-start"],
 			});
 		},
 	},
@@ -493,38 +532,50 @@ export default [
 				new dropdown({
 					label: "Right-aligned menu",
 					color: "secondary",
-					aligment: "end", //marker
 					option: dditem,
+
+					//marker
+					aligment: "end",
 				}),
 				new dropdown({
 					label: "Left-aligned, right-aligned lg",
 					color: "secondary",
-					aligment: ["start", "lg-end"], //marker
 					option: dditem,
+
+					//marker
+					aligment: ["start", "lg-end"],
 				}),
 				new dropdown({
 					label: "Right-aligned, left-aligned lg",
 					color: "secondary",
-					aligment: ["end", "lg-start"], //marker
 					option: dditem,
+
+					//marker
+					aligment: ["end", "lg-start"],
 				}),
 				new dropdown({
 					label: "Dropstart",
 					color: "secondary",
-					arrow: "start", //marker
 					option: dditem,
+
+					//marker
+					arrow: "start",
 				}),
 				new dropdown({
 					label: "Dropend",
 					color: "secondary",
-					arrow: "end", //marker
 					option: dditem,
+
+					//marker
+					arrow: "end",
 				}),
 				new dropdown({
 					label: "Dropup",
 					color: "secondary",
-					arrow: "up", //marker
 					option: dditem,
+
+					//marker
+					arrow: "up",
 				}),
 			];
 		},
@@ -543,6 +594,7 @@ export default [
 							value: "-", //marker
 							label: "Dropdown header", //marker
 						},
+
 						{ href: "javascript:void(0);", label: "Action" },
 						{ href: "javascript:void(0);", label: "Another action" },
 					],
@@ -669,15 +721,19 @@ export default [
 				new dropdown({
 					label: "Offset",
 					color: "secondary",
-					offset: "20,30", //marker
 					option: dditem,
+
+					//marker
+					offset: "20,30",
 				}),
 				new dropdown({
 					label: "Reference",
 					color: "secondary",
-					reference: "parent", //marker
 					splittoggle: true,
 					option: dditem,
+
+					//marker
+					reference: "parent",
 				}),
 			];
 		},
@@ -705,20 +761,26 @@ export default [
 				new dropdown({
 					label: "Clickable outside",
 					color: "secondary",
-					autoclose: "outside", //marker
 					option: dditem,
+
+					//marker
+					autoclose: "outside",
 				}),
 				new dropdown({
 					label: "Clickable inside",
 					color: "secondary",
-					autoclose: "inside", //marker
 					option: dditem,
+
+					//marker
+					autoclose: "inside",
 				}),
 				new dropdown({
 					label: "Manual close",
 					color: "secondary",
-					autoclose: "false", //marker
 					option: dditem,
+
+					//marker
+					autoclose: "false",
 				}),
 			];
 		},
@@ -768,15 +830,12 @@ export default [
 				onshow: (event) => {
 					new toast("i", fn(event.currentTarget, "onshow")).show();
 				},
-				//marker
 				onshown: (event) => {
 					new toast("/", fn(event.currentTarget, "onshown")).show();
 				},
-				//marker
 				onhide: (event) => {
 					new toast("!", fn(event.currentTarget, "onhide")).show();
 				},
-				//marker
 				onhidden: (event) => {
 					new toast("x", fn(event.currentTarget, "onhidden")).show();
 				},

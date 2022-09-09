@@ -38,7 +38,9 @@ export default [
 		import: ["carousel", "sample"],
 		code: () => {
 			return new carousel({
-				control: true, //marker
+				//marker
+				control: true,
+
 				item: [
 					sample.img(857, 428, "primary"),
 					sample.img(857, 428, "secondary"),
@@ -56,8 +58,10 @@ export default [
 		import: ["carousel", "sample"],
 		code: () => {
 			return new carousel({
+				//marker
+				indicators: true,
+
 				control: true,
-				indicators: true, //marker
 				item: [
 					sample.img(857, 428, "primary"),
 					sample.img(857, 428, "secondary"),
@@ -118,8 +122,10 @@ export default [
 		import: ["carousel", "sample"],
 		code: () => {
 			return new carousel({
+				//marker
+				fade: true,
+
 				control: true,
-				fade: true, //marker
 				item: [
 					sample.img(857, 428, "primary"),
 					sample.img(857, 428, "secondary"),
@@ -174,8 +180,10 @@ export default [
 		import: ["carousel", "sample"],
 		code: () => {
 			return new carousel({
+				//marker
+				touch: false,
+
 				control: true,
-				touch: false, //marker
 				item: [
 					sample.img(857, 428, "primary"),
 					sample.img(857, 428, "secondary"),
@@ -193,9 +201,11 @@ export default [
 		import: ["carousel", "sample"],
 		code: () => {
 			return new carousel({
+				//marker
+				dark: true,
+
 				control: true,
 				indicators: true,
-				dark: true, //marker
 				item: [
 					{
 						caption: "Title #1",
@@ -305,8 +315,6 @@ export default [
 
 									new toast("i", fn(event.currentTarget, "onslide")).show();
 								},
-
-								//marker
 								onslid: (event) => {
 									new toast("/", fn(event.currentTarget, "onslid")).show();
 								},

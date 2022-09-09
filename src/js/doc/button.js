@@ -21,7 +21,12 @@ export default [
 		code: () => {
 			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark", "link"].map(
 				(i) => {
-					return new button({ label: core.capitalize(i), color: i });
+					return new button({
+						label: core.capitalize(i),
+
+						//marker
+						color: i,
+					});
 				}
 			);
 		},
@@ -48,27 +53,58 @@ export default [
 		import: ["input", "button"],
 		code: () => {
 			return [
-				new button({ label: "Link", color: "primary", href: "javascript:void(0);" }),
 				new button({ label: "Button", color: "primary" }),
-				new button({ label: "Input", color: "primary", type: "input" }),
-				new button({ label: "Submit", color: "primary", type: "submit" }),
-				new button({ label: "Reset", color: "primary", type: "reset" }),
+
+				new button({
+					label: "Link",
+					color: "primary",
+
+					//marker
+					href: "javascript:void(0);",
+				}),
+				new button({
+					label: "Input",
+					color: "primary",
+
+					//marker
+					type: "input",
+				}),
+				new button({
+					label: "Submit",
+					color: "primary",
+
+					//marker
+					type: "submit",
+				}),
+				new button({
+					label: "Reset",
+					color: "primary",
+
+					//marker
+					type: "reset",
+				}),
 				new input({
 					class: "btn",
 					color: "primary",
+
+					//marker
 					type: "button",
 					value: "Input button",
 				}),
 				new input({
 					class: "btn",
-					color: "primary",
 					type: "submit",
+
+					//marker
+					color: "primary",
 					value: "Input submit",
 				}),
 				new input({
 					class: "btn",
-					color: "primary",
 					type: "reset",
+
+					//marker
+					color: "primary",
 					value: "Input reset",
 				}),
 			];
@@ -181,8 +217,6 @@ export default [
 
 					//marker
 					disabled: true,
-
-					//marker
 					href: "javascript:void(0);",
 				}),
 				new button({
@@ -192,8 +226,6 @@ export default [
 
 					//marker
 					disabled: true,
-
-					//marker
 					href: "javascript:void(0);",
 				}),
 			];
@@ -219,11 +251,9 @@ export default [
 			return new div({
 				//marker
 				display: "grid",
-
-				//marker
 				marginx: "auto",
 
-				gap: "2",
+				gap: 2,
 				col: 6,
 				elem: [
 					new button({ label: "Button", color: "primary" }),
@@ -241,8 +271,6 @@ export default [
 			return new div({
 				//marker
 				display: ["grid", "md-flex"],
-
-				//marker
 				justifycontent: "md-end",
 
 				gap: 2,
@@ -274,7 +302,6 @@ export default [
 
 					//marker
 					toggle: true,
-					//marker
 					active: true,
 				}),
 				new button({
@@ -283,7 +310,6 @@ export default [
 
 					//marker
 					toggle: true,
-					//marker
 					disabled: true,
 				}),
 			];
@@ -302,7 +328,6 @@ export default [
 
 					//marker
 					toggle: true,
-					//marker
 					href: "javascript:void(0)",
 				}),
 				new button({
@@ -311,9 +336,7 @@ export default [
 
 					//marker
 					toggle: true,
-					//marker
 					href: "javascript:void(0)",
-					//marker
 					active: true,
 				}),
 				new button({
@@ -322,9 +345,7 @@ export default [
 
 					//marker
 					toggle: true,
-					//marker
 					href: "javascript:void(0)",
-					//marker
 					disabled: true,
 				}),
 			];

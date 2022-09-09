@@ -62,11 +62,13 @@ export default [
 		code: () => {
 			return [
 				//direct class and elem
-				new div("container", "Content here"),
+				new div("container" /*marker*/, "Content here"),
 
 				//object
 				new div({
+					//marker
 					container: true,
+
 					elem: "Content here",
 				}),
 			];
@@ -122,7 +124,9 @@ export default [
 
 				//option
 				new div({
-					container: "fluid", //marker
+					//marker
+					container: "fluid",
+
 					elem: "Content here",
 				}),
 			];

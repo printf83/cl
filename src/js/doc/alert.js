@@ -18,7 +18,12 @@ export default [
 		import: ["alert"],
 		code: () => {
 			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map((i) => {
-				return new alert.container({ color: i, elem: `A simple ${i} alert—check it out!` });
+				return new alert.container({
+					elem: `A simple ${i} alert—check it out!`,
+
+					//marker
+					color: i,
+				});
 			});
 		},
 	},
@@ -31,7 +36,10 @@ export default [
 				return new alert.container({
 					elem: [
 						`A simple ${i} alert with `,
+
+						//marker
 						new alert.link({ label: "an example link", href: "javascript:void(0);" }),
+
 						`. Give it a click if you like.`,
 					],
 
@@ -125,8 +133,6 @@ export default [
 				onclose: (event) => {
 					new toast("!", fn(event.currentTarget, "onclose")).show();
 				},
-
-				//marker
 				onclosed: (event) => {
 					new toast("x", fn(event.currentTarget, "onclosed")).show();
 				},

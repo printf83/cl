@@ -40,18 +40,22 @@ export default [
 		code: () => {
 			return [
 				new input({
-					weight: "lg", //marker
 					type: "text",
 					placeholder: 'weight:"lg"',
+
+					//marker
+					weight: "lg",
 				}),
 				new input({
 					type: "text",
 					placeholder: "Default input",
 				}),
 				new input({
-					weight: "sm", //marker
 					type: "text",
 					placeholder: 'weight:"sm"',
+
+					//marker
+					weight: "sm",
 				}),
 			];
 		},
@@ -64,15 +68,19 @@ export default [
 		code: () => {
 			return [
 				new input({
-					disabled: true, //marker
 					type: "text",
 					placeholder: "Disabled input",
+
+					//marker
+					disabled: true,
 				}),
 				new input({
-					disabled: true, //marker
-					readonly: true,
 					type: "text",
 					placeholder: "Disabled readonly input",
+
+					//marker
+					disabled: true,
+					readonly: true,
 				}),
 			];
 		},
@@ -84,9 +92,11 @@ export default [
 		import: ["input"],
 		code: () => {
 			return new input({
-				readonly: true, //marker
 				type: "text",
 				placeholder: "Readonly input here...",
+
+				//marker
+				readonly: true,
 			});
 		},
 	},
@@ -102,10 +112,12 @@ export default [
 					labelsize: "sm-2",
 					ctlsize: "sm-10",
 					type: "email",
-					readonly: true, //marker
-					plaintext: true, //marker
 					value: "name@example.com",
 					autocomplete: "email",
+
+					//marker
+					readonly: true,
+					plaintext: true,
 				}),
 				new input({
 					label: "Password",
@@ -128,10 +140,12 @@ export default [
 					label: "Email",
 					hidelabel: true,
 					type: "email",
-					readonly: true, //marker
-					plaintext: true, //marker
 					value: "name@example.com",
 					autocomplete: "email",
+
+					//marker
+					readonly: true, 
+					plaintext: true, 
 				}),
 				new input({
 					label: "Password",
@@ -157,26 +171,36 @@ export default [
 			return [
 				new input({
 					label: "Default file input example",
-					type: "file", //marker
+
+					//marker
+					type: "file",
 				}),
 				new input({
 					label: "Multiple files input example",
-					type: "file", //marker
+
+					//marker
+					type: "file",
 					multiple: true,
 				}),
 				new input({
 					label: "Disabled file input example",
-					type: "file", //marker
+
+					//marker
+					type: "file", 
 					disabled: true,
 				}),
 				new input({
 					label: "Small file input example",
-					type: "file", //marker
+
+					//marker
+					type: "file", 
 					weight: "sm",
 				}),
 				new input({
 					label: "Large file input example",
-					type: "file", //marker
+
+					//marker
+					type: "file",
 					weight: "lg",
 				}),
 			];
@@ -190,7 +214,9 @@ export default [
 		code: () => {
 			return new input({
 				label: "Color picker",
-				type: "color", //marker
+
+				//marker
+				type: "color",
 			});
 		},
 	},
@@ -239,15 +265,12 @@ export default [
 					onclick: (event) => {
 						new toast("i", fn(event.currentTarget, "onclick")).show();
 					},
-					//marker
 					onfocus: (event) => {
 						new toast("!", fn(event.currentTarget, "onfocus")).show();
 					},
-					//marker
 					onblur: (event) => {
 						new toast("-", fn(event.currentTarget, "onblur")).show();
 					},
-					//marker
 					onchange: (event) => {
 						new toast("/", fn(event.currentTarget, "onchange")).show();
 					},
@@ -260,15 +283,12 @@ export default [
 					onclick: (event) => {
 						new toast("i", fn(event.currentTarget, "onclick")).show();
 					},
-					//marker
 					onfocus: (event) => {
 						new toast("!", fn(event.currentTarget, "onfocus")).show();
 					},
-					//marker
 					onblur: (event) => {
 						new toast("-", fn(event.currentTarget, "onblur")).show();
 					},
-					//marker
 					onchange: (event) => {
 						new toast("/", fn(event.currentTarget, "onchange")).show();
 					},

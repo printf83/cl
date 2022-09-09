@@ -98,6 +98,7 @@ export default [
 						placement: "top",
 						src: sample.img(286, 143),
 					}),
+
 					new card.body({
 						elem: new card.text({
 							elem: "Some quick example text to build on the card title and make up the bulk of the card's content.",

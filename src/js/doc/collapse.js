@@ -152,15 +152,12 @@ export default [
 					onshow: (event) => {
 						new toast("i", fn(event.currentTarget, "onshow")).show();
 					},
-					//marker
 					onshown: (event) => {
 						new toast("/", fn(event.currentTarget, "onshown")).show();
 					},
-					//marker
 					onhide: (event) => {
 						new toast("!", fn(event.currentTarget, "onhide")).show();
 					},
-					//marker
 					onhidden: (event) => {
 						new toast("x", fn(event.currentTarget, "onhidden")).show();
 					},

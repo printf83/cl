@@ -48,9 +48,10 @@ export default [
 			};
 
 			return new accordion({
+				item: [fn(1), fn(2), fn(3)],
+
 				//marker
 				flush: true,
-				item: [fn(1), fn(2), fn(3)],
 			});
 		},
 	},
@@ -68,9 +69,10 @@ export default [
 			};
 
 			return new accordion({
+				item: [fn(1), fn(2), fn(3)],
+
 				//marker
 				autoclose: false,
-				item: [fn(1), fn(2), fn(3)],
 			});
 		},
 	},
@@ -114,15 +116,12 @@ export default [
 						onshow: (event) => {
 							new toast("i", fn(event.currentTarget, "onshow")).show();
 						},
-						//marker
 						onshown: (event) => {
 							new toast("/", fn(event.currentTarget, "onshown")).show();
 						},
-						//marker
 						onhide: (event) => {
 							new toast("!", fn(event.currentTarget, "onhide")).show();
 						},
-						//marker
 						onhidden: (event) => {
 							new toast("x", fn(event.currentTarget, "onhidden")).show();
 						},
@@ -134,15 +133,12 @@ export default [
 						onshow: (event) => {
 							new toast("i", fn(event.currentTarget, "onshow")).show();
 						},
-						//marker
 						onshown: (event) => {
 							new toast("/", fn(event.currentTarget, "onshown")).show();
 						},
-						//marker
 						onhide: (event) => {
 							new toast("!", fn(event.currentTarget, "onhide")).show();
 						},
-						//marker
 						onhidden: (event) => {
 							new toast("x", fn(event.currentTarget, "onhidden")).show();
 						},
@@ -155,15 +151,12 @@ export default [
 						onshow: (event) => {
 							new toast("i", fn(event.currentTarget, "onshow")).show();
 						},
-						//marker
 						onshown: (event) => {
 							new toast("/", fn(event.currentTarget, "onshown")).show();
 						},
-						//marker
 						onhide: (event) => {
 							new toast("!", fn(event.currentTarget, "onhide")).show();
 						},
-						//marker
 						onhidden: (event) => {
 							new toast("x", fn(event.currentTarget, "onhidden")).show();
 						},

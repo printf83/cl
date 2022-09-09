@@ -112,7 +112,7 @@ span.nocode.marker::before {
 span.nocode.marker.downline::after {
 
     color: var(--bs-secondary);
-    content: "marker";
+    content: "important";
     margin-left: 0.5rem;
     -webkit-animation: fadeOut 2s;
     animation: fadeOut 2s;

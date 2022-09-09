@@ -39,7 +39,9 @@ export default [
 
 			return new file({
 				id: fileUploadID,
-				multiple: true, //marker
+
+				//marker
+				multiple: true,
 			});
 		},
 	},
@@ -53,7 +55,9 @@ export default [
 			return new file({
 				id: fileUploadID,
 				multiple: true,
-				accept: "image/gif,image/bmp,image/x-windows-bmp,image/jpeg,image/png", //marker
+
+				//marker
+				accept: "image/gif,image/bmp,image/x-windows-bmp,image/jpeg,image/png",
 			});
 		},
 	},
@@ -68,16 +72,17 @@ export default [
 				id: fileUploadID,
 				multiple: true,
 
-				accept: "application/pdf", //marker
-				uploadlabel: "Upload PDF", //marker
-				uploadicon: "file-pdf", //marker
-				uploadcolor: "primary", //marker
-				viewlabel: "View PDF", //marker
-				viewicon: "glasses", //marker
-				viewcolor: "success", //marker
-				deletelabel: null, //marker
-				deleteicon: "trash-alt", //marker
-				deletecolor: "danger", //marker
+				//marker
+				accept: "application/pdf",
+				uploadlabel: "Upload PDF",
+				uploadicon: "file-pdf",
+				uploadcolor: "primary",
+				viewlabel: "View PDF",
+				viewicon: "glasses",
+				viewcolor: "success",
+				deletelabel: null,
+				deleteicon: "trash-alt",
+				deletecolor: "danger",
 			});
 		},
 	},
