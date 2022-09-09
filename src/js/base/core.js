@@ -14,6 +14,15 @@ export function capitalize(str) {
 	return str.toLowerCase().replace(/(^\w{1})|(\s+\w{1})/g, (match) => match.toUpperCase());
 }
 
+export function shufflearray(arr) {
+	for (let i = arr.length - 1; i > 0; i--) {
+		let j = Math.floor(Math.random() * (i + 1));
+		[arr[i], arr[j]] = [arr[j], arr[i]];
+	}
+
+	return arr;
+}
+
 export const cookie = {
 	set: (cname, cvalue, exdays) => {
 		const d = new Date();
