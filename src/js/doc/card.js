@@ -49,12 +49,12 @@ export default [
 		msg: "The building block of a card is the {{card.body}}. Use it whenever you need a padded section within a card.",
 		import: ["card"],
 		code: () => {
-			return new card.container(new card.body("This is some text within a card body."));
+			return new card.container(/*marker*/ new card.body("This is some text within a card body."));
 		},
 	},
 
 	{
-		title: "Titles, text, and links",
+		title: "Titles, subtitle, text, and links",
 		msg: [
 			"Card titles are used by adding {{card.title}}. In the same way, links are added and placed next to each other by adding {{card.link}}.",
 			"Subtitles are used by adding a {{card.subtitle}}. If the {{card.title}} and the {{card.subtitle}} items are placed in a {{card.body}} item, the card title and subtitle are aligned nicely.",
@@ -64,6 +64,7 @@ export default [
 			return new card.container({
 				style: { width: "18rem" },
 				elem: new card.body({
+					//marker
 					elem: [
 						new card.title("Card Title"),
 						new card.subtitle("Card subtitle"),
@@ -92,6 +93,7 @@ export default [
 			return new card.container({
 				style: { width: "18rem" },
 				elem: [
+					//marker
 					new card.img({
 						placement: "top",
 						src: sample.img(286, 143),
@@ -113,6 +115,8 @@ export default [
 		code: () => {
 			return new card.container({
 				style: { width: "18rem" },
+
+				//marker
 				elem: new listgroup({
 					flush: true,
 					item: [{ elem: "An item" }, { elem: "A second item" }, { elem: "A third item" }],
@@ -127,6 +131,8 @@ export default [
 		code: () => {
 			return new card.container({
 				style: { width: "18rem" },
+
+				//marker
 				elem: [
 					new card.header("Feature"),
 					new listgroup({
@@ -144,6 +150,8 @@ export default [
 		code: () => {
 			return new card.container({
 				style: { width: "18rem" },
+
+				//marker
 				elem: [
 					new listgroup({
 						flush: true,
@@ -206,7 +214,7 @@ export default [
 		code: () => {
 			return new card.container({
 				elem: [
-					new card.header("Feature"),
+					new card.header("Feature"), //marker
 					new card.body({
 						elem: [
 							new card.title("Special title treatment"),
@@ -214,6 +222,7 @@ export default [
 							new button({ label: "Go somewhere", color: "primary" }),
 						],
 					}),
+					new card.footer("2 days ago"), //marker
 				],
 			});
 		},
@@ -227,7 +236,7 @@ export default [
 			return new card.container({
 				elem: [
 					new card.header({
-						class: "h5",
+						class: "h5", //marker
 						elem: "Feature",
 					}),
 					new card.body({
@@ -250,6 +259,7 @@ export default [
 				elem: [
 					new card.header("Quote"),
 					new card.body({
+						//marker
 						elem: new blockquote({
 							class: "mb-0",
 							elem: [
@@ -277,7 +287,7 @@ export default [
 		import: ["button", "card"],
 		code: () => {
 			return new card.container({
-				align: "center",
+				align: "center", //marker
 				elem: [
 					new card.header("Feature"),
 					new card.body({
@@ -304,11 +314,11 @@ export default [
 		import: ["div", "button", "card"],
 		code: () => {
 			return new div({
-				row: true,
+				row: true, //marker
 				gap: 2,
 				elem: [
 					new div({
-						col: "sm-6",
+						col: "sm-6", //marker
 						elem: new card.container({
 							elem: [
 								new card.body({
@@ -324,7 +334,7 @@ export default [
 						}),
 					}),
 					new div({
-						col: "sm-6",
+						col: "sm-6", //marker
 						elem: new card.container({
 							elem: [
 								new card.body({
@@ -351,7 +361,7 @@ export default [
 		code: () => {
 			return [
 				new card.container({
-					class: "w-75 mb-3",
+					class: "w-75 mb-3", //marker
 					elem: [
 						new card.body({
 							elem: [
@@ -363,7 +373,7 @@ export default [
 					],
 				}),
 				new card.container({
-					class: "w-50",
+					class: "w-50", //marker
 					elem: [
 						new card.body({
 							elem: [
@@ -385,7 +395,7 @@ export default [
 		code: () => {
 			return [
 				new card.container({
-					style: { width: "18rem" },
+					style: { width: "18rem" }, //marker
 					elem: [
 						new card.body({
 							elem: [
@@ -408,6 +418,7 @@ export default [
 		code: () => {
 			return [
 				new card.container({
+					align: "start", //marker
 					style: { width: "18rem" },
 					elem: [
 						new card.body({
@@ -420,7 +431,7 @@ export default [
 					],
 				}),
 				new card.container({
-					align: "center",
+					align: "center", //marker
 					style: { width: "18rem" },
 					elem: [
 						new card.body({
@@ -433,7 +444,7 @@ export default [
 					],
 				}),
 				new card.container({
-					align: "end",
+					align: "end", //marker
 					style: { width: "18rem" },
 					elem: [
 						new card.body({
@@ -480,7 +491,7 @@ export default [
 		import: ["tab", "sample"],
 		code: () => {
 			return new tab({
-				type: "pill",
+				type: "pill", //marker
 				item: [
 					{
 						label: "First",
@@ -508,10 +519,12 @@ export default [
 			return [
 				new card.container({
 					elem: [
+						//marker
 						new card.img({
 							placement: "top",
 							src: sample.img(857, 428),
 						}),
+
 						new card.body({
 							elem: [
 								new card.title("Card Title"),
@@ -534,6 +547,8 @@ export default [
 								new card.text({ color: "muted", elem: new small("Last updated 3 mins ago") }),
 							],
 						}),
+
+						//marker
 						new card.img({
 							placement: "bottom",
 							src: sample.img(857, 428),
@@ -554,6 +569,8 @@ export default [
 					new card.img({
 						src: sample.img(857, 428),
 					}),
+
+					//marker
 					new card.imgoverlay({
 						elem: [
 							new card.title("Card Title"),
@@ -575,6 +592,7 @@ export default [
 			return new card.container({
 				class: "h-100",
 				elem: [
+					//marker
 					new card.horizontal({
 						size: "sm-4",
 						left: [
@@ -624,7 +642,7 @@ export default [
 		import: ["card"],
 		code: () => {
 			return new card.container({
-				color: "primary",
+				color: "primary", //marker
 				style: { width: "18rem" },
 				elem: [
 					new card.header("Header"),
@@ -648,7 +666,7 @@ export default [
 		code: () => {
 			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map((i) => {
 				return new card.container({
-					color: i,
+					color: i, //marker
 					style: { width: "18rem" },
 					elem: [
 						new card.header("Header"),
@@ -672,7 +690,7 @@ export default [
 		import: ["card"],
 		code: () => {
 			return new card.container({
-				bordercolor: "primary",
+				bordercolor: "primary", //marker
 				style: { width: "18rem" },
 				elem: [
 					new card.header("Header"),
@@ -697,7 +715,7 @@ export default [
 		code: () => {
 			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map((i) => {
 				return new card.container({
-					bordercolor: i,
+					bordercolor: i, //marker
 					style: { width: "18rem" },
 					elem: [
 						new card.header("Header"),
@@ -774,6 +792,7 @@ export default [
 				});
 			};
 
+			//marker
 			return new card.group({
 				elem: [fn(str[0]), fn(str[1]), fn(str[2])],
 			});
@@ -801,11 +820,12 @@ export default [
 						new card.body({
 							elem: [new card.title("Card Title"), new card.text(str)],
 						}),
-						new card.footer("Last updated 3 mins ago"),
+						new card.footer("Last updated 3 mins ago"), //marker
 					],
 				});
 			};
 
+			//marker
 			return new card.group({
 				elem: [fn(str[0]), fn(str[1]), fn(str[2])],
 			});
@@ -838,7 +858,7 @@ export default [
 
 			return new div({
 				row: true,
-				rowcol: [1, "md-2"],
+				rowcol: [1, "md-2"], //marker
 				gap: 4,
 				elem: [
 					new div({ col: true, elem: fn(str[0]) }),
@@ -876,7 +896,7 @@ export default [
 
 			return new div({
 				row: true,
-				rowcol: [1, "md-3"],
+				rowcol: [1, "md-3"], //marker
 				gap: 4,
 				elem: [
 					new div({ col: true, elem: fn(str[0]) }),
@@ -900,7 +920,7 @@ export default [
 
 			let fn = (str) => {
 				return new card.container({
-					class: "h-100",
+					class: "h-100", //marker
 					elem: [
 						new card.img({
 							placement: "top",
@@ -939,7 +959,7 @@ export default [
 
 			let fn = (str) => {
 				return new card.container({
-					class: "h-100",
+					class: "h-100", //marker
 					elem: [
 						new card.img({
 							placement: "top",

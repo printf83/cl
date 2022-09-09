@@ -22,12 +22,12 @@ export default [
 		code: () => {
 			return new carousel({
 				item: [
-					sample.img(857, 428),
-					sample.img(857, 428),
-					sample.img(857, 428),
-					sample.img(857, 428),
-					sample.img(857, 428),
-					sample.img(857, 428),
+					sample.img(857, 428, "primary"),
+					sample.img(857, 428, "secondary"),
+					sample.img(857, 428, "success"),
+					sample.img(857, 428, "danger"),
+					sample.img(857, 428, "info"),
+					sample.img(857, 428, "dark"),
 				],
 			});
 		},
@@ -38,14 +38,14 @@ export default [
 		import: ["carousel", "sample"],
 		code: () => {
 			return new carousel({
-				control: true,
+				control: true, //marker
 				item: [
-					sample.img(857, 428),
-					sample.img(857, 428),
-					sample.img(857, 428),
-					sample.img(857, 428),
-					sample.img(857, 428),
-					sample.img(857, 428),
+					sample.img(857, 428, "primary"),
+					sample.img(857, 428, "secondary"),
+					sample.img(857, 428, "success"),
+					sample.img(857, 428, "danger"),
+					sample.img(857, 428, "info"),
+					sample.img(857, 428, "dark"),
 				],
 			});
 		},
@@ -57,14 +57,14 @@ export default [
 		code: () => {
 			return new carousel({
 				control: true,
-				indicators: true,
+				indicators: true, //marker
 				item: [
-					sample.img(857, 428),
-					sample.img(857, 428),
-					sample.img(857, 428),
-					sample.img(857, 428),
-					sample.img(857, 428),
-					sample.img(857, 428),
+					sample.img(857, 428, "primary"),
+					sample.img(857, 428, "secondary"),
+					sample.img(857, 428, "success"),
+					sample.img(857, 428, "danger"),
+					sample.img(857, 428, "info"),
+					sample.img(857, 428, "dark"),
 				],
 			});
 		},
@@ -79,34 +79,34 @@ export default [
 				indicators: true,
 				item: [
 					{
-						caption: "Title #1",
+						caption: "Title #1", //marker
 						text: "This is text for image no #1",
-						src: sample.img(857, 428),
+						src: sample.img(857, 428, "primary"),
 					},
 					{
-						caption: "Title #2",
+						caption: "Title #2", //marker
 						text: "This is text for image no #2",
-						src: sample.img(857, 428),
+						src: sample.img(857, 428, "secondary"),
 					},
 					{
-						caption: "Title #3",
+						caption: "Title #3", //marker
 						text: "This is text for image no #3",
-						src: sample.img(857, 428),
+						src: sample.img(857, 428, "success"),
 					},
 					{
-						caption: "Title #4",
+						caption: "Title #4", //marker
 						text: "This is text for image no #4",
-						src: sample.img(857, 428),
+						src: sample.img(857, 428, "danger"),
 					},
 					{
-						caption: "Title #5",
+						caption: "Title #5", //marker
 						text: "This is text for image no #5",
-						src: sample.img(857, 428),
+						src: sample.img(857, 428, "info"),
 					},
 					{
-						caption: "Title #6",
+						caption: "Title #6", //marker
 						text: "This is text for image no #6",
-						src: sample.img(857, 428),
+						src: sample.img(857, 428, "dark"),
 					},
 				],
 			});
@@ -119,14 +119,14 @@ export default [
 		code: () => {
 			return new carousel({
 				control: true,
-				fade: true,
+				fade: true, //marker
 				item: [
-					sample.img(857, 428),
-					sample.img(857, 428),
-					sample.img(857, 428),
-					sample.img(857, 428),
-					sample.img(857, 428),
-					sample.img(857, 428),
+					sample.img(857, 428, "primary"),
+					sample.img(857, 428, "secondary"),
+					sample.img(857, 428, "success"),
+					sample.img(857, 428, "danger"),
+					sample.img(857, 428, "info"),
+					sample.img(857, 428, "dark"),
 				],
 			});
 		},
@@ -140,12 +140,30 @@ export default [
 				control: true,
 				indicators: true,
 				item: [
-					{ interval: 10000, src: sample.img(857, 428) },
-					{ interval: 2000, src: sample.img(857, 428) },
-					{ interval: 5000, src: sample.img(857, 428) },
-					{ interval: 1000, src: sample.img(857, 428) },
-					{ interval: 3000, src: sample.img(857, 428) },
-					{ interval: 7500, src: sample.img(857, 428) },
+					{
+						interval: 10000, //marker
+						src: sample.img(857, 428, "primary"),
+					},
+					{
+						interval: 2000, //marker
+						src: sample.img(857, 428, "secondary"),
+					},
+					{
+						interval: 5000, //marker
+						src: sample.img(857, 428, "success"),
+					},
+					{
+						interval: 1000, //marker
+						src: sample.img(857, 428, "danger"),
+					},
+					{
+						interval: 3000, //marker
+						src: sample.img(857, 428, "info"),
+					},
+					{
+						interval: 7500, //marker
+						src: sample.img(857, 428, "dark"),
+					},
 				],
 			});
 		},
@@ -157,14 +175,14 @@ export default [
 		code: () => {
 			return new carousel({
 				control: true,
-				touch: false,
+				touch: false, //marker
 				item: [
-					sample.img(857, 428),
-					sample.img(857, 428),
-					sample.img(857, 428),
-					sample.img(857, 428),
-					sample.img(857, 428),
-					sample.img(857, 428),
+					sample.img(857, 428, "primary"),
+					sample.img(857, 428, "secondary"),
+					sample.img(857, 428, "success"),
+					sample.img(857, 428, "danger"),
+					sample.img(857, 428, "info"),
+					sample.img(857, 428, "dark"),
 				],
 			});
 		},
@@ -177,37 +195,37 @@ export default [
 			return new carousel({
 				control: true,
 				indicators: true,
-				dark: true,
+				dark: true, //marker
 				item: [
 					{
 						caption: "Title #1",
 						text: "This is text for image no #1",
-						src: sample.img(857, 428),
+						src: sample.img(857, 428, "primary"),
 					},
 					{
 						caption: "Title #2",
 						text: "This is text for image no #2",
-						src: sample.img(857, 428),
+						src: sample.img(857, 428, "secondary"),
 					},
 					{
 						caption: "Title #3",
 						text: "This is text for image no #3",
-						src: sample.img(857, 428),
+						src: sample.img(857, 428, "success"),
 					},
 					{
 						caption: "Title #4",
 						text: "This is text for image no #4",
-						src: sample.img(857, 428),
+						src: sample.img(857, 428, "danger"),
 					},
 					{
 						caption: "Title #5",
 						text: "This is text for image no #5",
-						src: sample.img(857, 428),
+						src: sample.img(857, 428, "info"),
 					},
 					{
 						caption: "Title #6",
 						text: "This is text for image no #6",
-						src: sample.img(857, 428),
+						src: sample.img(857, 428, "dark"),
 					},
 				],
 			});
@@ -269,6 +287,16 @@ export default [
 							new carousel({
 								control: true,
 								indicators: true,
+								item: [
+									sample.img(857, 428, "primary"),
+									sample.img(857, 428, "secondary"),
+									sample.img(857, 428, "success"),
+									sample.img(857, 428, "danger"),
+									sample.img(857, 428, "info"),
+									sample.img(857, 428, "dark"),
+								],
+
+								//marker
 								onslide: (event) => {
 									console.info("relatedTarget", event.relatedTarget);
 									console.info("direction", event.direction);
@@ -277,17 +305,11 @@ export default [
 
 									new toast("i", fn(event.currentTarget, "onslide")).show();
 								},
+
+								//marker
 								onslid: (event) => {
 									new toast("/", fn(event.currentTarget, "onslid")).show();
 								},
-								item: [
-									sample.img(857, 428),
-									sample.img(857, 428),
-									sample.img(857, 428),
-									sample.img(857, 428),
-									sample.img(857, 428),
-									sample.img(857, 428),
-								],
 							})
 						);
 					},
