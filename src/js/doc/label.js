@@ -15,6 +15,7 @@ export default [
 		import: ["label"],
 		code: () => {
 			return new label({
+				//marker
 				label: "Label",
 			});
 		},
@@ -25,8 +26,10 @@ export default [
 		import: ["label", "sample"],
 		code: () => {
 			return new label({
-				icon: sample.icon(),
 				label: "Label",
+
+				//marker
+				icon: sample.icon(),
 			});
 		},
 	},
@@ -36,8 +39,10 @@ export default [
 		import: ["label", "sample"],
 		code: () => {
 			return new label({
-				icon: sample.icon(),
 				label: "Label",
+				icon: sample.icon(),
+
+				//marker
 				iconafter: true,
 			});
 		},
@@ -51,11 +56,18 @@ export default [
 			let id = core.UUID();
 			return [
 				new label({
-					for: id,
-					icon: sample.icon(),
 					label: "Label",
+					icon: sample.icon(),
+
+					//marker
+					for: id,
 				}),
-				new input({ type: "text", id: id }),
+				new input({
+					type: "text",
+
+					//marker
+					id: id,
+				}),
 			];
 		},
 	},
@@ -67,8 +79,10 @@ export default [
 		import: ["label", "sample"],
 		code: () => {
 			return new label({
-				icon: sample.icon(),
 				label: "This is .visually-hidden label",
+				icon: sample.icon(),
+
+				//marker
 				hidelabel: true,
 			});
 		},
@@ -82,9 +96,11 @@ export default [
 		code: () => {
 			return [null, "sm", "md", "lg", "xl", "xxl"].map((i) => {
 				return new label({
-					icon: sample.icon(),
-					showlabel: i,
 					label: i ? `Show on ${i}` : "Always show label",
+					icon: sample.icon(),
+
+					//marker
+					showlabel: i,
 				});
 			});
 		},

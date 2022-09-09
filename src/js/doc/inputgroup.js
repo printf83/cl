@@ -21,18 +21,24 @@ export default [
 				new input({
 					type: "text",
 					placeholder: "Username",
+
+					//marker
 					before: "@",
 				}),
 
 				new input({
 					type: "text",
 					placeholder: "Recipient's username",
+
+					//marker
 					after: "@example.com",
 				}),
 
 				new input({
 					label: "Your vanity URL",
 					type: "text",
+
+					//marker
 					before: "https://example.com/users/",
 				}),
 
@@ -40,18 +46,23 @@ export default [
 					label: "Amount (to the nearest dollar)",
 					hidelabel: true,
 					type: "number",
+
+					//marker
 					before: "$",
 					after: ".00",
 				}),
 
 				//important if you create inputgroup manually,
 				//please set container to false
+				//using inputgroup.container
 				new inputgroup.container([
 					new input({
 						label: "Username",
 						hidelabel: true,
 						type: "text",
 						placeholder: "Username",
+
+						//marker
 						container: false, //<-- set container false
 					}),
 					new inputgroup.text("@"),
@@ -60,6 +71,8 @@ export default [
 						hidelabel: true,
 						type: "text",
 						placeholder: "Server",
+
+						//marker
 						container: false, //<-- set container false
 					}),
 				]),
@@ -68,6 +81,8 @@ export default [
 					label: "With textarea",
 					hidelabel: true,
 					type: "textarea",
+
+					//marker
 					before: "With textarea",
 				}),
 			];
@@ -84,9 +99,12 @@ export default [
 					nowrap: true,
 					placeholder: "Username",
 					type: "text",
+
+					//marker
 					before: "@",
 				}),
 
+				//using inputgroup.container
 				new inputgroup.container({
 					class: "flex-nowrap",
 					elem: [
@@ -94,6 +112,8 @@ export default [
 						new input({
 							placeholder: "Username",
 							type: "text",
+
+							//marker
 							container: false,
 						}),
 					],
@@ -110,17 +130,23 @@ export default [
 			return [
 				new input({
 					type: "text",
+
+					//marker
 					before: "Small",
 					weight: "sm",
 				}),
 
 				new input({
 					type: "text",
+
+					//marker
 					before: "Default",
 				}),
 
 				new input({
 					type: "text",
+
+					//marker
 					before: "Large",
 					weight: "lg",
 				}),
@@ -134,24 +160,43 @@ export default [
 		import: ["input", "inputgroup"],
 		code: () => {
 			return [
+				//using inputgroup.container
 				new inputgroup.container({
 					elem: [
 						new inputgroup.text({
-							elem: new input({ type: "checkbox", flex: true, class: "mt-0" }),
+							elem: new input({
+								type: "checkbox",
+
+								//marker
+								flex: true,
+								class: "mt-0",
+							}),
 						}),
 						new input({
 							type: "text",
+
+							//marker
 							container: false,
 						}),
 					],
 				}),
+
+				//using inputgroup.container
 				new inputgroup.container({
 					elem: [
 						new inputgroup.text({
-							elem: new input({ type: "radio", flex: true, class: "mt-0" }),
+							elem: new input({
+								type: "radio",
+
+								//marker
+								flex: true,
+								class: "mt-0",
+							}),
 						}),
 						new input({
 							type: "text",
+
+							//marker
 							container: false,
 						}),
 					],
@@ -166,6 +211,7 @@ export default [
 		import: ["input", "inputgroup"],
 		code: () => {
 			return [
+				//using inputgroup.container
 				new inputgroup.container({
 					elem: [
 						new inputgroup.text("First and last name"),
@@ -173,12 +219,16 @@ export default [
 							label: "First name",
 							hidelabel: true,
 							type: "text",
+
+							//marker
 							container: false,
 						}),
 						new input({
 							label: "Last name",
 							hidelabel: true,
 							type: "text",
+
+							//marker
 							container: false,
 						}),
 					],
@@ -193,6 +243,7 @@ export default [
 		import: ["input", "inputgroup"],
 		code: () => {
 			return [
+				//using inputgroup.container
 				new inputgroup.container({
 					elem: [
 						new inputgroup.text("$"),
@@ -201,17 +252,22 @@ export default [
 							label: "Dollar amount (with dot and two decimal places)",
 							hidelabel: true,
 							type: "number",
+
+							//marker
 							container: false,
 						}),
 					],
 				}),
 
+				//using inputgroup.container
 				new inputgroup.container({
 					elem: [
 						new input({
 							label: "Dollar amount (with dot and two decimal places)",
 							hidelabel: true,
 							type: "number",
+
+							//marker
 							container: false,
 						}),
 						new inputgroup.text("$"),
@@ -232,6 +288,8 @@ export default [
 					label: "Example text with button addon",
 					hidelabel: true,
 					type: "text",
+
+					//marker
 					before: new button({
 						outline: true,
 						color: "secondary",
@@ -242,6 +300,8 @@ export default [
 				new input({
 					placeholder: "Recipient's username",
 					type: "text",
+
+					//marker
 					after: new button({
 						outline: true,
 						color: "secondary",
@@ -249,6 +309,7 @@ export default [
 					}),
 				}),
 
+				//using inputgroup.container
 				new inputgroup.container({
 					elem: [
 						new button({
@@ -265,16 +326,21 @@ export default [
 							label: "Example text with button addon",
 							hidelabel: true,
 							type: "text",
+
+							//marker
 							container: false,
 						}),
 					],
 				}),
 
+				//using inputgroup.container
 				new inputgroup.container({
 					elem: [
 						new input({
 							placeholder: "Recipient's username",
 							type: "text",
+
+							//marker
 							container: false,
 						}),
 						new button({
@@ -311,11 +377,15 @@ export default [
 					label: "Text input with dropdown button",
 					hidelabel: true,
 					type: "text",
+
+					//marker
 					before: new dropdown({
 						outline: true,
 						color: "secondary",
 						label: "Dropdown",
 						option: dditem,
+
+						//marker
 						container: null,
 					}),
 				}),
@@ -324,11 +394,15 @@ export default [
 					label: "Text input with dropdown button",
 					hidelabel: true,
 					type: "text",
+
+					//marker
 					after: new dropdown({
 						outline: true,
 						color: "secondary",
 						label: "Dropdown",
 						option: dditem,
+
+						//marker
 						container: null,
 					}),
 				}),
@@ -337,11 +411,15 @@ export default [
 					label: "Text input with dropdown button",
 					hidelabel: true,
 					type: "text",
+
+					//marker
 					before: new dropdown({
 						outline: true,
 						color: "secondary",
 						label: "Dropdown",
 						option: dditem,
+
+						//marker
 						container: null,
 					}),
 					after: new dropdown({
@@ -349,6 +427,8 @@ export default [
 						color: "secondary",
 						label: "Dropdown",
 						option: dditem,
+
+						//marker
 						container: null,
 					}),
 				}),
@@ -374,12 +454,16 @@ export default [
 					label: "Text input with dropdown button",
 					hidelabel: true,
 					type: "text",
+
+					//marker
 					before: new dropdown({
 						outline: true,
 						color: "secondary",
 						label: "Action",
 						splittoggle: true,
 						option: dditem,
+
+						//marker
 						container: null,
 					}),
 				}),
@@ -388,12 +472,16 @@ export default [
 					label: "Text input with dropdown button",
 					hidelabel: true,
 					type: "text",
+
+					//marker
 					after: new dropdown({
 						outline: true,
 						color: "secondary",
 						label: "Action",
 						splittoggle: true,
 						option: dditem,
+
+						//marker
 						container: null,
 					}),
 				}),
@@ -416,34 +504,42 @@ export default [
 			return [
 				new input({
 					type: "select",
+					option: optitem,
+
+					//marker
 					before: "Options",
-					option: optitem,
 				}),
 
 				new input({
 					type: "select",
+					option: optitem,
+
+					//marker
 					after: "Options",
-					option: optitem,
 				}),
 
 				new input({
 					type: "select",
+					option: optitem,
+
+					//marker
 					before: new button({
 						outline: true,
 						color: "secondary",
 						label: "Button",
 					}),
-					option: optitem,
 				}),
 
 				new input({
 					type: "select",
+					option: optitem,
+
+					//marker
 					after: new button({
 						outline: true,
 						color: "secondary",
 						label: "Button",
 					}),
-					option: optitem,
 				}),
 			];
 		},
@@ -457,16 +553,22 @@ export default [
 			return [
 				new input({
 					type: "file",
+
+					//marker
 					before: "Upload",
 				}),
 
 				new input({
 					type: "file",
+
+					//marker
 					after: "Upload",
 				}),
 
 				new input({
 					type: "file",
+
+					//marker
 					before: new button({
 						outline: true,
 						color: "secondary",
@@ -476,6 +578,8 @@ export default [
 
 				new input({
 					type: "file",
+
+					//marker
 					after: new button({
 						outline: true,
 						color: "secondary",

@@ -31,7 +31,12 @@ export default [
 		import: ["pill", "sample"],
 		code: () => {
 			return [
-				{ icon: sample.icon(), label: "Label" },
+				{
+					//marker
+					icon: sample.icon(),
+
+					label: "Label",
+				},
 				{ icon: sample.icon(), label: "Label", color: "secondary" },
 				{ icon: sample.icon(), label: "Label", color: "success" },
 				{ icon: sample.icon(), label: "Label", color: "danger" },
@@ -49,7 +54,13 @@ export default [
 		import: ["pill"],
 		code: () => {
 			return [
-				{ icon: "i", title: "Title", label: "Info" },
+				{
+					//marker
+					icon: "i",
+
+					title: "Title",
+					label: "Info",
+				},
 				{ icon: "!", title: "Title", label: "Warning" },
 				{ icon: "/", title: "Title", label: "Success" },
 				{ icon: "x", title: "Title", label: "Critical" },
@@ -67,7 +78,13 @@ export default [
 		import: ["pill", "sample"],
 		code: () => {
 			return [
-				{ icon: "i", title: "Info", label: "Label" },
+				{
+					//marker
+					icon: "i",
+					title: "Info",
+
+					label: "Label",
+				},
 				{ icon: "!", title: "Warning", label: "Label" },
 				{ icon: "/", title: "Success", label: "Label" },
 				{ icon: "x", title: "Critical", label: "Label" },

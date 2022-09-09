@@ -51,6 +51,8 @@ export default [
 								document.getElementById(resultOutputId),
 
 								//list container option
+
+								//marker
 								new list.container({
 									id: resultOutputId,
 									setting: sample.query_setting(dbstate),
@@ -60,6 +62,8 @@ export default [
 							);
 
 							//load data into generated list container
+
+							//marker
 							list.container.reload(resultOutputId, sender, () => {
 								//hide run code button
 								document.getElementById(btnGenerate).classList.add("d-none");
@@ -112,7 +116,9 @@ export default [
 									setting: sample.query_setting(dbstate),
 									query: sample.query_data,
 									name: "customer",
-									paging: false, //disable paging
+
+									//marker
+									paging: false,
 								})
 							);
 
@@ -169,6 +175,8 @@ export default [
 									setting: sample.query_setting(dbstate),
 									query: sample.query_data,
 									name: "customer",
+
+									//marker
 									container: (data, opt) => {
 										//custom container template
 										return new ul({ class: "list-group", elem: opt.row(data, opt) });
@@ -224,12 +232,15 @@ export default [
 								document.getElementById(resultOutputId),
 
 								//list container option
+
 								new list.container({
 									id: resultOutputId,
 									setting: sample.query_setting(dbstate),
 									query: sample.query_data,
 									name: "customer",
 									container: sample.list_container,
+
+									//marker
 									row: (data, opt) => {
 										let lastgroup = null;
 										let result = [];
@@ -318,6 +329,8 @@ export default [
 									name: "customer",
 									container: sample.list_container,
 									row: sample.list_row,
+
+									//marker
 									group: (data, opt) => {
 										//custom group setup
 										return new list.group({ view: opt.view, key: data.key, name: data.name });
@@ -384,6 +397,8 @@ export default [
 									container: sample.list_container,
 									row: sample.list_row,
 									group: sample.list_group,
+
+									//marker
 									item: (data, opt) => {
 										//custom item template
 										return new list.item({
@@ -476,6 +491,8 @@ export default [
 									row: sample.list_row,
 									group: sample.list_group,
 									item: sample.list_item,
+
+									//marker
 									allow_delete: true,
 									allow_action: true,
 									allow_copy: true,
@@ -550,6 +567,8 @@ export default [
 									allow_delete: true,
 									allow_action: true,
 									allow_copy: true,
+
+									//marker
 									allow_more: true,
 									item_more: (sender, id) => {
 										//custom action when more button is clicked
@@ -618,6 +637,17 @@ export default [
 									id: resultOutputId,
 									setting: sample.query_setting(dbstate),
 									query: sample.query_data,
+									container: sample.list_container,
+									row: sample.list_row,
+									group: sample.list_group,
+									item: sample.list_item,
+									more: sample.list_more,
+									allow_delete: true,
+									allow_action: true,
+									allow_copy: true,
+									allow_more: true,
+
+									//marker
 									editor: (data) => {
 										//custom editor setting
 										return [
@@ -661,15 +691,6 @@ export default [
 											}),
 										];
 									},
-									container: sample.list_container,
-									row: sample.list_row,
-									group: sample.list_group,
-									item: sample.list_item,
-									more: sample.list_more,
-									allow_delete: true,
-									allow_action: true,
-									allow_copy: true,
-									allow_more: true,
 								})
 							);
 
@@ -770,6 +791,8 @@ export default [
 					icon: "floppy-disk",
 					color: "success",
 					onclick: (event) => {
+
+						//marker
 						list.container.item.add(resultOutputId, event.currentTarget);
 					},
 				}),
@@ -873,6 +896,7 @@ export default [
 							icon: "list-check",
 							color: "warning",
 							onclick: () => {
+								//marker
 								list.container.check.mode(resultOutputId);
 							},
 						}),
@@ -883,6 +907,7 @@ export default [
 							icon: "check-double",
 							color: "warning",
 							onclick: () => {
+								//marker
 								list.container.check.all(resultOutputId);
 							},
 						}),
@@ -893,6 +918,7 @@ export default [
 							icon: "trash-can",
 							color: "danger",
 							onclick: (event) => {
+								//marker
 								list.container.check.delete(resultOutputId, event.currentTarget);
 							},
 						}),
@@ -902,7 +928,10 @@ export default [
 							icon: "download",
 							color: "primary",
 							onclick: () => {
+
+								//marker
 								let checked = list.container.check.get(resultOutputId);
+
 								//checked : [{key:value,name:value}]
 								if (checked) {
 									new dlg.inputbox(
@@ -930,6 +959,8 @@ export default [
 							onclick: () => {
 								new dlg.inputbox("textarea", "ID", (_event, data) => {
 									let checked = data.value.split(",");
+
+									//marker
 									list.container.check.set(resultOutputId, checked);
 								}).show();
 							},
@@ -1035,6 +1066,7 @@ export default [
 							icon: "fire",
 							color: "primary",
 							onclick: (event) => {
+								//marker
 								list.container.query.all(resultOutputId, event.currentTarget);
 							},
 						}),
@@ -1043,6 +1075,7 @@ export default [
 							icon: "filter",
 							color: "primary",
 							onclick: (event) => {
+								//marker
 								list.container.query.filter(resultOutputId, event.currentTarget);
 							},
 						}),
@@ -1051,6 +1084,7 @@ export default [
 							icon: "sort",
 							color: "primary",
 							onclick: (event) => {
+								//marker
 								list.container.query.sort(resultOutputId, event.currentTarget);
 							},
 						}),
@@ -1059,6 +1093,7 @@ export default [
 							icon: "tasks",
 							color: "primary",
 							onclick: (event) => {
+								//marker
 								list.container.query.field(resultOutputId, event.currentTarget);
 							},
 						}),
@@ -1067,6 +1102,7 @@ export default [
 							icon: "list-ol",
 							color: "primary",
 							onclick: (event) => {
+								//marker
 								list.container.query.limit(resultOutputId, event.currentTarget);
 							},
 						}),
@@ -1075,6 +1111,7 @@ export default [
 							icon: { icon: "sort", rotate: 90 },
 							color: "primary",
 							onclick: (event) => {
+								//marker
 								list.container.query.page(resultOutputId, event.currentTarget);
 							},
 						}),

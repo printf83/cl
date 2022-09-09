@@ -31,6 +31,8 @@ export default [
 				limit: 10,
 				skip: 60,
 				total: 1260,
+
+				//marker
 				max: 5,
 			});
 		},
@@ -45,6 +47,8 @@ export default [
 				skip: 60,
 				total: 1260,
 				max: 3,
+
+				//marker
 				labelfirst: "First",
 				labellast: "Last",
 				labelnext: new icon("arrow-right"),
@@ -62,6 +66,8 @@ export default [
 				skip: 60,
 				total: 1260,
 				max: 3,
+
+				//marker
 				firstlast: false,
 			});
 		},
@@ -76,6 +82,8 @@ export default [
 				skip: 60,
 				total: 1260,
 				max: 3,
+
+				//marker
 				nextprev: false,
 			});
 		},
@@ -90,6 +98,8 @@ export default [
 				skip: 60,
 				total: 1260,
 				max: 3,
+
+				//marker
 				autoupdate: false,
 			});
 		},
@@ -108,6 +118,8 @@ export default [
 				skip: 60,
 				total: 1260,
 				max: 3,
+
+				//marker
 				weight: "lg",
 			});
 		},
@@ -122,6 +134,8 @@ export default [
 				skip: 60,
 				total: 1260,
 				max: 3,
+
+				//marker
 				weight: "sm",
 			});
 		},
@@ -140,6 +154,8 @@ export default [
 				skip: 60,
 				total: 1260,
 				max: 3,
+
+				//marker
 				align: "start",
 			});
 		},
@@ -154,6 +170,8 @@ export default [
 				skip: 60,
 				total: 1260,
 				max: 3,
+
+				//marker
 				align: "end",
 			});
 		},
@@ -169,6 +187,8 @@ export default [
 				skip: 20,
 				total: 1260,
 				max: 3,
+
+				//marker
 				onchange: (event) => {
 					//function called when skip change
 					new toast("i", `Skip changed to ${event.detail.skip}`).show();

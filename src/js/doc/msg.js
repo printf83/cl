@@ -30,8 +30,10 @@ export default [
 		import: ["msg", "sample"],
 		code: () => {
 			return new msg({
-				icon: sample.icon(),
 				elem: sample.text(),
+
+				//marker
+				icon: sample.icon(),
 			});
 		},
 	},
@@ -44,19 +46,25 @@ export default [
 		code: () => {
 			return [
 				new msg({
-					weight: "sm",
 					icon: sample.icon(),
 					elem: `<b>Weight: sm</b>. ${sample.text()}`,
+
+					//marker
+					weight: "sm",
 				}),
 				new msg({
-					weight: "md",
 					icon: sample.icon(),
 					elem: `<b>Weight: md</b>. ${sample.text()}`,
+
+					//marker
+					weight: "md",
 				}),
 				new msg({
-					weight: "lg",
 					icon: sample.icon(),
 					elem: `<b>Weight: lg</b>. ${sample.text()}`,
+
+					//marker
+					weight: "lg",
 				}),
 			];
 		},
@@ -71,12 +79,24 @@ export default [
 			return [
 				new toast({
 					color: "primary",
-					elem: new msg({ weight: "sm", icon: sample.icon(), elem: `<b>In toast</b>. ${sample.text()}` }),
+					elem: new msg({
+						icon: sample.icon(),
+						elem: `<b>In toast</b>. ${sample.text()}`,
+
+						//marker
+						weight: "sm",
+					}),
 					debug: true,
 				}),
 				new alert.container({
 					color: "primary",
-					elem: new msg({ weight: "sm", icon: sample.icon(), elem: `<b>In alert</b>. ${sample.text()}` }),
+					elem: new msg({
+						icon: sample.icon(),
+						elem: `<b>In alert</b>. ${sample.text()}`,
+
+						//marker
+						weight: "sm",
+					}),
 					debug: true,
 				}),
 			];
@@ -90,9 +110,11 @@ export default [
 		code: () => {
 			return new modal({
 				elem: new msg({
-					weight: "md",
 					icon: { icon: sample.icon(), color: "danger" },
 					elem: `<b>In modal</b>. ${sample.text()}`,
+
+					//marker
+					weight: "md",
 				}),
 				button: ["Okay", "Cancel"],
 				debug: true,
@@ -109,9 +131,18 @@ export default [
 				title: null,
 				icon: null,
 				color: "primary",
+
+				//marker
 				divider: false,
 				centerbutton: true,
-				elem: new msg({ weight: "lg", icon: sample.icon(), elem: `<h3>In modal</h3> <p>${sample.text()}</p>` }),
+
+				elem: new msg({
+					icon: sample.icon(),
+					elem: `<h3>In modal</h3> <p>${sample.text()}</p>`,
+
+					//marker
+					weight: "lg",
+				}),
 				button: [
 					{
 						color: "light",

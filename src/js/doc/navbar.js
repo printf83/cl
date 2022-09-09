@@ -90,6 +90,7 @@ export default [
 					expand: "lg",
 					color: "light",
 					elem: [
+						//marker
 						new navbar.brand({
 							label: "Navbar",
 							href: "#",
@@ -119,8 +120,10 @@ export default [
 				color: "light",
 				elem: [
 					new navbar.brand({
-						icon: sample.icon(),
 						href: "#",
+
+						//marker
+						icon: sample.icon(),
 					}),
 				],
 			});
@@ -136,9 +139,11 @@ export default [
 				color: "light",
 				elem: [
 					new navbar.brand({
+						href: "#",
+
+						//marker
 						icon: sample.icon(),
 						label: "Navbar",
-						href: "#",
 					}),
 				],
 			});
@@ -159,7 +164,9 @@ export default [
 				color: "light",
 				elem: [
 					new navbar.toggle({
-						target: `#${id}`, //this id must same with new navbar.collapsecontainer id
+						//this id must same with new navbar.collapsecontainer id
+						//marker
+						target: `#${id}`,
 						toggle: "collapse",
 					}),
 
@@ -168,9 +175,12 @@ export default [
 					}),
 
 					new navbar.collapsecontainer({
-						id: id, //this id must same with new navbar.toggle id
+						//this id must same with new navbar.toggle id
+						//marker
+						id: id,
 						elem: [
 							new navbar.itemcontainer({
+								//marker
 								parenttype: "collapse",
 								elem: [
 									new navbar.item({
@@ -235,6 +245,8 @@ export default [
 									}),
 									new navbar.item({
 										label: "Pricing",
+
+										//marker
 										option: [
 											{ href: "#", label: "Action" },
 											{ href: "#", label: "Another action" },
@@ -265,6 +277,7 @@ export default [
 				expand: "lg",
 				color: "light",
 				elem: [
+					//marker
 					new navbar.formcontainer({
 						elem: [
 							new input({
@@ -289,6 +302,7 @@ export default [
 				expand: "lg",
 				color: "light",
 				elem: [
+					//marker
 					new navbar.brand({
 						label: "Navbar",
 					}),
@@ -319,8 +333,10 @@ export default [
 				elem: [
 					new input({
 						type: "text",
-						before: "@",
 						placeholder: "Username",
+
+						//marker
+						before: "@",
 					}),
 				],
 			});
@@ -335,6 +351,8 @@ export default [
 				expand: "lg",
 				color: "light",
 				containerclass: "justify-content-start gap-2",
+
+				//marker
 				elem: [
 					new button({
 						label: "Main button",
@@ -360,6 +378,8 @@ export default [
 			return new navbar.container({
 				expand: "lg",
 				color: "light",
+
+				//marker
 				elem: new navbar.text("Navbar text with an inline element"),
 			});
 		},
@@ -470,20 +490,26 @@ export default [
 			return [
 				new navbar.container({
 					expand: "lg",
+					elem: fn(id1),
+
+					//marker
 					dark: true,
 					color: "dark",
-					elem: fn(id1),
 				}),
 				new navbar.container({
 					expand: "lg",
+					elem: fn(id2),
+
+					//marker
 					dark: true,
 					color: "primary",
-					elem: fn(id2),
 				}),
 				new navbar.container({
 					expand: "lg",
-					style: { backgroundColor: "#e3f2fd" },
 					elem: fn(id3),
+
+					//marker
+					style: { "background-color": "#e3f2fd" },
 				}),
 			];
 		},
@@ -498,7 +524,9 @@ export default [
 		import: ["div", "navbar"],
 		code: () => {
 			return new div({
+				//marker
 				container: true,
+
 				elem: new navbar.container({
 					expand: "lg",
 					color: "light",
@@ -518,7 +546,9 @@ export default [
 		import: ["navbar"],
 		code: () => {
 			return new div({
+				//marker
 				container: "fluid",
+
 				elem: new navbar.container({
 					expand: "lg",
 					color: "light",
@@ -540,13 +570,15 @@ export default [
 			return new navbar.container({
 				expand: "lg",
 				color: "light",
-				position: null, //fixed-top|fixed-bottom|sticky-top|null
 				elem: [
 					new navbar.brand({
 						label: "Navbar",
 						href: "#",
 					}),
 				],
+
+				//marker
+				position: null, //fixed-top|fixed-bottom|sticky-top|null
 			});
 		},
 	},
@@ -579,7 +611,6 @@ export default [
 						elem: [
 							new navbar.itemcontainer({
 								parenttype: "collapse",
-								scroll: "100px", //set scroll height here
 								elem: [
 									new navbar.item({ label: "Home", active: true }),
 									new navbar.item("Link"),
@@ -595,6 +626,10 @@ export default [
 									}),
 									new navbar.item({ label: "Disabled", disabled: true }),
 								],
+
+								//set scroll height here
+								//marker
+								scroll: "100px",
 							}),
 							new navbar.formcontainer({
 								elem: [
@@ -664,19 +699,25 @@ export default [
 
 			return [
 				new navbar.container({
-					expand: "lg",
 					color: "light",
 					elem: fn(id1, "lg"),
+
+					//marker
+					expand: "lg",
 				}),
 				new navbar.container({
-					expand: "",
 					color: "light",
 					elem: fn(id2, '""'),
+
+					//marker
+					expand: "",
 				}),
 				new navbar.container({
-					expand: null,
 					color: "light",
 					elem: fn(id3, "null"),
+
+					//marker
+					expand: null,
 				}),
 			];
 		},
@@ -699,13 +740,16 @@ export default [
 					expand: "lg",
 					color: "light",
 					elem: [
+						//marker
 						new navbar.toggle({
 							target: `#${id1}`,
 							toggle: "collapse",
 						}),
 
 						new navbar.collapsecontainer({
+							//marker
 							id: id1,
+
 							elem: [
 								new navbar.brand({
 									//brand inside collapsecontainer
@@ -743,13 +787,16 @@ export default [
 							label: "Navbar",
 						}),
 
+						//marker
 						new navbar.toggle({
 							target: `#${id2}`,
 							toggle: "collapse",
 						}),
 
 						new navbar.collapsecontainer({
+							//marker
 							id: id2,
+
 							elem: [
 								new navbar.itemcontainer({
 									parenttype: "collapse",
@@ -778,6 +825,7 @@ export default [
 					expand: "lg",
 					color: "light",
 					elem: [
+						//marker
 						new navbar.toggle({
 							target: `#${id3}`,
 							toggle: "collapse",
@@ -789,7 +837,9 @@ export default [
 						}),
 
 						new navbar.collapsecontainer({
+							//marker
 							id: id3,
+
 							elem: [
 								new navbar.itemcontainer({
 									parenttype: "collapse",
@@ -826,7 +876,9 @@ export default [
 			return [
 				//collapsecontainer outside container
 				new navbar.collapsecontainer({
+					//marker
 					id: id,
+
 					elem: new div("p-2", [
 						new h({ level: 5, elem: "Collapsed content" }),
 						new span("text-muted", "Toggleable via the navbar brand."),
@@ -841,6 +893,8 @@ export default [
 							label: "Navbar",
 							href: "#",
 						}),
+
+						//marker
 						new navbar.toggle({
 							target: `#${id}`,
 							toggle: "collapse",
@@ -897,18 +951,6 @@ export default [
 
 					new navbar.collapsecontainer({
 						id: id,
-						onshow: (event) => {
-							new toast("i", fn(event.currentTarget, "onshow")).show();
-						},
-						onshown: (event) => {
-							new toast("/", fn(event.currentTarget, "onshown")).show();
-						},
-						onhide: (event) => {
-							new toast("!", fn(event.currentTarget, "onhide")).show();
-						},
-						onhidden: (event) => {
-							new toast("x", fn(event.currentTarget, "onhidden")).show();
-						},
 						elem: [
 							new navbar.itemcontainer({
 								parenttype: "collapse",
@@ -938,6 +980,20 @@ export default [
 								new button({ label: "Search", color: "success", outline: true }),
 							]),
 						],
+
+						//marker
+						onshow: (event) => {
+							new toast("i", fn(event.currentTarget, "onshow")).show();
+						},
+						onshown: (event) => {
+							new toast("/", fn(event.currentTarget, "onshown")).show();
+						},
+						onhide: (event) => {
+							new toast("!", fn(event.currentTarget, "onhide")).show();
+						},
+						onhidden: (event) => {
+							new toast("x", fn(event.currentTarget, "onhidden")).show();
+						},
 					}),
 				],
 			});
@@ -990,18 +1046,6 @@ export default [
 					new navbar.offcanvascontainer({
 						id: id,
 						placement: "start",
-						onshow: (event) => {
-							new toast("i", fn(event.currentTarget, "onshow")).show();
-						},
-						onshown: (event) => {
-							new toast("/", fn(event.currentTarget, "onshown")).show();
-						},
-						onhide: (event) => {
-							new toast("!", fn(event.currentTarget, "onhide")).show();
-						},
-						onhidden: (event) => {
-							new toast("x", fn(event.currentTarget, "onhidden")).show();
-						},
 						elem: new div({
 							elem: [
 								new navbar.itemcontainer({
@@ -1024,6 +1068,20 @@ export default [
 								}),
 							],
 						}),
+
+						//marker
+						onshow: (event) => {
+							new toast("i", fn(event.currentTarget, "onshow")).show();
+						},
+						onshown: (event) => {
+							new toast("/", fn(event.currentTarget, "onshown")).show();
+						},
+						onhide: (event) => {
+							new toast("!", fn(event.currentTarget, "onhide")).show();
+						},
+						onhidden: (event) => {
+							new toast("x", fn(event.currentTarget, "onhidden")).show();
+						},
 					}),
 				],
 			});

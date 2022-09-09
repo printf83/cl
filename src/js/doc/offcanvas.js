@@ -28,7 +28,6 @@ export default [
 						close: true,
 						backdrop: true,
 						color: "light",
-						title: "Offcanvas",
 						elem: new div({
 							elem: [
 								new p({
@@ -65,9 +64,11 @@ export default [
 						color: "primary",
 						onclick: () => {
 							new offcanvas({
+								//marker
+								placement: i,
+
 								close: true,
 								backdrop: true,
-								placement: i,
 								color: "light",
 								title: "Top Offcanvas",
 								elem: new div({
@@ -107,9 +108,11 @@ export default [
 						color: "primary",
 						onclick: () => {
 							new offcanvas({
+								//marker
+								weight: i,
+
 								close: true,
 								backdrop: true,
-								weight: i,
 								color: "light",
 								title: "Top Offcanvas",
 								elem: new div({
@@ -167,11 +170,12 @@ export default [
 					color: "primary",
 					onclick: () => {
 						new offcanvas({
-							close: true,
+							//marker
 							scroll: true,
+
+							close: true,
 							backdrop: false,
 							color: "light",
-							title: "Offcanvas",
 							elem: fn,
 						}).show();
 					},
@@ -182,11 +186,12 @@ export default [
 					color: "primary",
 					onclick: () => {
 						new offcanvas({
+							//marker
+							backdrop: true,
+
 							close: true,
 							scroll: false,
-							backdrop: true,
 							color: "light",
-							title: "Offcanvas",
 							elem: fn,
 						}).show();
 					},
@@ -197,11 +202,12 @@ export default [
 					color: "primary",
 					onclick: () => {
 						new offcanvas({
-							close: true,
+							//marker
 							backdrop: true,
 							scroll: true,
+
+							close: true,
 							color: "light",
-							title: "Offcanvas",
 							elem: fn,
 						}).show();
 					},
@@ -248,19 +254,6 @@ export default [
 						close: true,
 						backdrop: true,
 						color: "light",
-						title: "Offcanvas",
-						onshow: (event) => {
-							new toast("i", fn(event.currentTarget, "onshow")).show();
-						},
-						onshown: (event) => {
-							new toast("/", fn(event.currentTarget, "onshown")).show();
-						},
-						onhide: (event) => {
-							new toast("!", fn(event.currentTarget, "onhide")).show();
-						},
-						onhidden: (event) => {
-							new toast("x", fn(event.currentTarget, "onhidden")).show();
-						},
 						elem: new div({
 							elem: [
 								new p({
@@ -279,6 +272,20 @@ export default [
 								}),
 							],
 						}),
+
+						//marker
+						onshow: (event) => {
+							new toast("i", fn(event.currentTarget, "onshow")).show();
+						},
+						onshown: (event) => {
+							new toast("/", fn(event.currentTarget, "onshown")).show();
+						},
+						onhide: (event) => {
+							new toast("!", fn(event.currentTarget, "onhide")).show();
+						},
+						onhidden: (event) => {
+							new toast("x", fn(event.currentTarget, "onhidden")).show();
+						},
 					}).show();
 				},
 			});

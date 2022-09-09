@@ -29,7 +29,14 @@ export default [
 		title: "Label",
 		import: ["progress"],
 		code: () => {
-			return new progress.container({ item: { label: true, value: 25 } });
+			return new progress.container({
+				item: {
+					//marker
+					label: true,
+
+					value: 25,
+				},
+			});
 		},
 	},
 
@@ -37,7 +44,16 @@ export default [
 		title: "Min & max",
 		import: ["progress"],
 		code: () => {
-			return new progress.container({ item: { label: true, value: 154, min: 75, max: 300 } });
+			return new progress.container({
+				item: {
+					label: true,
+					value: 154,
+
+					//marker
+					min: 75,
+					max: 300,
+				},
+			});
 		},
 	},
 
@@ -46,12 +62,17 @@ export default [
 		container: sample.vstackcontainer,
 		import: ["progress"],
 		code: () => {
-			return [
-				new progress.container({ item: { color: "success", value: 25 } }),
-				new progress.container({ item: { color: "info", value: 35 } }),
-				new progress.container({ item: { color: "warning", value: 55 } }),
-				new progress.container({ item: { color: "danger", value: 75 } }),
-			];
+			let fn = (color, value) => {
+				return new progress.container({
+					item: {
+						//marker
+						color: color,
+						value: value,
+					},
+				});
+			};
+
+			return [fn("primary", 10), fn("success", 25), fn("info", 50), fn("warning", 75), fn("danger", 100)];
 		},
 	},
 
@@ -61,8 +82,17 @@ export default [
 		import: ["progress"],
 		code: () => {
 			return [
-				new progress.container({ height: 1, item: { value: 25 } }),
-				new progress.container({ height: 20, item: { value: 75 } }),
+				new progress.container({
+					//marker
+					height: 1,
+
+					item: { value: 25 },
+				}),
+				new progress.container({
+					//marker
+					height: 20,
+					item: { value: 75 },
+				}),
 			];
 		},
 	},
@@ -72,6 +102,7 @@ export default [
 		import: ["progress"],
 		code: () => {
 			return new progress.container({
+				//marker
 				item: [
 					{ color: "primary", value: 15 },
 					{ color: "secondary", value: 30 },
@@ -86,13 +117,19 @@ export default [
 		container: sample.vstackcontainer,
 		import: ["progress"],
 		code: () => {
-			return [
-				new progress.container({ item: { stripe: true, color: "primary", value: 10 } }),
-				new progress.container({ item: { stripe: true, color: "success", value: 25 } }),
-				new progress.container({ item: { stripe: true, color: "info", value: 50 } }),
-				new progress.container({ item: { stripe: true, color: "warning", value: 75 } }),
-				new progress.container({ item: { stripe: true, color: "danger", value: 100 } }),
-			];
+			let fn = (color, value) => {
+				return new progress.container({
+					item: {
+						//marker
+						stripe: true,
+
+						color: color,
+						value: value,
+					},
+				});
+			};
+
+			return [fn("primary", 10), fn("success", 25), fn("info", 50), fn("warning", 75), fn("danger", 100)];
 		},
 	},
 
@@ -101,13 +138,20 @@ export default [
 		container: sample.vstackcontainer,
 		import: ["progress"],
 		code: () => {
-			return [
-				new progress.container({ item: { stripe: true, animated: true, color: "primary", value: 10 } }),
-				new progress.container({ item: { stripe: true, animated: true, color: "success", value: 25 } }),
-				new progress.container({ item: { stripe: true, animated: true, color: "info", value: 50 } }),
-				new progress.container({ item: { stripe: true, animated: true, color: "warning", value: 75 } }),
-				new progress.container({ item: { stripe: true, animated: true, color: "danger", value: 100 } }),
-			];
+			let fn = (color, value) => {
+				return new progress.container({
+					item: {
+						//marker
+						animated: true,
+
+						stripe: true,
+						color: color,
+						value: value,
+					},
+				});
+			};
+
+			return [fn("primary", 10), fn("success", 25), fn("info", 50), fn("warning", 75), fn("danger", 100)];
 		},
 	},
 

@@ -57,8 +57,10 @@ export default [
 		import: ["toast", "msg", "modal"],
 		code: () => {
 			return new modal({
+				//marker
 				title: null,
 				icon: null,
+
 				elem: new msg({
 					weight: "md",
 					icon: "i",
@@ -81,11 +83,13 @@ export default [
 		import: ["toast", "msg", "modal"],
 		code: () => {
 			return new modal({
+				//marker
 				title: "Bootstrap",
 				icon: {
 					type: "fab",
 					icon: "bootstrap",
 				},
+
 				elem: new msg({
 					weight: "md",
 					icon: "i",
@@ -117,7 +121,7 @@ export default [
 					label: i.label,
 					icon: i.icon,
 					onclick: () => {
-						new dlg.msgbox(i.icon, `This is example msgbox with <b>${i.icon}</b> icon`, () => {
+						new dlg.msgbox(i.icon /*marker*/, `This is example msgbox with <b>${i.icon}</b> icon`, () => {
 							new toast(i.icon, "After user click <b>Okay</b> button").show();
 						}).show();
 					},
@@ -133,8 +137,12 @@ export default [
 		import: ["toast", "dlg"],
 		code: () => {
 			return new dlg.inputbox(
+				//marker
 				"text",
+
 				"This is example inputbox text",
+
+				//marker
 				(event, data) => {
 					new toast("i", `Result from dlg.inputbox is : ${JSON.stringify(data)}`).show();
 				},
@@ -151,6 +159,7 @@ export default [
 		import: ["toast", "input", "dlg"],
 		code: () => {
 			return new dlg.inputbox(
+				//marker
 				new input({
 					type: "select",
 					option: [
@@ -161,7 +170,10 @@ export default [
 					],
 					name: "value",
 				}),
+
 				"This is example inputbox select",
+
+				//marker
 				(event, data) => {
 					new toast("i", `Result from dlg.inputbox is : ${JSON.stringify(data)}`).show();
 				},
@@ -198,11 +210,14 @@ export default [
 					color: "primary",
 					onclick: () => {
 						new dlg.inputbox(
+							//marker
 							i.hasOwnProperty("option")
 								? new input({ type: "select", option: i.option, name: "value" })
 								: i.type,
+
 							`This is example inputbox with <b>${i.type}</b> input`,
 							[
+								//marker
 								(event, data) => {
 									new toast("/", `You give <b>${data.value}</b> in inputbox`).show();
 								},
@@ -224,6 +239,7 @@ export default [
 		import: ["toast", "dlg", "container", "input", "listgroup"],
 		code: () => {
 			let el = new container.form([
+				//marker
 				new input({
 					label: "Name",
 					required: true,
@@ -314,6 +330,8 @@ export default [
 			return new dlg.inputbox(
 				el,
 				null,
+
+				//marker
 				(event, data) => {
 					new toast("/", `You give <b>${JSON.stringify(data)}</b> in inputbox`).show();
 				},
@@ -329,6 +347,7 @@ export default [
 		import: ["toast", "button", "dlg"],
 		code: () => {
 			let el = new container.form([
+				//marker
 				new input({
 					label: "Name",
 					required: true,
@@ -420,14 +439,20 @@ export default [
 				label: "Show inputbox with multiple input",
 				color: "primary",
 				onclick: () => {
-					new dlg.inputbox(el, null, (event, data) => {
-						new toast({
-							delay: 10000,
-							color: "success",
-							title: "Result",
-							elem: `${JSON.stringify(data)}`,
-						}).show();
-					}).show();
+					new dlg.inputbox(
+						el,
+						null,
+
+						//marker
+						(event, data) => {
+							new toast({
+								delay: 10000,
+								color: "success",
+								title: "Result",
+								elem: `${JSON.stringify(data)}`,
+							}).show();
+						}
+					).show();
 				},
 			});
 		},
@@ -440,8 +465,12 @@ export default [
 		import: ["toast", "dlg"],
 		code: () => {
 			return new dlg.confirmbox(
+				//marker
 				"?",
+
 				"This is example msgbox with <b>Okay and Cancel</b> button",
+
+				//marker
 				() => {
 					new toast("i", "Callback").show();
 				},
@@ -466,20 +495,26 @@ export default [
 					label: i.label,
 					icon: i.icon,
 					onclick: () => {
-						new dlg.confirmbox(i.icon, `This is example confirmbox with <b>${i.icon}</b> icon`, [
-							{
-								label: "Yes",
-								onclick: () => {
-									new toast("/", "After user click <b>Yes</b> button").show();
+						new dlg.confirmbox(
+							i.icon /*marker*/,
+							`This is example confirmbox with <b>${i.icon}</b> icon`,
+
+							//marker
+							[
+								{
+									label: "Yes",
+									onclick: () => {
+										new toast("/", "After user click <b>Yes</b> button").show();
+									},
 								},
-							},
-							{
-								label: "No",
-								onclick: () => {
-									new toast("x", "After user not click <b>No</b> button").show();
+								{
+									label: "No",
+									onclick: () => {
+										new toast("x", "After user not click <b>No</b> button").show();
+									},
 								},
-							},
-						]).show();
+							]
+						).show();
 					},
 				});
 			});
@@ -509,7 +544,9 @@ export default [
 				color: "primary",
 				onclick: () => {
 					new modal({
+						//marker
 						dark: true,
+
 						elem: "Modal body text goes here.",
 						button: [
 							{
@@ -540,6 +577,8 @@ export default [
 					},
 					"Close",
 				],
+
+				//marker
 				footer: new input({ type: "switch", name: "showagain", label: "Show again" }),
 				debug: true, // documentation purpose only
 			});
@@ -562,7 +601,9 @@ export default [
 					icon: i.icon,
 					onclick: (e) => {
 						new modal({
+							//marker
 							backdropcolor: i.backdropcolor,
+
 							elem: new msg({
 								weight: "md",
 								icon: i.icon,
@@ -594,7 +635,9 @@ export default [
 				color: "primary",
 				onclick: () => {
 					new modal({
+						//marker
 						static: false,
+
 						elem: "By default, modal dialog will not close if you click outside or press escape key. To allow modal dialog to close when click outside or press escape key, set <code>static: false</code> option",
 						button: [
 							{
@@ -620,7 +663,9 @@ export default [
 				color: "primary",
 				onclick: () => {
 					new modal({
+						//marker
 						scrollable: false,
+
 						elem: [
 							new p({
 								elem: "By default, modal dialog will activate scrolling inside modal dialog. To disabled it, set <code>scrollable: false</code> option.",
@@ -656,7 +701,9 @@ export default [
 				color: "primary",
 				onclick: () => {
 					new modal({
+						//marker
 						center: false,
+
 						elem: "By default, modal dialog will vertically centered when shown. To disabled it, set <code>center: false</code> option.",
 						button: [
 							{
@@ -680,6 +727,8 @@ export default [
 		code: () => {
 			return new modal({
 				elem: "Custom button dialog",
+
+				//marker
 				button: [
 					{
 						label: "Yesss!",
@@ -716,6 +765,8 @@ export default [
 							new p({
 								elem: [
 									"This ",
+
+									//marker
 									new tooltip({
 										type: "popover",
 										placement: "right",
@@ -734,6 +785,7 @@ export default [
 							new h({ level: 5, elem: "Tooltips in a modal" }),
 							new p({
 								elem: [
+									//marker
 									new tooltip({
 										type: "tooltip",
 										msg: "Tooltip for link 1",
@@ -743,6 +795,8 @@ export default [
 										}),
 									}),
 									" and ",
+
+									//marker
 									new tooltip({
 										type: "tooltip",
 										msg: "Tooltip for link 2",
@@ -763,7 +817,25 @@ export default [
 	},
 
 	{
-		title: "Using the grid",
+		title: "Using the grid (Direct HTML)",
+		import: ["button", "modal"],
+		code: () => {
+			return new button({
+				label: "Show live modal dialog",
+				color: "primary",
+				onclick: () => {
+					new modal({
+						title: "Grids in modal",
+						elem: `<div class="container-fluid cl-highlight-col"><div class="row"><div class="col-md-4">.col-md-4</div><div class="col-md-4 ms-auto">.col-md-4 .ms-auto</div></div><div class="row"><div class="col-md-3 ms-auto">.col-md-3 .ms-auto</div><div class="col-md-2 ms-auto">.col-md-2 .ms-auto</div></div><div class="row"><div class="col-md-6 ms-auto">.col-md-6 .ms-auto</div></div><div class="row"><div class="col-sm-9">Level 1: .col-md-9<div class="row"><div class="col-8 col-sm-6">Level 2: .col-8 .col-sm-6</div><div class="col-4 col-sm-6">Level 2: .col-4 .col-sm-6</div></div></div></div></div>`,
+						button: ["Save change", "Close"],
+					}).show();
+				},
+			});
+		},
+	},
+
+	{
+		msg: "Using easy option",
 		import: ["div", "button", "modal"],
 		code: () => {
 			return new button({
@@ -800,28 +872,11 @@ export default [
 	},
 
 	{
-		title: "Using the grid (Direct HTML)",
-		import: ["button", "modal"],
-		code: () => {
-			return new button({
-				label: "Show live modal dialog",
-				color: "primary",
-				onclick: () => {
-					new modal({
-						title: "Grids in modal",
-						elem: `<div class="container-fluid cl-highlight-col"><div class="row"><div class="col-md-4">.col-md-4</div><div class="col-md-4 ms-auto">.col-md-4 .ms-auto</div></div><div class="row"><div class="col-md-3 ms-auto">.col-md-3 .ms-auto</div><div class="col-md-2 ms-auto">.col-md-2 .ms-auto</div></div><div class="row"><div class="col-md-6 ms-auto">.col-md-6 .ms-auto</div></div><div class="row"><div class="col-sm-9">Level 1: .col-md-9<div class="row"><div class="col-8 col-sm-6">Level 2: .col-8 .col-sm-6</div><div class="col-4 col-sm-6">Level 2: .col-4 .col-sm-6</div></div></div></div></div>`,
-						button: ["Save change", "Close"],
-					}).show();
-				},
-			});
-		},
-	},
-
-	{
 		title: "Varying modal content",
 		container: sample.stackcontainer,
 		import: ["button", "modal", "input", "toast", "container"],
 		code: () => {
+			//marker
 			let fn = (recipient) => {
 				new modal({
 					elem: new container.form([
@@ -880,6 +935,7 @@ export default [
 		title: "Toggle between modals",
 		import: ["button", "modal"],
 		code: () => {
+			//marker
 			var dlgFirstModal = () => {
 				new modal({
 					title: "Modal 1",
@@ -887,12 +943,14 @@ export default [
 					button: {
 						label: "Show second modal",
 						onclick: () => {
+							//marker
 							dlgSecondModal();
 						},
 					},
 				}).show();
 			};
 
+			//marker
 			var dlgSecondModal = () => {
 				new modal({
 					title: "Modal 2",
@@ -900,6 +958,7 @@ export default [
 					button: {
 						label: "Show first modal",
 						onclick: () => {
+							//marker
 							dlgFirstModal();
 						},
 					},
@@ -910,6 +969,7 @@ export default [
 				label: "Show first modal",
 				color: "primary",
 				onclick: () => {
+					//marker
 					dlgFirstModal();
 				},
 			});
@@ -925,7 +985,9 @@ export default [
 				color: "primary",
 				onclick: () => {
 					new modal({
+						//marker
 						animate: false,
+
 						elem: "Dialog without fade effect",
 						button: "Okay",
 					}).show();
@@ -941,7 +1003,9 @@ export default [
 		code: () => {
 			let fn = (size) => {
 				new modal({
+					//marker
 					size: size,
+
 					elem: `Dialog with <code>size : <b>${size}</b></code> option`,
 					button: ["Okay"],
 				}).show();
@@ -980,7 +1044,9 @@ export default [
 		code: () => {
 			let fn = (fullscreen) => {
 				new modal({
+					//marker
 					fullscreen: fullscreen,
+
 					elem: `Dialog with <code>fullscreen : <b>${fullscreen}</b></code> option`,
 					button: ["Okay"],
 				}).show();
@@ -1073,6 +1139,8 @@ export default [
 					new modal({
 						elem: "Modal event example",
 						button: "Okay",
+
+						//marker
 						onshow: (event) => {
 							new toast("i", fn(event.currentTarget, "onshow")).show();
 						},

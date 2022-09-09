@@ -101,13 +101,20 @@ export default [
 				},
 				{
 					label: "Menu 2",
-					active: true,
 					item: [
 						{ label: "Sub menu 2.1" },
-						{ label: "Sub menu 2.2", active: true },
+						{
+							label: "Sub menu 2.2",
+
+							//marker
+							active: true,
+						},
 						{ label: "Sub menu 2.3" },
 						{ label: "Sub menu 2.4" },
 					],
+
+					//marker
+					active: true,
 				},
 				{
 					label: "Menu 3",
@@ -131,14 +138,23 @@ export default [
 			return [
 				{
 					label: "Menu",
-					icon: sample.icon(),
+
 					active: true,
 					item: [
-						{ label: "Sub menu 1", icon: sample.icon(), active: true },
+						{
+							label: "Sub menu 1",
+							active: true,
+
+							//marker
+							icon: sample.icon(),
+						},
 						{ label: "Sub menu 2" },
 						{ label: "Sub menu 3" },
 						{ label: "Sub menu 4" },
 					],
+
+					//marker
+					icon: sample.icon(),
 				},
 			].map((i) => {
 				return new menu(i);
@@ -158,7 +174,6 @@ export default [
 						color: "danger",
 					},
 					active: true,
-					arrow: false,
 					item: [
 						{
 							label: "Sub menu 1",
@@ -172,6 +187,9 @@ export default [
 						{ label: "Sub menu 3" },
 						{ label: "Sub menu 4" },
 					],
+
+					//marker
+					arrow: false,
 				},
 			].map((i) => {
 				return new menu(i);
@@ -187,10 +205,31 @@ export default [
 				{
 					label: "Menu",
 					item: [
-						{ label: "BS5 JS Builder", active: true, href: "#" },
-						{ label: "Bootstrap 5", href: "https://getbootstrap.com/docs/5.2/" },
-						{ label: "Font Awesome", href: "https://fontawesome.com/v6.2.0/icons" },
-						{ label: "Bootswatch", href: "https://bootswatch.com/" },
+						{
+							label: "BS5 JS Builder",
+							active: true,
+
+							//marker
+							href: "#",
+						},
+						{
+							label: "Bootstrap 5",
+
+							//marker
+							href: "https://getbootstrap.com/docs/5.2/",
+						},
+						{
+							label: "Font Awesome",
+
+							//marker
+							href: "https://fontawesome.com/v6.2.0/icons",
+						},
+						{
+							label: "Bootswatch",
+
+							//marker
+							href: "https://bootswatch.com/",
+						},
 					],
 				},
 			].map((i) => {
@@ -209,24 +248,32 @@ export default [
 					item: [
 						{
 							label: "Show info toast",
+
+							//marker
 							onclick: () => {
 								new toast("i", "Info toast").show();
 							},
 						},
 						{
 							label: "Show warning toast",
+
+							//marker
 							onclick: () => {
 								new toast("!", "Warning toast").show();
 							},
 						},
 						{
 							label: "Show success toast",
+
+							//marker
 							onclick: () => {
 								new toast("/", "Success toast").show();
 							},
 						},
 						{
 							label: "Show critical toast",
+
+							//marker
 							onclick: () => {
 								new toast("x", "Critical toast").show();
 							},

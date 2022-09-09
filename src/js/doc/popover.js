@@ -18,7 +18,9 @@ export default [
 		import: ["button", "tooltip"],
 		code: () => {
 			return new tooltip({
+				//marker
 				type: "popover",
+
 				title: "Popover title",
 				msg: "And here's some amazing content. It's very engaging. Right?",
 				trigger: null,
@@ -38,9 +40,11 @@ export default [
 		code: () => {
 			return [
 				new tooltip({
+					//marker
 					type: "popover",
-					msg: "Top popover",
 					placement: "top",
+
+					msg: "Top popover",
 					elem: new button({
 						label: "Popover on top",
 						color: "secondary",
@@ -48,9 +52,11 @@ export default [
 				}),
 
 				new tooltip({
+					//marker
 					type: "popover",
-					msg: "Left popover",
 					placement: "left",
+
+					msg: "Left popover",
 					elem: new button({
 						label: "Popover on left",
 						color: "secondary",
@@ -58,9 +64,11 @@ export default [
 				}),
 
 				new tooltip({
+					//marker
 					type: "popover",
-					msg: "Right popover",
 					placement: "right",
+
+					msg: "Right popover",
 					elem: new button({
 						label: "Popover on right",
 						color: "secondary",
@@ -68,9 +76,11 @@ export default [
 				}),
 
 				new tooltip({
+					//marker
 					type: "popover",
-					msg: "Bottom popover",
 					placement: "bottom",
+
+					msg: "Bottom popover",
 					elem: new button({
 						label: "Popover on bottom",
 						color: "secondary",
@@ -88,12 +98,14 @@ export default [
 				type: "popover",
 				title: "Popover title",
 				msg: "And here's some amazing content. It's very engaging. Right?",
-				trigger: "focus", //set dismiss on focus another element
 				elem: new button({
 					label: "Dismissible popover",
 					weight: "lg",
 					color: "danger",
 				}),
+
+				//marker
+				trigger: "focus", //set dismiss on focus another element
 			});
 		},
 	},
@@ -110,16 +122,20 @@ export default [
 				type: "popover",
 				title: "Popover title",
 				msg: "And here's some amazing content. It's very engaging. Right?",
-				trigger: "focus hover", //set dismiss on focus or hover another element
 				elem: new span({
 					class: "d-inline-block",
 					attr: { tabindex: "0" },
 					elem: new button({
 						label: "Dismissible popover",
 						color: "primary",
+
+						//marker
 						disabled: true,
 					}),
 				}),
+
+				//marker
+				trigger: "focus hover", //set dismiss on focus or hover another element
 			});
 		},
 	},

@@ -6,10 +6,11 @@ import div from "./div.js";
 import btnclose from "./btnclose.js";
 
 const defaultOption = {
+	title: undefined,
+	icon: undefined,
+
 	placement: "start",
 	close: true,
-	title: null,
-	icon: null,
 	showtitle: null,
 	iconafter: false,
 	scroll: true,
@@ -42,6 +43,16 @@ export default class offcanvas extends div {
 			opt = core.extend({}, defaultOption, opt);
 
 			opt.id = opt.id ? opt.id : core.UUID();
+
+			//set default icon if not provided
+			if (opt.icon === undefined) {
+				opt.icon = core.setting.icon();
+			}
+
+			//set default title if not provided
+			if (opt.title === undefined) {
+				opt.title = core.setting.title();
+			}
 
 			var header = null;
 			if (opt.close || opt.title) {

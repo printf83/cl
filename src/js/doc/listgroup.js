@@ -6,6 +6,7 @@ import h from "../base/h.js";
 import small from "../base/small.js";
 import p from "../base/p.js";
 import badge from "../base/badge.js";
+import list from "./list.js";
 
 export default [
 	{
@@ -36,7 +37,12 @@ export default [
 		code: () => {
 			return new listgroup({
 				item: [
-					{ elem: "An active item", active: true },
+					{
+						elem: "An active item",
+
+						//marker
+						active: true,
+					},
 					{ elem: "A second item" },
 					{ elem: "A third item" },
 					{ elem: "A fourth item" },
@@ -52,7 +58,12 @@ export default [
 		code: () => {
 			return new listgroup({
 				item: [
-					{ elem: "An disabled item", disabled: true },
+					{
+						elem: "An disabled item",
+
+						//marker
+						disabled: true,
+					},
 					{ elem: "A second item" },
 					{ elem: "A third item" },
 					{ elem: "A fourth item" },
@@ -70,11 +81,18 @@ export default [
 				type: "div",
 				item: [
 					{
-						href: "#",
 						elem: "A disabled item",
+
+						//marker
+						href: "#",
 						disabled: true,
 					},
-					{ href: "#", elem: "A second item" },
+					{
+						elem: "A second item",
+
+						//marker
+						href: "#",
+					},
 					{ href: "#", elem: "A third item" },
 					{ href: "#", elem: "A fourth item" },
 					{ href: "#", elem: "And a fifth one" },
@@ -91,11 +109,18 @@ export default [
 				type: "div",
 				item: [
 					{
-						onclick: () => {},
 						elem: "A disabled item",
+
+						//marker
+						onclick: () => {},
 						disabled: true,
 					},
-					{ onclick: () => {}, elem: "A second item" },
+					{
+						elem: "A second item",
+
+						//marker
+						onclick: () => {},
+					},
 					{ onclick: () => {}, elem: "A third item" },
 					{ onclick: () => {}, elem: "A fourth item" },
 					{ onclick: () => {}, elem: "And a fifth one" },
@@ -109,7 +134,6 @@ export default [
 		import: ["listgroup"],
 		code: () => {
 			return new listgroup({
-				flush: true,
 				item: [
 					{ elem: "An item" },
 					{ elem: "A second item" },
@@ -117,6 +141,9 @@ export default [
 					{ elem: "A fourth item" },
 					{ elem: "And a fifth one" },
 				],
+
+				//marker
+				flush: true,
 			});
 		},
 	},
@@ -126,7 +153,6 @@ export default [
 		import: ["listgroup"],
 		code: () => {
 			return new listgroup({
-				type: "ol",
 				item: [
 					{ elem: "An item" },
 					{ elem: "A second item" },
@@ -134,6 +160,9 @@ export default [
 					{ elem: "A fourth item" },
 					{ elem: "And a fifth one" },
 				],
+
+				//marker
+				type: "ol",
 			});
 		},
 	},
@@ -142,11 +171,13 @@ export default [
 		title: "Numbered custom content",
 		import: ["listgroup", "div", "badge"],
 		code: () => {
+			//marker
 			let el = [
 				new div({
 					class: "ms-2 me-auto",
 					elem: [new div("fw-bold", "Subheading"), "Cras justo odio"],
 				}),
+
 				new badge({
 					pill: true,
 					color: "primary",
@@ -155,7 +186,6 @@ export default [
 			];
 
 			return new listgroup({
-				type: "ol",
 				item: [
 					{
 						display: "flex",
@@ -176,6 +206,9 @@ export default [
 						elem: el,
 					},
 				],
+
+				//marker
+				type: "ol",
 			});
 		},
 	},
@@ -191,42 +224,14 @@ export default [
 		code: () => {
 			let el = [{ elem: "An item" }, { elem: "A second item" }, { elem: "A third item" }];
 
-			return [
-				new listgroup({
-					horizontal: true,
-					item: el,
-				}),
+			return [true, "sm", "md", "lg", "xl", "xxl", ["md", "xxl"]].map((i) => {
+				return new listgroup({
+					item: [{ elem: "An item" }, { elem: "A second item" }, { elem: "A third item" }],
 
-				new listgroup({
-					horizontal: "sm",
-					item: el,
-				}),
-
-				new listgroup({
-					horizontal: "md",
-					item: el,
-				}),
-
-				new listgroup({
-					horizontal: "lg",
-					item: el,
-				}),
-
-				new listgroup({
-					horizontal: "xl",
-					item: el,
-				}),
-
-				new listgroup({
-					horizontal: "xxl",
-					item: el,
-				}),
-
-				new listgroup({
-					horizontal: ["md", "xxl"],
-					item: el,
-				}),
-			];
+					//marker
+					horizontal: i,
+				});
+			});
 		},
 	},
 
@@ -235,7 +240,14 @@ export default [
 		import: ["listgroup"],
 		code: () => {
 			return new listgroup({
-				item: [{ color: "primary", elem: `A simple primary list group item` }],
+				item: [
+					{
+						elem: `A simple primary list group item`,
+
+						//marker
+						color: "primary",
+					},
+				],
 			});
 		},
 	},
@@ -246,7 +258,12 @@ export default [
 		code: () => {
 			return new listgroup({
 				item: ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map((i) => {
-					return { color: i, elem: `A simple ${i} list group item` };
+					return {
+						elem: `A simple ${i} list group item`,
+
+						//marker
+						color: i,
+					};
 				}),
 			});
 		},
@@ -260,10 +277,12 @@ export default [
 				type: "div",
 				item: ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map((i) => {
 					return {
+						elem: `A simple ${i} list group item`,
+
+						//marker
 						action: true,
 						href: "#",
 						color: i,
-						elem: `A simple ${i} list group item`,
 					};
 				}),
 			});
@@ -281,6 +300,8 @@ export default [
 					alignitem: "start",
 					elem: [
 						text,
+
+						//marker
 						new badge({
 							pill: true,
 							color: "primary",
@@ -345,25 +366,43 @@ export default [
 			return new listgroup({
 				type: "div",
 				item: [
-					{ type: "checkbox", value: "1", label: "First checkbox" },
 					{
+						label: "First checkbox",
+
+						//marker
+						type: "checkbox",
+						value: "1",
+					},
+					{
+						label: "Second checkbox",
+
+						//marker
 						type: "checkbox",
 						value: "2",
-						label: "Second checkbox",
 						checked: true,
 					},
 					{
+						label: "Third checkbox",
+
+						//marker
 						type: "checkbox",
 						value: "3",
-						label: "Third checkbox",
 						disabled: true,
 					},
 					{
+						label: "Fourth checkbox",
+
+						//marker
 						type: "checkbox",
 						value: "4",
-						label: "Fourth checkbox",
 					},
-					{ type: "checkbox", value: "5", label: "Fifth checkbox" },
+					{
+						label: "Fifth checkbox",
+
+						//marker
+						type: "checkbox",
+						value: "5",
+					},
 				],
 			});
 		},
@@ -377,36 +416,46 @@ export default [
 				type: "div",
 				item: [
 					{
+						label: "First radio",
+
+						//marker
 						type: "radio",
 						name: "g10",
 						value: "1",
-						label: "First radio",
 					},
 					{
+						label: "Second radio",
+
+						//marker
 						type: "radio",
 						name: "g10",
 						value: "2",
-						label: "Second radio",
 						checked: true,
 					},
 					{
+						label: "Third radio",
+
+						//marker
 						type: "radio",
 						name: "g10",
 						value: "3",
-						label: "Third radio",
 						disabled: true,
 					},
 					{
+						label: "Fourth radio",
+
+						//marker
 						type: "radio",
 						name: "g10",
 						value: "4",
-						label: "Fourth radio",
 					},
 					{
+						label: "Fifth radio",
+
+						//marker
 						type: "radio",
 						name: "g10",
 						value: "5",
-						label: "Fifth radio",
 					},
 				],
 			});
@@ -420,25 +469,43 @@ export default [
 			return new listgroup({
 				type: "div",
 				item: [
-					{ type: "switch", value: "1", label: "First switch" },
 					{
+						label: "First switch",
+
+						//marker
+						type: "switch",
+						value: "1",
+					},
+					{
+						label: "Second switch",
+
+						//marker
 						type: "switch",
 						value: "2",
-						label: "Second switch",
 						checked: true,
 					},
 					{
+						label: "Third switch",
+
+						//marker
 						type: "switch",
 						value: "3",
-						label: "Third switch",
 						disabled: true,
 					},
 					{
+						label: "Fourth switch",
+
+						//marker
 						type: "switch",
 						value: "4",
-						label: "Fourth switch",
 					},
-					{ type: "switch", value: "5", label: "Fifth switch" },
+					{
+						label: "Fifth switch",
+
+						//marker
+						type: "switch",
+						value: "5",
+					},
 				],
 			});
 		},
