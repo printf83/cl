@@ -237,19 +237,6 @@ const db_menu = [
 	},
 ];
 
-function markcode() {
-	let com = document.getElementsByClassName("com");
-	if (com && com.length > 0) {
-		Array.prototype.forEach.call(com, (i) => {
-			if (i.innerText === "/*marker*/") {
-				i.innerHTML = `<span class="nocode marker inline"></span>`;
-			} else if (i.innerText === "//marker") {
-				i.innerHTML = `<span class="nocode marker downline"></span>`;
-			}
-		});
-	}
-}
-
 let def_m1 = "Getting started";
 let def_m2 = "Introduction";
 let def_theme = null;
@@ -261,7 +248,7 @@ function reloadactivedoc() {
 		gen_content(cur_m1, cur_m2, () => {
 			core.init(document.getElementById("root"));
 			PR.prettyPrint();
-			markcode();
+			core.codemarker(document);
 		});
 	}
 }
@@ -311,7 +298,7 @@ function startmemoryleaktest(sender, limit) {
 							sender.classList.remove("active");
 							core.init(document.getElementById("root"));
 							PR.prettyPrint();
-							markcode();
+							core.codemarker(document);
 						}
 					);
 				},
@@ -753,7 +740,7 @@ function gen_menu(m1, m2, theme) {
 										gen_content(m1, m2, () => {
 											core.init(document.getElementById("root"));
 											PR.prettyPrint();
-											markcode();
+											core.codemarker(document);
 											sender.innerText = m2;
 										});
 									} else {

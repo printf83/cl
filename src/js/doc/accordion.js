@@ -48,7 +48,8 @@ export default [
 			};
 
 			return new accordion({
-				flush: true, //marker
+				//marker
+				flush: true,
 				item: [fn(1), fn(2), fn(3)],
 			});
 		},
@@ -67,7 +68,8 @@ export default [
 			};
 
 			return new accordion({
-				autoclose: false, //marker
+				//marker
+				autoclose: false,
 				item: [fn(1), fn(2), fn(3)],
 			});
 		},

@@ -35,7 +35,9 @@ export default [
 			return new button({
 				label: "Disable text wrapping button",
 				color: "primary",
-				nowrap: true, //marker
+
+				//marker
+				nowrap: true,
 			});
 		},
 	},
@@ -81,9 +83,11 @@ export default [
 			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark", "link"].map(
 				(i) => {
 					return new button({
-						outline: true, //marker
 						label: core.capitalize(i),
 						color: i,
+
+						//marker
+						outline: true,
 					});
 				}
 			);
@@ -97,14 +101,18 @@ export default [
 		code: () => {
 			return [
 				new button({
-					weight: "lg", //marker
 					label: "Large button",
 					color: "primary",
+
+					//marker
+					weight: "lg",
 				}),
 				new button({
-					weight: "lg", //marker
 					label: "Large button",
 					color: "secondary",
+
+					//marker
+					weight: "lg",
 				}),
 			];
 		},
@@ -117,14 +125,18 @@ export default [
 		code: () => {
 			return [
 				new button({
-					weight: "sm", //marker
 					label: "Small button",
 					color: "primary",
+
+					//marker
+					weight: "sm",
 				}),
 				new button({
-					weight: "sm", //marker
 					label: "Small button",
 					color: "secondary",
+
+					//marker
+					weight: "sm",
 				}),
 			];
 		},
@@ -137,16 +149,20 @@ export default [
 		code: () => {
 			return [
 				new button({
-					disabled: true, //marker
 					weight: "lg",
 					label: "Disabled button",
 					color: "primary",
+
+					//marker
+					disabled: true,
 				}),
 				new button({
-					disabled: true, //marker
 					weight: "lg",
 					label: "Disabled button",
 					color: "secondary",
+
+					//marker
+					disabled: true,
 				}),
 			];
 		},
@@ -159,18 +175,26 @@ export default [
 		code: () => {
 			return [
 				new button({
-					disabled: true, //marker
 					weight: "lg",
 					label: "Primary link",
 					color: "primary",
-					href: "javascript:void(0);", //marker
+
+					//marker
+					disabled: true,
+
+					//marker
+					href: "javascript:void(0);",
 				}),
 				new button({
-					disabled: true, //marker
 					weight: "lg",
 					label: "Link",
 					color: "secondary",
-					href: "javascript:void(0);", //marker
+
+					//marker
+					disabled: true,
+
+					//marker
+					href: "javascript:void(0);",
 				}),
 			];
 		},
@@ -193,10 +217,14 @@ export default [
 		import: ["div", "button"],
 		code: () => {
 			return new div({
-				display: "grid", //marker
+				//marker
+				display: "grid",
+
+				//marker
+				marginx: "auto",
+
 				gap: "2",
 				col: 6,
-				marginx: "auto", //marker
 				elem: [
 					new button({ label: "Button", color: "primary" }),
 					new button({ label: "Button", color: "primary" }),
@@ -211,8 +239,12 @@ export default [
 		import: ["div", "button"],
 		code: () => {
 			return new div({
-				display: ["grid", "md-flex"], //marker
-				justifycontent: "md-end", //marker
+				//marker
+				display: ["grid", "md-flex"],
+
+				//marker
+				justifycontent: "md-end",
+
 				gap: 2,
 				elem: [
 					new button({ label: "Button", color: "primary" }),
@@ -230,49 +262,28 @@ export default [
 		code: () => {
 			return [
 				new button({
-					toggle: true, //marker
 					label: "Toggle button",
 					color: "primary",
-				}),
-				new button({
-					toggle: true, //marker
-					active: true,
-					label: "Active toggle button",
-					color: "primary",
-				}),
-				new button({
-					toggle: true, //marker
-					label: "Disabled toggle button",
-					color: "primary",
-					disabled: true,
-				}),
-			];
-		},
-	},
 
-	{
-		title: "Toggle state button",
-		container: sample.stackcontainer,
-		import: ["button"],
-		code: () => {
-			return [
-				new button({
-					toggle: true, //marker
-					label: "Toggle button",
-					color: "primary",
+					//marker
+					toggle: true,
 				}),
 				new button({
-					toggle: true, //marker
-					active: true,
-					href: "javascript:void(0)",
 					label: "Active toggle button",
 					color: "primary",
+
+					//marker
+					toggle: true,
+					//marker
+					active: true,
 				}),
 				new button({
-					toggle: true, //marker
-					href: "javascript:void(0)",
 					label: "Disabled toggle button",
 					color: "primary",
+
+					//marker
+					toggle: true,
+					//marker
 					disabled: true,
 				}),
 			];
@@ -286,23 +297,34 @@ export default [
 		code: () => {
 			return [
 				new button({
-					toggle: true, //marker
-					href: "javascript:void(0)", //marker
 					label: "Toggle link",
 					color: "primary",
+
+					//marker
+					toggle: true,
+					//marker
+					href: "javascript:void(0)",
 				}),
 				new button({
-					toggle: true, //marker
-					active: true,
-					href: "javascript:void(0)", //marker
 					label: "Active toggle link",
 					color: "primary",
+
+					//marker
+					toggle: true,
+					//marker
+					href: "javascript:void(0)",
+					//marker
+					active: true,
 				}),
 				new button({
-					toggle: true, //marker
-					href: "javascript:void(0)", //marker
 					label: "Disabled toggle link",
 					color: "primary",
+
+					//marker
+					toggle: true,
+					//marker
+					href: "javascript:void(0)",
+					//marker
 					disabled: true,
 				}),
 			];

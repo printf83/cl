@@ -45,6 +45,19 @@ export const cookie = {
 	},
 };
 
+export const codemarker = (container) => {
+	let com = container.getElementsByClassName("com");
+	if (com && com.length > 0) {
+		Array.prototype.forEach.call(com, (i) => {
+			if (i.innerText === "/*marker*/") {
+				i.innerHTML = `<span class="nocode marker inline"></span>`;
+			} else if (i.innerText === "//marker") {
+				i.innerHTML = `<span class="nocode marker downline"></span>`;
+			}
+		});
+	}
+};
+
 export const isdarkcolor = (color) => {
 	let scolor = color;
 	if (color) {

@@ -21,7 +21,9 @@ export default [
 					level: i,
 					elem: [
 						`Example heading #${i}`,
-						new badge({ label: "New", marginstart: 3 }), //marker
+
+						//marker
+						new badge({ label: "New", marginstart: 3 }),
 					],
 				});
 			});
@@ -88,7 +90,9 @@ export default [
 			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map((i) => {
 				return new badge({
 					label: core.capitalize(i),
-					color: i, //marker
+
+					//marker
+					color: i,
 				});
 			});
 		},
@@ -101,9 +105,11 @@ export default [
 		code: () => {
 			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map((i) => {
 				return new badge({
-					pill: true, //marker
 					label: core.capitalize(i),
 					color: i,
+
+					//marker
+					pill: true,
 				});
 			});
 		},

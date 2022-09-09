@@ -29,12 +29,14 @@ export default [
 		code: () => {
 			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map((i) => {
 				return new alert.container({
-					color: i, //marker
 					elem: [
 						`A simple ${i} alert with `,
 						new alert.link({ label: "an example link", href: "javascript:void(0);" }),
 						`. Give it a click if you like.`,
 					],
+
+					//marker
+					color: i,
 				});
 			});
 		},
@@ -68,8 +70,10 @@ export default [
 		code: () => {
 			return ["i", "!!", "!", "?", "-", "x", "/"].map((i) => {
 				return new alert.container({
-					icon: i, //marker
 					elem: `An example alert with an <b>"${i}"</b> icon code`,
+
+					//marker
+					icon: i,
 				});
 			});
 		},
@@ -82,8 +86,10 @@ export default [
 			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map((i) => {
 				return new alert.container({
 					color: i,
-					close: true, //marker
 					elem: `<strong>Holy guacamole!</strong> You should check in on some of those fields below.`,
+
+					//marker
+					close: true,
 				});
 			});
 		},
@@ -114,10 +120,12 @@ export default [
 				close: true,
 				color: "danger",
 				elem: "<strong>Holy guacamole!</strong> You should check in on some of those fields below.",
+
 				//marker
 				onclose: (event) => {
 					new toast("!", fn(event.currentTarget, "onclose")).show();
 				},
+
 				//marker
 				onclosed: (event) => {
 					new toast("x", fn(event.currentTarget, "onclosed")).show();

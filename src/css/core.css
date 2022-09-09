@@ -95,3 +95,84 @@ input.wait.disabled {
     top: -0.2em;
     position: relative;
 }
+
+
+
+span.nocode.marker::before {
+
+    color: var(--bs-danger);
+    content: "\f08d";
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    -webkit-animation: fadeOut 2s;
+    animation: fadeOut 2s;
+    animation-iteration-count: infinite;
+}
+
+span.nocode.marker.downline::after {
+
+    color: var(--bs-secondary);
+    content: "marker";
+    margin-left: 0.5rem;
+    -webkit-animation: fadeOut 2s;
+    animation: fadeOut 2s;
+    animation-iteration-count: infinite;
+}
+
+/* span.nocode.marker{
+    line-height: 0;
+    position: relative;
+    height: 0;
+    display: inline-block;
+}
+
+span.nocode.marker.downline~span.pln {
+    line-height: 0;
+}
+
+span.nocode.marker::before {
+    
+    color: var(--bs-danger);
+    content: "\f08d";
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    -webkit-animation: fadeOut 2s;
+    animation: fadeOut 2s;
+    animation-iteration-count: infinite;
+}
+
+span.nocode.marker.downline::before {
+    position: absolute;
+    margin-top: 1rem;
+    margin-left: -1.5rem;
+} */
+
+
+
+@-webkit-keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
