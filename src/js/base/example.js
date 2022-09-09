@@ -30,6 +30,19 @@ const defaultOption = {
 	debug: false,
 };
 
+const fn = {
+	marker: (container) => {
+		let com = container.getElementsByClassName("com");
+		if (com && com.length > 0) {
+			console.log(`Found ${com.length} com`);
+			Array.prototype.forEach.call(com, (i) => {
+				if (i.innerText === "/*marker*/") {
+					i.innerHTML = `<span class="nocode marker">Marker</span>`;
+				}
+			});
+		}
+	},
+};
 /**
  * opt : {tagoption,icon,label}
  */
@@ -114,6 +127,8 @@ export default class example extends div {
 							new codepreview({ type: "html", code: core.html(opt.code()), container: null })
 						);
 						PR.prettyPrint();
+						fn.marker(sender);
+
 						sender.setAttribute("data-loaded", "true");
 					}
 				},
@@ -138,6 +153,7 @@ export default class example extends div {
 								})
 							);
 							PR.prettyPrint();
+							fn.marker(sender);
 							sender.setAttribute("data-loaded", "true");
 						}
 					},
@@ -162,6 +178,7 @@ export default class example extends div {
 							new codepreview({ type: "js", code: opt.source.join(`\n`), container: null })
 						);
 						PR.prettyPrint();
+						fn.marker(sender);
 						sender.setAttribute("data-loaded", "true");
 					}
 				},

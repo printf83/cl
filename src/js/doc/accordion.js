@@ -48,7 +48,7 @@ export default [
 			};
 
 			return new accordion({
-				flush: true,
+				/*marker*/ flush: true,
 				item: [fn(1), fn(2), fn(3)],
 			});
 		},
@@ -67,7 +67,7 @@ export default [
 			};
 
 			return new accordion({
-				autoclose: false,
+				/*marker*/ autoclose: false,
 				item: [fn(1), fn(2), fn(3)],
 			});
 		},
@@ -106,22 +106,26 @@ export default [
 				item: [
 					{
 						label: "Accordion Item 1",
-						onshow: (event) => {
+						elem: ["<b>This is the first item's accordion body.</b> ", sample.text()],
+
+						/*marker*/ onshow: (event) => {
 							new toast("i", fn(event.currentTarget, "onshow")).show();
 						},
-						onshown: (event) => {
+						/*marker*/ onshown: (event) => {
 							new toast("/", fn(event.currentTarget, "onshown")).show();
 						},
-						onhide: (event) => {
+						/*marker*/ onhide: (event) => {
 							new toast("!", fn(event.currentTarget, "onhide")).show();
 						},
-						onhidden: (event) => {
+						/*marker*/ onhidden: (event) => {
 							new toast("x", fn(event.currentTarget, "onhidden")).show();
 						},
-						elem: ["<b>This is the first item's accordion body.</b> ", sample.text()],
 					},
 					{
 						label: "Accordion Item 2",
+						elem: ["<b>This is the second item's accordion body.</b> ", sample.text()],
+
+						/*marker*/
 						onshow: (event) => {
 							new toast("i", fn(event.currentTarget, "onshow")).show();
 						},
@@ -134,10 +138,12 @@ export default [
 						onhidden: (event) => {
 							new toast("x", fn(event.currentTarget, "onhidden")).show();
 						},
-						elem: ["<b>This is the second item's accordion body.</b> ", sample.text()],
 					},
 					{
 						label: "Accordion Item 3",
+						elem: ["<b>This is the third item's accordion body.</b> ", sample.text()],
+
+						/*marker*/
 						onshow: (event) => {
 							new toast("i", fn(event.currentTarget, "onshow")).show();
 						},
@@ -150,7 +156,6 @@ export default [
 						onhidden: (event) => {
 							new toast("x", fn(event.currentTarget, "onhidden")).show();
 						},
-						elem: ["<b>This is the third item's accordion body.</b> ", sample.text()],
 					},
 				],
 			});

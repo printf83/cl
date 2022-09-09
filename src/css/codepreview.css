@@ -1,3 +1,18 @@
 .cl-codepreview-copy {
 	margin-top: -0.25rem;
 }
+
+
+.nocode.marker{
+	padding-left: 1rem;
+	color: var(--bs-danger);
+}
+
+.nocode.marker::before{
+	content: "\f08d";
+	font-family: "Font Awesome 6 Free";
+	font-weight: 900;
+	position: absolute;
+	margin-left: -1rem;
+	margin-top: 0.05rem;
+}
