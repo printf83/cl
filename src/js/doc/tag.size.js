@@ -29,6 +29,24 @@ export default [
 	},
 
 	{
+		msg: sample.usingclobject(),
+		container: sample.vstackcontainer,
+		viewclass: "cl-highlight-size",
+		import: ["tag"],
+		code: () => {
+			return [25, 50, 75, 100, "auto"].map((i) => {
+				return new tag({
+					tag: "div",
+					elem: `Width ${i}${typeof i === "string" ? "" : "%"}`,
+
+					//marker
+					width: i,
+				});
+			});
+		},
+	},
+
+	{
 		container: sample.stackcontainer,
 		viewclass: "cl-highlight-size-height",
 		import: ["tag"],
@@ -41,6 +59,25 @@ export default [
 
 					//marker
 					class: `h-${i}`,
+				});
+			});
+		},
+	},
+
+	{
+		msg: sample.usingclobject(),
+		container: sample.stackcontainer,
+		viewclass: "cl-highlight-size-height",
+		import: ["tag"],
+		code: () => {
+			return [25, 50, 75, 100, "auto"].map((i) => {
+				return new tag({
+					tag: "div",
+					display: "inline-block",
+					elem: `Height ${i}${typeof i === "string" ? "" : "%"}`,
+
+					//marker
+					height: i,
 				});
 			});
 		},
@@ -67,6 +104,29 @@ export default [
 	},
 
 	{
+		msg: sample.usingclobject(),
+		viewclass: "cl-highlight-div",
+		import: ["tag"],
+		code: () => {
+			return new tag({
+				tag: "div",
+
+				padding: 0,
+				elem: new tag({
+					tag: "div",
+					elem: "Max-width:100%",
+
+					//marker
+					maxwidth: 100,
+				}),
+
+				//marker
+				width: 100,
+			});
+		},
+	},
+
+	{
 		viewclass: "cl-highlight-div",
 		import: ["tag"],
 		code: () => {
@@ -78,10 +138,32 @@ export default [
 					tag: "div",
 					elem: "Max-height:100%",
 
-
 					//marker
 					class: "mh-100",
 					style: { width: "100px", height: "200px" },
+					//-
+				}),
+			});
+		},
+	},
+
+	{
+		msg: sample.usingclobject(),
+		viewclass: "cl-highlight-div",
+		import: ["tag"],
+		code: () => {
+			return new tag({
+				tag: "div",
+				height: "8rem",
+				padding: 0,
+				elem: new tag({
+					tag: "div",
+					elem: "Max-height:100%",
+
+					//marker
+					maxheight: 100,
+					width: "100px",
+					height: "200px",
 					//-
 				}),
 			});

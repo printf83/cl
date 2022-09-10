@@ -137,12 +137,16 @@ const defaultOption = {
 	start: null,
 	end: null,
 
-	// height: null,
-	// width: null,
-	// maxheight: null,
-	// maxwidth: null,
-	// minheight: null,
-	// minwidth: null,
+	height: null,
+	width: null,
+	maxheight: null,
+	maxwidth: null,
+	minheight: null,
+	minwidth: null,
+	viewheight: null,
+	viewwidth: null,
+	minviewheight: null,
+	minviewwidth: null,
 
 	elem: null,
 };
@@ -163,6 +167,175 @@ let gapManager = (opt) => {
 		return "gap";
 	}
 };
+
+let fnWH = {
+	main: (opt) => {
+		opt = fnWH.heightManager(opt);
+		opt = fnWH.widthManager(opt);
+		opt = fnWH.maxHeightManager(opt);
+		opt = fnWH.maxWidthManager(opt);
+		opt = fnWH.minHeightManager(opt);
+		opt = fnWH.minWidthManager(opt);
+		opt = fnWH.minViewHeightManager(opt);
+		opt = fnWH.minViewWidthManager(opt);
+		opt = fnWH.viewHeightManager(opt);
+		opt = fnWH.viewWidthManager(opt);
+
+		return opt;
+	},
+
+	heightManager: (opt) => {
+		if (opt.height) {
+			switch (true) {
+				case opt.height === "auto":
+				case opt.height === 25:
+				case opt.height === 50:
+				case opt.height === 75:
+				case opt.height === 100:
+					break;
+				default:
+					opt.style = core.merge.style(opt.style, {
+						height: typeof opt.height === "number" ? `${opt.height}%` : `${opt.height}`,
+					});
+
+					delete opt.height;
+					break;
+			}
+		}
+
+		return opt;
+	},
+	widthManager: (opt) => {
+		if (opt.width) {
+			switch (true) {
+				case opt.width === "auto":
+				case opt.width === 25:
+				case opt.width === 50:
+				case opt.width === 75:
+				case opt.width === 100:
+					break;
+				default:
+					opt.style = core.merge.style(opt.style, {
+						width: typeof opt.width === "number" ? `${opt.width}%` : `${opt.width}`,
+					});
+
+					delete opt.width;
+					break;
+			}
+		}
+
+		return opt;
+	},
+	maxHeightManager: (opt) => {
+		if (opt.maxheight) {
+			if (!opt.maxheight === 100) {
+				opt.style = core.merge.style(opt.style, {
+					"max-height": typeof opt.maxheight === "number" ? `${opt.maxheight}%` : `${opt.maxheight}`,
+				});
+
+				delete opt.maxheight;
+			}
+		}
+
+		return opt;
+	},
+	maxWidthManager: (opt) => {
+		if (opt.maxwidth) {
+			if (!opt.maxwidth === 100) {
+				opt.style = core.merge.style(opt.style, {
+					"max-width": typeof opt.maxwidth === "number" ? `${opt.maxwidth}%` : `${opt.maxwidth}`,
+				});
+
+				delete opt.maxwidth;
+			}
+		}
+
+		return opt;
+	},
+	minHeightManager: (opt) => {
+		if (opt.minheight) {
+			opt.style = core.merge.style(opt.style, {
+				"min-width": typeof opt.minheight === "number" ? `${opt.minheight}%` : `${opt.minheight}`,
+			});
+
+			delete opt.minheight;
+		}
+
+		return opt;
+	},
+	minWidthManager: (opt) => {
+		if (opt.minwidth) {
+			opt.style = core.merge.style(opt.style, {
+				"min-width": typeof opt.minwidth === "number" ? `${opt.minwidth}%` : `${opt.minwidth}`,
+			});
+
+			delete opt.minwidth;
+		}
+
+		return opt;
+	},
+	minViewHeightManager: (opt) => {
+		if (opt.minviewheight) {
+			if (!opt.minviewheight === 100) {
+				if (typeof opt.minviewheight === "number") {
+					opt.style = core.merge.style(opt.style, {
+						"min-height": `${opt.minviewheight}vh`,
+					});
+				}
+
+				delete opt.minviewheight;
+			}
+		}
+
+		return opt;
+	},
+	minViewWidthManager: (opt) => {
+		if (opt.minviewwidth) {
+			if (!opt.minviewwidth === 100) {
+				if (typeof opt.minviewwidth === "number") {
+					opt.style = core.merge.style(opt.style, {
+						"min-width": `${opt.minviewwidth}vw`,
+					});
+				}
+
+				delete opt.minviewwidth;
+			}
+		}
+
+		return opt;
+	},
+	viewHeightManager: (opt) => {
+		if (opt.viewheight) {
+			if (!opt.viewheight === 100) {
+				if (typeof opt.viewheight === "number") {
+					opt.style = core.merge.style(opt.style, {
+						height: `${opt.viewheight}vh`,
+					});
+				}
+
+				delete opt.viewheight;
+			}
+		}
+
+		return opt;
+	},
+	viewWidthManager: (opt) => {
+		if (opt.viewwidth) {
+			if (!opt.viewwidth === 100) {
+				if (typeof opt.viewwidth === "number") {
+					opt.style = core.merge.style(opt.style, {
+						width: `${opt.viewwidth}vw`,
+					});
+				}
+
+				delete opt.viewwidth;
+			}
+		}
+
+		return opt;
+	},
+};
+
 /**
  * opt : {tag,id,name,class,style,attr,href,onclick,onchange,onfocus,onblur,align,color,textcolor,bordercolor,border,elem}
  */
@@ -220,6 +393,9 @@ export default class tag {
 		if (!opt.textcolor && !opt.textbg && opt.color) {
 			opt.textbg = opt.color;
 		}
+
+		//height and width
+		opt = fnWH.main(opt);
 
 		this._d = {
 			tag: opt.tag,
@@ -282,6 +458,15 @@ export default class tag {
 						: null,
 					opt.lineheight ? `lh-${opt.lineheight}` : null,
 					opt.monospace ? "font-monospace" : null,
+
+					opt.height ? `h-${opt.height}` : null,
+					opt.width ? `w-${opt.width}` : null,
+					opt.maxheight ? `mh-${opt.maxheight}` : null,
+					opt.maxwidth ? `mw-${opt.maxwidth}` : null,
+					opt.viewheight ? `vh-${opt.viewheight}` : null,
+					opt.viewwidth ? `vw-${opt.viewwidth}` : null,
+					opt.minviewheight ? `min-vh-${opt.minviewheight}` : null,
+					opt.minviewwidth ? `min-vw-${opt.minviewwidth}` : null,
 
 					c3(opt.shadow, "shadow", "shadow-none", "shadow-$1", null, "shadow"),
 					c3(opt.border, "border", "border-0", "border-$1", null, "border"),
