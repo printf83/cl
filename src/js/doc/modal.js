@@ -60,6 +60,7 @@ export default [
 				//marker
 				title: null,
 				icon: null,
+				//-
 
 				elem: new msg({
 					weight: "md",
@@ -89,6 +90,7 @@ export default [
 					type: "fab",
 					icon: "bootstrap",
 				},
+				//-
 
 				elem: new msg({
 					weight: "md",
@@ -139,6 +141,7 @@ export default [
 			return new dlg.inputbox(
 				//marker
 				"text",
+				//-
 
 				"This is example inputbox text",
 
@@ -146,6 +149,8 @@ export default [
 				(event, data) => {
 					new toast("i", `Result from dlg.inputbox is : ${JSON.stringify(data)}`).show();
 				},
+				//-
+
 				"Custom Dialog Title",
 				{ debug: true } //this last argument is for this documentation preview only
 			);
@@ -170,6 +175,7 @@ export default [
 					],
 					name: "value",
 				}),
+				//-
 
 				"This is example inputbox select",
 
@@ -177,6 +183,8 @@ export default [
 				(event, data) => {
 					new toast("i", `Result from dlg.inputbox is : ${JSON.stringify(data)}`).show();
 				},
+				//-
+
 				null,
 				{ debug: true } //this last argument is for this documentation preview only
 			);
@@ -214,6 +222,7 @@ export default [
 							i.hasOwnProperty("option")
 								? new input({ type: "select", option: i.option, name: "value" })
 								: i.type,
+							//-
 
 							`This is example inputbox with <b>${i.type}</b> input`,
 							[
@@ -221,6 +230,8 @@ export default [
 								(event, data) => {
 									new toast("/", `You give <b>${data.value}</b> in inputbox`).show();
 								},
+								//-
+
 								(event) => {
 									new toast("x", `You not give anything in inputbox`).show();
 								},
@@ -325,6 +336,7 @@ export default [
 						{ value: "sg", label: "Singapore" },
 					],
 				}),
+				//-
 			]);
 
 			return new dlg.inputbox(
@@ -335,6 +347,8 @@ export default [
 				(event, data) => {
 					new toast("/", `You give <b>${JSON.stringify(data)}</b> in inputbox`).show();
 				},
+				//-
+
 				null,
 				{ debug: true } //this last argument is for this documentation preview only
 			);
@@ -433,6 +447,7 @@ export default [
 						{ value: "sg", label: "Singapore" },
 					],
 				}),
+				//-
 			]);
 
 			return new button({
@@ -452,6 +467,7 @@ export default [
 								elem: `${JSON.stringify(data)}`,
 							}).show();
 						}
+						//-
 					).show();
 				},
 			});
@@ -467,6 +483,7 @@ export default [
 			return new dlg.confirmbox(
 				//marker
 				"?",
+				//-
 
 				"This is example msgbox with <b>Okay and Cancel</b> button",
 
@@ -474,6 +491,8 @@ export default [
 				() => {
 					new toast("i", "Callback").show();
 				},
+				//-
+
 				null,
 				{ debug: true } //this last argument is for this documentation preview only
 			);
@@ -498,6 +517,7 @@ export default [
 						new dlg.confirmbox(
 							//marker
 							i.icon,
+							//-
 
 							`This is example confirmbox with <b>${i.icon}</b> icon`,
 
@@ -516,6 +536,7 @@ export default [
 									},
 								},
 							]
+							//-
 						).show();
 					},
 				});
@@ -548,13 +569,17 @@ export default [
 					new modal({
 						//marker
 						dark: true,
+						//-
 
 						elem: "Modal body text goes here.",
 						button: [
+							//marker
 							{
 								label: "Save changes",
 								onclick: () => {},
 							},
+							//-
+
 							"Cancel",
 						],
 					}).show();
@@ -582,6 +607,7 @@ export default [
 
 				//marker
 				footer: new input({ type: "switch", name: "showagain", label: "Show again" }),
+
 				debug: true, // documentation purpose only
 			});
 		},
@@ -603,9 +629,6 @@ export default [
 					icon: i.icon,
 					onclick: (e) => {
 						new modal({
-							//marker
-							backdropcolor: i.backdropcolor,
-
 							elem: new msg({
 								weight: "md",
 								icon: i.icon,
@@ -621,6 +644,9 @@ export default [
 								},
 								"Close",
 							],
+
+							//marker
+							backdropcolor: i.backdropcolor,
 						}).show();
 					},
 				});
@@ -637,9 +663,6 @@ export default [
 				color: "primary",
 				onclick: () => {
 					new modal({
-						//marker
-						static: false,
-
 						elem: "By default, modal dialog will not close if you click outside or press escape key. To allow modal dialog to close when click outside or press escape key, set <code>static: false</code> option",
 						button: [
 							{
@@ -650,6 +673,9 @@ export default [
 							},
 							"Close",
 						],
+
+						//marker
+						static: false,
 					}).show();
 				},
 			});
@@ -665,9 +691,6 @@ export default [
 				color: "primary",
 				onclick: () => {
 					new modal({
-						//marker
-						scrollable: false,
-
 						elem: [
 							new p({
 								elem: "By default, modal dialog will activate scrolling inside modal dialog. To disabled it, set <code>scrollable: false</code> option.",
@@ -688,6 +711,9 @@ export default [
 							},
 							"Close",
 						],
+
+						//marker
+						scrollable: false,
 					}).show();
 				},
 			});
@@ -703,9 +729,6 @@ export default [
 				color: "primary",
 				onclick: () => {
 					new modal({
-						//marker
-						center: false,
-
 						elem: "By default, modal dialog will vertically centered when shown. To disabled it, set <code>center: false</code> option.",
 						button: [
 							{
@@ -716,6 +739,9 @@ export default [
 							},
 							"Close",
 						],
+
+						//marker
+						center: false,
 					}).show();
 				},
 			});
@@ -748,6 +774,8 @@ export default [
 						},
 					},
 				],
+				//-
+
 				debug: true, // documentation purpose only
 			});
 		},
@@ -780,6 +808,8 @@ export default [
 											label: "button",
 										}),
 									}),
+									//-
+
 									" triggers a popover on click.",
 								],
 							}),
@@ -796,6 +826,8 @@ export default [
 											label: "This link",
 										}),
 									}),
+									//-
+
 									" and ",
 
 									//marker
@@ -807,6 +839,8 @@ export default [
 											label: "that link",
 										}),
 									}),
+									//-
+
 									" have tooltips on hover.",
 								],
 							}),
@@ -906,6 +940,7 @@ export default [
 					],
 				}).show();
 			};
+			//-
 
 			return [
 				new button({
@@ -952,7 +987,6 @@ export default [
 				}).show();
 			};
 
-			//marker
 			var dlgSecondModal = () => {
 				new modal({
 					title: "Modal 2",
@@ -966,6 +1000,7 @@ export default [
 					},
 				}).show();
 			};
+			//-
 
 			return new button({
 				label: "Show first modal",
@@ -987,11 +1022,11 @@ export default [
 				color: "primary",
 				onclick: () => {
 					new modal({
-						//marker
-						animate: false,
-
 						elem: "Dialog without fade effect",
 						button: "Okay",
+
+						//marker
+						animate: false,
 					}).show();
 				},
 			});
@@ -1005,11 +1040,11 @@ export default [
 		code: () => {
 			let fn = (size) => {
 				new modal({
-					//marker
-					size: size,
-
 					elem: `Dialog with <code>size : <b>${size}</b></code> option`,
 					button: ["Okay"],
+
+					//marker
+					size: size,
 				}).show();
 			};
 
@@ -1046,11 +1081,11 @@ export default [
 		code: () => {
 			let fn = (fullscreen) => {
 				new modal({
-					//marker
-					fullscreen: fullscreen,
-
 					elem: `Dialog with <code>fullscreen : <b>${fullscreen}</b></code> option`,
 					button: ["Okay"],
+
+					//marker
+					fullscreen: fullscreen,
 				}).show();
 			};
 
@@ -1158,6 +1193,7 @@ export default [
 						onhideprevented: (event) => {
 							new toast("-", fn(event.currentTarget, "onhideprevented")).show();
 						},
+						//-
 					}).show();
 				},
 			});

@@ -43,6 +43,7 @@ export default [
 					//marker
 					type: "popover",
 					placement: "top",
+					//-
 
 					msg: "Top popover",
 					elem: new button({
@@ -55,6 +56,7 @@ export default [
 					//marker
 					type: "popover",
 					placement: "left",
+					//-
 
 					msg: "Left popover",
 					elem: new button({
@@ -67,6 +69,7 @@ export default [
 					//marker
 					type: "popover",
 					placement: "right",
+					//-
 
 					msg: "Right popover",
 					elem: new button({
@@ -79,6 +82,7 @@ export default [
 					//marker
 					type: "popover",
 					placement: "bottom",
+					//-
 
 					msg: "Bottom popover",
 					elem: new button({

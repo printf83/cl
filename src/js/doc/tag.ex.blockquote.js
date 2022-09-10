@@ -27,12 +27,14 @@ export default [
 		import: ["div", "blockquote"],
 		code: () => {
 			return new div({
-				elem:
+				elem: [
 					//marker
 					new blockquote({
 						cite: "https://getbootstrap.com/",
 						elem: "Bootstrap · The most popular HTML, CSS, and JS library in the world.",
 					}),
+					//-
+				],
 			});
 		},
 	},

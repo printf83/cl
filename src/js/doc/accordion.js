@@ -125,6 +125,7 @@ export default [
 						onhidden: (event) => {
 							new toast("x", fn(event.currentTarget, "onhidden")).show();
 						},
+						//-
 					},
 					{
 						label: "Accordion Item 2",
@@ -142,6 +143,7 @@ export default [
 						onhidden: (event) => {
 							new toast("x", fn(event.currentTarget, "onhidden")).show();
 						},
+						//-
 					},
 					{
 						label: "Accordion Item 3",
@@ -160,6 +162,7 @@ export default [
 						onhidden: (event) => {
 							new toast("x", fn(event.currentTarget, "onhidden")).show();
 						},
+						//-
 					},
 				],
 			});

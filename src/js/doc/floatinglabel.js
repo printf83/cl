@@ -26,6 +26,7 @@ export default [
 					floatlabel: true,
 					type: "email",
 					autocomplete: "email",
+					//-
 				}),
 
 				new input({
@@ -35,6 +36,7 @@ export default [
 					floatlabel: true,
 					type: "password",
 					autocomplete: "current-password",
+					//-
 				}),
 			];
 		},
@@ -51,6 +53,7 @@ export default [
 				//marker
 				floatlabel: true,
 				value: "user@example.com",
+				//-
 			});
 		},
 	},
@@ -71,6 +74,7 @@ export default [
 						core.validate(event.currentTarget.parentElement, (result) => {
 							new toast("i", `Result: ${result}`).show();
 						});
+						//-
 					},
 				}),
 
@@ -80,6 +84,7 @@ export default [
 				required: true,
 				invalid: "Please provide email",
 				valid: "It's looks good",
+				//-
 			});
 		},
 	},
@@ -94,6 +99,7 @@ export default [
 				//marker
 				floatlabel: true,
 				type: "textarea",
+				//-
 			});
 		},
 	},
@@ -109,6 +115,7 @@ export default [
 				//marker
 				floatlabel: true,
 				style: { height: "100px" },
+				//-
 			});
 		},
 	},
@@ -129,6 +136,7 @@ export default [
 				//marker
 				floatlabel: true,
 				type: "select",
+				//-
 			});
 		},
 	},

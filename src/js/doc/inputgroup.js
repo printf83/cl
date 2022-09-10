@@ -50,6 +50,7 @@ export default [
 					//marker
 					before: "$",
 					after: ".00",
+					//-
 				}),
 
 				//important if you create inputgroup manually,
@@ -134,6 +135,7 @@ export default [
 					//marker
 					before: "Small",
 					weight: "sm",
+					//-
 				}),
 
 				new input({
@@ -149,6 +151,7 @@ export default [
 					//marker
 					before: "Large",
 					weight: "lg",
+					//-
 				}),
 			];
 		},
@@ -170,6 +173,7 @@ export default [
 								//marker
 								flex: true,
 								class: "mt-0",
+								//-
 							}),
 						}),
 						new input({
@@ -191,6 +195,7 @@ export default [
 								//marker
 								flex: true,
 								class: "mt-0",
+								//-
 							}),
 						}),
 						new input({
@@ -295,6 +300,7 @@ export default [
 						color: "secondary",
 						label: "Button",
 					}),
+					//-
 				}),
 
 				new input({
@@ -307,6 +313,7 @@ export default [
 						color: "secondary",
 						label: "Button",
 					}),
+					//-
 				}),
 
 				//using inputgroup.container
@@ -388,6 +395,7 @@ export default [
 						//marker
 						container: null,
 					}),
+					//-
 				}),
 
 				new input({
@@ -405,6 +413,7 @@ export default [
 						//marker
 						container: null,
 					}),
+					//-
 				}),
 
 				new input({
@@ -431,6 +440,7 @@ export default [
 						//marker
 						container: null,
 					}),
+					//-
 				}),
 			];
 		},
@@ -466,6 +476,7 @@ export default [
 						//marker
 						container: null,
 					}),
+					//-
 				}),
 
 				new input({
@@ -484,6 +495,7 @@ export default [
 						//marker
 						container: null,
 					}),
+					//-
 				}),
 			];
 		},
@@ -528,6 +540,7 @@ export default [
 						color: "secondary",
 						label: "Button",
 					}),
+					//-
 				}),
 
 				new input({
@@ -540,6 +553,7 @@ export default [
 						color: "secondary",
 						label: "Button",
 					}),
+					//-
 				}),
 			];
 		},
@@ -574,6 +588,7 @@ export default [
 						color: "secondary",
 						label: "Button",
 					}),
+					//-
 				}),
 
 				new input({
@@ -585,6 +600,7 @@ export default [
 						color: "secondary",
 						label: "Button",
 					}),
+					//-
 				}),
 			];
 		},

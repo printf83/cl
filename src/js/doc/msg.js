@@ -135,6 +135,7 @@ export default [
 				//marker
 				divider: false,
 				centerbutton: true,
+				//-
 
 				elem: new msg({
 					icon: sample.icon(),

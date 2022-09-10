@@ -28,6 +28,7 @@ export default [
 					//marker
 					type: "checkbox",
 					checked: true,
+					//-
 				}),
 			];
 		},
@@ -64,6 +65,7 @@ export default [
 					//marker
 					disabled: true,
 					checked: true,
+					//-
 				}),
 			];
 		},
@@ -81,6 +83,7 @@ export default [
 					//marker
 					name: "g1",
 					type: "radio",
+					//-
 				}),
 				new input({
 					label: "Checked radio",
@@ -89,6 +92,7 @@ export default [
 					name: "g1",
 					type: "radio",
 					checked: true,
+					//-
 				}),
 			];
 		},
@@ -107,6 +111,7 @@ export default [
 					name: "g2",
 					type: "radio",
 					disabled: true,
+					//-
 				}),
 				new input({
 					label: "Disabled checked radio",
@@ -115,6 +120,7 @@ export default [
 					type: "radio",
 					checked: true,
 					disabled: true,
+					//-
 				}),
 			];
 		},
@@ -138,6 +144,7 @@ export default [
 					//marker
 					type: "switch",
 					checked: true,
+					//-
 				}),
 				new input({
 					label: "Disabled switch checkbox input",
@@ -145,6 +152,7 @@ export default [
 					//marker
 					type: "switch",
 					disabled: true,
+					//-
 				}),
 				new input({
 					label: "Disabled checked switch checkbox input",
@@ -153,6 +161,7 @@ export default [
 					type: "switch",
 					checked: true,
 					disabled: true,
+					//-
 				}),
 			];
 		},
@@ -212,6 +221,7 @@ export default [
 					//marker
 					type: "checkbox",
 					inline: true,
+					//-
 				}),
 				new input({
 					label: "2",
@@ -219,6 +229,7 @@ export default [
 					//marker
 					type: "checkbox",
 					inline: true,
+					//-
 				}),
 				new input({
 					label: "3 (disabled)",
@@ -227,6 +238,7 @@ export default [
 					type: "checkbox",
 					inline: true,
 					disabled: true,
+					//-
 				}),
 			];
 		},
@@ -245,6 +257,7 @@ export default [
 					name: "g5",
 					type: "radio",
 					inline: true,
+					//-
 				}),
 				new input({
 					label: "2",
@@ -253,6 +266,7 @@ export default [
 					name: "g5",
 					type: "radio",
 					inline: true,
+					//-
 				}),
 				new input({
 					label: "3 (disabled)",
@@ -262,6 +276,7 @@ export default [
 					type: "radio",
 					inline: true,
 					disabled: true,
+					//-
 				}),
 			];
 		},
@@ -301,6 +316,7 @@ export default [
 				//marker
 				type: "checkbox",
 				checked: true,
+				//-
 			});
 		},
 	},
@@ -316,6 +332,7 @@ export default [
 				//marker
 				type: "checkbox",
 				disabled: true,
+				//-
 			});
 		},
 	},
@@ -334,6 +351,7 @@ export default [
 					name: "g7",
 					type: "radio",
 					checked: true,
+					//-
 				}),
 
 				new button({
@@ -343,6 +361,7 @@ export default [
 					//marker
 					name: "g7",
 					type: "radio",
+					//-
 				}),
 
 				new button({
@@ -353,6 +372,7 @@ export default [
 					name: "g7",
 					type: "radio",
 					disabled: true,
+					//-
 				}),
 
 				new button({
@@ -362,6 +382,7 @@ export default [
 					//marker
 					name: "g7",
 					type: "radio",
+					//-
 				}),
 			];
 		},
@@ -380,6 +401,7 @@ export default [
 					//marker
 					type: "checkbox",
 					outline: true,
+					//-
 				}),
 				new button({
 					label: "Checked",
@@ -389,6 +411,7 @@ export default [
 					type: "checkbox",
 					outline: true,
 					checked: true,
+					//-
 				}),
 				new button({
 					label: "Checked success radio",
@@ -399,6 +422,7 @@ export default [
 					outline: true,
 					checked: true,
 					color: "success",
+					//-
 				}),
 				new button({
 					label: "Danger radio",
@@ -408,6 +432,7 @@ export default [
 					type: "radio",
 					outline: true,
 					color: "danger",
+					//-
 				}),
 			];
 		},

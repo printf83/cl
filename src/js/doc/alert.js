@@ -39,6 +39,7 @@ export default [
 
 						//marker
 						new alert.link({ label: "an example link", href: "javascript:void(0);" }),
+						//-
 
 						`. Give it a click if you like.`,
 					],
@@ -67,6 +68,7 @@ export default [
 						marginbottom: 0,
 						elem: "Whenever you need to, be sure to use margin utilities to keep things nice and tidy.",
 					}),
+					//-
 				],
 			});
 		},
@@ -136,6 +138,7 @@ export default [
 				onclosed: (event) => {
 					new toast("x", fn(event.currentTarget, "onclosed")).show();
 				},
+				//-
 			});
 		},
 	},

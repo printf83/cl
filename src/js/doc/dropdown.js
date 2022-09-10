@@ -140,6 +140,7 @@ export default [
 					//marker
 					splittoggle: true,
 					color: i,
+					//-
 				});
 			});
 		},
@@ -408,6 +409,7 @@ export default [
 					{ value: "-" },
 					{ value: "4", label: "Separated link" },
 				],
+				//-
 			});
 		},
 	},
@@ -590,10 +592,12 @@ export default [
 					label: "Dropdown",
 					color: "secondary",
 					option: [
+						//marker
 						{
-							value: "-", //marker
-							label: "Dropdown header", //marker
+							value: "-",
+							label: "Dropdown header",
 						},
+						//-
 
 						{ href: "javascript:void(0);", label: "Action" },
 						{ href: "javascript:void(0);", label: "Another action" },
@@ -615,9 +619,13 @@ export default [
 						{ href: "javascript:void(0);", label: "Action" },
 						{ href: "javascript:void(0);", label: "Another action" },
 						{ href: "javascript:void(0);", label: "Something else here" },
+
+						//marker
 						{
-							value: "-", //marker
+							value: "-",
 						},
+						//-
+
 						{ href: "javascript:void(0);", label: "Separated link" },
 					],
 				}),
@@ -644,6 +652,7 @@ export default [
 									new p({ marginbottom: 0, elem: "And this is more example text." }),
 								],
 							}),
+							//-
 						},
 					],
 				}),
@@ -694,6 +703,7 @@ export default [
 									}),
 								],
 							}),
+							//-
 						},
 						{ value: "-" },
 						{ href: "javascript:void(0)", label: "new around here? Sign up" },
@@ -839,6 +849,7 @@ export default [
 				onhidden: (event) => {
 					new toast("x", fn(event.currentTarget, "onhidden")).show();
 				},
+				//-
 			});
 		},
 	},

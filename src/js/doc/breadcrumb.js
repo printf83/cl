@@ -79,7 +79,8 @@ export default [
 					{ label: "Data", active: true, href: "#" },
 				],
 
-				divider: "''", //marker
+				//marker
+				divider: "''",
 			});
 		},
 	},

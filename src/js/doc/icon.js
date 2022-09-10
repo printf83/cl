@@ -309,6 +309,7 @@ export default [
 					//marker
 					beat: true,
 					fade: true,
+					//-
 				});
 			});
 		},
@@ -424,6 +425,7 @@ export default [
 						color: "danger",
 						icon: sample.icon(),
 					},
+					//-
 				}),
 				new button({
 					label: "Button",
@@ -440,6 +442,7 @@ export default [
 					icon: sample.icon(),
 					iconafter: true,
 					showlabel: "md",
+					//-
 				}),
 				new button({
 					label: "Button",
@@ -449,6 +452,7 @@ export default [
 					icon: sample.icon(),
 					iconafter: true,
 					showlabel: "md",
+					//-
 				}),
 				new button({
 					label: "Button",
@@ -458,6 +462,7 @@ export default [
 					icon: sample.icon(),
 					iconafter: true,
 					showlabel: "md",
+					//-
 				}),
 			];
 		},
@@ -519,6 +524,7 @@ export default [
 					//marker
 					icon: sample.icon(),
 					iconafter: true,
+					//-
 
 					option: [
 						{
@@ -569,6 +575,7 @@ export default [
 							icon: { icon: sample.icon(), color: "danger", bounce: true },
 							iconafter: true,
 							showlabel: "md",
+							//-
 						}),
 					],
 				}),

@@ -86,6 +86,7 @@ export default [
 						//marker
 						href: "#",
 						disabled: true,
+						//-
 					},
 					{
 						elem: "A second item",
@@ -114,6 +115,7 @@ export default [
 						//marker
 						onclick: () => {},
 						disabled: true,
+						//-
 					},
 					{
 						elem: "A second item",
@@ -184,6 +186,7 @@ export default [
 					label: "14",
 				}),
 			];
+			//-
 
 			return new listgroup({
 				item: [
@@ -283,6 +286,7 @@ export default [
 						action: true,
 						href: "#",
 						color: i,
+						//-
 					};
 				}),
 			});
@@ -307,6 +311,7 @@ export default [
 							color: "primary",
 							label: badgeLabel,
 						}),
+						//-
 					],
 				};
 			};
@@ -372,6 +377,7 @@ export default [
 						//marker
 						type: "checkbox",
 						value: "1",
+						//-
 					},
 					{
 						label: "Second checkbox",
@@ -380,6 +386,7 @@ export default [
 						type: "checkbox",
 						value: "2",
 						checked: true,
+						//-
 					},
 					{
 						label: "Third checkbox",
@@ -388,6 +395,7 @@ export default [
 						type: "checkbox",
 						value: "3",
 						disabled: true,
+						//-
 					},
 					{
 						label: "Fourth checkbox",
@@ -395,6 +403,7 @@ export default [
 						//marker
 						type: "checkbox",
 						value: "4",
+						//-
 					},
 					{
 						label: "Fifth checkbox",
@@ -402,6 +411,7 @@ export default [
 						//marker
 						type: "checkbox",
 						value: "5",
+						//-
 					},
 				],
 			});
@@ -422,6 +432,7 @@ export default [
 						type: "radio",
 						name: "g10",
 						value: "1",
+						//-
 					},
 					{
 						label: "Second radio",
@@ -431,6 +442,7 @@ export default [
 						name: "g10",
 						value: "2",
 						checked: true,
+						//-
 					},
 					{
 						label: "Third radio",
@@ -440,6 +452,7 @@ export default [
 						name: "g10",
 						value: "3",
 						disabled: true,
+						//-
 					},
 					{
 						label: "Fourth radio",
@@ -448,6 +461,7 @@ export default [
 						type: "radio",
 						name: "g10",
 						value: "4",
+						//-
 					},
 					{
 						label: "Fifth radio",
@@ -456,6 +470,7 @@ export default [
 						type: "radio",
 						name: "g10",
 						value: "5",
+						//-
 					},
 				],
 			});
@@ -475,6 +490,7 @@ export default [
 						//marker
 						type: "switch",
 						value: "1",
+						//-
 					},
 					{
 						label: "Second switch",
@@ -483,6 +499,7 @@ export default [
 						type: "switch",
 						value: "2",
 						checked: true,
+						//-
 					},
 					{
 						label: "Third switch",
@@ -491,6 +508,7 @@ export default [
 						type: "switch",
 						value: "3",
 						disabled: true,
+						//-
 					},
 					{
 						label: "Fourth switch",
@@ -498,6 +516,7 @@ export default [
 						//marker
 						type: "switch",
 						value: "4",
+						//-
 					},
 					{
 						label: "Fifth switch",
@@ -505,6 +524,7 @@ export default [
 						//marker
 						type: "switch",
 						value: "5",
+						//-
 					},
 				],
 			});

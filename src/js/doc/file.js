@@ -83,6 +83,7 @@ export default [
 				deletelabel: null,
 				deleteicon: "trash-alt",
 				deletecolor: "danger",
+				//-
 			});
 		},
 	},
@@ -119,6 +120,7 @@ export default [
 							},
 							sender
 						);
+						//-
 					},
 				}),
 			];

@@ -236,6 +236,7 @@ export default [
 				//marker
 				caption: "Table caption",
 				captiontop: true,
+				//-
 
 				color: "primary",
 				striped: true,

@@ -53,6 +53,7 @@ export default [
 				labellast: "Last",
 				labelnext: new icon("arrow-right"),
 				labelprev: new icon("arrow-left"),
+				//-
 			});
 		},
 	},
@@ -193,6 +194,7 @@ export default [
 					//function called when skip change
 					new toast("i", `Skip changed to ${event.detail.skip}`).show();
 				},
+				//-
 			});
 		},
 	},

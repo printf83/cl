@@ -253,6 +253,7 @@ export default [
 							onclick: () => {
 								new toast("i", "Info toast").show();
 							},
+							//-
 						},
 						{
 							label: "Show warning toast",
@@ -261,6 +262,7 @@ export default [
 							onclick: () => {
 								new toast("!", "Warning toast").show();
 							},
+							//-
 						},
 						{
 							label: "Show success toast",
@@ -269,6 +271,7 @@ export default [
 							onclick: () => {
 								new toast("/", "Success toast").show();
 							},
+							//-
 						},
 						{
 							label: "Show critical toast",
@@ -277,6 +280,7 @@ export default [
 							onclick: () => {
 								new toast("x", "Critical toast").show();
 							},
+							//-
 						},
 					],
 				},

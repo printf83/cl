@@ -95,6 +95,7 @@ export default [
 							label: "Navbar",
 							href: "#",
 						}),
+						//-
 					],
 				}),
 
@@ -144,6 +145,7 @@ export default [
 						//marker
 						icon: sample.icon(),
 						label: "Navbar",
+						//-
 					}),
 				],
 			});
@@ -167,6 +169,7 @@ export default [
 						//this id must same with new navbar.collapsecontainer id
 						//marker
 						target: `#${id}`,
+
 						toggle: "collapse",
 					}),
 
@@ -178,6 +181,7 @@ export default [
 						//this id must same with new navbar.toggle id
 						//marker
 						id: id,
+
 						elem: [
 							new navbar.itemcontainer({
 								//marker
@@ -254,6 +258,7 @@ export default [
 											{ value: "-" },
 											{ href: "#", label: "Separated link" },
 										],
+										//-
 									}),
 									new navbar.item({
 										label: "Disabled",
@@ -289,6 +294,7 @@ export default [
 							new button({ label: "Search", color: "success", outline: true }),
 						],
 					}),
+					//-
 				],
 			});
 		},
@@ -306,6 +312,7 @@ export default [
 					new navbar.brand({
 						label: "Navbar",
 					}),
+					//-
 
 					new navbar.formcontainer({
 						elem: [
@@ -367,6 +374,7 @@ export default [
 						weight: "sm",
 					}),
 				],
+				//-
 			});
 		},
 	},
@@ -495,6 +503,7 @@ export default [
 					//marker
 					dark: true,
 					color: "dark",
+					//-
 				}),
 				new navbar.container({
 					expand: "lg",
@@ -503,6 +512,7 @@ export default [
 					//marker
 					dark: true,
 					color: "primary",
+					//-
 				}),
 				new navbar.container({
 					expand: "lg",
@@ -745,6 +755,7 @@ export default [
 							target: `#${id1}`,
 							toggle: "collapse",
 						}),
+						//-
 
 						new navbar.collapsecontainer({
 							//marker
@@ -792,6 +803,7 @@ export default [
 							target: `#${id2}`,
 							toggle: "collapse",
 						}),
+						//-
 
 						new navbar.collapsecontainer({
 							//marker
@@ -830,6 +842,7 @@ export default [
 							target: `#${id3}`,
 							toggle: "collapse",
 						}),
+						//-
 
 						new navbar.brand({
 							//brand after toggle
@@ -899,6 +912,7 @@ export default [
 							target: `#${id}`,
 							toggle: "collapse",
 						}),
+						//-
 					],
 				}),
 			];
@@ -994,6 +1008,7 @@ export default [
 						onhidden: (event) => {
 							new toast("x", fn(event.currentTarget, "onhidden")).show();
 						},
+						//-
 					}),
 				],
 			});
@@ -1082,6 +1097,7 @@ export default [
 						onhidden: (event) => {
 							new toast("x", fn(event.currentTarget, "onhidden")).show();
 						},
+						//-
 					}),
 				],
 			});

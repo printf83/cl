@@ -59,6 +59,7 @@ export default [
 									query: sample.query_data,
 									name: "customer",
 								})
+								//-
 							);
 
 							//load data into generated list container
@@ -69,6 +70,7 @@ export default [
 								document.getElementById(btnGenerate).classList.add("d-none");
 								document.getElementById(resultOutputId).classList.remove("d-none");
 							});
+							//-
 						}, sender);
 					},
 				}),
@@ -181,6 +183,7 @@ export default [
 										//custom container template
 										return new ul({ class: "list-group", elem: opt.row(data, opt) });
 									},
+									//-
 								})
 							);
 
@@ -269,6 +272,7 @@ export default [
 
 										return result;
 									},
+									//-
 								})
 							);
 
@@ -335,6 +339,7 @@ export default [
 										//custom group setup
 										return new list.group({ view: opt.view, key: data.key, name: data.name });
 									},
+									//-
 								})
 							);
 
@@ -415,6 +420,7 @@ export default [
 											allow_more: opt.allow_more,
 										});
 									},
+									//-
 								})
 							);
 
@@ -496,6 +502,7 @@ export default [
 									allow_delete: true,
 									allow_action: true,
 									allow_copy: true,
+									//-
 								})
 							);
 
@@ -574,6 +581,7 @@ export default [
 										//custom action when more button is clicked
 										new toast("i", `Call from id:${id}`).show();
 									},
+									//-
 								})
 							);
 
@@ -691,6 +699,7 @@ export default [
 											}),
 										];
 									},
+									//-
 								})
 							);
 

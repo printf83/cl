@@ -56,6 +56,7 @@ export default [
 					icon: { type: "fab", icon: "bootstrap" },
 					label: "Bootstrap",
 					color: "success",
+					//-
 				}),
 				new a({
 					href: "https://getbootstrap.com/docs/5.2",
@@ -68,6 +69,7 @@ export default [
 					icon: { type: "fab", icon: "bootstrap" },
 					label: "Bootstrap",
 					color: "light",
+					//-
 				}),
 			];
 		},

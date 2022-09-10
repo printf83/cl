@@ -84,28 +84,31 @@ export default [
 					type: "reset",
 				}),
 				new input({
-					class: "btn",
 					color: "primary",
+					value: "Input button",
 
 					//marker
+					class: "btn",
 					type: "button",
-					value: "Input button",
+					//-
 				}),
 				new input({
-					class: "btn",
-					type: "submit",
-
-					//marker
 					color: "primary",
 					value: "Input submit",
-				}),
-				new input({
-					class: "btn",
-					type: "reset",
 
 					//marker
+					class: "btn",
+					type: "submit",
+					//-
+				}),
+				new input({
 					color: "primary",
 					value: "Input reset",
+
+					//marker
+					class: "btn",
+					type: "reset",
+					//-
 				}),
 			];
 		},
@@ -218,6 +221,7 @@ export default [
 					//marker
 					disabled: true,
 					href: "javascript:void(0);",
+					//-
 				}),
 				new button({
 					weight: "lg",
@@ -227,6 +231,7 @@ export default [
 					//marker
 					disabled: true,
 					href: "javascript:void(0);",
+					//-
 				}),
 			];
 		},
@@ -249,10 +254,6 @@ export default [
 		import: ["div", "button"],
 		code: () => {
 			return new div({
-				//marker
-				display: "grid",
-				marginx: "auto",
-
 				gap: 2,
 				col: 6,
 				elem: [
@@ -260,6 +261,11 @@ export default [
 					new button({ label: "Button", color: "primary" }),
 					new button({ label: "Button", color: "primary" }),
 				],
+
+				//marker
+				display: "grid",
+				marginx: "auto",
+				//-
 			});
 		},
 	},
@@ -269,16 +275,17 @@ export default [
 		import: ["div", "button"],
 		code: () => {
 			return new div({
-				//marker
-				display: ["grid", "md-flex"],
-				justifycontent: "md-end",
-
 				gap: 2,
 				elem: [
 					new button({ label: "Button", color: "primary" }),
 					new button({ label: "Button", color: "primary" }),
 					new button({ label: "Button", color: "primary" }),
 				],
+
+				//marker
+				display: ["grid", "md-flex"],
+				justifycontent: "md-end",
+				//-
 			});
 		},
 	},
@@ -303,6 +310,7 @@ export default [
 					//marker
 					toggle: true,
 					active: true,
+					//-
 				}),
 				new button({
 					label: "Disabled toggle button",
@@ -311,6 +319,7 @@ export default [
 					//marker
 					toggle: true,
 					disabled: true,
+					//-
 				}),
 			];
 		},
@@ -329,6 +338,7 @@ export default [
 					//marker
 					toggle: true,
 					href: "javascript:void(0)",
+					//-
 				}),
 				new button({
 					label: "Active toggle link",
@@ -338,6 +348,7 @@ export default [
 					toggle: true,
 					href: "javascript:void(0)",
 					active: true,
+					//-
 				}),
 				new button({
 					label: "Disabled toggle link",
@@ -347,6 +358,7 @@ export default [
 					toggle: true,
 					href: "javascript:void(0)",
 					disabled: true,
+					//-
 				}),
 			];
 		},
@@ -373,6 +385,7 @@ export default [
 								elem: `Button <b>${core.elemInfo(sender)}</b> event <b>onclick</b> trigged`,
 							}).show();
 						},
+						//-
 					});
 				}
 			);

@@ -122,9 +122,6 @@ export default [
 		import: ["carousel", "sample"],
 		code: () => {
 			return new carousel({
-				//marker
-				fade: true,
-
 				control: true,
 				item: [
 					sample.img(857, 428, "primary"),
@@ -134,6 +131,9 @@ export default [
 					sample.img(857, 428, "info"),
 					sample.img(857, 428, "dark"),
 				],
+
+				//marker
+				fade: true,
 			});
 		},
 	},
@@ -180,9 +180,6 @@ export default [
 		import: ["carousel", "sample"],
 		code: () => {
 			return new carousel({
-				//marker
-				touch: false,
-
 				control: true,
 				item: [
 					sample.img(857, 428, "primary"),
@@ -192,6 +189,9 @@ export default [
 					sample.img(857, 428, "info"),
 					sample.img(857, 428, "dark"),
 				],
+
+				//marker
+				touch: false,
 			});
 		},
 	},
@@ -201,9 +201,6 @@ export default [
 		import: ["carousel", "sample"],
 		code: () => {
 			return new carousel({
-				//marker
-				dark: true,
-
 				control: true,
 				indicators: true,
 				item: [
@@ -238,6 +235,9 @@ export default [
 						src: sample.img(857, 428, "dark"),
 					},
 				],
+
+				//marker
+				dark: true,
 			});
 		},
 	},
@@ -318,6 +318,7 @@ export default [
 								onslid: (event) => {
 									new toast("/", fn(event.currentTarget, "onslid")).show();
 								},
+								//-
 							})
 						);
 					},

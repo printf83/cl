@@ -239,7 +239,7 @@ export default [
 			return new modal({
 				elem: new tab({
 					type: "tab",
-					flush: true, //!important
+					flush: true, //marker
 					item: [
 						{ label: "First", elem: `<b>This is the first item's tab body.</b> ${sample.text()}` },
 						{
@@ -270,7 +270,7 @@ export default [
 			return new modal({
 				elem: new tab({
 					type: "pill",
-					flush: true, //!important
+					flush: true, //marker
 					item: [
 						{ label: "First", elem: `<b>This is the first item's tab body.</b> ${sample.text()}` },
 						{
@@ -326,6 +326,9 @@ export default [
 				item: [
 					{
 						label: "First",
+						elem: `<b>This is the first item's tab body.</b> ${sample.text()}`,
+
+						//marker
 						onshow: (event) => {
 							new toast("i", fn(event.currentTarget, "onshow")).show();
 						},
@@ -338,10 +341,13 @@ export default [
 						onhidden: (event) => {
 							new toast("x", fn(event.currentTarget, "onhidden")).show();
 						},
-						elem: `<b>This is the first item's tab body.</b> ${sample.text()}`,
+						//-
 					},
 					{
 						label: "Second",
+						elem: `<b>This is the second item's tab body.</b> ${sample.text()}`,
+
+						//marker
 						onshow: (event) => {
 							new toast("i", fn(event.currentTarget, "onshow")).show();
 						},
@@ -354,10 +360,13 @@ export default [
 						onhidden: (event) => {
 							new toast("x", fn(event.currentTarget, "onhidden")).show();
 						},
-						elem: `<b>This is the second item's tab body.</b> ${sample.text()}`,
+						//-
 					},
 					{
 						label: "Third",
+						elem: `<b>This is the third item's tab body.</b> ${sample.text()}`,
+
+						//marker
 						onshow: (event) => {
 							new toast("i", fn(event.currentTarget, "onshow")).show();
 						},
@@ -370,7 +379,7 @@ export default [
 						onhidden: (event) => {
 							new toast("x", fn(event.currentTarget, "onhidden")).show();
 						},
-						elem: `<b>This is the third item's tab body.</b> ${sample.text()}`,
+						//-
 					},
 					{ label: "Disabled", disabled: true, elem: "This is the last item's tab body." },
 				],

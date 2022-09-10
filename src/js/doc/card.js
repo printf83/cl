@@ -80,6 +80,7 @@ export default [
 							elem: "Link 2",
 						}),
 					],
+					//-
 				}),
 			});
 		},
@@ -98,6 +99,7 @@ export default [
 						placement: "top",
 						src: sample.img(286, 143),
 					}),
+					//-
 
 					new card.body({
 						elem: new card.text({
@@ -122,6 +124,7 @@ export default [
 					flush: true,
 					item: [{ elem: "An item" }, { elem: "A second item" }, { elem: "A third item" }],
 				}),
+				//-
 			});
 		},
 	},
@@ -141,6 +144,7 @@ export default [
 						item: [{ elem: "An item" }, { elem: "A second item" }, { elem: "A third item" }],
 					}),
 				],
+				//-
 			});
 		},
 	},
@@ -163,6 +167,7 @@ export default [
 						elem: "Card footer",
 					}),
 				],
+				//-
 			});
 		},
 	},
@@ -525,6 +530,7 @@ export default [
 							placement: "top",
 							src: sample.img(857, 428),
 						}),
+						//-
 
 						new card.body({
 							elem: [
@@ -554,6 +560,7 @@ export default [
 							placement: "bottom",
 							src: sample.img(857, 428),
 						}),
+						//-
 					],
 				}),
 			];
@@ -581,6 +588,7 @@ export default [
 							new card.text({ color: "muted", elem: new small("Last updated 3 mins ago") }),
 						],
 					}),
+					//-
 				],
 			});
 		},
@@ -593,8 +601,7 @@ export default [
 			return new card.container({
 				class: "h-100",
 				elem: [
-					//marker
-					new card.horizontal({
+					/*marker*/ new card.horizontal({
 						size: "sm-4",
 						left: [
 							new card.img({
@@ -643,7 +650,6 @@ export default [
 		import: ["card"],
 		code: () => {
 			return new card.container({
-				color: "primary", //marker
 				style: { width: "18rem" },
 				elem: [
 					new card.header("Header"),
@@ -656,6 +662,9 @@ export default [
 						],
 					}),
 				],
+
+				//marker
+				color: "primary",
 			});
 		},
 	},
@@ -667,7 +676,6 @@ export default [
 		code: () => {
 			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map((i) => {
 				return new card.container({
-					color: i, //marker
 					style: { width: "18rem" },
 					elem: [
 						new card.header("Header"),
@@ -680,6 +688,9 @@ export default [
 							],
 						}),
 					],
+
+					//marker
+					color: i,
 				});
 			});
 		},
@@ -691,7 +702,6 @@ export default [
 		import: ["card"],
 		code: () => {
 			return new card.container({
-				bordercolor: "primary", //marker
 				style: { width: "18rem" },
 				elem: [
 					new card.header("Header"),
@@ -705,6 +715,8 @@ export default [
 						],
 					}),
 				],
+
+				bordercolor: "primary",
 			});
 		},
 	},
@@ -716,7 +728,6 @@ export default [
 		code: () => {
 			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map((i) => {
 				return new card.container({
-					bordercolor: i, //marker
 					style: { width: "18rem" },
 					elem: [
 						new card.header("Header"),
@@ -730,6 +741,9 @@ export default [
 							],
 						}),
 					],
+
+					//marker
+					bordercolor: i,
 				});
 			});
 		},
@@ -797,6 +811,7 @@ export default [
 			return new card.group({
 				elem: [fn(str[0]), fn(str[1]), fn(str[2])],
 			});
+			//-
 		},
 	},
 
@@ -830,6 +845,7 @@ export default [
 			return new card.group({
 				elem: [fn(str[0]), fn(str[1]), fn(str[2])],
 			});
+			//-
 		},
 	},
 
@@ -859,7 +875,6 @@ export default [
 
 			return new div({
 				row: true,
-				rowcol: [1, "md-2"], //marker
 				gap: 4,
 				elem: [
 					new div({ col: true, elem: fn(str[0]) }),
@@ -867,6 +882,9 @@ export default [
 					new div({ col: true, elem: fn(str[1]) }),
 					new div({ col: true, elem: fn(str[2]) }),
 				],
+
+				//marker
+				rowcol: [1, "md-2"],
 			});
 		},
 	},
@@ -897,7 +915,6 @@ export default [
 
 			return new div({
 				row: true,
-				rowcol: [1, "md-3"], //marker
 				gap: 4,
 				elem: [
 					new div({ col: true, elem: fn(str[0]) }),
@@ -905,6 +922,9 @@ export default [
 					new div({ col: true, elem: fn(str[1]) }),
 					new div({ col: true, elem: fn(str[2]) }),
 				],
+
+				//marker
+				rowcol: [1, "md-3"],
 			});
 		},
 	},
@@ -921,7 +941,6 @@ export default [
 
 			let fn = (str) => {
 				return new card.container({
-					class: "h-100", //marker
 					elem: [
 						new card.img({
 							placement: "top",
@@ -931,6 +950,9 @@ export default [
 							elem: [new card.title("Card Title"), new card.text(str)],
 						}),
 					],
+
+					//marker
+					class: "h-100",
 				});
 			};
 
@@ -960,7 +982,6 @@ export default [
 
 			let fn = (str) => {
 				return new card.container({
-					class: "h-100", //marker
 					elem: [
 						new card.img({
 							placement: "top",
@@ -971,6 +992,9 @@ export default [
 						}),
 						new card.footer("Last updated 3 mins ago"),
 					],
+
+					//marker
+					class: "h-100",
 				});
 			};
 

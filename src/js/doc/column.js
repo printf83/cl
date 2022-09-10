@@ -52,12 +52,13 @@ export default [
 			return new div(
 				"container",
 
-				//marker
 				["row align-items-start", "row align-items-center", "row align-items-end"].map((i) => {
 					return new div({
-						class: i,
 						style: { "min-height": "10rem" },
 						elem: Array(3).fill(new div("col", "One of three columns")),
+
+						//marker
+						class: i,
 					});
 				})
 			);
@@ -73,10 +74,12 @@ export default [
 				container: true,
 				elem: ["start", "center", "end"].map((i) => {
 					return new div({
-						alignitem: i, //marker
 						row: true,
 						style: { "min-height": "10rem" },
 						elem: Array(3).fill(new div({ col: true, elem: "One of three columns" })),
+
+						//marker
+						alignitem: i,
 					});
 				}),
 			});
@@ -115,9 +118,11 @@ export default [
 					style: { "min-height": "10rem" },
 					elem: ["start", "center", "end"].map((i) => {
 						return new div({
-							alignself: i, //marker
 							col: true,
 							elem: "One of three columns",
+
+							//marker
+							alignself: i,
 						});
 					}),
 				}),
@@ -132,7 +137,7 @@ export default [
 		code: () => {
 			return new div(
 				"container",
-				//marker
+
 				[
 					"row justify-content-start",
 					"row justify-content-center",
@@ -141,7 +146,7 @@ export default [
 					"row justify-content-between",
 					"row justify-content-evenly",
 				].map((i) => {
-					return new div(i, Array(2).fill(new div("col-4", "One of two columns")));
+					return new div(/*marker*/ i, Array(2).fill(new div("col-4", "One of two columns")));
 				})
 			);
 		},
@@ -156,9 +161,11 @@ export default [
 				container: true,
 				elem: ["start", "center", "end", "around", "between", "evenly"].map((i) => {
 					return new div({
-						justifycontent: i, //marker
 						row: true,
 						elem: Array(2).fill(new div({ col: 4, elem: "One of two columns" })),
+
+						//marker
+						justifycontent: i,
 					});
 				}),
 			});

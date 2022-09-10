@@ -81,6 +81,7 @@ export default [
 					//marker
 					disabled: true,
 					readonly: true,
+					//-
 				}),
 			];
 		},
@@ -118,6 +119,7 @@ export default [
 					//marker
 					readonly: true,
 					plaintext: true,
+					//-
 				}),
 				new input({
 					label: "Password",
@@ -144,8 +146,9 @@ export default [
 					autocomplete: "email",
 
 					//marker
-					readonly: true, 
-					plaintext: true, 
+					readonly: true,
+					plaintext: true,
+					//-
 				}),
 				new input({
 					label: "Password",
@@ -181,20 +184,23 @@ export default [
 					//marker
 					type: "file",
 					multiple: true,
+					//-
 				}),
 				new input({
 					label: "Disabled file input example",
 
 					//marker
-					type: "file", 
+					type: "file",
 					disabled: true,
+					//-
 				}),
 				new input({
 					label: "Small file input example",
 
 					//marker
-					type: "file", 
+					type: "file",
 					weight: "sm",
+					//-
 				}),
 				new input({
 					label: "Large file input example",
@@ -202,6 +208,7 @@ export default [
 					//marker
 					type: "file",
 					weight: "lg",
+					//-
 				}),
 			];
 		},
@@ -274,6 +281,7 @@ export default [
 					onchange: (event) => {
 						new toast("/", fn(event.currentTarget, "onchange")).show();
 					},
+					//-
 				}),
 				new input({
 					label: "Example textarea",
@@ -292,6 +300,7 @@ export default [
 					onchange: (event) => {
 						new toast("/", fn(event.currentTarget, "onchange")).show();
 					},
+					//-
 				}),
 			];
 		},

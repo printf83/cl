@@ -127,6 +127,7 @@ export default [
 								document.getElementById(resultOutputId).value = result;
 							}
 						);
+						//-
 					},
 				}),
 				new input({ type: "text", label: "Result", id: resultOutputId, copyctl: true }),
@@ -201,6 +202,7 @@ export default [
 									document.getElementById(resultOutputId).value = result;
 								}
 							);
+							//-
 						}).show();
 					},
 				}),
@@ -281,6 +283,7 @@ export default [
 									PR.prettyPrint();
 								}
 							);
+							//-
 						}).show();
 					},
 				}),
@@ -356,6 +359,7 @@ export default [
 									document.getElementById(resultOutputId).value = result;
 								}
 							);
+							//-
 						}).show();
 					},
 				}),
@@ -433,6 +437,7 @@ export default [
 								PR.prettyPrint();
 							}
 						);
+						//-
 					},
 				}),
 				new div({
@@ -477,6 +482,7 @@ export default [
 									limit: 10,
 									skip: 0,
 								},
+								//-
 							},
 							(result) => {
 								//result
@@ -588,6 +594,7 @@ export default [
 								);
 							}
 						);
+						//-
 					},
 				}),
 				new div({
@@ -734,6 +741,7 @@ export default [
 						},
 						sender: sender,
 					});
+					//-
 				},
 			});
 		},

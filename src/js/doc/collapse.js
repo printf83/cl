@@ -68,8 +68,11 @@ export default [
 					elem: new button({ label: "Toggle both element", color: "primary" }),
 				}),
 				new collapse.container({
-					id: id1, //marker
-					class: id3, //marker
+					//marker
+					id: id1,
+					class: id3,
+					//-
+
 					elem: new card.container({
 						elem: [
 							new card.header("Card 1"),
@@ -80,8 +83,11 @@ export default [
 					}),
 				}),
 				new collapse.container({
-					id: id2, //marker
-					class: id3, //marker
+					//marker
+					id: id2,
+					class: id3,
+					//-
+
 					elem: new card.container({
 						elem: [
 							new card.header("Card 2"),
@@ -161,6 +167,7 @@ export default [
 					onhidden: (event) => {
 						new toast("x", fn(event.currentTarget, "onhidden")).show();
 					},
+					//-
 				}),
 			];
 		},

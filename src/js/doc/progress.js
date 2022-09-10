@@ -52,6 +52,7 @@ export default [
 					//marker
 					min: 75,
 					max: 300,
+					//-
 				},
 			});
 		},
@@ -68,6 +69,7 @@ export default [
 						//marker
 						color: color,
 						value: value,
+						//-
 					},
 				});
 			};
@@ -91,6 +93,7 @@ export default [
 				new progress.container({
 					//marker
 					height: 20,
+
 					item: { value: 75 },
 				}),
 			];
@@ -108,6 +111,7 @@ export default [
 					{ color: "secondary", value: 30 },
 					{ color: "info", value: 20 },
 				],
+				//-
 			});
 		},
 	},

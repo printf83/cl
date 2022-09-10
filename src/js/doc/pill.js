@@ -82,6 +82,7 @@ export default [
 					//marker
 					icon: "i",
 					title: "Info",
+					//-
 
 					label: "Label",
 				},
