@@ -56,17 +56,21 @@ export default [
 			return [
 				new tag({
 					tag: "div",
-					display: "inline",
 					padding: 2,
 					color: "primary",
 					elem: "d-inline",
+
+					//marker
+					display: "inline",
 				}),
 				new tag({
 					tag: "div",
-					display: "inline",
 					padding: 2,
 					color: "dark",
 					elem: "d-inline",
+
+					//marker
+					display: "inline",
 				}),
 			];
 		},
@@ -78,17 +82,21 @@ export default [
 			return [
 				new tag({
 					tag: "div",
-					display: "block",
 					padding: 2,
 					color: "primary",
 					elem: "d-inline",
+
+					//marker
+					display: "block",
 				}),
 				new tag({
 					tag: "div",
-					display: "block",
 					padding: 2,
 					color: "dark",
 					elem: "d-inline",
+
+					//marker
+					display: "block",
 				}),
 			];
 		},
@@ -139,7 +147,13 @@ export default [
 				{ label: "hide on lg and wider screens", opt: "lg-none" },
 				{ label: "hide on screens smaller than lg", opt: ["none", "lg-block"] },
 			].map((i) => {
-				return new tag({ tag: "div", display: i.opt, elem: i.label });
+				return new tag({
+					tag: "div",
+					elem: i.label,
+
+					//marker
+					display: i.opt,
+				});
 			});
 		},
 	},
@@ -176,7 +190,13 @@ export default [
 					opt: ["none", "lg-block", "print-block"],
 				},
 			].map((i) => {
-				return new tag({ tag: "div", display: i.opt, elem: i.label });
+				return new tag({
+					tag: "div",
+					elem: i.label,
+
+					//marker
+					display: i.opt,
+				});
 			});
 		},
 	},

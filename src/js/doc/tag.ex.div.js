@@ -1,6 +1,7 @@
 "use strict";
 import sample from "./sample.js";
 import div from "../base/div.js";
+import ul from "../base/ul.js";
 
 export default [
 	{
@@ -33,7 +34,14 @@ export default [
 
 	{
 		title: "Easy option",
-		msg: "This component also supported easy option.",
+		msg: [
+			"This component also supported easy option.",
+			new ul({
+				item: ["object", "class,elem", "elem"].map((i) => {
+					return `<code>new code(${i})</code>`;
+				}),
+			}),
+		],
 		container: sample.vstackcontainer,
 		import: ["div"],
 		code: () => {

@@ -36,8 +36,10 @@ export default [
 			].map((i) => {
 				return new tag({
 					tag: "div",
-					textcolor: i,
 					elem: `Example element with <code>textcolor: ${i}</code>`,
+
+					//marker
+					textcolor: i,
 				});
 			});
 		},
@@ -53,7 +55,14 @@ export default [
 				textcolor: "muted",
 				elem: [
 					"Muted text with a ",
-					new tag({ tag: "a", href: "#", textcolor: "reset", elem: "reset link" }),
+					new tag({
+						tag: "a",
+						href: "#",
+						elem: "reset link",
+
+						//marker
+						textcolor: "reset",
+					}),
 					".",
 				],
 			});
@@ -67,9 +76,11 @@ export default [
 			return [null, "primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map((i) => {
 				return new tag({
 					tag: "a",
-					linkcolor: i,
 					href: "#",
 					elem: `Example link with <code>linkcolor: ${i}</code>`,
+
+					//marker
+					linkcolor: i,
 				});
 			});
 		},

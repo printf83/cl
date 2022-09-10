@@ -60,7 +60,7 @@ export const codemarker = (container) => {
 		Array.prototype.forEach.call(com, (i) => {
 			if (i.innerText === "/*marker*/") {
 				i.innerHTML = `<span class="nocode marker inline"></span>`;
-			} else if (i.innerText === "/*]*/") {
+			} else if (i.innerText === "") {
 				i.innerHTML = `<span class="nocode marker inline-end"></span>`;
 			} else if (i.innerText === "//marker") {
 				i.innerHTML = `<span class="nocode marker downline"></span>`;

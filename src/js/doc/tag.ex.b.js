@@ -2,6 +2,7 @@
 import sample from "./sample.js";
 import b from "../base/b.js";
 import div from "../base/div.js";
+import ul from "../base/ul.js";
 
 export default [
 	{
@@ -26,12 +27,16 @@ export default [
 			return new div({
 				elem: [
 					"This is ",
+
+					//marker
 					new b({
 						attr: {
 							"data-test": "test",
 						},
 						elem: "bold",
 					}),
+					//-
+
 					" text",
 				],
 			});
@@ -40,7 +45,14 @@ export default [
 
 	{
 		title: "Easy option",
-		msg: "This component also supported easy option.",
+		msg: [
+			"This component also supported easy option.",
+			new ul({
+				item: ["object", "class,elem", "elem"].map((i) => {
+					return `<code>new b(${i})</code>`;
+				}),
+			}),
+		],
 		container: sample.vstackcontainer,
 		import: ["b"],
 		code: () => {

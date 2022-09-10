@@ -125,7 +125,7 @@ span.nocode.marker.downline::after {
     animation-iteration-count: infinite;
 }
 
-span.nocode.marker.inline::after {
+/* span.nocode.marker.inline::after {
 
     color: var(--bs-secondary);
     content: "[";
@@ -133,9 +133,9 @@ span.nocode.marker.inline::after {
     -webkit-animation: fadeOut 2s;
     animation: fadeOut 2s;
     animation-iteration-count: infinite;
-}
+} */
 
-span.nocode.marker.inline-end::before {
+/* span.nocode.marker.inline-end::before {
 
     color: var(--bs-secondary);
     content: "]";
@@ -143,7 +143,7 @@ span.nocode.marker.inline-end::before {
     -webkit-animation: fadeOut 2s;
     animation: fadeOut 2s;
     animation-iteration-count: infinite;
-}
+} */
 
 span.nocode.marker.downline-end::after {
 

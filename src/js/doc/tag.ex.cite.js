@@ -2,6 +2,7 @@
 import sample from "./sample.js";
 import div from "../base/div.js";
 import cite from "../base/cite.js";
+import ul from "../base/ul.js";
 
 export default [
 	{
@@ -26,12 +27,16 @@ export default [
 			return new div({
 				elem: [
 					"This is ",
+
+					//marker
 					new cite({
 						attr: {
 							"data-test": "test",
 						},
 						elem: "cite",
 					}),
+					//-
+
 					" text",
 				],
 			});
@@ -40,7 +45,14 @@ export default [
 
 	{
 		title: "Easy option",
-		msg: "This component also supported easy option.",
+		msg: [
+			"This component also supported easy option.",
+			new ul({
+				item: ["object", "class,elem", "elem"].map((i) => {
+					return `<code>new cite(${i})</code>`;
+				}),
+			}),
+		],
 		container: sample.vstackcontainer,
 		import: ["cite"],
 		code: () => {

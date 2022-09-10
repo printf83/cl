@@ -121,13 +121,9 @@ export default [
 					label: i.label,
 					icon: i.icon,
 					onclick: () => {
-						new dlg.msgbox(
-							/*marker*/ i.icon /*]*/,
-							`This is example msgbox with <b>${i.icon}</b> icon`,
-							() => {
-								new toast(i.icon, "After user click <b>Okay</b> button").show();
-							}
-						).show();
+						new dlg.msgbox(/*marker*/ i.icon, `This is example msgbox with <b>${i.icon}</b> icon`, () => {
+							new toast(i.icon, "After user click <b>Okay</b> button").show();
+						}).show();
 					},
 				});
 			});
@@ -500,7 +496,9 @@ export default [
 					icon: i.icon,
 					onclick: () => {
 						new dlg.confirmbox(
-							/*marker*/ i.icon /*]*/,
+							//marker
+							i.icon,
+
 							`This is example confirmbox with <b>${i.icon}</b> icon`,
 
 							//marker

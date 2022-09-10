@@ -23,6 +23,8 @@ export default [
 			return [null, true, "top", "end", "bottom", "start", ["bottom", "start"]].map((i) => {
 				return new tag({
 					tag: "div",
+
+					//marker
 					border: i,
 				});
 			});
@@ -39,6 +41,8 @@ export default [
 				(i) => {
 					return new tag({
 						tag: "div",
+
+						//marker
 						border: Array.isArray(i) ? i : ["border", i],
 					});
 				}
@@ -57,6 +61,8 @@ export default [
 				(i) => {
 					return new tag({
 						tag: "div",
+
+						//marker
 						bordercolor: i,
 					});
 				}
@@ -74,6 +80,8 @@ export default [
 			return [null, 0, 1, 2, 3, 4, 5].map((i) => {
 				return new tag({
 					tag: "div",
+
+					//marker
 					borderweight: i,
 				});
 			});
@@ -90,6 +98,8 @@ export default [
 			return [null, 0, 1, 2, 3, 4, 5].map((i) => {
 				return new tag({
 					tag: "div",
+
+					//marker
 					rounded: i,
 				});
 			});
@@ -106,10 +116,12 @@ export default [
 			return [null, "top", "end", "bottom", "start", "pill", "circle"].map((i) => {
 				return new tag({
 					tag: "div",
-					roundedtype: i,
 					style: {
 						width: i === "pill" ? "10rem" : null,
 					},
+
+					//marker
+					roundedtype: i,
 				});
 			});
 		},

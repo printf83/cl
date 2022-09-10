@@ -36,20 +36,32 @@ export default [
 		import: ["tag"],
 		code: () => {
 			return [
-				new tag({ tag: "div", class: "cl-highlight-div cl-highlight-element", elem: "String" }),
 				new tag({
 					tag: "div",
 					class: "cl-highlight-div cl-highlight-element",
+
+					//marker
+					elem: "String",
+				}),
+				new tag({
+					tag: "div",
+					class: "cl-highlight-div cl-highlight-element",
+
+					//marker
 					elem: ["String", "<div>Sub element</div>"],
 				}),
 				new tag({
 					tag: "div",
 					class: "cl-highlight-div cl-highlight-element",
+
+					//marker
 					elem: new tag({ tag: "div", elem: "Sub element" }),
 				}),
 				new tag({
 					tag: "div",
 					class: "cl-highlight-div cl-highlight-element",
+
+					//marker
 					elem: ["Sub element 1", "<div>Sub element 2</div>", new tag({ tag: "div", elem: "Sub element 3" })],
 				}),
 			];
@@ -66,6 +78,10 @@ export default [
 				elem: new tag({
 					attr: { class: "hello" },
 					elem: "This sub element tag not have tag property",
+
+					//marker
+					//tag:"no tag element"
+					//-
 				}),
 			});
 		},
@@ -78,8 +94,10 @@ export default [
 		code: () => {
 			return new tag({
 				tag: "div",
-				attr: { id: "elementID", class: "elementClass", style: { color: "#555" } },
 				elem: "Example element",
+
+				//marker
+				attr: { id: "elementID", class: "elementClass", style: { color: "#555" } },
 			});
 		},
 	},
@@ -99,8 +117,10 @@ export default [
 		code: () => {
 			return new tag({
 				tag: "div",
-				id: "elementID2",
 				elem: "Example element",
+
+				//marker
+				id: "elementID2",
 			});
 		},
 	},
@@ -111,8 +131,10 @@ export default [
 		code: () => {
 			return new tag({
 				tag: "div",
-				name: "elementName",
 				elem: "Example element",
+
+				//marker
+				name: "elementName",
 			});
 		},
 	},
@@ -127,8 +149,10 @@ export default [
 		code: () => {
 			return new tag({
 				tag: "a",
-				href: "https://www.getbootstrap.com",
 				elem: "www.getbootstrap.com",
+
+				//marker
+				href: "https://www.getbootstrap.com",
 			});
 		},
 	},
@@ -141,70 +165,13 @@ export default [
 			return new tag({
 				tag: "button",
 				class: "btn btn-primary",
+				elem: "Example button",
+
+				//marker
 				onclick: (event) => {
 					event.currentTarget.innerText = "onclick trigged";
 				},
-				elem: "Example button",
-			});
-		},
-	},
-
-	{
-		title: "onchange",
-		msg: [
-			"Create attribute <code>onchange</code> for  element",
-			"Shortcut for : <code>attr:{onchange:value}</code>",
-		],
-		import: ["tag"],
-		code: () => {
-			return new tag({
-				tag: "input",
-				attr: {
-					class: "form-control",
-					type: "text",
-					placeholder: "Type some text here",
-				},
-				onchange: (event) => {
-					event.currentTarget.value = "onchange trigged";
-				},
-			});
-		},
-	},
-
-	{
-		title: "onfocus",
-		msg: ["Create attribute <code>onfocus</code> for  element", "Shortcut for : <code>attr:{onfocus:value}</code>"],
-		import: ["tag"],
-		code: () => {
-			return new tag({
-				tag: "input",
-				attr: {
-					class: "form-control",
-					type: "text",
-					placeholder: "Example input",
-				},
-				onfocus: (event) => {
-					event.currentTarget.value = "onfocus trigged";
-				},
-			});
-		},
-	},
-
-	{
-		title: "onblur",
-		msg: ["Create attribute <code>onblur</code> for  element", "Shortcut for : <code>attr:{onblur:value}</code>"],
-		import: ["tag"],
-		code: () => {
-			return new tag({
-				tag: "input",
-				attr: {
-					class: "form-control",
-					type: "text",
-					value: "Example input",
-				},
-				onblur: (event) => {
-					event.currentTarget.value = "onblur trigged";
-				},
+				//-
 			});
 		},
 	},
@@ -216,12 +183,15 @@ export default [
 		code: () => {
 			return new tag({
 				tag: "div",
+				elem: "Example element",
+
+				//marker
 				style: {
 					border: "1px solid rgba(95,95,95,0.5)",
 					"background-color": "rgba(155,155,155,0.4)",
 					padding: "1rem",
 				},
-				elem: "Example element",
+				//-
 			});
 		},
 	},

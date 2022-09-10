@@ -3,7 +3,7 @@ import sample from "./sample.js";
 import div from "../base/div.js";
 import blockquote from "../base/blockquote.js";
 import cite from "../base/cite.js";
-import span from "../base/span.js";
+import ul from "../base/ul.js";
 
 export default [
 	{
@@ -27,17 +27,26 @@ export default [
 		import: ["div", "blockquote"],
 		code: () => {
 			return new div({
-				elem: new blockquote({
-					cite: "https://getbootstrap.com/",
-					elem: "Bootstrap · The most popular HTML, CSS, and JS library in the world.",
-				}),
+				elem:
+					//marker
+					new blockquote({
+						cite: "https://getbootstrap.com/",
+						elem: "Bootstrap · The most popular HTML, CSS, and JS library in the world.",
+					}),
 			});
 		},
 	},
 
 	{
 		title: "Easy option",
-		msg: "This component also supported easy option.",
+		msg: [
+			"This component also supported easy option.",
+			new ul({
+				item: ["object", "class,cite,elem", "cite,elem", "elem"].map((i) => {
+					return `<code>new blockquote(${i})</code>`;
+				}),
+			}),
+		],
 		container: sample.vstackcontainer,
 		import: ["blockquote"],
 		code: () => {

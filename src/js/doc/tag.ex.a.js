@@ -50,20 +50,24 @@ export default [
 			return [
 				new a({
 					href: "https://getbootstrap.com/docs/5.2",
-					color: "success",
 					textdecoration: "none",
-					label: "Bootstrap",
+
+					//marker
 					icon: { type: "fab", icon: "bootstrap" },
+					label: "Bootstrap",
+					color: "success",
 				}),
 				new a({
 					href: "https://getbootstrap.com/docs/5.2",
-					color: "light",
 					class: "bg-primary",
 					padding: 2,
 					rounded: true,
 					textdecoration: "none",
-					label: "Bootstrap",
+
+					//marker
 					icon: { type: "fab", icon: "bootstrap" },
+					label: "Bootstrap",
+					color: "light",
 				}),
 			];
 		},
@@ -71,7 +75,18 @@ export default [
 
 	{
 		title: "Easy option",
-		msg: "This component also supported easy option.",
+		msg: [
+			"This component also supported easy option.",
+			new ul({
+				item: [
+					"object",
+					"href,elem",
+					"href",
+				].map((i) => {
+					return `<code>new a(${i})</code>`;
+				}),
+			}),
+		],
 		container: sample.vstackcontainer,
 		import: ["a"],
 		code: () => {

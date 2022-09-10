@@ -33,7 +33,9 @@ export default [
 		import: ["table"],
 		code: () => {
 			return new table.container({
+				//marker
 				rownumber: true,
+
 				item: [
 					["OrderDate", "Region", "Rep", "Item", "Units", "UnitCost", "Total"],
 					["1/6/2020", "East", "Jones", "Pencil", "95", "1.99", "189.05"],
@@ -53,8 +55,10 @@ export default [
 		import: ["table"],
 		code: () => {
 			return new table.container({
-				rownumber: true,
+				//marker
 				footer: true,
+
+				rownumber: true,
 				item: [
 					["OrderDate", "Region", "Rep", "Item", "Units", "UnitCost", "Total"],
 					["1/6/2020", "East", "Jones", "Pencil", "95", "1.99", "189.05"],
@@ -64,6 +68,8 @@ export default [
 					["3/15/2020", "West", "Sorvino", "Pencil", "56", "2.99", "167.44"],
 					["4/1/2020", "East", "Jones", "Binder", "60", "4.99", "299.40"],
 					["4/18/2020", "Central", "Andrews", "Pencil", "75", "1.99", "149.25"],
+
+					//marker
 					["", "", "", "", "", "Total", "2,524.01"],
 				],
 			});
@@ -75,9 +81,14 @@ export default [
 		import: ["table"],
 		code: () => {
 			return new table.container({
-				rownumber: true,
+				//marker
 				header: false,
+
+				rownumber: true,
 				item: [
+					//marker
+					//["OrderDate", "Region", "Rep", "Item", "Units", "UnitCost", "Total"],
+
 					["1/6/2020", "East", "Jones", "Pencil", "95", "1.99", "189.05"],
 					["1/23/2020", "Central", "Kivell", "Binder", "50", "19.99", "999.50"],
 					["2/9/2020", "Central", "Jardine", "Pencil", "36", "4.99", "179.64"],
@@ -95,7 +106,9 @@ export default [
 		import: ["table"],
 		code: () => {
 			return new table.container({
+				//marker
 				color: "dark",
+
 				footer: true,
 				item: [
 					["OrderDate", "Region", "Rep", "Item", "Units", "UnitCost", "Total"],
@@ -117,8 +130,10 @@ export default [
 		import: ["table"],
 		code: () => {
 			return new table.container({
-				color: "primary",
+				//marker
 				striped: true,
+
+				color: "primary",
 				footer: true,
 				item: [
 					["OrderDate", "Region", "Rep", "Item", "Units", "UnitCost", "Total"],
@@ -140,8 +155,10 @@ export default [
 		import: ["table"],
 		code: () => {
 			return new table.container({
-				color: "primary",
+				//marker
 				stripedcolumn: true,
+
+				color: "primary",
 				footer: true,
 				item: [
 					["OrderDate", "Region", "Rep", "Item", "Units", "UnitCost", "Total"],
@@ -163,9 +180,11 @@ export default [
 		import: ["table"],
 		code: () => {
 			return new table.container({
+				//marker
+				hover: true,
+
 				color: "primary",
 				striped: true,
-				hover: true,
 				footer: true,
 				item: [
 					["OrderDate", "Region", "Rep", "Item", "Units", "UnitCost", "Total"],
@@ -187,11 +206,13 @@ export default [
 		import: ["table"],
 		code: () => {
 			return new table.container({
+				//marker
+				caption: "Table caption",
+
 				color: "primary",
 				striped: true,
 				hover: true,
 				footer: true,
-				caption: "Table caption",
 				item: [
 					["OrderDate", "Region", "Rep", "Item", "Units", "UnitCost", "Total"],
 					["1/6/2020", "East", "Jones", "Pencil", "95", "1.99", "189.05"],
@@ -212,12 +233,14 @@ export default [
 		import: ["table"],
 		code: () => {
 			return new table.container({
+				//marker
+				caption: "Table caption",
+				captiontop: true,
+
 				color: "primary",
 				striped: true,
 				hover: true,
 				footer: true,
-				caption: "Table caption",
-				captiontop: true,
 				item: [
 					["OrderDate", "Region", "Rep", "Item", "Units", "UnitCost", "Total"],
 					["1/6/2020", "East", "Jones", "Pencil", "95", "1.99", "189.05"],
@@ -266,7 +289,8 @@ export default [
 	},
 
 	{
-		title: "Using component",
+		title: "Using cl component",
+		msg: `Using {{table.container}} with {{table.thead}}, {{table.tbody}}, {{table.tr}}, {{table.td}} and , {{table.th}}`,
 		import: ["table", "b"],
 		code: () => {
 			let fn = (d) => {
