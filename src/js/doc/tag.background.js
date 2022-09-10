@@ -33,9 +33,11 @@ export default [
 			].map((i) => {
 				return new tag({
 					tag: "div",
-					color: i,
 					padding: 3,
 					elem: `Example element with <b>color: ${i}</b>`,
+
+					//marker
+					color: i,
 				});
 			});
 		},
@@ -65,10 +67,13 @@ export default [
 			].map((i) => {
 				return new tag({
 					tag: "div",
-					color: i,
-					gradient: true,
 					padding: 3,
 					elem: `Example element with <b>color: ${i}</b>`,
+
+					//marker
+					color: i,
+					gradient: true,
+					//-
 				});
 			});
 		},

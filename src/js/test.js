@@ -2,25 +2,44 @@
 
 ///library
 import * as core from "./base/core.js";
-import * as layout from "./base/layout.js";
+import tag from "./base/tag.js";
 
 ///code
 let code = () => {
-	return new layout.l1({
-		topid: "top",
-		leftid: "left",
-		rightid: "right",
-		mainid: "main",
-		footerid: "footer",
+	return [
+		new tag({
+			tag: "div",
+			class: "cl-highlight-element",
+			maxheight: "6rem",
+			elem: "This is an example of using <code>overflow:auto</code> on an element with set width and height dimensions. By design, this content will vertically scroll.",
 
-		topelem: "Top",
-		leftelem: "Left",
-		rightelem: "Right",
-		mainelem: "Main",
-		footerelem: "Footer",
+			overflow: "auto",
+		}),
+		new tag({
+			tag: "div",
+			class: "cl-highlight-element",
+			maxheight: "6rem",
+			elem: "This is an example of using <code>overflow:hidden</code> on an element with set width and height dimensions.",
 
-		backtotop: true,
-	});
+			overflow: "hidden",
+		}),
+		new tag({
+			tag: "div",
+			class: "cl-highlight-element",
+			maxheight: "6rem",
+			elem: "This is an example of using <code>overflow:visible</code> on an element with set width and height dimensions.",
+
+			overflow: "visible",
+		}),
+		new tag({
+			tag: "div",
+			class: "cl-highlight-element",
+			maxheight: "6rem",
+			elem: "This is an example of using <code>overflow:scroll</code> on an element with set width and height dimensions.",
+
+			overflow: "scroll",
+		}),
+	];
 };
 
 ///loader
