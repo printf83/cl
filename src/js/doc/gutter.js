@@ -2,6 +2,7 @@
 import ul from "../base/ul.js";
 import li from "../base/li.js";
 import div from "../base/div.js";
+import sample from "./sample.js";
 
 export default [
 	{
@@ -35,10 +36,36 @@ export default [
 			return new div(
 				"container px-4",
 				new div(
-					"row gx-5",
+					/*marker*/ "row gx-5",
 					Array(2).fill(new div("col", new div("p-3 border bg-light", "Custom column padding")))
 				)
 			);
+		},
+	},
+
+	{
+		msg: sample.usingclobject(),
+		import: ["div"],
+		code: () => {
+			return new div({
+				container: true,
+				paddingx: 4,
+				elem: new div({
+					row: true,
+					gapx: 5, //marker
+					elem: Array(2).fill(
+						new div({
+							col: true,
+							elem: new div({
+								padding: 3,
+								color: "light",
+								border: true,
+								elem: "Custom column padding",
+							}),
+						})
+					),
+				}),
+			});
 		},
 	},
 
@@ -49,13 +76,43 @@ export default [
 			return new div(
 				"container overflow-hidden",
 				new div(
-					"row gx-5",
+					/*marker*/ "row gx-5",
 					new div(
-						"row gx-5",
+						/*marker*/ "row gx-5",
 						Array(2).fill(new div("col", new div("p-3 border bg-light", "Custom column padding")))
 					)
 				)
 			);
+		},
+	},
+
+	{
+		msg: sample.usingclobject(),
+		import: ["div"],
+		code: () => {
+			return new div({
+				container: true,
+				overflow: "hidden",
+				elem: new div({
+					row: true,
+					gapx: 5, //marker
+					elem: new div({
+						row: true,
+						gapx: 5, //marker
+						elem: Array(2).fill(
+							new div({
+								col: true,
+								elem: new div({
+									padding: 3,
+									color: "light",
+									border: true,
+									elem: "Custom column padding",
+								}),
+							})
+						),
+					}),
+				}),
+			});
 		},
 	},
 
@@ -67,10 +124,36 @@ export default [
 			return new div(
 				"container overflow-hidden",
 				new div(
-					"row gy-5",
+					/*marker*/ "row gy-5",
 					Array(4).fill(new div("col-6", new div("p-3 border bg-light", "Custom column padding")))
 				)
 			);
+		},
+	},
+
+	{
+		msg: sample.usingclobject(),
+		import: ["div"],
+		code: () => {
+			return new div({
+				container: true,
+				overflow: "hidden",
+				elem: new div({
+					row: true,
+					gapy: 5, //marker
+					elem: Array(4).fill(
+						new div({
+							col: 6,
+							elem: new div({
+								padding: 3,
+								color: "light",
+								border: true,
+								elem: "Custom column padding",
+							}),
+						})
+					),
+				}),
+			});
 		},
 	},
 
@@ -82,10 +165,35 @@ export default [
 			return new div(
 				"container",
 				new div(
-					"row g-2",
+					/*marker*/ "row g-2",
 					Array(4).fill(new div("col-6", new div("p-3 border bg-light", "Custom column padding")))
 				)
 			);
+		},
+	},
+
+	{
+		msg: sample.usingclobject(),
+		import: ["div"],
+		code: () => {
+			return new div({
+				container: true,
+				elem: new div({
+					row: true,
+					gap: 2, //marker
+					elem: Array(4).fill(
+						new div({
+							col: 6,
+							elem: new div({
+								padding: 3,
+								color: "light",
+								border: true,
+								elem: "Custom column padding",
+							}),
+						})
+					),
+				}),
+			});
 		},
 	},
 
@@ -97,10 +205,36 @@ export default [
 			return new div(
 				"container",
 				new div(
-					"row row-cols-2 row-cols-lg-5 g-2 g-lg-3",
+					/*marker*/ "row row-cols-2 row-cols-lg-5 g-2 g-lg-3",
 					Array(10).fill(new div("col-6", new div("p-3 border bg-light", "Row column")))
 				)
 			);
+		},
+	},
+
+	{
+		msg: sample.usingclobject(),
+		import: ["div"],
+		code: () => {
+			return new div({
+				container: true,
+				elem: new div({
+					row: true,
+					rowcol: [2, "lg-5"], //marker
+					gap: [2, "lg-3"], //marker
+					elem: Array(10).fill(
+						new div({
+							col: 6,
+							elem: new div({
+								padding: 3,
+								color: "light",
+								border: true,
+								elem: "Row column",
+							}),
+						})
+					),
+				}),
+			});
 		},
 	},
 
@@ -114,10 +248,34 @@ export default [
 		viewclass: "cl-highlight-col",
 		import: ["div"],
 		code: () => {
-			return new div("row g-0", [
+			return new div(/*marker*/ "row g-0", [
 				new div("col-sm-6 col-md-8", ".col-sm-6 .col-md-8"),
 				new div("col-6 col-md-4", ".col-6 .col-md-4"),
 			]);
+		},
+	},
+
+	{
+		msg: sample.usingclobject(),
+		viewclass: "cl-highlight-col",
+		import: ["div"],
+		code: () => {
+			return new div({
+				row: true,
+				elem: [
+					new div({
+						col: ["sm-6", "md-8"],
+						elem: ".col-sm-6 .col-md-8",
+					}),
+					new div({
+						col: [6, "md-4"],
+						elem: ".col-6 .col-md-4",
+					}),
+				],
+
+				//marker
+				gap: 0,
+			});
 		},
 	},
 ];

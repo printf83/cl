@@ -23,8 +23,12 @@ export default [
 		import: ["div"],
 		code: () => {
 			return new div(
-				"container",
-				new div("row", [new div("col", "Column"), new div("col", "Column"), new div("col", "Column")])
+				/*marker*/ "container",
+				new div(/*marker*/ "row", [
+					new div(/*marker*/ "col", "Column"),
+					new div(/*marker*/ "col", "Column"),
+					new div(/*marker*/ "col", "Column"),
+				])
 			);
 		},
 	},
@@ -35,13 +39,13 @@ export default [
 		import: ["div"],
 		code: () => {
 			return new div({
-				container: true,
+				container: true, //marker
 				elem: new div({
-					row: true,
+					row: true, //marker
 					elem: [
-						new div({ col: true, elem: "Column" }),
-						new div({ col: true, elem: "Column" }),
-						new div({ col: true, elem: "Column" }),
+						new div({ /*marker*/ col: true, elem: "Column" }),
+						new div({ /*marker*/ col: true, elem: "Column" }),
+						new div({ /*marker*/ col: true, elem: "Column" }),
 					],
 				}),
 			});
@@ -54,9 +58,13 @@ export default [
 		viewclass: "cl-highlight-col",
 		import: ["div"],
 		code: () => {
-			return new div("container", [
-				new div("row", [new div("col", "1 of 2"), new div("col", "2 of 2")]),
-				new div("row", [new div("col", "1 of 3"), new div("col", "2 of 3"), new div("col", "3 of 3")]),
+			return new div(/*marker*/ "container", [
+				new div(/*marker*/ "row", [new div(/*marker*/ "col", "1 of 2"), new div(/*marker*/ "col", "2 of 2")]),
+				new div(/*marker*/ "row", [
+					new div(/*marker*/ "col", "1 of 3"),
+					new div(/*marker*/ "col", "2 of 3"),
+					new div(/*marker*/ "col", "3 of 3"),
+				]),
 			]);
 		},
 	},
@@ -67,18 +75,21 @@ export default [
 		import: ["div"],
 		code: () => {
 			return new div({
-				container: true,
+				container: true, //marker
 				elem: [
 					new div({
-						row: true,
-						elem: [new div({ col: true, elem: "1 of 2" }), new div({ col: true, elem: "2 of 2" })],
+						row: true, //marker
+						elem: [
+							new div({ /*marker*/ col: true, elem: "1 of 2" }),
+							new div({ /*marker*/ col: true, elem: "2 of 2" }),
+						],
 					}),
 					new div({
-						row: true,
+						row: true, //marker
 						elem: [
-							new div({ col: true, elem: "1 of 3" }),
-							new div({ col: true, elem: "2 of 3" }),
-							new div({ col: true, elem: "3 of 3" }),
+							new div({ /*marker*/ col: true, elem: "1 of 3" }),
+							new div({ /*marker*/ col: true, elem: "2 of 3" }),
+							new div({ /*marker*/ col: true, elem: "3 of 3" }),
 						],
 					}),
 				],
@@ -95,12 +106,12 @@ export default [
 			return new div("container", [
 				new div("row", [
 					new div("col", "1 of 3"),
-					new div("col-6", "2 of 3 (wider)"),
+					new div(/*marker*/ "col-6", "2 of 3 (wider)"),
 					new div("col", "3 of 3"),
 				]),
 				new div("row", [
 					new div("col", "1 of 3"),
-					new div("col-5", "2 of 3 (wider)"),
+					new div(/*marker*/ "col-5", "2 of 3 (wider)"),
 					new div("col", "3 of 3"),
 				]),
 			]);
@@ -119,7 +130,7 @@ export default [
 						row: true,
 						elem: [
 							new div({ col: true, elem: "1 of 3" }),
-							new div({ col: 6, elem: "2 of 3 (wider)" }),
+							new div({ /*marker*/ col: 6, elem: "2 of 3 (wider)" }),
 							new div({ col: true, elem: "3 of 3" }),
 						],
 					}),
@@ -127,7 +138,7 @@ export default [
 						row: true,
 						elem: [
 							new div({ col: true, elem: "1 of 3" }),
-							new div({ col: 5, elem: "2 of 3 (wider)" }),
+							new div({ /*marker*/ col: 5, elem: "2 of 3 (wider)" }),
 							new div({ col: true, elem: "3 of 3" }),
 						],
 					}),
@@ -145,12 +156,12 @@ export default [
 			return new div("container", [
 				new div("row justify-content-md-center", [
 					new div("col col-lg-2", "1 of 3"),
-					new div("col-md-auto", "Variable width content"),
+					new div(/*marker*/ "col-md-auto", "Variable width content"),
 					new div("col col-lg-2", "3 of 3"),
 				]),
 				new div("row", [
 					new div("col", "1 of 3"),
-					new div("col-md-auto", "Variable width content"),
+					new div(/*marker*/ "col-md-auto", "Variable width content"),
 					new div("col col-lg-2", "3 of 3"),
 				]),
 			]);
@@ -170,7 +181,7 @@ export default [
 						justifycontent: "md-center",
 						elem: [
 							new div({ col: [true, "lg-2"], elem: "1 of 3" }),
-							new div({ col: "md-auto", elem: "Variable width content" }),
+							new div({ /*marker*/ col: "md-auto", elem: "Variable width content" }),
 							new div({ col: [true, "lg-2"], elem: "3 of 3" }),
 						],
 					}),
@@ -178,7 +189,7 @@ export default [
 						row: true,
 						elem: [
 							new div({ col: true, elem: "1 of 3" }),
-							new div({ col: "md-auto", elem: "Variable width content" }),
+							new div({ /*marker*/ col: "md-auto", elem: "Variable width content" }),
 							new div({ col: [true, "lg-2"], elem: "3 of 3" }),
 						],
 					}),
@@ -195,12 +206,12 @@ export default [
 		code: () => {
 			return new div("container", [
 				new div("row", [
-					new div("col", "col"),
-					new div("col", "col"),
-					new div("col", "col"),
-					new div("col", "col"),
+					new div(/*marker*/ "col", "col"),
+					new div(/*marker*/ "col", "col"),
+					new div(/*marker*/ "col", "col"),
+					new div(/*marker*/ "col", "col"),
 				]),
-				new div("row", [new div("col-8", "col-8"), new div("col-4", "col-4")]),
+				new div("row", [new div(/*marker*/ "col-8", "col-8"), new div(/*marker*/ "col-4", "col-4")]),
 			]);
 		},
 	},
@@ -216,15 +227,18 @@ export default [
 					new div({
 						row: true,
 						elem: [
-							new div({ col: true, elem: "col" }),
-							new div({ col: true, elem: "col" }),
-							new div({ col: true, elem: "col" }),
-							new div({ col: true, elem: "col" }),
+							new div({ /*marker*/ col: true, elem: "col" }),
+							new div({ /*marker*/ col: true, elem: "col" }),
+							new div({ /*marker*/ col: true, elem: "col" }),
+							new div({ /*marker*/ col: true, elem: "col" }),
 						],
 					}),
 					new div({
 						row: true,
-						elem: [new div({ col: 8, elem: "col-8" }), new div({ col: 4, elem: "col-4" })],
+						elem: [
+							new div({ /*marker*/ col: 8, elem: "col-8" }),
+							new div({ /*marker*/ col: 4, elem: "col-4" }),
+						],
 					}),
 				],
 			});
@@ -238,12 +252,15 @@ export default [
 		import: ["div"],
 		code: () => {
 			return new div("container", [
-				new div("row", [new div("col-sm-8", "col-sm-8"), new div("col-sm-4", "col-sm-4")]),
 				new div("row", [
-					new div("col-sm", "col-sm"),
-					new div("col-sm", "col-sm"),
-					new div("col-sm", "col-sm"),
-					new div("col-sm", "col-sm"),
+					new div(/*marker*/ "col-sm-8", "col-sm-8"),
+					new div(/*marker*/ "col-sm-4", "col-sm-4"),
+				]),
+				new div("row", [
+					new div(/*marker*/ "col-sm", "col-sm"),
+					new div(/*marker*/ "col-sm", "col-sm"),
+					new div(/*marker*/ "col-sm", "col-sm"),
+					new div(/*marker*/ "col-sm", "col-sm"),
 				]),
 			]);
 		},
@@ -259,15 +276,18 @@ export default [
 				elem: [
 					new div({
 						row: true,
-						elem: [new div({ col: 8, elem: "col-8" }), new div({ col: 4, elem: "col-4" })],
+						elem: [
+							new div({ /*marker*/ col: 8, elem: "col-8" }),
+							new div({ /*marker*/ col: 4, elem: "col-4" }),
+						],
 					}),
 					new div({
 						row: true,
 						elem: [
-							new div({ col: "sm", elem: "col-sm" }),
-							new div({ col: "sm", elem: "col-sm" }),
-							new div({ col: "sm", elem: "col-sm" }),
-							new div({ col: "sm", elem: "col-sm" }),
+							new div({ /*marker*/ col: "sm", elem: "col-sm" }),
+							new div({ /*marker*/ col: "sm", elem: "col-sm" }),
+							new div({ /*marker*/ col: "sm", elem: "col-sm" }),
+							new div({ /*marker*/ col: "sm", elem: "col-sm" }),
 						],
 					}),
 				],
@@ -341,7 +361,7 @@ export default [
 		import: ["div"],
 		code: () => {
 			return new div("container", [
-				new div("row row-cols-2", [
+				new div(/*marker*/ "row row-cols-2", [
 					new div("col", "Column"),
 					new div("col", "Column"),
 					new div("col", "Column"),
@@ -356,7 +376,7 @@ export default [
 		import: ["div"],
 		code: () => {
 			return new div("container", [
-				new div("row row-cols-3", [
+				new div(/*marker*/ "row row-cols-3", [
 					new div("col", "Column"),
 					new div("col", "Column"),
 					new div("col", "Column"),
@@ -371,7 +391,22 @@ export default [
 		import: ["div"],
 		code: () => {
 			return new div("container", [
-				new div("row row-cols-auto", [
+				new div(/*marker*/ "row row-cols-auto", [
+					new div("col", "Column"),
+					new div("col", "Column"),
+					new div("col", "Column"),
+					new div("col", "Column"),
+				]),
+			]);
+		},
+	},
+
+	{
+		viewclass: "cl-highlight-col",
+		import: ["div"],
+		code: () => {
+			return new div("container", [
+				new div(/*marker*/ "row row-cols-4", [
 					new div("col", "Column"),
 					new div("col", "Column"),
 					new div("col", "Column"),
@@ -389,22 +424,7 @@ export default [
 				new div("row row-cols-4", [
 					new div("col", "Column"),
 					new div("col", "Column"),
-					new div("col", "Column"),
-					new div("col", "Column"),
-				]),
-			]);
-		},
-	},
-
-	{
-		viewclass: "cl-highlight-col",
-		import: ["div"],
-		code: () => {
-			return new div("container", [
-				new div("row row-cols-4", [
-					new div("col", "Column"),
-					new div("col", "Column"),
-					new div("col-6", "Column"),
+					new div(/*marker*/ "col-6", "Column"),
 					new div("col", "Column"),
 				]),
 			]);
@@ -416,7 +436,7 @@ export default [
 		import: ["div"],
 		code: () => {
 			return new div("container", [
-				new div("row row-cols-1 row-cols-sm-2 row-cols-md-4", [
+				new div(/*marker*/ "row row-cols-1 row-cols-sm-2 row-cols-md-4", [
 					new div("col", "Column"),
 					new div("col", "Column"),
 					new div("col", "Column"),
@@ -435,7 +455,7 @@ export default [
 				container: true,
 				elem: new div({
 					row: true,
-					rowcol: 2,
+					rowcol: 2, //marker
 					elem: [
 						new div({ col: true, elem: "Column" }),
 						new div({ col: true, elem: "Column" }),
@@ -455,7 +475,7 @@ export default [
 				container: true,
 				elem: new div({
 					row: true,
-					rowcol: 3,
+					rowcol: 3, //marker
 					elem: [
 						new div({ col: true, elem: "Column" }),
 						new div({ col: true, elem: "Column" }),
@@ -475,7 +495,27 @@ export default [
 				container: true,
 				elem: new div({
 					row: true,
-					rowcol: "auto",
+					rowcol: "auto", //marker
+					elem: [
+						new div({ col: true, elem: "Column" }),
+						new div({ col: true, elem: "Column" }),
+						new div({ col: true, elem: "Column" }),
+						new div({ col: true, elem: "Column" }),
+					],
+				}),
+			});
+		},
+	},
+
+	{
+		viewclass: "cl-highlight-col",
+		import: ["div"],
+		code: () => {
+			return new div({
+				container: true,
+				elem: new div({
+					row: true,
+					rowcol: 4, //marker
 					elem: [
 						new div({ col: true, elem: "Column" }),
 						new div({ col: true, elem: "Column" }),
@@ -499,27 +539,7 @@ export default [
 					elem: [
 						new div({ col: true, elem: "Column" }),
 						new div({ col: true, elem: "Column" }),
-						new div({ col: true, elem: "Column" }),
-						new div({ col: true, elem: "Column" }),
-					],
-				}),
-			});
-		},
-	},
-
-	{
-		viewclass: "cl-highlight-col",
-		import: ["div"],
-		code: () => {
-			return new div({
-				container: true,
-				elem: new div({
-					row: true,
-					rowcol: 4,
-					elem: [
-						new div({ col: true, elem: "Column" }),
-						new div({ col: true, elem: "Column" }),
-						new div({ col: 6, elem: "Column" }),
+						new div({ /*marker*/ col: 6, elem: "Column" }),
 						new div({ col: true, elem: "Column" }),
 					],
 				}),
@@ -535,7 +555,7 @@ export default [
 				container: true,
 				elem: new div({
 					row: true,
-					rowcol: [1, "sm-2", "md-4"],
+					rowcol: [1, "sm-2", "md-4"], //marker
 					elem: [
 						new div({ col: true, elem: "Column" }),
 						new div({ col: true, elem: "Column" }),
@@ -554,13 +574,13 @@ export default [
 		import: ["div"],
 		code: () => {
 			return new div("container", [
-				new div("row", [
-					new div("col-sm-3", "Level 1: col-sm-3"),
+				new div(/*marker*/ "row", [
+					new div(/*marker*/ "col-sm-3", "Level 1: col-sm-3"),
 					new div(
-						"col-sm-9",
-						new div("row", [
-							new div("col-8 col-sm-6", "Level 2: col-8 col-sm-6"),
-							new div("col-4 col-sm-6", "Level 2: col-4 col-sm-6"),
+						/*marker*/ "col-sm-9",
+						new div(/*marker*/ "row", [
+							new div(/*marker*/ "col-8 col-sm-6", "Level 2: col-8 col-sm-6"),
+							new div(/*marker*/ "col-4 col-sm-6", "Level 2: col-4 col-sm-6"),
 						])
 					),
 				]),
@@ -576,16 +596,16 @@ export default [
 			return new div({
 				container: true,
 				elem: new div({
-					row: true,
+					row: true, //marker
 					elem: [
-						new div({ col: "sm-3", elem: "Level 1: col-sm-3" }),
+						new div({ /*marker*/ col: "sm-3", elem: "Level 1: col-sm-3" }),
 						new div({
-							col: "sm-9",
+							col: "sm-9", //marker
 							elem: new div({
-								row: true,
+								row: true, //marker
 								elem: [
-									new div({ col: [8, "sm-6"], elem: "Level 2: col-8 col-sm-6" }),
-									new div({ col: [8, "sm-6"], elem: "Level 2: col-8 col-sm-6" }),
+									new div({ /*marker*/ col: [8, "sm-6"], elem: "Level 2: col-8 col-sm-6" }),
+									new div({ /*marker*/ col: [8, "sm-6"], elem: "Level 2: col-8 col-sm-6" }),
 								],
 							}),
 						}),
