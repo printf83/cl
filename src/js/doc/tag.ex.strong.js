@@ -2,6 +2,7 @@
 import sample from "./sample.js";
 import div from "../base/div.js";
 import strong from "../base/strong.js";
+import ul from "../base/ul.js";
 
 export default [
 	{
@@ -14,7 +15,7 @@ export default [
 		msg: [
 			"Shortcut for {{new tag({tag:'strong'})}}",
 			"This component is extended from {{tag}} component, so any property on tag component, will also work on this component.",
-			"Property inherits from tag component:",
+			"Option property inherits from tag component:",
 			sample.tagprop(),
 		],
 	},
@@ -26,12 +27,16 @@ export default [
 			return new div({
 				elem: [
 					"This is ",
+
+					//marker
 					new strong({
 						attr: {
 							"data-test": "test",
 						},
 						elem: "strong",
 					}),
+					//-
+
 					" text",
 				],
 			});
@@ -40,7 +45,14 @@ export default [
 
 	{
 		title: "Easy option",
-		msg: "This component also supported easy option.",
+		msg: [
+			"This component also supported easy option.",
+			new ul({
+				item: ["option", "class,elem", "elem"].map((i) => {
+					return `<code>new strong(${i})</code>`;
+				}),
+			}),
+		],
 		container: sample.vstackcontainer,
 		import: ["strong"],
 		code: () => {

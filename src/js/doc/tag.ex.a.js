@@ -14,7 +14,7 @@ export default [
 		msg: [
 			"Shortcut for {{new tag({tag:'a'})}}",
 			"This component is extended from {{tag}} component, so any property on tag component, will also work on this component.",
-			"Property inherits from tag component:",
+			"Option property inherits from tag component:",
 			sample.tagprop("color"),
 		],
 	},
@@ -78,11 +78,7 @@ export default [
 		msg: [
 			"This component also supported easy option.",
 			new ul({
-				item: [
-					"object",
-					"href,elem",
-					"href",
-				].map((i) => {
+				item: ["option", "href,elem", "href"].map((i) => {
 					return `<code>new a(${i})</code>`;
 				}),
 			}),

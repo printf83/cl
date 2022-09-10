@@ -1,6 +1,7 @@
 "use strict";
 import sample from "./sample.js";
 import p from "../base/p.js";
+import ul from "../base/ul.js";
 
 export default [
 	{
@@ -13,7 +14,7 @@ export default [
 		msg: [
 			"Shortcut for {{new tag({tag:'p'})}}",
 			"This component is extended from {{tag}} component, so any property on tag component, will also work on this component.",
-			"Property inherits from tag component:",
+			"Option property inherits from tag component:",
 			sample.tagprop(),
 		],
 	},
@@ -30,7 +31,14 @@ export default [
 
 	{
 		title: "Easy option",
-		msg: "This component also supported easy option.",
+		msg: [
+			"This component also supported easy option.",
+			new ul({
+				item: ["option", "class,elem", "elem"].map((i) => {
+					return `<code>new p(${i})</code>`;
+				}),
+			}),
+		],
 		import: ["p"],
 		code: () => {
 			return [

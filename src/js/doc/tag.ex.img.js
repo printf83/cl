@@ -14,7 +14,7 @@ export default [
 		msg: [
 			"Shortcut for {{new tag({tag:'img'})}}",
 			"This component is extended from {{tag}} component, so any property on tag component, will also work on this component.",
-			"Property inherits from tag component:",
+			"Option property inherits from tag component:",
 			sample.tagprop("elem"),
 		],
 	},
@@ -47,7 +47,14 @@ export default [
 
 	{
 		title: "Easy option",
-		msg: "This component also supported easy option.",
+		msg: [
+			"This component also supported easy option.",
+			new ul({
+				item: ["option", "class,src", "src"].map((i) => {
+					return `<code>new img(${i})</code>`;
+				}),
+			}),
+		],
 		container: sample.stackcontainer,
 		import: ["img", "sample"],
 		code: () => {

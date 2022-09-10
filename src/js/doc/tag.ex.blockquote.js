@@ -17,7 +17,7 @@ export default [
 			"Shortcut for {{new tag({tag:'blockquote'})}}",
 			"This component has support for {{cite}} attribute that can be set using option {{cite}}",
 			"This component is extended from {{tag}} component, so any property on tag component, will also work on this component.",
-			"Property inherits from tag component:",
+			"Option property inherits from tag component:",
 			sample.tagprop(),
 		],
 	},
@@ -42,7 +42,7 @@ export default [
 		msg: [
 			"This component also supported easy option.",
 			new ul({
-				item: ["object", "class,cite,elem", "cite,elem", "elem"].map((i) => {
+				item: ["option", "class,cite,elem", "cite,elem", "elem"].map((i) => {
 					return `<code>new blockquote(${i})</code>`;
 				}),
 			}),

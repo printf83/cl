@@ -13,7 +13,7 @@ export default [
 		msg: [
 			"Shortcut for {{new tag({tag:'hr'})}}",
 			"This component is extended from {{tag}} component, so any property on tag component, will also work on this component.",
-			"Property inherits from tag component:",
+			"Option property inherits from tag component:",
 			sample.tagprop("elem"),
 		],
 	},

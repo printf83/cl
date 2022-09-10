@@ -21,8 +21,10 @@ export default [
 			return new tag({
 				tag: "div",
 				class: "cl-highlight-padding",
-				display: "flex",
 				elem: "I'm a flexbox container!",
+
+				//marker
+				display: "flex",
 			});
 		},
 	},
@@ -34,8 +36,10 @@ export default [
 			return new tag({
 				tag: "div",
 				class: "cl-highlight-padding",
-				display: "inline-flex",
 				elem: "I'm a inline flexbox container!",
+
+				//marker
+				display: "inline-flex",
 			});
 		},
 	},
@@ -68,13 +72,16 @@ export default [
 			return ["row", "row-reverse"].map((i) => {
 				return new tag({
 					tag: "div",
-					display: "flex",
-					flex: i,
 					elem: [
 						new tag({ tag: "div", elem: "Flex item 1" }),
 						new tag({ tag: "div", elem: "Flex item 2" }),
 						new tag({ tag: "div", elem: "Flex item 3" }),
 					],
+
+					//marker
+					display: "flex",
+					flex: i,
+					//-
 				});
 			});
 		},
@@ -90,13 +97,16 @@ export default [
 			return ["column", "column-reverse"].map((i) => {
 				return new tag({
 					tag: "div",
-					display: "flex",
-					flex: i,
 					elem: [
 						new tag({ tag: "div", elem: "Flex item 1" }),
 						new tag({ tag: "div", elem: "Flex item 2" }),
 						new tag({ tag: "div", elem: "Flex item 3" }),
 					],
+
+					//marker
+					display: "flex",
+					flex: i,
+					//-
 				});
 			});
 		},
@@ -127,9 +137,12 @@ export default [
 			return ["start", "end", "center", "between", "around", "evenly"].map((i) => {
 				return new tag({
 					tag: "div",
+					elem: Array(3).fill(new tag({ tag: "div", elem: "Flex item" })),
+
+					//marker
 					display: "flex",
 					justifycontent: i,
-					elem: Array(3).fill(new tag({ tag: "div", elem: "Flex item" })),
+					//-
 				});
 			});
 		},
@@ -161,9 +174,12 @@ export default [
 				return new tag({
 					tag: "div",
 					style: { height: "6rem" },
+					elem: Array(3).fill(new tag({ tag: "div", elem: "Flex item" })),
+
+					//marker
 					display: "flex",
 					alignitem: i,
-					elem: Array(3).fill(new tag({ tag: "div", elem: "Flex item" })),
+					//-
 				});
 			});
 		},
@@ -195,12 +211,14 @@ export default [
 				return new tag({
 					tag: "div",
 					style: { height: "6rem" },
-					display: "flex",
 					elem: [
 						new tag({ tag: "div", elem: "Flex item" }),
-						new tag({ tag: "div", alignself: i, elem: "Flex item" }),
+						new tag({ tag: "div", /*marker*/ alignself: i, elem: "Flex item" }),
 						new tag({ tag: "div", elem: "Flex item" }),
 					],
+
+					//marker
+					display: "flex",
 				});
 			});
 		},
@@ -230,12 +248,14 @@ export default [
 		code: () => {
 			return new tag({
 				tag: "div",
-				display: "flex",
 				elem: [
-					new tag({ tag: "div", flex: "fill", elem: "Flex item with a lot of content" }),
-					new tag({ tag: "div", flex: "fill", elem: "Flex item" }),
-					new tag({ tag: "div", flex: "fill", elem: "Flex item" }),
+					new tag({ tag: "div", /*marker*/ flex: "fill", elem: "Flex item with a lot of content" }),
+					new tag({ tag: "div", /*marker*/ flex: "fill", elem: "Flex item" }),
+					new tag({ tag: "div", /*marker*/ flex: "fill", elem: "Flex item" }),
 				],
+
+				//marker
+				display: "flex",
 			});
 		},
 	},
@@ -262,12 +282,14 @@ export default [
 		code: () => {
 			return new tag({
 				tag: "div",
-				display: "flex",
 				elem: [
-					new tag({ tag: "div", flex: "glow-1", elem: "Flex item" }),
+					new tag({ tag: "div", /*marker*/ flex: "glow-1", elem: "Flex item" }),
 					new tag({ tag: "div", elem: "Flex item" }),
 					new tag({ tag: "div", elem: "Third flex item" }),
 				],
+
+				//marker
+				display: "flex",
 			});
 		},
 	},
@@ -280,11 +302,13 @@ export default [
 		code: () => {
 			return new tag({
 				tag: "div",
-				display: "flex",
 				elem: [
 					new tag({ tag: "div", class: "w-100", elem: "Flex item" }),
-					new tag({ tag: "div", flex: "shrink-1", elem: "Flex item" }),
+					new tag({ tag: "div", /*marker*/ flex: "shrink-1", elem: "Flex item" }),
 				],
+
+				//marker
+				display: "flex",
 			});
 		},
 	},
@@ -314,26 +338,32 @@ export default [
 			return [
 				new tag({
 					tag: "div",
-					display: "flex",
 					elem: Array(3).fill(new tag({ tag: "div", elem: "Flex item" })),
+
+					//marker
+					display: "flex",
 				}),
 				new tag({
 					tag: "div",
-					display: "flex",
 					elem: [
-						new tag({ tag: "div", marginend: "auto", elem: "Flex item" }),
+						new tag({ tag: "div", /*marker*/ marginend: "auto", elem: "Flex item" }),
 						new tag({ tag: "div", elem: "Flex item" }),
 						new tag({ tag: "div", elem: "Flex item" }),
 					],
+
+					//marker
+					display: "flex",
 				}),
 				new tag({
 					tag: "div",
-					display: "flex",
 					elem: [
 						new tag({ tag: "div", elem: "Flex item" }),
 						new tag({ tag: "div", elem: "Flex item" }),
-						new tag({ tag: "div", marginstart: "auto", elem: "Flex item" }),
+						new tag({ tag: "div", /*marker*/ marginstart: "auto", elem: "Flex item" }),
 					],
+
+					//marker
+					display: "flex",
 				}),
 			];
 		},
@@ -350,11 +380,15 @@ export default [
 				new tag({
 					tag: "div",
 					style: { height: "12rem" },
+
+					//marker
 					display: "flex",
 					alignitem: "start",
 					flex: "column",
+					//-
+
 					elem: [
-						new tag({ tag: "div", marginbottom: "auto", elem: "Flex item" }),
+						new tag({ tag: "div", /*marker*/ marginbottom: "auto", elem: "Flex item" }),
 						new tag({ tag: "div", elem: "Flex item" }),
 						new tag({ tag: "div", elem: "Flex item" }),
 					],
@@ -362,13 +396,17 @@ export default [
 				new tag({
 					tag: "div",
 					style: { height: "12rem" },
+
+					//marker
 					display: "flex",
 					alignitem: "end",
 					flex: "column",
+					//-
+
 					elem: [
 						new tag({ tag: "div", elem: "Flex item" }),
 						new tag({ tag: "div", elem: "Flex item" }),
-						new tag({ tag: "div", margintop: "auto", elem: "Flex item" }),
+						new tag({ tag: "div", /*marker*/ margintop: "auto", elem: "Flex item" }),
 					],
 				}),
 			];
@@ -385,8 +423,10 @@ export default [
 			return new tag({
 				tag: "div",
 				display: "flex",
-				flex: "nowrap",
 				elem: Array(6).fill(new tag({ tag: "div", elem: "Flex item" })),
+
+				//marker
+				flex: "nowrap",
 			});
 		},
 	},
@@ -398,9 +438,12 @@ export default [
 		code: () => {
 			return new tag({
 				tag: "div",
-				display: "flex",
-				flex: "wrap",
 				elem: Array(15).fill(new tag({ tag: "div", elem: "Flex item" })),
+
+				//marker
+				flex: "wrap",
+				flex: "wrap-reverse",
+				//-
 			});
 		},
 	},
@@ -412,9 +455,12 @@ export default [
 		code: () => {
 			return new tag({
 				tag: "div",
+				elem: Array(15).fill(new tag({ tag: "div", elem: "Flex item" })),
+
+				//marker
 				display: "flex",
 				flex: "wrap-reverse",
-				elem: Array(15).fill(new tag({ tag: "div", elem: "Flex item" })),
+				//-
 			});
 		},
 	},
@@ -443,13 +489,16 @@ export default [
 		code: () => {
 			return new tag({
 				tag: "div",
+				elem: [
+					new tag({ tag: "div", /*marker*/ order: 3, elem: "First flex item" }),
+					new tag({ tag: "div", /*marker*/ order: 2, elem: "Second flex item" }),
+					new tag({ tag: "div", /*marker*/ order: 1, elem: "Third flex item" }),
+				],
+
+				//marker
 				display: "flex",
 				flex: "nowrap",
-				elem: [
-					new tag({ tag: "div", order: 3, elem: "First flex item" }),
-					new tag({ tag: "div", order: 2, elem: "Second flex item" }),
-					new tag({ tag: "div", order: 1, elem: "Third flex item" }),
-				],
+				//-
 			});
 		},
 	},
@@ -498,10 +547,13 @@ export default [
 				return new tag({
 					tag: "div",
 					style: { height: "12rem" },
+					elem: Array(15).fill(new tag({ tag: "div", elem: "Flex item" })),
+
+					//marker
 					display: "flex",
 					flex: "wrap",
 					aligncontent: i,
-					elem: Array(15).fill(new tag({ tag: "div", elem: "Flex item" })),
+					//-
 				});
 			});
 		},
@@ -529,24 +581,30 @@ export default [
 		code: () => {
 			return new tag({
 				tag: "div",
-				display: "flex",
 				elem: [
 					new tag({
 						tag: "div",
-						flex: "shrink-0",
 						elem: new tag({
 							tag: "img",
 							attr: { alt: "Image", src: sample.img(84, 80) },
 							style: { height: "5rem" },
 						}),
+
+						//marker
+						flex: "shrink-0",
 					}),
 					new tag({
 						tag: "div",
 						marginstart: 3,
-						flex: "grow-1",
 						elem: "This is some content from a media component. You can replace this with any content and adjust it as needed.",
+
+						//marker
+						flex: "grow-1",
 					}),
 				],
+
+				//marker
+				display: "flex",
 			});
 		},
 	},
@@ -557,25 +615,32 @@ export default [
 		code: () => {
 			return new tag({
 				tag: "div",
-				display: "flex",
-				alignitem: "center",
 				elem: [
 					new tag({
 						tag: "div",
-						flex: "shrink-0",
 						elem: new tag({
 							tag: "img",
 							attr: { alt: "Image", src: sample.img(84, 80) },
 							style: { height: "5rem" },
 						}),
+
+						//marker
+						flex: "shrink-0",
 					}),
 					new tag({
 						tag: "div",
 						marginstart: 3,
-						flex: "grow-1",
 						elem: "This is some content from a media component. You can replace this with any content and adjust it as needed.",
+
+						//marker
+						flex: "grow-1",
 					}),
 				],
+
+				//marker
+				display: "flex",
+				alignitem: "center",
+				//-
 			});
 		},
 	},
