@@ -253,29 +253,8 @@ function reloadactivedoc() {
 	}
 }
 
-let themeindex = 0;
-let dbthemeindex = [];
-
-function getthemeindex() {
-	let db_theme = db_menu[db_menu.length - 1].item;
-	let db_theme_length = db_theme.length;
-
-	if (themeindex === 0) {
-		//generate dbthemeindex (shuffle)
-		dbthemeindex = core.shufflearray(Array.from({ length: db_theme_length }, (_, index) => index));
-	}
-
-	if (themeindex + 1 >= db_theme_length) {
-		themeindex = 0;
-		return getthemeindex();
-	} else {
-		themeindex += 1;
-		return db_theme[dbthemeindex[themeindex - 1]].source;
-	}
-}
-
 function randomtheme() {
-	let cur_theme = getthemeindex();
+	let cur_theme = core.randomdb("index_theme", db_menu[db_menu.length - 1].item).source;
 
 	if (cur_theme === "") {
 		cur_theme = null;

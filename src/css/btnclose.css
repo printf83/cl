@@ -1,0 +1,47 @@
+/*fix bootstrap color problem on btn-close*/
+
+.btn-close-white {
+    filter: unset !important;
+}
+
+.btn-close {
+    color: unset !important;
+    background: none !important;
+}
+
+.btn-close::before {
+    position: unset;
+    top: unset;
+    right: unset;
+    content: unset;
+}
+
+.btn-close{
+    position: relative;
+}
+
+.btn-close::after{
+    content: "✕";
+    text-align: center;
+    position: absolute;
+    font-weight: lighter;
+    font-size: x-large;
+    line-height: 1em;
+    left: 0.1rem;
+    top: 0;
+}
+
+/* .btn-close::after {
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    content: "\f00d";
+    text-align: center;
+    width: 1em;
+    display: inline-block;
+    top: -0.2em;
+    position: relative;
+} */
+
+ /* content: "\f00d"; */
+ /* content: "\f057"; */
+ /* content: "\58"; */

@@ -43,7 +43,7 @@ export default [
 					new a({
 						textdecoration: "none",
 						href: "https://getbootstrap.com/",
-						elem: new pill({ icon: { icon: "bootstrap", type: "fab" }, label: "Bootstrap V5.2.0" }),
+						elem: new pill({ icon: { icon: "bootstrap", type: "fab" }, label: "Bootstrap V5.2.1" }),
 					}),
 					new a({
 						textdecoration: "none",
@@ -106,7 +106,7 @@ export default [
 							/>
 							<link
 								rel="stylesheet"
-								href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+								href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
 								id="css_bootstrap"
 							/>
 							<link
@@ -128,7 +128,7 @@ export default [
 
 							<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"></script>
 							<script src="https://cdn.jsdelivr.net/npm/moment@2.29.4"></script>
-							<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+							<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
 							<script src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0"></script>
 
 							<script type="module" src="/dist/js/index.js"></script>

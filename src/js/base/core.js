@@ -23,6 +23,34 @@ export function shufflearray(arr) {
 	return arr;
 }
 
+const rdb = {};
+
+export function randomdb(name, db) {
+	let db_length = db.length;
+
+	if (!rdb[name]) {
+		rdb[name] = {
+			x: 0,
+		};
+	}
+
+	if (rdb[name].x === 0) {
+		rdb[name].i = shufflearray(Array.from({ length: db_length }, (_, index) => index));
+	}
+
+	if (rdb[name].x + 1 >= db_length) {
+		rdb[name].x = 0;
+		return randomdb(name, db);
+	} else {
+		rdb[name].x = rdb[name].x + 1;
+
+		let x = rdb[name].x - 1;
+		let i = rdb[name].i[x];
+		let r = db[i];
+		return r;
+	}
+}
+
 export const cookie = {
 	set: (cname, cvalue, exdays) => {
 		const d = new Date();
@@ -231,7 +259,7 @@ export const setting = {
 			loadcss(
 				value
 					? `https://cdn.jsdelivr.net/npm/bootswatch@5.2.0/dist/${value}/bootstrap.min.css`
-					: `https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css`,
+					: `https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css`,
 				() => {
 					if (value) {
 						css_bootswatch.href = `https://cdn.jsdelivr.net/npm/bootswatch@5.2.0/dist/${value}/bootstrap.min.css`;

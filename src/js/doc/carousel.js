@@ -22,12 +22,12 @@ export default [
 		code: () => {
 			return new carousel({
 				item: [
-					sample.img(857, 428, "primary"),
-					sample.img(857, 428, "secondary"),
-					sample.img(857, 428, "success"),
-					sample.img(857, 428, "danger"),
-					sample.img(857, 428, "info"),
-					sample.img(857, 428, "dark"),
+					sample.img(857, 428),
+					sample.img(857, 428),
+					sample.img(857, 428),
+					sample.img(857, 428),
+					sample.img(857, 428),
+					sample.img(857, 428),
 				],
 			});
 		},
@@ -42,12 +42,12 @@ export default [
 				control: true,
 
 				item: [
-					sample.img(857, 428, "primary"),
-					sample.img(857, 428, "secondary"),
-					sample.img(857, 428, "success"),
-					sample.img(857, 428, "danger"),
-					sample.img(857, 428, "info"),
-					sample.img(857, 428, "dark"),
+					sample.img(857, 428),
+					sample.img(857, 428),
+					sample.img(857, 428),
+					sample.img(857, 428),
+					sample.img(857, 428),
+					sample.img(857, 428),
 				],
 			});
 		},
@@ -63,12 +63,12 @@ export default [
 
 				control: true,
 				item: [
-					sample.img(857, 428, "primary"),
-					sample.img(857, 428, "secondary"),
-					sample.img(857, 428, "success"),
-					sample.img(857, 428, "danger"),
-					sample.img(857, 428, "info"),
-					sample.img(857, 428, "dark"),
+					sample.img(857, 428),
+					sample.img(857, 428),
+					sample.img(857, 428),
+					sample.img(857, 428),
+					sample.img(857, 428),
+					sample.img(857, 428),
 				],
 			});
 		},
@@ -124,12 +124,12 @@ export default [
 			return new carousel({
 				control: true,
 				item: [
-					sample.img(857, 428, "primary"),
-					sample.img(857, 428, "secondary"),
-					sample.img(857, 428, "success"),
-					sample.img(857, 428, "danger"),
-					sample.img(857, 428, "info"),
-					sample.img(857, 428, "dark"),
+					sample.img(857, 428),
+					sample.img(857, 428),
+					sample.img(857, 428),
+					sample.img(857, 428),
+					sample.img(857, 428),
+					sample.img(857, 428),
 				],
 
 				//marker
@@ -182,12 +182,12 @@ export default [
 			return new carousel({
 				control: true,
 				item: [
-					sample.img(857, 428, "primary"),
-					sample.img(857, 428, "secondary"),
-					sample.img(857, 428, "success"),
-					sample.img(857, 428, "danger"),
-					sample.img(857, 428, "info"),
-					sample.img(857, 428, "dark"),
+					sample.img(857, 428),
+					sample.img(857, 428),
+					sample.img(857, 428),
+					sample.img(857, 428),
+					sample.img(857, 428),
+					sample.img(857, 428),
 				],
 
 				//marker
@@ -298,12 +298,12 @@ export default [
 								control: true,
 								indicators: true,
 								item: [
-									sample.img(857, 428, "primary"),
-									sample.img(857, 428, "secondary"),
-									sample.img(857, 428, "success"),
-									sample.img(857, 428, "danger"),
-									sample.img(857, 428, "info"),
-									sample.img(857, 428, "dark"),
+									sample.img(857, 428),
+									sample.img(857, 428),
+									sample.img(857, 428),
+									sample.img(857, 428),
+									sample.img(857, 428),
+									sample.img(857, 428),
 								],
 
 								//marker

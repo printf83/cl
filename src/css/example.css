@@ -1,0 +1,211 @@
+span.nocode.marker {
+    position: relative;
+}
+
+span.nocode.marker.inline::before,
+span.nocode.marker.downline::before,
+span.nocode.marker.downline-end::before {
+
+    color: var(--bs-danger);
+    content: "\f08d";
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    -webkit-animation: fadeOut 2s infinite;
+    animation: fadeOut 2s infinite;
+}
+
+span.nocode.marker.downline::after {
+
+    color: var(--bs-secondary);
+    content: "important";
+    margin-left: 0.5rem;
+    -webkit-animation: fadeOut 2s infinite;
+    animation: fadeOut 2s infinite;
+}
+
+/* span.nocode.marker.inline::after {
+
+    color: var(--bs-secondary);
+    content: "[";
+    margin-left: 0.5rem;
+    -webkit-animation: fadeOut 2s infinite;
+    animation: fadeOut 2s infinite;
+} */
+
+/* span.nocode.marker.inline-end::before {
+
+    color: var(--bs-secondary);
+    content: "]";
+    margin-left: 0.5rem;
+    -webkit-animation: fadeOut 2s infinite;
+    animation: fadeOut 2s infinite;
+} */
+
+span.nocode.marker.downline-end::after {
+
+    color: var(--bs-secondary);
+    content: "_________";
+    position: absolute;
+    margin-top: -0.35rem;
+    margin-left: 0.5rem;
+    -webkit-animation: fadeOut 2s infinite;
+    animation: fadeOut 2s infinite;
+}
+
+/* span.nocode.marker{
+    line-height: 0;
+    position: relative;
+    height: 0;
+    display: inline-block;
+}
+
+span.nocode.marker.downline~span.pln {
+    line-height: 0;
+}
+
+span.nocode.marker::before {
+    
+    color: var(--bs-danger);
+    content: "\f08d";
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    -webkit-animation: fadeOut 2s;
+    animation: fadeOut 2s;
+    animation-iteration-count: infinite;
+}
+
+span.nocode.marker.downline::before {
+    position: absolute;
+    margin-top: 1rem;
+    margin-left: -1.5rem;
+} */
+
+
+
+@-webkit-keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes shakeIcon {
+    0% {
+        -webkit-transform: rotate(-15deg);
+        transform: rotate(-15deg);
+    }
+
+    4% {
+        -webkit-transform: rotate(15deg);
+        transform: rotate(15deg);
+    }
+
+    8%,
+    24% {
+        -webkit-transform: rotate(-18deg);
+        transform: rotate(-18deg);
+    }
+
+    12%,
+    28% {
+        -webkit-transform: rotate(18deg);
+        transform: rotate(18deg);
+    }
+
+    16% {
+        -webkit-transform: rotate(-22deg);
+        transform: rotate(-22deg);
+    }
+
+    20% {
+        -webkit-transform: rotate(22deg);
+        transform: rotate(22deg);
+    }
+
+    32% {
+        -webkit-transform: rotate(-12deg);
+        transform: rotate(-12deg);
+    }
+
+    36% {
+        -webkit-transform: rotate(12deg);
+        transform: rotate(12deg);
+    }
+
+    40%,
+    100% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+}
+
+@keyframes shakeIcon {
+    0% {
+            -webkit-transform: rotate(-15deg);
+            transform: rotate(-15deg);
+        }
+    
+        4% {
+            -webkit-transform: rotate(15deg);
+            transform: rotate(15deg);
+        }
+    
+        8%,
+        24% {
+            -webkit-transform: rotate(-18deg);
+            transform: rotate(-18deg);
+        }
+    
+        12%,
+        28% {
+            -webkit-transform: rotate(18deg);
+            transform: rotate(18deg);
+        }
+    
+        16% {
+            -webkit-transform: rotate(-22deg);
+            transform: rotate(-22deg);
+        }
+    
+        20% {
+            -webkit-transform: rotate(22deg);
+            transform: rotate(22deg);
+        }
+    
+        32% {
+            -webkit-transform: rotate(-12deg);
+            transform: rotate(-12deg);
+        }
+    
+        36% {
+            -webkit-transform: rotate(12deg);
+            transform: rotate(12deg);
+        }
+    
+        40%,
+        100% {
+            -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+        }
+}

@@ -1,0 +1,11 @@
+/*fix bootstrap color problem on accordion button*/
+
+.accordion-button::after {
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    content: "\f078";
+    background-image: none !important;
+    text-align: center;
+    width: 1.25em;
+}
+

@@ -11,7 +11,6 @@ import ul from "../base/ul.js";
 import pill from "../base/pill.js";
 
 let dbstate = null;
-let textindex = 0;
 const textdb = [
 	"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur elit massa, elementum vel metus id, congue sollicitudin lectus. Praesent ultricies felis eget nisl volutpat gravida. In eleifend iaculis viverra. Proin ut gravida elit, id posuere velit. Nulla congue enim at odio eleifend accumsan. Curabitur felis quam, feugiat in tincidunt ac, pulvinar eu diam.",
 	"Nam tempor maximus ante vel malesuada. Vivamus nibh neque, cursus finibus risus vel, porttitor accumsan lacus. Nulla facilisi. Sed sit amet sagittis magna, id cursus est. Quisque convallis vel magna quis vestibulum. Curabitur placerat diam odio, in tincidunt felis viverra ac. Aenean quis ante diam. Sed sit amet lectus rutrum tortor feugiat auctor.",
@@ -25,7 +24,6 @@ const textdb = [
 	"Morbi pulvinar tortor a arcu accumsan, at aliquam augue eleifend. Aenean ut blandit erat. Nullam lorem ante, fermentum ultrices velit dictum, auctor aliquet ex. Integer bibendum augue gravida congue efficitur.",
 ];
 
-let shorttextindex = 0;
 const shorttextdb = [
 	"Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
 	"Nam tempor maximus ante vel malesuada.",
@@ -52,6 +50,8 @@ function isListed(val, listed) {
 		return false;
 	}
 }
+
+const dbcolor = ["primary", "success", "danger", "warning", "info", "dark"];
 
 const svgdata = (width, height, color) => {
 	color = core.getcssvar(color);
@@ -88,7 +88,6 @@ fill="${color}" stroke="none">
 </svg>`;
 };
 
-let iconindex = 0;
 const dbicon = [
 	"image",
 	"compass",
@@ -135,7 +134,11 @@ const fn = {
 		shorttextindex = 0;
 		iconindex = 0;
 	},
-	img: (width = 300, height = 283, color = "primary") => {
+	img: (width = 300, height = 283, color = undefined) => {
+		if (color === undefined) {
+			color = core.randomdb("sample_color", dbcolor);
+		}
+
 		if (!svgdb.hasOwnProperty(`${width}_${height}`)) {
 			svgdb[`${width}_${height}_${color}`] =
 				"data:image/svg+xml;charset=UTF-8," + encodeURIComponent(svgdata(width, height, color));
@@ -144,22 +147,13 @@ const fn = {
 		return svgdb[`${width}_${height}_${color}`];
 	},
 	text: () => {
-		if (textindex >= textdb.length) {
-			textindex = 0;
-		}
-		return textdb[textindex++];
+		return core.randomdb("sample_text", textdb);
 	},
 	shorttext: () => {
-		if (shorttextindex >= shorttextdb.length) {
-			shorttextindex = 0;
-		}
-		return shorttextdb[shorttextindex++];
+		return core.randomdb("sample_shorttext", shorttextdb);
 	},
 	icon: () => {
-		if (iconindex >= dbicon.length) {
-			iconindex = 0;
-		}
-		return dbicon[iconindex++];
+		return core.randomdb("sample_dbicon", dbicon);
 	},
 
 	tagprop: (exclude) => {
