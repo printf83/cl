@@ -116,7 +116,6 @@ export default class offcanvas extends div {
 			delete opt.backdrop;
 			delete opt.showtitle;
 			delete opt.iconafter;
-			delete opt.color;
 
 			delete opt.onshow;
 			delete opt.onshown;

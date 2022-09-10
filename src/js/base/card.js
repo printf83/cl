@@ -200,7 +200,8 @@ export class horizontal extends div {
 		if (opt) {
 			opt = core.extend({}, defaultHorizontalOption, opt);
 
-			opt.class = core.merge.class(opt.class, "row");
+			//opt.class = core.merge.class(opt.class, "row");
+			opt.row = true;
 			opt.elem = [
 				new div({
 					col: opt.size === "col" ? true : opt.size,
@@ -261,8 +262,8 @@ export class img extends imgtag {
 						opt.placement === "full" ? "card-img" : null,
 						opt.placement === "top" ? "card-img-top" : null,
 						opt.placement === "bottom" ? "card-img-bottom" : null,
-						opt.placement === "left" ? "img-fluid rounded-start" : null,
-						opt.placement === "right" ? "img-fluid rounded-end" : null,
+						opt.placement === "left" ? "img-fluid rounded-end-0" : null,
+						opt.placement === "right" ? "img-fluid rounded-start-0" : null,
 						opt.placement === "middle" ? "card-img rounded-0" : null,
 				  ])
 				: opt.class;

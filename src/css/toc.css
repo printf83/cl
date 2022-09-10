@@ -10,7 +10,7 @@
 .cl-toc li a label {
 	text-decoration: none;
 	color: var(--bs-body-color);
-	font-size: small;
+	font-size: .875em;
 	/* color: rgba(var(--bs-gray), 0.7);
 	font-weight: calc(var(--bs-body-font-weight) * 0.75);
 	padding: 0.25rem 0.5rem;

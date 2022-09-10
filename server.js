@@ -1,4 +1,5 @@
 "use strict";
+
 require("dotenv").config();
 
 if (process.env.DBURL) {

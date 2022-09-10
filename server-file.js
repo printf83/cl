@@ -1,3 +1,5 @@
+const DEBUG = true;
+
 const $ = require("./models/file.js");
 const fs = require("fs");
 const path = require("path");
@@ -29,7 +31,13 @@ function copyFileSync(source, target) {
 		}
 	}
 
+	// if (DEBUG && source.indexOf("/doc/") === -1) {
+	// 	minify.js(fs.readFileSync(source), (err, data) => {
+	// 		fs.writeFileSync(targetFile, data);
+	// 	});
+	// } else {
 	fs.writeFileSync(targetFile, fs.readFileSync(source));
+	// }
 }
 
 function copyFolderRecursiveSync(source, target) {
@@ -79,9 +87,19 @@ module.exports = () => {
 				files.forEach((file) => {
 					str += fs.readFileSync(`./src/css/${file}`);
 				});
-				fs.writeFileSync("./docs/dist/style.css", str);
 
-				console.info("Combine css file");
+				// if (DEBUG) {
+				// 	minify.css(str, (err, data) => {
+				// 		if (err) {
+				// 			console.error(err);
+				// 		} else {
+				// 			fs.writeFileSync("./docs/dist/style.css", data);
+				// 			console.info("Combine css file");
+				// 		}
+				// 	});
+				// } else {
+				fs.writeFileSync("./docs/dist/style.css", str);
+				// }
 			});
 		});
 	});

@@ -15,7 +15,8 @@ const defaultOption = {
 	offset: null,
 	reference: undefined,
 	autoclose: true,
-	dark: false,
+	color: null,
+	dark: null,
 	vertical: false,
 	weight: null,
 

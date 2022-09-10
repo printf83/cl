@@ -55,7 +55,7 @@
 	border-radius: var(--bs-border-radius-sm);
 	text-decoration: none;
 	display: inline-block;
-	font-size: small;
+	font-size: .875em;
 }
 
 .cl-menu-container li div:hover,
