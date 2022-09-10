@@ -150,7 +150,7 @@ span.nocode.marker.downline-end::after {
     color: var(--bs-secondary);
     content: "________________";
     position: absolute;
-    margin-top:-0.3rem;
+    margin-top:-0.325rem;
     margin-left: 0.5rem;
     -webkit-animation: fadeOut 2s;
     animation: fadeOut 2s;
