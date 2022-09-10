@@ -497,7 +497,7 @@ export default class file extends div {
 									label: opt.deletelabel,
 									icon: opt.deleteicon,
 									color: opt.deletecolor,
-									width: 0,
+									width: "auto",
 									disabled: opt.disabled ? true : opt.readonly ? true : false,
 									onclick: fn.ondelete,
 								}),
