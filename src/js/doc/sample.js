@@ -228,15 +228,18 @@ const fn = {
 			"border",
 			"bordercolor",
 			"borderweight",
+			"container",
 			"flex",
 			"order",
 			"offset",
 			"row",
 			"col",
 			"rowcol",
+
 			"gap",
 			"gapx",
 			"gapy",
+
 			"rounded",
 			"roundedtype",
 			"tmiddle",
@@ -244,6 +247,18 @@ const fn = {
 			"bottom",
 			"start",
 			"end",
+
+			"height",
+			"width",
+			"minheight",
+			"minwidth",
+			"maxheight",
+			"maxwidth",
+			"viewheight",
+			"viewwidth",
+			"minviewheight",
+			"minviewwidth",
+
 			"elem",
 		];
 

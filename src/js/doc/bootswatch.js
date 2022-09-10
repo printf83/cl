@@ -1111,7 +1111,7 @@ export default [
 					active: active,
 					elem: [
 						new div({
-							class: "w-100",
+							width: 100,
 							display: "flex",
 							justifycontent: "between",
 							elem: [

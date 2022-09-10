@@ -59,7 +59,7 @@ export class container extends div {
 				display: "flex",
 				alignitem: "stretch",
 				elem: [
-					new div({ class: "w-100", elem: opt.elem }),
+					new div({ width: 100, elem: opt.elem }),
 					opt.close
 						? new btnclose({
 								// dark: opt.color === "dark" || opt.color === "light" ? opt.color : "body-bg",

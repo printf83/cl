@@ -232,7 +232,7 @@ export default [
 				new div("row", [
 					new div("col-6 col-sm-3", ".col-6 .col-sm-3"),
 					new div("col-6 col-sm-3", ".col-6 .col-sm-3"),
-					new span({ class: "w-100" }), //marker
+					new span({ width:100 }), //marker
 					new div("col-6 col-sm-3", ".col-6 .col-sm-3"),
 					new div("col-6 col-sm-3", ".col-6 .col-sm-3"),
 				])
@@ -252,7 +252,7 @@ export default [
 					elem: [
 						new div({ col: [6, "sm-3"], elem: ".col-6 .col-sm-3" }),
 						new div({ col: [6, "sm-3"], elem: ".col-6 .col-sm-3" }),
-						new span({ class: "w-100" }), //marker
+						new span({ width: 100 }), //marker
 						new div({ col: [6, "sm-3"], elem: ".col-6 .col-sm-3" }),
 						new div({ col: [6, "sm-3"], elem: ".col-6 .col-sm-3" }),
 					],
@@ -271,7 +271,7 @@ export default [
 				new div("row", [
 					new div("col-6 col-sm-3", ".col-6 .col-sm-3"),
 					new div("col-6 col-sm-3", ".col-6 .col-sm-3"),
-					new span({ class: "w-100", display: ["none", "md-block"] }), //marker
+					new span({ width:100, display: ["none", "md-block"] }), //marker
 					new div("col-6 col-sm-3", ".col-6 .col-sm-3"),
 					new div("col-6 col-sm-3", ".col-6 .col-sm-3"),
 				])
@@ -291,7 +291,7 @@ export default [
 					elem: [
 						new div({ col: [6, "sm-3"], elem: ".col-6 .col-sm-3" }),
 						new div({ col: [6, "sm-3"], elem: ".col-6 .col-sm-3" }),
-						new span({ class: "w-100", display: ["none", "md-block"] }), //marker
+						new span({ width: 100, display: ["none", "md-block"] }), //marker
 						new div({ col: [6, "sm-3"], elem: ".col-6 .col-sm-3" }),
 						new div({ col: [6, "sm-3"], elem: ".col-6 .col-sm-3" }),
 					],

@@ -77,7 +77,9 @@ const fn = {
 										static: false,
 										size: "md",
 										elem: new img({
-											class: "img-fluid mx-auto w-100",
+											class: "img-fluid",
+											width: 100,
+											marginx: "auto",
 											display: "block",
 											rounded: true,
 											padding: 0,
@@ -192,7 +194,8 @@ const fn = {
 													padding: 5,
 													display: "flex",
 													justifycontent: "center",
-													class: "btn w-100",
+													class: "btn",
+													width: 100,
 													attr: {
 														"data-cl-file": i.id,
 													},
@@ -275,7 +278,7 @@ const fn = {
 					label: opt.viewlabel,
 					icon: opt.viewicon,
 					color: opt.viewcolor,
-					class: "w-100",
+					width: 100,
 					onclick: fn.onview,
 				})
 			);
@@ -308,7 +311,7 @@ const fn = {
 					label: opt.uploadlabel,
 					icon: opt.uploadicon,
 					color: opt.uploadcolor,
-					class: "w-100",
+					width: 100,
 					disabled: opt.disabled ? true : opt.readonly ? true : false,
 					onclick: fn.onupload,
 				})
@@ -486,7 +489,7 @@ export default class file extends div {
 									label: opt.viewlabel,
 									icon: opt.viewicon,
 									color: opt.viewcolor,
-									class: "w-100",
+									width: 100,
 									onclick: fn.onview,
 								}),
 								new button({
@@ -494,7 +497,7 @@ export default class file extends div {
 									label: opt.deletelabel,
 									icon: opt.deleteicon,
 									color: opt.deletecolor,
-									class: "w-0",
+									width: 0,
 									disabled: opt.disabled ? true : opt.readonly ? true : false,
 									onclick: fn.ondelete,
 								}),
@@ -505,7 +508,7 @@ export default class file extends div {
 									label: opt.uploadlabel,
 									icon: opt.uploadicon,
 									color: opt.uploadcolor,
-									class: "w-100",
+									width: 100,
 									disabled: opt.disabled ? true : opt.readonly ? true : false,
 									onclick: fn.onupload,
 								}),

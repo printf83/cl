@@ -190,7 +190,7 @@ const fn = {
 					position: "relative",
 					elem: new div({
 						position: "absolute",
-						class: "w-100",
+						width: 100,
 						elem: new div({
 							display: "flex",
 							justifycontent: "end",

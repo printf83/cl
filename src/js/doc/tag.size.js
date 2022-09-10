@@ -90,14 +90,14 @@ export default [
 		code: () => {
 			return new tag({
 				tag: "div",
-				style: { width: "100%" },
+				width: 100,
 				padding: 0,
 				elem: new tag({
 					tag: "div",
 					elem: "Max-width:100%",
 
 					//marker
-					class: "mw-100",
+					maxwidth: 100,
 				}),
 			});
 		},
@@ -132,15 +132,16 @@ export default [
 		code: () => {
 			return new tag({
 				tag: "div",
-				style: { height: "8rem" },
+				height: "8rem",
 				padding: 0,
 				elem: new tag({
 					tag: "div",
 					elem: "Max-height:100%",
 
 					//marker
-					class: "mh-100",
-					style: { width: "100px", height: "200px" },
+					maxheight: 100,
+					width: "100px",
+					height: "200px",
 					//-
 				}),
 			});

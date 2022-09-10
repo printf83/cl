@@ -303,7 +303,7 @@ export default [
 			return new tag({
 				tag: "div",
 				elem: [
-					new tag({ tag: "div", class: "w-100", elem: "Flex item" }),
+					new tag({ tag: "div", width: 100, elem: "Flex item" }),
 					new tag({ tag: "div", /*marker*/ flex: "shrink-1", elem: "Flex item" }),
 				],
 

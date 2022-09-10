@@ -599,7 +599,7 @@ export default [
 		import: ["small", "card", "sample"],
 		code: () => {
 			return new card.container({
-				class: "h-100",
+				height: 100,
 				elem: [
 					/*marker*/ new card.horizontal({
 						size: "sm-4",
@@ -610,7 +610,7 @@ export default [
 							}),
 						],
 						right: new card.container({
-							class: "h-100",
+							height: 100,
 							flush: true,
 							elem: [
 								new card.header({
@@ -952,7 +952,7 @@ export default [
 					],
 
 					//marker
-					class: "h-100",
+					height: 100,
 				});
 			};
 
@@ -994,7 +994,7 @@ export default [
 					],
 
 					//marker
-					class: "h-100",
+					height: 100,
 				});
 			};
 

@@ -106,7 +106,7 @@ export default class carousel extends div {
 							},
 							elem: [
 								new img({
-									class: "w-100",
+									width:100,
 									display: "block",
 									alt: i.alt ? i.alt : i.caption ? i.caption : null,
 									src: i.src,
