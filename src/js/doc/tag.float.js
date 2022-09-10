@@ -21,18 +21,24 @@ export default [
 			return [
 				new tag({
 					tag: "div",
-					float: "start",
 					elem: `Float start on all viewport sizes`,
+
+					//marker
+					float: "start",
 				}),
 				new tag({
 					tag: "div",
-					float: "end",
 					elem: `Float end on all viewport sizes`,
+
+					//marker
+					float: "end",
 				}),
 				new tag({
 					tag: "div",
-					float: "none",
 					elem: `Don't float on all viewport sizes`,
+
+					//marker
+					float: "none",
 				}),
 			];
 		},
@@ -47,23 +53,31 @@ export default [
 			return [
 				new tag({
 					tag: "div",
-					float: "sm-end",
 					elem: `Float end on viewports sized SM (small) or wider`,
+
+					//marker
+					float: "sm-end",
 				}),
 				new tag({
 					tag: "div",
-					float: "md-end",
 					elem: `Float end on viewports sized MD (medium) or wider`,
+
+					//marker
+					float: "md-end",
 				}),
 				new tag({
 					tag: "div",
-					float: "lg-end",
 					elem: `Float end on viewports sized LG (large) or wider`,
+
+					//marker
+					float: "lg-end",
 				}),
 				new tag({
 					tag: "div",
-					float: "xl-end",
 					elem: `Float end on viewports sized XL (extra-large) or wider`,
+
+					//marker
+					float: "xl-end",
 				}),
 			];
 		},

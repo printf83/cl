@@ -148,9 +148,9 @@ span.nocode.marker.downline::after {
 span.nocode.marker.downline-end::after {
 
     color: var(--bs-secondary);
-    content: "________________";
+    content: "_________";
     position: absolute;
-    margin-top:-0.325rem;
+    margin-top:-0.35rem;
     margin-left: 0.5rem;
     -webkit-animation: fadeOut 2s;
     animation: fadeOut 2s;

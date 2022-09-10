@@ -56,16 +56,26 @@ export default [
 		code: () => {
 			return new tag({
 				tag: "div",
-				position: "relative",
+				position: "relative", //marker
 				elem: [
-					{ tag: "div", position: "absolute", top: 0, start: 0 },
-					{ tag: "div", position: "absolute", top: 0, end: 0 },
-					{ tag: "div", position: "absolute", top: 50, start: 50 },
-					{ tag: "div", position: "absolute", bottom: 50, end: 50 },
-					{ tag: "div", position: "absolute", bottom: 0, start: 0 },
-					{ tag: "div", position: "absolute", bottom: 0, end: 0 },
+					{ top: 0, start: 0 },
+					{ top: 0, end: 0 },
+					{ top: 50, start: 50 },
+					{ bottom: 50, end: 50 },
+					{ bottom: 0, start: 0 },
+					{ bottom: 0, end: 0 },
 				].map((i) => {
-					return new tag(i);
+					return new tag({
+						tag: "div",
+
+						//marker
+						position: "absolute",
+						top: i.top,
+						bottom: i.bottom,
+						start: i.start,
+						end: i.end,
+						//-
+					});
 				}),
 			});
 		},
@@ -82,19 +92,28 @@ export default [
 		code: () => {
 			return new tag({
 				tag: "div",
-				position: "relative",
+				position: "relative", //marker
 				elem: [
-					{ tag: "div", position: "absolute", top: 0, start: 0, tmiddle: true },
-					{ tag: "div", position: "absolute", top: 0, start: 50, tmiddle: true },
-					{ tag: "div", position: "absolute", top: 0, start: 100, tmiddle: true },
-					{ tag: "div", position: "absolute", top: 50, start: 0, tmiddle: true },
-					{ tag: "div", position: "absolute", top: 50, start: 50, tmiddle: true },
-					{ tag: "div", position: "absolute", top: 50, start: 100, tmiddle: true },
-					{ tag: "div", position: "absolute", top: 100, start: 0, tmiddle: true },
-					{ tag: "div", position: "absolute", top: 100, start: 50, tmiddle: true },
-					{ tag: "div", position: "absolute", top: 100, start: 100, tmiddle: true },
+					{ top: 0, start: 0 },
+					{ top: 0, start: 50 },
+					{ top: 0, start: 100 },
+					{ top: 50, start: 0 },
+					{ top: 50, start: 50 },
+					{ top: 50, start: 100 },
+					{ top: 100, start: 0 },
+					{ top: 100, start: 50 },
+					{ top: 100, start: 100 },
 				].map((i) => {
-					return new tag(i);
+					return new tag({
+						tag: "div",
+
+						//marker
+						position: "absolute",
+						top: i.top,
+						start: i.start,
+						tmiddle: true,
+						//-
+					});
 				}),
 			});
 		},
@@ -109,19 +128,30 @@ export default [
 		code: () => {
 			return new tag({
 				tag: "div",
-				position: "relative",
+				position: "relative", //marker
 				elem: [
-					{ tag: "div", position: "absolute", top: 0, start: 0 },
-					{ tag: "div", position: "absolute", top: 0, start: 50, tmiddle: "x" },
-					{ tag: "div", position: "absolute", top: 0, end: 0 },
-					{ tag: "div", position: "absolute", top: 50, start: 0, tmiddle: "y" },
-					{ tag: "div", position: "absolute", top: 50, start: 50, tmiddle: true },
-					{ tag: "div", position: "absolute", top: 50, end: 0, tmiddle: "y" },
-					{ tag: "div", position: "absolute", bottom: 0, start: 0 },
-					{ tag: "div", position: "absolute", bottom: 0, start: 50, tmiddle: "x" },
-					{ tag: "div", position: "absolute", bottom: 0, end: 0 },
+					{ top: 0, start: 0 },
+					{ top: 0, start: 50, tmiddle: "x" },
+					{ top: 0, end: 0 },
+					{ top: 50, start: 0, tmiddle: "y" },
+					{ top: 50, start: 50, tmiddle: true },
+					{ top: 50, end: 0, tmiddle: "y" },
+					{ bottom: 0, start: 0 },
+					{ bottom: 0, start: 50, tmiddle: "x" },
+					{ bottom: 0, end: 0 },
 				].map((i) => {
-					return new tag(i);
+					return new tag({
+						tag: "div",
+
+						//marker
+						position: "absolute",
+						top: i.top,
+						bottom: i.bottom,
+						start: i.start,
+						end: i.end,
+						tmiddle: i.tmiddle,
+						//-
+					});
 				}),
 			});
 		},
@@ -138,27 +168,30 @@ export default [
 			return [
 				new tag({
 					tag: "button",
-					position: "relative",
+					position: "relative", //marker
 					class: "btn btn-primary",
 					elem: [
 						"Mail",
 						new tag({
 							tag: "span",
-							position: "absolute",
-							top: 0,
-							start: 100,
-							tmiddle: true,
 							class: "badge",
 							rounded: "pill",
 							color: "secondary",
 							elem: ["+99", new tag({ tag: "span", class: "visually-hidden", elem: "unread message" })],
+
+							//marker
+							position: "absolute",
+							top: 0,
+							start: 100,
+							tmiddle: true,
+							//-
 						}),
 					],
 				}),
 
 				new tag({
 					tag: "button",
-					position: "relative",
+					position: "relative", //marker
 					class: "btn btn-dark",
 					elem: [
 						"Marker",
@@ -171,10 +204,7 @@ export default [
 								fill: "#212529",
 								xmlns: "http://www.w3.org/2000/svg",
 							},
-							position: "absolute",
-							top: 100,
-							start: 50,
-							tmiddle: true,
+
 							class: "bi bi-caret-down-fill",
 							margintop: 1,
 							elem: new tag({
@@ -183,6 +213,13 @@ export default [
 									d: "M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z",
 								},
 							}),
+
+							//marker
+							position: "absolute",
+							top: 100,
+							start: 50,
+							tmiddle: true,
+							//-
 						}),
 					],
 				}),
@@ -195,16 +232,19 @@ export default [
 						"Alerts",
 						new tag({
 							tag: "span",
-							position: "absolute",
-							top: 0,
-							start: 100,
-							tmiddle: true,
 							class: "badge",
 							rounded: "circle",
 							bordercolor: "light",
 							color: "danger",
 							padding: 2,
 							elem: new tag({ tag: "span", class: "visually-hidden", elem: "unread message" }),
+
+							//marker
+							position: "absolute",
+							top: 0,
+							start: 100,
+							tmiddle: true,
+							//-
 						}),
 					],
 				}),
@@ -228,37 +268,46 @@ export default [
 					}),
 
 					new button({
-						position: "absolute",
-						top: 0,
-						start: 0,
-						tmiddle: true,
 						color: "primary",
 						rounded: "pill",
 						weight: "sm",
 						style: { width: "2rem", height: "2rem" },
 						label: "1",
-					}),
-					new button({
+
+						//marker
 						position: "absolute",
 						top: 0,
-						start: 50,
+						start: 0,
 						tmiddle: true,
+						//-
+					}),
+					new button({
 						color: "primary",
 						rounded: "pill",
 						weight: "sm",
 						style: { width: "2rem", height: "2rem" },
 						label: "2",
-					}),
-					new button({
+
+						//marker
 						position: "absolute",
 						top: 0,
-						start: 100,
+						start: 50,
 						tmiddle: true,
+						//-
+					}),
+					new button({
 						color: "secondary",
 						rounded: "pill",
 						weight: "sm",
 						style: { width: "2rem", height: "2rem" },
 						label: "3",
+
+						//marker
+						position: "absolute",
+						top: 0,
+						start: 100,
+						tmiddle: true,
+						//-
 					}),
 				],
 			});

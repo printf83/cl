@@ -19,8 +19,10 @@ export default [
 			return [25, 50, 75, 100, "auto"].map((i) => {
 				return new tag({
 					tag: "div",
-					class: `w-${i}`,
 					elem: `Width ${i}${typeof i === "string" ? "" : "%"}`,
+
+					//marker
+					class: `w-${i}`,
 				});
 			});
 		},
@@ -35,8 +37,10 @@ export default [
 				return new tag({
 					tag: "div",
 					display: "inline-block",
-					class: `h-${i}`,
 					elem: `Height ${i}${typeof i === "string" ? "" : "%"}`,
+
+					//marker
+					class: `h-${i}`,
 				});
 			});
 		},
@@ -53,8 +57,10 @@ export default [
 				padding: 0,
 				elem: new tag({
 					tag: "div",
-					class: "mw-100",
 					elem: "Max-width:100%",
+
+					//marker
+					class: "mw-100",
 				}),
 			});
 		},

@@ -40,9 +40,13 @@ export default [
 		code: () => {
 			return new toast({
 				color: "primary",
+				elem: sample.text(),
+
+				//marker
 				icon: null,
 				title: null,
-				elem: sample.text(),
+				//-
+
 				debug: true, // documentation purpose only
 			});
 		},
@@ -55,9 +59,13 @@ export default [
 		code: () => {
 			return new toast({
 				color: "primary",
+				elem: sample.text(),
+
+				//marker
 				icon: { type: "fab", icon: "bootstrap" },
 				title: "Bootstrap",
-				elem: sample.text(),
+				//-
+
 				debug: true, // documentation purpose only
 			});
 		},
@@ -128,7 +136,7 @@ export default [
 		code: () => {
 			return ["i", "!!", "!", "?", "-", "x", "/"].map((i) => {
 				//this last argument is for this documentation preview only
-				return new toast(i, `Example <b>${i}</b> icon toast`, { debug: true });
+				return new toast(/*marker*/ i, `Example <b>${i}</b> icon toast`, { debug: true });
 			});
 		},
 	},
@@ -148,7 +156,7 @@ export default [
 						onclick: (event) => {
 							let sender = event.currentTarget;
 							let icon = sender.previousSibling.value;
-							new toast(icon, `Example <b>${icon}</b> icon toast`).show();
+							new toast(/*marker*/ icon, `Example <b>${icon}</b> icon toast`).show();
 						},
 					}),
 					option: ["i", "!!", "!", "?", "-", "x", "/"],
@@ -164,8 +172,11 @@ export default [
 		code: () => {
 			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map((i) => {
 				return new toast({
-					color: i,
 					elem: new msg({ weight: "sm", icon: sample.icon(), elem: `Example <b>${i}</b> toast` }),
+
+					//marker
+					color: i,
+
 					debug: true, //this last argument is for this documentation preview only
 				});
 			});
@@ -195,8 +206,10 @@ export default [
 					label: i.label,
 					onclick: () => {
 						new toast({
-							position: i.position,
 							elem: new msg({ weight: "sm", icon: sample.icon(), elem: `${i.label} toast.` }),
+
+							//marker
+							position: i.position,
 						}).show();
 					},
 				});
@@ -215,9 +228,11 @@ export default [
 					new toast({
 						icon: undefined,
 						title: undefined,
-						autohide: false,
 						color: "warning",
 						elem: "Hello, world! This is a toast message.",
+
+						//marker
+						autohide: false,
 					}).show();
 				},
 			});
@@ -233,9 +248,11 @@ export default [
 				color: "primary",
 				onclick: () => {
 					new toast({
-						delay: 10000,
 						color: "primary",
 						elem: "This toast will close in 10 seconds.",
+
+						//marker
+						delay: 10000,
 					}).show();
 				},
 			});

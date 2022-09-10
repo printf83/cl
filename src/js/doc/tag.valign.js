@@ -34,7 +34,12 @@ export default [
 				elem: new table.tbody({
 					elem: new table.tr({
 						elem: ["baseline", "top", "middle", "bottom", "text-top", "text-bottom"].map((i) => {
-							return new table.td({ valign: i, elem: i });
+							return new table.td({
+								elem: i,
+
+								//marker
+								valign: i,
+							});
 						}),
 					}),
 				}),

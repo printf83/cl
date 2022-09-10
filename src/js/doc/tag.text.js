@@ -22,8 +22,10 @@ export default [
 			return [null, "start", "center", "end", ["end", "md-start", "lg-center"]].map((i) => {
 				return new tag({
 					tag: "div",
-					align: i,
 					elem: `Example element with <code>align: ${i}</code>`,
+
+					//marker
+					align: i,
 				});
 			});
 		},
@@ -44,9 +46,11 @@ export default [
 			return new tag({
 				tag: "div",
 				class: "cl-highlight",
-				wrap: true,
 				style: { width: "8rem" },
 				elem: "This text should wrap.",
+
+				//marker
+				wrap: true,
 			});
 		},
 	},
@@ -59,9 +63,11 @@ export default [
 			return new tag({
 				tag: "div",
 				class: "cl-highlight",
-				wrap: false,
 				style: { width: "8rem" },
 				elem: "This text should overflow the parent.",
+
+				//marker
+				wrap: false,
 			});
 		},
 	},
@@ -76,8 +82,10 @@ export default [
 			return new tag({
 				tag: "div",
 				class: "cl-highlight",
-				wordbreak: true,
 				elem: "mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm",
+
+				//marker
+				wordbreak: true,
 			});
 		},
 	},
@@ -98,8 +106,10 @@ export default [
 			return [null, "lowercase", "uppercase", "capitalize"].map((i) => {
 				return new tag({
 					tag: "div",
-					texttransform: i,
 					elem: `Example element with <code>texttransform: ${i}</code>`,
+
+					//marker
+					texttransform: i,
 				});
 			});
 		},
@@ -116,8 +126,10 @@ export default [
 			return [null, 1, 2, 3, 4, 5, 6].map((i) => {
 				return new tag({
 					tag: "div",
-					fontsize: i,
 					elem: `Example element with <code>fontsize: ${i}</code>`,
+
+					//marker
+					fontsize: i,
 				});
 			});
 		},
@@ -132,8 +144,10 @@ export default [
 			return [null, "bold", "bolder", "semibold", "normal", "light", "lighter"].map((i) => {
 				return new tag({
 					tag: "div",
-					fontweight: i,
 					elem: `Example element with <code>fontweight: ${i}</code>`,
+
+					//marker
+					fontweight: i,
 				});
 			});
 		},
@@ -148,8 +162,10 @@ export default [
 			return [null, true, false].map((i) => {
 				return new tag({
 					tag: "div",
-					fontitalic: i,
 					elem: `Example element with <code>fontitalic: ${i}</code>`,
+
+					//marker
+					fontitalic: i,
 				});
 			});
 		},
@@ -164,8 +180,10 @@ export default [
 			return [null, true, false, "underline", "line-through", "none"].map((i) => {
 				return new tag({
 					tag: "div",
-					textdecoration: i,
 					elem: `Example element with <code>textdecoration: ${i}</code>`,
+
+					//marker
+					textdecoration: i,
 				});
 			});
 		},
@@ -179,8 +197,10 @@ export default [
 		code: () => {
 			return new tag({
 				tag: "div",
-				monospace: true,
 				elem: `Example element with <code>monospace: true</code>`,
+
+				//marker
+				monospace: true,
 			});
 		},
 	},
@@ -195,8 +215,10 @@ export default [
 				return new tag({
 					tag: "div",
 					class: "cl-highlight-element",
-					lineheight: i,
 					elem: `Example element with <code>lineheight: ${i}</code>. ${sample.text()}`,
+
+					//marker
+					lineheight: i,
 				});
 			});
 		},

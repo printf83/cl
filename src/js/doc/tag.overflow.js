@@ -21,29 +21,37 @@ export default [
 					tag: "div",
 					class: "cl-highlight-element",
 					style: { "max-height": "6rem" },
-					overflow: "auto",
 					elem: "This is an example of using <code>overflow:auto</code> on an element with set width and height dimensions. By design, this content will vertically scroll.",
+
+					//marker
+					overflow: "auto",
 				}),
 				new tag({
 					tag: "div",
 					class: "cl-highlight-element",
 					style: { "max-height": "6rem" },
-					overflow: "hidden",
 					elem: "This is an example of using <code>overflow:hidden</code> on an element with set width and height dimensions.",
+
+					//marker
+					overflow: "hidden",
 				}),
 				new tag({
 					tag: "div",
 					class: "cl-highlight-element",
 					style: { "max-height": "6rem" },
-					overflow: "visible",
 					elem: "This is an example of using <code>overflow:visible</code> on an element with set width and height dimensions.",
+
+					//marker
+					overflow: "visible",
 				}),
 				new tag({
 					tag: "div",
 					class: "cl-highlight-element",
 					style: { "max-height": "6rem" },
-					overflow: "scroll",
 					elem: "This is an example of using <code>overflow:scroll</code> on an element with set width and height dimensions.",
+
+					//marker
+					overflow: "scroll",
 				}),
 			];
 		},

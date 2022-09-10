@@ -21,7 +21,13 @@ export default [
 		import: ["tag"],
 		code: () => {
 			return [null, false, true].map((i) => {
-				return new tag({ tag: "div", visible: i, elem: `Example element with <code>visible:${i}</code>.` });
+				return new tag({
+					tag: "div",
+					elem: `Example element with <code>visible:${i}</code>.`,
+
+					//marker
+					visible: i,
+				});
 			});
 		},
 	},

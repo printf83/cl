@@ -17,18 +17,24 @@ export default [
 			return [
 				new tag({
 					tag: "p",
-					userselect: "all",
 					elem: `This paragraph will be entirely selected when clicked by the user.`,
+
+					//marker
+					userselect: "all",
 				}),
 				new tag({
 					tag: "p",
+					elem: `This paragraph has default select behavior. Default is none`,
+
+					//marker
 					userselect: "auto",
-					elem: `This paragraph has default select behavior.`,
 				}),
 				new tag({
 					tag: "p",
-					userselect: "none",
 					elem: `This paragraph will not be selectable when clicked by the user.`,
+
+					//marker
+					userselect: "none",
 				}),
 			];
 		},
@@ -48,10 +54,13 @@ export default [
 						new tag({
 							tag: "a",
 							href: "#",
-							pointerevent: "none",
 							attr: { tabindex: "-1", "aria-disabled": "true" },
 							elem: "This link",
+
+							//marker
+							pointerevent: "none",
 						}),
+
 						" can not be clicked.",
 					],
 				}),
@@ -73,16 +82,20 @@ export default [
 						new tag({
 							tag: "a",
 							href: "#",
-							pointerevent: "none",
 							attr: { tabindex: "-1", "aria-disabled": "true" },
 							elem: "This link",
+
+							//marker
+							pointerevent: "none",
 						}),
 						" can not be clicked because the <code>pointerevent</code> property is inherited from its parent. However, ",
 						new tag({
 							tag: "a",
 							href: "#",
-							pointerevent: "auto",
 							elem: "this link",
+
+							//marker
+							pointerevent: "auto",
 						}),
 						,
 						" has a <code>pointerevent:auto</code> property and can be clicked.",

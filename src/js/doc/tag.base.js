@@ -20,11 +20,13 @@ export default [
 		import: ["tag"],
 		code: () => {
 			return [
+				//marker
 				new tag({ tag: "div", elem: "DIV element" }),
 				new tag({ tag: "span", elem: "SPAN element" }),
 				new tag({ tag: "p", elem: "P element" }),
 				new tag({ tag: "b", elem: "B element" }),
 				new tag({ tag: "i", elem: "I element" }),
+				//-
 			];
 		},
 	},
