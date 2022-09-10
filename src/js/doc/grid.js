@@ -277,8 +277,8 @@ export default [
 					new div({
 						row: true,
 						elem: [
-							new div({ /*marker*/ col: 8, elem: "col-8" }),
-							new div({ /*marker*/ col: 4, elem: "col-4" }),
+							new div({ /*marker*/ col: "sm-8", elem: "col-sm-8" }),
+							new div({ /*marker*/ col: "sm-4", elem: "col-sm-4" }),
 						],
 					}),
 					new div({

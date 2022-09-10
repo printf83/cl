@@ -743,7 +743,7 @@ export default [
 					option: dditem,
 
 					//marker
-					reference: "parent",
+					reference: null, //reference to split button
 				}),
 			];
 		},

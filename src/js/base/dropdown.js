@@ -13,7 +13,7 @@ const defaultOption = {
 	splittoggle: false,
 	aligment: null,
 	offset: null,
-	reference: null,
+	reference: undefined,
 	autoclose: true,
 	dark: false,
 	vertical: false,
@@ -43,6 +43,11 @@ export default class dropdown extends tag {
 			opt = core.extend({}, defaultOption, opt);
 
 			opt.id = opt.id || core.UUID();
+
+			if (opt.splittoggle && opt.reference === undefined) {
+				opt.reference = "parent";
+			}
+
 			opt.option = Array.isArray(opt.option) ? opt.option : [opt.option];
 
 			let menuctl = new ul({
