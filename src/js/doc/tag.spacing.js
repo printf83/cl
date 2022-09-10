@@ -62,7 +62,7 @@ export default [
 		code: () => {
 			return new tag({
 				tag: "div",
-				style: { width: "12rem" },
+				width: "12rem",
 				elem: `Centered element`,
 
 				//marker

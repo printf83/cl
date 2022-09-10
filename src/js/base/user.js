@@ -115,7 +115,7 @@ const fn = {
 							elem: new div({
 								display: "flex",
 								alignitem: "center",
-								style: { height: "100%" },
+								height: 100,
 								elem: core.setting.banner(type),
 							}),
 						}),
@@ -124,7 +124,7 @@ const fn = {
 							elem: new div({
 								display: "flex",
 								alignitem: "center",
-								style: { height: "100%" },
+								height: 100,
 								elem: elem,
 							}),
 						}),
@@ -298,7 +298,7 @@ const fn = {
 									//event
 									if (core.setting.userchange && typeof core.setting.userchange === "function") {
 										fn.action.info_guest(sender, function (current_guest_info) {
-											core.setting.userchange(current_guest_info);	
+											core.setting.userchange(current_guest_info);
 										});
 									}
 								} else {

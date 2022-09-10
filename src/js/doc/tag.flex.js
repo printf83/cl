@@ -173,7 +173,7 @@ export default [
 			return ["start", "end", "center", "baseline", "stretch"].map((i) => {
 				return new tag({
 					tag: "div",
-					style: { height: "6rem" },
+					height: "6rem",
 					elem: Array(3).fill(new tag({ tag: "div", elem: "Flex item" })),
 
 					//marker
@@ -210,7 +210,7 @@ export default [
 			return ["start", "end", "center", "baseline", "stretch"].map((i) => {
 				return new tag({
 					tag: "div",
-					style: { height: "6rem" },
+					height: "6rem",
 					elem: [
 						new tag({ tag: "div", elem: "Flex item" }),
 						new tag({ tag: "div", /*marker*/ alignself: i, elem: "Flex item" }),
@@ -379,7 +379,7 @@ export default [
 			return [
 				new tag({
 					tag: "div",
-					style: { height: "12rem" },
+					height: "12rem" ,
 
 					//marker
 					display: "flex",
@@ -395,7 +395,7 @@ export default [
 				}),
 				new tag({
 					tag: "div",
-					style: { height: "12rem" },
+					height: "12rem" ,
 
 					//marker
 					display: "flex",
@@ -546,7 +546,7 @@ export default [
 			return ["start", "end", "center", "between", "around", "stretch"].map((i) => {
 				return new tag({
 					tag: "div",
-					style: { height: "12rem" },
+					height: "12rem" ,
 					elem: Array(15).fill(new tag({ tag: "div", elem: "Flex item" })),
 
 					//marker
@@ -587,7 +587,7 @@ export default [
 						elem: new tag({
 							tag: "img",
 							attr: { alt: "Image", src: sample.img(84, 80) },
-							style: { height: "5rem" },
+							height: "5rem" ,
 						}),
 
 						//marker
@@ -621,7 +621,7 @@ export default [
 						elem: new tag({
 							tag: "img",
 							attr: { alt: "Image", src: sample.img(84, 80) },
-							style: { height: "5rem" },
+							height: "5rem" ,
 						}),
 
 						//marker

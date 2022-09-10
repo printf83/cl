@@ -1155,9 +1155,7 @@ export default [
 			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map((i) => {
 				return new card.container({
 					color: i,
-					style: {
-						width: "18rem",
-					},
+					width: "18rem",
 					elem: [
 						new card.header("Header"),
 						new card.body({
@@ -1182,9 +1180,7 @@ export default [
 				return new card.container({
 					bordercolor: i,
 					textcolor: i,
-					style: {
-						width: "18rem",
-					},
+					width: "18rem",
 					elem: [
 						new card.header("Header"),
 						new card.body({

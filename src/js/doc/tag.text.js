@@ -46,7 +46,7 @@ export default [
 			return new tag({
 				tag: "div",
 				class: "cl-highlight",
-				style: { width: "8rem" },
+				width: "8rem",
 				elem: "This text should wrap.",
 
 				//marker
@@ -63,7 +63,7 @@ export default [
 			return new tag({
 				tag: "div",
 				class: "cl-highlight",
-				style: { width: "8rem" },
+				width: "8rem",
 				elem: "This text should overflow the parent.",
 
 				//marker

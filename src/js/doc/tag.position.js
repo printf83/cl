@@ -271,7 +271,8 @@ export default [
 						color: "primary",
 						rounded: "pill",
 						weight: "sm",
-						style: { width: "2rem", height: "2rem" },
+						width: "2rem",
+						height: "2rem",
 						label: "1",
 
 						//marker
@@ -285,7 +286,8 @@ export default [
 						color: "primary",
 						rounded: "pill",
 						weight: "sm",
-						style: { width: "2rem", height: "2rem" },
+						width: "2rem",
+						height: "2rem",
 						label: "2",
 
 						//marker
@@ -299,7 +301,8 @@ export default [
 						color: "secondary",
 						rounded: "pill",
 						weight: "sm",
-						style: { width: "2rem", height: "2rem" },
+						width: "2rem",
+						height: "2rem",
 						label: "3",
 
 						//marker

@@ -24,7 +24,7 @@ export default [
 		import: ["button", "card", "sample"],
 		code: () => {
 			return new card.container({
-				style: { width: "18rem" },
+				width: "18rem",
 				elem: [
 					new card.img({
 						placement: "top",
@@ -62,7 +62,7 @@ export default [
 		import: ["card"],
 		code: () => {
 			return new card.container({
-				style: { width: "18rem" },
+				width: "18rem",
 				elem: new card.body({
 					//marker
 					elem: [
@@ -92,7 +92,7 @@ export default [
 		import: ["card", "sample"],
 		code: () => {
 			return new card.container({
-				style: { width: "18rem" },
+				width: "18rem",
 				elem: [
 					//marker
 					new card.img({
@@ -117,7 +117,7 @@ export default [
 		import: ["listgroup", "card"],
 		code: () => {
 			return new card.container({
-				style: { width: "18rem" },
+				width: "18rem",
 
 				//marker
 				elem: new listgroup({
@@ -134,7 +134,7 @@ export default [
 		import: ["listgroup", "card"],
 		code: () => {
 			return new card.container({
-				style: { width: "18rem" },
+				width: "18rem",
 
 				//marker
 				elem: [
@@ -154,7 +154,7 @@ export default [
 		import: ["listgroup", "card"],
 		code: () => {
 			return new card.container({
-				style: { width: "18rem" },
+				width: "18rem",
 
 				//marker
 				elem: [
@@ -178,7 +178,7 @@ export default [
 		import: ["listgroup", "card", "sample"],
 		code: () => {
 			return new card.container({
-				style: { width: "18rem" },
+				width: "18rem",
 				elem: [
 					new card.img({
 						placement: "top",
@@ -401,7 +401,7 @@ export default [
 		code: () => {
 			return [
 				new card.container({
-					style: { width: "18rem" }, //marker
+					width: "18rem", //marker
 					elem: [
 						new card.body({
 							elem: [
@@ -425,7 +425,7 @@ export default [
 			return [
 				new card.container({
 					align: "start", //marker
-					style: { width: "18rem" },
+					width: "18rem",
 					elem: [
 						new card.body({
 							elem: [
@@ -438,7 +438,7 @@ export default [
 				}),
 				new card.container({
 					align: "center", //marker
-					style: { width: "18rem" },
+					width: "18rem",
 					elem: [
 						new card.body({
 							elem: [
@@ -451,7 +451,7 @@ export default [
 				}),
 				new card.container({
 					align: "end", //marker
-					style: { width: "18rem" },
+					width: "18rem",
 					elem: [
 						new card.body({
 							elem: [
@@ -650,7 +650,7 @@ export default [
 		import: ["card"],
 		code: () => {
 			return new card.container({
-				style: { width: "18rem" },
+				width: "18rem",
 				elem: [
 					new card.header("Header"),
 					new card.body({
@@ -676,7 +676,7 @@ export default [
 		code: () => {
 			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map((i) => {
 				return new card.container({
-					style: { width: "18rem" },
+					width: "18rem",
 					elem: [
 						new card.header("Header"),
 						new card.body({
@@ -702,7 +702,7 @@ export default [
 		import: ["card"],
 		code: () => {
 			return new card.container({
-				style: { width: "18rem" },
+				width: "18rem",
 				elem: [
 					new card.header("Header"),
 					new card.body({
@@ -728,7 +728,7 @@ export default [
 		code: () => {
 			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map((i) => {
 				return new card.container({
-					style: { width: "18rem" },
+					width: "18rem",
 					elem: [
 						new card.header("Header"),
 						new card.body({
@@ -756,7 +756,7 @@ export default [
 		code: () => {
 			return new card.container({
 				bordercolor: "success",
-				style: { width: "18rem" },
+				width: "18rem",
 				elem: [
 					new card.header({
 						color: "transparent",

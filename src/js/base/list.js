@@ -1031,7 +1031,7 @@ export class item extends li {
 									? new div({
 											class: "cl-list-img",
 											marginend: 3,
-											style: { width: "3rem" },
+											width: "3rem",
 											elem: new img({
 												class: "img-fluid",
 												rounded: true,

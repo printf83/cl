@@ -22,7 +22,7 @@ export default [
 				return new tag({
 					tag: "span",
 					elem: ` ${i} `,
-					
+
 					//marker
 					valign: i,
 				});
@@ -35,7 +35,7 @@ export default [
 		import: ["table"],
 		code: () => {
 			return new table.container({
-				style: { height: "8rem" },
+				height: "8rem",
 				border: false,
 				elem: new table.tbody({
 					elem: new table.tr({

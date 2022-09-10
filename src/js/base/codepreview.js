@@ -78,9 +78,7 @@ function codecontainer(type, strcode, maxheight, linenums) {
 		new code({
 			overflow: "auto",
 			display: "block",
-			style: {
-				"max-height": maxheight,
-			},
+			maxheight: maxheight,
 			elem: new pre({
 				class: [
 					"prettyprint",

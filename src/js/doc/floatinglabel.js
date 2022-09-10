@@ -114,7 +114,7 @@ export default [
 
 				//marker
 				floatlabel: true,
-				style: { height: "100px" },
+				height: "100px",
 				//-
 			});
 		},

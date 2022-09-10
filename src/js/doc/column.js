@@ -54,7 +54,7 @@ export default [
 
 				["row align-items-start", "row align-items-center", "row align-items-end"].map((i) => {
 					return new div({
-						style: { "min-height": "10rem" },
+						minheight:"10rem",
 						elem: Array(3).fill(new div("col", "One of three columns")),
 
 						//marker
@@ -75,7 +75,7 @@ export default [
 				elem: ["start", "center", "end"].map((i) => {
 					return new div({
 						row: true,
-						style: { "min-height": "10rem" },
+						minheight:"10rem",
 						elem: Array(3).fill(new div({ col: true, elem: "One of three columns" })),
 
 						//marker
@@ -95,7 +95,7 @@ export default [
 				"container",
 				new div({
 					class: "row",
-					style: { "min-height": "10rem" },
+					minheight:"10rem",
 					elem: [
 						new div(/*marker*/ "col align-self-start", "One of three columns"),
 						new div(/*marker*/ "col align-self-center", "One of three columns"),
@@ -115,7 +115,7 @@ export default [
 				container: true,
 				elem: new div({
 					row: true,
-					style: { "min-height": "10rem" },
+					minheight:"10rem",
 					elem: ["start", "center", "end"].map((i) => {
 						return new div({
 							col: true,

@@ -646,7 +646,7 @@ export default [
 							//marker
 							elem: new div({
 								class: "text-muted p-4",
-								style: { width: "200px" },
+								width: "200px",
 								elem: [
 									new p("Some example text that's free-flowing within the dropdown menu."),
 									new p({ marginbottom: 0, elem: "And this is more example text." }),

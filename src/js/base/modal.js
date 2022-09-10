@@ -297,7 +297,7 @@ export default class modal extends div {
 				}),
 				color: opt.bgcolor ? opt.bgcolor : null,
 				elem: new div({
-					style: { "max-width": opt.maxwidth },
+					maxwidth: opt.maxwidth,
 					class: [
 						"modal-dialog",
 						opt.scrollable ? "modal-dialog-scrollable" : null,

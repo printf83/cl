@@ -185,7 +185,7 @@ let fnWH = {
 	},
 
 	heightManager: (opt) => {
-		if (opt.height) {
+		if (opt.height || opt.height === 0) {
 			switch (true) {
 				case opt.height === "auto":
 				case opt.height === 25:
@@ -206,7 +206,7 @@ let fnWH = {
 		return opt;
 	},
 	widthManager: (opt) => {
-		if (opt.width) {
+		if (opt.width || opt.width === 0) {
 			switch (true) {
 				case opt.width === "auto":
 				case opt.width === 25:
@@ -227,7 +227,7 @@ let fnWH = {
 		return opt;
 	},
 	maxHeightManager: (opt) => {
-		if (opt.maxheight) {
+		if (opt.maxheight || opt.maxheight === 0) {
 			if (!opt.maxheight === 100) {
 				opt.style = core.merge.style(opt.style, {
 					"max-height": typeof opt.maxheight === "number" ? `${opt.maxheight}%` : `${opt.maxheight}`,
@@ -240,7 +240,7 @@ let fnWH = {
 		return opt;
 	},
 	maxWidthManager: (opt) => {
-		if (opt.maxwidth) {
+		if (opt.maxwidth || opt.maxwidth === 0) {
 			if (!opt.maxwidth === 100) {
 				opt.style = core.merge.style(opt.style, {
 					"max-width": typeof opt.maxwidth === "number" ? `${opt.maxwidth}%` : `${opt.maxwidth}`,
@@ -253,7 +253,7 @@ let fnWH = {
 		return opt;
 	},
 	minHeightManager: (opt) => {
-		if (opt.minheight) {
+		if (opt.minheight || opt.minheight === 0) {
 			opt.style = core.merge.style(opt.style, {
 				"min-width": typeof opt.minheight === "number" ? `${opt.minheight}%` : `${opt.minheight}`,
 			});
@@ -264,7 +264,7 @@ let fnWH = {
 		return opt;
 	},
 	minWidthManager: (opt) => {
-		if (opt.minwidth) {
+		if (opt.minwidth || opt.minwidth === 0) {
 			opt.style = core.merge.style(opt.style, {
 				"min-width": typeof opt.minwidth === "number" ? `${opt.minwidth}%` : `${opt.minwidth}`,
 			});
@@ -275,7 +275,7 @@ let fnWH = {
 		return opt;
 	},
 	minViewHeightManager: (opt) => {
-		if (opt.minviewheight) {
+		if (opt.minviewheight || opt.minviewheight === 0) {
 			if (!opt.minviewheight === 100) {
 				if (typeof opt.minviewheight === "number") {
 					opt.style = core.merge.style(opt.style, {
@@ -290,7 +290,7 @@ let fnWH = {
 		return opt;
 	},
 	minViewWidthManager: (opt) => {
-		if (opt.minviewwidth) {
+		if (opt.minviewwidth || opt.minviewwidth === 0) {
 			if (!opt.minviewwidth === 100) {
 				if (typeof opt.minviewwidth === "number") {
 					opt.style = core.merge.style(opt.style, {
@@ -305,7 +305,7 @@ let fnWH = {
 		return opt;
 	},
 	viewHeightManager: (opt) => {
-		if (opt.viewheight) {
+		if (opt.viewheight || opt.viewheight === 0) {
 			if (!opt.viewheight === 100) {
 				if (typeof opt.viewheight === "number") {
 					opt.style = core.merge.style(opt.style, {
@@ -320,7 +320,7 @@ let fnWH = {
 		return opt;
 	},
 	viewWidthManager: (opt) => {
-		if (opt.viewwidth) {
+		if (opt.viewwidth || opt.viewwidth === 0) {
 			if (!opt.viewwidth === 100) {
 				if (typeof opt.viewwidth === "number") {
 					opt.style = core.merge.style(opt.style, {
