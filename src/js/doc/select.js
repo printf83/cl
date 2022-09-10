@@ -17,6 +17,8 @@ export default [
 				label: "Default select example",
 				hidelabel: true,
 				type: "select",
+
+				//marker
 				option: [
 					{ value: "", label: "Open this select menu", selected: true },
 					{ value: "1", label: "One" },
@@ -41,24 +43,28 @@ export default [
 
 			return [
 				new input({
-					weight: "lg",
 					label: "Large select example",
 					hidelabel: true,
 					type: "select",
 					option: optitem,
+
+					//marker
+					weight: "lg",
+				}),
+				new input({
+					label: "Default select example",
+					hidelabel: true,
+					type: "select",
+					option: optitem,
 				}),
 				new input({
 					label: "Small select example",
 					hidelabel: true,
 					type: "select",
 					option: optitem,
-				}),
-				new input({
+
+					//marker
 					weight: "sm",
-					label: "Small select example",
-					hidelabel: true,
-					type: "select",
-					option: optitem,
 				}),
 			];
 		},
@@ -69,7 +75,6 @@ export default [
 		import: ["input"],
 		code: () => {
 			return new input({
-				multiple: true,
 				label: "Multiple select example",
 				hidelabel: true,
 				type: "select",
@@ -79,6 +84,9 @@ export default [
 					{ value: "2", label: "Two" },
 					{ value: "3", label: "Three" },
 				],
+
+				//marker
+				multiple: true,
 			});
 		},
 	},
@@ -88,7 +96,6 @@ export default [
 		import: ["input"],
 		code: () => {
 			return new input({
-				size: 3,
 				label: "Size 3 select example",
 				hidelabel: true,
 				type: "select",
@@ -98,6 +105,9 @@ export default [
 					{ value: "2", label: "Two" },
 					{ value: "3", label: "Three" },
 				],
+
+				//marker
+				size: 3,
 			});
 		},
 	},
@@ -107,7 +117,6 @@ export default [
 		import: ["input"],
 		code: () => {
 			return new input({
-				disabled: true,
 				label: "Disabled select example",
 				hidelabel: true,
 				type: "select",
@@ -117,6 +126,9 @@ export default [
 					{ value: "2", label: "Two" },
 					{ value: "3", label: "Three" },
 				],
+
+				//marker
+				disabled: true,
 			});
 		},
 	},

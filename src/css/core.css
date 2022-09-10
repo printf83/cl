@@ -97,8 +97,14 @@ input.wait.disabled {
 }
 
 
+span.nocode.marker{
+    position: relative;
+}
 
-span.nocode.marker::before {
+span.nocode.marker.inline::before,
+span.nocode.marker.downline::before,
+span.nocode.marker.downline-end::before
+{
 
     color: var(--bs-danger);
     content: "\f08d";
@@ -113,6 +119,38 @@ span.nocode.marker.downline::after {
 
     color: var(--bs-secondary);
     content: "important";
+    margin-left: 0.5rem;
+    -webkit-animation: fadeOut 2s;
+    animation: fadeOut 2s;
+    animation-iteration-count: infinite;
+}
+
+span.nocode.marker.inline::after {
+
+    color: var(--bs-secondary);
+    content: "[";
+    margin-left: 0.5rem;
+    -webkit-animation: fadeOut 2s;
+    animation: fadeOut 2s;
+    animation-iteration-count: infinite;
+}
+
+span.nocode.marker.inline-end::before {
+
+    color: var(--bs-secondary);
+    content: "]";
+    margin-left: 0.5rem;
+    -webkit-animation: fadeOut 2s;
+    animation: fadeOut 2s;
+    animation-iteration-count: infinite;
+}
+
+span.nocode.marker.downline-end::after {
+
+    color: var(--bs-secondary);
+    content: "________________";
+    position: absolute;
+    margin-top:-0.3rem;
     margin-left: 0.5rem;
     -webkit-animation: fadeOut 2s;
     animation: fadeOut 2s;

@@ -236,7 +236,7 @@ export default [
 		title: "Block buttons",
 		import: ["container", "button"],
 		code: () => {
-			return /*marker*/ new container.grid([
+			return /*marker*/ new container.grid /*]*/([
 				new button({ label: "Button", color: "primary" }),
 				new button({ label: "Button", color: "primary" }),
 				new button({ label: "Button", color: "primary" }),

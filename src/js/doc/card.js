@@ -49,7 +49,7 @@ export default [
 		msg: "The building block of a card is the {{card.body}}. Use it whenever you need a padded section within a card.",
 		import: ["card"],
 		code: () => {
-			return new card.container(/*marker*/ new card.body("This is some text within a card body."));
+			return new card.container(/*marker*/ new card.body("This is some text within a card body.") /*]*/);
 		},
 	},
 

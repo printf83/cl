@@ -14,8 +14,10 @@ export default [
 		code: () => {
 			return new input({
 				label: "Simple Range",
-				type: "range",
 				value: 50,
+
+				//marker
+				type: "range",
 			});
 		},
 	},
@@ -27,8 +29,10 @@ export default [
 			return new input({
 				label: "Disable Range",
 				type: "range",
-				disabled: true,
 				value: 50,
+
+				//marker
+				disabled: true,
 			});
 		},
 	},
@@ -41,6 +45,8 @@ export default [
 				label: "Example Range",
 				type: "range",
 				value: 2.5,
+
+				//marker
 				min: 0,
 				max: 5,
 			});
@@ -57,6 +63,8 @@ export default [
 				value: 2.5,
 				min: 0,
 				max: 5,
+
+				//marker
 				step: 0.5,
 			});
 		},

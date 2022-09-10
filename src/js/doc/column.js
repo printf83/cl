@@ -94,9 +94,9 @@ export default [
 					class: "row",
 					style: { "min-height": "10rem" },
 					elem: [
-						new div("col align-self-start" /*marker*/, "One of three columns"),
-						new div("col align-self-center" /*marker*/, "One of three columns"),
-						new div("col align-self-end" /*marker*/, "One of three columns"),
+						new div(/*marker*/ "col align-self-start" /*]*/, "One of three columns"),
+						new div(/*marker*/ "col align-self-center" /*]*/, "One of three columns"),
+						new div(/*marker*/ "col align-self-end" /*]*/, "One of three columns"),
 					],
 				})
 			);
@@ -174,13 +174,13 @@ export default [
 			return new div(
 				"container",
 				new div("row", [
-					new div("col-9" /*marker*/, ".col-9"),
+					new div(/*marker*/ "col-9" /*]*/, ".col-9"),
 
 					new div(
-						"col-4", //marker
+						/*marker*/ "col-4" /*]*/,
 						".col-4 : Since 9 + 4 = 13 > 12, this 4-column-wide div gets wrapped onto a new line as one contiguous unit."
 					),
-					new div("col-6" /*marker*/, ".col-6 : Subsequent columns continue along the new line."),
+					new div(/*marker*/ "col-6" /*]*/, ".col-6 : Subsequent columns continue along the new line."),
 				])
 			);
 		},
@@ -307,8 +307,8 @@ export default [
 				"container",
 				new div("row", [
 					new div("col", "First in DOM, no order applied"),
-					new div("col order-5" /*marker*/, "Second in DOM, with a larger order"),
-					new div("col order-1" /*marker*/, "Third in DOM, with an order of 1"),
+					new div(/*marker*/ "col order-5" /*]*/, "Second in DOM, with a larger order"),
+					new div(/*marker*/ "col order-1" /*]*/, "Third in DOM, with an order of 1"),
 				])
 			);
 		},
@@ -355,13 +355,13 @@ export default [
 			return new div("container", [
 				new div("row", [
 					new div("col-md-4", ".col-md-4"),
-					new div("col-md-4 offset-md-4" /*marker*/, ".col-md-4 .offset-md-4"),
+					new div(/*marker*/ "col-md-4 offset-md-4" /*]*/, ".col-md-4 .offset-md-4"),
 				]),
 				new div("row", [
-					new div("col-md-3 offset-md-3" /*marker*/, ".col-md-3 .offset-md-3"),
-					new div("col-md-3 offset-md-3" /*marker*/, ".col-md-3 .offset-md-3"),
+					new div(/*marker*/ "col-md-3 offset-md-3" /*]*/, ".col-md-3 .offset-md-3"),
+					new div(/*marker*/ "col-md-3 offset-md-3" /*]*/, ".col-md-3 .offset-md-3"),
 				]),
-				new div("row", new div("col-md-6 offset-md-3" /*marker*/, ".col-md-6 .offset-md-3")),
+				new div("row", new div(/*marker*/ "col-md-6 offset-md-3" /*]*/, ".col-md-6 .offset-md-3")),
 			]);
 		},
 	},
@@ -424,14 +424,14 @@ export default [
 				new div("row", [
 					new div("col-sm-5 col-md-6", ".col-sm-5 .col-md-6"),
 					new div(
-						"col-sm-5 offset-sm-2 col-md-6 offset-md-0" /*marker*/,
+						/*marker*/ "col-sm-5 offset-sm-2 col-md-6 offset-md-0" /*]*/,
 						".col-sm-5 .offset-sm-2 .col-md-6 .offset-md-0"
 					),
 				]),
 				new div("row", [
 					new div("col-sm-6 col-md-5 col-lg-6", ".col-sm-6 .col-md-5 .col-lg-6"),
 					new div(
-						"col-sm-6 col-md-5 offset-md-2 col-lg-6 offset-lg-0" /*marker*/,
+						/*marker*/ "col-sm-6 col-md-5 offset-md-2 col-lg-6 offset-lg-0" /*]*/,
 						".col-sm-6 .col-md-5 .offset-md-2 .col-lg-6 .offset-lg-0"
 					),
 				]),
@@ -483,14 +483,14 @@ export default [
 			return new div("container", [
 				new div("row", [
 					new div("col-md-4", ".col-md-4"),
-					new div("col-md-4 ms-auto" /*marker*/, ".col-md-4 .ms-auto"),
+					new div(/*marker*/ "col-md-4 ms-auto" /*]*/, ".col-md-4 .ms-auto"),
 				]),
 				new div("row", [
-					new div("col-md-4 ms-auto" /*marker*/, ".col-md-4 .ms-auto"),
-					new div("col-md-4 ms-auto" /*marker*/, ".col-md-4 .ms-auto"),
+					new div(/*marker*/ "col-md-4 ms-auto" /*]*/, ".col-md-4 .ms-auto"),
+					new div(/*marker*/ "col-md-4 ms-auto" /*]*/, ".col-md-4 .ms-auto"),
 				]),
 				new div("row", [
-					new div("col-auto ms-auto" /*marker*/, ".col-auto .ms-auto"),
+					new div(/*marker*/ "col-auto ms-auto" /*]*/, ".col-auto .ms-auto"),
 					new div("col-auto", ".col-auto"),
 				]),
 			]);
@@ -554,8 +554,11 @@ export default [
 		import: ["div"],
 		code: () => {
 			return [
-				new div("col-3 bg-light p-3 border" /*marker*/, "  .col-3: width of 25%"),
-				new div("col-sm-9 bg-light p-3 border" /*marker*/, " .col-sm-9: width of 75% above sm breakpoint"),
+				new div(/*marker*/ "col-3 bg-light p-3 border" /*]*/, "  .col-3: width of 25%"),
+				new div(
+					/*marker*/ "col-sm-9 bg-light p-3 border" /*]*/,
+					" .col-sm-9: width of 75% above sm breakpoint"
+				),
 			];
 		},
 	},
@@ -589,7 +592,7 @@ export default [
 		viewclass: "cl-highlight-col",
 		import: ["img", "p", "div", "sample"],
 		code: () => {
-			return new div("clearfix" /*marker*/, [
+			return new div(/*marker*/ "clearfix" /*]*/, [
 				new img({ src: sample.img(200, 200), class: "col-md-6 float-md-end mb-3 ms-md-3" }),
 				new p(sample.text()),
 				new p(sample.text()),
