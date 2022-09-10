@@ -103,12 +103,14 @@ export default [
 			return new tag({
 				tag: "div",
 				display: "grid",
-				gap: 3, //marker
 				elem: [
 					new tag({ tag: "div", elem: "Grid item 1" }),
 					new tag({ tag: "div", elem: "Grid item 2" }),
 					new tag({ tag: "div", elem: "Grid item 3" }),
 				],
+
+				//marker
+				gap: 3,
 			});
 		},
 	},

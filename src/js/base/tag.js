@@ -137,6 +137,13 @@ const defaultOption = {
 	start: null,
 	end: null,
 
+	// height: null,
+	// width: null,
+	// maxheight: null,
+	// maxwidth: null,
+	// minheight: null,
+	// minwidth: null,
+
 	elem: null,
 };
 

@@ -86,6 +86,7 @@ export default [
 				icon: "key",
 				color: "primary",
 				onclick: (event) => {
+					//marker
 					new user.changepass({
 						callback: (result) => {
 							if (result) {
@@ -93,6 +94,7 @@ export default [
 							}
 						},
 					}).show();
+					//-
 				},
 			});
 		},
@@ -117,6 +119,8 @@ export default [
 				color: "primary",
 				onclick: (event) => {
 					let sender = event.currentTarget;
+
+					//marker
 					user.info(sender, (result) => {
 						if (result && result.email) {
 							new user.updateinfo({
@@ -130,6 +134,7 @@ export default [
 							}).show();
 						}
 					});
+					//-
 				},
 			});
 		},
@@ -159,11 +164,13 @@ export default [
 				icon: "user",
 				color: "primary",
 				onclick: (event) => {
+					//marker
 					user.info(event.currentTarget, (result) => {
 						if (result) {
 							new toast("/", `Hai ${result.name}`).show();
 						}
 					});
+					//-
 				},
 			});
 		},
@@ -179,6 +186,7 @@ export default [
 				icon: "user",
 				color: "primary",
 				onclick: (event) => {
+					//marker
 					user.info_guest(event.currentTarget, (result) => {
 						if (result) {
 							new toast("/", `Hai ${result.name}`).show();
@@ -186,6 +194,7 @@ export default [
 							new toast("!", `Hai guest`).show();
 						}
 					});
+					//-
 				},
 			});
 		},
@@ -200,6 +209,7 @@ export default [
 				icon: "power-off",
 				color: "danger",
 				onclick: (event) => {
+					//marker
 					user.signout(event.currentTarget, (result) => {
 						if (result) {
 							new toast("/", "User successfuly sign out").show();
@@ -207,6 +217,7 @@ export default [
 							new toast("!!", "User failed sign out").show();
 						}
 					});
+					//-
 				},
 			});
 		},
@@ -227,6 +238,8 @@ export default [
 						icon: "play",
 						color: "success",
 						onclick: () => {
+							//marker
+							core.setting.title = () => "Bootstrap";
 							core.setting.icon = (color, weight) => {
 								return {
 									color: color,
@@ -235,8 +248,7 @@ export default [
 									icon: "bootstrap",
 								};
 							};
-
-							core.setting.title = () => "Bootstrap";
+							//-
 
 							new toast("/", "Application icon and title changed").show();
 							reloadUserDoc(); // documentation purpose only
@@ -247,8 +259,10 @@ export default [
 						icon: "stop",
 						color: "danger",
 						onclick: () => {
+							//marker
 							core.setting.icon = null;
 							core.setting.title = null;
+							//-
 
 							new toast("-", "Application icon and title reset").show();
 							reloadUserDoc(); // documentation purpose only
@@ -274,6 +288,7 @@ export default [
 						icon: "play",
 						color: "success",
 						onclick: () => {
+							//marker
 							core.setting.banner = (type) => {
 								return new img({
 									class: ["img-fluid", "rounded"],
@@ -281,6 +296,7 @@ export default [
 									src: sample.img(730, 580),
 								});
 							};
+							//-
 
 							new toast("/", "User banner change").show();
 							reloadUserDoc(); // documentation purpose only
@@ -291,7 +307,9 @@ export default [
 						icon: "stop",
 						color: "danger",
 						onclick: () => {
+							//marker
 							core.setting.banner = null;
+
 							new toast("-", "User banner reset").show();
 							reloadUserDoc(); // documentation purpose only
 						},
@@ -316,6 +334,7 @@ export default [
 						icon: "play",
 						color: "success",
 						onclick: () => {
+							//marker
 							core.setting.term = () => {
 								new modal({
 									size: "xl",
@@ -341,6 +360,7 @@ export default [
 									],
 								}).show();
 							};
+							//-
 
 							new toast("/", "User sign up term change").show();
 							reloadUserDoc(); // documentation purpose only
@@ -351,6 +371,7 @@ export default [
 						icon: "stop",
 						color: "danger",
 						onclick: () => {
+							//marker
 							core.setting.term = null;
 
 							new toast("-", "User sign up term reset").show();
@@ -377,6 +398,7 @@ export default [
 						icon: "play",
 						color: "success",
 						onclick: () => {
+							//marker
 							core.setting.userchange = (result) => {
 								if (result) {
 									new toast("/", `Hai ${result.name}`).show();
@@ -384,6 +406,7 @@ export default [
 									new toast("!", `Hai guest`).show();
 								}
 							};
+							//-
 
 							new toast("/", "User event attached").show();
 							reloadUserDoc(); // documentation purpose only
@@ -394,7 +417,9 @@ export default [
 						icon: "stop",
 						color: "danger",
 						onclick: () => {
+							//marker
 							core.setting.userchange = null;
+
 							new toast("-", "User event detached").show();
 							reloadUserDoc(); // documentation purpose only
 						},

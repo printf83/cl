@@ -19,7 +19,13 @@ export default [
 		import: ["tag"],
 		code: () => {
 			return ["baseline", "top", "middle", "bottom", "text-top", "text-bottom"].map((i) => {
-				return new tag({ tag: "span", valign: i, elem: ` ${i} ` });
+				return new tag({
+					tag: "span",
+					elem: ` ${i} `,
+					
+					//marker
+					valign: i,
+				});
 			});
 		},
 	},

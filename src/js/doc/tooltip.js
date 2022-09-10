@@ -20,21 +20,25 @@ export default [
 				new tooltip({
 					type: "tooltip",
 					msg: "Top tooltip",
-					placement: "top",
 					elem: new button({
 						label: "Tooltip on top",
 						color: "secondary",
 					}),
+
+					//marker
+					placement: "top",
 				}),
 
 				new tooltip({
 					type: "tooltip",
 					msg: "Left tooltip",
-					placement: "left",
 					elem: new button({
 						label: "Tooltip on left",
 						color: "secondary",
 					}),
+
+					//marker
+					placement: "left",
 				}),
 
 				new tooltip({
@@ -50,21 +54,25 @@ export default [
 				new tooltip({
 					type: "tooltip",
 					msg: "Bottom tooltip",
-					placement: "bottom",
 					elem: new button({
 						label: "Tooltip on bottom",
 						color: "secondary",
 					}),
+
+					//marker
+					placement: "bottom",
 				}),
 
 				new tooltip({
 					type: "tooltip",
 					msg: "<em>Tooltip</em> <u>with</u> <b>HTML</b>",
-					placement: "right",
 					elem: new button({
 						label: "Tooltip with HTML",
 						color: "secondary",
 					}),
+
+					//marker
+					placement: "right",
 				}),
 			];
 		},
@@ -87,6 +95,8 @@ export default [
 					elem: new button({
 						label: "Dismissible tooltip",
 						color: "primary",
+
+						//marker
 						disabled: true,
 					}),
 				}),
