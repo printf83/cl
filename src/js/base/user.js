@@ -602,7 +602,7 @@ const fn = {
 			});
 		},
 		signin: (opt) => {
-			return new container.form(
+			return new container.vstack(
 				fn.header("Sign in", opt).concat(
 					[
 						new input({
@@ -669,7 +669,7 @@ const fn = {
 			);
 		},
 		signup: (opt) => {
-			return new container.form(
+			return new container.vstack(
 				fn.header("Sign up", opt).concat(
 					[
 						new input({
@@ -757,7 +757,7 @@ const fn = {
 			);
 		},
 		resetpass: (opt) => {
-			return new container.form(
+			return new container.vstack(
 				fn.header("Reset password", opt).concat(
 					[
 						new input({
@@ -812,7 +812,7 @@ const fn = {
 			);
 		},
 		changepass: (opt) => {
-			return new container.form(
+			return new container.vstack(
 				fn.header("Change password", opt).concat(
 					[
 						new input({
@@ -897,7 +897,7 @@ const fn = {
 			);
 		},
 		changepass_guest: (opt) => {
-			return new container.form(
+			return new container.vstack(
 				fn.header("Change password", opt).concat(
 					[
 						new tag({
@@ -971,7 +971,7 @@ const fn = {
 			);
 		},
 		updateinfo: (opt) => {
-			return new container.form(
+			return new container.vstack(
 				fn.header("Update info", opt).concat(
 					[
 						new file({
