@@ -3,29 +3,33 @@
 	overflow: hidden;
 	position: absolute;
 	right: 0;
-	background-color: var(--bs-list-group-border-color);
+	background-color: var(--bs-border-color);
 	height: 100%;
 	width: 0.7rem;
 	animation-name: cl-list-ctl-animation-out;
 	animation-duration: 300ms;
 	animation-iteration-count: 1;
+	text-align: center;
 }
 
 .cl-list-ctl:hover {
-	background-color: var(--bs-list-group-action-hover-bg);
+	background-color: var(--bs-border-color-translucent);
 	cursor: pointer;
 }
 
 .cl-list-ctl::after{
-	content: "⋮";
+
+	font-family: "Font Awesome 6 Free";
+	font-weight: 900;
+	content: "\f142";
 	color: var(--bs-primary);
-	position: relative;
-	top: calc(50% - 1rem);
-	display: flex;
-	font-weight: bold;
-	font-size: 1.25rem;
-	margin-left: calc(50% - 0.2rem);
-	margin-right: calc(50% - 0.2rem);
+	position: absolute;
+	top: calc(50% - 0.75rem);
+	display: inline-block;
+	text-align: center;
+	width: 100%;
+	margin-left: -0.3rem;
+	
 }
 
 .cl-list-ctl .btn-group{

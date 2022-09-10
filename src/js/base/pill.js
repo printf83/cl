@@ -31,6 +31,7 @@ export default class pill extends div {
 		opt.color = opt.color || "primary";
 
 		let elem = new inputgroup.container({
+			class: core.merge.class(opt.class, "cl-pill"),
 			weight: "sm",
 			elem: [
 				new inputgroup.text({
@@ -40,7 +41,7 @@ export default class pill extends div {
 					coloropacity: 25,
 					paddingx: 2,
 					paddingy: 1,
-					rounded: "start",
+					// rounded: "start",
 					elem: opt.icon ? new icon(opt.icon) : opt.title ? new small(opt.title) : null,
 				}),
 				new inputgroup.text({
@@ -49,7 +50,7 @@ export default class pill extends div {
 					textcolor: opt.textcolor,
 					paddingx: 2,
 					paddingy: 1,
-					rounded: "end",
+					// rounded: "end",
 					elem: opt.elem || new small(opt.label),
 				}),
 			],
@@ -63,6 +64,7 @@ export default class pill extends div {
 		delete opt.icon;
 		delete opt.label;
 		delete opt.color;
+		delete opt.class;
 
 		super.data = opt;
 	}

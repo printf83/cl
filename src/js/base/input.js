@@ -318,16 +318,17 @@ export default class input extends tag {
 					m.class = core.merge.class(m.class, [
 						opt.plaintext && opt.readonly ? "form-control-plaintext" : "form-control",
 						opt.weight && !(opt.before || opt.after) ? `form-control-${opt.weight}` : null,
-						opt.label && opt.floatlabel
-							? core.combineArray(
-									[
-										opt.before || opt.after ? "rounded-0" : null,
-										opt.before ? "rounded-end" : null,
-										opt.after ? "rounded-start" : null,
-									],
-									" "
-							  )
-							: null,
+
+						// opt.label && opt.floatlabel
+						// 	? core.combineArray(
+						// 			[
+						// 				opt.before || opt.after ? "rounded-0" : null,
+						// 				opt.before ? "rounded-end" : null,
+						// 				opt.after ? "rounded-start" : null,
+						// 			],
+						// 			" "
+						// 	  )
+						// 	: null,
 					]);
 					m.attr = core.merge.attr(m.attr, {
 						"aria-label": opt.hidelabel && opt.label ? opt.label : null,
@@ -345,16 +346,16 @@ export default class input extends tag {
 						opt.weight && !(opt.before || opt.after || opt.addctl !== null)
 							? `form-select-${opt.weight}`
 							: null,
-						opt.label && opt.floatlabel
-							? core.combineArray(
-									[
-										opt.before || opt.after ? "rounded-0" : null,
-										opt.before ? "rounded-end" : null,
-										opt.after ? "rounded-start" : null,
-									],
-									" "
-							  )
-							: null,
+						// opt.label && opt.floatlabel
+						// 	? core.combineArray(
+						// 			[
+						// 				opt.before || opt.after ? "rounded-0" : null,
+						// 				opt.before ? "rounded-end" : null,
+						// 				opt.after ? "rounded-start" : null,
+						// 			],
+						// 			" "
+						// 	  )
+						// 	: null,
 					]);
 
 					m.attr = core.merge.attr(m.attr, {
@@ -395,18 +396,18 @@ export default class input extends tag {
 						opt.type === "color"
 							? core.combineArray(["form-control-color", opt.floatlabel ? "w-100" : null], " ")
 							: null,
-						opt.label && opt.floatlabel
-							? core.combineArray(
-									[
-										opt.before || opt.after || opt.numctl ? "rounded-0" : null,
-										opt.before ? "rounded-end" : null,
-										opt.after ? "rounded-start" : null,
-									],
-									" "
-							  )
-							: opt.label && opt.numctl
-							? "rounded-0"
-							: null,
+						// opt.label && opt.floatlabel
+						// 	? core.combineArray(
+						// 			[
+						// 				opt.before || opt.after || opt.numctl ? "rounded-0" : null,
+						// 				opt.before ? "rounded-end" : null,
+						// 				opt.after ? "rounded-start" : null,
+						// 			],
+						// 			" "
+						// 	  )
+						// 	: opt.label && opt.numctl
+						// 	? "rounded-0"
+						// 	: null,
 					]);
 
 					m.attr = core.merge.attr(m.attr, {

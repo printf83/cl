@@ -2,7 +2,7 @@
 	color: rgba(var(--bs-gray), 0.7);
 	font-weight: calc(var(--bs-body-font-weight) * 1.5);
 	padding: 0.25rem 0.5rem;
-	border-radius: var(--bs-btn-border-radius);
+	border-radius: var(--bs-border-radius);
 	display: inline-block;
 }
 .bg-dark .cl-menu-toggle {
@@ -52,7 +52,7 @@
 .cl-menu-container li a {
 	color: rgba(var(--bs-gray), 0.7);
 	padding: 0.25rem 0.5rem;
-	border-radius: 0.2rem;
+	border-radius: var(--bs-border-radius-sm);
 	text-decoration: none;
 	display: inline-block;
 	font-size: small;
