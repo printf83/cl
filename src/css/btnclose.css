@@ -17,31 +17,16 @@
 }
 
 .btn-close{
-    position: relative;
+    display: flex;
+    justify-content: center;
 }
 
 .btn-close::after{
     content: "✕";
     text-align: center;
-    position: absolute;
+    justify-content: center;
     font-weight: lighter;
-    font-size: x-large;
-    line-height: 1em;
-    left: 0.1rem;
-    top: 0;
+    font-size: calc(100%*1.5);
+    display: flex;
+    align-self: center;
 }
-
-/* .btn-close::after {
-    font-family: "Font Awesome 6 Free";
-    font-weight: 900;
-    content: "\f00d";
-    text-align: center;
-    width: 1em;
-    display: inline-block;
-    top: -0.2em;
-    position: relative;
-} */
-
- /* content: "\f00d"; */
- /* content: "\f057"; */
- /* content: "\58"; */

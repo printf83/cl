@@ -74,7 +74,7 @@ const db_menu = [
 			{ title: "Navbar", source: doc.navbar },
 			{ title: "Offcanvas", source: doc.offcanvas },
 			{ title: "Paging", source: doc.paging },
-			{ title: "Placeholder", source: doc.placeholder },
+			{ title: "Placeholders", source: doc.placeholder },
 			{ title: "Popover", source: doc.popover },
 			{ title: "Progress", source: doc.progress },
 			{ title: "Toast", source: doc.toast },

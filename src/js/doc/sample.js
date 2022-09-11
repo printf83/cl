@@ -118,6 +118,42 @@ const dbicon = [
 	"clipboard",
 	"clock",
 	"kiss-wink-heart",
+
+	"music",
+	"masks-theater",
+	"award",
+	"cake-candles",
+	"mitten",
+	"camera-retro",
+	"spell-check",
+	"pen-clip",
+	"paintbrush",
+];
+
+const dbbrandicon = [
+	"github",
+	"css3",
+	"html5",
+	"js-square",
+	"node-js",
+	"font-awesome",
+	"bootstrap",
+	"edge",
+	"firefox",
+	"chrome",
+	"yahoo",
+	"waze",
+	"ubuntu",
+	"suse",
+	"linux",
+	"google",
+	"apple",
+	"android",
+	"cloudflare",
+	"safari",
+	"opera",
+	"fedora",
+	"aws",
 ];
 
 const fn = {
@@ -154,6 +190,9 @@ const fn = {
 	},
 	icon: () => {
 		return core.randomdb("sample_dbicon", dbicon);
+	},
+	brandicon: () => {
+		return core.randomdb("sample_dbbrandicon", dbbrandicon);
 	},
 
 	tagprop: (exclude) => {
@@ -234,7 +273,6 @@ const fn = {
 			"gapx",
 			"gapy",
 
-			"placeholder",
 			"rounded",
 			"roundedtype",
 			"tmiddle",
@@ -253,6 +291,11 @@ const fn = {
 			"viewwidth",
 			"minviewheight",
 			"minviewwidth",
+
+			"placeholder",
+			"placeholderanimation",
+			"placeholderweight",
+			"ariahidden",
 
 			"elem",
 		];

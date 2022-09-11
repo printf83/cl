@@ -28,7 +28,7 @@ function c3(val, iftrue, iffalse, format, supported, unsupported) {
 		} else if (val === false) {
 			return iffalse;
 		} else {
-			return core.multiClass(val, format, supported, unsupported);
+			return core.multiClass(val, format, supported, unsupported, iftrue, iffalse);
 		}
 	}
 	return null;
@@ -130,7 +130,11 @@ const defaultOption = {
 
 	rounded: null,
 	roundedtype: null,
+
 	placeholder: null,
+	placeholderanimation: null,
+	placeholderweight: null,
+	ariahidden: null,
 
 	tmiddle: null,
 	top: null,
@@ -420,6 +424,8 @@ export default class tag {
 				tabindex: opt.tabindex,
 				title: opt.title,
 
+				"aria-hidden": opt.ariahidden ? "true" : null,
+
 				style: opt.style,
 
 				class: core.merge.class(opt.class, [
@@ -469,10 +475,13 @@ export default class tag {
 					opt.minviewheight ? `min-vh-${opt.minviewheight}` : null,
 					opt.minviewwidth ? `min-vw-${opt.minviewwidth}` : null,
 
+					opt.placeholder || opt.placeholderweight ? `placeholder` : null,
+					opt.placeholderanimation ? `placeholder-${opt.placeholderanimation}` : null,
+					opt.placeholderweight ? `placeholder-${opt.placeholderweight}` : null,
+
 					c3(opt.shadow, "shadow", "shadow-none", "shadow-$1", null, "shadow"),
 					c3(opt.border, "border", "border-0", "border-$1", null, "border"),
 					c3(opt.rounded, "rounded", "rounded-0", "rounded-$1", null, "rounded"),
-					c3(opt.placeholder, "placeholder", null, "placeholder-$1", null, "placeholder"),
 
 					c1(opt.borderweight, null, null, `border border-${opt.borderweight}`),
 					c1(opt.bordercolor, null, null, `border border-${opt.bordercolor}`),

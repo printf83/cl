@@ -12,39 +12,32 @@ export default [
 		container: sample.stackcontainer,
 		import: ["pill"],
 		code: () => {
-			return [
-				{ title: "Title", label: "Label" },
-				{ title: "Title", label: "Label", color: "secondary" },
-				{ title: "Title", label: "Label", color: "success" },
-				{ title: "Title", label: "Label", color: "danger" },
-				{ title: "Title", label: "Label", color: "warning" },
-				{ title: "Title", label: "Label", color: "info" },
-				{ title: "Title", label: "Label", color: "dark" },
-			].map((i) => {
-				return new pill(i);
+			return ["primary", "secondary", "success", "danger", "warning", "info", "dark"].map((i) => {
+				return new pill({
+					color: i,
+
+					//marker
+					label: "Label",
+					title: "Title",
+				});
 			});
 		},
 	},
+
 	{
 		title: "Icon",
 		container: sample.stackcontainer,
 		import: ["pill", "sample"],
 		code: () => {
-			return [
-				{
-					//marker
-					icon: sample.icon(),
+			return ["primary", "secondary", "success", "danger", "warning", "info", "dark"].map((i) => {
+				let t = sample.icon();
+				return new pill({
+					label: t,
+					color: i,
 
-					label: "Label",
-				},
-				{ icon: sample.icon(), label: "Label", color: "secondary" },
-				{ icon: sample.icon(), label: "Label", color: "success" },
-				{ icon: sample.icon(), label: "Label", color: "danger" },
-				{ icon: sample.icon(), label: "Label", color: "warning" },
-				{ icon: sample.icon(), label: "Label", color: "info" },
-				{ icon: sample.icon(), label: "Label", color: "dark" },
-			].map((i) => {
-				return new pill(i);
+					//marker
+					icon: t,
+				});
 			});
 		},
 	},
@@ -53,21 +46,44 @@ export default [
 		container: sample.stackcontainer,
 		import: ["pill"],
 		code: () => {
+			return ["i", "!", "/", "x", "-", "!!"].map((i) => {
+				return new pill({
+					label: `Icon : ${i}`,
+
+					//marker
+					icon: i,
+				});
+			});
+		},
+	},
+
+	{
+		title: "Weight",
+		container: sample.stackcontainer,
+		import: ["pill", "sample"],
+		code: () => {
 			return [
 				{
-					//marker
-					icon: "i",
-
-					title: "Title",
-					label: "Info",
+					weight: "lg",
+					color: "primary",
 				},
-				{ icon: "!", title: "Title", label: "Warning" },
-				{ icon: "/", title: "Title", label: "Success" },
-				{ icon: "x", title: "Title", label: "Critical" },
-				{ icon: "-", title: "Title", label: "Stop" },
-				{ icon: "!!", title: "Title", label: "Danger" },
+				{
+					weight: "md",
+					color: "success",
+				},
+				{
+					weight: "sm",
+					color: "danger",
+				},
 			].map((i) => {
-				return new pill(i);
+				return new pill({
+					label: `Weight : ${i.weight}`,
+					color: i.color,
+					icon: sample.icon(),
+
+					//marker
+					weight: i.weight,
+				});
 			});
 		},
 	},
@@ -78,26 +94,26 @@ export default [
 		import: ["pill", "sample"],
 		code: () => {
 			return [
-				{
-					//marker
-					icon: "i",
-					title: "Info",
-					//-
-
-					label: "Label",
-				},
-				{ icon: "!", title: "Warning", label: "Label" },
-				{ icon: "/", title: "Success", label: "Label" },
-				{ icon: "x", title: "Critical", label: "Label" },
-				{ icon: sample.icon(), title: "Sample 1", label: "Label" },
+				{ icon: "i", title: "Info" },
+				{ icon: "!", title: "Warning" },
+				{ icon: "/", title: "Success" },
+				{ icon: "x", title: "Critical" },
+				{ icon: sample.icon(), title: "Random Icon 1", color: "info" },
 				{
 					icon: { icon: sample.icon(), spin: true },
-					title: "Sample 2",
-					label: "Spinning icon",
+					title: "Random Icon 2",
 					color: "warning",
 				},
-			].map((i) => {
-				return new pill(i);
+			].map((i, ix) => {
+				return new pill({
+					label: `Sample ${ix + 1}`,
+					color: i.color,
+
+					//marker
+					icon: i.icon,
+					title: i.title,
+					//-
+				});
 			});
 		},
 	},

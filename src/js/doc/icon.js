@@ -93,19 +93,20 @@ export default [
 	{
 		title: "Fontawesome brand icon",
 		container: sample.stackcontainer,
-		import: ["icon"],
+		import: ["icon", "sample"],
 		code: () => {
 			return [
-				"github",
-				"css3",
-				"html5",
-				"js-square",
-				"node-js",
-				"font-awesome",
-				"bootstrap",
-				"edge",
-				"firefox",
-				"chrome",
+				sample.brandicon(),
+				sample.brandicon(),
+				sample.brandicon(),
+				sample.brandicon(),
+				sample.brandicon(),
+				sample.brandicon(),
+				sample.brandicon(),
+				sample.brandicon(),
+				sample.brandicon(),
+				sample.brandicon(),
+				sample.brandicon(),
 			].map((i) => {
 				return new icon({
 					icon: i,
@@ -534,6 +535,7 @@ export default [
 							//marker
 							icon: "copy",
 							iconafter: true,
+							//-
 						},
 						{ href: "#", label: "Cut", icon: "cut", iconafter: true },
 						{ href: "#", label: "Paste", icon: "paste", iconafter: true },

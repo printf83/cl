@@ -737,13 +737,19 @@ function isSupported(val, supported, unsupported) {
 	return true;
 }
 
-export function multiClass(val, format, supported, unsupported) {
+export function multiClass(val, format, supported, unsupported, iftrue, iffalse) {
 	if (val || val === 0) {
 		return val || val === 0
 			? Array.isArray(val)
 				? val
 						.map((i) => {
-							return isSupported(i, supported, unsupported) ? format.replace("$1", i) : i;
+							if (i === true) {
+								return iftrue;
+							} else if (i === false || i === null) {
+								return iffalse;
+							} else {
+								return isSupported(i, supported, unsupported) ? format.replace("$1", i) : i;
+							}
 						})
 						.join(" ")
 				: isSupported(val, supported, unsupported)

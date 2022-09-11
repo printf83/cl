@@ -111,7 +111,6 @@ export default [
 								close: true,
 								backdrop: true,
 								color: "light",
-								title: "Top Offcanvas",
 								elem: new div({
 									elem: [
 										new p({
@@ -142,7 +141,7 @@ export default [
 		container: sample.stackcontainer,
 		import: ["button", "offcanvas", "div", "p", "dropdown"],
 		code: () => {
-			return [null, "sm", "md", "lg", "xl", "xxl"].map(
+			return [null, "xxl", "xl", "lg", "md", "sm"].map(
 				(i) =>
 					new button({
 						label: `Show${i ? " " + i : ""} offcanvas`,
@@ -156,7 +155,6 @@ export default [
 								close: true,
 								backdrop: true,
 								color: "light",
-								title: "Top Offcanvas",
 								elem: new div({
 									elem: [
 										new p({
