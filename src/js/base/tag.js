@@ -130,6 +130,7 @@ const defaultOption = {
 
 	rounded: null,
 	roundedtype: null,
+	placeholder: null,
 
 	tmiddle: null,
 	top: null,
@@ -471,6 +472,7 @@ export default class tag {
 					c3(opt.shadow, "shadow", "shadow-none", "shadow-$1", null, "shadow"),
 					c3(opt.border, "border", "border-0", "border-$1", null, "border"),
 					c3(opt.rounded, "rounded", "rounded-0", "rounded-$1", null, "rounded"),
+					c3(opt.placeholder, "placeholder", null, "placeholder-$1", null, "placeholder"),
 
 					c1(opt.borderweight, null, null, `border border-${opt.borderweight}`),
 					c1(opt.bordercolor, null, null, `border border-${opt.bordercolor}`),

@@ -234,6 +234,7 @@ const fn = {
 			"gapx",
 			"gapy",
 
+			"placeholder",
 			"rounded",
 			"roundedtype",
 			"tmiddle",

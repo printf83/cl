@@ -184,7 +184,7 @@ export const loadcss = (url, callback) => {
 	head.appendChild(link);
 };
 
-const __setting = {
+const _setting = {
 	icon: null,
 	title: null,
 	userchange: null,
@@ -195,8 +195,8 @@ const __setting = {
 
 export const setting = {
 	get icon() {
-		if (__setting.icon) {
-			return __setting.icon;
+		if (_setting.icon) {
+			return _setting.icon;
 		} else {
 			//default setting icon
 			return (color, weight) => {
@@ -210,42 +210,42 @@ export const setting = {
 	},
 	set icon(fn) {
 		if (fn && typeof fn === "function") {
-			__setting.icon = fn;
+			_setting.icon = fn;
 		} else {
-			__setting.icon = null;
+			_setting.icon = null;
 		}
 	},
 	get title() {
-		if (__setting.title) {
-			return __setting.title;
+		if (_setting.title) {
+			return _setting.title;
 		} else {
 			return () => "BS5.2 JS Builder";
 		}
 	},
 	set title(fn) {
 		if (fn && typeof fn === "function") {
-			__setting.title = fn;
+			_setting.title = fn;
 		} else {
-			__setting.title = null;
+			_setting.title = null;
 		}
 	},
 	get userchange() {
-		return __setting.userchange;
+		return _setting.userchange;
 	},
 	set userchange(fn) {
-		__setting.userchange = fn;
+		_setting.userchange = fn;
 	},
 	get term() {
-		return __setting.term;
+		return _setting.term;
 	},
 	set term(fn) {
-		__setting.term = fn;
+		_setting.term = fn;
 	},
 	get banner() {
-		return __setting.banner;
+		return _setting.banner;
 	},
 	set banner(fn) {
-		__setting.banner = fn;
+		_setting.banner = fn;
 	},
 	get theme() {
 		return cookie.get("theme");
@@ -274,8 +274,8 @@ export const setting = {
 						}, 300);
 					}
 
-					if (__setting.themechange && typeof __setting.themechange === "function") {
-						__setting.themechange(value);
+					if (_setting.themechange && typeof _setting.themechange === "function") {
+						_setting.themechange(value);
 					}
 				}
 			);
@@ -284,11 +284,127 @@ export const setting = {
 		}
 	},
 	get themechange() {
-		return __setting.themechange;
+		return _setting.themechange;
 	},
 	set themechange(fn) {
-		__setting.themechange = fn;
+		_setting.themechange = fn;
 	},
+};
+
+const num2EngDB = [
+	{ value: 1000000000000000, str: "quadrillion" },
+	{ value: 1000000000000, str: "trillion" },
+	{ value: 1000000000, str: "billion" },
+	{ value: 1000000, str: "million" },
+	{ value: 1000, str: "thousand" },
+	{ value: 100, str: "hundred" },
+	{ value: 90, str: "ninety" },
+	{ value: 80, str: "eighty" },
+	{ value: 70, str: "seventy" },
+	{ value: 60, str: "sixty" },
+	{ value: 50, str: "fifty" },
+	{ value: 40, str: "forty" },
+	{ value: 30, str: "thirty" },
+	{ value: 20, str: "twenty" },
+	{ value: 19, str: "nineteen" },
+	{ value: 18, str: "eighteen" },
+	{ value: 17, str: "seventeen" },
+	{ value: 16, str: "sixteen" },
+	{ value: 15, str: "fifteen" },
+	{ value: 14, str: "fourteen" },
+	{ value: 13, str: "thirteen" },
+	{ value: 12, str: "twelve" },
+	{ value: 11, str: "eleven" },
+	{ value: 10, str: "ten" },
+	{ value: 9, str: "nine" },
+	{ value: 8, str: "eight" },
+	{ value: 7, str: "seven" },
+	{ value: 6, str: "six" },
+	{ value: 5, str: "five" },
+	{ value: 4, str: "four" },
+	{ value: 3, str: "three" },
+	{ value: 2, str: "two" },
+	{ value: 1, str: "one" },
+];
+
+const num2Eng = (num) => {
+	let result = "";
+	for (let n of num2EngDB) {
+		if (num >= n.value) {
+			if (num <= 99) {
+				result += n.str;
+				num -= n.value;
+				if (num > 0) result += " ";
+			} else {
+				let t = Math.floor(num / n.value);
+				let d = num % n.value;
+				if (d > 0) {
+					return `${num2Eng(t)} ${n.str} ${num2Eng(d)}`;
+				} else {
+					return `${num2Eng(t)} ${n.str}`;
+				}
+			}
+		}
+	}
+	return result;
+};
+
+const num2EngThDB = [
+	{ value: 1000000000000000, str: "quadrillion" },
+	{ value: 1000000000000, str: "trillion" },
+	{ value: 1000000000, str: "billion" },
+	{ value: 1000000, str: "million" },
+	{ value: 1000, str: "thousand" },
+	{ value: 100, str: "hundred" },
+	{ value: 90, str: "ninet" },
+	{ value: 80, str: "eight" },
+	{ value: 70, str: "sevent" },
+	{ value: 60, str: "sixt" },
+	{ value: 50, str: "fift" },
+	{ value: 40, str: "fourt" },
+	{ value: 30, str: "thirt" },
+	{ value: 20, str: "twent" },
+	{ value: 19, str: "nineteenth" },
+	{ value: 18, str: "eighteenth" },
+	{ value: 17, str: "seventeenth" },
+	{ value: 16, str: "sixteenth" },
+	{ value: 15, str: "fifteenth" },
+	{ value: 14, str: "fourteenth" },
+	{ value: 13, str: "thirteenth" },
+	{ value: 12, str: "twelvth" },
+	{ value: 11, str: "eleventh" },
+	{ value: 10, str: "tenth" },
+	{ value: 9, str: "ninth" },
+	{ value: 8, str: "eighth" },
+	{ value: 7, str: "seventh" },
+	{ value: 6, str: "sixth" },
+	{ value: 5, str: "fifth" },
+	{ value: 4, str: "fourth" },
+	{ value: 3, str: "third" },
+	{ value: 2, str: "second" },
+	{ value: 1, str: "first" },
+];
+
+const num2EngTh = (num) => {
+	let result = "";
+	for (let n of num2EngThDB) {
+		if (num >= n.value) {
+			if (num <= 99) {
+				result += n.str;
+				num -= n.value;
+				if (num > 0) result += " ";
+			} else {
+				let t = Math.floor(num / n.value);
+				let d = num % n.value;
+				if (d > 0) {
+					return `${num2EngTh(t)}-${n.str}-${num2EngTh(d)}`;
+				} else {
+					return `${num2EngTh(t)}-${n.str}`;
+				}
+			}
+		}
+	}
+	return result;
 };
 
 const _baseIcon = {
@@ -575,122 +691,6 @@ export const merge = {
 	},
 };
 
-const num2EngDB = [
-	{ value: 1000000000000000, str: "quadrillion" },
-	{ value: 1000000000000, str: "trillion" },
-	{ value: 1000000000, str: "billion" },
-	{ value: 1000000, str: "million" },
-	{ value: 1000, str: "thousand" },
-	{ value: 100, str: "hundred" },
-	{ value: 90, str: "ninety" },
-	{ value: 80, str: "eighty" },
-	{ value: 70, str: "seventy" },
-	{ value: 60, str: "sixty" },
-	{ value: 50, str: "fifty" },
-	{ value: 40, str: "forty" },
-	{ value: 30, str: "thirty" },
-	{ value: 20, str: "twenty" },
-	{ value: 19, str: "nineteen" },
-	{ value: 18, str: "eighteen" },
-	{ value: 17, str: "seventeen" },
-	{ value: 16, str: "sixteen" },
-	{ value: 15, str: "fifteen" },
-	{ value: 14, str: "fourteen" },
-	{ value: 13, str: "thirteen" },
-	{ value: 12, str: "twelve" },
-	{ value: 11, str: "eleven" },
-	{ value: 10, str: "ten" },
-	{ value: 9, str: "nine" },
-	{ value: 8, str: "eight" },
-	{ value: 7, str: "seven" },
-	{ value: 6, str: "six" },
-	{ value: 5, str: "five" },
-	{ value: 4, str: "four" },
-	{ value: 3, str: "three" },
-	{ value: 2, str: "two" },
-	{ value: 1, str: "one" },
-];
-
-const num2Eng = (num) => {
-	let result = "";
-	for (let n of num2EngDB) {
-		if (num >= n.value) {
-			if (num <= 99) {
-				result += n.str;
-				num -= n.value;
-				if (num > 0) result += " ";
-			} else {
-				let t = Math.floor(num / n.value);
-				let d = num % n.value;
-				if (d > 0) {
-					return `${num2Eng(t)} ${n.str} ${num2Eng(d)}`;
-				} else {
-					return `${num2Eng(t)} ${n.str}`;
-				}
-			}
-		}
-	}
-	return result;
-};
-
-const num2EngThDB = [
-	{ value: 1000000000000000, str: "quadrillion" },
-	{ value: 1000000000000, str: "trillion" },
-	{ value: 1000000000, str: "billion" },
-	{ value: 1000000, str: "million" },
-	{ value: 1000, str: "thousand" },
-	{ value: 100, str: "hundred" },
-	{ value: 90, str: "ninet" },
-	{ value: 80, str: "eight" },
-	{ value: 70, str: "sevent" },
-	{ value: 60, str: "sixt" },
-	{ value: 50, str: "fift" },
-	{ value: 40, str: "fourt" },
-	{ value: 30, str: "thirt" },
-	{ value: 20, str: "twent" },
-	{ value: 19, str: "nineteenth" },
-	{ value: 18, str: "eighteenth" },
-	{ value: 17, str: "seventeenth" },
-	{ value: 16, str: "sixteenth" },
-	{ value: 15, str: "fifteenth" },
-	{ value: 14, str: "fourteenth" },
-	{ value: 13, str: "thirteenth" },
-	{ value: 12, str: "twelvth" },
-	{ value: 11, str: "eleventh" },
-	{ value: 10, str: "tenth" },
-	{ value: 9, str: "ninth" },
-	{ value: 8, str: "eighth" },
-	{ value: 7, str: "seventh" },
-	{ value: 6, str: "sixth" },
-	{ value: 5, str: "fifth" },
-	{ value: 4, str: "fourth" },
-	{ value: 3, str: "third" },
-	{ value: 2, str: "second" },
-	{ value: 1, str: "first" },
-];
-
-const num2EngTh = (num) => {
-	let result = "";
-	for (let n of num2EngThDB) {
-		if (num >= n.value) {
-			if (num <= 99) {
-				result += n.str;
-				num -= n.value;
-				if (num > 0) result += " ";
-			} else {
-				let t = Math.floor(num / n.value);
-				let d = num % n.value;
-				if (d > 0) {
-					return `${num2EngTh(t)}-${n.str}-${num2EngTh(d)}`;
-				} else {
-					return `${num2EngTh(t)}-${n.str}`;
-				}
-			}
-		}
-	}
-	return result;
-};
-
 export function num2En(num) {
 	return num2Eng(num);
 }
@@ -709,7 +709,7 @@ export function UUID(format) {
 
 export function isHTML(str) {
 	if (typeof str === "string") {
-		return /<\/?[a-z][\s\S]*>/i.test(str) || /\&\#\x\S{4}\;/i.test(str);
+		return /<\/?[a-z][\s\S]*>/i.test(str) || /\&\#\x\S{4}\;/i.test(str) || /\&\S+\;/i.test(str);
 	}
 }
 

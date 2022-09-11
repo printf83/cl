@@ -33,6 +33,7 @@ export default {
 	navbar: "../doc/navbar.js",
 	offcanvas: "../doc/offcanvas.js",
 	paging: "../doc/paging.js",
+	placeholder: "../doc/placeholder.js",
 	popover: "../doc/popover.js",
 	progress: "../doc/progress.js",
 	toast: "../doc/toast.js",

@@ -26,6 +26,8 @@ const defaultOption = {
 	nowrap: false,
 	floating: false,
 
+	placeholder: null,
+
 	elem: null,
 };
 
@@ -52,6 +54,12 @@ export default class button extends tag {
 				};
 
 				opt.color = opt.color || bI.color;
+			}
+
+			if (opt.placeholder) {
+				// opt.label = null;
+				// opt.icon = null;
+				opt.disabled = true;
 			}
 
 			if (opt.type === "checkbox" || opt.type === "radio") {
