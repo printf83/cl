@@ -63,10 +63,8 @@ export default [
 								elem: [
 									new card.img({
 										placement: "top",
-										src: "...",
-										alt: "...",
+										src: sample.empty_img(286, 143),
 										placeholder: true,
-										height: "143px",
 									}),
 									new card.body({
 										elem: [
@@ -82,7 +80,7 @@ export default [
 													new span({ placeholder: true, col: 4, marginend: 1 }),
 													new span({ placeholder: true, col: 6, marginend: 1 }),
 													new span({ placeholder: true, col: 8, marginend: 1 }),
-													new span({ placeholder: true, col: 7, marginend: 1 }),
+													new span({ placeholder: true, col: 3, marginend: 1 }),
 												],
 											}),
 											new button({

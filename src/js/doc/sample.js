@@ -38,6 +38,7 @@ const shorttextdb = [
 ];
 
 const svgdb = {};
+const empty_svgdb = {};
 
 function isListed(val, listed) {
 	if (listed) {
@@ -85,6 +86,15 @@ fill="${color}" stroke="none">
 -63 -42 -50 -100 -67 -168 -49 -67 18 -96 50 -109 121 -24 133 104 226 231
 169z"/>
 </g>
+</svg>`;
+};
+
+const empty_svgdata = (width, height) => {
+	return `
+<svg version="1.0" xmlns="http://www.w3.org/2000/svg"
+ width="${width}pt" height="${height}pt" viewBox="0 0 300 283"
+ style="background-color:rgba(0,0,0,.03);"
+ preserveAspectRatio="xMidYMid meet">
 </svg>`;
 };
 
@@ -175,12 +185,20 @@ const fn = {
 			color = core.randomdb("sample_color", dbcolor);
 		}
 
-		if (!svgdb.hasOwnProperty(`${width}_${height}`)) {
+		if (!svgdb.hasOwnProperty(`${width}_${height}_${color}`)) {
 			svgdb[`${width}_${height}_${color}`] =
 				"data:image/svg+xml;charset=UTF-8," + encodeURIComponent(svgdata(width, height, color));
 		}
 
 		return svgdb[`${width}_${height}_${color}`];
+	},
+	empty_img: (width = 300, height = 283) => {
+		if (!empty_svgdb.hasOwnProperty(`${width}_${height}`)) {
+			empty_svgdb[`${width}_${height}`] =
+				"data:image/svg+xml;charset=UTF-8," + encodeURIComponent(empty_svgdata(width, height));
+		}
+
+		return empty_svgdb[`${width}_${height}`];
 	},
 	text: () => {
 		return core.randomdb("sample_text", textdb);
