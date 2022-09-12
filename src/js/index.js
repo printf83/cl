@@ -794,14 +794,21 @@ function gen_tableofcontent_placeholder() {
 				: new span({ col: col, placeholder: true }),
 		});
 	};
+
+	let f0 = (len, maxcol) => {
+		return fn(Array.from({ length: len }, () => core.rnd(1, maxcol)));
+	};
+
+	let f1 = (len, maxcol) => {
+		return {
+			label: f0(len, maxcol),
+		};
+	};
+
 	return new toc({
 		ariahidden: true,
-		label: fn(12),
-		item: [[4, 6], [3, 5], [4, 6], 7, 5, [2, 4], [2, 6]].map((i) => {
-			return {
-				label: fn(i),
-			};
-		}),
+		label: f0(3, 3),
+		item: [f1(3, 3), f1(3, 3), f1(3, 3), f1(3, 3), f1(3, 3)],
 	});
 }
 
@@ -846,6 +853,7 @@ function get_url_param() {
 		  }
 		: null;
 }
+
 function alpha_only(str) {
 	if (str) {
 		return str.replace(/[^a-zA-Z]/g, "").toLowerCase();

@@ -49,7 +49,22 @@ export function randomdb(name, db) {
 	}
 
 	if (rdb[name].x === 0) {
-		rdb[name].i = shufflearray(Array.from({ length: db_length }, (_, index) => index));
+		if (rdb[name].i) {
+			//have old value
+			let last_i_value = rdb[name].i[db_length - 1];
+
+			//shuffle new db
+			rdb[name].i = shufflearray(Array.from({ length: db_length }, (_, index) => index));
+
+			//check if last value same with new value
+			if (last_i_value === rdb[name].i[0]) {
+				//swap first with end
+				rdb[name].i[0] = rdb[name].i[db_length - 1];
+				rdb[name].i[db_length - 1] = last_i_value;
+			}
+		} else {
+			rdb[name].i = shufflearray(Array.from({ length: db_length }, (_, index) => index));
+		}
 	}
 
 	if (rdb[name].x + 1 >= db_length) {
