@@ -8,6 +8,7 @@ import p from "../base/p.js";
 import * as core from "../base/core.js";
 import toast from "../base/toast.js";
 import * as table from "../base/table.js";
+import pill from "../base/pill.js";
 
 export default [
 	{
@@ -138,6 +139,7 @@ export default [
 
 	{
 		title: "Weight",
+		msg:new pill({icon:"!",label:"Broken component"}),
 		container: sample.stackcontainer,
 		import: ["button", "offcanvas", "div", "p", "dropdown"],
 		code: () => {

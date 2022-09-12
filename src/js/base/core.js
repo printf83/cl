@@ -14,6 +14,20 @@ export function capitalize(str) {
 	return str.toLowerCase().replace(/(^\w{1})|(\s+\w{1})/g, (match) => match.toUpperCase());
 }
 
+//rnd(max)
+//rnd(min,max)
+export function rnd(max, min) {
+	if (min === undefined) {
+		min = 0;
+	} else {
+		let t = max;
+		max = min;
+		min = t;
+	}
+
+	return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
 export function shufflearray(arr) {
 	for (let i = arr.length - 1; i > 0; i--) {
 		let j = Math.floor(Math.random() * (i + 1));
@@ -1310,7 +1324,6 @@ export function html(data) {
 }
 
 export function init(container) {
-
 	let popoverTriggerList = [].slice.call(container.querySelectorAll('[data-bs-toggle="popover"]'));
 	popoverTriggerList.map((popoverTriggerEl) => {
 		let elem = new bootstrap.Popover(popoverTriggerEl);
