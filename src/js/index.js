@@ -18,6 +18,8 @@ import toc from "./base/toc.js";
 import doc from "./doc.js";
 import * as dlg from "./base/dlg.js";
 
+const DEBUG = false;
+
 const db_menu = [
 	{
 		type: "menu",
@@ -179,26 +181,26 @@ const db_menu = [
 		item: [
 			{
 				title: "Memory Test 10",
-				source: (event) => {
-					startmemoryleaktest(event.currentTarget, 10);
+				source: (sender) => {
+					startmemoryleaktest(sender, 10);
 				},
 			},
 			{
 				title: "Memory Test 100",
-				source: (event) => {
-					startmemoryleaktest(event.currentTarget, 100);
+				source: (sender) => {
+					startmemoryleaktest(sender, 100);
 				},
 			},
 			{
 				title: "Memory Test 1000",
-				source: (event) => {
-					startmemoryleaktest(event.currentTarget, 1000);
+				source: (sender) => {
+					startmemoryleaktest(sender, 1000);
 				},
 			},
 			{
 				title: "Memory Test 5000",
-				source: (event) => {
-					startmemoryleaktest(event.currentTarget, 5000);
+				source: (sender) => {
+					startmemoryleaktest(sender, 5000);
 				},
 			},
 		],
@@ -208,32 +210,59 @@ const db_menu = [
 		title: "Theme",
 		icon: { icon: "swatchbook", color: "success" },
 		item: [
+			// { title: "Default", source: null },
+			// { title: "Cerulean (L|G)", source: "cerulean" },
+			// { title: "Cosmo (L|S)", source: "cosmo" },
+			// { title: "Cyborg (D|S)", source: "cyborg" },
+			// { title: "Darkly (D|S)", source: "darkly" },
+			// { title: "Flatly (L|S)", source: "flatly" },
+			// { title: "Journal (L|S)", source: "journal" },
+			// { title: "Litera (L|S)", source: "litera" },
+			// { title: "Lumen (L|S)", source: "lumen" },
+			// { title: "Lux (L|S)", source: "lux" },
+			// { title: "Materia (L|G)", source: "materia" },
+			// { title: "Minty (L|S)", source: "minty" },
+			// { title: "Morph (L|G)", source: "morph" },
+			// { title: "Pulse (L|S)", source: "pulse" },
+			// { title: "Quartz (D|G)", source: "quartz" },
+			// { title: "Sandstone (L|S)", source: "sandstone" },
+			// { title: "Simplex (L|G)", source: "simplex" },
+			// { title: "Sketchy (L|S)", source: "sketchy" },
+			// { title: "Slate (D|G)", source: "slate" },
+			// { title: "Solar (D|S)", source: "solar" },
+			// { title: "Spacelab (L|G)", source: "spacelab" },
+			// { title: "Superhero (D|S)", source: "superhero" },
+			// { title: "United (L|S)", source: "united" },
+			// { title: "Vapor (D|G)", source: "vapor" },
+			// { title: "Yeti (L|S)", source: "yeti" },
+			// { title: "Zephyr (L|S)", source: "zephyr" },
+
 			{ title: "Default", source: null },
-			{ title: "Cerulean (L|G)", source: "cerulean" },
-			{ title: "Cosmo (L|S)", source: "cosmo" },
-			{ title: "Cyborg (D|S)", source: "cyborg" },
-			{ title: "Darkly (D|S)", source: "darkly" },
-			{ title: "Flatly (L|S)", source: "flatly" },
-			{ title: "Journal (L|S)", source: "journal" },
-			{ title: "Litera (L|S)", source: "litera" },
-			{ title: "Lumen (L|S)", source: "lumen" },
-			{ title: "Lux (L|S)", source: "lux" },
-			{ title: "Materia (L|G)", source: "materia" },
-			{ title: "Minty (L|S)", source: "minty" },
-			{ title: "Morph (L|G)", source: "morph" },
-			{ title: "Pulse (L|S)", source: "pulse" },
-			{ title: "Quartz (D|G)", source: "quartz" },
-			{ title: "Sandstone (L|S)", source: "sandstone" },
-			{ title: "Simplex (L|G)", source: "simplex" },
-			{ title: "Sketchy (L|S)", source: "sketchy" },
-			{ title: "Slate (D|G)", source: "slate" },
-			{ title: "Solar (D|S)", source: "solar" },
-			{ title: "Spacelab (L|G)", source: "spacelab" },
-			{ title: "Superhero (D|S)", source: "superhero" },
-			{ title: "United (L|S)", source: "united" },
-			{ title: "Vapor (D|G)", source: "vapor" },
-			{ title: "Yeti (L|S)", source: "yeti" },
-			{ title: "Zephyr (L|S)", source: "zephyr" },
+			{ title: "Cerulean", source: "cerulean" },
+			{ title: "Cosmo", source: "cosmo" },
+			{ title: "Cyborg", source: "cyborg" },
+			{ title: "Darkly", source: "darkly" },
+			{ title: "Flatly", source: "flatly" },
+			{ title: "Journal", source: "journal" },
+			{ title: "Litera", source: "litera" },
+			{ title: "Lumen", source: "lumen" },
+			{ title: "Lux", source: "lux" },
+			{ title: "Materia", source: "materia" },
+			{ title: "Minty", source: "minty" },
+			{ title: "Morph", source: "morph" },
+			{ title: "Pulse", source: "pulse" },
+			{ title: "Quartz", source: "quartz" },
+			{ title: "Sandstone", source: "sandstone" },
+			{ title: "Simplex", source: "simplex" },
+			{ title: "Sketchy", source: "sketchy" },
+			{ title: "Slate", source: "slate" },
+			{ title: "Solar", source: "solar" },
+			{ title: "Spacelab", source: "spacelab" },
+			{ title: "Superhero", source: "superhero" },
+			{ title: "United", source: "united" },
+			{ title: "Vapor", source: "vapor" },
+			{ title: "Yeti", source: "yeti" },
+			{ title: "Zephyr", source: "zephyr" },
 		],
 	},
 ];
@@ -332,7 +361,12 @@ function randomtheme() {
 	}
 
 	def_theme = cur_theme;
+	activate_menu("theme", cur_theme, "theme");
 	set_theme(cur_theme);
+}
+
+function set_theme(theme) {
+	core.setting.theme = theme;
 }
 
 function startmemoryleaktest(sender, limit) {
@@ -360,11 +394,12 @@ function startmemoryleaktest(sender, limit) {
 								sender.innerText = `Memory Test ${parseInt((i / l) * 100, 10)}%`;
 							}
 						},
-						() => {
+						(m1, m2, m3) => {
 							sender.classList.remove("active");
 							core.init(document.getElementById("root"));
 							PR.prettyPrint();
 							core.codemarker(document);
+							activate_menu(m1, m2, m3);
 						}
 					);
 				},
@@ -376,6 +411,9 @@ function startmemoryleaktest(sender, limit) {
 let memoryleaktestrun = false;
 let ix1 = 0;
 let ix2 = 0;
+
+let last_ix1 = 0;
+let last_ix2 = 0;
 function memoryleaktest(index, limit, progressupdate, callback) {
 	if (index < limit && memoryleaktestrun === true) {
 		progressupdate(index, limit);
@@ -394,9 +432,11 @@ function memoryleaktest(index, limit, progressupdate, callback) {
 		}
 
 		if (process) {
+			last_ix1 = ix1;
+			last_ix2 = ix2;
 			gen_content(db_menu[ix1].title, db_menu[ix1].item[ix2].title, () => {
 				if (index >= limit) {
-					callback();
+					callback(db_menu[last_ix1].title, db_menu[last_ix1].item[last_ix2].title, "menu");
 				} else {
 					ix2 = ix2 + 1;
 					memoryleaktest(index + 1, limit, progressupdate, callback);
@@ -408,7 +448,7 @@ function memoryleaktest(index, limit, progressupdate, callback) {
 	} else {
 		memoryleaktestrun = false;
 		progressupdate(index, limit);
-		callback();
+		callback(db_menu[last_ix1].title, db_menu[last_ix1].item[last_ix2].title, "menu");
 	}
 }
 
@@ -566,15 +606,17 @@ function gen_content(m1, m2, callback) {
 											});
 										}
 
-										//count pagespeed
-										document.getElementById("pagespeed").innerText = `${(
-											processtimeend - processtimestart
-										).toFixed(2)} ms`;
+										if (DEBUG) {
+											//count pagespeed
+											document.getElementById("pagespeed").innerText = `${(
+												processtimeend - processtimestart
+											).toFixed(2)} ms`;
 
-										//count page weight
-										document.getElementById("pageweight").innerText = `${core.countElement(
-											document.getElementById("root")
-										)} items`;
+											//count page weight
+											document.getElementById("pageweight").innerText = `${core.countElement(
+												document.getElementById("root")
+											)} items`;
+										}
 
 										res();
 									});
@@ -616,11 +658,13 @@ function gen_content(m1, m2, callback) {
 				gen_toc();
 				gen_url(m1, m2);
 
-				//count pagespeed
-				document.getElementById("pagespeed").innerText = `0 ms`;
+				if (DEBUG) {
+					//count pagespeed
+					document.getElementById("pagespeed").innerText = `0 ms`;
 
-				//count page weight
-				document.getElementById("pageweight").innerText = `0 item`;
+					//count page weight
+					document.getElementById("pageweight").innerText = `0 item`;
+				}
 
 				if (callback instanceof Function) {
 					callback();
@@ -636,10 +680,6 @@ function gen_content(m1, m2, callback) {
 			console.warn("Unsupported type", m);
 		}
 	}
-}
-
-function set_theme(theme) {
-	core.setting.theme = theme;
 }
 
 function gen_toc() {
@@ -690,6 +730,35 @@ function get_url() {
 		  }
 		: null;
 }
+function strOnly(str) {
+	return str.replace(/[^a-zA-Z]/g, "").toLowerCase();
+}
+function activate_menu(main_menu, sub_menu, type) {
+	//remove last active for each type
+	let activeItem = [].slice.call(document.getElementById("sidebar").getElementsByClassName("active"));
+
+	activeItem.forEach((i) => {
+		if (i.getAttribute("cl-m3") === type) {
+			i.classList.remove("active");
+		}
+	});
+
+	//set current active
+	let curActive = document.getElementById(`${type}_${strOnly(main_menu)}_${strOnly(sub_menu)}`);
+	if (curActive) {
+		curActive.classList.add("active");
+		let ul = curActive.closest("ul");
+		if (ul) {
+			ul.classList.add("show");
+			let s = ul.previousSibling();
+			if (s) {
+				s.classList.remove("collapsed");
+				s.setAttribute("aria-expanded", "true");
+			}
+		}
+		// bootstrap.Collapse.getInstance(curActive.closest("ul")).show();
+	}
+}
 
 function gen_menu(m1, m2, theme) {
 	return db_menu.map((i) => {
@@ -703,47 +772,42 @@ function gen_menu(m1, m2, theme) {
 			// active: true,
 			item: i.item.map((j) => {
 				return {
+					id: `${i.type}_${strOnly(i.title)}_${strOnly(j.title)}`,
+					class: `cl-${i.type}-item`,
 					label: j.title,
-					active: j.title === m2 || (i.type === "theme" && j.source === theme),
+					// active: j.title === m2 || (i.type === "theme" && j.source === theme),
 					attr: {
 						"cl-m1": i.title,
 						"cl-m2": j.title,
 						"cl-m3": i.type,
 					},
-					onclick:
-						i.type !== "action"
-							? (event) => {
-									let sender = event.currentTarget;
+					onclick: (event) => {
+						let sender = event.currentTarget;
 
-									let m1 = sender.getAttribute("cl-m1");
-									let m2 = sender.getAttribute("cl-m2");
-									let m3 = sender.getAttribute("cl-m3");
+						let m1 = sender.getAttribute("cl-m1");
+						let m2 = sender.getAttribute("cl-m2");
+						let m3 = sender.getAttribute("cl-m3");
 
-									let activeItem = [].slice.call(
-										document.getElementById("sidebar").getElementsByClassName("active")
-									);
+						let m = find_menu(m1, m2);
+						if (m) {
+							if (m.type === "menu") {
+								sender.innerText = "Loading...";
+								gen_content(m1, m2, () => {
+									core.init(document.getElementById("root"));
+									PR.prettyPrint();
+									core.codemarker(document);
+									sender.innerText = m2;
 
-									activeItem.forEach((i) => {
-										if (i.getAttribute("cl-m3") === m3) {
-											i.classList.remove("active");
-										}
-									});
-
-									sender.classList.add("active");
-
-									if (i.type === "menu") {
-										sender.innerText = "Loading...";
-										gen_content(m1, m2, () => {
-											core.init(document.getElementById("root"));
-											PR.prettyPrint();
-											core.codemarker(document);
-											sender.innerText = m2;
-										});
-									} else {
-										gen_content(m1, m2);
-									}
-							  }
-							: j.source,
+									activate_menu(m1, m2, m3);
+								});
+							} else if (m.type === "theme") {
+								set_theme(m.source);
+								activate_menu(m1, m2, m3);
+							} else if (m.type === "action") {
+								m.source(sender);
+							}
+						}
+					},
 				};
 			}),
 		});
@@ -838,19 +902,24 @@ core.documentReady(() => {
 							new small("d-none d-xxl-inline", "xxl"),
 						],
 					}),
-					new pill({
-						icon: "stopwatch",
-						title: "Build speed",
-						color: "primary",
-						elem: [new small({ id: "pagespeed", elem: "0 ms" })],
-					}),
-					new pill({
-						icon: "balance-scale",
-						title: "Page weight",
-						color: "primary",
-						elem: [new small({ id: "pageweight", elem: "0 item" })],
-					}),
-				],
+
+					DEBUG
+						? new pill({
+								icon: "stopwatch",
+								title: "Build speed",
+								color: "primary",
+								elem: [new small({ id: "pagespeed", elem: "0 ms" })],
+						  })
+						: null,
+					DEBUG
+						? new pill({
+								icon: "balance-scale",
+								title: "Page weight",
+								color: "primary",
+								elem: [new small({ id: "pageweight", elem: "0 item" })],
+						  })
+						: null,
+				].filter(Boolean),
 			}),
 
 			backtotop: true,
