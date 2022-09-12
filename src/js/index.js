@@ -337,8 +337,8 @@ const dblibrary = {
 	sample: `import sample from "./doc/sample.js";	//for documentation purpose only`,
 };
 
-let def_m1 = "Getting started";
-let def_m2 = "Introduction";
+let def_main_menu = "Getting started";
+let def_sub_menu = "Introduction";
 let def_theme = null;
 
 function randomtheme() {
@@ -396,12 +396,12 @@ function startmemoryleaktest(sender, limit) {
 								sender.innerText = `Memory Test ${parseInt((i / l) * 100, 10)}%`;
 							}
 						},
-						(m1, m2, m3) => {
+						(main_menu, sub_menu, m3) => {
 							sender.classList.remove("active");
 							core.init(document.getElementById("root"));
 							PR.prettyPrint();
 							core.codemarker(document);
-							activate_menu(m1, m2, m3);
+							activate_menu(main_menu, sub_menu, m3);
 						}
 					);
 				},
@@ -546,14 +546,14 @@ function gen_example(opt) {
 	});
 }
 
-function find_menu(m1, m2) {
-	let m1_index = db_menu.findIndex((i) => i.title === m1);
-	if (m1_index > -1) {
-		let m2_index = db_menu[m1_index].item.findIndex((i) => i.title === m2);
-		if (m2_index > -1) {
+function find_menu(main_menu, sub_menu) {
+	let main_menu_index = db_menu.findIndex((i) => i.title === main_menu);
+	if (main_menu_index > -1) {
+		let sub_menu_index = db_menu[main_menu_index].item.findIndex((i) => i.title === sub_menu);
+		if (sub_menu_index > -1) {
 			return {
-				type: db_menu[m1_index].type,
-				source: db_menu[m1_index].item[m2_index].source,
+				type: db_menu[main_menu_index].type,
+				source: db_menu[main_menu_index].item[sub_menu_index].source,
 			};
 		}
 	}
@@ -561,25 +561,25 @@ function find_menu(m1, m2) {
 	return null;
 }
 
-let cur_m1 = null;
-let cur_m2 = null;
+let cur_main_menu = null;
+let cur_sub_menu = null;
 function reloadactivedoc() {
-	if (cur_m1 && cur_m2) {
-		gen_content(cur_m1, cur_m2, () => {
+	if (cur_main_menu && cur_sub_menu) {
+		gen_content(cur_main_menu, cur_sub_menu, () => {
 			core.init(document.getElementById("root"));
 			PR.prettyPrint();
 			core.codemarker(document);
-			activate_menu(cur_m1, cur_m2, "menu");
+			activate_menu(cur_main_menu, cur_sub_menu, "menu");
 		});
 	}
 }
 
-function gen_content(m1, m2, callback) {
-	let m = find_menu(m1, m2);
+function gen_content(main_menu, sub_menu, callback) {
+	let m = find_menu(main_menu, sub_menu);
 	if (m) {
 		if (m.type === "menu") {
-			cur_m1 = m1;
-			cur_m2 = m2;
+			cur_main_menu = main_menu;
+			cur_sub_menu = sub_menu;
 
 			if (m.source) {
 				setTimeout(
@@ -608,7 +608,7 @@ function gen_content(m1, m2, callback) {
 										let processtimeend = window.performance.now();
 
 										gen_toc();
-										gen_url(m1, m2);
+										gen_url(main_menu, sub_menu);
 
 										//update scroll-spy
 										const dataSpyList = document.querySelectorAll('[data-bs-spy="scroll"]');
@@ -665,13 +665,13 @@ function gen_content(m1, m2, callback) {
 						elem: new msg({
 							weight: "lg",
 							icon: "!",
-							elem: `Documentation for <b>${m1}</b> - <b>${m2}</b> not yet available`,
+							elem: `Documentation for <b>${main_menu}</b> - <b>${sub_menu}</b> not yet available`,
 						}),
 					})
 				);
 
 				gen_toc();
-				gen_url(m1, m2);
+				gen_url(main_menu, sub_menu);
 
 				if (DEBUG) {
 					//count pagespeed
@@ -724,10 +724,10 @@ function gen_toc() {
 	}
 }
 
-function gen_url(m1, m2) {
-	let title = `${core.setting.title()} - ${m1} | ${m2}`;
-	let path = `?m1=${encodeURIComponent(m1)}&m2=${encodeURIComponent(m2)}`;
-	let data = `${m1}.${m2}`;
+function gen_url(main_menu, sub_menu) {
+	let title = `${core.setting.title()} - ${main_menu} | ${sub_menu}`;
+	let path = `?m1=${encodeURIComponent(main_menu)}&m2=${encodeURIComponent(sub_menu)}`;
+	let data = `${main_menu}.${sub_menu}`;
 
 	window.history.pushState(data, title, path);
 	document.title = title;
@@ -736,12 +736,12 @@ function gen_url(m1, m2) {
 function get_url() {
 	let p = new URLSearchParams(window.location.search);
 
-	let m1 = p.get("m1");
-	let m2 = p.get("m2");
-	return m1 && m2
+	let main_menu = p.get("m1");
+	let sub_menu = p.get("m2");
+	return main_menu && sub_menu
 		? {
-				m1: decodeURIComponent(m1),
-				m2: decodeURIComponent(m2),
+				main_menu: decodeURIComponent(main_menu),
+				sub_menu: decodeURIComponent(sub_menu),
 		  }
 		: null;
 }
@@ -760,7 +760,7 @@ function activate_menu(main_menu, sub_menu, type) {
 		if (activeItem[x].getAttribute("cl-m3") === type) {
 			activeItem[x].classList.remove("active");
 
-			if (activeItem[x].getAttribute("cl-m1") !== main_menu) {
+			if (activeItem[x].getAttribute("cl-main_menu") !== main_menu) {
 				let iul = activeItem[x].closest("ul");
 				if (iul) {
 					try {
@@ -797,22 +797,17 @@ function activate_menu(main_menu, sub_menu, type) {
 	}
 }
 
-function gen_menu(m1, m2, theme) {
+function gen_menu(main_menu, sub_menu, theme) {
 	return db_menu.map((i) => {
 		return new menu({
-			// col: true,
-			// col: [6, "md-12"],
 			label: i.title,
 			icon: i.icon,
 			arrow: !i.icon,
-			active: i.title === m1,
-			// active: true,
 			item: i.item.map((j) => {
 				return {
 					id: `${i.type}_${strOnly(i.title)}_${strOnly(j.title)}`,
 					class: `cl-${i.type}-item`,
 					label: j.title,
-					// active: j.title === m2 || (i.type === "theme" && j.source === theme),
 					attr: {
 						"cl-m1": i.title,
 						"cl-m2": j.title,
@@ -821,25 +816,25 @@ function gen_menu(m1, m2, theme) {
 					onclick: (event) => {
 						let sender = event.currentTarget;
 
-						let m1 = sender.getAttribute("cl-m1");
-						let m2 = sender.getAttribute("cl-m2");
+						let main_menu = sender.getAttribute("cl-m1");
+						let sub_menu = sender.getAttribute("cl-m2");
 						let m3 = sender.getAttribute("cl-m3");
 
-						let m = find_menu(m1, m2);
+						let m = find_menu(main_menu, sub_menu);
 						if (m) {
 							if (m.type === "menu") {
 								sender.innerText = "Loading...";
-								gen_content(m1, m2, () => {
+								gen_content(main_menu, sub_menu, () => {
 									core.init(document.getElementById("root"));
 									PR.prettyPrint();
 									core.codemarker(document);
-									sender.innerText = m2;
+									sender.innerText = sub_menu;
 
-									activate_menu(m1, m2, m3);
+									activate_menu(main_menu, sub_menu, m3);
 								});
 							} else if (m.type === "theme") {
 								set_theme(m.source);
-								activate_menu(m1, m2, m3);
+								activate_menu(main_menu, sub_menu, m3);
 							} else if (m.type === "action") {
 								m.source(sender);
 							}
@@ -852,11 +847,11 @@ function gen_menu(m1, m2, theme) {
 }
 
 core.documentReady(() => {
-	//set def_m1 and m2
+	//set def_main_menu and sub_menu
 	let m = get_url();
-	if (m && m.m1 !== "undefined" && m.m2 !== "undefined") {
-		def_m1 = m.m1;
-		def_m2 = m.m2;
+	if (m && m.main_menu !== "undefined" && m.sub_menu !== "undefined") {
+		def_main_menu = m.main_menu;
+		def_sub_menu = m.sub_menu;
 	}
 
 	def_theme = core.setting.theme;
@@ -887,7 +882,7 @@ core.documentReady(() => {
 				overflow: "auto",
 				display: "md-block",
 				margintop: 3,
-				elem: gen_menu(def_m1, def_m2, def_theme),
+				elem: gen_menu(def_main_menu, def_sub_menu, def_theme),
 			}),
 			rightelem: new tag({
 				class: ["sticky-lg-top", "cl-vh-menu"],
@@ -950,6 +945,6 @@ core.documentReady(() => {
 		})
 	);
 
-	cur_m1 = def_m1;
-	cur_m2 = def_m2;
+	cur_main_menu = def_main_menu;
+	cur_sub_menu = def_sub_menu;
 });
