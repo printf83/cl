@@ -396,12 +396,12 @@ function startmemoryleaktest(sender, limit) {
 								sender.innerText = `Memory Test ${parseInt((i / l) * 100, 10)}%`;
 							}
 						},
-						(main_menu, sub_menu, m3) => {
+						(main_menu, sub_menu, type_menu) => {
 							sender.classList.remove("active");
 							core.init(document.getElementById("root"));
 							PR.prettyPrint();
 							core.codemarker(document);
-							activate_menu(main_menu, sub_menu, m3);
+							activate_menu(main_menu, sub_menu, type_menu);
 						}
 					);
 				},
@@ -566,10 +566,13 @@ let cur_sub_menu = null;
 function reloadactivedoc() {
 	if (cur_main_menu && cur_sub_menu) {
 		gen_content(cur_main_menu, cur_sub_menu, () => {
+			gen_toc();
+			activate_menu(cur_main_menu, cur_sub_menu, "menu");
+			gen_url(cur_main_menu, cur_sub_menu);
+
 			core.init(document.getElementById("root"));
 			PR.prettyPrint();
 			core.codemarker(document);
-			activate_menu(cur_main_menu, cur_sub_menu, "menu");
 		});
 	}
 }
@@ -589,9 +592,7 @@ function gen_content(main_menu, sub_menu, callback) {
 								try {
 									//async import doc source
 									core.importJS(m.source, (m_source) => {
-										let processtimestart = window.performance.now();
-
-										let tocId = core.UUID();
+										let processtimestart = DEBUG ? window.performance.now() : null;
 
 										// sample.resetindex();
 										core.replaceChild(
@@ -605,10 +606,10 @@ function gen_content(main_menu, sub_menu, callback) {
 											})
 										);
 
-										let processtimeend = window.performance.now();
+										let processtimeend = DEBUG ? window.performance.now() : null;
 
-										gen_toc();
-										gen_url(main_menu, sub_menu);
+										// gen_toc();
+										// gen_url(main_menu, sub_menu);
 
 										//update scroll-spy
 										const dataSpyList = document.querySelectorAll('[data-bs-spy="scroll"]');
@@ -669,9 +670,6 @@ function gen_content(main_menu, sub_menu, callback) {
 						}),
 					})
 				);
-
-				gen_toc();
-				gen_url(main_menu, sub_menu);
 
 				if (DEBUG) {
 					//count pagespeed
@@ -752,48 +750,53 @@ function strOnly(str) {
 		return "";
 	}
 }
-function activate_menu(main_menu, sub_menu, type) {
+
+function activate_menu(main_menu, sub_menu, type_menu) {
 	//remove last active for each type
-	let activeItem = [].slice.call(document.getElementById("sidebar").getElementsByClassName("active"));
 
-	for (let x = 0; x < activeItem.length; x++) {
-		if (activeItem[x].getAttribute("cl-m3") === type) {
-			activeItem[x].classList.remove("active");
+	if (type_menu !== "theme") {
+		let activeItem = [].slice.call(document.getElementById("sidebar").getElementsByClassName("active"));
 
-			if (activeItem[x].getAttribute("cl-main_menu") !== main_menu) {
-				let iul = activeItem[x].closest("ul");
-				if (iul) {
-					try {
-						let isib = iul.previousSibling;
-						iul.classList.remove("show");
-						if (isib) {
-							isib.classList.add("collapsed");
-							isib.setAttribute("aria-expanded", "false");
-						}
-					} catch {}
+		for (let x = 0; x < activeItem.length; x++) {
+			if (activeItem[x].getAttribute("cl-m3") === type_menu) {
+				activeItem[x].classList.remove("active");
+
+				if (activeItem[x].getAttribute("cl-main_menu") !== main_menu) {
+					let iul = activeItem[x].closest("ul");
+					if (iul) {
+						try {
+							let isib = iul.previousSibling;
+							iul.classList.remove("show");
+							if (isib) {
+								isib.classList.add("collapsed");
+								isib.setAttribute("aria-expanded", "false");
+							}
+						} catch {}
+					}
 				}
 			}
 		}
 	}
 
 	//set current active
-	let curActive = document.getElementById(`${type}_${strOnly(main_menu)}_${strOnly(sub_menu)}`);
+	let curActive = document.getElementById(`${type_menu}_${strOnly(main_menu)}_${strOnly(sub_menu)}`);
 	if (curActive) {
 		curActive.classList.add("active");
 
-		let cul = curActive.closest("ul");
-		if (cul) {
-			try {
-				let csib = cul.previousSibling;
-				cul.classList.add("show");
+		if (type_menu !== "theme") {
+			let cul = curActive.closest("ul");
+			if (cul) {
+				try {
+					let csib = cul.previousSibling;
+					cul.classList.add("show");
 
-				if (csib) {
-					csib.classList.remove("collapsed");
-					csib.setAttribute("aria-expanded", "true");
-				}
-			} catch {}
+					if (csib) {
+						csib.classList.remove("collapsed");
+						csib.setAttribute("aria-expanded", "true");
+					}
+				} catch {}
+			}
 		}
-		// bootstrap.Collapse.getInstance(curActive.closest("ul")).show();
 	}
 }
 
@@ -818,23 +821,25 @@ function gen_menu(main_menu, sub_menu, theme) {
 
 						let main_menu = sender.getAttribute("cl-m1");
 						let sub_menu = sender.getAttribute("cl-m2");
-						let m3 = sender.getAttribute("cl-m3");
+						let type_menu = sender.getAttribute("cl-m3");
 
 						let m = find_menu(main_menu, sub_menu);
 						if (m) {
 							if (m.type === "menu") {
 								sender.innerText = "Loading...";
 								gen_content(main_menu, sub_menu, () => {
+									gen_toc();
+									activate_menu(main_menu, sub_menu, type_menu);
+									gen_url(main_menu, sub_menu);
+
 									core.init(document.getElementById("root"));
 									PR.prettyPrint();
 									core.codemarker(document);
-									sender.innerText = sub_menu;
 
-									activate_menu(main_menu, sub_menu, m3);
+									sender.innerText = sub_menu;
 								});
 							} else if (m.type === "theme") {
 								set_theme(m.source);
-								activate_menu(main_menu, sub_menu, m3);
 							} else if (m.type === "action") {
 								m.source(sender);
 							}
@@ -940,6 +945,7 @@ core.documentReady(() => {
 						: null,
 				].filter(Boolean),
 			}),
+			mainelem: "Loading...",
 
 			backtotop: true,
 		})
