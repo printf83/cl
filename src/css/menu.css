@@ -81,11 +81,11 @@
 .cl-menu-container li div.active,
 .cl-menu-container li a.active {
 	font-weight: calc(var(--bs-body-font-weight) * 1.5);
-	color: rgba(var(--bs-gray), 0.9);
+	color: rgba(var(--bs-primary-rgb), 1);
 }
 .bg-dark .cl-menu-container li div.active,
 .bg-dark .cl-menu-container li a.active {
-	color: rgba(var(--bs-light-rgb), 0.9);
+	color: rgba(var(--bs-primary-rgb), 0.1);
 }
 
 .cl-menu-container li div.disabled,

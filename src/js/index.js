@@ -356,15 +356,31 @@ function set_theme(theme) {
 	core.setting.theme = theme;
 }
 
+let dbmenukey = [];
+function randompage() {
+	let i = core.randomdb("index_dbmenukey", dbmenukey);
+
+	gen_content(i.main_menu, i.sub_menu, () => {
+		gen_toc();
+		update_scrollspy();
+		activate_menu(i.main_menu, i.sub_menu, "menu");
+		gen_url(i.main_menu, i.sub_menu);
+
+		core.init(document.getElementById("root"));
+		PR.prettyPrint();
+		core.codemarker(document);
+	});
+}
+
 core.setting.themechange = (theme) => {
 	activate_menu("theme", theme, "theme");
 
 	let el = document.getElementById("pagetheme");
 	if (el) {
 		if (theme) {
-			el.innerText = `${theme}`;
+			el.innerText = `${core.capitalize(theme)}`;
 		} else {
-			el.innerText = `default`;
+			el.innerText = `Default`;
 		}
 	}
 
@@ -414,43 +430,61 @@ let memoryleaktestrun = false;
 let ix1 = 0;
 let ix2 = 0;
 
-let last_ix1 = 0;
-let last_ix2 = 0;
+let last_main_menu = 0;
+let last_sub_menu = 0;
 function memoryleaktest(index, limit, progressupdate, callback) {
 	if (index < limit && memoryleaktestrun === true) {
+		// progressupdate(index, limit);
+
+		// let process = true;
+		// if (db_menu[ix1].type === "menu") {
+		// 	if (ix2 >= db_menu[ix1].item.length) {
+		// 		ix1 = ix1 + 1;
+		// 		ix2 = 0;
+		// 		process = false;
+		// 	}
+		// } else {
+		// 	ix1 = 0;
+		// 	ix2 = 0;
+		// 	process = false;
+		// }
+
+		// if (process) {
+		// 	last_ix1 = ix1;
+		// 	last_ix2 = ix2;
+		// 	gen_content(db_menu[ix1].title, db_menu[ix1].item[ix2].title, () => {
+		// 		if (index >= limit) {
+		// 			callback(db_menu[last_ix1].title, db_menu[last_ix1].item[last_ix2].title, "menu");
+		// 		} else {
+		// 			ix2 = ix2 + 1;
+		// 			memoryleaktest(index + 1, limit, progressupdate, callback);
+		// 		}
+		// 	});
+		// } else {
+		// 	memoryleaktest(index, limit, progressupdate, callback);
+		// }
+
 		progressupdate(index, limit);
 
-		let process = true;
-		if (db_menu[ix1].type === "menu") {
-			if (ix2 >= db_menu[ix1].item.length) {
-				ix1 = ix1 + 1;
-				ix2 = 0;
-				process = false;
-			}
-		} else {
-			ix1 = 0;
-			ix2 = 0;
-			process = false;
-		}
+		let p = core.randomdb("index_dbmenukey", dbmenukey);
 
-		if (process) {
-			last_ix1 = ix1;
-			last_ix2 = ix2;
-			gen_content(db_menu[ix1].title, db_menu[ix1].item[ix2].title, () => {
-				if (index >= limit) {
-					callback(db_menu[last_ix1].title, db_menu[last_ix1].item[last_ix2].title, "menu");
-				} else {
-					ix2 = ix2 + 1;
-					memoryleaktest(index + 1, limit, progressupdate, callback);
-				}
-			});
-		} else {
-			memoryleaktest(index, limit, progressupdate, callback);
-		}
+		// if (process) {
+		last_main_menu = p.main_menu;
+		last_sub_menu = p.sub_menu;
+		gen_content(p.main_menu, p.sub_menu, () => {
+			if (index >= limit) {
+				callback(last_main_menu, last_sub_menu, "menu");
+			} else {
+				memoryleaktest(index + 1, limit, progressupdate, callback);
+			}
+		});
+		// } else {
+		// 	memoryleaktest(index, limit, progressupdate, callback);
+		// }
 	} else {
 		memoryleaktestrun = false;
 		progressupdate(index, limit);
-		callback(db_menu[last_ix1].title, db_menu[last_ix1].item[last_ix2].title, "menu");
+		callback(last_main_menu, last_sub_menu, "menu");
 	}
 }
 
@@ -564,9 +598,11 @@ function find_menu(main_menu, sub_menu) {
 let cur_main_menu = null;
 let cur_sub_menu = null;
 function reloadactivedoc() {
+	console.log("reload active doc");
 	if (cur_main_menu && cur_sub_menu) {
 		gen_content(cur_main_menu, cur_sub_menu, () => {
 			gen_toc();
+			update_scrollspy();
 			activate_menu(cur_main_menu, cur_sub_menu, "menu");
 			gen_url(cur_main_menu, cur_sub_menu);
 
@@ -607,20 +643,6 @@ function gen_content(main_menu, sub_menu, callback) {
 										);
 
 										let processtimeend = DEBUG ? window.performance.now() : null;
-
-										// gen_toc();
-										// gen_url(main_menu, sub_menu);
-
-										//update scroll-spy
-										const dataSpyList = document.querySelectorAll('[data-bs-spy="scroll"]');
-										if (dataSpyList && dataSpyList.length > 0) {
-											dataSpyList.forEach((dataSpyEl) => {
-												let inst = bootstrap.ScrollSpy.getInstance(dataSpyEl);
-												if (inst) {
-													inst.refresh();
-												}
-											});
-										}
 
 										if (DEBUG) {
 											//count pagespeed
@@ -722,6 +744,21 @@ function gen_toc() {
 	}
 }
 
+function update_scrollspy() {
+	//update scroll-spy
+	const dataSpyList = document.querySelectorAll('[data-bs-spy="scroll"]');
+	if (dataSpyList && dataSpyList.length > 0) {
+		dataSpyList.forEach((dataSpyEl) => {
+			let inst = bootstrap.ScrollSpy.getInstance(dataSpyEl);
+			if (inst) {
+				inst.refresh();
+			} else {
+				console.warn("scrollspy not build");
+			}
+		});
+	}
+}
+
 function gen_url(main_menu, sub_menu) {
 	let title = `${core.setting.title()} - ${main_menu} | ${sub_menu}`;
 	let path = `?m1=${encodeURIComponent(main_menu)}&m2=${encodeURIComponent(sub_menu)}`;
@@ -801,12 +838,18 @@ function activate_menu(main_menu, sub_menu, type_menu) {
 }
 
 function gen_menu(main_menu, sub_menu, theme) {
+	dbmenukey = [];
+
 	return db_menu.map((i) => {
 		return new menu({
 			label: i.title,
 			icon: i.icon,
 			arrow: !i.icon,
 			item: i.item.map((j) => {
+				if (i.type === "menu") {
+					dbmenukey.push({ main_menu: i.title, sub_menu: j.title });
+				}
+
 				return {
 					id: `${i.type}_${strOnly(i.title)}_${strOnly(j.title)}`,
 					class: `cl-${i.type}-item`,
@@ -829,6 +872,7 @@ function gen_menu(main_menu, sub_menu, theme) {
 								sender.innerText = "Loading...";
 								gen_content(main_menu, sub_menu, () => {
 									gen_toc();
+									update_scrollspy();
 									activate_menu(main_menu, sub_menu, type_menu);
 									gen_url(main_menu, sub_menu);
 
@@ -905,25 +949,38 @@ core.documentReady(() => {
 					new a({
 						class: "text-decoration-none",
 						elem: new pill({
-							icon: "swatchbook",
-							title: "Theme",
+							icon: "shuffle",
+							title: "Choose random page",
 							color: "primary",
-							elem: [new small({ id: "pagetheme", elem: "default" })],
+							elem: [new small({ elem: "Random Page" })],
+						}),
+						href: "javascript:void(0)",
+						onclick: randompage,
+					}),
+
+					new a({
+						class: "text-decoration-none",
+						elem: new pill({
+							icon: "swatchbook",
+							title: "Choose random theme",
+							color: "primary",
+							elem: [new small({ id: "pagetheme", elem: "Default" })],
 						}),
 						href: "javascript:void(0)",
 						onclick: randomtheme,
 					}),
+
 					new pill({
 						icon: "eye",
 						title: "Viewport",
 						color: "primary",
 						elem: [
-							new small("d-inline d-sm-none", "xs"),
-							new small("d-none d-sm-inline d-md-none", "sm"),
-							new small("d-none d-md-inline d-lg-none", "md"),
-							new small("d-none d-lg-inline d-xl-none", "lg"),
-							new small("d-none d-xl-inline d-xxl-none", "xl"),
-							new small("d-none d-xxl-inline", "xxl"),
+							new small("d-inline d-sm-none", "XS"),
+							new small("d-none d-sm-inline d-md-none", "SM"),
+							new small("d-none d-md-inline d-lg-none", "MD"),
+							new small("d-none d-lg-inline d-xl-none", "LG"),
+							new small("d-none d-xl-inline d-xxl-none", "XL"),
+							new small("d-none d-xxl-inline", "XXL"),
 						],
 					}),
 
@@ -951,6 +1008,7 @@ core.documentReady(() => {
 		})
 	);
 
+	core.init(document);
 	cur_main_menu = def_main_menu;
 	cur_sub_menu = def_sub_menu;
 });
