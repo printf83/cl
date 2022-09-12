@@ -139,7 +139,7 @@ export default [
 
 	{
 		title: "Weight",
-		msg:new pill({icon:"!",label:"Broken component"}),
+		msg: [new pill({ icon: "!", marginbottom: 3, label: "Broken component" })],
 		container: sample.stackcontainer,
 		import: ["button", "offcanvas", "div", "p", "dropdown"],
 		code: () => {

@@ -362,6 +362,26 @@ function set_theme(theme) {
 	core.setting.theme = theme;
 }
 
+core.setting.themechange = (theme) => {
+	activate_menu("theme", theme, "theme");
+
+	let el = document.getElementById("pagetheme");
+	if (el) {
+		if (theme) {
+			el.innerText = `${core.capitalize(theme)}`;
+		} else {
+			el.innerText = `Default`;
+		}
+	}
+
+	reload_page(() => {
+		if (randomtheme_callback && typeof randomtheme_callback === "function") {
+			randomtheme_callback();
+			randomtheme_callback = null;
+		}
+	});
+};
+
 let dbmenukey = [];
 function randompage(callback) {
 	let i = core.randomdb("index_dbmenukey", dbmenukey);
@@ -382,26 +402,6 @@ function randompage(callback) {
 		}
 	});
 }
-
-core.setting.themechange = (theme) => {
-	activate_menu("theme", theme, "theme");
-
-	let el = document.getElementById("pagetheme");
-	if (el) {
-		if (theme) {
-			el.innerText = `${core.capitalize(theme)}`;
-		} else {
-			el.innerText = `Default`;
-		}
-	}
-
-	reload_page(() => {
-		if (randomtheme_callback && typeof randomtheme_callback === "function") {
-			randomtheme_callback();
-			randomtheme_callback = null;
-		}
-	});
-};
 
 function startmemoryleaktest(sender, limit) {
 	if (memoryleaktestrun === true) {
@@ -625,7 +625,7 @@ function gen_page_placeholder() {
 function reload_page(callback) {
 	console.log("reload active doc");
 	if (cur_main_menu && cur_sub_menu) {
-		load_page(true, cur_main_menu, cur_sub_menu, () => {
+		load_page(false, cur_main_menu, cur_sub_menu, () => {
 			gen_tableofcontent();
 			update_scrollspy();
 			activate_menu(cur_main_menu, cur_sub_menu, "menu");
@@ -797,7 +797,7 @@ function gen_tableofcontent_placeholder() {
 	return new toc({
 		ariahidden: true,
 		label: fn(12),
-		item: [[4, 6], [3, 5], [4, 6], 7, 5, [2, 4], [2, 6], [1, 5], [3, 4]].map((i) => {
+		item: [[4, 6], [3, 5], [4, 6], 7, 5, [2, 4], [2, 6]].map((i) => {
 			return {
 				label: fn(i),
 			};
@@ -935,7 +935,7 @@ function gen_menu() {
 						let m = find_menu(main_menu, sub_menu);
 						if (m) {
 							if (m.type === "menu") {
-								sender.innerText = "Loading...";
+								sender.innerText = "Loading";
 								load_page(true, main_menu, sub_menu, () => {
 									gen_tableofcontent();
 									update_scrollspy();
@@ -1023,7 +1023,7 @@ core.documentReady(() => {
 						href: "javascript:void(0)",
 						onclick: () => {
 							let pagerandomlabel = document.getElementById("pagerandom");
-							pagerandomlabel.innerText = "Loading...";
+							pagerandomlabel.innerText = "Loading";
 							randompage(() => {
 								core.focusElement(pagerandomlabel);
 							});
@@ -1041,7 +1041,7 @@ core.documentReady(() => {
 						href: "javascript:void(0)",
 						onclick: () => {
 							let pagethemelabel = document.getElementById("pagetheme");
-							pagethemelabel.innerText = "Loading...";
+							pagethemelabel.innerText = "Loading";
 
 							randomtheme(() => {
 								core.focusElement(pagethemelabel);
