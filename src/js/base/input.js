@@ -42,6 +42,7 @@ const defaultOption = {
 	pattern: null,
 	autocomplete: null,
 
+	validitytype: "feedback",
 	valid: null,
 	invalid: null,
 
@@ -198,10 +199,10 @@ export default class input extends tag {
 			let helper = opt.helper ? new div({ id: `${opt.id}-helper`, class: "form-text", elem: opt.helper }) : null;
 
 			//valid msg
-			let validmsg = opt.valid ? new div({ class: "valid-feedback", elem: opt.valid }) : null;
+			let validmsg = opt.valid ? new div({ class: `valid-${opt.validitytype}`, elem: opt.valid }) : null;
 
 			//invalid msg
-			let invalidmsg = opt.invalid ? new div({ class: "invalid-feedback", elem: opt.invalid }) : null;
+			let invalidmsg = opt.invalid ? new div({ class: `invalid-${opt.validitytype}`, elem: opt.invalid }) : null;
 
 			//datalist
 			let datalistctl = null;
@@ -266,6 +267,10 @@ export default class input extends tag {
 				onblur: m.onblur,
 				onfocus: m.onfocus,
 			});
+
+			delete m.valid;
+			delete m.invalid;
+			delete m.validitytype;
 
 			delete m.type;
 
@@ -346,16 +351,6 @@ export default class input extends tag {
 						opt.weight && !(opt.before || opt.after || opt.addctl !== null)
 							? `form-select-${opt.weight}`
 							: null,
-						// opt.label && opt.floatlabel
-						// 	? core.combineArray(
-						// 			[
-						// 				opt.before || opt.after ? "rounded-0" : null,
-						// 				opt.before ? "rounded-end" : null,
-						// 				opt.after ? "rounded-start" : null,
-						// 			],
-						// 			" "
-						// 	  )
-						// 	: null,
 					]);
 
 					m.attr = core.merge.attr(m.attr, {
@@ -396,18 +391,6 @@ export default class input extends tag {
 						opt.type === "color"
 							? core.combineArray(["form-control-color", opt.floatlabel ? "w-100" : null], " ")
 							: null,
-						// opt.label && opt.floatlabel
-						// 	? core.combineArray(
-						// 			[
-						// 				opt.before || opt.after || opt.numctl ? "rounded-0" : null,
-						// 				opt.before ? "rounded-end" : null,
-						// 				opt.after ? "rounded-start" : null,
-						// 			],
-						// 			" "
-						// 	  )
-						// 	: opt.label && opt.numctl
-						// 	? "rounded-0"
-						// 	: null,
 					]);
 
 					m.attr = core.merge.attr(m.attr, {
@@ -507,10 +490,15 @@ export default class input extends tag {
 
 			if (opt.size) {
 				super.data = {
-					elem: new div({ class: core.multiClass(opt.size, "col-$1", null, "col"), elem: ctl }),
+					elem: new div({
+						col: opt.size ? opt.size : true,
+						position: opt.validitytype === "tooltip" ? "relative" : null,
+						elem: ctl,
+					}),
 				};
 			} else {
 				super.data = {
+					position: opt.validitytype === "tooltip" ? "relative" : null,
 					elem: ctl,
 				};
 			}

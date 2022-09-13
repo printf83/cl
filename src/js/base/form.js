@@ -2,7 +2,7 @@
 import * as core from "./core.js";
 import tag from "./tag.js";
 
-const defaultOption = { tag: "form" };
+const defaultOption = { tag: "form", onsubmit: null };
 /**
  * opt : {tagoption}
  */
@@ -15,6 +15,14 @@ export default class form extends tag {
 		return super.data;
 	}
 	set data(opt) {
-		super.data = core.extend({}, defaultOption, opt);
+		opt = core.extend({}, defaultOption, opt);
+
+		opt.attr = core.merge.attr(opt.attr, {
+			onsubmit: opt.onsubmit,
+		});
+
+		delete opt.onsubmit;
+
+		super.data = opt;
 	}
 }

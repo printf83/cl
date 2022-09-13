@@ -2,6 +2,10 @@
 import sample from "./sample.js";
 import form from "../base/form.js";
 import ul from "../base/ul.js";
+import button from "../base/button.js";
+import toast from "../base/toast.js";
+import input from "../base/input.js";
+import * as container from "../base/container.js";
 
 export default [
 	{
@@ -50,6 +54,53 @@ export default [
 				new form("Direct elem property"),
 				new form("classname", "Direct class and elem property"),
 			];
+		},
+	},
+
+	{
+		title: "Event",
+		msg: ["Form support {{onsubmit}} event."],
+		import: ["button", "toast", "input", "container"],
+		code: () => {
+			return new form({
+				//marker
+				onsubmit: (event) => {
+					let sender = event.currentTarget;
+					event.preventDefault();
+					event.stopPropagation();
+					sender.classList.add("was-validated");
+
+					if (!sender.checkValidity()) {
+						new toast("-", "Invalid input value").show();
+					} else {
+						new toast("/", "Valid input value").show();
+					}
+				},
+				//-
+
+				elem: new container.vstack([
+					new input({
+						label: "Email",
+						type: "email",
+						autocomplete: "email",
+						required: true,
+						validitytype: "tooltip",
+						invalid: "Its required!",
+						valid: "Looks good.",
+					}),
+					new input({
+						label: "Password",
+						type: "password",
+						autocomplete: "current-password",
+						required: true,
+						validitytype: "tooltip",
+						invalid: "Its required",
+						valid: "Looks good.",
+					}),
+
+					new button({ type: "submit", label: "Submit", color: "primary" }),
+				]),
+			});
 		},
 	},
 ];
