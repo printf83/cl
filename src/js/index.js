@@ -970,6 +970,10 @@ function gen_menu() {
 	});
 }
 
+function cl_event_handler(event) {
+	core.eventhandler(event);
+}
+
 core.documentReady(() => {
 	let url_param = get_url_param();
 	if (url_param && url_param.main_menu !== "undefined" && url_param.sub_menu !== "undefined") {

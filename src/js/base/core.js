@@ -436,6 +436,14 @@ const num2EngTh = (num) => {
 	return result;
 };
 
+export function num2En(num) {
+	return num2Eng(num);
+}
+
+export function num2EnT(num) {
+	return num2EngTh(num);
+}
+
 const _baseIcon = {
 	i: { icon: "info-circle", type: "fas", color: "primary" },
 	"!": { icon: "exclamation-triangle", type: "fas", color: "warning" },
@@ -720,16 +728,8 @@ export const merge = {
 	},
 };
 
-export function num2En(num) {
-	return num2Eng(num);
-}
-
-export function num2EnT(num) {
-	return num2EngTh(num);
-}
-
 export function UUID(format) {
-	return (format || "el-xxxxxxxxxxxx").replace(/[xy]/g, (c) => {
+	return (format || "el_xxxxxxxxxxxx").replace(/[xy]/g, (c) => {
 		let r = (Math.random() * 16) | 0,
 			v = c === "x" ? r : (r & 0x3) | 0x8;
 		return v.toString(16);
@@ -1121,47 +1121,103 @@ const booleanAttr = [
 	"truespeed",
 ];
 
-function attachAttr(elems, arg) {
-	if (elems && arg) {
+const eventdb = {
+	db: {},
+	create: (fn) => {
+		let id = UUID("fn_xxxxxxxxxxxxxxx");
+		eventdb[id] = fn;
+		return id;
+	},
+	call: (id) => eventdb[id],
+	remove: (sender) => {
+		sender.getAttributeNames().forEach((name) => {
+			if (name.startsWith("cl.event.")) {
+				delete eventdb[sender.getAttribute(name)];
+			}
+		});
+	},
+};
+
+function setupEventListener(name, elem, fn) {
+	if (elem.detachEventListener === undefined) {
+		elem.detachEventListener = {};
+	}
+	elem.detachEventListener[name] = fn;
+}
+
+function deleteEventListener(name, elem, fn) {
+	if (DEBUG) console.log(`Remove event ${name} from ${elemInfo(elem)}`);
+	elem.detachEventListener[name] = null;
+	delete elem.detachEventListener[name];
+	fn();
+}
+
+function attachAttr(elem, arg) {
+	if (elem && arg) {
 		Object.keys(arg).forEach((i) => {
 			if (i !== "tag" && i !== "elem" && (arg[i] || arg[i] === "") && arg[i] !== null) {
 				if (i === "class") {
 					if (Array.isArray(arg[i])) {
 						let k = combineArray(Array.from(new Set(arg[i])), " ");
-						if (k) elems.classList = k;
+						if (k) elem.classList = k;
 					} else {
-						elems.classList = arg[i];
+						elem.classList = arg[i];
 					}
 				} else if (i === "style") {
 					Object.keys(arg[i]).forEach((j) => {
 						if (arg[i][j] !== null && arg[i][j] !== undefined) {
-							elems.style.setProperty(j, arg[i][j]);
+							elem.style.setProperty(j, arg[i][j]);
 						}
 					});
 				} else if (booleanAttr.includes(i) && arg[i] && arg[i] !== undefined) {
-					elems[i] = true;
+					elem[i] = true;
 				} else {
 					if (arg[i] instanceof Function && arg[i] !== undefined) {
-						if (DEBUG) console.log(`Attach ${i} to ${elemInfo(elems)}`);
-						//console.warn(`Element ${elemInfo(elems)} has ${i} function`);
-						elems.addEventListener(i.startsWith("on") ? i.substring(2) : i, arg[i], false);
+						switch (true) {
+							case i === "show.bs.tooltip":
+							case i === "shown.bs.tooltip":
+							case i === "hide.bs.tooltip":
+							case i === "hidden.bs.tooltip":
+							case i === "inserted.bs.tooltip":
+							case i === "show.bs.popover":
+							case i === "shown.bs.popover":
+							case i === "hide.bs.popover":
+							case i === "hidden.bs.popover":
+							case i === "inserted.bs.popover":
+								if (DEBUG) console.log(`Attach ${i} to ${elemInfo(elem)}`);
+								let eventname = i.startsWith("on") ? i.substring(2) : i;
+								elem.setAttribute(`cl.event.${eventname}`, eventdb.create(arg[i])); //save fn to db
 
-						//create function to remove EventListener
-						elems.detachEventListener = (sender) => {
-							if (DEBUG) console.log(`Remove ${i} from ${elemInfo(sender)}`);
-							sender.removeEventListener(i.startsWith("on") ? i.substring(2) : i, arg[i], false);
-							sender.detachEventListener = null;
-							delete sender.detachEventListener;
-						};
+								setupEventListener(i, elem, () => {
+									deleteEventListener(i, elem, () => {
+										eventdb.remove(elem);
+									});
+								});
+
+								break;
+							default:
+								if (DEBUG) console.log(`Attach ${i} to ${elemInfo(elem)}`);
+								elem.addEventListener(i.startsWith("on") ? i.substring(2) : i, arg[i], false);
+
+								setupEventListener(i, elem, () => {
+									deleteEventListener(i, elem, () => {
+										elem.removeEventListener(
+											i.startsWith("on") ? i.substring(2) : i,
+											arg[i],
+											false
+										);
+									});
+								});
+						}
 					} else if (arg[i] !== undefined) {
-						elems.setAttribute(i, arg[i]);
+						elem.setAttribute(i, arg[i]);
 					}
 				}
 			}
 		});
 	}
 
-	return elems;
+	return elem;
 }
 
 function build(container, arg) {
@@ -1244,14 +1300,18 @@ export function detachEventListener(elem) {
 		if (c?.length > 0) {
 			c.forEach((item) => {
 				detachEventListener(item);
-				if (item.detachEventListener instanceof Function) {
-					item.detachEventListener(item);
+
+				if (item.detachEventListener) {
+					Object.keys(item.detachEventListener).forEach((i) => {
+						item.detachEventListener[i]();
+					});
 				}
 			});
 		}
-
-		if (elem.detachEventListener instanceof Function) {
-			elem.detachEventListener(elem);
+		if (elem.detachEventListener) {
+			Object.keys(elem.detachEventListener).forEach((i) => {
+				elem.detachEventListener[i]();
+			});
 		}
 	}
 }
@@ -1338,17 +1398,39 @@ export function html(data) {
 	return html;
 }
 
+function attacheventdb(elem, eventname) {
+	let eventID = elem.getAttribute(`cl.event.${eventname}`);
+	if (eventID) {
+		let fn = (event) => {
+			eventdb.call(eventID)(event);
+		};
+
+		if (DEBUG) console.log(`Attach ${i} to ${elemInfo(elem)}`);
+		elem.addEventListener(eventname, fn, false);
+
+		setupEventListener(eventname, elem, () => {
+			deleteEventListener(eventname, elem, () => {
+				elem.removeEventListener(eventname, fn, false);
+			});
+		});
+	}
+}
+
 export function init(container) {
 	let popoverTriggerList = [].slice.call(container.querySelectorAll('[data-bs-toggle="popover"]'));
 	popoverTriggerList.map((popoverTriggerEl) => {
 		let elem = new bootstrap.Popover(popoverTriggerEl);
 
-		popoverTriggerEl.detachEventListener = (sender) => {
-			if (DEBUG) console.log(`Remove popover from ${elemInfo(sender)}`);
-			bootstrap.Popover.getInstance(sender)?.dispose();
-			sender.detachEventListener = null;
-			delete sender.detachEventListener;
-		};
+		attacheventdb(popoverTriggerEl, "show.bs.popover");
+		attacheventdb(popoverTriggerEl, "shown.bs.popover");
+		attacheventdb(popoverTriggerEl, "hidden.bs.popover");
+		attacheventdb(popoverTriggerEl, "inserted.bs.popover");
+
+		setupEventListener("init", popoverTriggerEl, () => {
+			deleteEventListener("init", popoverTriggerEl, () => {
+				bootstrap.Popover.getInstance(popoverTriggerEl)?.dispose();
+			});
+		});
 
 		return elem;
 	});
@@ -1357,12 +1439,16 @@ export function init(container) {
 	tooltipTriggerList.map((tooltipTriggerEl) => {
 		let elem = new bootstrap.Tooltip(tooltipTriggerEl);
 
-		tooltipTriggerEl.detachEventListener = (sender) => {
-			if (DEBUG) console.log(`Remove tooltip from ${elemInfo(sender)}`);
-			bootstrap.Tooltip.getInstance(sender)?.dispose();
-			sender.detachEventListener = null;
-			delete sender.detachEventListener;
-		};
+		attacheventdb(tooltipTriggerEl, "show.bs.tooltip");
+		attacheventdb(tooltipTriggerEl, "shown.bs.tooltip");
+		attacheventdb(tooltipTriggerEl, "hidden.bs.tooltip");
+		attacheventdb(tooltipTriggerEl, "inserted.bs.tooltip");
+
+		setupEventListener("init", tooltipTriggerEl, () => {
+			deleteEventListener("init", tooltipTriggerEl, () => {
+				bootstrap.Tooltip.getInstance(tooltipTriggerEl)?.dispose();
+			});
+		});
 
 		return elem;
 	});
