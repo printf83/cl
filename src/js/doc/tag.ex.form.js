@@ -5,7 +5,7 @@ import ul from "../base/ul.js";
 import button from "../base/button.js";
 import toast from "../base/toast.js";
 import input from "../base/input.js";
-import * as container from "../base/container.js";
+import div from "../base/div.js";
 
 export default [
 	{
@@ -64,6 +64,9 @@ export default [
 		code: () => {
 			return new form({
 				//marker
+				row: true,
+				gap: 3,
+				novalidate: true,
 				onsubmit: (event) => {
 					let sender = event.currentTarget;
 					event.preventDefault();
@@ -78,8 +81,9 @@ export default [
 				},
 				//-
 
-				elem: new container.vstack([
+				elem: [
 					new input({
+						size: 12,
 						label: "Email",
 						type: "email",
 						autocomplete: "email",
@@ -89,6 +93,7 @@ export default [
 						valid: "Looks good.",
 					}),
 					new input({
+						size: 12,
 						label: "Password",
 						type: "password",
 						autocomplete: "current-password",
@@ -98,8 +103,16 @@ export default [
 						valid: "Looks good.",
 					}),
 
-					new button({ type: "submit", label: "Submit", color: "primary" }),
-				]),
+					new div({
+						col: 12,
+						elem: new button({
+							col: true,
+							type: "submit",
+							label: "Submit",
+							color: "primary",
+						}),
+					}),
+				],
 			});
 		},
 	},

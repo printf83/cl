@@ -2,7 +2,7 @@
 import * as core from "./core.js";
 import tag from "./tag.js";
 
-const defaultOption = { tag: "form", onsubmit: null, novalidate: null };
+const defaultOption = { tag: "form", onsubmit: null, novalidate: null, gap: 3, row: true };
 /**
  * opt : {tagoption}
  */
@@ -19,9 +19,10 @@ export default class form extends tag {
 
 		opt.attr = core.merge.attr(opt.attr, {
 			onsubmit: opt.onsubmit,
-			novalidate: opt.novalidate,
+			noValidate: opt.novalidate, //warning:only noValidate with V uppercase is working
 		});
 
+		delete opt.novalidate;
 		delete opt.onsubmit;
 
 		super.data = opt;

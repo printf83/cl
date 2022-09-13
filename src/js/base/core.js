@@ -1104,6 +1104,8 @@ const booleanAttr = [
 	"defer",
 	"disabled",
 	"formnovalidate",
+	"novalidate",
+	"noValidate",
 	"hidden",
 	"ismap",
 	"itemscope",
@@ -1111,7 +1113,6 @@ const booleanAttr = [
 	"multiple",
 	"muted",
 	"nomodule",
-	"novalidate",
 	"open",
 	"playsinline",
 	"readOnly",
@@ -1171,6 +1172,10 @@ function attachAttr(elem, arg) {
 					});
 				} else if (booleanAttr.includes(i) && arg[i] && arg[i] !== undefined) {
 					elem[i] = true;
+					if (elem[i] !== true) {
+						console.warn(`Attribute ${i} is not boolean attribute`);
+						elem[i] = i;
+					}
 				} else {
 					if (arg[i] instanceof Function && arg[i] !== undefined) {
 						switch (true) {
