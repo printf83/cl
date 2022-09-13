@@ -9,6 +9,9 @@ import * as core from "../base/core.js";
 import toast from "../base/toast.js";
 import * as table from "../base/table.js";
 import pill from "../base/pill.js";
+import small from "../base/small.js";
+import * as alert from "../base/alert.js";
+import tag from "../base/tag.js";
 
 export default [
 	{
@@ -139,55 +142,101 @@ export default [
 
 	{
 		title: "Weight",
-		msg: [new pill({ icon: "!!", marginbottom: 3, label: "Broken component" })],
+		msg: [
+			"Warning! Offcanvas only hide when screen reach {{xxl}}, {{xl}}, {{lg}}, {{md}} or {{sm}} view size",
+			new pill({ icon: "!!", marginbottom: 3, label: "Unsuspecting behavior" }),
+		],
 		container: sample.stackcontainer,
 		import: ["button", "offcanvas", "div", "p", "dropdown"],
 		code: () => {
-			return [null, "xxl", "xl", "lg", "md", "sm"].map(
-				(i) =>
-					new button({
-						label: `Show${i ? " " + i : ""} offcanvas`,
-						display: i ? `${i}-none` : null, //marker
-						color: i !== null ? "warning" : "primary",
-						badge:
-							i !== null
-								? {
-										border: "body",
-										color: "danger",
-										notification: true,
-										asst: "Broken",
-								  }
-								: null,
-						onclick: () => {
-							new offcanvas({
-								//marker
-								weight: i,
+			return [null, "xxl", "xl", "lg", "md", "sm"]
+				.map(
+					(i) =>
+						new button({
+							label: i ? `Offcanvas hide on ${i} screen` : "Normal offcanvas",
+							display: i ? `${i}-none` : null, //marker
+							color: i !== null ? "warning" : "primary",
+							badge:
+								i !== null
+									? {
+											border: "body",
+											color: "danger",
+											notification: true,
+											asst: "Broken",
+									  }
+									: null,
+							onclick: () => {
+								new offcanvas({
+									//marker
+									weight: i,
 
-								close: true,
-								backdrop: true,
-								color: "light",
-								elem: new div({
-									elem: [
-										new p({
-											elem: "Some text as placeholder. In real life you can have the elements you have chosen. Like, text, images, lists, etc.",
-										}),
-										new dropdown({
-											label: "Drowdown button",
-											color: "secondary",
-											option: [
-												{ href: "#", label: "Action" },
-												{ href: "#", label: "Another action" },
-												{ href: "#", label: "Something else here" },
-												{ value: "-" },
-												{ href: "#", label: "Separated link" },
-											],
-										}),
-									],
-								}),
-							}).show();
-						},
+									// close: false, //close not working
+									// backdrop: false, //close not working
+
+									color: "light",
+									elem: new div({
+										elem: [
+											new p({
+												elem: [
+													i
+														? new p(
+																new pill({
+																	icon: "eye",
+																	title: "Viewport",
+																	color: "primary",
+																	elem: [
+																		new small("d-inline d-sm-none", "XS"),
+																		new small("d-none d-sm-inline d-md-none", "SM"),
+																		new small("d-none d-md-inline d-lg-none", "MD"),
+																		new small("d-none d-lg-inline d-xl-none", "LG"),
+																		new small(
+																			"d-none d-xl-inline d-xxl-none",
+																			"XL"
+																		),
+																		new small("d-none d-xxl-inline", "XXL"),
+																	],
+																})
+														  )
+														: null,
+
+													i
+														? new p(
+																`This offcanvas only hide when your screen reach <code>${i}</code> size. If you can't close this offcanvas, please resize or refresh your browser.`
+														  )
+														: null,
+													new p(
+														"Some text as placeholder. In real life you can have the elements you have chosen. Like, text, images, lists, etc."
+													),
+												].filter(Boolean),
+											}),
+											new dropdown({
+												label: "Drowdown button",
+												color: "secondary",
+												option: [
+													{ href: "#", label: "Action" },
+													{ href: "#", label: "Another action" },
+													{ href: "#", label: "Something else here" },
+													{ value: "-" },
+													{ href: "#", label: "Separated link" },
+												],
+											}),
+										],
+									}),
+								}).show();
+							},
+						})
+				)
+				.concat(
+					new tag({
+						col: 12,
+						elem: new alert.container({
+							icon: "i",
+							marginbottom: 0,
+							display: ["none", "xxl-block"],
+							elem: "Resize your screen size to smaller size to view other offcanvas option.",
+						}),
 					})
-			);
+				);
 		},
 	},
 

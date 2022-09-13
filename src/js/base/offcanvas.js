@@ -54,6 +54,12 @@ export default class offcanvas extends div {
 				opt.title = core.setting.title();
 			}
 
+			//remove background and close button if weight is set
+			if (opt.weight) {
+				opt.close = false;
+				opt.backdrop = false;
+			}
+
 			var header = null;
 			if (opt.close || opt.title) {
 				header = new div({
