@@ -1438,8 +1438,8 @@ export function init(container) {
 		attacheventdb(popoverTriggerEl, "hidden.bs.popover");
 		attacheventdb(popoverTriggerEl, "inserted.bs.popover");
 
-		setupEventListenerRemover("init", popoverTriggerEl, () => {
-			deleteEventListener("init", popoverTriggerEl, () => {
+		setupEventListenerRemover("popover", popoverTriggerEl, () => {
+			deleteEventListener("popover", popoverTriggerEl, () => {
 				bootstrap.Popover.getInstance(popoverTriggerEl)?.dispose();
 			});
 		});
@@ -1456,8 +1456,8 @@ export function init(container) {
 		attacheventdb(tooltipTriggerEl, "hidden.bs.tooltip");
 		attacheventdb(tooltipTriggerEl, "inserted.bs.tooltip");
 
-		setupEventListenerRemover("init", tooltipTriggerEl, () => {
-			deleteEventListener("init", tooltipTriggerEl, () => {
+		setupEventListenerRemover("tooltip", tooltipTriggerEl, () => {
+			deleteEventListener("tooltip", tooltipTriggerEl, () => {
 				bootstrap.Tooltip.getInstance(tooltipTriggerEl)?.dispose();
 			});
 		});
