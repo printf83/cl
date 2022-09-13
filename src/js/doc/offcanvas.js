@@ -141,11 +141,8 @@ export default [
 	},
 
 	{
-		title: "Auto hide",
-		msg: [
-			"Warning! Offcanvas only hide when screen reach {{xxl}}, {{xl}}, {{lg}}, {{md}} or {{sm}} view size",
-			new pill({ icon: "!!", marginbottom: 3, label: "Unsuspecting behavior" }),
-		],
+		title: "Auto close",
+		msg: ["Offcanvas only hide when screen reach {{autohide}} setting view size"],
 		container: sample.stackcontainer,
 		import: ["button", "offcanvas", "div", "p", "dropdown"],
 		code: () => {
@@ -155,24 +152,13 @@ export default [
 						new button({
 							label: i ? `Offcanvas hide on ${i} screen` : "Normal offcanvas",
 							display: i ? `${i}-none` : null, //marker
-							color: i !== null ? "warning" : "primary",
-							badge:
-								i !== null
-									? {
-											border: "body",
-											color: "danger",
-											notification: true,
-											asst: "Broken",
-									  }
-									: null,
+							color: "primary",
 							onclick: () => {
 								new offcanvas({
 									//marker
-									autohide: i,
-									// close: false, //close not working
-									// backdrop: false, //close not working
+									autoclose: i,
 
-									color: "light",
+									close: true,
 									elem: new div({
 										elem: [
 											new p({
@@ -200,7 +186,7 @@ export default [
 
 													i
 														? new p(
-																`This offcanvas only hide when your screen reach <code>${i}</code> size. If you can't close this offcanvas, please resize or refresh your browser.`
+																`This offcanvas automaticly close when your screen reach <code>${i}</code> size.`
 														  )
 														: null,
 													new p(

@@ -15,7 +15,7 @@ const defaultOption = {
 	iconafter: false,
 	scroll: true,
 	backdrop: false,
-	autohide: null, // BS5.2
+	autoclose: null, // BS5.2
 	elem: null,
 	color: null,
 
@@ -54,12 +54,6 @@ export default class offcanvas extends div {
 				opt.title = core.setting.title();
 			}
 
-			//remove background and close button if autohide is set
-			if (opt.autohide) {
-				opt.close = false;
-				opt.backdrop = false;
-			}
-
 			var header = null;
 			if (opt.close || opt.title) {
 				header = new div({
@@ -82,6 +76,9 @@ export default class offcanvas extends div {
 							? new btnclose({
 									class: "text-reset",
 									dismiss: "offcanvas",
+									attr: {
+										"data-bs-target": opt.autoclose ? `#${opt.id}` : null,
+									},
 									// dark: opt.color ? opt.color : "body-bg",
 							  })
 							: null,
@@ -97,7 +94,7 @@ export default class offcanvas extends div {
 
 			opt.class = core.merge.class(opt.class, [
 				opt.placement ? `offcanvas-${opt.placement}` : "offcanvas-start",
-				opt.autohide ? `offcanvas-${opt.autohide}` : "offcanvas",
+				opt.autoclose ? `offcanvas-${opt.autoclose}` : "offcanvas",
 			]);
 
 			opt.attr = core.merge.attr(opt.attr, {
