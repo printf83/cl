@@ -1099,6 +1099,7 @@ const booleanAttr = [
 	"autofocus",
 	"autoplay",
 	"checked",
+	"indeterminate",
 	"controls",
 	"default",
 	"defer",

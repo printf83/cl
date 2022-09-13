@@ -22,6 +22,7 @@ const defaultOption = {
 
 	value: null,
 	checked: false,
+	indeterminate: null,
 	placeholder: null,
 	helper: null,
 	option: null,
@@ -78,9 +79,9 @@ export default class input extends tag {
 			opt = core.extend({}, defaultOption, opt);
 
 			//invalid and valid feedback only work one
-			if (opt.valid && opt.invalid) {
-				opt.valid = null;
-			}
+			// if (opt.valid && opt.invalid) {
+			// 	opt.valid = null;
+			// }
 
 			//floating label required label
 			//disable floatlabel if no label
@@ -271,6 +272,7 @@ export default class input extends tag {
 			delete m.valid;
 			delete m.invalid;
 			delete m.validitytype;
+			delete m.indeterminate;
 
 			delete m.type;
 
@@ -315,6 +317,7 @@ export default class input extends tag {
 					m.attr = core.merge.attr(m.attr, {
 						type: opt.type === "switch" ? "checkbox" : opt.type,
 						"aria-label": opt.hidelabel && opt.label ? opt.label : null,
+						indeterminate: opt.indeterminate && opt.type === "checkbox" ? true : null,
 					});
 					mainctl = new tag(m);
 					break;
@@ -323,17 +326,6 @@ export default class input extends tag {
 					m.class = core.merge.class(m.class, [
 						opt.plaintext && opt.readonly ? "form-control-plaintext" : "form-control",
 						opt.weight && !(opt.before || opt.after) ? `form-control-${opt.weight}` : null,
-
-						// opt.label && opt.floatlabel
-						// 	? core.combineArray(
-						// 			[
-						// 				opt.before || opt.after ? "rounded-0" : null,
-						// 				opt.before ? "rounded-end" : null,
-						// 				opt.after ? "rounded-start" : null,
-						// 			],
-						// 			" "
-						// 	  )
-						// 	: null,
 					]);
 					m.attr = core.merge.attr(m.attr, {
 						"aria-label": opt.hidelabel && opt.label ? opt.label : null,
