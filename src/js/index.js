@@ -430,7 +430,7 @@ function startmemoryleaktest(sender, limit) {
 						},
 						(main_menu, sub_menu, type_menu) => {
 							sender.classList.remove("active");
-							core.init(document.getElementById("root"));
+							// core.init(document.getElementById("root"));
 							PR.prettyPrint();
 							core.codemarker(document);
 							activate_menu(main_menu, sub_menu, type_menu);
@@ -455,6 +455,8 @@ function memoryleaktest(index, limit, progressupdate, callback) {
 		last_main_menu = p.main_menu;
 		last_sub_menu = p.sub_menu;
 		load_page(false, p.main_menu, p.sub_menu, () => {
+			core.init(document.getElementById("root"));
+
 			if (index >= limit) {
 				callback(last_main_menu, last_sub_menu, "menu");
 			} else {
