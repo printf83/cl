@@ -83,7 +83,6 @@ export default [
 
 				elem: [
 					new input({
-						size: 12,
 						label: "Email",
 						type: "email",
 						autocomplete: "email",
@@ -93,7 +92,6 @@ export default [
 						valid: "Looks good.",
 					}),
 					new input({
-						size: 12,
 						label: "Password",
 						type: "password",
 						autocomplete: "current-password",
@@ -103,16 +101,15 @@ export default [
 						valid: "Looks good.",
 					}),
 
-					new div({
-						col: 12,
-						elem: new button({
-							col: true,
-							type: "submit",
-							label: "Submit",
-							color: "primary",
-						}),
+					new button({
+						col: true,
+						type: "submit",
+						label: "Submit",
+						color: "primary",
 					}),
-				],
+				].map((i) => {
+					return new div({ col: true, elem: i });
+				}),
 			});
 		},
 	},

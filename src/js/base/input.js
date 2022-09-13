@@ -197,7 +197,7 @@ export default class input extends tag {
 				: null;
 
 			//helper
-			let helper = opt.helper ? new div({ id: `${opt.id}-helper`, class: "form-text", elem: opt.helper }) : null;
+			let helper = opt.helper ? new div({ id: `${opt.id}_helper`, class: "form-text", elem: opt.helper }) : null;
 
 			//valid msg
 			let validmsg = opt.valid ? new div({ class: `valid-${opt.validitytype}`, elem: opt.valid }) : null;

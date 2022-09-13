@@ -109,8 +109,8 @@ export default class tab extends div {
 									i.active ? "active" : null,
 									i.disabled ? "disabled" : null,
 								],
-								href: `#${i.id}-body`,
-								id: `${i.id}-head`,
+								href: `#${i.id}_body`,
+								id: `${i.id}_head`,
 								attr: {
 									"data-bs-toggle": i.option
 										? "dropdown"
@@ -119,7 +119,7 @@ export default class tab extends div {
 										: opt.type === "pill"
 										? "pill"
 										: "tab",
-									"aria-controls": `${i.id}-body`,
+									"aria-controls": `${i.id}_body`,
 									role: i.option ? "button" : null,
 
 									"show.bs.tab": i.onshow,
@@ -152,10 +152,10 @@ export default class tab extends div {
 					bodyItem.push(
 						new div({
 							class: ["tab-pane", opt.animated ? "fade" : null, i.active ? "active show" : null],
-							id: `${i.id}-body`,
+							id: `${i.id}_body`,
 							attr: {
 								role: "tabpanel",
-								"aria-labelledby": `${i.id}-head`,
+								"aria-labelledby": `${i.id}_head`,
 							},
 							elem: i.elem,
 						})
@@ -187,7 +187,7 @@ export default class tab extends div {
 						? "nav-fill"
 						: null,
 				],
-				id: opt.id ? `${opt.id}-head` : null,
+				id: opt.id ? `${opt.id}_head` : null,
 				attr: {
 					role: "tablist",
 				},
@@ -198,7 +198,7 @@ export default class tab extends div {
 				bodyItem && bodyItem.length > 0
 					? new div({
 							class: "tab-content",
-							id: opt.id ? `${opt.id}-body` : null,
+							id: opt.id ? `${opt.id}_body` : null,
 							elem: bodyItem,
 					  })
 					: null;

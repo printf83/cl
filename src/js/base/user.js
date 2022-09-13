@@ -104,32 +104,28 @@ const fn = {
 	banner: (type, elem) => {
 		if (core.setting.banner && typeof core.setting.banner === "function") {
 			return new div({
-				container: "fluid",
-				padding: 0,
-				elem: new div({
-					row: true,
-					elem: [
-						new div({
-							col: 8,
-							display: ["none", "lg-block"],
-							elem: new div({
-								display: "flex",
-								alignitem: "center",
-								height: 100,
-								elem: core.setting.banner(type),
-							}),
+				row: true,
+				elem: [
+					new div({
+						col: 8,
+						display: ["none", "lg-block"],
+						elem: new div({
+							display: "flex",
+							alignitem: "center",
+							height: 100,
+							elem: core.setting.banner(type),
 						}),
-						new div({
-							col: [12, "lg-4"],
-							elem: new div({
-								display: "flex",
-								alignitem: "center",
-								height: 100,
-								elem: elem,
-							}),
+					}),
+					new div({
+						col: [12, "lg-4"],
+						elem: new div({
+							display: "flex",
+							alignitem: "center",
+							height: 100,
+							elem: elem,
 						}),
-					],
-				}),
+					}),
+				],
 			});
 		} else {
 			return elem;
@@ -156,7 +152,7 @@ const fn = {
 				col: true,
 				display: opt.msg ? "null" : "none",
 				elem: new div({
-					id: `${opt.id}-msg`,
+					id: `${opt.id}_msg`,
 					elem: fn.msg(opt.msg, "i"),
 				}),
 			}),
@@ -172,7 +168,7 @@ const fn = {
 	},
 	showmsg: (container, msg, icon) => {
 		let id = container.getAttribute("id");
-		let msglabel = document.getElementById(`${id}-msg`);
+		let msglabel = document.getElementById(`${id}_msg`);
 		let msgcontainer = msglabel.parentElement;
 
 		core.removeChildElement(msglabel);
@@ -598,59 +594,199 @@ const fn = {
 			return new form({
 				id: id,
 				align: "center",
-				elem: elem,
+				rowcol: 1,
+				elem: elem.map((i) => {
+					return new div({ col: true, elem: i });
+				}),
 			});
 		},
 		signin: (opt) => {
-			return new container.vstack(
-				fn.header("Sign in", opt).concat(
-					[
-						new input({
-							before: new icon("at"),
-							name: "email",
-							type: "email",
-							placeholder: "Email address",
-							required: true,
-							autocomplete: "email",
-							value: opt.email,
-							onchange: fn.action.inputchange,
-						}),
-						new input({
-							before: new icon("key"),
-							name: "password",
-							type: "password",
-							placeholder: "Password",
-							required: true,
-							minlengh: 8,
-							autocomplete: "current-password",
-							onchange: fn.action.inputchange,
+			return fn.header("Sign in", opt).concat(
+				[
+					new input({
+						before: new icon("at"),
+						name: "email",
+						type: "email",
+						placeholder: "Email address",
+						required: true,
+						autocomplete: "email",
+						value: opt.email,
+						onchange: fn.action.inputchange,
+					}),
+					new input({
+						before: new icon("key"),
+						name: "password",
+						type: "password",
+						placeholder: "Password",
+						required: true,
+						minlengh: 8,
+						autocomplete: "current-password",
+						onchange: fn.action.inputchange,
+					}),
+					new div({
+						display: "flex",
+						justifycontent: "center",
+						elem: new input({ type: "checkbox", name: "remember", label: "Remember me" }),
+					}),
+					new container.grid([
+						new button({
+							label: "Sign in",
+							icon: "arrow-right-to-bracket",
+							color: "primary",
+							onclick: !opt.debug
+								? (event) => {
+										fn.action.signin(event.currentTarget, opt);
+								  }
+								: null,
 						}),
 						new div({
 							display: "flex",
-							justifycontent: "center",
-							elem: new input({ type: "checkbox", name: "remember", label: "Remember me" }),
+							justifycontent: "between",
+							elem: [
+								new button({
+									weight: "sm",
+									elem: "Reset password",
+									onclick: (event) => {
+										let sender = event.currentTarget;
+										fn.modalbodybuilder(sender, "resetpass", fn.form.resetpass, opt);
+									},
+								}),
+								new button({
+									weight: "sm",
+									elem: "Sign up",
+									onclick: (event) => {
+										let sender = event.currentTarget;
+										fn.modalbodybuilder(sender, "signup", fn.form.signup, opt);
+									},
+								}),
+							],
 						}),
-						new container.grid([
+					]),
+				].filter(Boolean)
+			);
+		},
+		signup: (opt) => {
+			return fn.header("Sign up", opt).concat(
+				[
+					new input({
+						before: new icon("at"),
+						name: "email",
+						type: "email",
+						placeholder: "Email address",
+						required: true,
+						floatlabel: true,
+						autocomplete: "email",
+						onchange: fn.action.inputchange,
+					}),
+					new input({
+						before: new icon("key"),
+						name: "password",
+						type: "password",
+						placeholder: "Password",
+						required: true,
+						minlengh: 8,
+						autocomplete: "new-password",
+						onchange: fn.action.inputchange,
+					}),
+					new input({
+						before: new icon("key"),
+						name: "password2",
+						type: "password",
+						placeholder: "Repeat password",
+						required: true,
+						minlengh: 8,
+						autocomplete: "new-password",
+						onchange: fn.action.inputchange,
+					}),
+					core.setting.term && typeof core.setting.term === "function"
+						? new div({
+								elem: new small({
+									textcolor: "muted",
+									elem: [
+										"By clicking sign up you are agreeing to the ",
+										new a({
+											href: "javascript:void(0);",
+											onclick: core.setting.term,
+											elem: "Terms and Conditions",
+										}),
+										".",
+									],
+								}),
+						  })
+						: null,
+					new container.grid([
+						new button({
+							label: "Sign up",
+							icon: "arrow-up-from-bracket",
+							color: "primary",
+							onclick: !opt.debug
+								? (event) => {
+										fn.action.signup(event.currentTarget, opt);
+								  }
+								: null,
+						}),
+						new div({
+							display: "flex",
+							justifycontent: "between",
+							elem: [
+								new button({
+									weight: "sm",
+									elem: "Reset password",
+									onclick: (event) => {
+										let sender = event.currentTarget;
+										fn.modalbodybuilder(sender, "resetpass", fn.form.resetpass, opt);
+									},
+								}),
+								new button({
+									weight: "sm",
+									elem: "Sign in",
+									onclick: (event) => {
+										let sender = event.currentTarget;
+										fn.modalbodybuilder(sender, "signin", fn.form.signin, opt);
+									},
+								}),
+							],
+						}),
+					]),
+				].filter(Boolean)
+			);
+		},
+		resetpass: (opt) => {
+			return fn.header("Reset password", opt).concat(
+				[
+					new input({
+						before: new icon("at"),
+						name: "email",
+						type: "email",
+						placeholder: "Email address",
+						required: true,
+						autocomplete: "email",
+						onchange: fn.action.inputchange,
+					}),
+
+					new container.grid(
+						[
 							new button({
-								label: "Sign in",
-								icon: "arrow-right-to-bracket",
+								label: "Send email",
+								icon: "arrow-up-from-bracket",
 								color: "primary",
 								onclick: !opt.debug
 									? (event) => {
-											fn.action.signin(event.currentTarget, opt);
+											fn.action.resetpass(event.currentTarget, opt);
 									  }
 									: null,
 							}),
+
 							new div({
 								display: "flex",
 								justifycontent: "between",
 								elem: [
 									new button({
 										weight: "sm",
-										elem: "Reset password",
+										elem: "Sign in",
 										onclick: (event) => {
 											let sender = event.currentTarget;
-											fn.modalbodybuilder(sender, "resetpass", fn.form.resetpass, opt);
+											fn.modalbodybuilder(sender, "signin", fn.form.signin, opt);
 										},
 									}),
 									new button({
@@ -663,386 +799,237 @@ const fn = {
 									}),
 								],
 							}),
-						]),
-					].filter(Boolean)
-				)
-			);
-		},
-		signup: (opt) => {
-			return new container.vstack(
-				fn.header("Sign up", opt).concat(
-					[
-						new input({
-							before: new icon("at"),
-							name: "email",
-							type: "email",
-							placeholder: "Email address",
-							required: true,
-							floatlabel: true,
-							autocomplete: "email",
-							onchange: fn.action.inputchange,
-						}),
-						new input({
-							before: new icon("key"),
-							name: "password",
-							type: "password",
-							placeholder: "Password",
-							required: true,
-							minlengh: 8,
-							autocomplete: "new-password",
-							onchange: fn.action.inputchange,
-						}),
-						new input({
-							before: new icon("key"),
-							name: "password2",
-							type: "password",
-							placeholder: "Repeat password",
-							required: true,
-							minlengh: 8,
-							autocomplete: "new-password",
-							onchange: fn.action.inputchange,
-						}),
-						core.setting.term && typeof core.setting.term === "function"
-							? new div({
-									elem: new small({
-										textcolor: "muted",
-										elem: [
-											"By clicking sign up you are agreeing to the ",
-											new a({
-												href: "javascript:void(0);",
-												onclick: core.setting.term,
-												elem: "Terms and Conditions",
-											}),
-											".",
-										],
-									}),
-							  })
-							: null,
-						new container.grid([
-							new button({
-								label: "Sign up",
-								icon: "arrow-up-from-bracket",
-								color: "primary",
-								onclick: !opt.debug
-									? (event) => {
-											fn.action.signup(event.currentTarget, opt);
-									  }
-									: null,
-							}),
-							new div({
-								display: "flex",
-								justifycontent: "between",
-								elem: [
-									new button({
-										weight: "sm",
-										elem: "Reset password",
-										onclick: (event) => {
-											let sender = event.currentTarget;
-											fn.modalbodybuilder(sender, "resetpass", fn.form.resetpass, opt);
-										},
-									}),
-									new button({
-										weight: "sm",
-										elem: "Sign in",
-										onclick: (event) => {
-											let sender = event.currentTarget;
-											fn.modalbodybuilder(sender, "signin", fn.form.signin, opt);
-										},
-									}),
-								],
-							}),
-						]),
-					].filter(Boolean)
-				)
-			);
-		},
-		resetpass: (opt) => {
-			return new container.vstack(
-				fn.header("Reset password", opt).concat(
-					[
-						new input({
-							before: new icon("at"),
-							name: "email",
-							type: "email",
-							placeholder: "Email address",
-							required: true,
-							autocomplete: "email",
-							onchange: fn.action.inputchange,
-						}),
-
-						new container.grid(
-							[
-								new button({
-									label: "Send email",
-									icon: "arrow-up-from-bracket",
-									color: "primary",
-									onclick: !opt.debug
-										? (event) => {
-												fn.action.resetpass(event.currentTarget, opt);
-										  }
-										: null,
-								}),
-
-								new div({
-									display: "flex",
-									justifycontent: "between",
-									elem: [
-										new button({
-											weight: "sm",
-											elem: "Sign in",
-											onclick: (event) => {
-												let sender = event.currentTarget;
-												fn.modalbodybuilder(sender, "signin", fn.form.signin, opt);
-											},
-										}),
-										new button({
-											weight: "sm",
-											elem: "Sign up",
-											onclick: (event) => {
-												let sender = event.currentTarget;
-												fn.modalbodybuilder(sender, "signup", fn.form.signup, opt);
-											},
-										}),
-									],
-								}),
-							].filter(Boolean)
-						),
-					].filter(Boolean)
-				)
+						].filter(Boolean)
+					),
+				].filter(Boolean)
 			);
 		},
 		changepass: (opt) => {
-			return new container.vstack(
-				fn.header("Change password", opt).concat(
-					[
-						new input({
-							before: new icon("key"),
-							name: "oldpassword",
-							type: "password",
-							placeholder: "Old password",
-							required: true,
-							minlengh: 8,
-							autocomplete: "current-password",
-							onchange: fn.action.inputchange,
+			return fn.header("Change password", opt).concat(
+				[
+					new input({
+						before: new icon("key"),
+						name: "oldpassword",
+						type: "password",
+						placeholder: "Old password",
+						required: true,
+						minlengh: 8,
+						autocomplete: "current-password",
+						onchange: fn.action.inputchange,
+					}),
+
+					new input({
+						before: new icon("key"),
+						name: "password",
+						type: "password",
+						placeholder: "New password",
+						required: true,
+						minlengh: 8,
+						autocomplete: "new-password",
+						onchange: fn.action.inputchange,
+					}),
+
+					new input({
+						before: new icon("key"),
+						name: "password2",
+						type: "password",
+						placeholder: "Repeat new password",
+						required: true,
+						minlengh: 8,
+						autocomplete: "new-password",
+						onchange: fn.action.inputchange,
+					}),
+
+					new container.grid([
+						new button({
+							label: "Change password",
+							icon: "floppy-disk",
+							color: "primary",
+							onclick: !opt.debug
+								? (event) => {
+										fn.action.changepass(event.currentTarget, opt);
+								  }
+								: null,
 						}),
+						new div({
+							display: "flex",
+							justifycontent: "between",
+							elem: [
+								new button({
+									weight: "sm",
+									elem: "Update profile",
+									onclick: (event) => {
+										let sender = event.currentTarget;
 
-						new input({
-							before: new icon("key"),
-							name: "password",
-							type: "password",
-							placeholder: "New password",
-							required: true,
-							minlengh: 8,
-							autocomplete: "new-password",
-							onchange: fn.action.inputchange,
+										fn.action.info(sender, (result) => {
+											if (result) {
+												opt.data = result;
+												fn.modalbodybuilder(sender, "updateinfo", fn.form.updateinfo, opt);
+											}
+										});
+									},
+								}),
+
+								new button({
+									weight: "sm",
+									elem: "Sign out",
+									onclick: (event) => {
+										let sender = event.currentTarget;
+
+										fn.action.signout(sender, () => {
+											fn.modalbodybuilder(sender, "signin", fn.form.signin, opt);
+										});
+									},
+								}),
+							],
 						}),
-
-						new input({
-							before: new icon("key"),
-							name: "password2",
-							type: "password",
-							placeholder: "Repeat new password",
-							required: true,
-							minlengh: 8,
-							autocomplete: "new-password",
-							onchange: fn.action.inputchange,
-						}),
-
-						new container.grid([
-							new button({
-								label: "Change password",
-								icon: "floppy-disk",
-								color: "primary",
-								onclick: !opt.debug
-									? (event) => {
-											fn.action.changepass(event.currentTarget, opt);
-									  }
-									: null,
-							}),
-							new div({
-								display: "flex",
-								justifycontent: "between",
-								elem: [
-									new button({
-										weight: "sm",
-										elem: "Update profile",
-										onclick: (event) => {
-											let sender = event.currentTarget;
-
-											fn.action.info(sender, (result) => {
-												if (result) {
-													opt.data = result;
-													fn.modalbodybuilder(sender, "updateinfo", fn.form.updateinfo, opt);
-												}
-											});
-										},
-									}),
-
-									new button({
-										weight: "sm",
-										elem: "Sign out",
-										onclick: (event) => {
-											let sender = event.currentTarget;
-
-											fn.action.signout(sender, () => {
-												fn.modalbodybuilder(sender, "signin", fn.form.signin, opt);
-											});
-										},
-									}),
-								],
-							}),
-						]),
-					].filter(Boolean)
-				)
+					]),
+				].filter(Boolean)
 			);
 		},
 		changepass_guest: (opt) => {
-			return new container.vstack(
-				fn.header("Change password", opt).concat(
-					[
-						new tag({
-							col: true,
-							display: "none",
-							elem: new input({
-								name: "token",
-								type: "hidden",
-								value: opt.token,
-							}),
+			return fn.header("Change password", opt).concat(
+				[
+					new tag({
+						col: true,
+						display: "none",
+						elem: new input({
+							name: "token",
+							type: "hidden",
+							value: opt.token,
 						}),
+					}),
 
-						new input({
-							before: new icon("key"),
-							name: "password",
-							type: "password",
-							placeholder: "New password",
-							required: true,
-							minlengh: 8,
-							autocomplete: "new-password",
-							onchange: fn.action.inputchange,
+					new input({
+						before: new icon("key"),
+						name: "password",
+						type: "password",
+						placeholder: "New password",
+						required: true,
+						minlengh: 8,
+						autocomplete: "new-password",
+						onchange: fn.action.inputchange,
+					}),
+
+					new input({
+						before: new icon("key"),
+						name: "password2",
+						type: "password",
+						placeholder: "Repeat new password",
+						required: true,
+						minlengh: 8,
+						autocomplete: "new-password",
+						onchange: fn.action.inputchange,
+					}),
+
+					new container.grid([
+						new button({
+							label: "Change password",
+							icon: "floppy-disk",
+							color: "primary",
+							onclick: !opt.debug
+								? (event) => {
+										fn.action.changepass_guest(event.currentTarget, opt);
+								  }
+								: null,
 						}),
-
-						new input({
-							before: new icon("key"),
-							name: "password2",
-							type: "password",
-							placeholder: "Repeat new password",
-							required: true,
-							minlengh: 8,
-							autocomplete: "new-password",
-							onchange: fn.action.inputchange,
+						new div({
+							display: "flex",
+							justifycontent: "between",
+							elem: [
+								new button({
+									weight: "sm",
+									elem: "Sign in",
+									onclick: (event) => {
+										let sender = event.currentTarget;
+										fn.modalbodybuilder(sender, "signin", fn.form.signin, opt);
+									},
+								}),
+								new button({
+									weight: "sm",
+									elem: "Reset password",
+									onclick: (event) => {
+										let sender = event.currentTarget;
+										fn.modalbodybuilder(sender, "resetpass", fn.form.resetpass, opt);
+									},
+								}),
+							],
 						}),
-
-						new container.grid([
-							new button({
-								label: "Change password",
-								icon: "floppy-disk",
-								color: "primary",
-								onclick: !opt.debug
-									? (event) => {
-											fn.action.changepass_guest(event.currentTarget, opt);
-									  }
-									: null,
-							}),
-							new div({
-								display: "flex",
-								justifycontent: "between",
-								elem: [
-									new button({
-										weight: "sm",
-										elem: "Sign in",
-										onclick: (event) => {
-											let sender = event.currentTarget;
-											fn.modalbodybuilder(sender, "signin", fn.form.signin, opt);
-										},
-									}),
-									new button({
-										weight: "sm",
-										elem: "Reset password",
-										onclick: (event) => {
-											let sender = event.currentTarget;
-											fn.modalbodybuilder(sender, "resetpass", fn.form.resetpass, opt);
-										},
-									}),
-								],
-							}),
-						]),
-					].filter(Boolean)
-				)
+					]),
+				].filter(Boolean)
 			);
 		},
 		updateinfo: (opt) => {
-			return new container.vstack(
-				fn.header("Update info", opt).concat(
-					[
-						new file({
-							name: "picture",
-							value: opt && opt.data ? opt.data.picture : null,
-							uploadlabel: "Upload picture",
-							uploadicon: "user",
-							uploadcolor: "secondary",
-							viewlabel: "View picture",
-							viewicon: "user",
+			return fn.header("Update info", opt).concat(
+				[
+					new file({
+						name: "picture",
+						value: opt && opt.data ? opt.data.picture : null,
+						uploadlabel: "Upload picture",
+						uploadicon: "user",
+						uploadcolor: "secondary",
+						viewlabel: "View picture",
+						viewicon: "user",
+					}),
+
+					new input({
+						before: new icon("envelope"),
+						name: "email",
+						type: "email",
+						placeholder: "Contact email",
+						required: true,
+						autocomplete: "email",
+						value: opt.data?.email,
+						onchange: fn.action.inputchange,
+					}),
+					new input({
+						before: new icon("tag"),
+						name: "name",
+						type: "text",
+						placeholder: "Name",
+						required: true,
+						autocomplete: "username",
+						value: opt.data?.name,
+						onchange: fn.action.inputchange,
+					}),
+
+					new container.grid([
+						new button({
+							label: "Update profile",
+							icon: "arrow-up-from-bracket",
+							color: "primary",
+							onclick: !opt.debug
+								? (event) => {
+										fn.action.updateinfo(event.currentTarget, opt);
+								  }
+								: null,
 						}),
 
-						new input({
-							before: new icon("envelope"),
-							name: "email",
-							type: "email",
-							placeholder: "Contact email",
-							required: true,
-							autocomplete: "email",
-							value: opt.data?.email,
-							onchange: fn.action.inputchange,
+						new div({
+							display: "flex",
+							justifycontent: "between",
+							elem: [
+								new button({
+									weight: "sm",
+									elem: "Change password",
+									onclick: (event) => {
+										let sender = event.currentTarget;
+										fn.modalbodybuilder(sender, "changepass", fn.form.changepass, opt);
+									},
+								}),
+
+								new button({
+									weight: "sm",
+									elem: "Sign out",
+									onclick: (event) => {
+										let sender = event.currentTarget;
+										fn.modalbodybuilder(sender, "signout", fn.form.signout, opt);
+									},
+								}),
+							],
 						}),
-						new input({
-							before: new icon("tag"),
-							name: "name",
-							type: "text",
-							placeholder: "Name",
-							required: true,
-							autocomplete: "username",
-							value: opt.data?.name,
-							onchange: fn.action.inputchange,
-						}),
-
-						new container.grid([
-							new button({
-								label: "Update profile",
-								icon: "arrow-up-from-bracket",
-								color: "primary",
-								onclick: !opt.debug
-									? (event) => {
-											fn.action.updateinfo(event.currentTarget, opt);
-									  }
-									: null,
-							}),
-
-							new div({
-								display: "flex",
-								justifycontent: "between",
-								elem: [
-									new button({
-										weight: "sm",
-										elem: "Change password",
-										onclick: (event) => {
-											let sender = event.currentTarget;
-											fn.modalbodybuilder(sender, "changepass", fn.form.changepass, opt);
-										},
-									}),
-
-									new button({
-										weight: "sm",
-										elem: "Sign out",
-										onclick: (event) => {
-											let sender = event.currentTarget;
-											fn.modalbodybuilder(sender, "signout", fn.form.signout, opt);
-										},
-									}),
-								],
-							}),
-						]),
-					].filter(Boolean)
-				)
+					]),
+				].filter(Boolean)
 			);
 		},
 	},

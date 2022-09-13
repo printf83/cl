@@ -267,14 +267,14 @@ const fn = {
 
 		if (value) {
 			//remove btn upload
-			let btnupload = btngroup.querySelectorAll(`#${id}-upload`)[0];
+			let btnupload = btngroup.querySelectorAll(`#${id}_upload`)[0];
 			core.removeElement(btnupload);
 
 			//add btn view
 			core.appendChild(
 				btngroup,
 				new button({
-					id: `${id}-view`,
+					id: `${id}_view`,
 					label: opt.viewlabel,
 					icon: opt.viewicon,
 					color: opt.viewcolor,
@@ -287,7 +287,7 @@ const fn = {
 			core.appendChild(
 				btngroup,
 				new button({
-					id: `${id}-delete`,
+					id: `${id}_delete`,
 					label: opt.deletelabel,
 					icon: opt.deleteicon,
 					color: opt.deletecolor,
@@ -297,8 +297,8 @@ const fn = {
 				})
 			);
 		} else {
-			let btnview = btngroup.querySelectorAll(`#${id}-view`)[0];
-			let btndelete = btngroup.querySelectorAll(`#${id}-delete`)[0];
+			let btnview = btngroup.querySelectorAll(`#${id}_view`)[0];
+			let btndelete = btngroup.querySelectorAll(`#${id}_delete`)[0];
 
 			core.removeElement(btnview);
 			core.removeElement(btndelete);
@@ -307,7 +307,7 @@ const fn = {
 			core.appendChild(
 				btngroup,
 				new button({
-					id: `${id}-upload`,
+					id: `${id}_upload`,
 					label: opt.uploadlabel,
 					icon: opt.uploadicon,
 					color: opt.uploadcolor,
@@ -485,7 +485,7 @@ export default class file extends div {
 					elem: opt.value
 						? [
 								new button({
-									id: `${id}-view`,
+									id: `${id}_view`,
 									label: opt.viewlabel,
 									icon: opt.viewicon,
 									color: opt.viewcolor,
@@ -493,7 +493,7 @@ export default class file extends div {
 									onclick: fn.onview,
 								}),
 								new button({
-									id: `${id}-delete`,
+									id: `${id}_delete`,
 									label: opt.deletelabel,
 									icon: opt.deleteicon,
 									color: opt.deletecolor,
@@ -504,7 +504,7 @@ export default class file extends div {
 						  ]
 						: [
 								new button({
-									id: `${id}-upload`,
+									id: `${id}_upload`,
 									label: opt.uploadlabel,
 									icon: opt.uploadicon,
 									color: opt.uploadcolor,

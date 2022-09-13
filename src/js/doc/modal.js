@@ -249,7 +249,7 @@ export default [
 		viewclass: "cl-modal-preview",
 		import: ["toast", "dlg", "container", "input", "listgroup"],
 		code: () => {
-			let el = new container.form([
+			let el = [
 				//marker
 				new input({
 					label: "Name",
@@ -337,7 +337,7 @@ export default [
 					],
 				}),
 				//-
-			]);
+			];
 
 			return new dlg.inputbox(
 				el,
@@ -360,7 +360,7 @@ export default [
 		msg: "First agrument can handle type {{[new input()]}}.",
 		import: ["toast", "button", "dlg"],
 		code: () => {
-			let el = new container.form([
+			let el = [
 				//marker
 				new input({
 					label: "Name",
@@ -448,7 +448,7 @@ export default [
 					],
 				}),
 				//-
-			]);
+			];
 
 			return new button({
 				label: "Show inputbox with multiple input",

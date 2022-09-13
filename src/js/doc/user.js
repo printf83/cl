@@ -10,7 +10,7 @@ import btngroup from "../base/btngroup.js";
 import p from "../base/p.js";
 
 const reloadUserDoc = () => {
-	let activeElem = document.getElementsByClassName("active");
+	let activeElem = document.getElementById("sidebar").getElementsByClassName("active");
 	if (activeElem && activeElem.length > 0) {
 		let menuItem = null;
 		for (let i = 0; i < activeElem.length; i++) {
@@ -21,11 +21,9 @@ const reloadUserDoc = () => {
 			) {
 				menuItem = activeElem[i];
 				i = activeElem.length;
-			}
-		}
 
-		if (menuItem) {
-			menuItem.dispatchEvent(new Event("click"));
+				menuItem.dispatchEvent(new Event("click"));
+			}
 		}
 	}
 };

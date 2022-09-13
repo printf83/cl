@@ -85,7 +85,7 @@ export default class accordion extends div {
 								elem: [
 									new h({
 										level: 2,
-										id: `${i.id}-head`,
+										id: `${i.id}_head`,
 										class: "accordion-header",
 										elem: new button({
 											label: i.label,
@@ -95,17 +95,17 @@ export default class accordion extends div {
 											class: ["accordion-button", !i.active ? "collapsed" : null],
 											attr: {
 												"data-bs-toggle": "collapse",
-												"data-bs-target": `#${i.id}-body`,
-												"aria-controls": `${i.id}-body`,
+												"data-bs-target": `#${i.id}_body`,
+												"aria-controls": `${i.id}_body`,
 												"aria-expanded": i.active ? "true" : "false",
 											},
 										}),
 									}),
 									new div({
-										id: `${i.id}-body`,
+										id: `${i.id}_body`,
 										class: ["accordion-collapse", "collapse", i.active ? "show" : null],
 										attr: {
-											"aria-labelledby": `${i.id}-head`,
+											"aria-labelledby": `${i.id}_head`,
 											"data-bs-parent": opt.autoclose ? `#${opt.id}` : null,
 											"show.bs.collapse": i.onshow,
 											"shown.bs.collapse": i.onshown,
