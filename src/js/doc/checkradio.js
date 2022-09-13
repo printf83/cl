@@ -41,6 +41,9 @@ export default [
 			return new input({
 				label: "Indeterminate checkbox",
 				type: "checkbox",
+
+				//marker
+				indeterminate: true,
 			});
 		},
 	},
