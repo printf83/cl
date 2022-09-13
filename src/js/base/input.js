@@ -42,6 +42,7 @@ const defaultOption = {
 	inputmode: null,
 	pattern: null,
 	autocomplete: null,
+	autofocus: null,
 
 	validitytype: "feedback",
 	valid: null,
@@ -260,6 +261,7 @@ export default class input extends tag {
 				checked: m.checked,
 				placeholder: m.placeholder,
 				autocomplete: m.autocomplete,
+				autofocus: m.autofocus,
 
 				disabled: m.disabled,
 				readOnly: m.readonly,
@@ -290,6 +292,7 @@ export default class input extends tag {
 			delete m.inputmode;
 			delete m.pattern;
 			delete m.autocomplete;
+			delete m.autofocus;
 
 			delete m.plaintext;
 

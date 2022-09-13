@@ -33,7 +33,7 @@ export default [
 				flex: "wrap",
 				justifycontent: "center",
 				marginbottom: 4,
-				gap: 1,
+				gap: 2,
 				elem: [
 					new a({
 						textdecoration: "none",

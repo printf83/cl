@@ -7,6 +7,24 @@ import div from "./div.js";
 import btnclose from "./btnclose.js";
 import * as container from "./container.js";
 
+const fnInputOnEnter = (event) => {
+	if (event && event.keyCode === 13) {
+		let sender = event.currentTarget;
+
+		event.preventDefault();
+		event.stopPropagation();
+		// let nextEl = sender.nextElementSibling;
+		let nextEl = sender.closest("div.col")?.nextSibling?.getElementsByTagName("INPUT")[0];
+		if (nextEl && nextEl.nodeName === "INPUT") {
+			nextEl.focus();
+		} else {
+			let mdl = sender.closest("div.modal");
+			let modalId = mdl.getAttribute("id");
+			let firstBtn = document.getElementById(`${modalId}_btn_0`);
+			firstBtn?.dispatchEvent(new Event("click"));
+		}
+	}
+};
 const defaultOption = {
 	attr: null, //combine to container
 
@@ -177,7 +195,7 @@ export default class modal extends div {
 						);
 
 						return new button({
-							id: i.id ? i.id : `${opt.id}-btn-${ix}`,
+							id: i.id ? i.id : `${opt.id}_btn_${ix}`,
 							label: i.label,
 							icon: i.icon,
 							class: core.merge.class(i.class, "btn-modal"),
@@ -374,7 +392,28 @@ export default class modal extends div {
 			}
 
 			//init
-			core.init(event.currentTarget);
+			let sender = event.currentTarget;
+			core.init(sender);
+
+			//focus first elem
+			let all_input = [].slice.call(sender.getElementsByTagName("INPUT"), 0);
+			let first_input = all_input ? all_input[0] : null;
+			if (first_input) {
+				first_input.focus();
+
+				//gotrue all input and add enter key
+				all_input.forEach((elem) => {
+					//add keydown event
+					elem.addEventListener("keydown", fnInputOnEnter);
+
+					//remove event
+					core.setupEventListenerRemover("keydown", elem, () => {
+						core.deleteEventListener("keydown", elem, () => {
+							elem.removeEventListener("keydown", fnInputOnEnter, false);
+						});
+					});
+				});
+			}
 		});
 
 		//set destroy after hide

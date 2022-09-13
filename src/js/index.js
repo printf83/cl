@@ -21,11 +21,9 @@ import span from "./base/span.js";
 import p from "./base/p.js";
 import h from "./base/h.js";
 
-const DEBUG = false;
-
 let def_main_menu = "Getting started";
 let def_sub_menu = "Introduction";
-let def_theme = null;
+let DEBUG = false;
 
 const db_menu = [
 	{
@@ -326,7 +324,6 @@ function randomtheme(callback) {
 		cur_theme = null;
 	}
 
-	def_theme = cur_theme;
 	set_theme(cur_theme);
 }
 
@@ -820,12 +817,19 @@ function get_url_param() {
 
 	let main_menu = p.get("m1");
 	let sub_menu = p.get("m2");
+	let debug = p.get("debug");
+
 	return main_menu && sub_menu
 		? {
 				main_menu: decodeURIComponent(main_menu),
 				sub_menu: decodeURIComponent(sub_menu),
+				debug: debug ? true : false,
 		  }
-		: null;
+		: {
+				main_menu: null,
+				sub_menu: null,
+				debug: debug ? true : false,
+		  };
 }
 
 function alpha_only(str) {
@@ -944,18 +948,15 @@ function gen_menu() {
 	});
 }
 
-function cl_event_handler(event) {
-	core.eventhandler(event);
-}
-
 core.documentReady(() => {
 	let url_param = get_url_param();
-	if (url_param && url_param.main_menu !== "undefined" && url_param.sub_menu !== "undefined") {
+	if (url_param && url_param.main_menu && url_param.sub_menu) {
 		def_main_menu = url_param.main_menu;
 		def_sub_menu = url_param.sub_menu;
 	}
 
-	def_theme = core.setting.theme;
+	DEBUG = url_param.debug;
+	core.setting.DEBUG = DEBUG;
 
 	core.replaceWith(
 		document.getElementById("main"),

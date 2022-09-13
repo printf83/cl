@@ -19,6 +19,7 @@ const defaultItemOption = {
 	iconafter: false,
 	active: false,
 	item: null,
+
 	onshow: null,
 	onshown: null,
 	onhide: null,

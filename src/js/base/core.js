@@ -1,7 +1,5 @@
 "use strict";
 
-const DEBUG = false;
-
 export function combineArray(arr, delimeter) {
 	return removeEmptyArray(arr)?.join(delimeter);
 }
@@ -152,13 +150,13 @@ export const isdarkcolor = (color) => {
 
 		// from : https://stackoverflow.com/questions/12043187/how-to-check-if-hex-color-is-too-black
 		var luma = 0.2126 * r + 0.7152 * g + 0.0722 * b;
-		if (DEBUG) console.log(`Color ${scolor} luma is ${luma}`);
+		if (setting.DEBUG) console.log(`Color ${scolor} luma is ${luma}`);
 
 		if (luma < 48) {
-			if (DEBUG) console.log(`Color ${scolor} is dark`);
+			if (setting.DEBUG) console.log(`Color ${scolor} is dark`);
 			return true;
 		} else {
-			if (DEBUG) console.log(`Color ${scolor} is light`);
+			if (setting.DEBUG) console.log(`Color ${scolor} is light`);
 			return false;
 		}
 	} else {
@@ -220,9 +218,16 @@ const _setting = {
 	term: null,
 	banner: null,
 	themechange: null,
+	debug: false,
 };
 
 export const setting = {
+	get DEBUG() {
+		return _setting.debug;
+	},
+	set DEBUG(value) {
+		_setting.debug = value;
+	},
 	get icon() {
 		if (_setting.icon) {
 			return _setting.icon;
@@ -1140,15 +1145,17 @@ const eventdb = {
 	},
 };
 
-function setupEventListener(name, elem, fn) {
+export function setupEventListenerRemover(name, elem, fn) {
 	if (elem.detachEventListener === undefined) {
 		elem.detachEventListener = {};
 	}
 	elem.detachEventListener[name] = fn;
+
+	if (setting.DEBUG) console.log(`Attach ${name} to ${elemInfo(elem)}`);
 }
 
-function deleteEventListener(name, elem, fn) {
-	if (DEBUG) console.log(`Remove event ${name} from ${elemInfo(elem)}`);
+export function deleteEventListener(name, elem, fn) {
+	if (setting.DEBUG) console.log(`Remove event ${name} from ${elemInfo(elem)}`);
 	elem.detachEventListener[name] = null;
 	delete elem.detachEventListener[name];
 	fn();
@@ -1178,45 +1185,45 @@ function attachAttr(elem, arg) {
 						elem[i] = i;
 					}
 				} else {
-					if (arg[i] instanceof Function && arg[i] !== undefined) {
-						switch (true) {
-							case i === "show.bs.tooltip":
-							case i === "shown.bs.tooltip":
-							case i === "hide.bs.tooltip":
-							case i === "hidden.bs.tooltip":
-							case i === "inserted.bs.tooltip":
-							case i === "show.bs.popover":
-							case i === "shown.bs.popover":
-							case i === "hide.bs.popover":
-							case i === "hidden.bs.popover":
-							case i === "inserted.bs.popover":
-								if (DEBUG) console.log(`Attach ${i} to ${elemInfo(elem)}`);
-								let eventname = i.startsWith("on") ? i.substring(2) : i;
-								elem.setAttribute(`cl.event.${eventname}`, eventdb.create(arg[i])); //save fn to db
+					if (arg[i] !== undefined && arg[i] !== null) {
+						if (arg[i] instanceof Function) {
+							switch (true) {
+								case i === "show.bs.tooltip":
+								case i === "shown.bs.tooltip":
+								case i === "hide.bs.tooltip":
+								case i === "hidden.bs.tooltip":
+								case i === "inserted.bs.tooltip":
+								case i === "show.bs.popover":
+								case i === "shown.bs.popover":
+								case i === "hide.bs.popover":
+								case i === "hidden.bs.popover":
+								case i === "inserted.bs.popover":
+									let eventname = i.startsWith("on") ? i.substring(2) : i;
+									elem.setAttribute(`cl.event.${eventname}`, eventdb.create(arg[i])); //save fn to db
 
-								setupEventListener(i, elem, () => {
-									deleteEventListener(i, elem, () => {
-										eventdb.remove(elem);
+									setupEventListenerRemover(i, elem, () => {
+										deleteEventListener(i, elem, () => {
+											eventdb.remove(elem);
+										});
 									});
-								});
 
-								break;
-							default:
-								if (DEBUG) console.log(`Attach ${i} to ${elemInfo(elem)}`);
-								elem.addEventListener(i.startsWith("on") ? i.substring(2) : i, arg[i], false);
+									break;
+								default:
+									elem.addEventListener(i.startsWith("on") ? i.substring(2) : i, arg[i], false);
 
-								setupEventListener(i, elem, () => {
-									deleteEventListener(i, elem, () => {
-										elem.removeEventListener(
-											i.startsWith("on") ? i.substring(2) : i,
-											arg[i],
-											false
-										);
+									setupEventListenerRemover(i, elem, () => {
+										deleteEventListener(i, elem, () => {
+											elem.removeEventListener(
+												i.startsWith("on") ? i.substring(2) : i,
+												arg[i],
+												false
+											);
+										});
 									});
-								});
+							}
+						} else {
+							elem.setAttribute(i, arg[i]);
 						}
-					} else if (arg[i] !== undefined) {
-						elem.setAttribute(i, arg[i]);
 					}
 				}
 			}
@@ -1335,7 +1342,7 @@ export function removeElement(elem) {
 }
 
 export function appendChild(container, data) {
-	if (DEBUG) console.time("appendChild");
+	if (setting.DEBUG) console.time("appendChild");
 	let n = node(data);
 	if (Node.prototype.isPrototypeOf(n)) {
 		container.appendChild(n);
@@ -1344,12 +1351,12 @@ export function appendChild(container, data) {
 			container.appendChild(i);
 		});
 	}
-	if (DEBUG) console.timeEnd("appendChild");
+	if (setting.DEBUG) console.timeEnd("appendChild");
 	return container.lastChild;
 }
 
 export function prependChild(container, data) {
-	if (DEBUG) console.time("prependChild");
+	if (setting.DEBUG) console.time("prependChild");
 	let n = node(data);
 	if (Node.prototype.isPrototypeOf(n)) {
 		container.insertBefore(n, container.firstChild);
@@ -1358,12 +1365,12 @@ export function prependChild(container, data) {
 			container.insertBefore(i, container.firstChild);
 		});
 	}
-	if (DEBUG) console.timeEnd("prependChild");
+	if (setting.DEBUG) console.timeEnd("prependChild");
 	return container.firstChild;
 }
 
 export function replaceWith(elem, data) {
-	if (DEBUG) console.time("replaceWith");
+	if (setting.DEBUG) console.time("replaceWith");
 	removeChildElement(elem);
 
 	let r = null;
@@ -1379,16 +1386,16 @@ export function replaceWith(elem, data) {
 
 	removeElement(elem);
 
-	if (DEBUG) console.timeEnd("replaceWith");
+	if (setting.DEBUG) console.timeEnd("replaceWith");
 	return r;
 }
 
 export function replaceChild(container, data) {
-	if (DEBUG) console.time("replaceChild");
+	if (setting.DEBUG) console.time("replaceChild");
 	removeChildElement(container);
 
 	build(container, data);
-	if (DEBUG) console.timeEnd("replaceChild");
+	if (setting.DEBUG) console.timeEnd("replaceChild");
 	return container.childNodes;
 }
 
@@ -1411,10 +1418,9 @@ function attacheventdb(elem, eventname) {
 			eventdb.call(eventID)(event);
 		};
 
-		if (DEBUG) console.log(`Attach ${i} to ${elemInfo(elem)}`);
 		elem.addEventListener(eventname, fn, false);
 
-		setupEventListener(eventname, elem, () => {
+		setupEventListenerRemover(eventname, elem, () => {
 			deleteEventListener(eventname, elem, () => {
 				elem.removeEventListener(eventname, fn, false);
 			});
@@ -1432,7 +1438,7 @@ export function init(container) {
 		attacheventdb(popoverTriggerEl, "hidden.bs.popover");
 		attacheventdb(popoverTriggerEl, "inserted.bs.popover");
 
-		setupEventListener("init", popoverTriggerEl, () => {
+		setupEventListenerRemover("init", popoverTriggerEl, () => {
 			deleteEventListener("init", popoverTriggerEl, () => {
 				bootstrap.Popover.getInstance(popoverTriggerEl)?.dispose();
 			});
@@ -1450,7 +1456,7 @@ export function init(container) {
 		attacheventdb(tooltipTriggerEl, "hidden.bs.tooltip");
 		attacheventdb(tooltipTriggerEl, "inserted.bs.tooltip");
 
-		setupEventListener("init", tooltipTriggerEl, () => {
+		setupEventListenerRemover("init", tooltipTriggerEl, () => {
 			deleteEventListener("init", tooltipTriggerEl, () => {
 				bootstrap.Tooltip.getInstance(tooltipTriggerEl)?.dispose();
 			});

@@ -15,6 +15,7 @@ const defaultOption = {
 
 	toggle: false,
 	checked: false,
+	autofocus: null,
 
 	color: null,
 	weight: null,
@@ -90,6 +91,7 @@ export default class button extends tag {
 				type: opt.href || opt.type === "checkbox" || opt.type === "radio" ? null : opt.type,
 				"data-bs-toggle": opt.toggle ? "button" : null,
 				autocomplete: opt.toggle ? "off" : null,
+				autofocus: opt.autofocus,
 				"aria-pressed": opt.toggle && opt.active ? "true" : null,
 				"aria-label": opt.hidelabel && opt.label ? opt.label : null,
 				"aria-disabled": opt.href && opt.disabled ? "true" : null,

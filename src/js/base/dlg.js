@@ -263,7 +263,11 @@ function elemBuilder(elem) {
 	return new container.form(
 		argElem.map((i, ix) => {
 			return typeof i === "string"
-				? new input({ type: i, required: true, name: ix === 0 ? "value" : `value_${ix}` })
+				? new input({
+						type: i,
+						required: true,
+						name: ix === 0 ? "value" : `value_${ix}`,
+				  })
 				: i;
 		})
 	);
