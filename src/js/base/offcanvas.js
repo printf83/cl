@@ -15,7 +15,7 @@ const defaultOption = {
 	iconafter: false,
 	scroll: true,
 	backdrop: false,
-	weight: null, // BS5.2
+	autohide: null, // BS5.2
 	elem: null,
 	color: null,
 
@@ -54,8 +54,8 @@ export default class offcanvas extends div {
 				opt.title = core.setting.title();
 			}
 
-			//remove background and close button if weight is set
-			if (opt.weight) {
+			//remove background and close button if autohide is set
+			if (opt.autohide) {
 				opt.close = false;
 				opt.backdrop = false;
 			}
@@ -97,7 +97,7 @@ export default class offcanvas extends div {
 
 			opt.class = core.merge.class(opt.class, [
 				opt.placement ? `offcanvas-${opt.placement}` : "offcanvas-start",
-				opt.weight ? `offcanvas-${opt.weight}` : "offcanvas",
+				opt.autohide ? `offcanvas-${opt.autohide}` : "offcanvas",
 			]);
 
 			opt.attr = core.merge.attr(opt.attr, {

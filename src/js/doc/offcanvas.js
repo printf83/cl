@@ -141,7 +141,7 @@ export default [
 	},
 
 	{
-		title: "Weight",
+		title: "Auto hide",
 		msg: [
 			"Warning! Offcanvas only hide when screen reach {{xxl}}, {{xl}}, {{lg}}, {{md}} or {{sm}} view size",
 			new pill({ icon: "!!", marginbottom: 3, label: "Unsuspecting behavior" }),
@@ -168,8 +168,7 @@ export default [
 							onclick: () => {
 								new offcanvas({
 									//marker
-									weight: i,
-
+									autohide: i,
 									// close: false, //close not working
 									// backdrop: false, //close not working
 
