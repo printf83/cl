@@ -148,7 +148,16 @@ export default [
 					new button({
 						label: `Show${i ? " " + i : ""} offcanvas`,
 						display: i ? `${i}-none` : null, //marker
-						color: "primary",
+						color: i !== null ? "warning" : "primary",
+						badge:
+							i !== null
+								? {
+										border: "body",
+										color: "danger",
+										notification: true,
+										asst: "Broken",
+								  }
+								: null,
 						onclick: () => {
 							new offcanvas({
 								//marker

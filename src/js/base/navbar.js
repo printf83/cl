@@ -162,6 +162,8 @@ export class toggle extends collapse.toggle {
 
 const defaultFormContainerOption = {
 	display: "flex",
+	row: false,
+	rowcol: null,
 };
 export class formcontainer extends form {
 	constructor(...opt) {
