@@ -108,7 +108,7 @@ const db_menu = [
 	},
 	{
 		type: "menu",
-		title: "Base Tag",
+		title: "Tag component",
 		icon: { icon: "tag", color: "success" },
 		item: [
 			{ title: "Basic", source: doc.tag_base },
