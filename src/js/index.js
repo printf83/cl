@@ -359,7 +359,7 @@ function start_memoryleaktest(sender, limit) {
 			"!!",
 			`
 			Are you sure to start <b>Memory Leak Test</b>?<br/><br/>
-			This test use by developer to check memory leak on this framework by open every page one by one for <b>${limit}</b> times. This test may make your device laggy.<br/><br/>
+			This test use by developer to check memory leak on this framework by open <b>${limit}</b> random page. This test may make your device laggy.<br/><br/>
 			If you want to stop the test, please click on this <b>Memory Leak Test</b> again to stop the test.`,
 			{
 				label: "Understand",
