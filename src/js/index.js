@@ -186,25 +186,25 @@ const db_menu = [
 			{
 				title: "Memory Test 10",
 				source: (sender) => {
-					startmemoryleaktest(sender, 10);
+					start_memoryleaktest(sender, 10);
 				},
 			},
 			{
 				title: "Memory Test 100",
 				source: (sender) => {
-					startmemoryleaktest(sender, 100);
+					start_memoryleaktest(sender, 100);
 				},
 			},
 			{
 				title: "Memory Test 1000",
 				source: (sender) => {
-					startmemoryleaktest(sender, 1000);
+					start_memoryleaktest(sender, 1000);
 				},
 			},
 			{
 				title: "Memory Test 5000",
 				source: (sender) => {
-					startmemoryleaktest(sender, 5000);
+					start_memoryleaktest(sender, 5000);
 				},
 			},
 		],
@@ -315,7 +315,7 @@ const dblibrary = {
 };
 
 let randomtheme_callback = null;
-function randomtheme(callback) {
+function load_random_theme(callback) {
 	randomtheme_callback = callback;
 
 	let cur_theme = core.randomdb("index_theme", db_menu[db_menu.length - 1].item).source;
@@ -351,28 +351,7 @@ core.setting.themechange = (theme) => {
 	});
 };
 
-let dbmenukey = [];
-function randompage(callback) {
-	let i = core.randomdb("index_dbmenukey", dbmenukey);
-
-	load_page(false, i.main_menu, i.sub_menu, () => {
-		gen_tableofcontent();
-		update_scrollspy();
-		activate_menu(i.main_menu, i.sub_menu, "menu");
-		update_url(i.main_menu, i.sub_menu);
-		update_pagerandom(i.main_menu, i.sub_menu);
-
-		core.init(document.getElementById("root"));
-		PR.prettyPrint();
-		core.codemarker(document);
-
-		if (callback && typeof callback === "function") {
-			callback();
-		}
-	});
-}
-
-function startmemoryleaktest(sender, limit) {
+function start_memoryleaktest(sender, limit) {
 	if (memoryleaktestrun === true) {
 		memoryleaktestrun = false;
 	} else {
@@ -423,7 +402,7 @@ function memoryleaktest(index, limit, progressupdate, callback) {
 
 		last_main_menu = p.main_menu;
 		last_sub_menu = p.sub_menu;
-		load_page(false, p.main_menu, p.sub_menu, () => {
+		load_page(false, null, p.main_menu, p.sub_menu, () => {
 			core.init(document.getElementById("root"));
 
 			if (index >= limit) {
@@ -439,7 +418,7 @@ function memoryleaktest(index, limit, progressupdate, callback) {
 	}
 }
 
-function gen_page(opt) {
+function generate_page(opt) {
 	opt = core.extend(
 		{},
 		{
@@ -549,7 +528,7 @@ function find_menu(main_menu, sub_menu) {
 let cur_main_menu = null;
 let cur_sub_menu = null;
 
-function gen_page_placeholder() {
+function generate_page_placeholder() {
 	let fn = (col) => {
 		return new div({
 			placeholderanimation: "glow",
@@ -593,11 +572,32 @@ function gen_page_placeholder() {
 	});
 }
 
+let dbmenukey = [];
+function load_random_page(callback) {
+	let i = core.randomdb("index_dbmenukey", dbmenukey);
+
+	load_page(false, null, i.main_menu, i.sub_menu, () => {
+		generate_tableofcontent();
+		update_scrollspy();
+		activate_menu(i.main_menu, i.sub_menu, "menu");
+		update_url(i.main_menu, i.sub_menu);
+		update_pagerandom(i.main_menu, i.sub_menu);
+
+		core.init(document.getElementById("root"));
+		PR.prettyPrint();
+		core.codemarker(document);
+
+		if (callback && typeof callback === "function") {
+			callback();
+		}
+	});
+}
+
 function reload_page(callback) {
 	console.log("reload active doc");
 	if (cur_main_menu && cur_sub_menu) {
-		load_page(false, cur_main_menu, cur_sub_menu, () => {
-			gen_tableofcontent();
+		load_page(false, null, cur_main_menu, cur_sub_menu, () => {
+			generate_tableofcontent();
 			update_scrollspy();
 			activate_menu(cur_main_menu, cur_sub_menu, "menu");
 			update_url(cur_main_menu, cur_sub_menu);
@@ -614,7 +614,7 @@ function reload_page(callback) {
 	}
 }
 
-function load_page(showloading, main_menu, sub_menu, callback) {
+function load_page(showloading, sender, main_menu, sub_menu, callback) {
 	let menu_item = find_menu(main_menu, sub_menu);
 	if (menu_item) {
 		if (menu_item.type === "menu") {
@@ -623,8 +623,8 @@ function load_page(showloading, main_menu, sub_menu, callback) {
 
 			//loading
 			if (showloading) {
-				core.replaceChild(document.getElementById("root"), gen_page_placeholder());
-				core.replaceChild(document.getElementById("nextbar"), gen_tableofcontent_placeholder());
+				core.replaceChild(document.getElementById("root"), generate_page_placeholder());
+				core.replaceChild(document.getElementById("nextbar"), generate_tableofcontent_placeholder());
 			}
 			//loading end
 
@@ -646,7 +646,7 @@ function load_page(showloading, main_menu, sub_menu, callback) {
 												marginbottom: 3,
 												tabindex: 0,
 												elem: menu_item_source.map((i) => {
-													return gen_page(i);
+													return generate_page(i);
 												}),
 											})
 										);
@@ -716,9 +716,9 @@ function load_page(showloading, main_menu, sub_menu, callback) {
 				}
 			}
 		} else if (menu_item.type === "navigate") {
-			window.location = menu_item.source;
+			window.open(menu_item.source, "_blank");
 		} else if (menu_item.type === "action") {
-			menu_item.source();
+			menu_item.source(sender);
 		} else if (menu_item.type === "theme") {
 			set_theme(menu_item.source);
 		} else {
@@ -727,7 +727,7 @@ function load_page(showloading, main_menu, sub_menu, callback) {
 	}
 }
 
-function gen_tableofcontent() {
+function generate_tableofcontent() {
 	let li = [];
 	let anchor = [].slice.call(document.getElementById("root").getElementsByClassName("anchorjs-link"));
 	if (anchor && anchor.length > 0) {
@@ -754,7 +754,7 @@ function gen_tableofcontent() {
 	}
 }
 
-function gen_tableofcontent_placeholder() {
+function generate_tableofcontent_placeholder() {
 	let fn = (col) => {
 		return new div({
 			placeholderanimation: "glow",
@@ -805,8 +805,8 @@ function update_pagerandom(main_menu, sub_menu) {
 
 function update_url(main_menu, sub_menu) {
 	let title = `${core.setting.title()} - ${main_menu} | ${sub_menu}`;
-	let path = `?m1=${encodeURIComponent(main_menu)}&m2=${encodeURIComponent(sub_menu)}`;
-	let data = `${main_menu}.${sub_menu}`;
+	let path = `?m1=${encodeURIComponent(main_menu)}&m2=${encodeURIComponent(sub_menu)}${DEBUG ? "&debug=1" : ""}`;
+	let data = { urlPath: path };
 
 	window.history.pushState(data, title, path);
 	document.title = title;
@@ -889,7 +889,7 @@ function activate_menu(main_menu, sub_menu, type_menu) {
 	}
 }
 
-function gen_menu() {
+function generate_menu() {
 	dbmenukey = [];
 
 	return db_menu.map((i) => {
@@ -918,29 +918,46 @@ function gen_menu() {
 						let sub_menu = sender.getAttribute("cl-m2");
 						let type_menu = sender.getAttribute("cl-m3");
 
-						let m = find_menu(main_menu, sub_menu);
-						if (m) {
-							if (m.type === "menu") {
-								sender.innerText = "Loading";
-								load_page(true, main_menu, sub_menu, () => {
-									gen_tableofcontent();
-									update_scrollspy();
-									activate_menu(main_menu, sub_menu, type_menu);
-									update_url(main_menu, sub_menu);
-									update_pagerandom(main_menu, sub_menu);
+						if (type_menu === "menu") sender.innerText = "Loading";
+						load_page(true, sender, main_menu, sub_menu, () => {
+							generate_tableofcontent();
+							update_scrollspy();
+							activate_menu(main_menu, sub_menu, type_menu);
+							update_url(main_menu, sub_menu);
+							update_pagerandom(main_menu, sub_menu);
 
-									core.init(document.getElementById("root"));
-									PR.prettyPrint();
-									core.codemarker(document);
+							core.init(document.getElementById("root"));
+							PR.prettyPrint();
+							core.codemarker(document);
 
-									sender.innerText = sub_menu;
-								});
-							} else if (m.type === "theme") {
-								set_theme(m.source);
-							} else if (m.type === "action") {
-								m.source(sender);
-							}
-						}
+							sender.innerText = sub_menu;
+						});
+
+						// let m = find_menu(main_menu, sub_menu);
+						// if (m) {
+						// 	if (m.type === "menu") {
+						// 		sender.innerText = "Loading";
+						// 		load_page(true, sender, main_menu, sub_menu, () => {
+						// 			generate_tableofcontent();
+						// 			update_scrollspy();
+						// 			activate_menu(main_menu, sub_menu, type_menu);
+						// 			update_url(main_menu, sub_menu);
+						// 			update_pagerandom(main_menu, sub_menu);
+
+						// 			core.init(document.getElementById("root"));
+						// 			PR.prettyPrint();
+						// 			core.codemarker(document);
+
+						// 			sender.innerText = sub_menu;
+						// 		});
+						// 	} else if (m.type === "theme") {
+						// 		set_theme(m.source);
+						// 	} else if (m.type === "action") {
+						// 		m.source(sender);
+						// 	} else if (m.type === "navigate") {
+						// 		window.open(menu_item.source, "_blank");
+						// 	}
+						// }
 					},
 				};
 			}),
@@ -984,13 +1001,13 @@ core.documentReady(() => {
 				overflow: "auto",
 				display: "md-block",
 				margintop: 3,
-				elem: gen_menu(),
+				elem: generate_menu(),
 			}),
 			rightelem: new tag({
 				class: ["sticky-lg-top", "cl-vh-menu"],
 				overflow: "auto",
 				margintop: 3,
-				elem: gen_tableofcontent_placeholder(),
+				elem: generate_tableofcontent_placeholder(),
 			}),
 			footerelem: new div({
 				display: "flex",
@@ -1010,8 +1027,18 @@ core.documentReady(() => {
 						href: "javascript:void(0)",
 						onclick: () => {
 							let pagerandomlabel = document.getElementById("pagerandom");
+							let pagerandomico = pagerandomlabel.closest("div.cl-pill").getElementsByTagName("I")[0];
+
 							pagerandomlabel.innerText = "Loading";
-							randompage(() => {
+							if (pagerandomico) {
+								pagerandomico.setAttribute("class", "fa-fw fa-spin fas fa-circle-notch");
+							}
+
+							load_random_page(() => {
+								if (pagerandomico) {
+									pagerandomico.setAttribute("class", "fa-fw fas fa-shuffle");
+								}
+
 								core.focusElement(pagerandomlabel);
 							});
 						},
@@ -1028,9 +1055,18 @@ core.documentReady(() => {
 						href: "javascript:void(0)",
 						onclick: () => {
 							let pagethemelabel = document.getElementById("pagetheme");
-							pagethemelabel.innerText = "Loading";
+							let pagethemeico = pagethemelabel.closest("div.cl-pill").getElementsByTagName("I")[0];
 
-							randomtheme(() => {
+							pagethemelabel.innerText = "Loading";
+							if (pagethemeico) {
+								pagethemeico.setAttribute("class", "fa-fw fa-spin fas fa-circle-notch");
+							}
+
+							load_random_theme(() => {
+								if (pagethemeico) {
+									pagethemeico.setAttribute("class", "fa-fw fas fa-swatchbook");
+								}
+
 								core.focusElement(pagethemelabel);
 							});
 						},
@@ -1068,7 +1104,7 @@ core.documentReady(() => {
 						: null,
 				].filter(Boolean),
 			}),
-			mainelem: gen_page_placeholder(),
+			mainelem: generate_page_placeholder(),
 
 			backtotop: true,
 		})
