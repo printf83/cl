@@ -378,10 +378,14 @@ function start_memoryleaktest(sender, limit) {
 						},
 						(main_menu, sub_menu, type_menu) => {
 							sender.classList.remove("active");
-							// core.init(document.getElementById("root"));
+							generate_tableofcontent();
+							update_scrollspy();
+							activate_menu(last_main_menu, last_sub_menu, "menu");
+							update_url(last_main_menu, last_sub_menu);
+							update_pagerandom(last_main_menu, last_sub_menu);
+
 							PR.prettyPrint();
 							core.codemarker(document);
-							activate_menu(main_menu, sub_menu, type_menu);
 						}
 					);
 				},
@@ -950,32 +954,6 @@ function generate_menu() {
 
 							sender.innerText = sub_menu;
 						});
-
-						// let m = find_menu(main_menu, sub_menu);
-						// if (m) {
-						// 	if (m.type === "menu") {
-						// 		sender.innerText = "Loading";
-						// 		load_page(true, sender, main_menu, sub_menu, () => {
-						// 			generate_tableofcontent();
-						// 			update_scrollspy();
-						// 			activate_menu(main_menu, sub_menu, type_menu);
-						// 			update_url(main_menu, sub_menu);
-						// 			update_pagerandom(main_menu, sub_menu);
-
-						// 			core.init(document.getElementById("root"));
-						// 			PR.prettyPrint();
-						// 			core.codemarker(document);
-
-						// 			sender.innerText = sub_menu;
-						// 		});
-						// 	} else if (m.type === "theme") {
-						// 		set_theme(m.source);
-						// 	} else if (m.type === "action") {
-						// 		m.source(sender);
-						// 	} else if (m.type === "navigate") {
-						// 		window.open(menu_item.source, "_blank");
-						// 	}
-						// }
 					},
 				};
 			}),
