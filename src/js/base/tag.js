@@ -408,7 +408,7 @@ export default class tag {
 				id: opt.id,
 				name: opt.name,
 
-				href: opt.href,
+				href: opt.href ? (opt.href === "#" ? "javascript:void(0)" : opt.href) : null,
 				onclick: opt.onclick,
 				onchange: opt.onchange,
 				onfocus: opt.onfocus,

@@ -52,7 +52,7 @@ export default [
 				],
 
 				//marker
-				href: "javascript:void(0);",
+				href: "#",
 			});
 		},
 	},
@@ -426,9 +426,9 @@ export default [
 						interactive: false, //marker
 						label: "Dropdown item text",
 					},
-					{ href: "javascript:void(0);", label: "Another" },
-					{ href: "javascript:void(0);", label: "Another action" },
-					{ href: "javascript:void(0);", label: "Something else here" },
+					{ href: "#", label: "Another" },
+					{ href: "#", label: "Another action" },
+					{ href: "#", label: "Something else here" },
 				],
 			});
 		},
@@ -442,9 +442,9 @@ export default [
 				label: "Drowdown",
 				color: "secondary",
 				option: [
-					{ href: "javascript:void(0);", label: "Regular link" },
-					{ href: "javascript:void(0);", label: "Active link", active: true },
-					{ href: "javascript:void(0);", label: "Another link" },
+					{ href: "#", label: "Regular link" },
+					{ href: "#", label: "Active link", active: true },
+					{ href: "#", label: "Another link" },
 				],
 			});
 		},
@@ -458,13 +458,13 @@ export default [
 				label: "Drowdown",
 				color: "secondary",
 				option: [
-					{ href: "javascript:void(0);", label: "Regular link" },
+					{ href: "#", label: "Regular link" },
 					{
-						href: "javascript:void(0);",
+						href: "#",
 						label: "Disabled link",
 						disabled: true, //marker
 					},
-					{ href: "javascript:void(0);", label: "Another link" },
+					{ href: "#", label: "Another link" },
 				],
 			});
 		},
@@ -599,8 +599,8 @@ export default [
 						},
 						//-
 
-						{ href: "javascript:void(0);", label: "Action" },
-						{ href: "javascript:void(0);", label: "Another action" },
+						{ href: "#", label: "Action" },
+						{ href: "#", label: "Another action" },
 					],
 				}),
 			];
@@ -616,9 +616,9 @@ export default [
 					label: "Dropdown",
 					color: "secondary",
 					option: [
-						{ href: "javascript:void(0);", label: "Action" },
-						{ href: "javascript:void(0);", label: "Another action" },
-						{ href: "javascript:void(0);", label: "Something else here" },
+						{ href: "#", label: "Action" },
+						{ href: "#", label: "Another action" },
+						{ href: "#", label: "Something else here" },
 
 						//marker
 						{
@@ -626,7 +626,7 @@ export default [
 						},
 						//-
 
-						{ href: "javascript:void(0);", label: "Separated link" },
+						{ href: "#", label: "Separated link" },
 					],
 				}),
 			];
@@ -706,8 +706,8 @@ export default [
 							//-
 						},
 						{ value: "-" },
-						{ href: "javascript:void(0)", label: "new around here? Sign up" },
-						{ href: "javascript:void(0)", label: "Forgot password?" },
+						{ href: "#", label: "new around here? Sign up" },
+						{ href: "#", label: "Forgot password?" },
 					],
 				}),
 			]);

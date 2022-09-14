@@ -38,7 +38,7 @@ export default [
 						`A simple ${i} alert with `,
 
 						//marker
-						new alert.link({ label: "an example link", href: "javascript:void(0);" }),
+						new alert.link({ label: "an example link", href: "#" }),
 						//-
 
 						`. Give it a click if you like.`,

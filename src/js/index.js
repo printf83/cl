@@ -1042,7 +1042,7 @@ core.documentReady(() => {
 							color: "primary",
 							elem: [new small({ id: "pagerandom", elem: "Random Page" })],
 						}),
-						href: "javascript:void(0)",
+						href: "#",
 						onclick: () => {
 							let pagerandomlabel = document.getElementById("pagerandom");
 							let pagerandomico = pagerandomlabel.closest("div.cl-pill").getElementsByTagName("I")[0];
@@ -1070,7 +1070,7 @@ core.documentReady(() => {
 							color: "primary",
 							elem: [new small({ id: "pagetheme", elem: "Default" })],
 						}),
-						href: "javascript:void(0)",
+						href: "#",
 						onclick: () => {
 							let pagethemelabel = document.getElementById("pagetheme");
 							let pagethemeico = pagethemelabel.closest("div.cl-pill").getElementsByTagName("I")[0];

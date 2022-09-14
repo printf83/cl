@@ -43,6 +43,7 @@ export default [
 					"<code>color</code> - shortcut to <code>linkcolor</code>. If you like to change the background color, you need to set <code>class:bg-*</code>",
 				],
 			}),
+			"If you set {{href:'#'}}, it will be changed to {{href:'javascript:void(0);'}}",
 		],
 		container: sample.vstackcontainer,
 		import: ["a"],

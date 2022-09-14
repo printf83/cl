@@ -60,7 +60,7 @@ export default [
 					color: "primary",
 
 					//marker
-					href: "javascript:void(0);",
+					href: "#",
 				}),
 				new button({
 					label: "Input",
@@ -220,7 +220,7 @@ export default [
 
 					//marker
 					disabled: true,
-					href: "javascript:void(0);",
+					href: "#",
 					//-
 				}),
 				new button({
@@ -230,7 +230,7 @@ export default [
 
 					//marker
 					disabled: true,
-					href: "javascript:void(0);",
+					href: "#",
 					//-
 				}),
 			];
@@ -337,7 +337,7 @@ export default [
 
 					//marker
 					toggle: true,
-					href: "javascript:void(0)",
+					href: "#",
 					//-
 				}),
 				new button({
@@ -346,7 +346,7 @@ export default [
 
 					//marker
 					toggle: true,
-					href: "javascript:void(0)",
+					href: "#",
 					active: true,
 					//-
 				}),
@@ -356,7 +356,7 @@ export default [
 
 					//marker
 					toggle: true,
-					href: "javascript:void(0)",
+					href: "#",
 					disabled: true,
 					//-
 				}),

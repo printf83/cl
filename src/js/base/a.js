@@ -24,7 +24,7 @@ export default class a extends tag {
 				{
 					rule: ["cl|cl[]|string|string[]"],
 					fn: (opt) => {
-						return { href: "javascript:void(0);", elem: opt[0] };
+						return { href: "#", elem: opt[0] };
 					},
 				},
 				{

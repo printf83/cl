@@ -705,7 +705,7 @@ const fn = {
 									elem: [
 										"By clicking sign up you are agreeing to the ",
 										new a({
-											href: "javascript:void(0);",
+											href: "#",
 											onclick: core.setting.term,
 											elem: "Terms and Conditions",
 										}),
