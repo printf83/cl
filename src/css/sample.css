@@ -21,13 +21,15 @@
 }
 
 .cl-highlight-col .col,
+.cl-highlight-col .col-auto,
 .cl-highlight-col .row > div {
 	border: 1px solid rgba(var(--bs-dark-rgb), 0.05);
 	background-color: rgba(var(--bs-dark-rgb), 0.03);
 	padding: 0.75rem;
 }
 
-.cl-highlight-col-div .col div {
+.cl-highlight-col-div .col div,
+.cl-highlight-col-div .col-auto div {
 	border: 1px solid rgba(var(--bs-dark-rgb), 0.05);
 	background-color: rgba(var(--bs-dark-rgb), 0.03);
 	padding: 0.75rem;
@@ -35,13 +37,16 @@
 
 .cl-highlight,
 .cl-highlight-flex .col .d-flex,
-.cl-highlight-flex .col .d-flex > div {
+.cl-highlight-flex .col .d-flex > div,
+.cl-highlight-flex .col-auto .d-flex,
+.cl-highlight-flex .col-auto .d-flex>div {
 	border: 1px solid rgba(var(--bs-dark-rgb), 0.05);
 	background-color: rgba(var(--bs-dark-rgb), 0.03);
 }
 
 .cl-highlight-padding,
-.cl-highlight-flex .card-body .col .d-flex > div {
+.cl-highlight-flex .card-body .col .d-flex > div,
+.cl-highlight-flex .card-body .col-auto .d-flex>div {
 	border: 1px solid rgba(var(--bs-dark-rgb), 0.05);
 	background-color: rgba(var(--bs-dark-rgb), 0.03);
 	padding: 0.75rem;
@@ -70,12 +75,14 @@
 	padding: 0.75rem;
 }
 
-.cl-highlight-box .card-body .col div {
+.cl-highlight-box .card-body .col div,
+.cl-highlight-box .card-body .col-auto div {
 	background-color: rgba(var(--bs-dark-rgb), 0.03);
 	padding: 2rem;
 }
 
-.cl-highlight-box-dark .card-body .col div {
+.cl-highlight-box-dark .card-body .col div ,
+.cl-highlight-box-dark .card-body .col-auto div{
 	background-color: rgba(var(--bs-dark-rgb), 0.3);
 	padding: 2rem;
 }
@@ -97,22 +104,28 @@
 
 .cl-highlight-shadow .col div,
 .cl-highlight-size .col div,
-.cl-highlight-size-height .col div {
+.cl-highlight-size-height .col div,
+.cl-highlight-shadow .col-auto div,
+.cl-highlight-size .col-auto div,
+.cl-highlight-size-height .col-auto div {
 	border: 1px solid var(--bs-gray-300);
 	background-color: rgba(var(--bs-dark-rgb), 0.03);
 	padding: 0.75rem;
 }
 
-.cl-highlight-shadow .col div {
+.cl-highlight-shadow .col div,
+.cl-highlight-shadow .col-auto div {
 	margin: 1rem 0.75rem;
 }
 
-.cl-highlight-size-height .card-body .col div {
+.cl-highlight-size-height .card-body .col div,
+.cl-highlight-size-height .card-body .col-auto div {
 	padding-top: unset;
 	padding-bottom: unset;
 }
 
-.cl-highlight-size-height .card-body .col {
+.cl-highlight-size-height .card-body .col,
+.cl-highlight-size-height .card-body .col-auto {
 	height: 12rem !important;
 }
 
