@@ -167,7 +167,7 @@ export default [
 		import: ["img", "sample"],
 		code: () => {
 			return [
-				new img({ src: sample.img(100, 100), class: "img-thumbnail", alt: "Sample Image" }),
+				new img({ src: sample.img(100, 100), thumbnail: true, alt: "Sample Image" }),
 				new img("img-thumbnail", sample.img(100, 100)),
 				new img(sample.img(100, 100)),
 			];

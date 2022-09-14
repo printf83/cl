@@ -289,7 +289,8 @@ export default [
 							//marker
 							core.setting.banner = (type) => {
 								return new img({
-									class: ["img-fluid", "rounded"],
+									fluid: true,
+									rounded: true,
 									alt: `Image for ${type}`,
 									src: sample.img(730, 580),
 								});

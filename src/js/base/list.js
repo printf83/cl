@@ -1033,7 +1033,7 @@ export class item extends li {
 											marginend: 3,
 											width: "3rem",
 											elem: new img({
-												class: "img-fluid",
+												fluid: true,
 												rounded: true,
 												src: db.file.url(opt.picture),
 											}),

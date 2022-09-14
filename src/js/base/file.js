@@ -77,7 +77,7 @@ const fn = {
 										static: false,
 										size: "md",
 										elem: new img({
-											class: "img-fluid",
+											fluid: true,
 											width: 100,
 											marginx: "auto",
 											display: "block",
@@ -174,7 +174,10 @@ const fn = {
 														}
 													},
 													elem: new img({
-														class: "img-fluid mx-auto d-block rounded",
+														fluid: true,
+														marginx: "auto",
+														display: "block",
+														rounded: true,
 														src: db.file.url(i.id),
 													}),
 												}),
