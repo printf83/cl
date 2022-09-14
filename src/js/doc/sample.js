@@ -262,6 +262,7 @@ const fn = {
 			"linkcolor",
 			"textcolor",
 			"textopacity",
+			"zindex",
 			"padding",
 			"paddingx",
 			"paddingy",

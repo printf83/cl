@@ -258,7 +258,7 @@ export default class toast extends div {
 						"aria-live": "polite",
 						"aria-atomic": "true",
 					},
-					style: { "z-index": 3 },
+					zindex: 3,
 					elem: new div({ class: ["toast-container", position], position: "fixed", padding: 3 }),
 				})
 			);

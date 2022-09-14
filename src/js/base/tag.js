@@ -95,6 +95,8 @@ const defaultOption = {
 	textcolor: null,
 	textopacity: null,
 
+	zindex: null,
+	
 	padding: null,
 	paddingx: null,
 	paddingy: null,
@@ -424,6 +426,8 @@ export default class tag {
 				tabindex: opt.tabindex,
 				title: opt.title,
 
+				"z-index": opt.zindex,
+				
 				"aria-hidden": opt.ariahidden ? "true" : null,
 
 				style: opt.style,
@@ -465,6 +469,7 @@ export default class tag {
 						: null,
 					opt.lineheight ? `lh-${opt.lineheight}` : null,
 					opt.monospace ? "font-monospace" : null,
+
 
 					opt.height ? `h-${opt.height}` : null,
 					opt.width ? `w-${opt.width}` : null,
