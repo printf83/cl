@@ -42,6 +42,7 @@ export default class menu extends div {
 		opt.elem = [
 			new collapse.toggle({
 				target: `#${opt.id}`,
+				control: `${opt.id}`,
 				toggle: "collapse",
 				show: opt.active,
 				elem: new button({
