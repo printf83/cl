@@ -89,11 +89,11 @@ export function setupEventListenerRemover(name, elem, fn) {
 	}
 	elem.detachEventListener[name] = fn;
 
-	if (setting.DEBUG) console.log(`Attach ${name} to ${elemInfo(elem)}`);
+	if (setting.DEBUG) console.log(`Attach ${name} event to ${elemInfo(elem)}`);
 }
 
 export function deleteEventListener(name, elem, fn) {
-	if (setting.DEBUG) console.log(`Remove event ${name} from ${elemInfo(elem)}`);
+	if (setting.DEBUG) console.log(`Remove ${name} event from ${elemInfo(elem)}`);
 	elem.detachEventListener[name] = null;
 	delete elem.detachEventListener[name];
 	fn();
@@ -198,51 +198,38 @@ function build(container, arg) {
 				element = attachAttr(element, e.data.attr);
 
 				if (e.data.elem) {
-					let elemType = typeof e.data.elem;
-					if (elemType === "string" || elemType === "number" || elemType === "boolean") {
-						if (isHTML(e.data.elem) && e.data.tag !== "pre") {
-							element.insertAdjacentHTML("beforeend", e.data.elem);
-						} else {
-							element.appendChild(document.createTextNode(e.data.elem));
-						}
-					} else {
-						if (Array.isArray(e.data.elem)) {
-							e.data.elem.forEach((i) => {
-								if (i) {
-									let iElemType = typeof i;
-									if (iElemType === "string" || iElemType === "number" || iElemType === "boolean") {
-										if (isHTML(i) && e.data.tag !== "pre") {
-											element.insertAdjacentHTML("beforeend", i);
-										} else {
-											element.appendChild(document.createTextNode(i));
-										}
-									} else if (Array.isArray(i)) {
-										console.warn(
-											"i is array. This happen when you set elem: [[tag],tag]. It should be elem:[tag,tag]",
-											i
-										);
-										i.forEach((j) => {
-											let t = build(element, j);
-											element = t ? t : element;
-										});
-									} else if (i.hasOwnProperty("cl")) {
-										let t = build(element, i);
-										element = t ? t : element;
-									} else {
-										console.error("i is not elem or [elem] or string or number or boolean", i);
-									}
+					
+					e.data.elem = Array.isArray(e.data.elem) ? e.data.elem : [e.data.elem];
+					e.data.elem.forEach((i) => {
+						if (i) {
+							let iElemType = typeof i;
+							if (iElemType === "string" || iElemType === "number" || iElemType === "boolean") {
+								if (isHTML(i) && e.data.tag !== "pre") {
+									element.insertAdjacentHTML("beforeend", i);
+								} else {
+									element.appendChild(document.createTextNode(i));
 								}
-							});
-						} else {
-							try {
-								let t = build(element, e.data.elem);
+								// } else if (Array.isArray(i)) {
+								// 	console.warn(
+								// 		"i is array. This happen when you set elem: [[tag],tag]. It should be elem:[tag,tag]",
+								// 		i
+								// 	);
+								// 	i.forEach((j) => {
+								// 		let t = build(element, j);
+								// 		element = t ? t : element;
+								// 	});
+							} else if (i.hasOwnProperty("cl")) {
+								let t = build(element, i);
 								element = t ? t : element;
-							} catch (ex) {
-								console.error(ex.message, e.data.elem, element);
+							} else {
+								console.error("i is not elem or [elem] or string or number or boolean", i);
 							}
 						}
-					}
+					});
 				}
+
+				//add to data dom
+				//e.dom = element;
 
 				if (e.data.tag) container.appendChild(element);
 			});

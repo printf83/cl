@@ -148,29 +148,30 @@ export default class offcanvas extends div {
 		this.dom = core.appendChild(document.body, this);
 		this.ofc = new bootstrap.Offcanvas(this.dom);
 
-		//set init
-		this.dom.addEventListener("shown.bs.offcanvas", (event) => {
+		let fn_shown = (event) => {
 			core.init(event.currentTarget);
-		});
+		};
+
+		let fn_hidden = (event) => {
+			let dom = event.currentTarget;
+			core.removeElement(dom);
+		};
+
+		//set init
+		this.dom.addEventListener("shown.bs.offcanvas", fn_shown, false);
 
 		//set destroy after hide
-		this.dom.addEventListener("hidden.bs.offcanvas", (event) => {
-			let dom = event.currentTarget;
-			let ofc = bootstrap.Offcanvas.getInstance(dom);
+		this.dom.addEventListener("hidden.bs.offcanvas", fn_hidden, false);
 
-			setTimeout(
-				(dom, ofc) => {
-					ofc.dispose();
-					core.removeChildElement(dom);
-					dom.remove();
-
-					this.ofc = null;
-					this.dom = null;
-				},
-				300,
-				dom,
-				ofc
-			);
+		//setup eventlistenerremover
+		core.setupEventListenerRemover("offcanvas", this.dom, () => {
+			core.deleteEventListener("offcanvas", this.dom, () => {
+				this.dom.removeEventListener("shown.bs.offcanvas", fn_shown, false);
+				this.dom.removeEventListener("hidden.bs.offcanvas", fn_hidden, false);
+				this.ofc.dispose();
+				this.ofc = null;
+				this.dom = null;
+			});
 		});
 
 		this.ofc.show();

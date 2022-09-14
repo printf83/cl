@@ -6,6 +6,7 @@ import button from "./button.js";
 import div from "./div.js";
 import btnclose from "./btnclose.js";
 import * as container from "./container.js";
+import { deleteEventListener, setupEventListenerRemover } from "./base.js";
 
 const fnInputOnEnter = (event) => {
 	if (event && event.keyCode === 13) {
@@ -13,7 +14,6 @@ const fnInputOnEnter = (event) => {
 
 		event.preventDefault();
 		event.stopPropagation();
-		// let nextEl = sender.nextElementSibling;
 		let nextEl = sender.closest("div.col")?.nextSibling?.getElementsByTagName("INPUT")[0];
 		if (nextEl && nextEl.nodeName === "INPUT") {
 			nextEl.focus();
@@ -356,6 +356,8 @@ export default class modal extends div {
 	}
 
 	show = () => {
+		//looks like memory leak
+
 		//add into document
 		this.dom = core.appendChild(document.body, this);
 		this.mdl = new bootstrap.Modal(this.dom);
@@ -380,7 +382,7 @@ export default class modal extends div {
 			}
 		}
 
-		this.dom.addEventListener("shown.bs.modal", (event) => {
+		let fn_shown = (event) => {
 			//set background
 			let mdlbackdrop = document.getElementsByClassName("modal-backdrop");
 			if (mdlbackdrop) {
@@ -414,10 +416,9 @@ export default class modal extends div {
 					});
 				});
 			}
-		});
+		};
 
-		//set destroy after hide
-		this.dom.addEventListener("hidden.bs.modal", (event) => {
+		let fn_hidden = (event) => {
 			//show back previous modal
 			let tmdl = [...document.getElementsByClassName("modal")];
 			if (tmdl && tmdl.length > 0) {
@@ -439,20 +440,23 @@ export default class modal extends div {
 			}
 
 			let dom = event.currentTarget;
-			let mdl = bootstrap.Modal.getInstance(dom);
+			core.removeElement(dom);
+		};
 
-			setTimeout(
-				(dom, mdl) => {
-					mdl.dispose();
-					core.removeElement(dom);
+		this.dom.addEventListener("shown.bs.modal", fn_shown, false);
 
-					this.mdl = null;
-					this.dom = null;
-				},
-				300,
-				dom,
-				mdl
-			);
+		//set destroy after hide
+		this.dom.addEventListener("hidden.bs.modal", fn_hidden, false);
+
+		//setup eventlistenerremover
+		core.setupEventListenerRemover("modal", this.dom, () => {
+			core.deleteEventListener("modal", this.dom, () => {
+				this.dom.removeEventListener("shown.bs.modal", fn_shown, false);
+				this.dom.removeEventListener("hidden.bs.modal", fn_hidden, false);
+				this.mdl.dispose();
+				this.mdl = null;
+				this.dom = null;
+			});
 		});
 
 		this.mdl.show();

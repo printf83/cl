@@ -32,6 +32,7 @@ const defaultOption = {
 export default class toast extends div {
 	_n = null;
 	_m = null;
+	_t = null;
 
 	constructor(...opt) {
 		super();
@@ -138,7 +139,7 @@ export default class toast extends div {
 			opt.id = opt.id || core.UUID();
 
 			//gen timer
-			let tc = toast.timercounter(new Date(opt.date));
+			let tc = this.timercounter(new Date(opt.date));
 
 			//set default icon if not provided
 			if (opt.icon === undefined) {
@@ -243,6 +244,14 @@ export default class toast extends div {
 		this._m = d;
 	}
 
+	get timerel() {
+		return this._t;
+	}
+
+	set timerel(elem) {
+		this._t = elem;
+	}
+
 	show = () => {
 		//generate container
 		let position = this.data.attr["data-cl-position"];
@@ -271,31 +280,40 @@ export default class toast extends div {
 		this.dom = core.appendChild(container, this);
 		this.tst = new bootstrap.Toast(this.dom);
 
-		toast.timer(this.dom.getElementsByClassName("timer")[0]);
+		this.timerel = this.dom.getElementsByClassName("timer")[0];
+		if (this.timerel) this.timer();
+
+		let fn_shown = (event) => {
+			core.init(event.currentTarget);
+		};
+
+		let fn_hidden = (event) => {
+			let dom = event.currentTarget;
+			core.removeElement(dom);
+		};
+
+		//set init
+		this.dom.addEventListener("shown.bs.toast", fn_shown, false);
 
 		//set destroy after hide
-		this.dom.addEventListener("hidden.bs.toast", (event) => {
-			let dom = event.currentTarget;
-			let tst = bootstrap.Toast.getInstance(dom);
+		this.dom.addEventListener("hidden.bs.toast", fn_hidden, false);
 
-			setTimeout(
-				(dom, tst) => {
-					tst.dispose();
-					core.removeElement(dom);
-
-					this.tst = null;
-					this.dom = null;
-				},
-				300,
-				dom,
-				tst
-			);
+		//setup eventlistenerremover
+		core.setupEventListenerRemover("toast", this.dom, () => {
+			core.deleteEventListener("toast", this.dom, () => {
+				this.dom.removeEventListener("shown.bs.toast", fn_shown, false);
+				this.dom.removeEventListener("hidden.bs.toast", fn_hidden, false);
+				this.tst.dispose();
+				this.timerel = null;
+				this.tst = null;
+				this.dom = null;
+			});
 		});
 
 		this.tst.show();
 	};
 
-	static timercounter(datevalue) {
+	timercounter(datevalue) {
 		var t1 = new Date();
 		var t2 = datevalue;
 		var next = -1;
@@ -336,22 +354,21 @@ export default class toast extends div {
 		};
 	}
 
-	static timer(elem) {
+	timer() {
 		//set "justtime timer"
-		if (elem) {
-			let tc = toast.timercounter(new Date(elem.dataset.clTime));
+
+		if (this.timerel) {
+			let tc = this.timercounter(new Date(this.timerel.dataset.clTime));
 			if (tc) {
-				elem.innerHTML = tc.msg;
+				this.timerel.innerHTML = tc.msg;
 				if (tc.next > 0) {
-					setTimeout(
-						(elem) => {
-							toast.timer(elem);
-						},
-						tc.next,
-						elem
-					);
+					setTimeout(() => {
+						this.timer();
+					}, tc.next);
 				}
 			}
+		} else {
+			if (core.setting.DEBUG) console.log(`Toast timer stop`);
 		}
 	}
 

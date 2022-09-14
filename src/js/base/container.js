@@ -31,8 +31,6 @@ export class stackform extends cl_form {
 			padding: 0,
 			gap: gap,
 			row: true,
-			// col: col,
-			// elem: elem,
 			elem: Array.isArray(elem)
 				? elem.map((i) => {
 						return new div({ col: col, elem: i });
@@ -62,7 +60,6 @@ export class stack extends div {
 		super({
 			row: true,
 			gap: gap,
-			// rowcol: col,
 			elem: Array.isArray(elem)
 				? elem.map((i) => {
 						return new div({ col: col, elem: i });

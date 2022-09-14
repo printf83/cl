@@ -41,9 +41,7 @@ export default class pill extends div {
 					coloropacity: 25,
 					paddingx: 2,
 					paddingy: 1,
-					// rounded: "start",
 					elem: opt.icon ? new icon(opt.icon) : opt.title ? new small(opt.title) : null,
-					// elem: opt.icon ? new icon(opt.icon) : opt.title ? opt.title : null,
 				}),
 				new inputgroup.text({
 					border: false,
@@ -51,9 +49,7 @@ export default class pill extends div {
 					textcolor: opt.textcolor,
 					paddingx: 2,
 					paddingy: 1,
-					// rounded: "end",
 					elem: opt.elem || new small(opt.label),
-					// elem: opt.elem || opt.label,
 				}),
 			],
 		});

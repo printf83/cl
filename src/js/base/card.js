@@ -200,7 +200,6 @@ export class horizontal extends div {
 		if (opt) {
 			opt = core.extend({}, defaultHorizontalOption, opt);
 
-			//opt.class = core.merge.class(opt.class, "row");
 			opt.row = true;
 			opt.elem = [
 				new div({

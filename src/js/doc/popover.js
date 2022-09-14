@@ -146,12 +146,9 @@ export default [
 		},
 	},
 
-	// unsupported. will check later - 20220831
-	// need to add this into core.init
 	{
 		title: "Event",
 		msg: [
-			// new pill({ icon: "!", marginbottom: 3, label: "Under construction" }),
 			new table.container({
 				item: [
 					["Option", "Description"],

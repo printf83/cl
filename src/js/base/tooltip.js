@@ -9,8 +9,6 @@ const defaultOption = {
 	placement: "top",
 	trigger: "focus",
 
-	// unsupported. will check later - 20220831
-	// need to add this into core.init
 	onshow: null,
 	onshown: null,
 	onhide: null,
@@ -44,8 +42,6 @@ export default class tooltip extends tag {
 					"data-bs-html": opt.type && core.isHTML(opt.msg) ? "true" : null,
 				});
 
-				// unsupported. will check later - 20220831
-				// need to add this into core.init
 				if (opt.type === "popover") {
 					tmp.attr = core.merge.attr(tmp.attr, {
 						"show.bs.popover": opt.onshow,

@@ -795,15 +795,29 @@ export function elemReady(elem, callback) {
 		callback();
 	} else if (document.addEventListener) {
 		// modern browsers
-		elem.addEventListener("DOMContentLoaded", () => {
-			callback();
+		elem.addEventListener("DOMContentLoaded", callback, false);
+
+		//setup eventlistenerremover
+		setupEventListenerRemover("elemReady", elem, () => {
+			deleteEventListener("elemReady", elem, () => {
+				elem.removeEventListener("DOMContentLoaded", callback, false);
+			});
 		});
 	} else {
 		// IE <= 8
-		document.attachEvent("onreadystatechange", () => {
+		let fn = () => {
 			if (document.readyState == "complete") {
 				callback();
 			}
+		};
+
+		elem.attachEvent("onreadystatechange", fn);
+
+		//setup eventlistenerremover
+		setupEventListenerRemover("elemReady", elem, () => {
+			deleteEventListener("elemReady", elem, () => {
+				elem.detachEvent("onreadystatechange", fn);
+			});
 		});
 	}
 }

@@ -51,10 +51,6 @@ export default class h extends tag {
 					rule: ["object"],
 					fn: (opt) => opt[0],
 				},
-				// {
-				// 	rule: null,
-				// 	fn: (opt) => null,
-				// },
 			],
 			"h",
 			opt

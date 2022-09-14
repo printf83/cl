@@ -598,7 +598,7 @@ function load_random_page(callback) {
 }
 
 function reload_page(update_url, callback) {
-	if (DEBUG) console.log("reload active doc");
+	if (DEBUG) console.log("---[reload active doc]---");
 
 	if (cur_main_menu && cur_sub_menu) {
 		load_page(false, null, cur_main_menu, cur_sub_menu, () => {

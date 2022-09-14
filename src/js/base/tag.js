@@ -159,15 +159,6 @@ const defaultOption = {
 };
 
 let gapManager = (opt) => {
-	// if (opt.display !== "grid" && opt.display !== "flex" && opt?.attr?.role !== "toolbar") {
-	// 	return "g";
-	// } else if (opt.display === "grid" || opt.display === "flex" || opt?.attr?.role === "toolbar") {
-	// 	return "gap"
-	// } else {
-	// 	console.warn("Option not handle by gapManager", opt);
-	// 	return "g";
-	// }
-
 	if (opt.row === true) {
 		return "g";
 	} else {
@@ -347,6 +338,7 @@ let fnWH = {
  * opt : {tag,id,name,class,style,attr,href,onclick,onchange,onfocus,onblur,align,color,textcolor,bordercolor,border,elem}
  */
 export default class tag {
+	_dom = null;
 	_d = null;
 	cl = 1; //name tag "cl" so we can check hasOwnProperty("cl")
 
@@ -388,6 +380,13 @@ export default class tag {
 			"tag",
 			opt
 		);
+	}
+
+	get dom() {
+		return this._dom;
+	}
+	set dom(element) {
+		this._dom = element;	
 	}
 
 	get data() {

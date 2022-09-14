@@ -58,8 +58,6 @@ export default class button extends tag {
 			}
 
 			if (opt.placeholder) {
-				// opt.label = null;
-				// opt.icon = null;
 				opt.disabled = true;
 			}
 
