@@ -84,7 +84,7 @@ export default class button extends tag {
 			opt.attr = core.merge.attr(opt.attr, {
 				value: opt.value,
 				checked: opt.checked,
-				role: "button",
+				role: opt.href || opt.type === "checkbox" || opt.type === "radio" ? "button" : null,
 				disabled: opt.disabled,
 				type: opt.href || opt.type === "checkbox" || opt.type === "radio" ? null : opt.type,
 				"data-bs-toggle": opt.toggle ? "button" : null,

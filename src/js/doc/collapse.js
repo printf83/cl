@@ -6,6 +6,7 @@ import * as card from "../base/card.js";
 import * as collapse from "../base/collapse.js";
 import toast from "../base/toast.js";
 import * as table from "../base/table.js";
+import p from "../base/p.js";
 
 export default [
 	{
@@ -13,20 +14,60 @@ export default [
 		msg: "Toggle the visibility of content across your project with a few classes and Bootstrap JavaScript plugin",
 		anchor: false,
 	},
+
 	{
 		title: "Example",
 		container: sample.stackcontainer,
-		import: ["button", "card", "collapse", "sample"],
+		import: ["button", "card", "collapse", "sample", "p"],
 		code: () => {
 			let id = core.UUID();
 
 			return [
 				new collapse.toggle({
-					target: `#${id}`, //marker
+					//marker
+					target: `#${id}`,
+					control: `${id}`,
+					//-
+					elem: new button({ label: "Toggle button", color: "primary" }),
+				}),
+				new collapse.container({
+					id: id, //marker
+					elem: new card.container({
+						elem: new card.body({
+							elem: [
+								new p(
+									"Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger."
+								),
+								new p(sample.text()),
+								new p(sample.text()),
+							],
+						}),
+					}),
+				}),
+			];
+		},
+	},
+
+	{
+		title: "Multiple toggle",
+		container: sample.stackcontainer,
+		import: ["button", "card", "collapse", "sample", "p"],
+		code: () => {
+			let id = core.UUID();
+
+			return [
+				new collapse.toggle({
+					//marker
+					target: `#${id}`,
+					control: `${id}`,
+					//-
 					elem: new button({ label: "Toggle button", color: "primary" }),
 				}),
 				new collapse.toggle({
-					target: `#${id}`, //marker
+					//marker
+					target: `#${id}`,
+					control: `${id}`,
+					//-
 					elem: new button({
 						icon: sample.icon(),
 						label: "Toggle with icon",
@@ -37,7 +78,13 @@ export default [
 					id: id, //marker
 					elem: new card.container({
 						elem: new card.body({
-							elem: "Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.",
+							elem: [
+								new p(
+									"Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger."
+								),
+								new p(sample.text()),
+								new p(sample.text()),
+							],
 						}),
 					}),
 				}),
@@ -56,15 +103,24 @@ export default [
 
 			return [
 				new collapse.toggle({
-					target: `#${id1}`, //marker
+					//marker
+					target: `#${id1}`,
+					control: `${id1}`,
+					//-
 					elem: new button({ label: "Toggle first element", color: "primary" }),
 				}),
 				new collapse.toggle({
-					target: `#${id2}`, //marker
+					//marker
+					target: `#${id2}`,
+					control: `${id2}`,
+					//-
 					elem: new button({ label: "Toggle second element", color: "primary" }),
 				}),
 				new collapse.toggle({
-					target: `.${id3}`, //marker
+					//marker
+					target: `.${id3}`,
+					control: `${id1} ${id2}`,
+					//-
 					elem: new button({ label: "Toggle both element", color: "primary" }),
 				}),
 				new collapse.container({

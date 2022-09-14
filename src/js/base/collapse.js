@@ -8,6 +8,7 @@ const defaultToggleOption = {
 	elem: null,
 
 	target: null,
+	control: null,
 	show: false,
 
 	toggle: "collapse", //collapse | offcanvas
@@ -35,12 +36,9 @@ export class toggle extends tag {
 			}
 
 			let t = opt.elem.data;
-			t.class = core.merge.class(t.class, [
-				opt.toggle === "collapse" ? "btn-toggle" : null,
-				opt.show && opt.toggle === "collapse" ? "collapsed" : null,
-			]);
+			t.class = core.merge.class(t.class, [!opt.show && opt.toggle === "collapse" ? "collapsed" : null]);
 			t.attr = core.merge.attr(t.attr, {
-				"aria-controls": opt.target,
+				"aria-controls": opt.control,
 				"aria-expanded": opt.show ? "true" : "false",
 				"data-bs-target": opt.target,
 				"data-bs-toggle": opt.toggle,
@@ -52,9 +50,7 @@ export class toggle extends tag {
 }
 
 const defaultContainerOption = {
-	elem: null,
 	id: null,
-	class: null,
 	show: false,
 
 	onshow: null,
@@ -78,22 +74,22 @@ export class container extends div {
 		if (opt) {
 			opt = core.extend({}, defaultContainerOption, opt);
 
-			if (!opt.elem) {
-				opt.elem = new div({ elem: "" });
-			}
-
-			let t = opt.elem.data;
-
-			t.class = core.merge.class(opt.class, core.merge.class(t.class, ["collapse", opt.show ? "show" : null]));
-			t.attr = core.merge.attr(t.attr, {
+			opt.id = opt.id || core.UUID();
+			opt.class = core.merge.class(opt.class, ["collapse", opt.show ? "show" : null]);
+			opt.attr = core.merge.attr(opt.attr, {
 				"show.bs.collapse": opt.onshow,
 				"shown.bs.collapse": opt.onshown,
 				"hide.bs.collapse": opt.onhide,
 				"hidden.bs.collapse": opt.onhidden,
 			});
-			t.id = t.id || opt.id;
 
-			super.data = t;
+			delete opt.show;
+			delete opt.onshow;
+			delete opt.onshown;
+			delete opt.onhide;
+			delete opt.onhidden;
+
+			super.data = opt;
 		}
 	}
 }
