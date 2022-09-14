@@ -2,6 +2,7 @@
 import sample from "./sample.js";
 import ul from "../base/ul.js";
 import img from "../base/img.js";
+import div from "../base/div.js";
 
 export default [
 	{
@@ -20,14 +21,117 @@ export default [
 	},
 
 	{
-		title: "Example",
+		title: "Responsive images",
+		msg: [
+			"Images in Bootstrap are made responsive with {{fluid:true}}. This applies {{max-width: 100%;}} and {{height: auto;}} to the image so that it scales with the parent element.",
+		],
 		import: ["img", "sample"],
 		code: () => {
 			return new img({
-				src: sample.img(100, 100),
-				alt: "Sample Image",
-				class: "img-fluid",
+				fluid: true, //marker
 				rounded: true,
+				src: sample.img(800, 200),
+				alt: "Image",
+			});
+		},
+	},
+
+	{
+		title: "Image thumbnails",
+		msg: [
+			"In addition to our border-radius utilities, you can use {{thumbnail:true}} to give an image a rounded 1px border appearance.",
+		],
+		import: ["img", "sample"],
+		code: () => {
+			return new img({
+				thumbnail: true, //marker
+				rounded: true,
+				src: sample.img(200, 200),
+				alt: "Image",
+			});
+		},
+	},
+
+	{
+		title: "Aligning images",
+		msg: [
+			"Align images with the helper float classes or text alignment classes. {{block-level}} images can be centered using the {{marginx:'auto'}} margin utility class.",
+		],
+		import: ["img", "sample"],
+		code: () => {
+			return [
+				new img({
+					src: sample.img(200, 200),
+					alt: "Image",
+					rounded: true,
+					float: "start", //marker
+				}),
+				new img({
+					src: sample.img(200, 200),
+					alt: "Image",
+					rounded: true,
+					float: "end", //marker
+				}),
+			];
+		},
+	},
+
+	{
+		import: ["img", "sample"],
+		code: () => {
+			return new img({
+				src: sample.img(200, 200),
+				alt: "Image",
+				rounded: true,
+
+				//marker
+				display: "block",
+				marginx: "auto",
+				//-
+			});
+		},
+	},
+
+	{
+		import: ["img", "div", "sample"],
+		code: () => {
+			return new div({
+				align: "center", //marker
+				elem: new img({
+					src: sample.img(200, 200),
+					alt: "Image",
+					rounded: true,
+				}),
+			});
+		},
+	},
+
+	{
+		title: "Figures",
+		msg: ["Displaying related images and text with the figure component in Bootstrap"],
+		import: ["img", "sample"],
+		code: () => {
+			return new img({
+				src: sample.img(400, 300),
+				alt: "Image",
+				rounded: true,
+				fluid: true,
+				caption: "A caption for the above image.", //marker
+			});
+		},
+	},
+
+	{
+		msg: ["Aligning the figure’s caption is easy with {{captionalign}} property."],
+		import: ["img", "sample"],
+		code: () => {
+			return new img({
+				src: sample.img(400, 300),
+				alt: "Image",
+				rounded: true,
+				fluid: true,
+				caption: "A caption for the above image.",
+				captionalign: "end", //marker
 			});
 		},
 	},
@@ -40,6 +144,10 @@ export default [
 				item: [
 					"<code>src</code> - to set src attribute. Shortcut from <code>{attr:src}</code>",
 					"<code>alt</code> - to set alt attribute. Shortcut from <code>{attr:alt}</code>",
+					"<code>fluid</code> - to set class <code>img-fluid</code>",
+					"<code>thumbnail</code> - to set class <code>img-thumbnail</code>",
+					"<code>caption</code> - to set image caption",
+					"<code>captionalign</code> - to align the image caption",
 				],
 			}),
 		],

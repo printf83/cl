@@ -10,6 +10,10 @@ const defaultOption = {
 	tag: "img",
 	src: null,
 	alt: "Image",
+	fluid: false,
+	thumbnail: false,
+	caption: null,
+	captionalign: null,
 };
 
 export default class img extends tag {
@@ -54,6 +58,11 @@ export default class img extends tag {
 		if (opt) {
 			opt = core.extend({}, defaultOption, opt);
 
+			opt.class = core.merge.class(opt.class, [
+				opt.fluid ? "img-fluid" : null,
+				opt.thumbnail ? "img-thumbnail" : null,
+			]);
+
 			opt.attr = core.merge.attr(opt.attr, {
 				src: opt.src,
 				alt: opt.alt,
@@ -61,8 +70,30 @@ export default class img extends tag {
 
 			delete opt.src;
 			delete opt.alt;
+			delete opt.fluid;
+			delete opt.thumbnail;
 
-			super.data = opt;
+			let f = null;
+			if (opt.caption) {
+				f = {
+					tag: "figure",
+					class: "figure",
+					elem: [
+						new tag(opt),
+						new tag({
+							tag: "figcaption",
+							class: "figure-caption",
+							align: opt.captionalign,
+							elem: opt.caption,
+						}),
+					],
+				};
+
+				delete opt.captionalign;
+				delete opt.caption;
+			}
+
+			super.data = f ? f : opt;
 		}
 	}
 }
