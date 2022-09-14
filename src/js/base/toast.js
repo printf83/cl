@@ -30,9 +30,8 @@ const defaultOption = {
  */
 
 export default class toast extends div {
-	_n = null;
-	_m = null;
-	_t = null;
+	_bs = null;
+	_tmr = null;
 
 	constructor(...opt) {
 		super();
@@ -230,26 +229,19 @@ export default class toast extends div {
 		}
 	}
 
-	get dom() {
-		return this._n;
+	get bs() {
+		return this._bs;
 	}
-	set dom(d) {
-		this._n = d;
-	}
-
-	get tst() {
-		return this._m;
-	}
-	set tst(d) {
-		this._m = d;
+	set bs(d) {
+		this._bs = d;
 	}
 
-	get timerel() {
-		return this._t;
+	get tmr() {
+		return this._tmr;
 	}
 
-	set timerel(elem) {
-		this._t = elem;
+	set tmr(elem) {
+		this._tmr = elem;
 	}
 
 	show = () => {
@@ -277,11 +269,11 @@ export default class toast extends div {
 		}
 
 		//add into document
-		this.dom = core.appendChild(container, this);
-		this.tst = new bootstrap.Toast(this.dom);
+		core.appendChild(container, this);
+		this.bs = new bootstrap.Toast(this.dom);
 
-		this.timerel = this.dom.getElementsByClassName("timer")[0];
-		if (this.timerel) this.timer();
+		this.tmr = this.dom.getElementsByClassName("timer")[0];
+		if (this.tmr) this.timer();
 
 		let fn_shown = (event) => {
 			core.init(event.currentTarget);
@@ -303,14 +295,14 @@ export default class toast extends div {
 			core.deleteEventListener("toast", this.dom, () => {
 				this.dom.removeEventListener("shown.bs.toast", fn_shown, false);
 				this.dom.removeEventListener("hidden.bs.toast", fn_hidden, false);
-				this.tst.dispose();
-				this.timerel = null;
-				this.tst = null;
+				this.bs.dispose();
+				this.tmr = null;
+				this.bs = null;
 				this.dom = null;
 			});
 		});
 
-		this.tst.show();
+		this.bs.show();
 	};
 
 	timercounter(datevalue) {
@@ -357,10 +349,10 @@ export default class toast extends div {
 	timer() {
 		//set "justtime timer"
 
-		if (this.timerel) {
-			let tc = this.timercounter(new Date(this.timerel.dataset.clTime));
+		if (this.tmr) {
+			let tc = this.timercounter(new Date(this.tmr.dataset.clTime));
 			if (tc) {
-				this.timerel.innerHTML = tc.msg;
+				this.tmr.innerHTML = tc.msg;
 				if (tc.next > 0) {
 					setTimeout(() => {
 						this.timer();
@@ -373,7 +365,7 @@ export default class toast extends div {
 	}
 
 	static hide(element) {
-		let tst = bootstrap.Toast.getInstance(element);
-		tst?.hide();
+		let bs = bootstrap.Toast.getInstance(element);
+		bs?.hide();
 	}
 }

@@ -6,7 +6,6 @@ import button from "./button.js";
 import div from "./div.js";
 import btnclose from "./btnclose.js";
 import * as container from "./container.js";
-import { deleteEventListener, setupEventListenerRemover } from "./base.js";
 
 const fnInputOnEnter = (event) => {
 	if (event && event.keyCode === 13) {
@@ -75,8 +74,7 @@ const defaultOption = {
  * option : {attr,id,class,static,title,icon,footer,button,animated,debug,scrollable,center,size,fullscreen,focus,align,color,textcolor,bordercolor,border,divider,centerbutton,elem}
  */
 export default class modal extends div {
-	_n = null;
-	_m = null;
+	_bs = null;
 
 	constructor(...opt) {
 		super(...opt);
@@ -341,55 +339,48 @@ export default class modal extends div {
 		}
 	}
 
-	get dom() {
-		return this._n;
+	get bs() {
+		return this._bs;
 	}
-	set dom(d) {
-		this._n = d;
-	}
-
-	get mdl() {
-		return this._m;
-	}
-	set mdl(d) {
-		this._m = d;
+	set bs(d) {
+		this._bs = d;
 	}
 
 	show = () => {
 		//looks like memory leak
 
 		//add into document
-		this.dom = core.appendChild(document.body, this);
-		this.mdl = new bootstrap.Modal(this.dom);
+		core.appendChild(document.body, this);
+		this.bs = new bootstrap.Modal(this.dom);
 
 		// hide previous modal
-		let tmdl = [...document.getElementsByClassName("modal")];
-		if (tmdl && tmdl.length > 0) {
+		let tbs = [...document.getElementsByClassName("modal")];
+		if (tbs && tbs.length > 0) {
 			//remove d-block modal
-			let amdl = [];
-			tmdl.forEach((i) => {
-				if (!i.classList.contains("cl-debug")) amdl.push(i);
+			let abs = [];
+			tbs.forEach((i) => {
+				if (!i.classList.contains("cl-debug")) abs.push(i);
 			});
 
 			//remove show class
-			if (amdl && amdl.length > 1) {
-				amdl[amdl.length - 2].classList.remove("show");
+			if (abs && abs.length > 1) {
+				abs[abs.length - 2].classList.remove("show");
 
 				//remove show from backdrop
-				if (amdl[amdl.length - 2].dataset.bsBackdrop === "static") {
-					amdl[amdl.length - 2].nextSibling?.classList.remove("show");
+				if (abs[abs.length - 2].dataset.bsBackdrop === "static") {
+					abs[abs.length - 2].nextSibling?.classList.remove("show");
 				}
 			}
 		}
 
 		let fn_shown = (event) => {
 			//set background
-			let mdlbackdrop = document.getElementsByClassName("modal-backdrop");
-			if (mdlbackdrop) {
+			let bs_backdrop = document.getElementsByClassName("modal-backdrop");
+			if (bs_backdrop) {
 				let backdropcolor = event.currentTarget.getAttribute("data-bs-backdropcolor");
 				if (backdropcolor) {
-					mdlbackdrop[0].classList.add(`bg-${backdropcolor}`);
-					mdlbackdrop[0].classList.add("opacity-100");
+					bs_backdrop[0].classList.add(`bg-${backdropcolor}`);
+					bs_backdrop[0].classList.add("opacity-100");
 				}
 			}
 
@@ -420,21 +411,21 @@ export default class modal extends div {
 
 		let fn_hidden = (event) => {
 			//show back previous modal
-			let tmdl = [...document.getElementsByClassName("modal")];
-			if (tmdl && tmdl.length > 0) {
+			let tbs = [...document.getElementsByClassName("modal")];
+			if (tbs && tbs.length > 0) {
 				//remove d-block modal
-				let amdl = [];
-				tmdl.forEach((i) => {
-					if (!i.classList.contains("cl-block")) amdl.push(i);
+				let abs = [];
+				tbs.forEach((i) => {
+					if (!i.classList.contains("cl-block")) abs.push(i);
 				});
 
 				//add show class
-				if (amdl && amdl.length > 1) {
-					amdl[amdl.length - 2].classList.add("show");
+				if (abs && abs.length > 1) {
+					abs[abs.length - 2].classList.add("show");
 
 					//add show backdrop
-					if (amdl[amdl.length - 2].dataset.bsBackdrop === "static") {
-						amdl[amdl.length - 2].nextSibling?.classList.add("show");
+					if (abs[abs.length - 2].dataset.bsBackdrop === "static") {
+						abs[abs.length - 2].nextSibling?.classList.add("show");
 					}
 				}
 			}
@@ -453,17 +444,17 @@ export default class modal extends div {
 			core.deleteEventListener("modal", this.dom, () => {
 				this.dom.removeEventListener("shown.bs.modal", fn_shown, false);
 				this.dom.removeEventListener("hidden.bs.modal", fn_hidden, false);
-				this.mdl.dispose();
-				this.mdl = null;
+				this.bs.dispose();
+				this.bs = null;
 				this.dom = null;
 			});
 		});
 
-		this.mdl.show();
+		this.bs.show();
 	};
 
 	static hide(element) {
-		let mdl = bootstrap.Modal.getInstance(element);
-		mdl?.hide();
+		let bs = bootstrap.Modal.getInstance(element);
+		bs?.hide();
 	}
 }

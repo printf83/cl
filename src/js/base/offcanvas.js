@@ -28,8 +28,7 @@ const defaultOption = {
  * option : {attr,id,class,static,title,icon,footer,button,animated,debug,scrollable,center,size,fullscreen,focus,align,color,textcolor,bordercolor,border,divider,centerbutton,elem}
  */
 export default class offcanvas extends div {
-	_n = null;
-	_m = null;
+	_bs = null;
 
 	constructor(...opt) {
 		super(...opt);
@@ -129,24 +128,17 @@ export default class offcanvas extends div {
 		}
 	}
 
-	get dom() {
-		return this._n;
+	get bs() {
+		return this._bs;
 	}
-	set dom(d) {
-		this._n = d;
-	}
-
-	get ofc() {
-		return this._m;
-	}
-	set ofc(d) {
-		this._m = d;
+	set bs(d) {
+		this._bs = d;
 	}
 
 	show = () => {
 		//add into document
-		this.dom = core.appendChild(document.body, this);
-		this.ofc = new bootstrap.Offcanvas(this.dom);
+		core.appendChild(document.body, this);
+		this.bs = new bootstrap.Offcanvas(this.dom);
 
 		let fn_shown = (event) => {
 			core.init(event.currentTarget);
@@ -168,17 +160,17 @@ export default class offcanvas extends div {
 			core.deleteEventListener("offcanvas", this.dom, () => {
 				this.dom.removeEventListener("shown.bs.offcanvas", fn_shown, false);
 				this.dom.removeEventListener("hidden.bs.offcanvas", fn_hidden, false);
-				this.ofc.dispose();
-				this.ofc = null;
+				this.bs.dispose();
+				this.bs = null;
 				this.dom = null;
 			});
 		});
 
-		this.ofc.show();
+		this.bs.show();
 	};
 
 	static hide(element) {
-		let ofc = bootstrap.Offcanvas.getInstance(element);
-		ofc.hide();
+		let bs = bootstrap.Offcanvas.getInstance(element);
+		bs?.hide();
 	}
 }

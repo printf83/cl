@@ -76,6 +76,7 @@ const fn = {
 										button: null,
 										static: false,
 										size: "md",
+										bodyclass: "p-1",
 										elem: new img({
 											fluid: true,
 											width: 100,

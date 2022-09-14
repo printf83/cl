@@ -198,7 +198,6 @@ function build(container, arg) {
 				element = attachAttr(element, e.data.attr);
 
 				if (e.data.elem) {
-					
 					e.data.elem = Array.isArray(e.data.elem) ? e.data.elem : [e.data.elem];
 					e.data.elem.forEach((i) => {
 						if (i) {
@@ -229,7 +228,7 @@ function build(container, arg) {
 				}
 
 				//add to data dom
-				//e.dom = element;
+				e.dom = element;
 
 				if (e.data.tag) container.appendChild(element);
 			});
