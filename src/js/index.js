@@ -343,7 +343,7 @@ core.setting.themechange = (theme) => {
 		}
 	}
 
-	reload_page(() => {
+	reload_page(false, () => {
 		if (randomtheme_callback && typeof randomtheme_callback === "function") {
 			randomtheme_callback();
 			randomtheme_callback = null;
@@ -593,7 +593,7 @@ function load_random_page(callback) {
 	});
 }
 
-function reload_page(callback) {
+function reload_page(update_url, callback) {
 	if (DEBUG) console.log("reload active doc");
 
 	if (cur_main_menu && cur_sub_menu) {
@@ -601,8 +601,9 @@ function reload_page(callback) {
 			generate_tableofcontent();
 			update_scrollspy();
 			activate_menu(cur_main_menu, cur_sub_menu, "menu");
-			update_url(cur_main_menu, cur_sub_menu);
 			update_pagerandom(cur_main_menu, cur_sub_menu);
+
+			if (update_url) update_url(cur_main_menu, cur_sub_menu);
 
 			core.init(document.getElementById("root"));
 			PR.prettyPrint();
@@ -806,12 +807,28 @@ function update_pagerandom(main_menu, sub_menu) {
 
 function update_url(main_menu, sub_menu) {
 	let title = `${core.setting.title()} - ${main_menu} | ${sub_menu}`;
-	let path = `?m1=${encodeURIComponent(main_menu)}&m2=${encodeURIComponent(sub_menu)}${DEBUG ? "&debug=1" : ""}`;
+	let path = `/?m1=${encodeURIComponent(main_menu)}&m2=${encodeURIComponent(sub_menu)}${DEBUG ? "&debug=1" : ""}`;
 	let data = { urlPath: path };
 
 	window.history.pushState(data, title, path);
 	document.title = title;
 }
+
+window.onpopstate = () => {
+	let url_param = get_url_param();
+	if (url_param && url_param.main_menu && url_param.sub_menu) {
+		def_main_menu = url_param.main_menu;
+		def_sub_menu = url_param.sub_menu;
+	}
+
+	DEBUG = url_param.debug;
+	core.setting.DEBUG = DEBUG;
+
+	cur_main_menu = def_main_menu;
+	cur_sub_menu = def_sub_menu;
+
+	reload_page(false);
+};
 
 function get_url_param() {
 	let p = new URLSearchParams(window.location.search);
