@@ -96,7 +96,7 @@ const defaultOption = {
 	textopacity: null,
 
 	zindex: null,
-	
+
 	padding: null,
 	paddingx: null,
 	paddingy: null,
@@ -386,7 +386,7 @@ export default class tag {
 		return this._dom;
 	}
 	set dom(element) {
-		this._dom = element;	
+		this._dom = element;
 	}
 
 	get data() {
@@ -402,6 +402,10 @@ export default class tag {
 
 		//height and width
 		opt = fnWH.main(opt);
+
+		opt.style = core.merge.style(opt.style, {
+			"z-index": opt.zindex,
+		});
 
 		this._d = {
 			tag: opt.tag,
@@ -425,8 +429,6 @@ export default class tag {
 				tabindex: opt.tabindex,
 				title: opt.title,
 
-				"z-index": opt.zindex,
-				
 				"aria-hidden": opt.ariahidden ? "true" : null,
 
 				style: opt.style,
@@ -468,7 +470,6 @@ export default class tag {
 						: null,
 					opt.lineheight ? `lh-${opt.lineheight}` : null,
 					opt.monospace ? "font-monospace" : null,
-
 
 					opt.height ? `h-${opt.height}` : null,
 					opt.width ? `w-${opt.width}` : null,

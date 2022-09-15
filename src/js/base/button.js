@@ -18,6 +18,7 @@ const defaultOption = {
 	autofocus: null,
 
 	color: null,
+	textbg: null,
 	weight: null,
 	disabled: false,
 	outline: false,

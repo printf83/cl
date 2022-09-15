@@ -150,7 +150,8 @@ export default [
 						label: "Okay",
 					},
 					{
-						color: "primary",
+						color: "transparent",
+						textbg: "primary",
 						label: "Cancel",
 					},
 				],

@@ -112,6 +112,7 @@ export default [
 								//marker
 								placement: i,
 
+								bodyoverflow: i === "top" ? "visible" : null, //some tweak
 								close: true,
 								backdrop: true,
 								color: "light",

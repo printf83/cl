@@ -125,6 +125,8 @@ function attachAttr(elem, arg) {
 				} else {
 					if (arg[i] !== undefined && arg[i] !== null) {
 						if (arg[i] instanceof Function) {
+							let eventname = i.startsWith("on") ? i.substring(2) : i;
+
 							switch (true) {
 								case i === "show.bs.tooltip":
 								case i === "shown.bs.tooltip":
@@ -136,7 +138,6 @@ function attachAttr(elem, arg) {
 								case i === "hide.bs.popover":
 								case i === "hidden.bs.popover":
 								case i === "inserted.bs.popover":
-									let eventname = i.startsWith("on") ? i.substring(2) : i;
 									elem.setAttribute(`cl.event.${eventname}`, eventdb.create(arg[i])); //save fn to db
 
 									setupEventListenerRemover(i, elem, () => {
@@ -147,15 +148,11 @@ function attachAttr(elem, arg) {
 
 									break;
 								default:
-									elem.addEventListener(i.startsWith("on") ? i.substring(2) : i, arg[i], false);
+									elem.addEventListener(eventname, arg[i], false);
 
 									setupEventListenerRemover(i, elem, () => {
 										deleteEventListener(i, elem, () => {
-											elem.removeEventListener(
-												i.startsWith("on") ? i.substring(2) : i,
-												arg[i],
-												false
-											);
+											elem.removeEventListener(eventname, arg[i], false);
 										});
 									});
 							}
@@ -205,18 +202,23 @@ function build(container, arg) {
 							if (iElemType === "string" || iElemType === "number" || iElemType === "boolean") {
 								if (isHTML(i) && e.data.tag !== "pre") {
 									element.insertAdjacentHTML("beforeend", i);
+								} else if (Array.isArray(i)) {
+									console.error(
+										"i is array. This happen when you set elem: [[tag],tag]. It should be elem:[tag,tag]",
+										i
+									);
+
+									// console.warn(
+									// 	"i is array. This happen when you set elem: [[tag],tag]. It should be elem:[tag,tag]",
+									// 	i
+									// );
+									// i.forEach((j) => {
+									// 	let t = build(element, j);
+									// 	element = t ? t : element;
+									// });
 								} else {
 									element.appendChild(document.createTextNode(i));
 								}
-								// } else if (Array.isArray(i)) {
-								// 	console.warn(
-								// 		"i is array. This happen when you set elem: [[tag],tag]. It should be elem:[tag,tag]",
-								// 		i
-								// 	);
-								// 	i.forEach((j) => {
-								// 		let t = build(element, j);
-								// 		element = t ? t : element;
-								// 	});
 							} else if (i.hasOwnProperty("cl")) {
 								let t = build(element, i);
 								element = t ? t : element;

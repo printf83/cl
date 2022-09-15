@@ -18,6 +18,7 @@ const defaultOption = {
 	autoclose: null, // BS5.2
 	elem: null,
 	color: null,
+	bodyoverflow: null,
 
 	onshow: null,
 	onshown: null,
@@ -88,7 +89,10 @@ export default class offcanvas extends div {
 			var body = null;
 
 			if (opt.elem) {
-				body = new div({ class: "offcanvas-body", elem: opt.elem });
+				body = new div({
+					class: ["offcanvas-body", opt.bodyoverflow ? `overflow-${opt.bodyoverflow}` : null].filter(Boolean),
+					elem: opt.elem,
+				});
 			}
 
 			opt.class = core.merge.class(opt.class, [
