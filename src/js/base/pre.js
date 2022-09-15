@@ -7,6 +7,7 @@ import tag from "./tag.js";
  */
 const defaultOption = {
 	tag: "pre",
+	border: false,
 };
 
 export default class pre extends tag {

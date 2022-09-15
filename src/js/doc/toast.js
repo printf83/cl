@@ -22,7 +22,7 @@ export default [
 			"To encourage extensible and predictable toasts, we recommend a header and body. Toast headers use {{display: flex}}, allowing easy alignment of content thanks to Bootstrap margin and flexbox utilities.",
 			"Toasts are as flexible as you need and have very little required markup. At a minimum, we require a single element to contain your “toasted” content and strongly encourage a dismiss button.",
 		],
-		viewclass: "cl-transparent-preview",
+
 		import: ["toast", "sample"],
 		code: () => {
 			return new toast({
@@ -35,7 +35,7 @@ export default [
 
 	{
 		title: "Without title & icon",
-		viewclass: "cl-transparent-preview",
+
 		import: ["toast", "sample"],
 		code: () => {
 			return new toast({
@@ -54,7 +54,7 @@ export default [
 
 	{
 		title: "Custom title & icon",
-		viewclass: "cl-transparent-preview",
+
 		import: ["toast", "sample"],
 		code: () => {
 			return new toast({
@@ -132,7 +132,7 @@ export default [
 	{
 		title: "Base icon",
 		container: sample.vstackcontainer,
-		viewclass: "cl-transparent-preview",
+
 		import: ["toast"],
 		code: () => {
 			return ["i", "!!", "!", "?", "-", "x", "/"].map((i) => {
@@ -169,21 +169,19 @@ export default [
 	{
 		title: "Color",
 		container: sample.vstackcontainer,
-		viewclass: "cl-transparent-preview",
+
 		import: ["toast", "msg", "sample"],
 		code: () => {
-			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark", "transparent"].map(
-				(i) => {
-					return new toast({
-						elem: new msg({ weight: "sm", icon: sample.icon(), elem: `Example <b>${i}</b> toast` }),
+			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map((i) => {
+				return new toast({
+					elem: new msg({ weight: "sm", icon: sample.icon(), elem: `Example <b>${i}</b> toast` }),
 
-						//marker
-						color: i,
+					//marker
+					color: i,
 
-						debug: true, //this last argument is for this documentation preview only
-					});
-				}
-			);
+					debug: true, //this last argument is for this documentation preview only
+				});
+			});
 		},
 	},
 

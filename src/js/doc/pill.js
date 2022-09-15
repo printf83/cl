@@ -10,10 +10,10 @@ export default [
 	{
 		title: "Example",
 		container: sample.stackcontainer,
-		viewclass: "cl-transparent-preview",
+
 		import: ["pill"],
 		code: () => {
-			return ["primary", "secondary", "success", "danger", "warning", "info", "dark", "transparent"].map((i) => {
+			return ["primary", "secondary", "success", "danger", "warning", "info", "dark"].map((i) => {
 				return new pill({
 					color: i,
 
@@ -28,10 +28,10 @@ export default [
 	{
 		title: "Icon",
 		container: sample.stackcontainer,
-		viewclass: "cl-transparent-preview",
+
 		import: ["pill", "sample"],
 		code: () => {
-			return ["primary", "secondary", "success", "danger", "warning", "info", "dark", "transparent"].map((i) => {
+			return ["primary", "secondary", "success", "danger", "warning", "info", "dark"].map((i) => {
 				let t = sample.icon();
 				return new pill({
 					label: t,

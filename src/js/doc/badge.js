@@ -87,39 +87,35 @@ export default [
 	{
 		title: "Background color",
 		container: sample.stackcontainer,
-		viewclass: "cl-transparent-preview",
+
 		import: ["badge"],
 		code: () => {
-			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark", "transparent"].map(
-				(i) => {
-					return new badge({
-						label: core.capitalize(i),
+			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map((i) => {
+				return new badge({
+					label: core.capitalize(i),
 
-						//marker
-						color: i,
-					});
-				}
-			);
+					//marker
+					color: i,
+				});
+			});
 		},
 	},
 
 	{
 		title: "Pill badge",
 		container: sample.stackcontainer,
-		viewclass: "cl-transparent-preview",
+
 		import: ["badge"],
 		code: () => {
-			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark", "transparent"].map(
-				(i) => {
-					return new badge({
-						label: core.capitalize(i),
-						color: i,
+			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map((i) => {
+				return new badge({
+					label: core.capitalize(i),
+					color: i,
 
-						//marker
-						pill: true,
-					});
-				}
-			);
+					//marker
+					pill: true,
+				});
+			});
 		},
 	},
 ];

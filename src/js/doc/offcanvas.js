@@ -61,41 +61,39 @@ export default [
 		container: sample.stackcontainer,
 		import: ["button", "offcanvas", "div", "p", "dropdown"],
 		code: () => {
-			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark", "transparent"].map(
-				(i) => {
-					return new button({
-						label: `Show ${i} offcanvas`,
-						color: i,
-						onclick: () => {
-							new offcanvas({
-								//marker
-								color: i,
+			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map((i) => {
+				return new button({
+					label: `Show ${i} offcanvas`,
+					color: i,
+					onclick: () => {
+						new offcanvas({
+							//marker
+							color: i,
 
-								close: true,
-								backdrop: true,
-								elem: new div({
-									elem: [
-										new p({
-											elem: "Some text as placeholder. In real life you can have the elements you have chosen. Like, text, images, lists, etc.",
-										}),
-										new dropdown({
-											label: "Drowdown button",
-											dark: true,
-											option: [
-												{ href: "#", label: "Action" },
-												{ href: "#", label: "Another action" },
-												{ href: "#", label: "Something else here" },
-												{ value: "-" },
-												{ href: "#", label: "Separated link" },
-											],
-										}),
-									],
-								}),
-							}).show();
-						},
-					});
-				}
-			);
+							close: true,
+							backdrop: true,
+							elem: new div({
+								elem: [
+									new p({
+										elem: "Some text as placeholder. In real life you can have the elements you have chosen. Like, text, images, lists, etc.",
+									}),
+									new dropdown({
+										label: "Drowdown button",
+										dark: true,
+										option: [
+											{ href: "#", label: "Action" },
+											{ href: "#", label: "Another action" },
+											{ href: "#", label: "Something else here" },
+											{ value: "-" },
+											{ href: "#", label: "Separated link" },
+										],
+									}),
+								],
+							}),
+						}).show();
+					},
+				});
+			});
 		},
 	},
 
