@@ -80,23 +80,26 @@ export default [
 	{
 		title: "Color varian",
 		container: sample.stackcontainer,
+		viewclass: "cl-transparent-preview",
 		import: ["dropdown"],
 		code: () => {
-			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map((i) => {
-				return new dropdown({
-					label: core.capitalize(i),
-					option: [
-						{ href: "#", label: "Action" },
-						{ href: "#", label: "Another action" },
-						{ href: "#", label: "Something else here" },
-						{ value: "-" },
-						{ href: "#", label: "Separated link" },
-					],
+			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark", "transparent"].map(
+				(i) => {
+					return new dropdown({
+						label: core.capitalize(i),
+						option: [
+							{ href: "#", label: "Action" },
+							{ href: "#", label: "Another action" },
+							{ href: "#", label: "Something else here" },
+							{ value: "-" },
+							{ href: "#", label: "Separated link" },
+						],
 
-					//marker
-					color: i,
-				});
-			});
+						//marker
+						color: i,
+					});
+				}
+			);
 		},
 	},
 
@@ -124,25 +127,28 @@ export default [
 	{
 		title: "Split button color variant",
 		container: sample.stackcontainer,
+		viewclass: "cl-transparent-preview",
 		import: ["dropdown"],
 		code: () => {
-			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map((i) => {
-				return new dropdown({
-					label: core.capitalize(i),
-					option: [
-						{ href: "#", label: "Action" },
-						{ href: "#", label: "Another action" },
-						{ href: "#", label: "Something else here" },
-						{ value: "-" },
-						{ href: "#", label: "Separated link" },
-					],
+			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark", "transparent"].map(
+				(i) => {
+					return new dropdown({
+						label: core.capitalize(i),
+						option: [
+							{ href: "#", label: "Action" },
+							{ href: "#", label: "Another action" },
+							{ href: "#", label: "Something else here" },
+							{ value: "-" },
+							{ href: "#", label: "Separated link" },
+						],
 
-					//marker
-					splittoggle: true,
-					color: i,
-					//-
-				});
-			});
+						//marker
+						splittoggle: true,
+						color: i,
+						//-
+					});
+				}
+			);
 		},
 	},
 

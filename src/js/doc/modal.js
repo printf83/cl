@@ -16,6 +16,7 @@ import tooltip from "../base/tooltip.js";
 import listgroup from "../base/listgroup.js";
 import * as container from "../base/container.js";
 import * as table from "../base/table.js";
+import pill from "../base/pill.js";
 
 export default [
 	{
@@ -1081,7 +1082,17 @@ export default [
 		code: () => {
 			let fn = (fullscreen) => {
 				new modal({
-					elem: `Dialog with <code>fullscreen : <b>${fullscreen}</b></code> option`,
+					elem: [
+						new p(
+							new pill({
+								icon: "eye",
+								title: "Viewport",
+								color: "primary",
+								viewport: true,
+							})
+						),
+						new p(`Dialog with <code>fullscreen : <b>${fullscreen}</b></code> option`),
+					],
 					button: ["Okay"],
 
 					//marker

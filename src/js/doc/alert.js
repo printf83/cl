@@ -15,44 +15,51 @@ export default [
 
 	{
 		title: "Example",
+		viewclass: "cl-transparent-preview",
 		import: ["alert"],
 		code: () => {
-			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map((i) => {
-				return new alert.container({
-					elem: `A simple ${i} alert—check it out!`,
+			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark", "transparent"].map(
+				(i) => {
+					return new alert.container({
+						elem: `A simple ${i} alert—check it out!`,
 
-					//marker
-					color: i,
-				});
-			});
+						//marker
+						color: i,
+					});
+				}
+			);
 		},
 	},
 
 	{
 		title: "Link color",
+		viewclass: "cl-transparent-preview",
 		import: ["alert"],
 		code: () => {
-			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map((i) => {
-				return new alert.container({
-					elem: [
-						`A simple ${i} alert with `,
+			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark", "transparent"].map(
+				(i) => {
+					return new alert.container({
+						elem: [
+							`A simple ${i} alert with `,
+
+							//marker
+							new alert.link({ label: "an example link", href: "#" }),
+							//-
+
+							`. Give it a click if you like.`,
+						],
 
 						//marker
-						new alert.link({ label: "an example link", href: "#" }),
-						//-
-
-						`. Give it a click if you like.`,
-					],
-
-					//marker
-					color: i,
-				});
-			});
+						color: i,
+					});
+				}
+			);
 		},
 	},
 
 	{
 		title: "Additional content",
+		viewclass: "cl-transparent-preview",
 		import: ["alert", "p", "hr"],
 		code: () => {
 			return new alert.container({
@@ -76,6 +83,7 @@ export default [
 
 	{
 		title: "Icons",
+		viewclass: "cl-transparent-preview",
 		import: [`import * as alert from "./base/alert.js";`],
 		code: () => {
 			return ["i", "!!", "!", "?", "-", "x", "/"].map((i) => {
@@ -91,17 +99,20 @@ export default [
 
 	{
 		title: "Dismissing",
+		viewclass: "cl-transparent-preview",
 		import: ["alert"],
 		code: () => {
-			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map((i) => {
-				return new alert.container({
-					color: i,
-					elem: `<strong>Holy guacamole!</strong> You should check in on some of those fields below.`,
+			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark", "transparent"].map(
+				(i) => {
+					return new alert.container({
+						color: i,
+						elem: `<strong>Holy guacamole!</strong> You should check in on some of those fields below.`,
 
-					//marker
-					close: true,
-				});
-			});
+						//marker
+						close: true,
+					});
+				}
+			);
 		},
 	},
 
@@ -122,6 +133,7 @@ export default [
 				],
 			}),
 		],
+		viewclass: "cl-transparent-preview",
 		import: ["alert", "toast"],
 		code: () => {
 			let fn = (sender, event) => `Alert <b>${core.elemInfo(sender)}</b> event <b>${event}</b> trigged`;

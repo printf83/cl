@@ -66,6 +66,12 @@ export default class button extends tag {
 				opt.outline = true;
 			}
 
+			if (opt.color === "transparent") {
+				if (!opt.border) opt.border = false;
+				if (!opt.shadow) opt.shadow = false;
+				if (!opt.textbg) opt.textbg = opt.color;
+			}
+
 			opt.tag = opt.href ? "a" : opt.color || opt.outline || opt.weight ? "button" : "div";
 			opt.class = core.merge.class(opt.class, [
 				opt.type === "a" ? "text-decoration-none" : opt.color || opt.outline || opt.weight ? "btn" : null,

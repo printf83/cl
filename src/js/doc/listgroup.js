@@ -6,7 +6,6 @@ import h from "../base/h.js";
 import small from "../base/small.js";
 import p from "../base/p.js";
 import badge from "../base/badge.js";
-import list from "./list.js";
 
 export default [
 	{
@@ -260,7 +259,17 @@ export default [
 		import: ["listgroup"],
 		code: () => {
 			return new listgroup({
-				item: ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map((i) => {
+				item: [
+					"primary",
+					"secondary",
+					"success",
+					"danger",
+					"warning",
+					"info",
+					"light",
+					"dark",
+					"transparent",
+				].map((i) => {
 					return {
 						elem: `A simple ${i} list group item`,
 
@@ -278,7 +287,17 @@ export default [
 		code: () => {
 			return new listgroup({
 				type: "div",
-				item: ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map((i) => {
+				item: [
+					"primary",
+					"secondary",
+					"success",
+					"danger",
+					"warning",
+					"info",
+					"light",
+					"dark",
+					"transparent",
+				].map((i) => {
 					return {
 						elem: `A simple ${i} list group item`,
 

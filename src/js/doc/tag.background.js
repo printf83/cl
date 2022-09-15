@@ -15,6 +15,7 @@ export default [
 			"Similar to the contextual text color classes, set the background of an element to any contextual class. Background utilities <b>do not set</b> {{color}}, so in some cases you’ll want to use {{textcolor}} property.",
 		],
 		container: sample.vstackcontainer,
+		viewclass: "cl-transparent-preview",
 		import: ["tag"],
 		code: () => {
 			return [
@@ -49,6 +50,7 @@ export default [
 			"By setting {{gradient:true}} property, a linear gradient is added as background image to the backgrounds. This gradient starts with a semi-transparent white which fades out to the bottom.",
 		],
 		container: sample.vstackcontainer,
+		viewclass: "cl-transparent-preview",
 		import: ["tag"],
 		code: () => {
 			return [

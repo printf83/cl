@@ -17,18 +17,28 @@ export default [
 	{
 		title: "Examples",
 		container: sample.stackcontainer,
+		viewclass: "cl-transparent-preview",
 		import: ["button"],
 		code: () => {
-			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark", "link"].map(
-				(i) => {
-					return new button({
-						label: core.capitalize(i),
+			return [
+				"primary",
+				"secondary",
+				"success",
+				"danger",
+				"warning",
+				"info",
+				"light",
+				"dark",
+				"transparent",
+				"link",
+			].map((i) => {
+				return new button({
+					label: core.capitalize(i),
 
-						//marker
-						color: i,
-					});
-				}
-			);
+					//marker
+					color: i,
+				});
+			});
 		},
 	},
 
@@ -117,19 +127,29 @@ export default [
 	{
 		title: "Outline button",
 		container: sample.stackcontainer,
+		viewclass: "cl-transparent-preview",
 		import: ["button"],
 		code: () => {
-			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark", "link"].map(
-				(i) => {
-					return new button({
-						label: core.capitalize(i),
-						color: i,
+			return [
+				"primary",
+				"secondary",
+				"success",
+				"danger",
+				"warning",
+				"info",
+				"light",
+				"dark",
+				"transparent",
+				"link",
+			].map((i) => {
+				return new button({
+					label: core.capitalize(i),
+					color: i,
 
-						//marker
-						outline: true,
-					});
-				}
-			);
+					//marker
+					outline: true,
+				});
+			});
 		},
 	},
 
@@ -368,27 +388,37 @@ export default [
 		title: "Event",
 		msg: ["Button support {{onclick}} event."],
 		container: sample.stackcontainer,
+		viewclass: "cl-transparent-preview",
 		import: ["button", "toast"],
 		code: () => {
-			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark", "link"].map(
-				(i) => {
-					return new button({
-						label: core.capitalize(i),
-						color: i,
+			return [
+				"primary",
+				"secondary",
+				"success",
+				"danger",
+				"warning",
+				"info",
+				"light",
+				"dark",
+				"transparent",
+				"link",
+			].map((i) => {
+				return new button({
+					label: core.capitalize(i),
+					color: i,
 
-						//marker
-						onclick: (event) => {
-							let sender = event.currentTarget;
-							new toast({
-								color: "primary",
-								title: "Button Event",
-								elem: `Button <b>${core.elemInfo(sender)}</b> event <b>onclick</b> trigged`,
-							}).show();
-						},
-						//-
-					});
-				}
-			);
+					//marker
+					onclick: (event) => {
+						let sender = event.currentTarget;
+						new toast({
+							color: "primary",
+							title: "Button Event",
+							elem: `Button <b>${core.elemInfo(sender)}</b> event <b>onclick</b> trigged`,
+						}).show();
+					},
+					//-
+				});
+			});
 		},
 	},
 ];

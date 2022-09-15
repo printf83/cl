@@ -645,6 +645,7 @@ const fn = {
 							elem: [
 								new button({
 									weight: "sm",
+									color: "transparent",
 									elem: "Reset password",
 									onclick: (event) => {
 										let sender = event.currentTarget;
@@ -653,6 +654,7 @@ const fn = {
 								}),
 								new button({
 									weight: "sm",
+									color: "transparent",
 									elem: "Sign up",
 									onclick: (event) => {
 										let sender = event.currentTarget;
@@ -731,6 +733,7 @@ const fn = {
 							elem: [
 								new button({
 									weight: "sm",
+									color: "transparent",
 									elem: "Reset password",
 									onclick: (event) => {
 										let sender = event.currentTarget;
@@ -739,6 +742,7 @@ const fn = {
 								}),
 								new button({
 									weight: "sm",
+									color: "transparent",
 									elem: "Sign in",
 									onclick: (event) => {
 										let sender = event.currentTarget;
@@ -783,6 +787,7 @@ const fn = {
 								elem: [
 									new button({
 										weight: "sm",
+										color: "transparent",
 										elem: "Sign in",
 										onclick: (event) => {
 											let sender = event.currentTarget;
@@ -791,6 +796,7 @@ const fn = {
 									}),
 									new button({
 										weight: "sm",
+										color: "transparent",
 										elem: "Sign up",
 										onclick: (event) => {
 											let sender = event.currentTarget;
@@ -857,6 +863,7 @@ const fn = {
 							elem: [
 								new button({
 									weight: "sm",
+									color: "transparent",
 									elem: "Update profile",
 									onclick: (event) => {
 										let sender = event.currentTarget;
@@ -872,6 +879,7 @@ const fn = {
 
 								new button({
 									weight: "sm",
+									color: "transparent",
 									elem: "Sign out",
 									onclick: (event) => {
 										let sender = event.currentTarget;
@@ -939,6 +947,7 @@ const fn = {
 							elem: [
 								new button({
 									weight: "sm",
+									color: "transparent",
 									elem: "Sign in",
 									onclick: (event) => {
 										let sender = event.currentTarget;
@@ -947,6 +956,7 @@ const fn = {
 								}),
 								new button({
 									weight: "sm",
+									color: "transparent",
 									elem: "Reset password",
 									onclick: (event) => {
 										let sender = event.currentTarget;
@@ -1011,6 +1021,7 @@ const fn = {
 							elem: [
 								new button({
 									weight: "sm",
+									color: "transparent",
 									elem: "Change password",
 									onclick: (event) => {
 										let sender = event.currentTarget;
@@ -1020,6 +1031,7 @@ const fn = {
 
 								new button({
 									weight: "sm",
+									color: "transparent",
 									elem: "Sign out",
 									onclick: (event) => {
 										let sender = event.currentTarget;

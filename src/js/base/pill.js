@@ -6,7 +6,7 @@ import small from "./small.js";
 import tooltip from "./tooltip.js";
 import icon from "./icon.js";
 
-const defaultOption = { icon: null, label: null, title: null, color: null, elem: null, weight: "sm" };
+const defaultOption = { icon: null, label: null, title: null, color: null, elem: null, weight: "sm", viewport: null };
 /**
  * opt : {tagoption,icon,label}
  */
@@ -29,6 +29,17 @@ export default class pill extends div {
 		}
 
 		opt.color = opt.color || "primary";
+
+		if (opt.viewport && opt.elem === null) {
+			opt.elem = [
+				new small("d-inline d-sm-none", "XS"),
+				new small("d-none d-sm-inline d-md-none", "SM"),
+				new small("d-none d-md-inline d-lg-none", "MD"),
+				new small("d-none d-lg-inline d-xl-none", "LG"),
+				new small("d-none d-xl-inline d-xxl-none", "XL"),
+				new small("d-none d-xxl-inline", "XXL"),
+			];
+		}
 
 		let elem = new inputgroup.container({
 			class: core.merge.class(opt.class, "cl-pill"),

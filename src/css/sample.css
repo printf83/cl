@@ -2,6 +2,10 @@
 	background-color: rgba(var(--bs-body-color-rgb), 0.5);
 } */
 
+.cl-transparent-preview{
+	background-color: rgba(var(--bs-dark-rgb), 0.015);
+}
+
 .cl-modal-preview {
 	background-color: rgba(var(--bs-dark-rgb), 0.125);
 	padding: 0;

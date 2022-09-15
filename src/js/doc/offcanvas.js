@@ -61,39 +61,41 @@ export default [
 		container: sample.stackcontainer,
 		import: ["button", "offcanvas", "div", "p", "dropdown"],
 		code: () => {
-			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map((i) => {
-				return new button({
-					label: `Show ${i} offcanvas`,
-					color: i,
-					onclick: () => {
-						new offcanvas({
-							//marker
-							color: i,
+			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark", "transparent"].map(
+				(i) => {
+					return new button({
+						label: `Show ${i} offcanvas`,
+						color: i,
+						onclick: () => {
+							new offcanvas({
+								//marker
+								color: i,
 
-							close: true,
-							backdrop: true,
-							elem: new div({
-								elem: [
-									new p({
-										elem: "Some text as placeholder. In real life you can have the elements you have chosen. Like, text, images, lists, etc.",
-									}),
-									new dropdown({
-										label: "Drowdown button",
-										dark: true,
-										option: [
-											{ href: "#", label: "Action" },
-											{ href: "#", label: "Another action" },
-											{ href: "#", label: "Something else here" },
-											{ value: "-" },
-											{ href: "#", label: "Separated link" },
-										],
-									}),
-								],
-							}),
-						}).show();
-					},
-				});
-			});
+								close: true,
+								backdrop: true,
+								elem: new div({
+									elem: [
+										new p({
+											elem: "Some text as placeholder. In real life you can have the elements you have chosen. Like, text, images, lists, etc.",
+										}),
+										new dropdown({
+											label: "Drowdown button",
+											dark: true,
+											option: [
+												{ href: "#", label: "Action" },
+												{ href: "#", label: "Another action" },
+												{ href: "#", label: "Something else here" },
+												{ value: "-" },
+												{ href: "#", label: "Separated link" },
+											],
+										}),
+									],
+								}),
+							}).show();
+						},
+					});
+				}
+			);
 		},
 	},
 
@@ -170,17 +172,7 @@ export default [
 																	icon: "eye",
 																	title: "Viewport",
 																	color: "primary",
-																	elem: [
-																		new small("d-inline d-sm-none", "XS"),
-																		new small("d-none d-sm-inline d-md-none", "SM"),
-																		new small("d-none d-md-inline d-lg-none", "MD"),
-																		new small("d-none d-lg-inline d-xl-none", "LG"),
-																		new small(
-																			"d-none d-xl-inline d-xxl-none",
-																			"XL"
-																		),
-																		new small("d-none d-xxl-inline", "XXL"),
-																	],
+																	viewport: true,
 																})
 														  )
 														: null,

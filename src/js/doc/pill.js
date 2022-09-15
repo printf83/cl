@@ -10,9 +10,10 @@ export default [
 	{
 		title: "Example",
 		container: sample.stackcontainer,
+		viewclass: "cl-transparent-preview",
 		import: ["pill"],
 		code: () => {
-			return ["primary", "secondary", "success", "danger", "warning", "info", "dark"].map((i) => {
+			return ["primary", "secondary", "success", "danger", "warning", "info", "dark", "transparent"].map((i) => {
 				return new pill({
 					color: i,
 
@@ -27,9 +28,10 @@ export default [
 	{
 		title: "Icon",
 		container: sample.stackcontainer,
+		viewclass: "cl-transparent-preview",
 		import: ["pill", "sample"],
 		code: () => {
-			return ["primary", "secondary", "success", "danger", "warning", "info", "dark"].map((i) => {
+			return ["primary", "secondary", "success", "danger", "warning", "info", "dark", "transparent"].map((i) => {
 				let t = sample.icon();
 				return new pill({
 					label: t,
@@ -98,10 +100,14 @@ export default [
 				{ icon: "!", title: "Warning" },
 				{ icon: "/", title: "Success" },
 				{ icon: "x", title: "Critical" },
-				{ icon: sample.icon(), title: "Random Icon 1", color: "info" },
+				{
+					icon: { icon: sample.icon(), shake: true },
+					title: "Shake icon",
+					color: "info",
+				},
 				{
 					icon: { icon: sample.icon(), spin: true },
-					title: "Random Icon 2",
+					title: "Spin icon",
 					color: "warning",
 				},
 			].map((i, ix) => {

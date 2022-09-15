@@ -672,33 +672,37 @@ export default [
 	{
 		title: "Example background and color",
 		container: sample.stackcontainer,
+		viewclass: "cl-transparent-preview",
 		import: ["card"],
 		code: () => {
-			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map((i) => {
-				return new card.container({
-					width: "18rem",
-					elem: [
-						new card.header("Header"),
-						new card.body({
-							elem: [
-								new card.title(`${core.capitalize(i)} card title`),
-								new card.text(
-									`Some quick example text to build on the ${i} card title and make up the bulk of the card's content.`
-								),
-							],
-						}),
-					],
+			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark", "transparent"].map(
+				(i) => {
+					return new card.container({
+						width: "18rem",
+						elem: [
+							new card.header("Header"),
+							new card.body({
+								elem: [
+									new card.title(`${core.capitalize(i)} card title`),
+									new card.text(
+										`Some quick example text to build on the ${i} card title and make up the bulk of the card's content.`
+									),
+								],
+							}),
+						],
 
-					//marker
-					color: i,
-				});
-			});
+						//marker
+						color: i,
+					});
+				}
+			);
 		},
 	},
 
 	{
 		title: "Border color",
 		container: sample.stackcontainer,
+		viewclass: "cl-transparent-preview",
 		import: ["card"],
 		code: () => {
 			return new card.container({
@@ -724,28 +728,31 @@ export default [
 	{
 		title: "Example border color",
 		container: sample.stackcontainer,
+		viewclass: "cl-transparent-preview",
 		import: ["card"],
 		code: () => {
-			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map((i) => {
-				return new card.container({
-					width: "18rem",
-					elem: [
-						new card.header("Header"),
-						new card.body({
-							textcolor: i,
-							elem: [
-								new card.title(`${core.capitalize(i)} card title`),
-								new card.text(
-									"Some quick example text to build on the card title and make up the bulk of the card's content."
-								),
-							],
-						}),
-					],
+			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark", "transparent"].map(
+				(i) => {
+					return new card.container({
+						width: "18rem",
+						elem: [
+							new card.header("Header"),
+							new card.body({
+								textcolor: i,
+								elem: [
+									new card.title(`${core.capitalize(i)} card title`),
+									new card.text(
+										"Some quick example text to build on the card title and make up the bulk of the card's content."
+									),
+								],
+							}),
+						],
 
-					//marker
-					bordercolor: i,
-				});
-			});
+						//marker
+						bordercolor: i,
+					});
+				}
+			);
 		},
 	},
 

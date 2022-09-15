@@ -163,11 +163,26 @@ export default [
 				code: `
 					"use strict";
 					
-					import $ from "./all.js";
+					import $ from "./all.js"; //marker
 
 					$.core.documentReady(() => {
 						$.core.appendChild(document.getElementById("root"), new $.button({label:'Hello World!', color:'primary'}));
 						$.core.appendChild(document.getElementById("root"), new $.p('Hello World!'));
+					});
+			`,
+			}),
+
+			new codepreview({
+				title: "Rename one component to something you like",
+				container: "card",
+				code: `
+					"use strict";
+					
+					import WOW from "./all.js"; //marker
+
+					WOW.core.documentReady(() => {
+						WOW.core.appendChild(document.getElementById("root"), new WOW.button({label:'Hello World!', color:'primary'}));
+						WOW.core.appendChild(document.getElementById("root"), new WOW.p('Hello World!'));
 					});
 			`,
 			}),
