@@ -403,9 +403,11 @@ export default class tag {
 		//height and width
 		opt = fnWH.main(opt);
 
-		opt.style = core.merge.style(opt.style, {
-			"z-index": opt.zindex,
-		});
+		if (opt.zindex !== null) {
+			opt.style = core.merge.style(opt.style, {
+				"z-index": opt.zindex,
+			});
+		}
 
 		this._d = {
 			tag: opt.tag,

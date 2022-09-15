@@ -644,7 +644,7 @@ export const merge = {
 		}
 	},
 	style: (a, b) => {
-		if (a && b && a !== undefined && b !== undefined) {
+		if (a !== null && b !== null && a !== undefined && b !== undefined) {
 			let c = {};
 			Object.keys(a).forEach((i) => {
 				if (b.hasOwnProperty(i)) {
@@ -662,9 +662,9 @@ export const merge = {
 			});
 
 			return c;
-		} else if (a && !b && a !== undefined) {
+		} else if (a !== null && a !== undefined) {
 			return a;
-		} else if (!a && b && b !== undefined) {
+		} else if (b !== null && b !== undefined) {
 			return b;
 		} else {
 			return null;
