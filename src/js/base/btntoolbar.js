@@ -3,9 +3,6 @@ import * as core from "./core.js";
 import div from "./div.js";
 
 const defaultOption = { label: null, elem: null };
-/**
- * opt : {tagoption,label,elem}
- */
 export default class btntoolbar extends div {
 	constructor(...opt) {
 		super(...opt);
@@ -17,13 +14,6 @@ export default class btntoolbar extends div {
 	set data(opt) {
 		if (opt) {
 			opt = core.extend({}, defaultOption, opt);
-
-			opt.attr = core.merge.attr(opt.attr, {
-				role: "toolbar",
-				"aria-label": opt.label,
-			});
-
-			opt.class = core.merge.class(opt.class, "btn-toolbar");
 
 			delete opt.label;
 

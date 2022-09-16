@@ -73,38 +73,66 @@ export default class button extends tag {
 			}
 
 			opt.tag = opt.href ? "a" : opt.color || opt.outline || opt.weight ? "button" : "div";
-			opt.class = core.merge.class(opt.class, [
-				opt.type === "a" ? "text-decoration-none" : opt.color || opt.outline || opt.weight ? "btn" : null,
-				opt.nowrap ? "text-nowrap" : null,
-				opt.weight ? `btn-${opt.weight}` : null,
-				opt.color ? (opt.outline ? `btn-outline-${opt.color}` : `btn-${opt.color}`) : null,
-				opt.toggle && opt.active ? "active" : null,
-				opt.floating ? "btn-floating" : null,
-			]);
 
-			opt.position = opt.position
-				? opt.position
-				: opt.badge && typeof opt.badge === "object" && opt.badge.notification
-				? "relative"
-				: null;
-
-			opt.attr = core.merge.attr(opt.attr, {
+			opt = core.merge({
+				class: [
+					opt.type === "a" ? "text-decoration-none" : opt.color || opt.outline || opt.weight ? "btn" : null,
+					opt.weight ? `btn-${opt.weight}` : null,
+					opt.color ? (opt.outline ? `btn-outline-${opt.color}` : `btn-${opt.color}`) : null,
+					opt.toggle && opt.active ? "active" : null,
+					opt.floating ? "btn-floating" : null,
+				],
+				position: opt.position
+					? opt.position
+					: opt.badge && typeof opt.badge === "object" && opt.badge.notification
+					? "relative"
+					: null,
 				value: opt.value,
 				checked: opt.checked,
 				role: opt.href || opt.type !== "button" ? "button" : null,
 				disabled: opt.disabled,
 				type: opt.href || opt.type === "checkbox" || opt.type === "radio" ? null : opt.type,
-				"data-bs-toggle": opt.toggle ? "button" : null,
+				dataBsToggle: opt.toggle ? "button" : null,
 				autocomplete: opt.toggle ? "off" : null,
 				autofocus: opt.autofocus,
-				"aria-pressed": opt.toggle && opt.active ? "true" : null,
-				"aria-label": opt.hidelabel && opt.label ? opt.label : null,
-				"aria-disabled": opt.href && opt.disabled ? "true" : null,
+				ariaPressed: opt.toggle && opt.active ? "true" : null,
+				ariaLabel: opt.hidelabel && opt.label ? opt.label : null,
+				ariaDisabled: opt.href && opt.disabled ? "true" : null,
 			});
+
+			// opt.class = core.merge.class(opt.class, [
+			// 	opt.type === "a" ? "text-decoration-none" : opt.color || opt.outline || opt.weight ? "btn" : null,
+			// 	opt.nowrap ? "text-nowrap" : null,
+			// 	opt.weight ? `btn-${opt.weight}` : null,
+			// 	opt.color ? (opt.outline ? `btn-outline-${opt.color}` : `btn-${opt.color}`) : null,
+			// 	opt.toggle && opt.active ? "active" : null,
+			// 	opt.floating ? "btn-floating" : null,
+			// ]);
+
+			// opt.position = opt.position
+			// 	? opt.position
+			// 	: opt.badge && typeof opt.badge === "object" && opt.badge.notification
+			// 	? "relative"
+			// 	: null;
+
+			// opt.attr = core.merge.attr(opt.attr, {
+			// 	value: opt.value,
+			// 	checked: opt.checked,
+			// 	role: opt.href || opt.type !== "button" ? "button" : null,
+			// 	disabled: opt.disabled,
+			// 	type: opt.href || opt.type === "checkbox" || opt.type === "radio" ? null : opt.type,
+			// 	"data-bs-toggle": opt.toggle ? "button" : null,
+			// 	autocomplete: opt.toggle ? "off" : null,
+			// 	autofocus: opt.autofocus,
+			// 	"aria-pressed": opt.toggle && opt.active ? "true" : null,
+			// 	"aria-label": opt.hidelabel && opt.label ? opt.label : null,
+			// 	"aria-disabled": opt.href && opt.disabled ? "true" : null,
+			// });
 
 			let m = null;
 			if (opt.type === "checkbox" || opt.type === "radio") {
 				m = core.extend({}, opt);
+
 				m.id = m.id || core.UUID();
 				opt.id = m.id;
 

@@ -15,9 +15,7 @@ const defaultOption = {
 	onclose: null,
 	onclosed: null,
 };
-/**
- * opt : {tagoption,icon,color,elem,close}
- */
+
 export class container extends div {
 	constructor(...opt) {
 		super(...opt);
@@ -42,31 +40,24 @@ export class container extends div {
 					elem: opt.elem,
 				});
 			}
-
-			opt.class = core.merge.class(opt.class, [
-				"alert",
-				opt.color ? `alert-${opt.color}` : null,
-				opt.close ? "fade show" : null,
-			]);
-
-			opt.attr = core.merge.attr(opt.attr, {
+			opt = core.merge(opt, {
+				class: ["alert", opt.close ? "fade show" : null],
+				alertColor: opt.color,
 				role: "alert",
 				"close.bs.alert": opt.onclose,
 				"closed.bs.alert": opt.onclosed,
-			});
-
-			opt.elem = new div({
-				display: "flex",
-				alignitem: "stretch",
-				elem: [
-					new div({ width: 100, elem: opt.elem }),
-					opt.close
-						? new btnclose({
-								// dark: opt.color === "dark" || opt.color === "light" ? opt.color : "body-bg",
-								dismiss: "alert",
-						  })
-						: null,
-				],
+				elem: new div({
+					display: "flex",
+					alignitem: "stretch",
+					elem: [
+						new div({ width: 100, elem: opt.elem }),
+						opt.close
+							? new btnclose({
+									dismiss: "alert",
+							  })
+							: null,
+					],
+				}),
 			});
 
 			delete opt.icon;

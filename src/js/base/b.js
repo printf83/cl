@@ -2,9 +2,6 @@
 import * as core from "./core.js";
 import tag from "./tag.js";
 
-/**
- * opt : {tagoption}
- */
 const defaultOption = {
 	tag: "b",
 };

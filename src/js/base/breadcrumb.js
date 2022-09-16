@@ -23,10 +23,6 @@ const defaultItemOption = {
 	onclick: null,
 	elem: null,
 };
-
-/**
- * opt : {tagoption,label,divider,item:{label,icon,current,href,onclick,elem}}
- */
 export default class breadcrumb extends nav {
 	constructor(...opt) {
 		super(...opt);
@@ -51,69 +47,68 @@ export default class breadcrumb extends nav {
 				opt.item[opt.item.length - 1].current = true;
 			}
 
-			opt.style = core.merge.style(opt.style, {
-				"--bs-breadcrumb-divider": opt.divider ? opt.divider : null,
-			});
+			opt = core.merge(opt, {
+				ariaLabel: opt.label,
+				style: {
+					"--bs-breadcrumb-divider": opt.divider ? opt.divider : null,
+				},
+				elem: opt.item
+					? new ol({
+							margin: "0",
+							class: ["breadcrumb"],
+							elem: opt.item.map((i) => {
+								i = core.extend({}, defaultItemOption, i);
 
-			opt.attr = core.merge.attr(opt.attr, {
-				"aria-label": opt.label,
-			});
-
-			opt.elem = opt.item
-				? new ol({
-						margin: "0",
-						class: ["breadcrumb"],
-						elem: opt.item.map((i) => {
-							i = core.extend({}, defaultItemOption, i);
-
-							return new li({
-								class: ["breadcrumb-item", i.current ? "active" : null],
-								attr: { "aria-current": i.current ? "page" : null },
-								elem: i.elem
-									? i.elem
-									: [
-											i.current
-												? new label({
-														icon: i.icon,
-														label: i.label,
-														showlabel: i.showlabel,
-														iconafter: i.iconafter,
-												  })
-												: i.href
-												? new a({
-														href: i.href,
-														elem: new label({
+								return new li({
+									class: ["breadcrumb-item", i.current ? "active" : null],
+									attr: { "aria-current": i.current ? "page" : null },
+									elem: i.elem
+										? i.elem
+										: [
+												i.current
+													? new label({
 															icon: i.icon,
 															label: i.label,
 															showlabel: i.showlabel,
 															iconafter: i.iconafter,
-														}),
-												  })
-												: i.onclick
-												? new button({
-														label: i.label,
-														icon: i.icon,
-														showlabel: i.showlabel,
-														iconafter: i.iconafter,
-														onclick: i.onclick,
-												  })
-												: new label({
-														icon: i.icon,
-														label: i.label,
-														showlabel: i.showlabel,
-														iconafter: i.iconafter,
-												  }),
-									  ],
-							});
-						}),
-				  })
-				: null;
+													  })
+													: i.href
+													? new a({
+															href: i.href,
+															elem: new label({
+																icon: i.icon,
+																label: i.label,
+																showlabel: i.showlabel,
+																iconafter: i.iconafter,
+															}),
+													  })
+													: i.onclick
+													? new button({
+															label: i.label,
+															icon: i.icon,
+															showlabel: i.showlabel,
+															iconafter: i.iconafter,
+															onclick: i.onclick,
+													  })
+													: new label({
+															icon: i.icon,
+															label: i.label,
+															showlabel: i.showlabel,
+															iconafter: i.iconafter,
+													  }),
+										  ],
+								});
+							}),
+					  })
+					: null,
+			});
 
 			delete opt.label;
 			delete opt.icon;
 			delete opt.showlabel;
 			delete opt.iconafter;
 			delete opt.divider;
+			delete opt.item;
 
 			super.data = opt;
 		}

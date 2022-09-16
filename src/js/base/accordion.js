@@ -26,11 +26,6 @@ const defaultItemOption = {
 	onhidden: null,
 };
 
-/**
- * opt : {tagoption,flush,autoclose,item:[{itemOption}]}
- * itemOption: {tagoption,label,icon,active,onhide,onshow,elem}
- *
- */
 export default class accordion extends div {
 	constructor(...opt) {
 		super(...opt);
@@ -58,67 +53,69 @@ export default class accordion extends div {
 				opt.item[0].active = true;
 			}
 
-			opt.class = core.merge.class(opt.class, ["accordion", opt.flush ? "accordion-flush" : null]);
-			opt.elem =
-				opt.item && opt.item.length > 0
-					? opt.item.map((i) => {
-							i = core.extend({}, defaultItemOption, i);
+			opt = core.merge(opt, {
+				class: ["accordion", opt.flush ? "accordion-flush" : null],
+				elem:
+					opt.item && opt.item.length > 0
+						? opt.item.map((i) => {
+								i = core.extend({}, defaultItemOption, i);
 
-							i.id = i.id || core.UUID();
+								i.id = i.id || core.UUID();
 
-							let t = core.extend({}, i);
+								let itembody = core.extend({}, i);
 
-							t.class = core.merge.class(t.class, "accordion-body");
+								delete itembody.id;
+								delete itembody.label;
+								delete itembody.icon;
+								delete itembody.active;
+								delete itembody.iconafter;
+								delete itembody.showlabel;
+								delete itembody.onshow;
+								delete itembody.onshown;
+								delete itembody.onhide;
+								delete itembody.onhidden;
 
-							delete t.id;
-							delete t.label;
-							delete t.icon;
-							delete t.active;
-							delete t.iconafter;
-							delete t.showlabel;
-							delete t.onshow;
-							delete t.onshown;
-							delete t.onhide;
-							delete t.onhidden;
+								itembody = core.merge(itembody, {
+									class: "accordion-body",
+								});
 
-							return new div({
-								class: "accordion-item",
-								elem: [
-									new h({
-										level: 2,
-										id: `${i.id}_head`,
-										class: "accordion-header",
-										elem: new button({
-											label: i.label,
-											icon: i.icon,
-											showlabel: i.showlabel,
-											iconafter: i.iconafter,
-											class: ["accordion-button", !i.active ? "collapsed" : null],
-											attr: {
-												"data-bs-toggle": "collapse",
-												"data-bs-target": `#${i.id}_body`,
-												"aria-controls": `${i.id}_body`,
-												"aria-expanded": i.active ? "true" : "false",
-											},
+								return new div({
+									class: "accordion-item",
+									elem: [
+										new h({
+											level: 2,
+											id: `${i.id}_head`,
+											class: "accordion-header",
+											elem: new button({
+												label: i.label,
+												icon: i.icon,
+												showlabel: i.showlabel,
+												iconafter: i.iconafter,
+												class: ["accordion-button", !i.active ? "collapsed" : null],
+												dataBsToggle: "collapse",
+												dataBsTarget: `#${i.id}_body`,
+												ariaControls: `${i.id}_body`,
+												ariaExpanded: i.active ? "true" : "false",
+											}),
 										}),
-									}),
-									new div({
-										id: `${i.id}_body`,
-										class: ["accordion-collapse", "collapse", i.active ? "show" : null],
-										attr: {
-											"aria-labelledby": `${i.id}_head`,
-											"data-bs-parent": opt.autoclose ? `#${opt.id}` : null,
+										new div({
+											id: `${i.id}_body`,
+											class: ["accordion-collapse", "collapse", i.active ? "show" : null],
+											ariaLabelledby: `${i.id}_head`,
+											dataBsParent: opt.autoclose ? `#${opt.id}` : null,
 											"show.bs.collapse": i.onshow,
 											"shown.bs.collapse": i.onshown,
 											"hide.bs.collapse": i.onhide,
 											"hidden.bs.collapse": i.onhidden,
-										},
-										elem: new div(t),
-									}),
-								],
-							});
-					  })
-					: null;
+											elem: new div(itembody),
+										}),
+									],
+								});
+						  })
+						: null,
+			});
+
+			delete opt.item;
 
 			super.data = opt;
 		}
