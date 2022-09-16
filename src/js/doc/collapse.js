@@ -49,6 +49,37 @@ export default [
 	},
 
 	{
+		title: "Horizontal",
+		import: ["button", "card", "collapse", "sample", "p"],
+		code: () => {
+			let id = core.UUID();
+
+			return [
+				new collapse.toggle({
+					//marker
+					target: `#${id}`,
+					control: `${id}`,
+					//-
+					elem: new button({ label: "Toggle button", color: "primary" }),
+				}),
+				new collapse.container({
+					//marker
+					id: id,
+					horizontal: true,
+					//-
+					margintop: 3,
+					elem: new card.container({
+						width: "300px",
+						elem: new card.body({
+							elem: "This is some placeholder content for a horizontal collapse. It's hidden by default and shown when triggered.",
+						}),
+					}),
+				}),
+			];
+		},
+	},
+
+	{
 		title: "Multiple toggle",
 		container: sample.stackcontainer,
 		import: ["button", "card", "collapse", "sample", "p"],

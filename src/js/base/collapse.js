@@ -52,6 +52,7 @@ export class toggle extends tag {
 const defaultContainerOption = {
 	id: null,
 	show: false,
+	horizontal: null,
 
 	onshow: null,
 	onshown: null,
@@ -75,13 +76,19 @@ export class container extends div {
 			opt = core.extend({}, defaultContainerOption, opt);
 
 			opt.id = opt.id || core.UUID();
-			opt.class = core.merge.class(opt.class, ["collapse", opt.show ? "show" : null]);
+			opt.class = core.merge.class(opt.class, [
+				"collapse",
+				opt.horizontal ? "collapse-horizontal" : null,
+				opt.show ? "show" : null,
+			]);
 			opt.attr = core.merge.attr(opt.attr, {
 				"show.bs.collapse": opt.onshow,
 				"shown.bs.collapse": opt.onshown,
 				"hide.bs.collapse": opt.onhide,
 				"hidden.bs.collapse": opt.onhidden,
 			});
+
+			delete opt.horizontal;
 
 			delete opt.show;
 			delete opt.onshow;

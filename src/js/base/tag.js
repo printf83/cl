@@ -253,7 +253,7 @@ let fnWH = {
 	minHeightManager: (opt) => {
 		if (opt.minheight || opt.minheight === 0) {
 			opt.style = core.merge.style(opt.style, {
-				"min-width": typeof opt.minheight === "number" ? `${opt.minheight}%` : `${opt.minheight}`,
+				"min-height": typeof opt.minheight === "number" ? `${opt.minheight}%` : `${opt.minheight}`,
 			});
 
 			delete opt.minheight;
