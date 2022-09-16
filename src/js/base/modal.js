@@ -205,7 +205,7 @@ export default class modal extends div {
 								//validate for first button only
 								let mdl = event.currentTarget.closest(".modal");
 								let sender = event.currentTarget;
-								if (sender.getAttribute("tab-index") === "1") {
+								if (sender.getAttribute("tabindex") === "1") {
 									core.validate(mdl, (isvalid) => {
 										if (isvalid) {
 											let formdata = core.getValue(mdl);
@@ -232,7 +232,7 @@ export default class modal extends div {
 							},
 							attr: {
 								"data-bs-dismiss": i.onclick instanceof Function ? null : "modal",
-								"tab-index": ix + 1,
+								tabindex: ix + 1,
 							},
 						});
 					}

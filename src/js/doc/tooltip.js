@@ -95,7 +95,7 @@ export default [
 				placement: "right",
 				elem: new span({
 					display: "inline-block",
-					attr: { tabindex: "0" },
+					tabindex: 0,
 					elem: new button({
 						label: "Dismissible tooltip",
 						color: "primary",

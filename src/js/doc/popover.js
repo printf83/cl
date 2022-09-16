@@ -130,7 +130,7 @@ export default [
 				msg: "And here's some amazing content. It's very engaging. Right?",
 				elem: new span({
 					class: "d-inline-block",
-					attr: { tabindex: "0" },
+					tabindex: 0,
 					elem: new button({
 						label: "Dismissible popover",
 						color: "primary",
