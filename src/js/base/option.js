@@ -12,9 +12,14 @@ const defaultOption = {
 	selected: null,
 };
 const defaultSelectItemOption = {
+	tag: "option",
 	value: null,
 	label: null,
 	selected: false,
+};
+const defaultSelectGroupOption = {
+	tag: "optgroup",
+	label: null,
 };
 /**
  * opt : {tagoption,item : {selectitem},selected}
@@ -34,33 +39,69 @@ export class select extends tag {
 
 			opt.selected = Array.isArray(opt.selected) ? opt.selected : [opt.selected];
 			opt.item = Array.isArray(opt.item) ? opt.item : [opt.item];
-			opt.elem = opt.item.map((i) => {
-				if (typeof i === "string") {
-					return new tag({
+
+			let gitem = null;
+			let item = {};
+			let items = [];
+			for (let i = 0; i < opt.item.length; i++) {
+				if (typeof opt.item[i] === "string") {
+					item = {
 						tag: "option",
 						attr: {
-							value: i,
-							selected: opt.selected?.includes(i),
+							value: opt.item[i],
+							selected: opt.selected?.includes(opt.item[i]),
 						},
-						elem: i,
-					});
+						elem: opt.item[i],
+					};
+
+					if (gitem !== null) {
+						gitem.elem.push(new tag(item));
+					} else {
+						items.push(new tag(item));
+					}
 				} else {
-					i = core.extend({}, defaultSelectItemOption, i);
+					if (opt.item[i].value === "-" && opt.item[i].label) {
+						if (gitem !== null) {
+							items.push(new tag(gitem));
+							gitem = {};
+						}
 
-					i.tag = "option";
-					i.attr = core.merge.attr(i.attr, {
-						value: i.value,
-						selected: opt.selected?.includes(i.value),
-					});
-					i.elem = i.label;
+						gitem = core.extend({}, defaultSelectGroupOption, opt.item[i]);
+						gitem.attr = core.merge.attr(gitem.attr, {
+							label: gitem.label,
+						});
+						gitem.elem = [];
 
-					delete i.value;
-					delete i.label;
-					delete i.selected;
+						delete gitem.value;
+						delete gitem.label;
+						delete gitem.selected;
+					} else {
+						item = core.extend({}, defaultSelectItemOption, opt.item[i]);
 
-					return new tag(i);
+						item.attr = core.merge.attr(item.attr, {
+							value: item.value,
+							selected: opt.selected?.includes(item.value),
+						});
+						item.elem = item.label;
+
+						delete item.value;
+						delete item.label;
+						delete item.selected;
+
+						if (gitem !== null) {
+							gitem.elem.push(new tag(item));
+						} else {
+							items.push(new tag(item));
+						}
+					}
 				}
-			});
+			}
+
+			if (gitem !== null) {
+				items.push(new tag(gitem));
+			}
+
+			opt.elem = items;
 
 			delete opt.item;
 			delete opt.selected;
