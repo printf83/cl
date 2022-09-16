@@ -44,7 +44,7 @@ export class select extends tag {
 			let item = {};
 			let items = [];
 			for (let i = 0; i < opt.item.length; i++) {
-				if (typeof opt.item[i] === "string") {
+				if (opt.item[i] === null || typeof opt.item[i] === "string") {
 					item = {
 						tag: "option",
 						attr: {
