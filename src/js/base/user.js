@@ -111,7 +111,7 @@ const fn = {
 						display: ["none", "lg-block"],
 						elem: new div({
 							display: "flex",
-							alignitem: "center",
+							alignItem: "center",
 							height: 100,
 							elem: core.setting.banner(type),
 						}),
@@ -120,7 +120,7 @@ const fn = {
 						col: [12, "lg-4"],
 						elem: new div({
 							display: "flex",
-							alignitem: "center",
+							alignItem: "center",
 							height: 100,
 							elem: elem,
 						}),
@@ -136,16 +136,16 @@ const fn = {
 			opt.icon ? new icon(opt.icon) : new icon(core.setting.icon(defaultIconColor, defaultIconWeight)),
 			new tag({
 				col: true,
-				marginy: 0,
+				marginY: 0,
 				elem: new small({
-					textcolor: "muted",
+					textColor: "muted",
 					elem: core.setting.title(),
 				}),
 			}),
 			new tag({
 				col: true,
-				marginy: 0,
-				elem: new h({ level: defaultTitleSize, marginy: 0, elem: opt.title ? opt.title : defaultTitle }),
+				marginY: 0,
+				elem: new h({ level: defaultTitleSize, marginY: 0, elem: opt.title ? opt.title : defaultTitle }),
 			}),
 
 			new tag({
@@ -161,7 +161,7 @@ const fn = {
 	msg: (msg, icon) => {
 		return new alert.container({
 			align: "start",
-			marginbottom: 0,
+			marginBottom: 0,
 			icon: icon,
 			elem: msg,
 		});
@@ -189,9 +189,9 @@ const fn = {
 						width: 100,
 						elem: new div({
 							display: "flex",
-							justifycontent: "end",
+							justifyContent: "end",
 							elem: new btnclose({
-								onclick: (event) => {
+								click: (event) => {
 									let sender = event.currentTarget;
 									let container = sender.closest("div.modal");
 									if (opt.callback instanceof Function) {
@@ -211,7 +211,7 @@ const fn = {
 			icon: null,
 
 			size: opt.size ? opt.size : core.setting.banner ? defaultSizeBanner : defaultSize,
-			maxwidth: core.setting.banner ? defaultMaxWidth : defaultMaxWidthBanner,
+			maxWidth: core.setting.banner ? defaultMaxWidth : defaultMaxWidthBanner,
 			backdropcolor: opt.backdropcolor,
 			elem: [opt.close ? fn.closebtn(opt) : null, fn.banner(type, fn.form.container(opt.id, form(opt)))].filter(
 				Boolean
@@ -238,7 +238,7 @@ const fn = {
 			new dlg.confirmbox("!!", `Are you sure to <b>Sign out</b> now?`, [
 				{
 					label: "Yes",
-					onclick: () => {
+					click: () => {
 						db.user.signout(
 							{
 								sender: sender,
@@ -611,7 +611,7 @@ const fn = {
 						required: true,
 						autocomplete: "email",
 						value: opt.email,
-						onchange: fn.action.inputchange,
+						change: fn.action.inputchange,
 					}),
 					new input({
 						before: new icon("key"),
@@ -621,11 +621,11 @@ const fn = {
 						required: true,
 						minlengh: 8,
 						autocomplete: "current-password",
-						onchange: fn.action.inputchange,
+						change: fn.action.inputchange,
 					}),
 					new div({
 						display: "flex",
-						justifycontent: "center",
+						justifyContent: "center",
 						elem: new input({ type: "checkbox", name: "remember", label: "Remember me" }),
 					}),
 					new container.grid([
@@ -633,7 +633,7 @@ const fn = {
 							label: "Sign in",
 							icon: "arrow-right-to-bracket",
 							color: "primary",
-							onclick: !opt.debug
+							click: !opt.debug
 								? (event) => {
 										fn.action.signin(event.currentTarget, opt);
 								  }
@@ -641,13 +641,13 @@ const fn = {
 						}),
 						new div({
 							display: "flex",
-							justifycontent: "between",
+							justifyContent: "between",
 							elem: [
 								new button({
 									weight: "sm",
 									color: "transparent",
 									elem: "Reset password",
-									onclick: (event) => {
+									click: (event) => {
 										let sender = event.currentTarget;
 										fn.modalbodybuilder(sender, "resetpass", fn.form.resetpass, opt);
 									},
@@ -656,7 +656,7 @@ const fn = {
 									weight: "sm",
 									color: "transparent",
 									elem: "Sign up",
-									onclick: (event) => {
+									click: (event) => {
 										let sender = event.currentTarget;
 										fn.modalbodybuilder(sender, "signup", fn.form.signup, opt);
 									},
@@ -678,7 +678,7 @@ const fn = {
 						required: true,
 						floatlabel: true,
 						autocomplete: "email",
-						onchange: fn.action.inputchange,
+						change: fn.action.inputchange,
 					}),
 					new input({
 						before: new icon("key"),
@@ -688,7 +688,7 @@ const fn = {
 						required: true,
 						minlengh: 8,
 						autocomplete: "new-password",
-						onchange: fn.action.inputchange,
+						change: fn.action.inputchange,
 					}),
 					new input({
 						before: new icon("key"),
@@ -698,17 +698,17 @@ const fn = {
 						required: true,
 						minlengh: 8,
 						autocomplete: "new-password",
-						onchange: fn.action.inputchange,
+						change: fn.action.inputchange,
 					}),
 					core.setting.term && typeof core.setting.term === "function"
 						? new div({
 								elem: new small({
-									textcolor: "muted",
+									textColor: "muted",
 									elem: [
 										"By clicking sign up you are agreeing to the ",
 										new a({
 											href: "#",
-											onclick: core.setting.term,
+											click: core.setting.term,
 											elem: "Terms and Conditions",
 										}),
 										".",
@@ -721,7 +721,7 @@ const fn = {
 							label: "Sign up",
 							icon: "arrow-up-from-bracket",
 							color: "primary",
-							onclick: !opt.debug
+							click: !opt.debug
 								? (event) => {
 										fn.action.signup(event.currentTarget, opt);
 								  }
@@ -729,13 +729,13 @@ const fn = {
 						}),
 						new div({
 							display: "flex",
-							justifycontent: "between",
+							justifyContent: "between",
 							elem: [
 								new button({
 									weight: "sm",
 									color: "transparent",
 									elem: "Reset password",
-									onclick: (event) => {
+									click: (event) => {
 										let sender = event.currentTarget;
 										fn.modalbodybuilder(sender, "resetpass", fn.form.resetpass, opt);
 									},
@@ -744,7 +744,7 @@ const fn = {
 									weight: "sm",
 									color: "transparent",
 									elem: "Sign in",
-									onclick: (event) => {
+									click: (event) => {
 										let sender = event.currentTarget;
 										fn.modalbodybuilder(sender, "signin", fn.form.signin, opt);
 									},
@@ -765,7 +765,7 @@ const fn = {
 						placeholder: "Email address",
 						required: true,
 						autocomplete: "email",
-						onchange: fn.action.inputchange,
+						change: fn.action.inputchange,
 					}),
 
 					new container.grid(
@@ -774,7 +774,7 @@ const fn = {
 								label: "Send email",
 								icon: "arrow-up-from-bracket",
 								color: "primary",
-								onclick: !opt.debug
+								click: !opt.debug
 									? (event) => {
 											fn.action.resetpass(event.currentTarget, opt);
 									  }
@@ -783,13 +783,13 @@ const fn = {
 
 							new div({
 								display: "flex",
-								justifycontent: "between",
+								justifyContent: "between",
 								elem: [
 									new button({
 										weight: "sm",
 										color: "transparent",
 										elem: "Sign in",
-										onclick: (event) => {
+										click: (event) => {
 											let sender = event.currentTarget;
 											fn.modalbodybuilder(sender, "signin", fn.form.signin, opt);
 										},
@@ -798,7 +798,7 @@ const fn = {
 										weight: "sm",
 										color: "transparent",
 										elem: "Sign up",
-										onclick: (event) => {
+										click: (event) => {
 											let sender = event.currentTarget;
 											fn.modalbodybuilder(sender, "signup", fn.form.signup, opt);
 										},
@@ -821,7 +821,7 @@ const fn = {
 						required: true,
 						minlengh: 8,
 						autocomplete: "current-password",
-						onchange: fn.action.inputchange,
+						change: fn.action.inputchange,
 					}),
 
 					new input({
@@ -832,7 +832,7 @@ const fn = {
 						required: true,
 						minlengh: 8,
 						autocomplete: "new-password",
-						onchange: fn.action.inputchange,
+						change: fn.action.inputchange,
 					}),
 
 					new input({
@@ -843,7 +843,7 @@ const fn = {
 						required: true,
 						minlengh: 8,
 						autocomplete: "new-password",
-						onchange: fn.action.inputchange,
+						change: fn.action.inputchange,
 					}),
 
 					new container.grid([
@@ -851,7 +851,7 @@ const fn = {
 							label: "Change password",
 							icon: "floppy-disk",
 							color: "primary",
-							onclick: !opt.debug
+							click: !opt.debug
 								? (event) => {
 										fn.action.changepass(event.currentTarget, opt);
 								  }
@@ -859,13 +859,13 @@ const fn = {
 						}),
 						new div({
 							display: "flex",
-							justifycontent: "between",
+							justifyContent: "between",
 							elem: [
 								new button({
 									weight: "sm",
 									color: "transparent",
 									elem: "Update profile",
-									onclick: (event) => {
+									click: (event) => {
 										let sender = event.currentTarget;
 
 										fn.action.info(sender, (result) => {
@@ -881,7 +881,7 @@ const fn = {
 									weight: "sm",
 									color: "transparent",
 									elem: "Sign out",
-									onclick: (event) => {
+									click: (event) => {
 										let sender = event.currentTarget;
 
 										fn.action.signout(sender, () => {
@@ -916,7 +916,7 @@ const fn = {
 						required: true,
 						minlengh: 8,
 						autocomplete: "new-password",
-						onchange: fn.action.inputchange,
+						change: fn.action.inputchange,
 					}),
 
 					new input({
@@ -927,7 +927,7 @@ const fn = {
 						required: true,
 						minlengh: 8,
 						autocomplete: "new-password",
-						onchange: fn.action.inputchange,
+						change: fn.action.inputchange,
 					}),
 
 					new container.grid([
@@ -935,7 +935,7 @@ const fn = {
 							label: "Change password",
 							icon: "floppy-disk",
 							color: "primary",
-							onclick: !opt.debug
+							click: !opt.debug
 								? (event) => {
 										fn.action.changepass_guest(event.currentTarget, opt);
 								  }
@@ -943,13 +943,13 @@ const fn = {
 						}),
 						new div({
 							display: "flex",
-							justifycontent: "between",
+							justifyContent: "between",
 							elem: [
 								new button({
 									weight: "sm",
 									color: "transparent",
 									elem: "Sign in",
-									onclick: (event) => {
+									click: (event) => {
 										let sender = event.currentTarget;
 										fn.modalbodybuilder(sender, "signin", fn.form.signin, opt);
 									},
@@ -958,7 +958,7 @@ const fn = {
 									weight: "sm",
 									color: "transparent",
 									elem: "Reset password",
-									onclick: (event) => {
+									click: (event) => {
 										let sender = event.currentTarget;
 										fn.modalbodybuilder(sender, "resetpass", fn.form.resetpass, opt);
 									},
@@ -990,7 +990,7 @@ const fn = {
 						required: true,
 						autocomplete: "email",
 						value: opt.data?.email,
-						onchange: fn.action.inputchange,
+						change: fn.action.inputchange,
 					}),
 					new input({
 						before: new icon("tag"),
@@ -1000,7 +1000,7 @@ const fn = {
 						required: true,
 						autocomplete: "username",
 						value: opt.data?.name,
-						onchange: fn.action.inputchange,
+						change: fn.action.inputchange,
 					}),
 
 					new container.grid([
@@ -1008,7 +1008,7 @@ const fn = {
 							label: "Update profile",
 							icon: "arrow-up-from-bracket",
 							color: "primary",
-							onclick: !opt.debug
+							click: !opt.debug
 								? (event) => {
 										fn.action.updateinfo(event.currentTarget, opt);
 								  }
@@ -1017,13 +1017,13 @@ const fn = {
 
 						new div({
 							display: "flex",
-							justifycontent: "between",
+							justifyContent: "between",
 							elem: [
 								new button({
 									weight: "sm",
 									color: "transparent",
 									elem: "Change password",
-									onclick: (event) => {
+									click: (event) => {
 										let sender = event.currentTarget;
 										fn.modalbodybuilder(sender, "changepass", fn.form.changepass, opt);
 									},
@@ -1033,7 +1033,7 @@ const fn = {
 									weight: "sm",
 									color: "transparent",
 									elem: "Sign out",
-									onclick: (event) => {
+									click: (event) => {
 										let sender = event.currentTarget;
 										fn.modalbodybuilder(sender, "signout", fn.form.signout, opt);
 									},

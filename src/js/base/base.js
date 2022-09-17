@@ -679,6 +679,7 @@ const bootstrapPropertyDb = {
 	textOpacity: { format: "text-opacity-$1", value: [25, 50, 75, 100] },
 
 	btnColor: { format: "btn-$1", value: bootstrapColor },
+	btnOutlineColor: { format: "btn-outline-$1", value: bootstrapColor },
 	alertColor: { format: "alert-$1", value: bootstrapColor },
 
 	textBgColor: { format: "text-bg-$1", value: bootstrapColor },
@@ -725,7 +726,7 @@ const bootstrapPropertyDb = {
 	},
 
 	borderNone: {
-		format: "border-$1",
+		format: "border-$1-0",
 		formatTrue: "border-0",
 		formatValue: "border",
 		value: [true, "top", "end", "bottom", "start"],
@@ -1180,6 +1181,25 @@ function attachStyle(key, elem, opt) {
 	return opt;
 }
 
+function attachManualStyle(key, elem, opt) {
+	if (key === "style") {
+		if (opt[key]) {
+			let styleKeys = Object.keys(opt[key]);
+			if (styleKeys) {
+				for (let x = 0; x < styleKeys.length; x++) {
+					if (opt[key][styleKeys]) {
+						elem.style.setProperty(styleKeys, opt[key][styleKeys]);
+					}
+				}
+			}
+		}
+
+		delete opt[key];
+	}
+
+	return opt;
+}
+
 function attachEvent(key, elem, opt) {
 	if (opt[key] instanceof Function) {
 		elem.addEventListener(key, opt[key], false);
@@ -1307,6 +1327,7 @@ function attachAttr(elem, opt) {
 					opt = attachBootstrap(keys[x], elem, opt);
 					opt = attachEvent(keys[x], elem, opt);
 					opt = attachStyle(keys[x], elem, opt);
+					opt = attachManualStyle(keys[x], elem, opt);
 					opt = attachClass(keys[x], elem, opt);
 					opt = attachOther(keys[x], elem, opt);
 				}
@@ -1349,6 +1370,7 @@ function mergeStyle(existingStyle, newStyle) {
 		return null;
 	}
 }
+
 function mergeClass(existingClass, newClass) {
 	if (existingClass !== null && newClass !== null && existingClass !== undefined && newClass !== undefined) {
 		let aT = typeof existingClass;

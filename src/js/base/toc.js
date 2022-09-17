@@ -31,14 +31,16 @@ export default class toc extends div {
 		opt.class = core.merge.class(opt.class, ["cl-toc"]);
 		opt.elem = [
 			new h({ level: 6, elem: new label({ icon: opt.icon, label: opt.label }) }),
-			new hr({ marginy: 2 }),
+			new hr({ marginY: 2 }),
 			new ul({
 				id: opt.id,
 				class: ["list-unstyled", opt.type === "menu" ? null : "small"],
 				elem: opt.item.map((i) => {
 					i = core.extend({}, defaultItemOption, i);
 
-					i.class = core.merge.class(i.class, ["cl-toc-item"]);
+					i = core.merge(i, {
+						class: "cl-toc-item",
+					});
 
 					let level = i.level;
 
@@ -47,7 +49,7 @@ export default class toc extends div {
 					if (opt.type === "menu") {
 						return new li({
 							class: [level === 1 ? null : "fw-bold"],
-							marginy: 1,
+							marginY: 1,
 							elem: new button(i),
 						});
 					} else {

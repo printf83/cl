@@ -33,7 +33,8 @@ export default class tooltip extends tag {
 				opt = core.extend({}, defaultOption, opt);
 
 				let tmp = opt.elem.data;
-				tmp.attr = core.merge.attr(tmp.attr, {
+
+				tmp = core.merge(tmp, {
 					title: opt.type === "popover" ? opt.title : opt.msg,
 					"data-bs-toggle": opt.type,
 					"data-bs-content": opt.type === "popover" ? opt.msg : null,
@@ -42,23 +43,23 @@ export default class tooltip extends tag {
 					"data-bs-html": opt.type && core.isHTML(opt.msg) ? "true" : null,
 				});
 
-				if (opt.type === "popover") {
-					tmp.attr = core.merge.attr(tmp.attr, {
-						"show.bs.popover": opt.onshow,
-						"shown.bs.popover": opt.onshown,
-						"hide.bs.popover": opt.onhide,
-						"hidden.bs.popover": opt.onhidden,
-						"inserted.bs.popover": opt.oninserted,
-					});
-				} else {
-					tmp.attr = core.merge.attr(tmp.attr, {
-						"show.bs.tooltip": opt.onshow,
-						"shown.bs.tooltip": opt.onshown,
-						"hide.bs.tooltip": opt.onhide,
-						"hidden.bs.tooltip": opt.onhidden,
-						"inserted.bs.tooltip": opt.oninserted,
-					});
-				}
+				// if (opt.type === "popover") {
+				// 	tmp.attr = core.merge.attr(tmp.attr, {
+				// 		"show.bs.popover": opt.onshow,
+				// 		"shown.bs.popover": opt.onshown,
+				// 		"hide.bs.popover": opt.onhide,
+				// 		"hidden.bs.popover": opt.onhidden,
+				// 		"inserted.bs.popover": opt.oninserted,
+				// 	});
+				// } else {
+				// 	tmp.attr = core.merge.attr(tmp.attr, {
+				// 		"show.bs.tooltip": opt.onshow,
+				// 		"shown.bs.tooltip": opt.onshown,
+				// 		"hide.bs.tooltip": opt.onhide,
+				// 		"hidden.bs.tooltip": opt.onhidden,
+				// 		"inserted.bs.tooltip": opt.oninserted,
+				// 	});
+				// }
 
 				super.data = tmp;
 			} else {
