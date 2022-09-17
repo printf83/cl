@@ -70,11 +70,11 @@ export class stack extends div {
 }
 
 export class grid extends div {
-	constructor(elem, gap = 2, col = null) {
+	constructor(elem, gutter = 2, col = null) {
 		super({
 			padding: 0,
 			display: "grid",
-			gap: gap,
+			gutter: gutter,
 			col: col,
 			elem: elem,
 		});

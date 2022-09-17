@@ -78,15 +78,13 @@ const fn = {
 										size: "md",
 										bodyclass: "p-1",
 										elem: new img({
-											fluid: true,
+											container: "fluid",
 											width: 100,
 											marginx: "auto",
 											display: "block",
 											rounded: true,
 											padding: 0,
-											attr: {
-												"data-cl-file": data[0].id,
-											},
+											"data-cl-file": data[0].id,
 											src: db.file.url(data[0].id),
 											onclick: (event) => {
 												let sender = event.currentTarget;
@@ -156,10 +154,10 @@ const fn = {
 												col: thumbnailsize,
 												padding: 0,
 												elem: new div({
-													class: "btn border p-1",
-													attr: {
-														"data-cl-file": i.id,
-													},
+													class: "btn",
+													padding: 1,
+													border: true,
+													"data-cl-file": i.id,
 													onclick: (event) => {
 														let sender = event.currentTarget;
 														let fileid = sender.getAttribute("data-cl-file");
@@ -175,8 +173,8 @@ const fn = {
 														}
 													},
 													elem: new img({
-														fluid: true,
-														marginx: "auto",
+														container: "fluid",
+														marginX: "auto",
 														display: "block",
 														rounded: true,
 														src: db.file.url(i.id),
@@ -200,9 +198,7 @@ const fn = {
 													justifycontent: "center",
 													class: "btn",
 													width: 100,
-													attr: {
-														"data-cl-file": i.id,
-													},
+													"data-cl-file": i.id,
 													onclick: (event) => {
 														let sender = event.currentTarget;
 														let fileid = sender.getAttribute("data-cl-file");
@@ -243,11 +239,11 @@ const fn = {
 								static: false,
 								size: "lg",
 								elem: new div({
-									class: "container",
+									container: true,
 									padding: 0,
 									elem: new div({
 										display: "flex",
-										justifycontent: "center",
+										justifyContent: "center",
 										row: true,
 										gap: 3,
 										elem: list,
@@ -295,7 +291,7 @@ const fn = {
 					label: opt.deletelabel,
 					icon: opt.deleteicon,
 					color: opt.deletecolor,
-					class: "w-0",
+					width: 0,
 					disabled: opt.disabled ? true : opt.readonly ? true : false,
 					onclick: fn.ondelete,
 				})
@@ -348,11 +344,9 @@ const fn = {
 			new input({
 				type: "file",
 				id: fu,
-				attr: {
-					multiple: opt.multiple,
-					accept: opt.accept ? opt.accept : null,
-				},
-				style: { display: "none" },
+				multiple: opt.multiple,
+				accept: opt.accept ? opt.accept : null,
+				disply: "none",
 				onchange: (event) => {
 					let sender = event.currentTarget;
 					let id = sender.getAttribute("id");

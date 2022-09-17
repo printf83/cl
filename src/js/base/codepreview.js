@@ -86,7 +86,7 @@ function codecontainer(type, strcode, maxheight, linenums) {
 					linenums ? `${"linenums:" + (linenums === true ? 1 : linenums)}` : null,
 				],
 				margin: 0,
-				attr: { lang: type },
+				lang: type,
 				elem:
 					type === "js"
 						? beautifyjs(strcode)

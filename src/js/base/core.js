@@ -495,125 +495,125 @@ export function extend(out) {
 }
 
 //class constructor with multiple option
-const fnA = {
-	defaultRule: {
-		rule: null,
-		fn: null,
-	},
-	compareRulesAndArg: (a, b) => {
-		if (b === null) {
-			if (a === null) {
-				return true;
-			}
-		} else {
-			if (a) {
-				if (a.length === b.length) {
-					for (let i = 0; i < a.length; i++) {
-						if (typeof a[i] === "function") {
-							if (a[i](b[i]) === true) {
-								return true;
-							}
-						} else {
-							if (a[i].indexOf("|") >= 0) {
-								//multiple
-								let c = a[i].split("|");
+// const fnA = {
+// 	defaultRule: {
+// 		rule: null,
+// 		fn: null,
+// 	},
+// 	compareRulesAndArg: (a, b) => {
+// 		if (b === null) {
+// 			if (a === null) {
+// 				return true;
+// 			}
+// 		} else {
+// 			if (a) {
+// 				if (a.length === b.length) {
+// 					for (let i = 0; i < a.length; i++) {
+// 						if (typeof a[i] === "function") {
+// 							if (a[i](b[i]) === true) {
+// 								return true;
+// 							}
+// 						} else {
+// 							if (a[i].indexOf("|") >= 0) {
+// 								//multiple
+// 								let c = a[i].split("|");
 
-								for (let j = 0; j < c.length; j++) {
-									if (c[j] === b[i] || c[j] === "any") {
-										return true;
-										break;
-									}
-								}
-							} else {
-								//single
-								if (a[i] === b[i] || a[i] === "any") {
-									return true;
-									break;
-								}
-							}
-						}
-					}
-				}
-			} else {
-				console.warn("a is null");
-			}
-		}
+// 								for (let j = 0; j < c.length; j++) {
+// 									if (c[j] === b[i] || c[j] === "any") {
+// 										return true;
+// 										break;
+// 									}
+// 								}
+// 							} else {
+// 								//single
+// 								if (a[i] === b[i] || a[i] === "any") {
+// 									return true;
+// 									break;
+// 								}
+// 							}
+// 						}
+// 					}
+// 				}
+// 			} else {
+// 				console.warn("a is null");
+// 			}
+// 		}
 
-		return false;
-	},
-	getFunction: (ruleSetting, argType) => {
-		if (ruleSetting && ruleSetting.length > 0) {
-			for (var i = 0; i < ruleSetting.length; i++) {
-				if (fnA.compareRulesAndArg(ruleSetting[i].rule, argType)) {
-					return ruleSetting[i].fn;
-					break;
-				}
-			}
-		}
+// 		return false;
+// 	},
+// 	getFunction: (ruleSetting, argType) => {
+// 		if (ruleSetting && ruleSetting.length > 0) {
+// 			for (var i = 0; i < ruleSetting.length; i++) {
+// 				if (fnA.compareRulesAndArg(ruleSetting[i].rule, argType)) {
+// 					return ruleSetting[i].fn;
+// 					break;
+// 				}
+// 			}
+// 		}
 
-		return null;
-	},
-	checkArgType: (obj) => {
-		if (obj === undefined) {
-			return "undefined";
-		}
+// 		return null;
+// 	},
+// 	checkArgType: (obj) => {
+// 		if (obj === undefined) {
+// 			return "undefined";
+// 		}
 
-		if (obj === null) {
-			return "null";
-		}
+// 		if (obj === null) {
+// 			return "null";
+// 		}
 
-		if (Array.isArray(obj)) {
-			if (obj.length > 0) {
-				return `${fnA.checkArgType(obj[0])}[]`;
-			} else {
-				return "any[]";
-			}
-		} else {
-			let t = typeof obj;
-			if (t === "object") {
-				if (obj.hasOwnProperty("cl") && obj.cl === 1) {
-					return "cl";
-				} else if (obj === { debug: true }) {
-					return "debug";
-				} else {
-					return t;
-				}
-			} else {
-				return t;
-			}
-		}
-	},
-	getArgType: (obj) => {
-		if (obj && obj.length > 0) {
-			let result = [];
-			obj.forEach((i) => {
-				result.push(fnA.checkArgType(i));
-			});
-			return result;
-		} else {
-			return null;
-		}
-	},
-	main: (rules, caller, ...obj) => {
-		let a = fnA.getArgType(...obj);
-		let f = fnA.getFunction(rules, a);
-		if (f) {
-			return f(...obj);
-		} else {
-			console.error(`${caller} argument ${a.join(", ")} not supported by any rules`, {
-				obj: a,
-				rule: rules
-					? rules.map((i) => {
-							return i?.rule?.join(", ");
-					  })
-					: null,
-			});
-			return null;
-		}
-	},
-};
+// 		if (Array.isArray(obj)) {
+// 			if (obj.length > 0) {
+// 				return `${fnA.checkArgType(obj[0])}[]`;
+// 			} else {
+// 				return "any[]";
+// 			}
+// 		} else {
+// 			let t = typeof obj;
+// 			if (t === "object") {
+// 				if (obj.hasOwnProperty("cl") && obj.cl === 1) {
+// 					return "cl";
+// 				} else if (obj === { debug: true }) {
+// 					return "debug";
+// 				} else {
+// 					return t;
+// 				}
+// 			} else {
+// 				return t;
+// 			}
+// 		}
+// 	},
+// 	getArgType: (obj) => {
+// 		if (obj && obj.length > 0) {
+// 			let result = [];
+// 			obj.forEach((i) => {
+// 				result.push(fnA.checkArgType(i));
+// 			});
+// 			return result;
+// 		} else {
+// 			return null;
+// 		}
+// 	},
+// 	main: (rules, caller, ...obj) => {
+// 		let a = fnA.getArgType(...obj);
+// 		let f = fnA.getFunction(rules, a);
+// 		if (f) {
+// 			return f(...obj);
+// 		} else {
+// 			console.error(`${caller} argument ${a.join(", ")} not supported by any rules`, {
+// 				obj: a,
+// 				rule: rules
+// 					? rules.map((i) => {
+// 							return i?.rule?.join(", ");
+// 					  })
+// 					: null,
+// 			});
+// 			return null;
+// 		}
+// 	},
+// };
 
-export const args = fnA.main;
+export const args = base.multipleConstructorClass;
 
 export const merge = base.mergeObject;
 

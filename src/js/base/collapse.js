@@ -35,13 +35,12 @@ export class toggle extends tag {
 				});
 			}
 
-			let t = opt.elem.data;
-			t.class = core.merge.class(t.class, [!opt.show && opt.toggle === "collapse" ? "collapsed" : null]);
-			t.attr = core.merge.attr(t.attr, {
-				"aria-controls": opt.control,
-				"aria-expanded": opt.show ? "true" : "false",
-				"data-bs-target": opt.target,
-				"data-bs-toggle": opt.toggle,
+			let t = core.merge(opt.elem.data, {
+				class: [!opt.show && opt.toggle === "collapse" ? "collapsed" : null],
+				ariaControls: opt.control,
+				ariaExpanded: opt.show ? "true" : "false",
+				dataBsTarget: opt.target,
+				dataBsToggle: opt.toggle,
 			});
 
 			super.data = t;
@@ -75,13 +74,9 @@ export class container extends div {
 		if (opt) {
 			opt = core.extend({}, defaultContainerOption, opt);
 
-			opt.id = opt.id || core.UUID();
-			opt.class = core.merge.class(opt.class, [
-				"collapse",
-				opt.horizontal ? "collapse-horizontal" : null,
-				opt.show ? "show" : null,
-			]);
-			opt.attr = core.merge.attr(opt.attr, {
+			opt = core.merge(opt, {
+				id: opt.id || core.UUID(),
+				class: ["collapse", opt.horizontal ? "collapse-horizontal" : null, opt.show ? "show" : null],
 				"show.bs.collapse": opt.onshow,
 				"shown.bs.collapse": opt.onshown,
 				"hide.bs.collapse": opt.onhide,

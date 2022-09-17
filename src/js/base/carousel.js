@@ -45,114 +45,112 @@ export default class carousel extends div {
 
 			opt.id = opt.id || core.UUID();
 
-			opt.item = Array.isArray(opt.item) ? opt.item : [opt.item];
+			opt.item = opt.item ? (Array.isArray(opt.item) ? opt.item : [opt.item]) : null;
 
-			opt.class = core.merge.class(opt.class, [
-				"carousel",
-				opt.slide ? "slide" : null,
-				opt.fade ? "carousel-fade" : null,
-				opt.dark ? "carousel-dark" : null,
-			]);
-
-			opt.attr = core.merge.attr(opt.attr, {
-				"data-bs-ride": "carousel",
-				"data-bs-touch": !opt.touch ? "false" : null,
-				"data-bs-interval": !opt.touch ? "false" : null,
+			opt = core.merge(opt, {
+				class: [
+					"carousel",
+					opt.slide ? "slide" : null,
+					opt.fade ? "carousel-fade" : null,
+					opt.dark ? "carousel-dark" : null,
+				],
+				dataBsRide: "carousel",
+				dataBsTouch: !opt.touch ? "false" : null,
+				dataBsInterval: !opt.touch ? "false" : null,
 
 				"slide.bs.carousel": opt.onslide,
 				"slid.bs.carousel": opt.onslid,
-			});
+				elem: [
+					opt.indicators
+						? new div({
+								class: "carousel-indicators",
+								elem: opt.item?.map((i, ix) => {
+									if (typeof i === "string") {
+										i = {
+											src: i,
+										};
+									}
 
-			opt.elem = [
-				opt.indicators
-					? new div({
-							class: "carousel-indicators",
-							elem: opt.item.map((i, ix) => {
-								if (typeof i === "string") {
-									i = {
-										src: i,
-									};
-								}
+									i = core.extend({}, defaultItemOption, i);
 
-								i = core.extend({}, defaultItemOption, i);
-
-								return new button({
-									class: ix === 0 ? "active" : null,
-									attr: {
-										"aria-current": ix === 0 ? "true" : null,
-										"aria-label": i.caption ? i.caption : i.alt ? i.alt : `Slide ${ix + 1}`,
-										"data-bs-slide-to": `${ix}`,
-										"data-bs-target": `${opt.id}`,
-									},
-								});
-							}),
-					  })
-					: null,
-				new div({
-					class: "carousel-inner",
-					elem: opt.item.map((i, ix) => {
-						if (typeof i === "string") {
-							i = {
-								src: i,
-							};
-						}
-
-						i = core.extend({}, defaultItemOption, i);
-
-						return new div({
-							class: ["carousel-item", ix === 0 ? "active" : null],
-							attr: {
-								"data-bs-interval": i.interval && opt.touch ? i.interval : null,
-							},
-							elem: [
-								new img({
-									width:100,
-									display: "block",
-									alt: i.alt ? i.alt : i.caption ? i.caption : null,
-									src: i.src,
+									return new button({
+										class: ix === 0 ? "active" : null,
+										attr: {
+											"aria-current": ix === 0 ? "true" : null,
+											"aria-label": i.caption ? i.caption : i.alt ? i.alt : `Slide ${ix + 1}`,
+											"data-bs-slide-to": `${ix}`,
+											"data-bs-target": `${opt.id}`,
+										},
+									});
 								}),
-								i.caption || i.text
-									? new div({
-											display: ["none", "md-block"],
-											class: "carousel-caption",
-											elem: [
-												i.caption ? new h({ level: 5, elem: i.caption }) : null,
-												i.text ? new p(i.text) : null,
-											],
-									  })
-									: null,
-							],
-						});
-					}),
-				}),
+						  })
+						: null,
+					new div({
+						class: "carousel-inner",
+						elem: opt.item?.map((i, ix) => {
+							if (typeof i === "string") {
+								i = {
+									src: i,
+								};
+							}
 
-				opt.control
-					? new button({
-							class: "carousel-control-prev",
-							attr: {
-								"data-bs-target": `#${opt.id}`,
-								"data-bs-slide": "prev",
-							},
-							elem: [
-								new span({ class: "carousel-control-prev-icon", attr: { "aria-hidden": "true" } }),
-								new span({ class: "visually-hidden", elem: "Previous" }),
-							],
-					  })
-					: null,
-				opt.control
-					? new button({
-							class: "carousel-control-next",
-							attr: {
-								"data-bs-target": `#${opt.id}`,
-								"data-bs-slide": "next",
-							},
-							elem: [
-								new span({ class: "carousel-control-next-icon", attr: { "aria-hidden": "true" } }),
-								new span({ class: "visually-hidden", elem: "Next" }),
-							],
-					  })
-					: null,
-			];
+							i = core.extend({}, defaultItemOption, i);
+
+							return new div({
+								class: ["carousel-item", ix === 0 ? "active" : null],
+								attr: {
+									"data-bs-interval": i.interval && opt.touch ? i.interval : null,
+								},
+								elem: [
+									new img({
+										width: 100,
+										display: "block",
+										alt: i.alt ? i.alt : i.caption ? i.caption : null,
+										src: i.src,
+									}),
+									i.caption || i.text
+										? new div({
+												display: ["none", "md-block"],
+												class: "carousel-caption",
+												elem: [
+													i.caption ? new h({ level: 5, elem: i.caption }) : null,
+													i.text ? new p(i.text) : null,
+												],
+										  })
+										: null,
+								],
+							});
+						}),
+					}),
+
+					opt.control
+						? new button({
+								class: "carousel-control-prev",
+								attr: {
+									"data-bs-target": `#${opt.id}`,
+									"data-bs-slide": "prev",
+								},
+								elem: [
+									new span({ class: "carousel-control-prev-icon", attr: { "aria-hidden": "true" } }),
+									new span({ class: "visually-hidden", elem: "Previous" }),
+								],
+						  })
+						: null,
+					opt.control
+						? new button({
+								class: "carousel-control-next",
+								attr: {
+									"data-bs-target": `#${opt.id}`,
+									"data-bs-slide": "next",
+								},
+								elem: [
+									new span({ class: "carousel-control-next-icon", attr: { "aria-hidden": "true" } }),
+									new span({ class: "visually-hidden", elem: "Next" }),
+								],
+						  })
+						: null,
+				],
+			});
 
 			delete opt.control;
 			delete opt.touch;

@@ -57,7 +57,7 @@ export default class example extends div {
 						: opt.anchor
 						? "h2"
 						: "h1",
-				class: !opt.anchor ? "fs-1" : null,
+				fontSize: !opt.anchor ? 1 : null,
 				paddingtop: 3,
 				id: opt.id,
 				elem: [
@@ -66,15 +66,13 @@ export default class example extends div {
 						? new a({
 								class: ["anchorjs-link", opt.debug ? "anchorjs-link-debug" : null],
 								paddingstart: 2,
-								attr: {
-									"aria-label": "Anchor",
-									"data-anchorjs-icon": "#",
-									onclick: opt.debug
-										? null
-										: (event) => {
-												core.focusElement(event.currentTarget.parentNode);
-										  },
-								},
+								ariaLabel: "Anchor",
+								dataAnchorjsIcon: "#",
+								onclick: opt.debug
+									? null
+									: (event) => {
+											core.focusElement(event.currentTarget.parentNode);
+									  },
 						  })
 						: null,
 				],

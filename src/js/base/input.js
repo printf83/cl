@@ -246,30 +246,30 @@ export default class input extends tag {
 				}
 			}
 
-			m.attr = core.merge.attr(m.attr, {
-				min: m.min,
-				max: m.max,
-				step: m.step,
-				rows: m.rows,
-				multiple: m.multiple,
-				required: m.required,
-				minlength: m.minlength,
-				maxlength: m.maxlength,
-				inputmode: m.inputmode,
-				pattern: m.pattern,
-				value: m.value,
-				checked: m.checked,
-				placeholder: m.placeholder,
-				autocomplete: m.autocomplete,
-				autofocus: m.autofocus,
+			// m.attr = core.merge.attr(m.attr, {
+			// 	min: m.min,
+			// 	max: m.max,
+			// 	step: m.step,
+			// 	rows: m.rows,
+			// 	multiple: m.multiple,
+			// 	required: m.required,
+			// 	minlength: m.minlength,
+			// 	maxlength: m.maxlength,
+			// 	inputmode: m.inputmode,
+			// 	pattern: m.pattern,
+			// 	value: m.value,
+			// 	checked: m.checked,
+			// 	placeholder: m.placeholder,
+			// 	autocomplete: m.autocomplete,
+			// 	autofocus: m.autofocus,
 
-				disabled: m.disabled,
-				readOnly: m.readonly,
+			// 	disabled: m.disabled,
+			// 	readOnly: m.readonly,
 
-				onchange: m.onchange,
-				onblur: m.onblur,
-				onfocus: m.onfocus,
-			});
+			// 	onchange: m.onchange,
+			// 	onblur: m.onblur,
+			// 	onfocus: m.onfocus,
+			// });
 
 			delete m.valid;
 			delete m.invalid;
@@ -315,81 +315,80 @@ export default class input extends tag {
 				case "switch":
 				case "checkbox":
 				case "radio":
-					m.tag = "input";
-					m.class = core.merge.class(m.class, "form-check-input");
-					m.attr = core.merge.attr(m.attr, {
+					m = core.merge(m, {
+						tag: "input",
+						class: "form-check-input",
 						type: opt.type === "switch" ? "checkbox" : opt.type,
 						"aria-label": opt.hidelabel && opt.label ? opt.label : null,
 						indeterminate: opt.indeterminate && opt.type === "checkbox" ? true : null,
 					});
+
 					mainctl = new tag(m);
 					break;
 				case "textarea":
-					m.tag = "textarea";
-					m.class = core.merge.class(m.class, [
-						opt.plaintext && opt.readonly ? "form-control-plaintext" : "form-control",
-						opt.weight && !(opt.before || opt.after) ? `form-control-${opt.weight}` : null,
-					]);
-					m.attr = core.merge.attr(m.attr, {
+					m = core.merge(m, {
+						tag: "textarea",
+						class: [
+							opt.plaintext && opt.readonly ? "form-control-plaintext" : "form-control",
+							opt.weight && !(opt.before || opt.after) ? `form-control-${opt.weight}` : null,
+						],
 						"aria-label": opt.hidelabel && opt.label ? opt.label : null,
+						elem: m.value,
 					});
-					m.elem = m.value;
 
 					delete m.value;
 
 					mainctl = new tag(m);
 					break;
 				case "select":
-					m.tag = "select";
-					m.class = core.merge.class(m.class, [
-						opt.plaintext && opt.readonly ? "form-select-plaintext" : "form-select",
-						opt.weight && !(opt.before || opt.after || opt.addctl !== null)
-							? `form-select-${opt.weight}`
-							: null,
-					]);
-
-					m.attr = core.merge.attr(m.attr, {
+					m = core.merge(m, {
+						tag: "select",
+						class: [
+							opt.plaintext && opt.readonly ? "form-select-plaintext" : "form-select",
+							opt.weight && !(opt.before || opt.after || opt.addctl !== null)
+								? `form-select-${opt.weight}`
+								: null,
+						],
 						"aria-label": opt.hidelabel && opt.label ? opt.label : null,
+						elem: new option.select({ item: opt.option, selected: opt.value }),
 					});
-
-					m.elem = new option.select({ item: opt.option, selected: opt.value });
 
 					mainctl = new tag(m);
 					break;
 				case "datalist":
-					m.tag = "datalist";
-					m.elem = new option.select({ item: opt.option, selected: opt.value });
+					m = core.merge(m, {
+						tag: "datalist",
+						elem: new option.select({ item: opt.option, selected: opt.value }),
+					});
 
 					mainctl = new tag(m);
 					break;
 				default:
-					m.tag = "input";
-					m.class = core.merge.class(m.class, [
-						opt.type !== "range"
-							? core.combineArray(
-									[
-										opt.plaintext && opt.readonly ? "form-control-plaintext" : "form-control",
-										,
-										opt.weight &&
-										!(
-											opt.before ||
-											opt.after ||
-											opt.addctl !== null ||
-											(opt.type === "number" && opt.numctl === true)
-										)
-											? `form-control-${opt.weight}`
-											: null,
-									],
-									" "
-							  )
-							: "form-range",
-						opt.type === "color"
-							? core.combineArray(["form-control-color", opt.floatlabel ? "w-100" : null], " ")
-							: null,
-					]);
-
-					m.attr = core.merge.attr(m.attr, {
-						type: opt.type,
+					m = core.merge(m, {
+						tag: "input",
+						class: [
+							opt.type !== "range"
+								? core.combineArray(
+										[
+											opt.plaintext && opt.readonly ? "form-control-plaintext" : "form-control",
+											,
+											opt.weight &&
+											!(
+												opt.before ||
+												opt.after ||
+												opt.addctl !== null ||
+												(opt.type === "number" && opt.numctl === true)
+											)
+												? `form-control-${opt.weight}`
+												: null,
+										],
+										" "
+								  )
+								: "form-range",
+							opt.type === "color"
+								? core.combineArray(["form-control-color", opt.floatlabel ? "w-100" : null], " ")
+								: null,
+						],
 						"aria-label": opt.hidelabel && opt.label ? opt.label : null,
 						list: opt.option ? `${opt.id}-dl` : null,
 					});

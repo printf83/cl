@@ -138,22 +138,18 @@ export default class button extends tag {
 
 				m.tag = "input";
 				m.class = "btn-check";
-				m.attr = core.merge.attr(m.attr, {
-					autocomplete: "off",
-					type: m.type,
-				});
+				opt.autocomplete = "off";
 
 				m = new tag(m);
 
-				opt.tag = "label";
-				opt.attr = core.merge.attr(opt.attr, { for: opt.id });
-				opt.elem = [
-					new label({ icon: opt.icon, label: opt.label, hidelabel: opt.hidelabel }),
-					opt.badge ? new badge(opt.badge) : null,
-				];
-
-				delete opt.id;
-				delete opt.name;
+				opt = core.merge(opt, {
+					tag: "label",
+					for: opt.id,
+					elem: [
+						new label({ icon: opt.icon, label: opt.label, hidelabel: opt.hidelabel }),
+						opt.badge ? new badge(opt.badge) : null,
+					],
+				});
 			} else {
 				opt.elem = opt.elem
 					? opt.elem

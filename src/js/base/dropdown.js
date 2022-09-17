@@ -77,15 +77,15 @@ export default class dropdown extends tag {
 
 			delete m.id;
 
-			s.class = core.merge.class(s.class, "dropdown-toggle");
-			s.attr = core.merge.attr(s.attr, {
-				"aria-expanded": "false",
-				"data-bs-auto-close": opt.autoclose,
-				"data-bs-reference": opt.reference,
-				"data-bs-offset": opt.offset,
-				"data-bs-toggle": "dropdown",
+			s = core.merge(s, {
+				class: "dropdown-toggle",
+				ariaExpanded: "false",
+				dataBsAutoClose: opt.autoclose,
+				dataBsReference: opt.reference,
+				dataBsOffset: opt.offset,
+				dataBsToggle: "dropdown",
 
-				"aria-labelledby": opt.id,
+				ariaLabelledby: opt.id,
 
 				"show.bs.dropdown": opt.onshow,
 				"shown.bs.dropdown": opt.onshown,
@@ -96,10 +96,13 @@ export default class dropdown extends tag {
 			let btnctl = opt.splittoggle ? new button(m) : new button(s);
 
 			let t = core.extend({}, s);
+
 			t.label = "Toggle Dropdown";
 			t.hidelabel = true;
 			t.icon = null;
-			t.class = core.merge.class(t.class, "dropdown-toggle-split");
+			t = core.merge(t, {
+				class: "dropdown-toggle-split",
+			});
 
 			let splitctl = opt.splittoggle ? new button(t) : null;
 

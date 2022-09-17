@@ -668,7 +668,7 @@ const bootstrapPositionView = [
 const bootstrapPropertyDb = {
 	userSelect: { format: "user-select-$1", value: ["all", "auto", "none"] },
 	pointerEvent: { format: "pe-$1", value: ["auto", "none"] },
-	position: { format: "position-$1", value: ["static", "relative", "absolute", "fixed", "sticky"] },
+	position: { format: "position-$1", value: ["static", "relative", "absolute", "fixed", "sticky", "tooltip"] },
 	overflow: { format: "overflow-$1", value: ["auto", "hidden", "visible", "scroll"] },
 
 	textAlign: { format: "text-$1", value: bootstrapPositionView },
@@ -1390,6 +1390,7 @@ function mergeAttr(existingObject, newObject, rules) {
 		return newObject[i]; //used newObject insted
 	}
 }
+
 export function mergeObject(existingObject, newObject, rules) {
 	if ((existingObject || newObject) && !(existingObject && newObject)) {
 		return existingObject || newObject;
@@ -1424,6 +1425,128 @@ export function mergeObject(existingObject, newObject, rules) {
 }
 
 //merge - end
+
+//multiple option constructor class
+const fnA = {
+	defaultRule: {
+		rule: null,
+		fn: null,
+	},
+	compareRulesAndArg: (a, b) => {
+		if (b === null) {
+			if (a === null) {
+				return true;
+			}
+		} else {
+			if (a) {
+				if (a.length === b.length) {
+					for (let i = 0; i < a.length; i++) {
+						if (typeof a[i] === "function") {
+							if (a[i](b[i]) === true) {
+								return true;
+							}
+						} else {
+							if (a[i].indexOf("|") >= 0) {
+								//multiple
+								let c = a[i].split("|");
+
+								for (let j = 0; j < c.length; j++) {
+									if (c[j] === b[i] || c[j] === "any") {
+										return true;
+										break;
+									}
+								}
+							} else {
+								//single
+								if (a[i] === b[i] || a[i] === "any") {
+									return true;
+									break;
+								}
+							}
+						}
+					}
+				}
+			} else {
+				console.warn("a is null");
+			}
+		}
+
+		return false;
+	},
+	getFunction: (ruleSetting, argType) => {
+		if (ruleSetting && ruleSetting.length > 0) {
+			for (var i = 0; i < ruleSetting.length; i++) {
+				if (fnA.compareRulesAndArg(ruleSetting[i].rule, argType)) {
+					return ruleSetting[i].fn;
+					break;
+				}
+			}
+		}
+
+		return null;
+	},
+	checkArgType: (obj) => {
+		if (obj === undefined) {
+			return "undefined";
+		}
+
+		if (obj === null) {
+			return "null";
+		}
+
+		if (Array.isArray(obj)) {
+			if (obj.length > 0) {
+				return `${fnA.checkArgType(obj[0])}[]`;
+			} else {
+				return "any[]";
+			}
+		} else {
+			let t = typeof obj;
+			if (t === "object") {
+				if (obj.hasOwnProperty("cl") && obj.cl === 1) {
+					return "cl";
+				} else if (obj === { debug: true }) {
+					return "debug";
+				} else {
+					return t;
+				}
+			} else {
+				return t;
+			}
+		}
+	},
+	getArgType: (obj) => {
+		if (obj && obj.length > 0) {
+			let result = [];
+			obj.forEach((i) => {
+				result.push(fnA.checkArgType(i));
+			});
+			return result;
+		} else {
+			return null;
+		}
+	},
+	main: (rules, caller, ...obj) => {
+		let a = fnA.getArgType(...obj);
+		let f = fnA.getFunction(rules, a);
+		if (f) {
+			return f(...obj);
+		} else {
+			console.error(`${caller} argument ${a.join(", ")} not supported by any rules`, {
+				obj: a,
+				rule: rules
+					? rules.map((i) => {
+							return i?.rule?.join(", ");
+					  })
+					: null,
+			});
+			return null;
+		}
+	},
+};
+
+export const multipleConstructorClass = fnA.main;
+//multiple option constructor class - end
 
 export function elemInfo(elem) {
 	let a1 = elem.localName;
