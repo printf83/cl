@@ -64,8 +64,9 @@ export default class menu extends div {
 						}
 
 						i = core.extend({}, defaultItemOption, i);
-
-						i.class = core.merge.class(i.class, [i.active ? "active" : null]);
+						i = core.merge(i, {
+							class: i.active ? "active" : null,
+						});
 
 						delete i.active;
 

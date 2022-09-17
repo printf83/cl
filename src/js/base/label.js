@@ -65,10 +65,6 @@ export default class label extends tag {
 			opt = core.extend({}, defaultOption, opt);
 
 			if (opt.for) {
-				opt.attr = core.merge.attr(opt.attr, {
-					for: opt.for,
-				});
-
 				opt.elem = generate(opt);
 
 				delete opt.for;

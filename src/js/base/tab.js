@@ -98,9 +98,7 @@ export default class tab extends div {
 				headerItem.push(
 					new li({
 						class: ["nav-item", i.option ? "dropdown" : null],
-						attr: {
-							role: "tab",
-						},
+						role: "tab",
 						elem: [
 							new a({
 								class: [
@@ -111,22 +109,20 @@ export default class tab extends div {
 								],
 								href: `#${i.id}_body`,
 								id: `${i.id}_head`,
-								attr: {
-									"data-bs-toggle": i.option
-										? "dropdown"
-										: opt.type === "tab"
-										? "tab"
-										: opt.type === "pill"
-										? "pill"
-										: "tab",
-									"aria-controls": `${i.id}_body`,
-									role: i.option ? "button" : null,
+								"data-bs-toggle": i.option
+									? "dropdown"
+									: opt.type === "tab"
+									? "tab"
+									: opt.type === "pill"
+									? "pill"
+									: "tab",
+								"aria-controls": `${i.id}_body`,
+								role: i.option ? "button" : null,
 
-									"show.bs.tab": i.onshow,
-									"shown.bs.tab": i.onshown,
-									"hide.bs.tab": i.onhide,
-									"hidden.bs.tab": i.onhidden,
-								},
+								"show.bs.tab": i.onshow,
+								"shown.bs.tab": i.onshown,
+								"hide.bs.tab": i.onhide,
+								"hidden.bs.tab": i.onhidden,
 								elem: new label({
 									label: i.label,
 									icon: i.icon,
@@ -153,10 +149,8 @@ export default class tab extends div {
 						new div({
 							class: ["tab-pane", opt.animated ? "fade" : null, i.active ? "active show" : null],
 							id: `${i.id}_body`,
-							attr: {
-								role: "tabpanel",
-								"aria-labelledby": `${i.id}_head`,
-							},
+							role: "tabpanel",
+							"aria-labelledby": `${i.id}_head`,
 							elem: i.elem,
 						})
 					);
@@ -188,9 +182,7 @@ export default class tab extends div {
 						: null,
 				],
 				id: opt.id ? `${opt.id}_head` : null,
-				attr: {
-					role: "tablist",
-				},
+				role: "tablist",
 				elem: headerItem,
 			});
 

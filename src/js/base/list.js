@@ -82,7 +82,7 @@ const fn = {
 									onchange: fn.pagechange,
 									autoupdate: false,
 									nextprev: false,
-									attr: { "data-cl-container": id },
+									"data-cl-container": id,
 								})
 							);
 						}
@@ -950,9 +950,10 @@ export class container extends div {
 		if (opt) {
 			opt = core.extend({}, defaultOption, opt);
 
-			opt.id = opt.id || core.UUID();
-
-			opt.class = core.merge.class(opt.class, ["cl-list"]);
+			opt = core.merge(opt, {
+				id: opt.id || core.UUID(),
+				class: "cl-list",
+			});
 
 			fn.set(opt.id, null, core.extend({}, opt));
 
@@ -1005,17 +1006,13 @@ export class item extends li {
 	set data(opt) {
 		opt = core.extend({}, defaultItemOption, opt);
 
-		opt.class = core.merge.class(
-			opt.class,
-			["list-group-item", opt.allow_action ? "pointer" : null].filter(Boolean)
-		);
-
-		super.data = {
-			class: opt.class,
-			attr: { "data-key": opt.key, "data-name": opt.name },
+		opt = core.merge(opt, {
+			class: ["list-group-item", opt.allow_action ? "pointer" : null],
+			"data-key": opt.key,
+			"data-name": opt.name,
 			display: "flex",
-			justifycontent: "between",
-			onclick: opt.allow_action ? fn.item.action : null,
+			justifyContent: "between",
+			click: opt.allow_action ? fn.item.action : null,
 			elem: [
 				new div({
 					display: "flex",
@@ -1058,8 +1055,8 @@ export class item extends li {
 					? new div({
 							class: "cl-list-ctl",
 							display: "flex",
-							alignself: "center",
-							onclick: fn.item.menu,
+							alignSelf: "center",
+							click: fn.item.menu,
 							elem: new btngroup({
 								elem: [
 									opt.allow_more
@@ -1076,7 +1073,9 @@ export class item extends li {
 					  })
 					: null,
 			],
-		};
+		});
+
+		super.data = opt;
 	}
 }
 
@@ -1091,11 +1090,13 @@ export class group extends li {
 	set data(opt) {
 		opt = core.extend({}, defaultGroupOption, opt);
 
-		opt.class = core.merge.class(opt.class, ["list-group-item", "list-group-item-header"]);
-
-		super.data = {
-			class: opt.class,
+		opt = core.merge(opt, {
+			class: ["list-group-item", "list-group-item-header"],
 			elem: new b(opt.name),
-		};
+		});
+
+		delete opt.name;
+
+		super.data = opt;
 	}
 }

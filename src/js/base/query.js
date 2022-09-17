@@ -232,7 +232,7 @@ let fn = {
 										new button({
 											color: "danger",
 											icon: "trash",
-											onclick: (event) => {
+											click: (event) => {
 												fn.filter.remove(event);
 											},
 										}),
@@ -445,10 +445,8 @@ let fn = {
 				color: opt.color,
 				col: opt.col,
 				label: opt.label,
-				attr: {
-					"data-cl-container": opt.container,
-				},
-				onclick: (event) => {
+				"data-cl-container": opt.container,
+				click: (event) => {
 					fn.filter.add(event, true);
 				},
 			});
@@ -629,7 +627,7 @@ let fn = {
 									new button({
 										color: "danger",
 										icon: "trash",
-										onclick: (event) => {
+										click: (event) => {
 											fn.sort.remove(event);
 										},
 									}),
@@ -721,10 +719,8 @@ let fn = {
 				color: opt.color,
 				col: opt.col,
 				label: opt.label,
-				attr: {
-					"data-cl-container": opt.container,
-				},
-				onclick: (event) => {
+				"data-cl-container": opt.container,
+				click: (event) => {
 					fn.sort.add(event, true);
 				},
 			});
@@ -907,7 +903,7 @@ function btnBuilder(btn, defButton, defColor, pushCancel) {
 			return {
 				label: ix <= defButton.length ? defButton[ix] : `Button ${ix + 1}`,
 				color: ix === 0 && defColor ? defColor : null,
-				onclick:
+				click:
 					ix === 0
 						? (sender) => {
 								if (core.validate(sender.closest(".modal"))) {

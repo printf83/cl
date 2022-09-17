@@ -24,7 +24,7 @@ const defaultOption = {
 	autoupdate: true,
 };
 /**
- * [item:{title,icon,divider,label,href,onclick}]
+ * [item:{title,icon,divider,label,href,click}]
  * opt : {attr,id,class,style,item,divider}
  */
 
@@ -74,13 +74,11 @@ export default class paging extends div {
 							class: ["page-item", curpage > 1 ? null : "disabled"],
 							elem: new a({
 								class: "page-link",
-								attr: {
-									tabindex: curpage > 1 ? null : "-1",
-									"aria-disabled": curpage > 1 ? null : true,
-									"aria-label": "First Page",
-								},
+								tabindex: curpage > 1 ? null : "-1",
+								"aria-disabled": curpage > 1 ? null : true,
+								"aria-label": "First Page",
 								href: "#",
-								onclick: (event) => {
+								click: (event) => {
 									data.skip = 0;
 									pagingonchange(event.currentTarget, data);
 								},
@@ -105,7 +103,7 @@ export default class paging extends div {
 									"aria-label": "Previous Page",
 								},
 								href: "#",
-								onclick: (event) => {
+								click: (event) => {
 									data.skip = (curpage - 2) * data.limit;
 									pagingonchange(event.currentTarget, data);
 								},
@@ -174,11 +172,9 @@ export default class paging extends div {
 							class: ["page-item", x === c ? "active" : null],
 							elem: new a({
 								class: "page-link",
-								attr: {
-									"aria-label": `Page ${x.toString()}`,
-								},
+								"aria-label": `Page ${x.toString()}`,
 								href: "#",
-								onclick: (event) => {
+								click: (event) => {
 									let xnum = parseInt(event.currentTarget.innerText, 10);
 									data.skip = (xnum - 1) * data.limit;
 									pagingonchange(event.currentTarget, data);
@@ -196,13 +192,11 @@ export default class paging extends div {
 							class: ["page-item", curpage < btncount ? null : "disabled"],
 							elem: new a({
 								class: "page-link",
-								attr: {
-									tabindex: curpage < btncount ? null : "-1",
-									"aria-disabled": curpage > 1 ? null : true,
-									"aria-label": "Next Page",
-								},
+								tabindex: curpage < btncount ? null : "-1",
+								"aria-disabled": curpage > 1 ? null : true,
+								"aria-label": "Next Page",
 								href: "#",
-								onclick: (event) => {
+								click: (event) => {
 									data.skip = curpage * data.limit;
 									pagingonchange(event.currentTarget, data);
 								},
@@ -219,13 +213,11 @@ export default class paging extends div {
 							class: ["page-item", curpage < btncount ? null : "disabled"],
 							elem: new a({
 								class: "page-link",
-								attr: {
-									tabindex: curpage < btncount ? null : "-1",
-									"aria-disabled": curpage > 1 ? null : true,
-									"aria-label": "Last Page",
-								},
+								tabindex: curpage < btncount ? null : "-1",
+								"aria-disabled": curpage > 1 ? null : true,
+								"aria-label": "Last Page",
 								href: "#",
-								onclick: (event) => {
+								click: (event) => {
 									data.skip = (btncount - 1) * data.limit;
 									pagingonchange(event.currentTarget, data);
 								},
@@ -256,7 +248,7 @@ export default class paging extends div {
 					display: "flex",
 					padding: 3,
 					overflow: opt.overflow ? "auto" : null,
-					justifycontent: opt.align ? opt.align : null,
+					justifyContent: opt.align ? opt.align : null,
 					class: "cl-paging",
 					elem: new ul(opt),
 				};

@@ -34,8 +34,8 @@ export default class msg extends div {
 						opt.icon
 							? new div({
 									display: "flex",
-									alignitem: "start",
-									marginend: 2,
+									alignItem: "start",
+									marginEnd: 2,
 									elem: new div({
 										class: opt.weight === "sm" ? "fs-5" : "display-4",
 										elem: new icon(opt.icon),
@@ -44,7 +44,7 @@ export default class msg extends div {
 							: null,
 						new div({
 							display: "flex",
-							alignitem: "center",
+							alignItem: "center",
 							elem: new div({ class: "text-break", elem: opt.elem }),
 						}),
 					];
@@ -60,13 +60,13 @@ export default class msg extends div {
 							? new h({
 									level: 1,
 									class: "display-1",
-									align: "center",
-									marginx: 3,
+									textAlign: "center",
+									marginX: 3,
 									elem: new icon(opt.icon),
 							  })
 							: null,
 						new div({
-							align: "center",
+							textAlign: "center",
 							elem: new div({ class: "text-break", elem: opt.elem }),
 						}),
 					];

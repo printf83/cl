@@ -126,7 +126,6 @@ export default class modal extends div {
 								}),
 								new btnclose({
 									dismiss: "modal",
-									// dark: opt.bgcolor ? opt.bgcolor : "body-bg",
 								}),
 							],
 					  })
@@ -142,7 +141,7 @@ export default class modal extends div {
 			//generate body
 			let ctlBody = new div({
 				class: ["modal-body", opt.bodyclass],
-				style: opt.bodyminheight ? { "min-height": opt.bodyminheight } : null,
+				minHeight: opt.bodyminheight,
 				padding: hastab ? 0 : null,
 				elem: opt.elem,
 			});
@@ -168,7 +167,7 @@ export default class modal extends div {
 							icon: null,
 							color: null,
 							class: null,
-							onclick: null,
+							click: null,
 						};
 
 						//support string and object
@@ -183,7 +182,7 @@ export default class modal extends div {
 							{
 								id: i.id,
 								class: i.class,
-								onclick: i.onclick,
+								click: i.click,
 
 								color: i.color,
 								label: i.label,
@@ -198,8 +197,9 @@ export default class modal extends div {
 							icon: i.icon,
 							class: core.merge.class(i.class, "btn-modal"),
 							color: ix === 0 ? (i.color ? i.color : defButtonColor) : i.color ? i.color : "transparent",
-							textbg: i.textbg,
-							onclick: (event) => {
+							"data-bs-dismiss": i.click instanceof Function ? null : "modal",
+							tabindex: ix + 1,
+							click: (event) => {
 								event.stopPropagation();
 
 								//validate for first button only
@@ -210,8 +210,8 @@ export default class modal extends div {
 										if (isvalid) {
 											let formdata = core.getValue(mdl);
 											let result =
-												i.onclick instanceof Function
-													? i.onclick(event.currentTarget, formdata)
+												i.click instanceof Function
+													? i.click(event.currentTarget, formdata)
 													: true;
 											if (result !== false) {
 												//find parent and close
@@ -223,16 +223,12 @@ export default class modal extends div {
 									//no need to validate for second button
 									let formdata = core.getValue(mdl);
 									let result =
-										i.onclick instanceof Function ? i.onclick(event.currentTarget, formdata) : true;
+										i.click instanceof Function ? i.click(event.currentTarget, formdata) : true;
 									if (result !== false) {
 										//find parent and close
 										modal.hide(mdl);
 									}
 								}
-							},
-							attr: {
-								"data-bs-dismiss": i.onclick instanceof Function ? null : "modal",
-								tabindex: ix + 1,
 							},
 						});
 					}
@@ -241,63 +237,56 @@ export default class modal extends div {
 				//reverse button in not centerbutton
 				if (btn && !opt.centerbutton) {
 					btn = btn.reverse();
+
+					//container for button
+					ctlButton = opt.centerbutton
+						? new div({ display: "grid", gutter: 2, col: [12, "md-6"], marginX: "auto", elem: btn })
+						: new div({ justifyContent: "end", elem: new container.stack(btn) });
 				}
 
-				//container for button
-				ctlButton = opt.centerbutton
-					? new div({ display: "grid", gap: 2, col: [12, "md-6"], marginx: "auto", elem: btn })
-					: new div({ justifycontent: "end", elem: new container.stack(btn) });
-			}
-
-			//mix footer and button
-			let ctlFooter = null;
-			if (ctlButton || ctlControl) {
-				if (opt.centerbutton) {
-					ctlFooter = new div({
-						border: !opt.divider ? "top-0" : null,
-						class: ["modal-footer"],
-						elem: new div({
-							gap: 2,
-							padding: 0,
-							class: "container-fluid",
-							elem: [
-								new div({ row: true, elem: new div({ col: true, elem: ctlButton }) }),
-								new div({ row: true, elem: new div({ col: true, elem: ctlControl }) }),
-							],
-						}),
-					});
-				} else {
-					ctlFooter = new div({
-						border: !opt.divider ? "top-0" : null,
-						class: ["modal-footer"],
-						elem: new div({
-							gap: 0,
-							padding: 0,
-							class: "container-fluid",
+				//mix footer and button
+				let ctlFooter = null;
+				if (ctlButton || ctlControl) {
+					if (opt.centerbutton) {
+						ctlFooter = new div({
+							border: !opt.divider ? "top-0" : null,
+							class: ["modal-footer"],
 							elem: new div({
-								row: true,
-								alignitem: "center",
+								gap: 2,
+								padding: 0,
+								container: "fluid",
 								elem: [
-									new div({ col: true, elem: ctlControl }),
-									new div({ col: "auto", elem: ctlButton }),
+									new div({ row: true, elem: new div({ col: true, elem: ctlButton }) }),
+									new div({ row: true, elem: new div({ col: true, elem: ctlControl }) }),
 								],
 							}),
-						}),
-					});
+						});
+					} else {
+						ctlFooter = new div({
+							border: !opt.divider ? "top-0" : null,
+							class: ["modal-footer"],
+							elem: new div({
+								gap: 0,
+								padding: 0,
+								container: "fluid",
+								elem: new div({
+									row: true,
+									alignItem: "center",
+									elem: [
+										new div({ col: true, elem: ctlControl }),
+										new div({ col: "auto", elem: ctlButton }),
+									],
+								}),
+							}),
+						});
+					}
 				}
-			}
 
-			//combine header,body,footer to div.modal > div.modal-dialog > div.content
-			super.data = {
-				id: opt.id,
-				name: opt.name,
-				class: core.merge.class(opt.class, [
-					"modal",
-					opt.animate && !opt.debug && "fade",
-					!opt.debug ? "show" : "cl-debug",
-				]),
-				style: core.merge.style(opt.style, opt.debug ? { display: "block", position: "static" } : null),
-				attr: core.merge.attr(opt.attr, {
+				//combine header,body,footer to div.modal > div.modal-dialog > div.content
+				opt = core.merge(opt, {
+					class: ["modal", opt.animate && !opt.debug && "fade", !opt.debug ? "show" : "cl-debug"],
+					display: opt.debug ? "block" : null,
+					position: opt.debug ? "static" : null,
 					tabindex: -1,
 					"data-bs-backdrop": opt.static ? "static" : null,
 					"data-bs-keyboard": opt.static ? "false" : "true",
@@ -310,32 +299,31 @@ export default class modal extends div {
 					"hide.bs.modal": opt.onhide,
 					"hidden.bs.modal": opt.onhidden,
 					"hidePrevented.bs.modal": opt.onhideprevented,
-				}),
-				color: opt.bgcolor ? opt.bgcolor : null,
-				elem: new div({
-					maxwidth: opt.maxwidth,
-					class: [
-						"modal-dialog",
-						opt.scrollable ? "modal-dialog-scrollable" : null,
-						opt.center ? "modal-dialog-centered" : null,
-						opt.size ? core.multiClass(opt.size, "modal-$1") : null,
-						opt.fullscreen
-							? typeof opt.fullscreen === "string" || Array.isArray(opt.fullscreen)
-								? core.multiClass(opt.fullscreen, "modal-fullscreen-$1")
-								: "modal-fullscreen"
-							: null,
-					],
 					elem: new div({
-						align: opt.align,
-						color: opt.color,
-						textcolor: opt.textcolor,
-						bordercolor: opt.bordercolor,
-						border: opt.border,
-						class: ["modal-content"],
-						elem: [ctlHeader, ctlBody, ctlFooter],
+						class: [
+							"modal-dialog",
+							opt.scrollable ? "modal-dialog-scrollable" : null,
+							opt.center ? "modal-dialog-centered" : null,
+							opt.size ? core.multiClass(opt.size, "modal-$1") : null,
+							opt.fullscreen
+								? typeof opt.fullscreen === "string" || Array.isArray(opt.fullscreen)
+									? core.multiClass(opt.fullscreen, "modal-fullscreen-$1")
+									: "modal-fullscreen"
+								: null,
+						],
+						elem: new div({
+							align: opt.align,
+							color: opt.color,
+							textcolor: opt.textcolor,
+							bordercolor: opt.bordercolor,
+							border: opt.border,
+							class: ["modal-content"],
+							elem: [ctlHeader, ctlBody, ctlFooter],
+						}),
 					}),
-				}),
-			};
+				});
+				super.data = opt;
+			}
 		}
 	}
 

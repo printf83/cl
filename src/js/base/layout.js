@@ -50,9 +50,9 @@ export class l1 extends div {
 									id: opt.leftid,
 									class: ["sticky-md-top"],
 									display: "md-block",
-									margintop: 3,
+									marginTop: 3,
 									overflow: "auto",
-									zindex: 0,
+									zIndex: 0,
 									elem: opt.leftelem,
 								}),
 							}),
@@ -83,8 +83,8 @@ export class l1 extends div {
 												id: opt.rightid,
 												class: "sticky-lg-top",
 												overflow: "auto",
-												margintop: 3,
-												zindex: 0,
+												marginTop: 3,
+												zIndex: 0,
 												elem: opt.rightelem,
 											}),
 										}),
@@ -112,7 +112,7 @@ export class l1 extends div {
 									label: "Back to top",
 									hidelabel: true,
 									icon: { icon: "arrow-up", fixwidth: false },
-									attr: { "data-mainid": opt.mainid },
+									"data-mainid": opt.mainid,
 									onclick: (event) => {
 										let sender = event.currentTarget;
 										document

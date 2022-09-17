@@ -47,10 +47,8 @@ export class select extends tag {
 				if (opt.item[i] === null || typeof opt.item[i] === "string") {
 					item = {
 						tag: "option",
-						attr: {
-							value: opt.item[i],
-							selected: opt.selected?.includes(opt.item[i]),
-						},
+						value: opt.item[i],
+						selected: opt.selected?.includes(opt.item[i]),
 						elem: opt.item[i],
 					};
 
@@ -67,9 +65,6 @@ export class select extends tag {
 						}
 
 						gitem = core.extend({}, defaultSelectGroupOption, opt.item[i]);
-						gitem.attr = core.merge.attr(gitem.attr, {
-							label: gitem.label,
-						});
 						gitem.elem = [];
 
 						delete gitem.value;
@@ -78,7 +73,7 @@ export class select extends tag {
 					} else {
 						item = core.extend({}, defaultSelectItemOption, opt.item[i]);
 
-						item.attr = core.merge.attr(item.attr, {
+						item = core.merge(item, {
 							value: item.value,
 							selected: opt.selected?.includes(item.value),
 						});
@@ -144,9 +139,7 @@ export class dropdown extends tag {
 				if (typeof i === "string") {
 					return new li({
 						elem: new span({
-							attr: {
-								class: ["dropdown-item", opt.selected?.includes(i) ? "active" : null],
-							},
+							class: ["dropdown-item", opt.selected?.includes(i) ? "active" : null],
 							elem: new label({
 								label: i,
 							}),
@@ -176,9 +169,7 @@ export class dropdown extends tag {
 								],
 								href: i.href,
 								onclick: i.onclick,
-								attr: {
-									type: !i.href && i.interactive ? "button" : null,
-								},
+								type: !i.href && i.interactive ? "button" : null,
 								elem: new label({
 									label: i.label,
 									icon: i.icon,

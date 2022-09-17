@@ -32,12 +32,13 @@ export class container extends tag {
 			delete opt.for;
 
 			let ctlmain = new div(opt);
-			let t = ctlmain.data;
-			t.class = core.merge.class(t.class, [
-				"input-group",
-				opt.weight ? `input-group-${opt.weight}` : null,
-				opt.nowrap ? "flex-nowrap" : null,
-			]);
+			let t = core.merge(ctlmain.data, {
+				class: [
+					"input-group",
+					opt.weight ? `input-group-${opt.weight}` : null,
+					opt.nowrap ? "flex-nowrap" : null,
+				],
+			});
 
 			delete t.weight;
 			delete t.nowrap;
@@ -64,7 +65,9 @@ export class text extends div {
 	}
 	set data(opt) {
 		if (opt) {
-			opt.class = core.merge.class(opt.class, "input-group-text");
+			opt = core.merge(opt, {
+				class: "input-group-text",
+			});
 			super.data = opt;
 		}
 	}

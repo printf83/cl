@@ -22,9 +22,8 @@ export class container extends div {
 		if (opt) {
 			opt = core.extend({}, defaultContainerOption, opt);
 
-			opt.class = core.merge.class(opt.class, "progress");
-			opt.style = core.merge.style(opt.style, {
-				height: opt.height > 0 ? `${opt.height}px` : null,
+			opt = core.merge(opt, {
+				class: "progress",
 			});
 
 			opt.item = opt.item ? (Array.isArray(opt.item) ? opt.item : [opt.item]) : null;
@@ -79,23 +78,19 @@ export class bar extends div {
 
 			let percent = opt.max - opt.min > 0 ? parseInt((opt.value / (opt.max - opt.min)) * 100, 10) : 0;
 
-			opt.class = core.merge.class(opt.class, [
-				"progress-bar",
-				opt.stripe ? "progress-bar-striped" : null,
-				opt.animated ? "progress-bar-animated" : null,
-			]);
-
-			opt.attr = core.merge.attr(opt.attr, {
+			opt = core.merge(opt, {
+				class: [
+					"progress-bar",
+					opt.stripe ? "progress-bar-striped" : null,
+					opt.animated ? "progress-bar-animated" : null,
+				],
 				role: "progressbar",
 				"aria-valuenow": opt.value,
 				"aria-valuemin": opt.min,
 				"aria-valuemax": opt.max,
-			});
-
-			opt.style = core.merge.style(opt.style, {
 				width: `${percent}%`,
+				elem: opt.label ? `${percent}%` : " ",
 			});
-			opt.elem = opt.label ? `${percent}%` : " ";
 
 			delete opt.max;
 			delete opt.min;
