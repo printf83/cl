@@ -178,7 +178,7 @@ export default [
 				elem: [
 					new div({
 						row: true,
-						justifycontent: "md-center",
+						justifyContent: "md-center",
 						elem: [
 							new div({ col: [true, "lg-2"], elem: "1 of 3" }),
 							new div({ /*marker*/ col: "md-auto", elem: "Variable width content" }),
@@ -455,7 +455,7 @@ export default [
 				container: true,
 				elem: new div({
 					row: true,
-					rowcol: 2, //marker
+					rowCol: 2, //marker
 					elem: [
 						new div({ col: true, elem: "Column" }),
 						new div({ col: true, elem: "Column" }),
@@ -475,7 +475,7 @@ export default [
 				container: true,
 				elem: new div({
 					row: true,
-					rowcol: 3, //marker
+					rowCol: 3, //marker
 					elem: [
 						new div({ col: true, elem: "Column" }),
 						new div({ col: true, elem: "Column" }),
@@ -495,7 +495,7 @@ export default [
 				container: true,
 				elem: new div({
 					row: true,
-					rowcol: "auto", //marker
+					rowCol: "auto", //marker
 					elem: [
 						new div({ col: true, elem: "Column" }),
 						new div({ col: true, elem: "Column" }),
@@ -515,7 +515,7 @@ export default [
 				container: true,
 				elem: new div({
 					row: true,
-					rowcol: 4, //marker
+					rowCol: 4, //marker
 					elem: [
 						new div({ col: true, elem: "Column" }),
 						new div({ col: true, elem: "Column" }),
@@ -535,7 +535,7 @@ export default [
 				container: true,
 				elem: new div({
 					row: true,
-					rowcol: 4,
+					rowCol: 4,
 					elem: [
 						new div({ col: true, elem: "Column" }),
 						new div({ col: true, elem: "Column" }),
@@ -555,7 +555,7 @@ export default [
 				container: true,
 				elem: new div({
 					row: true,
-					rowcol: [1, "sm-2", "md-4"], //marker
+					rowCol: [1, "sm-2", "md-4"], //marker
 					elem: [
 						new div({ col: true, elem: "Column" }),
 						new div({ col: true, elem: "Column" }),

@@ -52,7 +52,7 @@ export default [
 
 	{
 		title: "Border color",
-		msg: "Change the border color using {{bordercolor}} property on Bootstrap theme colors.",
+		msg: "Change the border color using {{borderColor}} property on Bootstrap theme colors.",
 		container: sample.stackcontainer,
 		viewclass: "cl-highlight-box",
 		import: ["tag"],
@@ -63,7 +63,7 @@ export default [
 						tag: "div",
 
 						//marker
-						bordercolor: i,
+						borderColor: i,
 					});
 				}
 			);
@@ -72,7 +72,7 @@ export default [
 
 	{
 		title: "Border-width",
-		msg: "Change the border width using {{borderweight}} property.",
+		msg: "Change the border width using {{borderWidth}} property.",
 		container: sample.stackcontainer,
 		viewclass: "cl-highlight-box",
 		import: ["tag"],
@@ -82,7 +82,7 @@ export default [
 					tag: "div",
 
 					//marker
-					borderweight: i,
+					borderWidth: i,
 				});
 			});
 		},
@@ -108,7 +108,7 @@ export default [
 
 	{
 		title: "Border-radius",
-		msg: "Change the border radius style {{roundedtype}} property.",
+		msg: "Change the border radius style {{roundedType}} property.",
 		container: sample.stackcontainer,
 		viewclass: "cl-highlight-box-dark",
 		import: ["tag"],
@@ -121,7 +121,7 @@ export default [
 					},
 
 					//marker
-					roundedtype: i,
+					roundedType: i,
 				});
 			});
 		},

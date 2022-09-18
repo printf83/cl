@@ -259,12 +259,10 @@ function gen_menu(m1, m2, theme) {
 				return {
 					label: j.title,
 					active: j.title === m2 || (i.type === "theme" && j.source === theme),
-					attr: {
-						"cl-m1": i.title,
-						"cl-m2": j.title,
-						"cl-m3": i.type,
-					},
-					onclick:
+					"cl-m1": i.title,
+					"cl-m2": j.title,
+					"cl-m3": i.type,
+					click:
 						i.type !== "action"
 							? (event) => {
 									let sender = event.currentTarget;
@@ -337,20 +335,20 @@ core.documentReady(() => {
 				class: ["sticky-md-top", "collapse", "navbar-collapse", "cl-vh-menu"],
 				overflow: "auto",
 				display: "md-block",
-				margintop: 3,
+				marginTop: 3,
 				elem: gen_menu(def_m1, def_m2, def_theme),
 			}),
 			rightelem: new tag({
 				class: ["sticky-lg-top", "cl-vh-menu"],
 				overflow: "auto",
-				margintop: 3,
+				marginTop: 3,
 				elem: "",
 			}),
 			footerelem: new div({
 				display: "flex",
 				flex: "wrap",
-				justifycontent: "center",
-				marginbottom: 5,
+				justifyContent: "center",
+				marginBottom: 5,
 				gap: 2,
 				elem: null,
 			}),

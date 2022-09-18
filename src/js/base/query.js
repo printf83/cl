@@ -243,7 +243,7 @@ let fn = {
 
 						new div({
 							row: true,
-							paddingy: 2,
+							paddingY: 2,
 							elem: new div({
 								col: true,
 								elem: new input({
@@ -507,7 +507,7 @@ let fn = {
 				elem: new div({
 					gap: 2,
 					row: true,
-					rowcol: 1,
+					rowCol: 1,
 					elem: new div({ col: true, class: "cl-filter-rule", id: id, elem: list }),
 				}),
 			});
@@ -615,7 +615,7 @@ let fn = {
 					padding: 0,
 					elem: new div({
 						row: true,
-						paddingbottom: 2,
+						paddingBottom: 2,
 						elem: new div({
 							col: true,
 							elem: new div({
@@ -755,7 +755,7 @@ let fn = {
 				elem: new div({
 					gap: 2,
 					row: true,
-					rowcol: 1,
+					rowCol: 1,
 					elem: new div({ col: true, class: "cl-sort-rule", id: id, elem: list }),
 				}),
 			});
@@ -822,7 +822,7 @@ let fn = {
 				elem: new div({
 					gap: 2,
 					row: true,
-					rowcol: 1,
+					rowCol: 1,
 					elem: new div({ col: true, class: "cl-field-rule", id: opt.id, elem: list }),
 				}),
 			});
@@ -981,7 +981,7 @@ function elemBuilder(opt) {
 						elem: new div({
 							gap: 2,
 							row: true,
-							rowcol: 1,
+							rowCol: 1,
 							elem: [
 								new div({
 									col: true,

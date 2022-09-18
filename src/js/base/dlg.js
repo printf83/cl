@@ -15,7 +15,7 @@ function btnBuilder(btn, defButton, defColor, pushCancel) {
 			return {
 				label: ix <= defButton.length ? defButton[ix] : `Button ${ix + 1}`,
 				color: ix === 0 && defColor ? defColor : null,
-				onclick: i,
+				click: i,
 			};
 		} else if (typeof i === "object") {
 			return i;
@@ -27,9 +27,9 @@ function btnBuilder(btn, defButton, defColor, pushCancel) {
 
 /**
  * icon, msg, callback
- * icon, msg, button : {label,color,onclick}
+ * icon, msg, button : {label,color,click}
  * msg, callback
- * msg, button : {label,color,onclick}
+ * msg, button : {label,color,click}
  * opt : {modal option}
  */
 export class msgbox extends modal {
@@ -144,12 +144,12 @@ export class msgbox extends modal {
 /**
  * icon, msg, callback
  * icon, msg, [callback]
- * icon, msg, button : {label,color,onclick}
- * icon, msg, [button : {label,color,onclick}]
+ * icon, msg, button : {label,color,click}
+ * icon, msg, [button : {label,color,click}]
  * msg, callback
  * msg, [callback]
- * msg, button : {label,color,onclick}
- * msg, [button : {label,color,onclick}]
+ * msg, button : {label,color,click}
+ * msg, [button : {label,color,click}]
  * opt : {modal option}
  */
 export class confirmbox extends modal {
@@ -276,16 +276,16 @@ function elemBuilder(elem) {
 /**
  * type, msg, callback
  * type, msg, [callback]
- * type, msg, button : {label,color,onclick}
- * type, msg, [button : {label,color,onclick}]
+ * type, msg, button : {label,color,click}
+ * type, msg, [button : {label,color,click}]
  * type, callback
  * type, [callback]
- * type, button : {label,color,onclick}
- * type, [button : {label,color,onclick}]
+ * type, button : {label,color,click}
+ * type, [button : {label,color,click}]
  * elem, callback
  * elem, [callback]
- * elem, button : {label,color,onclick}
- * elem, [button : {label,color,onclick}]
+ * elem, button : {label,color,click}
+ * elem, [button : {label,color,click}]
  * opt : {modal option}
  */
 export class inputbox extends modal {

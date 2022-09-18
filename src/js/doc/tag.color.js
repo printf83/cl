@@ -13,7 +13,7 @@ export default [
 	{
 		title: "Colors",
 		msg: [
-			"Colorize text with {{textcolor}} property. If you want to colorize links, you can use the {{linkcolor}} property which have :hover and :focus states.",
+			"Colorize text with {{textColor}} property. If you want to colorize links, you can use the {{linkColor}} property which have :hover and :focus states.",
 		],
 		container: sample.vstackcontainer,
 		import: ["tag"],
@@ -36,10 +36,10 @@ export default [
 			].map((i) => {
 				return new tag({
 					tag: "div",
-					elem: `Example element with <code>textcolor: ${i}</code>`,
+					elem: `Example element with <code>textColor: ${i}</code>`,
 
 					//marker
-					textcolor: i,
+					textColor: i,
 				});
 			});
 		},
@@ -52,7 +52,7 @@ export default [
 		code: () => {
 			return new tag({
 				tag: "p",
-				textcolor: "muted",
+				textColor: "muted",
 				elem: [
 					"Muted text with a ",
 					new tag({
@@ -61,7 +61,7 @@ export default [
 						elem: "reset link",
 
 						//marker
-						textcolor: "reset",
+						textColor: "reset",
 					}),
 					".",
 				],
@@ -77,10 +77,10 @@ export default [
 				return new tag({
 					tag: "a",
 					href: "#",
-					elem: `Example link with <code>linkcolor: ${i}</code>`,
+					elem: `Example link with <code>linkColor: ${i}</code>`,
 
 					//marker
-					linkcolor: i,
+					linkColor: i,
 				});
 			});
 		},

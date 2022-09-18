@@ -26,9 +26,7 @@ export default [
 		code: () => {
 			return new div({
 				elem: new footer({
-					attr: {
-						"data-test": "test",
-					},
+					"data-test": "test",
 					elem: "Example",
 				}),
 			});

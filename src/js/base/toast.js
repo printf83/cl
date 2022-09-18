@@ -26,7 +26,7 @@ const defaultOption = {
 };
 /**g
  * icon,msg
- * opt : {attr,id,class,animate,title,icon,elem,close,autohide,delay,color,textcolor,bordercolor,border,date,timer,position,debug}
+ * opt : {attr,id,class,animate,title,icon,elem,close,autohide,delay,color,textColor,borderColor,border,date,timer,position,debug}
  */
 
 export default class toast extends div {
@@ -251,11 +251,9 @@ export default class toast extends div {
 				document.body,
 				new div({
 					position: "absolute",
-					attr: {
-						"aria-live": "polite",
-						"aria-atomic": "true",
-					},
-					zindex: 3,
+					"aria-live": "polite",
+					"aria-atomic": "true",
+					zIndex: 3,
 					elem: new div({ class: ["toast-container", position], position: "fixed", padding: 3 }),
 				})
 			);

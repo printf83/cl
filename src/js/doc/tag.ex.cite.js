@@ -30,9 +30,7 @@ export default [
 
 					//marker
 					new cite({
-						attr: {
-							"data-test": "test",
-						},
+						"data-test": "test",
 						elem: "cite",
 					}),
 					//-

@@ -301,7 +301,7 @@ export default [
 						new table.td({ elem: new b({ elem: d ? core.capitalize(d) : "Default" }) }),
 						new table.td({ elem: "Column content" }),
 						new table.td({ elem: "Column content" }),
-						new table.td({ elem: "Column content", color: d, bgtextcolor: d }),
+						new table.td({ elem: "Column content", color: d, bgtextColor: d }),
 					],
 				});
 			};

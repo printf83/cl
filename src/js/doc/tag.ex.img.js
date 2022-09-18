@@ -55,7 +55,7 @@ export default [
 	{
 		title: "Aligning images",
 		msg: [
-			"Align images with the helper float classes or text alignment classes. {{block-level}} images can be centered using the {{marginx:'auto'}} margin utility class.",
+			"Align images with the helper float classes or text alignment classes. {{block-level}} images can be centered using the {{marginX:'auto'}} margin utility class.",
 		],
 		import: ["img", "sample"],
 		code: () => {
@@ -86,7 +86,7 @@ export default [
 
 				//marker
 				display: "block",
-				marginx: "auto",
+				marginX: "auto",
 				//-
 			});
 		},

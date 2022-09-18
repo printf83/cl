@@ -112,7 +112,7 @@ export default [
 						elem: "A disabled item",
 
 						//marker
-						onclick: () => {},
+						click: () => {},
 						disabled: true,
 						//-
 					},
@@ -120,11 +120,11 @@ export default [
 						elem: "A second item",
 
 						//marker
-						onclick: () => {},
+						click: () => {},
 					},
-					{ onclick: () => {}, elem: "A third item" },
-					{ onclick: () => {}, elem: "A fourth item" },
-					{ onclick: () => {}, elem: "And a fifth one" },
+					{ click: () => {}, elem: "A third item" },
+					{ click: () => {}, elem: "A fourth item" },
+					{ click: () => {}, elem: "And a fifth one" },
 				],
 			});
 		},
@@ -191,20 +191,20 @@ export default [
 				item: [
 					{
 						display: "flex",
-						justifycontent: "between",
-						alignitem: "start",
+						justifyContent: "between",
+						alignItem: "start",
 						elem: el,
 					},
 					{
 						display: "flex",
-						justifycontent: "between",
-						alignitem: "start",
+						justifyContent: "between",
+						alignItem: "start",
 						elem: el,
 					},
 					{
 						display: "flex",
-						justifycontent: "between",
-						alignitem: "start",
+						justifyContent: "between",
+						alignItem: "start",
 						elem: el,
 					},
 				],
@@ -319,8 +319,8 @@ export default [
 			let itemfn = (text, badgeLabel) => {
 				return {
 					display: "flex",
-					justifycontent: "between",
-					alignitem: "start",
+					justifyContent: "between",
+					alignItem: "start",
 					elem: [
 						text,
 
@@ -354,18 +354,18 @@ export default [
 						new div({
 							width: 100,
 							display: "flex",
-							justifycontent: "between",
+							justifyContent: "between",
 							elem: [
-								new h({ level: 5, marginbottom: 1, elem: title }),
+								new h({ level: 5, marginBottom: 1, elem: title }),
 								new small({
-									textcolor: !active ? "muted" : null,
+									textColor: !active ? "muted" : null,
 									elem: `${days} days ago`,
 								}),
 							],
 						}),
-						new p({ marginbottom: 1, elem: "Some placeholder content in a paragraph." }),
+						new p({ marginBottom: 1, elem: "Some placeholder content in a paragraph." }),
 						new small({
-							textcolor: !active ? "muted" : null,
+							textColor: !active ? "muted" : null,
 							elem: `And some${!active ? " muted" : ""} small print.`,
 						}),
 					],

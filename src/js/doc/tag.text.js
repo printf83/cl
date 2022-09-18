@@ -118,7 +118,7 @@ export default [
 	{
 		title: "Font size",
 		msg: [
-			"Quickly change the font-size of text using {{fontsize}} property. While Bootstrap heading classes (e.g., {{.h1}}–{{.h6}}) apply {{fontsize}}, {{fontweight}}, and {{lineheight}}, these utilities <i>only</i> apply {{font-size}}. Sizing for these utilities matches HTML’s heading elements, so as the number increases, their size decreases.",
+			"Quickly change the font-size of text using {{fontSize}} property. While Bootstrap heading classes (e.g., {{.h1}}–{{.h6}}) apply {{fontSize}}, {{fontWeight}}, and {{lineHeight}}, these utilities <i>only</i> apply {{font-size}}. Sizing for these utilities matches HTML’s heading elements, so as the number increases, their size decreases.",
 		],
 		container: sample.vstackcontainer,
 		import: ["tag"],
@@ -126,10 +126,10 @@ export default [
 			return [null, 1, 2, 3, 4, 5, 6].map((i) => {
 				return new tag({
 					tag: "div",
-					elem: `Example element with <code>fontsize: ${i}</code>`,
+					elem: `Example element with <code>fontSize: ${i}</code>`,
 
 					//marker
-					fontsize: i,
+					fontSize: i,
 				});
 			});
 		},
@@ -137,17 +137,17 @@ export default [
 
 	{
 		title: "Font weight",
-		msg: ["Quickly change the font-weight of text with these {{fontweight}}."],
+		msg: ["Quickly change the font-weight of text with these {{fontWeight}}."],
 		container: sample.vstackcontainer,
 		import: ["tag"],
 		code: () => {
 			return [null, "bold", "bolder", "semibold", "normal", "light", "lighter"].map((i) => {
 				return new tag({
 					tag: "div",
-					elem: `Example element with <code>fontweight: ${i}</code>`,
+					elem: `Example element with <code>fontWeight: ${i}</code>`,
 
 					//marker
-					fontweight: i,
+					fontWeight: i,
 				});
 			});
 		},
@@ -155,17 +155,17 @@ export default [
 
 	{
 		title: "Font italics",
-		msg: ["Quickly change the font-style of text with these {{fontitalic}}."],
+		msg: ["Quickly change the font-style of text with these {{fontItalic}}."],
 		container: sample.vstackcontainer,
 		import: ["tag"],
 		code: () => {
 			return [null, true, false].map((i) => {
 				return new tag({
 					tag: "div",
-					elem: `Example element with <code>fontitalic: ${i}</code>`,
+					elem: `Example element with <code>fontItalic: ${i}</code>`,
 
 					//marker
-					fontitalic: i,
+					fontItalic: i,
 				});
 			});
 		},
@@ -173,17 +173,17 @@ export default [
 
 	{
 		title: "Text decoration",
-		msg: ["Decorate text in components with {{textdecoration}} property."],
+		msg: ["Decorate text in components with {{textDecoration}} property."],
 		container: sample.vstackcontainer,
 		import: ["tag"],
 		code: () => {
 			return [null, true, false, "underline", "line-through", "none"].map((i) => {
 				return new tag({
 					tag: "div",
-					elem: `Example element with <code>textdecoration: ${i}</code>`,
+					elem: `Example element with <code>textDecoration: ${i}</code>`,
 
 					//marker
-					textdecoration: i,
+					textDecoration: i,
 				});
 			});
 		},
@@ -207,7 +207,7 @@ export default [
 
 	{
 		title: "Line height",
-		msg: ["Change the line height with {{lineheight}} property"],
+		msg: ["Change the line height with {{lineHeight}} property"],
 		container: sample.vstackcontainer,
 		import: ["tag", "sample"],
 		code: () => {
@@ -215,10 +215,10 @@ export default [
 				return new tag({
 					tag: "div",
 					class: "cl-highlight-element",
-					elem: `Example element with <code>lineheight: ${i}</code>. ${sample.text()}`,
+					elem: `Example element with <code>lineHeight: ${i}</code>. ${sample.text()}`,
 
 					//marker
-					lineheight: i,
+					lineHeight: i,
 				});
 			});
 		},

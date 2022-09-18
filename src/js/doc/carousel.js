@@ -288,7 +288,7 @@ export default [
 					label: "Run Code",
 					icon: "play",
 					color: "primary",
-					onclick: () => {
+					click: () => {
 						document.getElementById(btnGenerate).classList.add("d-none");
 						document.getElementById(divOutput).classList.remove("d-none");
 

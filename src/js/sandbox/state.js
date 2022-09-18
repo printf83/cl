@@ -121,7 +121,7 @@ export default {
 			id: "menu_add",
 			icon: "plus",
 			label: "Add New",
-			onclick: (event) => {
+			click: (event) => {
 				list.container.item.add("state_list", event.currentTarget);
 			},
 		},
@@ -129,7 +129,7 @@ export default {
 			id: "menu_check_on",
 			icon: "list-check",
 			label: "Check Mode",
-			onclick: (event) => {
+			click: (event) => {
 				list.container.check.mode("state_list");
 
 				menuController("menu_add", false);
@@ -144,7 +144,7 @@ export default {
 			id: "menu_check_off",
 			icon: "arrow-left",
 			label: "Back",
-			onclick: (event) => {
+			click: (event) => {
 				list.container.check.mode("state_list");
 
 				menuController("menu_add", true);
@@ -159,7 +159,7 @@ export default {
 			id: "menu_check_all",
 			icon: "check-double",
 			label: "Check All",
-			onclick: (event) => {
+			click: (event) => {
 				list.container.check.all("state_list");
 			},
 		},
@@ -167,7 +167,7 @@ export default {
 			id: "menu_check_delete",
 			icon: "trash-can",
 			label: "Delete Checked",
-			onclick: (event) => {
+			click: (event) => {
 				list.container.check.delete("state_list", event.currentTarget);
 			},
 		},
@@ -175,7 +175,7 @@ export default {
 			id: "menu_filter",
 			icon: "filter",
 			label: "Filter",
-			onclick: (event) => {
+			click: (event) => {
 				list.container.query.filter("state_list", event.currentTarget);
 			},
 		},
@@ -183,7 +183,7 @@ export default {
 			id: "menu_sort",
 			icon: "sort",
 			label: "Sort",
-			onclick: (event) => {
+			click: (event) => {
 				list.container.query.sort("state_list", event.currentTarget);
 			},
 		},
@@ -191,7 +191,7 @@ export default {
 			id: "menu_field",
 			icon: "tasks",
 			label: "Field",
-			onclick: (event) => {
+			click: (event) => {
 				list.container.query.field("state_list", event.currentTarget);
 			},
 		},
@@ -199,7 +199,7 @@ export default {
 			id: "menu_limit",
 			icon: "list-ol",
 			label: "Limit",
-			onclick: (event) => {
+			click: (event) => {
 				list.container.query.limit("state_list", event.currentTarget);
 			},
 		},
@@ -210,7 +210,7 @@ export default {
 				rotate: 90,
 			},
 			id: "menu_page",
-			onclick: (event) => {
+			click: (event) => {
 				list.container.query.page("state_list", event.currentTarget);
 			},
 		},

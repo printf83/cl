@@ -70,11 +70,6 @@ export class container extends nav {
 }
 
 const defaultBrandOption = {
-	id: null,
-	attr: null,
-	class: null,
-	style: null,
-
 	href: null,
 	click: null,
 	label: null,
@@ -154,7 +149,7 @@ export class toggle extends collapse.toggle {
 const defaultFormContainerOption = {
 	display: "flex",
 	row: false,
-	rowcol: null,
+	rowCol: null,
 };
 export class formcontainer extends form {
 	constructor(...opt) {

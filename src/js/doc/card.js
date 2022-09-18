@@ -275,7 +275,7 @@ export default [
 									elem: [
 										"Someone famous in",
 										new cite({
-											attr: { title: "Source Title" },
+											title: "Source Title",
 											elem: "Source Title",
 										}),
 									],
@@ -572,7 +572,7 @@ export default [
 		import: ["small", "card", "sample"],
 		code: () => {
 			return new card.container({
-				textcolor: "light",
+				textColor: "light",
 				elem: [
 					new card.img({
 						src: sample.img(857, 428),
@@ -708,7 +708,7 @@ export default [
 				elem: [
 					new card.header("Header"),
 					new card.body({
-						textcolor: "primary",
+						textColor: "primary",
 						elem: [
 							new card.title("Primary card title"),
 							new card.text(
@@ -718,7 +718,7 @@ export default [
 					}),
 				],
 
-				bordercolor: "primary",
+				borderColor: "primary",
 			});
 		},
 	},
@@ -735,7 +735,7 @@ export default [
 					elem: [
 						new card.header("Header"),
 						new card.body({
-							textcolor: i,
+							textColor: i,
 							elem: [
 								new card.title(`${core.capitalize(i)} card title`),
 								new card.text(
@@ -746,7 +746,7 @@ export default [
 					],
 
 					//marker
-					bordercolor: i,
+					borderColor: i,
 				});
 			});
 		},
@@ -758,7 +758,7 @@ export default [
 		import: ["card"],
 		code: () => {
 			return new card.container({
-				bordercolor: "success",
+				borderColor: "success",
 				width: "18rem",
 				elem: [
 					new card.header({
@@ -767,7 +767,7 @@ export default [
 						elem: "Header",
 					}),
 					new card.body({
-						textcolor: "success",
+						textColor: "success",
 						elem: [
 							new card.title("Success card title"),
 							new card.text(
@@ -887,7 +887,7 @@ export default [
 				],
 
 				//marker
-				rowcol: [1, "md-2"],
+				rowCol: [1, "md-2"],
 			});
 		},
 	},
@@ -927,7 +927,7 @@ export default [
 				],
 
 				//marker
-				rowcol: [1, "md-3"],
+				rowCol: [1, "md-3"],
 			});
 		},
 	},
@@ -961,7 +961,7 @@ export default [
 
 			return new div({
 				row: true,
-				rowcol: [1, "md-3"],
+				rowCol: [1, "md-3"],
 				gap: 4,
 				elem: [
 					new div({ col: true, elem: fn(str[0]) }),
@@ -1003,7 +1003,7 @@ export default [
 
 			return new div({
 				row: true,
-				rowcol: [1, "md-3"],
+				rowCol: [1, "md-3"],
 				gap: 4,
 				elem: [
 					new div({ col: true, elem: fn(str[0]) }),

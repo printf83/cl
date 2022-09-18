@@ -655,7 +655,7 @@ export default [
 								width: "200px",
 								elem: [
 									new p("Some example text that's free-flowing within the dropdown menu."),
-									new p({ marginbottom: 0, elem: "And this is more example text." }),
+									new p({ marginBottom: 0, elem: "And this is more example text." }),
 								],
 							}),
 							//-
@@ -682,7 +682,7 @@ export default [
 								padding: 3,
 								gap: 3,
 								row: true,
-								rowcol: 1,
+								rowCol: 1,
 								elem: [
 									new input({
 										size: "col",

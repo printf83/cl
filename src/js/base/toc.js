@@ -28,41 +28,43 @@ export default class toc extends div {
 		opt = core.extend({}, defaultOption, opt);
 		opt.item = Array.isArray(opt.item) ? opt.item : [opt.item];
 
-		opt.class = core.merge.class(opt.class, ["cl-toc"]);
-		opt.elem = [
-			new h({ level: 6, elem: new label({ icon: opt.icon, label: opt.label }) }),
-			new hr({ marginY: 2 }),
-			new ul({
-				id: opt.id,
-				class: ["list-unstyled", opt.type === "menu" ? null : "small"],
-				elem: opt.item.map((i) => {
-					i = core.extend({}, defaultItemOption, i);
+		opt = core.merge(opt, {
+			class: "cl-toc",
+			elem: [
+				new h({ level: 6, elem: new label({ icon: opt.icon, label: opt.label }) }),
+				new hr({ marginY: 2 }),
+				new ul({
+					id: opt.id,
+					class: ["list-unstyled", opt.type === "menu" ? null : "small"],
+					elem: opt.item.map((i) => {
+						i = core.extend({}, defaultItemOption, i);
 
-					i = core.merge(i, {
-						class: "cl-toc-item",
-					});
-
-					let level = i.level;
-
-					delete i.level;
-
-					if (opt.type === "menu") {
-						return new li({
-							class: [level === 1 ? null : "fw-bold"],
-							marginY: 1,
-							elem: new button(i),
+						i = core.merge(i, {
+							class: "cl-toc-item",
 						});
-					} else {
-						return new li({
-							class: [level === 1 ? null : "fw-bold"],
-							elem: new button(i),
-						});
-					}
+
+						let level = i.level;
+
+						delete i.level;
+
+						if (opt.type === "menu") {
+							return new li({
+								class: [level === 1 ? null : "fw-bold"],
+								marginY: 1,
+								elem: new button(i),
+							});
+						} else {
+							return new li({
+								class: [level === 1 ? null : "fw-bold"],
+								elem: new button(i),
+							});
+						}
+					}),
 				}),
-			}),
-		];
+			],
+		});
 
-		delete opt.id;
+		// delete opt.id;
 		delete opt.icon;
 		delete opt.label;
 		delete opt.item;

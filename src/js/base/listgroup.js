@@ -108,7 +108,7 @@ export default class listgroup extends tag {
 							});
 						} else {
 							i = core.merge(i, {
-								tag: i.href ? "a" : i.onclick instanceof Function ? "button" : "li",
+								tag: i.href ? "a" : i.click instanceof Function ? "button" : "li",
 								class: [
 									"list-group-item",
 									i.active ? "active" : null,

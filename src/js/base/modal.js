@@ -25,8 +25,6 @@ const fnInputOnEnter = (event) => {
 	}
 };
 const defaultOption = {
-	attr: null, //combine to container
-
 	id: null,
 	class: null,
 	static: true,
@@ -40,14 +38,14 @@ const defaultOption = {
 	scrollable: true,
 	center: true,
 	size: null,
-	maxwidth: null,
+	maxWidth: null,
 	fullscreen: false,
 	focus: true,
 
 	align: null, //left,right,center
 	color: null,
-	textcolor: null,
-	bordercolor: null,
+	textColor: null,
+	borderColor: null,
 	border: true,
 	bgcolor: null,
 	dark: null,
@@ -71,7 +69,7 @@ const defaultOption = {
 };
 
 /**
- * option : {attr,id,class,static,title,icon,footer,button,animated,debug,scrollable,center,size,fullscreen,focus,align,color,textcolor,bordercolor,border,divider,centerbutton,elem}
+ * option : {attr,id,class,static,title,icon,footer,button,animated,debug,scrollable,center,size,fullscreen,focus,align,color,textColor,borderColor,border,divider,centerbutton,elem}
  */
 export default class modal extends div {
 	_bs = null;
@@ -191,11 +189,15 @@ export default class modal extends div {
 							i
 						);
 
+						opt = core.merge(opt, {
+							class: "btn-modal",
+						});
+
 						return new button({
 							id: i.id ? i.id : `${opt.id}_btn_${ix}`,
 							label: i.label,
 							icon: i.icon,
-							class: core.merge.class(i.class, "btn-modal"),
+							class: i.class,
 							color: ix === 0 ? (i.color ? i.color : defButtonColor) : i.color ? i.color : "transparent",
 							"data-bs-dismiss": i.click instanceof Function ? null : "modal",
 							tabindex: ix + 1,
@@ -314,8 +316,8 @@ export default class modal extends div {
 						elem: new div({
 							align: opt.align,
 							color: opt.color,
-							textcolor: opt.textcolor,
-							bordercolor: opt.bordercolor,
+							textColor: opt.textColor,
+							borderColor: opt.borderColor,
 							border: opt.border,
 							class: ["modal-content"],
 							elem: [ctlHeader, ctlBody, ctlFooter],

@@ -48,7 +48,7 @@ export class container extends div {
 				"closed.bs.alert": opt.onclosed,
 				elem: new div({
 					display: "flex",
-					alignitem: "stretch",
+					alignItem: "stretch",
 					elem: [
 						new div({ width: 100, elem: opt.elem }),
 						opt.close
@@ -82,7 +82,9 @@ export class link extends a {
 	}
 	set data(opt) {
 		if (opt) {
-			opt.class = core.merge.class(opt.class, "alert-link");
+			opt = core.merge(opt, {
+				class: "alert-link",
+			});
 			super.data = opt;
 		}
 	}
@@ -102,7 +104,9 @@ export class heading extends h {
 	set data(opt) {
 		if (opt) {
 			opt = core.extend({}, defaultHeadingOption, opt);
-			opt.class = core.merge.class(opt.class, "heading");
+			opt = core.merge(opt, {
+				class: "heading",
+			});
 			super.data = opt;
 		}
 	}

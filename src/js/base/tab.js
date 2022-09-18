@@ -196,7 +196,11 @@ export default class tab extends div {
 					: null;
 
 			if (bodyCtl) {
-				opt.class = core.merge.class(opt.class, "card");
+				
+				opt = core.merge(opt, {
+					class: "card",
+				});
+
 				opt.padding = 0;
 				opt.elem = opt.size
 					? opt.headAlign === "vertical-right"

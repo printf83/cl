@@ -97,7 +97,7 @@ export default [
 					elem: "Max-width:100%",
 
 					//marker
-					maxwidth: 100,
+					maxWidth: 100,
 				}),
 			});
 		},
@@ -117,7 +117,7 @@ export default [
 					elem: "Max-width:100%",
 
 					//marker
-					maxwidth: 100,
+					maxWidth: 100,
 				}),
 
 				//marker
@@ -139,7 +139,7 @@ export default [
 					elem: "Max-height:100%",
 
 					//marker
-					maxheight: 100,
+					maxHeight: 100,
 					width: "100px",
 					height: "200px",
 					//-
@@ -162,7 +162,7 @@ export default [
 					elem: "Max-height:100%",
 
 					//marker
-					maxheight: 100,
+					maxHeight: 100,
 					width: "100px",
 					height: "200px",
 					//-

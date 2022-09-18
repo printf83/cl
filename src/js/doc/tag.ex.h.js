@@ -26,9 +26,7 @@ export default [
 		code: () => {
 			return new h({
 				level: 5,
-				attr: {
-					"data-test": "test",
-				},
+				"data-test": "test",
 				elem: "Example",
 			});
 		},

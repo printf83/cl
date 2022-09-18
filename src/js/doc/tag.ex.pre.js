@@ -24,9 +24,7 @@ export default [
 		import: ["pre"],
 		code: () => {
 			return new pre({
-				attr: {
-					"data-test": "test",
-				},
+				"data-test": "test",
 				elem: "<div>Example</div>",
 			});
 		},

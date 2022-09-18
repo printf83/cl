@@ -249,7 +249,7 @@ export default [
 			new table.container({
 				item: [
 					["Option", "Description"],
-					["<code>onclick</code>", "This event is fired when the control is clicked."],
+					["<code>click</code>", "This event is fired when the control is clicked."],
 					["<code>onfocus</code>", "This event is fired when the control is focused."],
 					["<code>onblur</code>", "This event is fired when the control is leaved."],
 					["<code>onchange</code>", "This event is fired when the control value is changed after leaved"],
@@ -269,8 +269,8 @@ export default [
 					helper: "We'll never share your email with anyone else.",
 
 					//marker
-					onclick: (event) => {
-						new toast("i", fn(event.currentTarget, "onclick")).show();
+					click: (event) => {
+						new toast("i", fn(event.currentTarget, "click")).show();
 					},
 					onfocus: (event) => {
 						new toast("!", fn(event.currentTarget, "onfocus")).show();
@@ -288,8 +288,8 @@ export default [
 					type: "textarea",
 
 					//marker
-					onclick: (event) => {
-						new toast("i", fn(event.currentTarget, "onclick")).show();
+					click: (event) => {
+						new toast("i", fn(event.currentTarget, "click")).show();
 					},
 					onfocus: (event) => {
 						new toast("!", fn(event.currentTarget, "onfocus")).show();

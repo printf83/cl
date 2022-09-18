@@ -28,7 +28,7 @@ export default class msg extends div {
 				case "sm":
 				case "md":
 					opt.display = "flex";
-					opt.alignitem = "stretch";
+					opt.alignItem = "stretch";
 					opt.gap = 2;
 					opt.elem = [
 						opt.icon

@@ -347,7 +347,7 @@ const fn = {
 								{
 									label: "Yes, delete",
 									color: "danger",
-									onclick: () => {
+									click: () => {
 										if (opt.file && opt.file.length > 0) {
 											fndeleterecursive(opt, checkedid, 0, () => {
 												fndelete(id, opt, checkedid, sender);
@@ -595,7 +595,7 @@ const fn = {
 						[
 							{
 								label: "Save",
-								onclick: (_event, data) => {
+								click: (_event, data) => {
 									db.api.create(
 										{
 											name: opt.name,
@@ -667,7 +667,7 @@ const fn = {
 									[
 										{
 											label: "Save",
-											onclick: (_event, newData) => {
+											click: (_event, newData) => {
 												newData._id = key;
 												db.api.update(
 													{
@@ -741,7 +741,7 @@ const fn = {
 											[
 												{
 													label: "Save",
-													onclick: (_event, data) => {
+													click: (_event, data) => {
 														db.api.create(
 															{
 																name: opt.name,
@@ -814,7 +814,7 @@ const fn = {
 							{
 								label: "Yes, delete",
 								color: "danger",
-								onclick: () => {
+								click: () => {
 									//check if has picture
 									if (opt.file && opt.file.length > 0) {
 										//need to load data first
@@ -1016,18 +1016,18 @@ export class item extends li {
 			elem: [
 				new div({
 					display: "flex",
-					justifycontent: "start",
-					alignself: "center",
+					justifyContent: "start",
+					alignSelf: "center",
 					elem: [
 						new div({
 							display: "flex",
-							alignself: "center",
-							justifycontent: "center",
+							alignSelf: "center",
+							justifyContent: "center",
 							elem: [
 								opt.picture
 									? new div({
 											class: "cl-list-img",
-											marginend: 3,
+											marginEnd: 3,
 											width: "3rem",
 											elem: new img({
 												fluid: true,
@@ -1038,7 +1038,7 @@ export class item extends li {
 									: null,
 								new icon({
 									class: "cl-list-check",
-									marginend: 3,
+									marginEnd: 3,
 									icon: "check",
 									color: "secondary",
 									weight: "2x",
@@ -1060,13 +1060,13 @@ export class item extends li {
 							elem: new btngroup({
 								elem: [
 									opt.allow_more
-										? new button({ icon: "cog", color: "primary", onclick: fn.item.more })
+										? new button({ icon: "cog", color: "primary", click: fn.item.more })
 										: null,
 									opt.allow_copy
-										? new button({ icon: "copy", color: "success", onclick: fn.item.copy })
+										? new button({ icon: "copy", color: "success", click: fn.item.copy })
 										: null,
 									opt.allow_delete
-										? new button({ icon: "trash", color: "danger", onclick: fn.item.delete })
+										? new button({ icon: "trash", color: "danger", click: fn.item.delete })
 										: null,
 								].filter(Boolean),
 							}),

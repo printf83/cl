@@ -1,7 +1,5 @@
 "use strict";
 
-import e from "express";
-
 const _setting = {
 	debug: false,
 };
@@ -705,7 +703,7 @@ const bootstrapPropertyDb = {
 	maxHeight: { format: "mh-$1", value: [100] },
 	maxWidth: { format: "mw-$1", value: [100] },
 	minViewHeight: { format: "min-vh-$1", value: [100] },
-	minViewWeight: { format: "min-vw-$1", value: [100] },
+	minViewWidth: { format: "min-vw-$1", value: [100] },
 	viewHeight: { format: "vh-$1", value: [100] },
 	viewWeight: { format: "vw-$1", value: [100] },
 
@@ -757,9 +755,17 @@ const bootstrapPropertyDb = {
 		value: [true, false, "top", "end", "bottom", "start", "circle", "pill"],
 	},
 
+	roundedNone: {
+		format: "rounded-$1-0",
+		formatTrue: "rounded-0",
+		formatFalse: "rounded",
+		formatValue: "rounded",
+		value: [true, false, "top", "end", "bottom", "start"],
+	},
+
 	roundedSize: {
 		format: "rounded-$1",
-		formatTrue: "rounded",
+		formatValue: "rounded",
 		value: [0, 1, 2, 3, 4, 5],
 	},
 
@@ -853,7 +859,7 @@ const bootstrapPropertyDb = {
 		value: bootstrapJustifyContent,
 	},
 
-	alignItems: {
+	alignItem: {
 		format: "align-items-$1",
 		value: bootstrapAlign,
 	},
@@ -913,29 +919,27 @@ const bootstrapPropertyDb = {
 
 function attachBootstrap(key, elem, opt) {
 	if (bootstrapPropertyDb.hasOwnProperty(key)) {
-		if (opt[key]) {
+		if (opt[key] !== null && opt[key] !== undefined) {
 			if (Array.isArray(opt[key])) {
 				let itsBootstrapAttr = false;
 				opt[key].forEach((i) => {
 					if (bootstrapPropertyDb[key].value.indexOf(i) > -1) {
 						itsBootstrapAttr = true;
 						if (bootstrapPropertyDb[key].hasOwnProperty("formatValue")) {
-							elem.classList.add(bootstrapPropertyDb[key].hasOwnProperty("formatValue"));
+							elem.classList.add(bootstrapPropertyDb[key].formatValue);
 						}
 
 						if (i === true) {
 							if (bootstrapPropertyDb[key].hasOwnProperty("ifTrue")) {
-								elem.classList.add(bootstrapPropertyDb[key].hasOwnProperty("ifTrue"));
+								elem.classList.add(bootstrapPropertyDb[key].ifTrue);
 							}
 						} else if (i === false) {
-							if (bootstrapPropertyDb[key].hasOwnProperty("ifFalse")) {
+							if (bootstrapPropertyDb[key].ifFalse) {
 								elem.classList.add(bootstrapPropertyDb[key].hasOwnProperty("ifFalse"));
 							}
 						} else {
 							if (bootstrapPropertyDb[key].hasOwnProperty("format")) {
-								elem.classList.add(
-									bootstrapPropertyDb[key].hasOwnProperty("format").replace(/\$1/g, i)
-								);
+								elem.classList.add(bootstrapPropertyDb[key].format.replace(/\$1/g, i));
 							}
 						}
 					} else {
@@ -949,20 +953,20 @@ function attachBootstrap(key, elem, opt) {
 			} else {
 				if (bootstrapPropertyDb[key].value.indexOf(opt[key]) > -1) {
 					if (bootstrapPropertyDb[key].hasOwnProperty("formatValue")) {
-						elem.classList.add(bootstrapPropertyDb[key].hasOwnProperty("formatValue"));
+						elem.classList.add(bootstrapPropertyDb[key].formatValue);
 					}
 
-					if (i === true) {
+					if (opt[key] === true) {
 						if (bootstrapPropertyDb[key].hasOwnProperty("ifTrue")) {
-							elem.classList.add(bootstrapPropertyDb[key].hasOwnProperty("ifTrue"));
+							elem.classList.add(bootstrapPropertyDb[key].ifTrue);
 						}
-					} else if (i === false) {
+					} else if (opt[key] === false) {
 						if (bootstrapPropertyDb[key].hasOwnProperty("ifFalse")) {
-							elem.classList.add(bootstrapPropertyDb[key].hasOwnProperty("ifFalse"));
+							elem.classList.add(bootstrapPropertyDb[key].ifFalse);
 						}
 					} else {
 						if (bootstrapPropertyDb[key].hasOwnProperty("format")) {
-							elem.classList.add(bootstrapPropertyDb[key].hasOwnProperty("format").replace(/\$1/g, i));
+							elem.classList.add(bootstrapPropertyDb[key].format.replace(/\$1/g, opt[key]));
 						}
 					}
 
@@ -971,17 +975,16 @@ function attachBootstrap(key, elem, opt) {
 					console.info(`${opt[key]} is not supported value for bootstrap ${key} property`);
 				}
 			}
-
-			delete opt[key];
 		}
+		delete opt[key];
 	}
 
-	return opt;
+	return { opt, elem };
 }
 
 const stylePropertyDb = [
 	"alignContent",
-	"alignItems",
+	"alignItem",
 	"alignSelf",
 	"animation",
 	"animationDelay",
@@ -1171,19 +1174,19 @@ const stylePropertyDb = [
 
 function attachStyle(key, elem, opt) {
 	if (stylePropertyDb.indexOf(key) > -1) {
-		if (opt[key]) {
+		if (opt[key] !== null) {
 			elem.style.setProperty(key, opt[key]);
 		}
 
 		delete opt[key];
 	}
 
-	return opt;
+	return { opt, elem };
 }
 
 function attachManualStyle(key, elem, opt) {
 	if (key === "style") {
-		if (opt[key]) {
+		if (opt[key] !== null) {
 			let styleKeys = Object.keys(opt[key]);
 			if (styleKeys) {
 				for (let x = 0; x < styleKeys.length; x++) {
@@ -1197,36 +1200,36 @@ function attachManualStyle(key, elem, opt) {
 		delete opt[key];
 	}
 
-	return opt;
+	return { opt, elem };
 }
 
 function attachEvent(key, elem, opt) {
-	if (opt[key] instanceof Function) {
+	if (opt[key] && typeof opt[key] === "function") {
 		elem.addEventListener(key, opt[key], false);
 
 		setupEventListenerRemover(key, elem, () => {
 			deleteEventListener(key, elem, () => {
-				elem.removeEventListener(eventname, opt[key], false);
+				elem.removeEventListener(key, opt[key], false);
 			});
 		});
 
 		delete opt[key];
 	}
 
-	return opt;
+	return { opt, elem };
 }
 
 function attachClass(key, elem, opt) {
 	if (key === "class") {
-		if (opt[key]) {
-			let i = Array.isArray(opt[key]) ? opt[key] : [opt[key]];
+		if (opt[key] !== null) {
+			let i = Array.isArray(opt[key]) ? opt[key] : [...opt[key].split(" ")];
 			elem.classList.add(...i);
 		}
 
 		delete opt[key];
 	}
 
-	return opt;
+	return { opt, elem };
 }
 
 const booleanAttr = [
@@ -1261,7 +1264,7 @@ const booleanAttr = [
 ];
 function attachBoolean(key, elem, opt) {
 	if (booleanAttr.indexOf(key) > -1) {
-		if (opt[key]) {
+		if (opt[key] !== null) {
 			if (elem[i] === true) {
 				elem[i] = true;
 
@@ -1272,12 +1275,12 @@ function attachBoolean(key, elem, opt) {
 		}
 	}
 
-	return opt;
+	return { opt, elem };
 }
 
 function attachData(key, elem, opt) {
 	if (key.startsWith("data")) {
-		if (opt[key]) {
+		if (opt[key] !== null) {
 			elem.setAttribute(
 				key.replace(/[A-Z]/g, (m) => "-" + m.toLowerCase()),
 				opt[key]
@@ -1287,12 +1290,12 @@ function attachData(key, elem, opt) {
 		delete opt[key];
 	}
 
-	return opt;
+	return { opt, elem };
 }
 
 function attachAria(key, elem, opt) {
 	if (key.startsWith("aria")) {
-		if (opt[key]) {
+		if (opt[key] !== null) {
 			elem.setAttribute(
 				key.replace(/[A-Z]/g, (m) => "-" + m.toLowerCase()),
 				opt[key]
@@ -1302,37 +1305,80 @@ function attachAria(key, elem, opt) {
 		delete opt[key];
 	}
 
-	return opt;
+	return { opt, elem };
 }
 
 function attachOther(key, elem, opt) {
-	if (opt[key]) {
+	if (opt[key] !== null) {
 		let i = Array.isArray(opt[key]) ? opt[key].join(" ") : opt[key];
 		elem.setAttribute(key, i);
 	}
 
 	delete opt[key];
+
+	return { opt, elem };
 }
 
 const notAttr = ["tag", "elem"];
 function attachAttr(elem, opt) {
-	if (elem && opt) {
-		let keys = Object.keys(opt);
-		if (keys) {
-			for (let x = 0; x < keys.length; x++) {
-				if (notAttr.indexOf(keys[x]) > -1) {
-					opt = attachBoolean(keys[x], elem, opt);
-					opt = attachData(keys[x], elem, opt);
-					opt = attachAria(keys[x], elem, opt);
-					opt = attachBootstrap(keys[x], elem, opt);
-					opt = attachEvent(keys[x], elem, opt);
-					opt = attachStyle(keys[x], elem, opt);
-					opt = attachManualStyle(keys[x], elem, opt);
-					opt = attachClass(keys[x], elem, opt);
-					opt = attachOther(keys[x], elem, opt);
+	try {
+		if (elem && opt) {
+			let keys = Object.keys(opt);
+			if (keys) {
+				for (let x = 0; x < keys.length; x++) {
+					if (notAttr.indexOf(keys[x]) === -1) {
+						let r = attachBoolean(keys[x], elem, opt);
+						opt = r.opt;
+						elem = r.elem;
+						if (opt.hasOwnProperty(keys[x])) {
+							let r = attachData(keys[x], elem, opt);
+							opt = r.opt;
+							elem = r.elem;
+							if (opt.hasOwnProperty(keys[x])) {
+								let r = attachAria(keys[x], elem, opt);
+								opt = r.opt;
+								elem = r.elem;
+								if (opt.hasOwnProperty(keys[x])) {
+									let r = attachBootstrap(keys[x], elem, opt);
+									opt = r.opt;
+									elem = r.elem;
+									if (opt.hasOwnProperty(keys[x])) {
+										let r = attachEvent(keys[x], elem, opt);
+										opt = r.opt;
+										elem = r.elem;
+										if (opt.hasOwnProperty(keys[x])) {
+											let r = attachStyle(keys[x], elem, opt);
+											opt = r.opt;
+											elem = r.elem;
+											if (opt.hasOwnProperty(keys[x])) {
+												let r = attachManualStyle(keys[x], elem, opt);
+												opt = r.opt;
+												elem = r.elem;
+												if (opt.hasOwnProperty(keys[x])) {
+													let r = attachClass(keys[x], elem, opt);
+													opt = r.opt;
+													elem = r.elem;
+													if (opt.hasOwnProperty(keys[x])) {
+														console.log(
+															`Treat ${keys[x]}:${opt[keys[x]]} as another attribute.`
+														);
+														let r = attachOther(keys[x], elem, opt);
+														opt = r.opt;
+														elem = r.elem;
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
 				}
 			}
 		}
+	} catch (error) {
+		console.error("Something broken", error);
 	}
 
 	return elem;
@@ -1347,10 +1393,13 @@ function mergeStyle(existingStyle, newStyle) {
 		let c = {};
 		Object.keys(existingStyle).forEach((i) => {
 			if (newStyle.hasOwnProperty(i)) {
-				console.warn(
-					`Same property ${i} provided in 'existingStyle' and 'newStyle'. Using style from 'newStyle' insted.`,
-					[existingStyle[i], newStyle[i]]
-				);
+				if (existingStyle[i] !== newStyle[i]) {
+					console.warn(
+						`Same property ${i} provided in 'existingStyle' and 'newStyle'. Using style from 'newStyle' insted.`,
+						{ existingStyle: existingStyle[i], newStyle: newStyle[i] }
+					);
+				}
+
 				c[i] = newStyle[i]; //used newStyle insted
 			} else {
 				c[i] = existingStyle[i];
@@ -1401,18 +1450,6 @@ function mergeClass(existingClass, newClass) {
 	}
 }
 
-function mergeAttr(existingObject, newObject, rules) {
-	if (rules && rules.hasOwnProperty(i)) {
-		return rules[i](existingObject[i], newObject[i]);
-	} else {
-		console.warn(`No rules provided for merging this attribute ${i}. Using attr from 'newObject' insted.`, [
-			existingObject[i],
-			newObject[i],
-		]);
-		return newObject[i]; //used newObject insted
-	}
-}
-
 export function mergeObject(existingObject, newObject, rules) {
 	if ((existingObject || newObject) && !(existingObject && newObject)) {
 		return existingObject || newObject;
@@ -1425,7 +1462,18 @@ export function mergeObject(existingObject, newObject, rules) {
 				} else if (i === "style") {
 					result[i] = mergeStyle(existingObject[i], newObject[i]);
 				} else {
-					result[i] = mergeAttr(existingObject[i], newObject[i], rules);
+					if (rules && rules.hasOwnProperty(i)) {
+						result[i] = rules[i](existingObject[i], newObject[i]);
+					} else {
+						if (existingObject[i] !== newObject[i]) {
+							console.warn(
+								`No rules provided for merging ${i} attribute. Using ${i} from 'newObject' insted.`,
+								{ existingObject: existingObject[i], newObject: newObject[i] }
+							);
+						}
+
+						result[i] = newObject[i]; //used newObject insted
+					}
 				}
 			} else {
 				result[i] = existingObject[i];
@@ -1601,7 +1649,8 @@ function build(container, arg) {
 					e.data.elem = Array.isArray(e.data.elem) ? e.data.elem : [e.data.elem];
 					e.data.elem.forEach((i) => {
 						if (i) {
-							if (["string", "number", "boolean"].indexOf(typeof i) > -1) {
+							let iType = typeof i;
+							if (iType === "string" || iType === "number" || iType === "boolean") {
 								if (e.data.tag !== "pre" && isHTML(i)) {
 									element.insertAdjacentHTML("beforeend", i);
 								} else if (Array.isArray(i)) {

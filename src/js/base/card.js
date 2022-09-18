@@ -112,7 +112,7 @@ export class title extends h {
 	}
 }
 
-const defaultSubtitleOption = { level: 6, marginbottom: 2 };
+const defaultSubtitleOption = { level: 6, marginBottom: 2 };
 export class subtitle extends h {
 	constructor(...opt) {
 		super(...opt);

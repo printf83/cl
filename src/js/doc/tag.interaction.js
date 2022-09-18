@@ -55,7 +55,7 @@ export default [
 							tag: "a",
 							href: "#",
 							tabindex: -1,
-							attr: { "aria-disabled": "true" },
+							"aria-disabled": "true",
 							elem: "This link",
 
 							//marker
@@ -84,7 +84,7 @@ export default [
 							tag: "a",
 							href: "#",
 							tabindex: -1,
-							attr: { "aria-disabled": "true" },
+							"aria-disabled": "true",
 							elem: "This link",
 
 							//marker

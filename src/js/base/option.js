@@ -168,7 +168,7 @@ export class dropdown extends tag {
 									i.active === true || (i.value && opt.selected?.includes(i.value)) ? "active" : null,
 								],
 								href: i.href,
-								onclick: i.onclick,
+								click: i.click,
 								type: !i.href && i.interactive ? "button" : null,
 								elem: new label({
 									label: i.label,

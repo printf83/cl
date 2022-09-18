@@ -40,7 +40,7 @@ export default [
 					label: "Run Code",
 					icon: "play",
 					color: "primary",
-					onclick: (event) => {
+					click: (event) => {
 						//get button to show loading
 						let sender = event.currentTarget;
 
@@ -102,7 +102,7 @@ export default [
 					label: "Run Code",
 					icon: "play",
 					color: "primary",
-					onclick: (event) => {
+					click: (event) => {
 						//get button to show loading
 						let sender = event.currentTarget;
 
@@ -161,7 +161,7 @@ export default [
 					label: "Run Code",
 					icon: "play",
 					color: "primary",
-					onclick: (event) => {
+					click: (event) => {
 						//get button to show loading
 						let sender = event.currentTarget;
 
@@ -224,7 +224,7 @@ export default [
 					label: "Run Code",
 					icon: "play",
 					color: "primary",
-					onclick: (event) => {
+					click: (event) => {
 						//run code button
 						let sender = event.currentTarget;
 
@@ -315,7 +315,7 @@ export default [
 					label: "Run Code",
 					icon: "play",
 					color: "primary",
-					onclick: (event) => {
+					click: (event) => {
 						//run code button
 						let sender = event.currentTarget;
 
@@ -383,7 +383,7 @@ export default [
 					label: "Run Code",
 					icon: "play",
 					color: "primary",
-					onclick: (event) => {
+					click: (event) => {
 						//get button to show loading
 						let sender = event.currentTarget;
 
@@ -476,7 +476,7 @@ export default [
 					label: "Run Code",
 					icon: "play",
 					color: "primary",
-					onclick: (event) => {
+					click: (event) => {
 						//get button to show loading
 						let sender = event.currentTarget;
 
@@ -550,7 +550,7 @@ export default [
 					label: "Run Code",
 					icon: "play",
 					color: "primary",
-					onclick: (event) => {
+					click: (event) => {
 						//get button to show loading
 						let sender = event.currentTarget;
 
@@ -628,7 +628,7 @@ export default [
 					label: "Run Code",
 					icon: "play",
 					color: "primary",
-					onclick: (event) => {
+					click: (event) => {
 						//get button to show loading
 						let sender = event.currentTarget;
 
@@ -750,7 +750,7 @@ export default [
 					label: "Run Code",
 					icon: "play",
 					color: "primary",
-					onclick: (event) => {
+					click: (event) => {
 						//get button to show loading
 						let sender = event.currentTarget;
 
@@ -794,13 +794,12 @@ export default [
 				//add button
 				new button({
 					display: "none",
-					marginbottom: 2,
+					marginBottom: 2,
 					id: btnAdd,
 					label: "Add new",
 					icon: "floppy-disk",
 					color: "success",
-					onclick: (event) => {
-
+					click: (event) => {
 						//marker
 						list.container.item.add(resultOutputId, event.currentTarget);
 					},
@@ -852,7 +851,7 @@ export default [
 					label: "Run Code",
 					icon: "play",
 					color: "primary",
-					onclick: (event) => {
+					click: (event) => {
 						//get button to show loading
 						let sender = event.currentTarget;
 
@@ -896,7 +895,7 @@ export default [
 				//check control
 				new btngroup({
 					id: btnCheck,
-					marginbottom: 2,
+					marginBottom: 2,
 					display: "none",
 					elem: [
 						new button({
@@ -904,7 +903,7 @@ export default [
 							showlabel: "lg",
 							icon: "list-check",
 							color: "warning",
-							onclick: () => {
+							click: () => {
 								//marker
 								list.container.check.mode(resultOutputId);
 							},
@@ -915,7 +914,7 @@ export default [
 							showlabel: "lg",
 							icon: "check-double",
 							color: "warning",
-							onclick: () => {
+							click: () => {
 								//marker
 								list.container.check.all(resultOutputId);
 							},
@@ -926,7 +925,7 @@ export default [
 							showlabel: "lg",
 							icon: "trash-can",
 							color: "danger",
-							onclick: (event) => {
+							click: (event) => {
 								//marker
 								list.container.check.delete(resultOutputId, event.currentTarget);
 							},
@@ -936,8 +935,7 @@ export default [
 							showlabel: "lg",
 							icon: "download",
 							color: "primary",
-							onclick: () => {
-
+							click: () => {
 								//marker
 								let checked = list.container.check.get(resultOutputId);
 
@@ -965,7 +963,7 @@ export default [
 							showlabel: "lg",
 							icon: "upload",
 							color: "primary",
-							onclick: () => {
+							click: () => {
 								new dlg.inputbox("textarea", "ID", (_event, data) => {
 									let checked = data.value.split(",");
 
@@ -1022,7 +1020,7 @@ export default [
 					label: "Run Code",
 					icon: "play",
 					color: "primary",
-					onclick: (event) => {
+					click: (event) => {
 						//get button to show loading
 						let sender = event.currentTarget;
 
@@ -1066,7 +1064,7 @@ export default [
 				//query control
 				new btngroup({
 					id: btnQuery,
-					marginbottom: 2,
+					marginBottom: 2,
 					display: "none",
 					elem: [
 						new button({
@@ -1074,7 +1072,7 @@ export default [
 							showlabel: "lg",
 							icon: "fire",
 							color: "primary",
-							onclick: (event) => {
+							click: (event) => {
 								//marker
 								list.container.query.all(resultOutputId, event.currentTarget);
 							},
@@ -1083,7 +1081,7 @@ export default [
 						new button({
 							icon: "filter",
 							color: "primary",
-							onclick: (event) => {
+							click: (event) => {
 								//marker
 								list.container.query.filter(resultOutputId, event.currentTarget);
 							},
@@ -1092,7 +1090,7 @@ export default [
 						new button({
 							icon: "sort",
 							color: "primary",
-							onclick: (event) => {
+							click: (event) => {
 								//marker
 								list.container.query.sort(resultOutputId, event.currentTarget);
 							},
@@ -1101,7 +1099,7 @@ export default [
 						new button({
 							icon: "tasks",
 							color: "primary",
-							onclick: (event) => {
+							click: (event) => {
 								//marker
 								list.container.query.field(resultOutputId, event.currentTarget);
 							},
@@ -1110,7 +1108,7 @@ export default [
 						new button({
 							icon: "list-ol",
 							color: "primary",
-							onclick: (event) => {
+							click: (event) => {
 								//marker
 								list.container.query.limit(resultOutputId, event.currentTarget);
 							},
@@ -1119,7 +1117,7 @@ export default [
 						new button({
 							icon: { icon: "sort", rotate: 90 },
 							color: "primary",
-							onclick: (event) => {
+							click: (event) => {
 								//marker
 								list.container.query.page(resultOutputId, event.currentTarget);
 							},

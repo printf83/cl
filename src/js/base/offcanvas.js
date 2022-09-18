@@ -26,7 +26,7 @@ const defaultOption = {
 	onhidden: null,
 };
 /**
- * option : {attr,id,class,static,title,icon,footer,button,animated,debug,scrollable,center,size,fullscreen,focus,align,color,textcolor,bordercolor,border,divider,centerbutton,elem}
+ * option : {attr,id,class,static,title,icon,footer,button,animated,debug,scrollable,center,size,fullscreen,focus,align,color,textColor,borderColor,border,divider,centerbutton,elem}
  */
 export default class offcanvas extends div {
 	_bs = null;

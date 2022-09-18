@@ -58,17 +58,17 @@ export default class example extends div {
 						? "h2"
 						: "h1",
 				fontSize: !opt.anchor ? 1 : null,
-				paddingtop: 3,
+				paddingTop: 3,
 				id: opt.id,
 				elem: [
 					new label({ label: opt.title.replace(/\{\{/g, "<code>").replace(/\}\}/g, "</code>") }),
 					opt.anchor
 						? new a({
 								class: ["anchorjs-link", opt.debug ? "anchorjs-link-debug" : null],
-								paddingstart: 2,
+								paddingStart: 2,
 								ariaLabel: "Anchor",
 								dataAnchorjsIcon: "#",
-								onclick: opt.debug
+								click: opt.debug
 									? null
 									: (event) => {
 											core.focusElement(event.currentTarget.parentNode);
@@ -171,13 +171,13 @@ export default class example extends div {
 		}
 
 		super.data = {
-			marginbottom: 5,
+			marginBottom: 5,
 			elem: [
 				ctltitle,
 				ctlmsg ? new div({ elem: ctlmsg }) : null,
 				opt.code && opt.view
 					? new card.container({
-							marginbottom: 3,
+							marginBottom: 3,
 							color: opt.dark ? "dark" : null,
 							class: opt.viewclass,
 							elem: new card.body({ elem: opt.container(opt.code()) }),

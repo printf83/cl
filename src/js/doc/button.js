@@ -52,7 +52,7 @@ export default [
 				color: "primary",
 
 				//marker
-				nowrap: true,
+				textWarp: true,
 			});
 		},
 	},
@@ -284,7 +284,7 @@ export default [
 
 				//marker
 				display: "grid",
-				marginx: "auto",
+				marginX: "auto",
 				//-
 			});
 		},
@@ -304,7 +304,7 @@ export default [
 
 				//marker
 				display: ["grid", "md-flex"],
-				justifycontent: "md-end",
+				justifyContent: "md-end",
 				//-
 			});
 		},
@@ -386,7 +386,7 @@ export default [
 
 	{
 		title: "Event",
-		msg: ["Button support {{onclick}} event."],
+		msg: ["Button support {{click}} event."],
 		container: sample.stackcontainer,
 		viewclass: "cl-transparent-preview",
 		import: ["button", "toast"],
@@ -408,12 +408,12 @@ export default [
 					color: i,
 
 					//marker
-					onclick: (event) => {
+					click: (event) => {
 						let sender = event.currentTarget;
 						new toast({
 							color: "primary",
 							title: "Button Event",
-							elem: `Button <b>${core.elemInfo(sender)}</b> event <b>onclick</b> trigged`,
+							elem: `Button <b>${core.elemInfo(sender)}</b> event <b>click</b> trigged`,
 						}).show();
 					},
 					//-

@@ -4,9 +4,9 @@ import cl_form from "./form.js";
 
 /**
  * icon, msg, callback
- * icon, msg, button : {label,color,onclick}
+ * icon, msg, button : {label,color,click}
  * msg, callback
- * msg, button : {label,color,onclick}
+ * msg, button : {label,color,click}
  * opt : {modal option}
  */
 export class form extends cl_form {
@@ -15,7 +15,7 @@ export class form extends cl_form {
 			padding: 0,
 			gap: gap,
 			row: true,
-			rowcol: col,
+			rowCol: col,
 			elem: Array.isArray(elem)
 				? elem.map((i) => {
 						return new div({ col: true, elem: i });
@@ -45,7 +45,7 @@ export class vstack extends div {
 		super({
 			gap: gap,
 			row: true,
-			rowcol: col,
+			rowCol: col,
 			elem: Array.isArray(elem)
 				? elem.map((i) => {
 						return new div({ col: true, elem: i });

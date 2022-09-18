@@ -12,7 +12,7 @@ export default [
 	{
 		title: "Background color",
 		msg: [
-			"Similar to the contextual text color classes, set the background of an element to any contextual class. Background utilities <b>do not set</b> {{color}}, so in some cases you’ll want to use {{textcolor}} property.",
+			"Similar to the contextual text color classes, set the background of an element to any contextual class. Background utilities <b>do not set</b> {{color}}, so in some cases you’ll want to use {{textColor}} property.",
 		],
 		container: sample.vstackcontainer,
 

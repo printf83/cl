@@ -151,7 +151,7 @@ export default [
 					},
 					{
 						color: "transparent",
-						textbg: "primary",
+						textBgColor: "primary",
 						label: "Cancel",
 					},
 				],

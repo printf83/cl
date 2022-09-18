@@ -363,7 +363,7 @@ function start_memoryleaktest(sender, limit) {
 			If you want to stop the test, please click on this <b>Memory Leak Test</b> again to stop the test.`,
 			{
 				label: "Understand",
-				onclick: () => {
+				click: () => {
 					sender.classList.add("active");
 					memoryleaktestrun = true;
 					memoryleaktest(
@@ -535,10 +535,10 @@ let cur_sub_menu = null;
 function generate_page_placeholder() {
 	let fn = (col) => {
 		return new div({
-			placeholderanimation: "glow",
+			placeholderAnimation: "glow",
 			elem: Array.isArray(col)
 				? col.map((i) => {
-						return new span({ col: i, marginend: 1, placeholder: true });
+						return new span({ col: i, marginEnd: 1, placeholder: true });
 				  })
 				: new span({ col: col, placeholder: true }),
 		});
@@ -550,23 +550,23 @@ function generate_page_placeholder() {
 
 	return new div({
 		ariahidden: true,
-		marginbottom: 5,
+		marginBottom: 5,
 		elem: [
-			new h({ level: 1, paddingtop: 3, fontsize: 3, elem: f(2, 4) }),
+			new h({ level: 1, paddingTop: 3, fontSize: 3, elem: f(2, 4) }),
 			new div({
 				elem: new p({
-					fontweight: "light",
-					fontsize: 5,
+					fontWeight: "light",
+					fontSize: 5,
 					elem: f(12, 5),
 				}),
 			}),
-			new h({ level: 3, paddingtop: 3, elem: f(2, 3) }),
+			new h({ level: 3, paddingTop: 3, elem: f(2, 3) }),
 			new div({
 				elem: new p({
 					elem: f(6, 6),
 				}),
 			}),
-			new h({ level: 3, paddingtop: 3, elem: f(2, 3) }),
+			new h({ level: 3, paddingTop: 3, elem: f(2, 3) }),
 			new div({
 				elem: new p({
 					elem: f(6, 6),
@@ -649,7 +649,7 @@ function load_page(showloading, sender, main_menu, sub_menu, callback) {
 										core.replaceChild(
 											document.getElementById("root"),
 											new div({
-												marginbottom: 3,
+												marginBottom: 3,
 												tabindex: 0,
 												elem: menu_item_source.map((i) => {
 													return generate_page(i);
@@ -700,7 +700,7 @@ function load_page(showloading, sender, main_menu, sub_menu, callback) {
 				core.replaceChild(
 					document.getElementById("root"),
 					new div({
-						marginbottom: 3,
+						marginBottom: 3,
 						elem: new msg({
 							weight: "lg",
 							icon: "!",
@@ -763,10 +763,10 @@ function generate_tableofcontent() {
 function generate_tableofcontent_placeholder() {
 	let fn = (col) => {
 		return new div({
-			placeholderanimation: "glow",
+			placeholderAnimation: "glow",
 			elem: Array.isArray(col)
 				? col.map((i) => {
-						return new span({ col: i, marginend: 1, placeholder: true });
+						return new span({ col: i, marginEnd: 1, placeholder: true });
 				  })
 				: new span({ col: col, placeholder: true }),
 		});
@@ -928,12 +928,10 @@ function generate_menu() {
 					id: `${i.type}_${alpha_only(i.title)}_${alpha_only(j.title)}`,
 					class: `cl-${i.type}-item`,
 					label: j.title,
-					attr: {
-						"cl-m1": i.title,
-						"cl-m2": j.title,
-						"cl-m3": i.type,
-					},
-					onclick: (event) => {
+					"cl-m1": i.title,
+					"cl-m2": j.title,
+					"cl-m3": i.type,
+					click: (event) => {
 						let sender = event.currentTarget;
 
 						let main_menu = sender.getAttribute("cl-m1");
@@ -996,20 +994,20 @@ core.documentReady(() => {
 				class: ["sticky-md-top", "collapse", "navbar-collapse", "cl-vh-menu"],
 				overflow: "auto",
 				display: "md-block",
-				margintop: 3,
+				marginTop: 3,
 				elem: generate_menu(),
 			}),
 			rightelem: new tag({
 				class: ["sticky-lg-top", "cl-vh-menu"],
 				overflow: "auto",
-				margintop: 3,
+				marginTop: 3,
 				elem: generate_tableofcontent_placeholder(),
 			}),
 			footerelem: new div({
 				display: "flex",
-				flex: "wrap",
-				justifycontent: "center",
-				marginbottom: 5,
+				flex: "warp",
+				justifyContent: "center",
+				marginBottom: 5,
 				gap: 2,
 				elem: [
 					new a({
@@ -1021,7 +1019,7 @@ core.documentReady(() => {
 							elem: [new small({ id: "pagerandom", elem: "Random Page" })],
 						}),
 						href: "#",
-						onclick: () => {
+						click: () => {
 							let pagerandomlabel = document.getElementById("pagerandom");
 							let pagerandomico = pagerandomlabel.closest("div.cl-pill").getElementsByTagName("I")[0];
 
@@ -1049,7 +1047,7 @@ core.documentReady(() => {
 							elem: [new small({ id: "pagetheme", elem: "Default" })],
 						}),
 						href: "#",
-						onclick: () => {
+						click: () => {
 							let pagethemelabel = document.getElementById("pagetheme");
 							let pagethemeico = pagethemelabel.closest("div.cl-pill").getElementsByTagName("I")[0];
 

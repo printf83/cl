@@ -23,7 +23,7 @@ export default [
 						`Example heading #${i}`,
 
 						//marker
-						new badge({ label: "New", marginstart: 3 }),
+						new badge({ label: "New", marginStart: 3 }),
 					],
 				});
 			});
@@ -39,7 +39,7 @@ export default [
 				color: "primary",
 
 				//marker
-				badge: { label: "4", marginstart: 3 },
+				badge: { label: "4", marginStart: 3 },
 			});
 		},
 	},

@@ -80,13 +80,13 @@ const fn = {
 										elem: new img({
 											container: "fluid",
 											width: 100,
-											marginx: "auto",
+											marginX: "auto",
 											display: "block",
 											rounded: true,
 											padding: 0,
 											"data-cl-file": data[0].id,
 											src: db.file.url(data[0].id),
-											onclick: (event) => {
+											click: (event) => {
 												let sender = event.currentTarget;
 												let fileid = sender.getAttribute("data-cl-file");
 
@@ -158,7 +158,7 @@ const fn = {
 													padding: 1,
 													border: true,
 													"data-cl-file": i.id,
-													onclick: (event) => {
+													click: (event) => {
 														let sender = event.currentTarget;
 														let fileid = sender.getAttribute("data-cl-file");
 
@@ -188,18 +188,18 @@ const fn = {
 										list.push(
 											new div({
 												display: "flex",
-												alignitem: "stretch",
+												alignItem: "stretch",
 												col: thumbnailsize,
 												padding: 0,
 												elem: new div({
 													border: true,
 													padding: 5,
 													display: "flex",
-													justifycontent: "center",
+													justifyContent: "center",
 													class: "btn",
 													width: 100,
 													"data-cl-file": i.id,
-													onclick: (event) => {
+													click: (event) => {
 														let sender = event.currentTarget;
 														let fileid = sender.getAttribute("data-cl-file");
 
@@ -214,7 +214,7 @@ const fn = {
 														}
 													},
 													elem: new span({
-														alignself: "center",
+														alignSelf: "center",
 														elem:
 															typeof opt.downloadicon === "object"
 																? new icon(opt.downloadicon)
@@ -279,7 +279,7 @@ const fn = {
 					icon: opt.viewicon,
 					color: opt.viewcolor,
 					width: 100,
-					onclick: fn.onview,
+					click: fn.onview,
 				})
 			);
 
@@ -293,7 +293,7 @@ const fn = {
 					color: opt.deletecolor,
 					width: 0,
 					disabled: opt.disabled ? true : opt.readonly ? true : false,
-					onclick: fn.ondelete,
+					click: fn.ondelete,
 				})
 			);
 		} else {
@@ -313,7 +313,7 @@ const fn = {
 					color: opt.uploadcolor,
 					width: 100,
 					disabled: opt.disabled ? true : opt.readonly ? true : false,
-					onclick: fn.onupload,
+					click: fn.onupload,
 				})
 			);
 		}
@@ -477,7 +477,7 @@ export default class file extends div {
 		ctl.push(
 			new div({
 				row: true,
-				attr: { "data-cl-container": id },
+				"data-cl-container": id,
 				elem: new btngroup({
 					weight: opt.weight,
 					elem: opt.value
@@ -488,7 +488,7 @@ export default class file extends div {
 									icon: opt.viewicon,
 									color: opt.viewcolor,
 									width: 100,
-									onclick: fn.onview,
+									click: fn.onview,
 								}),
 								new button({
 									id: `${id}_delete`,
@@ -497,7 +497,7 @@ export default class file extends div {
 									color: opt.deletecolor,
 									width: "auto",
 									disabled: opt.disabled ? true : opt.readonly ? true : false,
-									onclick: fn.ondelete,
+									click: fn.ondelete,
 								}),
 						  ]
 						: [
@@ -508,7 +508,7 @@ export default class file extends div {
 									color: opt.uploadcolor,
 									width: 100,
 									disabled: opt.disabled ? true : opt.readonly ? true : false,
-									onclick: fn.onupload,
+									click: fn.onupload,
 								}),
 						  ],
 				}),

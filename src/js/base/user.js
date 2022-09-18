@@ -594,7 +594,7 @@ const fn = {
 			return new form({
 				id: id,
 				align: "center",
-				rowcol: 1,
+				rowCol: 1,
 				elem: elem.map((i) => {
 					return new div({ col: true, elem: i });
 				}),

@@ -83,7 +83,7 @@ export default [
 				label: "Change password",
 				icon: "key",
 				color: "primary",
-				onclick: (event) => {
+				click: (event) => {
 					//marker
 					new user.changepass({
 						callback: (result) => {
@@ -115,7 +115,7 @@ export default [
 				label: "Update profile",
 				icon: "user",
 				color: "primary",
-				onclick: (event) => {
+				click: (event) => {
 					let sender = event.currentTarget;
 
 					//marker
@@ -161,7 +161,7 @@ export default [
 				label: "Get user info",
 				icon: "user",
 				color: "primary",
-				onclick: (event) => {
+				click: (event) => {
 					//marker
 					user.info(event.currentTarget, (result) => {
 						if (result) {
@@ -183,7 +183,7 @@ export default [
 				label: "Get guest info",
 				icon: "user",
 				color: "primary",
-				onclick: (event) => {
+				click: (event) => {
 					//marker
 					user.info_guest(event.currentTarget, (result) => {
 						if (result) {
@@ -206,7 +206,7 @@ export default [
 				label: "Sign out",
 				icon: "power-off",
 				color: "danger",
-				onclick: (event) => {
+				click: (event) => {
 					//marker
 					user.signout(event.currentTarget, (result) => {
 						if (result) {
@@ -235,7 +235,7 @@ export default [
 						label: "Run",
 						icon: "play",
 						color: "success",
-						onclick: () => {
+						click: () => {
 							//marker
 							core.setting.title = () => "Bootstrap";
 							core.setting.icon = (color, weight) => {
@@ -256,7 +256,7 @@ export default [
 					new button({
 						icon: "stop",
 						color: "danger",
-						onclick: () => {
+						click: () => {
 							//marker
 							core.setting.icon = null;
 							core.setting.title = null;
@@ -285,7 +285,7 @@ export default [
 						label: "Run",
 						icon: "play",
 						color: "success",
-						onclick: () => {
+						click: () => {
 							//marker
 							core.setting.banner = (type) => {
 								return new img({
@@ -305,7 +305,7 @@ export default [
 					new button({
 						icon: "stop",
 						color: "danger",
-						onclick: () => {
+						click: () => {
 							//marker
 							core.setting.banner = null;
 
@@ -332,7 +332,7 @@ export default [
 						label: "Run",
 						icon: "play",
 						color: "success",
-						onclick: () => {
+						click: () => {
 							//marker
 							core.setting.term = () => {
 								new modal({
@@ -353,7 +353,7 @@ export default [
 									button: [
 										{
 											label: "Okay",
-											onclick: () => {},
+											click: () => {},
 										},
 										"Close",
 									],
@@ -369,7 +369,7 @@ export default [
 					new button({
 						icon: "stop",
 						color: "danger",
-						onclick: () => {
+						click: () => {
 							//marker
 							core.setting.term = null;
 
@@ -396,7 +396,7 @@ export default [
 						label: "Attach",
 						icon: "play",
 						color: "success",
-						onclick: () => {
+						click: () => {
 							//marker
 							core.setting.userchange = (result) => {
 								if (result) {
@@ -415,7 +415,7 @@ export default [
 					new button({
 						icon: "stop",
 						color: "danger",
-						onclick: () => {
+						click: () => {
 							//marker
 							core.setting.userchange = null;
 

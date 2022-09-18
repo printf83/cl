@@ -30,9 +30,7 @@ export default [
 
 					//marker
 					new b({
-						attr: {
-							"data-test": "test",
-						},
+						"data-test": "test",
 						elem: "bold",
 					}),
 					//-

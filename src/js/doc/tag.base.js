@@ -78,7 +78,7 @@ export default [
 			return new tag({
 				tag: "div",
 				elem: new tag({
-					attr: { class: "hello" },
+					class: "hello",
 					elem: "This sub element tag not have tag property",
 
 					//marker
@@ -99,7 +99,10 @@ export default [
 				elem: "Example element",
 
 				//marker
-				attr: { id: "elementID", class: "elementClass", style: { color: "#555" } },
+				id: "elementID",
+				class: "elementClass",
+				color: "#555",
+				//-
 			});
 		},
 	},
@@ -160,8 +163,8 @@ export default [
 	},
 
 	{
-		title: "onclick",
-		msg: ["Create attribute <code>onclick</code> for  element", "Shortcut for : <code>attr:{onclick:value}</code>"],
+		title: "click",
+		msg: ["Create attribute <code>click</code> for  element", "Shortcut for : <code>attr:{click:value}</code>"],
 		import: ["tag"],
 		code: () => {
 			return new tag({
@@ -170,8 +173,8 @@ export default [
 				elem: "Example button",
 
 				//marker
-				onclick: (event) => {
-					event.currentTarget.innerText = "onclick trigged";
+				click: (event) => {
+					event.currentTarget.innerText = "click trigged";
 				},
 				//-
 			});

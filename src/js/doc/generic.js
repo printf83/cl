@@ -107,7 +107,7 @@ export default [
 					label: "Create record",
 					color: "success",
 					icon: "floppy-disk",
-					onclick: (event) => {
+					click: (event) => {
 						let sender = event.currentTarget;
 						//create record
 
@@ -178,7 +178,7 @@ export default [
 					label: "Update record",
 					color: "primary",
 					icon: "pen-to-square",
-					onclick: (event) => {
+					click: (event) => {
 						let sender = event.currentTarget;
 
 						//get id
@@ -251,7 +251,7 @@ export default [
 					label: "Load record",
 					color: "primary",
 					icon: "folder-open",
-					onclick: (event) => {
+					click: (event) => {
 						let sender = event.currentTarget;
 
 						//get id
@@ -275,7 +275,7 @@ export default [
 												title: "Result",
 												container: "card",
 
-												maxheight: "10rem",
+												maxHeight: "10rem",
 												code: JSON.stringify(result),
 											}),
 										})
@@ -340,7 +340,7 @@ export default [
 					label: "Delete record",
 					color: "danger",
 					icon: "trash-can",
-					onclick: (event) => {
+					click: (event) => {
 						let sender = event.currentTarget;
 
 						//get id
@@ -408,7 +408,7 @@ export default [
 					label: "Load list",
 					color: "primary",
 					icon: "folder-open",
-					onclick: (event) => {
+					click: (event) => {
 						let sender = event.currentTarget;
 
 						//get record
@@ -429,7 +429,7 @@ export default [
 											title: "Result",
 											container: "card",
 
-											maxheight: "10rem",
+											maxHeight: "10rem",
 											code: JSON.stringify(result),
 										}),
 									})
@@ -465,7 +465,7 @@ export default [
 					label: "Load list",
 					color: "primary",
 					icon: "folder-open",
-					onclick: (event) => {
+					click: (event) => {
 						let sender = event.currentTarget;
 
 						//get record
@@ -494,7 +494,7 @@ export default [
 											title: "Result",
 											container: "card",
 
-											maxheight: "10rem",
+											maxHeight: "10rem",
 											code: JSON.stringify(result),
 										}),
 									})
@@ -559,7 +559,7 @@ export default [
 					label: "Load list option",
 					color: "primary",
 					icon: "folder-open",
-					onclick: (event) => {
+					click: (event) => {
 						let sender = event.currentTarget;
 
 						//get record
@@ -581,7 +581,7 @@ export default [
 											title: "Result",
 											container: "card",
 
-											maxheight: "10rem",
+											maxHeight: "10rem",
 											code: JSON.stringify(result),
 										}),
 									})
@@ -623,7 +623,7 @@ export default [
 					label: "Load list option",
 					color: "primary",
 					icon: "folder-open",
-					onclick: (event) => {
+					click: (event) => {
 						let sender = event.currentTarget;
 
 						//get record
@@ -645,7 +645,7 @@ export default [
 											title: "Result",
 											container: "card",
 
-											maxheight: "10rem",
+											maxHeight: "10rem",
 											code: JSON.stringify(result),
 										}),
 									})
@@ -708,7 +708,7 @@ export default [
 				label: "Download XLSX file",
 				color: "primary",
 				icon: "download",
-				onclick: (event) => {
+				click: (event) => {
 					let sender = event.currentTarget;
 
 					db.api.excel({
@@ -728,7 +728,7 @@ export default [
 				label: "Download XLSX file",
 				color: "primary",
 				icon: "download",
-				onclick: (event) => {
+				click: (event) => {
 					let sender = event.currentTarget;
 
 					//marker

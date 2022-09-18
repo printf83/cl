@@ -43,7 +43,7 @@ export default [
 				}),
 				button: {
 					label: "Okay",
-					onclick: () => {
+					click: () => {
 						new toast("i", "Callback").show();
 					},
 				},
@@ -70,7 +70,7 @@ export default [
 				}),
 				button: {
 					label: "Okay",
-					onclick: () => {
+					click: () => {
 						new toast("i", "Callback").show();
 					},
 				},
@@ -100,7 +100,7 @@ export default [
 				}),
 				button: {
 					label: "Okay",
-					onclick: () => {
+					click: () => {
 						new toast("i", "Callback").show();
 					},
 				},
@@ -123,7 +123,7 @@ export default [
 				return new button({
 					label: i.label,
 					icon: i.icon,
-					onclick: () => {
+					click: () => {
 						new dlg.msgbox(/*marker*/ i.icon, `This is example msgbox with <b>${i.icon}</b> icon`, () => {
 							new toast(i.icon, "After user click <b>Okay</b> button").show();
 						}).show();
@@ -217,7 +217,7 @@ export default [
 				return new button({
 					label: i.label,
 					color: "primary",
-					onclick: () => {
+					click: () => {
 						new dlg.inputbox(
 							//marker
 							i.hasOwnProperty("option")
@@ -454,7 +454,7 @@ export default [
 			return new button({
 				label: "Show inputbox with multiple input",
 				color: "primary",
-				onclick: () => {
+				click: () => {
 					new dlg.inputbox(
 						el,
 						null,
@@ -514,7 +514,7 @@ export default [
 				return new button({
 					label: i.label,
 					icon: i.icon,
-					onclick: () => {
+					click: () => {
 						new dlg.confirmbox(
 							//marker
 							i.icon,
@@ -526,13 +526,13 @@ export default [
 							[
 								{
 									label: "Yes",
-									onclick: () => {
+									click: () => {
 										new toast("/", "After user click <b>Yes</b> button").show();
 									},
 								},
 								{
 									label: "No",
-									onclick: () => {
+									click: () => {
 										new toast("x", "After user not click <b>No</b> button").show();
 									},
 								},
@@ -566,7 +566,7 @@ export default [
 			return new button({
 				label: "Show live modal dialog",
 				color: "primary",
-				onclick: () => {
+				click: () => {
 					new modal({
 						//marker
 						dark: true,
@@ -577,7 +577,7 @@ export default [
 							//marker
 							{
 								label: "Save changes",
-								onclick: () => {},
+								click: () => {},
 							},
 							//-
 
@@ -599,7 +599,7 @@ export default [
 				button: [
 					{
 						label: "Save changes",
-						onclick: (event, data) => {
+						click: (event, data) => {
 							new toast("i", `Result from dialog is <b>${JSON.stringify(data)}</b>`).show();
 						},
 					},
@@ -628,7 +628,7 @@ export default [
 				return new button({
 					label: i.label,
 					icon: i.icon,
-					onclick: (e) => {
+					click: (e) => {
 						new modal({
 							elem: new msg({
 								weight: "md",
@@ -639,7 +639,7 @@ export default [
 								{
 									label: "Understand",
 									color: i.backdropcolor,
-									onclick: (event, data) => {
+									click: (event, data) => {
 										new toast("i", `Result from dialog is <b>${JSON.stringify(data)}</b>`).show();
 									},
 								},
@@ -662,13 +662,13 @@ export default [
 			return new button({
 				label: "Show live modal dialog",
 				color: "primary",
-				onclick: () => {
+				click: () => {
 					new modal({
 						elem: "By default, modal dialog will not close if you click outside or press escape key. To allow modal dialog to close when click outside or press escape key, set <code>static: false</code> option",
 						button: [
 							{
 								label: "Understand",
-								onclick: (event, data) => {
+								click: (event, data) => {
 									new toast("i", `Result from dialog is <b>${JSON.stringify(data)}</b>`).show();
 								},
 							},
@@ -690,7 +690,7 @@ export default [
 			return new button({
 				label: "Show live modal dialog",
 				color: "primary",
-				onclick: () => {
+				click: () => {
 					new modal({
 						elem: [
 							new p({
@@ -706,7 +706,7 @@ export default [
 						button: [
 							{
 								label: "Understand",
-								onclick: (event, data) => {
+								click: (event, data) => {
 									new toast("i", `Result from dialog is <b>${JSON.stringify(data)}</b>`).show();
 								},
 							},
@@ -728,13 +728,13 @@ export default [
 			return new button({
 				label: "Show live modal dialog",
 				color: "primary",
-				onclick: () => {
+				click: () => {
 					new modal({
 						elem: "By default, modal dialog will vertically centered when shown. To disabled it, set <code>center: false</code> option.",
 						button: [
 							{
 								label: "Save changes",
-								onclick: (event, data) => {
+								click: (event, data) => {
 									new toast("i", `Result from dialog is <b>${JSON.stringify(data)}</b>`).show();
 								},
 							},
@@ -762,7 +762,7 @@ export default [
 					{
 						label: "Yesss!",
 						color: "primary",
-						onclick: (event, data) => {
+						click: (event, data) => {
 							new toast("i", `Result from dialog is <b>${JSON.stringify(data)}</b>`).show();
 						},
 					},
@@ -770,7 +770,7 @@ export default [
 					{ label: "Cancel", color: "info" },
 					{
 						icon: "?",
-						onclick: () => {
+						click: () => {
 							new toast("?", "Question button pressed").show();
 						},
 					},
@@ -789,7 +789,7 @@ export default [
 			return new button({
 				label: "Show live modal dialog",
 				color: "primary",
-				onclick: () => {
+				click: () => {
 					new modal({
 						elem: [
 							new h({ level: 5, elem: "Popover in a modal" }),
@@ -860,7 +860,7 @@ export default [
 			return new button({
 				label: "Show live modal dialog",
 				color: "primary",
-				onclick: () => {
+				click: () => {
 					new modal({
 						title: "Grids in modal",
 						elem: `<div class="container-fluid cl-highlight-col"><div class="row"><div class="col-md-4">.col-md-4</div><div class="col-md-4 ms-auto">.col-md-4 .ms-auto</div></div><div class="row"><div class="col-md-3 ms-auto">.col-md-3 .ms-auto</div><div class="col-md-2 ms-auto">.col-md-2 .ms-auto</div></div><div class="row"><div class="col-md-6 ms-auto">.col-md-6 .ms-auto</div></div><div class="row"><div class="col-sm-9">Level 1: .col-md-9<div class="row"><div class="col-8 col-sm-6">Level 2: .col-8 .col-sm-6</div><div class="col-4 col-sm-6">Level 2: .col-4 .col-sm-6</div></div></div></div></div>`,
@@ -878,7 +878,7 @@ export default [
 			return new button({
 				label: "Show live modal dialog",
 				color: "primary",
-				onclick: () => {
+				click: () => {
 					new modal({
 						title: "Grids in modal",
 						elem: new div("container-fluid cl-highlight-col", [
@@ -933,7 +933,7 @@ export default [
 					button: [
 						{
 							label: "Send message",
-							onclick: (event, data) => {
+							click: (event, data) => {
 								new toast("i", `Result from dialog is <b>${JSON.stringify(data)}</b>`).show();
 							},
 						},
@@ -947,21 +947,21 @@ export default [
 				new button({
 					label: "Message for @mdo",
 					color: "primary",
-					onclick: () => {
+					click: () => {
 						fn("@mdo");
 					},
 				}),
 				new button({
 					label: "Message for @fat",
 					color: "primary",
-					onclick: () => {
+					click: () => {
 						fn("@fat");
 					},
 				}),
 				new button({
 					label: "Message for @getbootstrap",
 					color: "primary",
-					onclick: () => {
+					click: () => {
 						fn("@getbootstrap");
 					},
 				}),
@@ -980,7 +980,7 @@ export default [
 					elem: "Show a second modal and close this one with the button below.",
 					button: {
 						label: "Show second modal",
-						onclick: () => {
+						click: () => {
 							//marker
 							dlgSecondModal();
 						},
@@ -994,7 +994,7 @@ export default [
 					elem: "Close this modal and show the first with the button below.",
 					button: {
 						label: "Show first modal",
-						onclick: () => {
+						click: () => {
 							//marker
 							dlgFirstModal();
 						},
@@ -1006,7 +1006,7 @@ export default [
 			return new button({
 				label: "Show first modal",
 				color: "primary",
-				onclick: () => {
+				click: () => {
 					//marker
 					dlgFirstModal();
 				},
@@ -1021,7 +1021,7 @@ export default [
 			return new button({
 				label: "Show live modal dialog",
 				color: "primary",
-				onclick: () => {
+				click: () => {
 					new modal({
 						elem: "Dialog without fade effect",
 						button: "Okay",
@@ -1053,21 +1053,21 @@ export default [
 				new button({
 					label: "Extra large modal",
 					color: "primary",
-					onclick: () => {
+					click: () => {
 						fn("xl");
 					},
 				}),
 				new button({
 					label: "Large modal",
 					color: "primary",
-					onclick: () => {
+					click: () => {
 						fn("lg");
 					},
 				}),
 				new button({
 					label: "Small modal",
 					color: "primary",
-					onclick: () => {
+					click: () => {
 						fn("sm");
 					},
 				}),
@@ -1104,42 +1104,42 @@ export default [
 				new button({
 					label: "Full screen",
 					color: "primary",
-					onclick: () => {
+					click: () => {
 						fn(true);
 					},
 				}),
 				new button({
 					label: "Full screen below sm",
 					color: "primary",
-					onclick: () => {
+					click: () => {
 						fn("sm-down");
 					},
 				}),
 				new button({
 					label: "Full screen below md",
 					color: "primary",
-					onclick: () => {
+					click: () => {
 						fn("md-down");
 					},
 				}),
 				new button({
 					label: "Full screen below lg",
 					color: "primary",
-					onclick: () => {
+					click: () => {
 						fn("lg-down");
 					},
 				}),
 				new button({
 					label: "Full screen below xl",
 					color: "primary",
-					onclick: () => {
+					click: () => {
 						fn("xl-down");
 					},
 				}),
 				new button({
 					label: "Full screen below xxl",
 					color: "primary",
-					onclick: () => {
+					click: () => {
 						fn("xxl-down");
 					},
 				}),
@@ -1183,7 +1183,7 @@ export default [
 			return new button({
 				label: "Show live modal dialog",
 				color: "primary",
-				onclick: () => {
+				click: () => {
 					new modal({
 						elem: "Modal event example",
 						button: "Okay",

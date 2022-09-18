@@ -26,9 +26,7 @@ export default [
 			return [
 				new hr(),
 				new hr({
-					attr: {
-						"data-test": "test",
-					},
+					"data-test": "test",
 				}),
 			];
 		},

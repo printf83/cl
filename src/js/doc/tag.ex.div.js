@@ -24,9 +24,7 @@ export default [
 		import: ["div"],
 		code: () => {
 			return new div({
-				attr: {
-					"data-test": "test",
-				},
+				"data-test": "test",
 				elem: "Example",
 			});
 		},

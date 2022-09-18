@@ -29,7 +29,7 @@ export default [
 				elem: new div({
 					row: true,
 					gap: 3,
-					justifycontent: "center",
+					justifyContent: "center",
 					elem: [
 						new div({
 							col: [12, "md-6", "lg-4"],
@@ -69,18 +69,18 @@ export default [
 									new card.body({
 										elem: [
 											new card.title({
-												placeholderanimation: "glow",
+												placeholderAnimation: "glow",
 												elem: new span({ placeholder: true, col: 6 }),
 											}),
 											new card.text({
-												placeholderanimation: "glow",
+												placeholderAnimation: "glow",
 												elem: [
-													new span({ placeholder: true, col: 7, marginend: 1 }),
-													new span({ placeholder: true, col: 4, marginend: 1 }),
-													new span({ placeholder: true, col: 4, marginend: 1 }),
-													new span({ placeholder: true, col: 6, marginend: 1 }),
-													new span({ placeholder: true, col: 8, marginend: 1 }),
-													new span({ placeholder: true, col: 3, marginend: 1 }),
+													new span({ placeholder: true, col: 7, marginEnd: 1 }),
+													new span({ placeholder: true, col: 4, marginEnd: 1 }),
+													new span({ placeholder: true, col: 4, marginEnd: 1 }),
+													new span({ placeholder: true, col: 6, marginEnd: 1 }),
+													new span({ placeholder: true, col: 8, marginEnd: 1 }),
+													new span({ placeholder: true, col: 3, marginEnd: 1 }),
 												],
 											}),
 											new button({
@@ -187,7 +187,7 @@ export default [
 		code: () => {
 			return ["lg", "sm", "xs"].map((i) => {
 				return new span({
-					placeholderweight: i, //marker
+					placeholderWeight: i, //marker
 					col: 12,
 				});
 			});
@@ -201,7 +201,7 @@ export default [
 		code: () => {
 			return ["wave", "glow"].map((i) => {
 				return new p({
-					placeholderanimation: i, //marker
+					placeholderAnimation: i, //marker
 					elem: new span({
 						placeholder: true,
 						col: 12,

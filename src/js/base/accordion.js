@@ -7,23 +7,18 @@ import button from "./button.js";
 const defaultOption = {
 	id: null,
 	flush: false,
-	autoclose: true,
-	autoopen: true,
+	autoClose: true,
+	autoOpen: true,
 	item: null,
 };
 
 const defaultItemOption = {
 	label: null,
 	icon: null,
-	showlabel: null,
-	iconafter: false,
+	showLabel: null,
+	iconAfter: false,
 	active: false,
 	item: null,
-
-	onshow: null,
-	onshown: null,
-	onhide: null,
-	onhidden: null,
 };
 
 export default class accordion extends div {
@@ -68,18 +63,14 @@ export default class accordion extends div {
 								delete itembody.label;
 								delete itembody.icon;
 								delete itembody.active;
-								delete itembody.iconafter;
-								delete itembody.showlabel;
-								delete itembody.onshow;
-								delete itembody.onshown;
-								delete itembody.onhide;
-								delete itembody.onhidden;
+								delete itembody.iconAfter;
+								delete itembody.showLabel;
 
 								itembody = core.merge(itembody, {
 									class: "accordion-body",
 								});
 
-								return new div({
+								let h = {
 									class: "accordion-item",
 									elem: [
 										new h({
@@ -98,19 +89,19 @@ export default class accordion extends div {
 												ariaExpanded: i.active ? "true" : "false",
 											}),
 										}),
-										new div({
-											id: `${i.id}_body`,
-											class: ["accordion-collapse", "collapse", i.active ? "show" : null],
-											ariaLabelledby: `${i.id}_head`,
-											dataBsParent: opt.autoclose ? `#${opt.id}` : null,
-											"show.bs.collapse": i.onshow,
-											"shown.bs.collapse": i.onshown,
-											"hide.bs.collapse": i.onhide,
-											"hidden.bs.collapse": i.onhidden,
-											elem: new div(itembody),
-										}),
+										new div(
+											core.merge(i, {
+												id: `${i.id}_body`,
+												class: ["accordion-collapse", "collapse", i.active ? "show" : null],
+												ariaLabelledby: `${i.id}_head`,
+												dataBsParent: opt.autoclose ? `#${opt.id}` : null,
+												elem: new div(itembody),
+											})
+										),
 									],
-								});
+								};
+
+								return new div(h);
 						  })
 						: null,
 			});

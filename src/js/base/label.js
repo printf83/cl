@@ -12,7 +12,7 @@ function generate(opt) {
 			!opt.iconafter
 				? opt.icon
 					? new span({
-							marginend: opt.label && !opt.hidelabel ? (opt.showlabel ? `${opt.showlabel}-2` : 2) : null,
+							marginEnd: opt.label && !opt.hidelabel ? (opt.showlabel ? `${opt.showlabel}-2` : 2) : null,
 							elem: new icon(opt.icon),
 					  })
 					: null
@@ -29,7 +29,7 @@ function generate(opt) {
 			opt.iconafter
 				? opt.icon
 					? new span({
-							marginstart:
+							marginStart:
 								opt.label && !opt.hidelabel ? (opt.showlabel ? `${opt.showlabel}-2` : 2) : null,
 							elem: new icon(opt.icon),
 					  })

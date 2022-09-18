@@ -25,7 +25,7 @@ export default [
 		import: ["ol", "li"],
 		code: () => {
 			return new ol({
-				attr: { "data-test": "test" },
+				"data-test": "test",
 				elem: [new li("Item"), new li("Item"), new li("Item"), new li("Item")],
 			});
 		},
@@ -42,7 +42,7 @@ export default [
 		import: ["ol", "li"],
 		code: () => {
 			return new ol({
-				attr: { "data-test": "test" },
+				"data-test": "test",
 				item: ["Item", "Item", "Item", "Item"],
 			});
 		},

@@ -57,7 +57,7 @@ const defaultOption = {
 
 	container: true,
 	flex: false,
-	nowrap: false,
+	textWarp: false,
 
 	onchange: null,
 	onfocus: null,
@@ -65,7 +65,7 @@ const defaultOption = {
 };
 
 /**
- * opt : {tagoption,id,name,type,label,hidelabel,floatlabel,inline,labelsize,ctlsize,size,weight,value,checked,placeholder,option,numctl,addctl,copyctl,min,max,step,row,multiple,required,minlengh,maxlenght,inputmode,pattern,valid,invalid,before,after,plaintext,readonly,disabled,container,flex,nowrap,onclick,onchange,onclick,onfocus,onblur}
+ * opt : {tagoption,id,name,type,label,hidelabel,floatlabel,inline,labelsize,ctlsize,size,weight,value,checked,placeholder,option,numctl,addctl,copyctl,min,max,step,row,multiple,required,minlengh,maxlenght,inputmode,pattern,valid,invalid,before,after,plaintext,readonly,disabled,container,flex,nowrap,click,onchange,click,onfocus,onblur}
  */
 export default class input extends tag {
 	constructor(...opt) {
@@ -128,7 +128,7 @@ export default class input extends tag {
 				? new button({
 						icon: "minus",
 						color: "secondary",
-						onclick: (e) => {
+						click: (e) => {
 							let sender = e.currentTarget;
 							let parent = sender.parentElement;
 							let input = parent.getElementsByTagName("input")[0];
@@ -155,7 +155,7 @@ export default class input extends tag {
 				? new button({
 						icon: { icon: "plus" },
 						color: "secondary",
-						onclick: (e) => {
+						click: (e) => {
 							let sender = e.currentTarget;
 							let parent = sender.parentElement;
 							let input = parent.getElementsByTagName("input")[0];
@@ -174,7 +174,7 @@ export default class input extends tag {
 				? new button({
 						icon: { icon: "plus" },
 						color: "secondary",
-						onclick: opt.addctl,
+						click: opt.addctl,
 				  })
 				: null;
 
@@ -185,7 +185,7 @@ export default class input extends tag {
 							icon: "clipboard",
 						},
 						color: "secondary",
-						onclick: (event) => {
+						click: (event) => {
 							try {
 								let str = document.getElementById(opt.id).value;
 								navigator.clipboard.writeText(str);
@@ -301,7 +301,7 @@ export default class input extends tag {
 
 			delete m.container;
 			delete m.flex;
-			delete m.nowrap;
+			delete m.textWarp;
 
 			delete m.option;
 

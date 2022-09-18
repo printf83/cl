@@ -54,7 +54,7 @@ export default [
 
 				["row align-items-start", "row align-items-center", "row align-items-end"].map((i) => {
 					return new div({
-						minheight:"10rem",
+						minHeight: "10rem",
 						elem: Array(3).fill(new div("col", "One of three columns")),
 
 						//marker
@@ -75,11 +75,11 @@ export default [
 				elem: ["start", "center", "end"].map((i) => {
 					return new div({
 						row: true,
-						minheight:"10rem",
+						minHeight: "10rem",
 						elem: Array(3).fill(new div({ col: true, elem: "One of three columns" })),
 
 						//marker
-						alignitem: i,
+						alignItem: i,
 					});
 				}),
 			});
@@ -95,7 +95,7 @@ export default [
 				"container",
 				new div({
 					class: "row",
-					minheight:"10rem",
+					minHeight: "10rem",
 					elem: [
 						new div(/*marker*/ "col align-self-start", "One of three columns"),
 						new div(/*marker*/ "col align-self-center", "One of three columns"),
@@ -115,14 +115,14 @@ export default [
 				container: true,
 				elem: new div({
 					row: true,
-					minheight:"10rem",
+					minHeight: "10rem",
 					elem: ["start", "center", "end"].map((i) => {
 						return new div({
 							col: true,
 							elem: "One of three columns",
 
 							//marker
-							alignself: i,
+							alignSelf: i,
 						});
 					}),
 				}),
@@ -165,7 +165,7 @@ export default [
 						elem: Array(2).fill(new div({ col: 4, elem: "One of two columns" })),
 
 						//marker
-						justifycontent: i,
+						justifyContent: i,
 					});
 				}),
 			});
@@ -232,7 +232,7 @@ export default [
 				new div("row", [
 					new div("col-6 col-sm-3", ".col-6 .col-sm-3"),
 					new div("col-6 col-sm-3", ".col-6 .col-sm-3"),
-					new span({ width:100 }), //marker
+					new span({ width: 100 }), //marker
 					new div("col-6 col-sm-3", ".col-6 .col-sm-3"),
 					new div("col-6 col-sm-3", ".col-6 .col-sm-3"),
 				])
@@ -271,7 +271,7 @@ export default [
 				new div("row", [
 					new div("col-6 col-sm-3", ".col-6 .col-sm-3"),
 					new div("col-6 col-sm-3", ".col-6 .col-sm-3"),
-					new span({ width:100, display: ["none", "md-block"] }), //marker
+					new span({ width: 100, display: ["none", "md-block"] }), //marker
 					new div("col-6 col-sm-3", ".col-6 .col-sm-3"),
 					new div("col-6 col-sm-3", ".col-6 .col-sm-3"),
 				])
@@ -518,7 +518,7 @@ export default [
 							new div({ col: "md-4", elem: ".col-md-4" }),
 							new div({
 								col: "md-4",
-								marginstart: "auto", //marker
+								marginStart: "auto", //marker
 								elem: ".col-md-4 .ms-auto",
 							}),
 						],
@@ -528,12 +528,12 @@ export default [
 						elem: [
 							new div({
 								col: "md-4",
-								marginstart: "auto", //marker
+								marginStart: "auto", //marker
 								elem: ".col-md-4 .ms-auto",
 							}),
 							new div({
 								col: "md-4",
-								marginstart: "auto", //marker
+								marginStart: "auto", //marker
 								elem: ".col-md-4 .ms-auto",
 							}),
 						],
@@ -543,7 +543,7 @@ export default [
 						elem: [
 							new div({
 								col: "auto",
-								marginstart: "auto", //marker
+								marginStart: "auto", //marker
 								elem: ".col-auto .ms-auto",
 							}),
 							new div({ col: "auto", elem: ".col-auto" }),
@@ -618,8 +618,8 @@ export default [
 						src: sample.img(200, 200),
 						col: "md-6",
 						float: "md-end",
-						marginbottom: 3,
-						marginstart: "md-3",
+						marginBottom: 3,
+						marginStart: "md-3",
 					}),
 					new p({ elem: sample.text() }),
 					new p({ elem: sample.text() }),

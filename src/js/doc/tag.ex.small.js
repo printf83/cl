@@ -30,9 +30,7 @@ export default [
 
 					//marker
 					new small({
-						attr: {
-							"data-test": "test",
-						},
+						"data-test": "test",
 						elem: "small",
 					}),
 					//-

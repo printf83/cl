@@ -75,12 +75,10 @@ export default class carousel extends div {
 
 									return new button({
 										class: ix === 0 ? "active" : null,
-										attr: {
-											"aria-current": ix === 0 ? "true" : null,
-											"aria-label": i.caption ? i.caption : i.alt ? i.alt : `Slide ${ix + 1}`,
-											"data-bs-slide-to": `${ix}`,
-											"data-bs-target": `${opt.id}`,
-										},
+										"aria-current": ix === 0 ? "true" : null,
+										"aria-label": i.caption ? i.caption : i.alt ? i.alt : `Slide ${ix + 1}`,
+										"data-bs-slide-to": `${ix}`,
+										"data-bs-target": `${opt.id}`,
 									});
 								}),
 						  })
@@ -98,9 +96,7 @@ export default class carousel extends div {
 
 							return new div({
 								class: ["carousel-item", ix === 0 ? "active" : null],
-								attr: {
-									"data-bs-interval": i.interval && opt.touch ? i.interval : null,
-								},
+								"data-bs-interval": i.interval && opt.touch ? i.interval : null,
 								elem: [
 									new img({
 										width: 100,
@@ -126,12 +122,10 @@ export default class carousel extends div {
 					opt.control
 						? new button({
 								class: "carousel-control-prev",
-								attr: {
-									"data-bs-target": `#${opt.id}`,
-									"data-bs-slide": "prev",
-								},
+								"data-bs-target": `#${opt.id}`,
+								"data-bs-slide": "prev",
 								elem: [
-									new span({ class: "carousel-control-prev-icon", attr: { "aria-hidden": "true" } }),
+									new span({ class: "carousel-control-prev-icon", "aria-hidden": "true" }),
 									new span({ class: "visually-hidden", elem: "Previous" }),
 								],
 						  })
@@ -139,12 +133,10 @@ export default class carousel extends div {
 					opt.control
 						? new button({
 								class: "carousel-control-next",
-								attr: {
-									"data-bs-target": `#${opt.id}`,
-									"data-bs-slide": "next",
-								},
+								"data-bs-target": `#${opt.id}`,
+								"data-bs-slide": "next",
 								elem: [
-									new span({ class: "carousel-control-next-icon", attr: { "aria-hidden": "true" } }),
+									new span({ class: "carousel-control-next-icon", "aria-hidden": "true" }),
 									new span({ class: "visually-hidden", elem: "Next" }),
 								],
 						  })

@@ -19,7 +19,7 @@ const defaultContainerOption = {
 	responsive: true,
 	hover: false,
 	border: null, //null|"bordered"|"none"
-	bordercolor: null,
+	borderColor: null,
 	caption: null,
 	captiontop: false,
 

@@ -18,14 +18,14 @@ const defaultOption = {
 	autofocus: null,
 
 	color: null,
-	textbg: null,
+	textBgColor: null,
 	weight: null,
 	disabled: false,
 	outline: false,
 	hidelabel: false,
 	showlabel: null,
 	iconafter: false,
-	nowrap: false,
+	textWarp: false,
 	floating: false,
 
 	placeholder: null,
@@ -69,24 +69,25 @@ export default class button extends tag {
 			if (opt.color === "transparent") {
 				if (!opt.border) opt.border = false;
 				if (!opt.shadow) opt.shadow = false;
-				if (!opt.textbg) opt.textbg = opt.color;
+				if (!opt.textBgColor) opt.textBgColor = opt.color;
 			}
 
-			opt.tag = opt.href ? "a" : opt.color || opt.outline || opt.weight ? "button" : "div";
-
-			opt = core.merge({
+			opt = core.merge(opt, {
+				tag: opt.href ? "a" : opt.color || opt.outline || opt.weight ? "button" : "div",
 				class: [
 					opt.type === "a" ? "text-decoration-none" : opt.color || opt.outline || opt.weight ? "btn" : null,
 					opt.weight ? `btn-${opt.weight}` : null,
-					opt.color ? (opt.outline ? `btn-outline-${opt.color}` : `btn-${opt.color}`) : null,
 					opt.toggle && opt.active ? "active" : null,
 					opt.floating ? "btn-floating" : null,
 				],
+
 				position: opt.position
 					? opt.position
 					: opt.badge && typeof opt.badge === "object" && opt.badge.notification
 					? "relative"
 					: null,
+				btnColor: !opt.outline ? opt.color : null,
+				btnOutlineColor: opt.outline ? opt.color : null,
 				value: opt.value,
 				checked: opt.checked,
 				role: opt.href || opt.type !== "button" ? "button" : null,
@@ -181,7 +182,7 @@ export default class button extends tag {
 			delete opt.hidelabel;
 			delete opt.showlabel;
 			delete opt.iconafter;
-			delete opt.nowrap;
+			delete opt.textWarp;
 			delete opt.floating;
 
 			if (m) {

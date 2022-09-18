@@ -10,7 +10,7 @@ let code = () => {
 		new tag({
 			tag: "div",
 			class: "cl-highlight-element",
-			maxheight: "6rem",
+			maxHeight: "6rem",
 			elem: "This is an example of using <code>overflow:auto</code> on an element with set width and height dimensions. By design, this content will vertically scroll.",
 
 			overflow: "auto",
@@ -18,7 +18,7 @@ let code = () => {
 		new tag({
 			tag: "div",
 			class: "cl-highlight-element",
-			maxheight: "6rem",
+			maxHeight: "6rem",
 			elem: "This is an example of using <code>overflow:hidden</code> on an element with set width and height dimensions.",
 
 			overflow: "hidden",
@@ -26,7 +26,7 @@ let code = () => {
 		new tag({
 			tag: "div",
 			class: "cl-highlight-element",
-			maxheight: "6rem",
+			maxHeight: "6rem",
 			elem: "This is an example of using <code>overflow:visible</code> on an element with set width and height dimensions.",
 
 			overflow: "visible",
@@ -34,7 +34,7 @@ let code = () => {
 		new tag({
 			tag: "div",
 			class: "cl-highlight-element",
-			maxheight: "6rem",
+			maxHeight: "6rem",
 			elem: "This is an example of using <code>overflow:scroll</code> on an element with set width and height dimensions.",
 
 			overflow: "scroll",

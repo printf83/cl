@@ -20,7 +20,7 @@ const defaultItemOption = {
 	iconafter: false,
 	current: false,
 	href: null,
-	onclick: null,
+	click: null,
 	elem: null,
 };
 export default class breadcrumb extends nav {
@@ -61,7 +61,7 @@ export default class breadcrumb extends nav {
 
 								return new li({
 									class: ["breadcrumb-item", i.current ? "active" : null],
-									attr: { "aria-current": i.current ? "page" : null },
+									"aria-current": i.current ? "page" : null,
 									elem: i.elem
 										? i.elem
 										: [
@@ -82,13 +82,13 @@ export default class breadcrumb extends nav {
 																iconafter: i.iconafter,
 															}),
 													  })
-													: i.onclick
+													: i.click
 													? new button({
 															label: i.label,
 															icon: i.icon,
 															showlabel: i.showlabel,
 															iconafter: i.iconafter,
-															onclick: i.onclick,
+															click: i.click,
 													  })
 													: new label({
 															icon: i.icon,

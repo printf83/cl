@@ -97,11 +97,9 @@ export default class paging extends div {
 							class: ["page-item", curpage > 1 ? null : "disabled"],
 							elem: new a({
 								class: "page-link",
-								attr: {
-									tabindex: curpage > 1 ? null : "-1",
-									"aria-disabled": curpage > 1 ? null : true,
-									"aria-label": "Previous Page",
-								},
+								tabindex: curpage > 1 ? null : "-1",
+								"aria-disabled": curpage > 1 ? null : true,
+								"aria-label": "Previous Page",
 								href: "#",
 								click: (event) => {
 									data.skip = (curpage - 2) * data.limit;
@@ -229,7 +227,10 @@ export default class paging extends div {
 					);
 				}
 
-				opt.class = core.merge.class(opt.class, ["pagination", opt.weight ? `pagination-${opt.weight}` : null]);
+				opt = core.merge(opt, {
+					class: ["pagination", opt.weight ? `pagination-${opt.weight}` : null],
+				});
+
 				opt.elem = item;
 
 				delete opt.total;

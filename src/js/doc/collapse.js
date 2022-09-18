@@ -67,7 +67,7 @@ export default [
 					id: id,
 					horizontal: true,
 					//-
-					margintop: 3,
+					marginTop: 3,
 					elem: new card.container({
 						width: "300px",
 						elem: new card.body({

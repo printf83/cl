@@ -24,7 +24,7 @@ export default [
 		import: ["ul", "li"],
 		code: () => {
 			return new ul({
-				attr: { "data-test": "test" },
+				"data-test": "test",
 				elem: [new li("Item 1"), new li("Item 2"), new li("Item 3"), new li("Item 4")],
 			});
 		},
@@ -41,7 +41,7 @@ export default [
 		import: ["ul"],
 		code: () => {
 			return new ul({
-				attr: { "data-test": "test" },
+				"data-test": "test",
 				item: ["Item 1", "Item 2", "Item 3", "Item 4"],
 			});
 		},
