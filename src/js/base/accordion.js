@@ -7,16 +7,16 @@ import button from "./button.js";
 const defaultOption = {
 	id: null,
 	flush: false,
-	autoClose: true,
-	autoOpen: true,
+	autoclose: true,
+	autoopen: true,
 	item: null,
 };
 
 const defaultItemOption = {
 	label: null,
 	icon: null,
-	showLabel: null,
-	iconAfter: false,
+	showlabel: null,
+	iconafter: false,
 	active: false,
 	item: null,
 };
@@ -57,20 +57,21 @@ export default class accordion extends div {
 
 								i.id = i.id || core.UUID();
 
-								let itembody = core.extend({}, i);
+								let accodion_body = core.extend({}, i);
 
-								delete itembody.id;
-								delete itembody.label;
-								delete itembody.icon;
-								delete itembody.active;
-								delete itembody.iconAfter;
-								delete itembody.showLabel;
+								delete accodion_body.id;
+								delete accodion_body.label;
+								delete accodion_body.icon;
+								delete accodion_body.active;
+								delete accodion_body.iconafter;
+								delete accodion_body.showlabel;
+								delete accodion_body.item;
 
-								itembody = core.merge(itembody, {
+								accodion_body = core.merge(accodion_body, {
 									class: "accordion-body",
 								});
 
-								let h = {
+								let accodion_item = {
 									class: "accordion-item",
 									elem: [
 										new h({
@@ -83,29 +84,30 @@ export default class accordion extends div {
 												showlabel: i.showlabel,
 												iconafter: i.iconafter,
 												class: ["accordion-button", !i.active ? "collapsed" : null],
-												dataBsToggle: "collapse",
-												dataBsTarget: `#${i.id}_body`,
-												ariaControls: `${i.id}_body`,
-												ariaExpanded: i.active ? "true" : "false",
+												"data-bs-toggle": "collapse",
+												"data-bs-target": `#${i.id}_body`,
+												"aria-controls": `${i.id}_body`,
+												"aria-expanded": i.active ? "true" : "false",
 											}),
 										}),
-										new div(
-											core.merge(i, {
-												id: `${i.id}_body`,
-												class: ["accordion-collapse", "collapse", i.active ? "show" : null],
-												ariaLabelledby: `${i.id}_head`,
-												dataBsParent: opt.autoclose ? `#${opt.id}` : null,
-												elem: new div(itembody),
-											})
-										),
+										new div({
+											id: `${i.id}_body`,
+											class: ["accordion-collapse", "collapse", i.active ? "show" : null],
+											"aria-labelledby": `${i.id}_head`,
+											"data-bs-parent": opt.autoclose ? `#${opt.id}` : null,
+											elem: new div(accodion_body),
+										}),
 									],
 								};
 
-								return new div(h);
+								return new div(accodion_item);
 						  })
 						: null,
 			});
 
+			delete opt.flush;
+			delete opt.autoclose;
+			delete opt.autoopen;
 			delete opt.item;
 
 			super.data = opt;

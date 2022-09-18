@@ -37,10 +37,10 @@ export class toggle extends tag {
 
 			let t = core.merge(opt.elem.data, {
 				class: [!opt.show && opt.toggle === "collapse" ? "collapsed" : null],
-				ariaControls: opt.control,
-				ariaExpanded: opt.show ? "true" : "false",
-				dataBsTarget: opt.target,
-				dataBsToggle: opt.toggle,
+				"aria-controls": opt.control,
+				"aria-expanded": opt.show ? "true" : "false",
+				"data-bs-target": opt.target,
+				"data-bs-toggle": opt.toggle,
 			});
 
 			super.data = t;

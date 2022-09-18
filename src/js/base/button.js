@@ -93,7 +93,7 @@ export default class button extends tag {
 				role: opt.href || opt.type !== "button" ? "button" : null,
 				disabled: opt.disabled,
 				type: opt.href || opt.type === "checkbox" || opt.type === "radio" ? null : opt.type,
-				dataBsToggle: opt.toggle ? "button" : null,
+				"data-bs-toggle": opt.toggle ? "button" : null,
 				autocomplete: opt.toggle ? "off" : null,
 				autofocus: opt.autofocus,
 				ariaPressed: opt.toggle && opt.active ? "true" : null,
@@ -184,6 +184,8 @@ export default class button extends tag {
 			delete opt.iconafter;
 			delete opt.textWarp;
 			delete opt.floating;
+
+			delete opt.toggle;
 
 			if (m) {
 				super.data = {

@@ -64,19 +64,21 @@ export default class label extends tag {
 		if (opt) {
 			opt = core.extend({}, defaultOption, opt);
 
-			if (opt.for) {
-				opt.elem = generate(opt);
+			let generated = generate(opt);
 
-				delete opt.for;
-				delete opt.icon;
-				delete opt.label;
-				delete opt.hidelabel;
-				delete opt.showlabel;
-				delete opt.iconafter;
+			delete opt.for;
+			delete opt.icon;
+			delete opt.label;
+			delete opt.hidelabel;
+			delete opt.showlabel;
+			delete opt.iconafter;
+
+			if (opt.for) {
+				opt.elem = generated;
 
 				super.data = opt;
 			} else {
-				super.data = { elem: generate(opt) };
+				super.data = { elem: generated };
 			}
 		}
 	}

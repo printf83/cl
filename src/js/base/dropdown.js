@@ -79,13 +79,13 @@ export default class dropdown extends tag {
 
 			s = core.merge(s, {
 				class: "dropdown-toggle",
-				ariaExpanded: "false",
+				"aria-expanded": "false",
 				dataBsAutoClose: opt.autoclose,
 				dataBsReference: opt.reference,
 				dataBsOffset: opt.offset,
-				dataBsToggle: "dropdown",
+				"data-bs-toggle": "dropdown",
 
-				ariaLabelledby: opt.id,
+				"aria-labelledby": opt.id,
 
 				"show.bs.dropdown": opt.onshow,
 				"shown.bs.dropdown": opt.onshown,

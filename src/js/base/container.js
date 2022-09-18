@@ -10,10 +10,10 @@ import cl_form from "./form.js";
  * opt : {modal option}
  */
 export class form extends cl_form {
-	constructor(elem, gap = 3, col = 1) {
+	constructor(elem, gutter = 3, col = 1) {
 		super({
 			padding: 0,
-			gap: gap,
+			gutter: gutter,
 			row: true,
 			rowCol: col,
 			elem: Array.isArray(elem)
@@ -26,10 +26,10 @@ export class form extends cl_form {
 }
 
 export class stackform extends cl_form {
-	constructor(elem, gap = 2, col = "auto") {
+	constructor(elem, gutter = 2, col = "auto") {
 		super({
 			padding: 0,
-			gap: gap,
+			gutter: gutter,
 			row: true,
 			elem: Array.isArray(elem)
 				? elem.map((i) => {
@@ -41,9 +41,9 @@ export class stackform extends cl_form {
 }
 
 export class vstack extends div {
-	constructor(elem, gap = 3, col = 1) {
+	constructor(elem, gutter = 3, col = 1) {
 		super({
-			gap: gap,
+			gutter: gutter,
 			row: true,
 			rowCol: col,
 			elem: Array.isArray(elem)
@@ -56,10 +56,10 @@ export class vstack extends div {
 }
 
 export class stack extends div {
-	constructor(elem, gap = 2, col = "auto") {
+	constructor(elem, gutter = 2, col = "auto") {
 		super({
 			row: true,
-			gap: gap,
+			gutter: gutter,
 			elem: Array.isArray(elem)
 				? elem.map((i) => {
 						return new div({ col: col, elem: i });
@@ -70,11 +70,11 @@ export class stack extends div {
 }
 
 export class grid extends div {
-	constructor(elem, gutter = 2, col = null) {
+	constructor(elem, gap = 2, col = null) {
 		super({
 			padding: 0,
 			display: "grid",
-			gutter: gutter,
+			gap: gap,
 			col: col,
 			elem: elem,
 		});

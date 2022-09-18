@@ -191,6 +191,11 @@ export default class icon extends tag {
 			delete opt.icon;
 			delete opt.weight;
 			delete opt.fixwidth;
+			delete opt.beat;
+			delete opt.fade;
+			delete opt.bounce;
+			delete opt.flip;
+			delete opt.shake;
 			delete opt.spin;
 			delete opt.rotate;
 			delete opt.color;

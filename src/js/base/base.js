@@ -720,7 +720,8 @@ const bootstrapPropertyDb = {
 	border: {
 		format: "border-$1",
 		formatTrue: "border",
-		value: [true, "top", "end", "bottom", "start"],
+		formatFalse: "border-0",
+		value: [true, false, "top", "end", "bottom", "start"],
 	},
 
 	borderNone: {
@@ -908,7 +909,7 @@ const bootstrapPropertyDb = {
 	col: {
 		format: "col-$1",
 		formatTrue: "col",
-		value: [true, ...bootstrapGrid],
+		value: [true, ...bootstrapRowCol],
 	},
 
 	rowCol: {
@@ -919,64 +920,61 @@ const bootstrapPropertyDb = {
 
 function attachBootstrap(key, elem, opt) {
 	if (bootstrapPropertyDb.hasOwnProperty(key)) {
-		if (opt[key] !== null && opt[key] !== undefined) {
-			if (Array.isArray(opt[key])) {
-				let itsBootstrapAttr = false;
-				opt[key].forEach((i) => {
-					if (bootstrapPropertyDb[key].value.indexOf(i) > -1) {
-						itsBootstrapAttr = true;
-						if (bootstrapPropertyDb[key].hasOwnProperty("formatValue")) {
-							elem.classList.add(bootstrapPropertyDb[key].formatValue);
-						}
-
-						if (i === true) {
-							if (bootstrapPropertyDb[key].hasOwnProperty("ifTrue")) {
-								elem.classList.add(bootstrapPropertyDb[key].ifTrue);
-							}
-						} else if (i === false) {
-							if (bootstrapPropertyDb[key].ifFalse) {
-								elem.classList.add(bootstrapPropertyDb[key].hasOwnProperty("ifFalse"));
-							}
-						} else {
-							if (bootstrapPropertyDb[key].hasOwnProperty("format")) {
-								elem.classList.add(bootstrapPropertyDb[key].format.replace(/\$1/g, i));
-							}
-						}
-					} else {
-						console.info(`${i} is not supported value for bootstrap ${key} property`);
-					}
-				});
-
-				if (itsBootstrapAttr) {
-					delete opt[key];
-				}
-			} else {
-				if (bootstrapPropertyDb[key].value.indexOf(opt[key]) > -1) {
+		if (Array.isArray(opt[key])) {
+			let itsBootstrapAttr = false;
+			opt[key].forEach((i) => {
+				if (bootstrapPropertyDb[key].value.indexOf(i) > -1) {
+					itsBootstrapAttr = true;
 					if (bootstrapPropertyDb[key].hasOwnProperty("formatValue")) {
 						elem.classList.add(bootstrapPropertyDb[key].formatValue);
 					}
 
-					if (opt[key] === true) {
-						if (bootstrapPropertyDb[key].hasOwnProperty("ifTrue")) {
-							elem.classList.add(bootstrapPropertyDb[key].ifTrue);
+					if (i === true) {
+						if (bootstrapPropertyDb[key].hasOwnProperty("formatTrue")) {
+							elem.classList.add(bootstrapPropertyDb[key].formatTrue);
 						}
-					} else if (opt[key] === false) {
-						if (bootstrapPropertyDb[key].hasOwnProperty("ifFalse")) {
-							elem.classList.add(bootstrapPropertyDb[key].ifFalse);
+					} else if (i === false) {
+						if (bootstrapPropertyDb[key].formatFalse) {
+							elem.classList.add(bootstrapPropertyDb[key].hasOwnProperty("formatFalse"));
 						}
 					} else {
 						if (bootstrapPropertyDb[key].hasOwnProperty("format")) {
-							elem.classList.add(bootstrapPropertyDb[key].format.replace(/\$1/g, opt[key]));
+							elem.classList.add(bootstrapPropertyDb[key].format.replace(/\$1/g, i));
 						}
 					}
-
-					delete opt[key];
 				} else {
-					console.info(`${opt[key]} is not supported value for bootstrap ${key} property`);
+					console.info(`${i} is not supported value for bootstrap ${key} property`);
 				}
+			});
+
+			if (itsBootstrapAttr) {
+				delete opt[key];
+			}
+		} else {
+			if (bootstrapPropertyDb[key].value.indexOf(opt[key]) > -1) {
+				if (bootstrapPropertyDb[key].hasOwnProperty("formatValue")) {
+					elem.classList.add(bootstrapPropertyDb[key].formatValue);
+				}
+
+				if (opt[key] === true) {
+					if (bootstrapPropertyDb[key].hasOwnProperty("formatTrue")) {
+						elem.classList.add(bootstrapPropertyDb[key].formatTrue);
+					}
+				} else if (opt[key] === false) {
+					if (bootstrapPropertyDb[key].hasOwnProperty("formatFalse")) {
+						elem.classList.add(bootstrapPropertyDb[key].formatFalse);
+					}
+				} else {
+					if (bootstrapPropertyDb[key].hasOwnProperty("format")) {
+						elem.classList.add(bootstrapPropertyDb[key].format.replace(/\$1/g, opt[key]));
+					}
+				}
+
+				delete opt[key];
+			} else {
+				console.info(`${opt[key]} is not supported value for bootstrap ${key} property`);
 			}
 		}
-		delete opt[key];
 	}
 
 	return { opt, elem };
@@ -1174,9 +1172,7 @@ const stylePropertyDb = [
 
 function attachStyle(key, elem, opt) {
 	if (stylePropertyDb.indexOf(key) > -1) {
-		if (opt[key] !== null) {
-			elem.style.setProperty(key, opt[key]);
-		}
+		elem.style[key] = opt[key];
 
 		delete opt[key];
 	}
@@ -1186,13 +1182,11 @@ function attachStyle(key, elem, opt) {
 
 function attachManualStyle(key, elem, opt) {
 	if (key === "style") {
-		if (opt[key] !== null) {
-			let styleKeys = Object.keys(opt[key]);
-			if (styleKeys) {
-				for (let x = 0; x < styleKeys.length; x++) {
-					if (opt[key][styleKeys]) {
-						elem.style.setProperty(styleKeys, opt[key][styleKeys]);
-					}
+		let styleKeys = Object.keys(opt[key]);
+		if (styleKeys) {
+			for (let x = 0; x < styleKeys.length; x++) {
+				if (opt[key][styleKeys]) {
+					elem.style.setProperty(styleKeys, opt[key][styleKeys]);
 				}
 			}
 		}
@@ -1204,7 +1198,7 @@ function attachManualStyle(key, elem, opt) {
 }
 
 function attachEvent(key, elem, opt) {
-	if (opt[key] && typeof opt[key] === "function") {
+	if (typeof opt[key] === "function") {
 		elem.addEventListener(key, opt[key], false);
 
 		setupEventListenerRemover(key, elem, () => {
@@ -1221,8 +1215,9 @@ function attachEvent(key, elem, opt) {
 
 function attachClass(key, elem, opt) {
 	if (key === "class") {
-		if (opt[key] !== null) {
-			let i = Array.isArray(opt[key]) ? opt[key] : [...opt[key].split(" ")];
+		let i = Array.isArray(opt[key]) ? opt[key] : [...opt[key].split(" ")];
+		i = i.filter(Boolean);
+		if (i && i.length > 0) {
 			elem.classList.add(...i);
 		}
 
@@ -1264,15 +1259,13 @@ const booleanAttr = [
 ];
 function attachBoolean(key, elem, opt) {
 	if (booleanAttr.indexOf(key) > -1) {
-		if (opt[key] !== null) {
-			if (elem[i] === true) {
-				elem[i] = true;
-
-				delete opt[key];
-			} else {
-				console.warn(`Attribute ${i} is not boolean`);
-			}
+		if (elem[i] === true) {
+			elem[i] = true;
+		} else {
+			console.warn(`Attribute ${i} is not boolean`);
 		}
+
+		delete opt[key];
 	}
 
 	return { opt, elem };
@@ -1280,12 +1273,10 @@ function attachBoolean(key, elem, opt) {
 
 function attachData(key, elem, opt) {
 	if (key.startsWith("data")) {
-		if (opt[key] !== null) {
-			elem.setAttribute(
-				key.replace(/[A-Z]/g, (m) => "-" + m.toLowerCase()),
-				opt[key]
-			);
-		}
+		elem.setAttribute(
+			key.replace(/[A-Z]/g, (m) => "-" + m.toLowerCase()),
+			opt[key]
+		);
 
 		delete opt[key];
 	}
@@ -1295,12 +1286,10 @@ function attachData(key, elem, opt) {
 
 function attachAria(key, elem, opt) {
 	if (key.startsWith("aria")) {
-		if (opt[key] !== null) {
-			elem.setAttribute(
-				key.replace(/[A-Z]/g, (m) => "-" + m.toLowerCase()),
-				opt[key]
-			);
-		}
+		elem.setAttribute(
+			key.replace(/[A-Z]/g, (m) => "-" + m.toLowerCase()),
+			opt[key]
+		);
 
 		delete opt[key];
 	}
@@ -1309,68 +1298,71 @@ function attachAria(key, elem, opt) {
 }
 
 function attachOther(key, elem, opt) {
-	if (opt[key] !== null) {
-		let i = Array.isArray(opt[key]) ? opt[key].join(" ") : opt[key];
-		elem.setAttribute(key, i);
-	}
+	let i = Array.isArray(opt[key]) ? opt[key].join(" ") : opt[key];
+	elem.setAttribute(key, i);
 
 	delete opt[key];
 
 	return { opt, elem };
 }
 
+function cleanupAttr(key, elem, opt) {
+	if ((opt[key] === undefined || opt[key]) === null) {
+		// console.log(`${key}:${opt[key]} is null or undefined. Delete it`);
+		delete opt[key];
+	} else {
+		// console.log(`${key}:${opt[key]} isNot null and undefined`);
+	}
+
+	return { opt, elem };
+}
+
 const notAttr = ["tag", "elem"];
+const fnAttr = {
+	cleanupAttr: cleanupAttr,
+	attachBoolean: attachBoolean,
+	attachData: attachData,
+	attachAria: attachAria,
+	attachBootstrap: attachBootstrap,
+	attachEvent: attachEvent,
+	attachStyle: attachStyle,
+	attachManualStyle: attachManualStyle,
+	attachClass: attachClass,
+	attachOther: attachOther,
+};
+
+const fnAttrDb = [
+	"cleanupAttr",
+	"attachBoolean",
+	"attachData",
+	"attachAria",
+	"attachBootstrap",
+	"attachEvent",
+	"attachStyle",
+	"attachManualStyle",
+	"attachClass",
+	"attachOther",
+];
+
 function attachAttr(elem, opt) {
 	try {
 		if (elem && opt) {
 			let keys = Object.keys(opt);
 			if (keys) {
-				for (let x = 0; x < keys.length; x++) {
+				let keyLength = keys.length;
+				let fnAttrDbLength = fnAttrDb.length;
+
+				for (let x = 0; x < keyLength; x++) {
 					if (notAttr.indexOf(keys[x]) === -1) {
-						let r = attachBoolean(keys[x], elem, opt);
-						opt = r.opt;
-						elem = r.elem;
-						if (opt.hasOwnProperty(keys[x])) {
-							let r = attachData(keys[x], elem, opt);
-							opt = r.opt;
-							elem = r.elem;
-							if (opt.hasOwnProperty(keys[x])) {
-								let r = attachAria(keys[x], elem, opt);
+						for (let y = 0; y < fnAttrDbLength; y++) {
+							if (opt.hasOwnProperty(keys[x]) && opt[keys[x]] !== null && opt[keys[x]] !== undefined) {
+								if (y === fnAttrDbLength - 1) {
+									console.log(`Treat ${keys[x]}:${opt[keys[x]]} as another attribute.`);
+								}
+
+								let r = fnAttr[fnAttrDb[y]](keys[x], elem, opt);
 								opt = r.opt;
 								elem = r.elem;
-								if (opt.hasOwnProperty(keys[x])) {
-									let r = attachBootstrap(keys[x], elem, opt);
-									opt = r.opt;
-									elem = r.elem;
-									if (opt.hasOwnProperty(keys[x])) {
-										let r = attachEvent(keys[x], elem, opt);
-										opt = r.opt;
-										elem = r.elem;
-										if (opt.hasOwnProperty(keys[x])) {
-											let r = attachStyle(keys[x], elem, opt);
-											opt = r.opt;
-											elem = r.elem;
-											if (opt.hasOwnProperty(keys[x])) {
-												let r = attachManualStyle(keys[x], elem, opt);
-												opt = r.opt;
-												elem = r.elem;
-												if (opt.hasOwnProperty(keys[x])) {
-													let r = attachClass(keys[x], elem, opt);
-													opt = r.opt;
-													elem = r.elem;
-													if (opt.hasOwnProperty(keys[x])) {
-														console.log(
-															`Treat ${keys[x]}:${opt[keys[x]]} as another attribute.`
-														);
-														let r = attachOther(keys[x], elem, opt);
-														opt = r.opt;
-														elem = r.elem;
-													}
-												}
-											}
-										}
-									}
-								}
 							}
 						}
 					}
@@ -1617,6 +1609,20 @@ const fnA = {
 
 export const multipleConstructorClass = fnA.main;
 //multiple option constructor class - end
+
+export function extend(out) {
+	out = out || {};
+
+	for (let i = 1; i < arguments.length; i++) {
+		if (!arguments[i]) continue;
+
+		for (let key in arguments[i]) {
+			if (arguments[i].hasOwnProperty(key)) out[key] = arguments[i][key];
+		}
+	}
+
+	return out;
+}
 
 export function elemInfo(elem) {
 	let a1 = elem.localName;

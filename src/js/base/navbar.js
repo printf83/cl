@@ -49,6 +49,7 @@ export class container extends nav {
 					opt.dark ? `navbar-${opt.dark ? "dark" : "light"}` : null,
 					opt.position ? opt.position : null,
 				],
+				bgColor: opt.color,
 			});
 
 			opt.body = core.merge(opt.body, {
@@ -59,6 +60,7 @@ export class container extends nav {
 
 			opt.elem = new div(opt.body);
 
+			delete opt.color;
 			delete opt.body;
 			delete opt.expand;
 			delete opt.dark;
@@ -110,6 +112,9 @@ export class brand extends tag {
 
 			delete opt.icon;
 			delete opt.label;
+			delete opt.showlabel;
+			delete opt.iconafter;
+			delete opt.img;
 
 			super.data = opt;
 		}
@@ -184,6 +189,7 @@ export class collapsecontainer extends div {
 
 		opt = core.merge(opt, {
 			class: ["collapse", "navbar-collapse"],
+
 			"show.bs.collapse": opt.onshow,
 			"shown.bs.collapse": opt.onshown,
 			"hide.bs.collapse": opt.onhide,

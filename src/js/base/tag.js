@@ -62,7 +62,7 @@ export default class tag {
 		return this._d;
 	}
 	set data(opt) {
-		opt = core.extend(defaultOption, opt); //core.extend({}, defaultOption, opt);
+		opt = core.extend({}, defaultOption, opt); //core.extend({}, defaultOption, opt);
 
 		//BS5.2
 		if (!opt.textColor && !opt.textBgColor) {
