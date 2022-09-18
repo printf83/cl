@@ -58,9 +58,12 @@ export default class accordion extends div {
 				opt.item[0].active = true;
 			}
 
-			opt = core.merge(opt, {
-				class: ["accordion", opt.flush ? "accordion-flush" : null],
-			});
+			opt = core.merge(
+				{
+					class: ["accordion", opt.flush ? "accordion-flush" : null],
+				},
+				opt
+			);
 			opt.elem =
 				opt.item && opt.item.length > 0
 					? opt.item.map((i) => {
@@ -70,9 +73,13 @@ export default class accordion extends div {
 
 							let t = core.extend({}, i);
 
-							t = core.merge(t, {
-								class: "accordion-body",
-							});
+							t = core.merge(
+								t,
+								{
+									class: "accordion-body",
+								},
+								t
+							);
 
 							delete t.id;
 							delete t.label;

@@ -189,7 +189,7 @@ export default class modal extends div {
 							i
 						);
 
-						opt = core.merge(opt, {
+						i = core.merge(i, {
 							class: "btn-modal",
 						});
 

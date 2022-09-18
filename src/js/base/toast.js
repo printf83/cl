@@ -107,7 +107,7 @@ export default class toast extends div {
 					},
 				},
 				{
-					rule: ["object"],
+					rule: ["object|debug"],
 					fn: () => {
 						return opt[0];
 					},
@@ -203,6 +203,8 @@ export default class toast extends div {
 			opt = core.merge(opt, {
 				class: ["toast", opt.debug ? "show" : null],
 				tabindex: -1,
+				bgColor: opt.color,
+				textBgColor: opt.color,
 				"data-bs-animation": opt.animate ? "true" : null,
 				"data-bs-autohide": opt.autohide ? "true" : "false",
 				"data-bs-delay": opt.delay,

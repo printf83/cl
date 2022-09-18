@@ -128,7 +128,7 @@ export class msgbox extends modal {
 						},
 					},
 					{
-						rule: ["object"],
+						rule: ["object|debug"],
 						fn: () => {
 							return opt[0];
 						},

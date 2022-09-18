@@ -63,10 +63,10 @@ export default [
 		import: ["h"],
 		code: () => {
 			return [
-				new h({ level: 5, class: "classname", elem: "Using elem property" }),
-				new h(5, "Direct level and elem property"),
+				new h({ level: 3, class: "classname", elem: "Using elem property" }),
+				new h(4, "Direct level and elem property"),
 				new h("classname", "Direct class and elem property"),
-				new h(5, "classname", "Direct level, class and elem property"),
+				new h(6, "classname", "Direct level, class and elem property"),
 			];
 		},
 	},

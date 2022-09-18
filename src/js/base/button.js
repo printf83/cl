@@ -73,6 +73,17 @@ export default class button extends tag {
 			}
 
 			opt.tag = opt.href ? "a" : opt.color || opt.outline || opt.weight ? "button" : "div";
+
+			opt.position = opt.position
+				? opt.position
+				: opt.badge && typeof opt.badge === "object" && opt.badge.notification
+				? "relative"
+				: null;
+
+			if (opt["data-bs-toggle"] === undefined) {
+				opt["data-bs-toggle"] = opt.toggle ? "button" : null;
+			}
+
 			opt = core.merge(opt, {
 				class: [
 					opt.type === "a" ? "text-decoration-none" : opt.color || opt.outline || opt.weight ? "btn" : null,
@@ -82,21 +93,11 @@ export default class button extends tag {
 					opt.toggle && opt.active ? "active" : null,
 					opt.floating ? "btn-floating" : null,
 				],
-			});
-
-			opt.position = opt.position
-				? opt.position
-				: opt.badge && typeof opt.badge === "object" && opt.badge.notification
-				? "relative"
-				: null;
-
-			opt = core.merge(opt, {
 				value: opt.value,
 				checked: opt.checked,
 				role: opt.href || opt.type !== "button" ? "button" : null,
 				disabled: opt.disabled,
 				type: opt.href || opt.type === "checkbox" || opt.type === "radio" ? null : opt.type,
-				"data-bs-toggle": opt.toggle ? "button" : null,
 				autocomplete: opt.toggle ? "off" : null,
 				autofocus: opt.autofocus,
 				"aria-pressed": opt.toggle && opt.active ? "true" : null,

@@ -1373,33 +1373,35 @@ const fnAttrDb = [
 ];
 
 function attachAttr(elem, opt) {
-	try {
-		if (elem && opt) {
-			let keys = Object.keys(opt);
-			if (keys) {
-				let keyLength = keys.length;
-				let fnAttrDbLength = fnAttrDb.length;
+	// try {
+	if (elem && opt) {
+		let keys = Object.keys(opt);
+		if (keys) {
+			let keyLength = keys.length;
+			let fnAttrDbLength = fnAttrDb.length;
 
-				for (let x = 0; x < keyLength; x++) {
-					if (notAttr.indexOf(keys[x]) === -1) {
-						for (let y = 0; y < fnAttrDbLength; y++) {
-							if (opt.hasOwnProperty(keys[x]) && opt[keys[x]] !== null && opt[keys[x]] !== undefined) {
-								if (y === fnAttrDbLength - 1) {
+			for (let x = 0; x < keyLength; x++) {
+				if (notAttr.indexOf(keys[x]) === -1) {
+					for (let y = 0; y < fnAttrDbLength; y++) {
+						if (opt.hasOwnProperty(keys[x]) && opt[keys[x]] !== null && opt[keys[x]] !== undefined) {
+							if (y === fnAttrDbLength - 1) {
+								if (setting.DEBUG) {
 									console.log(`Treat ${keys[x]}:${opt[keys[x]]} as another attribute.`);
 								}
-
-								let r = fnAttr[fnAttrDb[y]](keys[x], elem, opt);
-								opt = r.opt;
-								elem = r.elem;
 							}
+
+							let r = fnAttr[fnAttrDb[y]](keys[x], elem, opt);
+							opt = r.opt;
+							elem = r.elem;
 						}
 					}
 				}
 			}
 		}
-	} catch (error) {
-		console.error("Something broken", error);
 	}
+	// } catch (error) {
+	// 	console.error("Something broken", error);
+	// }
 
 	return elem;
 }
@@ -1412,18 +1414,7 @@ function mergeStyle(existingStyle, newStyle) {
 	if (existingStyle !== null && newStyle !== null && existingStyle !== undefined && newStyle !== undefined) {
 		let c = {};
 		Object.keys(existingStyle).forEach((i) => {
-			// if (newStyle.hasOwnProperty(i)) {
-			// 	// if (existingStyle[i] !== newStyle[i]) {
-			// 	// 	console.warn(
-			// 	// 		`Same property ${i} provided in 'existingStyle' and 'newStyle'. Using style from 'existingStyle' insted.`,
-			// 	// 		{ existingStyle: existingStyle[i], newStyle: newStyle[i] }
-			// 	// 	);
-			// 	// }
-
-			// 	c[i] = existingStyle[i]; //used newStyle insted
-			// } else {
-			c[i] = existingStyle[i];
-			// }
+			c[i] = newStyle[i];
 		});
 		Object.keys(newStyle).forEach((i) => {
 			if (!existingStyle.hasOwnProperty(i)) {
@@ -1485,14 +1476,7 @@ export function mergeObject(existingObject, newObject, rules) {
 					if (rules && rules.hasOwnProperty(i)) {
 						result[i] = rules[i](existingObject[i], newObject[i]);
 					} else {
-						// if (existingObject[i] !== newObject[i]) {
-						// 	console.warn(
-						// 		`No rules provided for merging ${i} attribute. Using ${i} from 'existingObject' insted.`,
-						// 		{ existingObject: existingObject[i], newObject: newObject[i] }
-						// 	);
-						// }
-
-						result[i] = existingObject[i]; //used newObject insted
+						result[i] = newObject[i]; //used newObject insted
 					}
 				}
 			} else {
@@ -1604,9 +1588,9 @@ const fnA = {
 		} else {
 			let t = typeof obj;
 			if (t === "object") {
-				if (obj.hasOwnProperty("cl") && obj.cl === 1) {
+				if (obj.hasOwnProperty("cl")) {
 					return "cl";
-				} else if (obj === { debug: true }) {
+				} else if (obj.debug === true) {
 					return "debug";
 				} else {
 					return t;
@@ -1634,12 +1618,13 @@ const fnA = {
 			return f(...obj);
 		} else {
 			console.error(`${caller} argument ${a.join(", ")} not supported by any rules`, {
-				obj: a,
+				type: a,
 				rule: rules
 					? rules.map((i) => {
 							return i?.rule?.join(", ");
 					  })
 					: null,
+				// obj: obj,
 			});
 			return null;
 		}
@@ -1686,40 +1671,42 @@ function build(container, arg) {
 			container = container || document.createElement("div");
 
 			arg.forEach((e) => {
-				let element = e.data.tag ? document.createElement(e.data.tag) : container;
-				// element = attachAttr(element, e.data.attr); //V1
-				element = attachAttr(element, e.data); //V2
+				if ((e !== null) & (e.data !== null)) {
+					let element = e.data.tag ? document.createElement(e.data.tag) : container;
+					// element = attachAttr(element, e.data.attr); //V1
+					element = attachAttr(element, e.data); //V2
 
-				if (e.data.elem) {
-					e.data.elem = Array.isArray(e.data.elem) ? e.data.elem : [e.data.elem];
-					e.data.elem.forEach((i) => {
-						if (i) {
-							let iType = typeof i;
-							if (iType === "string" || iType === "number" || iType === "boolean") {
-								if (e.data.tag !== "pre" && isHTML(i)) {
-									element.insertAdjacentHTML("beforeend", i);
-								} else if (Array.isArray(i)) {
-									console.error(
-										"i is array. This happen when you set elem: [[tag],tag]. It should be elem:[tag,tag]",
-										i
-									);
+					if (e.data.elem) {
+						e.data.elem = Array.isArray(e.data.elem) ? e.data.elem : [e.data.elem];
+						e.data.elem.forEach((i) => {
+							if (i) {
+								let iType = typeof i;
+								if (iType === "string" || iType === "number" || iType === "boolean") {
+									if (e.data.tag !== "pre" && isHTML(i)) {
+										element.insertAdjacentHTML("beforeend", i);
+									} else if (Array.isArray(i)) {
+										console.error(
+											"i is array. This happen when you set elem: [[tag],tag]. It should be elem:[tag,tag]",
+											i
+										);
+									} else {
+										element.appendChild(document.createTextNode(i));
+									}
+								} else if (i.hasOwnProperty("cl")) {
+									let t = build(element, i);
+									element = t ? t : element;
 								} else {
-									element.appendChild(document.createTextNode(i));
+									console.error("i is not elem or [elem] or string or number or boolean", i);
 								}
-							} else if (i.hasOwnProperty("cl")) {
-								let t = build(element, i);
-								element = t ? t : element;
-							} else {
-								console.error("i is not elem or [elem] or string or number or boolean", i);
 							}
-						}
-					});
+						});
+					}
+
+					//add to data dom
+					e.dom = element;
+
+					if (e.data.tag) container.appendChild(element);
 				}
-
-				//add to data dom
-				e.dom = element;
-
-				if (e.data.tag) container.appendChild(element);
 			});
 
 			if (hasContainer) {

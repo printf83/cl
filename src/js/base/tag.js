@@ -33,7 +33,7 @@ export default class tag {
 				},
 
 				{
-					rule: ["object"],
+					rule: ["object|debug"],
 					fn: () => {
 						return opt[0];
 					},

@@ -35,6 +35,7 @@ export default [
 					tag: "div",
 					padding: 3,
 					bgColor: i, //marker
+					textBgColor: i, //marker
 					elem: `Example element with <b>bgColor: ${i}</b>`,
 				});
 			});
@@ -68,6 +69,7 @@ export default [
 					padding: 3,
 					bgColor: i,
 					bgGradient: true, //marker
+					textBgColor: i, //marker
 					elem: `Example element with <b>bgColor: ${i}</b>`,
 				});
 			});
