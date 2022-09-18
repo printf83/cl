@@ -54,7 +54,7 @@ function codecontainer(type, strcode, maxHeight, linenums) {
 	return [
 		new div({
 			position: "relative",
-			float: "right",
+			float: "end",
 			class: "cl-codepreview-copy",
 			elem: new button({
 				icon: { type: "far", icon: "clipboard" },
@@ -62,7 +62,8 @@ function codecontainer(type, strcode, maxHeight, linenums) {
 				hidelabel: true,
 				textColor: "primary",
 				align: "end",
-				class: "position-absolute end-0",
+				position: "absolute",
+				end: 0,
 				click: (event) => {
 					let str = event.currentTarget.parentElement.nextSibling.firstChild.innerText;
 

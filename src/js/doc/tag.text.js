@@ -19,13 +19,11 @@ export default [
 		viewclass: "cl-highlight-col",
 		import: ["tag"],
 		code: () => {
-			return [null, "start", "center", "end", ["end", "md-start", "lg-center"]].map((i) => {
+			return ["start", "center", "end", ["end", "md-start", "lg-center"]].map((i) => {
 				return new tag({
 					tag: "div",
-					elem: `Example element with <code>align: ${i}</code>`,
-
-					//marker
-					align: i,
+					textAlign: i, //marker
+					elem: `Example element with <code>textAlign: ${i}</code>`,
 				});
 			});
 		},
@@ -40,52 +38,43 @@ export default [
 
 	{
 		title: "Text wrapping and overflow",
-		msg: ["Wrap text with a {{wrap:true}} property"],
+		msg: ["Wrap text with a {{textWrap:true}} property"],
 		import: ["tag"],
 		code: () => {
 			return new tag({
 				tag: "div",
 				class: "cl-highlight",
 				width: "8rem",
+				textWrap: true, //marker
 				elem: "This text should wrap.",
-
-				//marker
-				wrap: true,
 			});
 		},
 	},
 
 	{
 		title: "Text wrapping and overflow",
-		msg: ["Wrap text with a {{wrap}} property"],
+		msg: ["Wrap text with a {{textWrap:false}} property"],
 		import: ["tag"],
 		code: () => {
 			return new tag({
 				tag: "div",
 				class: "cl-highlight",
 				width: "8rem",
+				textWrap: false, //marker
 				elem: "This text should overflow the parent.",
-
-				//marker
-				wrap: false,
 			});
 		},
 	},
 
 	{
 		title: "Word break",
-		msg: [
-			"Prevent long strings of text from breaking your components' layout by using .text-break to set word-wrap: break-word and word-break: break-word. We use word-wrap instead of the more common overflow-wrap for wider browser support, and add the deprecated word-break: break-word to avoid issues with flex containers.",
-		],
 		import: ["tag"],
 		code: () => {
 			return new tag({
 				tag: "div",
 				class: "cl-highlight",
+				wordBreak: true, //marker
 				elem: "mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm",
-
-				//marker
-				wordbreak: true,
 			});
 		},
 	},
@@ -103,13 +92,11 @@ export default [
 		container: sample.vstackcontainer,
 		import: ["tag"],
 		code: () => {
-			return [null, "lowercase", "uppercase", "capitalize"].map((i) => {
+			return ["lowercase", "uppercase", "capitalize"].map((i) => {
 				return new tag({
 					tag: "div",
-					elem: `Example element with <code>texttransform: ${i}</code>`,
-
-					//marker
-					texttransform: i,
+					textTransform: i, //marker
+					elem: `Example element with <code>textTransform: ${i}</code>`,
 				});
 			});
 		},
@@ -123,13 +110,11 @@ export default [
 		container: sample.vstackcontainer,
 		import: ["tag"],
 		code: () => {
-			return [null, 1, 2, 3, 4, 5, 6].map((i) => {
+			return [1, 2, 3, 4, 5, 6].map((i) => {
 				return new tag({
 					tag: "div",
+					fontSize: i, //marker
 					elem: `Example element with <code>fontSize: ${i}</code>`,
-
-					//marker
-					fontSize: i,
 				});
 			});
 		},
@@ -144,10 +129,8 @@ export default [
 			return [null, "bold", "bolder", "semibold", "normal", "light", "lighter"].map((i) => {
 				return new tag({
 					tag: "div",
+					fontWeight: i, //marker
 					elem: `Example element with <code>fontWeight: ${i}</code>`,
-
-					//marker
-					fontWeight: i,
 				});
 			});
 		},
@@ -159,13 +142,11 @@ export default [
 		container: sample.vstackcontainer,
 		import: ["tag"],
 		code: () => {
-			return [null, true, false].map((i) => {
+			return [true, false].map((i) => {
 				return new tag({
 					tag: "div",
+					fontItalic: i, //marker
 					elem: `Example element with <code>fontItalic: ${i}</code>`,
-
-					//marker
-					fontItalic: i,
 				});
 			});
 		},
@@ -177,13 +158,11 @@ export default [
 		container: sample.vstackcontainer,
 		import: ["tag"],
 		code: () => {
-			return [null, true, false, "underline", "line-through", "none"].map((i) => {
+			return ["underline", "line-through", "none"].map((i) => {
 				return new tag({
 					tag: "div",
+					textDecoration: i, //marker
 					elem: `Example element with <code>textDecoration: ${i}</code>`,
-
-					//marker
-					textDecoration: i,
 				});
 			});
 		},
@@ -197,10 +176,8 @@ export default [
 		code: () => {
 			return new tag({
 				tag: "div",
+				monospace: true, //marker
 				elem: `Example element with <code>monospace: true</code>`,
-
-				//marker
-				monospace: true,
 			});
 		},
 	},
@@ -211,14 +188,12 @@ export default [
 		container: sample.vstackcontainer,
 		import: ["tag", "sample"],
 		code: () => {
-			return [null, 1, "sm", "base", "lg"].map((i) => {
+			return [1, "sm", "base", "lg"].map((i) => {
 				return new tag({
 					tag: "div",
 					class: "cl-highlight-element",
+					lineHeight: i, //marker
 					elem: `Example element with <code>lineHeight: ${i}</code>. ${sample.text()}`,
-
-					//marker
-					lineHeight: i,
 				});
 			});
 		},

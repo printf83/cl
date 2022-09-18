@@ -65,9 +65,9 @@ export default class tag {
 		opt = core.extend({}, defaultOption, opt); //core.extend({}, defaultOption, opt);
 
 		//BS5.2
-		if (!opt.textColor && !opt.textBgColor) {
-			opt.textBgColor = opt.btnColor || opt.alertColor || opt.bgColor;
-		}
+		// if (!opt.textColor && !opt.textBgColor) {
+		// 	opt.textBgColor = opt.btnColor || opt.alertColor || opt.bgColor;
+		// }
 
 		this._d = opt;
 	}

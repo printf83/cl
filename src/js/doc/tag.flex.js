@@ -21,10 +21,8 @@ export default [
 			return new tag({
 				tag: "div",
 				class: "cl-highlight-padding",
+				display: "flex", //marker
 				elem: "I'm a flexbox container!",
-
-				//marker
-				display: "flex",
 			});
 		},
 	},
@@ -36,10 +34,8 @@ export default [
 			return new tag({
 				tag: "div",
 				class: "cl-highlight-padding",
+				display: "inline-flex", //marker
 				elem: "I'm a inline flexbox container!",
-
-				//marker
-				display: "inline-flex",
 			});
 		},
 	},
@@ -72,16 +68,13 @@ export default [
 			return ["row", "row-reverse"].map((i) => {
 				return new tag({
 					tag: "div",
+					display: "flex",
+					flex: i, //marker
 					elem: [
 						new tag({ tag: "div", elem: "Flex item 1" }),
 						new tag({ tag: "div", elem: "Flex item 2" }),
 						new tag({ tag: "div", elem: "Flex item 3" }),
 					],
-
-					//marker
-					display: "flex",
-					flex: i,
-					//-
 				});
 			});
 		},
@@ -97,16 +90,13 @@ export default [
 			return ["column", "column-reverse"].map((i) => {
 				return new tag({
 					tag: "div",
+					display: "flex",
+					flex: i, //marker
 					elem: [
 						new tag({ tag: "div", elem: "Flex item 1" }),
 						new tag({ tag: "div", elem: "Flex item 2" }),
 						new tag({ tag: "div", elem: "Flex item 3" }),
 					],
-
-					//marker
-					display: "flex",
-					flex: i,
-					//-
 				});
 			});
 		},
@@ -137,12 +127,9 @@ export default [
 			return ["start", "end", "center", "between", "around", "evenly"].map((i) => {
 				return new tag({
 					tag: "div",
-					elem: Array(3).fill(new tag({ tag: "div", elem: "Flex item" })),
-
-					//marker
 					display: "flex",
-					justifyContent: i,
-					//-
+					justifyContent: i, //marker
+					elem: Array(3).fill(new tag({ tag: "div", elem: "Flex item" })),
 				});
 			});
 		},
@@ -174,12 +161,9 @@ export default [
 				return new tag({
 					tag: "div",
 					height: "6rem",
-					elem: Array(3).fill(new tag({ tag: "div", elem: "Flex item" })),
-
-					//marker
 					display: "flex",
-					alignItem: i,
-					//-
+					alignItem: i, //marker
+					elem: Array(3).fill(new tag({ tag: "div", elem: "Flex item" })),
 				});
 			});
 		},
@@ -210,15 +194,13 @@ export default [
 			return ["start", "end", "center", "baseline", "stretch"].map((i) => {
 				return new tag({
 					tag: "div",
+					display: "flex",
 					height: "6rem",
 					elem: [
 						new tag({ tag: "div", elem: "Flex item" }),
 						new tag({ tag: "div", /*marker*/ alignSelf: i, elem: "Flex item" }),
 						new tag({ tag: "div", elem: "Flex item" }),
 					],
-
-					//marker
-					display: "flex",
 				});
 			});
 		},
@@ -248,14 +230,12 @@ export default [
 		code: () => {
 			return new tag({
 				tag: "div",
+				display: "flex",
 				elem: [
 					new tag({ tag: "div", /*marker*/ flex: "fill", elem: "Flex item with a lot of content" }),
 					new tag({ tag: "div", /*marker*/ flex: "fill", elem: "Flex item" }),
 					new tag({ tag: "div", /*marker*/ flex: "fill", elem: "Flex item" }),
 				],
-
-				//marker
-				display: "flex",
 			});
 		},
 	},
@@ -282,14 +262,12 @@ export default [
 		code: () => {
 			return new tag({
 				tag: "div",
+				display: "flex",
 				elem: [
-					new tag({ tag: "div", /*marker*/ flex: "glow-1", elem: "Flex item" }),
+					new tag({ tag: "div", /*marker*/ flex: "grow-1", elem: "Flex item" }),
 					new tag({ tag: "div", elem: "Flex item" }),
 					new tag({ tag: "div", elem: "Third flex item" }),
 				],
-
-				//marker
-				display: "flex",
 			});
 		},
 	},
@@ -302,13 +280,11 @@ export default [
 		code: () => {
 			return new tag({
 				tag: "div",
+				display: "flex",
 				elem: [
 					new tag({ tag: "div", width: 100, elem: "Flex item" }),
 					new tag({ tag: "div", /*marker*/ flex: "shrink-1", elem: "Flex item" }),
 				],
-
-				//marker
-				display: "flex",
 			});
 		},
 	},
@@ -338,32 +314,26 @@ export default [
 			return [
 				new tag({
 					tag: "div",
-					elem: Array(3).fill(new tag({ tag: "div", elem: "Flex item" })),
-
-					//marker
 					display: "flex",
+					elem: Array(3).fill(new tag({ tag: "div", elem: "Flex item" })),
 				}),
 				new tag({
 					tag: "div",
+					display: "flex",
 					elem: [
 						new tag({ tag: "div", /*marker*/ marginEnd: "auto", elem: "Flex item" }),
 						new tag({ tag: "div", elem: "Flex item" }),
 						new tag({ tag: "div", elem: "Flex item" }),
 					],
-
-					//marker
-					display: "flex",
 				}),
 				new tag({
 					tag: "div",
+					display: "flex",
 					elem: [
 						new tag({ tag: "div", elem: "Flex item" }),
 						new tag({ tag: "div", elem: "Flex item" }),
 						new tag({ tag: "div", /*marker*/ marginStart: "auto", elem: "Flex item" }),
 					],
-
-					//marker
-					display: "flex",
 				}),
 			];
 		},
@@ -380,13 +350,9 @@ export default [
 				new tag({
 					tag: "div",
 					height: "12rem",
-
-					//marker
 					display: "flex",
-					alignItem: "start",
-					flex: "column",
-					//-
-
+					alignItem: "start", //marker
+					flex: "column", //marker
 					elem: [
 						new tag({ tag: "div", /*marker*/ marginBottom: "auto", elem: "Flex item" }),
 						new tag({ tag: "div", elem: "Flex item" }),
@@ -396,13 +362,9 @@ export default [
 				new tag({
 					tag: "div",
 					height: "12rem",
-
-					//marker
 					display: "flex",
-					alignItem: "end",
-					flex: "column",
-					//-
-
+					alignItem: "end", //marker
+					flex: "column", //marker
 					elem: [
 						new tag({ tag: "div", elem: "Flex item" }),
 						new tag({ tag: "div", elem: "Flex item" }),
@@ -423,10 +385,8 @@ export default [
 			return new tag({
 				tag: "div",
 				display: "flex",
-				elem: Array(6).fill(new tag({ tag: "div", elem: "Flex item" })),
-
-				//marker
 				flex: "nowrap",
+				elem: Array(6).fill(new tag({ tag: "div", elem: "Flex item" })),
 			});
 		},
 	},
@@ -438,29 +398,9 @@ export default [
 		code: () => {
 			return new tag({
 				tag: "div",
-				elem: Array(15).fill(new tag({ tag: "div", elem: "Flex item" })),
-
-				//marker
-				flex: "wrap",
-				flex: "wrap-reverse",
-				//-
-			});
-		},
-	},
-
-	{
-		container: sample.vstackcontainer,
-		viewclass: "cl-highlight-flex",
-		import: ["tag"],
-		code: () => {
-			return new tag({
-				tag: "div",
-				elem: Array(15).fill(new tag({ tag: "div", elem: "Flex item" })),
-
-				//marker
 				display: "flex",
 				flex: "wrap-reverse",
-				//-
+				elem: Array(15).fill(new tag({ tag: "div", elem: "Flex item" })),
 			});
 		},
 	},
@@ -489,16 +429,13 @@ export default [
 		code: () => {
 			return new tag({
 				tag: "div",
+				display: "flex",
+				flex: "nowrap",
 				elem: [
 					new tag({ tag: "div", /*marker*/ order: 3, elem: "First flex item" }),
 					new tag({ tag: "div", /*marker*/ order: 2, elem: "Second flex item" }),
 					new tag({ tag: "div", /*marker*/ order: 1, elem: "Third flex item" }),
 				],
-
-				//marker
-				display: "flex",
-				flex: "nowrap",
-				//-
 			});
 		},
 	},
@@ -546,14 +483,11 @@ export default [
 			return ["start", "end", "center", "between", "around", "stretch"].map((i) => {
 				return new tag({
 					tag: "div",
-					height: "12rem",
-					elem: Array(15).fill(new tag({ tag: "div", elem: "Flex item" })),
-
-					//marker
 					display: "flex",
 					flex: "wrap",
-					alignContent: i,
-					//-
+					alignContent: i, //marker
+					height: "12rem",
+					elem: Array(15).fill(new tag({ tag: "div", elem: "Flex item" })),
 				});
 			});
 		},
@@ -581,31 +515,25 @@ export default [
 		code: () => {
 			return new tag({
 				tag: "div",
+				display: "flex",
 				elem: [
 					new tag({
 						tag: "div",
+						flex: "shrink-1", //marker
 						elem: new tag({
 							tag: "img",
 							alt: "Image",
 							src: sample.img(84, 80),
 							height: "5rem",
 						}),
-
-						//marker
-						flex: "shrink-0",
 					}),
 					new tag({
 						tag: "div",
 						marginStart: 3,
+						flex: "grow-1", //marker
 						elem: "This is some content from a media component. You can replace this with any content and adjust it as needed.",
-
-						//marker
-						flex: "grow-1",
 					}),
 				],
-
-				//marker
-				display: "flex",
 			});
 		},
 	},
@@ -616,33 +544,26 @@ export default [
 		code: () => {
 			return new tag({
 				tag: "div",
+				display: "flex",
+				alignItem: "center",
 				elem: [
 					new tag({
 						tag: "div",
+						flex: "shirnk-1", //marker
 						elem: new tag({
 							tag: "img",
 							alt: "Image",
 							src: sample.img(84, 80),
 							height: "5rem",
 						}),
-
-						//marker
-						flex: "shrink-0",
 					}),
 					new tag({
 						tag: "div",
 						marginStart: 3,
+						flex: "grow-1", //marker
 						elem: "This is some content from a media component. You can replace this with any content and adjust it as needed.",
-
-						//marker
-						flex: "grow-1",
 					}),
 				],
-
-				//marker
-				display: "flex",
-				alignItem: "center",
-				//-
 			});
 		},
 	},

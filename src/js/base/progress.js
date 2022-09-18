@@ -3,7 +3,6 @@ import * as core from "./core.js";
 import div from "./div.js";
 
 const defaultContainerOption = {
-	height: null,
 	item: null,
 };
 /**
@@ -36,7 +35,6 @@ export class container extends div {
 				  })
 				: null;
 
-			delete opt.height;
 			delete opt.item;
 
 			super.data = opt;

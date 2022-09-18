@@ -186,51 +186,81 @@ const bootstrapDisplay = [
 const bootstrapFlex = [
 	"row",
 	"row-reverse",
-	"col",
-	"col-reverse",
-	"warp",
-	"warp-reverse",
-	"nowarp",
+	"column",
+	"column-reverse",
+	"wrap",
+	"wrap-reverse",
+	"nowrap",
+	"fill",
+	"shrink-0",
+	"shrink-1",
+	"grow-0",
+	"grow-1",
 
 	"sm-row",
 	"sm-row-reverse",
-	"sm-col",
-	"sm-col-reverse",
-	"sm-warp",
-	"sm-warp-reverse",
-	"sm-nowarp",
+	"sm-column",
+	"sm-column-reverse",
+	"sm-wrap",
+	"sm-wrap-reverse",
+	"sm-nowrap",
+	"sm-fill",
+	"sm-shrink-0",
+	"sm-shrink-1",
+	"sm-grow-0",
+	"sm-grow-1",
 
 	"md-row",
 	"md-row-reverse",
-	"md-col",
-	"md-col-reverse",
-	"md-warp",
-	"md-warp-reverse",
-	"md-nowarp",
+	"md-column",
+	"md-column-reverse",
+	"md-wrap",
+	"md-wrap-reverse",
+	"md-nowrap",
+	"md-fill",
+	"md-shrink-0",
+	"md-shrink-1",
+	"md-grow-0",
+	"md-grow-1",
 
 	"lg-row",
 	"lg-row-reverse",
-	"lg-col",
-	"lg-col-reverse",
-	"lg-warp",
-	"lg-warp-reverse",
-	"lg-nowarp",
+	"lg-column",
+	"lg-column-reverse",
+	"lg-wrap",
+	"lg-wrap-reverse",
+	"lg-nowrap",
+	"lg-fill",
+	"lg-shrink-0",
+	"lg-shrink-1",
+	"lg-grow-0",
+	"lg-grow-1",
 
 	"xl-row",
 	"xl-row-reverse",
-	"xl-col",
-	"xl-col-reverse",
-	"xl-warp",
-	"xl-warp-reverse",
-	"xl-nowarp",
+	"xl-column",
+	"xl-column-reverse",
+	"xl-wrap",
+	"xl-wrap-reverse",
+	"xl-nowrap",
+	"xl-fill",
+	"xl-shrink-0",
+	"xl-shrink-1",
+	"xl-grow-0",
+	"xl-grow-1",
 
 	"xxl-row",
 	"xxl-row-reverse",
-	"xxl-col",
-	"xxl-col-reverse",
-	"xxl-warp",
-	"xxl-warp-reverse",
-	"xxl-nowarp",
+	"xxl-column",
+	"xxl-column-reverse",
+	"xxl-wrap",
+	"xxl-wrap-reverse",
+	"xxl-nowrap",
+	"xxl-fill",
+	"xxl-shrink-0",
+	"xxl-shrink-1",
+	"xxl-grow-0",
+	"xxl-grow-1",
 ];
 
 const bootstrapJustifyContent = [
@@ -696,7 +726,7 @@ const bootstrapPropertyDb = {
 	bottom: { format: "bottom-$1", value: [0, 50, 100] },
 	start: { format: "start-$1", value: [0, 50, 100] },
 	end: { format: "end-$1", value: [0, 50, 100] },
-	tMiddle: { format: "translate-middle-$1", formatTrue: "transate-middle", value: [true, "x", "y"] },
+	tMiddle: { format: "translate-middle-$1", formatTrue: "translate-middle", value: [true, "x", "y"] },
 
 	height: { format: "h-$1", value: ["auto", 25, 50, 75, 100] },
 	width: { format: "w-$1", value: ["auto", 25, 50, 75, 100] },
@@ -805,36 +835,6 @@ const bootstrapPropertyDb = {
 		value: bootstrapFlex,
 	},
 
-	flexFill: {
-		format: "flex-$1-fill",
-		formatTrue: "flex-fill",
-		value: [true, "sm", "md", "lg", "xl", "xxl"],
-	},
-
-	flexGrow0: {
-		format: "flex-$1-grow-0",
-		formatTrue: "flex-grow-0",
-		value: [true, "sm", "md", "lg", "xl", "xxl"],
-	},
-
-	flexGrow1: {
-		format: "flex-$1-grow-1",
-		formatTrue: "flex-grow-1",
-		value: [true, "sm", "md", "lg", "xl", "xxl"],
-	},
-
-	flexShrink0: {
-		format: "flex-$1-shrink-0",
-		formatTrue: "flex-shrink-0",
-		value: [true, "sm", "md", "lg", "xl", "xxl"],
-	},
-
-	flexShrink1: {
-		format: "flex-$1-shrink-1",
-		formatTrue: "flex-shrink-1",
-		value: [true, "sm", "md", "lg", "xl", "xxl"],
-	},
-
 	float: {
 		format: "float-$1",
 		value: bootstrapFloat,
@@ -874,7 +874,7 @@ const bootstrapPropertyDb = {
 		formatFalse: "invisible",
 		value: [true, false],
 	},
-	textWarp: {
+	textWrap: {
 		formatTrue: "text-wrap",
 		formatFalse: "text-nowrap",
 		value: [true, false],
@@ -1215,10 +1215,36 @@ function attachEvent(key, elem, opt) {
 
 function attachClass(key, elem, opt) {
 	if (key === "class") {
-		let i = Array.isArray(opt[key]) ? opt[key] : [...opt[key].split(" ")];
-		i = i.filter(Boolean);
-		if (i && i.length > 0) {
-			elem.classList.add(...i);
+		let i = [];
+		try {
+			if (Array.isArray(opt[key])) {
+				i = opt[key];
+			} else {
+				i = [opt[key]];
+			}
+
+			//remove null
+			i = i.filter(Boolean);
+
+			//make sure every class not have whitespace
+			if (i && i.length > 0) {
+				for (let x = 0; x < i.length; x++) {
+					if (i[x].indexOf(" ") > -1) {
+						i[x] = i[x].split(" ");
+						i[x] = i[x].filter(Boolean);
+
+						if (i[x] && i[x].length > 0) {
+							for (let y = 0; y < i[x].length; y++) {
+								elem.classList.add(i[x][y]);
+							}
+						}
+					} else {
+						elem.classList.add(i[x]);
+					}
+				}
+			}
+		} catch (error) {
+			console.error(`Fail to add class ${i}`, error);
 		}
 
 		delete opt[key];
@@ -1259,10 +1285,10 @@ const booleanAttr = [
 ];
 function attachBoolean(key, elem, opt) {
 	if (booleanAttr.indexOf(key) > -1) {
-		if (elem[i] === true) {
-			elem[i] = true;
+		if (opt[key] === true) {
+			elem[key] = true;
 		} else {
-			console.warn(`Attribute ${i} is not boolean`);
+			console.warn(`Attribute ${key}:${opt[key]} is not boolean`);
 		}
 
 		delete opt[key];
@@ -1384,18 +1410,18 @@ function mergeStyle(existingStyle, newStyle) {
 	if (existingStyle !== null && newStyle !== null && existingStyle !== undefined && newStyle !== undefined) {
 		let c = {};
 		Object.keys(existingStyle).forEach((i) => {
-			if (newStyle.hasOwnProperty(i)) {
-				if (existingStyle[i] !== newStyle[i]) {
-					console.warn(
-						`Same property ${i} provided in 'existingStyle' and 'newStyle'. Using style from 'newStyle' insted.`,
-						{ existingStyle: existingStyle[i], newStyle: newStyle[i] }
-					);
-				}
+			// if (newStyle.hasOwnProperty(i)) {
+			// 	// if (existingStyle[i] !== newStyle[i]) {
+			// 	// 	console.warn(
+			// 	// 		`Same property ${i} provided in 'existingStyle' and 'newStyle'. Using style from 'existingStyle' insted.`,
+			// 	// 		{ existingStyle: existingStyle[i], newStyle: newStyle[i] }
+			// 	// 	);
+			// 	// }
 
-				c[i] = newStyle[i]; //used newStyle insted
-			} else {
-				c[i] = existingStyle[i];
-			}
+			// 	c[i] = existingStyle[i]; //used newStyle insted
+			// } else {
+			c[i] = existingStyle[i];
+			// }
 		});
 		Object.keys(newStyle).forEach((i) => {
 			if (!existingStyle.hasOwnProperty(i)) {
@@ -1457,14 +1483,14 @@ export function mergeObject(existingObject, newObject, rules) {
 					if (rules && rules.hasOwnProperty(i)) {
 						result[i] = rules[i](existingObject[i], newObject[i]);
 					} else {
-						if (existingObject[i] !== newObject[i]) {
-							console.warn(
-								`No rules provided for merging ${i} attribute. Using ${i} from 'newObject' insted.`,
-								{ existingObject: existingObject[i], newObject: newObject[i] }
-							);
-						}
+						// if (existingObject[i] !== newObject[i]) {
+						// 	console.warn(
+						// 		`No rules provided for merging ${i} attribute. Using ${i} from 'existingObject' insted.`,
+						// 		{ existingObject: existingObject[i], newObject: newObject[i] }
+						// 	);
+						// }
 
-						result[i] = newObject[i]; //used newObject insted
+						result[i] = existingObject[i]; //used newObject insted
 					}
 				}
 			} else {

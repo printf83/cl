@@ -15,44 +15,36 @@ export default [
 		container: (elem) => {
 			return new div({ display: "md-flex", class: "gap-2", elem: elem });
 		},
-		import: ["tag"],
+		import: ["tag", "sanple"],
 		code: () => {
 			return [
 				new tag({
 					tag: "div",
 					class: "cl-highlight-element",
 					maxHeight: "6rem",
+					overflow: "auto", //marker
 					elem: `This is an example of using <code>overflow:auto</code> on an element with set width and height dimensions. By design, this content will vertically scroll. ${sample.shorttext()}`,
-
-					//marker
-					overflow: "auto",
 				}),
 				new tag({
 					tag: "div",
 					class: "cl-highlight-element",
 					maxHeight: "6rem",
+					overflow: "hidden", //marker
 					elem: `This is an example of using <code>overflow:hidden</code> on an element with set width and height dimensions. ${sample.shorttext()}`,
-
-					//marker
-					overflow: "hidden",
 				}),
 				new tag({
 					tag: "div",
 					class: "cl-highlight-element",
 					maxHeight: "6rem",
+					overflow: "visible", //marker
 					elem: `This is an example of using <code>overflow:visible</code> on an element with set width and height dimensions. ${sample.shorttext()}`,
-
-					//marker
-					overflow: "visible",
 				}),
 				new tag({
 					tag: "div",
 					class: "cl-highlight-element",
 					maxHeight: "6rem",
+					overflow: "scroll", //marker
 					elem: `This is an example of using <code>overflow:scroll</code> on an element with set width and height dimensions. ${sample.shorttext()}`,
-
-					//marker
-					overflow: "scroll",
 				}),
 			];
 		},

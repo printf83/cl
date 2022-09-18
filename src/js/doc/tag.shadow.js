@@ -27,10 +27,8 @@ export default [
 			return ["none", "sm", true, "lg"].map((i) => {
 				return new tag({
 					tag: "div",
+					shadow: i, //marker
 					elem: `This is an example of using <code>shadow:${i}</code>`,
-
-					//marker
-					shadow: i,
 				});
 			});
 		},

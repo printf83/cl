@@ -34,10 +34,8 @@ export default [
 				return new tag({
 					tag: "div",
 					padding: 3,
-					elem: `Example element with <b>color: ${i}</b>`,
-
-					//marker
-					color: i,
+					bgColor: i, //marker
+					elem: `Example element with <b>bgColor: ${i}</b>`,
 				});
 			});
 		},
@@ -68,12 +66,9 @@ export default [
 				return new tag({
 					tag: "div",
 					padding: 3,
-					elem: `Example element with <b>color: ${i}</b>`,
-
-					//marker
-					color: i,
-					gradient: true,
-					//-
+					bgColor: i,
+					bgGradient: true, //marker
+					elem: `Example element with <b>bgColor: ${i}</b>`,
 				});
 			});
 		},

@@ -19,28 +19,8 @@ export default [
 			return [25, 50, 75, 100, "auto"].map((i) => {
 				return new tag({
 					tag: "div",
+					width: i, //marker
 					elem: `Width ${i}${typeof i === "string" ? "" : "%"}`,
-
-					//marker
-					class: `w-${i}`,
-				});
-			});
-		},
-	},
-
-	{
-		msg: sample.usingclobject(),
-		container: sample.vstackcontainer,
-		viewclass: "cl-highlight-size",
-		import: ["tag"],
-		code: () => {
-			return [25, 50, 75, 100, "auto"].map((i) => {
-				return new tag({
-					tag: "div",
-					elem: `Width ${i}${typeof i === "string" ? "" : "%"}`,
-
-					//marker
-					width: i,
 				});
 			});
 		},
@@ -55,29 +35,8 @@ export default [
 				return new tag({
 					tag: "div",
 					display: "inline-block",
+					height: i, //marker
 					elem: `Height ${i}${typeof i === "string" ? "" : "%"}`,
-
-					//marker
-					class: `h-${i}`,
-				});
-			});
-		},
-	},
-
-	{
-		msg: sample.usingclobject(),
-		container: sample.stackcontainer,
-		viewclass: "cl-highlight-size-height",
-		import: ["tag"],
-		code: () => {
-			return [25, 50, 75, 100, "auto"].map((i) => {
-				return new tag({
-					tag: "div",
-					display: "inline-block",
-					elem: `Height ${i}${typeof i === "string" ? "" : "%"}`,
-
-					//marker
-					height: i,
 				});
 			});
 		},
@@ -90,38 +49,13 @@ export default [
 		code: () => {
 			return new tag({
 				tag: "div",
-				width: 100,
 				padding: 0,
+				width: 100, //marker
 				elem: new tag({
 					tag: "div",
+					maxWidth: 100, //marker
 					elem: "Max-width:100%",
-
-					//marker
-					maxWidth: 100,
 				}),
-			});
-		},
-	},
-
-	{
-		msg: sample.usingclobject(),
-		viewclass: "cl-highlight-div",
-		import: ["tag"],
-		code: () => {
-			return new tag({
-				tag: "div",
-
-				padding: 0,
-				elem: new tag({
-					tag: "div",
-					elem: "Max-width:100%",
-
-					//marker
-					maxWidth: 100,
-				}),
-
-				//marker
-				width: 100,
 			});
 		},
 	},
@@ -136,36 +70,12 @@ export default [
 				padding: 0,
 				elem: new tag({
 					tag: "div",
-					elem: "Max-height:100%",
-
 					//marker
 					maxHeight: 100,
 					width: "100px",
 					height: "200px",
 					//-
-				}),
-			});
-		},
-	},
-
-	{
-		msg: sample.usingclobject(),
-		viewclass: "cl-highlight-div",
-		import: ["tag"],
-		code: () => {
-			return new tag({
-				tag: "div",
-				height: "8rem",
-				padding: 0,
-				elem: new tag({
-					tag: "div",
 					elem: "Max-height:100%",
-
-					//marker
-					maxHeight: 100,
-					width: "100px",
-					height: "200px",
-					//-
 				}),
 			});
 		},
@@ -177,10 +87,10 @@ export default [
 			"You can also use utilities to set the width and height relative to the viewport.",
 			new ul({
 				item: [
-					{ code: "min-vw-100", label: "Min-width 100vw" },
-					{ code: "min-vh-100", label: "Min-height 100vh" },
-					{ code: "vw-100", label: "Width 100vw" },
-					{ code: "vh-100", label: "Height 100vh" },
+					{ code: "minViewWidth:100", label: "Min-width 100vw" },
+					{ code: "minViewHeight:100", label: "Min-height 100vh" },
+					{ code: "viewWidth:100", label: "Width 100vw" },
+					{ code: "viewHeight:100", label: "Height 100vh" },
 				].map((i) => {
 					return `<code>.${i.code}</code> for ${i.label}`;
 				}),

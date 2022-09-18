@@ -46,7 +46,7 @@ export default [
 
 	{
 		title: "Vertical alignment",
-		viewclass: "cl-highlight-col cl-highlight-row",
+		viewclass: ["cl-highlight-col", "cl-highlight-row"],
 		import: ["div"],
 		code: () => {
 			return new div(
@@ -67,7 +67,7 @@ export default [
 
 	{
 		msg: sample.usingclobject(),
-		viewclass: "cl-highlight-col cl-highlight-row",
+		viewclass: ["cl-highlight-col", "cl-highlight-row"],
 		import: ["div"],
 		code: () => {
 			return new div({
@@ -88,7 +88,7 @@ export default [
 
 	{
 		title: "Self alignment",
-		viewclass: "cl-highlight-col cl-highlight-row",
+		viewclass: ["cl-highlight-col", "cl-highlight-row"],
 		import: ["div"],
 		code: () => {
 			return new div(
@@ -108,7 +108,7 @@ export default [
 
 	{
 		msg: sample.usingclobject(),
-		viewclass: "cl-highlight-col cl-highlight-row",
+		viewclass: ["cl-highlight-col", "cl-highlight-row"],
 		import: ["div"],
 		code: () => {
 			return new div({
@@ -597,7 +597,13 @@ export default [
 		import: ["img", "p", "div", "sample"],
 		code: () => {
 			return new div(/*marker*/ "clearfix", [
-				new img({ src: sample.img(200, 200), class: "col-md-6 float-md-end mb-3 ms-md-3" }),
+				new img({
+					src: sample.img(200, 200),
+					col: "md-6",
+					float: "md-end",
+					marginBottom: 3,
+					marginStart: "md-3",
+				}),
 				new p(sample.text()),
 				new p(sample.text()),
 				new p(sample.text()),

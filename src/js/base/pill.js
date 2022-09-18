@@ -59,7 +59,7 @@ export default class pill extends div {
 				new inputgroup.text({
 					border: false,
 					bgColor: opt.color,
-					textColor: opt.textColor,
+					textBgColor: opt.color,
 					paddingX: 2,
 					paddingY: 1,
 					elem: opt.elem || new small(opt.label),
@@ -77,7 +77,6 @@ export default class pill extends div {
 		delete opt.icon;
 		delete opt.label;
 		delete opt.color;
-		delete opt.class;
 
 		super.data = opt;
 	}

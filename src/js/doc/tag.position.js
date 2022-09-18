@@ -176,7 +176,7 @@ export default [
 							tag: "span",
 							class: "badge",
 							rounded: "pill",
-							color: "secondary",
+							bgColor: "secondary",
 							elem: ["+99", new tag({ tag: "span", class: "visually-hidden", elem: "unread message" })],
 
 							//marker
@@ -192,7 +192,7 @@ export default [
 				new tag({
 					tag: "button",
 					position: "relative", //marker
-					class: "btn btn-dark",
+					class: ["btn", "btn-dark"],
 					elem: [
 						"Marker",
 						new tag({
@@ -222,7 +222,7 @@ export default [
 				new tag({
 					tag: "button",
 					position: "relative",
-					class: "btn btn-primary",
+					class: ["btn", "btn-primary"],
 					elem: [
 						"Alerts",
 						new tag({
@@ -230,7 +230,7 @@ export default [
 							class: "badge",
 							rounded: "circle",
 							borderColor: "light",
-							color: "danger",
+							bgColor: "danger",
 							padding: 2,
 							elem: new tag({ tag: "span", class: "visually-hidden", elem: "unread message" }),
 
@@ -256,7 +256,7 @@ export default [
 				margin: 4,
 				elem: [
 					new progress.container({
-						height: 1,
+						height: "1px",
 						elem: new progress.bar({
 							value: 50,
 						}),

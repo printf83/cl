@@ -257,10 +257,10 @@ export default [
 					new div(/*marker*/ "col-sm-4", "col-sm-4"),
 				]),
 				new div("row", [
-					new div(/*marker*/ "col-sm", "col-sm"),
-					new div(/*marker*/ "col-sm", "col-sm"),
-					new div(/*marker*/ "col-sm", "col-sm"),
-					new div(/*marker*/ "col-sm", "col-sm"),
+					new div(/*marker*/ "col-sm-auto", "col-sm-auto"),
+					new div(/*marker*/ "col-sm-auto", "col-sm-auto"),
+					new div(/*marker*/ "col-sm-auto", "col-sm-auto"),
+					new div(/*marker*/ "col-sm-auto", "col-sm-auto"),
 				]),
 			]);
 		},
@@ -284,10 +284,10 @@ export default [
 					new div({
 						row: true,
 						elem: [
-							new div({ /*marker*/ col: "sm", elem: "col-sm" }),
-							new div({ /*marker*/ col: "sm", elem: "col-sm" }),
-							new div({ /*marker*/ col: "sm", elem: "col-sm" }),
-							new div({ /*marker*/ col: "sm", elem: "col-sm" }),
+							new div({ /*marker*/ col: "sm-auto", elem: "col-sm-auto" }),
+							new div({ /*marker*/ col: "sm-auto", elem: "col-sm-auto" }),
+							new div({ /*marker*/ col: "sm-auto", elem: "col-sm-auto" }),
+							new div({ /*marker*/ col: "sm-auto", elem: "col-sm-auto" }),
 						],
 					}),
 				],

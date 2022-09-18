@@ -20,13 +20,11 @@ export default [
 		],
 		import: ["tag"],
 		code: () => {
-			return [null, false, true].map((i) => {
+			return [false, true].map((i) => {
 				return new tag({
 					tag: "div",
+					visible: i, //marker
 					elem: `Example element with <code>visible:${i}</code>.`,
-
-					//marker
-					visible: i,
 				});
 			});
 		},

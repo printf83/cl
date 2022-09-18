@@ -324,6 +324,41 @@ export default class modal extends div {
 						}),
 					}),
 				});
+
+				delete opt.static;
+				delete opt.title;
+				delete opt.icon;
+
+				delete opt.footer;
+				delete opt.button;
+				delete opt.animate;
+				delete opt.scrollable;
+				delete opt.center;
+				delete opt.size;
+				delete opt.fullscreen;
+				delete opt.focus;
+
+				delete opt.align; //left,right,center
+				delete opt.color;
+				delete opt.dark;
+
+				delete opt.bodyclass;
+				delete opt.bodyminheight;
+				delete opt.backdropcolor;
+				delete opt.defautlbtncolor;
+				delete opt.divider;
+				delete opt.centerbutton;
+
+				delete opt.elem;
+
+				delete opt.onshow;
+				delete opt.onshown;
+				delete opt.onhide;
+				delete opt.onhidden;
+				delete opt.onhideprevented;
+
+				delete opt.debug;
+
 				super.data = opt;
 			}
 		}

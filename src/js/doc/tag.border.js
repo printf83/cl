@@ -23,9 +23,7 @@ export default [
 			return [null, true, "top", "end", "bottom", "start", ["bottom", "start"]].map((i) => {
 				return new tag({
 					tag: "div",
-
-					//marker
-					border: i,
+					border: i, //marker
 				});
 			});
 		},
@@ -37,22 +35,17 @@ export default [
 		viewclass: "cl-highlight-box",
 		import: ["tag"],
 		code: () => {
-			return [null, false, "top-0", "end-0", "bottom-0", "start-0", ["border", "bottom-0", "start-0"]].map(
-				(i) => {
-					return new tag({
-						tag: "div",
-
-						//marker
-						border: Array.isArray(i) ? i : ["border", i],
-					});
-				}
-			);
+			return [null, true, "top", "end", "bottom", "start", ["bottom", "start"]].map((i) => {
+				return new tag({
+					tag: "div",
+					borderNone: i, //marker
+				});
+			});
 		},
 	},
 
 	{
 		title: "Border color",
-		msg: "Change the border color using {{borderColor}} property on Bootstrap theme colors.",
 		container: sample.stackcontainer,
 		viewclass: "cl-highlight-box",
 		import: ["tag"],
@@ -61,9 +54,7 @@ export default [
 				(i) => {
 					return new tag({
 						tag: "div",
-
-						//marker
-						borderColor: i,
+						borderColor: i, //marker
 					});
 				}
 			);
@@ -71,8 +62,7 @@ export default [
 	},
 
 	{
-		title: "Border-width",
-		msg: "Change the border width using {{borderWidth}} property.",
+		title: "Border width",
 		container: sample.stackcontainer,
 		viewclass: "cl-highlight-box",
 		import: ["tag"],
@@ -80,9 +70,7 @@ export default [
 			return [null, 0, 1, 2, 3, 4, 5].map((i) => {
 				return new tag({
 					tag: "div",
-
-					//marker
-					borderWidth: i,
+					borderWidth: i, //marker
 				});
 			});
 		},
@@ -90,7 +78,6 @@ export default [
 
 	{
 		title: "Sizes",
-		msg: "Change the border radius size {{rounded}} property.",
 		container: sample.stackcontainer,
 		viewclass: "cl-highlight-box-dark",
 		import: ["tag"],
@@ -98,17 +85,14 @@ export default [
 			return [null, 0, 1, 2, 3, 4, 5].map((i) => {
 				return new tag({
 					tag: "div",
-
-					//marker
-					rounded: i,
+					roundedSize: i, //marker
 				});
 			});
 		},
 	},
 
 	{
-		title: "Border-radius",
-		msg: "Change the border radius style {{roundedType}} property.",
+		title: "Border radius",
 		container: sample.stackcontainer,
 		viewclass: "cl-highlight-box-dark",
 		import: ["tag"],
@@ -116,12 +100,7 @@ export default [
 			return [null, "top", "end", "bottom", "start", "pill", "circle"].map((i) => {
 				return new tag({
 					tag: "div",
-					style: {
-						width: i === "pill" ? "10rem" : null,
-					},
-
-					//marker
-					roundedType: i,
+					rounded: i, //marker
 				});
 			});
 		},

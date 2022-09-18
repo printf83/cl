@@ -276,23 +276,23 @@ export default class input extends tag {
 			delete m.validitytype;
 			delete m.indeterminate;
 
-			delete m.type;
+			// delete m.type;
 
 			delete m.checked;
 			delete m.placeholder;
 
-			delete m.min;
-			delete m.max;
-			delete m.step;
-			delete m.rows;
-			delete m.multiple;
-			delete m.required;
-			delete m.minlength;
-			delete m.maxlength;
-			delete m.inputmode;
-			delete m.pattern;
-			delete m.autocomplete;
-			delete m.autofocus;
+			// delete m.min;
+			// delete m.max;
+			// delete m.step;
+			// delete m.rows;
+			// delete m.multiple;
+			// delete m.required;
+			// delete m.minlength;
+			// delete m.maxlength;
+			// delete m.inputmode;
+			// delete m.pattern;
+			// delete m.autocomplete;
+			// delete m.autofocus;
 
 			delete m.plaintext;
 

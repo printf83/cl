@@ -57,20 +57,16 @@ export default [
 				new tag({
 					tag: "div",
 					padding: 2,
-					color: "primary",
+					bgColor: "primary",
+					display: "inline", //marker
 					elem: "d-inline",
-
-					//marker
-					display: "inline",
 				}),
 				new tag({
 					tag: "div",
 					padding: 2,
-					color: "dark",
+					bgColor: "dark",
+					display: "inline", //marker
 					elem: "d-inline",
-
-					//marker
-					display: "inline",
 				}),
 			];
 		},
@@ -83,20 +79,16 @@ export default [
 				new tag({
 					tag: "div",
 					padding: 2,
-					color: "primary",
+					bgColor: "primary",
+					display: "block", //marker
 					elem: "d-inline",
-
-					//marker
-					display: "block",
 				}),
 				new tag({
 					tag: "div",
 					padding: 2,
-					color: "dark",
+					bgColor: "dark",
+					display: "block", //marker
 					elem: "d-inline",
-
-					//marker
-					display: "block",
 				}),
 			];
 		},
@@ -149,10 +141,8 @@ export default [
 			].map((i) => {
 				return new tag({
 					tag: "div",
+					display: i.opt, //marker
 					elem: i.label,
-
-					//marker
-					display: i.opt,
 				});
 			});
 		},
@@ -192,10 +182,8 @@ export default [
 			].map((i) => {
 				return new tag({
 					tag: "div",
+					display: i.opt, //marker
 					elem: i.label,
-
-					//marker
-					display: i.opt,
 				});
 			});
 		},

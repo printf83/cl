@@ -63,10 +63,8 @@ export default [
 			return new tag({
 				tag: "div",
 				width: "12rem",
+				marginX: "auto", //marker
 				elem: `Centered element`,
-
-				//marker
-				marginX: "auto",
 			});
 		},
 	},
@@ -85,10 +83,8 @@ export default [
 			return [null, 1, "n1"].map((i) => {
 				return new tag({
 					tag: "div",
+					marginTop: i, //marker
 					elem: `Example element`,
-
-					//marker
-					marginTop: i,
 				});
 			});
 		},
@@ -103,14 +99,12 @@ export default [
 			return new tag({
 				tag: "div",
 				display: "grid",
+				gap: 3, //marker
 				elem: [
 					new tag({ tag: "div", elem: "Grid item 1" }),
 					new tag({ tag: "div", elem: "Grid item 2" }),
 					new tag({ tag: "div", elem: "Grid item 3" }),
 				],
-
-				//marker
-				gap: 3,
 			});
 		},
 	},
