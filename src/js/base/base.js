@@ -1287,6 +1287,8 @@ function attachBoolean(key, elem, opt) {
 	if (booleanAttr.indexOf(key) > -1) {
 		if (opt[key] === true) {
 			elem[key] = true;
+		} else if (opt[key] === false) {
+			//elem[key] = false;
 		} else {
 			console.warn(`Attribute ${key}:${opt[key]} is not boolean`);
 		}
