@@ -242,7 +242,7 @@ export default class toast extends div {
 
 	show = () => {
 		//generate container
-		let position = this.data.attr["data-cl-position"];
+		let position = this.data["data-cl-position"];
 		let containerQuery = core.combineArray(["toast-container", position], " ");
 		let container = document.body.getElementsByClassName(containerQuery)[0];
 		if (!container || container.length === 0) {

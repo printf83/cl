@@ -1522,38 +1522,49 @@ const fnA = {
 		rule: null,
 		fn: null,
 	},
-	compareRulesAndArg: (a, b) => {
-		if (b === null) {
-			if (a === null) {
+	compareRulesAndArg: (ruleSetting, argType) => {
+		if (argType === null) {
+			if (ruleSetting === null) {
 				return true;
 			}
 		} else {
-			if (a) {
-				if (a.length === b.length) {
-					for (let i = 0; i < a.length; i++) {
-						if (typeof a[i] === "function") {
-							if (a[i](b[i]) === true) {
-								return true;
+			if (ruleSetting) {
+				//make sure rule setting is same with arg
+				if (ruleSetting.length === argType.length) {
+					let result = Array.from({ length: ruleSetting.length }, (e) => false);
+
+					//check if each rule apply to arg
+					for (let i = 0; i < ruleSetting.length; i++) {
+						if (typeof ruleSetting[i] === "function") {
+							if (ruleSetting[i](argType[i]) === true) {
+								result[i] = true;
 							}
 						} else {
-							if (a[i].indexOf("|") >= 0) {
+							if (ruleSetting[i].indexOf("|") >= 0) {
 								//multiple
-								let c = a[i].split("|");
+								let c = ruleSetting[i].split("|");
 
 								for (let j = 0; j < c.length; j++) {
-									if (c[j] === b[i] || c[j] === "any") {
-										return true;
+									if (c[j] === argType[i] || c[j] === "any") {
+										result[i] = true;
 										break;
 									}
 								}
 							} else {
 								//single
-								if (a[i] === b[i] || a[i] === "any") {
-									return true;
-									break;
+								if (ruleSetting[i] === argType[i] || ruleSetting[i] === "any") {
+									result[i] = true;
 								}
 							}
 						}
+					}
+
+					//if all result is true
+					//then return true
+					if (result.indexOf(false) > -1) {
+						return false;
+					} else {
+						return true;
 					}
 				}
 			} else {

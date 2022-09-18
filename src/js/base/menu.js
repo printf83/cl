@@ -81,7 +81,7 @@ export default class menu extends div {
 		delete opt.id;
 		delete opt.icon;
 		delete opt.label;
-		// delete opt.active;
+		delete opt.active;
 		delete opt.item;
 		delete opt.arrow;
 

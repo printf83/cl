@@ -1005,7 +1005,7 @@ core.documentReady(() => {
 			}),
 			footerelem: new div({
 				display: "flex",
-				flex: "warp",
+				flex: "wrap",
 				justifyContent: "center",
 				marginBottom: 5,
 				gap: 2,
