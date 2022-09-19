@@ -129,7 +129,7 @@ export default class button extends tag {
 									icon: opt.icon,
 							  })
 							: null,
-						opt.badge ? new badge(opt.badeg) : null,
+						opt.badge ? new badge(opt.badge) : null,
 					],
 				});
 			} else {
@@ -144,7 +144,7 @@ export default class button extends tag {
 									icon: opt.icon,
 							  })
 							: null,
-						opt.badge ? new badge(opt.badeg) : null,
+						opt.badge ? new badge(opt.badge) : null,
 					];
 				}
 			}

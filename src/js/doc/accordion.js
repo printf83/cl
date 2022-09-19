@@ -111,25 +111,18 @@ export default [
 					{
 						label: "Accordion Item 1",
 						elem: ["<b>This is the first item's accordion body.</b> ", sample.text()],
-
-						//marker
-						onshow: (event) => {
-							new toast("i", fn(event.currentTarget, "onshow")).show();
-						},
-						onshown: (event) => {
-							new toast("/", fn(event.currentTarget, "onshown")).show();
-						},
-						onhide: (event) => {
-							new toast("!", fn(event.currentTarget, "onhide")).show();
-						},
-						onhidden: (event) => {
-							new toast("x", fn(event.currentTarget, "onhidden")).show();
-						},
-						//-
 					},
 					{
 						label: "Accordion Item 2",
 						elem: ["<b>This is the second item's accordion body.</b> ", sample.text()],
+						badge: {
+							color: "danger",
+							notification: true,
+							label: "Event attached",
+							rounded: "pill",
+							hidelabel: true,
+						},
+
 						//marker
 						onshow: (event) => {
 							new toast("i", fn(event.currentTarget, "onshow")).show();
@@ -148,21 +141,6 @@ export default [
 					{
 						label: "Accordion Item 3",
 						elem: ["<b>This is the third item's accordion body.</b> ", sample.text()],
-
-						//marker
-						onshow: (event) => {
-							new toast("i", fn(event.currentTarget, "onshow")).show();
-						},
-						onshown: (event) => {
-							new toast("/", fn(event.currentTarget, "onshown")).show();
-						},
-						onhide: (event) => {
-							new toast("!", fn(event.currentTarget, "onhide")).show();
-						},
-						onhidden: (event) => {
-							new toast("x", fn(event.currentTarget, "onhidden")).show();
-						},
-						//-
 					},
 				],
 			});

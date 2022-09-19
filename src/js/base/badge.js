@@ -32,10 +32,6 @@ export default class badge extends span {
 				opt.tMiddle = true;
 			}
 
-			if (opt.hidelabel === null && opt.notification === true) {
-				opt.hidelabel = true;
-			}
-
 			if (!opt.elem) {
 				opt.elem =
 					opt.label || opt.icon
@@ -49,14 +45,24 @@ export default class badge extends span {
 						: null;
 			}
 
+			let t_padding = 2;
+			if (opt.padding) {
+				t_padding = opt.padding;
+			} else {
+				if (opt.label && opt.hidelabel !== true && opt.notification) {
+					t_padding = 1;
+				}
+			}
+
 			opt = core.merge(opt, {
 				class: "badge",
-				rounded: opt.rounded || (!opt.label && !opt.icon) ? "circle" : null,
-				padding: opt.padding || (!opt.label && !opt.icon) ? 2 : null,
-				borderWeight: opt.borderWeight || opt.notification ? 2 : null,
-				borderColor: opt.borderColor || opt.notification ? "body" : null,
+				rounded: opt.rounded,
+				padding: t_padding,
+				borderWidth: opt.borderWeight || opt.notification ? 2 : null,
+				borderColor: opt.borderColor || opt.notification ? "white" : null,
 				position: opt.position || opt.notification ? "absolute" : null,
 				bgColor: opt.bgColor || opt.color,
+				zIndex: opt.notification ? 2 : null,
 			});
 
 			delete opt.label;

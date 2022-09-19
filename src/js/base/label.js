@@ -12,7 +12,7 @@ function generate(opt) {
 		let i2 = null;
 		let i3 = null;
 
-		if (opt.icon && opt.iconafter === false) {
+		if (opt.icon && !opt.iconafter) {
 			i1 = new span({
 				marginEnd: opt.label && !opt.hidelabel ? (opt.showlabel ? `${opt.showlabel}-2` : 2) : null,
 				elem: new icon(opt.icon),

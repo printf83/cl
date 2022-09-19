@@ -2,24 +2,35 @@
 
 ///library
 import * as core from "./base/core.js";
-import button from "./base/button.js";
+import breadcrumb from "./base/breadcrumb.js";
+import sample from "./doc/sample.js"; //for documentation purpose only
 
 ///code
 let code = () => {
 	return [
-		new button({
-			weight: "lg",
-			color: "primary",
-			disabled: true,
-			href: "#",
-			label: "Primary link",
-		}),
-		new button({
-			weight: "lg",
-			color: "secondary",
-			disabled: true,
-			href: "#",
-			label: "Link",
+		new breadcrumb({
+			item: [
+				{
+					label: "Home",
+					href: "#",
+				},
+				{
+					label: "Library",
+					icon: {
+						icon: sample.icon(),
+						shake: true,
+					},
+					click: () => {},
+					textWrap: true,
+					color: "primary",
+					weight: "sm",
+				},
+				{
+					label: "Data",
+					current: true,
+					href: "#",
+				},
+			],
 		}),
 	];
 };
