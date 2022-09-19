@@ -5,12 +5,9 @@ import div from "./div.js";
 import button from "./button.js";
 
 const defaultToggleOption = {
-	elem: null,
-
 	target: null,
 	control: null,
 	show: false,
-
 	toggle: "collapse", //collapse | offcanvas
 };
 
@@ -35,15 +32,15 @@ export class toggle extends tag {
 				});
 			}
 
-			let t = core.merge(opt.elem.data, {
+			//no need to delete opt because we add the option into elem
+
+			super.data = core.merge(opt.elem.data, {
 				class: [!opt.show && opt.toggle === "collapse" ? "collapsed" : null],
 				"aria-controls": opt.control,
 				"aria-expanded": opt.show ? "true" : "false",
 				"data-bs-target": opt.target,
 				"data-bs-toggle": opt.toggle,
 			});
-
-			super.data = t;
 		}
 	}
 }
@@ -84,8 +81,8 @@ export class container extends div {
 			});
 
 			delete opt.horizontal;
-
 			delete opt.show;
+
 			delete opt.onshow;
 			delete opt.onshown;
 			delete opt.onhide;
