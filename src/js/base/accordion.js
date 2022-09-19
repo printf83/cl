@@ -94,7 +94,7 @@ export default class accordion extends div {
 					//create body
 					let t_body = {
 						id: `${i_id}_body`,
-						class: ["accordion-body", "accordion-collapse", "collapse", i.active ? "show" : null],
+						class: ["accordion-collapse", "collapse", i.active ? "show" : null],
 						"aria-labelledby": `${i_id}_head`,
 						"data-bs-parent": opt.autoclose ? `#${opt.id}` : null, //container id
 						"show.bs.collapse": i.onshow,
@@ -120,7 +120,7 @@ export default class accordion extends div {
 					delete i.onhidden;
 
 					//add item body into t_body
-					t_body.elem = new div(i);
+					t_body.elem = new div({ class: "accordion-body", elem: i.elem });
 
 					//change
 					return new div({
