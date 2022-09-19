@@ -33,10 +33,8 @@ export default [
 				"link",
 			].map((i) => {
 				return new button({
+					color: i, //marker
 					label: core.capitalize(i),
-
-					//marker
-					color: i,
 				});
 			});
 		},
@@ -48,11 +46,9 @@ export default [
 		import: ["button"],
 		code: () => {
 			return new button({
-				label: "Disable text wrapping button",
 				color: "primary",
-
-				//marker
-				textWarp: true,
+				textWrap: true, //marker
+				label: "Disable text wrapping button",
 			});
 		},
 	},
@@ -66,36 +62,28 @@ export default [
 				new button({ label: "Button", color: "primary" }),
 
 				new button({
+					color: "primary",
+					href: "#", //marker
 					label: "Link",
-					color: "primary",
-
-					//marker
-					href: "#",
 				}),
 				new button({
+					color: "primary",
+					type: "input", //marker
 					label: "Input",
-					color: "primary",
-
-					//marker
-					type: "input",
 				}),
 				new button({
+					color: "primary",
+					type: "submit", //marker
 					label: "Submit",
-					color: "primary",
-
-					//marker
-					type: "submit",
 				}),
 				new button({
-					label: "Reset",
 					color: "primary",
-
-					//marker
-					type: "reset",
+					type: "reset", //marker
+					label: "Reset",
 				}),
 				new input({
-					color: "primary",
 					value: "Input button",
+					color: "primary",
 
 					//marker
 					class: "btn",
@@ -143,11 +131,9 @@ export default [
 				"link",
 			].map((i) => {
 				return new button({
-					label: core.capitalize(i),
 					color: i,
-
-					//marker
-					outline: true,
+					outline: true, //marker
+					label: core.capitalize(i),
 				});
 			});
 		},
@@ -160,18 +146,14 @@ export default [
 		code: () => {
 			return [
 				new button({
-					label: "Large button",
 					color: "primary",
-
-					//marker
-					weight: "lg",
+					weight: "lg", //marker
+					label: "Large button",
 				}),
 				new button({
-					label: "Large button",
 					color: "secondary",
-
-					//marker
-					weight: "lg",
+					weight: "lg", //marker
+					label: "Large button",
 				}),
 			];
 		},
@@ -184,18 +166,14 @@ export default [
 		code: () => {
 			return [
 				new button({
-					label: "Small button",
 					color: "primary",
-
-					//marker
-					weight: "sm",
+					weight: "sm", //marker
+					label: "Small button",
 				}),
 				new button({
-					label: "Small button",
 					color: "secondary",
-
-					//marker
-					weight: "sm",
+					weight: "sm", //marker
+					label: "Small button",
 				}),
 			];
 		},
@@ -209,19 +187,15 @@ export default [
 			return [
 				new button({
 					weight: "lg",
-					label: "Disabled button",
 					color: "primary",
-
-					//marker
-					disabled: true,
+					disabled: true, //marker
+					label: "Disabled button",
 				}),
 				new button({
 					weight: "lg",
-					label: "Disabled button",
 					color: "secondary",
-
-					//marker
-					disabled: true,
+					disabled: true, //marker
+					label: "Disabled button",
 				}),
 			];
 		},
@@ -235,23 +209,17 @@ export default [
 			return [
 				new button({
 					weight: "lg",
-					label: "Primary link",
 					color: "primary",
-
-					//marker
-					disabled: true,
+					disabled: true, //marker
 					href: "#",
-					//-
+					label: "Primary link",
 				}),
 				new button({
 					weight: "lg",
-					label: "Link",
 					color: "secondary",
-
-					//marker
-					disabled: true,
+					disabled: true, //marker
 					href: "#",
-					//-
+					label: "Link",
 				}),
 			];
 		},
@@ -274,6 +242,8 @@ export default [
 		import: ["div", "button"],
 		code: () => {
 			return new div({
+				display: "grid", //marker
+				marginX: "auto", //marker
 				gap: 2,
 				col: 6,
 				elem: [
@@ -281,11 +251,6 @@ export default [
 					new button({ label: "Button", color: "primary" }),
 					new button({ label: "Button", color: "primary" }),
 				],
-
-				//marker
-				display: "grid",
-				marginX: "auto",
-				//-
 			});
 		},
 	},
@@ -295,17 +260,14 @@ export default [
 		import: ["div", "button"],
 		code: () => {
 			return new div({
+				display: ["grid", "md-flex"], //marker
+				justifyContent: "md-end", //marker
 				gap: 2,
 				elem: [
 					new button({ label: "Button", color: "primary" }),
 					new button({ label: "Button", color: "primary" }),
 					new button({ label: "Button", color: "primary" }),
 				],
-
-				//marker
-				display: ["grid", "md-flex"],
-				justifyContent: "md-end",
-				//-
 			});
 		},
 	},
@@ -317,29 +279,21 @@ export default [
 		code: () => {
 			return [
 				new button({
+					color: "primary",
+					toggle: true, //marker
 					label: "Toggle button",
-					color: "primary",
-
-					//marker
-					toggle: true,
 				}),
 				new button({
+					toggle: true,
+					active: true, //marker
+					color: "primary",
 					label: "Active toggle button",
-					color: "primary",
-
-					//marker
-					toggle: true,
-					active: true,
-					//-
 				}),
 				new button({
-					label: "Disabled toggle button",
-					color: "primary",
-
-					//marker
 					toggle: true,
-					disabled: true,
-					//-
+					disabled: true, //marker
+					color: "primary",
+					label: "Disabled toggle button",
 				}),
 			];
 		},
@@ -352,33 +306,24 @@ export default [
 		code: () => {
 			return [
 				new button({
+					toggle: true, //marker
+					href: "#",
+					color: "primary",
 					label: "Toggle link",
-					color: "primary",
-
-					//marker
-					toggle: true,
-					href: "#",
-					//-
 				}),
 				new button({
+					toggle: true,
+					active: true, //marker
+					href: "#",
+					color: "primary",
 					label: "Active toggle link",
-					color: "primary",
-
-					//marker
-					toggle: true,
-					href: "#",
-					active: true,
-					//-
 				}),
 				new button({
-					label: "Disabled toggle link",
-					color: "primary",
-
-					//marker
 					toggle: true,
 					href: "#",
-					disabled: true,
-					//-
+					disabled: true, //marker
+					color: "primary",
+					label: "Disabled toggle link",
 				}),
 			];
 		},

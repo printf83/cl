@@ -54,6 +54,7 @@ export class container extends nav {
 
 			opt.body = core.merge(opt.body, {
 				elem: opt.body.elem || opt.elem,
+				container: opt.expand,
 			});
 
 			delete opt.body.fluid;

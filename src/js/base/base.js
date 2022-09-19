@@ -1286,9 +1286,9 @@ const booleanAttr = [
 function attachBoolean(key, elem, opt) {
 	if (booleanAttr.indexOf(key) > -1) {
 		if (opt[key] === true) {
-			elem[key] = true;
+			elem.setAttribute(key, key);
 		} else if (opt[key] === false) {
-			//elem[key] = false;
+			elem.setAttribute(key, "");
 		} else {
 			console.warn(`Attribute ${key}:${opt[key]} is not boolean`);
 		}
@@ -1327,7 +1327,12 @@ function attachAria(key, elem, opt) {
 
 function attachOther(key, elem, opt) {
 	let i = Array.isArray(opt[key]) ? opt[key].join(" ") : opt[key];
-	elem.setAttribute(key, i);
+
+	if (key === "href" && i === "#") {
+		elem.setAttribute(key, "javascript:void(0);");
+	} else {
+		elem.setAttribute(key, i);
+	}
 
 	delete opt[key];
 
@@ -1462,12 +1467,10 @@ function mergeClass(existingClass, newClass) {
 }
 
 export function mergeObject(existingObject, newObject, rules) {
-	if ((existingObject || newObject) && !(existingObject && newObject)) {
-		return existingObject || newObject;
-	} else if (existingObject && newObject) {
+	if (existingObject !== null && newObject !== null && existingObject !== undefined && newObject !== undefined) {
 		let result = {};
 		Object.keys(existingObject).forEach((i) => {
-			if (newObject.hasOwnProperty(i)) {
+			if (newObject.hasOwnProperty(i) && newObject !== null && newObject !== undefined) {
 				if (i === "class") {
 					result[i] = mergeClass(existingObject[i], newObject[i]);
 				} else if (i === "style") {
@@ -1486,13 +1489,17 @@ export function mergeObject(existingObject, newObject, rules) {
 
 		Object.keys(newObject).forEach((i) => {
 			if (!existingObject.hasOwnProperty(i)) {
-				if (newObject[i]) {
+				if (newObject[i] !== null && newObject[i] !== undefined) {
 					result[i] = newObject[i];
 				}
 			}
 		});
 
 		return result;
+	} else if (existingObject !== null && existingObject !== undefined) {
+		return existingObject;
+	} else if (newObject !== null && newObject !== undefined) {
+		return newObject;
 	} else {
 		return null;
 	}

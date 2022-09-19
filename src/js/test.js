@@ -2,15 +2,26 @@
 
 ///library
 import * as core from "./base/core.js";
-import toast from "./base/toast.js";
+import button from "./base/button.js";
 
 ///code
 let code = () => {
-	return new toast({
-		color: "primary",
-		elem: "Hello, world! This is a toast message.",
-		debug: true, // documentation purpose only
-	});
+	return [
+		new button({
+			weight: "lg",
+			color: "primary",
+			disabled: true,
+			href: "#",
+			label: "Primary link",
+		}),
+		new button({
+			weight: "lg",
+			color: "secondary",
+			disabled: true,
+			href: "#",
+			label: "Link",
+		}),
+	];
 };
 
 ///loader
