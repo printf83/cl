@@ -2,7 +2,7 @@
 import * as core from "./core.js";
 import div from "./div.js";
 
-const defaultOption = { label: null, weight: null, vertical: false, elem: null };
+const defaultOption = { label: null, weight: null, vertical: false };
 export default class btngroup extends div {
 	constructor(...opt) {
 		super(...opt);
@@ -21,7 +21,7 @@ export default class btngroup extends div {
 					opt.weight ? `btn-group-${opt.weight}` : null,
 				],
 				role: "group",
-				ariaLabel: opt.label,
+				"aria-label": opt.label,
 			});
 
 			delete opt.label;

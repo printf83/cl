@@ -23,9 +23,6 @@ const defaultOption = {
 	toggle: false,
 };
 
-/**
- * option : {tagoption,type,label,icon,badge,value,checked,color,weight,disabled,outline,hidelabel,nowrap,elem}
- */
 export default class button extends tag {
 	constructor(...opt) {
 		super(...opt);
@@ -109,16 +106,10 @@ export default class button extends tag {
 				//id required
 				opt.id = opt.id || core.UUID();
 
-				//change the opt type to checkbox
-				opt = core.merge(opt, {
-					tag: "input",
-					class: "btn-check",
-					autocomplete: opt.autocomplete || "off",
-				});
-
 				//create label for input check or radio
 				toggle_label = new label({
 					for: opt.id,
+					class: opt.class,
 					elem: [
 						opt.label || opt.icon
 							? new label({
@@ -132,6 +123,11 @@ export default class button extends tag {
 						opt.badge ? new badge(opt.badge) : null,
 					],
 				});
+
+				//change the opt type to checkbox or radio
+				opt.tag = "input";
+				opt.class = "btn-check";
+				opt.autocomplete = opt.autocomplete || "off";
 			} else {
 				if (!opt.elem) {
 					opt.elem = [
@@ -165,7 +161,7 @@ export default class button extends tag {
 
 			if (toggle_label) {
 				super.data = {
-					elem: [toggle_label, new tag(opt)],
+					elem: [new tag(opt), toggle_label],
 				};
 			} else {
 				super.data = opt;

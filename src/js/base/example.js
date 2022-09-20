@@ -103,7 +103,7 @@ export default class example extends div {
 			item.push({
 				label: "Generated HTML",
 				icon: "code",
-				onshow: (event) => {
+				show: (event) => {
 					let sender = event.currentTarget;
 
 					if (!sender.getAttribute("data-loaded")) {
@@ -125,7 +125,7 @@ export default class example extends div {
 				item.push({
 					label: sampleKey,
 					icon: "link",
-					onshow: (event) => {
+					show: (event) => {
 						let sender = event.currentTarget;
 
 						if (!sender.getAttribute("data-loaded")) {
@@ -154,7 +154,7 @@ export default class example extends div {
 					icon: "square-js",
 				},
 				active: !opt.codecollapse,
-				onshow: (event) => {
+				show: (event) => {
 					let sender = event.currentTarget;
 
 					if (!sender.getAttribute("data-loaded")) {

@@ -22,17 +22,12 @@ const defaultItemOption = {
 
 	active: false,
 
-	onshow: null,
-	onshown: null,
-	onhide: null,
-	onhidden: null,
+	show: null,
+	shown: null,
+	hide: null,
+	hidden: null,
 };
 
-/**
- * opt : {tagoption,flush,autoclose,item:[{itemOption}]}
- * itemOption: {tagoption,label,icon,active,onhide,onshow,elem}
- *
- */
 export default class accordion extends div {
 	constructor(...opt) {
 		super(...opt);
@@ -97,10 +92,10 @@ export default class accordion extends div {
 						class: ["accordion-collapse", "collapse", i.active ? "show" : null],
 						"aria-labelledby": `${i_id}_head`,
 						"data-bs-parent": opt.autoclose ? `#${opt.id}` : null, //container id
-						"show.bs.collapse": i.onshow,
-						"shown.bs.collapse": i.onshown,
-						"hide.bs.collapse": i.onhide,
-						"hidden.bs.collapse": i.onhidden,
+						"show.bs.collapse": i.show,
+						"shown.bs.collapse": i.shown,
+						"hide.bs.collapse": i.hide,
+						"hidden.bs.collapse": i.hidden,
 					};
 
 					//delete unuse attr
@@ -114,10 +109,10 @@ export default class accordion extends div {
 
 					delete i.active;
 
-					delete i.onshow;
-					delete i.onshown;
-					delete i.onhide;
-					delete i.onhidden;
+					delete i.show;
+					delete i.shown;
+					delete i.hide;
+					delete i.hidden;
 
 					//add item body into t_body
 					t_body.elem = new div({ class: "accordion-body", elem: i.elem });

@@ -19,13 +19,10 @@ export class container extends div {
 		if (opt) {
 			opt = core.extend({}, defaultContainerOption, opt);
 
-			if (opt.flush) {
-				opt.rounded = false;
-				opt.border = false;
-			}
-
 			opt = core.merge(opt, {
 				class: "card",
+				rounded: opt.flush ? false : null,
+				border: opt.flush ? false : null,
 			});
 
 			delete opt.flush;
@@ -160,7 +157,7 @@ export class imgoverlay extends div {
 	}
 }
 
-const defaultHorizontalOption = { left: null, right: null, size: "auto", gap: 0 };
+const defaultHorizontalOption = { start: null, end: null, size: "auto", gap: 0 };
 export class horizontal extends div {
 	constructor(...opt) {
 		super(...opt);
@@ -177,16 +174,16 @@ export class horizontal extends div {
 			opt.elem = [
 				new div({
 					col: opt.size === "col" ? true : opt.size,
-					elem: opt.left,
+					elem: opt.start,
 				}),
 				new div({
 					col: true,
-					elem: opt.right,
+					elem: opt.end,
 				}),
 			];
 
-			delete opt.left;
-			delete opt.right;
+			delete opt.start;
+			delete opt.end;
 			delete opt.size;
 
 			super.data = opt;
@@ -223,17 +220,25 @@ export class img extends imgtag {
 		if (opt) {
 			opt = core.extend({}, defaultImgOption, opt);
 
+			let className = null;
+			if (opt.placement !== "top" && opt.placement !== "bottom") {
+				className = `card-img`;
+			} else if (opt.placement === "start" && opt.placement === "end") {
+				className = `img-fluid`;
+			} else {
+				className = `card-img-${opt.placement}`;
+			}
+
+			let roundedNone = null;
+			if (opt.placement === "end" || opt.placement === "start") {
+				roundedNone = opt.placement;
+			} else if (opt.placement === "middle") {
+				roundedNone = true;
+			}
+
 			opt = core.merge(opt, {
-				class: opt.placement
-					? [
-							opt.placement === "full" ? "card-img" : null,
-							opt.placement === "top" ? "card-img-top" : null,
-							opt.placement === "bottom" ? "card-img-bottom" : null,
-							opt.placement === "left" ? "img-fluid rounded-end-0" : null,
-							opt.placement === "right" ? "img-fluid rounded-start-0" : null,
-							opt.placement === "middle" ? "card-img rounded-0" : null,
-					  ]
-					: opt.class,
+				class: className,
+				roundedNone: roundedNone,
 			});
 
 			delete opt.placement;
