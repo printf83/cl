@@ -250,13 +250,14 @@ export default [
 		dark: true,
 		import: ["navbar", "dropdown"],
 		code: () => {
-			var id = new core.UUID();
+			var id = core.UUID();
 			return new navbar.container({
 				expand: "lg",
+				dark: true,
 				color: "dark",
 				elem: [
 					new navbar.toggle({
-						id,
+						id: id,
 						toggle: "collapse",
 					}),
 
@@ -265,7 +266,7 @@ export default [
 					}),
 
 					new navbar.collapsecontainer({
-						id,
+						id: id,
 						elem: [
 							new navbar.itemcontainer({
 								parenttype: "collapse",

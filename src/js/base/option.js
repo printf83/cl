@@ -6,6 +6,7 @@ import li from "./li.js";
 import span from "./span.js";
 import hr from "./hr.js";
 import h from "./h.js";
+import button from "./button.js";
 
 const defaultOption = {
 	item: null,
@@ -21,10 +22,6 @@ const defaultSelectGroupOption = {
 	tag: "optgroup",
 	label: null,
 };
-/**
- * opt : {tagoption,item : {selectitem},selected}
- * selectitem : [string]|[{tagoption,elem,value,label,icon,active,disabled,interactive}]
- */
 export class select extends tag {
 	constructor(...opt) {
 		super(...opt);
@@ -108,13 +105,14 @@ export class select extends tag {
 
 const defaultDropdownItemOption = {
 	value: null,
+
 	label: null,
 	icon: null,
 	iconafter: false,
 	showlabel: null,
+	hidelabel: null,
 
 	active: false,
-	disabled: false,
 	interactive: true,
 };
 /**
@@ -145,52 +143,58 @@ export class dropdown extends tag {
 							}),
 						}),
 					});
+				} else if (i.hasOwnProperty("cl")) {
+					return new li({ elem: i });
 				} else {
 					i = core.extend({}, defaultDropdownItemOption, i);
+					let item = {};
 
 					if (i.value === "-") {
 						if (i.label) {
-							i.elem = new h({
+							item = new h({
 								level: 6,
 								class: "dropdown-header",
-								elem: new label({ icon: i.icon, label: i.label }),
+								elem: new label({
+									label: i.label,
+									icon: i.icon,
+									iconafter: i.iconafter,
+									showlabel: i.showlabel,
+									hidelabel: i.hidelabel,
+								}),
 							});
 						} else {
-							i.elem = new hr({ class: "dropdown-divider" });
+							item = new hr({ class: "dropdown-divider" });
 						}
 					} else {
-						if (!i.elem) {
-							i.elem = new tag({
+						if (i.elem) {
+							item = i.elem;
+						} else {
+							item = new tag({
 								tag: i.href ? "a" : i.interactive ? "button" : "span",
 								class: [
 									i.interactive ? "dropdown-item" : "dropdown-item-text",
 									i.disabled ? "disabled" : null,
 									i.active === true || (i.value && opt.selected?.includes(i.value)) ? "active" : null,
 								],
+								disabled: i.disabled,
 								href: i.href,
-								click: i.click,
 								type: !i.href && i.interactive ? "button" : null,
 								elem: new label({
 									label: i.label,
 									icon: i.icon,
 									iconafter: i.iconafter,
 									showlabel: i.showlabel,
+									hidelabel: i.hidelabel,
 								}),
 							});
 						}
 					}
 
-					delete i.value;
-					delete i.label;
-					delete i.icon;
-					delete i.active;
-					delete i.disabled;
-					delete i.interactive;
-
-					return new li(i);
+					return new li(item);
 				}
 			});
 
+			delete opt.item;
 			delete opt.selected;
 
 			super.data = opt;

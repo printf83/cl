@@ -20,10 +20,10 @@ const defaultOption = {
 	vertical: false,
 	weight: null,
 
-	onshow: null,
-	onshown: null,
-	onhide: null,
-	onhidden: null,
+	show: null,
+	shown: null,
+	hide: null,
+	hidden: null,
 };
 
 /**
@@ -51,60 +51,63 @@ export default class dropdown extends tag {
 
 			opt.option = Array.isArray(opt.option) ? opt.option : [opt.option];
 
-			let menuctl = new ul({
-				class: ["dropdown-menu", opt.dark ? "dropdown-menu-dark" : null],
+			let dropdown_menu = new ul({
+				class: [
+					"dropdown-menu",
+					opt.dark ? "dropdown-menu-dark" : null,
+					opt.aligment ? core.multiClass(opt.aligment, "dropdown-menu-$1") : null,
+				],
 				elem: new option.dropdown({ item: opt.option, selected: opt.value }),
 			});
 
-			let m = core.extend({}, opt);
+			let normal_ctl = core.extend({}, opt);
 
-			delete m.option;
-			delete m.container;
-			delete m.arrow;
-			delete m.splittoggle;
-			delete m.aligment;
-			delete m.offset;
-			delete m.reference;
-			delete m.autoclose;
-			delete m.dark;
+			delete normal_ctl.option;
+			delete normal_ctl.container;
+			delete normal_ctl.arrow;
+			delete normal_ctl.splittoggle;
+			delete normal_ctl.aligment;
+			delete normal_ctl.offset;
+			delete normal_ctl.reference;
+			delete normal_ctl.autoclose;
+			delete normal_ctl.dark;
+			delete normal_ctl.vertical;
+			delete normal_ctl.weight;
 
-			delete m.onshow;
-			delete m.onshown;
-			delete m.onhide;
-			delete m.onhidden;
+			delete normal_ctl.show;
+			delete normal_ctl.shown;
+			delete normal_ctl.hide;
+			delete normal_ctl.hidden;
 
-			let s = core.extend({}, m);
+			let split_ctl = core.extend({}, normal_ctl);
 
-			delete m.id;
+			delete normal_ctl.id;
 
-			s = core.merge(s, {
+			split_ctl = core.merge(split_ctl, {
 				class: "dropdown-toggle",
 				"aria-expanded": "false",
-				dataBsAutoClose: opt.autoclose,
-				dataBsReference: opt.reference,
-				dataBsOffset: opt.offset,
+				"data-bs-auto-close": opt.autoclose,
+				"data-bs-reference": opt.reference,
+				"data-bs-offset": opt.offset,
 				"data-bs-toggle": "dropdown",
-
 				"aria-labelledby": opt.id,
 
-				"show.bs.dropdown": opt.onshow,
-				"shown.bs.dropdown": opt.onshown,
-				"hide.bs.dropdown": opt.onhide,
-				"hidden.bs.dropdown": opt.onhidden,
+				"show.bs.dropdown": opt.show,
+				"shown.bs.dropdown": opt.shown,
+				"hide.bs.dropdown": opt.hide,
+				"hidden.bs.dropdown": opt.hidden,
 			});
 
-			let btnctl = opt.splittoggle ? new button(m) : new button(s);
+			let btn_main = opt.splittoggle ? new button(normal_ctl) : new button(split_ctl);
 
-			let t = core.extend({}, s);
-
-			t.label = "Toggle Dropdown";
-			t.hidelabel = true;
-			t.icon = null;
-			t = core.merge(t, {
+			split_ctl.label = "Toggle Dropdown";
+			split_ctl.hidelabel = true;
+			split_ctl.icon = null;
+			split_ctl = core.merge(split_ctl, {
 				class: "dropdown-toggle-split",
 			});
 
-			let splitctl = opt.splittoggle ? new button(t) : null;
+			let btn_split = opt.splittoggle ? new button(split_ctl) : null;
 
 			if (opt.splittoggle && opt.arrow === "start") {
 				super.data = {
@@ -114,16 +117,16 @@ export default class dropdown extends tag {
 						new btngroup({
 							weight: opt.weight,
 							vertical: opt.vertical,
-							elem: [splitctl, menuctl],
+							elem: [btn_split, dropdown_menu],
 						}),
-						btnctl,
+						btn_main,
 					],
 				};
 			} else {
 				super.data = {
 					tag: opt.container ? "div" : null,
 					class: opt.container ? [opt.container, opt.arrow ? `drop${opt.arrow}` : null] : null,
-					elem: [btnctl, splitctl, menuctl],
+					elem: [btn_main, btn_split, dropdown_menu],
 				};
 			}
 		}

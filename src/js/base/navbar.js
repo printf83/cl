@@ -50,6 +50,7 @@ export class container extends nav {
 					opt.position ? opt.position : null,
 				],
 				bgColor: opt.color,
+				textBgColor: opt.color,
 			});
 
 			opt.body = core.merge(opt.body, {

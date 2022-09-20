@@ -178,7 +178,7 @@ export default class example extends div {
 				opt.code && opt.view
 					? new card.container({
 							marginBottom: 3,
-							color: opt.dark ? "dark" : null,
+							bgColor: opt.dark ? "dark" : null,
 							class: opt.viewclass,
 							elem: new card.body({ elem: opt.container(opt.code()) }),
 					  })
