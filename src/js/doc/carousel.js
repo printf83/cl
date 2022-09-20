@@ -38,9 +38,7 @@ export default [
 		import: ["carousel", "sample"],
 		code: () => {
 			return new carousel({
-				//marker
-				control: true,
-
+				control: true, //marker
 				item: [
 					sample.img(857, 428),
 					sample.img(857, 428),
@@ -58,9 +56,7 @@ export default [
 		import: ["carousel", "sample"],
 		code: () => {
 			return new carousel({
-				//marker
-				indicators: true,
-
+				indicators: true, //marker
 				control: true,
 				item: [
 					sample.img(857, 428),
@@ -122,6 +118,7 @@ export default [
 		import: ["carousel", "sample"],
 		code: () => {
 			return new carousel({
+				fade: true, //marker
 				control: true,
 				item: [
 					sample.img(857, 428),
@@ -131,9 +128,6 @@ export default [
 					sample.img(857, 428),
 					sample.img(857, 428),
 				],
-
-				//marker
-				fade: true,
 			});
 		},
 	},
@@ -180,6 +174,7 @@ export default [
 		import: ["carousel", "sample"],
 		code: () => {
 			return new carousel({
+				touch: false, //marker
 				control: true,
 				item: [
 					sample.img(857, 428),
@@ -189,9 +184,6 @@ export default [
 					sample.img(857, 428),
 					sample.img(857, 428),
 				],
-
-				//marker
-				touch: false,
 			});
 		},
 	},
@@ -201,6 +193,7 @@ export default [
 		import: ["carousel", "sample"],
 		code: () => {
 			return new carousel({
+				dark: true, //marker
 				control: true,
 				indicators: true,
 				item: [
@@ -235,9 +228,6 @@ export default [
 						src: sample.img(857, 428, "dark"),
 					},
 				],
-
-				//marker
-				dark: true,
 			});
 		},
 	},
@@ -266,13 +256,10 @@ export default [
 				item: [
 					["Option", "Description"],
 					[
-						"<code>onslide</code>",
+						"<code>slide</code>",
 						"This event fires immediately when the <code>slide</code> instance method is invoked.",
 					],
-					[
-						"<code>onslid</code>",
-						"This event is fired when the carousel has completed its slide transition.",
-					],
+					["<code>slid</code>", "This event is fired when the carousel has completed its slide transition."],
 				],
 			}),
 		],
@@ -307,7 +294,7 @@ export default [
 								],
 
 								//marker
-								onslide: (event) => {
+								slide: (event) => {
 									console.info("relatedTarget", event.relatedTarget);
 									console.info("direction", event.direction);
 									console.info("from", event.from);
@@ -315,7 +302,7 @@ export default [
 
 									new toast("i", fn(event.currentTarget, "onslide")).show();
 								},
-								onslid: (event) => {
+								slid: (event) => {
 									new toast("/", fn(event.currentTarget, "onslid")).show();
 								},
 								//-

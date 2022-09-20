@@ -943,7 +943,7 @@ function attachBootstrap(key, elem, opt) {
 						}
 					}
 				} else {
-					console.info(`${i} is not supported value for bootstrap ${key} property`);
+					if (setting.DEBUG) console.warn(`${i} is not supported value for bootstrap ${key} property`);
 				}
 			});
 
@@ -972,7 +972,7 @@ function attachBootstrap(key, elem, opt) {
 
 				delete opt[key];
 			} else {
-				console.info(`${opt[key]} is not supported value for bootstrap ${key} property`);
+				if (setting.DEBUG) console.warn(`${opt[key]} is not supported value for bootstrap ${key} property`);
 			}
 		}
 	}
@@ -1286,9 +1286,11 @@ const booleanAttr = [
 function attachBoolean(key, elem, opt) {
 	if (booleanAttr.indexOf(key) > -1) {
 		if (opt[key] === true) {
-			elem.setAttribute(key, key);
+			// elem.setAttribute(key, key);
+			elem[key] = true;
 		} else if (opt[key] === false) {
-			elem.setAttribute(key, "");
+			// elem.setAttribute(key, "");
+			elem[key] = false;
 		} else {
 			console.warn(`Attribute ${key}:${opt[key]} is not boolean`);
 		}
@@ -1391,7 +1393,7 @@ function attachAttr(elem, opt) {
 						if (opt.hasOwnProperty(keys[x]) && opt[keys[x]] !== null && opt[keys[x]] !== undefined) {
 							if (y === fnAttrDbLength - 1) {
 								if (setting.DEBUG) {
-									console.log(`Treat ${keys[x]}:${opt[keys[x]]} as another attribute.`);
+									console.info(`Treat ${keys[x]}:${opt[keys[x]]} as another attribute.`);
 								}
 							}
 

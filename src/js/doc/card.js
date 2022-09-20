@@ -26,10 +26,7 @@ export default [
 			return new card.container({
 				width: "18rem",
 				elem: [
-					new card.img({
-						placement: "top",
-						src: sample.img(286, 143),
-					}),
+					new card.img({ "data-test": "card.img", placement: "top", src: sample.img(286, 143) }),
 					new card.body({
 						elem: [
 							new card.title("Card Title"),
