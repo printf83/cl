@@ -13,11 +13,9 @@ export default [
 		import: ["input"],
 		code: () => {
 			return new input({
-				label: "Simple Range",
+				type: "range", //marker
 				value: 50,
-
-				//marker
-				type: "range",
+				label: "Simple Range",
 			});
 		},
 	},
@@ -27,12 +25,10 @@ export default [
 		import: ["input"],
 		code: () => {
 			return new input({
-				label: "Disable Range",
+				disabled: true, //marker
 				type: "range",
 				value: 50,
-
-				//marker
-				disabled: true,
+				label: "Disable Range",
 			});
 		},
 	},
@@ -42,14 +38,11 @@ export default [
 		import: ["input"],
 		code: () => {
 			return new input({
-				label: "Example Range",
 				type: "range",
 				value: 2.5,
-
-				//marker
-				min: 0,
-				max: 5,
-				//-
+				min: 0, //marker
+				max: 5, //marker
+				label: "Example Range",
 			});
 		},
 	},
@@ -59,14 +52,12 @@ export default [
 		import: ["input"],
 		code: () => {
 			return new input({
-				label: "Example Range",
 				type: "range",
 				value: 2.5,
 				min: 0,
 				max: 5,
-
-				//marker
-				step: 0.5,
+				step: 0.5, //marker
+				label: "Example Range",
 			});
 		},
 	},

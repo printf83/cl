@@ -143,13 +143,13 @@ export const isdarkcolor = (color) => {
 
 		// from : https://stackoverflow.com/questions/12043187/how-to-check-if-hex-color-is-too-black
 		var luma = 0.2126 * r + 0.7152 * g + 0.0722 * b;
-		if (setting.DEBUG) console.log(`Color ${scolor} luma is ${luma}`);
+		if (setting.DEBUG > 2) console.log(`Color ${scolor} luma is ${luma}`);
 
 		if (luma < 48) {
-			if (setting.DEBUG) console.log(`Color ${scolor} is dark`);
+			if (setting.DEBUG > 2) console.log(`Color ${scolor} is dark`);
 			return true;
 		} else {
-			if (setting.DEBUG) console.log(`Color ${scolor} is light`);
+			if (setting.DEBUG > 2) console.log(`Color ${scolor} is light`);
 			return false;
 		}
 	} else {
@@ -212,7 +212,7 @@ const _setting = {
 	term: null,
 	banner: null,
 	themechange: null,
-	debug: false,
+	debug: 0,
 };
 
 export const setting = {
@@ -497,6 +497,8 @@ export function extend(out) {
 export const args = base.multipleConstructorClass;
 
 export const merge = base.mergeObject;
+export const mergeClass = base.mergeClass;
+export const mergeStyle = base.mergeStyle;
 
 export function documentReady(callback) {
 	elemReady(document, () => {

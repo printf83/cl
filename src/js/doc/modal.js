@@ -1189,19 +1189,19 @@ export default [
 						button: "Okay",
 
 						//marker
-						onshow: (event) => {
+						show: (event) => {
 							new toast("i", fn(event.currentTarget, "onshow")).show();
 						},
-						onshown: (event) => {
+						shown: (event) => {
 							new toast("/", fn(event.currentTarget, "onshown")).show();
 						},
-						onhide: (event) => {
+						hide: (event) => {
 							new toast("!", fn(event.currentTarget, "onhide")).show();
 						},
-						onhidden: (event) => {
+						hidden: (event) => {
 							new toast("x", fn(event.currentTarget, "onhidden")).show();
 						},
-						onhideprevented: (event) => {
+						hideprevented: (event) => {
 							new toast("-", fn(event.currentTarget, "onhideprevented")).show();
 						},
 						//-

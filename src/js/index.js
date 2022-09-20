@@ -23,7 +23,7 @@ import h from "./base/h.js";
 
 let def_main_menu = "Getting started";
 let def_sub_menu = "Introduction";
-let DEBUG = false;
+let DEBUG = 0;
 
 const db_menu = [
 	{
@@ -598,7 +598,7 @@ function load_random_page(callback) {
 }
 
 function reload_page(update_url, callback) {
-	if (DEBUG) console.log("---[reload active doc]---");
+	if (DEBUG > 2) console.log("---[reload active doc]---");
 
 	if (cur_main_menu && cur_sub_menu) {
 		load_page(false, null, cur_main_menu, cur_sub_menu, () => {
@@ -643,7 +643,7 @@ function load_page(showloading, sender, main_menu, sub_menu, callback) {
 								try {
 									//async import doc source
 									core.importJS(menu_item.source, (menu_item_source) => {
-										let processtimestart = DEBUG ? window.performance.now() : null;
+										let processtimestart = DEBUG > 0 ? window.performance.now() : null;
 
 										// sample.resetindex();
 										core.replaceChild(
@@ -657,9 +657,9 @@ function load_page(showloading, sender, main_menu, sub_menu, callback) {
 											})
 										);
 
-										let processtimeend = DEBUG ? window.performance.now() : null;
+										let processtimeend = DEBUG > 0 ? window.performance.now() : null;
 
-										if (DEBUG) {
+										if (DEBUG > 0) {
 											//count pagespeed
 											document.getElementById("pagespeed").innerText = `${(
 												processtimeend - processtimestart
@@ -709,7 +709,7 @@ function load_page(showloading, sender, main_menu, sub_menu, callback) {
 					})
 				);
 
-				if (DEBUG) {
+				if (DEBUG > 0) {
 					//count pagespeed
 					document.getElementById("pagespeed").innerText = `0 ms`;
 
@@ -811,7 +811,9 @@ function update_pagerandom(main_menu, sub_menu) {
 
 function update_url(main_menu, sub_menu) {
 	let title = `${core.setting.title()} - ${main_menu} | ${sub_menu}`;
-	let path = `/?m1=${encodeURIComponent(main_menu)}&m2=${encodeURIComponent(sub_menu)}${DEBUG ? "&debug=1" : ""}`;
+	let path = `/?m1=${encodeURIComponent(main_menu)}&m2=${encodeURIComponent(sub_menu)}${
+		DEBUG ? `&debug=${DEBUG}` : ""
+	}`;
 	let data = { urlPath: path };
 
 	window.history.pushState(data, title, path);
@@ -845,12 +847,12 @@ function get_url_param() {
 		? {
 				main_menu: decodeURIComponent(main_menu),
 				sub_menu: decodeURIComponent(sub_menu),
-				debug: debug ? true : false,
+				debug: debug ? parseInt(debug) : 0,
 		  }
 		: {
 				main_menu: null,
 				sub_menu: null,
-				debug: debug ? true : false,
+				debug: debug ? parseInt(debug) : 0,
 		  };
 }
 
@@ -871,7 +873,7 @@ function activate_menu(main_menu, sub_menu, type_menu) {
 			activeItem[x].classList.remove("active");
 			if (type_menu !== "theme") {
 				if (activeItem[x].getAttribute("cl-main_menu") !== main_menu) {
-					let iul = activeItem[x].closest("ul");
+					let iul = activeItem[x].closest("ul").parentElement;
 					if (iul) {
 						try {
 							let isib = iul.previousSibling;
@@ -895,7 +897,7 @@ function activate_menu(main_menu, sub_menu, type_menu) {
 		current_active_menu_item.classList.add("active");
 
 		if (type_menu !== "theme") {
-			let cul = current_active_menu_item.closest("ul");
+			let cul = current_active_menu_item.closest("ul").parentElement;
 			if (cul) {
 				try {
 					let csib = cul.previousSibling;
@@ -1073,7 +1075,7 @@ core.documentReady(() => {
 						viewport: true,
 					}),
 
-					DEBUG
+					DEBUG > 0
 						? new pill({
 								icon: "stopwatch",
 								title: "Build speed",
@@ -1081,7 +1083,7 @@ core.documentReady(() => {
 								elem: [new small({ id: "pagespeed", elem: "0 ms" })],
 						  })
 						: null,
-					DEBUG
+					DEBUG > 0
 						? new pill({
 								icon: "balance-scale",
 								title: "Page weight",

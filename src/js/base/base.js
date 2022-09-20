@@ -1,7 +1,7 @@
 "use strict";
 
 const _setting = {
-	debug: false,
+	debug: 0,
 };
 
 export const setting = {
@@ -58,11 +58,11 @@ export function setupEventListenerRemover(name, elem, fn) {
 	}
 	elem.detachEventListener[name] = fn;
 
-	if (setting.DEBUG) console.log(`Attach ${name} event to ${elemInfo(elem)}`);
+	if (setting.DEBUG > 2) console.log(`Attach ${name} event to ${elemInfo(elem)}`);
 }
 
 export function deleteEventListener(name, elem, fn) {
-	if (setting.DEBUG) console.log(`Remove ${name} event from ${elemInfo(elem)}`);
+	if (setting.DEBUG > 2) console.log(`Remove ${name} event from ${elemInfo(elem)}`);
 	elem.detachEventListener[name] = null;
 	delete elem.detachEventListener[name];
 	fn();
@@ -926,24 +926,28 @@ function attachBootstrap(key, elem, opt) {
 				if (bootstrapPropertyDb[key].value.indexOf(i) > -1) {
 					itsBootstrapAttr = true;
 					if (bootstrapPropertyDb[key].hasOwnProperty("formatValue")) {
-						elem.classList.add(bootstrapPropertyDb[key].formatValue);
+						// elem.classList.add(bootstrapPropertyDb[key].formatValue);
+						elem = addIntoClassList(elem, bootstrapPropertyDb[key].formatValue);
 					}
 
 					if (i === true) {
 						if (bootstrapPropertyDb[key].hasOwnProperty("formatTrue")) {
-							elem.classList.add(bootstrapPropertyDb[key].formatTrue);
+							// elem.classList.add(bootstrapPropertyDb[key].formatTrue);
+							elem = addIntoClassList(elem, bootstrapPropertyDb[key].formatTrue);
 						}
 					} else if (i === false) {
-						if (bootstrapPropertyDb[key].formatFalse) {
-							elem.classList.add(bootstrapPropertyDb[key].hasOwnProperty("formatFalse"));
+						if (bootstrapPropertyDb[key].hasOwnProperty("formatFalse")) {
+							// elem.classList.add(bootstrapPropertyDb[key].formatFalse);
+							elem = addIntoClassList(elem, bootstrapPropertyDb[key].formatFalse);
 						}
 					} else {
 						if (bootstrapPropertyDb[key].hasOwnProperty("format")) {
-							elem.classList.add(bootstrapPropertyDb[key].format.replace(/\$1/g, i));
+							// elem.classList.add(bootstrapPropertyDb[key].format.replace(/\$1/g, i));
+							elem = addIntoClassList(elem, bootstrapPropertyDb[key].format.replace(/\$1/g, i));
 						}
 					}
 				} else {
-					if (setting.DEBUG) console.warn(`${i} is not supported value for bootstrap ${key} property`);
+					if (setting.DEBUG > 0) console.warn(`${i} is not supported value for bootstrap ${key} property`);
 				}
 			});
 
@@ -953,26 +957,30 @@ function attachBootstrap(key, elem, opt) {
 		} else {
 			if (bootstrapPropertyDb[key].value.indexOf(opt[key]) > -1) {
 				if (bootstrapPropertyDb[key].hasOwnProperty("formatValue")) {
-					elem.classList.add(bootstrapPropertyDb[key].formatValue);
+					// elem.classList.add(bootstrapPropertyDb[key].formatValue);
+					elem = addIntoClassList(elem, bootstrapPropertyDb[key].formatValue);
 				}
 
 				if (opt[key] === true) {
 					if (bootstrapPropertyDb[key].hasOwnProperty("formatTrue")) {
-						elem.classList.add(bootstrapPropertyDb[key].formatTrue);
+						// elem.classList.add(bootstrapPropertyDb[key].formatTrue);
+						elem = addIntoClassList(elem, bootstrapPropertyDb[key].formatTrue);
 					}
 				} else if (opt[key] === false) {
 					if (bootstrapPropertyDb[key].hasOwnProperty("formatFalse")) {
-						elem.classList.add(bootstrapPropertyDb[key].formatFalse);
+						// elem.classList.add(bootstrapPropertyDb[key].formatFalse);
+						elem = addIntoClassList(elem, bootstrapPropertyDb[key].formatFalse);
 					}
 				} else {
 					if (bootstrapPropertyDb[key].hasOwnProperty("format")) {
-						elem.classList.add(bootstrapPropertyDb[key].format.replace(/\$1/g, opt[key]));
+						// elem.classList.add(bootstrapPropertyDb[key].format.replace(/\$1/g, opt[key]));
+						elem = addIntoClassList(elem, bootstrapPropertyDb[key].format.replace(/\$1/g, opt[key]));
 					}
 				}
 
 				delete opt[key];
 			} else {
-				if (setting.DEBUG) console.warn(`${opt[key]} is not supported value for bootstrap ${key} property`);
+				if (setting.DEBUG > 0) console.warn(`${opt[key]} is not supported value for bootstrap ${key} property`);
 			}
 		}
 	}
@@ -1213,39 +1221,47 @@ function attachEvent(key, elem, opt) {
 	return { opt, elem };
 }
 
+function addIntoClassList(elem, value) {
+	let i = [];
+	try {
+		if (Array.isArray(value)) {
+			i = value;
+		} else {
+			i = [value];
+		}
+
+		//remove null
+		i = i.filter(Boolean);
+
+		//make sure every class not have whitespace
+		if (i && i.length > 0) {
+			for (let x = 0; x < i.length; x++) {
+				if (i[x].indexOf(" ") > -1) {
+					i[x] = i[x].split(" ");
+					i[x] = i[x].filter(Boolean);
+
+					if (i[x] && i[x].length > 0) {
+						for (let y = 0; y < i[x].length; y++) {
+							elem.classList.add(i[x][y]);
+						}
+					}
+				} else {
+					elem.classList.add(i[x]);
+				}
+			}
+		}
+	} catch (error) {
+		console.error(`Fail to add class ${i}`, error);
+	}
+
+	return elem;
+}
+
 function attachClass(key, elem, opt) {
 	if (key === "class") {
 		let i = [];
-		try {
-			if (Array.isArray(opt[key])) {
-				i = opt[key];
-			} else {
-				i = [opt[key]];
-			}
 
-			//remove null
-			i = i.filter(Boolean);
-
-			//make sure every class not have whitespace
-			if (i && i.length > 0) {
-				for (let x = 0; x < i.length; x++) {
-					if (i[x].indexOf(" ") > -1) {
-						i[x] = i[x].split(" ");
-						i[x] = i[x].filter(Boolean);
-
-						if (i[x] && i[x].length > 0) {
-							for (let y = 0; y < i[x].length; y++) {
-								elem.classList.add(i[x][y]);
-							}
-						}
-					} else {
-						elem.classList.add(i[x]);
-					}
-				}
-			}
-		} catch (error) {
-			console.error(`Fail to add class ${i}`, error);
-		}
+		elem = addIntoClassList(elem, opt[key]);
 
 		delete opt[key];
 	}
@@ -1283,6 +1299,7 @@ const booleanAttr = [
 	"selected",
 	"truespeed",
 ];
+
 function attachBoolean(key, elem, opt) {
 	if (booleanAttr.indexOf(key) > -1) {
 		if (opt[key] === true) {
@@ -1379,9 +1396,11 @@ const fnAttrDb = [
 	"attachOther",
 ];
 
-function attachAttr(elem, opt) {
+function attachAttr(elem, d) {
 	// try {
-	if (elem && opt) {
+	if (elem && d) {
+		let opt = extend({}, d);
+
 		let keys = Object.keys(opt);
 		if (keys) {
 			let keyLength = keys.length;
@@ -1392,8 +1411,8 @@ function attachAttr(elem, opt) {
 					for (let y = 0; y < fnAttrDbLength; y++) {
 						if (opt.hasOwnProperty(keys[x]) && opt[keys[x]] !== null && opt[keys[x]] !== undefined) {
 							if (y === fnAttrDbLength - 1) {
-								if (setting.DEBUG) {
-									console.info(`Treat ${keys[x]}:${opt[keys[x]]} as another attribute.`);
+								if (setting.DEBUG > 2) {
+									console.log(`Treat ${keys[x]}:${opt[keys[x]]} as another attribute.`);
 								}
 							}
 
@@ -1417,7 +1436,7 @@ function attachAttr(elem, opt) {
 
 //merge
 
-function mergeStyle(existingStyle, newStyle) {
+export function mergeStyle(existingStyle, newStyle) {
 	if (existingStyle !== null && newStyle !== null && existingStyle !== undefined && newStyle !== undefined) {
 		let c = {};
 		Object.keys(existingStyle).forEach((i) => {
@@ -1438,7 +1457,7 @@ function mergeStyle(existingStyle, newStyle) {
 	}
 }
 
-function mergeClass(existingClass, newClass) {
+export function mergeClass(existingClass, newClass) {
 	if (existingClass !== null && newClass !== null && existingClass !== undefined && newClass !== undefined) {
 		let aT = typeof existingClass;
 		let bT = typeof newClass;
@@ -1765,7 +1784,7 @@ export function removeElement(elem) {
 }
 
 export function appendChild(container, data) {
-	if (setting.DEBUG) console.time("appendChild");
+	if (setting.DEBUG > 1) console.time("appendChild");
 	let n = node(data);
 	if (Node.prototype.isPrototypeOf(n)) {
 		container.appendChild(n);
@@ -1774,12 +1793,12 @@ export function appendChild(container, data) {
 			container.appendChild(i);
 		});
 	}
-	if (setting.DEBUG) console.timeEnd("appendChild");
+	if (setting.DEBUG > 1) console.timeEnd("appendChild");
 	return container.lastChild;
 }
 
 export function prependChild(container, data) {
-	if (setting.DEBUG) console.time("prependChild");
+	if (setting.DEBUG > 1) console.time("prependChild");
 	let n = node(data);
 	if (Node.prototype.isPrototypeOf(n)) {
 		container.insertBefore(n, container.firstChild);
@@ -1788,12 +1807,12 @@ export function prependChild(container, data) {
 			container.insertBefore(i, container.firstChild);
 		});
 	}
-	if (setting.DEBUG) console.timeEnd("prependChild");
+	if (setting.DEBUG > 1) console.timeEnd("prependChild");
 	return container.firstChild;
 }
 
 export function replaceWith(elem, data) {
-	if (setting.DEBUG) console.time("replaceWith");
+	if (setting.DEBUG > 1) console.time("replaceWith");
 	removeChildElement(elem);
 
 	let r = null;
@@ -1809,16 +1828,16 @@ export function replaceWith(elem, data) {
 
 	removeElement(elem);
 
-	if (setting.DEBUG) console.timeEnd("replaceWith");
+	if (setting.DEBUG > 1) console.timeEnd("replaceWith");
 	return r;
 }
 
 export function replaceChild(container, data) {
-	if (setting.DEBUG) console.time("replaceChild");
+	if (setting.DEBUG > 1) console.time("replaceChild");
 	removeChildElement(container);
 
 	build(container, data);
-	if (setting.DEBUG) console.timeEnd("replaceChild");
+	if (setting.DEBUG > 1) console.timeEnd("replaceChild");
 	return container.childNodes;
 }
 
@@ -1834,32 +1853,32 @@ export function html(data) {
 	return html;
 }
 
-function attacheventdb(elem, eventname) {
-	let eventID = elem.getAttribute(`cl.event.${eventname}`);
-	if (eventID) {
-		let fn = (event) => {
-			eventdb.call(eventID)(event);
-		};
+// function attacheventdb(elem, eventname) {
+// 	let eventID = elem.getAttribute(`cl.event.${eventname}`);
+// 	if (eventID) {
+// 		let fn = (event) => {
+// 			eventdb.call(eventID)(event);
+// 		};
 
-		elem.addEventListener(eventname, fn, false);
+// 		elem.addEventListener(eventname, fn, false);
 
-		setupEventListenerRemover(eventname, elem, () => {
-			deleteEventListener(eventname, elem, () => {
-				elem.removeEventListener(eventname, fn, false);
-			});
-		});
-	}
-}
+// 		setupEventListenerRemover(eventname, elem, () => {
+// 			deleteEventListener(eventname, elem, () => {
+// 				elem.removeEventListener(eventname, fn, false);
+// 			});
+// 		});
+// 	}
+// }
 
 export function init(container) {
 	let popoverTriggerList = [].slice.call(container.querySelectorAll('[data-bs-toggle="popover"]'));
 	popoverTriggerList.map((popoverTriggerEl) => {
 		let elem = new bootstrap.Popover(popoverTriggerEl);
 
-		attacheventdb(popoverTriggerEl, "show.bs.popover");
-		attacheventdb(popoverTriggerEl, "shown.bs.popover");
-		attacheventdb(popoverTriggerEl, "hidden.bs.popover");
-		attacheventdb(popoverTriggerEl, "inserted.bs.popover");
+		// attacheventdb(popoverTriggerEl, "show.bs.popover");
+		// attacheventdb(popoverTriggerEl, "shown.bs.popover");
+		// attacheventdb(popoverTriggerEl, "hidden.bs.popover");
+		// attacheventdb(popoverTriggerEl, "inserted.bs.popover");
 
 		setupEventListenerRemover("popover", popoverTriggerEl, () => {
 			deleteEventListener("popover", popoverTriggerEl, () => {
@@ -1874,10 +1893,10 @@ export function init(container) {
 	tooltipTriggerList.map((tooltipTriggerEl) => {
 		let elem = new bootstrap.Tooltip(tooltipTriggerEl);
 
-		attacheventdb(tooltipTriggerEl, "show.bs.tooltip");
-		attacheventdb(tooltipTriggerEl, "shown.bs.tooltip");
-		attacheventdb(tooltipTriggerEl, "hidden.bs.tooltip");
-		attacheventdb(tooltipTriggerEl, "inserted.bs.tooltip");
+		// attacheventdb(tooltipTriggerEl, "show.bs.tooltip");
+		// attacheventdb(tooltipTriggerEl, "shown.bs.tooltip");
+		// attacheventdb(tooltipTriggerEl, "hidden.bs.tooltip");
+		// attacheventdb(tooltipTriggerEl, "inserted.bs.tooltip");
 
 		setupEventListenerRemover("tooltip", tooltipTriggerEl, () => {
 			deleteEventListener("tooltip", tooltipTriggerEl, () => {
