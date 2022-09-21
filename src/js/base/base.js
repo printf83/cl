@@ -1321,10 +1321,10 @@ function attachBoolean(key, elem, opt) {
 			elem.setAttribute(key, key);
 			// elem[key] = true;
 		} else if (opt[key] === false) {
-			elem.setAttribute(key, "");
+			// elem.setAttribute(key, "");
 			// elem[key] = false;
 		} else {
-			if (setting.DEBUG > 2) console.log(`Attribute ${key}:${opt[key]} is not boolean`);
+			if (setting.DEBUG > 2) console.log(`Attribute ${key}:${opt[key]} is not TRUE`);
 		}
 
 		delete opt[key];
@@ -1363,11 +1363,15 @@ function attachSpecial(key, elem, opt) {
 	if (opt[key] === true) {
 		if (key === "active") {
 			elem = addIntoClassList(elem, "active");
+
 			delete opt[key];
 		} else if (key === "disabled") {
 			elem = addIntoClassList(elem, key);
 			elem.setAttribute(`aria-${key}`, opt[key]);
+			elem.setAttribute(key, key);
 			elem.setAttribute("tabindex", -1);
+
+			delete opt[key];
 		}
 	}
 

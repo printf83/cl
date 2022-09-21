@@ -79,7 +79,7 @@ const fn = {
 									total: result.total,
 									skip: opt.query.skip,
 									limit: opt.query.limit,
-									onchange: fn.pagechange,
+									change: fn.pagechange,
 									autoupdate: false,
 									nextprev: false,
 									"data-cl-container": id,

@@ -160,7 +160,7 @@ const fn = {
 	},
 	msg: (msg, icon) => {
 		return new alert.container({
-			align: "start",
+			textAlign: "start",
 			marginBottom: 0,
 			icon: icon,
 			elem: msg,
@@ -593,7 +593,7 @@ const fn = {
 		container: (id, elem) => {
 			return new form({
 				id: id,
-				align: "center",
+				textAlign: "center",
 				rowCol: 1,
 				elem: elem.map((i) => {
 					return new div({ col: true, elem: i });

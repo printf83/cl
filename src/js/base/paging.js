@@ -14,7 +14,7 @@ const defaultOption = {
 	weight: null,
 	align: "center", //start|end|center(default)
 	overflow: true,
-	onchange: null,
+	change: null,
 	firstlast: true,
 	nextprev: true,
 	labelfirst: null,
@@ -72,14 +72,14 @@ export default class paging extends div {
 					item.push(
 						new li({
 							class: "page-item",
-							disabled: curpage > 1,
+							disabled: !(curpage > 1),
 							elem: new a({
 								class: "page-link",
 								// tabindex: curpage > 1 ? null : "-1",
 								// "aria-disabled": curpage > 1 ? null : true,
 								"aria-label": "First Page",
 								href: "#",
-								disabled: curpage > 1,
+								disabled: !(curpage > 1),
 								click: (event) => {
 									data.skip = 0;
 									pagingonchange(event.currentTarget, data);
@@ -97,14 +97,14 @@ export default class paging extends div {
 					item.push(
 						new li({
 							class: "page-item",
-							disabled: curpage > 1,
+							disabled: !(curpage > 1),
 							elem: new a({
 								class: "page-link",
 								// tabindex: curpage > 1 ? null : "-1",
 								// "aria-disabled": curpage > 1 ? null : true,
 								"aria-label": "Previous Page",
 								href: "#",
-								disabled: curpage > 1,
+								disabled: !(curpage > 1),
 								click: (event) => {
 									data.skip = (curpage - 2) * data.limit;
 									pagingonchange(event.currentTarget, data);
@@ -193,13 +193,13 @@ export default class paging extends div {
 					item.push(
 						new li({
 							class: "page-item",
-							disabled: curpage < btncount,
+							disabled: !(curpage < btncount),
 							elem: new a({
 								class: "page-link",
 								// tabindex: curpage < btncount ? null : "-1",
 								// "aria-disabled": curpage > 1 ? null : true,
 								"aria-label": "Next Page",
-								disabled: curpage < btncount,
+								disabled: !(curpage < btncount),
 								href: "#",
 								click: (event) => {
 									data.skip = curpage * data.limit;
@@ -216,13 +216,13 @@ export default class paging extends div {
 					item.push(
 						new li({
 							class: "page-item",
-							disabled: curpage < btncount,
+							disabled: !(curpage < btncount),
 							elem: new a({
 								class: "page-link",
-								tabindex: curpage < btncount ? null : "-1",
-								"aria-disabled": curpage > 1 ? null : true,
+								// tabindex: curpage < btncount ? null : "-1",
+								// "aria-disabled": curpage > 1 ? null : true,
 								"aria-label": "Last Page",
-								disabled: curpage < btncount,
+								disabled: !(curpage < btncount),
 								href: "#",
 								click: (event) => {
 									data.skip = (btncount - 1) * data.limit;

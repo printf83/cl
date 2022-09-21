@@ -49,7 +49,7 @@ const db_menu = [
 	{
 		type: "menu",
 		title: "Forms",
-		icon: { icon: "list-check", color: "secondary" },
+		icon: { icon: "list-check", color: "muted" },
 		item: [
 			{ title: "Form control", source: doc.formcontrol },
 			{ title: "Select", source: doc.select },
@@ -172,7 +172,7 @@ const db_menu = [
 	{
 		type: "navigate",
 		title: "Others",
-		icon: { icon: "link", color: "secondary" },
+		icon: { icon: "link", color: "muted" },
 		item: [
 			{ title: "Sandbox", source: "sandbox.html" },
 			{ title: "Test", source: "test.html" },
