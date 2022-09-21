@@ -346,14 +346,16 @@ export class item extends div {
 						href: opt.href,
 						class: [
 							"nav-link",
-							opt.active ? "active" : null,
-							opt.disabled ? "disabled" : null,
+							// opt.active ? "active" : null,
+							// opt.disabled ? "disabled" : null,
 							opt.option ? "dropdown-toggle" : null,
 						],
 						"aria-current": opt.active ? "page" : null,
 						role: "button",
 						"data-bs-toggle": opt.option ? "dropdown" : null,
 						"aria-expanded": opt.option ? "false" : null,
+						active: opt.active,
+						disabled: opt.disabled,
 						elem: new label({
 							icon: opt.icon,
 							label: opt.label,

@@ -17,11 +17,11 @@ const defaultContainerOption = {
 
 const defaultItemOption = {
 	type: null, //null|checkbox|radio|switch
-	disabled: false,
+	// disabled: false,
 	action: false,
 	value: null,
-	active: false,
-	checked: null, //if check
+	// active: false,
+	// checked: null, //if check
 	color: null,
 };
 
@@ -62,11 +62,10 @@ export default class listgroup extends tag {
 				"list-group",
 				opt.flush ? "list-group-flush" : null,
 				opt.type === "ol" ? "list-group-numbered" : null,
-				opt.horizontal === true
-					? "horizontal"
-					: opt.horizontal === false
-					? null
-					: core.multiClass(opt.horizontal, "list-group-horizontal-$1"),
+				core.multiClass(opt.horizontal, {
+					format: "list-group-horizontal-$1",
+					formatTrue: "list-group-horizontal",
+				}),
 			],
 			item: Array.isArray(opt.item) ? opt.item : [opt.item],
 			elem: opt.elem
@@ -81,13 +80,8 @@ export default class listgroup extends tag {
 								marginStart: i.type === "switch" ? 0 : null,
 								class: "form-check-input",
 								type: i.type === "switch" ? "checkbox" : i.type,
-								checked: i.checked,
-								value: i.value,
 							});
 
-							// delete ctl.type;
-							// delete ctl.value;
-							// delete ctl.checked;
 							delete ctl.color;
 
 							i = core.merge(i, {
@@ -95,14 +89,14 @@ export default class listgroup extends tag {
 								class: [
 									"list-group-item",
 									i.type === "switch" ? "form-switch" : null,
-									i.active ? "active" : null,
-									i.disabled ? "disabled" : null,
+									// i.active ? "active" : null,
+									// i.disabled ? "disabled" : null,
 									i.action ? "list-group-item-action" : null,
 									i.color ? `list-group-item-${i.color}` : null,
 								],
-								disabled: !i.href && i.disabled ? "" : null,
-								tabindex: i.href && i.disabled ? -1 : null,
-								"aria-disabled": i.href && i.disabled ? "true" : null,
+								// disabled: !i.href && i.disabled ? "" : null,
+								// tabindex: i.href && i.disabled ? -1 : null,
+								// "aria-disabled": i.href && i.disabled ? "true" : null,
 								"aria-current": i.active ? "true" : null,
 								elem: [new tag(ctl), i.label],
 							});
@@ -111,23 +105,23 @@ export default class listgroup extends tag {
 								tag: i.href ? "a" : i.click instanceof Function ? "button" : "li",
 								class: [
 									"list-group-item",
-									i.active ? "active" : null,
-									i.disabled ? "disabled" : null,
+									// i.active ? "active" : null,
+									// i.disabled ? "disabled" : null,
 									i.action || i.tag === "a" || i.tag === "button" ? "list-group-item-action" : null,
 									i.color ? `list-group-item-${i.color}` : null,
 								],
-								disabled: !i.href && i.disabled ? "" : null,
-								tabindex: i.href && i.disabled ? "-1" : null,
-								"aria-disabled": i.href && i.disabled ? "true" : null,
+								// disabled: !i.href && i.disabled ? "" : null,
+								// tabindex: i.href && i.disabled ? "-1" : null,
+								// "aria-disabled": i.href && i.disabled ? "true" : null,
 								"aria-current": i.active ? "true" : null,
 							});
 						}
 
 						delete i.type;
-						delete i.active;
+						// delete i.active;
 						delete i.action;
-						delete i.value;
-						delete i.checked;
+						// delete i.value;
+						// delete i.checked;
 						delete i.color;
 
 						return new tag(i);

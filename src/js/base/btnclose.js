@@ -17,7 +17,7 @@ export default class btnclose extends button {
 			opt = core.extend({}, defaultOption, opt);
 
 			opt = core.merge(opt, {
-				class: ["btn-close", !opt.dark ? "btn-close-white" : null, opt.disabled ? "disabled" : null],
+				class: ["btn-close", !opt.dark ? "btn-close-white" : null],
 				"data-bs-dismiss": opt.dismiss,
 				"aria-label": opt.label,
 			});

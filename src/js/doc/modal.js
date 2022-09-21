@@ -1154,23 +1154,23 @@ export default [
 				item: [
 					["Option", "Description"],
 					[
-						"<code>onshow</code>",
+						"<code>show</code>",
 						"This event fires immediately when the <code>show</code> instance method is called. If caused by a click, the clicked element is available as the <code>relatedTarget</code> property of the event.",
 					],
 					[
-						"<code>onshown</code>",
+						"<code>shown</code>",
 						"This event is fired when the modal has been made visible to the user (will wait for CSS transitions to complete). If caused by a click, the clicked element is available as the <code>relatedTarget</code> property of the event.",
 					],
 					[
-						"<code>onhide</code>",
+						"<code>hide</code>",
 						"This event is fired immediately when the <code>hide</code> instance method has been called.",
 					],
 					[
-						"<code>onhidden</code>",
+						"<code>hidden</code>",
 						"This event is fired when the modal has finished being hidden from the user (will wait for CSS transitions to complete).",
 					],
 					[
-						"<code>onhideprevented</code>",
+						"<code>hideprevented</code>",
 						"This event is fired when the modal is shown, its backdrop is <code>static</code> and a click outside the modal or an escape key press is performed with the keyboard option or <code>data-keyboard</code> set to <code>false</code>.",
 					],
 				],
@@ -1190,19 +1190,19 @@ export default [
 
 						//marker
 						show: (event) => {
-							new toast("i", fn(event.currentTarget, "onshow")).show();
+							new toast("i", fn(event.currentTarget, "show")).show();
 						},
 						shown: (event) => {
-							new toast("/", fn(event.currentTarget, "onshown")).show();
+							new toast("/", fn(event.currentTarget, "shown")).show();
 						},
 						hide: (event) => {
-							new toast("!", fn(event.currentTarget, "onhide")).show();
+							new toast("!", fn(event.currentTarget, "hide")).show();
 						},
 						hidden: (event) => {
-							new toast("x", fn(event.currentTarget, "onhidden")).show();
+							new toast("x", fn(event.currentTarget, "hidden")).show();
 						},
 						hideprevented: (event) => {
-							new toast("-", fn(event.currentTarget, "onhideprevented")).show();
+							new toast("-", fn(event.currentTarget, "hideprevented")).show();
 						},
 						//-
 					}).show();

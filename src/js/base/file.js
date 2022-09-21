@@ -454,7 +454,11 @@ export default class file extends div {
 					for: id,
 					label: opt.label,
 					class: opt.labelsize
-						? ["col-form-label"].concat(core.multiClass(opt.labelsize, "col-$1", null, "col"))
+						? core.multiClass(opt.labelsize, {
+								format: "col-$1",
+								formatTrue: "col",
+								formatValue: "col-form-label",
+						  })
 						: "form-label",
 				})
 			);

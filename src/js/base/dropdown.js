@@ -55,7 +55,7 @@ export default class dropdown extends tag {
 				class: [
 					"dropdown-menu",
 					opt.dark ? "dropdown-menu-dark" : null,
-					opt.aligment ? core.multiClass(opt.aligment, "dropdown-menu-$1") : null,
+					core.multiClass(opt.aligment, { format: "dropdown-menu-$1" }),
 				],
 				elem: new option.dropdown({ item: opt.option, selected: opt.value }),
 			});

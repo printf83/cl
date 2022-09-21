@@ -115,10 +115,7 @@ const defaultDropdownItemOption = {
 	active: false,
 	interactive: true,
 };
-/**
- * opt : {tagoption,item : dropdownitem,selected}
- * dropdownitem : [string]|[{tagoption,elem,value,label,icon,active,disabled,interactive}]
- */
+
 export class dropdown extends tag {
 	constructor(...opt) {
 		super(...opt);
@@ -173,7 +170,7 @@ export class dropdown extends tag {
 								tag: i.href ? "a" : i.interactive ? "button" : "span",
 								class: [
 									i.interactive ? "dropdown-item" : "dropdown-item-text",
-									i.disabled ? "disabled" : null,
+									// i.disabled ? "disabled" : null,
 									i.active === true || (i.value && opt.selected?.includes(i.value)) ? "active" : null,
 								],
 								disabled: i.disabled,

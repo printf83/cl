@@ -19,8 +19,9 @@ export default [
 		import: ["listgroup"],
 		code: () => {
 			return new listgroup({
+				"data-cl-test": "test-list-group",
 				item: [
-					{ elem: "An item" },
+					{ elem: "An item", "data-cl-test": "test-item" },
 					{ elem: "A second item" },
 					{ elem: "A third item" },
 					{ elem: "A fourth item" },
@@ -38,9 +39,7 @@ export default [
 				item: [
 					{
 						elem: "An active item",
-
-						//marker
-						active: true,
+						active: true, //marker
 					},
 					{ elem: "A second item" },
 					{ elem: "A third item" },
@@ -59,9 +58,7 @@ export default [
 				item: [
 					{
 						elem: "An disabled item",
-
-						//marker
-						disabled: true,
+						disabled: true, //marker
 					},
 					{ elem: "A second item" },
 					{ elem: "A third item" },
@@ -81,21 +78,15 @@ export default [
 				item: [
 					{
 						elem: "A disabled item",
-
 						//marker
 						href: "#",
 						disabled: true,
 						//-
 					},
-					{
-						elem: "A second item",
-
-						//marker
-						href: "#",
-					},
-					{ href: "#", elem: "A third item" },
-					{ href: "#", elem: "A fourth item" },
-					{ href: "#", elem: "And a fifth one" },
+					{ href: "#" /*marker*/, elem: "A second item" },
+					{ href: "#" /*marker*/, elem: "A third item" },
+					{ href: "#" /*marker*/, elem: "A fourth item" },
+					{ href: "#" /*marker*/, elem: "And a fifth one" },
 				],
 			});
 		},
@@ -116,15 +107,10 @@ export default [
 						disabled: true,
 						//-
 					},
-					{
-						elem: "A second item",
-
-						//marker
-						click: () => {},
-					},
-					{ click: () => {}, elem: "A third item" },
-					{ click: () => {}, elem: "A fourth item" },
-					{ click: () => {}, elem: "And a fifth one" },
+					{ click: () => {} /*marker*/, elem: "A second item" },
+					{ click: () => {} /*marker*/, elem: "A third item" },
+					{ click: () => {} /*marker*/, elem: "A fourth item" },
+					{ click: () => {} /*marker*/, elem: "And a fifth one" },
 				],
 			});
 		},
@@ -135,6 +121,7 @@ export default [
 		import: ["listgroup"],
 		code: () => {
 			return new listgroup({
+				flush: true, //marker
 				item: [
 					{ elem: "An item" },
 					{ elem: "A second item" },
@@ -142,9 +129,6 @@ export default [
 					{ elem: "A fourth item" },
 					{ elem: "And a fifth one" },
 				],
-
-				//marker
-				flush: true,
 			});
 		},
 	},
@@ -154,6 +138,7 @@ export default [
 		import: ["listgroup"],
 		code: () => {
 			return new listgroup({
+				type: "ol", //marker
 				item: [
 					{ elem: "An item" },
 					{ elem: "A second item" },
@@ -161,9 +146,6 @@ export default [
 					{ elem: "A fourth item" },
 					{ elem: "And a fifth one" },
 				],
-
-				//marker
-				type: "ol",
 			});
 		},
 	},

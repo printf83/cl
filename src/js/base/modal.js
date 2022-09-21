@@ -318,12 +318,12 @@ export default class modal extends div {
 						"modal-dialog",
 						opt.scrollable ? "modal-dialog-scrollable" : null,
 						opt.center ? "modal-dialog-centered" : null,
-						opt.size ? core.multiClass(opt.size, "modal-$1") : null,
-						opt.fullscreen
-							? typeof opt.fullscreen === "string" || Array.isArray(opt.fullscreen)
-								? core.multiClass(opt.fullscreen, "modal-fullscreen-$1")
-								: "modal-fullscreen"
-							: null,
+						core.multiClass(opt.size, { format: "modal-$1" }),
+						core.multiClass(opt.fullscreen, {
+							format: "modal-fullscreen-$1",
+							formatTrue: "modal-fullscreen",
+						}),
+
 					],
 					elem: new div({
 						textAlign: opt.align,

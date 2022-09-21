@@ -918,31 +918,38 @@ const bootstrapPropertyDb = {
 	},
 };
 
+/*
+rules :
+{
+	format:"string-$1",
+	formatTrue:"string",
+	formatFalse:"string-0", 
+	formatValue:"found-string", //add this string if value accepted
+	value:["a","b","c",1,2,3],
+
+} 
+ */
 function attachBootstrap(key, elem, opt) {
 	if (bootstrapPropertyDb.hasOwnProperty(key)) {
 		if (Array.isArray(opt[key])) {
-			let itsBootstrapAttr = false;
+			let shared = false;
 			opt[key].forEach((i) => {
 				if (bootstrapPropertyDb[key].value.indexOf(i) > -1) {
-					itsBootstrapAttr = true;
+					shared = shared === false && bootstrapPropertyDb[key].shared === true ? true : false;
 					if (bootstrapPropertyDb[key].hasOwnProperty("formatValue")) {
-						// elem.classList.add(bootstrapPropertyDb[key].formatValue);
 						elem = addIntoClassList(elem, bootstrapPropertyDb[key].formatValue);
 					}
 
 					if (i === true) {
 						if (bootstrapPropertyDb[key].hasOwnProperty("formatTrue")) {
-							// elem.classList.add(bootstrapPropertyDb[key].formatTrue);
 							elem = addIntoClassList(elem, bootstrapPropertyDb[key].formatTrue);
 						}
 					} else if (i === false) {
 						if (bootstrapPropertyDb[key].hasOwnProperty("formatFalse")) {
-							// elem.classList.add(bootstrapPropertyDb[key].formatFalse);
 							elem = addIntoClassList(elem, bootstrapPropertyDb[key].formatFalse);
 						}
 					} else {
 						if (bootstrapPropertyDb[key].hasOwnProperty("format")) {
-							// elem.classList.add(bootstrapPropertyDb[key].format.replace(/\$1/g, i));
 							elem = addIntoClassList(elem, bootstrapPropertyDb[key].format.replace(/\$1/g, i));
 						}
 					}
@@ -951,34 +958,32 @@ function attachBootstrap(key, elem, opt) {
 				}
 			});
 
-			if (itsBootstrapAttr) {
+			if (!shared) {
 				delete opt[key];
 			}
 		} else {
 			if (bootstrapPropertyDb[key].value.indexOf(opt[key]) > -1) {
 				if (bootstrapPropertyDb[key].hasOwnProperty("formatValue")) {
-					// elem.classList.add(bootstrapPropertyDb[key].formatValue);
 					elem = addIntoClassList(elem, bootstrapPropertyDb[key].formatValue);
 				}
 
 				if (opt[key] === true) {
 					if (bootstrapPropertyDb[key].hasOwnProperty("formatTrue")) {
-						// elem.classList.add(bootstrapPropertyDb[key].formatTrue);
 						elem = addIntoClassList(elem, bootstrapPropertyDb[key].formatTrue);
 					}
 				} else if (opt[key] === false) {
 					if (bootstrapPropertyDb[key].hasOwnProperty("formatFalse")) {
-						// elem.classList.add(bootstrapPropertyDb[key].formatFalse);
 						elem = addIntoClassList(elem, bootstrapPropertyDb[key].formatFalse);
 					}
 				} else {
 					if (bootstrapPropertyDb[key].hasOwnProperty("format")) {
-						// elem.classList.add(bootstrapPropertyDb[key].format.replace(/\$1/g, opt[key]));
 						elem = addIntoClassList(elem, bootstrapPropertyDb[key].format.replace(/\$1/g, opt[key]));
 					}
 				}
 
-				delete opt[key];
+				if (!bootstrapPropertyDb[key].shared) {
+					delete opt[key];
+				}
 			} else {
 				if (setting.DEBUG > 0) console.warn(`${opt[key]} is not supported value for bootstrap ${key} property`);
 			}
@@ -1221,37 +1226,47 @@ function attachEvent(key, elem, opt) {
 	return { opt, elem };
 }
 
-function addIntoClassList(elem, value) {
-	let i = [];
-	try {
-		if (Array.isArray(value)) {
-			i = value;
-		} else {
-			i = [value];
-		}
+function genClassList(value) {
+	let result = [];
+	let i = null;
+	if (Array.isArray(value)) {
+		i = value;
+	} else {
+		i = [value];
+	}
 
-		//remove null
-		i = i.filter(Boolean);
+	//remove null
+	i = i.filter(Boolean);
 
-		//make sure every class not have whitespace
-		if (i && i.length > 0) {
-			for (let x = 0; x < i.length; x++) {
-				if (i[x].indexOf(" ") > -1) {
-					i[x] = i[x].split(" ");
-					i[x] = i[x].filter(Boolean);
+	//make sure every class not have whitespace
+	if (i && i.length > 0) {
+		for (let x = 0; x < i.length; x++) {
+			if (i[x].indexOf(" ") > -1) {
+				i[x] = i[x].split(" ");
+				i[x] = i[x].filter(Boolean);
 
-					if (i[x] && i[x].length > 0) {
-						for (let y = 0; y < i[x].length; y++) {
-							elem.classList.add(i[x][y]);
-						}
+				if (i[x] && i[x].length > 0) {
+					for (let y = 0; y < i[x].length; y++) {
+						result.push(i[x][y]);
 					}
-				} else {
-					elem.classList.add(i[x]);
 				}
+			} else {
+				result.push(i[x]);
 			}
 		}
+	}
+
+	return result && result.length > 0 ? result : null;
+}
+
+function addIntoClassList(elem, value) {
+	try {
+		let i = genClassList(value);
+		if (i && i.length > 0) {
+			elem.classList.add(...i);
+		}
 	} catch (error) {
-		console.error(`Fail to add class ${i}`, error);
+		console.error(`Fail to add class ${value}`, error);
 	}
 
 	return elem;
@@ -1303,13 +1318,13 @@ const booleanAttr = [
 function attachBoolean(key, elem, opt) {
 	if (booleanAttr.indexOf(key) > -1) {
 		if (opt[key] === true) {
-			// elem.setAttribute(key, key);
-			elem[key] = true;
+			elem.setAttribute(key, key);
+			// elem[key] = true;
 		} else if (opt[key] === false) {
-			// elem.setAttribute(key, "");
-			elem[key] = false;
+			elem.setAttribute(key, "");
+			// elem[key] = false;
 		} else {
-			console.warn(`Attribute ${key}:${opt[key]} is not boolean`);
+			if (setting.DEBUG > 2) console.log(`Attribute ${key}:${opt[key]} is not boolean`);
 		}
 
 		delete opt[key];
@@ -1344,6 +1359,21 @@ function attachAria(key, elem, opt) {
 	return { opt, elem };
 }
 
+function attachSpecial(key, elem, opt) {
+	if (opt[key] === true) {
+		if (key === "active") {
+			elem = addIntoClassList(elem, "active");
+			delete opt[key];
+		} else if (key === "disabled") {
+			elem = addIntoClassList(elem, key);
+			elem.setAttribute(`aria-${key}`, opt[key]);
+			elem.setAttribute("tabindex", -1);
+		}
+	}
+
+	return { opt, elem };
+}
+
 function attachOther(key, elem, opt) {
 	let i = Array.isArray(opt[key]) ? opt[key].join(" ") : opt[key];
 
@@ -1360,10 +1390,10 @@ function attachOther(key, elem, opt) {
 
 function cleanupAttr(key, elem, opt) {
 	if ((opt[key] === undefined || opt[key]) === null) {
-		// console.log(`${key}:${opt[key]} is null or undefined. Delete it`);
+		if (setting.DEBUG > 3) console.log(`${key}:${opt[key]} is null or undefined. Delete it`);
 		delete opt[key];
 	} else {
-		// console.log(`${key}:${opt[key]} isNot null and undefined`);
+		if (setting.DEBUG > 3) console.log(`${key}:${opt[key]} isNot null and undefined`);
 	}
 
 	return { opt, elem };
@@ -1372,6 +1402,7 @@ function cleanupAttr(key, elem, opt) {
 const notAttr = ["tag", "elem"];
 const fnAttr = {
 	cleanupAttr: cleanupAttr,
+	attachSpecial: attachSpecial,
 	attachBoolean: attachBoolean,
 	attachData: attachData,
 	attachAria: attachAria,
@@ -1385,6 +1416,7 @@ const fnAttr = {
 
 const fnAttrDb = [
 	"cleanupAttr",
+	"attachSpecial",
 	"attachBoolean",
 	"attachData",
 	"attachAria",
@@ -1431,6 +1463,47 @@ function attachAttr(elem, d) {
 
 	return elem;
 }
+
+//multiclass
+function _bootstrapClassBuilder(value, rules) {
+	let i = [];
+
+	if (rules.hasOwnProperty("formatValue")) {
+		i = [...i, ...genClassList(rules.formatValue)];
+	}
+
+	if (value === true) {
+		if (rules.hasOwnProperty("formatTrue")) {
+			i = [...i, ...genClassList(rules.formatTrue)];
+		}
+	} else if (value === false) {
+		if (rules.hasOwnProperty("formatFalse")) {
+			i = [...i, ...genClassList(rules.formatFalse)];
+		}
+	} else {
+		if (rules.hasOwnProperty("format")) {
+			i = [...i, ...genClassList(rules.format.replace(/\$1/g, value))];
+		}
+	}
+
+	return i && i.length > 0 ? i : null;
+}
+export function multiClass(value, rules) {
+	if (value !== null && value !== undefined) {
+		if (rules.hasOwnProperty("value")) {
+			if (rules.value.indexOf(value) > -1) {
+				return _bootstrapClassBuilder(value, rules);
+			} else {
+				if (setting.DEBUG > 0) console.warn(`${value} is not supported value for bootstrap property`);
+			}
+		} else {
+			return _bootstrapClassBuilder(value, rules);
+		}
+	}
+
+	return null;
+}
+//multiclass - end
 
 //attribute builder - end
 

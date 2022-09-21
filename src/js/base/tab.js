@@ -29,10 +29,10 @@ const defaultItemOption = {
 	option: null,
 	elem: null,
 
-	onshow: null,
-	onshown: null,
-	onhide: null,
-	onhidden: null,
+	show: null,
+	shown: null,
+	hide: null,
+	hidden: null,
 };
 
 /**
@@ -104,9 +104,11 @@ export default class tab extends div {
 								class: [
 									"nav-link",
 									i.option ? "dropdown-toggle" : null,
-									i.active ? "active" : null,
-									i.disabled ? "disabled" : null,
+									// i.active ? "active" : null,
+									// i.disabled ? "disabled" : null,
 								],
+								active: i.active,
+								disabled: i.disabled,
 								href: `#${i.id}_body`,
 								id: `${i.id}_head`,
 								"data-bs-toggle": i.option
@@ -119,10 +121,10 @@ export default class tab extends div {
 								"aria-controls": `${i.id}_body`,
 								role: i.option ? "button" : null,
 
-								"show.bs.tab": i.onshow,
-								"shown.bs.tab": i.onshown,
-								"hide.bs.tab": i.onhide,
-								"hidden.bs.tab": i.onhidden,
+								"show.bs.tab": i.show,
+								"shown.bs.tab": i.shown,
+								"hide.bs.tab": i.hide,
+								"hidden.bs.tab": i.hidden,
 								elem: new label({
 									label: i.label,
 									icon: i.icon,
@@ -196,7 +198,6 @@ export default class tab extends div {
 					: null;
 
 			if (bodyCtl) {
-				
 				opt = core.merge(opt, {
 					class: "card",
 				});

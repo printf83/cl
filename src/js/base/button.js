@@ -47,7 +47,7 @@ export default class button extends tag {
 
 			if (opt.placeholder || opt.disabled) {
 				opt.disabled = opt.disabled || true;
-				opt["aria-disabled"] = opt["aria-disabled"] || "true";
+				// opt["aria-disabled"] = opt["aria-disabled"] || "true";
 			}
 
 			if (opt.type === "checkbox" || opt.type === "radio") {
@@ -90,7 +90,7 @@ export default class button extends tag {
 					opt.color ? (opt.outline ? `btn-outline-${opt.color}` : `btn-${opt.color}`) : null,
 					opt.toggle && opt.active ? "active" : null,
 					opt.floating ? "btn-floating" : null,
-					opt.disabled ? "disabled" : null,
+					// opt.disabled ? "disabled" : null,
 				],
 				autocomplete: opt.toggle ? "off" : null,
 				"aria-pressed": opt.toggle && opt.active ? "true" : null,
