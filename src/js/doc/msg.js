@@ -146,8 +146,7 @@ export default [
 				}),
 				button: [
 					{
-						btnColor: "light",
-						textColor: "primary",
+						color: "light",
 						label: "Okay",
 					},
 					{
