@@ -600,13 +600,13 @@ export default [
 				elem: [
 					/*marker*/ new card.horizontal({
 						size: "sm-4",
-						left: [
+						start: [
 							new card.img({
 								placement: "left",
 								src: sample.img(285, 285),
 							}),
 						],
-						right: new card.container({
+						end: new card.container({
 							height: 100,
 							flush: true,
 							elem: [
@@ -647,6 +647,8 @@ export default [
 		import: ["card"],
 		code: () => {
 			return new card.container({
+				bgColor: "primary", //marker
+				textBgColor: "primary", //marker
 				width: "18rem",
 				elem: [
 					new card.header("Header"),
@@ -659,9 +661,6 @@ export default [
 						],
 					}),
 				],
-
-				//marker
-				color: "primary",
 			});
 		},
 	},
@@ -674,6 +673,8 @@ export default [
 		code: () => {
 			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map((i) => {
 				return new card.container({
+					bgColor: i, //marker
+					textBgColor: i, //marker
 					width: "18rem",
 					elem: [
 						new card.header("Header"),
@@ -686,9 +687,6 @@ export default [
 							],
 						}),
 					],
-
-					//marker
-					color: i,
 				});
 			});
 		},
@@ -728,6 +726,8 @@ export default [
 		code: () => {
 			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map((i) => {
 				return new card.container({
+					borderColor: i, //marker
+					textColor: i, //marker
 					width: "18rem",
 					elem: [
 						new card.header("Header"),
@@ -741,9 +741,6 @@ export default [
 							],
 						}),
 					],
-
-					//marker
-					borderColor: i,
 				});
 			});
 		},
@@ -759,8 +756,8 @@ export default [
 				width: "18rem",
 				elem: [
 					new card.header({
-						color: "transparent",
-						class: "border-success",
+						bgColor: "success",
+						textBgColor: "success",
 						elem: "Header",
 					}),
 					new card.body({
@@ -773,8 +770,6 @@ export default [
 						],
 					}),
 					new card.footer({
-						class: "border-success",
-						color: "transparent",
 						elem: "Footer",
 					}),
 				],

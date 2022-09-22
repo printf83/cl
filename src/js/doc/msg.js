@@ -146,11 +146,12 @@ export default [
 				}),
 				button: [
 					{
-						color: "light",
+						btnColor: "light",
+						textColor: "primary",
 						label: "Okay",
 					},
 					{
-						color: "transparent",
+						btnColor: "transparent",
 						textBgColor: "primary",
 						label: "Cancel",
 					},

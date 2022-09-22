@@ -810,19 +810,19 @@ export default [
 				item: [
 					["Option", "Description"],
 					[
-						"<code>onshow</code>",
+						"<code>show</code>",
 						"This event fires immediately when the <code>show</code> instance method is called.",
 					],
 					[
-						"<code>onshown</code>",
+						"<code>shown</code>",
 						"This event is fired when the dropdown has been made visible to the user (will wait for CSS transitions to complete).",
 					],
 					[
-						"<code>onhide</code>",
+						"<code>hide</code>",
 						"This event is fired immediately when the <code>hide</code> instance method has been called.",
 					],
 					[
-						"<code>onhidden</code>",
+						"<code>hidden</code>",
 						"This event is fired when the dropdown has finished being hidden from the user (will wait for CSS transitions to complete).",
 					],
 				],
@@ -844,17 +844,17 @@ export default [
 				],
 
 				//marker
-				onshow: (event) => {
-					new toast("i", fn(event.currentTarget, "onshow")).show();
+				show: (event) => {
+					new toast("i", fn(event.currentTarget, "show")).show();
 				},
-				onshown: (event) => {
-					new toast("/", fn(event.currentTarget, "onshown")).show();
+				shown: (event) => {
+					new toast("/", fn(event.currentTarget, "shown")).show();
 				},
-				onhide: (event) => {
-					new toast("!", fn(event.currentTarget, "onhide")).show();
+				hide: (event) => {
+					new toast("!", fn(event.currentTarget, "hide")).show();
 				},
-				onhidden: (event) => {
-					new toast("x", fn(event.currentTarget, "onhidden")).show();
+				hidden: (event) => {
+					new toast("x", fn(event.currentTarget, "hidden")).show();
 				},
 				//-
 			});

@@ -767,7 +767,7 @@ const bootstrapPropertyDb = {
 	borderNone: {
 		format: "border-$1-0",
 		formatTrue: "border-0",
-		formatValue: "border",
+		// formatValue: "border",
 		value: [true, "top", "end", "bottom", "start"],
 	},
 
