@@ -939,7 +939,7 @@ function allowBootstrap(key) {
 				.map((i) => {
 					let j = camel2Dash(i);
 					if (j !== i) {
-						return bootstrapPropertyAllow.push(j);
+						return j;
 					}
 				})
 				.filter(Boolean),
@@ -1230,14 +1230,14 @@ let stylePropertyAllow = [];
 
 function allowStyle(key) {
 	if (stylePropertyAllow.length === 0) {
-		let t = Object.keys(stylePropertyDb);
+		let t = stylePropertyDb;
 		stylePropertyAllow = [
 			...t,
 			...t
 				.map((i) => {
 					let j = camel2Dash(i);
 					if (j !== i) {
-						return stylePropertyAllow.push(j);
+						return j;
 					}
 				})
 				.filter(Boolean),
