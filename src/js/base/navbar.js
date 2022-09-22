@@ -346,8 +346,6 @@ export class item extends div {
 						href: opt.href,
 						class: [
 							"nav-link",
-							// opt.active ? "active" : null,
-							// opt.disabled ? "disabled" : null,
 							opt.option ? "dropdown-toggle" : null,
 						],
 						"aria-current": opt.active ? "page" : null,

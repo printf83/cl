@@ -1,5 +1,7 @@
 "use strict";
 
+import e from "express";
+
 const _setting = {
 	debug: 0,
 };
@@ -2002,32 +2004,10 @@ export function html(data) {
 	return html;
 }
 
-// function attacheventdb(elem, eventname) {
-// 	let eventID = elem.getAttribute(`cl.event.${eventname}`);
-// 	if (eventID) {
-// 		let fn = (event) => {
-// 			eventdb.call(eventID)(event);
-// 		};
-
-// 		elem.addEventListener(eventname, fn, false);
-
-// 		setupEventListenerRemover(eventname, elem, () => {
-// 			deleteEventListener(eventname, elem, () => {
-// 				elem.removeEventListener(eventname, fn, false);
-// 			});
-// 		});
-// 	}
-// }
-
 export function init(container) {
 	let popoverTriggerList = [].slice.call(container.querySelectorAll('[data-bs-toggle="popover"]'));
 	popoverTriggerList.map((popoverTriggerEl) => {
 		let elem = new bootstrap.Popover(popoverTriggerEl);
-
-		// attacheventdb(popoverTriggerEl, "show.bs.popover");
-		// attacheventdb(popoverTriggerEl, "shown.bs.popover");
-		// attacheventdb(popoverTriggerEl, "hidden.bs.popover");
-		// attacheventdb(popoverTriggerEl, "inserted.bs.popover");
 
 		setupEventListenerRemover("popover", popoverTriggerEl, () => {
 			deleteEventListener("popover", popoverTriggerEl, () => {
@@ -2042,11 +2022,6 @@ export function init(container) {
 	tooltipTriggerList.map((tooltipTriggerEl) => {
 		let elem = new bootstrap.Tooltip(tooltipTriggerEl);
 
-		// attacheventdb(tooltipTriggerEl, "show.bs.tooltip");
-		// attacheventdb(tooltipTriggerEl, "shown.bs.tooltip");
-		// attacheventdb(tooltipTriggerEl, "hidden.bs.tooltip");
-		// attacheventdb(tooltipTriggerEl, "inserted.bs.tooltip");
-
 		setupEventListenerRemover("tooltip", tooltipTriggerEl, () => {
 			deleteEventListener("tooltip", tooltipTriggerEl, () => {
 				bootstrap.Tooltip.getInstance(tooltipTriggerEl)?.dispose();
@@ -2055,4 +2030,14 @@ export function init(container) {
 
 		return elem;
 	});
+}
+
+function attachBadge(opt) {
+	if (opt.badge && typeof opt.badge === "object" && opt.badge.notification) {
+		opt.position = opt.position || "relative";
+	}
+
+	if (opt.elem) {
+	} else {
+	}
 }

@@ -104,8 +104,6 @@ export default class tab extends div {
 								class: [
 									"nav-link",
 									i.option ? "dropdown-toggle" : null,
-									// i.active ? "active" : null,
-									// i.disabled ? "disabled" : null,
 								],
 								active: i.active,
 								disabled: i.disabled,

@@ -20,10 +20,8 @@ export default [
 		code: () => {
 			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map((i) => {
 				return new alert.container({
+					color: i, //marker
 					elem: `A simple ${i} alert—check it out!`,
-
-					//marker
-					color: i,
 				});
 			});
 		},
@@ -36,6 +34,7 @@ export default [
 		code: () => {
 			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map((i) => {
 				return new alert.container({
+					color: i, //marker
 					elem: [
 						`A simple ${i} alert with `,
 
@@ -45,9 +44,6 @@ export default [
 
 						`. Give it a click if you like.`,
 					],
-
-					//marker
-					color: i,
 				});
 			});
 		},
@@ -84,10 +80,8 @@ export default [
 		code: () => {
 			return ["i", "!!", "!", "?", "-", "x", "/"].map((i) => {
 				return new alert.container({
+					icon: i, //marker
 					elem: `An example alert with an <b>"${i}"</b> icon code`,
-
-					//marker
-					icon: i,
 				});
 			});
 		},
@@ -101,10 +95,8 @@ export default [
 			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map((i) => {
 				return new alert.container({
 					color: i,
+					close: true, //marker
 					elem: `<strong>Holy guacamole!</strong> You should check in on some of those fields below.`,
-
-					//marker
-					close: true,
 				});
 			});
 		},
@@ -117,11 +109,11 @@ export default [
 				item: [
 					["Option", "Description"],
 					[
-						"<code>onclose</code>",
+						"<code>close</code>",
 						"This event is fired immediately when the <code>close</code> instance method has been called.",
 					],
 					[
-						"<code>onclosed</code>",
+						"<code>closed</code>",
 						"This event is fired when the alert has been closed (will wait for CSS transitions to complete).",
 					],
 				],
@@ -138,11 +130,11 @@ export default [
 				elem: "<strong>Holy guacamole!</strong> You should check in on some of those fields below.",
 
 				//marker
-				onclose: (event) => {
-					new toast("!", fn(event.currentTarget, "onclose")).show();
+				close: (event) => {
+					new toast("!", fn(event.currentTarget, "close")).show();
 				},
-				onclosed: (event) => {
-					new toast("x", fn(event.currentTarget, "onclosed")).show();
+				closed: (event) => {
+					new toast("x", fn(event.currentTarget, "closed")).show();
 				},
 				//-
 			});

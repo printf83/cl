@@ -3,6 +3,7 @@ import * as core from "./core.js";
 
 const defaultOption = {
 	tag: null,
+	badge: null,
 	elem: null,
 };
 

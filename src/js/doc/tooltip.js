@@ -99,9 +99,7 @@ export default [
 					elem: new button({
 						label: "Dismissible tooltip",
 						color: "primary",
-
-						//marker
-						disabled: true,
+						disabled: true, //marker
 					}),
 				}),
 			});

@@ -6,7 +6,7 @@ import p from "./p.js";
 import div from "./div.js";
 import imgtag from "./img.js";
 
-const defaultContainerOption = { flush: false, color: null };
+const defaultContainerOption = { flush: false, color: null, badge: null };
 export class container extends div {
 	constructor(...opt) {
 		super(...opt);

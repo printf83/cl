@@ -12,8 +12,8 @@ const defaultOption = {
 	elem: null,
 	close: false,
 
-	onclose: null,
-	onclosed: null,
+	close: null,
+	closed: null,
 };
 
 export class container extends div {
@@ -44,8 +44,8 @@ export class container extends div {
 				class: ["alert", opt.close ? "fade show" : null],
 				alertColor: opt.color,
 				role: "alert",
-				"close.bs.alert": opt.onclose,
-				"closed.bs.alert": opt.onclosed,
+				"close.bs.alert": opt.close,
+				"closed.bs.alert": opt.closed,
 				elem: new div({
 					display: "flex",
 					alignItem: "stretch",
@@ -64,8 +64,8 @@ export class container extends div {
 			delete opt.color;
 			delete opt.close;
 			delete opt.msg;
-			delete opt.onclose;
-			delete opt.onclosed;
+			delete opt.close;
+			delete opt.closed;
 
 			super.data = opt;
 		}

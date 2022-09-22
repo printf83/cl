@@ -49,7 +49,7 @@ export default [
 							tag: "a",
 							href: "#",
 							tabindex: -1,
-							"aria-disabled": "true",
+							disabled: true,
 							pointerEvent: "none", //marker
 							elem: "This link",
 						}),
@@ -76,7 +76,7 @@ export default [
 							tag: "a",
 							href: "#",
 							tabindex: -1,
-							"aria-disabled": "true",
+							disabled: true,
 							pointerEvent: "none", //marker
 							elem: "This link",
 						}),
