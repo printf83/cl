@@ -205,6 +205,7 @@ export default [
 						elem: new pill({ icon: { icon: "at" }, label: "Send email", color: "danger" }),
 						href: "mailto:printf83@gmail.com?subject=bs5-js-builder&body=I%20have%20a%20question%20about%20...",
 					}),
+					new pill({ icon: { icon: "code-branch" }, label: "0.0.2", color: "success" }),
 				],
 			}),
 		],

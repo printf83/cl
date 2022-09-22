@@ -693,6 +693,16 @@ const bootstrapPositionView = [
 	"xl-end",
 ];
 
+function camel2Dash(value) {
+	return value.replace(/[A-Z]/g, (m) => "-" + m.toLowerCase());
+}
+
+function dash2Camel(value) {
+	return value.replace(/-([a-z])/gi, function ($0, $1) {
+		return $1.toUpperCase();
+	});
+}
+
 const bootstrapPropertyDb = {
 	userSelect: { format: "user-select-$1", value: ["all", "auto", "none"] },
 	pointerEvent: { format: "pe-$1", value: ["auto", "none"] },
@@ -918,6 +928,36 @@ const bootstrapPropertyDb = {
 	},
 };
 
+let bootstrapPropertyAllow = [];
+
+function allowBootstrap(key) {
+	if (bootstrapPropertyAllow.length === 0) {
+		let t = Object.keys(bootstrapPropertyDb);
+		bootstrapPropertyAllow = [
+			...t,
+			...t
+				.map((i) => {
+					let j = camel2Dash(i);
+					if (j !== i) {
+						return bootstrapPropertyAllow.push(j);
+					}
+				})
+				.filter(Boolean),
+		];
+	}
+
+	if (bootstrapPropertyAllow.indexOf(key) > -1) {
+		let k = dash2Camel(key);
+		if (k !== key) {
+			return k;
+		} else {
+			return key;
+		}
+	}
+
+	return null;
+}
+
 /*
 rules :
 {
@@ -930,31 +970,33 @@ rules :
 } 
  */
 function attachBootstrap(key, elem, opt) {
-	if (bootstrapPropertyDb.hasOwnProperty(key)) {
+	let a_key = allowBootstrap(key);
+	if (a_key !== null) {
 		if (Array.isArray(opt[key])) {
 			let shared = false;
 			opt[key].forEach((i) => {
-				if (bootstrapPropertyDb[key].value.indexOf(i) > -1) {
-					shared = shared === false && bootstrapPropertyDb[key].shared === true ? true : false;
-					if (bootstrapPropertyDb[key].hasOwnProperty("formatValue")) {
-						elem = addIntoClassList(elem, bootstrapPropertyDb[key].formatValue);
+				if (bootstrapPropertyDb[a_key].value.indexOf(i) > -1) {
+					shared = shared === false && bootstrapPropertyDb[a_key].shared === true ? true : false;
+					if (bootstrapPropertyDb[a_key].hasOwnProperty("formatValue")) {
+						elem = addIntoClassList(elem, bootstrapPropertyDb[a_key].formatValue);
 					}
 
 					if (i === true) {
-						if (bootstrapPropertyDb[key].hasOwnProperty("formatTrue")) {
-							elem = addIntoClassList(elem, bootstrapPropertyDb[key].formatTrue);
+						if (bootstrapPropertyDb[a_key].hasOwnProperty("formatTrue")) {
+							elem = addIntoClassList(elem, bootstrapPropertyDb[a_key].formatTrue);
 						}
 					} else if (i === false) {
-						if (bootstrapPropertyDb[key].hasOwnProperty("formatFalse")) {
-							elem = addIntoClassList(elem, bootstrapPropertyDb[key].formatFalse);
+						if (bootstrapPropertyDb[a_key].hasOwnProperty("formatFalse")) {
+							elem = addIntoClassList(elem, bootstrapPropertyDb[a_key].formatFalse);
 						}
 					} else {
-						if (bootstrapPropertyDb[key].hasOwnProperty("format")) {
-							elem = addIntoClassList(elem, bootstrapPropertyDb[key].format.replace(/\$1/g, i));
+						if (bootstrapPropertyDb[a_key].hasOwnProperty("format")) {
+							elem = addIntoClassList(elem, bootstrapPropertyDb[a_key].format.replace(/\$1/g, i));
 						}
 					}
 				} else {
-					if (setting.DEBUG > 0) console.warn(`${i} is not supported value for bootstrap ${key} property`);
+					if (setting.DEBUG > 0)
+						console.warn(`${a_key}:"${i}" is not supported value for bootstrap property`);
 				}
 			});
 
@@ -962,30 +1004,31 @@ function attachBootstrap(key, elem, opt) {
 				delete opt[key];
 			}
 		} else {
-			if (bootstrapPropertyDb[key].value.indexOf(opt[key]) > -1) {
-				if (bootstrapPropertyDb[key].hasOwnProperty("formatValue")) {
-					elem = addIntoClassList(elem, bootstrapPropertyDb[key].formatValue);
+			if (bootstrapPropertyDb[a_key].value.indexOf(opt[key]) > -1) {
+				if (bootstrapPropertyDb[a_key].hasOwnProperty("formatValue")) {
+					elem = addIntoClassList(elem, bootstrapPropertyDb[a_key].formatValue);
 				}
 
 				if (opt[key] === true) {
-					if (bootstrapPropertyDb[key].hasOwnProperty("formatTrue")) {
-						elem = addIntoClassList(elem, bootstrapPropertyDb[key].formatTrue);
+					if (bootstrapPropertyDb[a_key].hasOwnProperty("formatTrue")) {
+						elem = addIntoClassList(elem, bootstrapPropertyDb[a_key].formatTrue);
 					}
 				} else if (opt[key] === false) {
-					if (bootstrapPropertyDb[key].hasOwnProperty("formatFalse")) {
-						elem = addIntoClassList(elem, bootstrapPropertyDb[key].formatFalse);
+					if (bootstrapPropertyDb[a_key].hasOwnProperty("formatFalse")) {
+						elem = addIntoClassList(elem, bootstrapPropertyDb[a_key].formatFalse);
 					}
 				} else {
-					if (bootstrapPropertyDb[key].hasOwnProperty("format")) {
-						elem = addIntoClassList(elem, bootstrapPropertyDb[key].format.replace(/\$1/g, opt[key]));
+					if (bootstrapPropertyDb[a_key].hasOwnProperty("format")) {
+						elem = addIntoClassList(elem, bootstrapPropertyDb[a_key].format.replace(/\$1/g, opt[key]));
 					}
 				}
 
-				if (!bootstrapPropertyDb[key].shared) {
+				if (!bootstrapPropertyDb[a_key].shared) {
 					delete opt[key];
 				}
 			} else {
-				if (setting.DEBUG > 0) console.warn(`${opt[key]} is not supported value for bootstrap ${key} property`);
+				if (setting.DEBUG > 0)
+					console.warn(`${opt[key]}:"${key}" is not supported value for bootstrap property`);
 			}
 		}
 	}
@@ -1183,9 +1226,40 @@ const stylePropertyDb = [
 	"zIndex",
 ];
 
+let stylePropertyAllow = [];
+
+function allowStyle(key) {
+	if (stylePropertyAllow.length === 0) {
+		let t = Object.keys(stylePropertyDb);
+		stylePropertyAllow = [
+			...t,
+			...t
+				.map((i) => {
+					let j = camel2Dash(i);
+					if (j !== i) {
+						return stylePropertyAllow.push(j);
+					}
+				})
+				.filter(Boolean),
+		];
+	}
+
+	if (stylePropertyAllow.indexOf(key) > -1) {
+		let k = dash2Camel(key);
+		if (k !== key) {
+			return k;
+		} else {
+			return key;
+		}
+	}
+
+	return null;
+}
+
 function attachStyle(key, elem, opt) {
-	if (stylePropertyDb.indexOf(key) > -1) {
-		elem.style[key] = opt[key];
+	let a_key = allowStyle(key);
+	if (a_key !== null) {
+		elem.style[a_key] = opt[key];
 
 		delete opt[key];
 	}
@@ -1461,9 +1535,6 @@ function attachAttr(elem, d) {
 			}
 		}
 	}
-	// } catch (error) {
-	// 	console.error("Something broken", error);
-	// }
 
 	return elem;
 }
@@ -1498,7 +1569,8 @@ export function multiClass(value, rules) {
 			if (rules.value.indexOf(value) > -1) {
 				return _bootstrapClassBuilder(value, rules);
 			} else {
-				if (setting.DEBUG > 0) console.warn(`${value} is not supported value for bootstrap property`);
+				if (setting.DEBUG > 0)
+					console.warn(`"${value}" is not supported value for this rule`, { value: value, rules: rules });
 			}
 		} else {
 			return _bootstrapClassBuilder(value, rules);
@@ -1722,7 +1794,7 @@ const fnA = {
 		if (f) {
 			return f(...obj);
 		} else {
-			console.error(`${caller} argument ${a.join(", ")} not supported by any rules`, {
+			console.error(`"${caller}" argument "${a.join(", ")}" is not supported by any rules`, {
 				type: a,
 				rule: rules
 					? rules.map((i) => {
