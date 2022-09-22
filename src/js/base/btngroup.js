@@ -2,10 +2,7 @@
 import * as core from "./core.js";
 import div from "./div.js";
 
-const defaultOption = { label: null, weight: null, vertical: false, elem: null };
-/**
- * opt : {tagoption,label,weight,vertical,elem}
- */
+const defaultOption = { label: null, weight: null, vertical: false };
 export default class btngroup extends div {
 	constructor(...opt) {
 		super(...opt);
@@ -18,15 +15,14 @@ export default class btngroup extends div {
 		if (opt) {
 			opt = core.extend({}, defaultOption, opt);
 
-			opt.attr = core.merge.attr(opt.attr, {
+			opt = core.merge(opt, {
+				class: [
+					opt.vertical ? "btn-group-vertical" : "btn-group",
+					opt.weight ? `btn-group-${opt.weight}` : null,
+				],
 				role: "group",
 				"aria-label": opt.label,
 			});
-
-			opt.class = core.merge.class(opt.class, [
-				opt.vertical ? "btn-group-vertical" : "btn-group",
-				opt.weight ? `btn-group-${opt.weight}` : null,
-			]);
 
 			delete opt.label;
 			delete opt.weight;

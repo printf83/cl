@@ -21,10 +21,8 @@ export default [
 			return new tag({
 				tag: "div",
 				class: "cl-highlight-padding",
+				display: "flex", //marker
 				elem: "I'm a flexbox container!",
-
-				//marker
-				display: "flex",
 			});
 		},
 	},
@@ -36,10 +34,8 @@ export default [
 			return new tag({
 				tag: "div",
 				class: "cl-highlight-padding",
+				display: "inline-flex", //marker
 				elem: "I'm a inline flexbox container!",
-
-				//marker
-				display: "inline-flex",
 			});
 		},
 	},
@@ -72,16 +68,13 @@ export default [
 			return ["row", "row-reverse"].map((i) => {
 				return new tag({
 					tag: "div",
+					display: "flex",
+					flex: i, //marker
 					elem: [
 						new tag({ tag: "div", elem: "Flex item 1" }),
 						new tag({ tag: "div", elem: "Flex item 2" }),
 						new tag({ tag: "div", elem: "Flex item 3" }),
 					],
-
-					//marker
-					display: "flex",
-					flex: i,
-					//-
 				});
 			});
 		},
@@ -97,16 +90,13 @@ export default [
 			return ["column", "column-reverse"].map((i) => {
 				return new tag({
 					tag: "div",
+					display: "flex",
+					flex: i, //marker
 					elem: [
 						new tag({ tag: "div", elem: "Flex item 1" }),
 						new tag({ tag: "div", elem: "Flex item 2" }),
 						new tag({ tag: "div", elem: "Flex item 3" }),
 					],
-
-					//marker
-					display: "flex",
-					flex: i,
-					//-
 				});
 			});
 		},
@@ -129,7 +119,7 @@ export default [
 
 	{
 		title: "Justify content",
-		msg: "Use {{justifycontent}} property on {{display:flex|flex-inline}} containers to change the alignment of flex items on the main axis (the x-axis to start, y-axis if {{flex:column}}). Choose from {{start}} (browser default), {{end}}, {{center}}, {{between}}, {{around}}, or {{evenly}}.",
+		msg: "Use {{justifyContent}} property on {{display:flex|flex-inline}} containers to change the alignment of flex items on the main axis (the x-axis to start, y-axis if {{flex:column}}). Choose from {{start}} (browser default), {{end}}, {{center}}, {{between}}, {{around}}, or {{evenly}}.",
 		container: sample.vstackcontainer,
 		viewclass: "cl-highlight-flex",
 		import: ["tag"],
@@ -137,12 +127,9 @@ export default [
 			return ["start", "end", "center", "between", "around", "evenly"].map((i) => {
 				return new tag({
 					tag: "div",
-					elem: Array(3).fill(new tag({ tag: "div", elem: "Flex item" })),
-
-					//marker
 					display: "flex",
-					justifycontent: i,
-					//-
+					justifyContent: i, //marker
+					elem: Array(3).fill(new tag({ tag: "div", elem: "Flex item" })),
 				});
 			});
 		},
@@ -150,7 +137,7 @@ export default [
 
 	{
 		msg: [
-			"Responsive variations also exist for {{justifycontent}} property.",
+			"Responsive variations also exist for {{justifyContent}} property.",
 			new ul({
 				item: ["", "sm-", "md-", "lg-", "xl-", "xxl-"]
 					.map((i) => {
@@ -165,7 +152,7 @@ export default [
 
 	{
 		title: "Align items",
-		msg: "Use {{alignitem}} property on {{display:flex|flex-inline}} containers to change the alignment of flex items on the cross axis (the y-axis to start, x-axis if {{flex:column}}). Choose from {{start}}, {{end}}, {{center}}, {{baseline}}, or {{stretch}} (browser default).",
+		msg: "Use {{alignItem}} property on {{display:flex|flex-inline}} containers to change the alignment of flex items on the cross axis (the y-axis to start, x-axis if {{flex:column}}). Choose from {{start}}, {{end}}, {{center}}, {{baseline}}, or {{stretch}} (browser default).",
 		container: sample.vstackcontainer,
 		viewclass: "cl-highlight-flex",
 		import: ["tag"],
@@ -174,12 +161,9 @@ export default [
 				return new tag({
 					tag: "div",
 					height: "6rem",
-					elem: Array(3).fill(new tag({ tag: "div", elem: "Flex item" })),
-
-					//marker
 					display: "flex",
-					alignitem: i,
-					//-
+					alignItem: i, //marker
+					elem: Array(3).fill(new tag({ tag: "div", elem: "Flex item" })),
 				});
 			});
 		},
@@ -187,7 +171,7 @@ export default [
 
 	{
 		msg: [
-			"Responsive variations also exist for {{alignitem}} property.",
+			"Responsive variations also exist for {{alignItem}} property.",
 			new ul({
 				item: ["", "sm-", "md-", "lg-", "xl-", "xxl-"]
 					.map((i) => {
@@ -202,7 +186,7 @@ export default [
 
 	{
 		title: "Align self",
-		msg: "Use {{alignself}} property on {{display:flex|flex-inline}} containers to change the alignment of flex items on the cross axis (the y-axis to start, x-axis if {{flex:column}}). Choose from {{start}}, {{end}}, {{center}}, {{baseline}}, or {{stretch}} (browser default).",
+		msg: "Use {{alignSelf}} property on {{display:flex|flex-inline}} containers to change the alignment of flex items on the cross axis (the y-axis to start, x-axis if {{flex:column}}). Choose from {{start}}, {{end}}, {{center}}, {{baseline}}, or {{stretch}} (browser default).",
 		container: sample.vstackcontainer,
 		viewclass: "cl-highlight-flex",
 		import: ["tag"],
@@ -210,15 +194,13 @@ export default [
 			return ["start", "end", "center", "baseline", "stretch"].map((i) => {
 				return new tag({
 					tag: "div",
+					display: "flex",
 					height: "6rem",
 					elem: [
 						new tag({ tag: "div", elem: "Flex item" }),
-						new tag({ tag: "div", /*marker*/ alignself: i, elem: "Flex item" }),
+						new tag({ tag: "div", /*marker*/ alignSelf: i, elem: "Flex item" }),
 						new tag({ tag: "div", elem: "Flex item" }),
 					],
-
-					//marker
-					display: "flex",
 				});
 			});
 		},
@@ -226,7 +208,7 @@ export default [
 
 	{
 		msg: [
-			"Responsive variations also exist for {{alignself}} property.",
+			"Responsive variations also exist for {{alignSelf}} property.",
 			new ul({
 				item: ["", "sm-", "md-", "lg-", "xl-", "xxl-"]
 					.map((i) => {
@@ -248,14 +230,12 @@ export default [
 		code: () => {
 			return new tag({
 				tag: "div",
+				display: "flex",
 				elem: [
 					new tag({ tag: "div", /*marker*/ flex: "fill", elem: "Flex item with a lot of content" }),
 					new tag({ tag: "div", /*marker*/ flex: "fill", elem: "Flex item" }),
 					new tag({ tag: "div", /*marker*/ flex: "fill", elem: "Flex item" }),
 				],
-
-				//marker
-				display: "flex",
 			});
 		},
 	},
@@ -282,14 +262,12 @@ export default [
 		code: () => {
 			return new tag({
 				tag: "div",
+				display: "flex",
 				elem: [
-					new tag({ tag: "div", /*marker*/ flex: "glow-1", elem: "Flex item" }),
+					new tag({ tag: "div", /*marker*/ flex: "grow-1", elem: "Flex item" }),
 					new tag({ tag: "div", elem: "Flex item" }),
 					new tag({ tag: "div", elem: "Third flex item" }),
 				],
-
-				//marker
-				display: "flex",
 			});
 		},
 	},
@@ -302,13 +280,11 @@ export default [
 		code: () => {
 			return new tag({
 				tag: "div",
+				display: "flex",
 				elem: [
 					new tag({ tag: "div", width: 100, elem: "Flex item" }),
 					new tag({ tag: "div", /*marker*/ flex: "shrink-1", elem: "Flex item" }),
 				],
-
-				//marker
-				display: "flex",
 			});
 		},
 	},
@@ -330,7 +306,7 @@ export default [
 
 	{
 		title: "Auto margins",
-		msg: "Flexbox can do some pretty awesome things when you mix flex alignments with auto margins. Shown below are three examples of controlling flex items via auto margins: default (no auto margin), pushing two items to the right ({{marginend:auto}}), and pushing two items to the left ({{marginstart:auto}}).",
+		msg: "Flexbox can do some pretty awesome things when you mix flex alignments with auto margins. Shown below are three examples of controlling flex items via auto margins: default (no auto margin), pushing two items to the right ({{marginEnd:auto}}), and pushing two items to the left ({{marginStart:auto}}).",
 		container: sample.vstackcontainer,
 		viewclass: "cl-highlight-flex",
 		import: ["tag"],
@@ -338,40 +314,34 @@ export default [
 			return [
 				new tag({
 					tag: "div",
+					display: "flex",
 					elem: Array(3).fill(new tag({ tag: "div", elem: "Flex item" })),
-
-					//marker
-					display: "flex",
 				}),
 				new tag({
 					tag: "div",
+					display: "flex",
 					elem: [
-						new tag({ tag: "div", /*marker*/ marginend: "auto", elem: "Flex item" }),
+						new tag({ tag: "div", /*marker*/ marginEnd: "auto", elem: "Flex item" }),
 						new tag({ tag: "div", elem: "Flex item" }),
 						new tag({ tag: "div", elem: "Flex item" }),
 					],
-
-					//marker
-					display: "flex",
 				}),
 				new tag({
 					tag: "div",
+					display: "flex",
 					elem: [
 						new tag({ tag: "div", elem: "Flex item" }),
 						new tag({ tag: "div", elem: "Flex item" }),
-						new tag({ tag: "div", /*marker*/ marginstart: "auto", elem: "Flex item" }),
+						new tag({ tag: "div", /*marker*/ marginStart: "auto", elem: "Flex item" }),
 					],
-
-					//marker
-					display: "flex",
 				}),
 			];
 		},
 	},
 
 	{
-		title: "With alignitem property",
-		msg: "Vertically move one flex item to the top or bottom of a container by mixing {{alignitem}}, {{flex:column}}, and {{margintop:auto}} or {{marginbottom:auto}}.",
+		title: "With alignItem property",
+		msg: "Vertically move one flex item to the top or bottom of a container by mixing {{alignItem}}, {{flex:column}}, and {{marginTop:auto}} or {{marginBottom:auto}}.",
 		container: sample.vstackcontainer,
 		viewclass: "cl-highlight-flex",
 		import: ["tag"],
@@ -379,34 +349,26 @@ export default [
 			return [
 				new tag({
 					tag: "div",
-					height: "12rem" ,
-
-					//marker
+					height: "12rem",
 					display: "flex",
-					alignitem: "start",
-					flex: "column",
-					//-
-
+					alignItem: "start", //marker
+					flex: "column", //marker
 					elem: [
-						new tag({ tag: "div", /*marker*/ marginbottom: "auto", elem: "Flex item" }),
+						new tag({ tag: "div", /*marker*/ marginBottom: "auto", elem: "Flex item" }),
 						new tag({ tag: "div", elem: "Flex item" }),
 						new tag({ tag: "div", elem: "Flex item" }),
 					],
 				}),
 				new tag({
 					tag: "div",
-					height: "12rem" ,
-
-					//marker
+					height: "12rem",
 					display: "flex",
-					alignitem: "end",
-					flex: "column",
-					//-
-
+					alignItem: "end", //marker
+					flex: "column", //marker
 					elem: [
 						new tag({ tag: "div", elem: "Flex item" }),
 						new tag({ tag: "div", elem: "Flex item" }),
-						new tag({ tag: "div", /*marker*/ margintop: "auto", elem: "Flex item" }),
+						new tag({ tag: "div", /*marker*/ marginTop: "auto", elem: "Flex item" }),
 					],
 				}),
 			];
@@ -423,10 +385,8 @@ export default [
 			return new tag({
 				tag: "div",
 				display: "flex",
-				elem: Array(6).fill(new tag({ tag: "div", elem: "Flex item" })),
-
-				//marker
 				flex: "nowrap",
+				elem: Array(6).fill(new tag({ tag: "div", elem: "Flex item" })),
 			});
 		},
 	},
@@ -438,29 +398,9 @@ export default [
 		code: () => {
 			return new tag({
 				tag: "div",
-				elem: Array(15).fill(new tag({ tag: "div", elem: "Flex item" })),
-
-				//marker
-				flex: "wrap",
-				flex: "wrap-reverse",
-				//-
-			});
-		},
-	},
-
-	{
-		container: sample.vstackcontainer,
-		viewclass: "cl-highlight-flex",
-		import: ["tag"],
-		code: () => {
-			return new tag({
-				tag: "div",
-				elem: Array(15).fill(new tag({ tag: "div", elem: "Flex item" })),
-
-				//marker
 				display: "flex",
 				flex: "wrap-reverse",
-				//-
+				elem: Array(15).fill(new tag({ tag: "div", elem: "Flex item" })),
 			});
 		},
 	},
@@ -489,16 +429,13 @@ export default [
 		code: () => {
 			return new tag({
 				tag: "div",
+				display: "flex",
+				flex: "nowrap",
 				elem: [
 					new tag({ tag: "div", /*marker*/ order: 3, elem: "First flex item" }),
 					new tag({ tag: "div", /*marker*/ order: 2, elem: "Second flex item" }),
 					new tag({ tag: "div", /*marker*/ order: 1, elem: "Third flex item" }),
 				],
-
-				//marker
-				display: "flex",
-				flex: "nowrap",
-				//-
 			});
 		},
 	},
@@ -536,7 +473,7 @@ export default [
 	{
 		title: "Align content",
 		msg: [
-			"Use {{aligncontent}} property on {{display:flex}} containers to align flex items together on the cross axis. Choose from {{start}} (browser default), {{end}}, {{center}}, {{between}}, {{around}}, or {{stretch}}. To demonstrate these utilities, we’ve enforced {{flex:wrap}} and increased the number of flex items.",
+			"Use {{alignContent}} property on {{display:flex}} containers to align flex items together on the cross axis. Choose from {{start}} (browser default), {{end}}, {{center}}, {{between}}, {{around}}, or {{stretch}}. To demonstrate these utilities, we’ve enforced {{flex:wrap}} and increased the number of flex items.",
 			"<b>Heads up!</b> This property has no effect on single rows of flex items.",
 		],
 		container: sample.vstackcontainer,
@@ -546,14 +483,11 @@ export default [
 			return ["start", "end", "center", "between", "around", "stretch"].map((i) => {
 				return new tag({
 					tag: "div",
-					height: "12rem" ,
-					elem: Array(15).fill(new tag({ tag: "div", elem: "Flex item" })),
-
-					//marker
 					display: "flex",
 					flex: "wrap",
-					aligncontent: i,
-					//-
+					alignContent: i, //marker
+					height: "12rem",
+					elem: Array(15).fill(new tag({ tag: "div", elem: "Flex item" })),
 				});
 			});
 		},
@@ -561,7 +495,7 @@ export default [
 
 	{
 		msg: [
-			"Additionally there are also responsive {{aligncontent}} property.",
+			"Additionally there are also responsive {{alignContent}} property.",
 			new ul({
 				item: ["", "sm-", "md-", "lg-", "xl-", "xxl-"]
 					.map((i) => {
@@ -581,30 +515,25 @@ export default [
 		code: () => {
 			return new tag({
 				tag: "div",
+				display: "flex",
 				elem: [
 					new tag({
 						tag: "div",
+						flex: "shrink-1", //marker
 						elem: new tag({
 							tag: "img",
-							attr: { alt: "Image", src: sample.img(84, 80) },
-							height: "5rem" ,
+							alt: "Image",
+							src: sample.img(84, 80),
+							height: "5rem",
 						}),
-
-						//marker
-						flex: "shrink-0",
 					}),
 					new tag({
 						tag: "div",
-						marginstart: 3,
+						marginStart: 3,
+						flex: "grow-1", //marker
 						elem: "This is some content from a media component. You can replace this with any content and adjust it as needed.",
-
-						//marker
-						flex: "grow-1",
 					}),
 				],
-
-				//marker
-				display: "flex",
 			});
 		},
 	},
@@ -615,32 +544,26 @@ export default [
 		code: () => {
 			return new tag({
 				tag: "div",
+				display: "flex",
+				alignItem: "center",
 				elem: [
 					new tag({
 						tag: "div",
+						flex: "shirnk-1", //marker
 						elem: new tag({
 							tag: "img",
-							attr: { alt: "Image", src: sample.img(84, 80) },
-							height: "5rem" ,
+							alt: "Image",
+							src: sample.img(84, 80),
+							height: "5rem",
 						}),
-
-						//marker
-						flex: "shrink-0",
 					}),
 					new tag({
 						tag: "div",
-						marginstart: 3,
+						marginStart: 3,
+						flex: "grow-1", //marker
 						elem: "This is some content from a media component. You can replace this with any content and adjust it as needed.",
-
-						//marker
-						flex: "grow-1",
 					}),
 				],
-
-				//marker
-				display: "flex",
-				alignitem: "center",
-				//-
 			});
 		},
 	},

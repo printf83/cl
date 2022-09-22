@@ -57,24 +57,22 @@ export default class example extends div {
 						: opt.anchor
 						? "h2"
 						: "h1",
-				class: !opt.anchor ? "fs-1" : null,
-				paddingtop: 3,
+				fontSize: !opt.anchor ? 1 : null,
+				paddingTop: 3,
 				id: opt.id,
 				elem: [
 					new label({ label: opt.title.replace(/\{\{/g, "<code>").replace(/\}\}/g, "</code>") }),
 					opt.anchor
 						? new a({
 								class: ["anchorjs-link", opt.debug ? "anchorjs-link-debug" : null],
-								paddingstart: 2,
-								attr: {
-									"aria-label": "Anchor",
-									"data-anchorjs-icon": "#",
-									onclick: opt.debug
-										? null
-										: (event) => {
-												core.focusElement(event.currentTarget.parentNode);
-										  },
-								},
+								paddingStart: 2,
+								ariaLabel: "Anchor",
+								dataAnchorjsIcon: "#",
+								click: opt.debug
+									? null
+									: (event) => {
+											core.focusElement(event.currentTarget.parentNode);
+									  },
 						  })
 						: null,
 				],
@@ -105,7 +103,7 @@ export default class example extends div {
 			item.push({
 				label: "Generated HTML",
 				icon: "code",
-				onshow: (event) => {
+				show: (event) => {
 					let sender = event.currentTarget;
 
 					if (!sender.getAttribute("data-loaded")) {
@@ -127,7 +125,7 @@ export default class example extends div {
 				item.push({
 					label: sampleKey,
 					icon: "link",
-					onshow: (event) => {
+					show: (event) => {
 						let sender = event.currentTarget;
 
 						if (!sender.getAttribute("data-loaded")) {
@@ -156,7 +154,7 @@ export default class example extends div {
 					icon: "square-js",
 				},
 				active: !opt.codecollapse,
-				onshow: (event) => {
+				show: (event) => {
 					let sender = event.currentTarget;
 
 					if (!sender.getAttribute("data-loaded")) {
@@ -173,14 +171,14 @@ export default class example extends div {
 		}
 
 		super.data = {
-			marginbottom: 5,
+			marginBottom: 5,
 			elem: [
 				ctltitle,
 				ctlmsg ? new div({ elem: ctlmsg }) : null,
 				opt.code && opt.view
 					? new card.container({
-							marginbottom: 3,
-							color: opt.dark ? "dark" : null,
+							marginBottom: 3,
+							bgColor: opt.dark ? "dark" : null,
 							class: opt.viewclass,
 							elem: new card.body({ elem: opt.container(opt.code()) }),
 					  })

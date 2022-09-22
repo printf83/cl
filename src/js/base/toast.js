@@ -26,7 +26,7 @@ const defaultOption = {
 };
 /**g
  * icon,msg
- * opt : {attr,id,class,animate,title,icon,elem,close,autohide,delay,color,textcolor,bordercolor,border,date,timer,position,debug}
+ * opt : {attr,id,class,animate,title,icon,elem,close,autohide,delay,color,textColor,borderColor,border,date,timer,position,debug}
  */
 
 export default class toast extends div {
@@ -107,7 +107,7 @@ export default class toast extends div {
 					},
 				},
 				{
-					rule: ["object"],
+					rule: ["object|debug"],
 					fn: () => {
 						return opt[0];
 					},
@@ -161,16 +161,13 @@ export default class toast extends div {
 									? new small({
 											id: `${opt.id}-timer`,
 											class: ["text-muted", "timer"],
-											attr: {
-												"data-cl-time": opt.date,
-											},
+											"data-cl-time": opt.date,
 											elem: tc ? tc.msg : "Just now", //need to add timer here
 									  })
 									: null,
 								opt.close
 									? new btnclose({
 											dismiss: "toast",
-											// dark: true,
 									  })
 									: null,
 							],
@@ -182,21 +179,20 @@ export default class toast extends div {
 				class: "toast-body",
 				elem: new div({
 					display: "flex",
-					alignitem: "stretch",
+					alignItem: "stretch",
 					elem: [
 						new div({
-							marginend: "auto",
+							marginEnd: "auto",
 							display: "flex",
-							alignitem: "center",
+							alignItem: "center",
 							elem: opt.elem,
 						}),
 						!(opt.icon || opt.title) && opt.close
 							? new div({
-									marginstart: 2,
+									marginStart: 2,
 									elem: new btnclose({
 										dismiss: "toast",
-										// dark: opt.color ? opt.color : "body-bg",
-										marginy: 1,
+										marginY: 1,
 									}),
 							  })
 							: null,
@@ -204,15 +200,17 @@ export default class toast extends div {
 				}),
 			});
 
-			opt.class = core.merge.class(opt.class, ["toast", opt.debug ? "show" : null]);
-			opt.attr = core.merge.attr(opt.attr, {
+			opt = core.merge(opt, {
+				class: ["toast", opt.debug ? "show" : null],
 				tabindex: -1,
+				bgColor: opt.color,
+				textBgColor: opt.color,
 				"data-bs-animation": opt.animate ? "true" : null,
 				"data-bs-autohide": opt.autohide ? "true" : "false",
 				"data-bs-delay": opt.delay,
 				"data-cl-position": opt.position,
+				elem: [ctlHeader, ctlBody],
 			});
-			opt.elem = [ctlHeader, ctlBody];
 
 			delete opt.animate;
 			delete opt.title;
@@ -246,7 +244,7 @@ export default class toast extends div {
 
 	show = () => {
 		//generate container
-		let position = this.data.attr["data-cl-position"];
+		let position = this.data["data-cl-position"];
 		let containerQuery = core.combineArray(["toast-container", position], " ");
 		let container = document.body.getElementsByClassName(containerQuery)[0];
 		if (!container || container.length === 0) {
@@ -255,11 +253,9 @@ export default class toast extends div {
 				document.body,
 				new div({
 					position: "absolute",
-					attr: {
-						"aria-live": "polite",
-						"aria-atomic": "true",
-					},
-					zindex: 3,
+					"aria-live": "polite",
+					"aria-atomic": "true",
+					zIndex: 3,
 					elem: new div({ class: ["toast-container", position], position: "fixed", padding: 3 }),
 				})
 			);

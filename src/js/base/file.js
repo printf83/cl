@@ -78,17 +78,15 @@ const fn = {
 										size: "md",
 										bodyclass: "p-1",
 										elem: new img({
-											fluid: true,
+											container: "fluid",
 											width: 100,
-											marginx: "auto",
+											marginX: "auto",
 											display: "block",
 											rounded: true,
 											padding: 0,
-											attr: {
-												"data-cl-file": data[0].id,
-											},
+											"data-cl-file": data[0].id,
 											src: db.file.url(data[0].id),
-											onclick: (event) => {
+											click: (event) => {
 												let sender = event.currentTarget;
 												let fileid = sender.getAttribute("data-cl-file");
 
@@ -156,11 +154,11 @@ const fn = {
 												col: thumbnailsize,
 												padding: 0,
 												elem: new div({
-													class: "btn border p-1",
-													attr: {
-														"data-cl-file": i.id,
-													},
-													onclick: (event) => {
+													class: "btn",
+													padding: 1,
+													border: true,
+													"data-cl-file": i.id,
+													click: (event) => {
 														let sender = event.currentTarget;
 														let fileid = sender.getAttribute("data-cl-file");
 
@@ -175,8 +173,8 @@ const fn = {
 														}
 													},
 													elem: new img({
-														fluid: true,
-														marginx: "auto",
+														container: "fluid",
+														marginX: "auto",
 														display: "block",
 														rounded: true,
 														src: db.file.url(i.id),
@@ -190,20 +188,18 @@ const fn = {
 										list.push(
 											new div({
 												display: "flex",
-												alignitem: "stretch",
+												alignItem: "stretch",
 												col: thumbnailsize,
 												padding: 0,
 												elem: new div({
 													border: true,
 													padding: 5,
 													display: "flex",
-													justifycontent: "center",
+													justifyContent: "center",
 													class: "btn",
 													width: 100,
-													attr: {
-														"data-cl-file": i.id,
-													},
-													onclick: (event) => {
+													"data-cl-file": i.id,
+													click: (event) => {
 														let sender = event.currentTarget;
 														let fileid = sender.getAttribute("data-cl-file");
 
@@ -218,7 +214,7 @@ const fn = {
 														}
 													},
 													elem: new span({
-														alignself: "center",
+														alignSelf: "center",
 														elem:
 															typeof opt.downloadicon === "object"
 																? new icon(opt.downloadicon)
@@ -243,11 +239,11 @@ const fn = {
 								static: false,
 								size: "lg",
 								elem: new div({
-									class: "container",
+									container: true,
 									padding: 0,
 									elem: new div({
 										display: "flex",
-										justifycontent: "center",
+										justifyContent: "center",
 										row: true,
 										gap: 3,
 										elem: list,
@@ -283,7 +279,7 @@ const fn = {
 					icon: opt.viewicon,
 					color: opt.viewcolor,
 					width: 100,
-					onclick: fn.onview,
+					click: fn.onview,
 				})
 			);
 
@@ -295,9 +291,9 @@ const fn = {
 					label: opt.deletelabel,
 					icon: opt.deleteicon,
 					color: opt.deletecolor,
-					class: "w-0",
+					width: 0,
 					disabled: opt.disabled ? true : opt.readonly ? true : false,
-					onclick: fn.ondelete,
+					click: fn.ondelete,
 				})
 			);
 		} else {
@@ -317,7 +313,7 @@ const fn = {
 					color: opt.uploadcolor,
 					width: 100,
 					disabled: opt.disabled ? true : opt.readonly ? true : false,
-					onclick: fn.onupload,
+					click: fn.onupload,
 				})
 			);
 		}
@@ -348,11 +344,9 @@ const fn = {
 			new input({
 				type: "file",
 				id: fu,
-				attr: {
-					multiple: opt.multiple,
-					accept: opt.accept ? opt.accept : null,
-				},
-				style: { display: "none" },
+				multiple: opt.multiple,
+				accept: opt.accept ? opt.accept : null,
+				disply: "none",
 				onchange: (event) => {
 					let sender = event.currentTarget;
 					let id = sender.getAttribute("id");
@@ -460,7 +454,11 @@ export default class file extends div {
 					for: id,
 					label: opt.label,
 					class: opt.labelsize
-						? ["col-form-label"].concat(core.multiClass(opt.labelsize, "col-$1", null, "col"))
+						? core.multiClass(opt.labelsize, {
+								format: "col-$1",
+								formatTrue: "col",
+								formatValue: "col-form-label",
+						  })
 						: "form-label",
 				})
 			);
@@ -483,7 +481,7 @@ export default class file extends div {
 		ctl.push(
 			new div({
 				row: true,
-				attr: { "data-cl-container": id },
+				"data-cl-container": id,
 				elem: new btngroup({
 					weight: opt.weight,
 					elem: opt.value
@@ -494,7 +492,7 @@ export default class file extends div {
 									icon: opt.viewicon,
 									color: opt.viewcolor,
 									width: 100,
-									onclick: fn.onview,
+									click: fn.onview,
 								}),
 								new button({
 									id: `${id}_delete`,
@@ -503,7 +501,7 @@ export default class file extends div {
 									color: opt.deletecolor,
 									width: "auto",
 									disabled: opt.disabled ? true : opt.readonly ? true : false,
-									onclick: fn.ondelete,
+									click: fn.ondelete,
 								}),
 						  ]
 						: [
@@ -514,7 +512,7 @@ export default class file extends div {
 									color: opt.uploadcolor,
 									width: 100,
 									disabled: opt.disabled ? true : opt.readonly ? true : false,
-									onclick: fn.onupload,
+									click: fn.onupload,
 								}),
 						  ],
 				}),

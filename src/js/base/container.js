@@ -4,18 +4,18 @@ import cl_form from "./form.js";
 
 /**
  * icon, msg, callback
- * icon, msg, button : {label,color,onclick}
+ * icon, msg, button : {label,color,click}
  * msg, callback
- * msg, button : {label,color,onclick}
+ * msg, button : {label,color,click}
  * opt : {modal option}
  */
 export class form extends cl_form {
-	constructor(elem, gap = 3, col = 1) {
+	constructor(elem, gutter = 2, col = 1) {
 		super({
 			padding: 0,
-			gap: gap,
+			gutter: gutter,
 			row: true,
-			rowcol: col,
+			rowCol: col,
 			elem: Array.isArray(elem)
 				? elem.map((i) => {
 						return new div({ col: true, elem: i });
@@ -26,10 +26,10 @@ export class form extends cl_form {
 }
 
 export class stackform extends cl_form {
-	constructor(elem, gap = 2, col = "auto") {
+	constructor(elem, gutter = 2, col = "auto") {
 		super({
 			padding: 0,
-			gap: gap,
+			gutter: gutter,
 			row: true,
 			elem: Array.isArray(elem)
 				? elem.map((i) => {
@@ -41,11 +41,11 @@ export class stackform extends cl_form {
 }
 
 export class vstack extends div {
-	constructor(elem, gap = 3, col = 1) {
+	constructor(elem, gutter = 2, col = 1) {
 		super({
-			gap: gap,
+			gutter: gutter,
 			row: true,
-			rowcol: col,
+			rowCol: col,
 			elem: Array.isArray(elem)
 				? elem.map((i) => {
 						return new div({ col: true, elem: i });
@@ -56,10 +56,10 @@ export class vstack extends div {
 }
 
 export class stack extends div {
-	constructor(elem, gap = 2, col = "auto") {
+	constructor(elem, gutter = 2, col = "auto") {
 		super({
 			row: true,
-			gap: gap,
+			gutter: gutter,
 			elem: Array.isArray(elem)
 				? elem.map((i) => {
 						return new div({ col: col, elem: i });
@@ -70,7 +70,7 @@ export class stack extends div {
 }
 
 export class grid extends div {
-	constructor(elem, gap = 2, col = null) {
+	constructor(elem, gap = 2, col = true) {
 		super({
 			padding: 0,
 			display: "grid",

@@ -50,20 +50,21 @@ function beautifycss(str) {
 	return beautifyhtml(str);
 }
 
-function codecontainer(type, strcode, maxheight, linenums) {
+function codecontainer(type, strcode, maxHeight, linenums) {
 	return [
 		new div({
 			position: "relative",
-			float: "right",
+			float: "end",
 			class: "cl-codepreview-copy",
 			elem: new button({
 				icon: { type: "far", icon: "clipboard" },
 				label: "Copy",
 				hidelabel: true,
-				textcolor: "primary",
+				textColor: "primary",
 				align: "end",
-				class: "position-absolute end-0",
-				onclick: (event) => {
+				position: "absolute",
+				end: 0,
+				click: (event) => {
 					let str = event.currentTarget.parentElement.nextSibling.firstChild.innerText;
 
 					try {
@@ -78,7 +79,7 @@ function codecontainer(type, strcode, maxheight, linenums) {
 		new code({
 			overflow: "auto",
 			display: "block",
-			maxheight: maxheight,
+			maxHeight: maxHeight,
 			elem: new pre({
 				class: [
 					"prettyprint",
@@ -86,7 +87,7 @@ function codecontainer(type, strcode, maxheight, linenums) {
 					linenums ? `${"linenums:" + (linenums === true ? 1 : linenums)}` : null,
 				],
 				margin: 0,
-				attr: { lang: type },
+				lang: type,
 				elem:
 					type === "js"
 						? beautifyjs(strcode)
@@ -106,8 +107,8 @@ const defaultOption = {
 	linenums: null,
 	container: "div",
 	title: null,
-	maxheight: null,
-	marginy: 3,
+	maxHeight: null,
+	marginY: 3,
 };
 /**
  * opt : {tagoption,icon,label}
@@ -131,8 +132,8 @@ export default class codepreview extends tag {
 			super.data = {
 				elem: [
 					new div({
-						marginy: opt.marginy,
-						elem: new card.body({ elem: codecontainer(opt.type, opt.code, opt.maxheight, opt.linenums) }),
+						marginY: opt.marginY,
+						elem: new card.body({ elem: codecontainer(opt.type, opt.code, opt.maxHeight, opt.linenums) }),
 					}),
 				],
 			};
@@ -140,17 +141,17 @@ export default class codepreview extends tag {
 			super.data = {
 				elem: [
 					new card.container({
-						marginy: opt.marginy,
+						marginY: opt.marginY,
 						elem: [
 							opt.title ? new card.header(new small(new b(opt.title))) : null,
-							new card.body({ elem: codecontainer(opt.type, opt.code, opt.maxheight, opt.linenums) }),
+							new card.body({ elem: codecontainer(opt.type, opt.code, opt.maxHeight, opt.linenums) }),
 						].filter(Boolean),
 					}),
 				],
 			};
 		} else {
 			super.data = {
-				elem: codecontainer(opt.type, opt.code, opt.maxheight, opt.linenums),
+				elem: codecontainer(opt.type, opt.code, opt.maxHeight, opt.linenums),
 			};
 		}
 	}

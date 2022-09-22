@@ -17,24 +17,18 @@ export default [
 			return [
 				new tag({
 					tag: "p",
+					userSelect: "all", //marker
 					elem: `This paragraph will be entirely selected when clicked by the user.`,
-
-					//marker
-					userselect: "all",
 				}),
 				new tag({
 					tag: "p",
+					userSelect: "auto", //marker
 					elem: `This paragraph has default select behavior. Default is none`,
-
-					//marker
-					userselect: "auto",
 				}),
 				new tag({
 					tag: "p",
+					userSelect: "none", //marker
 					elem: `This paragraph will not be selectable when clicked by the user.`,
-
-					//marker
-					userselect: "none",
 				}),
 			];
 		},
@@ -43,7 +37,7 @@ export default [
 	{
 		title: "Pointer events",
 		msg: [
-			"Bootstrap provides {{pointerevent:none}} and {{pointerevent:auto}} property to prevent or add element interactions.",
+			"Bootstrap provides {{pointerEvent:none}} and {{pointerEvent:auto}} property to prevent or add element interactions.",
 		],
 		import: ["tag"],
 		code: () => {
@@ -55,11 +49,9 @@ export default [
 							tag: "a",
 							href: "#",
 							tabindex: -1,
-							attr: { "aria-disabled": "true" },
+							"aria-disabled": "true",
+							pointerEvent: "none", //marker
 							elem: "This link",
-
-							//marker
-							pointerevent: "none",
 						}),
 
 						" can not be clicked.",
@@ -78,29 +70,25 @@ export default [
 				}),
 				new tag({
 					tag: "p",
-					pointerevent: "none",
+					pointerEvent: "none",
 					elem: [
 						new tag({
 							tag: "a",
 							href: "#",
 							tabindex: -1,
-							attr: { "aria-disabled": "true" },
+							"aria-disabled": "true",
+							pointerEvent: "none", //marker
 							elem: "This link",
-
-							//marker
-							pointerevent: "none",
 						}),
-						" can not be clicked because the <code>pointerevent</code> property is inherited from its parent. However, ",
+						" can not be clicked because the <code>pointerEvent</code> property is inherited from its parent. However, ",
 						new tag({
 							tag: "a",
 							href: "#",
+							pointerEvent: "auto", //marker
 							elem: "this link",
-
-							//marker
-							pointerevent: "auto",
 						}),
 						,
-						" has a <code>pointerevent:auto</code> property and can be clicked.",
+						" has a <code>pointerEvent:auto</code> property and can be clicked.",
 					],
 				}),
 			];
@@ -110,7 +98,7 @@ export default [
 	{
 		msg: new alert.container({
 			color: "warning",
-			elem: "The <code>pointerevent:none</code> property (and the pointer-events CSS property it sets) only prevents interactions with a pointer (mouse, stylus, touch). Links and controls with <code>pointerevent:none</code> are, by default, still focusable and actionable for keyboard users. To ensure that they are completely neutralized even for keyboard users, you may need to add further attributes such as <code>tabindex:-1</code> (to prevent them from receiving keyboard focus) and <code>aria-disabled:true</code> (to convey the fact they are effectively disabled to assistive technologies), and possibly use JavaScript to completely prevent them from being actionable. For form controls, consider using the <code>disabled</code> HTML attribute instead.",
+			elem: "The <code>pointerEvent:none</code> property (and the pointer-events CSS property it sets) only prevents interactions with a pointer (mouse, stylus, touch). Links and controls with <code>pointerEvent:none</code> are, by default, still focusable and actionable for keyboard users. To ensure that they are completely neutralized even for keyboard users, you may need to add further attributes such as <code>tabindex:-1</code> (to prevent them from receiving keyboard focus) and <code>aria-disabled:true</code> (to convey the fact they are effectively disabled to assistive technologies), and possibly use JavaScript to completely prevent them from being actionable. For form controls, consider using the <code>disabled</code> HTML attribute instead.",
 		}),
 	},
 ];

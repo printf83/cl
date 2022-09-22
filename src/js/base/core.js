@@ -143,13 +143,13 @@ export const isdarkcolor = (color) => {
 
 		// from : https://stackoverflow.com/questions/12043187/how-to-check-if-hex-color-is-too-black
 		var luma = 0.2126 * r + 0.7152 * g + 0.0722 * b;
-		if (setting.DEBUG) console.log(`Color ${scolor} luma is ${luma}`);
+		if (setting.DEBUG > 2) console.log(`Color ${scolor} luma is ${luma}`);
 
 		if (luma < 48) {
-			if (setting.DEBUG) console.log(`Color ${scolor} is dark`);
+			if (setting.DEBUG > 2) console.log(`Color ${scolor} is dark`);
 			return true;
 		} else {
-			if (setting.DEBUG) console.log(`Color ${scolor} is light`);
+			if (setting.DEBUG > 2) console.log(`Color ${scolor} is light`);
 			return false;
 		}
 	} else {
@@ -191,6 +191,7 @@ export const loadcss = (url, callback) => {
 	link.onload = () => {
 		let elem = document.getElementById(id);
 		if (elem) {
+			//TODO:setupeventlistenerremover
 			detachEventListener(elem);
 			elem.remove();
 		}
@@ -211,7 +212,7 @@ const _setting = {
 	term: null,
 	banner: null,
 	themechange: null,
-	debug: false,
+	debug: 0,
 };
 
 export const setting = {
@@ -493,294 +494,11 @@ export function extend(out) {
 	return out;
 }
 
-const fnA = {
-	defaultRule: {
-		rule: null,
-		fn: null,
-	},
-	compareRulesAndArg: (a, b) => {
-		if (b === null) {
-			if (a === null) {
-				return true;
-			}
-		} else {
-			if (a) {
-				if (a.length === b.length) {
-					for (let i = 0; i < a.length; i++) {
-						if (typeof a[i] === "function") {
-							if (a[i](b[i]) === true) {
-								return true;
-							}
-						} else {
-							if (a[i].indexOf("|") >= 0) {
-								//multiple
-								let c = a[i].split("|");
+export const args = base.multipleConstructorClass;
 
-								for (let j = 0; j < c.length; j++) {
-									if (c[j] === b[i] || c[j] === "any") {
-										return true;
-										break;
-									}
-								}
-							} else {
-								//single
-								if (a[i] === b[i] || a[i] === "any") {
-									return true;
-									break;
-								}
-							}
-						}
-					}
-				}
-			} else {
-				console.warn("a is null");
-			}
-		}
-
-		return false;
-	},
-	getFunction: (ruleSetting, argType) => {
-		if (ruleSetting && ruleSetting.length > 0) {
-			for (var i = 0; i < ruleSetting.length; i++) {
-				if (fnA.compareRulesAndArg(ruleSetting[i].rule, argType)) {
-					return ruleSetting[i].fn;
-					break;
-				}
-			}
-		}
-
-		return null;
-	},
-	checkArgType: (obj) => {
-		if (obj === undefined) {
-			return "undefined";
-		}
-
-		if (obj === null) {
-			return "null";
-		}
-
-		if (Array.isArray(obj)) {
-			if (obj.length > 0) {
-				return `${fnA.checkArgType(obj[0])}[]`;
-			} else {
-				return "any[]";
-			}
-		} else {
-			let t = typeof obj;
-			if (t === "object") {
-				if (obj.hasOwnProperty("cl") && obj.cl === 1) {
-					return "cl";
-				} else if (obj === { debug: true }) {
-					return "debug";
-				} else {
-					return t;
-				}
-			} else {
-				return t;
-			}
-		}
-	},
-	getArgType: (obj) => {
-		if (obj && obj.length > 0) {
-			let result = [];
-			obj.forEach((i) => {
-				result.push(fnA.checkArgType(i));
-			});
-			return result;
-		} else {
-			return null;
-		}
-	},
-	main: (rules, caller, ...obj) => {
-		let a = fnA.getArgType(...obj);
-		let f = fnA.getFunction(rules, a);
-		if (f) {
-			return f(...obj);
-		} else {
-			const bold = "font-weight: bold;";
-			console.error(`${caller} argument ${a.join(", ")} not supported by any rules`, {
-				obj: a,
-				rule: rules
-					? rules.map((i) => {
-							return i?.rule?.join(", ");
-					  })
-					: null,
-			});
-			return null;
-		}
-	},
-};
-
-export const args = fnA.main;
-
-export const merge = {
-	class: (a, b) => {
-		if (a && b && a !== undefined && b !== undefined) {
-			let aT = typeof a;
-			let bT = typeof b;
-			let aR = Array.isArray(a);
-			let bR = Array.isArray(b);
-
-			if (!aR && !bR && aT === "string" && bT === "string") {
-				return [a, b];
-			} else if (!aR && bR && aT === "string") {
-				b.push(a);
-				return b;
-			} else if (aR && !bR && bT === "string") {
-				a.push(b);
-				return a;
-			} else if (aR && bR) {
-				return [...a, ...b];
-			} else {
-				console.error("Unhandle class rules", [aT, bT, aR, bR]);
-			}
-		} else if (a && !b && a !== undefined) {
-			return a;
-		} else if (!a && b && b !== undefined) {
-			return b;
-		} else {
-			return null;
-		}
-	},
-	style: (a, b) => {
-		if (a !== null && b !== null && a !== undefined && b !== undefined) {
-			let c = {};
-			Object.keys(a).forEach((i) => {
-				if (b.hasOwnProperty(i)) {
-					console.warn(`Same property ${i} provided in 'a' and 'b'. Using style from 'a' insted.`);
-					c[i] = a[i]; //used a insted
-				} else {
-					c[i] = a[i];
-				}
-			});
-
-			Object.keys(b).forEach((i) => {
-				if (!a.hasOwnProperty(i)) {
-					c[i] = b[i];
-				}
-			});
-
-			return c;
-		} else if (a !== null && a !== undefined) {
-			return a;
-		} else if (b !== null && b !== undefined) {
-			return b;
-		} else {
-			return null;
-		}
-	},
-	/**
-	 *
-	 * rules : unsupported property merge process
-	 * example :
-	 * merge({},{},{id:function(a,b){return b}})
-	 */
-	attr: (a, b, rules) => {
-		if ((a || b) && !(a && b)) {
-			return a || b;
-		} else if (a && b) {
-			//manual copy needed
-			let c = {};
-			Object.keys(a).forEach((i) => {
-				if (b.hasOwnProperty(i)) {
-					if ((a[i] || b[i]) && !(a[i] && b[i])) {
-						c[i] = a[i] || b[i];
-					} else if (a[i] && b[i]) {
-						//need to merge a and b into c
-						switch (i) {
-							case "class":
-								c[i] = merge.class(a[i], b[i]);
-								break;
-							case "style":
-								c[i] = merge.style(a[i], b[i]);
-								break;
-							default:
-								if (rules && rules.hasOwnProperty(i)) {
-									c[i] = rules[i](a[i], b[i]);
-								} else {
-									console.error(
-										`Fail to merge attr:${i}. No rules provided for merging this attribute. Using attr from 'a' insted.`,
-										[a[i], b[i]]
-									);
-									c[i] = a[i]; //used a insted
-								}
-						}
-					}
-				} else {
-					c[i] = a[i];
-				}
-			});
-
-			Object.keys(b).forEach((i) => {
-				if (!a.hasOwnProperty(i)) {
-					if (b[i]) {
-						c[i] = b[i];
-					}
-				}
-			});
-
-			return c;
-		} else {
-			return null;
-		}
-	},
-};
-
-function isListed(val, listed) {
-	if (listed) {
-		if (Array.isArray(listed) && listed.includes(val)) {
-			return true;
-		} else {
-			return listed === val;
-		}
-	} else {
-		return true;
-	}
-}
-
-function isSupported(val, supported, unsupported) {
-	if (unsupported && isListed(val, unsupported)) {
-		return false;
-	}
-
-	if (supported && isListed(val, supported)) {
-		return true;
-	}
-
-	return true;
-}
-
-export function multiClass(val, format, supported, unsupported, iftrue, iffalse) {
-	if (val || val === 0) {
-		return val || val === 0
-			? Array.isArray(val)
-				? val
-						.map((i) => {
-							if (i === true) {
-								return iftrue;
-							} else if (i === false || i === null) {
-								return iffalse;
-							} else {
-								return isSupported(i, supported, unsupported) ? format.replace("$1", i) : i;
-							}
-						})
-						.join(" ")
-				: isSupported(val, supported, unsupported)
-				? format.replace("$1", val)
-				: val
-			: null;
-	} else {
-		return val;
-	}
-}
-
-// const welcomeLog = () => {
-// 	console.log(
-// 		`%c${setting.title()}`,
-// 		"font-weight: bold; font-size: 50px;color: white; text-shadow: 3px 3px 0 rgb(217,31,38) , 6px 6px 0 rgb(226,91,14) , 9px 9px 0 rgb(245,221,8) , 12px 12px 0 rgb(5,148,68) , 15px 15px 0 rgb(2,135,206) , 18px 18px 0 rgb(4,77,145) , 21px 21px 0 rgb(42,21,113); margin-bottom: 12px; padding: 5%"
-// 	);
-// };
+export const merge = base.mergeObject;
+export const mergeClass = base.mergeClass;
+export const mergeStyle = base.mergeStyle;
 
 export function documentReady(callback) {
 	elemReady(document, () => {
@@ -1076,6 +794,61 @@ export function validate(container, callback) {
 		}
 	}
 }
+
+//multiclass support
+// function isListed(val, listed) {
+// 	if (listed) {
+// 		if (Array.isArray(listed) && listed.includes(val)) {
+// 			return true;
+// 		} else {
+// 			return listed === val;
+// 		}
+// 	} else {
+// 		return true;
+// 	}
+// }
+
+// function isSupported(val, supported, unsupported) {
+// 	if (unsupported && isListed(val, unsupported)) {
+// 		return false;
+// 	}
+
+// 	if (supported && isListed(val, supported)) {
+// 		return true;
+// 	}
+
+// 	return true;
+// }
+
+// export function multiClass(val, format, supported, unsupported, iftrue, iffalse) {
+// 	if (val || val === 0) {
+// 		return val || val === 0
+// 			? Array.isArray(val)
+// 				? val
+// 						.map((i) => {
+// 							if (i === true) {
+// 								return iftrue;
+// 							} else if (i === false || i === null) {
+// 								return iffalse;
+// 							} else {
+// 								return isSupported(i, supported, unsupported) ? format.replace("$1", i) : i;
+// 							}
+// 						})
+// 						.join(" ")
+// 				: isSupported(val, supported, unsupported)
+// 				? format.replace("$1", val)
+// 				: val
+// 			: null;
+// 	} else {
+// 		return val;
+// 	}
+// }
+
+export function multiClass(value, rules) {
+	return base.multiClass(value, rules);
+}
+
+//multiclass support - end
 
 // BASE
 export function combineArray(arr, delimeter) {

@@ -16,7 +16,7 @@ import * as option from "./option.js";
 
 const defaultContainerOption = {
 	body: {
-		fluid: true,
+		container: "fluid",
 	},
 
 	expand: null, //sm|md|lg|xl|xxl|null|''
@@ -38,39 +38,31 @@ export class container extends nav {
 		if (opt) {
 			opt = core.extend({}, defaultContainerOption, opt);
 
-			opt.class = core.merge.class(opt.class, [
-				"navbar",
-				opt.expand || opt.expand === ""
-					? opt.expand === ""
-						? "navbar-expand"
-						: `navbar-expand-${opt.expand}`
-					: null,
-				opt.dark ? `navbar-${opt.dark ? "dark" : "light"}` : null,
-				opt.position ? opt.position : null,
-			]);
+			opt = core.merge(opt, {
+				class: [
+					"navbar",
+					opt.expand || opt.expand === ""
+						? opt.expand === ""
+							? "navbar-expand"
+							: `navbar-expand-${opt.expand}`
+						: null,
+					opt.dark ? `navbar-${opt.dark ? "dark" : "light"}` : null,
+					opt.position ? opt.position : null,
+				],
+				bgColor: opt.color,
+				textBgColor: opt.color,
+			});
 
-			opt.body = core.extend(
-				{},
-				{
-					fluid: true,
-				},
-				opt.body
-			);
-
-			opt.body.class = core.merge.attr(opt.body.class, [
-				opt.body.fluid === true
-					? "container-fluid"
-					: opt.body.fluid === false
-					? "container"
-					: core.multiClass(opt.body.fluid, "container-$1"),
-			]);
-
-			opt.body.elem = opt.body.elem || opt.elem;
+			opt.body = core.merge(opt.body, {
+				elem: opt.body.elem || opt.elem,
+				container: opt.expand,
+			});
 
 			delete opt.body.fluid;
 
 			opt.elem = new div(opt.body);
 
+			delete opt.color;
 			delete opt.body;
 			delete opt.expand;
 			delete opt.dark;
@@ -82,13 +74,8 @@ export class container extends nav {
 }
 
 const defaultBrandOption = {
-	id: null,
-	attr: null,
-	class: null,
-	style: null,
-
 	href: null,
-	onclick: null,
+	click: null,
 	label: null,
 	icon: null,
 
@@ -111,20 +98,25 @@ export class brand extends tag {
 		if (opt) {
 			opt = core.extend({}, defaultBrandOption, opt);
 
-			opt.tag = opt.href ? "a" : "h1";
-			opt.marginbottom = !opt.href ? 0 : null;
-			opt.class = core.merge.class(opt.class, "navbar-brand");
-			opt.elem =
-				opt.elem ||
-				new label({
-					icon: opt.icon,
-					label: opt.label,
-					showlabel: opt.showlabel,
-					iconafter: opt.iconafter,
-				});
+			opt = core.merge(opt, {
+				tag: opt.href ? "a" : "h1",
+				marginBottom: !opt.href ? 0 : null,
+				class: "navbar-brand",
+				elem:
+					opt.elem ||
+					new label({
+						icon: opt.icon,
+						label: opt.label,
+						showlabel: opt.showlabel,
+						iconafter: opt.iconafter,
+					}),
+			});
 
 			delete opt.icon;
 			delete opt.label;
+			delete opt.showlabel;
+			delete opt.iconafter;
+			delete opt.img;
 
 			super.data = opt;
 		}
@@ -147,14 +139,15 @@ export class toggle extends collapse.toggle {
 		if (opt) {
 			opt = core.extend({}, defaultToggleOption, opt);
 
-			opt.elem =
-				opt.elem ||
-				new button({
+			opt = core.merge(opt, {
+				elem: new button({
 					icon: "bars",
 					label: "Toggle navigation",
 					hidelabel: true,
 					class: "navbar-toggler",
-				});
+				}),
+			});
+
 			super.data = opt;
 		}
 	}
@@ -163,7 +156,7 @@ export class toggle extends collapse.toggle {
 const defaultFormContainerOption = {
 	display: "flex",
 	row: false,
-	rowcol: null,
+	rowCol: null,
 };
 export class formcontainer extends form {
 	constructor(...opt) {
@@ -196,8 +189,9 @@ export class collapsecontainer extends div {
 	set data(opt) {
 		opt = core.extend({}, defaultCollapseContainerOption, opt);
 
-		opt.class = core.merge.class(opt.class, ["collapse", "navbar-collapse"]);
-		opt.attr = core.merge.attr(opt.attr, {
+		opt = core.merge(opt, {
+			class: ["collapse", "navbar-collapse"],
+
 			"show.bs.collapse": opt.onshow,
 			"shown.bs.collapse": opt.onshown,
 			"hide.bs.collapse": opt.onhide,
@@ -238,7 +232,12 @@ export class offcanvascontainer extends div {
 		opt = core.extend({}, defaultOffcanvasContainerOption, opt);
 
 		opt.id = opt.id || core.UUID();
-		opt.attr = core.merge.attr(opt.attr, {
+
+		opt = core.merge(opt, {
+			class: [
+				opt.weight ? `offcanvas-${opt.weight}` : "offcanvas",
+				opt.placement ? `offcanvas-${opt.placement}` : "offcanvas-start",
+			],
 			tabindex: "-1",
 			"aria-labelledby": opt.id ? `${opt.id}-label` : null,
 
@@ -246,28 +245,23 @@ export class offcanvascontainer extends div {
 			"shown.bs.offcanvas": opt.onshown,
 			"hide.bs.offcanvas": opt.onhide,
 			"hidden.bs.offcanvas": opt.onhidden,
+
+			elem: [
+				new div({
+					class: "offcanvas-header",
+					elem: [
+						new h({
+							level: 5,
+							class: "offcanvas-title",
+							id: `${opt.id}-label`,
+							elem: new label({ icon: opt.icon, title: opt.title }),
+						}),
+						new btnclose({ class: "text-reset", dismiss: "offcanvas", label: "Close" }),
+					],
+				}),
+				new div({ class: "offcanvas-body", elem: opt.elem }),
+			],
 		});
-
-		opt.class = core.merge.class(opt.class, [
-			opt.weight ? `offcanvas-${opt.weight}` : "offcanvas",
-			opt.placement ? `offcanvas-${opt.placement}` : "offcanvas-start",
-		]);
-
-		opt.elem = [
-			new div({
-				class: "offcanvas-header",
-				elem: [
-					new h({
-						level: 5,
-						class: "offcanvas-title",
-						id: `${opt.id}-label`,
-						elem: new label({ icon: opt.icon, title: opt.title }),
-					}),
-					new btnclose({ class: "text-reset", dismiss: "offcanvas", label: "Close" }),
-				],
-			}),
-			new div({ class: "offcanvas-body", elem: opt.elem }),
-		];
 
 		delete opt.icon;
 		delete opt.title;
@@ -300,21 +294,19 @@ export class itemcontainer extends div {
 	set data(opt) {
 		opt = core.extend({}, defaultItemContainerOption, opt);
 
-		opt.style = core.merge.style(opt.style, { "--bs-scroll-height": opt.scroll });
-		opt.marginend = opt.mxauto ? "auto" : null;
-
 		if (opt.parenttype === "collapse") {
-			opt.marginbottom = opt.parenttype === "collapse" ? [(2, "lg-0")] : null;
+			opt.marginBottom = opt.parenttype === "collapse" ? [2, "lg-0"] : null;
 		} else if (opt.parenttype === "offcanvas") {
-			opt.justifycontent = "end";
-			opt.paddingend = 3;
+			opt.justifyContent = "end";
+			opt.paddingEnd = 3;
 		}
-		opt.class = core.merge.class(opt.class, [
-			"navbar-nav",
-			opt.mxauto ? "me-auto" : null,
-			opt.scroll ? "navbar-nav-scroll" : null,
-			opt.parenttype === "offcanvas" ? "flex-grow-1" : null,
-		]);
+
+		opt = core.merge(opt, {
+			style: { "--bs-scroll-height": opt.scroll },
+			marginEnd: opt.mxauto ? "auto" : null,
+			class: ["navbar-nav", opt.scroll ? "navbar-nav-scroll" : null],
+			flexGrow1: opt.parenttype ? true : null,
+		});
 
 		delete opt.mxauto;
 		delete opt.scroll;
@@ -346,38 +338,40 @@ export class item extends div {
 			opt = core.extend({}, defaultItemOption, opt);
 
 			opt.id = opt.id || core.UUID();
-			opt.class = core.merge.class(opt.class, ["nav-item", opt.option ? "dropdown" : null]);
 
-			opt.elem = [
-				new a({
-					href: opt.href,
-					class: [
-						"nav-link",
-						opt.active ? "active" : null,
-						opt.disabled ? "disabled" : null,
-						opt.option ? "dropdown-toggle" : null,
-					],
-					attr: {
+			opt = core.merge(opt, {
+				class: ["nav-item", opt.option ? "dropdown" : null],
+				elem: [
+					new a({
+						href: opt.href,
+						class: [
+							"nav-link",
+							// opt.active ? "active" : null,
+							// opt.disabled ? "disabled" : null,
+							opt.option ? "dropdown-toggle" : null,
+						],
 						"aria-current": opt.active ? "page" : null,
 						role: "button",
 						"data-bs-toggle": opt.option ? "dropdown" : null,
 						"aria-expanded": opt.option ? "false" : null,
-					},
-					elem: new label({
-						icon: opt.icon,
-						label: opt.label,
-						showlabel: opt.showlabel,
-						iconafter: opt.iconafter,
+						active: opt.active,
+						disabled: opt.disabled,
+						elem: new label({
+							icon: opt.icon,
+							label: opt.label,
+							showlabel: opt.showlabel,
+							iconafter: opt.iconafter,
+						}),
 					}),
-				}),
-				opt.option
-					? new ul({
-							class: ["dropdown-menu"],
-							attr: { "aria-labelledby": opt.id ? opt.id : null },
-							elem: new option.dropdown({ item: opt.option }),
-					  })
-					: null,
-			];
+					opt.option
+						? new ul({
+								class: ["dropdown-menu"],
+								"aria-labelledby": opt.id ? opt.id : null,
+								elem: new option.dropdown({ item: opt.option }),
+						  })
+						: null,
+				],
+			});
 
 			delete opt.href;
 			delete opt.active;
@@ -402,7 +396,7 @@ export class text extends span {
 		return super.data;
 	}
 	set data(opt) {
-		opt.class = core.merge.class(opt.class, "navbar-text");
+		opt = core.merge(opt, { class: "navbar-text" });
 		super.data = opt;
 	}
 }

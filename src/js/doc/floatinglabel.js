@@ -69,7 +69,7 @@ export default [
 				after: new button({
 					label: "Validate",
 					color: "primary",
-					onclick: (event) => {
+					click: (event) => {
 						//marker
 						core.validate(event.currentTarget.parentElement, (result) => {
 							new toast("i", `Result: ${result}`).show();

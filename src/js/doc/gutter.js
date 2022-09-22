@@ -49,10 +49,10 @@ export default [
 		code: () => {
 			return new div({
 				container: true,
-				paddingx: 4,
+				paddingX: 4,
 				elem: new div({
 					row: true,
-					gapx: 5, //marker
+					gapX: 5, //marker
 					elem: Array(2).fill(
 						new div({
 							col: true,
@@ -95,10 +95,10 @@ export default [
 				overflow: "hidden",
 				elem: new div({
 					row: true,
-					gapx: 5, //marker
+					gapX: 5, //marker
 					elem: new div({
 						row: true,
-						gapx: 5, //marker
+						gapX: 5, //marker
 						elem: Array(2).fill(
 							new div({
 								col: true,
@@ -140,7 +140,7 @@ export default [
 				overflow: "hidden",
 				elem: new div({
 					row: true,
-					gapy: 5, //marker
+					gapY: 5, //marker
 					elem: Array(4).fill(
 						new div({
 							col: 6,
@@ -220,7 +220,7 @@ export default [
 				container: true,
 				elem: new div({
 					row: true,
-					rowcol: [2, "lg-5"], //marker
+					rowCol: [2, "lg-5"], //marker
 					gap: [2, "lg-3"], //marker
 					elem: Array(10).fill(
 						new div({

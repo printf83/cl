@@ -26,10 +26,7 @@ export default [
 			return new card.container({
 				width: "18rem",
 				elem: [
-					new card.img({
-						placement: "top",
-						src: sample.img(286, 143),
-					}),
+					new card.img({ "data-test": "card.img", placement: "top", src: sample.img(286, 143) }),
 					new card.body({
 						elem: [
 							new card.title("Card Title"),
@@ -275,7 +272,7 @@ export default [
 									elem: [
 										"Someone famous in",
 										new cite({
-											attr: { title: "Source Title" },
+											title: "Source Title",
 											elem: "Source Title",
 										}),
 									],
@@ -572,7 +569,7 @@ export default [
 		import: ["small", "card", "sample"],
 		code: () => {
 			return new card.container({
-				textcolor: "light",
+				textColor: "light",
 				elem: [
 					new card.img({
 						src: sample.img(857, 428),
@@ -603,13 +600,13 @@ export default [
 				elem: [
 					/*marker*/ new card.horizontal({
 						size: "sm-4",
-						left: [
+						start: [
 							new card.img({
 								placement: "left",
 								src: sample.img(285, 285),
 							}),
 						],
-						right: new card.container({
+						end: new card.container({
 							height: 100,
 							flush: true,
 							elem: [
@@ -650,6 +647,8 @@ export default [
 		import: ["card"],
 		code: () => {
 			return new card.container({
+				bgColor: "primary", //marker
+				textBgColor: "primary", //marker
 				width: "18rem",
 				elem: [
 					new card.header("Header"),
@@ -662,9 +661,6 @@ export default [
 						],
 					}),
 				],
-
-				//marker
-				color: "primary",
 			});
 		},
 	},
@@ -677,6 +673,8 @@ export default [
 		code: () => {
 			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map((i) => {
 				return new card.container({
+					bgColor: i, //marker
+					textBgColor: i, //marker
 					width: "18rem",
 					elem: [
 						new card.header("Header"),
@@ -689,9 +687,6 @@ export default [
 							],
 						}),
 					],
-
-					//marker
-					color: i,
 				});
 			});
 		},
@@ -708,7 +703,7 @@ export default [
 				elem: [
 					new card.header("Header"),
 					new card.body({
-						textcolor: "primary",
+						textColor: "primary",
 						elem: [
 							new card.title("Primary card title"),
 							new card.text(
@@ -718,7 +713,7 @@ export default [
 					}),
 				],
 
-				bordercolor: "primary",
+				borderColor: "primary",
 			});
 		},
 	},
@@ -731,11 +726,13 @@ export default [
 		code: () => {
 			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map((i) => {
 				return new card.container({
+					borderColor: i, //marker
+					textColor: i, //marker
 					width: "18rem",
 					elem: [
 						new card.header("Header"),
 						new card.body({
-							textcolor: i,
+							textColor: i,
 							elem: [
 								new card.title(`${core.capitalize(i)} card title`),
 								new card.text(
@@ -744,9 +741,6 @@ export default [
 							],
 						}),
 					],
-
-					//marker
-					bordercolor: i,
 				});
 			});
 		},
@@ -758,16 +752,16 @@ export default [
 		import: ["card"],
 		code: () => {
 			return new card.container({
-				bordercolor: "success",
+				borderColor: "success",
 				width: "18rem",
 				elem: [
 					new card.header({
-						color: "transparent",
-						class: "border-success",
+						bgColor: "success",
+						textBgColor: "success",
 						elem: "Header",
 					}),
 					new card.body({
-						textcolor: "success",
+						textColor: "success",
 						elem: [
 							new card.title("Success card title"),
 							new card.text(
@@ -776,8 +770,6 @@ export default [
 						],
 					}),
 					new card.footer({
-						class: "border-success",
-						color: "transparent",
 						elem: "Footer",
 					}),
 				],
@@ -887,7 +879,7 @@ export default [
 				],
 
 				//marker
-				rowcol: [1, "md-2"],
+				rowCol: [1, "md-2"],
 			});
 		},
 	},
@@ -927,7 +919,7 @@ export default [
 				],
 
 				//marker
-				rowcol: [1, "md-3"],
+				rowCol: [1, "md-3"],
 			});
 		},
 	},
@@ -961,7 +953,7 @@ export default [
 
 			return new div({
 				row: true,
-				rowcol: [1, "md-3"],
+				rowCol: [1, "md-3"],
 				gap: 4,
 				elem: [
 					new div({ col: true, elem: fn(str[0]) }),
@@ -1003,7 +995,7 @@ export default [
 
 			return new div({
 				row: true,
-				rowcol: [1, "md-3"],
+				rowCol: [1, "md-3"],
 				gap: 4,
 				elem: [
 					new div({ col: true, elem: fn(str[0]) }),

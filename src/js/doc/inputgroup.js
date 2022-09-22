@@ -97,7 +97,7 @@ export default [
 		code: () => {
 			return [
 				new input({
-					nowrap: true,
+					textWarp: true,
 					placeholder: "Username",
 					type: "text",
 

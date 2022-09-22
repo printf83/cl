@@ -19,15 +19,12 @@ export default [
 		container: sample.vstackcontainer,
 		import: ["tag"],
 		code: () => {
-			return [
-				//marker
-				new tag({ tag: "div", elem: "DIV element" }),
-				new tag({ tag: "span", elem: "SPAN element" }),
-				new tag({ tag: "p", elem: "P element" }),
-				new tag({ tag: "b", elem: "B element" }),
-				new tag({ tag: "i", elem: "I element" }),
-				//-
-			];
+			return ["div", "span", "p", "b", "i", "unknow"].map((i) => {
+				return new tag({
+					tag: i, //marker
+					elem: `The ${i.toUpperCase()} element`,
+				});
+			});
 		},
 	},
 
@@ -41,30 +38,22 @@ export default [
 				new tag({
 					tag: "div",
 					class: "cl-highlight-div cl-highlight-element",
-
-					//marker
-					elem: "String",
+					elem: "String", //marker
 				}),
 				new tag({
 					tag: "div",
 					class: "cl-highlight-div cl-highlight-element",
-
-					//marker
-					elem: ["String", "<div>Sub element</div>"],
+					elem: ["String", "<div>Sub element</div>"], //marker
 				}),
 				new tag({
 					tag: "div",
 					class: "cl-highlight-div cl-highlight-element",
-
-					//marker
-					elem: new tag({ tag: "div", elem: "Sub element" }),
+					elem: new tag({ tag: "div", elem: "Sub element" }), //marker
 				}),
 				new tag({
 					tag: "div",
 					class: "cl-highlight-div cl-highlight-element",
-
-					//marker
-					elem: ["Sub element 1", "<div>Sub element 2</div>", new tag({ tag: "div", elem: "Sub element 3" })],
+					elem: ["Sub element 1", "<div>Sub element 2</div>", new tag({ tag: "div", elem: "Sub element 3" })], //marker
 				}),
 			];
 		},
@@ -78,28 +67,30 @@ export default [
 			return new tag({
 				tag: "div",
 				elem: new tag({
-					attr: { class: "hello" },
-					elem: "This sub element tag not have tag property",
-
 					//marker
 					//tag:"no tag element"
+					class: "hello",
 					//-
+
+					elem: "This sub element tag not have tag property. The class will be set on the parent.",
 				}),
 			});
 		},
 	},
 
 	{
-		title: "attr",
+		title: "Attribute",
 		msg: ["Create attribute for element"],
 		import: ["tag"],
 		code: () => {
 			return new tag({
 				tag: "div",
-				elem: "Example element",
-
 				//marker
-				attr: { id: "elementID", class: "elementClass", style: { color: "#555" } },
+				id: "elementID",
+				class: "elementClass",
+				color: "#555",
+				//-
+				elem: "Example element",
 			});
 		},
 	},
@@ -109,69 +100,55 @@ export default [
 	//=============================
 	{
 		anchor: true,
-		title: "Helper property",
-		msg: "This property is create to help user to create <code>attr</code> property.",
+		title: "Another example",
 	},
 	{
 		title: "id",
-		msg: ["Create attribute <code>id</code> for element", "Shortcut for : <code>attr:{id:value}</code>"],
 		import: ["tag"],
 		code: () => {
 			return new tag({
 				tag: "div",
+				id: "elementID2", //marker
 				elem: "Example element",
-
-				//marker
-				id: "elementID2",
 			});
 		},
 	},
 	{
 		title: "name",
-		msg: ["Create attribute <code>name</code> for element", "Shortcut for : <code>attr:{id:value}</code>"],
 		import: ["tag"],
 		code: () => {
 			return new tag({
 				tag: "div",
+				name: "elementName", //marker
 				elem: "Example element",
-
-				//marker
-				name: "elementName",
 			});
 		},
 	},
 
 	{
 		title: "href",
-		msg: [
-			"Create attribute <code>href</code> for <code>a</code> element",
-			"Shortcut for : <code>attr:{href:value}</code>",
-		],
 		import: ["tag"],
 		code: () => {
 			return new tag({
 				tag: "a",
+				href: "https://www.getbootstrap.com", //marker
 				elem: "www.getbootstrap.com",
-
-				//marker
-				href: "https://www.getbootstrap.com",
 			});
 		},
 	},
 
 	{
-		title: "onclick",
-		msg: ["Create attribute <code>onclick</code> for  element", "Shortcut for : <code>attr:{onclick:value}</code>"],
+		title: "Event",
+		msg: ["Create event by set function as value for the event"],
 		import: ["tag"],
 		code: () => {
 			return new tag({
 				tag: "button",
 				class: "btn btn-primary",
 				elem: "Example button",
-
 				//marker
-				onclick: (event) => {
-					event.currentTarget.innerText = "onclick trigged";
+				click: (event) => {
+					event.currentTarget.innerText = "click trigged";
 				},
 				//-
 			});
@@ -180,19 +157,36 @@ export default [
 
 	{
 		title: "style",
+		import: ["tag"],
+		code: () => {
+			return new tag({
+				tag: "div",
+				elem: "Example element",
+				//marker
+				border: "1px solid rgba(95,95,95,0.5)",
+				backgroundColor: "rgba(155,155,155,0.4)",
+				padding: "1rem",
+				style: {
+					"unsupported-style-1": "style-1",
+					unsupportedStyle2: "style-2",
+				},
+				//-
+			});
+		},
+	},
+
+	{
+		title: "Bootstrap style",
 		msg: ["Create attribute <code>style</code> for  element", "Shortcut for : <code>attr:{style:value}</code>"],
 		import: ["tag"],
 		code: () => {
 			return new tag({
 				tag: "div",
 				elem: "Example element",
-
 				//marker
-				style: {
-					border: "1px solid rgba(95,95,95,0.5)",
-					"background-color": "rgba(155,155,155,0.4)",
-					padding: "1rem",
-				},
+				border: true,
+				bgColor: "primary",
+				padding: 3,
 				//-
 			});
 		},

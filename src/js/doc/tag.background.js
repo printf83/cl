@@ -12,7 +12,7 @@ export default [
 	{
 		title: "Background color",
 		msg: [
-			"Similar to the contextual text color classes, set the background of an element to any contextual class. Background utilities <b>do not set</b> {{color}}, so in some cases you’ll want to use {{textcolor}} property.",
+			"Similar to the contextual text color classes, set the background of an element to any contextual class. Background utilities <b>do not set</b> {{color}}, so in some cases you’ll want to use {{textColor}} property.",
 		],
 		container: sample.vstackcontainer,
 
@@ -34,10 +34,9 @@ export default [
 				return new tag({
 					tag: "div",
 					padding: 3,
-					elem: `Example element with <b>color: ${i}</b>`,
-
-					//marker
-					color: i,
+					bgColor: i, //marker
+					textBgColor: i, //marker
+					elem: `Example element with <b>bgColor: ${i}</b>`,
 				});
 			});
 		},
@@ -68,12 +67,10 @@ export default [
 				return new tag({
 					tag: "div",
 					padding: 3,
-					elem: `Example element with <b>color: ${i}</b>`,
-
-					//marker
-					color: i,
-					gradient: true,
-					//-
+					bgColor: i,
+					bgGradient: true, //marker
+					textBgColor: i, //marker
+					elem: `Example element with <b>bgColor: ${i}</b>`,
 				});
 			});
 		},

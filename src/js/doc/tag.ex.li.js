@@ -26,10 +26,10 @@ export default [
 			return new ul({
 				elem: [
 					//marker
-					new li({ attr: { "data-test": "test" }, elem: "Item 1" }),
-					new li({ attr: { "data-test": "test" }, elem: "Item 2" }),
-					new li({ attr: { "data-test": "test" }, elem: "Item 3" }),
-					new li({ attr: { "data-test": "test" }, elem: "Item 4" }),
+					new li({ "data-test": "test", elem: "Item 1" }),
+					new li({ "data-test": "test", elem: "Item 2" }),
+					new li({ "data-test": "test", elem: "Item 3" }),
+					new li({ "data-test": "test", elem: "Item 4" }),
 					//-
 				],
 			});

@@ -30,9 +30,7 @@ export default [
 
 					//marker
 					new strong({
-						attr: {
-							"data-test": "test",
-						},
+						"data-test": "test",
 						elem: "strong",
 					}),
 					//-

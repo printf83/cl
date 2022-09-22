@@ -56,17 +56,15 @@ export default [
 
 	{
 		title: "Horizontal centering",
-		msg: "Additionally, Bootstrap also includes an {{marginx:auto}} property for horizontally centering fixed-width block level content—that is, content that has {{display:block}} and a {{width}} set—by setting the horizontal margins to {{auto}}.",
+		msg: "Additionally, Bootstrap also includes an {{marginX:auto}} property for horizontally centering fixed-width block level content—that is, content that has {{display:block}} and a {{width}} set—by setting the horizontal margins to {{auto}}.",
 		viewclass: "cl-highlight-div",
 		import: ["tag"],
 		code: () => {
 			return new tag({
 				tag: "div",
 				width: "12rem",
+				marginX: "auto", //marker
 				elem: `Centered element`,
-
-				//marker
-				marginx: "auto",
 			});
 		},
 	},
@@ -75,7 +73,7 @@ export default [
 		title: "Negative margin",
 		msg: [
 			"In CSS, {{margin}} properties can utilize negative values ({{padding}} cannot). These negative margins are <b>disabled by default</b>, but can be enabled in Sass by setting {{$enable-negative-margins: true}}.",
-			"The syntax is nearly the same as the default, positive margin utilities, but with the addition of {{n}} before the requested size. Here’s an example margin value that’s the opposite of {{margintop:1}}:",
+			"The syntax is nearly the same as the default, positive margin utilities, but with the addition of {{n}} before the requested size. Here’s an example margin value that’s the opposite of {{marginTop:1}}:",
 		],
 
 		viewclass: "cl-highlight-col-div",
@@ -85,10 +83,8 @@ export default [
 			return [null, 1, "n1"].map((i) => {
 				return new tag({
 					tag: "div",
+					marginTop: i, //marker
 					elem: `Example element`,
-
-					//marker
-					margintop: i,
 				});
 			});
 		},
@@ -103,14 +99,12 @@ export default [
 			return new tag({
 				tag: "div",
 				display: "grid",
+				gap: 3, //marker
 				elem: [
 					new tag({ tag: "div", elem: "Grid item 1" }),
 					new tag({ tag: "div", elem: "Grid item 2" }),
 					new tag({ tag: "div", elem: "Grid item 3" }),
 				],
-
-				//marker
-				gap: 3,
 			});
 		},
 	},

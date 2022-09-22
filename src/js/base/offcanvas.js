@@ -26,7 +26,7 @@ const defaultOption = {
 	onhidden: null,
 };
 /**
- * option : {attr,id,class,static,title,icon,footer,button,animated,debug,scrollable,center,size,fullscreen,focus,align,color,textcolor,bordercolor,border,divider,centerbutton,elem}
+ * option : {attr,id,class,static,title,icon,footer,button,animated,debug,scrollable,center,size,fullscreen,focus,align,color,textColor,borderColor,border,divider,centerbutton,elem}
  */
 export default class offcanvas extends div {
 	_bs = null;
@@ -76,10 +76,7 @@ export default class offcanvas extends div {
 							? new btnclose({
 									class: "text-reset",
 									dismiss: "offcanvas",
-									attr: {
-										"data-bs-target": opt.autoclose ? `#${opt.id}` : null,
-									},
-									// dark: opt.color ? opt.color : "body-bg",
+									"data-bs-target": opt.autoclose ? `#${opt.id}` : null,
 							  })
 							: null,
 					],
@@ -95,12 +92,12 @@ export default class offcanvas extends div {
 				});
 			}
 
-			opt.class = core.merge.class(opt.class, [
-				opt.placement ? `offcanvas-${opt.placement}` : "offcanvas-start",
-				opt.autoclose ? `offcanvas-${opt.autoclose}` : "offcanvas",
-			]);
+			opt = core.merge(opt, {
+				class: [
+					opt.placement ? `offcanvas-${opt.placement}` : "offcanvas-start",
+					opt.autoclose ? `offcanvas-${opt.autoclose}` : "offcanvas",
+				],
 
-			opt.attr = core.merge.attr(opt.attr, {
 				"aria-labelledby": `${opt.id}-label`,
 				"data-bs-scroll": opt.scroll ? "true" : "false",
 				"data-bs-backdrop": opt.backdrop ? "true" : "false",
@@ -110,9 +107,9 @@ export default class offcanvas extends div {
 				"shown.bs.offcanvas": opt.onshown,
 				"hide.bs.offcanvas": opt.onhide,
 				"hidden.bs.offcanvas": opt.onhidden,
-			});
 
-			opt.elem = [header, body];
+				elem: [header, body],
+			});
 
 			delete opt.placement;
 			delete opt.close;

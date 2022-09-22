@@ -79,7 +79,7 @@ export default [
 			return new button({
 				label: "Show live toast",
 				color: "primary",
-				onclick: () => {
+				click: () => {
 					new toast({
 						color: "primary",
 						elem: sample.text(),
@@ -111,7 +111,7 @@ export default [
 			return new button({
 				label: "Show live toast",
 				color: "primary",
-				onclick: () => {
+				click: () => {
 					new toast({
 						color: "primary",
 						elem: "Heads up, toasts will stack automatically. Second toast will appear in 2 second.",
@@ -154,7 +154,7 @@ export default [
 					after: new button({
 						label: "Show",
 						color: "primary",
-						onclick: (event) => {
+						click: (event) => {
 							let sender = event.currentTarget;
 							let icon = sender.previousSibling.value;
 							new toast(/*marker*/ icon, `Example <b>${icon}</b> icon toast`).show();
@@ -205,7 +205,7 @@ export default [
 				return new button({
 					color: "primary",
 					label: i.label,
-					onclick: () => {
+					click: () => {
 						new toast({
 							elem: new msg({ weight: "sm", icon: sample.icon(), elem: `${i.label} toast.` }),
 
@@ -225,7 +225,7 @@ export default [
 			return new button({
 				label: "Show live toast",
 				color: "primary",
-				onclick: () => {
+				click: () => {
 					new toast({
 						icon: undefined,
 						title: undefined,
@@ -247,7 +247,7 @@ export default [
 			return new button({
 				label: "Show live toast",
 				color: "primary",
-				onclick: () => {
+				click: () => {
 					new toast({
 						color: "primary",
 						elem: "This toast will close in 10 seconds.",

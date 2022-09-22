@@ -19,6 +19,7 @@ export default class hr extends tag {
 		opt = core.extend({}, defaultOption, opt);
 
 		delete opt.elem;
+
 		super.data = opt;
 	}
 }

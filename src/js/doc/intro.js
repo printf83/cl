@@ -19,39 +19,39 @@ export default [
 					weight: "md",
 					elem: "<b>Warning!</b> This framework created by <b>one developer</b> for research only!<br/>", //<b>Help!</b> I lost my job 😢. Anyone can help me? Please drop me <a class='alert-link' href='mailto:printf83@gmail.com?subject=bs5-js-builder-job-offer'>an email</a> if you think I am usefull in your company especially company in <b>Kota Kinabalu, Malaysia</b> - 28/08/2022
 				}),
-				margintop: 5,
+				marginTop: 5,
 			}),
 
 			new div({
 				align: "center",
-				marginbottom: 3,
+				marginBottom: 3,
 				elem: "Build a Full Stack Web Application using ",
 			}),
 
 			new div({
 				display: "flex",
 				flex: "wrap",
-				justifycontent: "center",
-				marginbottom: 4,
+				justifyContent: "center",
+				marginBottom: 4,
 				gap: 2,
 				elem: [
 					new a({
-						textdecoration: "none",
+						textDecoration: "none",
 						href: "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
 						elem: new pill({ icon: { icon: "js-square", type: "fab" }, label: "Javascript" }),
 					}),
 					new a({
-						textdecoration: "none",
+						textDecoration: "none",
 						href: "https://getbootstrap.com/",
 						elem: new pill({ icon: { icon: "bootstrap", type: "fab" }, label: "Bootstrap V5.2.1" }),
 					}),
 					new a({
-						textdecoration: "none",
+						textDecoration: "none",
 						href: "https://bootswatch.com/",
 						elem: new pill({ icon: { icon: "swatchbook" }, label: "Bootswatch V5.2.0" }),
 					}),
 					new a({
-						textdecoration: "none",
+						textDecoration: "none",
 						href: "https://fontawesome.com/",
 						elem: new pill({
 							icon: { icon: "font-awesome-flag", type: "fab" },
@@ -59,17 +59,17 @@ export default [
 						}),
 					}),
 					new a({
-						textdecoration: "none",
+						textDecoration: "none",
 						href: "https://nodejs.org/en/",
 						elem: new pill({ icon: { icon: "node-js", type: "fab" }, label: "NodeJS" }),
 					}),
 					new a({
-						textdecoration: "none",
+						textDecoration: "none",
 						href: "https://www.mongodb.com/",
 						elem: new pill({ icon: { icon: "envira", type: "fab" }, label: "MongoDB" }),
 					}),
 					new a({
-						textdecoration: "none",
+						textDecoration: "none",
 						href: "http://bs5-js-builder.herokuapp.com/",
 						elem: new pill({ icon: core.setting.icon(), label: "CL" }),
 					}),
@@ -191,8 +191,8 @@ export default [
 
 			new div({
 				display: "flex",
-				justifycontent: "center",
-				marginbottom: 3,
+				justifyContent: "center",
+				marginBottom: 3,
 				gap: 2,
 				elem: [
 					new a({
@@ -205,6 +205,7 @@ export default [
 						elem: new pill({ icon: { icon: "at" }, label: "Send email", color: "danger" }),
 						href: "mailto:printf83@gmail.com?subject=bs5-js-builder&body=I%20have%20a%20question%20about%20...",
 					}),
+					new pill({ icon: { icon: "code-branch" }, label: "0.0.2", color: "success" }),
 				],
 			}),
 		],

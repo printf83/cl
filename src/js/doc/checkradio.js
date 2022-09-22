@@ -39,11 +39,9 @@ export default [
 		import: ["input"],
 		code: () => {
 			return new input({
+				indeterminate: true, //marker
 				label: "Indeterminate checkbox",
 				type: "checkbox",
-
-				//marker
-				indeterminate: true,
 			});
 		},
 	},
@@ -55,20 +53,15 @@ export default [
 		code: () => {
 			return [
 				new input({
-					label: "Disabled checkbox",
 					type: "checkbox",
-
-					//marker
-					disabled: true,
+					disabled: true, //marker
+					label: "Disabled checkbox",
 				}),
 				new input({
-					label: "Disabled checked checkbox",
 					type: "checkbox",
-
-					//marker
-					disabled: true,
-					checked: true,
-					//-
+					disabled: true, //marker
+					checked: true, //marker
+					label: "Disabled checked checkbox",
 				}),
 			];
 		},
@@ -81,21 +74,15 @@ export default [
 		code: () => {
 			return [
 				new input({
+					name: "g1", //marker
+					type: "radio", //marker
 					label: "Default radio",
-
-					//marker
-					name: "g1",
-					type: "radio",
-					//-
 				}),
 				new input({
+					name: "g1", //marker
+					type: "radio", //marker
+					checked: true, //marker
 					label: "Checked radio",
-
-					//marker
-					name: "g1",
-					type: "radio",
-					checked: true,
-					//-
 				}),
 			];
 		},
@@ -108,22 +95,16 @@ export default [
 		code: () => {
 			return [
 				new input({
-					label: "Disabled radio",
-
-					//marker
 					name: "g2",
 					type: "radio",
-					disabled: true,
-					//-
+					disabled: true, //marker
+					label: "Disabled radio",
 				}),
 				new input({
-					label: "Disabled checked radio",
-
-					//marker
 					type: "radio",
 					checked: true,
-					disabled: true,
-					//-
+					disabled: true, //marker
+					label: "Disabled checked radio",
 				}),
 			];
 		},
@@ -136,35 +117,24 @@ export default [
 		code: () => {
 			return [
 				new input({
+					type: "switch", //marker
 					label: "Default switch checkbox input",
-
-					//marker
-					type: "switch",
 				}),
 				new input({
+					type: "switch", //marker
+					checked: true, //marker
 					label: "Checked switch checkbox input",
-
-					//marker
-					type: "switch",
-					checked: true,
-					//-
 				}),
 				new input({
+					type: "switch", //marker
+					disabled: true, //marker
 					label: "Disabled switch checkbox input",
-
-					//marker
-					type: "switch",
-					disabled: true,
-					//-
 				}),
 				new input({
+					type: "switch", //marker
+					checked: true, //marker
+					disabled: true, //marker
 					label: "Disabled checked switch checkbox input",
-
-					//marker
-					type: "switch",
-					checked: true,
-					disabled: true,
-					//-
 				}),
 			];
 		},
@@ -195,18 +165,14 @@ export default [
 					name: "g4",
 					label: "Disabled radio",
 					type: "radio",
-
-					//marker
-					disabled: true,
+					disabled: true, //marker
 				}),
 				new input({
 					name: "g4",
 					label: "Disabled checked radio",
 					type: "radio",
 					checked: true,
-
-					//marker
-					disabled: true,
+					disabled: true, //marker
 				}),
 			];
 		},
@@ -219,29 +185,20 @@ export default [
 		code: () => {
 			return [
 				new input({
+					type: "checkbox",
+					inline: true, //marker
 					label: "1",
-
-					//marker
-					type: "checkbox",
-					inline: true,
-					//-
 				}),
 				new input({
+					type: "checkbox",
+					inline: true, //marker
 					label: "2",
-
-					//marker
-					type: "checkbox",
-					inline: true,
-					//-
 				}),
 				new input({
-					label: "3 (disabled)",
-
-					//marker
 					type: "checkbox",
-					inline: true,
+					inline: true, //marker
 					disabled: true,
-					//-
+					label: "3 (disabled)",
 				}),
 			];
 		},

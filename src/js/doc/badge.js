@@ -23,7 +23,7 @@ export default [
 						`Example heading #${i}`,
 
 						//marker
-						new badge({ label: "New", marginstart: 3 }),
+						new badge({ label: "New", marginStart: 3 }),
 					],
 				});
 			});
@@ -39,7 +39,7 @@ export default [
 				color: "primary",
 
 				//marker
-				badge: { label: "4", marginstart: 3 },
+				badge: { label: "4", marginStart: 3 },
 			});
 		},
 	},
@@ -57,7 +57,6 @@ export default [
 					label: "99+",
 					color: "danger",
 					notification: true,
-					pill: true,
 				},
 				//-
 			});
@@ -74,10 +73,11 @@ export default [
 
 				//marker
 				badge: {
-					border: "light",
 					color: "danger",
 					notification: true,
-					asst: "new message",
+					label: "New message",
+					rounded: "pill",
+					hidelabel: true,
 				},
 				//-
 			});
@@ -93,9 +93,7 @@ export default [
 			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map((i) => {
 				return new badge({
 					label: core.capitalize(i),
-
-					//marker
-					color: i,
+					color: i, //marker
 				});
 			});
 		},
@@ -111,9 +109,7 @@ export default [
 				return new badge({
 					label: core.capitalize(i),
 					color: i,
-
-					//marker
-					pill: true,
+					rounded: "pill", //marker
 				});
 			});
 		},

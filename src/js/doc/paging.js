@@ -180,7 +180,7 @@ export default [
 
 	{
 		title: "Event",
-		msg: ["Paging support {{onchange}} event. The {{skip}} value return in {{event.detail.skip}}"],
+		msg: ["Paging support {{change}} event. The {{skip}} value return in {{event.detail.skip}}"],
 		import: ["toast", "paging"],
 		code: () => {
 			return new paging({
@@ -190,7 +190,7 @@ export default [
 				max: 3,
 
 				//marker
-				onchange: (event) => {
+				change: (event) => {
 					//function called when skip change
 					new toast("i", `Skip changed to ${event.detail.skip}`).show();
 				},

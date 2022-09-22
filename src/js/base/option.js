@@ -6,6 +6,7 @@ import li from "./li.js";
 import span from "./span.js";
 import hr from "./hr.js";
 import h from "./h.js";
+import button from "./button.js";
 
 const defaultOption = {
 	item: null,
@@ -21,10 +22,6 @@ const defaultSelectGroupOption = {
 	tag: "optgroup",
 	label: null,
 };
-/**
- * opt : {tagoption,item : {selectitem},selected}
- * selectitem : [string]|[{tagoption,elem,value,label,icon,active,disabled,interactive}]
- */
 export class select extends tag {
 	constructor(...opt) {
 		super(...opt);
@@ -47,10 +44,8 @@ export class select extends tag {
 				if (opt.item[i] === null || typeof opt.item[i] === "string") {
 					item = {
 						tag: "option",
-						attr: {
-							value: opt.item[i],
-							selected: opt.selected?.includes(opt.item[i]),
-						},
+						value: opt.item[i],
+						selected: opt.selected?.includes(opt.item[i]),
 						elem: opt.item[i],
 					};
 
@@ -67,9 +62,6 @@ export class select extends tag {
 						}
 
 						gitem = core.extend({}, defaultSelectGroupOption, opt.item[i]);
-						gitem.attr = core.merge.attr(gitem.attr, {
-							label: gitem.label,
-						});
 						gitem.elem = [];
 
 						delete gitem.value;
@@ -78,7 +70,7 @@ export class select extends tag {
 					} else {
 						item = core.extend({}, defaultSelectItemOption, opt.item[i]);
 
-						item.attr = core.merge.attr(item.attr, {
+						item = core.merge(item, {
 							value: item.value,
 							selected: opt.selected?.includes(item.value),
 						});
@@ -113,19 +105,17 @@ export class select extends tag {
 
 const defaultDropdownItemOption = {
 	value: null,
+
 	label: null,
 	icon: null,
 	iconafter: false,
 	showlabel: null,
+	hidelabel: null,
 
 	active: false,
-	disabled: false,
 	interactive: true,
 };
-/**
- * opt : {tagoption,item : dropdownitem,selected}
- * dropdownitem : [string]|[{tagoption,elem,value,label,icon,active,disabled,interactive}]
- */
+
 export class dropdown extends tag {
 	constructor(...opt) {
 		super(...opt);
@@ -144,62 +134,64 @@ export class dropdown extends tag {
 				if (typeof i === "string") {
 					return new li({
 						elem: new span({
-							attr: {
-								class: ["dropdown-item", opt.selected?.includes(i) ? "active" : null],
-							},
+							class: ["dropdown-item", opt.selected?.includes(i) ? "active" : null],
 							elem: new label({
 								label: i,
 							}),
 						}),
 					});
+				} else if (i.hasOwnProperty("cl")) {
+					return new li({ elem: i });
 				} else {
 					i = core.extend({}, defaultDropdownItemOption, i);
+					let item = {};
 
 					if (i.value === "-") {
 						if (i.label) {
-							i.elem = new h({
+							item = new h({
 								level: 6,
 								class: "dropdown-header",
-								elem: new label({ icon: i.icon, label: i.label }),
-							});
-						} else {
-							i.elem = new hr({ class: "dropdown-divider" });
-						}
-					} else {
-						if (!i.elem) {
-							i.elem = new tag({
-								tag: i.href ? "a" : i.interactive ? "button" : "span",
-								class: [
-									i.interactive ? "dropdown-item" : "dropdown-item-text",
-									i.disabled ? "disabled" : null,
-									i.active === true || (i.value && opt.selected?.includes(i.value)) ? "active" : null,
-								],
-								href: i.href,
-								onclick: i.onclick,
-								attr: {
-									type: !i.href && i.interactive ? "button" : null,
-								},
 								elem: new label({
 									label: i.label,
 									icon: i.icon,
 									iconafter: i.iconafter,
 									showlabel: i.showlabel,
+									hidelabel: i.hidelabel,
+								}),
+							});
+						} else {
+							item = new hr({ class: "dropdown-divider" });
+						}
+					} else {
+						if (i.elem) {
+							item = i.elem;
+						} else {
+							item = new tag({
+								tag: i.href ? "a" : i.interactive ? "button" : "span",
+								class: [
+									i.interactive ? "dropdown-item" : "dropdown-item-text",
+									// i.disabled ? "disabled" : null,
+									i.active === true || (i.value && opt.selected?.includes(i.value)) ? "active" : null,
+								],
+								disabled: i.disabled,
+								href: i.href,
+								type: !i.href && i.interactive ? "button" : null,
+								elem: new label({
+									label: i.label,
+									icon: i.icon,
+									iconafter: i.iconafter,
+									showlabel: i.showlabel,
+									hidelabel: i.hidelabel,
 								}),
 							});
 						}
 					}
 
-					delete i.value;
-					delete i.label;
-					delete i.icon;
-					delete i.active;
-					delete i.disabled;
-					delete i.interactive;
-
-					return new li(i);
+					return new li(item);
 				}
 			});
 
+			delete opt.item;
 			delete opt.selected;
 
 			super.data = opt;

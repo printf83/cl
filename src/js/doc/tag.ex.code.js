@@ -24,9 +24,7 @@ export default [
 		import: ["code"],
 		code: () => {
 			return new code({
-				attr: {
-					"data-test": "test",
-				},
+				"data-test": "test",
 				elem: "<div>Example</div>",
 			});
 		},

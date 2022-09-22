@@ -15,18 +15,13 @@ const defaultOption = {
 
 const defaultItemOption = {
 	label: null,
-	icon: null,
 	showlabel: null,
-	iconafter: false,
-	current: false,
-	href: null,
-	onclick: null,
-	elem: null,
-};
+	hidelabel: null,
+	iconafter: null,
+	icon: null,
 
-/**
- * opt : {tagoption,label,divider,item:{label,icon,current,href,onclick,elem}}
- */
+	current: false,
+};
 export default class breadcrumb extends nav {
 	constructor(...opt) {
 		super(...opt);
@@ -47,73 +42,63 @@ export default class breadcrumb extends nav {
 				return i.current === true;
 			});
 
+			//no current, select last item as current
 			if (!currentitem && typeof opt.item[opt.item.length - 1] === "object") {
 				opt.item[opt.item.length - 1].current = true;
 			}
 
-			opt.style = core.merge.style(opt.style, {
-				"--bs-breadcrumb-divider": opt.divider ? opt.divider : null,
-			});
-
-			opt.attr = core.merge.attr(opt.attr, {
+			opt = core.merge(opt, {
 				"aria-label": opt.label,
+				style: {
+					"--bs-breadcrumb-divider": opt.divider ? opt.divider : null,
+				},
+				elem: opt.item
+					? new ol({
+							margin: 0,
+							class: ["breadcrumb"],
+							elem: opt.item.map((i) => {
+								i = core.extend({}, defaultItemOption, i);
+
+								let i_current = i.current;
+								delete i.current;
+
+								//gen item elem
+								let elem = null;
+								if (i.elem) {
+									elem = i.elem;
+								} else {
+									if (i_current) {
+										elem = new label(i);
+									} else {
+										if (i.href) {
+											let t_href = i.href;
+											delete i.href;
+
+											elem = new a({
+												href: t_href,
+												elem: new label(i),
+											});
+										} else if (i.click) {
+											elem = new button(i);
+										} else {
+											elem = new label(i);
+										}
+									}
+								}
+
+								return new li({
+									class: ["breadcrumb-item", i_current ? "active" : null],
+									"aria-current": i_current ? "page" : null,
+									elem: elem,
+								});
+							}),
+					  })
+					: null,
 			});
-
-			opt.elem = opt.item
-				? new ol({
-						margin: "0",
-						class: ["breadcrumb"],
-						elem: opt.item.map((i) => {
-							i = core.extend({}, defaultItemOption, i);
-
-							return new li({
-								class: ["breadcrumb-item", i.current ? "active" : null],
-								attr: { "aria-current": i.current ? "page" : null },
-								elem: i.elem
-									? i.elem
-									: [
-											i.current
-												? new label({
-														icon: i.icon,
-														label: i.label,
-														showlabel: i.showlabel,
-														iconafter: i.iconafter,
-												  })
-												: i.href
-												? new a({
-														href: i.href,
-														elem: new label({
-															icon: i.icon,
-															label: i.label,
-															showlabel: i.showlabel,
-															iconafter: i.iconafter,
-														}),
-												  })
-												: i.onclick
-												? new button({
-														label: i.label,
-														icon: i.icon,
-														showlabel: i.showlabel,
-														iconafter: i.iconafter,
-														onclick: i.onclick,
-												  })
-												: new label({
-														icon: i.icon,
-														label: i.label,
-														showlabel: i.showlabel,
-														iconafter: i.iconafter,
-												  }),
-									  ],
-							});
-						}),
-				  })
-				: null;
 
 			delete opt.label;
-			delete opt.icon;
-			delete opt.showlabel;
-			delete opt.iconafter;
 			delete opt.divider;
+			delete opt.item;
 
 			super.data = opt;
 		}

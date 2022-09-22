@@ -382,7 +382,7 @@ export default [
 		import: ["h", "small", "p", "sample"],
 		code: () => {
 			return [
-				new h({ level: 3, elem: ["Heading ", new small({ textcolor: "muted", elem: "with muted text" })] }),
+				new h({ level: 3, elem: ["Heading ", new small({ textColor: "muted", elem: "with muted text" })] }),
 				new p("lead", sample.shorttext()),
 			];
 		},
@@ -409,7 +409,7 @@ export default [
 		import: ["p", "sample"],
 		code: () => {
 			return ["muted", "primary", "secondary", "warning", "danger", "success", "info", "dark", "light"].map(
-				(i) => new p({ textcolor: i, elem: sample.shorttext() })
+				(i) => new p({ textColor: i, elem: sample.shorttext() })
 			);
 		},
 	},
@@ -1058,8 +1058,8 @@ export default [
 			let itemfn = (text, badgeLabel) => {
 				return {
 					display: "flex",
-					justifycontent: "between",
-					alignitem: "start",
+					justifyContent: "between",
+					alignItem: "start",
 					elem: [
 						text,
 						new badge({
@@ -1083,8 +1083,8 @@ export default [
 			let itemfn = (text, active, disabled) => {
 				return {
 					display: "flex",
-					justifycontent: "between",
-					alignitem: "start",
+					justifyContent: "between",
+					alignItem: "start",
 					active: active,
 					disabled: disabled,
 					elem: text,
@@ -1113,25 +1113,25 @@ export default [
 						new div({
 							width: 100,
 							display: "flex",
-							justifycontent: "between",
+							justifyContent: "between",
 							elem: [
 								new h({
 									level: 5,
-									marginbottom: 1,
+									marginBottom: 1,
 									elem: title,
 								}),
 								new small({
-									textcolor: !active ? "muted" : null,
+									textColor: !active ? "muted" : null,
 									elem: `${days} days ago`,
 								}),
 							],
 						}),
 						new p({
-							marginbottom: 1,
+							marginBottom: 1,
 							elem: sample.shorttext(),
 						}),
 						new small({
-							textcolor: !active ? "muted" : null,
+							textColor: !active ? "muted" : null,
 							elem: `And some${!active ? " muted" : ""} small print.`,
 						}),
 					],
@@ -1178,8 +1178,8 @@ export default [
 		code: () => {
 			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map((i) => {
 				return new card.container({
-					bordercolor: i,
-					textcolor: i,
+					borderColor: i,
+					textColor: i,
 					width: "18rem",
 					elem: [
 						new card.header("Header"),
@@ -1360,7 +1360,7 @@ export default [
 				new button({
 					label: title,
 					color: "primary",
-					onclick: () => {
+					click: () => {
 						new offcanvas(opt).show();
 					},
 				});

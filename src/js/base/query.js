@@ -232,7 +232,7 @@ let fn = {
 										new button({
 											color: "danger",
 											icon: "trash",
-											onclick: (event) => {
+											click: (event) => {
 												fn.filter.remove(event);
 											},
 										}),
@@ -243,7 +243,7 @@ let fn = {
 
 						new div({
 							row: true,
-							paddingy: 2,
+							paddingY: 2,
 							elem: new div({
 								col: true,
 								elem: new input({
@@ -445,10 +445,8 @@ let fn = {
 				color: opt.color,
 				col: opt.col,
 				label: opt.label,
-				attr: {
-					"data-cl-container": opt.container,
-				},
-				onclick: (event) => {
+				"data-cl-container": opt.container,
+				click: (event) => {
 					fn.filter.add(event, true);
 				},
 			});
@@ -509,7 +507,7 @@ let fn = {
 				elem: new div({
 					gap: 2,
 					row: true,
-					rowcol: 1,
+					rowCol: 1,
 					elem: new div({ col: true, class: "cl-filter-rule", id: id, elem: list }),
 				}),
 			});
@@ -617,7 +615,7 @@ let fn = {
 					padding: 0,
 					elem: new div({
 						row: true,
-						paddingbottom: 2,
+						paddingBottom: 2,
 						elem: new div({
 							col: true,
 							elem: new div({
@@ -629,7 +627,7 @@ let fn = {
 									new button({
 										color: "danger",
 										icon: "trash",
-										onclick: (event) => {
+										click: (event) => {
 											fn.sort.remove(event);
 										},
 									}),
@@ -721,10 +719,8 @@ let fn = {
 				color: opt.color,
 				col: opt.col,
 				label: opt.label,
-				attr: {
-					"data-cl-container": opt.container,
-				},
-				onclick: (event) => {
+				"data-cl-container": opt.container,
+				click: (event) => {
 					fn.sort.add(event, true);
 				},
 			});
@@ -759,7 +755,7 @@ let fn = {
 				elem: new div({
 					gap: 2,
 					row: true,
-					rowcol: 1,
+					rowCol: 1,
 					elem: new div({ col: true, class: "cl-sort-rule", id: id, elem: list }),
 				}),
 			});
@@ -826,7 +822,7 @@ let fn = {
 				elem: new div({
 					gap: 2,
 					row: true,
-					rowcol: 1,
+					rowCol: 1,
 					elem: new div({ col: true, class: "cl-field-rule", id: opt.id, elem: list }),
 				}),
 			});
@@ -907,7 +903,7 @@ function btnBuilder(btn, defButton, defColor, pushCancel) {
 			return {
 				label: ix <= defButton.length ? defButton[ix] : `Button ${ix + 1}`,
 				color: ix === 0 && defColor ? defColor : null,
-				onclick:
+				click:
 					ix === 0
 						? (sender) => {
 								if (core.validate(sender.closest(".modal"))) {
@@ -985,7 +981,7 @@ function elemBuilder(opt) {
 						elem: new div({
 							gap: 2,
 							row: true,
-							rowcol: 1,
+							rowCol: 1,
 							elem: [
 								new div({
 									col: true,

@@ -14,7 +14,7 @@ const defaultOption = {
 	weight: null,
 	align: "center", //start|end|center(default)
 	overflow: true,
-	onchange: null,
+	change: null,
 	firstlast: true,
 	nextprev: true,
 	labelfirst: null,
@@ -24,7 +24,7 @@ const defaultOption = {
 	autoupdate: true,
 };
 /**
- * [item:{title,icon,divider,label,href,onclick}]
+ * [item:{title,icon,divider,label,href,click}]
  * opt : {attr,id,class,style,item,divider}
  */
 
@@ -71,16 +71,16 @@ export default class paging extends div {
 				if (opt.firstlast) {
 					item.push(
 						new li({
-							class: ["page-item", curpage > 1 ? null : "disabled"],
+							class: "page-item",
+							disabled: !(curpage > 1),
 							elem: new a({
 								class: "page-link",
-								attr: {
-									tabindex: curpage > 1 ? null : "-1",
-									"aria-disabled": curpage > 1 ? null : true,
-									"aria-label": "First Page",
-								},
+								// tabindex: curpage > 1 ? null : "-1",
+								// "aria-disabled": curpage > 1 ? null : true,
+								"aria-label": "First Page",
 								href: "#",
-								onclick: (event) => {
+								disabled: !(curpage > 1),
+								click: (event) => {
 									data.skip = 0;
 									pagingonchange(event.currentTarget, data);
 								},
@@ -96,16 +96,16 @@ export default class paging extends div {
 				if (opt.nextprev) {
 					item.push(
 						new li({
-							class: ["page-item", curpage > 1 ? null : "disabled"],
+							class: "page-item",
+							disabled: !(curpage > 1),
 							elem: new a({
 								class: "page-link",
-								attr: {
-									tabindex: curpage > 1 ? null : "-1",
-									"aria-disabled": curpage > 1 ? null : true,
-									"aria-label": "Previous Page",
-								},
+								// tabindex: curpage > 1 ? null : "-1",
+								// "aria-disabled": curpage > 1 ? null : true,
+								"aria-label": "Previous Page",
 								href: "#",
-								onclick: (event) => {
+								disabled: !(curpage > 1),
+								click: (event) => {
 									data.skip = (curpage - 2) * data.limit;
 									pagingonchange(event.currentTarget, data);
 								},
@@ -171,14 +171,13 @@ export default class paging extends div {
 				for (x; x <= y; x++) {
 					item.push(
 						new li({
-							class: ["page-item", x === c ? "active" : null],
+							class: "page-item",
+							active: x === c,
 							elem: new a({
 								class: "page-link",
-								attr: {
-									"aria-label": `Page ${x.toString()}`,
-								},
+								"aria-label": `Page ${x.toString()}`,
 								href: "#",
-								onclick: (event) => {
+								click: (event) => {
 									let xnum = parseInt(event.currentTarget.innerText, 10);
 									data.skip = (xnum - 1) * data.limit;
 									pagingonchange(event.currentTarget, data);
@@ -193,16 +192,16 @@ export default class paging extends div {
 				if (opt.nextprev) {
 					item.push(
 						new li({
-							class: ["page-item", curpage < btncount ? null : "disabled"],
+							class: "page-item",
+							disabled: !(curpage < btncount),
 							elem: new a({
 								class: "page-link",
-								attr: {
-									tabindex: curpage < btncount ? null : "-1",
-									"aria-disabled": curpage > 1 ? null : true,
-									"aria-label": "Next Page",
-								},
+								// tabindex: curpage < btncount ? null : "-1",
+								// "aria-disabled": curpage > 1 ? null : true,
+								"aria-label": "Next Page",
+								disabled: !(curpage < btncount),
 								href: "#",
-								onclick: (event) => {
+								click: (event) => {
 									data.skip = curpage * data.limit;
 									pagingonchange(event.currentTarget, data);
 								},
@@ -216,16 +215,16 @@ export default class paging extends div {
 				if (opt.firstlast) {
 					item.push(
 						new li({
-							class: ["page-item", curpage < btncount ? null : "disabled"],
+							class: "page-item",
+							disabled: !(curpage < btncount),
 							elem: new a({
 								class: "page-link",
-								attr: {
-									tabindex: curpage < btncount ? null : "-1",
-									"aria-disabled": curpage > 1 ? null : true,
-									"aria-label": "Last Page",
-								},
+								// tabindex: curpage < btncount ? null : "-1",
+								// "aria-disabled": curpage > 1 ? null : true,
+								"aria-label": "Last Page",
+								disabled: !(curpage < btncount),
 								href: "#",
-								onclick: (event) => {
+								click: (event) => {
 									data.skip = (btncount - 1) * data.limit;
 									pagingonchange(event.currentTarget, data);
 								},
@@ -237,7 +236,10 @@ export default class paging extends div {
 					);
 				}
 
-				opt.class = core.merge.class(opt.class, ["pagination", opt.weight ? `pagination-${opt.weight}` : null]);
+				opt = core.merge(opt, {
+					class: ["pagination", opt.weight ? `pagination-${opt.weight}` : null],
+				});
+
 				opt.elem = item;
 
 				delete opt.total;
@@ -256,7 +258,7 @@ export default class paging extends div {
 					display: "flex",
 					padding: 3,
 					overflow: opt.overflow ? "auto" : null,
-					justifycontent: opt.align ? opt.align : null,
+					justifyContent: opt.align ? opt.align : null,
 					class: "cl-paging",
 					elem: new ul(opt),
 				};

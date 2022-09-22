@@ -17,11 +17,11 @@ const defaultContainerOption = {
 
 const defaultItemOption = {
 	type: null, //null|checkbox|radio|switch
-	disabled: false,
+	// disabled: false,
 	action: false,
 	value: null,
-	active: false,
-	checked: null, //if check
+	// active: false,
+	// checked: null, //if check
 	color: null,
 };
 
@@ -56,94 +56,77 @@ export default class listgroup extends tag {
 			opt.horizontal = "horizontal";
 		}
 
-		opt.tag = opt.type;
+		opt = core.merge(opt, {
+			tag: opt.type,
+			class: [
+				"list-group",
+				opt.flush ? "list-group-flush" : null,
+				opt.type === "ol" ? "list-group-numbered" : null,
+				core.multiClass(opt.horizontal, {
+					format: "list-group-horizontal-$1",
+					formatTrue: "list-group-horizontal",
+				}),
+			],
+			item: Array.isArray(opt.item) ? opt.item : [opt.item],
+			elem: opt.elem
+				? opt.elem
+				: opt.item.map((i) => {
+						i = core.extend({}, defaultItemOption, i);
 
-		opt.class = core.merge.class(opt.class, [
-			"list-group",
-			opt.flush ? "list-group-flush" : null,
-			opt.type === "ol" ? "list-group-numbered" : null,
-			opt.horizontal === true
-				? "horizontal"
-				: opt.horizontal === false
-				? null
-				: core.multiClass(opt.horizontal, "list-group-horizontal-$1"),
-		]);
+						if (i.type === "checkbox" || i.type === "radio" || i.type === "switch") {
+							let ctl = core.merge(i, {
+								tag: "input",
+								marginEnd: 2,
+								marginStart: i.type === "switch" ? 0 : null,
+								class: "form-check-input",
+								type: i.type === "switch" ? "checkbox" : i.type,
+							});
 
-		opt.item = Array.isArray(opt.item) ? opt.item : [opt.item];
+							delete ctl.color;
 
-		opt.elem = opt.elem
-			? opt.elem
-			: opt.item.map((i) => {
-					i = core.extend({}, defaultItemOption, i);
-
-					if (i.type === "checkbox" || i.type === "radio" || i.type === "switch") {
-						let ctl = core.extend({}, i);
-						ctl.tag = "input";
-
-						ctl.class = core.merge.class(ctl.class, [
-							"form-check-input",
-							"me-2",
-							i.type === "switch" ? "ms-0" : null,
-						]);
-
-						ctl.attr = core.merge.attr(ctl.attr, {
-							type: i.type === "switch" ? "checkbox" : i.type,
-							checked: i.checked,
-							value: i.value,
-						});
-
-						delete ctl.type;
-						delete ctl.value;
-						delete ctl.checked;
-						delete ctl.color;
-
-						i = {
-							tag: "label",
-							class: core.merge.class(i.class, [
-								"list-group-item",
-								i.type === "switch" ? "form-switch" : null,
-								i.active ? "active" : null,
-								i.disabled ? "disabled" : null,
-								i.action ? "list-group-item-action" : null,
-								i.color ? `list-group-item-${i.color}` : null,
-							]),
-							attr: core.merge.attr(i.attr, {
-								disabled: !i.href && i.disabled ? "" : null,
-								tabindex: i.href && i.disabled ? "-1" : null,
-								"aria-disabled": i.href && i.disabled ? "true" : null,
+							i = core.merge(i, {
+								tag: "label",
+								class: [
+									"list-group-item",
+									i.type === "switch" ? "form-switch" : null,
+									// i.active ? "active" : null,
+									// i.disabled ? "disabled" : null,
+									i.action ? "list-group-item-action" : null,
+									i.color ? `list-group-item-${i.color}` : null,
+								],
+								// disabled: !i.href && i.disabled ? "" : null,
+								// tabindex: i.href && i.disabled ? -1 : null,
+								// "aria-disabled": i.href && i.disabled ? "true" : null,
 								"aria-current": i.active ? "true" : null,
-							}),
-							elem: [new tag(ctl), i.label],
-						};
-					} else {
-						i.tag = i.href ? "a" : i.onclick instanceof Function ? "button" : "li";
+								elem: [new tag(ctl), i.label],
+							});
+						} else {
+							i = core.merge(i, {
+								tag: i.href ? "a" : i.click instanceof Function ? "button" : "li",
+								class: [
+									"list-group-item",
+									// i.active ? "active" : null,
+									// i.disabled ? "disabled" : null,
+									i.action || i.tag === "a" || i.tag === "button" ? "list-group-item-action" : null,
+									i.color ? `list-group-item-${i.color}` : null,
+								],
+								// disabled: !i.href && i.disabled ? "" : null,
+								// tabindex: i.href && i.disabled ? "-1" : null,
+								// "aria-disabled": i.href && i.disabled ? "true" : null,
+								"aria-current": i.active ? "true" : null,
+							});
+						}
 
-						i.class = core.merge.class(i.class, [
-							"list-group-item",
-							i.active ? "active" : null,
-							i.disabled ? "disabled" : null,
-							i.action || i.tag === "a" || i.tag === "button" ? "list-group-item-action" : null,
-							i.color ? `list-group-item-${i.color}` : null,
-						]);
+						delete i.type;
+						// delete i.active;
+						delete i.action;
+						// delete i.value;
+						// delete i.checked;
+						delete i.color;
 
-						i.attr = core.merge.attr(i.attr, {
-							disabled: !i.href && i.disabled ? "" : null,
-							tabindex: i.href && i.disabled ? "-1" : null,
-							"aria-disabled": i.href && i.disabled ? "true" : null,
-							"aria-current": i.active ? "true" : null,
-						});
-					}
-
-					delete i.type;
-					delete i.active;
-					delete i.disabled;
-					delete i.action;
-					delete i.value;
-					delete i.checked;
-					delete i.color;
-
-					return new tag(i);
-			  });
+						return new tag(i);
+				  }),
+		});
 
 		delete opt.item;
 		delete opt.type;

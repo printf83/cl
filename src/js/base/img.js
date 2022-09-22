@@ -58,18 +58,10 @@ export default class img extends tag {
 		if (opt) {
 			opt = core.extend({}, defaultOption, opt);
 
-			opt.class = core.merge.class(opt.class, [
-				opt.fluid ? "img-fluid" : null,
-				opt.thumbnail ? "img-thumbnail" : null,
-			]);
-
-			opt.attr = core.merge.attr(opt.attr, {
-				src: opt.src,
-				alt: opt.alt,
+			opt = core.merge(opt, {
+				class: [opt.fluid ? "img-fluid" : null, opt.thumbnail ? "img-thumbnail" : null],
 			});
 
-			delete opt.src;
-			delete opt.alt;
 			delete opt.fluid;
 			delete opt.thumbnail;
 

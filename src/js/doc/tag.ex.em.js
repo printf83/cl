@@ -30,9 +30,7 @@ export default [
 
 					//marker
 					new em({
-						attr: {
-							"data-test": "test",
-						},
+						"data-test": "test",
 						elem: "emphasis",
 					}),
 					//-

@@ -30,9 +30,7 @@ export default [
 
 					//marker
 					new i({
-						attr: {
-							"data-test": "test",
-						},
+						"data-test": "test",
 						elem: "italic",
 					}),
 					//-

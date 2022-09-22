@@ -150,48 +150,52 @@ export default class icon extends tag {
 					break;
 			}
 
-			opt.class = core.merge.class(opt.class, [
-				opt.weight ? `fa-${opt.weight}` : null,
-				opt.fixwidth ? "fa-fw" : null,
-				opt.spin ? "fa-spin" : null,
-				!opt.beat && opt.fade ? "fa-fade" : null,
-				opt.beat && !opt.fade ? "fa-beat" : null,
-				opt.beat && opt.fade ? "fa-beat-fade" : null,
-				opt.bounce ? "fa-bounce" : null,
-				opt.flip ? "fa-flip" : null,
-				opt.shake ? "fa-shake" : null,
-				opt.elem ? "fa-stack" : null,
-				opt.stack > 0 ? `fa-stack-${opt.stack}x` : null,
-				opt.inverse ? "fa-inverse" : null,
-				rotate,
-			]);
+			opt = core.merge(opt, {
+				class: [
+					opt.weight ? `fa-${opt.weight}` : null,
+					opt.fixwidth ? "fa-fw" : null,
+					opt.spin ? "fa-spin" : null,
+					!opt.beat && opt.fade ? "fa-fade" : null,
+					opt.beat && !opt.fade ? "fa-beat" : null,
+					opt.beat && opt.fade ? "fa-beat-fade" : null,
+					opt.bounce ? "fa-bounce" : null,
+					opt.flip ? "fa-flip" : null,
+					opt.shake ? "fa-shake" : null,
+					opt.elem ? "fa-stack" : null,
+					opt.stack > 0 ? `fa-stack-${opt.stack}x` : null,
+					opt.inverse ? "fa-inverse" : null,
+					rotate,
+				],
+			});
 
 			if (isSVG(opt.icon)) {
-				opt.tag = "img";
-				opt.attr = core.merge.attr(opt.attr, {
+				opt = core.merge(opt, {
+					tag: "img",
+					class: "fa-cl-svg",
 					src: editSVG(opt.color, opt.icon),
-					alt: opt.alt,
 				});
-				opt.class = core.merge.class(opt.class, "fa-cl-svg");
 			} else if (isImage(opt.icon)) {
-				opt.tag = "img";
-				opt.attr = core.merge.attr(opt.attr, {
+				opt = core.merge(opt, {
+					tag: "img",
+					class: "fa-cl-image",
 					src: opt.icon,
-					alt: opt.alt,
 				});
-				opt.class = core.merge.class(opt.class, "fa-cl-image");
 			} else {
-				opt.textcolor = opt.color;
-				opt.class = core.merge.class(opt.class, [
-					opt.type ? opt.type : null,
-					opt.icon ? `fa-${opt.icon}` : null,
-				]);
+				opt = core.merge(opt, {
+					textColor: opt.color,
+					class: [opt.type ? opt.type : null, opt.icon ? `fa-${opt.icon}` : null],
+				});
 			}
 
 			delete opt.type;
 			delete opt.icon;
 			delete opt.weight;
 			delete opt.fixwidth;
+			delete opt.beat;
+			delete opt.fade;
+			delete opt.bounce;
+			delete opt.flip;
+			delete opt.shake;
 			delete opt.spin;
 			delete opt.rotate;
 			delete opt.color;

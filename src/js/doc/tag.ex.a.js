@@ -25,8 +25,8 @@ export default [
 		code: () => {
 			return new a({
 				href: "https://getbootstrap.com/docs/5.2",
-				linkcolor: "danger",
-				textdecoration: "none",
+				linkColor: "danger",
+				textDecoration: "none",
 				elem: "Bootstrap",
 			});
 		},
@@ -40,7 +40,7 @@ export default [
 				item: [
 					"<code>icon</code> - only works if elem not provided",
 					"<code>label</code> - only works if elem not provided",
-					"<code>color</code> - shortcut to <code>linkcolor</code>. If you like to change the background color, you need to set <code>class:bg-*</code>",
+					"<code>color</code> - shortcut to <code>linkColor</code>. If you like to change the background color, you need to set <code>class:bg-*</code>",
 				],
 			}),
 			"If you set {{href:'#'}}, it will be changed to {{href:'javascript:void(0);'}}",
@@ -51,7 +51,7 @@ export default [
 			return [
 				new a({
 					href: "https://getbootstrap.com/docs/5.2",
-					textdecoration: "none",
+					textDecoration: "none",
 
 					//marker
 					icon: { type: "fab", icon: "bootstrap" },
@@ -64,7 +64,7 @@ export default [
 					class: "bg-primary",
 					padding: 2,
 					rounded: true,
-					textdecoration: "none",
+					textDecoration: "none",
 
 					//marker
 					icon: { type: "fab", icon: "bootstrap" },

@@ -19,13 +19,11 @@ export default [
 		viewclass: "cl-highlight-col",
 		import: ["tag"],
 		code: () => {
-			return [null, "start", "center", "end", ["end", "md-start", "lg-center"]].map((i) => {
+			return ["start", "center", "end", ["end", "md-start", "lg-center"]].map((i) => {
 				return new tag({
 					tag: "div",
-					elem: `Example element with <code>align: ${i}</code>`,
-
-					//marker
-					align: i,
+					textAlign: i, //marker
+					elem: `Example element with <code>textAlign: ${i}</code>`,
 				});
 			});
 		},
@@ -40,52 +38,43 @@ export default [
 
 	{
 		title: "Text wrapping and overflow",
-		msg: ["Wrap text with a {{wrap:true}} property"],
+		msg: ["Wrap text with a {{textWrap:true}} property"],
 		import: ["tag"],
 		code: () => {
 			return new tag({
 				tag: "div",
 				class: "cl-highlight",
 				width: "8rem",
+				textWrap: true, //marker
 				elem: "This text should wrap.",
-
-				//marker
-				wrap: true,
 			});
 		},
 	},
 
 	{
 		title: "Text wrapping and overflow",
-		msg: ["Wrap text with a {{wrap}} property"],
+		msg: ["Wrap text with a {{textWrap:false}} property"],
 		import: ["tag"],
 		code: () => {
 			return new tag({
 				tag: "div",
 				class: "cl-highlight",
 				width: "8rem",
+				textWrap: false, //marker
 				elem: "This text should overflow the parent.",
-
-				//marker
-				wrap: false,
 			});
 		},
 	},
 
 	{
 		title: "Word break",
-		msg: [
-			"Prevent long strings of text from breaking your components' layout by using .text-break to set word-wrap: break-word and word-break: break-word. We use word-wrap instead of the more common overflow-wrap for wider browser support, and add the deprecated word-break: break-word to avoid issues with flex containers.",
-		],
 		import: ["tag"],
 		code: () => {
 			return new tag({
 				tag: "div",
 				class: "cl-highlight",
+				wordBreak: true, //marker
 				elem: "mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm",
-
-				//marker
-				wordbreak: true,
 			});
 		},
 	},
@@ -103,13 +92,11 @@ export default [
 		container: sample.vstackcontainer,
 		import: ["tag"],
 		code: () => {
-			return [null, "lowercase", "uppercase", "capitalize"].map((i) => {
+			return ["lowercase", "uppercase", "capitalize"].map((i) => {
 				return new tag({
 					tag: "div",
-					elem: `Example element with <code>texttransform: ${i}</code>`,
-
-					//marker
-					texttransform: i,
+					textTransform: i, //marker
+					elem: `Example element with <code>textTransform: ${i}</code>`,
 				});
 			});
 		},
@@ -118,18 +105,16 @@ export default [
 	{
 		title: "Font size",
 		msg: [
-			"Quickly change the font-size of text using {{fontsize}} property. While Bootstrap heading classes (e.g., {{.h1}}–{{.h6}}) apply {{fontsize}}, {{fontweight}}, and {{lineheight}}, these utilities <i>only</i> apply {{font-size}}. Sizing for these utilities matches HTML’s heading elements, so as the number increases, their size decreases.",
+			"Quickly change the font-size of text using {{fontSize}} property. While Bootstrap heading classes (e.g., {{.h1}}–{{.h6}}) apply {{fontSize}}, {{fontWeight}}, and {{lineHeight}}, these utilities <i>only</i> apply {{font-size}}. Sizing for these utilities matches HTML’s heading elements, so as the number increases, their size decreases.",
 		],
 		container: sample.vstackcontainer,
 		import: ["tag"],
 		code: () => {
-			return [null, 1, 2, 3, 4, 5, 6].map((i) => {
+			return [1, 2, 3, 4, 5, 6].map((i) => {
 				return new tag({
 					tag: "div",
-					elem: `Example element with <code>fontsize: ${i}</code>`,
-
-					//marker
-					fontsize: i,
+					fontSize: i, //marker
+					elem: `Example element with <code>fontSize: ${i}</code>`,
 				});
 			});
 		},
@@ -137,17 +122,15 @@ export default [
 
 	{
 		title: "Font weight",
-		msg: ["Quickly change the font-weight of text with these {{fontweight}}."],
+		msg: ["Quickly change the font-weight of text with these {{fontWeight}}."],
 		container: sample.vstackcontainer,
 		import: ["tag"],
 		code: () => {
 			return [null, "bold", "bolder", "semibold", "normal", "light", "lighter"].map((i) => {
 				return new tag({
 					tag: "div",
-					elem: `Example element with <code>fontweight: ${i}</code>`,
-
-					//marker
-					fontweight: i,
+					fontWeight: i, //marker
+					elem: `Example element with <code>fontWeight: ${i}</code>`,
 				});
 			});
 		},
@@ -155,17 +138,15 @@ export default [
 
 	{
 		title: "Font italics",
-		msg: ["Quickly change the font-style of text with these {{fontitalic}}."],
+		msg: ["Quickly change the font-style of text with these {{fontItalic}}."],
 		container: sample.vstackcontainer,
 		import: ["tag"],
 		code: () => {
-			return [null, true, false].map((i) => {
+			return [true, false].map((i) => {
 				return new tag({
 					tag: "div",
-					elem: `Example element with <code>fontitalic: ${i}</code>`,
-
-					//marker
-					fontitalic: i,
+					fontItalic: i, //marker
+					elem: `Example element with <code>fontItalic: ${i}</code>`,
 				});
 			});
 		},
@@ -173,17 +154,15 @@ export default [
 
 	{
 		title: "Text decoration",
-		msg: ["Decorate text in components with {{textdecoration}} property."],
+		msg: ["Decorate text in components with {{textDecoration}} property."],
 		container: sample.vstackcontainer,
 		import: ["tag"],
 		code: () => {
-			return [null, true, false, "underline", "line-through", "none"].map((i) => {
+			return ["underline", "line-through", "none"].map((i) => {
 				return new tag({
 					tag: "div",
-					elem: `Example element with <code>textdecoration: ${i}</code>`,
-
-					//marker
-					textdecoration: i,
+					textDecoration: i, //marker
+					elem: `Example element with <code>textDecoration: ${i}</code>`,
 				});
 			});
 		},
@@ -197,28 +176,24 @@ export default [
 		code: () => {
 			return new tag({
 				tag: "div",
+				monospace: true, //marker
 				elem: `Example element with <code>monospace: true</code>`,
-
-				//marker
-				monospace: true,
 			});
 		},
 	},
 
 	{
 		title: "Line height",
-		msg: ["Change the line height with {{lineheight}} property"],
+		msg: ["Change the line height with {{lineHeight}} property"],
 		container: sample.vstackcontainer,
 		import: ["tag", "sample"],
 		code: () => {
-			return [null, 1, "sm", "base", "lg"].map((i) => {
+			return [1, "sm", "base", "lg"].map((i) => {
 				return new tag({
 					tag: "div",
 					class: "cl-highlight-element",
-					elem: `Example element with <code>lineheight: ${i}</code>. ${sample.text()}`,
-
-					//marker
-					lineheight: i,
+					lineHeight: i, //marker
+					elem: `Example element with <code>lineHeight: ${i}</code>. ${sample.text()}`,
 				});
 			});
 		},

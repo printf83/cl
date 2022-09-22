@@ -250,13 +250,14 @@ export default [
 		dark: true,
 		import: ["navbar", "dropdown"],
 		code: () => {
-			var id = new core.UUID();
+			var id = core.UUID();
 			return new navbar.container({
 				expand: "lg",
+				dark: true,
 				color: "dark",
 				elem: [
 					new navbar.toggle({
-						id,
+						id: id,
 						toggle: "collapse",
 					}),
 
@@ -265,7 +266,7 @@ export default [
 					}),
 
 					new navbar.collapsecontainer({
-						id,
+						id: id,
 						elem: [
 							new navbar.itemcontainer({
 								parenttype: "collapse",
@@ -655,7 +656,7 @@ export default [
 								width: "200px",
 								elem: [
 									new p("Some example text that's free-flowing within the dropdown menu."),
-									new p({ marginbottom: 0, elem: "And this is more example text." }),
+									new p({ marginBottom: 0, elem: "And this is more example text." }),
 								],
 							}),
 							//-
@@ -682,7 +683,7 @@ export default [
 								padding: 3,
 								gap: 3,
 								row: true,
-								rowcol: 1,
+								rowCol: 1,
 								elem: [
 									new input({
 										size: "col",
@@ -809,19 +810,19 @@ export default [
 				item: [
 					["Option", "Description"],
 					[
-						"<code>onshow</code>",
+						"<code>show</code>",
 						"This event fires immediately when the <code>show</code> instance method is called.",
 					],
 					[
-						"<code>onshown</code>",
+						"<code>shown</code>",
 						"This event is fired when the dropdown has been made visible to the user (will wait for CSS transitions to complete).",
 					],
 					[
-						"<code>onhide</code>",
+						"<code>hide</code>",
 						"This event is fired immediately when the <code>hide</code> instance method has been called.",
 					],
 					[
-						"<code>onhidden</code>",
+						"<code>hidden</code>",
 						"This event is fired when the dropdown has finished being hidden from the user (will wait for CSS transitions to complete).",
 					],
 				],
@@ -843,17 +844,17 @@ export default [
 				],
 
 				//marker
-				onshow: (event) => {
-					new toast("i", fn(event.currentTarget, "onshow")).show();
+				show: (event) => {
+					new toast("i", fn(event.currentTarget, "show")).show();
 				},
-				onshown: (event) => {
-					new toast("/", fn(event.currentTarget, "onshown")).show();
+				shown: (event) => {
+					new toast("/", fn(event.currentTarget, "shown")).show();
 				},
-				onhide: (event) => {
-					new toast("!", fn(event.currentTarget, "onhide")).show();
+				hide: (event) => {
+					new toast("!", fn(event.currentTarget, "hide")).show();
 				},
-				onhidden: (event) => {
-					new toast("x", fn(event.currentTarget, "onhidden")).show();
+				hidden: (event) => {
+					new toast("x", fn(event.currentTarget, "hidden")).show();
 				},
 				//-
 			});

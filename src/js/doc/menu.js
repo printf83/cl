@@ -250,7 +250,7 @@ export default [
 							label: "Show info toast",
 
 							//marker
-							onclick: () => {
+							click: () => {
 								new toast("i", "Info toast").show();
 							},
 							//-
@@ -259,7 +259,7 @@ export default [
 							label: "Show warning toast",
 
 							//marker
-							onclick: () => {
+							click: () => {
 								new toast("!", "Warning toast").show();
 							},
 							//-
@@ -268,7 +268,7 @@ export default [
 							label: "Show success toast",
 
 							//marker
-							onclick: () => {
+							click: () => {
 								new toast("/", "Success toast").show();
 							},
 							//-
@@ -277,7 +277,7 @@ export default [
 							label: "Show critical toast",
 
 							//marker
-							onclick: () => {
+							click: () => {
 								new toast("x", "Critical toast").show();
 							},
 							//-

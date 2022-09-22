@@ -24,7 +24,7 @@ export default [
 		import: ["nav"],
 		code: () => {
 			return new nav({
-				attr: { "data-test": "test" },
+				"data-test": "test",
 				elem: "Example navigation",
 			});
 		},

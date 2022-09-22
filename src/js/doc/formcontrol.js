@@ -5,6 +5,7 @@ import input from "../base/input.js";
 import button from "../base/button.js";
 import toast from "../base/toast.js";
 import * as table from "../base/table.js";
+import div from "../base/div.js";
 
 export default [
 	{
@@ -41,10 +42,8 @@ export default [
 			return [
 				new input({
 					type: "text",
+					weight: "lg", //marker
 					placeholder: 'weight:"lg"',
-
-					//marker
-					weight: "lg",
 				}),
 				new input({
 					type: "text",
@@ -52,10 +51,8 @@ export default [
 				}),
 				new input({
 					type: "text",
+					weight: "sm", //marker
 					placeholder: 'weight:"sm"',
-
-					//marker
-					weight: "sm",
 				}),
 			];
 		},
@@ -69,19 +66,14 @@ export default [
 			return [
 				new input({
 					type: "text",
+					disabled: true, //marker
 					placeholder: "Disabled input",
-
-					//marker
-					disabled: true,
 				}),
 				new input({
 					type: "text",
+					disabled: true, //marker
+					readonly: true, //marker
 					placeholder: "Disabled readonly input",
-
-					//marker
-					disabled: true,
-					readonly: true,
-					//-
 				}),
 			];
 		},
@@ -94,41 +86,48 @@ export default [
 		code: () => {
 			return new input({
 				type: "text",
+				readonly: true, //marker
 				placeholder: "Readonly input here...",
-
-				//marker
-				readonly: true,
 			});
 		},
 	},
 
 	{
 		title: "Readonly plain text",
-		container: sample.formcontainer,
+		// container: sample.stackformcontainer,
 		import: ["input"],
 		code: () => {
-			return [
-				new input({
-					label: "Email",
-					labelsize: "sm-2",
-					ctlsize: "sm-10",
-					type: "email",
-					value: "name@example.com",
-					autocomplete: "email",
-
-					//marker
-					readonly: true,
-					plaintext: true,
-					//-
-				}),
-				new input({
-					label: "Password",
-					labelsize: "sm-2",
-					ctlsize: "sm-10",
-					type: "password",
-					autocomplete: "current-password",
-				}),
-			];
+			return new div({
+				container: "fluid",
+				padding: 0,
+				elem: [
+					new div({
+						row: true,
+						gap: 2,
+						elem: new input({
+							label: "Email",
+							labelsize: "md-3",
+							ctlsize: "auto",
+							type: "email",
+							value: "name@example.com",
+							autocomplete: "email",
+							readonly: true, //marker
+							plaintext: true, //marker
+						}),
+					}),
+					new div({
+						row: true,
+						gap: 2,
+						elem: new input({
+							label: "Password",
+							labelsize: "md-3",
+							ctlsize: "auto",
+							type: "password",
+							autocomplete: "current-password",
+						}),
+					}),
+				],
+			});
 		},
 	},
 
@@ -144,11 +143,8 @@ export default [
 					type: "email",
 					value: "name@example.com",
 					autocomplete: "email",
-
-					//marker
-					readonly: true,
-					plaintext: true,
-					//-
+					readonly: true, //marker
+					plaintext: true, //marker
 				}),
 				new input({
 					label: "Password",
@@ -173,42 +169,28 @@ export default [
 		code: () => {
 			return [
 				new input({
+					type: "file", //marker
 					label: "Default file input example",
-
-					//marker
-					type: "file",
 				}),
 				new input({
+					type: "file",
+					multiple: true, //marker
 					label: "Multiple files input example",
-
-					//marker
-					type: "file",
-					multiple: true,
-					//-
 				}),
 				new input({
+					type: "file",
+					disabled: true, //marker
 					label: "Disabled file input example",
-
-					//marker
-					type: "file",
-					disabled: true,
-					//-
 				}),
 				new input({
+					type: "file",
+					weight: "sm", //marker
 					label: "Small file input example",
-
-					//marker
-					type: "file",
-					weight: "sm",
-					//-
 				}),
 				new input({
-					label: "Large file input example",
-
-					//marker
 					type: "file",
-					weight: "lg",
-					//-
+					weight: "lg", //marker
+					label: "Large file input example",
 				}),
 			];
 		},
@@ -220,10 +202,8 @@ export default [
 		import: ["input"],
 		code: () => {
 			return new input({
+				type: "color", //marker
 				label: "Color picker",
-
-				//marker
-				type: "color",
 			});
 		},
 	},
@@ -249,10 +229,10 @@ export default [
 			new table.container({
 				item: [
 					["Option", "Description"],
-					["<code>onclick</code>", "This event is fired when the control is clicked."],
-					["<code>onfocus</code>", "This event is fired when the control is focused."],
-					["<code>onblur</code>", "This event is fired when the control is leaved."],
-					["<code>onchange</code>", "This event is fired when the control value is changed after leaved"],
+					["<code>click</code>", "This event is fired when the control is clicked."],
+					["<code>focus</code>", "This event is fired when the control is focused."],
+					["<code>blur</code>", "This event is fired when the control is leaved."],
+					["<code>change</code>", "This event is fired when the control value is changed after leaved"],
 				],
 			}),
 		],
@@ -269,17 +249,17 @@ export default [
 					helper: "We'll never share your email with anyone else.",
 
 					//marker
-					onclick: (event) => {
-						new toast("i", fn(event.currentTarget, "onclick")).show();
+					click: (event) => {
+						new toast("i", fn(event.currentTarget, "click")).show();
 					},
-					onfocus: (event) => {
-						new toast("!", fn(event.currentTarget, "onfocus")).show();
+					focus: (event) => {
+						new toast("!", fn(event.currentTarget, "focus")).show();
 					},
-					onblur: (event) => {
-						new toast("-", fn(event.currentTarget, "onblur")).show();
+					blur: (event) => {
+						new toast("-", fn(event.currentTarget, "blur")).show();
 					},
-					onchange: (event) => {
-						new toast("/", fn(event.currentTarget, "onchange")).show();
+					change: (event) => {
+						new toast("/", fn(event.currentTarget, "change")).show();
 					},
 					//-
 				}),
@@ -288,17 +268,17 @@ export default [
 					type: "textarea",
 
 					//marker
-					onclick: (event) => {
-						new toast("i", fn(event.currentTarget, "onclick")).show();
+					click: (event) => {
+						new toast("i", fn(event.currentTarget, "click")).show();
 					},
-					onfocus: (event) => {
-						new toast("!", fn(event.currentTarget, "onfocus")).show();
+					focus: (event) => {
+						new toast("!", fn(event.currentTarget, "focus")).show();
 					},
-					onblur: (event) => {
-						new toast("-", fn(event.currentTarget, "onblur")).show();
+					blur: (event) => {
+						new toast("-", fn(event.currentTarget, "blur")).show();
 					},
-					onchange: (event) => {
-						new toast("/", fn(event.currentTarget, "onchange")).show();
+					change: (event) => {
+						new toast("/", fn(event.currentTarget, "change")).show();
 					},
 					//-
 				}),

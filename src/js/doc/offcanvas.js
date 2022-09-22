@@ -27,7 +27,7 @@ export default [
 			return new button({
 				label: "Show offcanvas",
 				color: "primary",
-				onclick: () => {
+				click: () => {
 					new offcanvas({
 						close: true,
 						backdrop: true,
@@ -65,7 +65,7 @@ export default [
 				return new button({
 					label: `Show ${i} offcanvas`,
 					color: i,
-					onclick: () => {
+					click: () => {
 						new offcanvas({
 							//marker
 							color: i,
@@ -107,7 +107,7 @@ export default [
 					new button({
 						label: `Show ${i} offcanvas`,
 						color: "primary",
-						onclick: () => {
+						click: () => {
 							new offcanvas({
 								//marker
 								placement: i,
@@ -154,7 +154,7 @@ export default [
 							label: i ? `Offcanvas hide on ${i} screen` : "Normal offcanvas",
 							display: i ? `${i}-none` : null, //marker
 							color: "primary",
-							onclick: () => {
+							click: () => {
 								new offcanvas({
 									//marker
 									autoclose: i,
@@ -207,7 +207,7 @@ export default [
 						col: 12,
 						elem: new alert.container({
 							icon: "i",
-							marginbottom: 0,
+							marginBottom: 0,
 							display: ["none", "xxl-block"],
 							elem: "Resize your screen size to smaller size to view other offcanvas option.",
 						}),
@@ -244,7 +244,7 @@ export default [
 				new button({
 					label: "Enable body scrolling",
 					color: "primary",
-					onclick: () => {
+					click: () => {
 						new offcanvas({
 							//marker
 							scroll: true,
@@ -260,7 +260,7 @@ export default [
 				new button({
 					label: "Enable backdrop",
 					color: "primary",
-					onclick: () => {
+					click: () => {
 						new offcanvas({
 							//marker
 							backdrop: true,
@@ -276,7 +276,7 @@ export default [
 				new button({
 					label: "Enable both scrolling & backdrop",
 					color: "primary",
-					onclick: () => {
+					click: () => {
 						new offcanvas({
 							//marker
 							backdrop: true,
@@ -326,7 +326,7 @@ export default [
 			return new button({
 				label: "Show offcanvas",
 				color: "primary",
-				onclick: () => {
+				click: () => {
 					new offcanvas({
 						close: true,
 						backdrop: true,

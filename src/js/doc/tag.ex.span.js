@@ -30,9 +30,7 @@ export default [
 
 					//marker
 					new span({
-						attr: {
-							"data-test": "test",
-						},
+						"data-test": "test",
 						elem: "span",
 					}),
 					//-

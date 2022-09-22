@@ -28,9 +28,7 @@ export default [
 		import: ["form"],
 		code: () => {
 			return new form({
-				attr: {
-					"data-test": "test",
-				},
+				"data-test": "test",
 				elem: "Example",
 			});
 		},

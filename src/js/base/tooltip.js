@@ -9,11 +9,11 @@ const defaultOption = {
 	placement: "top",
 	trigger: "focus",
 
-	onshow: null,
-	onshown: null,
-	onhide: null,
-	onhidden: null,
-	oninserted: null,
+	show: null,
+	shown: null,
+	hide: null,
+	hidden: null,
+	inserted: null,
 };
 /**
  * elem, msg
@@ -33,7 +33,8 @@ export default class tooltip extends tag {
 				opt = core.extend({}, defaultOption, opt);
 
 				let tmp = opt.elem.data;
-				tmp.attr = core.merge.attr(tmp.attr, {
+
+				tmp = core.merge(tmp, {
 					title: opt.type === "popover" ? opt.title : opt.msg,
 					"data-bs-toggle": opt.type,
 					"data-bs-content": opt.type === "popover" ? opt.msg : null,
@@ -43,20 +44,20 @@ export default class tooltip extends tag {
 				});
 
 				if (opt.type === "popover") {
-					tmp.attr = core.merge.attr(tmp.attr, {
-						"show.bs.popover": opt.onshow,
-						"shown.bs.popover": opt.onshown,
-						"hide.bs.popover": opt.onhide,
-						"hidden.bs.popover": opt.onhidden,
-						"inserted.bs.popover": opt.oninserted,
+					tmp = core.merge(tmp, {
+						"show.bs.popover": opt.show,
+						"shown.bs.popover": opt.shown,
+						"hide.bs.popover": opt.hide,
+						"hidden.bs.popover": opt.hidden,
+						"inserted.bs.popover": opt.inserted,
 					});
 				} else {
-					tmp.attr = core.merge.attr(tmp.attr, {
-						"show.bs.tooltip": opt.onshow,
-						"shown.bs.tooltip": opt.onshown,
-						"hide.bs.tooltip": opt.onhide,
-						"hidden.bs.tooltip": opt.onhidden,
-						"inserted.bs.tooltip": opt.oninserted,
+					tmp = core.merge(tmp, {
+						"show.bs.tooltip": opt.show,
+						"shown.bs.tooltip": opt.shown,
+						"hide.bs.tooltip": opt.hide,
+						"hidden.bs.tooltip": opt.hidden,
+						"inserted.bs.tooltip": opt.inserted,
 					});
 				}
 

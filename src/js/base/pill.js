@@ -41,25 +41,27 @@ export default class pill extends div {
 			];
 		}
 
+		opt = core.merge(opt, { class: "cl-pill" });
+
 		let elem = new inputgroup.container({
-			class: core.merge.class(opt.class, "cl-pill"),
+			class: opt.class,
 			weight: opt.weight,
 			elem: [
 				new inputgroup.text({
 					border: false,
-					color: opt.color,
-					textcolor: opt.color,
-					coloropacity: 25,
-					paddingx: 2,
-					paddingy: 1,
+					bgColor: opt.color,
+					textColor: opt.color,
+					bgOpacity: 25,
+					paddingX: 2,
+					paddingY: 1,
 					elem: opt.icon ? new icon(opt.icon) : opt.title ? new small(opt.title) : null,
 				}),
 				new inputgroup.text({
 					border: false,
-					color: opt.color,
-					textcolor: opt.textcolor,
-					paddingx: 2,
-					paddingy: 1,
+					bgColor: opt.color,
+					textBgColor: opt.color,
+					paddingX: 2,
+					paddingY: 1,
 					elem: opt.elem || new small(opt.label),
 				}),
 			],
@@ -70,11 +72,11 @@ export default class pill extends div {
 				? new tooltip({ type: "tooltip", placement: "top", msg: opt.title, elem: elem })
 				: elem;
 
+		delete opt.viewport;
 		delete opt.weight;
 		delete opt.icon;
 		delete opt.label;
 		delete opt.color;
-		delete opt.class;
 
 		super.data = opt;
 	}

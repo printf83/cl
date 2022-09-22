@@ -23,7 +23,7 @@ import h from "./base/h.js";
 
 let def_main_menu = "Getting started";
 let def_sub_menu = "Introduction";
-let DEBUG = false;
+let DEBUG = 0;
 
 const db_menu = [
 	{
@@ -49,7 +49,7 @@ const db_menu = [
 	{
 		type: "menu",
 		title: "Forms",
-		icon: { icon: "list-check", color: "secondary" },
+		icon: { icon: "list-check", color: "muted" },
 		item: [
 			{ title: "Form control", source: doc.formcontrol },
 			{ title: "Select", source: doc.select },
@@ -172,7 +172,7 @@ const db_menu = [
 	{
 		type: "navigate",
 		title: "Others",
-		icon: { icon: "link", color: "secondary" },
+		icon: { icon: "link", color: "muted" },
 		item: [
 			{ title: "Sandbox", source: "sandbox.html" },
 			{ title: "Test", source: "test.html" },
@@ -363,7 +363,7 @@ function start_memoryleaktest(sender, limit) {
 			If you want to stop the test, please click on this <b>Memory Leak Test</b> again to stop the test.`,
 			{
 				label: "Understand",
-				onclick: () => {
+				click: () => {
 					sender.classList.add("active");
 					memoryleaktestrun = true;
 					memoryleaktest(
@@ -535,10 +535,10 @@ let cur_sub_menu = null;
 function generate_page_placeholder() {
 	let fn = (col) => {
 		return new div({
-			placeholderanimation: "glow",
+			placeholderAnimation: "glow",
 			elem: Array.isArray(col)
 				? col.map((i) => {
-						return new span({ col: i, marginend: 1, placeholder: true });
+						return new span({ col: i, marginEnd: 1, placeholder: true });
 				  })
 				: new span({ col: col, placeholder: true }),
 		});
@@ -550,23 +550,23 @@ function generate_page_placeholder() {
 
 	return new div({
 		ariahidden: true,
-		marginbottom: 5,
+		marginBottom: 5,
 		elem: [
-			new h({ level: 1, paddingtop: 3, fontsize: 3, elem: f(2, 4) }),
+			new h({ level: 1, paddingTop: 3, fontSize: 3, elem: f(2, 4) }),
 			new div({
 				elem: new p({
-					fontweight: "light",
-					fontsize: 5,
+					fontWeight: "light",
+					fontSize: 5,
 					elem: f(12, 5),
 				}),
 			}),
-			new h({ level: 3, paddingtop: 3, elem: f(2, 3) }),
+			new h({ level: 3, paddingTop: 3, elem: f(2, 3) }),
 			new div({
 				elem: new p({
 					elem: f(6, 6),
 				}),
 			}),
-			new h({ level: 3, paddingtop: 3, elem: f(2, 3) }),
+			new h({ level: 3, paddingTop: 3, elem: f(2, 3) }),
 			new div({
 				elem: new p({
 					elem: f(6, 6),
@@ -598,7 +598,7 @@ function load_random_page(callback) {
 }
 
 function reload_page(update_url, callback) {
-	if (DEBUG) console.log("---[reload active doc]---");
+	if (DEBUG > 2) console.log("---[reload active doc]---");
 
 	if (cur_main_menu && cur_sub_menu) {
 		load_page(false, null, cur_main_menu, cur_sub_menu, () => {
@@ -643,13 +643,13 @@ function load_page(showloading, sender, main_menu, sub_menu, callback) {
 								try {
 									//async import doc source
 									core.importJS(menu_item.source, (menu_item_source) => {
-										let processtimestart = DEBUG ? window.performance.now() : null;
+										let processtimestart = DEBUG > 0 ? window.performance.now() : null;
 
 										// sample.resetindex();
 										core.replaceChild(
 											document.getElementById("root"),
 											new div({
-												marginbottom: 3,
+												marginBottom: 3,
 												tabindex: 0,
 												elem: menu_item_source.map((i) => {
 													return generate_page(i);
@@ -657,9 +657,9 @@ function load_page(showloading, sender, main_menu, sub_menu, callback) {
 											})
 										);
 
-										let processtimeend = DEBUG ? window.performance.now() : null;
+										let processtimeend = DEBUG > 0 ? window.performance.now() : null;
 
-										if (DEBUG) {
+										if (DEBUG > 0) {
 											//count pagespeed
 											document.getElementById("pagespeed").innerText = `${(
 												processtimeend - processtimestart
@@ -700,7 +700,7 @@ function load_page(showloading, sender, main_menu, sub_menu, callback) {
 				core.replaceChild(
 					document.getElementById("root"),
 					new div({
-						marginbottom: 3,
+						marginBottom: 3,
 						elem: new msg({
 							weight: "lg",
 							icon: "!",
@@ -709,7 +709,7 @@ function load_page(showloading, sender, main_menu, sub_menu, callback) {
 					})
 				);
 
-				if (DEBUG) {
+				if (DEBUG > 0) {
 					//count pagespeed
 					document.getElementById("pagespeed").innerText = `0 ms`;
 
@@ -763,10 +763,10 @@ function generate_tableofcontent() {
 function generate_tableofcontent_placeholder() {
 	let fn = (col) => {
 		return new div({
-			placeholderanimation: "glow",
+			placeholderAnimation: "glow",
 			elem: Array.isArray(col)
 				? col.map((i) => {
-						return new span({ col: i, marginend: 1, placeholder: true });
+						return new span({ col: i, marginEnd: 1, placeholder: true });
 				  })
 				: new span({ col: col, placeholder: true }),
 		});
@@ -811,7 +811,9 @@ function update_pagerandom(main_menu, sub_menu) {
 
 function update_url(main_menu, sub_menu) {
 	let title = `${core.setting.title()} - ${main_menu} | ${sub_menu}`;
-	let path = `/?m1=${encodeURIComponent(main_menu)}&m2=${encodeURIComponent(sub_menu)}${DEBUG ? "&debug=1" : ""}`;
+	let path = `/?m1=${encodeURIComponent(main_menu)}&m2=${encodeURIComponent(sub_menu)}${
+		DEBUG ? `&debug=${DEBUG}` : ""
+	}`;
 	let data = { urlPath: path };
 
 	window.history.pushState(data, title, path);
@@ -845,12 +847,12 @@ function get_url_param() {
 		? {
 				main_menu: decodeURIComponent(main_menu),
 				sub_menu: decodeURIComponent(sub_menu),
-				debug: debug ? true : false,
+				debug: debug ? parseInt(debug) : 0,
 		  }
 		: {
 				main_menu: null,
 				sub_menu: null,
-				debug: debug ? true : false,
+				debug: debug ? parseInt(debug) : 0,
 		  };
 }
 
@@ -871,7 +873,7 @@ function activate_menu(main_menu, sub_menu, type_menu) {
 			activeItem[x].classList.remove("active");
 			if (type_menu !== "theme") {
 				if (activeItem[x].getAttribute("cl-main_menu") !== main_menu) {
-					let iul = activeItem[x].closest("ul");
+					let iul = activeItem[x].closest("ul").parentElement;
 					if (iul) {
 						try {
 							let isib = iul.previousSibling;
@@ -895,7 +897,7 @@ function activate_menu(main_menu, sub_menu, type_menu) {
 		current_active_menu_item.classList.add("active");
 
 		if (type_menu !== "theme") {
-			let cul = current_active_menu_item.closest("ul");
+			let cul = current_active_menu_item.closest("ul").parentElement;
 			if (cul) {
 				try {
 					let csib = cul.previousSibling;
@@ -928,12 +930,10 @@ function generate_menu() {
 					id: `${i.type}_${alpha_only(i.title)}_${alpha_only(j.title)}`,
 					class: `cl-${i.type}-item`,
 					label: j.title,
-					attr: {
-						"cl-m1": i.title,
-						"cl-m2": j.title,
-						"cl-m3": i.type,
-					},
-					onclick: (event) => {
+					"cl-m1": i.title,
+					"cl-m2": j.title,
+					"cl-m3": i.type,
+					click: (event) => {
 						let sender = event.currentTarget;
 
 						let main_menu = sender.getAttribute("cl-m1");
@@ -996,20 +996,20 @@ core.documentReady(() => {
 				class: ["sticky-md-top", "collapse", "navbar-collapse", "cl-vh-menu"],
 				overflow: "auto",
 				display: "md-block",
-				margintop: 3,
+				marginTop: 3,
 				elem: generate_menu(),
 			}),
 			rightelem: new tag({
 				class: ["sticky-lg-top", "cl-vh-menu"],
 				overflow: "auto",
-				margintop: 3,
+				marginTop: 3,
 				elem: generate_tableofcontent_placeholder(),
 			}),
 			footerelem: new div({
 				display: "flex",
 				flex: "wrap",
-				justifycontent: "center",
-				marginbottom: 5,
+				justifyContent: "center",
+				marginBottom: 5,
 				gap: 2,
 				elem: [
 					new a({
@@ -1021,7 +1021,7 @@ core.documentReady(() => {
 							elem: [new small({ id: "pagerandom", elem: "Random Page" })],
 						}),
 						href: "#",
-						onclick: () => {
+						click: () => {
 							let pagerandomlabel = document.getElementById("pagerandom");
 							let pagerandomico = pagerandomlabel.closest("div.cl-pill").getElementsByTagName("I")[0];
 
@@ -1049,7 +1049,7 @@ core.documentReady(() => {
 							elem: [new small({ id: "pagetheme", elem: "Default" })],
 						}),
 						href: "#",
-						onclick: () => {
+						click: () => {
 							let pagethemelabel = document.getElementById("pagetheme");
 							let pagethemeico = pagethemelabel.closest("div.cl-pill").getElementsByTagName("I")[0];
 
@@ -1075,7 +1075,7 @@ core.documentReady(() => {
 						viewport: true,
 					}),
 
-					DEBUG
+					DEBUG > 0
 						? new pill({
 								icon: "stopwatch",
 								title: "Build speed",
@@ -1083,7 +1083,7 @@ core.documentReady(() => {
 								elem: [new small({ id: "pagespeed", elem: "0 ms" })],
 						  })
 						: null,
-					DEBUG
+					DEBUG > 0
 						? new pill({
 								icon: "balance-scale",
 								title: "Page weight",

@@ -19,8 +19,9 @@ export default [
 		import: ["listgroup"],
 		code: () => {
 			return new listgroup({
+				"data-cl-test": "test-list-group",
 				item: [
-					{ elem: "An item" },
+					{ elem: "An item", "data-cl-test": "test-item" },
 					{ elem: "A second item" },
 					{ elem: "A third item" },
 					{ elem: "A fourth item" },
@@ -38,9 +39,7 @@ export default [
 				item: [
 					{
 						elem: "An active item",
-
-						//marker
-						active: true,
+						active: true, //marker
 					},
 					{ elem: "A second item" },
 					{ elem: "A third item" },
@@ -59,9 +58,7 @@ export default [
 				item: [
 					{
 						elem: "An disabled item",
-
-						//marker
-						disabled: true,
+						disabled: true, //marker
 					},
 					{ elem: "A second item" },
 					{ elem: "A third item" },
@@ -81,21 +78,15 @@ export default [
 				item: [
 					{
 						elem: "A disabled item",
-
 						//marker
 						href: "#",
 						disabled: true,
 						//-
 					},
-					{
-						elem: "A second item",
-
-						//marker
-						href: "#",
-					},
-					{ href: "#", elem: "A third item" },
-					{ href: "#", elem: "A fourth item" },
-					{ href: "#", elem: "And a fifth one" },
+					{ href: "#" /*marker*/, elem: "A second item" },
+					{ href: "#" /*marker*/, elem: "A third item" },
+					{ href: "#" /*marker*/, elem: "A fourth item" },
+					{ href: "#" /*marker*/, elem: "And a fifth one" },
 				],
 			});
 		},
@@ -112,19 +103,14 @@ export default [
 						elem: "A disabled item",
 
 						//marker
-						onclick: () => {},
+						click: () => {},
 						disabled: true,
 						//-
 					},
-					{
-						elem: "A second item",
-
-						//marker
-						onclick: () => {},
-					},
-					{ onclick: () => {}, elem: "A third item" },
-					{ onclick: () => {}, elem: "A fourth item" },
-					{ onclick: () => {}, elem: "And a fifth one" },
+					{ click: () => {} /*marker*/, elem: "A second item" },
+					{ click: () => {} /*marker*/, elem: "A third item" },
+					{ click: () => {} /*marker*/, elem: "A fourth item" },
+					{ click: () => {} /*marker*/, elem: "And a fifth one" },
 				],
 			});
 		},
@@ -135,6 +121,7 @@ export default [
 		import: ["listgroup"],
 		code: () => {
 			return new listgroup({
+				flush: true, //marker
 				item: [
 					{ elem: "An item" },
 					{ elem: "A second item" },
@@ -142,9 +129,6 @@ export default [
 					{ elem: "A fourth item" },
 					{ elem: "And a fifth one" },
 				],
-
-				//marker
-				flush: true,
 			});
 		},
 	},
@@ -154,6 +138,7 @@ export default [
 		import: ["listgroup"],
 		code: () => {
 			return new listgroup({
+				type: "ol", //marker
 				item: [
 					{ elem: "An item" },
 					{ elem: "A second item" },
@@ -161,9 +146,6 @@ export default [
 					{ elem: "A fourth item" },
 					{ elem: "And a fifth one" },
 				],
-
-				//marker
-				type: "ol",
 			});
 		},
 	},
@@ -191,20 +173,20 @@ export default [
 				item: [
 					{
 						display: "flex",
-						justifycontent: "between",
-						alignitem: "start",
+						justifyContent: "between",
+						alignItem: "start",
 						elem: el,
 					},
 					{
 						display: "flex",
-						justifycontent: "between",
-						alignitem: "start",
+						justifyContent: "between",
+						alignItem: "start",
 						elem: el,
 					},
 					{
 						display: "flex",
-						justifycontent: "between",
-						alignitem: "start",
+						justifyContent: "between",
+						alignItem: "start",
 						elem: el,
 					},
 				],
@@ -319,8 +301,8 @@ export default [
 			let itemfn = (text, badgeLabel) => {
 				return {
 					display: "flex",
-					justifycontent: "between",
-					alignitem: "start",
+					justifyContent: "between",
+					alignItem: "start",
 					elem: [
 						text,
 
@@ -354,18 +336,18 @@ export default [
 						new div({
 							width: 100,
 							display: "flex",
-							justifycontent: "between",
+							justifyContent: "between",
 							elem: [
-								new h({ level: 5, marginbottom: 1, elem: title }),
+								new h({ level: 5, marginBottom: 1, elem: title }),
 								new small({
-									textcolor: !active ? "muted" : null,
+									textColor: !active ? "muted" : null,
 									elem: `${days} days ago`,
 								}),
 							],
 						}),
-						new p({ marginbottom: 1, elem: "Some placeholder content in a paragraph." }),
+						new p({ marginBottom: 1, elem: "Some placeholder content in a paragraph." }),
 						new small({
-							textcolor: !active ? "muted" : null,
+							textColor: !active ? "muted" : null,
 							elem: `And some${!active ? " muted" : ""} small print.`,
 						}),
 					],

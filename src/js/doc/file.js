@@ -102,7 +102,7 @@ export default [
 					label: "Save file",
 					color: "success",
 					icon: "floppy-disk",
-					onclick: (event) => {
+					click: (event) => {
 						let sender = event.currentTarget;
 
 						//marker

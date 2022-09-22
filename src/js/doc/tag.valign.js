@@ -11,7 +11,7 @@ export default [
 
 	{
 		msg: [
-			"Change the alignment of elements with the {{valign}} property. Please note that vertical-align only affects {{inline}}, {{inline-block}}, {{inline-table}}, and {{table cell}} elements.",
+			"Change the alignment of elements with the {{verticalAlign}} property. Please note that vertical-align only affects {{inline}}, {{inline-block}}, {{inline-table}}, and {{table cell}} elements.",
 			"Choose from {{baseline}}, {{top}}, {{middle}}, {{bottom}}, {{text-bottom}}, and {{text-top}} as needed.",
 			"To vertically center non-inline content (like {{div}} and more), use Bootstrap <b>flex box utilities</b>.",
 			"With inline elements:",
@@ -21,10 +21,8 @@ export default [
 			return ["baseline", "top", "middle", "bottom", "text-top", "text-bottom"].map((i) => {
 				return new tag({
 					tag: "span",
+					verticalAlign: i, //marker
 					elem: ` ${i} `,
-
-					//marker
-					valign: i,
 				});
 			});
 		},
@@ -41,10 +39,8 @@ export default [
 					elem: new table.tr({
 						elem: ["baseline", "top", "middle", "bottom", "text-top", "text-bottom"].map((i) => {
 							return new table.td({
+								verticalAlign: i, //marker
 								elem: i,
-
-								//marker
-								valign: i,
 							});
 						}),
 					}),

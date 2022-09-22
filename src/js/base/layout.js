@@ -40,29 +40,29 @@ export class l1 extends div {
 				}),
 				new div({
 					class: "container-lg",
-					paddingtop: 3,
+					paddingTop: 3,
 					elem: new div({
 						row: true,
 						elem: [
 							new div({
-								col: ["col", 12, "md-3", "xl-2"],
+								col: [true, 12, "md-3", "xl-2"],
 								elem: new div({
 									id: opt.leftid,
 									class: ["sticky-md-top"],
 									display: "md-block",
-									margintop: 3,
+									marginTop: 3,
 									overflow: "auto",
-									zindex: 0,
+									zIndex: 0,
 									elem: opt.leftelem,
 								}),
 							}),
 							new div({
-								col: ["col", 12, "md-9", "xl-10"],
+								col: [true, 12, "md-9", "xl-10"],
 								elem: new div({
 									row: true,
 									elem: [
 										new div({
-											col: ["col", 12, "xl-10"],
+											col: [true, 12, "xl-10"],
 											order: [2, "xl-1"],
 											elem: [
 												new div({
@@ -77,14 +77,14 @@ export class l1 extends div {
 										}),
 
 										new div({
-											col: ["col", 12, "xl-2"],
+											col: [true, 12, "xl-2"],
 											order: [1, "xl-2"],
 											elem: new div({
 												id: opt.rightid,
 												class: "sticky-lg-top",
 												overflow: "auto",
-												margintop: 3,
-												zindex: 0,
+												marginTop: 3,
+												zIndex: 0,
 												elem: opt.rightelem,
 											}),
 										}),
@@ -102,8 +102,8 @@ export class l1 extends div {
 							start: 100,
 							elem: new div({
 								class: "float-end",
-								paddingbottom: 3,
-								paddingend: 3,
+								paddingBottom: 3,
+								paddingEnd: 3,
 								elem: new button({
 									floating: true,
 									color: "danger",
@@ -112,8 +112,8 @@ export class l1 extends div {
 									label: "Back to top",
 									hidelabel: true,
 									icon: { icon: "arrow-up", fixwidth: false },
-									attr: { "data-mainid": opt.mainid },
-									onclick: (event) => {
+									"data-mainid": opt.mainid,
+									click: (event) => {
 										let sender = event.currentTarget;
 										document
 											.getElementById(sender.getAttribute("data-mainid"))

@@ -94,7 +94,7 @@ export default [
 					label: "Query Dialog",
 					icon: "fire",
 					color: "primary",
-					onclick: (event) => {
+					click: (event) => {
 						let sender = event.currentTarget;
 
 						sample.list_state((dbstate) => {
@@ -117,7 +117,7 @@ export default [
 													title: "query.dialog result",
 													container: "card",
 
-													maxheight: "10rem",
+													maxHeight: "10rem",
 													code: JSON.stringify(data),
 												}),
 											})
@@ -143,7 +143,7 @@ export default [
 															title: "db.api.list result",
 															container: "card",
 
-															maxheight: "10rem",
+															maxHeight: "10rem",
 															code: JSON.stringify(result),
 														}),
 													})
@@ -256,7 +256,7 @@ export default [
 					label: "Filter Dialog",
 					icon: "filter",
 					color: "primary",
-					onclick: (event) => {
+					click: (event) => {
 						let sender = event.currentTarget;
 
 						sample.list_state((dbstate) => {
@@ -277,7 +277,7 @@ export default [
 													title: "query.filter result",
 													container: "card",
 
-													maxheight: "10rem",
+													maxHeight: "10rem",
 													code: JSON.stringify(data),
 												}),
 											})
@@ -303,7 +303,7 @@ export default [
 															title: "db.api.list result",
 															container: "card",
 
-															maxheight: "10rem",
+															maxHeight: "10rem",
 															code: JSON.stringify(result),
 														}),
 													})
@@ -407,7 +407,7 @@ export default [
 					label: "Sort Dialog",
 					icon: "sort",
 					color: "primary",
-					onclick: (event) => {
+					click: (event) => {
 						let sender = event.currentTarget;
 
 						//edit query
@@ -427,7 +427,7 @@ export default [
 												title: "query.sort result",
 												container: "card",
 
-												maxheight: "10rem",
+												maxHeight: "10rem",
 												code: JSON.stringify(data),
 											}),
 										})
@@ -453,7 +453,7 @@ export default [
 														title: "db.api.list result",
 														container: "card",
 
-														maxheight: "10rem",
+														maxHeight: "10rem",
 														code: JSON.stringify(result),
 													}),
 												})
@@ -554,7 +554,7 @@ export default [
 					label: "Field Dialog",
 					icon: "tasks",
 					color: "primary",
-					onclick: (event) => {
+					click: (event) => {
 						let sender = event.currentTarget;
 
 						//edit query
@@ -573,7 +573,7 @@ export default [
 												title: "query.field result",
 												container: "card",
 
-												maxheight: "10rem",
+												maxHeight: "10rem",
 												code: JSON.stringify(data),
 											}),
 										})
@@ -599,7 +599,7 @@ export default [
 														title: "db.api.list result",
 														container: "card",
 
-														maxheight: "10rem",
+														maxHeight: "10rem",
 														code: JSON.stringify(result),
 													}),
 												})
@@ -707,7 +707,7 @@ export default [
 					label: "Limit Dialog",
 					icon: "list-ol",
 					color: "primary",
-					onclick: (event) => {
+					click: (event) => {
 						let sender = event.currentTarget;
 
 						//edit query
@@ -728,7 +728,7 @@ export default [
 												title: "query.limit result",
 												container: "card",
 
-												maxheight: "10rem",
+												maxHeight: "10rem",
 												code: JSON.stringify(data),
 											}),
 										})
@@ -756,7 +756,7 @@ export default [
 													elem: new codepreview({
 														title: "db.api.list result",
 														container: "card",
-														maxheight: "10rem",
+														maxHeight: "10rem",
 														code: JSON.stringify(result),
 													}),
 												})
@@ -863,7 +863,7 @@ export default [
 					label: "Page Dialog",
 					icon: { icon: "sort", rotate: 90 },
 					color: "primary",
-					onclick: (event) => {
+					click: (event) => {
 						let sender = event.currentTarget;
 
 						//edit query
@@ -885,7 +885,7 @@ export default [
 												title: "query.page result",
 												container: "card",
 
-												maxheight: "10rem",
+												maxHeight: "10rem",
 												code: JSON.stringify(data),
 											}),
 										})
@@ -911,7 +911,7 @@ export default [
 														title: "db.api.list result",
 														container: "card",
 
-														maxheight: "10rem",
+														maxHeight: "10rem",
 														code: JSON.stringify(result),
 													}),
 												})

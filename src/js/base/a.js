@@ -45,7 +45,7 @@ export default class a extends tag {
 
 		opt.elem = opt.elem || (opt.label || opt.icon ? new label({ icon: opt.icon, label: opt.label }) : opt.href);
 
-		opt.linkcolor = opt.linkcolor || opt.color;
+		opt.linkColor = opt.linkColor || opt.color;
 
 		delete opt.color;
 		delete opt.icon;

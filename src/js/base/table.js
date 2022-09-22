@@ -19,7 +19,7 @@ const defaultContainerOption = {
 	responsive: true,
 	hover: false,
 	border: null, //null|"bordered"|"none"
-	bordercolor: null,
+	borderColor: null,
 	caption: null,
 	captiontop: false,
 
@@ -124,16 +124,6 @@ export class td extends tag {
 	set data(opt) {
 		opt = core.extend({}, defaultTdOption, opt);
 
-		opt.attr = core.merge.attr(opt.attr, {
-			colspan: opt.colspan,
-			rowspan: opt.rowspan,
-			scope: opt.scope,
-		});
-
-		delete opt.colspan;
-		delete opt.rowspan;
-		delete opt.scope;
-
 		super.data = opt;
 	}
 }
@@ -151,12 +141,6 @@ export class th extends tag {
 	}
 	set data(opt) {
 		opt = core.extend({}, defaultThOption, opt);
-
-		opt.attr = core.merge.attr(opt.attr, {
-			colspan: opt.colspan,
-			rowspan: opt.rowspan,
-			scope: opt.scope,
-		});
 
 		delete opt.colspan;
 		delete opt.rowspan;
@@ -180,22 +164,24 @@ export class container extends tag {
 	set data(opt) {
 		opt = core.extend({}, defaultContainerOption, opt);
 
-		opt.class = core.merge.class(opt.class, [
-			"table",
-			opt.color ? `table-${opt.color}` : null,
-			opt.striped ? "table-striped" : null,
-			opt.stripedcolumn ? "table-striped-columns" : null,
-			opt.hover ? "table-hover" : null,
-			opt.captiontop ? "caption-top" : null,
-			opt.size ? `table-${opt.size}` : null,
-			opt.border !== null
-				? opt.border === false
-					? "table-borderless"
-					: opt.border === true
-					? "table-bordered"
-					: null
-				: null,
-		]);
+		opt = core.merge(opt, {
+			class: [
+				"table",
+				opt.color ? `table-${opt.color}` : null,
+				opt.striped ? "table-striped" : null,
+				opt.stripedcolumn ? "table-striped-columns" : null,
+				opt.hover ? "table-hover" : null,
+				opt.captiontop ? "caption-top" : null,
+				opt.size ? `table-${opt.size}` : null,
+				opt.border !== null
+					? opt.border === false
+						? "table-borderless"
+						: opt.border === true
+						? "table-bordered"
+						: null
+					: null,
+			],
+		});
 
 		let tmp_head = null;
 		let tmp_body = null;
