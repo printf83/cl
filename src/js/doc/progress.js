@@ -31,9 +31,7 @@ export default [
 		code: () => {
 			return new progress.container({
 				item: {
-					//marker
-					label: true,
-
+					label: true, //marker
 					value: 25,
 				},
 			});
@@ -47,12 +45,9 @@ export default [
 			return new progress.container({
 				item: {
 					label: true,
+					min: 75, //marker
+					max: 300, //marker
 					value: 154,
-
-					//marker
-					min: 75,
-					max: 300,
-					//-
 				},
 			});
 		},
@@ -66,10 +61,8 @@ export default [
 			let fn = (color, value) => {
 				return new progress.container({
 					item: {
-						//marker
-						color: color,
-						value: value,
-						//-
+						color: color, //marker
+						value: value, //marker
 					},
 				});
 			};
@@ -85,15 +78,11 @@ export default [
 		code: () => {
 			return [
 				new progress.container({
-					//marker
-					height: 1,
-
+					height: "1px", //marker
 					item: { value: 25 },
 				}),
 				new progress.container({
-					//marker
-					height: 20,
-
+					height: "20px", //marker
 					item: { value: 75 },
 				}),
 			];
@@ -124,9 +113,7 @@ export default [
 			let fn = (color, value) => {
 				return new progress.container({
 					item: {
-						//marker
-						stripe: true,
-
+						stripe: true, //marker
 						color: color,
 						value: value,
 					},
@@ -145,9 +132,7 @@ export default [
 			let fn = (color, value) => {
 				return new progress.container({
 					item: {
-						//marker
-						animated: true,
-
+						animated: true, //marker
 						stripe: true,
 						color: color,
 						value: value,
@@ -164,7 +149,7 @@ export default [
 		import: ["progress"],
 		code: () => {
 			return new progress.container({
-				height: 30,
+				height: "30px",
 				item: [
 					{ label: true, color: "success", value: 15 },
 					new tooltip({

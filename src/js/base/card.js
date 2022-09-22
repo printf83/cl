@@ -6,7 +6,7 @@ import p from "./p.js";
 import div from "./div.js";
 import imgtag from "./img.js";
 
-const defaultContainerOption = { flush: false };
+const defaultContainerOption = { flush: false, color: null };
 export class container extends div {
 	constructor(...opt) {
 		super(...opt);
@@ -23,9 +23,12 @@ export class container extends div {
 				class: "card",
 				rounded: opt.flush ? false : null,
 				border: opt.flush ? false : null,
+				bgColor: opt.bgColor || opt.color,
+				textBgColor: opt.textBgColor || opt.color,
 			});
 
 			delete opt.flush;
+			delete opt.color;
 
 			super.data = opt;
 		}

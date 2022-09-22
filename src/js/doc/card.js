@@ -647,8 +647,7 @@ export default [
 		import: ["card"],
 		code: () => {
 			return new card.container({
-				bgColor: "primary", //marker
-				textBgColor: "primary", //marker
+				color: "primary", //marker
 				width: "18rem",
 				elem: [
 					new card.header("Header"),
@@ -673,8 +672,7 @@ export default [
 		code: () => {
 			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map((i) => {
 				return new card.container({
-					bgColor: i, //marker
-					textBgColor: i, //marker
+					color: i, //marker
 					width: "18rem",
 					elem: [
 						new card.header("Header"),
@@ -756,7 +754,7 @@ export default [
 				width: "18rem",
 				elem: [
 					new card.header({
-						bgColor: "success",
+						bgColor: "primary",
 						textBgColor: "success",
 						elem: "Header",
 					}),

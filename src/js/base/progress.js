@@ -43,6 +43,7 @@ export class container extends div {
 }
 
 const defaultBarOption = {
+	color: null,
 	label: false,
 	stripe: false,
 	animated: false,
@@ -88,8 +89,11 @@ export class bar extends div {
 				"aria-valuemax": opt.max,
 				width: `${percent}%`,
 				elem: opt.label ? `${percent}%` : " ",
+				bgColor: opt.bgColor || opt.color,
+				textBgColor: opt.textBgColor || opt.color,
 			});
 
+			delete opt.color;
 			delete opt.max;
 			delete opt.min;
 			delete opt.animated;

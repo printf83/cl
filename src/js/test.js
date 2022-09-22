@@ -6,16 +6,22 @@ import * as progress from "./base/progress.js";
 
 ///code
 let code = () => {
-	let fn = (color, value) => {
-		return new progress.container({
-			item: {
-				color: color,
-				value: value,
-			},
-		});
-	};
+	return [
+		new progress.container({
+			height: 1,
 
-	return [fn("primary", 10)];
+			item: {
+				value: 25,
+			},
+		}),
+		new progress.container({
+			height: 20,
+
+			item: {
+				value: 75,
+			},
+		}),
+	];
 };
 
 ///loader

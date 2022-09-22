@@ -50,10 +50,10 @@ const defaultContainerOption = {
 	show: false,
 	horizontal: null,
 
-	onshow: null,
-	onshown: null,
-	onhide: null,
-	onhidden: null,
+	show: null,
+	shown: null,
+	hide: null,
+	hidden: null,
 };
 
 /**
@@ -74,19 +74,19 @@ export class container extends div {
 			opt = core.merge(opt, {
 				id: opt.id || core.UUID(),
 				class: ["collapse", opt.horizontal ? "collapse-horizontal" : null, opt.show ? "show" : null],
-				"show.bs.collapse": opt.onshow,
-				"shown.bs.collapse": opt.onshown,
-				"hide.bs.collapse": opt.onhide,
-				"hidden.bs.collapse": opt.onhidden,
+				"show.bs.collapse": opt.show,
+				"shown.bs.collapse": opt.shown,
+				"hide.bs.collapse": opt.hide,
+				"hidden.bs.collapse": opt.hidden,
 			});
 
 			delete opt.horizontal;
 			delete opt.show;
 
-			delete opt.onshow;
-			delete opt.onshown;
-			delete opt.onhide;
-			delete opt.onhidden;
+			delete opt.show;
+			delete opt.shown;
+			delete opt.hide;
+			delete opt.hidden;
 
 			super.data = opt;
 		}
