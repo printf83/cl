@@ -1,6 +1,6 @@
 "use strict";
 
-import e from "express";
+import badge from "./badge.js";
 
 const _setting = {
 	debug: 0,
@@ -1731,7 +1731,7 @@ const fnA = {
 					}
 				}
 			} else {
-				console.warn("a is null");
+				if (setting.DEBUG > 1) console.warn("a is null");
 			}
 		}
 
@@ -1796,15 +1796,18 @@ const fnA = {
 		if (f) {
 			return f(...obj);
 		} else {
-			console.error(`"${caller}" argument "${a.join(", ")}" is not supported by any rules`, {
-				type: a,
-				rule: rules
-					? rules.map((i) => {
-							return i?.rule?.join(", ");
-					  })
-					: null,
-				// obj: obj,
-			});
+			if (setting.DEBUG > 1) {
+				console.error(`"${caller}" argument "${a.join(", ")}" is not supported by any rules`, {
+					type: a,
+					rule: rules
+						? rules.map((i) => {
+								return i?.rule?.join(", ");
+						  })
+						: null,
+					// obj: obj,
+				});
+			}
+
 			return null;
 		}
 	},
@@ -2032,12 +2035,35 @@ export function init(container) {
 	});
 }
 
-function attachBadge(opt) {
-	if (opt.badge && typeof opt.badge === "object" && opt.badge.notification) {
-		opt.position = opt.position || "relative";
+//ATTACH BADGE
+export function attachBadge(opt) {
+	if (opt && opt.badge) {
+		if (opt.hasOwnProperty("cl")) {
+			if (opt.data.badge && typeof opt.data.badge === "object" && opt.data.badge.notification) {
+				opt.data.position = opt.data.position || "relative";
+			}
+
+			if (opt.data.elem) {
+				opt.data.elem.push(new badge(opt.data.badge));
+			} else {
+				opt.data.elem = [new badge(opt.data.badge)];
+			}
+		} else {
+			if (opt.badge && typeof opt.badge === "object" && opt.badge.notification) {
+				opt.position = opt.position || "relative";
+			}
+
+			if (opt.elem) {
+				if (Array.isArray(opt.elem)) {
+					opt.elem.push(new badge(opt.badge));
+				} else {
+					opt.elem = [opt.elem, new badge(opt.badge)];
+				}
+			} else {
+				opt.elem = [new badge(opt.badge)];
+			}
+		}
 	}
 
-	if (opt.elem) {
-	} else {
-	}
+	return opt;
 }

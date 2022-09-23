@@ -70,6 +70,9 @@ export default class tag {
 		// 	opt.textBgColor = opt.btnColor || opt.alertColor || opt.bgColor;
 		// }
 
+		opt = core.attachBadge(opt);
+		delete opt.badge;
+
 		this._d = opt;
 	}
 }

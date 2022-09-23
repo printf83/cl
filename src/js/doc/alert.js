@@ -1,4 +1,5 @@
 "use strict";
+import sample from "./sample.js";
 import * as alert from "../base/alert.js";
 import hr from "../base/hr.js";
 import p from "../base/p.js";
@@ -15,12 +16,25 @@ export default [
 
 	{
 		title: "Example",
-
 		import: ["alert"],
 		code: () => {
 			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map((i) => {
 				return new alert.container({
 					color: i, //marker
+					elem: `A simple ${i} alert—check it out!`,
+				});
+			});
+		},
+	},
+
+	{
+		title: "Badge",
+		import: ["alert", "sample"],
+		code: () => {
+			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map((i) => {
+				return new alert.container({
+					color: i,
+					badge: sample.badge(), //marker
 					elem: `A simple ${i} alert—check it out!`,
 				});
 			});

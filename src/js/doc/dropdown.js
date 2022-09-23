@@ -37,12 +37,13 @@ export default [
 	},
 
 	{
-		title: "Dropdown link",
-		import: ["dropdown"],
+		title: "Badge",
+		import: ["dropdown", "sample"],
 		code: () => {
 			return new dropdown({
-				label: "Drowdown link",
+				label: "Drowdown button",
 				color: "secondary",
+				badge: sample.badge(), //marker
 				option: [
 					{ href: "#", label: "Action" },
 					{ href: "#", label: "Another action" },
@@ -50,9 +51,25 @@ export default [
 					{ value: "-" },
 					{ href: "#", label: "Separated link" },
 				],
+			});
+		},
+	},
 
-				//marker
-				href: "#",
+	{
+		title: "Dropdown link",
+		import: ["dropdown"],
+		code: () => {
+			return new dropdown({
+				label: "Drowdown link",
+				color: "secondary",
+				href: "#", //marker
+				option: [
+					{ href: "#", label: "Action" },
+					{ href: "#", label: "Another action" },
+					{ href: "#", label: "Something else here" },
+					{ value: "-" },
+					{ href: "#", label: "Separated link" },
+				],
 			});
 		},
 	},
@@ -63,6 +80,7 @@ export default [
 		code: () => {
 			return new dropdown({
 				label: "Drowdown",
+				color: "primary", //marker
 				option: [
 					{ href: "#", label: "Action" },
 					{ href: "#", label: "Another action" },
@@ -70,9 +88,6 @@ export default [
 					{ value: "-" },
 					{ href: "#", label: "Separated link" },
 				],
-
-				//marker
-				color: "primary",
 			});
 		},
 	},
@@ -87,6 +102,7 @@ export default [
 				(i) => {
 					return new dropdown({
 						label: core.capitalize(i),
+						color: i, //marker
 						option: [
 							{ href: "#", label: "Action" },
 							{ href: "#", label: "Another action" },
@@ -94,9 +110,6 @@ export default [
 							{ value: "-" },
 							{ href: "#", label: "Separated link" },
 						],
-
-						//marker
-						color: i,
 					});
 				}
 			);
@@ -105,11 +118,13 @@ export default [
 
 	{
 		title: "Split button",
-		import: ["dropdown"],
+		import: ["dropdown", "sample"],
 		code: () => {
 			return new dropdown({
 				label: "Drowdown",
 				color: "primary",
+				splittoggle: true, //marker
+				badge: sample.badge(),
 				option: [
 					{ href: "#", label: "Action" },
 					{ href: "#", label: "Another action" },
@@ -117,9 +132,6 @@ export default [
 					{ value: "-" },
 					{ href: "#", label: "Separated link" },
 				],
-
-				//marker
-				splittoggle: true,
 			});
 		},
 	},

@@ -98,6 +98,10 @@ export default class dropdown extends tag {
 				"hidden.bs.dropdown": opt.hidden,
 			});
 
+			if (opt.splittoggle) {
+				delete normal_ctl.badge;
+			}
+
 			let btn_main = opt.splittoggle ? new button(normal_ctl) : new button(split_ctl);
 
 			split_ctl.label = "Toggle Dropdown";

@@ -2,7 +2,7 @@
 import * as core from "./core.js";
 import tag from "./tag.js";
 import label from "./label.js";
-import badge from "./badge.js";
+// import badge from "./badge.js";
 
 const defaultOption = {
 	tag: "button",
@@ -14,7 +14,7 @@ const defaultOption = {
 	iconafter: false,
 	icon: null,
 
-	badge: null,
+	// badge: null,
 
 	weight: null,
 	outline: false,
@@ -70,9 +70,9 @@ export default class button extends tag {
 				opt.role = "button";
 			}
 
-			if (opt.badge && typeof opt.badge === "object" && opt.badge.notification) {
-				opt.position = opt.position || "relative";
-			}
+			// if (opt.badge && typeof opt.badge === "object" && opt.badge.notification) {
+			// 	opt.position = opt.position || "relative";
+			// }
 
 			if (opt.toggle) {
 				opt["data-bs-toggle"] = opt["data-bs-toggle"] ? opt["data-bs-toggle"] : "button";
@@ -118,7 +118,7 @@ export default class button extends tag {
 									icon: opt.icon,
 							  })
 							: null,
-						opt.badge ? new badge(opt.badge) : null,
+						// opt.badge ? new badge(opt.badge) : null,
 					],
 				});
 
@@ -138,7 +138,7 @@ export default class button extends tag {
 									icon: opt.icon,
 							  })
 							: null,
-						opt.badge ? new badge(opt.badge) : null,
+						// opt.badge ? new badge(opt.badge) : null,
 					];
 				}
 			}
@@ -149,8 +149,6 @@ export default class button extends tag {
 			delete opt.iconafter;
 			delete opt.icon;
 
-			delete opt.badge;
-
 			delete opt.weight;
 			delete opt.outline;
 			delete opt.color;
@@ -158,10 +156,16 @@ export default class button extends tag {
 			delete opt.toggle;
 
 			if (toggle_label) {
+				// toggle_label = core.attachBadge(toggle_label);
+				// delete opt.badge;
+
 				super.data = {
 					elem: [new tag(opt), toggle_label],
 				};
 			} else {
+				// opt = core.attachBadge(opt);
+				// delete opt.badge;
+
 				super.data = opt;
 			}
 		}

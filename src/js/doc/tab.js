@@ -19,7 +19,10 @@ export default [
 		code: () => {
 			return new tab({
 				item: [
-					{ label: "First", elem: `<b>This is the first item's tab body.</b> ${sample.text()}` },
+					{
+						label: "First",
+						elem: `<b>This is the first item's tab body.</b> ${sample.text()}`,
+					},
 					{ label: "Second", elem: `<b>This is the second item's tab body.</b> ${sample.text()}` },
 					{ label: "Third", elem: `<b>This is the third item's tab body.</b> ${sample.text()}` },
 					{ label: "Disabled", disabled: true, elem: "This is the last item's tab body." },

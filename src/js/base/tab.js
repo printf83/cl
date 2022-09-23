@@ -99,12 +99,10 @@ export default class tab extends div {
 					new li({
 						class: ["nav-item", i.option ? "dropdown" : null],
 						role: "tab",
+						badge: i.badge,
 						elem: [
 							new a({
-								class: [
-									"nav-link",
-									i.option ? "dropdown-toggle" : null,
-								],
+								class: ["nav-link", i.option ? "dropdown-toggle" : null],
 								active: i.active,
 								disabled: i.disabled,
 								href: `#${i.id}_body`,

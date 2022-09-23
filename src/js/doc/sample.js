@@ -212,7 +212,15 @@ const fn = {
 	brandicon: () => {
 		return core.randomdb("sample_dbbrandicon", dbbrandicon);
 	},
-
+	badge: () => {
+		return {
+			color: "danger",
+			notification: true,
+			label: "New message",
+			rounded: "pill",
+			hidelabel: true,
+		};
+	},
 	tagprop: (exclude) => {
 		let tprop = [
 			"id",

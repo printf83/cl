@@ -850,6 +850,10 @@ export function multiClass(value, rules) {
 
 //multiclass support - end
 
+export function attachBadge(opt) {
+	return base.attachBadge(opt);
+}
+
 // BASE
 export function combineArray(arr, delimeter) {
 	return base.combineArray(arr, delimeter);

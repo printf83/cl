@@ -5,7 +5,6 @@ import div from "../base/div.js";
 import h from "../base/h.js";
 import small from "../base/small.js";
 import p from "../base/p.js";
-import badge from "../base/badge.js";
 
 export default [
 	{
@@ -135,13 +134,16 @@ export default [
 
 	{
 		title: "Numbered",
-		import: ["listgroup"],
+		import: ["listgroup", "sample"],
 		code: () => {
 			return new listgroup({
 				type: "ol", //marker
 				item: [
 					{ elem: "An item" },
-					{ elem: "A second item" },
+					{
+						elem: "A second item",
+						badge: sample.badge(), //marker
+					},
 					{ elem: "A third item" },
 					{ elem: "A fourth item" },
 					{ elem: "And a fifth one" },
@@ -152,19 +154,13 @@ export default [
 
 	{
 		title: "Numbered custom content",
-		import: ["listgroup", "div", "badge"],
+		import: ["listgroup", "div"],
 		code: () => {
 			//marker
 			let el = [
 				new div({
 					class: "ms-2 me-auto",
 					elem: [new div("fw-bold", "Subheading"), "Cras justo odio"],
-				}),
-
-				new badge({
-					pill: true,
-					color: "primary",
-					label: "14",
 				}),
 			];
 			//-
@@ -296,24 +292,15 @@ export default [
 
 	{
 		title: "With badge",
-		import: ["badge", "listgroup"],
+		import: ["badge", "listgroup", "sample"],
 		code: () => {
 			let itemfn = (text, badgeLabel) => {
 				return {
 					display: "flex",
 					justifyContent: "between",
 					alignItem: "start",
-					elem: [
-						text,
-
-						//marker
-						new badge({
-							pill: true,
-							color: "primary",
-							label: badgeLabel,
-						}),
-						//-
-					],
+					elem: text,
+					badge: sample.badge(), //marker
 				};
 			};
 
