@@ -16,7 +16,6 @@ let code = () => {
 		}),
 		new progress.container({
 			height: 20,
-
 			item: {
 				value: 75,
 			},

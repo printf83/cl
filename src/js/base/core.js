@@ -796,63 +796,23 @@ export function validate(container, callback) {
 }
 
 //multiclass support
-// function isListed(val, listed) {
-// 	if (listed) {
-// 		if (Array.isArray(listed) && listed.includes(val)) {
-// 			return true;
-// 		} else {
-// 			return listed === val;
-// 		}
-// 	} else {
-// 		return true;
-// 	}
-// }
-
-// function isSupported(val, supported, unsupported) {
-// 	if (unsupported && isListed(val, unsupported)) {
-// 		return false;
-// 	}
-
-// 	if (supported && isListed(val, supported)) {
-// 		return true;
-// 	}
-
-// 	return true;
-// }
-
-// export function multiClass(val, format, supported, unsupported, iftrue, iffalse) {
-// 	if (val || val === 0) {
-// 		return val || val === 0
-// 			? Array.isArray(val)
-// 				? val
-// 						.map((i) => {
-// 							if (i === true) {
-// 								return iftrue;
-// 							} else if (i === false || i === null) {
-// 								return iffalse;
-// 							} else {
-// 								return isSupported(i, supported, unsupported) ? format.replace("$1", i) : i;
-// 							}
-// 						})
-// 						.join(" ")
-// 				: isSupported(val, supported, unsupported)
-// 				? format.replace("$1", val)
-// 				: val
-// 			: null;
-// 	} else {
-// 		return val;
-// 	}
-// }
-
 export function multiClass(value, rules) {
 	return base.multiClass(value, rules);
 }
 
 //multiclass support - end
 
+//global elem
 export function attachBadge(opt) {
 	return base.attachBadge(opt);
 }
+export function attachTooltip(opt) {
+	return base.attachTooltip(opt);
+}
+export function attachPopover(opt) {
+	return base.attachPopover(opt);
+}
+//global elem - end
 
 // BASE
 export function combineArray(arr, delimeter) {

@@ -71,7 +71,12 @@ export default class tag {
 		// }
 
 		opt = core.attachBadge(opt);
+		opt = core.attachPopover(opt);
+		opt = core.attachTooltip(opt);
+
 		delete opt.badge;
+		delete opt.popover;
+		delete opt.tooltip;
 
 		this._d = opt;
 	}

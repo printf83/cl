@@ -3,8 +3,10 @@ import tag from "./tag.js";
 
 const defaultOption = {
 	elem: null,
+	title: null,
 	msg: null,
 	placement: "top",
+	trigger: "focus",
 
 	show: null,
 	shown: null,
@@ -12,8 +14,11 @@ const defaultOption = {
 	hidden: null,
 	inserted: null,
 };
-
-export default class tooltip extends tag {
+/**
+ * elem, msg
+ * elem, opt : {attr,title,msg,type,placement,trigger}
+ */
+export default class popover extends tag {
 	constructor(...opt) {
 		super(...opt);
 	}
@@ -29,20 +34,23 @@ export default class tooltip extends tag {
 				let tmp = opt.elem.data;
 
 				tmp = core.merge(tmp, {
-					"data-bs-toggle": "tooltip",
-					"data-bs-html": core.isHTML(opt.msg) ? "true" : null,
-					title: opt.msg,
+					title: opt.title,
+					"data-bs-toggle": "popover",
+					"data-bs-trigger": opt.trigger,
+					"data-bs-content": opt.msg,
 					"data-bs-placement": opt.placement,
-					"show.bs.tooltip": opt.show,
-					"shown.bs.tooltip": opt.shown,
-					"hide.bs.tooltip": opt.hide,
-					"hidden.bs.tooltip": opt.hidden,
-					"inserted.bs.tooltip": opt.inserted,
+					"data-bs-html": core.isHTML(opt.msg) ? "true" : null,
+
+					"show.bs.popover": opt.show,
+					"shown.bs.popover": opt.shown,
+					"hide.bs.popover": opt.hide,
+					"hidden.bs.popover": opt.hidden,
+					"inserted.bs.popover": opt.inserted,
 				});
 
 				super.data = tmp;
 			} else {
-				console.error("Tooltip unsupported element", opt.elem);
+				console.error("Popover unsupported element", opt.elem);
 				super.data = null;
 			}
 		} else {

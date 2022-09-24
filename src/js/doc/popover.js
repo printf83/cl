@@ -1,12 +1,15 @@
 "use strict";
 import sample from "./sample.js";
 import * as core from "../base/core.js";
-import tooltip from "../base/tooltip.js";
+import popover from "../base/popover.js";
 import button from "../base/button.js";
 import span from "../base/span.js";
 import * as table from "../base/table.js";
 import toast from "../base/toast.js";
-import pill from "../base/pill.js";
+import div from "../base/div.js";
+import input from "../base/input.js";
+import * as alert from "../base/alert.js";
+import dropdown from "../base/dropdown.js";
 
 export default [
 	{
@@ -17,12 +20,9 @@ export default [
 
 	{
 		title: "Popover",
-		import: ["button", "tooltip"],
+		import: ["button", "popover"],
 		code: () => {
-			return new tooltip({
-				//marker
-				type: "popover",
-
+			return new popover({
 				title: "Popover title",
 				msg: "And here's some amazing content. It's very engaging. Right?",
 				trigger: null,
@@ -38,15 +38,11 @@ export default [
 	{
 		title: "Four direction",
 		container: sample.stackcontainer,
-		import: ["button", "tooltip"],
+		import: ["button", "popover"],
 		code: () => {
 			return [
-				new tooltip({
-					//marker
-					type: "popover",
-					placement: "top",
-					//-
-
+				new popover({
+					placement: "top", //marker
 					msg: "Top popover",
 					elem: new button({
 						label: "Popover on top",
@@ -54,12 +50,8 @@ export default [
 					}),
 				}),
 
-				new tooltip({
-					//marker
-					type: "popover",
-					placement: "left",
-					//-
-
+				new popover({
+					placement: "left", //marker
 					msg: "Left popover",
 					elem: new button({
 						label: "Popover on left",
@@ -67,12 +59,8 @@ export default [
 					}),
 				}),
 
-				new tooltip({
-					//marker
-					type: "popover",
-					placement: "right",
-					//-
-
+				new popover({
+					placement: "right", //marker
 					msg: "Right popover",
 					elem: new button({
 						label: "Popover on right",
@@ -80,12 +68,8 @@ export default [
 					}),
 				}),
 
-				new tooltip({
-					//marker
-					type: "popover",
+				new popover({
 					placement: "bottom",
-					//-
-
 					msg: "Bottom popover",
 					elem: new button({
 						label: "Popover on bottom",
@@ -98,10 +82,10 @@ export default [
 
 	{
 		title: "Dismiss on next click",
-		import: ["button", "tooltip"],
+		import: ["button", "popover"],
 		code: () => {
-			return new tooltip({
-				type: "popover",
+			return new popover({
+				trigger: "focus", //marker
 				title: "Popover title",
 				msg: "And here's some amazing content. It's very engaging. Right?",
 				elem: new button({
@@ -109,9 +93,6 @@ export default [
 					weight: "lg",
 					color: "danger",
 				}),
-
-				//marker
-				trigger: "focus", //set dismiss on focus another element
 			});
 		},
 	},
@@ -119,13 +100,13 @@ export default [
 	{
 		title: "Disabled elements",
 		msg: [
-			"Elements with the disabled attribute aren’t interactive, meaning users cannot hover or click them to trigger a popover (or tooltip). As a workaround, you’ll want to trigger the popover from a wrapper {{div}} or {{span}}, ideally made keyboard-focusable using {{tabindex='0'}}.",
-			"For disabled popover triggers, you may also prefer {{trigger:'hover focus'}} on {{new tooltip}} option so that the popover appears as immediate visual feedback to your users as they may not expect to click on a disabled element.",
+			"Elements with the disabled attribute aren’t interactive, meaning users cannot hover or click them to trigger a popover. As a workaround, you’ll want to trigger the popover from a wrapper {{div}} or {{span}}, ideally made keyboard-focusable using {{tabindex='0'}}.",
+			"For disabled popover triggers, you may also prefer {{trigger:'hover focus'}} on {{new popover}} option so that the popover appears as immediate visual feedback to your users as they may not expect to click on a disabled element.",
 		],
-		import: ["span", "button", "tooltip"],
+		import: ["span", "button", "popover"],
 		code: () => {
-			return new tooltip({
-				type: "popover",
+			return new popover({
+				trigger: "focus hover", //marker
 				title: "Popover title",
 				msg: "And here's some amazing content. It's very engaging. Right?",
 				elem: new span({
@@ -134,15 +115,75 @@ export default [
 					elem: new button({
 						label: "Dismissible popover",
 						color: "primary",
-
-						//marker
-						disabled: true,
+						disabled: true, //marker
 					}),
 				}),
-
-				//marker
-				trigger: "focus hover", //set dismiss on focus or hover another element
 			});
+		},
+	},
+
+	{
+		title: "Global property",
+		msg: ["Use popover on any cl element"],
+		container: sample.stackcontainer,
+		import: ["div", "button", "input"],
+		code: () => {
+			return [
+				new div({
+					elem: "DIV with tooltip",
+					popover: {
+						title: "Test",
+						msg: "Example",
+						placement: "left",
+					},
+				}),
+				new button({
+					color: "primary",
+					click: () => {},
+					elem: "Button with tooltip",
+					popover: {
+						title: "Test",
+						msg: "Example",
+						placement: "right",
+					},
+				}),
+				new alert.container({
+					color: "warning",
+					elem: `A simple alert — check it out!`,
+					popover: {
+						title: "Test",
+						msg: "Example",
+						placement: "bottom",
+					},
+				}),
+				new dropdown({
+					label: "Drowdown button",
+					color: "secondary",
+					popover: {
+						title: "Test",
+						msg: "Example",
+						placement: "bottom",
+					},
+					option: [
+						{ href: "#", label: "Action" },
+						{ href: "#", label: "Another action" },
+						{ href: "#", label: "Something else here" },
+						{ value: "-" },
+						{ href: "#", label: "Separated link" },
+					],
+				}),
+				new input({
+					label: "Email address",
+					type: "email",
+					placeholder: "name@example.com",
+					helper: "We'll never share your email with anyone else.",
+					popover: {
+						title: "Test",
+						msg: "Example",
+						placement: "top",
+					},
+				}),
+			];
 		},
 	},
 
@@ -175,12 +216,11 @@ export default [
 				],
 			}),
 		],
-		import: ["button", "tooltip", "toast"],
+		import: ["button", "popover", "toast"],
 		code: () => {
 			let fn = (sender, event) => `Popover <b>${core.elemInfo(sender)}</b> event <b>${event}</b> trigged`;
 
-			return new tooltip({
-				type: "popover",
+			return new popover({
 				title: "Popover title",
 				msg: "And here's some amazing content. It's very engaging. Right?",
 				trigger: null,

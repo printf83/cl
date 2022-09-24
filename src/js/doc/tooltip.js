@@ -4,9 +4,12 @@ import * as core from "../base/core.js";
 import tooltip from "../base/tooltip.js";
 import button from "../base/button.js";
 import span from "../base/span.js";
-import pill from "../base/pill.js";
 import * as table from "../base/table.js";
 import toast from "../base/toast.js";
+import div from "../base/div.js";
+import input from "../base/input.js";
+import * as alert from "../base/alert.js";
+import dropdown from "../base/dropdown.js";
 
 export default [
 	{
@@ -22,27 +25,21 @@ export default [
 		code: () => {
 			return [
 				new tooltip({
-					type: "tooltip",
+					placement: "top", //marker
 					msg: "Top tooltip",
 					elem: new button({
 						label: "Tooltip on top",
 						color: "secondary",
 					}),
-
-					//marker
-					placement: "top",
 				}),
 
 				new tooltip({
-					type: "tooltip",
+					placement: "left", //marker
 					msg: "Left tooltip",
 					elem: new button({
 						label: "Tooltip on left",
 						color: "secondary",
 					}),
-
-					//marker
-					placement: "left",
 				}),
 
 				new tooltip({
@@ -56,27 +53,21 @@ export default [
 				}),
 
 				new tooltip({
-					type: "tooltip",
+					placement: "bottom", //marker
 					msg: "Bottom tooltip",
 					elem: new button({
 						label: "Tooltip on bottom",
 						color: "secondary",
 					}),
-
-					//marker
-					placement: "bottom",
 				}),
 
 				new tooltip({
-					type: "tooltip",
+					placement: "right", //marker
 					msg: "<em>Tooltip</em> <u>with</u> <b>HTML</b>",
 					elem: new button({
 						label: "Tooltip with HTML",
 						color: "secondary",
 					}),
-
-					//marker
-					placement: "right",
 				}),
 			];
 		},
@@ -90,7 +81,6 @@ export default [
 		import: ["span", "button", "tooltip"],
 		code: () => {
 			return new tooltip({
-				type: "tooltip",
 				msg: "And here's some amazing content. It's very engaging. Right?",
 				placement: "right",
 				elem: new span({
@@ -103,6 +93,71 @@ export default [
 					}),
 				}),
 			});
+		},
+	},
+
+	{
+		title: "Global property",
+		msg: ["Use tooltip on any cl element"],
+		container: sample.stackcontainer,
+		import: ["div", "button", "input"],
+		code: () => {
+			return [
+				new div({
+					elem: "DIV with tooltip",
+					tooltip: {
+						msg: "Example",
+						placement: "left",
+					},
+				}),
+				new button({
+					color: "primary",
+					click: () => {},
+					elem: "Button with tooltip",
+					tooltip: {
+						msg: "Example",
+						placement: "right",
+					},
+				}),
+				new alert.container({
+					color: "warning",
+					elem: `A simple alert — check it out!`,
+					tooltip: {
+						msg: "Example",
+						placement: "bottom",
+					},
+				}),
+
+				new dropdown({
+					label: "Drowdown button",
+					color: "secondary",
+					tooltip: {
+						color: "danger",
+						notification: true,
+						label: "New message",
+						rounded: "pill",
+						hidelabel: true,
+					},
+					option: [
+						{ href: "#", label: "Action" },
+						{ href: "#", label: "Another action" },
+						{ href: "#", label: "Something else here" },
+						{ value: "-" },
+						{ href: "#", label: "Separated link" },
+					],
+				}),
+
+				new input({
+					label: "Email address",
+					type: "email",
+					placeholder: "name@example.com",
+					helper: "We'll never share your email with anyone else.",
+					tooltip: {
+						msg: "Example",
+						placement: "top",
+					},
+				}),
+			];
 		},
 	},
 
@@ -161,6 +216,7 @@ export default [
 					new toast("/", fn(event.currentTarget, "inserted")).show();
 				},
 				//-
+
 				elem: new button({
 					label: "Click to toggle tooltip",
 					weight: "lg",

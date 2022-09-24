@@ -297,6 +297,7 @@ const dblibrary = {
 	p: `import p from "./base/p.js";`,
 	paging: `import paging from "./base/paging.js";`,
 	pill: `import pill from "./base/pill.js";`,
+	popover: `import popover from "./base/popover.js";`,
 	pre: `import pre from "./base/pre.js";`,
 	progress: `import * as progress from "./base/progress.js";`,
 	query: `import * as query from "./base/query.js";`,

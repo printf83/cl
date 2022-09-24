@@ -4,6 +4,10 @@ import * as core from "../base/core.js";
 import h from "../base/h.js";
 import badge from "../base/badge.js";
 import button from "../base/button.js";
+import div from "../base/div.js";
+import input from "../base/input.js";
+import * as alert from "../base/alert.js";
+import dropdown from "../base/dropdown.js";
 
 export default [
 	{
@@ -21,9 +25,7 @@ export default [
 					level: i,
 					elem: [
 						`Example heading #${i}`,
-
-						//marker
-						new badge({ label: "New", marginStart: 3 }),
+						new badge({ label: "New", marginStart: 3 }), //marker
 					],
 				});
 			});
@@ -102,7 +104,6 @@ export default [
 	{
 		title: "Pill badge",
 		container: sample.stackcontainer,
-
 		import: ["badge"],
 		code: () => {
 			return ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].map((i) => {
@@ -112,6 +113,73 @@ export default [
 					rounded: "pill", //marker
 				});
 			});
+		},
+	},
+
+	{
+		title: "Global property",
+		msg: ["Use badge on any cl element"],
+		container: sample.stackcontainer,
+		import: ["div", "button", "input"],
+		code: () => {
+			return [
+				new div({
+					elem: "DIV with tooltip",
+					badge: { label: "New", marginStart: 3 },
+				}),
+				new button({
+					color: "primary",
+					click: () => {},
+					elem: "Button with tooltip",
+					badge: {
+						color: "danger",
+						notification: true,
+						label: "New message",
+						rounded: "pill",
+						hidelabel: true,
+					},
+				}),
+				new alert.container({
+					color: "warning",
+					elem: `A simple alert — check it out!`,
+					badge: {
+						color: "danger",
+						notification: true,
+						label: "New message",
+						rounded: "pill",
+						hidelabel: true,
+					},
+				}),
+				new dropdown({
+					label: "Drowdown button",
+					color: "secondary",
+					badge: {
+						color: "danger",
+						notification: true,
+						label: "New message",
+						rounded: "pill",
+						hidelabel: true,
+					},
+					option: [
+						{ href: "#", label: "Action" },
+						{ href: "#", label: "Another action" },
+						{ href: "#", label: "Something else here" },
+						{ value: "-" },
+						{ href: "#", label: "Separated link" },
+					],
+				}),
+				new input({
+					label: "Email address",
+					type: "email",
+					placeholder: "name@example.com",
+					helper: "We'll never share your email with anyone else.",
+					badge: {
+						label: "99+",
+						color: "danger",
+						notification: true,
+					},
+				}),
+			];
 		},
 	},
 ];

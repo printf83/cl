@@ -2035,7 +2035,52 @@ export function init(container) {
 	});
 }
 
-//ATTACH BADGE
+//global element
+export function attachTooltip(opt) {
+	if (opt && opt.tooltip) {
+		if (opt.tooltip.msg) {
+			opt = mergeObject(opt, {
+				title: opt.tooltip.msg,
+				"data-bs-toggle": "tooltip",
+				"data-bs-placement": opt.tooltip.placement || "top",
+
+				"show.bs.tooltip": opt.tooltip.show,
+				"shown.bs.tooltip": opt.tooltip.shown,
+				"hide.bs.tooltip": opt.tooltip.hide,
+				"hidden.bs.tooltip": opt.tooltip.hidden,
+				"inserted.bs.tooltip": opt.tooltip.inserted,
+			});
+		}
+
+		delete opt.tooltip;
+	}
+
+	return opt;
+}
+export function attachPopover(opt) {
+	if (opt && opt.popover) {
+		if (opt.popover.msg) {
+			opt = mergeObject(opt, {
+				title: opt.popover.title,
+				"data-bs-toggle": "popover",
+				"data-bs-trigger": opt.popover.trigger || "focus hover",
+				"data-bs-content": opt.popover.msg,
+				"data-bs-placement": opt.popover.placement || "top",
+				"data-bs-html": isHTML(opt.popover.msg) ? "true" : null,
+
+				"show.bs.popover": opt.popover.show,
+				"shown.bs.popover": opt.popover.shown,
+				"hide.bs.popover": opt.popover.hide,
+				"hidden.bs.popover": opt.popover.hidden,
+				"inserted.bs.popover": opt.popover.inserted,
+			});
+		}
+
+		delete opt.popover;
+	}
+
+	return opt;
+}
 export function attachBadge(opt) {
 	if (opt && opt.badge) {
 		if (opt.hasOwnProperty("cl")) {
@@ -2067,3 +2112,5 @@ export function attachBadge(opt) {
 
 	return opt;
 }
+
+//global element - end

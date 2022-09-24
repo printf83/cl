@@ -115,13 +115,6 @@ export default [
 					{
 						label: "Accordion Item 2",
 						elem: ["<b>This is the second item's accordion body.</b> ", sample.text()],
-						badge: {
-							color: "danger",
-							notification: true,
-							label: "Event attached",
-							rounded: "pill",
-							hidelabel: true,
-						},
 
 						//marker
 						show: (event) => {

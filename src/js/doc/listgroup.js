@@ -140,10 +140,7 @@ export default [
 				type: "ol", //marker
 				item: [
 					{ elem: "An item" },
-					{
-						elem: "A second item",
-						badge: sample.badge(), //marker
-					},
+					{ elem: "A second item" },
 					{ elem: "A third item" },
 					{ elem: "A fourth item" },
 					{ elem: "And a fifth one" },

@@ -52,6 +52,7 @@ import * as option from "./base/option.js";
 import p from "./base/p.js";
 import paging from "./base/paging.js";
 import pill from "./base/pill.js";
+import popover from "./base/popover.js";
 import pre from "./base/pre.js";
 import * as progress from "./base/progress.js";
 import * as query from "./base/query.js";
@@ -120,6 +121,7 @@ export default {
 	p,
 	paging,
 	pill,
+	popover,
 	pre,
 	progress,
 	query,
