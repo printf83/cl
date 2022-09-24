@@ -2,23 +2,46 @@
 
 ///library
 import * as core from "./base/core.js";
-import * as progress from "./base/progress.js";
+import * as alert from "./base/alert.js";
+import button from "./base/button.js";
+import div from "./base/div.js";
+import dropdown from "./base/dropdown.js";
+import input from "./base/input.js";
 
 ///code
 let code = () => {
 	return [
-		new progress.container({
-			height: 1,
-
-			item: {
-				value: 25,
+		new dropdown({
+			label: "Drowdown button",
+			color: "secondary",
+			tooltip: {
+				color: "danger",
+				notification: true,
+				label: "New message",
+				rounded: "pill",
+				hidelabel: true,
 			},
-		}),
-		new progress.container({
-			height: 20,
-			item: {
-				value: 75,
-			},
+			option: [
+				{
+					href: "#",
+					label: "Action",
+				},
+				{
+					href: "#",
+					label: "Tooltip",
+				},
+				{
+					href: "#",
+					label: "Something else here",
+				},
+				{
+					value: "-",
+				},
+				{
+					href: "#",
+					label: "Separated link",
+				},
+			],
 		}),
 	];
 };
@@ -26,4 +49,5 @@ let code = () => {
 ///loader
 core.documentReady(() => {
 	core.replaceChild(document.getElementById("root"), code());
+	core.init(document.getElementById("root"));
 });

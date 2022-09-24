@@ -100,7 +100,7 @@ export default [
 		title: "Global property",
 		msg: ["Use tooltip on any cl element"],
 		container: sample.stackcontainer,
-		import: ["div", "button", "input"],
+		import: ["div", "button", "input", "dropdown", "alert"],
 		code: () => {
 			return [
 				new div({
@@ -131,20 +131,30 @@ export default [
 				new dropdown({
 					label: "Drowdown button",
 					color: "secondary",
-					tooltip: {
-						color: "danger",
-						notification: true,
-						label: "New message",
-						rounded: "pill",
-						hidelabel: true,
-					},
 					option: [
 						{ href: "#", label: "Action" },
-						{ href: "#", label: "Another action" },
+						{
+							href: "#",
+							label: "Hover here",
+							icon: {
+								beat: true,
+								color: "danger",
+								icon: "star",
+							},
+							tooltip: {
+								msg: "Example",
+								placement: "top",
+							},
+						},
 						{ href: "#", label: "Something else here" },
 						{ value: "-" },
 						{ href: "#", label: "Separated link" },
 					],
+					shown: (event) => {
+						let sender = event.currentTarget;
+						let container = sender.closest("div.dropdown");
+						core.init(container);
+					},
 				}),
 
 				new input({

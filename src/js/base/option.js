@@ -135,6 +135,9 @@ export class dropdown extends tag {
 					return new li({
 						elem: new span({
 							class: ["dropdown-item", opt.selected?.includes(i) ? "active" : null],
+							badge: i.badge,
+							tooltip: i.tooltip,
+							popover: i.popover,
 							elem: new label({
 								label: i,
 							}),
@@ -151,6 +154,9 @@ export class dropdown extends tag {
 							item = new h({
 								level: 6,
 								class: "dropdown-header",
+								badge: i.badge,
+								tooltip: i.tooltip,
+								popover: i.popover,
 								elem: new label({
 									label: i.label,
 									icon: i.icon,
@@ -160,7 +166,12 @@ export class dropdown extends tag {
 								}),
 							});
 						} else {
-							item = new hr({ class: "dropdown-divider" });
+							item = new hr({
+								class: "dropdown-divider",
+								badge: i.badge,
+								tooltip: i.tooltip,
+								popover: i.popover,
+							});
 						}
 					} else {
 						if (i.elem) {
@@ -170,9 +181,11 @@ export class dropdown extends tag {
 								tag: i.href ? "a" : i.interactive ? "button" : "span",
 								class: [
 									i.interactive ? "dropdown-item" : "dropdown-item-text",
-									// i.disabled ? "disabled" : null,
 									i.active === true || (i.value && opt.selected?.includes(i.value)) ? "active" : null,
 								],
+								badge: i.badge,
+								tooltip: i.tooltip,
+								popover: i.popover,
 								disabled: i.disabled,
 								href: i.href,
 								type: !i.href && i.interactive ? "button" : null,

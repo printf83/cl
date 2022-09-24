@@ -39,9 +39,7 @@ export default [
 			return new button({
 				label: "Notifications",
 				color: "primary",
-
-				//marker
-				badge: { label: "4", marginStart: 3 },
+				badge: { label: "4", marginStart: 3 }, //marker
 			});
 		},
 	},
@@ -120,7 +118,7 @@ export default [
 		title: "Global property",
 		msg: ["Use badge on any cl element"],
 		container: sample.stackcontainer,
-		import: ["div", "button", "input"],
+		import: ["div", "button", "input", "dropdown", "alert"],
 		code: () => {
 			return [
 				new div({

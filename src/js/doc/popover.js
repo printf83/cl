@@ -126,7 +126,7 @@ export default [
 		title: "Global property",
 		msg: ["Use popover on any cl element"],
 		container: sample.stackcontainer,
-		import: ["div", "button", "input"],
+		import: ["div", "button", "input", "dropdown", "alert"],
 		code: () => {
 			return [
 				new div({
@@ -159,18 +159,31 @@ export default [
 				new dropdown({
 					label: "Drowdown button",
 					color: "secondary",
-					popover: {
-						title: "Test",
-						msg: "Example",
-						placement: "bottom",
-					},
 					option: [
 						{ href: "#", label: "Action" },
-						{ href: "#", label: "Another action" },
+						{
+							href: "#",
+							label: "Hover here",
+							icon: {
+								beat: true,
+								color: "danger",
+								icon: "star",
+							},
+							popover: {
+								title: "Test",
+								msg: "Example",
+								placement: "right",
+							},
+						},
 						{ href: "#", label: "Something else here" },
 						{ value: "-" },
 						{ href: "#", label: "Separated link" },
 					],
+					shown: (event) => {
+						let sender = event.currentTarget;
+						let container = sender.closest("div.dropdown");
+						core.init(container);
+					},
 				}),
 				new input({
 					label: "Email address",
