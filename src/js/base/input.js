@@ -7,6 +7,7 @@ import * as inputgroup from "./inputgroup.js";
 import div from "./div.js";
 import * as option from "./option.js";
 import toast from "./toast.js";
+import badge from "./badge.js";
 
 const defaultOption = {
 	type: "text", //checkbox,radio,text,number,textarea
@@ -38,6 +39,8 @@ const defaultOption = {
 
 	container: true,
 	flex: false,
+
+	badge: null,
 };
 
 export default class input extends tag {
@@ -430,6 +433,7 @@ export default class input extends tag {
 			if (opt.size) {
 				super.data = {
 					elem: new div({
+						badge: opt.badge,
 						col: opt.size ? opt.size : true,
 						position: opt.validitytype === "tooltip" ? "relative" : null,
 						elem: ctl,
@@ -437,6 +441,7 @@ export default class input extends tag {
 				};
 			} else {
 				super.data = {
+					badge: opt.badge,
 					position: opt.validitytype === "tooltip" ? "relative" : null,
 					elem: ctl,
 				};

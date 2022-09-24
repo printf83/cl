@@ -174,6 +174,7 @@ export default [
 					placeholder: "name@example.com",
 					helper: "We'll never share your email with anyone else.",
 					badge: {
+						marginTop: "2rem", //need to set manually
 						label: "99+",
 						color: "danger",
 						notification: true,
