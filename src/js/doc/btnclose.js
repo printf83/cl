@@ -22,8 +22,7 @@ export default [
 		import: ["btnclose"],
 		code: () => {
 			return new btnclose({
-				//marker
-				disabled: true,
+				disabled: true, //marker
 			});
 		},
 	},
@@ -36,14 +35,11 @@ export default [
 		code: () => {
 			return [
 				new btnclose({
-					//marker
-					dark: false,
+					dark: false, //marker
 				}),
 				new btnclose({
 					disabled: true,
-
-					//marker
-					dark: false,
+					dark: false, //marker
 				}),
 			];
 		},

@@ -212,13 +212,36 @@ const fn = {
 	brandicon: () => {
 		return core.randomdb("sample_dbbrandicon", dbbrandicon);
 	},
-	badge: () => {
+	badge: (color = "danger", marginTop = null) => {
 		return {
-			color: "danger",
+			marginTop: marginTop,
+			color: color,
 			notification: true,
-			label: "New message",
+			label: "Message",
 			rounded: "pill",
 			hidelabel: true,
+		};
+	},
+	badge2: (color = "danger", label = "99+", marginTop = null) => {
+		return {
+			marginTop: marginTop,
+			label: label,
+			color: color,
+			notification: true,
+		};
+	},
+	popover: (placement = "top", msg = "Example") => {
+		return {
+			title: core.setting.title,
+			icon: core.setting.icon,
+			msg: msg,
+			placement: placement,
+		};
+	},
+	tooltip: (placement = "top", msg = "Example") => {
+		return {
+			msg: msg,
+			placement: placement,
 		};
 	},
 	tagprop: (exclude) => {

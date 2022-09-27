@@ -4,6 +4,10 @@ export default {
 	intro: "../doc/intro.js",
 	bootswatch: "../doc/bootswatch.js",
 
+	bootswatch_badge: "../doc/bootswatch_badge.js",
+	bootswatch_popover: "../doc/bootswatch_popover.js",
+	bootswatch_tooltip: "../doc/bootswatch_tooltip.js",
+
 	container: "../doc/container.js",
 	grid: "../doc/grid.js",
 	column: "../doc/column.js",

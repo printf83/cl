@@ -37,6 +37,16 @@ const db_menu = [
 	},
 	{
 		type: "menu",
+		title: "Global Property",
+		icon: { icon: "globe", color: "warning" },
+		item: [
+			{ title: "Badge", source: doc.bootswatch_badge },
+			{ title: "Popover", source: doc.bootswatch_popover },
+			{ title: "Tooltip", source: doc.bootswatch_tooltip },
+		],
+	},
+	{
+		type: "menu",
 		title: "Layout",
 		icon: { icon: "grip", color: "info" },
 		item: [

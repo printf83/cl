@@ -258,9 +258,7 @@ export default [
 			return new button({
 				label: "Single toggle",
 				color: "primary",
-
-				//marker
-				type: "checkbox",
+				type: "checkbox", //marker
 			});
 		},
 	},
@@ -272,11 +270,9 @@ export default [
 			return new button({
 				label: "Checked",
 				color: "primary",
+				type: "checkbox", //marker
+				checked: true, //marker
 
-				//marker
-				type: "checkbox",
-				checked: true,
-				//-
 			});
 		},
 	},
