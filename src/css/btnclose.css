@@ -1,8 +1,8 @@
 /*fix bootstrap color problem on btn-close*/
 
-.btn-close-white {
+/* .btn-close-white {
     filter: unset !important;
-}
+} */
 
 .btn-close {
     color: unset !important;
