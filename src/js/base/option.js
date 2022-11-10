@@ -76,9 +76,7 @@ export class select extends tag {
 						});
 						item.elem = item.label;
 
-						delete item.value;
 						delete item.label;
-						delete item.selected;
 
 						if (gitem !== null) {
 							gitem.elem.push(new tag(item));

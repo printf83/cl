@@ -173,7 +173,6 @@ function gen_content(m1, m2, callback) {
 													new toc({
 														label: m_source.name,
 														item: m_source.menu,
-														type: "menu",
 													})
 												);
 											} else {

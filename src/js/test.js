@@ -2,52 +2,39 @@
 
 ///library
 import * as core from "./base/core.js";
-import * as alert from "./base/alert.js";
-import button from "./base/button.js";
-import div from "./base/div.js";
-import dropdown from "./base/dropdown.js";
 import input from "./base/input.js";
 
 ///code
 let code = () => {
-	return [
-		new dropdown({
-			label: "Drowdown button",
-			color: "secondary",
-			tooltip: {
-				color: "danger",
-				notification: true,
-				label: "New message",
-				rounded: "pill",
-				hidelabel: true,
+	return new input({
+		label: "Disabled select example",
+		hidelabel: true,
+		type: "select",
+		option: [
+			{
+				value: "",
+				label: "Open this select menu",
+				selected: true,
 			},
-			option: [
-				{
-					href: "#",
-					label: "Action",
-				},
-				{
-					href: "#",
-					label: "Tooltip",
-				},
-				{
-					href: "#",
-					label: "Something else here",
-				},
-				{
-					value: "-",
-				},
-				{
-					href: "#",
-					label: "Separated link",
-				},
-			],
-		}),
-	];
+			{
+				value: "1",
+				label: "One",
+			},
+			{
+				value: "2",
+				label: "Two",
+			},
+			{
+				value: "3",
+				label: "Three",
+			},
+		],
+
+		disabled: true,
+	});
 };
 
 ///loader
 core.documentReady(() => {
 	core.replaceChild(document.getElementById("root"), code());
-	core.init(document.getElementById("root"));
 });
