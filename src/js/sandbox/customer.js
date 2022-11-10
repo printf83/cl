@@ -136,9 +136,9 @@ const editor = (data) => {
 			value: data ? data.state : null,
 			dbname: "state",
 			addctl: true,
-			deletectl: true,
-			editctl: true,
-			copyctl: true,
+			// deletectl: true,
+			// editctl: true,
+			// copyctl: true,
 			modify: (e) => {
 				let sender = e.currentTarget;
 				dbstate = null;
