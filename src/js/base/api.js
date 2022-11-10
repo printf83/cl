@@ -75,7 +75,7 @@ const fn = {
 		},
 		isfree: (sender) => {
 			if (sender) {
-				if (sender.classList.contains("disabled") || sender.disabled === true) {
+				if (sender.classList?.contains("disabled") || sender.disabled === true) {
 					return false;
 				}
 			}

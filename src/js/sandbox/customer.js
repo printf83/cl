@@ -106,12 +106,14 @@ const editor = (data) => {
 			label: "Date of birth",
 			name: "dob",
 			value: data ? data.dob : null,
+			clearctl: true,
 		}),
 		new input({
 			type: "text",
 			label: "Phone",
 			name: "phone",
 			value: data ? data.phone : null,
+			clearctl: true,
 		}),
 		new file({
 			label: "Picture",
@@ -122,6 +124,7 @@ const editor = (data) => {
 			type: "email",
 			label: "Email",
 			name: "email",
+			copyctl: true,
 			value: data ? data.email : null,
 		}),
 		new input({
@@ -131,6 +134,16 @@ const editor = (data) => {
 			required: true,
 			option: dbstate,
 			value: data ? data.state : null,
+			dbname: "state",
+			addctl: true,
+			deletectl: true,
+			editctl: true,
+			copyctl: true,
+			modify: (e) => {
+				let sender = e.currentTarget;
+				dbstate = null;
+				loadState(() => {}, sender);
+			},
 		}),
 	];
 };

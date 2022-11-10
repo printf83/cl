@@ -530,6 +530,9 @@ const fn = {
 			callback(dbstate);
 		}
 	},
+	reset_list_state: () => {
+		dbstate = null;
+	},
 };
 
 export default fn;

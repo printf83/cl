@@ -7,7 +7,9 @@ import * as inputgroup from "./inputgroup.js";
 import div from "./div.js";
 import * as option from "./option.js";
 import toast from "./toast.js";
-import badge from "./badge.js";
+
+import * as dlg from "./dlg.js";
+import * as db from "./api.js";
 
 const defaultOption = {
 	type: "text", //checkbox,radio,text,number,textarea
@@ -25,8 +27,12 @@ const defaultOption = {
 	option: null,
 
 	numctl: false,
-	addctl: null,
-	copyctl: null,
+	addctl: false,
+	deletectl: false,
+	editctl: false,
+	clearctl: false,
+	copyctl: false,
+	managectl: false,
 
 	validitytype: "feedback",
 	valid: null,
@@ -41,6 +47,12 @@ const defaultOption = {
 	flex: false,
 
 	badge: null,
+
+	//for select only
+	dbname: null,
+	fieldkey: "_id",
+	fieldname: "name",
+	modify: null, //event when change
 };
 
 export default class input extends tag {
@@ -80,7 +92,7 @@ export default class input extends tag {
 			}
 
 			//automark aftertype if addctl provided
-			if (i.addctl) {
+			if (i.addctl || i.deletectl || i.editctl || i.copyctl || i.clearctl) {
 				i.after = null;
 			}
 
@@ -91,90 +103,453 @@ export default class input extends tag {
 			}
 
 			//before control
-			let elem_before = null;
+			let elem_before = [];
 			if (i.before) {
 				if (typeof i.before === "string" || i.before.hasOwnProperty("clicon")) {
-					elem_before = new inputgroup.text({ elem: i.before });
+					elem_before.push(new inputgroup.text({ elem: i.before }));
 				} else {
-					elem_before = new tag({ elem: i.before });
+					elem_before.push(new tag({ elem: i.before }));
 				}
 			} else {
 				if (i.type === "number" && i.numctl) {
-					elem_before = new button({
-						icon: "minus",
-						color: "secondary",
-						click: (e) => {
-							let sender = e.currentTarget;
-							let parent = sender.parentElement;
-							let input = parent.getElementsByTagName("input")[0];
-							let val = parseInt(input.value);
-							let min = parseInt(input.min);
-							let step = parseInt(input.step);
+					elem_before.push(
+						new button({
+							icon: "minus",
+							color: "secondary",
+							click: (e) => {
+								let sender = e.currentTarget;
+								let parent = sender.parentElement;
+								let input = parent.getElementsByTagName("input")[0];
+								let val = parseInt(input.value);
+								let min = parseInt(input.min);
+								let step = parseInt(input.step);
 
-							val = val || min;
-							step = step || 1;
-							input.value = val - step;
-							if (val - step < min) input.value = min;
-						},
-					});
+								val = val || min;
+								step = step || 1;
+								input.value = val - step;
+								if (val - step < min) input.value = min;
+							},
+						})
+					);
 				}
 			}
 
 			//after control
-			let elem_after = null;
+			let elem_after = [];
 			if (i.after) {
 				if (typeof i.after === "string" || i.after.hasOwnProperty("clicon")) {
-					elem_after = new inputgroup.text({ elem: i.after });
+					elem_after.push(new inputgroup.text({ elem: i.after }));
 				} else {
-					elem_after = new tag({ elem: i.after });
+					elem_after.push(new tag({ elem: i.after }));
 				}
 			} else {
 				if (i.type === "number" && i.numctl) {
-					elem_after = new button({
-						icon: "plus",
-						color: "secondary",
-						click: (e) => {
-							let sender = e.currentTarget;
-							let parent = sender.parentElement;
-							let input = parent.getElementsByTagName("input")[0];
-							let val = parseInt(input.value);
-							let max = parseInt(input.max);
-							let min = parseInt(input.min);
-							let step = parseInt(input.step);
+					elem_after.push(
+						new button({
+							icon: "plus",
+							color: "secondary",
+							click: (e) => {
+								let input = document.getElementById(i.id);
+								let val = parseInt(input.value);
+								let max = parseInt(input.max);
+								let min = parseInt(input.min);
+								let step = parseInt(input.step);
 
-							val = val || min;
-							step = step || 1;
-							input.value = val + step;
-							if (val + step > max) input.value = max;
-						},
-					});
-				} else if (i.addctl) {
-					elem_after = new button({
-						icon: "plus",
-						color: "secondary",
-						click: i.addctl,
-					});
+								val = val || min;
+								step = step || 1;
+								input.value = val + step;
+								if (val + step > max) input.value = max;
+							},
+						})
+					);
 				}
-			}
 
-			let elem_copy = null;
-			if (i.copyctl) {
-				elem_copy = new button({
-					icon: {
-						type: "far",
-						icon: "clipboard",
-					},
-					color: "secondary",
-					click: () => {
-						try {
-							let str = document.getElementById(i.id).value;
-							navigator.clipboard.writeText(str);
-							new toast("/", "Copied to clipboard").show();
-						} catch (ex) {
-							new toast("!!", `Error when copy code to clipboard. ${ex}`).show();
-						}
-					},
-				});
+				if (typeof i.clearctl === "function" || i.clearctl === true) {
+					if (typeof i.clearctl === "function") {
+						elem_after.push(
+							new button({
+								icon: "delete-left",
+								color: "secondary",
+								click: i.clearctl,
+							})
+						);
+					} else {
+						elem_after.push(
+							new button({
+								icon: "delete-left",
+								color: "secondary",
+								click: () => {
+									document.getElementById(i.id).value = null;
+								},
+							})
+						);
+					}
+				}
+
+				if (typeof i.addctl === "function" || i.addctl === true) {
+					if (typeof i.addctl === "function") {
+						elem_after.push(
+							new button({
+								icon: "plus",
+								color: "primary",
+								click: i.addctl,
+							})
+						);
+					} else if (i.type === "select" && i.dbname !== null) {
+						elem_after.push(
+							new button({
+								icon: "plus",
+								color: "primary",
+								"data-dbname": i.dbname,
+								"data-fieldkey": i.fieldkey,
+								"data-fieldname": i.fieldname,
+								"data-label": i.label,
+								click: (event) => {
+									let sender = event.currentTarget;
+									let i_dbname = sender.dataset.dbname;
+									let i_fieldkey = sender.dataset.fieldkey;
+									let i_fieldname = sender.dataset.fieldname;
+									let i_label = sender.dataset.label;
+
+									new dlg.inputbox(
+										"text",
+										"Name",
+										(event, data) => {
+											db.api.create(
+												{
+													name: i_dbname,
+													sender: sender,
+													data: {
+														[i_fieldname]: data.value,
+													},
+												},
+												(resultId) => {
+													if (resultId) {
+														db.api.option(
+															{
+																name: i_dbname,
+																fieldkey: i_fieldkey,
+																fieldname: i_fieldname,
+																sender: sender,
+															},
+															(resultItems) => {
+																if (resultItems) {
+																	//get the select
+																	let ctl = document.getElementById(i.id);
+
+																	//generate option
+																	core.replaceChild(
+																		ctl,
+																		new option.select({
+																			selected: resultId,
+																			item: resultItems,
+																		})
+																	);
+
+																	//change value
+																	ctl.value = resultId;
+
+																	//trigger event modify
+																	ctl.dispatchEvent(new Event("modify"));
+																}
+															}
+														);
+													}
+												}
+											);
+										},
+										`Add New ${i_label}`
+									).show();
+								},
+							})
+						);
+					}
+				}
+
+				if (typeof i.editctl === "function" || i.editctl === true) {
+					if (typeof i.editctl === "function") {
+						elem_after.push(
+							new button({
+								icon: "pen",
+								color: "secondary",
+								click: i.editctl,
+							})
+						);
+					} else if (i.type === "select" && i.dbname !== null) {
+						elem_after.push(
+							new button({
+								icon: "pen",
+								color: "secondary",
+								"data-dbname": i.dbname,
+								"data-fieldkey": i.fieldkey,
+								"data-fieldname": i.fieldname,
+								"data-label": i.label,
+								click: (event) => {
+									let sender = event.currentTarget;
+									let ctl = document.getElementById(i.id);
+									let i_text = ctl.options[ctl.selectedIndex].text;
+									let i_key = ctl.value;
+									let i_dbname = sender.dataset.dbname;
+									let i_fieldkey = sender.dataset.fieldkey;
+									let i_fieldname = sender.dataset.fieldname;
+									let i_label = sender.dataset.label;
+
+									new dlg.inputbox(
+										new input({ type: "text", value: i_text, name: "value", required: true }),
+										"Name",
+										(event, data) => {
+											db.api.update(
+												{
+													name: i_dbname,
+													sender: sender,
+													id: i_key,
+													data: {
+														[i_fieldname]: data.value,
+													},
+												},
+												(resultId) => {
+													if (resultId) {
+														db.api.option(
+															{
+																name: i_dbname,
+																fieldkey: i_fieldkey,
+																fieldname: i_fieldname,
+																sender: sender,
+															},
+															(resultItems) => {
+																if (resultItems) {
+																	//get the select
+																	let ctl = document.getElementById(i.id);
+
+																	//generate option
+																	core.replaceChild(
+																		ctl,
+																		new option.select({
+																			selected: resultId,
+																			item: resultItems,
+																		})
+																	);
+
+																	//change value
+																	ctl.value = resultId;
+
+																	//trigger event modify
+																	ctl.dispatchEvent(new Event("modify"));
+																}
+															}
+														);
+													}
+												}
+											);
+										},
+										`Edit ${i_label}`
+									).show();
+								},
+							})
+						);
+					}
+				}
+
+				if (typeof i.copyctl === "function" || i.copyctl === true) {
+					if (typeof i.copyctl === "function") {
+						elem_after.push(
+							new button({
+								icon: "copy",
+								color: "success",
+								click: i.copyctl,
+							})
+						);
+					} else if (i.type === "select" && i.dbname !== null) {
+						elem_after.push(
+							new button({
+								icon: "copy",
+								color: "success",
+								"data-dbname": i.dbname,
+								"data-fieldkey": i.fieldkey,
+								"data-fieldname": i.fieldname,
+								"data-label": i.label,
+								click: (event) => {
+									let sender = event.currentTarget;
+									let ctl = document.getElementById(i.id);
+									let i_text = ctl.options[ctl.selectedIndex].text;
+									let i_dbname = sender.dataset.dbname;
+									let i_fieldkey = sender.dataset.fieldkey;
+									let i_fieldname = sender.dataset.fieldname;
+									let i_label = sender.dataset.label;
+
+									new dlg.inputbox(
+										new input({
+											type: "text",
+											value: `Copy of ${i_text}`,
+											name: "value",
+											required: true,
+										}),
+										"Name",
+										(event, data) => {
+											db.api.create(
+												{
+													name: i_dbname,
+													sender: sender,
+													data: {
+														[i_fieldname]: data.value,
+													},
+												},
+												(resultId) => {
+													if (resultId) {
+														db.api.option(
+															{
+																name: i_dbname,
+																fieldkey: i_fieldkey,
+																fieldname: i_fieldname,
+																sender: sender,
+															},
+															(resultItems) => {
+																if (resultItems) {
+																	//get the select
+																	let ctl = document.getElementById(i.id);
+
+																	//generate option
+																	core.replaceChild(
+																		ctl,
+																		new option.select({
+																			selected: resultId,
+																			item: resultItems,
+																		})
+																	);
+
+																	//change value
+																	ctl.value = resultId;
+
+																	//trigger event modify
+																	ctl.dispatchEvent(new Event("modify"));
+																}
+															}
+														);
+													}
+												}
+											);
+										},
+										`Copy ${i_label}`
+									).show();
+								},
+							})
+						);
+					} else {
+						elem_after.push(
+							new button({
+								icon: {
+									type: "far",
+									icon: "clipboard",
+								},
+								color: "secondary",
+								click: () => {
+									try {
+										let str = document.getElementById(i.id).value;
+										navigator.clipboard.writeText(str);
+										new toast("/", "Copied to clipboard").show();
+									} catch (ex) {
+										new toast("!!", `Error when copy code to clipboard. ${ex}`).show();
+									}
+								},
+							})
+						);
+					}
+				}
+
+				if (typeof i.deletectl === "function" || i.deletectl === true) {
+					if (typeof i.deletectl === "function") {
+						elem_after.push(
+							new button({
+								icon: "trash-can",
+								color: "danger",
+								click: i.deletectl,
+							})
+						);
+					} else if (i.type === "select" && i.dbname !== null) {
+						elem_after.push(
+							new button({
+								icon: "trash-can",
+								color: "danger",
+								"data-dbname": i.dbname,
+								"data-fieldkey": i.fieldkey,
+								"data-fieldname": i.fieldname,
+								"data-label": i.label,
+								click: (event) => {
+									let sender = event.currentTarget;
+									let ctl = document.getElementById(i.id);
+									let i_text = ctl.options[ctl.selectedIndex].text;
+									let i_key = ctl.value;
+									let i_dbname = sender.dataset.dbname;
+									let i_fieldkey = sender.dataset.fieldkey;
+									let i_fieldname = sender.dataset.fieldname;
+									let i_label = sender.dataset.label;
+
+									new dlg.confirmbox(
+										"!!",
+										`Are you sure delete <b>${i_text}</b> record?`,
+										[
+											{
+												label: "Yes, delete",
+												color: "danger",
+												click: () => {
+													db.api.delete(
+														{
+															name: i_dbname,
+															id: i_key,
+														},
+														(resultDeleted) => {
+															if (resultDeleted) {
+																db.api.option(
+																	{
+																		name: i_dbname,
+																		fieldkey: i_fieldkey,
+																		fieldname: i_fieldname,
+																		sender: sender,
+																	},
+																	(resultItems) => {
+																		if (resultItems) {
+																			//generate option
+																			core.replaceChild(
+																				ctl,
+																				new option.select({
+																					item: resultItems,
+																				})
+																			);
+
+																			//change value
+																			ctl.value = null;
+
+																			//trigger event modify
+																			ctl.dispatchEvent(new Event("modify"));
+																		}
+																	}
+																);
+															}
+														}
+													);
+												},
+											},
+											{
+												label: "Cancel",
+											},
+										],
+										`Delete ${i_label}`
+									).show();
+								},
+							})
+						);
+					}
+				}
+
+				if (typeof i.managectl === "function") {
+					elem_after.push(
+						new button({
+							icon: "sliders",
+							color: "secondary",
+							click: i.managectl,
+						})
+					);
+				}
 			}
 
 			//helper
@@ -333,7 +708,10 @@ export default class input extends tag {
 
 			delete i.numctl;
 			delete i.addctl;
+			delete i.deletectl;
+			delete i.editctl;
 			delete i.copyctl;
+			delete i.managectl;
 
 			delete i.validitytype;
 			delete i.valid;
@@ -348,13 +726,17 @@ export default class input extends tag {
 			delete i.flex;
 			delete i.textWarp;
 
+			delete i.dbname;
+			delete i.fieldkey;
+			delete i.fieldname;
+
 			let elem_main = new tag(i);
 
 			//combine all
 			let ctl = [];
 
 			//add before element
-			if (elem_before) ctl.push(elem_before);
+			if (elem_before && elem_before.length > 0) ctl.push(...elem_before);
 
 			//add label
 			if (elem_label && opt.floatlabel) {
@@ -368,10 +750,7 @@ export default class input extends tag {
 			if (elem_datalist) ctl.push(elem_datalist);
 
 			//add after element
-			if (elem_after) ctl.push(elem_after);
-
-			//add copyctl
-			if (elem_copy) ctl.push(elem_copy);
+			if (elem_after && elem_after.length > 0) ctl.push(...elem_after);
 
 			//add validation feedback
 			if (elem_validmsg) ctl.push(elem_validmsg);

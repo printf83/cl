@@ -224,6 +224,36 @@ export default [
 	},
 
 	{
+		title: "Control",
+		container: sample.formcontainer,
+		import: ["input"],
+		code: () => {
+			return [
+				new input({
+					type: "date",
+					label: "Clear",
+					clearctl: true, //marker
+				}),
+				new input({
+					type: "number",
+					label: "Number",
+					min: 10,
+					max: 100,
+					step: 5,
+					value: 50,
+					numctl: true, //marker
+				}),
+				new input({
+					type: "text",
+					label: "Copy",
+					value: "Click copy button to copy this text",
+					copyctl: true, //marker
+				}),
+			];
+		},
+	},
+
+	{
 		title: "Event",
 		msg: [
 			new table.container({

@@ -1,6 +1,10 @@
 "use strict";
 import sample from "./sample.js";
 import input from "../base/input.js";
+import toast from "../base/toast.js";
+import * as core from "../base/core.js";
+import button from "../base/button.js";
+import div from "../base/div.js";
 
 export default [
 	{
@@ -139,6 +143,130 @@ export default [
 				//marker
 				disabled: true,
 			});
+		},
+	},
+
+	{
+		title: "Control",
+		import: ["input", "button", "list", "div", "sample", "toast"],
+		code: () => {
+			let resultOutputId = core.UUID();
+			let btnGenerate = core.UUID();
+
+			return [
+				//run code button
+				new button({
+					id: btnGenerate,
+					label: "Run Code",
+					icon: "play",
+					color: "primary",
+					click: (event) => {
+						//get button to show loading
+						let sender = event.currentTarget;
+
+						//get list of state
+						sample.list_state((dbstate) => {
+							//generate select input
+							core.appendChild(
+								document.getElementById(resultOutputId),
+
+								new div(
+									"col",
+									new input({
+										label: "State",
+										type: "select",
+										option: dbstate,
+
+										//marker
+										dbname: "state",
+										addctl: true,
+										deletectl: true,
+										editctl: true,
+										copyctl: true,
+										modify: (e) => {
+											new toast("i", "State modify").show();
+											sample.reset_list_state();
+										},
+										//-
+									})
+								)
+							);
+
+							//hide run code button
+							document.getElementById(btnGenerate).classList.add("d-none");
+							document.getElementById(resultOutputId).classList.remove("d-none");
+						}, sender);
+					},
+				}),
+
+				//output list container
+				new div({ id: resultOutputId, display: "none" }),
+			];
+		},
+	},
+
+	{
+		title: "Custom Control",
+		import: ["input", "button", "list", "div", "sample", "toast"],
+		code: () => {
+			let resultOutputId = core.UUID();
+			let btnGenerate = core.UUID();
+
+			return [
+				//run code button
+				new button({
+					id: btnGenerate,
+					label: "Run Code",
+					icon: "play",
+					color: "primary",
+					click: (event) => {
+						//get button to show loading
+						let sender = event.currentTarget;
+
+						//get list of state
+						sample.list_state((dbstate) => {
+							//generate select input
+							core.appendChild(
+								document.getElementById(resultOutputId),
+
+								new div(
+									"col",
+									new input({
+										label: "State",
+										type: "select",
+										option: dbstate,
+
+										//marker
+										addctl: (e) => {
+											new toast("i", "Add your <b>add code</b> here").show();
+										},
+										deletectl: (e) => {
+											new toast("i", "Add your <b>delete code</b> here").show();
+										},
+										editctl: (e) => {
+											new toast("i", "Add your <b>edit code</b> here").show();
+										},
+										copyctl: (e) => {
+											new toast("i", "Add your <b>copy code</b> here").show();
+										},
+										managectl: (e) => {
+											new toast("i", "Add your <b>manage code</b> here").show();
+										},
+										//-
+									})
+								)
+							);
+
+							//hide run code button
+							document.getElementById(btnGenerate).classList.add("d-none");
+							document.getElementById(resultOutputId).classList.remove("d-none");
+						}, sender);
+					},
+				}),
+
+				//output list container
+				new div({ id: resultOutputId, display: "none" }),
+			];
 		},
 	},
 ];
