@@ -33,7 +33,7 @@ import ul from "../base/ul.js";
 
 export default [
 	{
-		title: "Tooltip global property",
+		title: "Badge global property",
 		anchor: false,
 	},
 
@@ -348,6 +348,7 @@ export default [
 				gap: 2,
 				elem: [
 					new btngroup({
+						tooltip: sample.tooltip(), //marker
 						elem: [fn(1), fn(2), fn(3), fn(4)],
 					}),
 					new btngroup({
@@ -369,7 +370,11 @@ export default [
 		import: ["sample", "h"],
 		code: () => {
 			return [1, 2, 3, 4, 5, 6].map((i) => {
-				return new h(i, `Heading ${i}`);
+				return new h({
+					level: i,
+					elem: `Heading ${i}`,
+					tooltip: sample.tooltip(), //marker
+				});
 			});
 		},
 	},
@@ -378,7 +383,17 @@ export default [
 		import: ["sample", "h", "small", "p", "sample"],
 		code: () => {
 			return [
-				new h({ level: 3, elem: ["Heading ", new small({ textColor: "muted", elem: "with muted text" })] }),
+				new h({
+					level: 3,
+					elem: [
+						"Heading ",
+						new small({
+							textColor: "muted",
+							elem: "with muted text",
+							tooltip: sample.tooltip(), //marker
+						}),
+					],
+				}),
 				new p("lead", sample.shorttext()),
 			];
 		},
@@ -443,8 +458,8 @@ export default [
 					elem: [
 						new table.td({ scope: "row", elem: new b({ elem: d ? core.capitalize(d) : "Default" }) }),
 						new table.td({ elem: "Column content" }),
-						new table.td({ elem: "Column content" }),
 						new table.td({ elem: "Column content", tooltip: sample.tooltip() /*marker*/ }),
+						new table.td({ elem: "Column content" }),
 					],
 				});
 			};
@@ -457,8 +472,8 @@ export default [
 							elem: [
 								new table.th({ elem: "Type" }),
 								new table.th({ elem: "Column heading" }),
-								new table.th({ elem: "Column heading" }),
 								new table.th({ elem: "Column heading", tooltip: sample.tooltip() /*marker*/ }),
+								new table.th({ elem: "Column heading" }),
 							],
 						}),
 					}),
@@ -920,7 +935,11 @@ export default [
 						new p({
 							elem: [
 								"Best check yo self, you're not looking too good. Nulla vitae elit libero, a pharetra augue. Praesent commodo cursus magna, ",
-								new alert.link("#", "vel scelerisque nisl consectetur et"),
+								new alert.link({
+									href: "#",
+									elem: "vel scelerisque nisl consectetur et",
+									tooltip: sample.tooltip(), //marker
+								}),
 								".",
 							],
 						}),

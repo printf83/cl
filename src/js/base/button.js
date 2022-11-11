@@ -106,6 +106,11 @@ export default class button extends tag {
 
 				//create label for input check or radio
 				toggle_label = new label({
+					//move badge, tooltip and popover into label
+					badge: opt.badge,
+					tooltip: opt.tooltip,
+					popover: opt.popover,
+
 					for: opt.id,
 					class: opt.class,
 					elem: [
@@ -126,6 +131,11 @@ export default class button extends tag {
 				opt.tag = "input";
 				opt.class = "btn-check";
 				opt.autocomplete = opt.autocomplete || "off";
+
+				//delete badge,tooltip and popover
+				delete opt.badge;
+				delete opt.tooltip;
+				delete opt.popover;
 			} else {
 				if (!opt.elem) {
 					opt.elem = [
