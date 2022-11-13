@@ -1,40 +1,16 @@
 "use strict";
 
-///library
 import * as core from "../../cl/js/base/core.js";
-import input from "../../cl/js/base/input.js";
+import button from "../../cl/js/base/button.js";
+import p from "../../cl/js/base/p.js";
 
-///code
-let code = () => {
-	return new input({
-		label: "Disabled select example",
-		hidelabel: true,
-		type: "select",
-		option: [
-			{
-				value: "",
-				label: "Open this select menu",
-				selected: true,
-			},
-			{
-				value: "1",
-				label: "One",
-			},
-			{
-				value: "2",
-				label: "Two",
-			},
-			{
-				value: "3",
-				label: "Three",
-			},
-		],
-
-		disabled: true,
-	});
-};
-
-///loader
 core.documentReady(() => {
-	core.replaceChild(document.getElementById("root"), code());
+	core.appendChild(
+		document.getElementById("root"),
+		new button({
+			label: "Hello World!",
+			color: "primary",
+		})
+	);
+	core.appendChild(document.getElementById("root"), new p("Hello World!"));
 });

@@ -95,7 +95,7 @@ export default [
 					<html lang="en">
 						<head>
 							<meta charset="utf-8" />
-							<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1" />
+							<meta name="viewport" content="width=device-width, initial-scale=1" />
 							<meta name="description" content="Testing website" />
 							<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 							<link rel="icon" type="image/png" href="/favicon.png" />
@@ -115,7 +115,7 @@ export default [
 								disabled="disabled"
 								id="css_bootswatch"
 							/>
-							<link rel="stylesheet" href="./dist/style.css" />
+							<link rel="stylesheet" href="./cl/css/style.css" />
 
 							<title>${core.setting.title()}</title>
 						</head>
@@ -131,7 +131,7 @@ export default [
 							<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
 							<script src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0"></script>
 
-							<script type="module" src="/dist/js/index.js"></script>
+							<script type="module" src="./js/index.js"></script>
 						</body>
 					</html>
 
@@ -144,9 +144,9 @@ export default [
 				code: `
 					"use strict";
 					
-					import * as core from "./base/core.js";
-					import button from "./base/button.js";
-					import p from "./base/p.js";
+					import * as core from "../../cl/js/base/core.js";
+					import button from "../../cl/js/base/button.js";
+					import p from "../../cl/js/base/p.js";
 
 					core.documentReady(() => {
 						core.appendChild(document.getElementById("root"), new button({label:'Hello World!', color:'primary'}));
@@ -163,7 +163,7 @@ export default [
 				code: `
 					"use strict";
 					
-					import $ from "./all.js"; //marker
+					import $ from "../../cl/js/all.js"; //marker
 
 					$.core.documentReady(() => {
 						$.core.appendChild(document.getElementById("root"), new $.button({label:'Hello World!', color:'primary'}));
@@ -178,7 +178,7 @@ export default [
 				code: `
 					"use strict";
 					
-					import WOW from "./all.js"; //marker
+					import WOW from "../../cl/js/all.js"; //marker
 
 					WOW.core.documentReady(() => {
 						WOW.core.appendChild(document.getElementById("root"), new WOW.button({label:'Hello World!', color:'primary'}));
@@ -187,7 +187,7 @@ export default [
 			`,
 			}),
 
-			`If you want to test the code, you can copy the code into <b>./src/js/test.js</b> and go to <a href="test.html">test.html</a> to check the output. Please run {{npm start}} to rebuild the js file.`,
+			`If you want to test the code, you can copy the code into <b>./client/js/test.js</b> and go to <a href="test.html">test.html</a> to check the output.`,
 
 			new div({
 				display: "flex",

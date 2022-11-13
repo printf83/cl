@@ -322,7 +322,7 @@ const dblibrary = {
 	tooltip: `import tooltip from "../../cl/js/base/tooltip.js";`,
 	ul: `import ul from "../../cl/js/base/ul.js";`,
 	user: `import * as user from "../../cl/js/base/user.js";`,
-	sample: `import sample from "./doc/sample.js";	//for documentation purpose only`,
+	sample: `import sample from "../../../js/doc/sample.js";	//for documentation purpose only`,
 };
 
 let randomtheme_callback = null;
