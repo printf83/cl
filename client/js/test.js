@@ -1,16 +1,24 @@
 "use strict";
 
+///library
 import * as core from "../../cl/js/base/core.js";
-import button from "../../cl/js/base/button.js";
-import p from "../../cl/js/base/p.js";
+import tag from "../../cl/js/base/tag.js";
 
+///code
+let code = () => {
+	return [
+		new tag({
+			tag: "div",
+			elem: "Example with style",
+
+			border: "2px solid #aaa",
+			backgroundColor: "rgba(255,0,0,0.5)",
+			padding: "1rem",
+		}),
+	];
+};
+
+///loader
 core.documentReady(() => {
-	core.appendChild(
-		document.getElementById("root"),
-		new button({
-			label: "Hello World!",
-			color: "primary",
-		})
-	);
-	core.appendChild(document.getElementById("root"), new p("Hello World!"));
+	core.replaceChild(document.getElementById("root"), code());
 });

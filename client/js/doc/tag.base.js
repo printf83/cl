@@ -191,4 +191,47 @@ export default [
 			});
 		},
 	},
+
+	{
+		title: "Mix value support",
+		msg: ["CL automaticly create style or bootstrap class base on property value"],
+		import: ["tag"],
+		container: sample.vstackcontainer,
+		code: () => {
+			return [
+				new tag({
+					tag: "div",
+					elem: "Example with style",
+
+					//marker
+					border: "2px solid #aaa",
+					backgroundColor: "rgba(255,0,0,0.5)",
+					padding: "1rem",
+					//-
+				}),
+
+				new tag({
+					tag: "div",
+					elem: "Example with bootstrap",
+
+					//marker
+					border: true,
+					bgColor: "primary",
+					padding: 3,
+					//-
+				}),
+
+				new tag({
+					tag: "div",
+					elem: "Example with style and bootstrap (mixing)",
+
+					//marker
+					border: true,
+					backgroundColor: "rgba(0,255,0,0.5)",
+					padding: 3,
+					//-
+				}),
+			];
+		},
+	},
 ];

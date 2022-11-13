@@ -58,6 +58,7 @@ export default [
 					tag: "div",
 					padding: 2,
 					bgColor: "primary",
+					textBgColor: "primary",
 					display: "inline", //marker
 					elem: "d-inline",
 				}),
@@ -65,6 +66,7 @@ export default [
 					tag: "div",
 					padding: 2,
 					bgColor: "dark",
+					textBgColor: "dark",
 					display: "inline", //marker
 					elem: "d-inline",
 				}),
@@ -80,6 +82,7 @@ export default [
 					tag: "div",
 					padding: 2,
 					bgColor: "primary",
+					textBgColor: "primary",
 					display: "block", //marker
 					elem: "d-inline",
 				}),
@@ -87,6 +90,7 @@ export default [
 					tag: "div",
 					padding: 2,
 					bgColor: "dark",
+					textBgColor: "dark",
 					display: "block", //marker
 					elem: "d-inline",
 				}),
