@@ -106,4 +106,4 @@ dist
 #cl
 tmp/
 file/
-docs/dist/
+client/cl/
