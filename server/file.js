@@ -79,6 +79,9 @@ module.exports = () => {
 			copyFolderRecursiveSync("./source/cl/js", "./client/cl");
 			console.info("Copy source/cl/js into client/cl/js");
 
+			// copyFolderRecursiveSync("./source/cl/css", "./client/cl");
+			// console.info("Copy source/cl/css into client/cl/css");
+
 			// read css then combine
 			fs.readdir("./source/cl/css", (err, files) => {
 				let str = "";

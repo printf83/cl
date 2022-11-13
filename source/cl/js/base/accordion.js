@@ -1,4 +1,7 @@
 "use strict";
+// import sheet from "../../css/accordion.css" assert { type: "css" };
+// document.adoptedStyleSheets = [sheet];
+
 import * as core from "./core.js";
 import h from "./h.js";
 import div from "./div.js";

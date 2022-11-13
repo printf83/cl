@@ -65,7 +65,6 @@ export class select extends tag {
 						gitem.elem = [];
 
 						delete gitem.value;
-						delete gitem.label;
 						delete gitem.selected;
 					} else {
 						item = core.extend({}, defaultSelectItemOption, opt.item[i]);
