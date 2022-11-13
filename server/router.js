@@ -3,7 +3,7 @@ const path = require("path");
 
 module.exports = (app) => {
 	//static file (required)
-	app.use(express.static(path.join(__dirname, "docs")));
+	app.use(express.static("./docs"));
 
 	//user, login, register handler, (required)
 	require("./routes/user.js")(app);

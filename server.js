@@ -8,16 +8,16 @@ if (process.env.DBURL) {
 	const app = express();
 
 	//security
-	require("./server-security.js")(app);
+	require("./server/security.js")(app);
 
 	//db
-	require("./server-db.js")();
+	require("./server/db.js")();
 
 	//file
-	require("./server-file.js")();
+	require("./server/file.js")();
 
 	//router
-	require("./server-router.js")(app);
+	require("./server/router.js")(app);
 
 	//start server
 	const envPORT = process.env.PORT || 3000;
