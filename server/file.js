@@ -5,7 +5,7 @@ const fs = require("fs");
 const path = require("path");
 
 //cleanup temp file
-function cleanuptmpfile() {
+function removeTempFileFromDB() {
 	$.db
 		.find({ saved: { $eq: false } })
 		.then((data) => {
@@ -66,40 +66,41 @@ function copyFolderRecursiveSync(source, target) {
 module.exports = () => {
 	//delete tmp folder
 	fs.rmSync("./tmp", { recursive: true, force: true });
+	removeTempFileFromDB();
+	console.info("Complete remove tmp file and folder");
 
-	cleanuptmpfile();
-	console.info("Remove tmp file and folder");
+	//delete lib from client
+	fs.rmSync("./client/cl", { recursive: true, force: true });
+	console.info("Remove client/cl");
 
-	//delete dist
-	fs.rmSync("./docs/dist", { recursive: true, force: true });
+	//copy all cl framework into client lib
+	fs.mkdir("./client/cl", (err) => {
+		fs.mkdir("./client/cl/js", (err) => {
+			copyFolderRecursiveSync("./source/cl/js", "./client/cl");
+			console.info("Copy source/cl/js into client/cl/js");
 
-	console.info("Remove docs/dist");
-
-	//copy all jsfile into dist
-	fs.mkdir("./docs/dist", (err) => {
-		fs.mkdir("./docs/dist/js", (err) => {
-			copyFolderRecursiveSync("./src/js", "./docs/dist");
-			console.info("Copy src/js into docs/dist");
-
-			// read css
-			fs.readdir("./src/css", (err, files) => {
+			// read css then combine
+			fs.readdir("./source/cl/css", (err, files) => {
 				let str = "";
 				files.forEach((file) => {
-					str += fs.readFileSync(`./src/css/${file}`);
+					str += fs.readFileSync(`./source/cl/css/${file}`);
 				});
 
-				// if (DEBUG) {
-				// 	minify.css(str, (err, data) => {
-				// 		if (err) {
-				// 			console.error(err);
-				// 		} else {
-				// 			fs.writeFileSync("./docs/dist/style.css", data);
-				// 			console.info("Combine css file");
-				// 		}
-				// 	});
-				// } else {
-				fs.writeFileSync("./docs/dist/style.css", str);
-				// }
+				fs.mkdir("./client/cl/css", (err) => {
+					// if (DEBUG) {
+					// 	minify.css(str, (err, data) => {
+					// 		if (err) {
+					// 			console.error(err);
+					// 		} else {
+					// 			fs.writeFileSync("./client/cl/css/style.css", data);
+					// 			console.info("Combine css file");
+					// 		}
+					// 	});
+					// } else {
+					fs.writeFileSync("./client/cl/css/style.css", str);
+					console.info("Combine css file");
+					// }
+				});
 			});
 		});
 	});

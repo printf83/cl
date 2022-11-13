@@ -1,0 +1,700 @@
+/*fix bootstrap color problem on accordion button*/
+
+.accordion-button::after {
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    content: "\f078";
+    background-image: none !important;
+    text-align: center;
+    width: 1.25em;
+}
+
+.anchorjs-link {
+	font-weight: 400;
+	color: rgba(var(--bs-primary-rgb), 0.5);
+	transition: color 0.15s ease-in-out;
+	text-decoration: none;
+	opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.anchorjs-link {
+		transition: none;
+	}
+}
+
+.anchorjs-link:focus,
+.anchorjs-link:hover {
+	color: var(--bs-primary);
+	text-decoration: none;
+}
+
+.anchorjs-link:focus,
+:hover > .anchorjs-link {
+	opacity: 1;
+}
+
+[data-anchorjs-icon]::after {
+	content: attr(data-anchorjs-icon);
+}
+.cl-fadein {
+	animation-name: fadein;
+	animation-duration: 0.5s;
+	animation-fill-mode: forwards;
+}
+
+.cl-fadeout {
+	animation-name: fadeout;
+	animation-duration: 0.5s;
+	animation-fill-mode: forwards;
+}
+
+.cl-slidein {
+	animation-name: slidein;
+	animation-duration: 0.5s;
+	animation-fill-mode: forwards;
+}
+
+.cl-slideout {
+	animation-name: slideout;
+	animation-duration: 0.5s;
+	animation-fill-mode: forwards;
+}
+
+.cl-fadeslidein {
+	animation-name: fadeslidein;
+	animation-duration: 0.5s;
+	animation-fill-mode: forwards;
+}
+
+.cl-fadeslideout {
+	animation-name: fadeslideout;
+	animation-duration: 0.5s;
+	animation-fill-mode: forwards;
+}
+
+@media (prefers-reduced-motion) {
+	.cl-fadein,
+	.cl-fadeout,
+	.cl-slidein,
+	.cl-slideout,
+	.cl-fadeslidein,
+	.cl-fadeslideout {
+		animation-name: dissolve;
+		animation-duration: 0s;
+	}
+}
+
+@keyframes fadein {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+@keyframes fadeout {
+	0% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+	}
+}
+
+@keyframes slidein {
+	100% {
+		transform: translateX(0%);
+	}
+}
+
+@keyframes slideout {
+	0% {
+		transform: translateX(0%);
+	}
+	100% {
+		transform: translateX(-100%);
+	}
+}
+
+@keyframes fadeslidein {
+	0% {
+		opacity: 0;
+		transform: translateX(-100%);
+	}
+	100% {
+		opacity: 1;
+		transform: translateX(0%);
+	}
+}
+
+@keyframes fadeslideout {
+	0% {
+		opacity: 1;
+		transform: translateX(0%);
+	}
+	100% {
+		opacity: 0;
+		transform: translateX(-100%);
+	}
+}
+/*fix bootstrap color problem on btn-close*/
+
+/* .btn-close-white {
+    filter: unset !important;
+} */
+
+.btn-close {
+    color: unset !important;
+    background: none !important;
+}
+
+.btn-close::before {
+    position: unset;
+    top: unset;
+    right: unset;
+    content: unset;
+}
+
+.btn-close{
+    display: flex;
+    justify-content: center;
+}
+
+.btn-close::after{
+    content: "✕";
+    text-align: center;
+    justify-content: center;
+    font-weight: lighter;
+    font-size: calc(100%*1.5);
+    display: flex;
+    align-self: center;
+}
+.cl-codepreview-copy {
+	margin-top: -0.25rem;
+}
+
+li[disabled],
+li.disabled,
+button[disabled],
+button.disabled,
+a[disabled],
+a.disabled,
+div[disabled],
+div.disabled,
+input[disabled],
+input.disabled{
+    cursor: not-allowed !important;
+    pointer-events: unset;
+}
+
+li.wait,
+li.wait.disabled,
+button.wait,
+button.wait.disabled,
+a.wait,
+a.wait.disabled,
+div.wait,
+div.wait.disabled,
+input.wait,
+input.wait.disabled {
+    cursor: wait !important;
+    pointer-events: unset; 
+}
+
+
+.noselect {
+    -webkit-touch-callout: none;
+    /* iOS Safari */
+    -webkit-user-select: none;
+    /* Safari */
+    -khtml-user-select: none;
+    /* Konqueror HTML */
+    -moz-user-select: none;
+    /* Old versions of Firefox */
+    -ms-user-select: none;
+    /* Internet Explorer/Edge */
+    user-select: none;
+    /* Non-prefixed version, currently
+    supported by Chrome, Edge, Opera and Firefox */
+}
+
+.noselect pre {
+    -webkit-touch-callout: text;
+    /* iOS Safari */
+    -webkit-user-select: text;
+    /* Safari */
+    -khtml-user-select: text;
+    /* Konqueror HTML */
+    -moz-user-select: text;
+    /* Old versions of Firefox */
+    -ms-user-select: text;
+    /* Internet Explorer/Edge */
+    user-select: text;
+    /* Non-prefixed version, currently
+    supported by Chrome, Edge, Opera and Firefox */
+}
+
+
+
+
+.cl-fu-progress {
+	position: absolute;
+	background-color: rgba(var(--bs-light-rgb), 0.5);
+	display: block;
+	height: 100%;
+	top: 0;
+	left: 0;
+}
+.fa-cl-image{
+    padding: 0.125rem;
+    display: inline-block;
+    line-height: .05em;
+    vertical-align: -.075em;
+    margin-top: -.05em;
+}
+
+.fa-cl-svg{
+    /* padding: 0.2rem;
+    display: inline-block;
+    line-height: .05em;
+    vertical-align: -.075em;
+    margin-top: -.05em; */
+    padding: 0.2rem;
+    display: inline-block;
+    margin-top: -.05em;
+}
+.cl-list-ctl {
+	overflow: hidden;
+	position: absolute;
+	right: 0;
+	background-color: var(--bs-border-color);
+	height: 100%;
+	width: 0.7rem;
+	animation-name: cl-list-ctl-animation-out;
+	animation-duration: 300ms;
+	animation-iteration-count: 1;
+	text-align: center;
+}
+
+.cl-list-ctl:hover {
+	background-color: var(--bs-border-color-translucent);
+	cursor: pointer;
+}
+
+.cl-list-ctl::after{
+
+	font-family: "Font Awesome 6 Free";
+	font-weight: 900;
+	content: "\f142";
+	color: var(--bs-primary);
+	position: absolute;
+	top: calc(50% - 0.75rem);
+	display: inline-block;
+	text-align: center;
+	width: 100%;
+	margin-left: -0.3rem;
+	
+}
+
+.cl-list-ctl .btn-group{
+	display: none;
+}
+
+.cl-list-ctl.show {
+	position: absolute;
+	right: 1rem;
+	background-color:unset;
+	height: unset;
+	width: unset;
+	content: unset;
+	cursor: unset;
+	animation-name: cl-list-ctl-animation-in;
+	animation-duration: 300ms;
+	animation-iteration-count: 1;
+}
+
+.cl-list-ctl.show:hover {
+	background-color: unset;
+	cursor: unset;
+}
+
+.cl-list-ctl.show::after {
+	content: unset;
+	color: unset;
+	position: unset;
+	top: unset;
+	display: unset;
+	padding: unset;
+}
+
+.cl-list-ctl.show .btn-group{
+	display: inline-flex;
+}
+
+
+/* cl-list-ctl animation */
+@keyframes cl-list-ctl-animation-in {
+	from {
+		width: 0.7rem;
+		right: 0;
+	}
+
+	to {
+		width: unset;
+		right: 1rem;
+	}
+}
+
+@keyframes cl-list-ctl-animation-out {
+	from {
+		width: unset;
+	}
+
+	to {
+		width: 0.7rem;
+	}
+}
+
+/* item */
+
+
+.cl-list .cl-list-img,
+.cl-list .cl-list-ctl {
+	display: block !important;
+}
+
+
+
+.cl-list .cl-list-check {
+	display: none !important;
+}
+
+.cl-list.check .cl-list-img,
+.cl-list.check .cl-list-ctl {
+	display: none !important;
+}
+
+.cl-list.check .cl-list-check {
+	display: block !important;
+}
+
+.cl-list.check .check .cl-list-check {
+	color: var(--bs-primary) !important;
+}
+
+.cl-list .list-group-item {
+	overflow: hidden;
+	
+}
+
+.cl-list .list-group-item[data-key],
+.cl-list .list-group-item.pointer {
+	cursor: pointer;
+}
+
+.cl-list .list-group-item-header{
+	color: var(--bs-primary);
+	text-align: center;
+}
+
+/* custom */
+.cl-list .list-group-item:not(.list-group-item-header) {
+	min-height: 4rem;
+}
+
+.cl-list .list-group-item h6 {
+	margin-bottom: 0;
+}
+
+.cl-list .list-group-item small {
+	margin-top: 0.5rem;
+	display: inline-block;
+}
+
+/* .cl-list .list-group-item-header::before {
+	content: "[ ";
+}
+
+.cl-list .list-group-item-header::after {
+	content: " ]";
+} */
+
+.cl-menu-toggle {
+	color: rgba(var(--bs-gray), 0.7);
+	font-weight: calc(var(--bs-body-font-weight) * 1.5);
+	padding: 0.25rem 0.5rem;
+	border-radius: var(--bs-border-radius);
+	display: inline-block;
+}
+.bg-dark .cl-menu-toggle {
+	color: rgba(var(--bs-light-rgb), 0.7);
+}
+.cl-menu-toggle:hover {
+	background-color: rgba(var(--bs-primary-rgb), 0.1);
+	cursor: pointer;
+}
+.cl-menu-toggle:hover label {
+	cursor: pointer;
+}
+
+.bg-dark .cl-menu-toggle:hover {
+	background-color: rgba(var(--bs-primary-rgb), 0.1);
+}
+.cl-menu-toggle:not(.no-arrow)::before {
+	text-align: center;
+	width: 1.25em;
+	line-height: 0;
+	content: "\f054";
+	font-family: "Font Awesome 5 Free";
+	font-weight: 900;
+	transition: transform 0.35s ease;
+	transform-origin: 0.5em 50%;
+	display: inline-block;
+}
+.cl-menu-toggle[aria-expanded="true"] {
+	color: rgba(var(--bs-gray), 0.9);
+}
+.bg-dark .cl-menu-toggle[aria-expanded="true"] {
+	color: rgba(var(--bs-light-rgb), 0.9);
+}
+.cl-menu-toggle[aria-expanded="true"]:not(.no-arrow)::before {
+	transform: rotate(90deg);
+}
+.cl-menu-container {
+	padding-left: 0.25rem;
+	list-style: none;
+	margin: 0;
+}
+.cl-menu-container.no-arrow{
+	padding-left: 0.75rem;
+}
+
+.cl-menu-container li div,
+.cl-menu-container li a {
+	color: rgba(var(--bs-gray), 0.7);
+	padding: 0.25rem 0.5rem;
+	border-radius: var(--bs-border-radius-sm);
+	text-decoration: none;
+	display: inline-block;
+	font-size: .875em;
+}
+
+.cl-menu-container li div:hover,
+.cl-menu-container li div:hover label,
+.cl-menu-container li a:hover,
+.cl-menu-container li a:hover label {
+	cursor: pointer;
+}
+
+.bg-dark .cl-menu-container li div,
+.bg-dark .cl-menu-container li a {
+	color: rgba(var(--bs-light-rgb), 0.7);
+}
+
+.cl-menu-container li div:hover,
+.cl-menu-container li a:hover {
+	background-color: rgba(var(--bs-primary-rgb), 0.1);
+}
+.bg-dark .cl-menu-container li div:hover,
+.bg-dark .cl-menu-container li a:hover {
+	background-color: rgba(var(--bs-primary-rgb), 0.1);
+}
+.cl-menu-container li div.active,
+.cl-menu-container li a.active {
+	font-weight: calc(var(--bs-body-font-weight) * 1.5);
+	color: rgba(var(--bs-primary-rgb), 1);
+}
+.bg-dark .cl-menu-container li div.active,
+.bg-dark .cl-menu-container li a.active {
+	color: rgba(var(--bs-primary-rgb), 0.1);
+}
+
+.cl-menu-container li div.disabled,
+.cl-menu-container li a.disabled,
+.cl-menu-container li div[disabled],
+.cl-menu-container li a[disabled] {
+	color: var(--bs-secondary);
+}
+
+@media (min-width: 768px) {
+	.cl-vh-menu {
+		max-height: calc(100vh - 5.5rem) !important;
+	}
+}
+.navbar .navbar-collapse.collapse.show .dropdown-menu.show{
+    margin-bottom: 0.5rem;
+}.cl-pill{
+    border-radius: var(--bs-border-radius);
+}/*! Color themes for Google Code Prettify | MIT License | github.com/jmblog/color-themes-for-google-code-prettify */
+.prettyprint {
+	/* background: #f5f7ff; */
+	font-family: var(--bs-font-monospace);
+	font-size: calc(var(--bs-body-font-size) * 0.8);
+	/* border: 0 !important; */
+}
+
+.pln {
+	color: var(--bs-body-color);
+}
+
+/* Specify class=linenums on a pre to get line numbering */
+ol.linenums {
+	margin-top: 0;
+	margin-bottom: 0;
+	color: var(--bs-body-color);
+}
+
+li.L0,
+li.L1,
+li.L2,
+li.L3,
+li.L4,
+li.L5,
+li.L6,
+li.L7,
+li.L8,
+li.L9 {
+	padding-left: 1em;
+	/* background-color: #f5f7ff; */
+	list-style-type: decimal;
+}
+
+@media screen {
+	/* string content */
+
+	.str {
+		color: var(--bs-success);
+	}
+
+	/* keyword */
+
+	.kwd {
+		color: var(--bs-primary);
+	}
+
+	/* comment */
+
+	.com {
+		color: var(--bs-secondary);
+	}
+
+	/* type name */
+
+	.typ {
+		color: var(--bs-primary);
+	}
+
+	/* literal value */
+
+	.lit {
+		color: var(--bs-danger);
+	}
+
+	/* punctuation */
+
+	.pun {
+		color: rgba(var(--bs-body-color-rgb), 0.8);
+	}
+
+	/* lisp open bracket */
+
+	.opn {
+		color: var(--bs-body-color);
+	}
+
+	/* lisp close bracket */
+
+	.clo {
+		color: var(--bs-body-color);
+	}
+
+	/* markup tag name */
+
+	.tag {
+		color: var(--bs-danger);
+	}
+
+	/* markup attribute name */
+
+	.atn {
+		color: var(--bs-primary);
+	}
+
+	/* markup attribute value */
+
+	.atv {
+		color: var(--bs-success);
+	}
+
+	/* declaration */
+
+	.dec {
+		color: var(--bs-danger);
+	}
+
+	/* variable name */
+
+	.var {
+		color: var(--bs-danger);
+	}
+
+	/* function name */
+
+	.fun {
+		color: var(--bs-primary);
+	}
+}
+.font-fa,
+.font-fa optgroup,
+.font-fa option {
+	font-family: "Font Awesome 5 Free";
+	font-weight: 900;
+	-webkit-font-smoothing: antialiased;
+}
+.cl-toc li{
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.cl-toc li div,
+.cl-toc li div label,
+.cl-toc li a,
+.cl-toc li a label {
+	text-decoration: none;
+	color: var(--bs-body-color);
+	/* color: rgba(var(--bs-gray), 0.7);
+	font-weight: calc(var(--bs-body-font-weight) * 0.75);
+	padding: 0.25rem 0.5rem;
+	border-radius: var(--bs-btn-border-radius);
+	display: inline-block; */
+	
+}
+
+.cl-toc li div:hover,
+.cl-toc li div:hover label,
+.cl-toc li a:hover,
+.cl-toc li a:hover label {
+	text-decoration: underline;
+	cursor: pointer;
+	
+}
+
+.cl-toc li div.disabled,
+.cl-toc li a.disabled,
+.cl-toc li div[disabled],
+.cl-toc li a[disabled]{
+	color:var(--bs-secondary);
+}
+
+.cl-toc li div.active,
+.cl-toc li a.active {
+	color: var(--bs-primary);
+	font-weight: bold;
+}
+
+.cl-toc h6{
+	font-weight: calc(var(--bs-body-font-weight) * 1.5);
+}
