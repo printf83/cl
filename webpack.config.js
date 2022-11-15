@@ -6,20 +6,10 @@ const CopyPlugin = require("copy-webpack-plugin");
 module.exports = [
 	{
 		mode: "development",
-		plugins: [
-			new CopyPlugin({
-				patterns: [
-					{ from: path.resolve(__dirname, "source/cl"), to: path.resolve(__dirname, "client/src/cl") },
-				],
-			}),
-		],
-	},
-	{
-		mode: "development",
 		module: {
 			rules: [
 				{
-					test: /\.js$/,
+					test: /\.js$/i,
 					exclude: /node_modules/,
 					use: {
 						loader: "babel-loader",
@@ -28,11 +18,31 @@ module.exports = [
 				// Additional configuration to handle *.css files
 				{
 					test: /\.css$/i,
-					use: ["style-loader", "css-loader"],
+					use: [
+						{ loader: "style-loader" },
+						{
+							loader: "css-loader",
+							options: {
+								importLoaders: 1,
+								modules: true,
+							},
+						},
+					],
 				},
 			],
 		},
 	},
+	{
+		mode: "development",
+		plugins: [
+			new CopyPlugin({
+				patterns: [
+					{ from: path.resolve(__dirname, "source/cl"), to: path.resolve(__dirname, "client/src/cl") },
+				],
+			}),
+		],
+	},
+
 	{
 		mode: "development",
 		entry: path.resolve(__dirname, "client/src/index.js"),

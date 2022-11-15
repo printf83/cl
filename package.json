@@ -9,7 +9,7 @@
 	"main": "server.js",
 	"scripts": {
 		"test": "npm start",
-		"build": "webpack --stats-error-details --config webpack.config.js"
+		"build": "webpack"
 	},
 	"dependencies": {
 		"bcrypt": "^5.0.1",

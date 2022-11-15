@@ -1,7 +1,7 @@
 "use strict";
 
 //disable this if you not using webpack
-import css from "./css/btnclose.css";
+import "./css/btnclose.css";
 //-------------------------------------
 
 import * as core from "./core.js";

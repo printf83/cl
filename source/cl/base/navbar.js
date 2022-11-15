@@ -1,7 +1,7 @@
 "use strict";
 
 //disable this if you not using webpack
-import css from "./css/navbar.css";
+import "./css/navbar.css";
 //-------------------------------------
 
 import * as core from "./core.js";
