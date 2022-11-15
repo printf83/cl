@@ -2,24 +2,24 @@
 
 // import "../css/sample.css";
 
-import a from "../../cl/js/base/a.js";
-import * as core from "../../cl/js/base/core.js";
-import div from "../../cl/js/base/div.js";
-import example from "../../cl/js/base/example.js";
-import * as layout from "../../cl/js/base/layout.js";
-import menu from "../../cl/js/base/menu.js";
-import msg from "../../cl/js/base/msg.js";
-import * as navbar from "../../cl/js/base/navbar.js";
-import pill from "../../cl/js/base/pill.js";
-import small from "../../cl/js/base/small.js";
-import * as table from "../../cl/js/base/table.js";
-import tag from "../../cl/js/base/tag.js";
-import toc from "../../cl/js/base/toc.js";
+import a from "./cl/base/a.js";
+import * as core from "./cl/base/core.js";
+import div from "./cl/base/div.js";
+import example from "./cl/base/example.js";
+import * as layout from "./cl/base/layout.js";
+import menu from "./cl/base/menu.js";
+import msg from "./cl/base/msg.js";
+import * as navbar from "./cl/base/navbar.js";
+import pill from "./cl/base/pill.js";
+import small from "./cl/base/small.js";
+import * as table from "./cl/base/table.js";
+import tag from "./cl/base/tag.js";
+import toc from "./cl/base/toc.js";
 import doc from "./doc.js";
-import * as dlg from "../../cl/js/base/dlg.js";
-import span from "../../cl/js/base/span.js";
-import p from "../../cl/js/base/p.js";
-import h from "../../cl/js/base/h.js";
+import * as dlg from "./cl/base/dlg.js";
+import span from "./cl/base/span.js";
+import p from "./cl/base/p.js";
+import h from "./cl/base/h.js";
 
 let def_main_menu = "Getting started";
 let def_sub_menu = "Introduction";
@@ -255,74 +255,74 @@ const db_menu = [
 ];
 
 const dblibrary = {
-	a: `import a from "../../cl/js/base/a.js";`,
-	abbr: `import a from "../../cl/js/base/abbr.js";`,
-	accordion: `import accordion from "../../cl/js/base/accordion.js";`,
-	alert: `import * as alert from "../../cl/js/base/alert.js";`,
-	b: `import b from "../../cl/js/base/b.js";`,
-	badge: `import badge from "../../cl/js/base/badge.js";`,
-	blockquote: `import blockquote from "../../cl/js/base/blockquote.js";`,
-	breadcrumb: `import breadcrumb from "../../cl/js/base/breadcrumb.js";`,
-	btnclose: `import btnclose from "../../cl/js/base/btnclose.js";`,
-	btngroup: `import btngroup from "../../cl/js/base/btngroup.js";`,
-	btntoolbar: `import btntoolbar from "../../cl/js/base/btntoolbar.js";`,
-	button: `import button from "../../cl/js/base/button.js";`,
-	card: `import * as card from "../../cl/js/base/card.js";`,
-	carousel: `import carousel from "../../cl/js/base/carousel.js";`,
-	cite: `import cite from "../../cl/js/base/cite.js";`,
-	code: `import code from "../../cl/js/base/code.js";`,
-	codepreview: `import codepreview from "../../cl/js/base/codepreview.js";`,
-	collapse: `import * as collapse from "../../cl/js/base/collapse.js";`,
-	container: `import * as container from "../../cl/js/base/container.js";`,
-	core: `import * as core from "../../cl/js/base/core.js";`,
-	db: `import * as db from "../../cl/js/base/api.js";`,
-	div: `import div from "../../cl/js/base/div.js";`,
-	dlg: `import * as dlg from "../../cl/js/base/dlg.js";`,
-	dropdown: `import dropdown from "../../cl/js/base/dropdown.js";`,
-	em: `import example from "../../cl/js/base/em.js";`,
-	example: `import example from "../../cl/js/base/example.js";`,
-	file: `import file from "../../cl/js/base/file.js";`,
-	form: `import form from "../../cl/js/base/form.js";`,
-	footer: `import footer from "../../cl/js/base/footer.js";`,
-	h: `import h from "../../cl/js/base/h.js";`,
-	hr: `import hr from "../../cl/js/base/hr.js";`,
-	i: `import icon from "../../cl/js/base/i.js";`,
-	icon: `import icon from "../../cl/js/base/icon.js";`,
-	img: `import img from "../../cl/js/base/img.js";`,
-	input: `import input from "../../cl/js/base/input.js";`,
-	inputgroup: `import * as inputgroup from "../../cl/js/base/inputgroup.js";`,
-	label: `import label from "../../cl/js/base/label.js";`,
-	layout: `import * as layout from "../../cl/js/base/layout.js";`,
-	li: `import li from "../../cl/js/base/li.js";`,
-	listgroup: `import listgroup from "../../cl/js/base/listgroup.js";`,
-	list: `import * as list from "../../cl/js/base/list.js";`,
-	menu: `import menu from "../../cl/js/base/menu.js";`,
-	modal: `import modal from "../../cl/js/base/modal.js";`,
-	msg: `import msg from "../../cl/js/base/msg.js";`,
-	nav: `import nav from "../../cl/js/base/nav.js";`,
-	navbar: `import * as navbar from "../../cl/js/base/navbar.js";`,
-	offcanvas: `import offcanvas from "../../cl/js/base/offcanvas.js";`,
-	ol: `import ol from "../../cl/js/base/ol.js";`,
-	option: `import * as option from "../../cl/js/base/option.js";`,
-	p: `import p from "../../cl/js/base/p.js";`,
-	paging: `import paging from "../../cl/js/base/paging.js";`,
-	pill: `import pill from "../../cl/js/base/pill.js";`,
-	popover: `import popover from "../../cl/js/base/popover.js";`,
-	pre: `import pre from "../../cl/js/base/pre.js";`,
-	progress: `import * as progress from "../../cl/js/base/progress.js";`,
-	query: `import * as query from "../../cl/js/base/query.js";`,
-	small: `import small from "../../cl/js/base/small.js";`,
-	span: `import span from "../../cl/js/base/span.js";`,
-	strong: `import strong from "../../cl/js/base/strong.js";`,
-	tab: `import tab from "../../cl/js/base/tab.js";`,
-	table: `import * as table from "../../cl/js/base/table.js";`,
-	tag: `import tag from "../../cl/js/base/tag.js";`,
-	toast: `import toast from "../../cl/js/base/toast.js";`,
-	toc: `import toc from "../../cl/js/base/toc.js";`,
-	tooltip: `import tooltip from "../../cl/js/base/tooltip.js";`,
-	ul: `import ul from "../../cl/js/base/ul.js";`,
-	user: `import * as user from "../../cl/js/base/user.js";`,
-	sample: `import sample from "../../../js/doc/sample.js";	//for documentation purpose only`,
+	a: `import a from "./cl/base/a.js";`,
+	abbr: `import a from "./cl/base/abbr.js";`,
+	accordion: `import accordion from "./cl/base/accordion.js";`,
+	alert: `import * as alert from "./cl/base/alert.js";`,
+	b: `import b from "./cl/base/b.js";`,
+	badge: `import badge from "./cl/base/badge.js";`,
+	blockquote: `import blockquote from "./cl/base/blockquote.js";`,
+	breadcrumb: `import breadcrumb from "./cl/base/breadcrumb.js";`,
+	btnclose: `import btnclose from "./cl/base/btnclose.js";`,
+	btngroup: `import btngroup from "./cl/base/btngroup.js";`,
+	btntoolbar: `import btntoolbar from "./cl/base/btntoolbar.js";`,
+	button: `import button from "./cl/base/button.js";`,
+	card: `import * as card from "./cl/base/card.js";`,
+	carousel: `import carousel from "./cl/base/carousel.js";`,
+	cite: `import cite from "./cl/base/cite.js";`,
+	code: `import code from "./cl/base/code.js";`,
+	codepreview: `import codepreview from "./cl/base/codepreview.js";`,
+	collapse: `import * as collapse from "./cl/base/collapse.js";`,
+	container: `import * as container from "./cl/base/container.js";`,
+	core: `import * as core from "./cl/base/core.js";`,
+	db: `import * as db from "./cl/base/api.js";`,
+	div: `import div from "./cl/base/div.js";`,
+	dlg: `import * as dlg from "./cl/base/dlg.js";`,
+	dropdown: `import dropdown from "./cl/base/dropdown.js";`,
+	em: `import example from "./cl/base/em.js";`,
+	example: `import example from "./cl/base/example.js";`,
+	file: `import file from "./cl/base/file.js";`,
+	form: `import form from "./cl/base/form.js";`,
+	footer: `import footer from "./cl/base/footer.js";`,
+	h: `import h from "./cl/base/h.js";`,
+	hr: `import hr from "./cl/base/hr.js";`,
+	i: `import icon from "./cl/base/i.js";`,
+	icon: `import icon from "./cl/base/icon.js";`,
+	img: `import img from "./cl/base/img.js";`,
+	input: `import input from "./cl/base/input.js";`,
+	inputgroup: `import * as inputgroup from "./cl/base/inputgroup.js";`,
+	label: `import label from "./cl/base/label.js";`,
+	layout: `import * as layout from "./cl/base/layout.js";`,
+	li: `import li from "./cl/base/li.js";`,
+	listgroup: `import listgroup from "./cl/base/listgroup.js";`,
+	list: `import * as list from "./cl/base/list.js";`,
+	menu: `import menu from "./cl/base/menu.js";`,
+	modal: `import modal from "./cl/base/modal.js";`,
+	msg: `import msg from "./cl/base/msg.js";`,
+	nav: `import nav from "./cl/base/nav.js";`,
+	navbar: `import * as navbar from "./cl/base/navbar.js";`,
+	offcanvas: `import offcanvas from "./cl/base/offcanvas.js";`,
+	ol: `import ol from "./cl/base/ol.js";`,
+	option: `import * as option from "./cl/base/option.js";`,
+	p: `import p from "./cl/base/p.js";`,
+	paging: `import paging from "./cl/base/paging.js";`,
+	pill: `import pill from "./cl/base/pill.js";`,
+	popover: `import popover from "./cl/base/popover.js";`,
+	pre: `import pre from "./cl/base/pre.js";`,
+	progress: `import * as progress from "./cl/base/progress.js";`,
+	query: `import * as query from "./cl/base/query.js";`,
+	small: `import small from "./cl/base/small.js";`,
+	span: `import span from "./cl/base/span.js";`,
+	strong: `import strong from "./cl/base/strong.js";`,
+	tab: `import tab from "./cl/base/tab.js";`,
+	table: `import * as table from "./cl/base/table.js";`,
+	tag: `import tag from "./cl/base/tag.js";`,
+	toast: `import toast from "./cl/base/toast.js";`,
+	toc: `import toc from "./cl/base/toc.js";`,
+	tooltip: `import tooltip from "./cl/base/tooltip.js";`,
+	ul: `import ul from "./cl/base/ul.js";`,
+	user: `import * as user from "./cl/base/user.js";`,
+	sample: `import sample from "./doc/sample.js";	//for documentation purpose only`,
 };
 
 let randomtheme_callback = null;

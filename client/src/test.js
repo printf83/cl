@@ -1,8 +1,8 @@
 "use strict";
 
 ///library
-import * as core from "../../cl/js/base/core.js";
-import tag from "../../cl/js/base/tag.js";
+import * as core from "./cl/base/core.js";
+import tag from "./cl/base/tag.js";
 
 ///code
 let code = () => {

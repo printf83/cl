@@ -1,6 +1,9 @@
 "use strict";
-// import "../../css/animation.css";
-// import "../../css/query.css";
+
+//disable this if you not using webpack
+import css from "./css/animation.css";
+import css2 from "./css/query.css";
+//-------------------------------------
 
 import * as core from "./core.js";
 import modal from "./modal.js";

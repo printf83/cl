@@ -1,5 +1,8 @@
 "use strict";
-// import "../../css/menu.css";
+
+//disable this if you not using webpack
+import css from "./css/menu.css";
+//-------------------------------------
 
 import * as core from "./core.js";
 import * as collapse from "./collapse.js";

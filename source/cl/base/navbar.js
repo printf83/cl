@@ -1,4 +1,9 @@
 "use strict";
+
+//disable this if you not using webpack
+import css from "./css/navbar.css";
+//-------------------------------------
+
 import * as core from "./core.js";
 import tag from "./tag.js";
 import nav from "./nav.js";
@@ -344,10 +349,7 @@ export class item extends div {
 				elem: [
 					new a({
 						href: opt.href,
-						class: [
-							"nav-link",
-							opt.option ? "dropdown-toggle" : null,
-						],
+						class: ["nav-link", opt.option ? "dropdown-toggle" : null],
 						"aria-current": opt.active ? "page" : null,
 						role: "button",
 						"data-bs-toggle": opt.option ? "dropdown" : null,

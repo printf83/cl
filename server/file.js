@@ -1,3 +1,8 @@
+//---------------------------------
+// PACKAGE SOURCE MANNUALY
+//---------------------------------
+
+const USINGWEBPACK = false;
 const DEBUG = true;
 
 const $ = require("./models/file.js");
@@ -31,13 +36,7 @@ function copyFileSync(source, target) {
 		}
 	}
 
-	// if (DEBUG && source.indexOf("/doc/") === -1) {
-	// 	minify.js(fs.readFileSync(source), (err, data) => {
-	// 		fs.writeFileSync(targetFile, data);
-	// 	});
-	// } else {
 	fs.writeFileSync(targetFile, fs.readFileSync(source));
-	// }
 }
 
 function copyFolderRecursiveSync(source, target) {
@@ -70,41 +69,35 @@ module.exports = () => {
 	console.info("Complete remove tmp file and folder");
 
 	//delete lib from client
-	fs.rmSync("./client/cl", { recursive: true, force: true });
-	console.info("Remove client/cl");
+	fs.rmSync("./client/src/cl", { recursive: true, force: true });
+	console.info("Remove client/src/cl");
 
 	//copy all cl framework into client lib
-	fs.mkdir("./client/cl", (err) => {
-		fs.mkdir("./client/cl/js", (err) => {
-			copyFolderRecursiveSync("./source/cl/js", "./client/cl");
-			console.info("Copy source/cl/js into client/cl/js");
+	fs.mkdir("./client/src", (err) => {
+		fs.mkdir("./client/src/cl", (err) => {
+			copyFileSync("./source/cl/all.js", "./client/src/cl/all.js");
+			console.info("Copy source/cl/all.js into client/src/cl/all.js");
 
-			// copyFolderRecursiveSync("./source/cl/css", "./client/cl");
-			// console.info("Copy source/cl/css into client/cl/css");
+			copyFolderRecursiveSync("./source/cl/base", "./client/src/cl");
+			console.info("Copy source/cl/base into client/src/cl/base");
+
+			// copyFolderRecursiveSync("./source/cl/css", "./client/css");
+			// console.info("Copy source/cl/css into client/css/cl");
 
 			// read css then combine
-			fs.readdir("./source/cl/css", (err, files) => {
-				let str = "";
-				files.forEach((file) => {
-					str += fs.readFileSync(`./source/cl/css/${file}`);
-				});
+			// fs.readdir("./source/cl/css", (err, files) => {
+			// 	let str = "";
+			// 	files.forEach((file) => {
+			// 		str += fs.readFileSync(`./source/cl/css/${file}`);
+			// 	});
 
-				fs.mkdir("./client/cl/css", (err) => {
-					// if (DEBUG) {
-					// 	minify.css(str, (err, data) => {
-					// 		if (err) {
-					// 			console.error(err);
-					// 		} else {
-					// 			fs.writeFileSync("./client/cl/css/style.css", data);
-					// 			console.info("Combine css file");
-					// 		}
-					// 	});
-					// } else {
-					fs.writeFileSync("./client/cl/css/style.css", str);
-					console.info("Combine css file");
-					// }
-				});
-			});
+			// 	fs.mkdir("./client/css", (err) => {
+			// 		fs.mkdir("./client/css/cl", (err) => {
+			// 			fs.writeFileSync("./client/css/cl/style.css", str);
+			// 			console.info("Combine css file");
+			// 		});
+			// 	});
+			// });
 		});
 	});
 };

@@ -1,18 +1,18 @@
 "use strict";
 
-import * as core from "../../cl/js/base/core.js";
-import div from "../../cl/js/base/div.js";
-import * as layout from "../../cl/js/base/layout.js";
-import menu from "../../cl/js/base/menu.js";
-import * as navbar from "../../cl/js/base/navbar.js";
-import tag from "../../cl/js/base/tag.js";
-import toast from "../../cl/js/base/toast.js";
-import toc from "../../cl/js/base/toc.js";
-import * as user from "../../cl/js/base/user.js";
+import * as core from "./cl/base/core.js";
+import div from "./cl/base/div.js";
+import * as layout from "./cl/base/layout.js";
+import menu from "./cl/base/menu.js";
+import * as navbar from "./cl/base/navbar.js";
+import tag from "./cl/base/tag.js";
+import toast from "./cl/base/toast.js";
+import toc from "./cl/base/toc.js";
+import * as user from "./cl/base/user.js";
 
 const sb = {
-	customer: "../../../js/sandbox/customer.js",
-	state: "../../../js/sandbox/state.js",
+	customer: "./js/sandbox/customer.js",
+	state: "./js/sandbox/state.js",
 };
 
 const db_menu = [

@@ -1,5 +1,8 @@
 "use strict";
-// import "../../css/file.css";
+
+//disable this if you not using webpack
+import css from "./css/file.css";
+//-------------------------------------
 
 import * as core from "./core.js";
 import * as db from "./api.js";

@@ -1,6 +1,8 @@
 "use strict";
-// import sheet from "../../css/accordion.css" assert { type: "css" };
-// document.adoptedStyleSheets = [sheet];
+
+//disable this if you not using webpack
+import css from "./css/accordion.css";
+//-------------------------------------
 
 import * as core from "./core.js";
 import h from "./h.js";

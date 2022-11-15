@@ -1,6 +1,9 @@
 "use strict";
-// import "../../css/codepreview.css";
-// import "../../css/prettify.css";
+
+//disable this if you not using webpack
+import css from "./css/codepreview.css";
+import css2 from "./css/prettify.css";
+//-------------------------------------
 
 import * as core from "./core.js";
 import * as card from "./card.js";

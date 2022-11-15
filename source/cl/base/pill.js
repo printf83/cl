@@ -1,4 +1,9 @@
 "use strict";
+
+//disable this if you not using webpack
+import css from "./css/pill.css";
+//-------------------------------------
+
 import * as core from "./core.js";
 import * as inputgroup from "./inputgroup.js";
 import div from "./div.js";

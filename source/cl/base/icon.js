@@ -1,6 +1,8 @@
 "use strict";
 
-// import "../../css/icon.css";
+//disable this if you not using webpack
+import css from "./css/icon.css";
+//-------------------------------------
 
 import * as core from "./core.js";
 import tag from "./tag.js";

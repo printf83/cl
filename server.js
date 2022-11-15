@@ -13,8 +13,8 @@ if (process.env.DBURL) {
 	//db
 	require("./server/db.js")();
 
-	//file
-	require("./server/file.js")();
+	//source file packaging
+	//require("./server/file.js")();
 
 	//router
 	require("./server/router.js")(app);
