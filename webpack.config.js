@@ -3,35 +3,21 @@ const CopyPlugin = require("copy-webpack-plugin");
 // const CSSPlugin = require("css-loader");
 // const StylePlugin = require("style-loader");
 
-module.exports = [
-	{
-		mode: "development",
-		module: {
-			rules: [
-				{
-					test: /\.js$/i,
-					exclude: /node_modules/,
-					use: {
-						loader: "babel-loader",
-					},
-				},
-				// Additional configuration to handle *.css files
-				{
-					test: /\.css$/i,
-					use: [
-						{ loader: "style-loader" },
-						{
-							loader: "css-loader",
-							options: {
-								importLoaders: 1,
-								modules: true,
-							},
-						},
-					],
-				},
-			],
+const _module_rule = {
+	rules: [
+		{
+			test: /\.js$/i,
+			exclude: /node_modules/,
+			use: "babel-loader",
 		},
-	},
+		{
+			test: /\.css$/i,
+			use: ["style-loader", "css-loader"],
+		},
+	],
+};
+
+module.exports = [
 	{
 		mode: "development",
 		plugins: [
@@ -41,6 +27,7 @@ module.exports = [
 				],
 			}),
 		],
+		module: _module_rule,
 	},
 
 	{
@@ -50,6 +37,7 @@ module.exports = [
 			path: path.resolve(__dirname, "client/src"),
 			filename: "index.bundle.js",
 		},
+		module: _module_rule,
 	},
 	{
 		mode: "development",
@@ -58,6 +46,7 @@ module.exports = [
 			path: path.resolve(__dirname, "client/src"),
 			filename: "sandbox.bundle.js",
 		},
+		module: _module_rule,
 	},
 	{
 		mode: "development",
@@ -66,5 +55,6 @@ module.exports = [
 			path: path.resolve(__dirname, "client/src"),
 			filename: "test.bundle.js",
 		},
+		module: _module_rule,
 	},
 ];

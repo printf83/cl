@@ -11,8 +11,8 @@ import toc from "./cl/base/toc.js";
 import * as user from "./cl/base/user.js";
 
 const sb = {
-	customer: "./js/sandbox/customer.js",
-	state: "./js/sandbox/state.js",
+	customer: "./client/src/sandbox/customer.js",
+	state: "./client/src/sandbox/state.js",
 };
 
 const db_menu = [
