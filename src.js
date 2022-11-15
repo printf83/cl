@@ -1,1 +1,1 @@
-browser = "client";
+browser = "";

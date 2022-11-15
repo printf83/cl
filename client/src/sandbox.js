@@ -11,8 +11,8 @@ import toc from "./cl/base/toc.js";
 import * as user from "./cl/base/user.js";
 
 const sb = {
-	customer: "./client/src/sandbox/customer.js",
-	state: "./client/src/sandbox/state.js",
+	customer: "sandbox/customer.js",
+	state: "sandbox/state.js",
 };
 
 const db_menu = [
@@ -158,6 +158,7 @@ function gen_content(m1, m2, callback) {
 							return new Promise((res, rej) => {
 								try {
 									//async import doc source
+
 									core.importJS(m.source, (m_source) => {
 										m_source.main((elem) => {
 											core.replaceChild(
