@@ -19,8 +19,16 @@ module.exports = [
 		module: {
 			rules: [
 				{
-					test: /\.css$/,
-					use: [{ loader: "style-loader" }, { loader: "css-loader" }],
+					test: /\.js$/,
+					exclude: /node_modules/,
+					use: {
+						loader: "babel-loader",
+					},
+				},
+				// Additional configuration to handle *.css files
+				{
+					test: /\.css$/i,
+					use: ["style-loader", "css-loader"],
 				},
 			],
 		},
@@ -39,6 +47,14 @@ module.exports = [
 		output: {
 			path: path.resolve(__dirname, "client/src"),
 			filename: "sandbox.bundle.js",
+		},
+	},
+	{
+		mode: "development",
+		entry: path.resolve(__dirname, "client/src/test.js"),
+		output: {
+			path: path.resolve(__dirname, "client/src"),
+			filename: "test.bundle.js",
 		},
 	},
 ];

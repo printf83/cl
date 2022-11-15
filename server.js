@@ -14,7 +14,7 @@ if (process.env.DBURL) {
 	require("./server/db.js")();
 
 	//source file packaging
-	//require("./server/file.js")();
+	require("./server/file.js")();
 
 	//router
 	require("./server/router.js")(app);
