@@ -1,7 +1,7 @@
 const path = require("path");
 const CopyPlugin = require("copy-webpack-plugin");
-const CSSPlugin = require("css-loader");
-const StylePlugin = require("style-loader");
+// const CSSPlugin = require("css-loader");
+// const StylePlugin = require("style-loader");
 
 module.exports = [
 	{
@@ -19,8 +19,8 @@ module.exports = [
 		module: {
 			rules: [
 				{
-					test: /\.css$/i,
-					use: ["style-loader", "css-loader"],
+					test: /\.css$/,
+					use: [{ loader: "style-loader" }, { loader: "css-loader" }],
 				},
 			],
 		},
