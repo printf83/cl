@@ -24,11 +24,11 @@ const _module_resolve = {
 
 const _module_rule = {
 	rules: [
-		{
-			test: /\.js$/i,
-			exclude: /node_modules/,
-			use: "babel-loader",
-		},
+		// {
+		// 	test: /\.js$/i,
+		// 	exclude: /node_modules/,
+		// 	use: "babel-loader",
+		// },
 		{
 			test: /\.css$/i,
 			use: ["style-loader", "css-loader"],
