@@ -9,7 +9,7 @@ import tag from "./tag.js";
 
 const defaultOption = {
 	tag: "i",
-	type: "fas",
+	type: "fas", //"fas",
 	icon: null,
 	weight: null,
 	fixwidth: true,

@@ -43,19 +43,19 @@ export default [
 					new a({
 						textDecoration: "none",
 						href: "https://getbootstrap.com/",
-						elem: new pill({ icon: { icon: "bootstrap", type: "fab" }, label: "Bootstrap V5.2.1" }),
+						elem: new pill({ icon: { icon: "bootstrap", type: "fab" }, label: "Bootstrap V5.2.2" }),
 					}),
 					new a({
 						textDecoration: "none",
 						href: "https://bootswatch.com/",
-						elem: new pill({ icon: { icon: "swatchbook" }, label: "Bootswatch V5.2.0" }),
+						elem: new pill({ icon: { icon: "swatchbook" }, label: "Bootswatch V5.2.2" }),
 					}),
 					new a({
 						textDecoration: "none",
 						href: "https://fontawesome.com/",
 						elem: new pill({
 							icon: { icon: "font-awesome-flag", type: "fab" },
-							label: "Fontawesome V6.2.0",
+							label: "Fontawesome V6.2.1",
 						}),
 					}),
 					new a({

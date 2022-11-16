@@ -285,13 +285,16 @@ export const setting = {
 		let css_bootswatch = document.getElementById("css_bootswatch");
 
 		if (css_bootstrap && css_bootswatch) {
+			// href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/5.2.2/cerulean/bootstrap.min.css"
+			// href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.2/css/bootstrap.min.css"
+
 			loadcss(
 				value
-					? `https://cdn.jsdelivr.net/npm/bootswatch@5.2.0/dist/${value}/bootstrap.min.css`
-					: `https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css`,
+					? `https://cdnjs.cloudflare.com/ajax/libs/bootswatch/5.2.2/${value}/bootstrap.min.css`
+					: `https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.2/css/bootstrap.min.css`,
 				() => {
 					if (value) {
-						css_bootswatch.href = `https://cdn.jsdelivr.net/npm/bootswatch@5.2.0/dist/${value}/bootstrap.min.css`;
+						css_bootswatch.href = `https://cdnjs.cloudflare.com/ajax/libs/bootswatch/5.2.2/${value}/bootstrap.min.css`;
 						css_bootswatch.removeAttribute("disabled");
 						setTimeout(() => {
 							css_bootstrap.setAttribute("disabled", "disabled");

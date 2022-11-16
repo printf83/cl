@@ -7,8 +7,10 @@ span.nocode.marker.downline::before,
 span.nocode.marker.downline-end::before {
 
     color: var(--bs-danger);
-    content: "\f08d";
-    font-family: "Font Awesome 6 Free";
+    /* content: "\f08d"; */
+    content:"!";
+    
+    /* font-family: "Font Awesome 6 Free"; */
     font-weight: 900;
     /* -webkit-animation: fadeOut 2s ease infinite;
     animation: fadeOut 2s ease infinite; */

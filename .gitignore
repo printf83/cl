@@ -107,6 +107,5 @@ dist
 tmp/
 file/
 # client/src/cl/
-client/*.bundle.js
-client/*/*.bundle.js
+client/src/*.bundle.js
 
