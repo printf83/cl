@@ -10,10 +10,26 @@ import toast from "./cl/base/toast.js";
 import toc from "./cl/base/toc.js";
 import * as user from "./cl/base/user.js";
 
+// const sb = {
+// 	customer: "./sandbox/customer.js",
+// 	state: "./sandbox/state.js",
+// };
+
 const sb = {
-	customer: "sandbox/customer.js",
-	state: "sandbox/state.js",
+	customer: "customer",
+	state: "state",
 };
+
+function genPromiseSource(source) {
+	switch (source) {
+		case "customer":
+			return import(/* webpackChunkName: "customer" */ "./sandbox/customer.js");
+			break;
+		default:
+			return import(/* webpackChunkName: "state" */ "./sandbox/state.js");
+			break;
+	}
+}
 
 const db_menu = [
 	{
@@ -159,7 +175,8 @@ function gen_content(m1, m2, callback) {
 								try {
 									//async import doc source
 
-									core.importJS(m.source, (m_source) => {
+									// core.importJS(m.source, (m_source) => {
+									core.importJSPromise(genPromiseSource(m.source), (m_source) => {
 										m_source.main((elem) => {
 											core.replaceChild(
 												document.getElementById("root"),

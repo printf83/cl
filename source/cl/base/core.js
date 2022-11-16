@@ -480,6 +480,16 @@ export function importJS(path, callback) {
 	});
 }
 
+export function importJSPromise(p, callback) {
+	p.then((obj) => {
+		if (typeof obj.default === "undefined") {
+			callback(obj);
+		} else {
+			callback(obj.default);
+		}
+	});
+}
+
 export function extend(out) {
 	out = out || {};
 

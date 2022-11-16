@@ -33,7 +33,7 @@ module.exports = [
 		entry: "/client/src/index.js",
 		output: {
 			path: path.resolve(__dirname, "client/src"),
-			// chunkFilename: "[name].bundle.js",
+			chunkFilename: "doc/[name].bundle.js",
 			filename: "[name].bundle.js",
 		},
 		module: _module_rule,
@@ -43,7 +43,7 @@ module.exports = [
 		entry: "/client/src/sandbox.js",
 		output: {
 			path: path.resolve(__dirname, "client/src"),
-			// chunkFilename: "[name].bundle.js",
+			chunkFilename: "sandbox/[name].bundle.js",
 			filename: "[name].bundle.js",
 		},
 		module: _module_rule,
@@ -53,7 +53,7 @@ module.exports = [
 		entry: "/client/src/test.js",
 		output: {
 			path: path.resolve(__dirname, "client/src"),
-			// chunkFilename: "[name].bundle.js",
+			chunkFilename: "test/[name].bundle.js",
 			filename: "[name].bundle.js",
 		},
 		module: _module_rule,
