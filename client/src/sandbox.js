@@ -10,18 +10,22 @@ import toast from "./cl/base/toast.js";
 import toc from "./cl/base/toc.js";
 import * as user from "./cl/base/user.js";
 
-const sb = {
-	customer: import("./sandbox/customer.js"),
-	state: import("./sandbox/state.js"),
-};
+function pageSource(source) {
+	switch (source) {
+		case "customer":
+			return import("./sandbox/customer.js");
+		case "state":
+			return import("./sandbox/state.js");
+	}
+}
 
 const db_menu = [
 	{
 		type: "menu",
 		title: "Main",
 		item: [
-			{ title: "Customer", source: sb.customer },
-			{ title: "State", source: sb.state },
+			{ title: "Customer", source: "customer" },
+			{ title: "State", source: "state" },
 		],
 	},
 	{
@@ -159,8 +163,7 @@ function gen_content(m1, m2, callback) {
 								try {
 									//async import doc source
 
-									// core.importJS(m.source, (m_source) => {
-									core.importJSPromise(m.source, (m_source) => {
+									core.importJSPromise(pageSource(m.source), (m_source) => {
 										m_source.main((elem) => {
 											core.replaceChild(
 												document.getElementById("root"),
