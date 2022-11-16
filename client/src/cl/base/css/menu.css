@@ -1,0 +1,102 @@
+.cl-menu-toggle {
+	color: rgba(var(--bs-gray), 0.7);
+	font-weight: calc(var(--bs-body-font-weight) * 1.5);
+	padding: 0.25rem 0.5rem;
+	border-radius: var(--bs-border-radius);
+	display: inline-block;
+}
+.bg-dark .cl-menu-toggle {
+	color: rgba(var(--bs-light-rgb), 0.7);
+}
+.cl-menu-toggle:hover {
+	background-color: rgba(var(--bs-primary-rgb), 0.1);
+	cursor: pointer;
+}
+.cl-menu-toggle:hover label {
+	cursor: pointer;
+}
+
+.bg-dark .cl-menu-toggle:hover {
+	background-color: rgba(var(--bs-primary-rgb), 0.1);
+}
+.cl-menu-toggle:not(.no-arrow)::before {
+	text-align: center;
+	width: 1.25em;
+	line-height: 0;
+	content: "\f054";
+	font-family: "Font Awesome 5 Free";
+	font-weight: 900;
+	transition: transform 0.35s ease;
+	transform-origin: 0.5em 50%;
+	display: inline-block;
+}
+.cl-menu-toggle[aria-expanded="true"] {
+	color: rgba(var(--bs-gray), 0.9);
+}
+.bg-dark .cl-menu-toggle[aria-expanded="true"] {
+	color: rgba(var(--bs-light-rgb), 0.9);
+}
+.cl-menu-toggle[aria-expanded="true"]:not(.no-arrow)::before {
+	transform: rotate(90deg);
+}
+.cl-menu-container {
+	padding-left: 0.25rem;
+	list-style: none;
+	margin: 0;
+}
+.cl-menu-container.no-arrow{
+	padding-left: 0.75rem;
+}
+
+.cl-menu-container li div,
+.cl-menu-container li a {
+	color: rgba(var(--bs-gray), 0.7);
+	padding: 0.25rem 0.5rem;
+	border-radius: var(--bs-border-radius-sm);
+	text-decoration: none;
+	display: inline-block;
+	font-size: .875em;
+}
+
+.cl-menu-container li div:hover,
+.cl-menu-container li div:hover label,
+.cl-menu-container li a:hover,
+.cl-menu-container li a:hover label {
+	cursor: pointer;
+}
+
+.bg-dark .cl-menu-container li div,
+.bg-dark .cl-menu-container li a {
+	color: rgba(var(--bs-light-rgb), 0.7);
+}
+
+.cl-menu-container li div:hover,
+.cl-menu-container li a:hover {
+	background-color: rgba(var(--bs-primary-rgb), 0.1);
+}
+.bg-dark .cl-menu-container li div:hover,
+.bg-dark .cl-menu-container li a:hover {
+	background-color: rgba(var(--bs-primary-rgb), 0.1);
+}
+.cl-menu-container li div.active,
+.cl-menu-container li a.active {
+	font-weight: calc(var(--bs-body-font-weight) * 1.5);
+	color: rgba(var(--bs-primary-rgb), 1);
+}
+.bg-dark .cl-menu-container li div.active,
+.bg-dark .cl-menu-container li a.active {
+	color: rgba(var(--bs-primary-rgb), 0.1);
+}
+
+.cl-menu-container li div.disabled,
+.cl-menu-container li a.disabled,
+.cl-menu-container li div[disabled],
+.cl-menu-container li a[disabled] {
+	color: var(--bs-secondary);
+}
+
+@media (min-width: 768px) {
+	.cl-vh-menu {
+		max-height: calc(100vh - 5.5rem) !important;
+	}
+}
