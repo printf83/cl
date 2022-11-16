@@ -34,7 +34,6 @@ module.exports = [
 		resolve: _module_resolve,
 	},
 
-	// WEBPACK DESTROY EXAMPLE CODE
 	{
 		mode: "development",
 		entry: path.resolve(__dirname, "client/src/index.js"),
