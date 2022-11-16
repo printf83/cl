@@ -8,7 +8,7 @@ const _module_optimization = {
 	minimize: true,
 	minimizer: [
 		new TerserPlugin({
-			exclude: /\/doc/,
+			exclude: /\/doc\//,
 			parallel: true,
 			terserOptions: {
 				format: {
