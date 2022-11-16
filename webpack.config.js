@@ -1,6 +1,22 @@
 const path = require("path");
 const CopyPlugin = require("copy-webpack-plugin");
+const TerserPlugin = require("terser-webpack-plugin");
 
+const _module_optimization = {
+	minimize: true,
+	minimizer: [
+		new TerserPlugin({
+			exclude: /\/doc/,
+			parallel: true,
+			terserOptions: {
+				format: {
+					comments: false,
+				},
+			},
+			extractComments: false,
+		}),
+	],
+};
 const _module_resolve = {
 	modules: [path.resolve("./node_modules"), path.resolve("./source/cl"), path.resolve("./client/src")],
 	extensions: [".json", ".js"],
@@ -30,6 +46,7 @@ module.exports = [
 				],
 			}),
 		],
+		optimization: _module_optimization,
 		module: _module_rule,
 		resolve: _module_resolve,
 	},
@@ -42,6 +59,7 @@ module.exports = [
 			chunkFilename: "index.[name].bundle.js",
 			filename: "index.bundle.js",
 		},
+		optimization: _module_optimization,
 		module: _module_rule,
 		resolve: _module_resolve,
 	},
@@ -54,6 +72,7 @@ module.exports = [
 			chunkFilename: "sandbox.[name].bundle.js",
 			filename: "sandbox.bundle.js",
 		},
+		optimization: _module_optimization,
 		module: _module_rule,
 		resolve: _module_resolve,
 	},
@@ -65,6 +84,7 @@ module.exports = [
 			chunkFilename: "test.[name].bundle.js",
 			filename: "test.bundle.js",
 		},
+		optimization: _module_optimization,
 		module: _module_rule,
 		resolve: _module_resolve,
 	},
