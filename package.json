@@ -12,12 +12,9 @@
 		"build": "webpack"
 	},
 	"dependencies": {
-		"babel-loader": "^9.1.0",
 		"bcrypt": "^5.0.1",
 		"compression": "^1.7.4",
 		"cookie-parser": "^1.4.6",
-		"copy-webpack-plugin": "^11.0.0",
-		"css-loader": "^6.7.2",
 		"dotenv": "^10.0.0",
 		"exceljs": "^4.3.0",
 		"express": "^4.17.1",
@@ -27,7 +24,12 @@
 		"multer": "^1.4.5-lts.1",
 		"nodemailer": "^6.7.2",
 		"style-loader": "^3.3.1",
+		"css-loader": "^6.7.2",
+		"@babel/core": "^7.20.2",
+		"@babel/preset-env": "^7.20.2",
+		"babel-loader": "^9.1.0",
 		"terser-webpack-plugin": "^5.3.6",
+		"copy-webpack-plugin": "^11.0.0",
 		"webpack": "^5.75.0",
 		"webpack-cli": "^4.10.0"
 	}
