@@ -471,7 +471,7 @@ export function getBaseIcon(icon, baseIcon, baseColor) {
 }
 
 export function importJS(path, callback) {
-	import(/* webpackMode: "eager" */ path).then((obj) => {
+	import(path).then((obj) => {
 		if (typeof obj.default === "undefined") {
 			callback(obj);
 		} else {

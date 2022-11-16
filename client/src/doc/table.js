@@ -1,7 +1,7 @@
 "use strict";
-import * as core from "../../cl/js/base/core.js";
-import b from "../../cl/js/base/b.js";
-import * as table from "../../cl/js/base/table.js";
+import * as core from "../cl/base/core.js";
+import b from "../cl/base/b.js";
+import * as table from "../cl/base/table.js";
 
 export default [
 	{

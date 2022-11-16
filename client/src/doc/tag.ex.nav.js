@@ -1,7 +1,7 @@
 "use strict";
 import sample from "./sample.js";
-import nav from "../../cl/js/base/nav.js";
-import ul from "../../cl/js/base/ul.js";
+import nav from "../cl/base/nav.js";
+import ul from "../cl/base/ul.js";
 
 export default [
 	{

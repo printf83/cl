@@ -1,8 +1,8 @@
 "use strict";
 
 //disable this if you not using webpack
-import "./css/codepreview.css";
-import "./css/prettify.css";
+import css from "./css/codepreview.css";
+import css2 from "./css/prettify.css";
 //-------------------------------------
 
 import * as core from "./core.js";

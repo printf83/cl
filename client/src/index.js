@@ -1,7 +1,10 @@
 "use strict";
 
-// import "../css/sample.css";
-
+//disable this if you not using webpack
+import css from "./css/anchor.css";
+import css2 from "./css/example.css";
+import css3 from "./css/sample.css";
+//-------------------------------------
 import a from "./cl/base/a.js";
 import * as core from "./cl/base/core.js";
 import div from "./cl/base/div.js";
@@ -15,7 +18,6 @@ import small from "./cl/base/small.js";
 import * as table from "./cl/base/table.js";
 import tag from "./cl/base/tag.js";
 import toc from "./cl/base/toc.js";
-import doc from "./doc.js";
 import * as dlg from "./cl/base/dlg.js";
 import span from "./cl/base/span.js";
 import p from "./cl/base/p.js";
@@ -24,6 +26,107 @@ import h from "./cl/base/h.js";
 let def_main_menu = "Getting started";
 let def_sub_menu = "Introduction";
 let DEBUG = 0;
+
+const doc = {
+	intro: import("./doc/intro.js"),
+	bootswatch: import("./doc/bootswatch.js"),
+
+	bootswatch_badge: import("./doc/bootswatch_badge.js"),
+	bootswatch_popover: import("./doc/bootswatch_popover.js"),
+	bootswatch_tooltip: import("./doc/bootswatch_tooltip.js"),
+
+	container: import("./doc/container.js"),
+	grid: import("./doc/grid.js"),
+	column: import("./doc/column.js"),
+	gutter: import("./doc/gutter.js"),
+
+	formcontrol: import("./doc/formcontrol.js"),
+	select: import("./doc/select.js"),
+	checkradio: import("./doc/checkradio.js"),
+	range: import("./doc/range.js"),
+	inputgroup: import("./doc/inputgroup.js"),
+	floatinglabel: import("./doc/floatinglabel.js"),
+
+	button: import("./doc/button.js"),
+	accordion: import("./doc/accordion.js"),
+	alert: import("./doc/alert.js"),
+	badge: import("./doc/badge.js"),
+	breadcrumb: import("./doc/breadcrumb.js"),
+	btngroup: import("./doc/btngroup.js"),
+	card: import("./doc/card.js"),
+	carousel: import("./doc/carousel.js"),
+	btnclose: import("./doc/btnclose.js"),
+	collapse: import("./doc/collapse.js"),
+	dropdown: import("./doc/dropdown.js"),
+	listgroup: import("./doc/listgroup.js"),
+	modal: import("./doc/modal.js"),
+	tab: import("./doc/tab.js"),
+	navbar: import("./doc/navbar.js"),
+	offcanvas: import("./doc/offcanvas.js"),
+	paging: import("./doc/paging.js"),
+	placeholder: import("./doc/placeholder.js"),
+	popover: import("./doc/popover.js"),
+	progress: import("./doc/progress.js"),
+	toast: import("./doc/toast.js"),
+	tooltip: import("./doc/tooltip.js"),
+
+	icon: import("./doc/icon.js"),
+	menu: import("./doc/menu.js"),
+	toc: import("./doc/toc.js"),
+	pill: import("./doc/pill.js"),
+	example: import("./doc/example.js"),
+	label: import("./doc/label.js"),
+	msg: import("./doc/msg.js"),
+	table: import("./doc/table.js"),
+	layout: import("./doc/layout.js"),
+
+	tag_base: import("./doc/tag.base.js"),
+	tag_text: import("./doc/tag.text.js"),
+	tag_background: import("./doc/tag.background.js"),
+	tag_border: import("./doc/tag.border.js"),
+	tag_color: import("./doc/tag.color.js"),
+	tag_display: import("./doc/tag.display.js"),
+	tag_flex: import("./doc/tag.flex.js"),
+	tag_float: import("./doc/tag.float.js"),
+	tag_interaction: import("./doc/tag.interaction.js"),
+	tag_overflow: import("./doc/tag.overflow.js"),
+	tag_position: import("./doc/tag.position.js"),
+	tag_shadow: import("./doc/tag.shadow.js"),
+	tag_size: import("./doc/tag.size.js"),
+	tag_spacing: import("./doc/tag.spacing.js"),
+	tag_valign: import("./doc/tag.valign.js"),
+	tag_visibility: import("./doc/tag.visibility.js"),
+
+	tag_ex_a: import("./doc/tag.ex.a.js"),
+	tag_ex_abbr: import("./doc/tag.ex.abbr.js"),
+	tag_ex_b: import("./doc/tag.ex.b.js"),
+	tag_ex_blockquote: import("./doc/tag.ex.blockquote.js"),
+	tag_ex_cite: import("./doc/tag.ex.cite.js"),
+	tag_ex_code: import("./doc/tag.ex.code.js"),
+	tag_ex_div: import("./doc/tag.ex.div.js"),
+	tag_ex_em: import("./doc/tag.ex.em.js"),
+	tag_ex_form: import("./doc/tag.ex.form.js"),
+	tag_ex_footer: import("./doc/tag.ex.footer.js"),
+	tag_ex_h: import("./doc/tag.ex.h.js"),
+	tag_ex_hr: import("./doc/tag.ex.hr.js"),
+	tag_ex_i: import("./doc/tag.ex.i.js"),
+	tag_ex_img: import("./doc/tag.ex.img.js"),
+	tag_ex_li: import("./doc/tag.ex.li.js"),
+	tag_ex_nav: import("./doc/tag.ex.nav.js"),
+	tag_ex_ol: import("./doc/tag.ex.ol.js"),
+	tag_ex_p: import("./doc/tag.ex.p.js"),
+	tag_ex_pre: import("./doc/tag.ex.pre.js"),
+	tag_ex_small: import("./doc/tag.ex.small.js"),
+	tag_ex_span: import("./doc/tag.ex.span.js"),
+	tag_ex_strong: import("./doc/tag.ex.strong.js"),
+	tag_ex_ul: import("./doc/tag.ex.ul.js"),
+
+	generic: import("./doc/generic.js"),
+	file: import("./doc/file.js"),
+	query: import("./doc/query.js"),
+	list: import("./doc/list.js"),
+	user: import("./doc/user.js"),
+};
 
 const db_menu = [
 	{
@@ -653,7 +756,7 @@ function load_page(showloading, sender, main_menu, sub_menu, callback) {
 							return new Promise((res, rej) => {
 								try {
 									//async import doc source
-									core.importJS(menu_item.source, (menu_item_source) => {
+									core.importJSPromise(menu_item.source, (menu_item_source) => {
 										let processtimestart = DEBUG > 0 ? window.performance.now() : null;
 
 										// sample.resetindex();

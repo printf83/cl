@@ -1,10 +1,10 @@
 "use strict";
-import * as core from "../../cl/js/base/core.js";
+import * as core from "../cl/base/core.js";
 import sample from "./sample.js";
-import tab from "../../cl/js/base/tab.js";
-import modal from "../../cl/js/base/modal.js";
-import toast from "../../cl/js/base/toast.js";
-import * as table from "../../cl/js/base/table.js";
+import tab from "../cl/base/tab.js";
+import modal from "../cl/base/modal.js";
+import toast from "../cl/base/toast.js";
+import * as table from "../cl/base/table.js";
 
 export default [
 	{

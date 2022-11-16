@@ -1,6 +1,6 @@
 "use strict";
 import sample from "./sample.js";
-import btnclose from "../../cl/js/base/btnclose.js";
+import btnclose from "../cl/base/btnclose.js";
 
 export default [
 	{

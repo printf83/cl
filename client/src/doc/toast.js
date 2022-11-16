@@ -1,9 +1,9 @@
 "use strict";
 import sample from "./sample.js";
-import toast from "../../cl/js/base/toast.js";
-import button from "../../cl/js/base/button.js";
-import input from "../../cl/js/base/input.js";
-import msg from "../../cl/js/base/msg.js";
+import toast from "../cl/base/toast.js";
+import button from "../cl/base/button.js";
+import input from "../cl/base/input.js";
+import msg from "../cl/base/msg.js";
 
 export default [
 	{

@@ -1,7 +1,7 @@
 "use strict";
 
 //disable this if you not using webpack
-import "./css/toc.css";
+import css from "./css/toc.css";
 //-------------------------------------
 
 import button from "./button.js";

@@ -1,5 +1,5 @@
 "use strict";
-import * as layout from "../../cl/js/base/layout.js";
+import * as layout from "../cl/base/layout.js";
 
 export default [
 	{

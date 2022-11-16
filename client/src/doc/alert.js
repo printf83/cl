@@ -1,10 +1,10 @@
 "use strict";
-import * as alert from "../../cl/js/base/alert.js";
-import hr from "../../cl/js/base/hr.js";
-import p from "../../cl/js/base/p.js";
-import * as core from "../../cl/js/base/core.js";
-import toast from "../../cl/js/base/toast.js";
-import * as table from "../../cl/js/base/table.js";
+import * as alert from "../cl/base/alert.js";
+import hr from "../cl/base/hr.js";
+import p from "../cl/base/p.js";
+import * as core from "../cl/base/core.js";
+import toast from "../cl/base/toast.js";
+import * as table from "../cl/base/table.js";
 
 export default [
 	{

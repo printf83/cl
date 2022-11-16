@@ -1,6 +1,6 @@
 "use strict";
 import sample from "./sample.js";
-import breadcrumb from "../../cl/js/base/breadcrumb.js";
+import breadcrumb from "../cl/base/breadcrumb.js";
 
 export default [
 	{

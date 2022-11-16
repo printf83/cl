@@ -1,14 +1,14 @@
 "use strict";
-import * as container from "../../cl/js/base/container.js";
-import * as db from "../../cl/js/base/api.js";
-import file from "../../cl/js/base/file.js";
-import input from "../../cl/js/base/input.js";
-import * as list from "../../cl/js/base/list.js";
-import small from "../../cl/js/base/small.js";
-import toast from "../../cl/js/base/toast.js";
-import * as core from "../../cl/js/base/core.js";
-import ul from "../../cl/js/base/ul.js";
-import pill from "../../cl/js/base/pill.js";
+import * as container from "../cl/base/container.js";
+import * as db from "../cl/base/api.js";
+import file from "../cl/base/file.js";
+import input from "../cl/base/input.js";
+import * as list from "../cl/base/list.js";
+import small from "../cl/base/small.js";
+import toast from "../cl/base/toast.js";
+import * as core from "../cl/base/core.js";
+import ul from "../cl/base/ul.js";
+import pill from "../cl/base/pill.js";
 
 let dbstate = null;
 const textdb = [

@@ -1,9 +1,9 @@
 "use strict";
-import tag from "../../cl/js/base/tag.js";
-import ul from "../../cl/js/base/ul.js";
-import button from "../../cl/js/base/button.js";
-import div from "../../cl/js/base/div.js";
-import * as progress from "../../cl/js/base/progress.js";
+import tag from "../cl/base/tag.js";
+import ul from "../cl/base/ul.js";
+import button from "../cl/base/button.js";
+import div from "../cl/base/div.js";
+import * as progress from "../cl/base/progress.js";
 
 export default [
 	{

@@ -1,7 +1,7 @@
 "use strict";
 import sample from "./sample.js";
-import menu from "../../cl/js/base/menu.js";
-import toast from "../../cl/js/base/toast.js";
+import menu from "../cl/base/menu.js";
+import toast from "../cl/base/toast.js";
 
 export default [
 	{

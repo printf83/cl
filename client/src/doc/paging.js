@@ -1,7 +1,7 @@
 "use strict";
-import icon from "../../cl/js/base/icon.js";
-import toast from "../../cl/js/base/toast.js";
-import paging from "../../cl/js/base/paging.js";
+import icon from "../cl/base/icon.js";
+import toast from "../cl/base/toast.js";
+import paging from "../cl/base/paging.js";
 
 export default [
 	{

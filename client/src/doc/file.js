@@ -1,9 +1,9 @@
 "use strict";
 import sample from "./sample.js";
-import file from "../../cl/js/base/file.js";
-import button from "../../cl/js/base/button.js";
-import toast from "../../cl/js/base/toast.js";
-import * as core from "../../cl/js/base/core.js";
+import file from "../cl/base/file.js";
+import button from "../cl/base/button.js";
+import toast from "../cl/base/toast.js";
+import * as core from "../cl/base/core.js";
 
 export default [
 	{

@@ -1,7 +1,7 @@
 "use strict";
-import ul from "../../cl/js/base/ul.js";
-import li from "../../cl/js/base/li.js";
-import div from "../../cl/js/base/div.js";
+import ul from "../cl/base/ul.js";
+import li from "../cl/base/li.js";
+import div from "../cl/base/div.js";
 import sample from "./sample.js";
 
 export default [

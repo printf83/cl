@@ -1,6 +1,6 @@
 "use strict";
-import tag from "../../cl/js/base/tag.js";
-import * as table from "../../cl/js/base/table.js";
+import tag from "../cl/base/tag.js";
+import * as table from "../cl/base/table.js";
 
 export default [
 	{

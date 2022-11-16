@@ -1,6 +1,6 @@
 "use strict";
 import sample from "./sample.js";
-import tag from "../../cl/js/base/tag.js";
+import tag from "../cl/base/tag.js";
 
 export default [
 	{

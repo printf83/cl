@@ -1,7 +1,7 @@
 "use strict";
 
 //disable this if you not using webpack
-import "./css/file.css";
+import css from "./css/file.css";
 //-------------------------------------
 
 import * as core from "./core.js";

@@ -1,17 +1,17 @@
 "use strict";
 import sample from "./sample.js";
-import offcanvas from "../../cl/js/base/offcanvas.js";
-import button from "../../cl/js/base/button.js";
-import div from "../../cl/js/base/div.js";
-import dropdown from "../../cl/js/base/dropdown.js";
-import p from "../../cl/js/base/p.js";
-import * as core from "../../cl/js/base/core.js";
-import toast from "../../cl/js/base/toast.js";
-import * as table from "../../cl/js/base/table.js";
-import pill from "../../cl/js/base/pill.js";
-import small from "../../cl/js/base/small.js";
-import * as alert from "../../cl/js/base/alert.js";
-import tag from "../../cl/js/base/tag.js";
+import offcanvas from "../cl/base/offcanvas.js";
+import button from "../cl/base/button.js";
+import div from "../cl/base/div.js";
+import dropdown from "../cl/base/dropdown.js";
+import p from "../cl/base/p.js";
+import * as core from "../cl/base/core.js";
+import toast from "../cl/base/toast.js";
+import * as table from "../cl/base/table.js";
+import pill from "../cl/base/pill.js";
+import small from "../cl/base/small.js";
+import * as alert from "../cl/base/alert.js";
+import tag from "../cl/base/tag.js";
 
 export default [
 	{

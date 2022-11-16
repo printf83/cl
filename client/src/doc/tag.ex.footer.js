@@ -1,8 +1,8 @@
 "use strict";
 import sample from "./sample.js";
-import div from "../../cl/js/base/div.js";
-import footer from "../../cl/js/base/footer.js";
-import ul from "../../cl/js/base/ul.js";
+import div from "../cl/base/div.js";
+import footer from "../cl/base/footer.js";
+import ul from "../cl/base/ul.js";
 
 export default [
 	{

@@ -1,15 +1,15 @@
 "use strict";
 import sample from "./sample.js";
-import * as core from "../../cl/js/base/core.js";
-import tooltip from "../../cl/js/base/tooltip.js";
-import button from "../../cl/js/base/button.js";
-import span from "../../cl/js/base/span.js";
-import * as table from "../../cl/js/base/table.js";
-import toast from "../../cl/js/base/toast.js";
-import div from "../../cl/js/base/div.js";
-import input from "../../cl/js/base/input.js";
-import * as alert from "../../cl/js/base/alert.js";
-import dropdown from "../../cl/js/base/dropdown.js";
+import * as core from "../cl/base/core.js";
+import tooltip from "../cl/base/tooltip.js";
+import button from "../cl/base/button.js";
+import span from "../cl/base/span.js";
+import * as table from "../cl/base/table.js";
+import toast from "../cl/base/toast.js";
+import div from "../cl/base/div.js";
+import input from "../cl/base/input.js";
+import * as alert from "../cl/base/alert.js";
+import dropdown from "../cl/base/dropdown.js";
 
 export default [
 	{

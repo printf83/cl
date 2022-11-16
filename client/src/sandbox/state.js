@@ -1,8 +1,8 @@
 "use strict";
-import input from "../../cl/js/base/input.js";
-import * as list from "../../cl/js/base/list.js";
-import toast from "../../cl/js/base/toast.js";
-import ul from "../../cl/js/base/ul.js";
+import input from "../cl/base/input.js";
+import * as list from "../cl/base/list.js";
+import toast from "../cl/base/toast.js";
+import ul from "../cl/base/ul.js";
 
 let query_data = {
 	filter: null,

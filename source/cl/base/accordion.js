@@ -1,7 +1,7 @@
 "use strict";
 
 //disable this if you not using webpack
-import "./css/accordion.css";
+import css from "./css/accordion.css";
 //-------------------------------------
 
 import * as core from "./core.js";

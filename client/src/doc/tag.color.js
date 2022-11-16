@@ -1,7 +1,7 @@
 "use strict";
 import sample from "./sample.js";
-import tag from "../../cl/js/base/tag.js";
-import * as alert from "../../cl/js/base/alert.js";
+import tag from "../cl/base/tag.js";
+import * as alert from "../cl/base/alert.js";
 
 export default [
 	{

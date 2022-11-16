@@ -1,16 +1,16 @@
 "use strict";
 import sample from "./sample.js";
-import * as core from "../../cl/js/base/core.js";
-import * as card from "../../cl/js/base/card.js";
-import button from "../../cl/js/base/button.js";
-import listgroup from "../../cl/js/base/listgroup.js";
-import tab from "../../cl/js/base/tab.js";
-import div from "../../cl/js/base/div.js";
-import p from "../../cl/js/base/p.js";
-import small from "../../cl/js/base/small.js";
-import footer from "../../cl/js/base/footer.js";
-import cite from "../../cl/js/base/cite.js";
-import blockquote from "../../cl/js/base/blockquote.js";
+import * as core from "../cl/base/core.js";
+import * as card from "../cl/base/card.js";
+import button from "../cl/base/button.js";
+import listgroup from "../cl/base/listgroup.js";
+import tab from "../cl/base/tab.js";
+import div from "../cl/base/div.js";
+import p from "../cl/base/p.js";
+import small from "../cl/base/small.js";
+import footer from "../cl/base/footer.js";
+import cite from "../cl/base/cite.js";
+import blockquote from "../cl/base/blockquote.js";
 
 export default [
 	{

@@ -1,12 +1,12 @@
 "use strict";
-import * as core from "../../cl/js/base/core.js";
+import * as core from "../cl/base/core.js";
 import sample from "./sample.js";
-import button from "../../cl/js/base/button.js";
-import * as card from "../../cl/js/base/card.js";
-import * as collapse from "../../cl/js/base/collapse.js";
-import toast from "../../cl/js/base/toast.js";
-import * as table from "../../cl/js/base/table.js";
-import p from "../../cl/js/base/p.js";
+import button from "../cl/base/button.js";
+import * as card from "../cl/base/card.js";
+import * as collapse from "../cl/base/collapse.js";
+import toast from "../cl/base/toast.js";
+import * as table from "../cl/base/table.js";
+import p from "../cl/base/p.js";
 
 export default [
 	{

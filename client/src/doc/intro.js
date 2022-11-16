@@ -1,11 +1,11 @@
 "use strict";
-import * as alert from "../../cl/js/base/alert.js";
-import div from "../../cl/js/base/div.js";
-import pill from "../../cl/js/base/pill.js";
-import codepreview from "../../cl/js/base/codepreview.js";
-import a from "../../cl/js/base/a.js";
-import msg from "../../cl/js/base/msg.js";
-import * as core from "../../cl/js/base/core.js";
+import * as alert from "../cl/base/alert.js";
+import div from "../cl/base/div.js";
+import pill from "../cl/base/pill.js";
+import codepreview from "../cl/base/codepreview.js";
+import a from "../cl/base/a.js";
+import msg from "../cl/base/msg.js";
+import * as core from "../cl/base/core.js";
 
 export default [
 	{
@@ -144,9 +144,9 @@ export default [
 				code: `
 					"use strict";
 					
-					import * as core from "../../cl/js/base/core.js";
-					import button from "../../cl/js/base/button.js";
-					import p from "../../cl/js/base/p.js";
+					import * as core from "../cl/base/core.js";
+					import button from "../cl/base/button.js";
+					import p from "../cl/base/p.js";
 
 					core.documentReady(() => {
 						core.appendChild(document.getElementById("root"), new button({label:'Hello World!', color:'primary'}));

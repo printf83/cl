@@ -1,9 +1,9 @@
 "use strict";
 import sample from "./sample.js";
-import input from "../../cl/js/base/input.js";
-import * as inputgroup from "../../cl/js/base/inputgroup.js";
-import button from "../../cl/js/base/button.js";
-import dropdown from "../../cl/js/base/dropdown.js";
+import input from "../cl/base/input.js";
+import * as inputgroup from "../cl/base/inputgroup.js";
+import button from "../cl/base/button.js";
+import dropdown from "../cl/base/dropdown.js";
 
 export default [
 	{

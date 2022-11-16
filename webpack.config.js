@@ -1,6 +1,11 @@
 const path = require("path");
 const CopyPlugin = require("copy-webpack-plugin");
 
+const _module_resolve = {
+	modules: [path.resolve("./node_modules"), path.resolve("./source/cl"), path.resolve("./client/src")],
+	extensions: [".json", ".js"],
+};
+
 const _module_rule = {
 	rules: [
 		{
@@ -26,36 +31,42 @@ module.exports = [
 			}),
 		],
 		module: _module_rule,
+		resolve: _module_resolve,
 	},
 
+	// WEBPACK DESTROY EXAMPLE CODE
 	{
 		mode: "development",
 		entry: path.resolve(__dirname, "client/src/index.js"),
 		output: {
 			path: path.resolve(__dirname, "client/src"),
-			// chunkFilename: "doc/[name].bundle.js",
+			chunkFilename: "index.[name].bundle.js",
 			filename: "index.bundle.js",
 		},
 		module: _module_rule,
+		resolve: _module_resolve,
 	},
+
 	{
 		mode: "development",
 		entry: path.resolve(__dirname, "client/src/sandbox.js"),
 		output: {
 			path: path.resolve(__dirname, "client/src"),
-			// chunkFilename: "sandbox/[name].bundle.js",
+			chunkFilename: "sandbox.[name].bundle.js",
 			filename: "sandbox.bundle.js",
 		},
 		module: _module_rule,
+		resolve: _module_resolve,
 	},
 	{
 		mode: "development",
 		entry: path.resolve(__dirname, "client/src/test.js"),
 		output: {
 			path: path.resolve(__dirname, "client/src"),
-			// chunkFilename: "test/[name].bundle.js",
+			chunkFilename: "test.[name].bundle.js",
 			filename: "test.bundle.js",
 		},
 		module: _module_rule,
+		resolve: _module_resolve,
 	},
 ];

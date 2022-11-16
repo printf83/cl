@@ -1,6 +1,6 @@
 "use strict";
 import sample from "./sample.js";
-import pill from "../../cl/js/base/pill.js";
+import pill from "../cl/base/pill.js";
 
 export default [
 	{

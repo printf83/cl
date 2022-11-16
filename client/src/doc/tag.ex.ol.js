@@ -1,8 +1,8 @@
 "use strict";
 import sample from "./sample.js";
-import ol from "../../cl/js/base/ol.js";
-import ul from "../../cl/js/base/ul.js";
-import li from "../../cl/js/base/li.js";
+import ol from "../cl/base/ol.js";
+import ul from "../cl/base/ul.js";
+import li from "../cl/base/li.js";
 
 export default [
 	{

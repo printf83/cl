@@ -1,6 +1,6 @@
 "use strict";
-import tag from "../../cl/js/base/tag.js";
-import div from "../../cl/js/base/div.js";
+import tag from "../cl/base/tag.js";
+import div from "../cl/base/div.js";
 import sample from "./sample.js";
 
 export default [

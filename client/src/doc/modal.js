@@ -1,22 +1,22 @@
 "use strict";
 import sample from "./sample.js";
-import * as core from "../../cl/js/base/core.js";
-import a from "../../cl/js/base/a.js";
-import button from "../../cl/js/base/button.js";
-import div from "../../cl/js/base/div.js";
-import * as dlg from "../../cl/js/base/dlg.js";
-import h from "../../cl/js/base/h.js";
-import hr from "../../cl/js/base/hr.js";
-import input from "../../cl/js/base/input.js";
-import modal from "../../cl/js/base/modal.js";
-import msg from "../../cl/js/base/msg.js";
-import p from "../../cl/js/base/p.js";
-import toast from "../../cl/js/base/toast.js";
-import tooltip from "../../cl/js/base/tooltip.js";
-import listgroup from "../../cl/js/base/listgroup.js";
-import * as container from "../../cl/js/base/container.js";
-import * as table from "../../cl/js/base/table.js";
-import pill from "../../cl/js/base/pill.js";
+import * as core from "../cl/base/core.js";
+import a from "../cl/base/a.js";
+import button from "../cl/base/button.js";
+import div from "../cl/base/div.js";
+import * as dlg from "../cl/base/dlg.js";
+import h from "../cl/base/h.js";
+import hr from "../cl/base/hr.js";
+import input from "../cl/base/input.js";
+import modal from "../cl/base/modal.js";
+import msg from "../cl/base/msg.js";
+import p from "../cl/base/p.js";
+import toast from "../cl/base/toast.js";
+import tooltip from "../cl/base/tooltip.js";
+import listgroup from "../cl/base/listgroup.js";
+import * as container from "../cl/base/container.js";
+import * as table from "../cl/base/table.js";
+import pill from "../cl/base/pill.js";
 
 export default [
 	{

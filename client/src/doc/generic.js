@@ -1,14 +1,14 @@
 "use strict";
 import sample from "./sample.js";
-import * as core from "../../cl/js/base/core.js";
-import * as db from "../../cl/js/base/api.js";
-import codepreview from "../../cl/js/base/codepreview.js";
-import ul from "../../cl/js/base/ul.js";
-import button from "../../cl/js/base/button.js";
-import input from "../../cl/js/base/input.js";
-import * as option from "../../cl/js/base/option.js";
-import * as dlg from "../../cl/js/base/dlg.js";
-import div from "../../cl/js/base/div.js";
+import * as core from "../cl/base/core.js";
+import * as db from "../cl/base/api.js";
+import codepreview from "../cl/base/codepreview.js";
+import ul from "../cl/base/ul.js";
+import button from "../cl/base/button.js";
+import input from "../cl/base/input.js";
+import * as option from "../cl/base/option.js";
+import * as dlg from "../cl/base/dlg.js";
+import div from "../cl/base/div.js";
 
 export default [
 	{

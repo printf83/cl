@@ -1,11 +1,11 @@
 "use strict";
 import sample from "./sample.js";
-import codepreview from "../../cl/js/base/codepreview.js";
-import button from "../../cl/js/base/button.js";
-import * as query from "../../cl/js/base/query.js";
-import div from "../../cl/js/base/div.js";
-import * as core from "../../cl/js/base/core.js";
-import * as db from "../../cl/js/base/api.js";
+import codepreview from "../cl/base/codepreview.js";
+import button from "../cl/base/button.js";
+import * as query from "../cl/base/query.js";
+import div from "../cl/base/div.js";
+import * as core from "../cl/base/core.js";
+import * as db from "../cl/base/api.js";
 
 export default [
 	{
