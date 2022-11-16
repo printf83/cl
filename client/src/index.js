@@ -357,9 +357,88 @@ const db_menu = [
 	},
 ];
 
+const wplibrary = {
+	a: /_cl_base_a_js.+\[.+\]/g,
+	abbr: /_cl_base_abbr_js.+\[.+\]/g,
+	accordion: /_cl_base_accordion_js.+\[.+\]/g,
+	"alert.": /_cl_base_alert_js.+\./g,
+	b: /_cl_base_b_js.+\[.+\]/g,
+	badge: /_cl_base_badge_js.+\[.+\]/g,
+	blockquote: /_cl_base_blockquote_js.+\[.+\]/g,
+	breadcrumb: /_cl_base_breadcrumb_js.+\[.+\]/g,
+	btnclose: /_cl_base_btnclose_js.+\[.+\]/g,
+	btngroup: /_cl_base_btngroup_js.+\[.+\]/g,
+	btntoolbar: /_cl_base_btntoolbar_js.+\[.+\]/g,
+	button: /_cl_base_button_js.+\[.+\]/g,
+	"card.": /_cl_base_card_js.+\./g,
+	carousel: /_cl_base_carousel_js.+\[.+\]/g,
+	cite: /_cl_base_cite_js.+\[.+\]/g,
+	code: /_cl_base_code_js.+\[.+\]/g,
+	codepreview: /_cl_base_codepreview_js.+\[.+\]/g,
+	"collapse.": /_cl_base_collapse_js.+\./g,
+	"container.": /_cl_base_container_js.+\./g,
+	"core.": /_cl_base_core_js.+\./g,
+	"db.": /_cl_base_db_js.+\./g,
+	div: /_cl_base_div_js.+\[.+\]/g,
+	"dlg.": /_cl_base_dlg_js.+\./g,
+	dropdown: /_cl_base_dropdown_js.+\[.+\]/g,
+	em: /_cl_base_em_js.+\[.+\]/g,
+	example: /_cl_base_example_js.+\[.+\]/g,
+	file: /_cl_base_file_js.+\[.+\]/g,
+	form: /_cl_base_from_js.+\[.+\]/g,
+	footer: /_cl_base_footer_js.+\[.+\]/g,
+	h: /_cl_base_h_js.+\[.+\]/g,
+	hr: /_cl_base_hr_js.+\[.+\]/g,
+	i: /_cl_base_i_js.+\[.+\]/g,
+	icon: /_cl_base_icon_js.+\[.+\]/g,
+	img: /_cl_base_img_js.+\[.+\]/g,
+	input: /_cl_base_input_js.+\[.+\]/g,
+	"inputgroup.": /_cl_base_inputgroup_js.+\./g,
+	label: /_cl_base_label_js.+\[.+\]/g,
+	"layout.": /_cl_base_layout_js.+\./g,
+	li: /_cl_base_li_js.+\[.+\]/g,
+	listgroup: /_cl_base_listgroup_js.+\[.+\]/g,
+	"list.": /_cl_base_list_js.+\./g,
+	menu: /_cl_base_menu_js.+\[.+\]/g,
+	modal: /_cl_base_modal_js.+\[.+\]/g,
+	msg: /_cl_base_msg_js.+\[.+\]/g,
+	nav: /_cl_base_nav_js.+\[.+\]/g,
+	"navbar.": /_cl_base_navbar_js.+\./g,
+	offcanvas: /_cl_base_offcanvas_js.+\[.+\]/g,
+	ol: /_cl_base_ol_js.+\[.+\]/g,
+	"option.": /_cl_base_option_js.+\./g,
+	p: /_cl_base_p_js.+\[.+\]/g,
+	paging: /_cl_base_paging_js.+\[.+\]/g,
+	pill: /_cl_base_pill_js.+\[.+\]/g,
+	popover: /_cl_base_popover_js.+\[.+\]/g,
+	pre: /_cl_base_pre_js.+\[.+\]/g,
+	"progress.": /_cl_base_progress_js.+\./g,
+	"query.": /_cl_base_query_js.+\./g,
+	small: /_cl_base_small_js.+\[.+\]/g,
+	span: /_cl_base_span_js.+\[.+\]/g,
+	strong: /_cl_base_strong_js.+\[.+\]/g,
+	tab: /_cl_base_tab_js.+\[.+\]/g,
+	"table.": /_cl_base_table_js.+\./g,
+	tag: /_cl_base_tag_js.+\[.+\]/g,
+	toast: /_cl_base_toast_js.+\[.+\]/g,
+	toc: /_cl_base_toc_js.+\[.+\]/g,
+	tooltip: /_cl_base_tooltip_js.+\[.+\]/g,
+	ul: /_cl_base_ul_js.+\[.+\]/g,
+	"user.": /_cl_base_user_js.+\./g,
+	"sample.": /_sample_js.+\./g,
+};
+
+function replaceWPLib(str) {
+	Object.keys(wplibrary).forEach((key) => {
+		str = str.replaceAll(wplibrary[key], key);
+	});
+
+	return str;
+}
+
 const dblibrary = {
 	a: `import a from "./cl/base/a.js";`,
-	abbr: `import a from "./cl/base/abbr.js";`,
+	abbr: `import abbr from "./cl/base/abbr.js";`,
 	accordion: `import accordion from "./cl/base/accordion.js";`,
 	alert: `import * as alert from "./cl/base/alert.js";`,
 	b: `import b from "./cl/base/b.js";`,
@@ -605,7 +684,7 @@ function generate_page(opt) {
 		sourcecode.push(`	`);
 
 		sourcecode.push(`\/\/\/code`);
-		sourcecode.push(`let code = ${opt.code.toString()};`);
+		sourcecode.push(`let code = ${replaceWPLib(opt.code.toString())};`);
 		sourcecode.push(`	`);
 
 		sourcecode.push(`\/\/\/loader`);
