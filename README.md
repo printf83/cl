@@ -6,7 +6,8 @@
 3. echo -e
    "PORT=<value>\nDBURL=<value>\nSERVERURL=<value>\nSESSIONSECRET=<value>\nSESSIONEXPIRED=<value>\nHASHSALT=<value>\nEMAILPROVIDER=<value>\nEMAILADDRESS=<value>\nEMAILPASSWORD=<value>" >>
    .env
-4. npm start
+4. npm build
+5. npm start
 
 -   # example .env file
 
