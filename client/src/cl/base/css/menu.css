@@ -45,13 +45,13 @@
 	transform: rotate(0deg);
 }
 .cl-menu-container {
-	padding-left: 0.8rem;
+	/* padding-left: 0.8rem; */
 	list-style: none;
 	margin: 0 0 0 -0.25rem;
 }
-.cl-menu-container.no-arrow{
+/* .cl-menu-container.no-arrow{
 	padding-left: 0.8rem;
-}
+} */
 
 .cl-menu-container li div,
 .cl-menu-container li a {

@@ -1,4 +1,6 @@
 const path = require("path");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 
 const _module_mode = "development";
@@ -24,6 +26,7 @@ const _module_resolve = {
 };
 
 const _module_rule = {
+	plugins: [new MiniCssExtractPlugin()],
 	rules: [
 		// {
 		// 	test: /\.js$/i,
@@ -32,12 +35,24 @@ const _module_rule = {
 		// },
 		{
 			test: /\.css$/i,
-			use: ["style-loader", "css-loader"],
+			use: [MiniCssExtractPlugin.loader, "css-loader"],
 		},
 	],
 };
 
 module.exports = [
+	{
+		mode: _module_mode,
+		plugins: [
+			new CleanWebpackPlugin({
+				dry: true,
+				output: {
+					path: "client/src",
+				},
+				cleanOnceBeforeBuildPatterns: ["client/src/*.bundle.js"],
+			}),
+		],
+	},
 	{
 		mode: _module_mode,
 		entry: path.resolve(__dirname, "client/src/index.js"),
@@ -46,6 +61,7 @@ module.exports = [
 			chunkFilename: "index.[name].bundle.js",
 			filename: "index.bundle.js",
 		},
+
 		cache: _module_cache,
 		optimization: _module_optimization,
 		module: _module_rule,
