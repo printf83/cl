@@ -25,7 +25,6 @@ const _module_resolve = {
 };
 
 const _module_rule = {
-	plugins: [new MiniCssExtractPlugin()],
 	rules: [
 		{
 			test: /\.css$/i,
@@ -43,7 +42,7 @@ module.exports = [
 			chunkFilename: "index.[name].bundle.js",
 			filename: "index.bundle.js",
 		},
-
+		plugins: [new MiniCssExtractPlugin()],
 		cache: _module_cache,
 		optimization: _module_optimization,
 		module: _module_rule,
@@ -58,6 +57,7 @@ module.exports = [
 			chunkFilename: "sandbox.[name].bundle.js",
 			filename: "sandbox.bundle.js",
 		},
+		plugins: [new MiniCssExtractPlugin()],
 		cache: _module_cache,
 		optimization: _module_optimization,
 		module: _module_rule,
@@ -71,6 +71,7 @@ module.exports = [
 			chunkFilename: "test.[name].bundle.js",
 			filename: "test.bundle.js",
 		},
+		plugins: [new MiniCssExtractPlugin()],
 		cache: _module_cache,
 		optimization: _module_optimization,
 		module: _module_rule,

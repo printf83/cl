@@ -1,0 +1,287 @@
+/*!***********************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./client/src/cl/base/css/core.css ***!
+  \***********************************************************************************/
+li[disabled],
+li.disabled,
+button[disabled],
+button.disabled,
+a[disabled],
+a.disabled,
+div[disabled],
+div.disabled,
+input[disabled],
+input.disabled{
+    cursor: not-allowed !important;
+    pointer-events: unset;
+}
+
+li.wait,
+li.wait.disabled,
+button.wait,
+button.wait.disabled,
+a.wait,
+a.wait.disabled,
+div.wait,
+div.wait.disabled,
+input.wait,
+input.wait.disabled {
+    cursor: wait !important;
+    pointer-events: unset; 
+}
+
+
+.noselect {
+    -webkit-touch-callout: none;
+    /* iOS Safari */
+    -webkit-user-select: none;
+    /* Safari */
+    -khtml-user-select: none;
+    /* Konqueror HTML */
+    -moz-user-select: none;
+    /* Old versions of Firefox */
+    -ms-user-select: none;
+    /* Internet Explorer/Edge */
+    user-select: none;
+    /* Non-prefixed version, currently
+    supported by Chrome, Edge, Opera and Firefox */
+}
+
+.noselect pre {
+    -webkit-touch-callout: text;
+    /* iOS Safari */
+    -webkit-user-select: text;
+    /* Safari */
+    -khtml-user-select: text;
+    /* Konqueror HTML */
+    -moz-user-select: text;
+    /* Old versions of Firefox */
+    -ms-user-select: text;
+    /* Internet Explorer/Edge */
+    user-select: text;
+    /* Non-prefixed version, currently
+    supported by Chrome, Edge, Opera and Firefox */
+}
+
+
+
+
+
+/*!***********************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./client/src/cl/base/css/icon.css ***!
+  \***********************************************************************************/
+.fa-cl-image{
+    padding: 0.125rem;
+    display: inline-block;
+    line-height: .05em;
+    vertical-align: -.075em;
+    margin-top: -.05em;
+}
+
+.fa-cl-svg{
+    padding: 0.2rem;
+    display: inline-block;
+    margin-top: -.05em;
+}
+/*!***********************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./client/src/cl/base/css/menu.css ***!
+  \***********************************************************************************/
+.cl-menu-toggle {
+	color: rgba(var(--bs-gray), 0.7);
+	font-weight: calc(var(--bs-body-font-weight) * 1.5);
+	padding: 0.25rem 0.5rem;
+	border-radius: var(--bs-border-radius);
+	display: inline-block;
+}
+.bg-dark .cl-menu-toggle {
+	color: rgba(var(--bs-light-rgb), 0.7);
+}
+.cl-menu-toggle:hover {
+	background-color: rgba(var(--bs-primary-rgb), 0.1);
+	cursor: pointer;
+}
+.cl-menu-toggle:hover label {
+	cursor: pointer;
+}
+
+.bg-dark .cl-menu-toggle:hover {
+	background-color: rgba(var(--bs-primary-rgb), 0.1);
+}
+.cl-menu-toggle:not(.no-arrow)::before {
+	display: inline-block;
+	margin-bottom: -0.25rem;
+	margin-right: 0.5rem;
+	transform: rotate(-90deg);
+	flex-shrink: 0;
+	width: var(--bs-accordion-btn-icon-width);
+	height: var(--bs-accordion-btn-icon-width);
+	margin-left: auto;
+	content: "";
+	background-image: var(--bs-accordion-btn-icon);
+	background-repeat: no-repeat;
+	background-size: var(--bs-accordion-btn-icon-width);
+	transition: var(--bs-accordion-btn-icon-transition);
+	
+}
+.cl-menu-toggle[aria-expanded="true"] {
+	color: rgba(var(--bs-gray), 0.9);
+}
+.bg-dark .cl-menu-toggle[aria-expanded="true"] {
+	color: rgba(var(--bs-light-rgb), 0.9);
+}
+.cl-menu-toggle[aria-expanded="true"]:not(.no-arrow)::before {
+	transform: rotate(0deg);
+}
+.cl-menu-container {
+	/* padding-left: 0.8rem; */
+	list-style: none;
+	margin: 0 0 0 -0.25rem;
+}
+/* .cl-menu-container.no-arrow{
+	padding-left: 0.8rem;
+} */
+
+.cl-menu-container li div,
+.cl-menu-container li a {
+	color: rgba(var(--bs-gray), 0.7);
+	padding: 0.25rem 0.5rem;
+	border-radius: var(--bs-border-radius-sm);
+	text-decoration: none;
+	display: inline-block;
+	font-size: .875em;
+}
+
+.cl-menu-container li div:hover,
+.cl-menu-container li div:hover label,
+.cl-menu-container li a:hover,
+.cl-menu-container li a:hover label {
+	cursor: pointer;
+}
+
+.bg-dark .cl-menu-container li div,
+.bg-dark .cl-menu-container li a {
+	color: rgba(var(--bs-light-rgb), 0.7);
+}
+
+.cl-menu-container li div:hover,
+.cl-menu-container li a:hover {
+	background-color: rgba(var(--bs-primary-rgb), 0.1);
+}
+.bg-dark .cl-menu-container li div:hover,
+.bg-dark .cl-menu-container li a:hover {
+	background-color: rgba(var(--bs-primary-rgb), 0.1);
+}
+.cl-menu-container li div.active,
+.cl-menu-container li a.active {
+	font-weight: calc(var(--bs-body-font-weight) * 1.5);
+	color: rgba(var(--bs-primary-rgb), 1);
+}
+.bg-dark .cl-menu-container li div.active,
+.bg-dark .cl-menu-container li a.active {
+	color: rgba(var(--bs-primary-rgb), 0.1);
+}
+
+.cl-menu-container li div.disabled,
+.cl-menu-container li a.disabled,
+.cl-menu-container li div[disabled],
+.cl-menu-container li a[disabled] {
+	color: var(--bs-secondary);
+}
+
+@media (min-width: 768px) {
+	.cl-vh-menu {
+		max-height: calc(100vh - 5.5rem) !important;
+	}
+}
+
+/*!*************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./client/src/cl/base/css/navbar.css ***!
+  \*************************************************************************************/
+.navbar .navbar-collapse.collapse.show .dropdown-menu.show{
+    margin-bottom: 0.5rem;
+}
+/*!***************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./client/src/cl/base/css/btnclose.css ***!
+  \***************************************************************************************/
+/*fix bootstrap color problem on btn-close*/
+
+/* .btn-close {
+    color: unset !important;
+    background: none !important;
+}
+
+.btn-close::before {
+    position: unset;
+    top: unset;
+    right: unset;
+    content: unset;
+}
+
+.btn-close{
+    display: flex;
+    justify-content: center;
+}
+
+.btn-close::after{
+    content: "✕";
+    text-align: center;
+    justify-content: center;
+    font-weight: lighter;
+    font-size: calc(100%*1.5);
+    display: flex;
+    align-self: center;
+} */
+
+/*!**********************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./client/src/cl/base/css/toc.css ***!
+  \**********************************************************************************/
+.cl-toc li{
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.cl-toc li div,
+.cl-toc li div label,
+.cl-toc li a,
+.cl-toc li a label {
+	text-decoration: none;
+	color: var(--bs-body-color);	
+}
+
+.cl-toc li div:hover,
+.cl-toc li div:hover label,
+.cl-toc li a:hover,
+.cl-toc li a:hover label {
+	text-decoration: underline;
+	cursor: pointer;
+	
+}
+
+.cl-toc li div.disabled,
+.cl-toc li a.disabled,
+.cl-toc li div[disabled],
+.cl-toc li a[disabled]{
+	color:var(--bs-secondary);
+}
+
+.cl-toc li div.active,
+.cl-toc li a.active {
+	color: var(--bs-primary);
+	font-weight: bold;
+}
+
+.cl-toc h6{
+	font-weight: calc(var(--bs-body-font-weight) * 1.5);
+}
+/*!***********************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./client/src/cl/base/css/file.css ***!
+  \***********************************************************************************/
+.cl-fu-progress {
+	position: absolute;
+	background-color: rgba(var(--bs-light-rgb), 0.5);
+	display: block;
+	height: 100%;
+	top: 0;
+	left: 0;
+}
+

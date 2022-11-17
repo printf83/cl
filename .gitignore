@@ -108,4 +108,5 @@ tmp/
 file/
 client/src/cl/
 client/src/*.bundle.js
+client/src/client_src_*.css
 

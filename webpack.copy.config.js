@@ -26,7 +26,6 @@ const _module_resolve = {
 };
 
 const _module_rule = {
-	plugins: [new MiniCssExtractPlugin()],
 	rules: [
 		{
 			test: /\.css$/i,
@@ -50,6 +49,7 @@ module.exports = {
 			},
 			{ copyUnmodified: true }
 		),
+		new MiniCssExtractPlugin(),
 	],
 	cache: _module_cache,
 	optimization: _module_optimization,
