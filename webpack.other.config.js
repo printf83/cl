@@ -1,5 +1,5 @@
 const path = require("path");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+// const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 
 const _module_mode = "development";
@@ -28,7 +28,8 @@ const _module_rule = {
 	rules: [
 		{
 			test: /\.css$/i,
-			use: [MiniCssExtractPlugin.loader, "css-loader"],
+			// use: [MiniCssExtractPlugin.loader, "css-loader"],
+			use: ["style-loader", "css-loader"],
 		},
 	],
 };
@@ -42,7 +43,7 @@ module.exports = [
 			chunkFilename: "index.[name].bundle.js",
 			filename: "index.bundle.js",
 		},
-		plugins: [new MiniCssExtractPlugin()],
+		// plugins: [new MiniCssExtractPlugin()],
 		cache: _module_cache,
 		optimization: _module_optimization,
 		module: _module_rule,
@@ -57,7 +58,7 @@ module.exports = [
 			chunkFilename: "sandbox.[name].bundle.js",
 			filename: "sandbox.bundle.js",
 		},
-		plugins: [new MiniCssExtractPlugin()],
+		// plugins: [new MiniCssExtractPlugin()],
 		cache: _module_cache,
 		optimization: _module_optimization,
 		module: _module_rule,
@@ -71,7 +72,7 @@ module.exports = [
 			chunkFilename: "test.[name].bundle.js",
 			filename: "test.bundle.js",
 		},
-		plugins: [new MiniCssExtractPlugin()],
+		// plugins: [new MiniCssExtractPlugin()],
 		cache: _module_cache,
 		optimization: _module_optimization,
 		module: _module_rule,
