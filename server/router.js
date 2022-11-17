@@ -1,7 +1,10 @@
 const express = require("express");
+const expressStaticGzip = require("express-static-gzip");
 const path = require("path");
 
 module.exports = (app) => {
+	app.use("/", expressStaticGzip("/client"));
+
 	//static file (required)
 	app.use(express.static("./client"));
 

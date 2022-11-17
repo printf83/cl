@@ -4,7 +4,6 @@ require("dotenv").config();
 
 if (process.env.DBURL) {
 	const express = require("express");
-
 	const app = express();
 
 	//security

@@ -20,16 +20,6 @@
 	background-color: rgba(var(--bs-primary-rgb), 0.1);
 }
 .cl-menu-toggle:not(.no-arrow)::before {
-	/* text-align: center;
-	width: 1.25em;
-	line-height: 0;
-	content: "\f054";
-	font-family: "Font Awesome 5 Free";
-	font-weight: 900;
-	transition: transform 0.35s ease;
-	transform-origin: 0.5em 50%;
-	*/
-
 	display: inline-block;
 	flex-shrink: 0;
 	width: 1.25rem;
@@ -41,7 +31,9 @@
 	background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23495057'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
 	background-repeat: no-repeat;
 	background-size: 1.25rem;
+	transform: rotate(-90deg);
 	transition: transform 0.2s ease-in-out;
+	
 }
 .cl-menu-toggle[aria-expanded="true"] {
 	color: rgba(var(--bs-gray), 0.9);
@@ -50,15 +42,15 @@
 	color: rgba(var(--bs-light-rgb), 0.9);
 }
 .cl-menu-toggle[aria-expanded="true"]:not(.no-arrow)::before {
-	transform: rotate(-90deg);
+	transform: rotate(0deg);
 }
 .cl-menu-container {
-	padding-left: 0.25rem;
+	padding-left: 0.8rem;
 	list-style: none;
 	margin: 0;
 }
 .cl-menu-container.no-arrow{
-	padding-left: 0.75rem;
+	padding-left: 0.8rem;
 }
 
 .cl-menu-container li div,
