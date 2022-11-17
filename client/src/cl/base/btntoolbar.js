@@ -1,1 +1,0 @@
-"use strict";import*as core from"./core.js";import div from"./div.js";const defaultOption={label:null};export default class btntoolbar extends div{constructor(...e){super(...e)}get data(){return super.data}set data(e){e&&(e=core.extend({},defaultOption,e),delete(e=core.merge(e,{class:"btn-toolbar",role:"toolbar","aria-label":e.label})).label,super.data=e)}}

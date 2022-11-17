@@ -1,1 +1,0 @@
-"use strict";import*as core from"./core.js";import tag from"./tag.js";const defaultOption={tag:"form",gap:3,row:!0};export default class form extends tag{constructor(...t){super(...t)}get data(){return super.data}set data(t){t=core.extend({},defaultOption,t),super.data=t}}
