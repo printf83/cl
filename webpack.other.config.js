@@ -1,5 +1,4 @@
 const path = require("path");
-const CopyPlugin = require("copy-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 
 const _module_mode = "development";
@@ -39,21 +38,6 @@ const _module_rule = {
 };
 
 module.exports = [
-	{
-		mode: _module_mode,
-		plugins: [
-			new CopyPlugin({
-				patterns: [
-					{ from: path.resolve(__dirname, "source/cl"), to: path.resolve(__dirname, "client/src/cl") },
-				],
-			}),
-		],
-		cache: _module_cache,
-		optimization: _module_optimization,
-		module: _module_rule,
-		resolve: _module_resolve,
-	},
-
 	{
 		mode: _module_mode,
 		entry: path.resolve(__dirname, "client/src/index.js"),

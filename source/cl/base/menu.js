@@ -49,7 +49,7 @@ export default class menu extends div {
 				toggle: "collapse",
 				show: opt.active,
 				elem: new button({
-					class: ["cl-menu-toggle", !opt.arrow ? "no-arrow" : null],
+					class: ["cl-menu-toggle", opt.arrow ? "accordion" : null, !opt.arrow ? "no-arrow" : null],
 					label: opt.label,
 					icon: opt.icon,
 				}),
@@ -58,7 +58,7 @@ export default class menu extends div {
 				id: opt.id,
 				show: opt.active,
 				elem: new ul({
-					class: ["cl-menu-container", "ms-3", !opt.arrow ? "no-arrow" : null],
+					class: ["cl-menu-container", !opt.arrow ? "no-arrow" : null],
 					elem: opt.item.map((i) => {
 						if (typeof i === "string") {
 							i = {
