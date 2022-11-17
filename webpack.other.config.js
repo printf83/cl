@@ -1,5 +1,4 @@
 const path = require("path");
-const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 
@@ -28,11 +27,6 @@ const _module_resolve = {
 const _module_rule = {
 	plugins: [new MiniCssExtractPlugin()],
 	rules: [
-		// {
-		// 	test: /\.js$/i,
-		// 	exclude: /node_modules/,
-		// 	use: "babel-loader",
-		// },
 		{
 			test: /\.css$/i,
 			use: [MiniCssExtractPlugin.loader, "css-loader"],
@@ -41,18 +35,6 @@ const _module_rule = {
 };
 
 module.exports = [
-	{
-		mode: _module_mode,
-		plugins: [
-			new CleanWebpackPlugin({
-				dry: true,
-				output: {
-					path: "client/src",
-				},
-				cleanOnceBeforeBuildPatterns: ["client/src/*.bundle.js"],
-			}),
-		],
-	},
 	{
 		mode: _module_mode,
 		entry: path.resolve(__dirname, "client/src/index.js"),
