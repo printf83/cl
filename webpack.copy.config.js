@@ -29,8 +29,8 @@ const _module_rule = {
 	rules: [
 		{
 			test: /\.css$/i,
-			use: [MiniCssExtractPlugin.loader, "style-loader", "css-loader"],
-			// use: ["style-loader", "css-loader"],
+			// use: [MiniCssExtractPlugin.loader, "style-loader", "css-loader"],
+			use: ["style-loader", "css-loader"],
 		},
 	],
 };
@@ -50,10 +50,10 @@ module.exports = {
 			},
 			{ copyUnmodified: true }
 		),
-		new MiniCssExtractPlugin(),
+		// new MiniCssExtractPlugin(),
 	],
 	cache: _module_cache,
-	optimization: _module_optimization,
+	// optimization: _module_optimization,
 	module: _module_rule,
 	resolve: _module_resolve,
 };
