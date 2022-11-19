@@ -17,11 +17,8 @@ const defaultContainerOption = {
 
 const defaultItemOption = {
 	type: null, //null|checkbox|radio|switch
-	// disabled: false,
 	action: false,
 	value: null,
-	// active: false,
-	// checked: null, //if check
 	color: null,
 };
 
@@ -89,14 +86,9 @@ export default class listgroup extends tag {
 								class: [
 									"list-group-item",
 									i.type === "switch" ? "form-switch" : null,
-									// i.active ? "active" : null,
-									// i.disabled ? "disabled" : null,
 									i.action ? "list-group-item-action" : null,
 									i.color ? `list-group-item-${i.color}` : null,
 								],
-								// disabled: !i.href && i.disabled ? "" : null,
-								// tabindex: i.href && i.disabled ? -1 : null,
-								// "aria-disabled": i.href && i.disabled ? "true" : null,
 								"aria-current": i.active ? "true" : null,
 								elem: [new tag(ctl), i.label],
 							});
@@ -105,24 +97,21 @@ export default class listgroup extends tag {
 								tag: i.href ? "a" : i.click instanceof Function ? "button" : "li",
 								class: [
 									"list-group-item",
-									// i.active ? "active" : null,
-									// i.disabled ? "disabled" : null,
 									i.action || i.tag === "a" || i.tag === "button" ? "list-group-item-action" : null,
 									i.color ? `list-group-item-${i.color}` : null,
 								],
-								// disabled: !i.href && i.disabled ? "" : null,
-								// tabindex: i.href && i.disabled ? "-1" : null,
-								// "aria-disabled": i.href && i.disabled ? "true" : null,
 								"aria-current": i.active ? "true" : null,
 							});
 						}
 
 						delete i.type;
-						// delete i.active;
+						delete i.active;
 						delete i.action;
-						// delete i.value;
-						// delete i.checked;
+						delete i.value;
+						delete i.checked;
 						delete i.color;
+						delete i.name;
+						delete i.label;
 
 						return new tag(i);
 				  }),

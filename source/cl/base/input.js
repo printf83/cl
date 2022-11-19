@@ -709,6 +709,7 @@ export default class input extends tag {
 			delete i.numctl;
 			delete i.addctl;
 			delete i.deletectl;
+			delete i.clearctl;
 			delete i.editctl;
 			delete i.copyctl;
 			delete i.managectl;
