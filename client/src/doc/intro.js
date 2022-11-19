@@ -100,22 +100,20 @@ export default [
 							<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 							<link rel="icon" type="image/png" href="/favicon.png" />
 
+							<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
+
 							<link
 								rel="stylesheet"
-								href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"
-							/>
-							<link
-								rel="stylesheet"
-								href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
+								href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.2/css/bootstrap.min.css"
 								id="css_bootstrap"
 							/>
+
 							<link
 								rel="stylesheet"
-								href="https://cdn.jsdelivr.net/npm/bootswatch@5.2.0/dist/cerulean/bootstrap.min.css"
+								href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/5.2.2/cerulean/bootstrap.min.css"
 								disabled="disabled"
 								id="css_bootswatch"
 							/>
-							<link rel="stylesheet" href="./cl/css/style.css" />
 
 							<title>${core.setting.title()}</title>
 						</head>
@@ -126,12 +124,16 @@ export default [
 								</noscript>
 							</div>
 
-							<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"></script>
-							<script src="https://cdn.jsdelivr.net/npm/moment@2.29.4"></script>
-							<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
-							<script src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0"></script>
+							<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"></script>
+							<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+							<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.2/js/bootstrap.min.js"></script>
 
-							<script type="module" src="./js/index.js"></script>
+							<script type="text/javascript">
+								window.FontAwesomeConfig = { autoReplaceSvg: false };
+							</script>
+							<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/js/all.min.js"></script>
+
+							<script type="module" src="./src/index.bundle.js"></script>
 						</body>
 					</html>
 
@@ -144,9 +146,9 @@ export default [
 				code: `
 					"use strict";
 					
-					import * as core from "../cl/base/core.js";
-					import button from "../cl/base/button.js";
-					import p from "../cl/base/p.js";
+					import * as core from "./cl/base/core.js";
+					import button from "./cl/base/button.js";
+					import p from "./cl/base/p.js";
 
 					core.documentReady(() => {
 						core.appendChild(document.getElementById("root"), new button({label:'Hello World!', color:'primary'}));
@@ -155,7 +157,7 @@ export default [
 			`,
 			}),
 
-			`Alternatively, if you prefer the simpler method, use {{import $ from "./all.js";}} to import all components.`,
+			`Alternatively, if you prefer the simpler method, use {{import $ from "./cl/all.js";}} to import all components.`,
 
 			new codepreview({
 				title: "Example index.js using only one component",
@@ -163,7 +165,7 @@ export default [
 				code: `
 					"use strict";
 					
-					import $ from "../../cl/js/all.js"; //marker
+					import $ from "./cl/all.js"; //marker
 
 					$.core.documentReady(() => {
 						$.core.appendChild(document.getElementById("root"), new $.button({label:'Hello World!', color:'primary'}));
@@ -178,7 +180,7 @@ export default [
 				code: `
 					"use strict";
 					
-					import WOW from "../../cl/js/all.js"; //marker
+					import WOW from "./cl/all.js"; //marker
 
 					WOW.core.documentReady(() => {
 						WOW.core.appendChild(document.getElementById("root"), new WOW.button({label:'Hello World!', color:'primary'}));
@@ -187,7 +189,7 @@ export default [
 			`,
 			}),
 
-			`If you want to test the code, you can copy the code into <b>./client/js/test.js</b> and go to <a href="test.html">test.html</a> to check the output.`,
+			`If you want to test the code, you can copy the code into <b>./client/src/test.js</b> and go to <a href="test.html">test.html</a> to check the output.`,
 
 			new div({
 				display: "flex",
