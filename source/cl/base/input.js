@@ -443,12 +443,28 @@ export default class input extends tag {
 								},
 								color: "secondary",
 								click: () => {
-									try {
-										let str = document.getElementById(i.id).value;
-										navigator.clipboard.writeText(str);
-										new toast("/", "Copied to clipboard").show();
-									} catch (ex) {
-										new toast("!!", `Error when copy code to clipboard. ${ex}`).show();
+									let str = document.getElementById(i.id).value;
+									if (str) {
+										try {
+											navigator.clipboard.writeText(str);
+											new toast("/", "Copied to clipboard").show();
+										} catch (ex) {
+											new toast(
+												"!!",
+												`Error when copy code to clipboard. No permission to access the clipboard. ${ex}`
+											).show();
+										}
+									} else {
+										try {
+											navigator.clipboard
+												.readText()
+												.then((str) => (document.getElementById(i.id).value = str));
+										} catch (ex) {
+											new toast(
+												"!!",
+												`Error when paste text from clipboard. No permission to access the clipboard.  ${ex}`
+											).show();
+										}
 									}
 								},
 							})

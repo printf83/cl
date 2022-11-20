@@ -150,14 +150,20 @@ export default [
 					import button from "./dist/cl/base/button.js";
 					import p from "./dist/cl/base/p.js";
 
+					let code = () => {
+						return [
+							new button({label:'Hello World!', color:'primary'}),
+							new p('Hello World!')
+						];
+					};
+
 					core.documentReady(() => {
-						core.appendChild(document.getElementById("root"), new button({label:'Hello World!', color:'primary'}));
-						core.appendChild(document.getElementById("root"), new p('Hello World!'));
+						core.replaceChild(document.getElementById("root"), code());
 					});
 			`,
 			}),
 
-			`Alternatively, if you prefer the simpler method, use {{import $ from "./cl/all.js";}} to import all components.`,
+			`Alternatively, if you prefer the simpler method, use {{import $ from "./dist/cl/all.js";}} to import all components.`,
 
 			new codepreview({
 				title: "Example index.js using only one component",
@@ -165,11 +171,17 @@ export default [
 				code: `
 					"use strict";
 					
-					import $ from "./cl/all.js"; //marker
+					import $ from "./dist/cl/all.js"; //marker
+
+					let code = () => {
+						return [
+							new $.button({label:'Hello World!', color:'primary'}),
+							new $.p('Hello World!')
+						];
+					};
 
 					$.core.documentReady(() => {
-						$.core.appendChild(document.getElementById("root"), new $.button({label:'Hello World!', color:'primary'}));
-						$.core.appendChild(document.getElementById("root"), new $.p('Hello World!'));
+						$.core.replaceChild(document.getElementById("root"), code());
 					});
 			`,
 			}),
@@ -180,16 +192,22 @@ export default [
 				code: `
 					"use strict";
 					
-					import WOW from "./cl/all.js"; //marker
+					import WOW from "./dist/cl/all.js"; //marker
+
+					let code = () => {
+						return [
+							new WOW.button({label:'Hello World!', color:'primary'}),
+							new WOW.p('Hello World!')
+						];
+					};
 
 					WOW.core.documentReady(() => {
-						WOW.core.appendChild(document.getElementById("root"), new WOW.button({label:'Hello World!', color:'primary'}));
-						WOW.core.appendChild(document.getElementById("root"), new WOW.p('Hello World!'));
+						WOW.core.replaceChild(document.getElementById("root"), code());
 					});
 			`,
 			}),
 
-			`If you want to test the code, you can copy the code into <b>./client/src/test.js</b> and go to <a href="test.html">test.html</a> to check the output.`,
+			`If you want to test the code, you can copy the code into {{./client/src/test.js}}, run {{npm run build}} in the terminal to build the code, run {{npm start}} in the terminal to start the server then go to <a href="test.html">test.html</a> to check the output.`,
 
 			new div({
 				display: "flex",
