@@ -1,10 +1,10 @@
 "use strict";
 import sample from "./sample.js";
-import listgroup from "../cl/base/listgroup.js";
-import div from "../cl/base/div.js";
-import h from "../cl/base/h.js";
-import small from "../cl/base/small.js";
-import p from "../cl/base/p.js";
+import listgroup from "../dist/cl/base/listgroup.js";
+import div from "../dist/cl/base/div.js";
+import h from "../dist/cl/base/h.js";
+import small from "../dist/cl/base/small.js";
+import p from "../dist/cl/base/p.js";
 
 export default [
 	{

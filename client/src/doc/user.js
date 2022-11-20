@@ -1,13 +1,13 @@
 "use strict";
-import * as core from "../cl/base/core.js";
-import * as user from "../cl/base/user.js";
-import toast from "../cl/base/toast.js";
-import button from "../cl/base/button.js";
+import * as core from "../dist/cl/base/core.js";
+import * as user from "../dist/cl/base/user.js";
+import toast from "../dist/cl/base/toast.js";
+import button from "../dist/cl/base/button.js";
 import sample from "./sample.js";
-import modal from "../cl/base/modal.js";
-import img from "../cl/base/img.js";
-import btngroup from "../cl/base/btngroup.js";
-import p from "../cl/base/p.js";
+import modal from "../dist/cl/base/modal.js";
+import img from "../dist/cl/base/img.js";
+import btngroup from "../dist/cl/base/btngroup.js";
+import p from "../dist/cl/base/p.js";
 
 const reloadUserDoc = () => {
 	let activeElem = document.getElementById("sidebar").getElementsByClassName("active");

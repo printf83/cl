@@ -1,7 +1,7 @@
 "use strict";
 import sample from "./sample.js";
-import code from "../cl/base/code.js";
-import ul from "../cl/base/ul.js";
+import code from "../dist/cl/base/code.js";
+import ul from "../dist/cl/base/ul.js";
 
 export default [
 	{

@@ -1,8 +1,8 @@
 "use strict";
 import sample from "./sample.js";
-import abbr from "../cl/base/abbr.js";
-import div from "../cl/base/div.js";
-import ul from "../cl/base/ul.js";
+import abbr from "../dist/cl/base/abbr.js";
+import div from "../dist/cl/base/div.js";
+import ul from "../dist/cl/base/ul.js";
 
 export default [
 	{

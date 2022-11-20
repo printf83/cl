@@ -1,10 +1,10 @@
 "use strict";
 import sample from "./sample.js";
-import btngroup from "../cl/base/btngroup.js";
-import btntoolbar from "../cl/base/btntoolbar.js";
-import button from "../cl/base/button.js";
-import input from "../cl/base/input.js";
-import dropdown from "../cl/base/dropdown.js";
+import btngroup from "../dist/cl/base/btngroup.js";
+import btntoolbar from "../dist/cl/base/btntoolbar.js";
+import button from "../dist/cl/base/button.js";
+import input from "../dist/cl/base/input.js";
+import dropdown from "../dist/cl/base/dropdown.js";
 
 export default [
 	{

@@ -1,7 +1,7 @@
 "use strict";
 import sample from "./sample.js";
-import tooltip from "../cl/base/tooltip.js";
-import * as progress from "../cl/base/progress.js";
+import tooltip from "../dist/cl/base/tooltip.js";
+import * as progress from "../dist/cl/base/progress.js";
 
 export default [
 	{

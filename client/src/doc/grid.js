@@ -1,6 +1,6 @@
 "use strict";
-import * as alert from "../cl/base/alert.js";
-import div from "../cl/base/div.js";
+import * as alert from "../dist/cl/base/alert.js";
+import div from "../dist/cl/base/div.js";
 import sample from "./sample.js";
 
 export default [

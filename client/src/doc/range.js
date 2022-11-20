@@ -1,5 +1,5 @@
 "use strict";
-import input from "../cl/base/input.js";
+import input from "../dist/cl/base/input.js";
 
 export default [
 	{

@@ -43,7 +43,7 @@ module.exports = {
 				patterns: [
 					{
 						from: path.resolve(__dirname, "source/cl"),
-						to: path.resolve(__dirname, "client/src/cl"),
+						to: path.resolve(__dirname, "client/src/dist/cl"),
 						force: true,
 					},
 				],

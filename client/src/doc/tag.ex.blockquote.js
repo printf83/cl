@@ -1,9 +1,9 @@
 "use strict";
 import sample from "./sample.js";
-import div from "../cl/base/div.js";
-import blockquote from "../cl/base/blockquote.js";
-import cite from "../cl/base/cite.js";
-import ul from "../cl/base/ul.js";
+import div from "../dist/cl/base/div.js";
+import blockquote from "../dist/cl/base/blockquote.js";
+import cite from "../dist/cl/base/cite.js";
+import ul from "../dist/cl/base/ul.js";
 
 export default [
 	{

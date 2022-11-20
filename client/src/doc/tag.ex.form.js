@@ -1,11 +1,11 @@
 "use strict";
 import sample from "./sample.js";
-import form from "../cl/base/form.js";
-import ul from "../cl/base/ul.js";
-import button from "../cl/base/button.js";
-import toast from "../cl/base/toast.js";
-import input from "../cl/base/input.js";
-import div from "../cl/base/div.js";
+import form from "../dist/cl/base/form.js";
+import ul from "../dist/cl/base/ul.js";
+import button from "../dist/cl/base/button.js";
+import toast from "../dist/cl/base/toast.js";
+import input from "../dist/cl/base/input.js";
+import div from "../dist/cl/base/div.js";
 
 export default [
 	{

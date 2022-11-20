@@ -1,7 +1,7 @@
 "use strict";
 import sample from "./sample.js";
-import toc from "../cl/base/toc.js";
-import toast from "../cl/base/toast.js";
+import toc from "../dist/cl/base/toc.js";
+import toast from "../dist/cl/base/toast.js";
 
 export default [
 	{

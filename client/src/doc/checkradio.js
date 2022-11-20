@@ -1,7 +1,7 @@
 "use strict";
 import sample from "./sample.js";
-import input from "../cl/base/input.js";
-import button from "../cl/base/button.js";
+import input from "../dist/cl/base/input.js";
+import button from "../dist/cl/base/button.js";
 
 export default [
 	{

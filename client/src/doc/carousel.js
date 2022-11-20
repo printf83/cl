@@ -1,13 +1,13 @@
 "use strict";
-import * as core from "../cl/base/core.js";
+import * as core from "../dist/cl/base/core.js";
 import sample from "./sample.js";
-import carousel from "../cl/base/carousel.js";
-import toast from "../cl/base/toast.js";
-import * as table from "../cl/base/table.js";
-import button from "../cl/base/button.js";
-import div from "../cl/base/div.js";
-import ul from "../cl/base/ul.js";
-import li from "../cl/base/li.js";
+import carousel from "../dist/cl/base/carousel.js";
+import toast from "../dist/cl/base/toast.js";
+import * as table from "../dist/cl/base/table.js";
+import button from "../dist/cl/base/button.js";
+import div from "../dist/cl/base/div.js";
+import ul from "../dist/cl/base/ul.js";
+import li from "../dist/cl/base/li.js";
 
 export default [
 	{

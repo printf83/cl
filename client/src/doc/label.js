@@ -1,8 +1,8 @@
 "use strict";
 import sample from "./sample.js";
-import * as core from "../cl/base/core.js";
-import label from "../cl/base/label.js";
-import input from "../cl/base/input.js";
+import * as core from "../dist/cl/base/core.js";
+import label from "../dist/cl/base/label.js";
+import input from "../dist/cl/base/input.js";
 
 export default [
 	{

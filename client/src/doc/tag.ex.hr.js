@@ -1,6 +1,6 @@
 "use strict";
 import sample from "./sample.js";
-import hr from "../cl/base/hr.js";
+import hr from "../dist/cl/base/hr.js";
 
 export default [
 	{

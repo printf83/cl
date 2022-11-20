@@ -1,13 +1,13 @@
 "use strict";
 import sample from "./sample.js";
-import * as core from "../cl/base/core.js";
-import h from "../cl/base/h.js";
-import badge from "../cl/base/badge.js";
-import button from "../cl/base/button.js";
-import div from "../cl/base/div.js";
-import input from "../cl/base/input.js";
-import * as alert from "../cl/base/alert.js";
-import dropdown from "../cl/base/dropdown.js";
+import * as core from "../dist/cl/base/core.js";
+import h from "../dist/cl/base/h.js";
+import badge from "../dist/cl/base/badge.js";
+import button from "../dist/cl/base/button.js";
+import div from "../dist/cl/base/div.js";
+import input from "../dist/cl/base/input.js";
+import * as alert from "../dist/cl/base/alert.js";
+import dropdown from "../dist/cl/base/dropdown.js";
 
 export default [
 	{

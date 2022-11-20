@@ -1,11 +1,11 @@
 "use strict";
 import sample from "./sample.js";
-import icon from "../cl/base/icon.js";
-import * as navbar from "../cl/base/navbar.js";
-import tab from "../cl/base/tab.js";
-import dropdown from "../cl/base/dropdown.js";
-import input from "../cl/base/input.js";
-import button from "../cl/base/button.js";
+import icon from "../dist/cl/base/icon.js";
+import * as navbar from "../dist/cl/base/navbar.js";
+import tab from "../dist/cl/base/tab.js";
+import dropdown from "../dist/cl/base/dropdown.js";
+import input from "../dist/cl/base/input.js";
+import button from "../dist/cl/base/button.js";
 
 export default [
 	{

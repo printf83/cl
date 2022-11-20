@@ -20,7 +20,12 @@ const _module_optimization = {
 	],
 };
 const _module_resolve = {
-	modules: [path.resolve("./node_modules"), path.resolve("./source/cl"), path.resolve("./client/src")],
+	modules: [
+		path.resolve("./node_modules"),
+		path.resolve("./source/cl"),
+		path.resolve("./client/src"),
+		path.resolve("./client/src/dist"),
+	],
 	extensions: [".ts", ".css", ".js"],
 };
 
@@ -39,7 +44,7 @@ module.exports = [
 		mode: _module_mode,
 		entry: path.resolve(__dirname, "client/src/index.js"),
 		output: {
-			path: path.resolve(__dirname, "client/src"),
+			path: path.resolve(__dirname, "client/src/dist"),
 			chunkFilename: "index.[name].bundle.js",
 			filename: "index.bundle.js",
 		},
@@ -54,7 +59,7 @@ module.exports = [
 		mode: _module_mode,
 		entry: path.resolve(__dirname, "client/src/sandbox.js"),
 		output: {
-			path: path.resolve(__dirname, "client/src"),
+			path: path.resolve(__dirname, "client/src/dist"),
 			chunkFilename: "sandbox.[name].bundle.js",
 			filename: "sandbox.bundle.js",
 		},
@@ -68,7 +73,7 @@ module.exports = [
 		mode: _module_mode,
 		entry: path.resolve(__dirname, "client/src/test.js"),
 		output: {
-			path: path.resolve(__dirname, "client/src"),
+			path: path.resolve(__dirname, "client/src/dist"),
 			chunkFilename: "test.[name].bundle.js",
 			filename: "test.bundle.js",
 		},

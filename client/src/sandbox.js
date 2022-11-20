@@ -1,14 +1,14 @@
 "use strict";
 
-import * as core from "./cl/base/core.js";
-import div from "./cl/base/div.js";
-import * as layout from "./cl/base/layout.js";
-import menu from "./cl/base/menu.js";
-import * as navbar from "./cl/base/navbar.js";
-import tag from "./cl/base/tag.js";
-import toast from "./cl/base/toast.js";
-import toc from "./cl/base/toc.js";
-import * as user from "./cl/base/user.js";
+import * as core from "./dist/cl/base/core.js";
+import div from "./dist/cl/base/div.js";
+import * as layout from "./dist/cl/base/layout.js";
+import menu from "./dist/cl/base/menu.js";
+import * as navbar from "./dist/cl/base/navbar.js";
+import tag from "./dist/cl/base/tag.js";
+import toast from "./dist/cl/base/toast.js";
+import toc from "./dist/cl/base/toc.js";
+import * as user from "./dist/cl/base/user.js";
 
 function pageSource(source) {
 	switch (source) {

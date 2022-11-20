@@ -1,16 +1,16 @@
 "use strict";
 import sample from "./sample.js";
-import * as core from "../cl/base/core.js";
-import button from "../cl/base/button.js";
-import * as list from "../cl/base/list.js";
-import input from "../cl/base/input.js";
-import btngroup from "../cl/base/btngroup.js";
-import * as dlg from "../cl/base/dlg.js";
-import small from "../cl/base/small.js";
-import div from "../cl/base/div.js";
-import ul from "../cl/base/ul.js";
-import file from "../cl/base/file.js";
-import toast from "../cl/base/toast.js";
+import * as core from "../dist/cl/base/core.js";
+import button from "../dist/cl/base/button.js";
+import * as list from "../dist/cl/base/list.js";
+import input from "../dist/cl/base/input.js";
+import btngroup from "../dist/cl/base/btngroup.js";
+import * as dlg from "../dist/cl/base/dlg.js";
+import small from "../dist/cl/base/small.js";
+import div from "../dist/cl/base/div.js";
+import ul from "../dist/cl/base/ul.js";
+import file from "../dist/cl/base/file.js";
+import toast from "../dist/cl/base/toast.js";
 
 export default [
 	{

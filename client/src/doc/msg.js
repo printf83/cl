@@ -1,9 +1,9 @@
 "use strict";
 import sample from "./sample.js";
-import msg from "../cl/base/msg.js";
-import toast from "../cl/base/toast.js";
-import * as alert from "../cl/base/alert.js";
-import modal from "../cl/base/modal.js";
+import msg from "../dist/cl/base/msg.js";
+import toast from "../dist/cl/base/toast.js";
+import * as alert from "../dist/cl/base/alert.js";
+import modal from "../dist/cl/base/modal.js";
 
 export default [
 	{

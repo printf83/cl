@@ -1,1 +1,1 @@
-var browser = "client/src";
+var browser = "client/src/dist/";

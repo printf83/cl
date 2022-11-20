@@ -1,9 +1,9 @@
 "use strict";
 import sample from "./sample.js";
-import * as core from "../cl/base/core.js";
-import accordion from "../cl/base/accordion.js";
-import toast from "../cl/base/toast.js";
-import * as table from "../cl/base/table.js";
+import * as core from "../dist/cl/base/core.js";
+import accordion from "../dist/cl/base/accordion.js";
+import toast from "../dist/cl/base/toast.js";
+import * as table from "../dist/cl/base/table.js";
 
 export default [
 	{

@@ -1,11 +1,11 @@
 "use strict";
 import sample from "./sample.js";
-import button from "../cl/base/button.js";
-import * as card from "../cl/base/card.js";
-import div from "../cl/base/div.js";
-import span from "../cl/base/span.js";
-import p from "../cl/base/p.js";
-import * as alert from "../cl/base/alert.js";
+import button from "../dist/cl/base/button.js";
+import * as card from "../dist/cl/base/card.js";
+import div from "../dist/cl/base/div.js";
+import span from "../dist/cl/base/span.js";
+import p from "../dist/cl/base/p.js";
+import * as alert from "../dist/cl/base/alert.js";
 
 export default [
 	{

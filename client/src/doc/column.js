@@ -1,12 +1,12 @@
 "use strict";
 import sample from "./sample.js";
-import * as alert from "../cl/base/alert.js";
-import ul from "../cl/base/ul.js";
-import li from "../cl/base/li.js";
-import div from "../cl/base/div.js";
-import img from "../cl/base/img.js";
-import span from "../cl/base/span.js";
-import p from "../cl/base/p.js";
+import * as alert from "../dist/cl/base/alert.js";
+import ul from "../dist/cl/base/ul.js";
+import li from "../dist/cl/base/li.js";
+import div from "../dist/cl/base/div.js";
+import img from "../dist/cl/base/img.js";
+import span from "../dist/cl/base/span.js";
+import p from "../dist/cl/base/p.js";
 
 export default [
 	{
