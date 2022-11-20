@@ -1,1 +1,1 @@
-browser = "client";
+var browser = "client/src";

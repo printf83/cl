@@ -106,6 +106,7 @@ dist
 #cl
 tmp/
 file/
+client/src/dist/
 client/src/cl/
 client/src/*.bundle.js
 client/src/client_src_*.css

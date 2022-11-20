@@ -9,7 +9,8 @@
 	"main": "server.js",
 	"scripts": {
 		"test": "npm start",
-		"build": "webpack --stats-error-details --config webpack.delete.config.js && webpack --stats-error-details --config webpack.copy.config.js && webpack --stats-error-details --config webpack.other.config.js"
+		"clean": "webpack --config webpack.delete.config.js",
+		"build": "webpack --config webpack.delete.config.js && webpack --config webpack.copy.config.js && webpack --config webpack.other.config.js"
 	},
 	"dependencies": {
 		"bcrypt": "^5.0.1",

@@ -22,7 +22,7 @@ const _module_optimization = {
 };
 const _module_resolve = {
 	modules: [path.resolve("./node_modules"), path.resolve("./source/cl"), path.resolve("./client/src")],
-	extensions: [".json", ".js"],
+	extensions: [".ts", ".css", ".js"],
 };
 
 const _module_rule = {
