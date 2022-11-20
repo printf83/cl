@@ -1,6 +1,6 @@
 const path = require("path");
 const CopyPlugin = require("copy-webpack-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+// const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 
 const _module_mode = "development";
@@ -53,7 +53,7 @@ module.exports = {
 		// new MiniCssExtractPlugin(),
 	],
 	cache: _module_cache,
-	// optimization: _module_optimization,
+	optimization: _module_optimization,
 	module: _module_rule,
 	resolve: _module_resolve,
 };
