@@ -1,8 +1,8 @@
 const path = require("path");
 const CopyPlugin = require("copy-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+// const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+// const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 
 module.exports = {
 	mode: "production",
@@ -19,6 +19,8 @@ module.exports = {
 			},
 			{ copyUnmodified: true }
 		),
+		// new MiniCssExtractPlugin(),
+		// new CssMinimizerPlugin(),
 	],
 	cache: false,
 	optimization: {
@@ -35,14 +37,17 @@ module.exports = {
 				},
 				extractComments: false,
 			}),
-			new CssMinimizerPlugin(),
+			// new CssMinimizerPlugin({
+			// 	test: /\.css$/i,
+			// }),
 		],
 	},
 	module: {
 		rules: [
 			{
 				test: /\.css$/i,
-				use: [MiniCssExtractPlugin.loader, "style-loader", "css-loader"],
+				// use: [MiniCssExtractPlugin.loader, "style-loader", "css-loader"],
+				use: ["style-loader", "css-loader"],
 			},
 		],
 	},

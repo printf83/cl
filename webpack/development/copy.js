@@ -2,7 +2,7 @@ const path = require("path");
 const CopyPlugin = require("copy-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+// const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 
 module.exports = {
 	mode: "development",
@@ -19,6 +19,8 @@ module.exports = {
 			},
 			{ copyUnmodified: true }
 		),
+		new MiniCssExtractPlugin(),
+		// new CssMinimizerPlugin(),
 	],
 	cache: false,
 	optimization: {
@@ -35,7 +37,9 @@ module.exports = {
 				},
 				extractComments: false,
 			}),
-			new CssMinimizerPlugin(),
+			// new CssMinimizerPlugin({
+			// 	test: /\.css$/i,
+			// }),
 		],
 	},
 	module: {
