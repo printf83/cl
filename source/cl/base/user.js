@@ -35,7 +35,7 @@ let defaultSignInOption = {
 	email: null,
 	callback: null,
 	close: true,
-	backdropcolor: "primary",
+	backdropcolor: null,
 	debug: false,
 };
 
@@ -47,7 +47,7 @@ let defaultSignUpOption = {
 	title: null,
 	callback: null,
 	close: true,
-	backdropcolor: "primary",
+	backdropcolor: null,
 	debug: false,
 };
 
@@ -59,7 +59,7 @@ let defaultResetPassOption = {
 	title: null,
 	callback: null,
 	close: true,
-	backdropcolor: "primary",
+	backdropcolor: null,
 	debug: false,
 };
 
@@ -83,7 +83,7 @@ let defaultChangePassGuestOption = {
 	title: null,
 	callback: null,
 	close: true,
-	// backdropcolor: "primary",
+	backdropcolor: null,
 	debug: false,
 };
 

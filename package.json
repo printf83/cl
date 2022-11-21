@@ -10,7 +10,8 @@
 	"scripts": {
 		"test": "npm start",
 		"clean": "webpack --config webpack.delete.config.js",
-		"build": "webpack --config webpack.delete.config.js && webpack --config webpack.copy.config.js && webpack --config webpack.other.config.js"
+		"build-dev": "webpack --config webpack.delete.config.js && webpack --config webpack.copy.development.config.js && webpack --config webpack.other.development.config.js",
+		"build": "webpack --config webpack.delete.config.js && webpack --config webpack.copy.production.config.js && webpack --config webpack.other.production.config.js"
 	},
 	"dependencies": {
 		"bcrypt": "^5.0.1",

@@ -1,7 +1,7 @@
 const RemovePlugin = require("remove-files-webpack-plugin");
 
 module.exports = {
-	mode: "development",
+	mode: "production",
 	plugins: [
 		new RemovePlugin({
 			before: {
