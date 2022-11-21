@@ -1,6 +1,8 @@
 const path = require("path");
 const CopyPlugin = require("copy-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 
 module.exports = {
 	mode: "production",
@@ -9,8 +11,8 @@ module.exports = {
 			{
 				patterns: [
 					{
-						from: path.resolve(__dirname, "source/cl"),
-						to: path.resolve(__dirname, "client/src/dist/cl"),
+						from: path.resolve(__dirname, "../../source/cl"),
+						to: path.resolve(__dirname, "../../client/src/dist/cl"),
 						force: true,
 					},
 				],
@@ -29,22 +31,27 @@ module.exports = {
 					format: {
 						comments: false,
 					},
-					mangle: true,
+					mangle: false,
 				},
 				extractComments: false,
 			}),
+			new CssMinimizerPlugin(),
 		],
 	},
 	module: {
 		rules: [
 			{
 				test: /\.css$/i,
-				use: ["style-loader", "css-loader"],
+				use: [MiniCssExtractPlugin.loader, "style-loader", "css-loader"],
 			},
 		],
 	},
 	resolve: {
-		modules: [path.resolve("./node_modules"), path.resolve("./source/cl"), path.resolve("./client/src")],
+		modules: [
+			path.resolve(__dirname, "../../node_modules"),
+			path.resolve(__dirname, "../../source/cl"),
+			path.resolve(__dirname, "../../client/src"),
+		],
 		extensions: [".ts", ".css", ".js"],
 	},
 };

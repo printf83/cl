@@ -8,10 +8,11 @@
 	"private": false,
 	"main": "server.js",
 	"scripts": {
-		"test": "npm start",
-		"clean": "webpack --config webpack.delete.config.js",
-		"build-dev": "webpack --config webpack.delete.config.js && webpack --config webpack.copy.development.config.js && webpack --config webpack.other.development.config.js",
-		"build": "webpack --config webpack.delete.config.js && webpack --config webpack.copy.production.config.js && webpack --config webpack.other.production.config.js"
+		"start": "npm run build && node server.js",
+		"test": "npm run build-dev && node server.js",
+		"clean": "webpack --config webpack/development/delete.js",
+		"build-dev": "webpack --config webpack/development/delete.js && webpack --config webpack/development/copy.js && webpack --config webpack/development/other.js",
+		"build": "webpack --config webpack/production/delete.js && webpack --config webpack/production/copy.js && webpack --config webpack/production/other.js"
 	},
 	"dependencies": {
 		"bcrypt": "^5.0.1",
@@ -19,6 +20,7 @@
 		"cookie-parser": "^1.4.6",
 		"copy-webpack-plugin": "^11.0.0",
 		"css-loader": "^6.7.2",
+		"css-minimizer-webpack-plugin": "^4.2.2",
 		"dotenv": "^10.0.0",
 		"exceljs": "^4.3.0",
 		"express": "^4.17.1",

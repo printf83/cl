@@ -1,5 +1,7 @@
 const path = require("path");
 const TerserPlugin = require("terser-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 
 const fn = (name, input, output, mode) => {
 	return {
@@ -25,22 +27,23 @@ const fn = (name, input, output, mode) => {
 					},
 					extractComments: false,
 				}),
+				new CssMinimizerPlugin(),
 			],
 		},
 		module: {
 			rules: [
 				{
 					test: /\.css$/i,
-					use: ["style-loader", "css-loader"],
+					use: [MiniCssExtractPlugin.loader, "style-loader", "css-loader"],
 				},
 			],
 		},
 		resolve: {
 			modules: [
-				path.resolve("./node_modules"),
-				path.resolve("./source/cl"),
-				path.resolve("./client/src"),
-				path.resolve("./client/src/dist"),
+				path.resolve(__dirname, "../../node_modules"),
+				path.resolve(__dirname, "../../source/cl"),
+				path.resolve(__dirname, "../../client/src"),
+				path.resolve(__dirname, "../../client/src/dist"),
 			],
 			extensions: [".ts", ".css", ".js"],
 		},
@@ -48,7 +51,7 @@ const fn = (name, input, output, mode) => {
 };
 
 module.exports = [
-	fn("index", "client/src/index.js", "client/src/dist", "development"),
-	fn("sandbox", "client/src/sandbox.js", "client/src/dist", "development"),
-	fn("test", "client/src/test.js", "client/src/dist", "development"),
+	fn("index", "../../client/src/index.js", "../../client/src/dist/", "development"),
+	fn("sandbox", "../../client/src/sandbox.js", "../../client/src/dist/", "production"),
+	fn("test", "../../client/src/test.js", "../../client/src/dist/", "production"),
 ];
