@@ -66,6 +66,7 @@ module.exports = () => {
 	//delete tmp folder
 	fs.rmSync("./tmp", { recursive: true, force: true });
 	removeTempFileFromDB();
+	fs.mkdirSync("./tmp");
 	console.info("Complete remove tmp file and folder");
 
 	// //delete lib from client

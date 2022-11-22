@@ -1,7 +1,5 @@
 const path = require("path");
 const TerserPlugin = require("terser-webpack-plugin");
-// const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-// const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 
 const fn = (name, input, output, mode) => {
 	return {
@@ -12,11 +10,9 @@ const fn = (name, input, output, mode) => {
 			chunkFilename: name + ".[name].bundle.js",
 			filename: name + ".bundle.js",
 		},
-		// plugins: [new MiniCssExtractPlugin(), new CssMinimizerPlugin()],
-		// plugins: [new CssMinimizerPlugin()],
 		cache: false,
 		optimization: {
-			minimize: true,
+			minimize: mode === "production",
 			minimizer: [
 				new TerserPlugin({
 					exclude: /_doc_/,
@@ -29,16 +25,12 @@ const fn = (name, input, output, mode) => {
 					},
 					extractComments: false,
 				}),
-				// new CssMinimizerPlugin({
-				// 	test: /\.css$/i,
-				// }),
 			],
 		},
 		module: {
 			rules: [
 				{
 					test: /\.css$/i,
-					// use: [MiniCssExtractPlugin.loader, "style-loader", "css-loader"],
 					use: ["style-loader", "css-loader"],
 				},
 			],

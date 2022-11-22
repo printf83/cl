@@ -396,7 +396,8 @@ const fn = {
 				multiple: opt.multiple,
 				accept: opt.accept ? opt.accept : null,
 				disply: "none",
-				onchange: (event) => {
+				container: null,
+				change: (event) => {
 					let sender = event.currentTarget;
 					let id = sender.getAttribute("id");
 					let data = sender.files;
