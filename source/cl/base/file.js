@@ -127,16 +127,16 @@ const fn = {
 											title: null,
 											button: null,
 											static: false,
-											size: "md",
+											size: "xl",
 											bodyclass: "p-3",
 											elem: new div({
-												class: "embed-responsive embed-responsive-4by3",
+												class: "ratio ratio-16x9",
 												rounded: true,
 												border: true,
+												overflow: "hidden",
 												elem: new tag({
 													tag: "iframe",
-													class: "embed-responsive-item",
-													src: `src/dist/pdfjs/web/viewer.html?file=${url}`,
+													src: `src/dist/pdfjs/web/viewer.html?file=../../../../${url}`,
 												}),
 											}),
 										}).show();
