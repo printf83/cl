@@ -136,7 +136,7 @@ const fn = {
 												elem: new tag({
 													tag: "iframe",
 													class: "embed-responsive-item",
-													src: `../../pdfjs/web/viewer.html?file=${url}`,
+													src: `src/dist/pdfjs/web/viewer.html?file=${url}`,
 												}),
 											}),
 										}).show();
