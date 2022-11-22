@@ -1,5 +1,6 @@
 "use strict";
 import sample from "./sample.js";
+import * as alert from "../dist/cl/base/alert.js";
 import i from "../dist/cl/base/i.js";
 import div from "../dist/cl/base/div.js";
 import ul from "../dist/cl/base/ul.js";
@@ -19,7 +20,12 @@ export default [
 			sample.tagpropCl(),
 			"Bootstrap option property that inherits from tag component :",
 			sample.tagpropBootstrap(),
-			"If the Bootstrap property value is not supported by bootstrap, it will be process as html property (if supported)",
+			new alert.container({
+				color: "primary",
+				elem: "If the Bootstrap property value is not supported by bootstrap, it will be process as <b>style</b> or <b>html</b> property (if supported)",
+			}),
+			"CSS option property that inherits from tag component :",
+			sample.tagpropCss(),
 			"Html option property that inherits from tag component (if supported by the tag) :",
 			sample.tagpropHtml(),
 		],

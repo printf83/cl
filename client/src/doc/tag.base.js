@@ -15,7 +15,12 @@ export default [
 			sample.tagpropCl(),
 			"Bootstrap option property :",
 			sample.tagpropBootstrap(),
-			"If the Bootstrap property value is not supported by bootstrap, it will be process as html property (if supported)",
+			new alert.container({
+				color: "primary",
+				elem: "If the Bootstrap property value is not supported by bootstrap, it will be process as <b>style</b> or <b>html</b> property (if supported)",
+			}),
+			"CSS option property :",
+			sample.tagpropCss(),
 			"Html option property (if supported by the tag) :",
 			sample.tagpropHtml(),
 		],
