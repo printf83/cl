@@ -72,39 +72,85 @@ const fn = {
 								case "image/bmp":
 								case "image/x-windows-bmp":
 									//if picture. do preview
+									const imgViewer = (fileid) => {
+										new modal({
+											icon: null,
+											title: null,
+											button: null,
+											static: false,
+											size: "md",
+											bodyclass: "p-3",
+											elem: new img({
+												container: "fluid",
+												width: 100,
+												marginX: "auto",
+												display: "block",
+												rounded: true,
+												padding: 0,
+												"data-cl-file": fileid,
+												src: db.file.url(fileid),
+												click: (event) => {
+													let sender = event.currentTarget;
+													let fileid = sender.getAttribute("data-cl-file");
 
-									new modal({
-										icon: null,
-										title: null,
-										button: null,
-										static: false,
-										size: "md",
-										bodyclass: "p-1",
-										elem: new img({
-											container: "fluid",
-											width: 100,
-											marginX: "auto",
-											display: "block",
-											rounded: true,
-											padding: 0,
-											"data-cl-file": data[0].id,
-											src: db.file.url(data[0].id),
-											click: (event) => {
-												let sender = event.currentTarget;
-												let fileid = sender.getAttribute("data-cl-file");
+													if (opt.downloadsignin) {
+														db.user.info({ sender: sender }, (info) => {
+															if (info) {
+																db.file.download(fileid, sender);
+															}
+														});
+													} else {
+														db.file.download(fileid, sender);
+													}
+												},
+											}),
+										}).show();
+									};
 
-												if (opt.downloadsignin) {
-													db.user.info({ sender: sender }, (info) => {
-														if (info) {
-															db.file.download(fileid, sender);
-														}
-													});
-												} else {
-													db.file.download(fileid, sender);
-												}
-											},
-										}),
-									}).show();
+									if (opt.downloadsignin) {
+										db.user.info({ sender: sender }, (info) => {
+											if (info) {
+												imgViewer(data[0].id);
+											}
+										});
+									} else {
+										imgViewer(data[0].id);
+									}
+
+									break;
+
+								case "application/pdf":
+									const pdfViewer = (url) => {
+										//if pdf. preview using pdfjs
+										new modal({
+											icon: null,
+											title: null,
+											button: null,
+											static: false,
+											size: "md",
+											bodyclass: "p-3",
+											elem: new div({
+												class: "embed-responsive embed-responsive-4by3",
+												rounded: true,
+												border: true,
+												elem: new tag({
+													tag: "iframe",
+													class: "embed-responsive-item",
+													src: `../../pdfjs/web/viewer.html?file=${url}`,
+												}),
+											}),
+										}).show();
+									};
+
+									if (opt.downloadsignin) {
+										db.user.info({ sender: sender }, (info) => {
+											if (info) {
+												pdfViewer(db.file.url(data[0].id));
+											}
+										});
+									} else {
+										pdfViewer(db.file.url(data[0].id));
+									}
 
 									break;
 

@@ -11,8 +11,8 @@ module.exports = {
 			{
 				patterns: [
 					{
-						from: path.resolve(__dirname, "../../source/cl"),
-						to: path.resolve(__dirname, "../../client/src/dist/cl"),
+						from: path.resolve(__dirname, "../../source"),
+						to: path.resolve(__dirname, "../../client/src/dist"),
 						force: true,
 					},
 				],
