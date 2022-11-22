@@ -2,7 +2,7 @@ const $ = require("../models/file.js");
 const fs = require("fs");
 const path = require("path");
 const multer = require("multer");
-const uploader = multer({ dest: "../../tmp/" });
+const uploader = multer({ dest: "./tmp/" });
 const core = require(`../core.js`);
 const { Readable } = require("stream");
 
@@ -14,7 +14,7 @@ module.exports = (app, setting) => {
 			if (req.files && req.files.length > 0) {
 				let files = [];
 				req.files.forEach((file) => {
-					let data = fs.readFileSync(path.join(__dirname, `../${file.path}`));
+					let data = fs.readFileSync(path.join(__dirname, `../../${file.path}`));
 					// let encodeData = data.toString("base64");
 
 					files.push({

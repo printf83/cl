@@ -520,7 +520,7 @@ export default class file extends div {
 				id: id,
 				name: opt.name,
 				type: "hidden",
-				onchange: fn.onchange,
+				change: fn.onchange,
 				readonly: opt.readonly,
 				disabled: opt.disabled,
 				value: opt.value,
