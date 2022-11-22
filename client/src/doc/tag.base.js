@@ -9,6 +9,18 @@ export default [
 		anchor: false,
 	},
 
+	{
+		msg: [
+			"CL option property :",
+			sample.tagpropCl(),
+			"Bootstrap option property :",
+			sample.tagpropBootstrap(),
+			"If the Bootstrap property value is not supported by bootstrap, it will be process as html property (if supported)",
+			"Html option property (if supported by the tag) :",
+			sample.tagpropHtml(),
+		],
+	},
+
 	//=============================
 	//BASE
 	//=============================
