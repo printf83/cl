@@ -1,5 +1,6 @@
 "use strict";
 import sample from "./sample.js";
+import * as alert from "../dist/cl/base/alert.js";
 import tag from "../dist/cl/base/tag.js";
 
 export default [
