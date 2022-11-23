@@ -182,6 +182,23 @@ const fn = {
 		opt = core.extend({}, defaultOptionUpload, opt);
 
 		let req = new XMLHttpRequest();
+
+		if (typeof opt.progress === "function") {
+			req.upload.onprogress = (e) => {
+				if (e.lengthComputable) {
+					var percentComplete = parseInt((e.loaded / e.total) * 100, 10);
+					opt.progress(percentComplete);
+				}
+			};
+
+			req.upload.onloadstart = () => {
+				opt.progress(0);
+			};
+			req.upload.onloadend = () => {
+				opt.progress(100);
+			};
+		}
+
 		req.onreadystatechange = () => {
 			if (req.readyState == 4) {
 				if (req.status == 200) {
@@ -205,26 +222,6 @@ const fn = {
 				}
 			}
 		};
-
-		if (typeof opt.progress === "function") {
-			// console.log("has opt.progress");
-			// console.log(req.upload);
-
-			req.upload.onprogress = (event) => {
-				console.log(event);
-				if (event.lengthComputable) {
-					var percentComplete = parseInt((event.loaded / event.total) * 100, 10);
-					opt.progress(percentComplete);
-				}
-			};
-
-			req.upload.onloadstart = () => {
-				opt.progress(0);
-			};
-			req.upload.onloadend = () => {
-				opt.progress(100);
-			};
-		}
 
 		req.open(opt.type, opt.url, opt.async);
 		req.send(fn.genfileformdata(opt.data));
