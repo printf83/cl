@@ -1,6 +1,7 @@
 "use strict";
 
 import * as core from "./core.js";
+import a from "./a.js";
 import { signin as user_signin } from "./user.js";
 
 const axios = require("axios");
@@ -245,6 +246,23 @@ const fn = {
 		// 		console.log(err);
 		// 		opt.callback(null);
 		// 	});
+	},
+	download: (url, filename) => {
+		let id = core.UUID();
+
+		//append file uploader into document
+		core.appendChild(
+			document.body,
+			new a({
+				id: id,
+				href: url,
+				download: filename,
+			})
+		);
+
+		let ctl = document.getElementById(id);
+		ctl.click();
+		core.removeElement(ctl);
 	},
 	upload: (opt) => {
 		opt = core.extend({}, defaultOptionUpload, opt);

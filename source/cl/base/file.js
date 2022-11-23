@@ -35,6 +35,9 @@ const defaultOption = {
 	viewlabel: "View",
 	viewicon: "eye",
 	viewcolor: "success",
+	downloadlabel: null,
+	downloadicon: "download",
+	downloadcolor: "primary",
 	deletelabel: null,
 	deleteicon: "times",
 	deletecolor: "danger",
@@ -332,6 +335,20 @@ const fn = {
 				})
 			);
 
+			//add btn download
+			core.appendChild(
+				btngroup,
+				new button({
+					id: `${id}_download`,
+					label: opt.downloadlabel,
+					icon: opt.downloadicon,
+					color: opt.downloadcolor,
+					width: "auto",
+					disabled: opt.disabled ? true : opt.readonly ? true : false,
+					click: fn.ondownload,
+				})
+			);
+
 			//add btn delete
 			core.appendChild(
 				btngroup,
@@ -347,9 +364,11 @@ const fn = {
 			);
 		} else {
 			let btnview = btngroup.querySelectorAll(`#${id}_view`)[0];
+			let btndownload = btngroup.querySelectorAll(`#${id}_download`)[0];
 			let btndelete = btngroup.querySelectorAll(`#${id}_delete`)[0];
 
 			core.removeElement(btnview);
+			core.removeElement(btndownload);
 			core.removeElement(btndelete);
 
 			//add btn upload
@@ -364,6 +383,31 @@ const fn = {
 					disabled: opt.disabled ? true : opt.readonly ? true : false,
 					click: fn.onupload,
 				})
+			);
+		}
+	},
+	ondownload: (event) => {
+		let sender = event.currentTarget;
+		let container = sender.closest("div[data-cl-container]");
+		let id = container.getAttribute("data-cl-container");
+		let ctl = container.parentNode.querySelectorAll(`#${id}`)[0];
+
+		let value = ctl.value;
+
+		if (value) {
+			db.file.info(
+				value,
+				(data) => {
+					if (data) {
+						if (data.length === 1) {
+							db.file.download(db.file.url(value), data.filename);
+						} else {
+							//download one by one
+							//TODO:write code
+						}
+					}
+				},
+				sender
 			);
 		}
 	},
@@ -545,6 +589,15 @@ export default class file extends div {
 									click: fn.onview,
 								}),
 								new button({
+									id: `${id}_download`,
+									label: opt.downloadlabel,
+									icon: opt.downloadicon,
+									color: opt.downloadcolor,
+									width: "auto",
+									disabled: opt.disabled ? true : opt.readonly ? true : false,
+									click: fn.ondownload,
+								}),
+								new button({
 									id: `${id}_delete`,
 									label: opt.deletelabel,
 									icon: opt.deleteicon,
@@ -581,6 +634,10 @@ export default class file extends div {
 			uploadlabel: opt.uploadlabel,
 			uploadicon: opt.uploadicon,
 			uploadcolor: opt.uploadcolor,
+
+			downloadlabel: opt.downloadlabel,
+			downloadicon: opt.downloadicon,
+			downloadcolor: opt.downloadcolor,
 
 			deletelabel: opt.deletelabel,
 			deleteicon: opt.deleteicon,
