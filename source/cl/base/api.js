@@ -10,7 +10,7 @@ const defaultOption = {
 	type: "GET",
 	url: null,
 	data: null,
-	async: true,
+	// async: true,
 	auth: true,
 };
 
@@ -19,7 +19,7 @@ const defaultOptionPost = {
 	type: "POST",
 	url: null,
 	data: null,
-	async: true,
+	// async: true,
 	auth: true,
 };
 
@@ -29,7 +29,7 @@ const defaultOptionUpload = {
 	type: "POST",
 	url: null,
 	data: null,
-	async: false,
+	// async: false,
 	auth: true,
 };
 
@@ -38,7 +38,7 @@ const defaultOptionDownload = {
 	type: "GET",
 	url: null,
 	data: null,
-	async: true,
+	// async: true,
 	auth: true,
 };
 
@@ -147,6 +147,39 @@ const fn = {
 		req.open(opt.type, opt.url, opt.async);
 		req.setRequestHeader("Content-Type", "application/json");
 		req.send(fn.obj2String(opt.data));
+
+		// axios
+		// 	.get(opt.url, opt.data, {
+		// 		method: opt.type,
+		// 		// headers: {
+		// 		// 	"Content-Type": "application/json",
+		// 		// },
+		// 	})
+		// 	.then((req) => {
+		// 		if (req.status === 200) {
+		// 			opt.callback(req.data);
+		// 		} else if (req.status === 401) {
+		// 			if (opt.auth) {
+		// 				new user_signin({
+		// 					callback: (result) => {
+		// 						if (result) {
+		// 							opt.callback(result);
+		// 						} else {
+		// 							opt.callback(null);
+		// 						}
+		// 					},
+		// 				}).show();
+		// 			} else {
+		// 				opt.callback(null);
+		// 			}
+		// 		} else {
+		// 			opt.callback(null);
+		// 		}
+		// 	})
+		// 	.catch((err) => {
+		// 		console.log(err);
+		// 		opt.callback(null);
+		// 	});
 	},
 	post: (opt) => {
 		opt = core.extend({}, defaultOptionPost, opt);
@@ -179,6 +212,39 @@ const fn = {
 		req.open(opt.type, opt.url, opt.async);
 		req.setRequestHeader("Content-Type", "application/json");
 		req.send(fn.obj2String(opt.data));
+
+		// axios
+		// 	.post(opt.url, opt.data, {
+		// 		method: opt.type,
+		// 		headers: {
+		// 			"Content-Type": "application/json",
+		// 		},
+		// 	})
+		// 	.then((req) => {
+		// 		if (req.status === 200) {
+		// 			opt.callback(req.data);
+		// 		} else if (req.status === 401) {
+		// 			if (opt.auth) {
+		// 				new user_signin({
+		// 					callback: (result) => {
+		// 						if (result) {
+		// 							opt.callback(result);
+		// 						} else {
+		// 							opt.callback(null);
+		// 						}
+		// 					},
+		// 				}).show();
+		// 			} else {
+		// 				opt.callback(null);
+		// 			}
+		// 		} else {
+		// 			opt.callback(null);
+		// 		}
+		// 	})
+		// 	.catch((err) => {
+		// 		console.log(err);
+		// 		opt.callback(null);
+		// 	});
 	},
 	upload: (opt) => {
 		opt = core.extend({}, defaultOptionUpload, opt);
@@ -242,7 +308,7 @@ const fn = {
 						: null,
 			})
 			.then((req) => {
-				if (req.status == 200) {
+				if (req.status === 200) {
 					opt.callback(req.data);
 				} else if (req.status === 401) {
 					if (opt.auth) {
@@ -264,6 +330,7 @@ const fn = {
 			})
 			.catch((err) => {
 				console.log(err);
+				opt.callback(null);
 			});
 	},
 	genformdata: (obj) => {

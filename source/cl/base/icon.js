@@ -204,6 +204,12 @@ export default class icon extends tag {
 			delete opt.inverse;
 			delete opt.stack;
 
+			// super.data = {
+			// 	tag: "i",
+			// 	class: "icon-container",
+			// 	elem: new tag(opt),
+			// };
+
 			super.data = opt;
 		}
 	}
