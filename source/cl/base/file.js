@@ -32,16 +32,20 @@ const defaultOption = {
 	uploadlabel: "Upload",
 	uploadicon: "arrow-up-from-bracket",
 	uploadcolor: "primary",
+
 	viewlabel: "View",
 	viewicon: "eye",
 	viewcolor: "success",
+
 	downloadlabel: null,
-	downloadicon: "download",
+	downloadicon: { icon: "arrow-right-to-bracket", rotate: 90 },
 	downloadcolor: "primary",
+
 	deletelabel: null,
 	deleteicon: "times",
 	deletecolor: "danger",
-	downloadicon: { icon: "arrow-right-to-bracket", rotate: 90, weight: "2x", color: "muted" },
+
+	// downloadicon: { icon: "arrow-right-to-bracket", rotate: 90, weight: "2x", color: "muted" },
 
 	uploadsignin: true,
 	downloadsignin: false,
@@ -390,25 +394,21 @@ const fn = {
 		let sender = event.currentTarget;
 		let container = sender.closest("div[data-cl-container]");
 		let id = container.getAttribute("data-cl-container");
+		let opt = db_opt[id];
 		let ctl = container.parentNode.querySelectorAll(`#${id}`)[0];
 
-		let value = ctl.value;
+		let fileid = ctl.value;
 
-		if (value) {
-			db.file.info(
-				value,
-				(data) => {
-					if (data) {
-						if (data.length === 1) {
-							db.file.download(db.file.url(value), data.filename);
-						} else {
-							//download one by one
-							//TODO:write code
-						}
+		if (fileid) {
+			if (opt.downloadsignin) {
+				db.user.info({ sender: sender }, (info) => {
+					if (info) {
+						db.file.download(fileid, sender);
 					}
-				},
-				sender
-			);
+				});
+			} else {
+				db.file.download(fileid, sender);
+			}
 		}
 	},
 	ondelete: (event) => {
@@ -646,8 +646,6 @@ export default class file extends div {
 			viewlabel: opt.viewlabel,
 			viewicon: opt.viewicon,
 			viewcolor: opt.viewcolor,
-
-			downloadicon: opt.downloadicon,
 
 			uploadsignin: opt.uploadsignin,
 			downloadsignin: opt.downloadsignin,

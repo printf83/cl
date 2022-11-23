@@ -672,7 +672,21 @@ export const file = {
 		}
 	},
 	download: (id, sender) => {
-		window.location = file.url(id);
+		file.info(
+			id,
+			(data) => {
+				if (data) {
+					if (data.length === 1) {
+						fn.download(file.url(data[0].id), data[0].filename);
+					} else {
+						//download one by one
+						//TODO:write code
+						console.warn("TODO:CODE");
+					}
+				}
+			},
+			sender
+		);
 	},
 	url: (id) => {
 		if (id) {
