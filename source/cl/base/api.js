@@ -207,11 +207,22 @@ const fn = {
 		};
 
 		if (typeof opt.progress === "function") {
-			req.onprogress = (event) => {
+			// console.log("has opt.progress");
+			// console.log(req.upload);
+
+			req.upload.onprogress = (event) => {
+				console.log(event);
 				if (event.lengthComputable) {
 					var percentComplete = parseInt((event.loaded / event.total) * 100, 10);
 					opt.progress(percentComplete);
 				}
+			};
+
+			req.upload.onloadstart = () => {
+				opt.progress(0);
+			};
+			req.upload.onloadend = () => {
+				opt.progress(100);
 			};
 		}
 

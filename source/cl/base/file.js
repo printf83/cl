@@ -340,7 +340,7 @@ const fn = {
 					label: opt.deletelabel,
 					icon: opt.deleteicon,
 					color: opt.deletecolor,
-					width: 0,
+					width: "auto",
 					disabled: opt.disabled ? true : opt.readonly ? true : false,
 					click: fn.ondelete,
 				})
@@ -382,7 +382,7 @@ const fn = {
 		core.appendChild(
 			sender,
 			new span({
-				id: `${fu}-progress`,
+				id: `${fu}_progress`,
 				class: "cl-fu-progress",
 			})
 		);
@@ -405,7 +405,7 @@ const fn = {
 					db.file.upload(
 						data,
 						(percentComplete) => {
-							let fuprg = document.getElementById(`${id}-progress`);
+							let fuprg = document.getElementById(`${id}_progress`);
 							fuprg.style.width = `${percentComplete}%`;
 						},
 						(data) => {
