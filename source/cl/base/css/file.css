@@ -2,7 +2,9 @@
 	position: absolute;
 	background-color: rgba(var(--bs-light-rgb), 0.5);
 	display: block;
-	height: 100%;
-	top: 0;
+	/* height: 100%; */
+	/* top: 0; */
+	height:3px;
+	bottom:0;
 	left: 0;
 }

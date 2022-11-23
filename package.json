@@ -15,6 +15,7 @@
 		"build": "webpack --config webpack/production/delete.js && webpack --config webpack/production/copy.js && webpack --config webpack/production/other.js"
 	},
 	"dependencies": {
+		"axios": "^1.2.0",
 		"bcrypt": "^5.0.1",
 		"compression": "^1.7.4",
 		"cookie-parser": "^1.4.6",

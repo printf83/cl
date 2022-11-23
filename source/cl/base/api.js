@@ -3,6 +3,8 @@
 import * as core from "./core.js";
 import { signin as user_signin } from "./user.js";
 
+const axios = require("axios");
+
 const defaultOption = {
 	callback: (data) => {},
 	type: "GET",
@@ -181,28 +183,67 @@ const fn = {
 	upload: (opt) => {
 		opt = core.extend({}, defaultOptionUpload, opt);
 
-		let req = new XMLHttpRequest();
+		// let req = new XMLHttpRequest();
 
-		if (typeof opt.progress === "function") {
-			req.upload.onprogress = (e) => {
-				if (e.lengthComputable) {
-					var percentComplete = parseInt((e.loaded / e.total) * 100, 10);
-					opt.progress(percentComplete);
-				}
-			};
+		// if (typeof opt.progress === "function") {
+		// 	req.upload.onprogress = (e) => {
+		// 		if (e.lengthComputable) {
+		// 			var percentComplete = parseInt((e.loaded / e.total) * 100, 10);
+		// 			opt.progress(percentComplete);
+		// 		}
+		// 	};
 
-			req.upload.onloadstart = () => {
-				opt.progress(0);
-			};
-			req.upload.onloadend = () => {
-				opt.progress(100);
-			};
-		}
+		// 	req.upload.onloadstart = () => {
+		// 		opt.progress(0);
+		// 	};
+		// 	req.upload.onloadend = () => {
+		// 		opt.progress(100);
+		// 	};
+		// }
 
-		req.onreadystatechange = () => {
-			if (req.readyState == 4) {
+		// req.onreadystatechange = () => {
+		// 	if (req.readyState == 4) {
+		// 		if (req.status == 200) {
+		// 			opt.callback(fn.str2Object(req.responseText));
+		// 		} else if (req.status === 401) {
+		// 			if (opt.auth) {
+		// 				new user_signin({
+		// 					callback: (result) => {
+		// 						if (result) {
+		// 							fn.upload(opt);
+		// 						} else {
+		// 							opt.callback(null);
+		// 						}
+		// 					},
+		// 				}).show();
+		// 			} else {
+		// 				opt.callback(null);
+		// 			}
+		// 		} else {
+		// 			opt.callback(null);
+		// 		}
+		// 	}
+		// };
+
+		// req.open(opt.type, opt.url, opt.async);
+		// req.send(fn.genfileformdata(opt.data));
+
+		axios
+			.post(opt.url, fn.genfileformdata(opt.data), {
+				headers: {
+					"Content-Type": "multipart/form-data",
+				},
+				onUploadProgress:
+					typeof opt.progress === "function"
+						? (e) => {
+								var percentComplete = parseInt((e.loaded / e.total) * 100, 10);
+								opt.progress(percentComplete);
+						  }
+						: null,
+			})
+			.then((req) => {
 				if (req.status == 200) {
-					opt.callback(fn.str2Object(req.responseText));
+					opt.callback(req.data);
 				} else if (req.status === 401) {
 					if (opt.auth) {
 						new user_signin({
@@ -220,11 +261,10 @@ const fn = {
 				} else {
 					opt.callback(null);
 				}
-			}
-		};
-
-		req.open(opt.type, opt.url, opt.async);
-		req.send(fn.genfileformdata(opt.data));
+			})
+			.catch((err) => {
+				console.log(err);
+			});
 	},
 	genformdata: (obj) => {
 		if (obj) {
