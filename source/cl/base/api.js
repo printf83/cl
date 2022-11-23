@@ -144,7 +144,7 @@ const fn = {
 				}
 			}
 		};
-		req.open(opt.type, opt.url, opt.async);
+		req.open(opt.type, opt.url);
 		req.setRequestHeader("Content-Type", "application/json");
 		req.send(fn.obj2String(opt.data));
 
@@ -209,7 +209,7 @@ const fn = {
 			}
 		};
 
-		req.open(opt.type, opt.url, opt.async);
+		req.open(opt.type, opt.url);
 		req.setRequestHeader("Content-Type", "application/json");
 		req.send(fn.obj2String(opt.data));
 

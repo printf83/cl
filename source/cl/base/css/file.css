@@ -2,9 +2,13 @@
 	position: absolute;
 	background-color: rgba(var(--bs-light-rgb), 0.5);
 	display: block;
-	/* height: 100%; */
-	/* top: 0; */
-	height:3px;
-	bottom:0;
-	left: 0;
+	height: calc(100% - 4px);
+	max-width: calc(100% - 4px);
+	top: 2px;
+	left: 2px;
+	border-radius: var(--bs-border-radius-sm);
+
+	/* height:3px;
+	bottom:0; */
+	
 }
