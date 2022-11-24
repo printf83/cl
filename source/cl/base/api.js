@@ -4,9 +4,9 @@ import * as core from "./core.js";
 import a from "./a.js";
 import { signin as user_signin } from "./user.js";
 
-// disable if ejs
-// import { axios } from "axios";
+// disable this if you not using webpack
 const axios = require("axios");
+//-------------------------------------
 
 const defaultOption = {
 	callback: (data) => {},

@@ -1,8 +1,7 @@
 "use strict";
 
 //disable this if you not using webpack
-import css from "./css/toc.css" assert { type: "css" };
-// document.adoptedStyleSheets = [css];
+import css from "./css/toc.css";
 //-------------------------------------
 
 import button from "./button.js";

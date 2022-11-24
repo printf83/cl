@@ -1,8 +1,7 @@
 "use strict";
 
 //disable this if you not using webpack
-import css from "./css/btnclose.css" assert { type: "css" };
-// document.adoptedStyleSheets = [css];
+import css from "./css/btnclose.css";
 //-------------------------------------
 
 import * as core from "./core.js";
