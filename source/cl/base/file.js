@@ -86,7 +86,7 @@ const fn = {
 											button: null,
 											static: false,
 											size: "md",
-											bodyclass: "p-3",
+											bodyclass: "p-1",
 											elem: new img({
 												container: "fluid",
 												width: 100,
@@ -135,7 +135,7 @@ const fn = {
 											button: null,
 											static: false,
 											size: "xl",
-											bodyclass: "p-3",
+											bodyclass: "p-1",
 											elem: new div({
 												class: "ratio ratio-16x9",
 												rounded: true,

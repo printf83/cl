@@ -13,7 +13,6 @@ const defaultOption = {
 	type: "GET",
 	url: null,
 	data: null,
-	// async: true,
 	auth: true,
 };
 
@@ -22,7 +21,6 @@ const defaultOptionPost = {
 	type: "POST",
 	url: null,
 	data: null,
-	// async: true,
 	auth: true,
 };
 
@@ -32,16 +30,6 @@ const defaultOptionUpload = {
 	type: "POST",
 	url: null,
 	data: null,
-	// async: false,
-	auth: true,
-};
-
-const defaultOptionDownload = {
-	callback: (data) => {},
-	type: "GET",
-	url: null,
-	data: null,
-	// async: true,
 	auth: true,
 };
 

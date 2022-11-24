@@ -1,1 +1,1 @@
-// var browser = "client/src/dist/";
+var browser = "client/src/dist/";
