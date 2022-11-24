@@ -1,7 +1,8 @@
 "use strict";
 
 //disable this if you not using webpack
-import css from "./css/file.css";
+import css from "./css/file.css" assert { type: "css" };
+// document.adoptedStyleSheets = [css];
 //-------------------------------------
 
 import * as core from "./core.js";
@@ -427,7 +428,7 @@ const fn = {
 			sender,
 			new span({
 				id: `${fu}_progress`,
-				class: "cl-fu-progress",
+				class: "cl-fu-progress btn",
 			})
 		);
 

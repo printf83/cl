@@ -8,10 +8,12 @@
 	"private": false,
 	"main": "server.js",
 	"scripts": {
+		"debug": "npm run build-debug && node server.js",
+		"test": "npm run build-development && node server.js",
 		"start": "npm run build && node server.js",
-		"test": "npm run build-dev && node server.js",
 		"clean": "webpack --config webpack/development/delete.js",
-		"build-dev": "webpack --config webpack/development/delete.js && webpack --config webpack/development/copy.js && webpack --config webpack/development/other.js",
+		"build-debug": "webpack --config webpack/development/delete.js && webpack --config webpack/development/copy.js",
+		"build-development": "webpack --config webpack/development/delete.js && webpack --config webpack/development/copy.js && webpack --config webpack/development/other.js",
 		"build": "webpack --config webpack/production/delete.js && webpack --config webpack/production/copy.js && webpack --config webpack/production/other.js"
 	},
 	"dependencies": {

@@ -1,7 +1,8 @@
 "use strict";
 
 //disable this if you not using webpack
-import css from "./css/menu.css";
+import css from "./css/menu.css" assert { type: "css" };
+// document.adoptedStyleSheets = [css];
 //-------------------------------------
 
 import * as core from "./core.js";

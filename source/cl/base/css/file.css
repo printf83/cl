@@ -1,12 +1,11 @@
 .cl-fu-progress {
 	position: absolute;
-	background-color: rgba(var(--bs-light-rgb), 0.5);
+	background-color: rgba(var(--bs-light-rgb), 0.25);
 	display: block;
-	height: calc(100% - 4px);
-	max-width: calc(100% - 4px);
-	top: 2px;
-	left: 2px;
-	border-radius: var(--bs-border-radius-sm);
+	height: calc(100% - 2px);
+	max-width: calc(100% - 2px);
+	top: 1px;
+	left: 1px;
 
 	/* height:3px;
 	bottom:0; */

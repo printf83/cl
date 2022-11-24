@@ -1,8 +1,9 @@
 "use strict";
 
 //disable this if you not using webpack
-import css from "./css/codepreview.css";
-import css2 from "./css/prettify.css";
+import css from "./css/codepreview.css" assert { type: "css" };
+import css2 from "./css/prettify.css" assert { type: "css" };
+// document.adoptedStyleSheets = [css, css2];
 //-------------------------------------
 
 import * as core from "./core.js";

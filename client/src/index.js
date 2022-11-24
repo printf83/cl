@@ -1,9 +1,10 @@
 "use strict";
 
 //disable this if you not using webpack
-import css from "./css/anchor.css";
-import css2 from "./css/example.css";
-import css3 from "./css/sample.css";
+import css from "./css/anchor.css" assert { type: "css" };
+import css2 from "./css/example.css" assert { type: "css" };
+import css3 from "./css/sample.css" assert { type: "css" };
+// document.adoptedStyleSheets = [css, css2, css3];
 //-------------------------------------
 import a from "./dist/cl/base/a.js";
 import * as core from "./dist/cl/base/core.js";
