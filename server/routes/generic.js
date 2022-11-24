@@ -115,7 +115,7 @@ module.exports = (app, dbname, setting) => {
 
 							stream.pipe(res);
 
-							console.log(`Sending file ${strFileName}`);
+							// console.log(`Sending file ${strFileName}`);
 						} else {
 							res.status(404).send("Not found");
 						}

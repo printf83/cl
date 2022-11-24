@@ -62,7 +62,7 @@ module.exports = (app, setting) => {
 
 							stream.pipe(res);
 
-							console.log(`Sending file ${data.id}`);
+							// console.log(`Sending file ${data.id}`);
 						} else {
 							res.status(404).send("Not found");
 						}

@@ -898,7 +898,7 @@ export default [
 					total: 1260,
 					max: 3,
 					weight: weight,
-					onchange: (event) => {
+					change: (event) => {
 						new toast("i", `Skip changed to ${event.detail.skip}`).show();
 					},
 				});

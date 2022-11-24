@@ -164,7 +164,7 @@ let fn = {
 			let sel_from = new input({
 				type: "select",
 				name: "from",
-				onchange: (event) => {
+				change: (event) => {
 					fn.filter.change(event, useopricon);
 				},
 				option: from_opt,
@@ -585,7 +585,7 @@ let fn = {
 			let sel_from = new input({
 				type: "select",
 				name: "from",
-				onchange: (event) => {
+				change: (event) => {
 					fn.sort.change(event, useopricon);
 				},
 				option: from_opt,
