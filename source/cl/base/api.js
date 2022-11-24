@@ -83,10 +83,16 @@ const fn = {
 
 				if (!fn.sender.islist(sender)) {
 					//change icon
-					let ico = sender.querySelectorAll("i");
+					// let ico = sender.querySelectorAll("i");
+					let ico = sender.querySelectorAll("span.cl-icon-container");
+
 					if (ico && ico.length > 0) {
-						ico[0].setAttribute("data-old-class", ico[0].getAttribute("class"));
-						ico[0].setAttribute("class", "fas fa-circle-notch fa-fw fa-spin");
+						ico = ico[0];
+						// ico.setAttribute("data-old-class", ico.getAttribute("class"));
+						// ico.setAttribute("class", "fas fa-circle-notch fa-fw fa-spin");
+
+						ico.setAttribute("data-old-class", encodeURIComponent(ico.innerHTML));
+						ico.innerHTML = `<i class="fas fa-circle-notch fa-fw fa-spin"></i>`;
 					}
 				}
 			}
@@ -99,10 +105,16 @@ const fn = {
 
 				if (!fn.sender.islist(sender)) {
 					//change icon
-					let ico = sender.querySelectorAll("i");
+					// let ico = sender.querySelectorAll("i");
+					let ico = sender.querySelectorAll("span.cl-icon-container");
+
 					if (ico && ico.length > 0) {
-						ico[0].setAttribute("class", ico[0].getAttribute("data-old-class"));
-						ico[0].setAttribute("data-old-class", null);
+						ico = ico[0];
+						// ico.setAttribute("class", ico.getAttribute("data-old-class"));
+						// ico.setAttribute("data-old-class", null);
+
+						ico.innerHTML = decodeURIComponent(ico.getAttribute("data-old-class"));
+						ico.setAttribute("data-old-class", null);
 					}
 				}
 			}

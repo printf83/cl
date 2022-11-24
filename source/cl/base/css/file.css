@@ -9,5 +9,12 @@
 
 	/* height:3px;
 	bottom:0; */
-	
+
+
+	font-size: unset;
+	font-weight: unset;
+	line-height: unset;
+	text-transform: unset;
+	padding: 0;
+	border: none;
 }

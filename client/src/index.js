@@ -1308,16 +1308,29 @@ core.documentReady(() => {
 						href: "#",
 						click: () => {
 							let pagerandomlabel = document.getElementById("pagerandom");
-							let pagerandomico = pagerandomlabel.closest("div.cl-pill").getElementsByTagName("I")[0];
+							// let pagerandomico = pagerandomlabel.closest("div.cl-pill").getElementsByTagName("I")[0];
+							let pagerandomico = pagerandomlabel
+								.closest("div.cl-pill")
+								.querySelectorAll("span.cl-icon-container")[0];
 
 							pagerandomlabel.innerText = "Loading";
 							if (pagerandomico) {
-								pagerandomico.setAttribute("class", "fa-fw fa-spin fas fa-circle-notch");
+								// pagerandomico.setAttribute("class", "fa-fw fa-spin fas fa-circle-notch");
+								pagerandomico.setAttribute(
+									"data-old-class",
+									encodeURIComponent(pagerandomico.innerHTML)
+								);
+								pagerandomico.innerHTML = `<i class="fa-fw fa-spin fas fa-circle-notch"></i>`;
 							}
 
 							load_random_page(() => {
 								if (pagerandomico) {
-									pagerandomico.setAttribute("class", "fa-fw fas fa-shuffle");
+									// pagerandomico.setAttribute("class", "fa-fw fas fa-shuffle");
+									pagerandomico.innerHTML = decodeURIComponent(
+										pagerandomico.getAttribute("data-old-class")
+									);
+
+									pagerandomico.setAttribute("data-old-class", null);
 								}
 
 								core.focusElement(pagerandomlabel);
@@ -1335,17 +1348,43 @@ core.documentReady(() => {
 						}),
 						href: "#",
 						click: () => {
+							// let pagethemelabel = document.getElementById("pagetheme");
+							// let pagethemeico = pagethemelabel.closest("div.cl-pill").getElementsByTagName("I")[0];
+
+							// pagethemelabel.innerText = "Loading";
+							// if (pagethemeico) {
+							// 	pagethemeico.setAttribute("class", "fa-fw fa-spin fas fa-circle-notch");
+							// }
+
+							// load_random_theme(() => {
+							// 	if (pagethemeico) {
+							// 		pagethemeico.setAttribute("class", "fa-fw fas fa-swatchbook");
+							// 	}
+
+							// 	core.focusElement(pagethemelabel);
+							// });
+
 							let pagethemelabel = document.getElementById("pagetheme");
-							let pagethemeico = pagethemelabel.closest("div.cl-pill").getElementsByTagName("I")[0];
+							// let pagethemeico = pagethemelabel.closest("div.cl-pill").getElementsByTagName("I")[0];
+							let pagethemeico = pagethemelabel
+								.closest("div.cl-pill")
+								.querySelectorAll("span.cl-icon-container")[0];
 
 							pagethemelabel.innerText = "Loading";
 							if (pagethemeico) {
-								pagethemeico.setAttribute("class", "fa-fw fa-spin fas fa-circle-notch");
+								// pagethemeico.setAttribute("class", "fa-fw fa-spin fas fa-circle-notch");
+								pagethemeico.setAttribute("data-old-class", encodeURIComponent(pagethemeico.innerHTML));
+								pagethemeico.innerHTML = `<i class="fa-fw fa-spin fas fa-circle-notch"></i>`;
 							}
 
 							load_random_theme(() => {
 								if (pagethemeico) {
-									pagethemeico.setAttribute("class", "fa-fw fas fa-swatchbook");
+									// pagethemeico.setAttribute("class", "fa-fw fas fa-shuffle");
+									pagethemeico.innerHTML = decodeURIComponent(
+										pagethemeico.getAttribute("data-old-class")
+									);
+
+									pagethemeico.setAttribute("data-old-class", null);
 								}
 
 								core.focusElement(pagethemelabel);
