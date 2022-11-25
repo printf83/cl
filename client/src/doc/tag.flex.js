@@ -198,7 +198,7 @@ export default [
 					height: "6rem",
 					elem: [
 						new tag({ tag: "div", elem: "Flex item" }),
-						new tag({ tag: "div", /*marker*/ alignSelf: i, elem: "Flex item" }),
+						new tag({ tag: "div", alignSelf: i, elem: "Flex item" }),
 						new tag({ tag: "div", elem: "Flex item" }),
 					],
 				});
@@ -232,9 +232,9 @@ export default [
 				tag: "div",
 				display: "flex",
 				elem: [
-					new tag({ tag: "div", /*marker*/ flex: "fill", elem: "Flex item with a lot of content" }),
-					new tag({ tag: "div", /*marker*/ flex: "fill", elem: "Flex item" }),
-					new tag({ tag: "div", /*marker*/ flex: "fill", elem: "Flex item" }),
+					new tag({ tag: "div", flex: "fill", elem: "Flex item with a lot of content" }),
+					new tag({ tag: "div", flex: "fill", elem: "Flex item" }),
+					new tag({ tag: "div", flex: "fill", elem: "Flex item" }),
 				],
 			});
 		},
@@ -264,7 +264,7 @@ export default [
 				tag: "div",
 				display: "flex",
 				elem: [
-					new tag({ tag: "div", /*marker*/ flex: "grow-1", elem: "Flex item" }),
+					new tag({ tag: "div", flex: "grow-1", elem: "Flex item" }),
 					new tag({ tag: "div", elem: "Flex item" }),
 					new tag({ tag: "div", elem: "Third flex item" }),
 				],
@@ -283,7 +283,7 @@ export default [
 				display: "flex",
 				elem: [
 					new tag({ tag: "div", width: 100, elem: "Flex item" }),
-					new tag({ tag: "div", /*marker*/ flex: "shrink-1", elem: "Flex item" }),
+					new tag({ tag: "div", flex: "shrink-1", elem: "Flex item" }),
 				],
 			});
 		},
@@ -321,7 +321,7 @@ export default [
 					tag: "div",
 					display: "flex",
 					elem: [
-						new tag({ tag: "div", /*marker*/ marginEnd: "auto", elem: "Flex item" }),
+						new tag({ tag: "div", marginEnd: "auto", elem: "Flex item" }),
 						new tag({ tag: "div", elem: "Flex item" }),
 						new tag({ tag: "div", elem: "Flex item" }),
 					],
@@ -332,7 +332,7 @@ export default [
 					elem: [
 						new tag({ tag: "div", elem: "Flex item" }),
 						new tag({ tag: "div", elem: "Flex item" }),
-						new tag({ tag: "div", /*marker*/ marginStart: "auto", elem: "Flex item" }),
+						new tag({ tag: "div", marginStart: "auto", elem: "Flex item" }),
 					],
 				}),
 			];
@@ -354,7 +354,7 @@ export default [
 					alignItem: "start", //marker
 					flex: "column", //marker
 					elem: [
-						new tag({ tag: "div", /*marker*/ marginBottom: "auto", elem: "Flex item" }),
+						new tag({ tag: "div", marginBottom: "auto", elem: "Flex item" }),
 						new tag({ tag: "div", elem: "Flex item" }),
 						new tag({ tag: "div", elem: "Flex item" }),
 					],
@@ -368,7 +368,7 @@ export default [
 					elem: [
 						new tag({ tag: "div", elem: "Flex item" }),
 						new tag({ tag: "div", elem: "Flex item" }),
-						new tag({ tag: "div", /*marker*/ marginTop: "auto", elem: "Flex item" }),
+						new tag({ tag: "div", marginTop: "auto", elem: "Flex item" }),
 					],
 				}),
 			];
@@ -432,9 +432,9 @@ export default [
 				display: "flex",
 				flex: "nowrap",
 				elem: [
-					new tag({ tag: "div", /*marker*/ order: 3, elem: "First flex item" }),
-					new tag({ tag: "div", /*marker*/ order: 2, elem: "Second flex item" }),
-					new tag({ tag: "div", /*marker*/ order: 1, elem: "Third flex item" }),
+					new tag({ tag: "div", order: 3, elem: "First flex item" }),
+					new tag({ tag: "div", order: 2, elem: "Second flex item" }),
+					new tag({ tag: "div", order: 1, elem: "Third flex item" }),
 				],
 			});
 		},

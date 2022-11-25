@@ -458,7 +458,7 @@ export default [
 					elem: [
 						new table.td({ scope: "row", elem: new b({ elem: d ? core.capitalize(d) : "Default" }) }),
 						new table.td({ elem: "Column content" }),
-						new table.td({ elem: "Column content", popover: sample.popover() /*marker*/ }),
+						new table.td({ elem: "Column content", popover: sample.popover() }),
 						new table.td({ elem: "Column content" }),
 					],
 				});
@@ -472,7 +472,7 @@ export default [
 							elem: [
 								new table.th({ elem: "Type" }),
 								new table.th({ elem: "Column heading" }),
-								new table.th({ elem: "Column heading", popover: sample.popover() /*marker*/ }),
+								new table.th({ elem: "Column heading", popover: sample.popover() }),
 								new table.th({ elem: "Column heading" }),
 							],
 						}),

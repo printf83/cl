@@ -458,7 +458,7 @@ export default [
 					elem: [
 						new table.td({ scope: "row", elem: new b({ elem: d ? core.capitalize(d) : "Default" }) }),
 						new table.td({ elem: "Column content" }),
-						new table.td({ elem: "Column content", badge: sample.badge() /*marker*/ }),
+						new table.td({ elem: "Column content", badge: sample.badge() }),
 						new table.td({ elem: "Column content" }),
 					],
 				});
@@ -472,7 +472,7 @@ export default [
 							elem: [
 								new table.th({ elem: "Type" }),
 								new table.th({ elem: "Column heading" }),
-								new table.th({ elem: "Column heading", badge: sample.badge() /*marker*/ }),
+								new table.th({ elem: "Column heading", badge: sample.badge() }),
 								new table.th({ elem: "Column heading" }),
 							],
 						}),

@@ -36,7 +36,7 @@ export default [
 			return new div(
 				"container px-4",
 				new div(
-					/*marker*/ "row gx-5",
+					"row gx-5",
 					Array(2).fill(new div("col", new div("p-3 border bg-light", "Custom column padding")))
 				)
 			);
@@ -76,9 +76,9 @@ export default [
 			return new div(
 				"container overflow-hidden",
 				new div(
-					/*marker*/ "row gx-5",
+					"row gx-5",
 					new div(
-						/*marker*/ "row gx-5",
+						"row gx-5",
 						Array(2).fill(new div("col", new div("p-3 border bg-light", "Custom column padding")))
 					)
 				)
@@ -124,7 +124,7 @@ export default [
 			return new div(
 				"container overflow-hidden",
 				new div(
-					/*marker*/ "row gy-5",
+					"row gy-5",
 					Array(4).fill(new div("col-6", new div("p-3 border bg-light", "Custom column padding")))
 				)
 			);
@@ -165,7 +165,7 @@ export default [
 			return new div(
 				"container",
 				new div(
-					/*marker*/ "row g-2",
+					"row g-2",
 					Array(4).fill(new div("col-6", new div("p-3 border bg-light", "Custom column padding")))
 				)
 			);
@@ -205,7 +205,7 @@ export default [
 			return new div(
 				"container",
 				new div(
-					/*marker*/ "row row-cols-2 row-cols-lg-5 g-2 g-lg-3",
+					"row row-cols-2 row-cols-lg-5 g-2 g-lg-3",
 					Array(10).fill(new div("col-6", new div("p-3 border bg-light", "Row column")))
 				)
 			);
@@ -248,7 +248,7 @@ export default [
 		viewclass: "cl-highlight-col",
 		import: ["div"],
 		code: () => {
-			return new div(/*marker*/ "row g-0", [
+			return new div("row g-0", [
 				new div("col-sm-6 col-md-8", ".col-sm-6 .col-md-8"),
 				new div("col-6 col-md-4", ".col-6 .col-md-4"),
 			]);
@@ -262,6 +262,7 @@ export default [
 		code: () => {
 			return new div({
 				row: true,
+				gap: 0, //marker
 				elem: [
 					new div({
 						col: ["sm-6", "md-8"],
@@ -272,9 +273,6 @@ export default [
 						elem: ".col-6 .col-md-4",
 					}),
 				],
-
-				//marker
-				gap: 0,
 			});
 		},
 	},

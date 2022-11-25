@@ -33,7 +33,7 @@ export default [
 				label: "On this page",
 				item: [
 					{ label: "Item 1" },
-					{ label: "Item 2", /*marker*/ level: 1 },
+					{ label: "Item 2", level: 1 }, //marker
 					{ label: "Item 3" },
 					{ label: "Item 4" },
 					{ label: "Item 5" },
@@ -47,17 +47,15 @@ export default [
 		import: ["toc", "sample"],
 		code: () => {
 			return new toc({
+				icon: sample.icon(), //marker
 				label: "Example",
 				item: [
-					{ /*marker*/ icon: sample.icon(), label: "Item 1" },
+					{ icon: sample.icon(), label: "Item 1" },
 					{ label: "Item 2" },
 					{ label: "Item 3" },
 					{ label: "Item 4" },
 					{ label: "Item 5" },
 				],
-
-				//marker
-				icon: sample.icon(),
 			});
 		},
 	},
@@ -69,10 +67,10 @@ export default [
 			return new toc({
 				label: "Example",
 				item: [
-					{ label: "BS5 JS Builder", /*marker*/ href: "#" },
-					{ label: "Bootstrap 5", /*marker*/ href: "https://getbootstrap.com/docs/5.2/" },
-					{ label: "Font Awesome", /*marker*/ href: "https://fontawesome.com/v6.2.0/icons" },
-					{ label: "Bootswatch", /*marker*/ href: "https://bootswatch.com/" },
+					{ label: "BS5 JS Builder", href: "#" },
+					{ label: "Bootstrap 5", href: "https://getbootstrap.com/docs/5.2/" },
+					{ label: "Font Awesome", href: "https://fontawesome.com/v6.2.0/icons" },
+					{ label: "Bootswatch", href: "https://bootswatch.com/" },
 				],
 			});
 		},

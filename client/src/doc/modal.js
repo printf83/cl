@@ -58,11 +58,8 @@ export default [
 		import: ["toast", "msg", "modal"],
 		code: () => {
 			return new modal({
-				//marker
-				title: null,
-				icon: null,
-				//-
-
+				title: null, //marker
+				icon: null, //marker
 				elem: new msg({
 					weight: "md",
 					icon: "i",
@@ -124,7 +121,7 @@ export default [
 					label: i.label,
 					icon: i.icon,
 					click: () => {
-						new dlg.msgbox(/*marker*/ i.icon, `This is example msgbox with <b>${i.icon}</b> icon`, () => {
+						new dlg.msgbox(i.icon, `This is example msgbox with <b>${i.icon}</b> icon`, () => {
 							new toast(i.icon, "After user click <b>Okay</b> button").show();
 						}).show();
 					},
@@ -140,10 +137,7 @@ export default [
 		import: ["toast", "dlg"],
 		code: () => {
 			return new dlg.inputbox(
-				//marker
-				"text",
-				//-
-
+				"text", //marker
 				"This is example inputbox text",
 
 				//marker
@@ -482,10 +476,7 @@ export default [
 		import: ["toast", "dlg"],
 		code: () => {
 			return new dlg.confirmbox(
-				//marker
-				"?",
-				//-
-
+				"?", //marker
 				"This is example msgbox with <b>Okay and Cancel</b> button",
 
 				//marker
@@ -516,10 +507,7 @@ export default [
 					icon: i.icon,
 					click: () => {
 						new dlg.confirmbox(
-							//marker
-							i.icon,
-							//-
-
+							i.icon, //marker
 							`This is example confirmbox with <b>${i.icon}</b> icon`,
 
 							//marker
@@ -568,10 +556,7 @@ export default [
 				color: "primary",
 				click: () => {
 					new modal({
-						//marker
-						dark: true,
-						//-
-
+						dark: true, //marker
 						elem: "Modal body text goes here.",
 						button: [
 							//marker
@@ -595,6 +580,7 @@ export default [
 		import: ["toast", "input", "modal"],
 		code: () => {
 			return new modal({
+				footer: new input({ type: "switch", name: "showagain", label: "Show again" }), //marker
 				elem: "Modal body text goes here.",
 				button: [
 					{
@@ -605,9 +591,6 @@ export default [
 					},
 					"Close",
 				],
-
-				//marker
-				footer: new input({ type: "switch", name: "showagain", label: "Show again" }),
 
 				debug: true, // documentation purpose only
 			});
@@ -630,6 +613,7 @@ export default [
 					icon: i.icon,
 					click: (e) => {
 						new modal({
+							backdropcolor: i.backdropcolor, //marker
 							elem: new msg({
 								weight: "md",
 								icon: i.icon,
@@ -645,9 +629,6 @@ export default [
 								},
 								"Close",
 							],
-
-							//marker
-							backdropcolor: i.backdropcolor,
 						}).show();
 					},
 				});
@@ -664,6 +645,7 @@ export default [
 				color: "primary",
 				click: () => {
 					new modal({
+						static: false, //marker
 						elem: "By default, modal dialog will not close if you click outside or press escape key. To allow modal dialog to close when click outside or press escape key, set <code>static: false</code> option",
 						button: [
 							{
@@ -674,9 +656,6 @@ export default [
 							},
 							"Close",
 						],
-
-						//marker
-						static: false,
 					}).show();
 				},
 			});
@@ -692,6 +671,7 @@ export default [
 				color: "primary",
 				click: () => {
 					new modal({
+						scrollable: false, //marker
 						elem: [
 							new p({
 								elem: "By default, modal dialog will activate scrolling inside modal dialog. To disabled it, set <code>scrollable: false</code> option.",
@@ -712,9 +692,6 @@ export default [
 							},
 							"Close",
 						],
-
-						//marker
-						scrollable: false,
 					}).show();
 				},
 			});
@@ -730,6 +707,7 @@ export default [
 				color: "primary",
 				click: () => {
 					new modal({
+						center: false, //marker
 						elem: "By default, modal dialog will vertically centered when shown. To disabled it, set <code>center: false</code> option.",
 						button: [
 							{
@@ -740,9 +718,6 @@ export default [
 							},
 							"Close",
 						],
-
-						//marker
-						center: false,
 					}).show();
 				},
 			});
@@ -981,8 +956,7 @@ export default [
 					button: {
 						label: "Show second modal",
 						click: () => {
-							//marker
-							dlgSecondModal();
+							dlgSecondModal(); //marker
 						},
 					},
 				}).show();
@@ -995,8 +969,7 @@ export default [
 					button: {
 						label: "Show first modal",
 						click: () => {
-							//marker
-							dlgFirstModal();
+							dlgFirstModal(); //marker
 						},
 					},
 				}).show();
@@ -1007,8 +980,7 @@ export default [
 				label: "Show first modal",
 				color: "primary",
 				click: () => {
-					//marker
-					dlgFirstModal();
+					dlgFirstModal(); //marker
 				},
 			});
 		},
@@ -1023,11 +995,9 @@ export default [
 				color: "primary",
 				click: () => {
 					new modal({
+						animate: false, //marker
 						elem: "Dialog without fade effect",
 						button: "Okay",
-
-						//marker
-						animate: false,
 					}).show();
 				},
 			});
@@ -1041,11 +1011,9 @@ export default [
 		code: () => {
 			let fn = (size) => {
 				new modal({
+					size: size, //marker
 					elem: `Dialog with <code>size : <b>${size}</b></code> option`,
 					button: ["Okay"],
-
-					//marker
-					size: size,
 				}).show();
 			};
 
@@ -1082,6 +1050,7 @@ export default [
 		code: () => {
 			let fn = (fullscreen) => {
 				new modal({
+					fullscreen: fullscreen, //marker
 					elem: [
 						new p(
 							new pill({
@@ -1094,9 +1063,6 @@ export default [
 						new p(`Dialog with <code>fullscreen : <b>${fullscreen}</b></code> option`),
 					],
 					button: ["Okay"],
-
-					//marker
-					fullscreen: fullscreen,
 				}).show();
 			};
 

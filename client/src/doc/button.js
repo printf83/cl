@@ -84,29 +84,20 @@ export default [
 				new input({
 					value: "Input button",
 					color: "primary",
-
-					//marker
-					class: "btn",
-					type: "button",
-					//-
+					class: "btn", //marker
+					type: "button", //marker
 				}),
 				new input({
 					color: "primary",
 					value: "Input submit",
-
-					//marker
-					class: "btn",
-					type: "submit",
-					//-
+					class: "btn", //marker
+					type: "submit", //marker
 				}),
 				new input({
 					color: "primary",
 					value: "Input reset",
-
-					//marker
-					class: "btn",
-					type: "reset",
-					//-
+					class: "btn", //marker
+					type: "reset", //marker
 				}),
 			];
 		},
@@ -229,7 +220,7 @@ export default [
 		title: "Block buttons",
 		import: ["container", "button"],
 		code: () => {
-			return /*marker*/ new container.grid([
+			return new container.grid([
 				new button({ label: "Button", color: "primary" }),
 				new button({ label: "Button", color: "primary" }),
 				new button({ label: "Button", color: "primary" }),

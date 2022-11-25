@@ -62,13 +62,11 @@ export default [
 		code: () => {
 			return [
 				//direct class and elem
-				new div(/*marker*/ "container", "Content here"),
+				new div("container", "Content here"),
 
 				//object
 				new div({
-					//marker
-					container: true,
-
+					container: true, //marker
 					elem: "Content here",
 				}),
 			];
@@ -82,11 +80,11 @@ export default [
 		import: ["div"],
 		code: () => {
 			return [
-				new div(/*marker*/ "container-sm", "100% wide until small breakpoint"),
-				new div(/*marker*/ "container-md", "100% wide until medium breakpoint"),
-				new div(/*marker*/ "container-lg", "100% wide until large breakpoint"),
-				new div(/*marker*/ "container-xl", "100% wide until extra large breakpoint"),
-				new div(/*marker*/ "container-xxl", "100% wide until extra extra large breakpoint"),
+				new div("container-sm", "100% wide until small breakpoint"),
+				new div("container-md", "100% wide until medium breakpoint"),
+				new div("container-lg", "100% wide until large breakpoint"),
+				new div("container-xl", "100% wide until extra large breakpoint"),
+				new div("container-xxl", "100% wide until extra extra large breakpoint"),
 			];
 		},
 	},
@@ -120,13 +118,11 @@ export default [
 		code: () => {
 			return [
 				//easy option
-				new div(/*marker*/ "container-fluid", "Content here"),
+				new div("container-fluid", "Content here"),
 
 				//option
 				new div({
-					//marker
-					container: "fluid",
-
+					container: "fluid", //marker
 					elem: "Content here",
 				}),
 			];

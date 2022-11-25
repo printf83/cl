@@ -46,7 +46,7 @@ export default [
 		msg: "The building block of a card is the {{card.body}}. Use it whenever you need a padded section within a card.",
 		import: ["card"],
 		code: () => {
-			return new card.container(/*marker*/ new card.body("This is some text within a card body."));
+			return new card.container(new card.body("This is some text within a card body."));
 		},
 	},
 
@@ -279,6 +279,7 @@ export default [
 								}),
 							],
 						}),
+						//-
 					}),
 				],
 			});
@@ -598,7 +599,7 @@ export default [
 			return new card.container({
 				height: 100,
 				elem: [
-					/*marker*/ new card.horizontal({
+					new card.horizontal({
 						size: "sm-4",
 						start: [
 							new card.img({
@@ -875,9 +876,7 @@ export default [
 					new div({ col: true, elem: fn(str[1]) }),
 					new div({ col: true, elem: fn(str[2]) }),
 				],
-
-				//marker
-				rowCol: [1, "md-2"],
+				rowCol: [1, "md-2"], //marker
 			});
 		},
 	},
@@ -915,9 +914,7 @@ export default [
 					new div({ col: true, elem: fn(str[1]) }),
 					new div({ col: true, elem: fn(str[2]) }),
 				],
-
-				//marker
-				rowCol: [1, "md-3"],
+				rowCol: [1, "md-3"], //marker
 			});
 		},
 	},
@@ -943,9 +940,7 @@ export default [
 							elem: [new card.title("Card Title"), new card.text(str)],
 						}),
 					],
-
-					//marker
-					height: 100,
+					height: 100, //marker
 				});
 			};
 
@@ -985,9 +980,7 @@ export default [
 						}),
 						new card.footer("Last updated 3 mins ago"),
 					],
-
-					//marker
-					height: 100,
+					height: 100, //marker
 				});
 			};
 
