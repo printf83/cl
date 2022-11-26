@@ -566,7 +566,24 @@ const fn = {
 			"value",
 			"width",
 			"wrap",
+		];
 
+		let f = tprop
+			.map((i) => {
+				if (!isListed(i, exclude)) {
+					return `<code>${i}</code>`;
+				} else {
+					return null;
+				}
+			})
+			.filter(Boolean);
+
+		let l = f.pop();
+
+		return f.join(", ") + " and " + l;
+	},
+	tagpropEvent: (exclude) => {
+		const tprop = [
 			"abort",
 			"afterprint",
 			"beforeprint",
@@ -637,6 +654,7 @@ const fn = {
 			"volumechange",
 			"waiting",
 			"wheel",
+			"any property with function as value",
 		];
 
 		let f = tprop
@@ -648,8 +666,6 @@ const fn = {
 				}
 			})
 			.filter(Boolean);
-
-		f.push(`event property (any property with function as value)`);
 
 		let l = f.pop();
 

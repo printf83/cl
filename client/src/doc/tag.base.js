@@ -24,6 +24,8 @@ export default [
 			sample.tagpropCss(),
 			"Html option property (if supported by the tag) :",
 			sample.tagpropHtml(),
+			"Event option property (if supported by the tag) :",
+			sample.tagpropEvent(),
 		],
 	},
 

@@ -39,9 +39,7 @@ export default [
 
 			return new file({
 				id: fileUploadID,
-
-				//marker
-				multiple: true,
+				multiple: true, //marker
 			});
 		},
 	},
@@ -55,9 +53,7 @@ export default [
 			return new file({
 				id: fileUploadID,
 				multiple: true,
-
-				//marker
-				accept: "image/gif,image/bmp,image/x-windows-bmp,image/jpeg,image/png",
+				accept: "image/gif,image/bmp,image/x-windows-bmp,image/jpeg,image/png", //marker
 			});
 		},
 	},
@@ -80,6 +76,9 @@ export default [
 				viewlabel: "View PDF",
 				viewicon: "glasses",
 				viewcolor: "success",
+				downloadlabel: null,
+				downloadicon: { icon: "arrow-right-to-bracket", rotate: 90 },
+				downloadcolor: "primary",
 				deletelabel: null,
 				deleteicon: "trash-alt",
 				deletecolor: "danger",
@@ -95,9 +94,7 @@ export default [
 			let fileUploadID = core.UUID();
 
 			return [
-				//marker
-				new file({ id: fileUploadID }),
-
+				new file({ id: fileUploadID }), //marker
 				new button({
 					label: "Save file",
 					color: "success",

@@ -26,6 +26,8 @@ export default [
 			sample.tagpropCss(),
 			"Html option property that inherits from tag component (if supported by the tag) :",
 			sample.tagpropHtml(),
+			"Event option property that inherits from tag component (if supported by the tag) :",
+			sample.tagpropEvent(),
 		],
 	},
 
