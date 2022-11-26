@@ -185,7 +185,7 @@ export default class toast extends div {
 							marginEnd: "auto",
 							display: "flex",
 							alignItem: "center",
-							elem: opt.elem,
+							elem: new div({ elem: opt.elem }),
 						}),
 						!(opt.icon || opt.title) && opt.close
 							? new div({

@@ -51,7 +51,12 @@ export class container extends div {
 					alignItem: "stretch",
 
 					elem: [
-						new div({ width: 100, display: "flex", alignItem: "center", elem: opt.elem }),
+						new div({
+							width: 100,
+							display: "flex",
+							alignItem: "center",
+							elem: new div({ elem: opt.elem }),
+						}),
 						opt.close
 							? new btnclose({
 									dismiss: "alert",
