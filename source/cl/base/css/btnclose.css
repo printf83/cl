@@ -33,7 +33,8 @@
     align-self: center; */
 }
 
-.modal-header .btn-close::after{
+.modal-header .btn-close::after, 
+.offcanvas-header .btn-close::after {
     margin-right: 0.5rem;
 }
 
