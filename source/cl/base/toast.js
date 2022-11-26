@@ -192,7 +192,7 @@ export default class toast extends div {
 									marginStart: 2,
 									elem: new btnclose({
 										dismiss: "toast",
-										marginY: 1,
+										// marginY: 1,
 									}),
 							  })
 							: null,

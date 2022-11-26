@@ -4,6 +4,10 @@
 .btn-close {
     color: unset !important;
     background: none !important;
+
+    width: unset !important;
+    height: unset !important;
+    padding: unset !important;
 }
 
 .btn-close::before {
@@ -14,19 +18,23 @@
 }
 
 /* using cl btn close */
-.btn-close{
+/* .btn-close{
     display: flex;
     justify-content: center;
-}
+} */
 
 .btn-close::after{
     content: "✕";
-    text-align: center;
-    justify-content: center;
+    /* text-align: center;
+    justify-content: center; */
     font-weight: lighter;
     font-size: calc(100%*1.5);
-    display: flex;
-    align-self: center;
+    /* display: flex;
+    align-self: center; */
+}
+
+.modal-header .btn-close::after{
+    margin-right: 0.5rem;
 }
 
 /* using font awesome */
