@@ -146,10 +146,11 @@ export class toggle extends collapse.toggle {
 
 			opt = core.merge(opt, {
 				elem: new button({
-					icon: "bars",
-					label: "Toggle navigation",
-					hidelabel: true,
+					// icon: "bars",
+					// label: "Toggle navigation",
+					// hidelabel: true,
 					class: "navbar-toggler",
+					elem: new span({ class: "navbar-toggler-icon" }),
 				}),
 			});
 
@@ -160,8 +161,8 @@ export class toggle extends collapse.toggle {
 
 const defaultFormContainerOption = {
 	display: "flex",
+	gap: 2,
 	row: false,
-	rowCol: null,
 };
 export class formcontainer extends form {
 	constructor(...opt) {
