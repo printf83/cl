@@ -25,6 +25,22 @@ function btnBuilder(btn, defButton, defColor, pushCancel) {
 	});
 }
 
+function elemBuilder(elem) {
+	let argElem = Array.isArray(elem) ? elem : [elem];
+
+	return new container.form(
+		argElem.map((i, ix) => {
+			return typeof i === "string"
+				? new input({
+						type: i,
+						required: true,
+						name: ix === 0 ? "value" : `value_${ix}`,
+				  })
+				: i;
+		})
+	);
+}
+
 /**
  * icon, msg, callback
  * icon, msg, button : {label,color,click}
@@ -43,6 +59,7 @@ export class msgbox extends modal {
 							"string|string[]|cl|cl[]",
 							"string|string[]|object|object[]|function|function[]",
 							"string|null",
+							"string|string[]|null",
 							"debug",
 						],
 						fn: () => {
@@ -62,6 +79,7 @@ export class msgbox extends modal {
 								defautlbtncolor: bI ? bI.color : null,
 								button: btnBuilder(opt[2], ["Okay"], bI?.color, false),
 								title: opt[3] === null ? undefined : opt[3],
+								size: opt[4] === null ? undefined : opt[4],
 								debug: true,
 							};
 						},
@@ -72,6 +90,7 @@ export class msgbox extends modal {
 							"string|string[]|cl|cl[]",
 							"string|string[]|object|object[]|function|function[]",
 							"string|null",
+							"string|string[]|null",
 						],
 						fn: () => {
 							let bI = core.getBaseIcon(opt[0]);
@@ -90,7 +109,35 @@ export class msgbox extends modal {
 								defautlbtncolor: bI ? bI.color : null,
 								button: btnBuilder(opt[2], ["Okay"], bI?.color, false),
 								title: opt[3] === null ? undefined : opt[3],
+								size: opt[4] === null ? undefined : opt[4],
 							});
+						},
+					},
+					{
+						rule: [
+							"string",
+							"string|string[]|cl|cl[]",
+							"string|string[]|object|object[]|function|function[]",
+							"string|null",
+						],
+						fn: () => {
+							let bI = core.getBaseIcon(opt[0]);
+
+							return {
+								elem: new msg({
+									weight: "md",
+									icon: bI
+										? {
+												icon: bI.icon,
+												color: bI.color,
+										  }
+										: opt[0],
+									elem: opt[1],
+								}),
+								defautlbtncolor: bI ? bI.color : null,
+								button: btnBuilder(opt[2], ["Okay"], bI?.color, false),
+								title: opt[3] === null ? undefined : opt[3],
+							};
 						},
 					},
 					{
@@ -164,6 +211,7 @@ export class confirmbox extends modal {
 						"string|string[]|cl|cl[]",
 						"string|string[]|object|object[]|function|function[]",
 						"string|null",
+						"string|string[]|null",
 						"debug",
 					],
 					fn: () => {
@@ -183,7 +231,37 @@ export class confirmbox extends modal {
 							defautlbtncolor: bI ? bI.color : null,
 							button: btnBuilder(opt[2], ["Okay", "Cancel", "Retry"], bI?.color, true),
 							title: opt[3] === null ? undefined : opt[3],
+							size: opt[4] === null ? undefined : opt[4],
 							debug: true,
+						};
+					},
+				},
+				{
+					rule: [
+						"string",
+						"string|string[]|cl|cl[]",
+						"string|string[]|object|object[]|function|function[]",
+						"string|null",
+						"string|string[]|null",
+					],
+					fn: () => {
+						let bI = core.getBaseIcon(opt[0]);
+
+						return {
+							elem: new msg({
+								weight: "md",
+								icon: bI
+									? {
+											icon: bI.icon,
+											color: bI.color,
+									  }
+									: opt[0],
+								elem: opt[1],
+							}),
+							defautlbtncolor: bI ? bI.color : null,
+							button: btnBuilder(opt[2], ["Okay", "Cancel", "Retry"], bI?.color, true),
+							title: opt[3] === null ? undefined : opt[3],
+							size: opt[4] === null ? undefined : opt[4],
 						};
 					},
 				},
@@ -257,22 +335,6 @@ export class confirmbox extends modal {
 	}
 }
 
-function elemBuilder(elem) {
-	let argElem = Array.isArray(elem) ? elem : [elem];
-
-	return new container.form(
-		argElem.map((i, ix) => {
-			return typeof i === "string"
-				? new input({
-						type: i,
-						required: true,
-						name: ix === 0 ? "value" : `value_${ix}`,
-				  })
-				: i;
-		})
-	);
-}
-
 /**
  * type, msg, callback
  * type, msg, [callback]
@@ -300,6 +362,7 @@ export class inputbox extends modal {
 						"string|null",
 						"string|string[]|object|object[]|function|function[]",
 						"string|null",
+						"string|string[]|null",
 						"debug",
 					],
 					fn: () => {
@@ -307,7 +370,25 @@ export class inputbox extends modal {
 							elem: [opt[1] ? new p({ elem: opt[1] }) : null, elemBuilder(opt[0])].filter(Boolean),
 							button: btnBuilder(opt[2], ["Okay", "Cancel", "Retry"], null, true),
 							title: opt[3] === null ? undefined : opt[3],
+							size: opt[4] === null ? undefined : opt[4],
 							debug: true,
+						};
+					},
+				},
+				{
+					rule: [
+						"string|string[]|cl|cl[]",
+						"string|null",
+						"string|string[]|object|object[]|function|function[]",
+						"string|null",
+						"string|string[]|null",
+					],
+					fn: () => {
+						return {
+							elem: [opt[1] ? new p({ elem: opt[1] }) : null, elemBuilder(opt[0])].filter(Boolean),
+							button: btnBuilder(opt[2], ["Okay", "Cancel", "Retry"], null, true),
+							title: opt[3] === null ? undefined : opt[3],
+							size: opt[4] === null ? undefined : opt[4],
 						};
 					},
 				},

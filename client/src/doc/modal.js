@@ -147,6 +147,7 @@ export default [
 				//-
 
 				"Custom Dialog Title",
+				"md",
 				{ debug: true } //this last argument is for this documentation preview only
 			);
 		},
@@ -180,7 +181,8 @@ export default [
 				},
 				//-
 
-				null,
+				"Title",
+				"md",
 				{ debug: true } //this last argument is for this documentation preview only
 			);
 		},
@@ -344,7 +346,8 @@ export default [
 				},
 				//-
 
-				null,
+				"Title",
+				"md",
 				{ debug: true } //this last argument is for this documentation preview only
 			);
 		},
@@ -485,7 +488,8 @@ export default [
 				},
 				//-
 
-				null,
+				"Title",
+				"md",
 				{ debug: true } //this last argument is for this documentation preview only
 			);
 		},

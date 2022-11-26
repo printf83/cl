@@ -625,7 +625,8 @@ const fn = {
 								label: "Cancel",
 							},
 						],
-						`Add ${opt.name}`
+						`Add ${opt.name}`,
+						"lg"
 					).show();
 				}
 			}
@@ -699,7 +700,8 @@ const fn = {
 											label: "Cancel",
 										},
 									],
-									`Edit ${opt.name}`
+									`Edit ${opt.name}`,
+									"lg"
 								).show();
 							}
 						},
@@ -770,7 +772,8 @@ const fn = {
 													label: "Cancel",
 												},
 											],
-											`Copy ${opt.name}`
+											`Copy ${opt.name}`,
+											"lg"
 										).show();
 									},
 									item
