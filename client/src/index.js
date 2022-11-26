@@ -470,7 +470,7 @@ const wplibrary = {
 	"collapse.": /_dist_cl_base_collapse_js.+\./g,
 	"container.": /_dist_cl_base_container_js.+\./g,
 	"core.": /_dist_cl_base_core_js.+\./g,
-	"db.": /_dist_cl_base_db_js.+\./g,
+	"db.": /_dist_cl_base_api_js.+\./g,
 	div: /_dist_cl_base_div_js.+\[.+\]/g,
 	"dlg.": /_dist_cl_base_dlg_js.+\./g,
 	dropdown: /_dist_cl_base_dropdown_js.+\[.+\]/g,
