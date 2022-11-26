@@ -43,7 +43,7 @@ export default [
 					new a({
 						textDecoration: "none",
 						href: "https://getbootstrap.com/",
-						elem: new pill({ icon: { icon: "bootstrap", type: "fab" }, label: "Bootstrap V5.2.2" }),
+						elem: new pill({ icon: { icon: "bootstrap", type: "fab" }, label: "Bootstrap V5.2.3" }),
 					}),
 					new a({
 						textDecoration: "none",
@@ -104,7 +104,7 @@ export default [
 
 							<link
 								rel="stylesheet"
-								href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.2/css/bootstrap.min.css"
+								href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/css/bootstrap.min.css"
 								id="css_bootstrap"
 							/>
 
@@ -126,7 +126,7 @@ export default [
 
 							<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"></script>
 							<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
-							<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.2/js/bootstrap.min.js"></script>
+							<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.min.js"></script>
 							<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/js/all.min.js"></script>
 
 							<script type="module" src="./src/index.bundle.js"></script>
