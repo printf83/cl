@@ -1,5 +1,6 @@
 /*fix bootstrap color problem on btn-close*/
 
+/* disable bootstrap css */
 .btn-close {
     color: unset !important;
     background: none !important;
@@ -12,6 +13,7 @@
     content: unset;
 }
 
+/* using cl btn close */
 .btn-close{
     display: flex;
     justify-content: center;
@@ -26,3 +28,20 @@
     display: flex;
     align-self: center;
 }
+
+/* using font awesome */
+/* .btn-close {
+    display: flex;
+    justify-content: center;
+}
+
+.btn-close::after{
+    content: "\f00d";
+    text-align: center;
+    justify-content: center;
+    font-weight: 900;
+    font-size: calc(100%*1.75);
+    display: flex;
+    align-self: center;
+    font-family: "Font Awesome 6 Free";
+} */
