@@ -150,7 +150,7 @@ export class toggle extends collapse.toggle {
 					// label: "Toggle navigation",
 					// hidelabel: true,
 					class: "navbar-toggler",
-					display: "inline-block",
+					// display: "inline-block",
 					elem: new span({ class: "navbar-toggler-icon" }),
 				}),
 			});
