@@ -511,7 +511,6 @@ export default [
 		code: () => {
 			return new div({
 				container: true, //marker
-
 				elem: new navbar.container({
 					expand: "lg",
 					color: "light",
@@ -532,9 +531,7 @@ export default [
 		import: ["navbar"],
 		code: () => {
 			return new div({
-				//marker
-				container: "fluid",
-
+				container: "fluid", //marker
 				elem: new navbar.container({
 					expand: "lg",
 					color: "light",
@@ -687,23 +684,17 @@ export default [
 				new navbar.container({
 					color: "light",
 					elem: fn(id1, "xl"),
-
-					//marker
-					expand: "xl",
+					expand: "xl", //marker
 				}),
 				new navbar.container({
 					color: "light",
 					elem: fn(id2, "lg"),
-
-					//marker
-					expand: "lg",
+					expand: "lg", //marker
 				}),
 				new navbar.container({
 					color: "light",
 					elem: fn(id3, "md"),
-
-					//marker
-					expand: "md",
+					expand: "md", //marker
 				}),
 			];
 		},

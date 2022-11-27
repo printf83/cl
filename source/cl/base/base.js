@@ -915,7 +915,8 @@ const bootstrapPropertyDb = {
 
 	row: {
 		formatTrue: "row",
-		value: [true],
+		formatFalse: null,
+		value: [true, false],
 	},
 
 	col: {
@@ -978,7 +979,7 @@ function attachBootstrap(key, elem, opt) {
 			let shared = false;
 			opt[key].forEach((i) => {
 				if (bootstrapPropertyDb[a_key].value.indexOf(i) > -1) {
-					shared = shared === false && bootstrapPropertyDb[a_key].shared === true ? true : false;
+					shared = shared === false && bootstrapPropertyDb[a_key].shared !== false ? true : false;
 					if (bootstrapPropertyDb[a_key].hasOwnProperty("formatValue")) {
 						elem = addIntoClassList(elem, bootstrapPropertyDb[a_key].formatValue);
 					}

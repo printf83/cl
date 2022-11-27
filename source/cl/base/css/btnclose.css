@@ -18,19 +18,13 @@
 }
 
 /* using cl btn close */
-/* .btn-close{
-    display: flex;
-    justify-content: center;
-} */
-
 .btn-close::after{
-    content: "✕";
-    /* text-align: center;
-    justify-content: center; */
+    content: "×";
     font-weight: lighter;
-    font-size: calc(100%*1.5);
-    /* display: flex;
-    align-self: center; */
+    font-size: 3rem;
+    line-height: 0.5;
+    display: block;
+    height: 1.75rem;
 }
 
 .modal-header .btn-close::after, 
