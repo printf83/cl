@@ -20,10 +20,10 @@ const defaultOption = {
 	color: null,
 	bodyoverflow: null,
 
-	onshow: null,
-	onshown: null,
-	onhide: null,
-	onhidden: null,
+	show: null,
+	shown: null,
+	hide: null,
+	hidden: null,
 };
 /**
  * option : {attr,id,class,static,title,icon,footer,button,animated,debug,scrollable,center,size,fullscreen,focus,align,color,textColor,borderColor,border,divider,centerbutton,elem}
@@ -104,10 +104,10 @@ export default class offcanvas extends div {
 				"data-bs-backdrop": opt.backdrop ? "true" : "false",
 				tabindex: "-1",
 
-				"show.bs.offcanvas": opt.onshow,
-				"shown.bs.offcanvas": opt.onshown,
-				"hide.bs.offcanvas": opt.onhide,
-				"hidden.bs.offcanvas": opt.onhidden,
+				"show.bs.offcanvas": opt.show,
+				"shown.bs.offcanvas": opt.shown,
+				"hide.bs.offcanvas": opt.hide,
+				"hidden.bs.offcanvas": opt.hidden,
 
 				elem: [header, body],
 			});
@@ -122,10 +122,10 @@ export default class offcanvas extends div {
 			delete opt.iconafter;
 			delete opt.color;
 
-			delete opt.onshow;
-			delete opt.onshown;
-			delete opt.onhide;
-			delete opt.onhidden;
+			delete opt.show;
+			delete opt.shown;
+			delete opt.hide;
+			delete opt.hidden;
 
 			super.data = opt;
 		}

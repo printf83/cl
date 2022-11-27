@@ -18,13 +18,25 @@
 }
 
 /* using cl btn close */
+/* .cl-btn-close-container{
+    overflow: visible;
+    height: 1.5rem;
+    width: 1.5rem;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    
+} */
+
 .btn-close::after{
     content: "×";
     font-weight: lighter;
-    font-size: 3rem;
-    line-height: 0.5;
-    display: block;
-    height: 1.75rem;
+    font-size: calc(100% * 3);
+    line-height: 0.7;
+}
+
+.toast-header .btn-close::after{
+    margin-top: calc(1rem * -0.2);
 }
 
 .modal-header .btn-close::after, 
