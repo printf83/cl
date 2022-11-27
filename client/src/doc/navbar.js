@@ -485,27 +485,17 @@ export default [
 				new navbar.container({
 					expand: "lg",
 					elem: fn(id1),
-
-					//marker
-					dark: true,
-					color: "dark",
-					//-
+					color: "dark", //marker
 				}),
 				new navbar.container({
 					expand: "lg",
 					elem: fn(id2),
-
-					//marker
-					dark: true,
-					color: "primary",
-					//-
+					color: "primary", //marker
 				}),
 				new navbar.container({
 					expand: "lg",
 					elem: fn(id3),
-
-					//marker
-					style: { "background-color": "#e3f2fd" },
+					backgroundColor: "#e3f2fd", //marker
 				}),
 			];
 		},
@@ -831,7 +821,6 @@ export default [
 						//-
 
 						new navbar.brand({
-							//brand after toggle
 							label: "Navbar",
 							href: "#",
 						}),
@@ -875,18 +864,18 @@ export default [
 			return [
 				//collapsecontainer outside container
 				new navbar.collapsecontainer({
-					//marker
-					id: id,
-
-					elem: new div("p-2", [
+					id: id, //marker
+					bgColor: "dark",
+					textBgColor: "dark",
+					padding: 4,
+					elem: [
 						new h({ level: 5, elem: "Collapsed content" }),
 						new span("text-muted", "Toggleable via the navbar brand."),
-					]),
+					],
 				}),
 
 				new navbar.container({
 					expand: null,
-					dark: true,
 					color: "dark",
 					elem: new div({
 						container: "fluid",
@@ -911,118 +900,26 @@ export default [
 		code: () => {
 			let id1 = core.UUID();
 			let id2 = core.UUID();
-			let fn = (id, dark) => {
-				return new div({
-					container: "fluid",
-					elem: [
-						// new navbar.brand({
-						// 	label: "Navbar",
-						// 	href: "#",
-						// }),
+			let fn = (id, color, title) => {
+				return [
+					new navbar.brand({
+						label: title,
+						href: "#",
+					}),
 
-						new navbar.toggle({
-							target: `#${id}`,
-							toggle: "offcanvas",
-						}),
+					new navbar.toggle({
+						target: `#${id}`,
+						toggle: "offcanvas",
+					}),
 
-						new navbar.offcanvascontainer({
-							id: id,
-							placement: "end",
-							dark: dark,
-							elem: new div({
-								elem: [
-									new navbar.itemcontainer({
-										parenttype: "offcanvas",
-										elem: [
-											new navbar.item({ label: "Home", active: true }),
-											new navbar.item({ label: "Link" }),
-											new navbar.item({
-												label: "Dropdown",
-												option: [
-													{ href: "#", label: "Action" },
-													{ href: "#", label: "Another action" },
-													{ href: "#", label: "Something else here" },
-													{ value: "-" },
-													{ href: "#", label: "Separated link" },
-												],
-											}),
-											new navbar.item({ label: "Disabled", disabled: true }),
-										],
-									}),
-								],
-							}),
-						}),
-					],
-				});
-			};
-
-			return [
-				new navbar.container({
-					expand: null,
-					color: "light",
-					elem: fn(id1, false),
-				}),
-				new navbar.container({
-					expand: null,
-					color: "dark",
-					dark: true,
-					elem: fn(id2, true),
-				}),
-			];
-		},
-	},
-
-	{
-		title: "Collapse container event",
-		msg: [
-			new table.container({
-				item: [
-					["Option", "Description"],
-					[
-						"<code>onshow</code>",
-						"This event fires immediately when the <code>show</code> instance method is called.",
-					],
-					[
-						"<code>onshown</code>",
-						"This event is fired when the collapse container has been made visible to the user (will wait for CSS transitions to complete).",
-					],
-					[
-						"<code>onhide</code>",
-						"This event is fired immediately when the <code>hide</code> instance method has been called.",
-					],
-					[
-						"<code>onhidden</code>",
-						"This event is fired when the collapse container has finished being hidden from the user (will wait for CSS transitions to complete).",
-					],
-				],
-			}),
-		],
-		import: ["navbar", "button", "input", "toast"],
-		code: () => {
-			let id = core.UUID();
-			let fn = (sender, event) =>
-				`Collapse container <b>${core.elemInfo(sender)}</b> event <b>${event}</b> trigged`;
-
-			return new navbar.container({
-				expand: null,
-				color: "light",
-				elem: new div({
-					container: "fluid",
-					elem: [
-						// new navbar.brand({
-						// 	label: "Navbar",
-						// 	href: "#",
-						// }),
-						new navbar.toggle({
-							target: `#${id}`,
-							toggle: "collapse",
-						}),
-
-						new navbar.collapsecontainer({
-							id: id,
+					new navbar.offcanvascontainer({
+						id: id,
+						placement: "end",
+						color: color,
+						elem: new div({
 							elem: [
 								new navbar.itemcontainer({
-									parenttype: "collapse",
+									parenttype: "offcanvas",
 									elem: [
 										new navbar.item({ label: "Home", active: true }),
 										new navbar.item({ label: "Link" }),
@@ -1039,33 +936,117 @@ export default [
 										new navbar.item({ label: "Disabled", disabled: true }),
 									],
 								}),
-								new navbar.formcontainer([
-									new input({
-										type: "search",
-										placeholder: "Search",
-										hiddenlabel: "Search",
-									}),
-									new button({ label: "Search", color: "success", outline: true }),
-								]),
 							],
-
-							//marker
-							onshow: (event) => {
-								new toast("i", fn(event.currentTarget, "onshow")).show();
-							},
-							onshown: (event) => {
-								new toast("/", fn(event.currentTarget, "onshown")).show();
-							},
-							onhide: (event) => {
-								new toast("!", fn(event.currentTarget, "onhide")).show();
-							},
-							onhidden: (event) => {
-								new toast("x", fn(event.currentTarget, "onhidden")).show();
-							},
-							//-
 						}),
-					],
+					}),
+				];
+			};
+
+			return [
+				new navbar.container({
+					expand: "lg",
+					elem: fn(id1, "light", "Light Offcanvas"),
 				}),
+				new navbar.container({
+					expand: "lg",
+					color: "dark",
+					elem: fn(id2, "dark", "Dark Offcanvas"),
+				}),
+			];
+		},
+	},
+
+	{
+		title: "Collapse container event",
+		msg: [
+			new table.container({
+				item: [
+					["Option", "Description"],
+					[
+						"<code>show</code>",
+						"This event fires immediately when the <code>show</code> instance method is called.",
+					],
+					[
+						"<code>shown</code>",
+						"This event is fired when the collapse container has been made visible to the user (will wait for CSS transitions to complete).",
+					],
+					[
+						"<code>hide</code>",
+						"This event is fired immediately when the <code>hide</code> instance method has been called.",
+					],
+					[
+						"<code>hidden</code>",
+						"This event is fired when the collapse container has finished being hidden from the user (will wait for CSS transitions to complete).",
+					],
+				],
+			}),
+		],
+		import: ["navbar", "button", "input", "toast"],
+		code: () => {
+			let id = core.UUID();
+			let fn = (sender, event) =>
+				`Collapse container <b>${core.elemInfo(sender)}</b> event <b>${event}</b> trigged`;
+
+			return new navbar.container({
+				expand: "lg",
+				elem: [
+					new navbar.brand({
+						label: "Navbar event",
+						href: "#",
+					}),
+
+					new navbar.toggle({
+						target: `#${id}`,
+						toggle: "collapse",
+					}),
+
+					new navbar.collapsecontainer({
+						id: id,
+						elem: [
+							new navbar.itemcontainer({
+								parenttype: "collapse",
+								elem: [
+									new navbar.item({ label: "Home", active: true }),
+									new navbar.item({ label: "Link" }),
+									new navbar.item({
+										label: "Dropdown",
+										option: [
+											{ href: "#", label: "Action" },
+											{ href: "#", label: "Another action" },
+											{ href: "#", label: "Something else here" },
+											{ value: "-" },
+											{ href: "#", label: "Separated link" },
+										],
+									}),
+									new navbar.item({ label: "Disabled", disabled: true }),
+								],
+							}),
+							new navbar.formcontainer([
+								new input({
+									type: "search",
+									placeholder: "Search",
+									hiddenlabel: "Search",
+								}),
+								new button({ label: "Search", color: "success", outline: true }),
+							]),
+						],
+
+						//marker
+						show: (event) => {
+							new toast("i", fn(event.currentTarget, "show")).show();
+						},
+						shown: (event) => {
+							new toast("/", fn(event.currentTarget, "shown")).show();
+						},
+						hide: (event) => {
+							new toast("!", fn(event.currentTarget, "hide")).show();
+						},
+						hidden: (event) => {
+							new toast("x", fn(event.currentTarget, "hidden")).show();
+						},
+						//-
+					}),
+				],
 			});
 		},
 	},
@@ -1101,63 +1082,60 @@ export default [
 			let fn = (sender, event) => `Offcanvas <b>${core.elemInfo(sender)}</b> event <b>${event}</b> trigged`;
 
 			return new navbar.container({
-				expand: null,
-				color: "light",
-				elem: new div({
-					container: "fluid",
-					elem: [
-						// new navbar.brand({
-						// 	label: "Navbar",
-						// 	href: "#",
-						// }),
-						new navbar.toggle({
-							target: `#${id}`,
-							toggle: "offcanvas",
+				expand: "lg",
+				elem: [
+					new navbar.brand({
+						label: "Offcanvas event",
+						href: "#",
+					}),
+
+					new navbar.toggle({
+						target: `#${id}`,
+						toggle: "offcanvas",
+					}),
+
+					new navbar.offcanvascontainer({
+						id: id,
+						placement: "end",
+						elem: new div({
+							elem: [
+								new navbar.itemcontainer({
+									parenttype: "offcanvas",
+									elem: [
+										new navbar.item({ label: "Home", active: true }),
+										new navbar.item({ label: "Link" }),
+										new navbar.item({
+											label: "Dropdown",
+											option: [
+												{ href: "#", label: "Action" },
+												{ href: "#", label: "Another action" },
+												{ href: "#", label: "Something else here" },
+												{ value: "-" },
+												{ href: "#", label: "Separated link" },
+											],
+										}),
+										new navbar.item({ label: "Disabled", disabled: true }),
+									],
+								}),
+							],
 						}),
 
-						new navbar.offcanvascontainer({
-							id: id,
-							placement: "end",
-							elem: new div({
-								elem: [
-									new navbar.itemcontainer({
-										parenttype: "offcanvas",
-										elem: [
-											new navbar.item({ label: "Home", active: true }),
-											new navbar.item({ label: "Link" }),
-											new navbar.item({
-												label: "Dropdown",
-												option: [
-													{ href: "#", label: "Action" },
-													{ href: "#", label: "Another action" },
-													{ href: "#", label: "Something else here" },
-													{ value: "-" },
-													{ href: "#", label: "Separated link" },
-												],
-											}),
-											new navbar.item({ label: "Disabled", disabled: true }),
-										],
-									}),
-								],
-							}),
-
-							//marker
-							show: (event) => {
-								new toast("i", fn(event.currentTarget, "show")).show();
-							},
-							shown: (event) => {
-								new toast("/", fn(event.currentTarget, "shown")).show();
-							},
-							hide: (event) => {
-								new toast("!", fn(event.currentTarget, "hide")).show();
-							},
-							hidden: (event) => {
-								new toast("x", fn(event.currentTarget, "hidden")).show();
-							},
-							//-
-						}),
-					],
-				}),
+						//marker
+						show: (event) => {
+							new toast("i", fn(event.currentTarget, "show")).show();
+						},
+						shown: (event) => {
+							new toast("/", fn(event.currentTarget, "shown")).show();
+						},
+						hide: (event) => {
+							new toast("!", fn(event.currentTarget, "hide")).show();
+						},
+						hidden: (event) => {
+							new toast("x", fn(event.currentTarget, "hidden")).show();
+						},
+						//-
+					}),
+				],
 			});
 		},
 	},

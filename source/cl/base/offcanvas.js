@@ -97,6 +97,7 @@ export default class offcanvas extends div {
 					opt.placement ? `offcanvas-${opt.placement}` : "offcanvas-start",
 					opt.autoclose ? `offcanvas-${opt.autoclose}` : "offcanvas",
 				],
+				textBgColor: opt.color,
 
 				"aria-labelledby": `${opt.id}-label`,
 				"data-bs-scroll": opt.scroll ? "true" : "false",
@@ -119,6 +120,7 @@ export default class offcanvas extends div {
 			delete opt.backdrop;
 			delete opt.showtitle;
 			delete opt.iconafter;
+			delete opt.color;
 
 			delete opt.onshow;
 			delete opt.onshown;

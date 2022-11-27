@@ -25,8 +25,8 @@ const defaultContainerOption = {
 	},
 
 	expand: null, //sm|md|lg|xl|xxl|null|''
-	dark: false, //light|dark
-	color: null, //danger|primary|dark|warning|...
+	// dark: false, //light|dark
+	color: "light", //danger|primary|dark|warning|...
 	position: null, //fixed-top|fixed-bottom|sticky-top|null
 	elem: null,
 };
@@ -40,6 +40,9 @@ export class container extends nav {
 		return super.data;
 	}
 	set data(opt) {
+		const darkColor = ["dark", "primary", "secondary", "success", "danger"];
+		const isDarkColor = (opt) => darkColor.indexOf(opt.bgColor) > -1 || darkColor.indexOf(opt.color) > -1;
+
 		if (opt) {
 			opt = core.extend({}, defaultContainerOption, opt);
 
@@ -51,11 +54,11 @@ export class container extends nav {
 							? "navbar-expand"
 							: `navbar-expand-${opt.expand}`
 						: null,
-					opt.dark ? `navbar-${opt.dark ? "dark" : "light"}` : null,
+					isDarkColor(opt) ? "navbar-dark" : "navbar-light",
 					opt.position ? opt.position : null,
 				],
-				bgColor: opt.color,
-				textBgColor: opt.color,
+				bgColor: opt.bgColor || opt.color,
+				textBgColor: opt.bgColor || opt.color,
 			});
 
 			opt.body = core.merge(opt.body, {
@@ -65,12 +68,16 @@ export class container extends nav {
 
 			delete opt.body.fluid;
 
-			opt.elem = new div(opt.body);
+			if (opt.expand) {
+				opt.elem = new div(opt.body);
+			} else {
+				opt.elem = opt.body.elem;
+			}
 
 			delete opt.color;
 			delete opt.body;
 			delete opt.expand;
-			delete opt.dark;
+			// delete opt.dark;
 			delete opt.position;
 
 			super.data = opt;
@@ -180,10 +187,10 @@ export class formcontainer extends form {
 }
 
 const defaultCollapseContainerOption = {
-	onshow: null,
-	onshown: null,
-	onhide: null,
-	onhidden: null,
+	show: null,
+	shown: null,
+	hide: null,
+	hidden: null,
 };
 export class collapsecontainer extends div {
 	constructor(...opt) {
@@ -199,16 +206,16 @@ export class collapsecontainer extends div {
 		opt = core.merge(opt, {
 			class: ["collapse", "navbar-collapse"],
 
-			"show.bs.collapse": opt.onshow,
-			"shown.bs.collapse": opt.onshown,
-			"hide.bs.collapse": opt.onhide,
-			"hidden.bs.collapse": opt.onhidden,
+			"show.bs.collapse": opt.show,
+			"shown.bs.collapse": opt.shown,
+			"hide.bs.collapse": opt.hide,
+			"hidden.bs.collapse": opt.hidden,
 		});
 
-		delete opt.onshow;
-		delete opt.onshown;
-		delete opt.onhide;
-		delete opt.onhidden;
+		delete opt.show;
+		delete opt.shown;
+		delete opt.hide;
+		delete opt.hidden;
 
 		super.data = opt;
 	}
@@ -220,10 +227,10 @@ const defaultOffcanvasContainerOption = {
 	placement: "start",
 	weight: null,
 
-	onshow: null,
-	onshown: null,
-	onhide: null,
-	onhidden: null,
+	show: null,
+	shown: null,
+	hide: null,
+	hidden: null,
 };
 
 export class offcanvascontainer extends div {
@@ -245,13 +252,14 @@ export class offcanvascontainer extends div {
 				opt.weight ? `offcanvas-${opt.weight}` : "offcanvas",
 				opt.placement ? `offcanvas-${opt.placement}` : "offcanvas-start",
 			],
+			textBgColor: opt.color,
 			tabindex: "-1",
 			"aria-labelledby": opt.id ? `${opt.id}-label` : null,
 
-			"show.bs.offcanvas": opt.onshow,
-			"shown.bs.offcanvas": opt.onshown,
-			"hide.bs.offcanvas": opt.onhide,
-			"hidden.bs.offcanvas": opt.onhidden,
+			"show.bs.offcanvas": opt.show,
+			"shown.bs.offcanvas": opt.shown,
+			"hide.bs.offcanvas": opt.hide,
+			"hidden.bs.offcanvas": opt.hidden,
 
 			elem: [
 				new div({
@@ -274,11 +282,12 @@ export class offcanvascontainer extends div {
 		delete opt.title;
 		delete opt.placement;
 		delete opt.weight;
+		delete opt.color;
 
-		delete opt.onshow;
-		delete opt.onshown;
-		delete opt.onhide;
-		delete opt.onhidden;
+		delete opt.show;
+		delete opt.shown;
+		delete opt.hide;
+		delete opt.hidden;
 
 		super.data = opt;
 	}
