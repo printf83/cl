@@ -867,11 +867,14 @@ export default [
 					id: id, //marker
 					bgColor: "dark",
 					textBgColor: "dark",
-					padding: 4,
-					elem: [
-						new h({ level: 5, elem: "Collapsed content" }),
-						new span("text-muted", "Toggleable via the navbar brand."),
-					],
+					// padding: 4, //dont put padding here
+					elem: new div({
+						padding: 4, //put padding here to prevent lagging
+						elem: [
+							new h({ level: 5, elem: "Collapsed content" }),
+							new span("text-muted", "Toggleable via the navbar brand."),
+						],
+					}),
 				}),
 
 				new navbar.container({
