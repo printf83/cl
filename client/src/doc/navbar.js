@@ -911,10 +911,15 @@ export default [
 		code: () => {
 			let id1 = core.UUID();
 			let id2 = core.UUID();
-			let fn = (id) => {
+			let fn = (id, dark) => {
 				return new div({
 					container: "fluid",
 					elem: [
+						// new navbar.brand({
+						// 	label: "Navbar",
+						// 	href: "#",
+						// }),
+
 						new navbar.toggle({
 							target: `#${id}`,
 							toggle: "offcanvas",
@@ -922,7 +927,8 @@ export default [
 
 						new navbar.offcanvascontainer({
 							id: id,
-							placement: "start",
+							placement: "end",
+							dark: dark,
 							elem: new div({
 								elem: [
 									new navbar.itemcontainer({
@@ -954,13 +960,13 @@ export default [
 				new navbar.container({
 					expand: null,
 					color: "light",
-					elem: fn(id1),
+					elem: fn(id1, false),
 				}),
 				new navbar.container({
 					expand: null,
 					color: "dark",
 					dark: true,
-					elem: fn(id2),
+					elem: fn(id2, true),
 				}),
 			];
 		},
@@ -1003,6 +1009,10 @@ export default [
 				elem: new div({
 					container: "fluid",
 					elem: [
+						// new navbar.brand({
+						// 	label: "Navbar",
+						// 	href: "#",
+						// }),
 						new navbar.toggle({
 							target: `#${id}`,
 							toggle: "collapse",
@@ -1096,6 +1106,10 @@ export default [
 				elem: new div({
 					container: "fluid",
 					elem: [
+						// new navbar.brand({
+						// 	label: "Navbar",
+						// 	href: "#",
+						// }),
 						new navbar.toggle({
 							target: `#${id}`,
 							toggle: "offcanvas",
@@ -1103,7 +1117,7 @@ export default [
 
 						new navbar.offcanvascontainer({
 							id: id,
-							placement: "start",
+							placement: "end",
 							elem: new div({
 								elem: [
 									new navbar.itemcontainer({
