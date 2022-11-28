@@ -11,6 +11,10 @@ module.exports = (app) => {
 	//user, login, register handler, (required)
 	require("./routes/user.js")(app);
 
+	//document run
+	//TODO: change true to auth
+	// require("./routes/run.js")(app, "auth");
+
 	//file upload, download handler (required)
 	require("./routes/file.js")(app, {
 		upload: "auth",

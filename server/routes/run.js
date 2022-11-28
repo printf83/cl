@@ -1,0 +1,71 @@
+const core = require(`../core.js`);
+const { Readable } = require("stream");
+
+module.exports = (app, setting) => {
+	const fn = (req, res) => {
+		let r = `
+                <!DOCTYPE html>
+                <html lang="en">
+                    <head>
+                        <meta charset="utf-8" />
+                        <meta name="viewport" content="width=device-width, initial-scale=1" />
+                        <meta name="description" content="Testing website" />
+                        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+                        <link rel="icon" type="image/png" href="/favicon.png" />
+
+                        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
+
+                        <link
+                            rel="stylesheet"
+                            href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/css/bootstrap.min.css"
+                            id="css_bootstrap"
+                        />
+
+                        <link
+                            rel="stylesheet"
+                            href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/5.2.2/cerulean/bootstrap.min.css"
+                            disabled="disabled"
+                            id="css_bootswatch"
+                        />
+
+                        <title>BS5.2 JS Builder</title>
+                    </head>
+
+                    <body class="position-relative noselect">
+                        <div class="position-fixed top-50 start-50 translate-middle" id="root">
+                            <div class="text-center">
+                                <i class="fa-solid fa-circle-notch fa-fw fa-spin fa-5x"></i>
+                                <noscript>
+                                    <p class="text-danger">Your browser does not support JavaScript!</p>
+                                </noscript>
+                            </div>
+                        </div>
+
+                        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"></script>
+                        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+                        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.min.js"></script>
+                        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/js/all.min.js"></script>
+
+                        <script type="module">
+                            ${req.query.q}
+                        </script>
+                    </body>
+                </html>
+
+            `;
+
+		res.setHeader("Content-Type", `text/html`);
+		res.setHeader("Content-Length", r.length);
+		res.status(200).send(r);
+	};
+
+	setting = setting || false;
+
+	if (setting) {
+		if (setting === "auth") {
+			app.get("/run", core.auth, fn);
+		} else {
+			app.get("/run", fn);
+		}
+	}
+};

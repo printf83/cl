@@ -164,7 +164,6 @@ export default class example extends div {
 								type: "js",
 								code: opt.source.join(`\n`),
 								container: null,
-								allowrun: true,
 							})
 						);
 						PR.prettyPrint();
