@@ -1,7 +1,7 @@
 /*fix bootstrap color problem on btn-close*/
 
 /* disable bootstrap css */
-.btn-close {
+/* .btn-close {
     color: unset !important;
     background: none !important;
 
@@ -15,9 +15,12 @@
     top: unset;
     right: unset;
     content: unset;
-}
+} */
 
-/* using cl btn close */
+/* using cl btn close 1 */
+
+
+/* using cl btn close 2*/
 /* .cl-btn-close-container{
     overflow: visible;
     height: 1.5rem;
@@ -28,21 +31,21 @@
     
 } */
 
-.btn-close::after{
+/* .btn-close::after{
     content: "×";
     font-weight: lighter;
     font-size: calc(100% * 3);
     line-height: 0.7;
-}
+} */
 
-.toast-header .btn-close::after{
+/* .toast-header .btn-close::after{
     margin-top: calc(1rem * -0.2);
 }
 
 .modal-header .btn-close::after, 
 .offcanvas-header .btn-close::after {
     margin-right: 0.5rem;
-}
+} */
 
 /* using font awesome */
 /* .btn-close {
