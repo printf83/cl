@@ -1,0 +1,46 @@
+/*fix bootstrap color problem on btn-close*/
+.btn-close {
+    color: unset !important;
+    background: none !important;
+    padding: unset !important;
+}
+
+.btn-close::before {
+    position: unset;
+    top: unset;
+    right: unset;
+    content: unset;
+}
+
+
+.modal-header .cl-btn-close-container, 
+.offcanvas-header .cl-btn-close-container,
+.toast-header .cl-btn-close-container{
+    margin-right: 0.5rem;
+}
+
+.cl-btn-close-container{
+    overflow: visible;
+    height: 1.5rem;
+    width: 1.5rem;
+    display: flex;
+    align-items: center;
+    
+}
+
+.btn-close {
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    height: 1.5rem;
+    width: 1.5rem;
+}
+
+.btn-close::after {
+    content: "×";
+    font-weight: lighter;
+    font-size: calc(100% * 3);
+    line-height: calc(1rem * 1.1);
+}
+
+

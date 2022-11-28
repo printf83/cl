@@ -1,16 +1,18 @@
 "use strict";
 
 //disable this if you not using webpack
-import css from "./css/btnclose.css";
+// import css1 from "./css/btnclose.style-1.css";
+import css2 from "./css/btnclose.style-2.css";
+// import css3 from "./css/btnclose.style-3.css";
 //-------------------------------------
 
 import * as core from "./core.js";
 import button from "./button.js";
-// import div from "./div.js";
+import div from "./div.js";
 
 const defaultOption = { label: "Close", dismiss: null, dark: true, disabled: false };
 
-export default class btnclose extends button {
+export default class btnclose extends div {
 	constructor(opt) {
 		super(core.extend({}, defaultOption, opt));
 	}
@@ -33,7 +35,7 @@ export default class btnclose extends button {
 			delete opt.dark;
 
 			super.data = {
-				tag: "div",
+				// tag: "div",
 				class: "cl-btn-close-container",
 				elem: new button(opt),
 			};

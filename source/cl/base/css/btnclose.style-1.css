@@ -1,10 +1,7 @@
 /*fix bootstrap color problem on btn-close*/
-
-/* disable bootstrap css */
 .btn-close {
     color: unset !important;
     background: none !important;
-
     width: unset !important;
     height: unset !important;
     padding: unset !important;
@@ -17,17 +14,12 @@
     content: unset;
 }
 
-/* adjust margin base on location */
-.toast-header .cl-btn-close-container{
-    margin-top: calc(1rem * -0.2);
-}
-
 .modal-header .cl-btn-close-container, 
-.offcanvas-header .cl-btn-close-container{
+.offcanvas-header .cl-btn-close-container,
+.toast-header .cl-btn-close-container{
     margin-right: 0.5rem;
 }
 
-/* container */
 .cl-btn-close-container{
     overflow: visible;
     height: 1.5rem;
@@ -37,11 +29,12 @@
     
 }
 
-/* using cl btn close 1 */
 .btn-close {
     display: flex;
     margin-left: auto;
     margin-right: auto;
+    height: 1.5rem;
+    width: 1.5rem;
 }
 
 .btn-close::after {
@@ -53,20 +46,3 @@
     display: flex;
     align-self: center;
 }
-
-/* using font awesome */
-/* .btn-close {
-    display: flex;
-    justify-content: center;
-}
-
-.btn-close::after{
-    content: "\f00d";
-    text-align: center;
-    justify-content: center;
-    font-weight: 900;
-    font-size: calc(100%*1.75);
-    display: flex;
-    align-self: center;
-    font-family: "Font Awesome 6 Free";
-} */

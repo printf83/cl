@@ -190,6 +190,9 @@ export default class toast extends div {
 						!(opt.icon || opt.title) && opt.close
 							? new div({
 									marginStart: 2,
+									display: "flex",
+									alignItem: "top",
+
 									elem: new btnclose({
 										dismiss: "toast",
 									}),
