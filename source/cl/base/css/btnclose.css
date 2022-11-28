@@ -1,7 +1,7 @@
 /*fix bootstrap color problem on btn-close*/
 
 /* disable bootstrap css */
-/* .btn-close {
+.btn-close {
     color: unset !important;
     background: none !important;
 
@@ -15,37 +15,44 @@
     top: unset;
     right: unset;
     content: unset;
-} */
+}
 
-/* using cl btn close 1 */
+/* adjust margin base on location */
+.toast-header .cl-btn-close-container{
+    margin-top: calc(1rem * -0.2);
+}
 
+.modal-header .cl-btn-close-container, 
+.offcanvas-header .cl-btn-close-container{
+    margin-right: 0.5rem;
+}
 
-/* using cl btn close 2*/
-/* .cl-btn-close-container{
+/* container */
+.cl-btn-close-container{
     overflow: visible;
     height: 1.5rem;
     width: 1.5rem;
     display: flex;
     align-items: center;
-    align-content: center;
     
-} */
-
-/* .btn-close::after{
-    content: "×";
-    font-weight: lighter;
-    font-size: calc(100% * 3);
-    line-height: 0.7;
-} */
-
-/* .toast-header .btn-close::after{
-    margin-top: calc(1rem * -0.2);
 }
 
-.modal-header .btn-close::after, 
-.offcanvas-header .btn-close::after {
-    margin-right: 0.5rem;
-} */
+/* using cl btn close 1 */
+.btn-close {
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.btn-close::after {
+    content: "✕";
+    text-align: center;
+    justify-content: center;
+    font-weight: lighter;
+    font-size: calc(100%*1.5);
+    display: flex;
+    align-self: center;
+}
 
 /* using font awesome */
 /* .btn-close {

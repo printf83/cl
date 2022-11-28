@@ -32,12 +32,12 @@ export default class btnclose extends button {
 			delete opt.label;
 			delete opt.dark;
 
-			// super.data = {
-			// 	tag: "div",
-			// 	class: "cl-btn-close-container",
-			// 	elem: new button(opt),
-			// };
-			super.data = opt;
+			super.data = {
+				tag: "div",
+				class: "cl-btn-close-container",
+				elem: new button(opt),
+			};
+			// super.data = opt;
 		}
 	}
 }
