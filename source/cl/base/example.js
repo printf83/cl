@@ -160,7 +160,12 @@ export default class example extends div {
 					if (!sender.getAttribute("data-loaded")) {
 						core.replaceChild(
 							sender.firstChild,
-							new codepreview({ type: "js", code: opt.source.join(`\n`), container: null })
+							new codepreview({
+								type: "js",
+								code: opt.source.join(`\n`),
+								container: null,
+								allowrun: true,
+							})
 						);
 						PR.prettyPrint();
 						core.codemarker(sender);

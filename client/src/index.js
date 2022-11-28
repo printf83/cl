@@ -1265,8 +1265,8 @@ core.documentReady(() => {
 			mainid: "root",
 
 			topelem: new navbar.container({
-				dark: true,
 				color: "primary",
+				gradient:true,
 				expand: "lg",
 				body: { fluid: "lg" },
 				elem: [

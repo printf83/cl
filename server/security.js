@@ -29,7 +29,7 @@ module.exports = (app) => {
 				],
 				imgSrc: ["*", "data:"],
 				connectSrc: ["'self'"],
-				frameSrc: ["'self'"],
+				frameSrc: ["'self'", "data:"],
 				"script-src-attr": null,
 			},
 		})
