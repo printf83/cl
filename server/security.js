@@ -9,6 +9,7 @@ module.exports = (app) => {
 	app.use(express.json());
 	app.use(cookieparser(process.env.SESSIONSECRET));
 	app.use(compression());
+
 	app.use(
 		helmet.contentSecurityPolicy({
 			directives: {

@@ -17,10 +17,10 @@ import small from "./small.js";
 import b from "./b.js";
 import modal from "./modal.js";
 
-const LIBNAME = /component.Z./g;
-const LIBNAME2 = /_component_js__WEBPACK_IMPORTED_MODULE_0__.Z./g;
-const SAMPLELIBNAME = /doc_sample.Z./g;
-const FNNAME = /list_fn./g;
+// const LIBNAME = /component.Z./g;
+// const LIBNAME2 = /_component_js__WEBPACK_IMPORTED_MODULE_0__.Z./g;
+// const SAMPLELIBNAME = /doc_sample.Z./g;
+// const FNNAME = /list_fn./g;
 
 function beautifyjs(str) {
 	let opt = {
@@ -29,10 +29,10 @@ function beautifyjs(str) {
 		brace_style: "collapse",
 	};
 
-	str = str.replace(LIBNAME2, "$.");
-	str = str.replace(LIBNAME, "$.");
-	str = str.replace(SAMPLELIBNAME, "sample.");
-	str = str.replace(FNNAME, "fn.");
+	// str = str.replace(LIBNAME2, "$.");
+	// str = str.replace(LIBNAME, "$.");
+	// str = str.replace(SAMPLELIBNAME, "sample.");
+	// str = str.replace(FNNAME, "fn.");
 
 	return js_beautify(str, opt);
 }
@@ -65,6 +65,9 @@ function codecontainer(type, strcode, maxHeight, linenums, allowrun, allowcopy) 
 					display: "inline-block",
 					click: (event) => {
 						let str = event.currentTarget.closest(".cl-codepreview-ctl").nextSibling.firstChild.innerText;
+
+						str = str.replace(/\.\/dist/g, "http://localhost:8081/src/dist");
+
 						let html = `
 							<!DOCTYPE html>
 							<html lang="en">
@@ -130,6 +133,7 @@ function codecontainer(type, strcode, maxHeight, linenums, allowrun, allowcopy) 
 								overflow: "hidden",
 								elem: new tag({
 									tag: "iframe",
+									sandbox: "allow-forms allow-popups allow-scripts allow-same-origin",
 									src: `data:text/html;charset=utf-8,${encodeURI(html)}`,
 								}),
 							}),
