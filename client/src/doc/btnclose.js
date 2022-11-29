@@ -12,6 +12,7 @@ export default [
 	{
 		title: "Example",
 		import: ["btnclose"],
+		container: sample.stackcontainer,
 		code: () => {
 			return new btnclose();
 		},
@@ -20,7 +21,7 @@ export default [
 	{
 		title: "Style",
 		import: ["btnclose"],
-		container: sample.vstackcontainer,
+		container: sample.stackcontainer,
 		code: () => {
 			return [
 				new btnclose({ style: 0 }), //bootstrap
@@ -34,6 +35,7 @@ export default [
 	{
 		title: "Disabled state",
 		import: ["btnclose"],
+		container: sample.stackcontainer,
 		code: () => {
 			return new btnclose({
 				disabled: true, //marker

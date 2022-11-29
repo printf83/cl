@@ -134,7 +134,7 @@ const fn = {
 											title: null,
 											button: null,
 											static: false,
-											size: "xl",
+											size: "lg",
 											bodyclass: "p-1",
 											elem: new div({
 												class: "ratio ratio-16x9",

@@ -14,11 +14,9 @@
 
 
 /* .modal-header .cl-btn-close-container, 
-.offcanvas-header .cl-btn-close-container,
-.toast-header .cl-btn-close-container, */
+.offcanvas-header .cl-btn-close-container*/
 .modal-header .cl-btn-close-container.s2,
-.offcanvas-header .cl-btn-close-container.s2,
-.toast-header .cl-btn-close-container.s2 {
+.offcanvas-header .cl-btn-close-container.s2{
     margin-right: 0.5rem;
 }
 
