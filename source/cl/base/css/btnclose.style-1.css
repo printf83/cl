@@ -1,26 +1,28 @@
 /*fix bootstrap color problem on btn-close*/
-.btn-close {
+.cl-btn-close-container.s1 .btn-close {
     color: unset !important;
     background: none !important;
-    width: unset !important;
-    height: unset !important;
     padding: unset !important;
 }
 
-.btn-close::before {
+.cl-btn-close-container.s1 .btn-close::before {
     position: unset;
     top: unset;
     right: unset;
     content: unset;
 }
 
-.modal-header .cl-btn-close-container, 
+/* .modal-header .cl-btn-close-container, 
 .offcanvas-header .cl-btn-close-container,
-.toast-header .cl-btn-close-container{
+.toast-header .cl-btn-close-container, */
+.modal-header .cl-btn-close-container.s1,
+.offcanvas-header .cl-btn-close-container.s1,
+.toast-header .cl-btn-close-container.s1{
     margin-right: 0.5rem;
 }
 
-.cl-btn-close-container{
+/* .cl-btn-close-container, */
+.cl-btn-close-container.{
     overflow: visible;
     height: 1.5rem;
     width: 1.5rem;
@@ -29,7 +31,8 @@
     
 }
 
-.btn-close {
+/* .btn-close, */
+.cl-btn-close-container.s1 .btn-close {
     display: flex;
     margin-left: auto;
     margin-right: auto;
@@ -37,7 +40,8 @@
     width: 1.5rem;
 }
 
-.btn-close::after {
+/* .btn-close::after, */
+.cl-btn-close-container.s1 .btn-close::after {
     content: "✕";
     text-align: center;
     justify-content: center;

@@ -18,6 +18,20 @@ export default [
 	},
 
 	{
+		title: "Style",
+		import: ["btnclose"],
+		container: sample.vstackcontainer,
+		code: () => {
+			return [
+				new btnclose({ style: 0 }), //bootstrap
+				new btnclose({ style: 1 }), //cl style 1
+				new btnclose({ style: 2 }), //cl style 2
+				new btnclose({ style: 3 }), //using font-awesome
+			];
+		},
+	},
+
+	{
 		title: "Disabled state",
 		import: ["btnclose"],
 		code: () => {

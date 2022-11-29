@@ -8,6 +8,9 @@ module.exports = {
 		new CopyPlugin({
 			patterns: [
 				{
+					filter: (resourcePath) => {
+						return !resourcePath.match(/\.map$/i);
+					},
 					from: path.resolve(__dirname, "../../source"),
 					to: path.resolve(__dirname, "../../client/src/dist"),
 				},
