@@ -16,7 +16,6 @@ import file from "./file.js";
 import a from "./a.js";
 import small from "./small.js";
 import tag from "./tag.js";
-import toast from "./toast.js";
 
 const defaultIconWeight = "4x";
 const defaultIconColor = "primary";
