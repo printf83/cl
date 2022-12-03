@@ -1,4 +1,4 @@
-li[disabled],
+/* li[disabled],
 li.disabled,
 button[disabled],
 button.disabled,
@@ -24,7 +24,7 @@ input.wait,
 input.wait.disabled {
     cursor: wait !important;
     pointer-events: unset; 
-}
+} */
 
 
 .noselect {

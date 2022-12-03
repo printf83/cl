@@ -588,6 +588,7 @@ const fn = {
 			});
 		},
 	},
+	//FORM
 	form: {
 		container: (id, elem) => {
 			return new form({
@@ -630,6 +631,7 @@ const fn = {
 					new container.grid([
 						new button({
 							label: "Sign in",
+							weight: "lg",
 							icon: "arrow-right-to-bracket",
 							color: "primary",
 							click: !opt.debug
@@ -718,6 +720,7 @@ const fn = {
 					new container.grid([
 						new button({
 							label: "Sign up",
+							weight: "lg",
 							icon: "arrow-up-from-bracket",
 							color: "primary",
 							click: !opt.debug
@@ -771,6 +774,7 @@ const fn = {
 						[
 							new button({
 								label: "Send email",
+								weight: "lg",
 								icon: "arrow-up-from-bracket",
 								color: "primary",
 								click: !opt.debug
@@ -848,6 +852,7 @@ const fn = {
 					new container.grid([
 						new button({
 							label: "Change password",
+							weight: "lg",
 							icon: "floppy-disk",
 							color: "primary",
 							click: !opt.debug
@@ -932,6 +937,7 @@ const fn = {
 					new container.grid([
 						new button({
 							label: "Change password",
+							weight: "lg",
 							icon: "floppy-disk",
 							color: "primary",
 							click: !opt.debug
@@ -1005,6 +1011,7 @@ const fn = {
 					new container.grid([
 						new button({
 							label: "Update profile",
+							weight: "lg",
 							icon: "arrow-up-from-bracket",
 							color: "primary",
 							click: !opt.debug

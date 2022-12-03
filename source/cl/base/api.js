@@ -131,6 +131,7 @@ const fn = {
 				} else if (req.status === 401) {
 					if (opt.auth) {
 						new user_signin({
+							msg: "Please sign in to continue",
 							callback: (result) => {
 								if (result) {
 									fn.get(opt);
@@ -164,6 +165,7 @@ const fn = {
 		// 		} else if (req.status === 401) {
 		// 			if (opt.auth) {
 		// 				new user_signin({
+		//					msg:"Please sign in to continue",
 		// 					callback: (result) => {
 		// 						if (result) {
 		// 							opt.callback(result);
@@ -195,6 +197,7 @@ const fn = {
 				} else if (req.status === 401) {
 					if (opt.auth) {
 						new user_signin({
+							msg: "Please sign in to continue",
 							callback: (result) => {
 								if (result) {
 									fn.post(opt);
@@ -229,6 +232,7 @@ const fn = {
 		// 		} else if (req.status === 401) {
 		// 			if (opt.auth) {
 		// 				new user_signin({
+		//					msg:"Please sign in to continue",
 		// 					callback: (result) => {
 		// 						if (result) {
 		// 							opt.callback(result);
@@ -294,6 +298,7 @@ const fn = {
 		// 		} else if (req.status === 401) {
 		// 			if (opt.auth) {
 		// 				new user_signin({
+		//					msg: "Please sign in to continue",
 		// 					callback: (result) => {
 		// 						if (result) {
 		// 							fn.upload(opt);
@@ -333,6 +338,7 @@ const fn = {
 				} else if (req.status === 401) {
 					if (opt.auth) {
 						new user_signin({
+							msg: "Please sign in to continue",
 							callback: (result) => {
 								if (result) {
 									fn.upload(opt);
