@@ -747,7 +747,7 @@ const bootstrapPropertyDb = {
 	minViewHeight: { format: "min-vh-$1", value: [100] },
 	minViewWidth: { format: "min-vw-$1", value: [100] },
 	viewHeight: { format: "vh-$1", value: [100] },
-	viewWeight: { format: "vw-$1", value: [100] },
+	viewWidth: { format: "vw-$1", value: [100] },
 
 	placeholderAnimation: { format: "placeholder-$1", value: ["glow", "wave"] },
 	placeholderWeight: { format: "placeholder-$1", formatValue: "placeholder $1", value: ["lg", "sm", "xs"] },

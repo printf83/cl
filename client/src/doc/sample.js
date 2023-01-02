@@ -706,7 +706,7 @@ const fn = {
 			"minViewHeight",
 			"minViewWidth",
 			"viewHeight",
-			"viewWeight",
+			"viewWidth",
 			"placeholderAnimation",
 			"placeholderWeight",
 			"shadow",
